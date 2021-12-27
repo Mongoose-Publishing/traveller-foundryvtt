@@ -1,0 +1,649 @@
+{
+  "Actor": {
+    "types": ["character"],
+    "templates": {
+      "base": {
+        "health": {
+          "value": 10,
+          "min": 0,
+          "max": 10
+        },
+        "power": {
+          "value": 5,
+          "min": 0,
+          "max": 5
+        },
+        "biography": ""
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "attributes": {
+        "level": {
+          "value": 1
+        }
+      },
+      "characteristics": {
+        "STR": {
+            "label": "Strength",
+            "value": 7
+        },
+        "DEX": {
+            "label": "Dexterity",
+            "value": 7
+        },
+        "END": {
+            "label": "Endurance",
+            "value": 7
+        },
+        "INT": {
+            "label": "Intelligence",
+            "value": 7
+        },
+        "EDU": {
+            "label": "Education",
+            "value": 7
+        },
+        "SOC": {
+            "label": "Social Standing",
+            "value": 7
+        }
+      },
+      "skills": {
+        "admin": {
+            "label": "Admin",
+            "default": "EDU",
+            "value": 0,
+            "trained": false
+        },
+        "advocate": {
+            "label": "Advocate",
+            "default": "EDU",
+            "value": 0,
+            "trained": false
+        },
+        "animals": {
+            "label": "Animals",
+            "default": "INT",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Handling",
+                    "default": "DEX",
+                    "value": 0
+                },
+                {
+                    "label": "Vetinary",
+                    "default": "EDU",
+                    "value": 0
+                },
+                {
+                    "label": "Training",
+                    "default": "INT",
+                    "value": 0
+                }
+            ]
+        },
+        "art": {
+            "label": "Art",
+            "default": "INT",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Performer",
+                    "value": 0
+                },
+                {
+                    "label": "Holography",
+                    "value": 0
+                },
+                {
+                    "label": "Instrument",
+                    "value": 0
+                },
+                {
+                    "label": "Visual Media",
+                    "value": 0
+                },
+                {
+                    "label": "Write",
+                    "value": 0
+                }
+            ]
+        },
+        "astrogation": {
+            "label": "Astrogation",
+            "default": "EDU",
+            "value": 0,
+            "trained": false
+        },
+        "athletics": {
+            "label": "Athletics",
+            "default": "DEX",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Dexterity",
+                    "default": "DEX",
+                    "value": 0
+                },
+                {
+                    "label": "Endurance",
+                    "default": "END",
+                    "value": 0
+                },
+                {
+                    "label": "Strength",
+                    "default": "STR",
+                    "value": 0
+                }
+            ]
+        },
+        "broker": {
+            "label": "Broker",
+            "default": "INT",
+            "value": 0,
+            "trained": false
+        },
+        "carouse": {
+            "label": "Carouse",
+            "default": "SOC",
+            "value": 0,
+            "trained": false
+        },
+        "deception": {
+            "label": "Deception",
+            "default": "INT",
+            "value": 0,
+            "trained": false
+        },
+        "diplomat": {
+            "label": "Diplomat",
+            "default": "SOC",
+            "value": 0,
+            "trained": false
+        },
+        "drive": {
+            "label": "Drive",
+            "default": "DEX",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Hovercraft",
+                    "value": 0
+                },
+                {
+                    "label": "Mole",
+                    "value": 0
+                },
+                {
+                    "label": "Track",
+                    "value": 0
+                },
+                {
+                    "label": "Walker",
+                    "value": 0
+                },
+                {
+                    "label": "Wheel",
+                    "value": 0
+                }
+            ]
+        },
+        "electronics": {
+            "label": "Electronics",
+            "default": "EDU",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Comms",
+                    "value": 0
+                },
+                {
+                    "label": "Computers",
+                    "value": 0
+                },
+                {
+                    "label": "Remote Ops",
+                    "value": 0
+                },
+                {
+                    "Sensors": "Sensors",
+                    "value": 0
+                }
+            ]
+        },
+        "engineer": {
+            "label": "Engineer",
+            "default": "EDU",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "M-drive",
+                    "value": 0
+                },
+                {
+                    "label": "J-drive",
+                    "value": 0
+                },
+                {
+                    "label": "Life Support",
+                    "value": 0
+                },
+                {
+                    "label": "Power",
+                    "value": 0
+                }
+            ]
+        },
+        "explosives": {
+            "label": "Explosives",
+            "default": "EDU",
+            "value": 0,
+            "trained": false
+        },
+        "flyer": {
+            "label": "Flyer",
+            "default": "DEX",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Airship",
+                    "value": 0
+                },
+                {
+                    "label": "Grav",
+                    "value": 0
+                },
+                {
+                    "label": "Ornithopter",
+                    "value": 0
+                },
+                {
+                    "label": "Rotor",
+                    "value": 0
+                },
+                {
+                    "label": "Wing",
+                    "value": 0
+                }
+            ]
+        },
+        "gambler": {
+            "label": "Gambler",
+            "default": "INT",
+            "value": 0,
+            "trained": false
+        },
+        "gunner": {
+            "label": "Gunner",
+            "default": "DEX",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Turret",
+                    "value": 0
+                },
+                {
+                    "label": "Ortillery",
+                    "value": 0
+                },
+                {
+                    "label": "Screen",
+                    "value": 0
+                },
+                {
+                    "label": "Capital",
+                    "value": 0
+                }
+            ]
+        },
+        "guncombat": {
+            "label": "Gun Combat",
+            "default": "DEX",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Archaic",
+                    "value": 0
+                },
+                {
+                    "label": "Energy",
+                    "value": 0
+                },
+                {
+                    "label": "Slug",
+                    "value": 0
+                }
+            ]
+        },
+        "heavyweapons": {
+            "label": "Heavy Weapons",
+            "default": "DEX",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Artillery",
+                    "value": 0
+                },
+                {
+                    "label": "Portable",
+                    "value": 0
+                },
+                {
+                    "label": "Vehicle",
+                    "value": 0
+                }
+            ]
+        },
+        "investigate": {
+            "label": "Investigate",
+            "default": "INT",
+            "value": 0,
+            "trained": false
+        },
+        "jackofalltrades": {
+            "label": "Jack-of-All-Trades",
+            "default": "INT",
+            "value": 0,
+            "trained": false
+        },
+        "language": {
+            "label": "Language",
+            "default": "EDU",
+            "value": 0,
+            "trained": false
+        },
+        "leadership": {
+            "label": "Leadership",
+            "default": "SOC",
+            "value": 0,
+            "trained": false
+        },
+        "mechanic": {
+            "label": "Mechanic",
+            "default": "EDU",
+            "value": 0,
+            "trained": false
+        },
+        "medic": {
+            "label": "Medic",
+            "default": "EDU",
+            "value": 0,
+            "trained": false
+        },
+        "melee": {
+            "label": "Melee",
+            "default": "DEX",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Unarmed",
+                    "value": 0
+                },
+                {
+                    "label": "Blade",
+                    "value": 0
+                },
+                {
+                    "label": "Bludgeon",
+                    "value": 0
+                },
+                {
+                    "label": "Natural",
+                    "value": 0
+                }
+            ]
+        },
+        "navigation": {
+            "label": "Navigation",
+            "default": "INT",
+            "value": 0,
+            "trained": false
+        },
+        "persuade": {
+            "label": "Persuade",
+            "default": "SOC",
+            "value": 0,
+            "trained": false
+        },
+        "pilot": {
+            "label": "Pilot",
+            "default": "DEX",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Small Craft",
+                    "value": 0
+                },
+                {
+                    "label": "Spacecraft",
+                    "value": 0
+                },
+                {
+                    "label": "Capital Ships",
+                    "value": 0
+                }
+            ]
+        },
+        "profession": {
+            "label": "Profession",
+            "default": "INT",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Belter",
+                    "value": 0
+                },
+                {
+                    "label": "Biologicals",
+                    "value": 0
+                },
+                {
+                    "label": "Civil Engineering",
+                    "value": 0
+                },
+                {
+                    "label": "Construction",
+                    "value": 0
+                },
+                {
+                    "label": "Hydroponics",
+                    "value": 0
+                },
+                {
+                    "label": "Polymers",
+                    "value": 0
+                }
+            ]
+        },
+        "recon": {
+            "label": "Recon",
+            "default": "INT",
+            "value": 0,
+            "trained": false
+        },
+        "science": {
+            "label": "Science",
+            "default": "EDU",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Archaeology",
+                    "value": 0
+                },
+                {
+                    "label": "Astronomy",
+                    "value": 0
+                },
+                {
+                    "label": "Biology",
+                    "value": 0
+                },
+                {
+                    "label": "Chemistry",
+                    "value": 0
+                },
+                {
+                    "label": "Cosmology",
+                    "value": 0
+                },
+                {
+                    "label": "Cybernetics",
+                    "value": 0
+                },
+                {
+                    "label": "Economics",
+                    "value": 0
+                },
+                {
+                    "label": "Genetics",
+                    "value": 0
+                },
+                {
+                    "label": "History",
+                    "value": 0
+                },
+                {
+                    "label": "Linguistics",
+                    "value": 0
+                },
+                {
+                    "label": "Philosophy",
+                    "value": 0
+                },
+                {
+                    "label": "Physics",
+                    "value": 0
+                },
+                {
+                    "label": "Planetology",
+                    "value": 0
+                },
+                {
+                    "label": "Psionicology",
+                    "value": 0
+                },
+                {
+                    "label": "Psycology",
+                    "value": 0
+                },
+                {
+                    "label": "Robotics",
+                    "value": 0
+                },
+                {
+                    "label": "Sophontology",
+                    "value": 0
+                },
+                {
+                    "label": "Xenology",
+                    "value": 0
+                }
+            ]
+        },
+        "seafarer": {
+            "label": "Seafarer",
+            "default": "INT",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Ocean Ships",
+                    "value": 0
+                },
+                {
+                    "label": "Personal",
+                    "value": 0
+                },
+                {
+                    "label": "Sail",
+                    "value": 0
+                },
+                {
+                    "label": "Submarine",
+                    "value": 0
+                }
+            ]
+        },
+        "stealth": {
+            "label": "Stealth",
+            "default": "DEX",
+            "value": 0,
+            "trained": false
+        },
+        "steward": {
+            "label": "Steward",
+            "default": "SOC",
+            "value": 0,
+            "trained": false
+        },
+        "streetwise": {
+            "label": "Streetwise",
+            "default": "INT",
+            "value": 0,
+            "trained": false
+        },
+        "survival": {
+            "label": "Survival",
+            "default": "EDU",
+            "value": 0,
+            "trained": false
+        },
+        "tactics": {
+            "label": "Tactics",
+            "default": "EDU",
+            "value": 0,
+            "trained": false,
+            "specialities": [
+                {
+                    "label": "Military",
+                    "value": 0
+                },
+                {
+                    "label": "Naval",
+                    "value": 0
+                }
+            ]
+        },
+        "vaccsuit": {
+            "label": "Vacc Suit",
+            "default": "DEX",
+            "value": 0,
+            "trained": false
+        }
+      }
+    }
+  },
+  "Item": {
+    "types": ["item", "feature"],
+    "templates": {
+      "base": {
+        "description": ""
+      }
+    },
+    "item": {
+      "templates": ["base"],
+      "quantity": 1,
+      "weight": 0,
+      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
+    },
+    "feature": {
+      "templates": ["base"]
+    }
+  }
+}
