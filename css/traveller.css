@@ -485,6 +485,11 @@
     color: #404040;
 }
 
+.traveller .characteristic-readonly {
+    width: 3em;
+    color: #404040;
+}
+
 
 .traveller .text-title {
     font-weight: bold;
