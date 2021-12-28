@@ -454,3 +454,39 @@
 .traveller .effects .item .effect-controls {
   border: none;
 }
+
+
+.traveller .characteristic-title {
+    font-weight: bold;
+    font-size: 14pt;
+    text-align: left;
+}
+
+.traveller .characteristic-dm {
+    font-weight: bold;
+    font-size: 12pt;
+    background-color: white;
+    border: 1pt solid black;
+    text-align: center;
+    border-radius: 25%;
+    padding: 2px;
+    padding-bottom: 1px;
+    width: 2em;
+    display: inline-block;
+    margin-bottom: 1px;
+}
+
+.traveller .characteristic-value {
+    width: 3em;
+}
+
+.traveller .characteristic-readonly {
+    width: 3em;
+    color: #404040;
+}
+
+
+.traveller .text-title {
+    font-weight: bold;
+}
+

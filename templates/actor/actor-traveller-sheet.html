@@ -1,0 +1,132 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+
+      {{!-- Traveller Characteristics --}}
+      <div class="resources grid grid-3col">
+        {{!-- "flex-group-center" is also defined in the _grid.scss file
+        and it will add a small amount of padding, a border, and will
+        center all of its child elements content and text. --}}
+
+        {{#each data.characteristics as | char key | }}
+            {{#if char.show}}
+                <div class="resource flex-group-center">
+                    <label for="data.characteristics.{{key}}.value" class="characteristic-title" title="{{char.label}}">{{key}}</label>
+                    <span class="characteristic-dm rollable" data-roll="2d6+@{{key}}" data-label="{{key}}">{{numberFormat char.dm sign=true}}</span>
+                    <br/>
+                    <input class="characteristic-readonly" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.current" value="{{char.current}}" data-dtype="Number" readonly/> /
+                    <input class="characteristic-value" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    {{!-- Default tab is specified in actor-sheet.mjs --}}
+    <a class="item" data-tab="skills">Skills</a>
+    <a class="item" data-tab="combat">Combat</a>
+    <a class="item" data-tab="features">Features</a>
+    <a class="item" data-tab="description">Description</a>
+    <a class="item" data-tab="items">Items</a>
+    <a class="item" data-tab="settings">Settings</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Skills Tab --}}
+    <div class="tab skills" data-group="primary" data-tab="skills">
+      <section class="grid grid-3col">
+
+        {{#each data.skills as |skill key|}}
+            <div class="resource flex-group-left">
+              <div>
+                <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
+                <label for="data.skills.{{key}}.value" class="resource-label" style="width: 96px">{{skill.label}}</label>
+                {{#if skill.trained}}
+
+                {{#if skill.specialities}}
+                <input type="text" name="data.skills.{{key}}.value" value="0" data-dtype="Number" style="width: 24px" readonly/>
+
+                {{#each skill.specialities as |spec|}}
+                    <br/><label>{{spec.label}}</label>
+                {{/each}}
+
+                {{else}}
+                <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" style="width: 24px"/>
+                {{/if}}
+                {{else}}
+                (-3)
+                {{/if}}
+              </div>
+            </div>
+        {{/each}}
+
+      </section>
+    </div>
+
+    <div class="tab combat" data-group="primary" data-tab="combat">
+        <label>Characteristic Damage</label>
+        <section class="grid grid-3col">
+            {{#each data.damage as |dmg key|}}
+            <div class="resource flex-group-center">
+                <label for="data.damage.{{key}}" class="resource-label">{{key}}</label>
+                <input type="text" name="data.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
+            <div>
+            {{/each}}
+        </section>
+    </div>
+
+    {{!-- Owned Features Tab --}}
+    <div class="tab features" data-group="primary" data-tab="features">
+      <section class="grid grid-3col">
+        <aside class="sidebar">
+
+          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+          use both the "grid" and "grid-Ncol" class where "N" can be any number
+          from 1 to 12 and will create that number of columns.  --}}
+        </aside>
+
+        {{!-- For the main features list, span the right two columns --}}
+        <section class="main grid-span-2">
+          {{!-- This is a Handlebars partial. They're stored in the `/parts` folder next to this sheet, and defined in module/helpers/templates.mjs --}}
+          {{> "systems/traveller/templates/actor/parts/actor-features.html"}}
+        </section>
+
+      </section>
+    </div>
+
+    {{!-- Biography Tab --}}
+    <div class="tab biography" data-group="primary" data-tab="description">
+      {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
+      {{editor content=data.biography target="data.biography" rollData=rollData button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Owned Items Tab --}}
+    <div class="tab items" data-group="primary" data-tab="items">
+       {{> "systems/traveller/templates/actor/parts/actor-items.html"}}
+    </div>
+
+    {{!-- Active Effects Tab --}}
+    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+      {{> "systems/traveller/templates/actor/parts/actor-effects.html"}}
+    </div>
+
+    <div class="tab settings flexcol" data-group="primary" data-tab="settings">
+      <section class="resources grid grid-3col">
+        {{#each data.characteristics as | char key | }}
+            <div class="resource flex-group-left">
+                <input type="checkbox" name="data.characteristics.{{key}}.show" {{checked char.show}} data-dtype="Boolean" />
+                <label for="data.characteristics.{{key}}.value" title="{{char.label}}">{{key}}</label>
+            </div>
+        {{/each}}
+      </section>
+  </section>
+</form>
+

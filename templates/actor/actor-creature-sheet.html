@@ -6,60 +6,47 @@
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
 
-      <div class="resources grid grid-3col">
+      {{!-- Traveller Characteristics --}}
+      <div class="resources grid grid-4col">
         {{!-- "flex-group-center" is also defined in the _grid.scss file
         and it will add a small amount of padding, a border, and will
         center all of its child elements content and text. --}}
+
         <div class="resource flex-group-center">
-          <label for="data.characteristics.STR.value" class="resource-label">STR</label>
-          <span class="ability-mod rollable" data-roll="2d6+@STR" data-label="STR">🎲</span>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.characteristics.STR.value" value="{{data.characteristics.STR.value}}" data-dtype="Number"/>
-            <input type="text" name="data.characteristics.STR.dm" value="{{data.characteristics.STR.dm}}" data-dtype="Number" readonly/>
-          </div>
+            <label for="data.hits.value" class="text-title">HITS</label>
+            <input class="characteristic-value" type="number" name="data.hits.value" value="{{data.hits.value}}" data-dtype="Number"/>
         </div>
 
         <div class="resource flex-group-center">
-          <label for="data.characteristics.DEX.value" class="resource-label">DEX</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.characteristics.DEX.value" value="{{data.characteristics.DEX.value}}" data-dtype="Number"/>
-            <input type="text" name="data.characteristics.DEX.dm" value="{{data.characteristics.DEX.dm}}" data-dtype="Number" readonly/>
-          </div>
+            <label for="data.speed" class="text-title">SPEED</label>
+            <input class="characteristic-value" type="number" name="data.speed" value="{{data.speed}}" data-dtype="Number"/>
         </div>
 
         <div class="resource flex-group-center">
-          <label for="data.characteristics.END.value" class="resource-label">END</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.characteristics.END.value" value="{{data.characteristics.END.value}}" data-dtype="Number"/>
-            <input type="text" name="data.characteristics.END.dm" value="{{data.characteristics.END.dm}}" data-dtype="Number" readonly/>
-          </div>
+            <label for="data.armour" class="text-title">ARMOUR</label>
+            <input class="characteristic-value" type="number" name="data.armour" value="{{data.armour}}" data-dtype="Number"/>
         </div>
 
         <div class="resource flex-group-center">
-          <label for="data.characteristics.INT.value" class="resource-label">INT</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.characteristics.INT.value" value="{{data.characteristics.INT.value}}" data-dtype="Number"/>
-            <input type="text" name="data.characteristics.INT.dm" value="{{data.characteristics.INT.dm}}" data-dtype="Number" readonly/>
-          </div>
+            <label for="data.size" class="text-title">SIZE</label>
+            <input class="characteristic-value" type="number" name="data.size" value="{{data.size}}" data-dtype="Number"/>
         </div>
-
-        <div class="resource flex-group-center">
-          <label for="data.characteristics.EDU.value" class="resource-label">EDU</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.characteristics.EDU.value" value="{{data.characteristics.EDU.value}}" data-dtype="Number"/>
-            <input type="text" name="data.characteristics.EDU.dm" value="{{data.characteristics.EDU.dm}}" data-dtype="Number" readonly/>
-          </div>
-        </div>
-
-        <div class="resource flex-group-center">
-          <label for="data.characteristics.SOC.value" class="resource-label">SOC</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.characteristics.SOC.value" value="{{data.characteristics.SOC.value}}" data-dtype="Number"/>
-            <input type="text" name="data.characteristics.SOC.dm" value="{{data.characteristics.SOC.dm}}" data-dtype="Number" readonly/>
-          </div>
-        </div>
-
     </div>
+
+    <div class="resources">
+        <div class="resource flex-group-left">
+            <label class="text-title">Behaviour</label>
+            <input type="text" name="data.behaviour" value="{{data.behaviour}}" data-dtype="Text"/>
+        </div>
+    </div>
+    <div>
+        <div class="resource flex-group-left">
+            <label class="text-title">Traits</label>
+            <input type="text" name="data.traits" value="{{data.traits}}" data-dtype="Text"/>
+        </div>
+    </div>
+
+
   </header>
 
   {{!-- Sheet Tab Navigation --}}
@@ -78,8 +65,8 @@
     {{!-- Skills Tab --}}
     <div class="tab skills" data-group="primary" data-tab="skills">
       <section class="grid grid-3col">
-
         {{#each data.skills as |skill key|}}
+            {{#if skill.creature}}
             <div class="resource flex-group-left">
               <div>
                 <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
@@ -101,6 +88,7 @@
                 {{/if}}
               </div>
             </div>
+            {{/if}}
         {{/each}}
 
       </section>

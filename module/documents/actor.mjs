@@ -33,9 +33,9 @@ export class TravellerActor extends Actor {
     const data = actorData.data;
     const flags = actorData.flags.traveller || {};
 
-    // Make separate methods for each Actor type (character, npc, etc.) to keep
+    // Make separate methods for each Actor type (traveller, npc, etc.) to keep
     // things organized.
-    this._prepareCharacterData(actorData);
+    this._prepareTravellerData(actorData);
   }
 
 
@@ -56,17 +56,45 @@ export class TravellerActor extends Actor {
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(actorData) {
-    if (actorData.type !== 'character') return;
+  _prepareTravellerData(actorData) {
+    if (actorData.type !== 'traveller') return;
 
     // Make modifications to data here. For example:
     const data = actorData.data;
 
     for (const char in data.characteristics) {
-        let dm = this.getModifier(data.characteristics[char].value);
+        let value = data.characteristics[char].value;
+        let dmg = 0;
+        if (data.damage && data.damage[char]) {
+            dmg = data.damage[char].value;
+            if (dmg < 0) {
+                dmg = 0;
+                data.damage[char].value = dmg;
+            }
+            if (dmg > value) {
+                dmg = value;
+                data.damage[char].value = dmg;
+            }
+            value -= dmg;
+        }
+        data.characteristics[char].current = value;
+
+        let dm = this.getModifier(value);
         data.characteristics[char].dm = dm;
         console.log("Characteristic " + char + " is " + dm);
     }
+
+    if (data.damage && data.totalHits) {
+        let totalHits = 0;
+        let maxHits = 0;
+
+        totalHits = data.characteristics.STR.current + data.characteristics.DEX.current + data.characteristics.END.current;
+        maxHits = data.characteristics.STR.value + data.characteristics.DEX.value + data.characteristics.END.value;
+
+        data.totalHits.value = totalHits;
+        data.totalHits.max = maxHits;
+    }
+
   }
 
   /**
@@ -75,8 +103,8 @@ export class TravellerActor extends Actor {
   getRollData() {
     const data = super.getRollData();
 
-    // Prepare character roll data.
-    this._getCharacterRollData(data);
+    // Prepare traveller roll data.
+    this._getTravellerRollData(data);
 
     return data;
   }
@@ -84,12 +112,12 @@ export class TravellerActor extends Actor {
   /**
    * Prepare character roll data.
    */
-  _getCharacterRollData(data) {
-    if (this.data.type !== 'character') return;
+  _getTravellerRollData(data) {
+    if (this.data.type !== 'traveller') return;
 
-    // Add level for easier access, or fall back to 0.
-    if (data.attributes.level) {
-      data.lvl = data.attributes.level.value ?? 0;
+    if (!data.characteristics) {
+        console.log("This Traveller has no characteristics");
+        return;
     }
 
     for (let [k,v] of Object.entries(data.characteristics)) {
