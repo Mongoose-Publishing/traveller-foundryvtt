@@ -4,7 +4,10 @@
     "templates": {
       "base": {
         "speed": 6,
-        "description": ""
+        "description": "",
+        "settings": {
+            "hideUntrained": false
+        }
       },
       "hits": {
         "hits": {
@@ -111,19 +114,22 @@
                 "label": "Admin",
                 "default": "EDU",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "advocate": {
                 "label": "Advocate",
                 "default": "EDU",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "animals": {
                 "label": "Animals",
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Handling",
@@ -147,6 +153,7 @@
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Performer",
@@ -174,7 +181,8 @@
                 "label": "Astrogation",
                 "default": "EDU",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "athletics": {
                 "label": "Athletics",
@@ -182,6 +190,7 @@
                 "value": 0,
                 "trained": false,
                 "creature": true,
+                "requires": "DEX",
                 "specialities": [
                     {
                         "label": "Dexterity",
@@ -204,31 +213,36 @@
                 "label": "Broker",
                 "default": "INT",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "carouse": {
                 "label": "Carouse",
                 "default": "SOC",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "deception": {
                 "label": "Deception",
                 "default": "INT",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "diplomat": {
                 "label": "Diplomat",
                 "default": "SOC",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "drive": {
                 "label": "Drive",
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "requires": "DEX",
                 "specialities": [
                     {
                         "label": "Hovercraft",
@@ -257,6 +271,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Comms",
@@ -281,6 +296,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "M-drive",
@@ -304,13 +320,15 @@
                 "label": "Explosives",
                 "default": "EDU",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "flyer": {
                 "label": "Flyer",
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "requires": "DEX",
                 "specialities": [
                     {
                         "label": "Airship",
@@ -338,13 +356,15 @@
                 "label": "Gambler",
                 "default": "INT",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "gunner": {
                 "label": "Gunner",
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Turret",
@@ -369,6 +389,7 @@
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "requires": "DEX",
                 "specialities": [
                     {
                         "label": "Archaic",
@@ -389,6 +410,7 @@
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Artillery",
@@ -404,47 +426,61 @@
                     }
                 ]
             },
+            "independence": {
+                "label": "Independence",
+                "default": "INT",
+                "value": 0,
+                "trained": false,
+                "requires": "TER"
+            },
             "investigate": {
                 "label": "Investigate",
                 "default": "INT",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "jackofalltrades": {
                 "label": "Jack-of-All-Trades",
                 "default": "INT",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "language": {
                 "label": "Language",
                 "default": "EDU",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "leadership": {
                 "label": "Leadership",
                 "default": "SOC",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "mechanic": {
                 "label": "Mechanic",
                 "default": "EDU",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "medic": {
                 "label": "Medic",
                 "default": "EDU",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "melee": {
                 "label": "Melee",
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "requires": "DEX",
                 "creature": true,
                 "specialities": [
                     {
@@ -469,19 +505,22 @@
                 "label": "Navigation",
                 "default": "INT",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "persuade": {
                 "label": "Persuade",
                 "default": "SOC",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "pilot": {
                 "label": "Pilot",
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Small Craft",
@@ -502,6 +541,7 @@
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Belter",
@@ -534,6 +574,7 @@
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "creature": true
             },
             "science": {
@@ -541,6 +582,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Archaeology",
@@ -621,6 +663,7 @@
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Ocean Ships",
@@ -645,25 +688,29 @@
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "creature": true
             },
             "steward": {
                 "label": "Steward",
                 "default": "SOC",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "streetwise": {
                 "label": "Streetwise",
                 "default": "INT",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
             },
             "survival": {
                 "label": "Survival",
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "creature": true
             },
             "tactics": {
@@ -671,6 +718,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "requires": "INT",
                 "specialities": [
                     {
                         "label": "Military",
@@ -686,7 +734,43 @@
                 "label": "Vacc Suit",
                 "default": "DEX",
                 "value": 0,
-                "trained": false
+                "trained": false,
+                "requires": "INT"
+            },
+            "telepathy": {
+                "label": "Telepathy",
+                "default": "PSI",
+                "value": 0,
+                "trained": false,
+                "requires": "PSI"
+            },
+            "clairvoyance": {
+                "label": "Clairvoyance",
+                "default": "PSI",
+                "value": 0,
+                "trained": false,
+                "requires": "PSI"
+            },
+            "telekinesis": {
+                "label": "Telekinesis",
+                "default": "PSI",
+                "value": 0,
+                "trained": false,
+                "requires": "PSI"
+            },
+            "awareness": {
+                "label": "Awareness",
+                "default": "PSI",
+                "value": 0,
+                "trained": false,
+                "requires": "PSI"
+            },
+            "teleportation": {
+                "label": "Teleportation",
+                "default": "PSI",
+                "value": 0,
+                "trained": false,
+                "requires": "PSI"
             }
         }
       }

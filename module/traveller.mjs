@@ -66,6 +66,11 @@ Handlebars.registerHelper('toLowerCase', function(str) {
   return str.toLowerCase();
 });
 
+Handlebars.registerHelper('isChaShown', function(data, ch) {
+    return data.characteristics[ch].show;
+});
+
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

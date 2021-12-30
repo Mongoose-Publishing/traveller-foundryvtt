@@ -44,28 +44,40 @@
     <div class="tab skills" data-group="primary" data-tab="skills">
       <section class="grid grid-3col">
 
+        {{log "Hello World"}}
+        {{log data.characteristics.STR.show}}
+        {{log "Goodbye World"}}
+
         {{#each data.skills as |skill key|}}
-            <div class="resource flex-group-left">
-              <div>
-                <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
-                <label for="data.skills.{{key}}.value" class="resource-label" style="width: 96px">{{skill.label}}</label>
+            {{#if (isChaShown ../data skill.requires)}}
                 {{#if skill.trained}}
+                    <div class="resource flex-group-left">
+                        <div>
+                            <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
+                            <label for="data.skills.{{key}}.value" class="resource-label" style="width: 96px">{{skill.label}}</label>
+                            {{#if skill.specialities}}
+                                <input type="text" name="data.skills.{{key}}.value" value="0" data-dtype="Number" style="width: 24px" readonly/>
 
-                {{#if skill.specialities}}
-                <input type="text" name="data.skills.{{key}}.value" value="0" data-dtype="Number" style="width: 24px" readonly/>
+                                {{#each skill.specialities as |spec|}}
+                                    <br/><label>{{spec.label}}</label>
+                                {{/each}}
 
-                {{#each skill.specialities as |spec|}}
-                    <br/><label>{{spec.label}}</label>
-                {{/each}}
-
+                            {{else}}
+                                <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" style="width: 24px"/>
+                            {{/if}}
+                        </div>
+                    </div>
+                {{else if ../data/settings.hideUntrained}}
                 {{else}}
-                <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" style="width: 24px"/>
+                    <div class="resource flex-group-left">
+                        <div>
+                            <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
+                            <label for="data.skills.{{key}}.value" class="resource-label" style="width: 96px; font-weight: normal">{{skill.label}}</label>
+                            (-3)
+                        </div>
+                    </div>
                 {{/if}}
-                {{else}}
-                (-3)
-                {{/if}}
-              </div>
-            </div>
+            {{/if}}
         {{/each}}
 
       </section>
@@ -119,6 +131,13 @@
     </div>
 
     <div class="tab settings flexcol" data-group="primary" data-tab="settings">
+      <section class="resources grid grid-3col">
+        <div class="resource flex-group-left">
+          <input type="checkbox" name="data.settings.hideUntrained" {{checked data.settings.hideUntrained}} data-dtype="Boolean" />
+          <label for="data.settings.hideUntrained">Hide untrained skills</label>
+        </div>
+      </section>
+      <hr/>
       <section class="resources grid grid-3col">
         {{#each data.characteristics as | char key | }}
             <div class="resource flex-group-left">
