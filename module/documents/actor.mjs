@@ -137,7 +137,7 @@ export class TravellerActor extends Actor {
    * Prepare character roll data.
    */
   _getTravellerRollData(data) {
-    if (this.data.type !== 'traveller') return;
+    if (this.data.type !== 'traveller' && this.data.type !== 'npc') return;
 
     if (!data.characteristics) {
         console.log("This Traveller has no characteristics");
@@ -145,7 +145,6 @@ export class TravellerActor extends Actor {
     }
 
     for (let [k,v] of Object.entries(data.characteristics)) {
-        console.log("RollData for " + k);
         data[k] = v.dm ?? -3;
     }
 
