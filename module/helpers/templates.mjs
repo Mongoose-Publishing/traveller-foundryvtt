@@ -10,5 +10,6 @@
     "systems/traveller/templates/actor/parts/actor-features.html",
     "systems/traveller/templates/actor/parts/actor-items.html",
     "systems/traveller/templates/actor/parts/actor-effects.html",
+    "systems/traveller/templates/actor/parts/actor-skills.html",
   ]);
 };

@@ -18,7 +18,6 @@
                     <label for="data.characteristics.{{key}}.value" class="characteristic-title" title="{{char.label}}">{{key}}</label>
                     <span class="characteristic-dm rollable" data-roll="2d6+@{{key}}" data-label="{{key}}">{{numberFormat char.dm sign=true}}</span>
                     <br/>
-                    <input class="characteristic-readonly" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.current" value="{{char.current}}" data-dtype="Number" readonly/> /
                     <input class="characteristic-value" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
                 </div>
             {{/if}}
@@ -48,12 +47,10 @@
     <div class="tab combat" data-group="primary" data-tab="combat">
         <label>Characteristic Damage</label>
         <section class="grid grid-3col">
-            {{#each data.damage as |dmg key|}}
             <div class="resource flex-group-center">
-                <label for="data.damage.{{key}}" class="resource-label">{{key}}</label>
-                <input type="text" name="data.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
+                <label for="data.hits.max" class="resource-label">HITS</label>
+                <input type="text" name="data.hits.max" value="{{data.hits.max}}" data-dtype="Number"/>
             <div>
-            {{/each}}
         </section>
     </div>
 

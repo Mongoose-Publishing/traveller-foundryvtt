@@ -1,0 +1,34 @@
+<section class="grid grid-3col">
+{{#each data.skills as |skill key|}}
+    {{#if (isChaShown ../data skill.requires)}}
+        {{#if skill.trained}}
+            <div class="resource flex-group-left">
+                <div>
+                    <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
+                    <label for="data.skills.{{key}}.value" class="resource-label rollable" data-roll="2d6+@{{skill.default}}+{{skill.value}}" data-label="{{skill.label}}" style="width: 96px">{{skill.label}}</label>
+                    {{#if skill.specialities}}
+                        <input type="text" name="data.skills.{{key}}.value" value="0" data-dtype="Number" style="width: 24px" readonly/>
+
+                        {{#each skill.specialities as |spec|}}
+                            <br/><label>{{spec.label}}</label>
+                        {{/each}}
+
+                    {{else}}
+                        <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" style="width: 24px"/>
+                    {{/if}}
+                </div>
+            </div>
+        {{else if ../data/settings.hideUntrained}}
+        {{else}}
+            <div class="resource flex-group-left">
+                <div>
+                    <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
+                    <label for="data.skills.{{key}}.value" class="resource-label" style="width: 96px; font-weight: normal">{{skill.label}}</label>
+                    (-3)
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+{{/each}}
+
+</section>

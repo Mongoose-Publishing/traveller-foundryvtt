@@ -36,6 +36,7 @@ export class TravellerActor extends Actor {
     // Make separate methods for each Actor type (traveller, npc, etc.) to keep
     // things organized.
     this._prepareTravellerData(actorData);
+    this._prepareNpcData(actorData);
   }
 
 
@@ -97,6 +98,29 @@ export class TravellerActor extends Actor {
 
   }
 
+  _prepareNpcData(actorData) {
+    if (actorData.type !== 'npc') return;
+
+    // Make modifications to data here. For example:
+    const data = actorData.data;
+
+    for (const char in data.characteristics) {
+        let value = data.characteristics[char].value;
+        let dm = this.getModifier(value);
+        data.characteristics[char].dm = dm;
+        console.log("Characteristic " + char + " is " + dm);
+    }
+
+    if (data.hits) {
+        let totalHits = 0;
+        let maxHits = 0;
+
+        maxHits = data.characteristics.STR.value + data.characteristics.DEX.value + data.characteristics.END.value;
+
+        data.hits.max = maxHits;
+    }
+
+  }
   /**
    * Override getRollData() that's supplied to rolls.
    */
