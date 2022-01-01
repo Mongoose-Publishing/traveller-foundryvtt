@@ -11,7 +11,8 @@
         },
         "description": "",
         "settings": {
-            "hideUntrained": false
+            "hideUntrained": false,
+            "onlyBackground": false
         }
       },
       "characteristics": {
@@ -93,6 +94,12 @@
                 "value": 0,
                 "current": 7,
                 "show": false
+            },
+            "RES": {
+                "label": "Resolve",
+                "value": 0,
+                "current": 7,
+                "show": false
             }
         }
       },
@@ -114,6 +121,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT"
             },
             "advocate": {
@@ -128,6 +136,7 @@
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT",
                 "specialities": {
                     "handling": {
@@ -152,6 +161,7 @@
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT",
                 "specialities": {
                     "performer": {
@@ -188,6 +198,7 @@
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "creature": true,
                 "requires": "DEX",
                 "specialities": {
@@ -220,6 +231,7 @@
                 "default": "SOC",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT"
             },
             "deception": {
@@ -241,6 +253,7 @@
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "DEX",
                 "specialities": {
                     "hovercraft": {
@@ -270,6 +283,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT",
                 "specialities": {
                     "comms": {
@@ -327,6 +341,7 @@
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "DEX",
                 "specialities": {
                     "airship": {
@@ -452,7 +467,34 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
-                "requires": "INT"
+                "background": true,
+                "requires": "INT",
+                "specialities": {
+                    "galanglic": {
+                        "label": "Galanglic",
+                        "value": 0
+                    },
+                    "vilani": {
+                        "label": "Vilani",
+                        "value": 0
+                    },
+                    "zdetl": {
+                        "label": "Zdetl",
+                        "value": 0
+                    },
+                    "oynprith": {
+                        "label": "Oynprith",
+                        "value": 0
+                    },
+                    "trokh": {
+                        "label": "Trokh",
+                        "value": 0
+                    },
+                    "gvegh": {
+                        "label": "Gvegh",
+                        "value": 0
+                    }
+                }
             },
             "leadership": {
                 "label": "Leadership",
@@ -466,6 +508,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT"
             },
             "medic": {
@@ -473,6 +516,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT"
             },
             "melee": {
@@ -541,6 +585,7 @@
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT",
                 "specialities": {
                     "belter": {
@@ -582,6 +627,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT",
                 "specialities": {
                     "archaeology": {
@@ -663,6 +709,7 @@
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT",
                 "specialities": {
                     "oceanShips": {
@@ -703,6 +750,7 @@
                 "default": "INT",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT"
             },
             "survival": {
@@ -710,6 +758,7 @@
                 "default": "EDU",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT",
                 "creature": true
             },
@@ -735,6 +784,7 @@
                 "default": "DEX",
                 "value": 0,
                 "trained": false,
+                "background": true,
                 "requires": "INT"
             },
             "telepathy": {

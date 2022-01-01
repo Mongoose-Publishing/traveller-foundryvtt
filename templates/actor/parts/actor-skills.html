@@ -1,7 +1,17 @@
 <section class="grid grid-3col">
 {{#each data.skills as |skill key|}}
     {{#if (isChaShown ../data skill.requires)}}
-        {{#if skill.trained}}
+        {{#if ../data/settings.onlyBackground}}
+            {{#if skill.background}}
+                <div class="resource flex-group-left">
+                    <div>
+                        <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
+                        <label for="data.skills.{{key}}.value" class="resource-label" style="width: 96px; font-weight: normal">{{skill.label}}</label>
+                        ({{defaultSkill ../data}})
+                    </div>
+                </div>
+            {{/if}}
+        {{else if skill.trained}}
             <div class="resource flex-group-left">
                 <div>
                     <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
