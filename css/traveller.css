@@ -1,7 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap');
+
 /* Global styles */
 .window-app {
-  font-family: "Roboto", sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
 .rollable:hover, .rollable:focus {
@@ -458,13 +462,13 @@
 
 .traveller .characteristic-title {
     font-weight: bold;
-    font-size: 14pt;
+    font-size: 12pt;
     text-align: left;
 }
 
 .traveller .characteristic-dm {
     font-weight: bold;
-    font-size: 12pt;
+    font-size: 10pt;
     background-color: white;
     border: 1pt solid black;
     text-align: center;
