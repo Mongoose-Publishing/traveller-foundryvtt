@@ -82,7 +82,6 @@ export class TravellerActor extends Actor {
 
         let dm = this.getModifier(value);
         data.characteristics[char].dm = dm;
-        console.log("Characteristic " + char + " is " + dm);
     }
 
     if (data.damage && data.totalHits) {
@@ -108,7 +107,6 @@ export class TravellerActor extends Actor {
         let value = data.characteristics[char].value;
         let dm = this.getModifier(value);
         data.characteristics[char].dm = dm;
-        console.log("Characteristic " + char + " is " + dm);
     }
 
     if (data.hits) {
@@ -117,6 +115,7 @@ export class TravellerActor extends Actor {
 
         maxHits = data.characteristics.STR.value + data.characteristics.DEX.value + data.characteristics.END.value;
 
+        //data.hits.value = maxHits;
         data.hits.max = maxHits;
     }
 

@@ -490,6 +490,12 @@
     color: #404040;
 }
 
+.traveller .specialisation {
+    font-style: italic;
+    padding-left: 2em;
+    width: 10em;
+    display: inline-block;
+}
 
 .traveller .text-title {
     font-weight: bold;

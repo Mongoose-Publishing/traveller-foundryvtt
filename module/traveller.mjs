@@ -29,7 +29,7 @@ Hooks.once('init', async function() {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "1d20",
+    formula: "2d6",
     decimals: 2
   };
 
@@ -67,9 +67,21 @@ Handlebars.registerHelper('toLowerCase', function(str) {
 });
 
 Handlebars.registerHelper('isChaShown', function(data, ch) {
-    return data.characteristics[ch].show;
+    if (data.characteristics[ch]) {
+        return data.characteristics[ch].show;
+    } else {
+        return false;
+    }
 });
 
+Handlebars.registerHelper('defaultSkill', function(data) {
+    if (data && data.skills && data.skills.jackofalltrades && data.skills.jackofalltrades.trained) {
+        let dm = data.skills.jackofalltrades.value - 3;
+        return (dm > 0)?0:dm;
+    } else {
+        return -3;
+    }
+});
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */

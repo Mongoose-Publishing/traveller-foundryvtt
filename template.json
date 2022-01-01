@@ -4,15 +4,14 @@
     "templates": {
       "base": {
         "speed": 6,
-        "description": "",
-        "settings": {
-            "hideUntrained": false
-        }
-      },
-      "hits": {
+        "initiative": 0,
         "hits": {
             "value": 21,
             "max": 21
+        },
+        "description": "",
+        "settings": {
+            "hideUntrained": false
         }
       },
       "characteristics": {
@@ -130,23 +129,23 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "handling": {
                         "label": "Handling",
                         "default": "DEX",
                         "value": 0
                     },
-                    {
+                    "vetinary": {
                         "label": "Vetinary",
                         "default": "EDU",
                         "value": 0
                     },
-                    {
+                    "training": {
                         "label": "Training",
                         "default": "INT",
                         "value": 0
                     }
-                ]
+                }
             },
             "art": {
                 "label": "Art",
@@ -154,28 +153,28 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "performer": {
                         "label": "Performer",
                         "value": 0
                     },
-                    {
+                    "holography": {
                         "label": "Holography",
                         "value": 0
                     },
-                    {
+                    "instrument": {
                         "label": "Instrument",
                         "value": 0
                     },
-                    {
+                    "visualMedia": {
                         "label": "Visual Media",
                         "value": 0
                     },
-                    {
+                    "write": {
                         "label": "Write",
                         "value": 0
                     }
-                ]
+                }
             },
             "astrogation": {
                 "label": "Astrogation",
@@ -191,23 +190,23 @@
                 "trained": false,
                 "creature": true,
                 "requires": "DEX",
-                "specialities": [
-                    {
+                "specialities": {
+                    "dexterity": {
                         "label": "Dexterity",
                         "default": "DEX",
                         "value": 0
                     },
-                    {
+                    "endurance": {
                         "label": "Endurance",
                         "default": "END",
                         "value": 0
                     },
-                    {
+                    "strength": {
                         "label": "Strength",
                         "default": "STR",
                         "value": 0
                     }
-                ]
+                }
             },
             "broker": {
                 "label": "Broker",
@@ -243,28 +242,28 @@
                 "value": 0,
                 "trained": false,
                 "requires": "DEX",
-                "specialities": [
-                    {
+                "specialities": {
+                    "hovercraft": {
                         "label": "Hovercraft",
                         "value": 0
                     },
-                    {
+                    "mole": {
                         "label": "Mole",
                         "value": 0
                     },
-                    {
+                    "track": {
                         "label": "Track",
                         "value": 0
                     },
-                    {
+                    "walker": {
                         "label": "Walker",
                         "value": 0
                     },
-                    {
+                    "wheel": {
                         "label": "Wheel",
                         "value": 0
                     }
-                ]
+                }
             },
             "electronics": {
                 "label": "Electronics",
@@ -272,24 +271,24 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "comms": {
                         "label": "Comms",
                         "value": 0
                     },
-                    {
+                    "computers": {
                         "label": "Computers",
                         "value": 0
                     },
-                    {
+                    "remoteOps": {
                         "label": "Remote Ops",
                         "value": 0
                     },
-                    {
-                        "Sensors": "Sensors",
+                    "sensors": {
+                        "label": "Sensors",
                         "value": 0
                     }
-                ]
+                }
             },
             "engineer": {
                 "label": "Engineer",
@@ -297,24 +296,24 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "mDrive": {
                         "label": "M-drive",
                         "value": 0
                     },
-                    {
+                    "jDrive": {
                         "label": "J-drive",
                         "value": 0
                     },
-                    {
+                    "lifeSupport": {
                         "label": "Life Support",
                         "value": 0
                     },
-                    {
+                    "power": {
                         "label": "Power",
                         "value": 0
                     }
-                ]
+                }
             },
             "explosives": {
                 "label": "Explosives",
@@ -329,28 +328,28 @@
                 "value": 0,
                 "trained": false,
                 "requires": "DEX",
-                "specialities": [
-                    {
+                "specialities": {
+                    "airship": {
                         "label": "Airship",
                         "value": 0
                     },
-                    {
+                    "grav": {
                         "label": "Grav",
                         "value": 0
                     },
-                    {
+                    "ornithopter": {
                         "label": "Ornithopter",
                         "value": 0
                     },
-                    {
+                    "rotor": {
                         "label": "Rotor",
                         "value": 0
                     },
-                    {
+                    "wing": {
                         "label": "Wing",
                         "value": 0
                     }
-                ]
+                }
             },
             "gambler": {
                 "label": "Gambler",
@@ -365,24 +364,25 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "turret": {
                         "label": "Turret",
                         "value": 0
                     },
-                    {
+                    "ortillery": {
                         "label": "Ortillery",
                         "value": 0
                     },
-                    {
+                    "screen": {
                         "label": "Screen",
                         "value": 0
                     },
-                    {
+                    "capital": {
                         "label": "Capital",
+                        "default": "INT",
                         "value": 0
                     }
-                ]
+                }
             },
             "guncombat": {
                 "label": "Gun Combat",
@@ -390,20 +390,20 @@
                 "value": 0,
                 "trained": false,
                 "requires": "DEX",
-                "specialities": [
-                    {
+                "specialities": {
+                    "archaic": {
                         "label": "Archaic",
                         "value": 0
                     },
-                    {
+                    "energy": {
                         "label": "Energy",
                         "value": 0
                     },
-                    {
+                    "slug": {
                         "label": "Slug",
                         "value": 0
                     }
-                ]
+                }
             },
             "heavyweapons": {
                 "label": "Heavy Weapons",
@@ -411,20 +411,20 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "artillery": {
                         "label": "Artillery",
                         "value": 0
                     },
-                    {
+                    "portable": {
                         "label": "Portable",
                         "value": 0
                     },
-                    {
+                    "vehicle": {
                         "label": "Vehicle",
                         "value": 0
                     }
-                ]
+                }
             },
             "independence": {
                 "label": "Independence",
@@ -482,24 +482,24 @@
                 "trained": false,
                 "requires": "DEX",
                 "creature": true,
-                "specialities": [
-                    {
+                "specialities": {
+                    "unarmed": {
                         "label": "Unarmed",
                         "value": 0
                     },
-                    {
+                    "blade": {
                         "label": "Blade",
                         "value": 0
                     },
-                    {
+                    "bludgeon": {
                         "label": "Bludgeon",
                         "value": 0
                     },
-                    {
+                    "natural": {
                         "label": "Natural",
                         "value": 0
                     }
-                ]
+                }
             },
             "navigation": {
                 "label": "Navigation",
@@ -521,20 +521,20 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "smallCraft": {
                         "label": "Small Craft",
                         "value": 0
                     },
-                    {
+                    "spacecraft": {
                         "label": "Spacecraft",
                         "value": 0
                     },
-                    {
+                    "capitalShips": {
                         "label": "Capital Ships",
                         "value": 0
                     }
-                ]
+                }
             },
             "profession": {
                 "label": "Profession",
@@ -542,32 +542,32 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "belter": {
                         "label": "Belter",
                         "value": 0
                     },
-                    {
+                    "biologicals": {
                         "label": "Biologicals",
                         "value": 0
                     },
-                    {
+                    "civilEngineering": {
                         "label": "Civil Engineering",
                         "value": 0
                     },
-                    {
+                    "construction": {
                         "label": "Construction",
                         "value": 0
                     },
-                    {
+                    "hydroponics": {
                         "label": "Hydroponics",
                         "value": 0
                     },
-                    {
+                    "polymers": {
                         "label": "Polymers",
                         "value": 0
                     }
-                ]
+                }
             },
             "recon": {
                 "label": "Recon",
@@ -583,80 +583,80 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "archaeology": {
                         "label": "Archaeology",
                         "value": 0
                     },
-                    {
+                    "astronomy": {
                         "label": "Astronomy",
                         "value": 0
                     },
-                    {
+                    "biology": {
                         "label": "Biology",
                         "value": 0
                     },
-                    {
+                    "chemistry": {
                         "label": "Chemistry",
                         "value": 0
                     },
-                    {
+                    "cosmology": {
                         "label": "Cosmology",
                         "value": 0
                     },
-                    {
+                    "cybernetics": {
                         "label": "Cybernetics",
                         "value": 0
                     },
-                    {
+                    "economics": {
                         "label": "Economics",
                         "value": 0
                     },
-                    {
+                    "genetics": {
                         "label": "Genetics",
                         "value": 0
                     },
-                    {
+                    "history": {
                         "label": "History",
                         "value": 0
                     },
-                    {
+                    "linquistics": {
                         "label": "Linguistics",
                         "value": 0
                     },
-                    {
+                    "philosopy": {
                         "label": "Philosophy",
                         "value": 0
                     },
-                    {
+                    "physics": {
                         "label": "Physics",
                         "value": 0
                     },
-                    {
+                    "planetology": {
                         "label": "Planetology",
                         "value": 0
                     },
-                    {
+                    "psionicology": {
                         "label": "Psionicology",
                         "value": 0
                     },
-                    {
+                    "psycology": {
                         "label": "Psycology",
                         "value": 0
                     },
-                    {
+                    "robotics": {
                         "label": "Robotics",
                         "value": 0
                     },
-                    {
+                    "sophontology": {
                         "label": "Sophontology",
                         "value": 0
                     },
-                    {
+                    "xenology": {
                         "label": "Xenology",
                         "value": 0
                     }
-                ]
+                }
             },
             "seafarer": {
                 "label": "Seafarer",
@@ -664,24 +664,24 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "oceanShips": {
                         "label": "Ocean Ships",
                         "value": 0
                     },
-                    {
+                    "personal": {
                         "label": "Personal",
                         "value": 0
                     },
-                    {
+                    "sail": {
                         "label": "Sail",
                         "value": 0
                     },
-                    {
+                    "submarine": {
                         "label": "Submarine",
                         "value": 0
                     }
-                ]
+                }
             },
             "stealth": {
                 "label": "Stealth",
@@ -719,16 +719,16 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "specialities": [
-                    {
+                "specialities": {
+                    "military": {
                         "label": "Military",
                         "value": 0
                     },
-                    {
+                    "naval": {
                         "label": "Naval",
                         "value": 0
                     }
-                ]
+                }
             },
             "vaccsuit": {
                 "label": "Vacc Suit",
@@ -785,13 +785,11 @@
     },
     "npc": {
         "templates": [ "base", "characteristics", "skills" ],
-        "hits": 21,
         "armour": 0,
         "size": 0
     },
     "creature": {
         "templates": [ "base", "skills" ],
-        "hits": 21,
         "armour": 0,
         "size": 0,
         "behaviour": "",

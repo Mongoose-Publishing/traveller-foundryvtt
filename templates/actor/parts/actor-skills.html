@@ -9,8 +9,10 @@
                     {{#if skill.specialities}}
                         <input type="text" name="data.skills.{{key}}.value" value="0" data-dtype="Number" style="width: 24px" readonly/>
 
-                        {{#each skill.specialities as |spec|}}
-                            <br/><label>{{spec.label}}</label>
+                        {{#each skill.specialities as |spec i|}}
+                            <br/>
+                            <label class="specialisation">{{spec.label}}</label>
+                            <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value" value="{{spec.value}}" data-dtype="Number" style="width: 24px"/>
                         {{/each}}
 
                     {{else}}
@@ -24,7 +26,7 @@
                 <div>
                     <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
                     <label for="data.skills.{{key}}.value" class="resource-label" style="width: 96px; font-weight: normal">{{skill.label}}</label>
-                    (-3)
+                    ({{defaultSkill ../data}})
                 </div>
             </div>
         {{/if}}
