@@ -11,7 +11,7 @@ export class TravellerActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["traveller", "sheet", "actor"],
       template: "systems/traveller/templates/actor/actor-sheet.html",
-      width: 600,
+      width: 720,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
     });
