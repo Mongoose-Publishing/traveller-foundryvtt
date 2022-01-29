@@ -55,20 +55,20 @@
             },
             "CHA": {
                 "label": "Charisma",
-                "value": 0,
+                "value": 7,
                 "current": 7,
                 "show": false
             },
             "TER": {
                 "label": "Territory",
                 "value": 0,
-                "current": 7,
+                "current": 0,
                 "show": false
             },
             "PSI": {
                 "label": "Psionic Strength",
                 "value": 0,
-                "current": 7,
+                "current": 0,
                 "show": false
             },
             "WLT": {
@@ -85,20 +85,26 @@
             },
             "MRL": {
                 "label": "Morale",
-                "value": 0,
+                "value": 7,
                 "current": 7,
                 "show": false
             },
             "SAN": {
                 "label": "Sanity",
-                "value": 0,
+                "value": 7,
                 "current": 7,
                 "show": false
             },
             "RES": {
                 "label": "Resolve",
-                "value": 0,
+                "value": 7,
                 "current": 7,
+                "show": false
+            },
+            "FOL": {
+                "label": "Following",
+                "value": 0,
+                "current": 0,
                 "show": false
             }
         }
@@ -847,17 +853,46 @@
     }
   },
   "Item": {
-    "types": ["item", "feature"],
+    "types": ["item", "feature", "weapon", "armour", "augment" ],
     "templates": {
       "base": {
+        "name": "",
         "description": ""
+      },
+      "hardware": {
+        "tl": 0,
+        "weight": 0,
+        "cost": 0
+      },
+      "weapon": {
+        "range": 0,
+        "damage": "1d6",
+        "magazine": 0,
+        "ammo": 0,
+        "skill": "@dex",
+        "traits": ""
+      },
+      "armour": {
+        "protection": 0,
+        "rad": 0,
+        "vaccSuit": 0
+      },
+      "augment": {
+        "stat": "DEX",
+        "bonus": 0
       }
     },
     "item": {
-      "templates": ["base"],
+      "templates": ["base", "hardware" ],
       "quantity": 1,
-      "weight": 0,
       "formula": "d20 + @str.mod + ceil(@lvl / 2)"
+    },
+    "weapon": {
+      "templates": ["base", "hardware", "weapon"],
+      "quantity": 0
+    },
+    "armour": {
+      "templates": ["base", "hardware", "armour"]
     },
     "feature": {
       "templates": ["base"]
