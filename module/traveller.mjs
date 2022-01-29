@@ -83,6 +83,13 @@ Handlebars.registerHelper('defaultSkill', function(data) {
     }
 });
 
+Handlebars.registerHelper('showSpec', function(data, spec) {
+    if (spec && spec.value && parseInt(spec.value) > 0) {
+        return "inline-block";
+    }
+    return "hidden";
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
