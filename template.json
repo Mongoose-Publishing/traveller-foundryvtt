@@ -12,7 +12,9 @@
         "description": "",
         "settings": {
             "hideUntrained": false,
-            "onlyBackground": false
+            "onlyBackground": false,
+            "rollType": "normal",
+            "resetOnRoll": false
         }
       },
       "characteristics": {

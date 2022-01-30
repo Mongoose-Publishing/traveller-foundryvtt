@@ -152,6 +152,8 @@ export class TravellerActorSheet extends ActorSheet {
       const char = name.replace(/data.characteristics./, "").replace(/.default/, "");
       const value = actor.data.data.characteristics[char].default
 
+      console.log("useCharacteristic " + char);
+
       const chars = actor.data.data.characteristics;
       for (let ch in chars) {
           chars[ch].default = false;

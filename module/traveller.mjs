@@ -90,18 +90,66 @@ Handlebars.registerHelper('showSpec', function(data, spec) {
     return "hidden";
 });
 
-Handlebars.registerHelper('skillRollable', function(data, skill) {
-    if (data && data.skills && skill) {
-        if (skill.trained) {
-            let cha = skill.default;
-            let chaDM = data[cha];
 
-            return "2d6 + " + chaDM + " + " + skill.value;
+Handlebars.registerHelper('skillLabel', function(data, skill, spec) {
+    if (data && data.skills && skill) {
+        let cha = skill.default;
+
+        const chars = data.characteristics;
+        for (let ch in chars) {
+            if (chars[ch].default) {
+                cha = ch;
+                break;
+            }
+        }
+
+        if (skill.trained) {
+            if (spec) {
+                return cha + " + " + skill.label + " (" + spec.label + ")";
+            } else {
+                return cha + " + " + skill.label;
+            }
         } else {
-            return "2d6-3";
+            return cha + " + " + skill.label + " (untrained)";
         }
     } else {
-        return "2d6";
+        return "Roll";
+    }
+});
+
+Handlebars.registerHelper('skillRollable', function(data, skill, spec) {
+    if (data && data.skills && skill) {
+        let cha = skill.default;
+
+        const chars = data.characteristics;
+        for (let ch in chars) {
+            if (chars[ch].default) {
+                cha = ch;
+                break;
+            }
+        }
+        let chaDM = data[cha];
+
+        if (skill.trained) {
+            let value = skill.value;
+            let label = skill.label;
+            if (spec) {
+                value = spec.value;
+                label = spec.label;
+            }
+
+            return "2d6 + @" + cha + "["+cha+"] + " + value + "[" + label + "]";
+        } else {
+            let untrained = -3;
+            if (data.skills && data.skills.jackofalltrades &&
+                data.skills.jackofalltrades.trained) {
+                untrained += data.skills.jackofalltrades.value;
+            }
+
+            return "2d6 + @" + cha + "["+cha+"] + " + untrained + "[untrained]";
+        }
+    } else {
+        return "2d6[Undefined]";
     }
 });
 
