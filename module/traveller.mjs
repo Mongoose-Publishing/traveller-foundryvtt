@@ -128,7 +128,6 @@ Handlebars.registerHelper('skillRollable', function(data, skill, spec) {
     if (data && data.skills && skill) {
         let cha = skill.default;
         let dice = "2d6";
-        let type = "";
 
         if (data.settings.rollType === "boon") {
             dice="3d6k2";
@@ -165,6 +164,36 @@ Handlebars.registerHelper('skillRollable', function(data, skill, spec) {
         }
     } else {
         return "2d6[Undefined]";
+    }
+});
+
+Handlebars.registerHelper('boonDice', function(data) {
+    if (data && data.settings) {
+        let dice = "2d6";
+
+        if (data.settings.rollType === "boon") {
+            dice="3d6k2";
+        } else if (data.settings.rollType === "bane") {
+            dice="3d6kl2";
+        }
+        return dice;
+    } else {
+        return "2d6";
+    }
+});
+
+Handlebars.registerHelper('boonLabel', function(data) {
+    if (data && data.settings) {
+        let label = "";
+
+        if (data.settings.rollType === "boon") {
+            label=" [Boon]";
+        } else if (data.settings.rollType === "bane") {
+            label = " [Bane]";
+        }
+        return label;
+    } else {
+        return "";
     }
 });
 

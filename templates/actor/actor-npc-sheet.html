@@ -22,7 +22,7 @@
                             data.dtype="Boolean"/>
                     <label for="data.characteristics.{{key}}.value"
                             class="characteristic-title rollable"
-                            data-roll="2d6+@{{key}}" data-label="{{key}}"
+                            data-roll="{{boonDice ../data}}+@{{key}}" data-label="{{key}}{{boonLabel ../data}}"
                             title="{{char.label}}">{{key}}</label>
                     <span class="characteristic-dm">{{numberFormat char.dm sign=true}}</span>
                     <br/>
