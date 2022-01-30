@@ -486,12 +486,8 @@
 }
 
 .traveller .characteristic-value {
+    background-color: #F0F0F0;
     width: 3em;
-}
-
-.traveller .characteristic-readonly {
-    width: 3em;
-    color: #404040;
 }
 
 .traveller .characteristic-readonly {
@@ -551,5 +547,9 @@ input.trained {
     font-weight: bold;
     color: white;
     background: black;
+}
+
+input.useCharacteristic {
+    width: 12px;
 }
 

@@ -15,12 +15,27 @@
         {{#each data.characteristics as | char key | }}
             {{#if char.show}}
                 <div class="resource flex-group-center">
-                    <input type="checkbox" class="useCharacteristic use-{{key}}" name="data.characteristics.{{key}}.default" {{checked char.default}} data.dtype="Boolean"/>
-                    <label for="data.characteristics.{{key}}.value" class="characteristic-title" title="{{char.label}}">{{key}}</label>
-                    <span class="characteristic-dm rollable" data-roll="2d6+@{{key}}" data-label="{{key}}">{{numberFormat char.dm sign=true}}</span>
+                    <input type="checkbox"
+                            class="useCharacteristic use-{{key}}"
+                            name="data.characteristics.{{key}}.default"
+                            {{checked char.default}}
+                            data.dtype="Boolean"/>
+                    <label for="data.characteristics.{{key}}.value"
+                            class="characteristic-title rollable"
+                            data-roll="2d6+@{{key}}" data-label="{{key}}"
+                            title="{{char.label}}">{{key}}</label>
+                    <span class="characteristic-dm">{{numberFormat char.dm sign=true}}</span>
                     <br/>
-                    <input class="characteristic-readonly" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.current" value="{{char.current}}" data-dtype="Number" readonly/> /
-                    <input class="characteristic-value" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                    <input class="characteristic-readonly"
+                            type="number" min="0" max="20" step="1"
+                            name="data.characteristics.{{key}}.current"
+                            value="{{char.current}}"
+                            data-dtype="Number" readonly/> /
+                    <input class="characteristic-value"
+                            type="number" min="0" max="20" step="1"
+                            name="data.characteristics.{{key}}.value"
+                            value="{{char.value}}"
+                            data-dtype="Number"/>
                 </div>
             {{/if}}
         {{/each}}
