@@ -139,7 +139,12 @@ export class TravellerActorSheet extends ActorSheet {
     }
 
     html.find(".useCharacteristic").click(ev => this._onUseCharacteristic(ev, this.actor, html));
-  }
+
+    html.find(".rollTypeNormal").click(ev => this._onRollTypeChange(ev, this.actor, "normal"));
+    html.find(".rollTypeBoon").click(ev => this._onRollTypeChange(ev, this.actor, "boon"));
+    html.find(".rollTypeBane").click(ev => this._onRollTypeChange(ev, this.actor, "bane"));
+
+}
 
   /**
    * Turn the checkboxes for which characteristic to use into zero or one.
@@ -163,6 +168,10 @@ export class TravellerActorSheet extends ActorSheet {
         html.find(".use-"+char).prop("checked", true);
         chars[char].default = true;
       }
+  }
+
+  async _onRollTypeChange(event, actor, type) {
+    actor.data.data.settings.rollType = type;
   }
 
   /**

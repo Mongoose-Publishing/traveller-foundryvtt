@@ -260,6 +260,11 @@
   margin-right: 10px;
 }
 
+.traveller .sheet-header .header-options {
+    width: 100px;
+    border: 1pt solid red;
+}
+
 .traveller .sheet-header .header-fields {
   -webkit-box-flex: 1;
   -ms-flex: 1;
@@ -536,3 +541,15 @@ input.trained {
 .traveller .untrained {
     font-weight: normal;
 }
+
+.traveller .rollType {
+    font-weight: bold;
+    color: black;
+}
+
+.traveller .rollTypeActive {
+    font-weight: bold;
+    color: white;
+    background: black;
+}
+

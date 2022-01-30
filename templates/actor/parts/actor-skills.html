@@ -1,4 +1,21 @@
 <section class="grid grid-3col">
+    <div class="flex-group-center">
+        <input type="radio" class="rollType" name="data.settings.rollType" value="normal" {{rollTypeActive data 'normal'}}/>
+        <label class="rollType rollTypeNormal">Normal</label>
+    </div>
+    <div class="flex-group-center">
+        <input type="radio" class="rollType" name="data.settings.rollType" value="boon" {{rollTypeActive data 'boon'}}/>
+        <label class="rollType rollTypeBoon">Boon</label>
+    </div>
+    <div class="flex-group-center">
+        <input type="radio" class="rollType" name="data.settings.rollType" value="bane" {{rollTypeActive data 'bane'}}/>
+        <label class="rollType rollTypeBane">Bane</label>
+    </div>
+</section>
+
+<hr/>
+
+<section class="grid grid-3col">
 {{#each data.skills as |skill key|}}
     {{#if (isChaShown ../data skill.requires)}}
         {{#if ../data/settings.onlyBackground}}
@@ -14,7 +31,8 @@
         {{else if skill.trained}}
             <div class="resource flex-group-left">
                 <div>
-                    <input type="checkbox" class="trained" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
+                    <input type="checkbox" class="trained"
+                            name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
                     <label for="data.skills.{{key}}.value"
                             class="resource-label skill-label rollable"
                             data-roll="{{skillRollable ../data skill null}}"

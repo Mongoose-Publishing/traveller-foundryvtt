@@ -94,6 +94,13 @@ Handlebars.registerHelper('showSpec', function(data, spec) {
 Handlebars.registerHelper('skillLabel', function(data, skill, spec) {
     if (data && data.skills && skill) {
         let cha = skill.default;
+        let type = "";
+
+        if (data.settings.rollType === "boon") {
+            type = " [Boon]";
+        } else if (data.settings.rollType === "bane") {
+            type = " [Bane]";
+        }
 
         const chars = data.characteristics;
         for (let ch in chars) {
@@ -105,12 +112,12 @@ Handlebars.registerHelper('skillLabel', function(data, skill, spec) {
 
         if (skill.trained) {
             if (spec) {
-                return cha + " + " + skill.label + " (" + spec.label + ")";
+                return cha + " + " + skill.label + " (" + spec.label + ")" + type;
             } else {
-                return cha + " + " + skill.label;
+                return cha + " + " + skill.label + type;
             }
         } else {
-            return cha + " + " + skill.label + " (untrained)";
+            return cha + " + " + skill.label + " (untrained)" + type;
         }
     } else {
         return "Roll";
@@ -120,6 +127,14 @@ Handlebars.registerHelper('skillLabel', function(data, skill, spec) {
 Handlebars.registerHelper('skillRollable', function(data, skill, spec) {
     if (data && data.skills && skill) {
         let cha = skill.default;
+        let dice = "2d6";
+        let type = "";
+
+        if (data.settings.rollType === "boon") {
+            dice="3d6k2";
+        } else if (data.settings.rollType === "bane") {
+            dice="3d6kl2";
+        }
 
         const chars = data.characteristics;
         for (let ch in chars) {
@@ -138,7 +153,7 @@ Handlebars.registerHelper('skillRollable', function(data, skill, spec) {
                 label = spec.label;
             }
 
-            return "2d6 + @" + cha + "["+cha+"] + " + value + "[" + label + "]";
+            return dice + " + @" + cha + "["+cha+"] + " + value + "[" + label + "]";
         } else {
             let untrained = -3;
             if (data.skills && data.skills.jackofalltrades &&
@@ -146,12 +161,28 @@ Handlebars.registerHelper('skillRollable', function(data, skill, spec) {
                 untrained += data.skills.jackofalltrades.value;
             }
 
-            return "2d6 + @" + cha + "["+cha+"] + " + untrained + "[untrained]";
+            return dice + " + @" + cha + "["+cha+"] + " + untrained + "[untrained]";
         }
     } else {
         return "2d6[Undefined]";
     }
 });
+
+Handlebars.registerHelper('rollType', function(data, type) {
+    if (type === data.settings.rollType) {
+        return "rollTypeActive";
+    }
+    return "rollType";
+});
+
+Handlebars.registerHelper('rollTypeActive', function(data, type) {
+    if (type === data.settings.rollType) {
+        return "checked";
+    }
+    return "";
+});
+
+
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
