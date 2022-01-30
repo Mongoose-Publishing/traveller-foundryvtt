@@ -15,6 +15,7 @@
         {{#each data.characteristics as | char key | }}
             {{#if char.show}}
                 <div class="resource flex-group-center">
+                    <input type="checkbox" class="useCharacteristic use-{{key}}" name="data.characteristics.{{key}}.default" {{checked char.default}} data.dtype="Boolean"/>
                     <label for="data.characteristics.{{key}}.value" class="characteristic-title" title="{{char.label}}">{{key}}</label>
                     <span class="characteristic-dm rollable" data-roll="2d6+@{{key}}" data-label="{{key}}">{{numberFormat char.dm sign=true}}</span>
                     <br/>

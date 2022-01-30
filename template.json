@@ -21,91 +21,106 @@
                 "label": "Strength",
                 "value": 7,
                 "current": 7,
-                "show": true
+                "show": true,
+                "default": false
             },
             "DEX": {
                 "label": "Dexterity",
                 "value": 7,
                 "current": 7,
-                "show": true
+                "show": true,
+                "default": false
             },
             "END": {
                 "label": "Endurance",
                 "value": 7,
                 "current": 7,
-                "show": true
+                "show": true,
+                "default": false
             },
             "INT": {
                 "label": "Intelligence",
                 "value": 7,
                 "current": 7,
-                "show": true
+                "show": true,
+                "default": false
             },
             "EDU": {
                 "label": "Education",
                 "value": 7,
                 "current": 7,
-                "show": true
+                "show": true,
+                "default": false
             },
             "SOC": {
                 "label": "Social Standing",
                 "value": 7,
                 "current": 7,
-                "show": true
+                "show": true,
+                "default": false
             },
             "CHA": {
                 "label": "Charisma",
                 "value": 7,
                 "current": 7,
-                "show": false
+                "show": false,
+                "default": false
             },
             "TER": {
                 "label": "Territory",
                 "value": 0,
                 "current": 0,
-                "show": false
+                "show": false,
+                "default": false
             },
             "PSI": {
                 "label": "Psionic Strength",
                 "value": 0,
                 "current": 0,
-                "show": false
+                "show": false,
+                "default": false
             },
             "WLT": {
                 "label": "Wealth",
                 "value": 7,
                 "current": 7,
-                "show": false
+                "show": false,
+                "default": false
             },
             "LCK": {
                 "label": "Luck",
                 "value": 7,
                 "current": 7,
-                "show": false
+                "show": false,
+                "default": false
             },
             "MRL": {
                 "label": "Morale",
                 "value": 7,
                 "current": 7,
-                "show": false
+                "show": false,
+                "default": false
             },
             "SAN": {
                 "label": "Sanity",
                 "value": 7,
                 "current": 7,
-                "show": false
+                "show": false,
+                "default": false
             },
             "RES": {
                 "label": "Resolve",
                 "value": 7,
                 "current": 7,
-                "show": false
+                "show": false,
+                "default": false
             },
             "FOL": {
                 "label": "Following",
                 "value": 0,
                 "current": 0,
-                "show": false
+                "show": false,
+                "default": false
             }
         }
       },

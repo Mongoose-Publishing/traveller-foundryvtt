@@ -137,6 +137,30 @@ export class TravellerActorSheet extends ActorSheet {
         li.addEventListener("dragstart", handler, false);
       });
     }
+
+    html.find(".useCharacteristic").click(ev => this._onUseCharacteristic(ev, this.actor, html));
+  }
+
+  /**
+   * Turn the checkboxes for which characteristic to use into zero or one.
+   * If one is selected, deselect all the others. If the selected one is
+   * selected, then de-select it.
+   */
+  async _onUseCharacteristic(event, actor, html) {
+      const header = event.currentTarget;
+      const name = header.name;
+      const char = name.replace(/data.characteristics./, "").replace(/.default/, "");
+      const value = actor.data.data.characteristics[char].default
+
+      const chars = actor.data.data.characteristics;
+      for (let ch in chars) {
+          chars[ch].default = false;
+      }
+      html.find(".useCharacteristic").prop("checked", false);
+      if (!value) {
+        html.find(".use-"+char).prop("checked", true);
+        chars[char].default = true;
+      }
   }
 
   /**

@@ -15,7 +15,7 @@
             <div class="resource flex-group-left">
                 <div>
                     <input type="checkbox" class="trained" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
-                    <label for="data.skills.{{key}}.value" class="resource-label skill-label rollable" data-roll="2d6+@{{skill.default}}+{{skill.value}}" data-label="{{skill.label}}">{{skill.label}}</label>
+                    <label for="data.skills.{{key}}.value" class="resource-label skill-label rollable" data-roll="2d6+@{{skill.default}}+{{skill.value}}" data-label="{{skill.label}}" title="{{skill.default}} + {{skill.value}}">{{skill.label}}</label>
                     {{#if skill.specialities}}
                         <input type="text" value="0" data-dtype="Number" class="skill-fixed" readonly/>
                         {{#each skill.specialities as |spec i|}}

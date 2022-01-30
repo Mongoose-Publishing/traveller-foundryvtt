@@ -90,6 +90,21 @@ Handlebars.registerHelper('showSpec', function(data, spec) {
     return "hidden";
 });
 
+Handlebars.registerHelper('skillRollable', function(data, skill) {
+    if (data && data.skills && skill) {
+        if (skill.trained) {
+            let cha = skill.default;
+            let chaDM = data[cha];
+
+            return "2d6 + " + chaDM + " + " + skill.value;
+        } else {
+            return "2d6-3";
+        }
+    } else {
+        return "2d6";
+    }
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
