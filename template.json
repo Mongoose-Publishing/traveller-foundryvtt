@@ -17,6 +17,17 @@
             "resetOnRoll": false
         }
       },
+      "sophont": {
+        "sophont": {
+            "age": 18,
+            "species": "Vilani",
+            "gender": "",
+            "weight": 70,
+            "height": 175,
+            "profession": "",
+            "homeworld": ""
+        }
+      },
       "characteristics": {
         "characteristics": {
             "STR": {
@@ -849,7 +860,14 @@
       }
     },
     "traveller": {
-      "templates": [ "base", "characteristics", "skills", "damage" ],
+      "templates": [ "base", "characteristics", "skills", "damage", "sophont" ],
+      "finance": {
+          "cash": 0,
+          "pension": 0,
+          "medicalDebt": 0,
+          "mortgage": 0,
+          "otherIncome": 0
+      },
       "attributes": {
         "level": {
           "value": 1
@@ -857,7 +875,7 @@
       }
     },
     "npc": {
-        "templates": [ "base", "characteristics", "skills" ],
+        "templates": [ "base", "characteristics", "skills", "sophont" ],
         "armour": 0,
         "size": 0
     },

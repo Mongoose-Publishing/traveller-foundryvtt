@@ -1,8 +1,18 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
 
   {{!-- Sheet Header --}}
-  <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+  <header class="sheet-header grid grid-2col">
+    <div class="header-profile flex-group-left">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="140" width="140"/>
+
+        <div>
+            <label class="profile-label">Species</label>
+            <input name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
+            <label class="profile-label">Gender</label>
+            <input name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
+        </div>
+    </div>
+
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
 
@@ -113,8 +123,31 @@
 
     {{!-- Biography Tab --}}
     <div class="tab biography" data-group="primary" data-tab="description">
-      {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
-      {{editor content=data.biography target="data.biography" rollData=rollData button=true owner=owner editable=editable}}
+        <section class="grid grid-4col">
+            <div class="resource grid-span-1">
+                <label class="profile-label">Age</label>
+                <input name="data.sophont.age" type="text" value="{{data.sophont.age}}"/>
+                <label class="profile-label">Homeworld</label>
+                <input name="data.sophont.homeworld" type="text" value="{{data.sophont.homeworld}}"/>
+                <hr/>
+                <label class="profile-label">Cash</label>
+                <input name="data.finance.cash" type="text" value="{{data.finance.cash}}"/>
+                <label class="profile-label">Pension</label>
+                <input name="data.finance.pension" type="text" value="{{data.finance.pension}}"/>
+                <label class="profile-label">Other Income</label>
+                <input name="data.finance.otherIncome" type="text" value="{{data.finance.otherIncome}}"/>
+                <label class="profile-label">Medical Debt</label>
+                <input name="data.finance.medicalDebt" type="text" value="{{data.finance.medicalDebt}}"/>
+                <label class="profile-label">Ship Mortgage</label>
+                <input name="data.finance.mortgage" type="text" value="{{data.finance.mortgage}}"/>
+
+            </div>
+            <div class="grid-span-3">
+
+                {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
+                {{editor content=data.biography target="data.biography" rollData=rollData button=true owner=owner editable=editable}}
+            </div>
+        </section>
     </div>
 
     {{!-- Owned Items Tab --}}

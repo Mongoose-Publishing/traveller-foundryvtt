@@ -254,15 +254,20 @@
 
 .traveller .sheet-header .profile-img {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 100px;
-  flex: 0 0 100px;
-  height: 100px;
+  -ms-flex: 0 0 140px;
+  flex: 0 0 140px;
+  height: 140px;
   margin-right: 10px;
 }
 
-.traveller .sheet-header .header-options {
-    width: 100px;
-    border: 1pt solid red;
+.traveller .sheet-header .header-profile {
+    width: 140px;
+    margin-top: 0px;
+    padding-top: 0px;
+    max-width: 140px;
+    vertical-align: top;
+    flex-basis: auto;
+    align-self: flex-start;
 }
 
 .traveller .sheet-header .header-fields {
@@ -551,5 +556,9 @@ input.trained {
 
 input.useCharacteristic {
     width: 12px;
+}
+
+.traveller .header-profile .profile-label {
+    font-weight: bold;
 }
 
