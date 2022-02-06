@@ -25,6 +25,28 @@ export class TravellerItem extends Item {
     return rollData;
   }
 
+  getDice(data) {
+      if (data && data.settings && data.settings.rollType) {
+          if (data.settings.rollType === "boon") {
+              return "3d6k2";
+          } else if (data.settings.rollType === "bane") {
+              return "3d6kl2";
+          }
+      }
+      return "2d6";
+  }
+
+  getBoon(data) {
+      if (data && data.settings && data.settings.rollType) {
+          if (data.settings.rollType === "boon") {
+              return " (Boon)";
+          } else if (data.settings.rollType === "bane") {
+              return " (Bane)";
+          }
+      }
+      return "";
+  }
+
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event
@@ -37,6 +59,7 @@ export class TravellerItem extends Item {
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
     const rollMode = game.settings.get('core', 'rollMode');
     const label = `[${item.type}] ${item.name}`;
+    const rollData = this.getRollData();
 
     let  content = item.data.weapon.damage + "; " + item.data.weapon.range + "m";
 
@@ -49,14 +72,23 @@ export class TravellerItem extends Item {
 
         console.log("Using skill " + skill[0] + "(" + skill[1] + ")");
 
-        console.log(this.getRollData());
+        console.log(rollData);
 
-        let skillRoll = `2d6 + @${char} + @skills.${skill[0]}.specialities.${skill[1]}.value`;
+
+        let skillValue = -3;
+        if (rollData.skills[skill[0]].trained) {
+            skillValue = rollData.skills[skill[0]].specialities[skill[1]].value;
+        } else if (rollData.skills["jackofalltrades"].trained) {
+            skillValue += rollData.skills["jackofalltrades"].value;
+        }
+        console.log("Skill value is " + skillValue);
+
+        let skillRoll = `${this.getDice(rollData)} + @${char} + ${skillValue}[${skill[1]}]`;
 
 
         const label = `<h2>Attack ${item.name}</h2>`;
         const roll = new Roll(item.data.weapon.damage, this.getRollData()).evaluate({ async: false });
-        let content = `Attack: [[${skillRoll}]]<br/>Damage: [[${item.data.weapon.damage}]]<br>Range: ${range}m`;
+        let content = `Attack${this.getBoon(rollData)}: [[${skillRoll}]]<br/><br/>Damage: [[${item.data.weapon.damage}]]<br/><br/>Range: ${range}m`;
         ChatMessage.create({
             speaker: speaker,
             rollMode: rollMode,
