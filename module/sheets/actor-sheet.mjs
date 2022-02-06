@@ -40,9 +40,10 @@ export class TravellerActorSheet extends ActorSheet {
     context.flags = actorData.flags;
 
     // Prepare character data and items.
-    if (actorData.type == 'character') {
-      this._prepareItems(context);
-      this._prepareCharacterData(context);
+    if (actorData.type == 'traveller') {
+        console.log("Actor type is " + actorData.type);
+        this._prepareItems(context);
+        this._prepareCharacterData(context);
     }
 
     // Add roll data for TinyMCE editors.
@@ -76,21 +77,34 @@ export class TravellerActorSheet extends ActorSheet {
     const gear = [];
     const features = [];
 
+    const weapons = [];
+    const armour = [];
+    const augments = [];
+    console.log("_prepareItems:");
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
+      console.log("Prepare item " + i.name + " of type " + i.type);
       if (i.type === 'item') {
         gear.push(i);
-      }
-      // Append to features.
-      else if (i.type === 'feature') {
-        features.push(i);
+      } else if (i.type === 'weapon') {
+          console.log("Adding weapon " + i.name);
+          weapons.push(i);
+      } else if (i.type === 'armour') {
+          armour.push(i);
+      } else if (i.type === 'augments') {
+          augments.push(i);
       }
     }
 
     // Assign and return
     context.gear = gear;
+    context.weapons = weapons;
+    context.armour = armour;
+    context.augments = augments;
+
+
     context.features = features;
    }
 

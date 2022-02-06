@@ -38,13 +38,47 @@ export class TravellerItem extends Item {
     const rollMode = game.settings.get('core', 'rollMode');
     const label = `[${item.type}] ${item.name}`;
 
+    let  content = item.data.weapon.damage + "; " + item.data.weapon.range + "m";
+
+
+    if (item.type == "weapon") {
+        const damage = item.data.weapon.damage;
+        const range = item.data.weapon.range;
+
+        const label = `<h2>Attack ${item.name}</h2>`;
+        const roll = new Roll(item.data.weapon.damage, this.getRollData()).evaluate({ async: false });
+        let content = `Damage: [[${item.data.weapon.damage}]]<br>Range: ${range}m`;
+        ChatMessage.create({
+            speaker: speaker,
+            rollMode: rollMode,
+            flavor: label,
+            content: content
+        });
+        return roll;
+    }
+
+    // If a weapon
+    if (item.type == "weapon") {
+      let damage = item.data.weapon.damage;
+      console.log("Damage is " + damage);
+
+      // Invoke the roll and submit it to chat.
+      let roll = new Roll(item.data.weapon.damage, this.getRollData()).evaluate({ async: false });
+
+      console.log(roll);
+      roll.toMessage({
+        speaker: speaker,
+        rollMode: rollMode,
+        flavor: label,
+      });
+      return roll;
+    } else if (!this.data.data.formula) {
     // If there's no roll data, send a chat message.
-    if (!this.data.data.formula) {
       ChatMessage.create({
         speaker: speaker,
         rollMode: rollMode,
         flavor: label,
-        content: item.data.description ?? ''
+        content: content
       });
     }
     // Otherwise, create a roll and send a chat message from it.

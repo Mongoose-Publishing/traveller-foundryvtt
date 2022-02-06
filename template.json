@@ -626,7 +626,7 @@
                         "label": "Belter",
                         "value": 0
                     },
-                    "biologicals": {
+                    "bio grid-logicals": {
                         "label": "Biologicals",
                         "value": 0
                     },
@@ -892,42 +892,47 @@
     "templates": {
       "base": {
         "name": "",
-        "description": ""
-      },
-      "hardware": {
+        "description": "",
         "tl": 0,
         "weight": 0,
         "cost": 0
       },
       "weapon": {
-        "range": 0,
-        "damage": "1d6",
-        "magazine": 0,
-        "ammo": 0,
-        "skill": "@dex",
-        "traits": ""
+        "weapon": {
+            "range": 0,
+            "damage": "1d6",
+            "magazine": 0,
+            "ammo": 0,
+            "characteristic": "dex",
+            "skill": "Melee (Blade)",
+            "traits": ""
+        }
       },
       "armour": {
-        "protection": 0,
-        "rad": 0,
-        "vaccSuit": 0
+        "armour": {
+            "protection": 0,
+            "rad": 0,
+            "vaccSuit": 0
+        }
       },
       "augment": {
-        "stat": "DEX",
-        "bonus": 0
+        "augment": {
+            "stat": "DEX",
+            "bonus": 0
+        }
       }
     },
     "item": {
-      "templates": ["base", "hardware" ],
+      "templates": ["base" ],
       "quantity": 1,
-      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
+      "formula": "2d6 + @str"
     },
     "weapon": {
-      "templates": ["base", "hardware", "weapon"],
+      "templates": ["base", "weapon"],
       "quantity": 0
     },
     "armour": {
-      "templates": ["base", "hardware", "armour"]
+      "templates": ["base", "armour"]
     },
     "feature": {
       "templates": ["base"]
