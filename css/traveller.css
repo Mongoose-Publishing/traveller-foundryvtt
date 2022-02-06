@@ -456,6 +456,21 @@
   padding: 0 8px;
 }
 
+.traveller .weapon-name {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 200px;
+  flex: 0 0 200px;
+  padding: 0 8px;
+
+}
+
+.traveller .weapon-prop {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100px;
+  flex: 0 0 100px;
+  padding: 0 8px;
+}
+
 .traveller .effects .item .effect-source,
 .traveller .effects .item .effect-duration,
 .traveller .effects .item .effect-controls {

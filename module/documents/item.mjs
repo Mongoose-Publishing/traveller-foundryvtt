@@ -44,10 +44,19 @@ export class TravellerItem extends Item {
     if (item.type == "weapon") {
         const damage = item.data.weapon.damage;
         const range = item.data.weapon.range;
+        const char = item.data.weapon.characteristic;
+        const skill = (""+item.data.weapon.skill).split(".");
+
+        console.log("Using skill " + skill[0] + "(" + skill[1] + ")");
+
+        console.log(this.getRollData());
+
+        let skillRoll = `2d6 + @${char} + @skills.${skill[0]}.specialities.${skill[1]}.value`;
+
 
         const label = `<h2>Attack ${item.name}</h2>`;
         const roll = new Roll(item.data.weapon.damage, this.getRollData()).evaluate({ async: false });
-        let content = `Damage: [[${item.data.weapon.damage}]]<br>Range: ${range}m`;
+        let content = `Attack: [[${skillRoll}]]<br/>Damage: [[${item.data.weapon.damage}]]<br>Range: ${range}m`;
         ChatMessage.create({
             speaker: speaker,
             rollMode: rollMode,

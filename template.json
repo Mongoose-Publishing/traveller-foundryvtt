@@ -904,7 +904,7 @@
             "magazine": 0,
             "ammo": 0,
             "characteristic": "dex",
-            "skill": "Melee (Blade)",
+            "skill": "melee.unarmed",
             "traits": ""
         }
       },
