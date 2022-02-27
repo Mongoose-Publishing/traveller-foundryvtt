@@ -1,10 +1,18 @@
 {{!-- This template is a fallback for when items don't have more specific templates. --}}
 {{!-- Generally, you'll want to make more specific templates when possible. --}}
-<form class="{{cssClass}}" autocomplete="off">
-  <header class="sheet-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+<form class="{{cssClass}} item" autocomplete="off">
+
+
+
+  <header class="sheet-header grid grid-2col">
+    <div class="header-profile flex-group-left">
+      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="140px" height="140px"/>
+    </div>
+
     <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+      </h1>
     </div>
   </header>
 
