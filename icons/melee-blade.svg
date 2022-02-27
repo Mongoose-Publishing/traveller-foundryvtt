@@ -12,7 +12,7 @@
    viewBox="0 0 135.46666 135.46667"
    version="1.1"
    id="svg8"
-   sodipodi:docname="heavy-portable.svg"
+   sodipodi:docname="melee-blade.svg"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
   <defs
      id="defs2">
@@ -67,10 +67,10 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="310.93535"
-     inkscape:cy="119.58478"
+     inkscape:cx="483.08768"
+     inkscape:cy="342.37564"
      inkscape:document-units="mm"
-     inkscape:current-layer="g988"
+     inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="true"
      inkscape:window-width="2560"
@@ -88,7 +88,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -97,57 +97,83 @@
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       id="g988">
-      <g
-         id="g997"
-         transform="matrix(0.90715475,0.90754424,-0.90715475,0.90754424,61.162809,-47.629586)"
-         style="stroke-width:0.77931">
-        <rect
-           style="fill:#ffffff;stroke:#000000;stroke-width:0.779307;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-           id="rect1335"
-           width="79.316849"
-           height="6.5281205"
-           x="12.737648"
-           y="54.33757" />
-        <rect
-           style="fill:#ffffff;stroke:#000000;stroke-width:0.779307;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-           id="rect1335-3"
-           width="79.316849"
-           height="6.5281205"
-           x="12.737648"
-           y="65.628197" />
-        <rect
-           style="fill:#ffffff;stroke:#000000;stroke-width:0.779309;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-           id="rect1335-3-6"
-           width="5.8766479"
-           height="28.072126"
-           x="28.959112"
-           y="49.386154" />
-        <rect
-           style="fill:#ffffff;stroke:#000000;stroke-width:0.779309;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-           id="rect1335-3-6-7"
-           width="5.8766479"
-           height="28.072126"
-           x="40.656601"
-           y="49.386154" />
-        <rect
-           style="fill:#ffffff;stroke:#000000;stroke-width:0.779305;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-           id="rect1335-35"
-           width="21.195124"
-           height="6.5281205"
-           x="92.054497"
-           y="56.276123" />
-        <path
-           id="rect1335-3-6-7-5"
-           style="fill:#ffffff;stroke:#000000;stroke-width:0.779307;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-           d="m 78.387169,47.279647 h 22.724021 3.99037 c 0.69861,-3.764652 -1.67629,-6.210508 -2.57131,-7.760765 l 9.09653,-5.873422 c 3.00243,2.166965 5.92524,10.793271 5.60285,13.634187 V 52.2548 H 101.11119 V 85.63192 H 78.387169 Z"
-           sodipodi:nodetypes="ccccccccccc" />
-        <path
-           id="rect1335-3-6-7-6"
-           style="fill:#ffffff;stroke:#000000;stroke-width:0.779309;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-           d="m 59.762428,38.162322 h 5.876648 l 29.477229,0.133635 v 4.834894 L 65.639076,42.997217 v 35.5194 h -5.876648 z"
-           sodipodi:nodetypes="cccccccc" />
-      </g>
-    </g>
+       id="g1012"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1014"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1016"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1018"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1020"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1022"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1024"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1026"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1028"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1030"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1032"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1034"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1036"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1038"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <g
+       id="g1040"
+       style="fill:#000000"
+       transform="matrix(0.26458333,0,0,0.26458333,2.0286714,-0.2547333)">
+</g>
+    <path
+       d="M 121.85525,13.42981 115.17061,33.483758 54.616048,88.531841 51.595419,83.877653 46.715631,80.710802 101.80131,20.11446 Z M 56.274257,112.137 61.001145,107.41012 47.976109,87.347821 27.913812,74.322783 23.186923,79.049666 36.299692,92.162441 21.986197,107.91022 c -1.865016,-0.24483 -3.817765,0.34259 -5.250801,1.77518 -2.447402,2.44742 -2.447402,6.41518 0,8.8626 2.447418,2.44742 6.415177,2.44742 8.862596,0 1.432183,-1.43218 2.019605,-3.3841 1.77561,-5.24829 L 43.122217,98.985381 Z"
+       id="path1087"
+       style="fill:#ffffff;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none" />
   </g>
 </svg>
