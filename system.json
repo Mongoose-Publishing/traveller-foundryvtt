@@ -1,13 +1,13 @@
 {
-  "name": "traveller",
-  "title": "Mongoose Traveller",
+  "name": "mgt2",
+  "title": "Mongoose Traveller 2e",
   "description": "The Mongoose Traveller system for FoundryVTT!",
   "version": "1.1.0",
   "minimumCoreVersion": "0.8.5",
   "compatibleCoreVersion": "0.8.6",
   "author": "Samuel Penn",
-  "esmodules": ["module/traveller.mjs"],
-  "styles": ["css/traveller.css"],
+  "esmodules": ["module/mgt2.mjs"],
+  "styles": ["css/mgt2.css"],
   "scripts": [],
   "packs": [],
   "languages": [
@@ -17,8 +17,8 @@
       "path": "lang/en.json"
     }
   ],
-  "gridDistance": 5,
-  "gridUnits": "ft",
+  "gridDistance": 1,
+  "gridUnits": "m",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power",
   "url": "",

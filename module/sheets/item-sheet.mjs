@@ -2,12 +2,12 @@
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class TravellerItemSheet extends ItemSheet {
+export class MgT2ItemSheet extends ItemSheet {
 
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["traveller", "sheet", "item"],
+      classes: ["mgt2", "sheet", "item"],
       width: 520,
       height: 480,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "attributes" }]
@@ -16,7 +16,7 @@ export class TravellerItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = "systems/traveller/templates/item";
+    const path = "systems/mgt2/templates/item";
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.html`;
 

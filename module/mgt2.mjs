@@ -1,12 +1,12 @@
 // Import document classes.
-import { TravellerActor } from "./documents/actor.mjs";
-import { TravellerItem } from "./documents/item.mjs";
+import { MgT2Actor } from "./documents/actor.mjs";
+import { MgT2Item } from "./documents/item.mjs";
 // Import sheet classes.
-import { TravellerActorSheet } from "./sheets/actor-sheet.mjs";
-import { TravellerItemSheet } from "./sheets/item-sheet.mjs";
+import { MgT2ActorSheet } from "./sheets/actor-sheet.mjs";
+import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
-import { TRAVELLER } from "./helpers/config.mjs";
+import { MGT2 } from "./helpers/config.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -16,13 +16,13 @@ Hooks.once('init', async function() {
 
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
-  game.traveller = {
-    TravellerActor,
-    TravellerItem
+  game.mgt2 = {
+    MgT2Actor,
+    MgT2Item
   };
 
   // Add custom constants for configuration.
-  CONFIG.TRAVELLER = TRAVELLER;
+  CONFIG.MGT2 = MGT2;
 
   /**
    * Set an initiative formula for the system
@@ -34,14 +34,14 @@ Hooks.once('init', async function() {
   };
 
   // Define custom Document classes
-  CONFIG.Actor.documentClass = TravellerActor;
-  CONFIG.Item.documentClass = TravellerItem;
+  CONFIG.Actor.documentClass = MgT2Actor;
+  CONFIG.Item.documentClass = MgT2Item;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("traveller", TravellerActorSheet, { makeDefault: true });
+  Actors.registerSheet("mgt2", MgT2ActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("traveller", TravellerItemSheet, { makeDefault: true });
+  Items.registerSheet("mgt2", MgT2ItemSheet, { makeDefault: true });
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();

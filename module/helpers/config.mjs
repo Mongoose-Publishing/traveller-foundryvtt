@@ -1,7 +1,7 @@
-export const TRAVELLER = {};
+export const MGT2 = {};
 
 // Define constants here, such as:
-TRAVELLER.foobar = {
-  'bas': 'TRAVELLER.bas',
-  'bar': 'TRAVELLER.bar'
+MGT2.foobar = {
+  'bas': 'MGT2.bas',
+  'bar': 'MGT2.bar'
 };

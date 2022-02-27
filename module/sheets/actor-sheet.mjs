@@ -4,13 +4,13 @@ import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/ef
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class TravellerActorSheet extends ActorSheet {
+export class MgT2ActorSheet extends ActorSheet {
 
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["traveller", "sheet", "actor"],
-      template: "systems/traveller/templates/actor/actor-sheet.html",
+      classes: ["mgt2", "sheet", "actor"],
+      template: "systems/mgt2/templates/actor/actor-sheet.html",
       width: 720,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
@@ -19,7 +19,7 @@ export class TravellerActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/traveller/templates/actor/actor-${this.actor.data.type}-sheet.html`;
+    return `systems/mgt2/templates/actor/actor-${this.actor.data.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */

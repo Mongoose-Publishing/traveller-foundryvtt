@@ -7,10 +7,10 @@
   return loadTemplates([
 
     // Actor partials.
-    "systems/traveller/templates/actor/parts/actor-features.html",
-    "systems/traveller/templates/actor/parts/actor-items.html",
-    "systems/traveller/templates/actor/parts/actor-effects.html",
-    "systems/traveller/templates/actor/parts/actor-skills.html",
-    "systems/traveller/templates/actor/parts/actor-weapons.html",
+    "systems/mgt2/templates/actor/parts/actor-features.html",
+    "systems/mgt2/templates/actor/parts/actor-items.html",
+    "systems/mgt2/templates/actor/parts/actor-effects.html",
+    "systems/mgt2/templates/actor/parts/actor-skills.html",
+    "systems/mgt2/templates/actor/parts/actor-weapons.html",
   ]);
 };

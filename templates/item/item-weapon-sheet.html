@@ -1,15 +1,15 @@
-<form class="{{cssClass}} traveller flexcol" autocomplete="off">
+<form class="{{cssClass}} {{item.type}} flexcol" autocomplete="off">
 
   <header class="sheet-header grid grid-2col">
     <div class="header-profile flex-group-left">
-      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="140"/>
+      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
       <div>
         <label class="profile-label">Weapon</label>
       </div>
     </div>
 
-    <div class="header-fields">
+    <div class="header-fields flex-group-left">
       <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
 
       <div class="resources grid grid-4col">
@@ -30,6 +30,7 @@
           <input type="text" name="data.weapon.ammo" value="{{data.weapon.ammo}}" data-dtype="Number"/>
         </div>
       </div>
+    </div>
   </header>
 
   {{!-- Sheet Tab Navigation --}}

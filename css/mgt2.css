@@ -232,6 +232,11 @@
   font-family: "Roboto", sans-serif;
 }
 
+.weapon .sheet-header .header-fields {
+    background-color: blue;
+    color: white;
+}
+
 .traveller .sheet-header {
   -webkit-box-flex: 0;
   -ms-flex: 0 auto;
@@ -268,6 +273,7 @@
     vertical-align: top;
     flex-basis: auto;
     align-self: flex-start;
+    background-color: green;
 }
 
 .traveller .sheet-header .header-fields {
@@ -280,6 +286,7 @@
     vertical-align: top;
     flex-basis: auto;
     align-self: flex-start;
+    background-color: red;
 }
 
 .traveller .sheet-header h1.charname {
