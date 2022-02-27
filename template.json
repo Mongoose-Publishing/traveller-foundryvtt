@@ -626,7 +626,7 @@
                         "label": "Belter",
                         "value": 0
                     },
-                    "bio grid-logicals": {
+                    "biologicals": {
                         "label": "Biologicals",
                         "value": 0
                     },
@@ -905,14 +905,17 @@
             "ammo": 0,
             "characteristic": "dex",
             "skill": "melee.unarmed",
-            "traits": ""
+            "damageBonus": "",
+            "traits": "",
+            "sfx": ""
         }
       },
       "armour": {
         "armour": {
             "protection": 0,
+            "lasers": 0,
             "rad": 0,
-            "vaccSuit": 0
+            "skill": ""
         }
       },
       "augment": {

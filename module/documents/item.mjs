@@ -66,29 +66,84 @@ export class MgT2Item extends Item {
 
     if (item.type == "weapon") {
         const damage = item.data.weapon.damage;
-        const range = item.data.weapon.range;
+        const range = parseInt(item.data.weapon.range);
         const char = item.data.weapon.characteristic;
         const skill = (""+item.data.weapon.skill).split(".");
+        const traits = item.data.weapon.traits===""?null:(""+item.data.weapon.traits).trim().toLowerCase();
+        const dmgChar = item.data.weapon.damageBonus;
 
         console.log("Using skill " + skill[0] + "(" + skill[1] + ")");
+        console.log("Traits are [" + traits + "]");
 
         console.log(rollData);
 
 
         let skillValue = -3;
+        let skillUsed = "Unskilled";
         if (rollData.skills[skill[0]].trained) {
-            skillValue = rollData.skills[skill[0]].specialities[skill[1]].value;
+            if (skill.length > 1) {
+                skillValue = rollData.skills[skill[0]].specialities[skill[1]].value;
+                skillUsed = rollData.skills[skill[0]].specialities[skill[1]].label;
+            } else {
+                skillValue = rollData.skills[skill[0]].value;
+                skillUsed = rollData.skills[skill[0]].label;
+            }
         } else if (rollData.skills["jackofalltrades"].trained) {
             skillValue += rollData.skills["jackofalltrades"].value;
         }
         console.log("Skill value is " + skillValue);
 
-        let skillRoll = `${this.getDice(rollData)} + @${char} + ${skillValue}[${skill[1]}]`;
+        let skillRoll = `${this.getDice(rollData)} + @${char} + ${skillValue}[${skillUsed}]`;
+        if (traits && traits.indexOf("very bulky") > -1) {
+            let str = rollData.STR;
+            if (str < 1) {
+                let strPenalty = 2 - str;
+                skillRoll += ` - ${strPenalty}[Very Bulky]`;
+            }
+        } else if (traits && traits.indexOf("bulky") > -1) {
+            let str = rollData.STR;
+            if (str < 2) {
+                let strPenalty = 1 - str;
+                skillRoll += ` - ${strPenalty}[Bulky]`;
+            }
+        }
 
 
         const label = `<h2>Attack ${item.name}</h2>`;
-        const roll = new Roll(item.data.weapon.damage, this.getRollData()).evaluate({ async: false });
-        let content = `Attack${this.getBoon(rollData)}: [[${skillRoll}]]<br/><br/>Damage: [[${item.data.weapon.damage}]]<br/><br/>Range: ${range}m`;
+        let dmg = item.data.weapon.damage;
+        if (dmgChar && dmgChar.length > 0) {
+            console.log("Damage characteristic is " + dmgChar);
+            dmg = dmg + " + @"+dmgChar;
+        }
+        const roll = new Roll(dmg, this.getRollData()).evaluate({ async: false });
+        let content = "";
+
+        if (item.data.weapon.sfx) {
+            content += "<i>" + item.data.weapon.sfx + "</i><br/><br/>";
+        }
+
+        if (traits) {
+            content += `Traits: ${item.data.weapon.traits}<br/>`;
+        }
+        content += `Attack${this.getBoon(rollData)}: [[${skillRoll}]], Damage: [[${dmg}]]<br/><br/>`;
+        if (traits && traits.indexOf("radiation") > -1) {
+            content += `Radiation: [[2d6 * 20]]<br/>`;
+        }
+
+        if (range > 0) {
+            content += `Range: ${range}m<br>`;
+
+            let shortRange = parseInt(range / 4);
+            let longRange = parseInt(range * 2);
+            let extremeRange = parseInt(range * 4);
+
+            content += "<table><tr><th>Short (+1)</th><th>Medium</th><th>Long (-2)</th><th>Extreme (-4)</th></tr>";
+            content += `<tr><td>${shortRange}m</td><td>${range}m</td><td>${longRange}m</td><td>${extremeRange}m</td></tr>`;
+            content += "</table>";
+        } else {
+            content += "Range: <i>Melee</i>";
+        }
+
         ChatMessage.create({
             speaker: speaker,
             rollMode: rollMode,
