@@ -1,8 +1,18 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
 
   {{!-- Sheet Header --}}
-  <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+  <header class="sheet-header grid grid-2col">
+    <div class="header-profile flex-group-left">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="140" width="140"/>
+
+        <div>
+            <label class="profile-label">Species</label>
+            <input name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
+            <label class="profile-label">Gender</label>
+            <input name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
+        </div>
+    </div>
+
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
 
