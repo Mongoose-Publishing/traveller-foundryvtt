@@ -6,15 +6,28 @@
       <div class="grid grid-4col">
         <div class="resource">
           <label class="resource-label">Protection</label>
-          <input type="text" name="data.armour.damage" value="{{data.armour.damage}}" data-dtype="Number"/>
+          <input type="text" name="data.armour.protection" value="{{data.armour.protection}}" data-dtype="Number"/>
+        </div>
+        <div class="resource">
+          <label class="resource-label">Lasers</label>
+          <input type="text" name="data.armour.lasers" value="{{data.armour.lasers}}" data-dtype="Number"/>
         </div>
         <div class="resource">
           <label class="resource-label">Rad</label>
           <input type="text" name="data.armour.rad" value="{{data.armour.rad}}" data-dtype="Number"/>
         </div>
         <div class="resource">
-          <label class="resource-label">Skill</label>
+          <label class="resource-label">Vacc Suit</label>
           <input type="text" name="data.armour.skill" value="{{data.armour.skill}}" data-dtype="String"/>
+        </div>
+
+        <div class="resource">
+            <label class="resource-label">TL</label>
+            <input type="text" name="data.item.tl" value="{{data.item.tl}}" data-dtype="Number"/>
+        </div>
+        <div class="resource">
+            <label class="resource-label">KG</label>
+            <input type="text" name="data.item.weight" value="{{data.item.weight}}" data-dtype="Number"/>
         </div>
       </div>
   </header>
@@ -38,7 +51,23 @@
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       {{!-- As you add new fields, add them in here! --}}
 
-      <div class="resource">
+      <div class="grid grid-3col">
+        <div class="resource">
+          <label class="resource-label">STR bonus</label>
+          <input type="text" name="data.armour.strBonus" value="{{data.armour.strBonus}}" data-dtype="Number"/>
+        </div>
+
+        <div class="resource">
+          <label class="resource-label">DEX bonus</label>
+          <input type="text" name="data.armour.dexBonus" value="{{data.armour.dexBonus}}" data-dtype="Number"/>
+        </div>
+
+        <div class="resource">
+          <label class="resource-label">Hours</label>
+          <input type="text" name="data.armour.duration" value="{{data.armour.duration}}" data-dtype="Number"/>
+        </div>
+      </div>
+        <div class="resource">
         <label for="data.weapon.characteristic" class="resource-label">Characteristic</label>
         <select name="data.weapon.characteristic">
             {{#select data.weapon.characteristic}}

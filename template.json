@@ -915,13 +915,19 @@
             "protection": 0,
             "lasers": 0,
             "rad": 0,
-            "skill": ""
+            "skill": "",
+            "strBonus": 0,
+            "dexBonus": 0,
+            "duration": 0,
+            "augments": []
         }
       },
       "augment": {
         "augment": {
-            "stat": "DEX",
-            "bonus": 0
+            "char": "",
+            "charBonus": 0,
+            "skill": "",
+            "skillBonus": 0
         }
       }
     },
