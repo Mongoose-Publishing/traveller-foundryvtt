@@ -67,6 +67,7 @@
           <label class="resource-label">Hours</label>
           <input type="text" name="data.armour.duration" value="{{data.armour.duration}}" data-dtype="Number"/>
         </div>
+
       </div>
 
       <h4>Skill Bonuses</h4>
@@ -92,9 +93,9 @@
               <select name="data.augments.{{id}}.char">
                 {{#select aug.char}}
                 <option value="">-</option>
-                {{#each characteristics as |ch cid|}}
+                {{#each ../characteristics as |ch cid|}}
                   {{log ch.label}}
-                  <option value="{{cid}}">{{ch.label}}</option>
+                  <option value="{{cid}}">{{cid}}</option>
                 {{/each}}
                 {{/select}}
               </select>
