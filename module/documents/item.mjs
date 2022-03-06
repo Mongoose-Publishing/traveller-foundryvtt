@@ -77,7 +77,6 @@ export class MgT2Item extends Item {
 
         console.log(rollData);
 
-
         let skillValue = -3;
         let skillUsed = "Unskilled";
         if (rollData.skills[skill[0]].trained) {
@@ -118,8 +117,8 @@ export class MgT2Item extends Item {
         const roll = new Roll(dmg, this.getRollData()).evaluate({ async: false });
         let content = "";
 
-        if (item.data.weapon.sfx) {
-            content += "<i>" + item.data.weapon.sfx + "</i><br/><br/>";
+        if (item.data.notes) {
+            content += "<i>" + item.data.notes + "</i><br/><br/>";
         }
 
         if (traits) {

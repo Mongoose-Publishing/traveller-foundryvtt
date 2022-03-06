@@ -895,9 +895,11 @@
         "description": "",
         "tl": 0,
         "weight": 0,
-        "cost": 0
+        "cost": 0,
+        "notes": ""
       },
       "weapon": {
+        "templates":["base"],
         "weapon": {
             "range": 0,
             "damage": "1d6",
@@ -911,6 +913,7 @@
         }
       },
       "armour": {
+        "templates": ["base"],
         "armour": {
             "protection": 0,
             "lasers": 0,

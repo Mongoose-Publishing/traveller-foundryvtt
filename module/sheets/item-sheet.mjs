@@ -35,6 +35,9 @@ export class MgT2ItemSheet extends ItemSheet {
     // Use a safe clone of the item data for further operations.
     const itemData = context.item.data;
 
+    console.log("item-sheet.getData:");
+    console.log(game.system.template);
+
     // Retrieve the roll data for TinyMCE editors.
     context.rollData = {};
     let actor = this.object?.parent ?? null;
@@ -45,6 +48,9 @@ export class MgT2ItemSheet extends ItemSheet {
     // Add the actor's data to context.data for easier access, as well as flags.
     context.data = itemData.data;
     context.flags = itemData.flags;
+
+    context.characteristics = game.system.template.Actor.templates.characteristics.characteristics;
+    context.skills = game.system.template.Actor.templates.skills.skills;
 
     return context;
   }

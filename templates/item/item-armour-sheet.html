@@ -67,16 +67,12 @@
           <input type="text" name="data.armour.duration" value="{{data.armour.duration}}" data-dtype="Number"/>
         </div>
       </div>
-        <div class="resource">
-        <label for="data.weapon.characteristic" class="resource-label">Characteristic</label>
-        <select name="data.weapon.characteristic">
-            {{#select data.weapon.characteristic}}
-            <option value="STR">STR</option>
-            <option value="DEX">DEX</option>
-            <option value="INT">INT</option>
-            {{/select}}
-        </select>
-      </div>
+
+      <h4>Skill Bonuses</h4>
+
+        {{#each data.armour.augments as |augment id|}}
+        {{/each}}
+
 
       <div class="resource">
         <label for="data.weapon.skill" class="resource-label">Skill</label>
@@ -96,10 +92,6 @@
         </select>
       </div>
 
-      <div class="resource">
-          <label class="resource-label">Weight (kg)</label>
-          <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
-      </div>
 
   </section>
 </form>

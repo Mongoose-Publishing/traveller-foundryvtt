@@ -14,28 +14,28 @@
 
       <div class="resources grid grid-4col">
         <div class="resource">
-          <label class="resource-label">Damage</label>
+          <label for="data.weapon.damage" class="resource-label">Damage</label>
           <input type="text" name="data.weapon.damage" value="{{data.weapon.damage}}" data-dtype="String"/>
         </div>
         <div class="resource">
-          <label class="resource-label">Range (m)</label>
+          <label for="data.weapon.range" class="resource-label">Range (m)</label>
           <input type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
         </div>
         <div class="resource">
-          <label class="resource-label">Magazine</label>
+          <label for="data.weapon.magazine" class="resource-label">Magazine</label>
           <input type="text" name="data.weapon.magazine" value="{{data.weapon.magazine}}" data-dtype="Number"/>
         </div>
         <div class="resource">
-          <label class="resource-label">Ammo</label>
+          <label for="data.weapon.ammo" class="resource-label">Ammo</label>
           <input type="text" name="data.weapon.ammo" value="{{data.weapon.ammo}}" data-dtype="Number"/>
         </div>
 
         <div class="resource">
-            <label class="resource-label">TL</label>
+            <label for="data.item.tl" class="resource-label">TL</label>
             <input type="text" name="data.item.tl" value="{{data.item.tl}}" data-dtype="Number"/>
         </div>
         <div class="resource">
-            <label class="resource-label">KG</label>
+            <label for="data.item.weight" class="resource-label">KG</label>
             <input type="text" name="data.item.weight" value="{{data.item.weight}}" data-dtype="Number"/>
         </div>
         <div class="resource grid-span-2">
@@ -103,8 +103,8 @@
         </div>
 
         <div class="resource grid-span-3">
-            <label for="data.weapon.sfx" class="resource-label">SFX</label><br/>
-            <input type="text" name="data.weapon.sfx" value="{{data.weapon.sfx}}" data-dtype="String"/>
+            <label for="data.weapon.notes" class="resource-label">Notes</label><br/>
+            <input type="text" name="data.notes" value="{{data.notes}}" data-dtype="String"/>
         </div>
       </div>
 
@@ -115,8 +115,8 @@
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
       {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the rollData prop. --}}
-      <label>SFX</label>
-      {{editor content=data.weapon.sfx target="data.weapon.sfx" rollData=rollData button=true owner=owner editable=editable}}
+      <label>Notes</label>
+      {{editor content=data.notes target="data.notes" rollData=rollData button=true owner=owner editable=editable}}
       <label>Description</label>
       {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner editable=editable}}
     </div>
