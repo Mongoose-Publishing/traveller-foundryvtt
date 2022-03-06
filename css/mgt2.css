@@ -465,6 +465,23 @@
   padding: 0 8px;
 }
 
+.traveller .item-type {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px;
+    padding: 0 8px;
+    text-transform: capitalize;
+    text-align: left;
+}
+
+.traveller .item-prop {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px;
+    padding: 0 8px;
+    text-align: left;
+}
+
 .traveller .weapon-name {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 200px;

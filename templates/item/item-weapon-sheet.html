@@ -12,6 +12,8 @@
     <div class="header-fields flex-group-left">
       <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
 
+        {{log item}}
+
       <div class="resources grid grid-4col">
         <div class="resource">
           <label for="data.weapon.damage" class="resource-label">Damage</label>
@@ -31,12 +33,12 @@
         </div>
 
         <div class="resource">
-            <label for="data.item.tl" class="resource-label">TL</label>
-            <input type="text" name="data.item.tl" value="{{data.item.tl}}" data-dtype="Number"/>
+            <label for="data.tl" class="resource-label">TL</label>
+            <input type="text" name="data.tl" value="{{data.tl}}" data-dtype="Number"/>
         </div>
         <div class="resource">
-            <label for="data.item.weight" class="resource-label">KG</label>
-            <input type="text" name="data.item.weight" value="{{data.item.weight}}" data-dtype="Number"/>
+            <label for="data.weight" class="resource-label">KG</label>
+            <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
         </div>
         <div class="resource grid-span-2">
             <label for="data.weapon.traits" class="resource-label">Traits</label>
