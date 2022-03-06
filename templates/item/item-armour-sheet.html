@@ -30,6 +30,7 @@
             <input type="text" name="data.item.weight" value="{{data.item.weight}}" data-dtype="Number"/>
         </div>
       </div>
+    </div>
   </header>
 
   {{!-- Sheet Tab Navigation --}}
@@ -70,28 +71,51 @@
 
       <h4>Skill Bonuses</h4>
 
-        {{#each data.armour.augments as |augment id|}}
+      <ol class="items-list">
+        <li class="item flexrow items-header">
+          <div class="aug-name">Name</div>
+          <div class="aug-target">Characteristic</div>
+          <div class="aug-bonus">Bonus</div>
+          <div class="aug-target">Skill</div>
+          <div class="aug-bonus">Bonus</div>
+          <div class="item-controls">
+            <a class="item-control augment-create" title="Add Bonus" data-type="item"><i class="fas fa-plus"></i> Add</a>
+          </div>
+        </li>
+        {{#each data.augments as |aug id|}}
+          <li class="item flexrow" data-item-id="{{item._id}}">
+            <div class="aug-name">
+              <input type="text" name="data.augments.{{id}}.name" value="{{aug.name}}" data-dtype="String"/>
+            </div>
+            <div class="aug-target">
+              {{log id}}
+              <select name="data.augments.{{id}}.char">
+                {{#select aug.char}}
+                <option value="">-</option>
+                {{#each characteristics as |ch cid|}}
+                  {{log ch.label}}
+                  <option value="{{cid}}">{{ch.label}}</option>
+                {{/each}}
+                {{/select}}
+              </select>
+            </div>
+            <div class="aug-target">
+              <input type="text" name="data.augments.{{id}}.charBonus" value="{{aug.charBonus}}" data-dtype="Number"/>
+            </div>
+            <div class="aug-target">
+              <input type="text" name="data.augments.{{id}}.skill" value="{{aug.skill}}" data-dtype="String"/>
+            </div>
+            <div class="aug-target">
+              <input type="text" name="data.augments.{{id}}.skillBonus" value="{{aug.skillBonus}}" data-dtype="Number"/>
+            </div>
+            <div class="item-controls">
+              <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
         {{/each}}
-
-
-      <div class="resource">
-        <label for="data.weapon.skill" class="resource-label">Skill</label>
-        <select name="data.weapon.skill">
-            {{#select data.weapon.skill}}
-            <option value="melee.unarmed">Melee (Unarmed)</option>
-            <option value="melee.blade">Melee (Blade)</option>
-            <option value="melee.bludgeon">Melee (Bludgeon)</option>
-            <option value="melee.natural">Melee (Natural)</option>
-            <option value="guncombat.archaic">Gun Combat (Archaic)</option>
-            <option value="guncombat.energy">Gun Combat (Energy)</option>
-            <option value="guncombat.slug">Gun Combat (Slug)</option>
-            <option value="heavyweapons.artillery">Heavy Weapons (Artillery)</option>
-            <option value="heavyweapons.portable">Heavy Weapons (Portable)</option>
-            <option value="heavyweapons.vehicle">Heavy Weapons (Vehicle)</option>
-            {{/select}}
-        </select>
-      </div>
-
+      </ol>
+    </div>
 
   </section>
 </form>

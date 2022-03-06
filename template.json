@@ -896,7 +896,9 @@
         "tl": 0,
         "weight": 0,
         "cost": 0,
-        "notes": ""
+        "notes": "",
+        "augments": [],
+        "active": false
       },
       "weapon": {
         "templates":["base"],
@@ -921,8 +923,7 @@
             "skill": "",
             "strBonus": 0,
             "dexBonus": 0,
-            "duration": 0,
-            "augments": []
+            "duration": 0
         }
       },
       "augment": {

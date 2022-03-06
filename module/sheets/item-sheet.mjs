@@ -1,3 +1,5 @@
+import {onManageActiveEffect} from "../helpers/effects.mjs";
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -35,9 +37,6 @@ export class MgT2ItemSheet extends ItemSheet {
     // Use a safe clone of the item data for further operations.
     const itemData = context.item.data;
 
-    console.log("item-sheet.getData:");
-    console.log(game.system.template);
-
     // Retrieve the roll data for TinyMCE editors.
     context.rollData = {};
     let actor = this.object?.parent ?? null;
@@ -52,18 +51,90 @@ export class MgT2ItemSheet extends ItemSheet {
     context.characteristics = game.system.template.Actor.templates.characteristics.characteristics;
     context.skills = game.system.template.Actor.templates.skills.skills;
 
+    this._prepareArmour(context);
+
     return context;
   }
 
+  _prepareArmour(context) {
+      // Initialize containers.
+      const augments = [];
+      console.log("_prepareItems:");
+      console.log(context);
+      console.log("after prepare");
+
+      if (context.augments) {
+        console.log("Have found augments list");
+      }
+
+      if (!context.item.data.data.armour) {
+        console.log("This is not armour");
+        return;
+      }
+      console.log("This is armour");
+
+      // Iterate through items, allocating to containers
+      if (context.item.data.data.augments) {
+        for (let aug in context.item.data.data.augments) {
+          augments.push(aug);
+        }
+      } else {
+        context.item.data.data.augments = [];
+      }
+      // Assign and return
+      context.augments = augments;
+  }
+
   /* -------------------------------------------- */
+
 
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
 
+    // Render the item sheet for viewing/editing prior to the editable check.
+    html.find('.item-edit').click(ev => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      item.sheet.render(true);
+    });
+
+    // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
 
-    // Roll handlers, click handlers, etc. would go here.
+    // Add Inventory Item
+    if (html.find('.augment-create')) {
+      html.find(".augment-create").click(ev => this._onAugmentCreate(ev, this.object.data, html));
+
+      // Delete Inventory Item
+      html.find('.item-delete').click(ev => {
+        const li = $(ev.currentTarget).parents(".item");
+        const item = this.actor.items.get(li.data("itemId"));
+        item.delete();
+        li.slideUp(200, () => this.render(false));
+      });
+    }
+
+    // Active Effect management
+    html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
+
+
   }
+  async _onAugmentCreate(event, item, html) {
+    console.log("_onAugmentCreate:");
+    console.log(item);
+
+    if (!item.data.augments) {
+      item.data.augments = [];
+    }
+    let i=0;
+    while (item.data.augments[i]) {
+      i++;
+    }
+
+    item.data.augments[i] = { 'name': 'Unnamed ' + i, 'char': '', 'charBonus': 0, 'skill': '', 'skillBonus': 0 };
+
+  }
+
 }
