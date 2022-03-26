@@ -108,33 +108,38 @@ export class MgT2ItemSheet extends ItemSheet {
       html.find(".augment-create").click(ev => this._onAugmentCreate(ev, this.object.data, html));
 
       // Delete Inventory Item
-      html.find('.item-delete').click(ev => {
-        const li = $(ev.currentTarget).parents(".item");
-        const item = this.actor.items.get(li.data("itemId"));
-        item.delete();
-        li.slideUp(200, () => this.render(false));
-      });
+      html.find('.item-delete').click(ev => this._onAugmentDelete(ev, this.object.data, html));
     }
 
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
-
-
   }
   async _onAugmentCreate(event, item, html) {
     console.log("_onAugmentCreate:");
-    console.log(item);
-
     if (!item.data.augments) {
       item.data.augments = [];
     }
-    let i=0;
-    while (item.data.augments[i]) {
-      i++;
-    }
+    console.log(item.data.augments);
+    let i = Object.keys(item.data.augments).length;
 
-    item.data.augments[i] = { 'name': 'Unnamed ' + i, 'char': '', 'charBonus': 0, 'skill': '', 'skillBonus': 0 };
+    item.data.augments[i] = { 'aug': i, 'name': 'Unnamed ' + i, 'char': '', 'charBonus': 0, 'skill': '', 'skillBonus': 0 };
 
+    return;
+  }
+
+  async _onAugmentDelete(event, item, html) {
+    console.log("Delete augment");
+    const li = $(event.currentTarget).parents(".aug");
+    const aug = li.data("itemId");
+
+    console.log("The aug ID is " + aug);
+
+    console.log(item);
+
+    delete item.data.augments[aug];
+
+    //item.delete();
+    //li.slideUp(200, () => this.render(false));
   }
 
 }

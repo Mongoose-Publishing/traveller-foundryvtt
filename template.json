@@ -892,7 +892,7 @@
     "templates": {
       "base": {
         "name": "",
-        "description": "",
+        "description": "Item Description",
         "tl": 0,
         "weight": 0,
         "cost": 0,

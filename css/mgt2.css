@@ -228,7 +228,7 @@
 }
 
 /* Styles limited to traveller sheets */
-.traveller .item-form {
+.system-mgt2 .item-form {
   font-family: "Roboto", sans-serif;
 }
 
@@ -298,23 +298,24 @@
 }
 
 
-.traveller .sheet-tabs {
+.system-mgt2 .sheet-tabs {
   -webkit-box-flex: 0;
   -ms-flex: 0;
   flex: 0;
 }
 
-.traveller .sheet-body,
-.traveller .sheet-body .tab,
-.traveller .sheet-body .tab .editor {
+.system-mgt2 .sheet-body,
+.system-mgt2 .sheet-body .tab,
+.system-mgt2 .sheet-body .tab .editor {
   height: 100%;
 }
 
-.traveller .tox .tox-editor-container {
-  background: #fff;
+.system-mgt2 .tox .tox-editor-container {
+    background: #fff;
+    height: 100%;
 }
 
-.traveller .tox .tox-edit-area {
+.system-mgt2 .tox .tox-edit-area {
   padding: 0 8px;
 }
 

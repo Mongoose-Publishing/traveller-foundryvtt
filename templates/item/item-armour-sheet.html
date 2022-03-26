@@ -84,7 +84,7 @@
           </div>
         </li>
         {{#each data.augments as |aug id|}}
-          <li class="item flexrow" data-item-id="{{item._id}}">
+          <li class="aug flexrow" data-item-id="{{id}}">
             <div class="aug-name">
               <input type="text" name="data.augments.{{id}}.name" value="{{aug.name}}" data-dtype="String"/>
             </div>
@@ -110,7 +110,6 @@
               <input type="text" name="data.augments.{{id}}.skillBonus" value="{{aug.skillBonus}}" data-dtype="Number"/>
             </div>
             <div class="item-controls">
-              <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
           </li>
