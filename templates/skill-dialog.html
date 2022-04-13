@@ -1,26 +1,29 @@
-<form class="flexcol">
+<form class="flexcol skilldialog">
 
     {{#if spec}}
-        <p>Rolling {{skill.label}} ({{spec.label}}) {{value}}</p>
+        <p>Rolling <b>{{skill.label}} ({{spec.label}})</b> {{value}}</p>
     {{else}}
-        <p>Rolling {{skill.label}} {{value}}</p>
+    <p>Rolling <b>{{skill.label}}</b> {{value}}</p>
     {{/if}}
 
     <div class="characteristic-selection">
-        <label for="characteristic" class="resource-label">Characteristic</label><br/>
+        <label for="characteristic" class="resource-label skillDialogLabel">Characteristic</label>
         <select class="skillDialogCha" name="characteristic">
             {{#select characteristic}}
                 {{#each data.characteristics as |char id|}}
                     {{#if char.show}}
-                        <option value="{{id}}">{{id}}</option>
+                        <option value="{{id}}">{{id}} ({{char.dm}})</option>
                     {{/if}}
                 {{/each}}
             {{/select}}
         </select>
+        <br/>
+        <label for="remember" class="skillDialogLabel">Remember as default</label>
+        <input type="checkbox" name="remember" class="skillDialogRemember" value="false"/>
     </div>
 
     <div class="boon-selection">
-        <label for="dicetype">Roll Type</label><br/>
+        <label for="dicetype" class="skillDialogLabel">Roll Type</label>
         <select class="skillDialogRollType" name="dicetype">
             {{#select "normal"}}
                 <option value="normal">Normal</option>
@@ -31,7 +34,7 @@
     </div>
 
     <div class="bonus-selection">
-        <label for="dm">DM</label><br/>
+        <label for="dm" class="skillDialogLabel">DM</label>
         <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
     </div>
 

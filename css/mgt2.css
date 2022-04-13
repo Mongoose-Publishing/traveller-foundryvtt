@@ -604,3 +604,19 @@ input.useCharacteristic {
     font-weight: bold;
 }
 
+.boon {
+    color: green;
+}
+
+.bane {
+    color: red;
+}
+
+.skillDialogLabel {
+    display: inline-block;
+    width: 15em;
+}
+
+input.skillDialogDM {
+    width: 5em;
+}

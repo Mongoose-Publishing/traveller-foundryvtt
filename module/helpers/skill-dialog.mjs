@@ -75,9 +75,11 @@ export class MgT2SkillDialog extends Application {
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
         let cha = html.find(".skillDialogCha")[0].value;
         let rollType = html.find(".skillDialogRollType")[0].value;
-        console.log(cha);
-        console.log(rollType);
-        console.log(dm);
+        let remember = html.find(".skillDialogRemember")[0].value;
+
+        if (remember) {
+            this.skill.default = cha;
+        }
 
         let dice = "2D6";
         if (rollType === "boon") {
@@ -89,8 +91,6 @@ export class MgT2SkillDialog extends Application {
         dice += " + " + chaDM;
         dice += " + " + this.value + " + " + dm;
 
-        console.log(dice);
-
         let roll = new Roll(dice, this.actor.getRollData()).evaluate({async: false});
         if (roll) {
             let text = cha + "[" + chaDM + "] + " + this.skill.label;
@@ -99,9 +99,9 @@ export class MgT2SkillDialog extends Application {
             }
             text += " [" + this.value + "]";
             if (dm > 0) {
-                text += " + " + dm;
+                text += " +" + dm;
             } else if (dm < 0) {
-                text += " - " + dm;
+                text += " " + dm;
             }
             if (rollType === "boon") {
                 text += " <span class='boon'>[Boon]</span>";

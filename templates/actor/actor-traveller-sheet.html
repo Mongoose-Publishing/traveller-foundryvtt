@@ -145,7 +145,6 @@
 
             </div>
             <div class="grid-span-3">
-
                 {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
                 {{editor content=data.biography target="data.biography" rollData=rollData button=true owner=owner editable=editable}}
             </div>
@@ -171,6 +170,10 @@
         <div class="resource flex-group-left">
           <input type="checkbox" name="data.settings.onlyBackground" {{checked data.settings.onlyBackground}} data-dtype="Boolean" />
           <label for="data.settings.onlyBackground">Show only background skills</label>
+        </div>
+        <div class="resource flex-group-left">
+            <input type="checkbox" name="data.settings.quickRolls" {{checked data.settings.quickRolls}} data-dtype="Boolean" />
+            <label for="data.settings.quickRolls">Default to quick rolls</label>
         </div>
       </section>
       <hr/>

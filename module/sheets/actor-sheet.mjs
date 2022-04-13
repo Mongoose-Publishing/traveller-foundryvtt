@@ -263,8 +263,12 @@ export class MgT2ActorSheet extends ActorSheet {
         skillValue = -3;
       }
     }
-
+    let quickRoll = data.settings.quickRolls?true:false;
     if (event.shiftKey) {
+      quickRoll = !quickRoll;
+    }
+
+    if (!quickRoll) {
       let title = skillLabel + (spec ? (" (" + specLabel + ")") : "");
 
       //let d = new MgT2SkillDialog(actor, skill, spec);
@@ -332,28 +336,7 @@ export class MgT2ActorSheet extends ActorSheet {
     const skill = dataset.skill;
     const spec = dataset.spec;
 
-    if (event.shiftKey) {
-      let d = new Dialog({
-        title: dataset.label,
-        content: "<p>You must choose either Option 1, or Option 2</p>",
-        buttons: {
-          one: {
-            icon: '<i class="fas fa-check"></i>',
-            label: "Option One",
-            callback: () => console.log("Chose One")
-          },
-          two: {
-            icon: '<i class="fas fa-times"></i>',
-            label: "Option Two",
-            callback: () => console.log("Chose Two")
-          }
-        },
-        default: "two",
-        render: html => console.log("Register interactivity in the rendered dialog"),
-        close: html => console.log("This always is logged no matter which option is chosen")
-      });
-      d.render(true);
-    } else {
+
       // Handle rolls that supply the formula directly.
       if (dataset.roll) {
         console.log("Label is " + label);
@@ -374,6 +357,6 @@ export class MgT2ActorSheet extends ActorSheet {
         return roll;
       }
     }
-  }
+
 
 }
