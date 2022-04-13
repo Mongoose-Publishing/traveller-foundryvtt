@@ -6,9 +6,9 @@
   "minimumCoreVersion": "0.8.5",
   "compatibleCoreVersion": "0.8.6",
   "author": "Samuel Penn",
-  "esmodules": ["module/mgt2.mjs"],
+  "esmodules": ["module/mgt2.mjs" ],
   "styles": ["css/mgt2.css"],
-  "scripts": [],
+  "scripts": [ ],
   "packs": [],
   "languages": [
     {

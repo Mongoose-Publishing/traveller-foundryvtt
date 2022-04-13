@@ -4,6 +4,7 @@ import { MgT2Item } from "./documents/item.mjs";
 // Import sheet classes.
 import { MgT2ActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
+
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";

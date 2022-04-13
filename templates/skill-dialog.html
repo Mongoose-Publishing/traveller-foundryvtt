@@ -1,0 +1,42 @@
+<form class="flexcol">
+
+    {{#if spec}}
+        <p>Rolling {{skill.label}} ({{spec.label}}) {{value}}</p>
+    {{else}}
+        <p>Rolling {{skill.label}} {{value}}</p>
+    {{/if}}
+
+    <div class="characteristic-selection">
+        <label for="characteristic" class="resource-label">Characteristic</label><br/>
+        <select class="skillDialogCha" name="characteristic">
+            {{#select characteristic}}
+                {{#each data.characteristics as |char id|}}
+                    {{#if char.show}}
+                        <option value="{{id}}">{{id}}</option>
+                    {{/if}}
+                {{/each}}
+            {{/select}}
+        </select>
+    </div>
+
+    <div class="boon-selection">
+        <label for="dicetype">Roll Type</label><br/>
+        <select class="skillDialogRollType" name="dicetype">
+            {{#select "normal"}}
+                <option value="normal">Normal</option>
+                <option value="boon">Boon</option>
+                <option value="bane">Bane</option>
+            {{/select}}
+        </select>
+    </div>
+
+    <div class="bonus-selection">
+        <label for="dm">DM</label><br/>
+        <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
+    </div>
+
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="skillRoll">Roll</button>
+    </footer>
+
+</form>

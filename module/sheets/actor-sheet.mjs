@@ -1,4 +1,6 @@
+
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
+import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -140,7 +142,9 @@ export class MgT2ActorSheet extends ActorSheet {
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
 
     // Rollable abilities.
-    html.find('.rollable').click(this._onRoll.bind(this));
+    //html.find('.rollable').click(this._onRoll.bind(this));
+
+    html.find('.rollable').click(ev => this._onRollWrapper(ev, this.actor));
 
     // Drag events for macros.
     if (this.actor.owner) {
@@ -215,6 +219,82 @@ export class MgT2ActorSheet extends ActorSheet {
     return await Item.create(itemData, {parent: this.actor});
   }
 
+  _onRollWrapper(event, actor) {
+    console.log("_onRollWrapper:");
+
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+
+    // Handle item rolls.
+    if (dataset.rollType) {
+      if (dataset.rollType == 'item') {
+        const itemId = element.closest('.item').dataset.itemId;
+        const item = this.actor.items.get(itemId);
+        if (item) return item.roll();
+      }
+    }
+
+    if (!dataset.roll) {
+      return;
+    }
+    let label = dataset.label ? `[roll] ${dataset.label}` : '';
+
+    const data = actor.data.data;
+
+    const skill = dataset.skill;
+    const spec = dataset.spec;
+    let skillValue = 0;
+    let specValue = 0;
+    let skillLabel = "";
+    let specLabel = "";
+    let skillDefault = "";
+
+    if (skill) {
+      if (data.skills[skill].trained) {
+        skillValue = data.skills[skill].value;
+        skillLabel = data.skills[skill].label;
+        skillDefault = data.skills[skill].default;
+        if (spec) {
+          specValue = data.skills[skill].specialities[spec].value;
+          specLabel = data.skills[skill].specialities[spec].label;
+        }
+      } else {
+        skillValue = -3;
+      }
+    }
+
+    if (event.shiftKey) {
+      let title = skillLabel + (spec ? (" (" + specLabel + ")") : "");
+
+      //let d = new MgT2SkillDialog(actor, skill, spec);
+      //d.render();
+      let dialog = new MgT2SkillDialog(actor, skill, spec).render(true);
+    } else {
+      // Handle rolls that supply the formula directly.
+      if (dataset.roll) {
+        console.log("Label is " + label);
+        console.log("Roll is " + dataset.roll);
+
+        let roller = new Roll(dataset.roll);
+
+        let roll = new Roll(dataset.roll, this.actor.getRollData()).evaluate({async: false});
+        if (roll) {
+          roll.toMessage({
+            speaker: ChatMessage.getSpeaker({actor: this.actor}),
+            flavor: label,
+            rollMode: game.settings.get('core', 'rollMode'),
+          });
+        } else {
+          console.log("There is no roll");
+        }
+        return roll;
+      }
+    }
+}
+
+
+
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event
@@ -234,27 +314,65 @@ export class MgT2ActorSheet extends ActorSheet {
       }
     }
 
-    // Handle rolls that supply the formula directly.
-    if (dataset.roll) {
-      let label = dataset.label ? `[roll] ${dataset.label}` : '';
+    console.log("_onRoll click event");
+    console.log("Button was " + event.button);
+    console.log("Shift was " + event.shiftKey);
 
-      console.log("Label is " + label);
-      console.log("Roll is " + dataset.roll);
+    if (!dataset.roll) {
+      return;
+    }
+    let label = dataset.label ? `[roll] ${dataset.label}` : '';
+    console.log("Roll is " + dataset.roll);
+    console.log("Label is " + label);
+    console.log("RollType is " + dataset.rolltype);
+    console.log("Skill is " + dataset.skill);
+    console.log("Spec is " + dataset.spec);
+    console.log(dataset);
 
-      let roller = new Roll(dataset.roll);
+    const skill = dataset.skill;
+    const spec = dataset.spec;
 
+    if (event.shiftKey) {
+      let d = new Dialog({
+        title: dataset.label,
+        content: "<p>You must choose either Option 1, or Option 2</p>",
+        buttons: {
+          one: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Option One",
+            callback: () => console.log("Chose One")
+          },
+          two: {
+            icon: '<i class="fas fa-times"></i>',
+            label: "Option Two",
+            callback: () => console.log("Chose Two")
+          }
+        },
+        default: "two",
+        render: html => console.log("Register interactivity in the rendered dialog"),
+        close: html => console.log("This always is logged no matter which option is chosen")
+      });
+      d.render(true);
+    } else {
+      // Handle rolls that supply the formula directly.
+      if (dataset.roll) {
+        console.log("Label is " + label);
+        console.log("Roll is " + dataset.roll);
 
-      let roll = new Roll(dataset.roll, this.actor.getRollData()).evaluate({ async: false });
-      if (roll) {
-        roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        let roller = new Roll(dataset.roll);
+
+        let roll = new Roll(dataset.roll, this.actor.getRollData()).evaluate({async: false});
+        if (roll) {
+          roll.toMessage({
+            speaker: ChatMessage.getSpeaker({actor: this.actor}),
             flavor: label,
             rollMode: game.settings.get('core', 'rollMode'),
-        });
-      } else {
+          });
+        } else {
           console.log("There is no roll");
+        }
+        return roll;
       }
-      return roll;
     }
   }
 
