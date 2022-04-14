@@ -3,9 +3,10 @@
     {{#if spec}}
         <p>Rolling <b>{{skill.label}} ({{spec.label}})</b> {{value}}</p>
     {{else}}
-    <p>Rolling <b>{{skill.label}}</b> {{value}}</p>
+        <p>Rolling <b>{{skill.label}}</b> {{value}}</p>
     {{/if}}
 
+    {{#if skill}}
     <div class="characteristic-selection">
         <label for="characteristic" class="resource-label skillDialogLabel">Characteristic</label>
         <select class="skillDialogCha" name="characteristic">
@@ -21,6 +22,7 @@
         <label for="remember" class="skillDialogLabel">Remember as default</label>
         <input type="checkbox" name="remember" class="skillDialogRemember" value="false"/>
     </div>
+    {{/if}}
 
     <div class="boon-selection">
         <label for="dicetype" class="skillDialogLabel">Roll Type</label>

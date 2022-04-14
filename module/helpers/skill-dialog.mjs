@@ -11,7 +11,7 @@ export class MgT2SkillDialog extends Application {
         return options;
     }
 
-    constructor(actor, skill, spec) {
+    constructor(actor, skill, spec, cha) {
         super();
         console.log("constructor:");
 
@@ -23,18 +23,17 @@ export class MgT2SkillDialog extends Application {
 
         const data = actor.data.data;
 
-        let skillValue = 0;
-        let specValue = 0;
-        let skillLabel = "";
-        let specLabel = "";
-        let skillDefault = "";
-
         this.skill = null;
         this.spec = null;
         this.value = -3;
+        this.cha = cha;
+        if (cha) {
+            this.characteristic = data.characteristics[cha];
+        }
         this.data = data;
         if (skill) {
             this.skill = data.skills[skill];
+            this.cha = this.skill.default;
             if (data.skills[skill].trained) {
                 this.value = this.skill.value;
                 if (spec) {
@@ -44,14 +43,18 @@ export class MgT2SkillDialog extends Application {
             } else {
                 this.value = data.skills["jackofalltrades"].value - 3;
             }
+            this.options.title = this.skill.label;
+        } else if (cha) {
+            this.options.title = this.characteristic.label;
+            this.value = this.characteristic.dm;
         }
-        this.options.title = this.skill.label;
         if (this.spec) {
             this.options.title += " (" + this.spec.label + ")";
         }
     }
 
     getData() {
+        console.log("getData: Characteristic is " + this.cha);
         return {
             "actor": this.actor,
             "data": this.data,
@@ -60,7 +63,7 @@ export class MgT2SkillDialog extends Application {
             "value": this.value,
             "dm": 0,
             "dicetype": "normal",
-            "characteristic": this.skill.default
+            "characteristic": this.cha
         }
     }
 
@@ -75,9 +78,13 @@ export class MgT2SkillDialog extends Application {
         console.log("onRollClick:");
 
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
-        let cha = html.find(".skillDialogCha")[0].value;
+        let cha = this.cha;
+        let remember = false;
+        if (html.find(".skillDialogCha")[0]) {
+            cha = html.find(".skillDialogCha")[0].value;
+            remember = html.find(".skillDialogRemember")[0].value;
+        }
         let rollType = html.find(".skillDialogRollType")[0].value;
-        let remember = html.find(".skillDialogRemember")[0].value;
 
         if (remember) {
             this.skill.default = cha;

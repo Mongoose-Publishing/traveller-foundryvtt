@@ -245,7 +245,9 @@ export class MgT2ActorSheet extends ActorSheet {
 
     const skill = dataset.skill;
     const spec = dataset.spec;
-    let skillDefault = "";
+    const cha = dataset.cha;
+
+    let skillDefault = dataset.cha?dataset.cha:"";
     let speciality = null;
 
     if (skill) {
@@ -262,7 +264,7 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     if (!quickRoll) {
-      new MgT2SkillDialog(actor, skill, spec).render(true);
+      new MgT2SkillDialog(actor, skill, spec, cha).render(true);
     } else {
       // Roll directly with no options.
       rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal");
