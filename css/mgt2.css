@@ -475,7 +475,7 @@
     text-align: left;
 }
 
-.traveller .item-prop {
+.actor .item-prop {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 50px;
     flex: 0 0 50px;
@@ -483,7 +483,7 @@
     text-align: left;
 }
 
-.traveller .weapon-name {
+.actor .weapon-name {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 200px;
   flex: 0 0 200px;
@@ -491,7 +491,7 @@
 
 }
 
-.traveller .weapon-prop {
+.actor .weapon-prop {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 100px;
   flex: 0 0 100px;
@@ -507,18 +507,18 @@
   font-size: 12px;
 }
 
-.traveller .effects .item .effect-controls {
+.actor .effects .item .effect-controls {
   border: none;
 }
 
 
-.traveller .characteristic-title {
+.actor .characteristic-title {
     font-weight: bold;
     font-size: 12pt;
     text-align: left;
 }
 
-.traveller .characteristic-dm {
+.actor .characteristic-dm {
     font-weight: bold;
     font-size: 10pt;
     background-color: white;
@@ -532,34 +532,34 @@
     margin-bottom: 1px;
 }
 
-.traveller .characteristic-value {
+.actor .characteristic-value {
     background-color: #F0F0F0;
     width: 3em;
 }
 
-.traveller .characteristic-readonly {
+.actor .characteristic-readonly {
     width: 3em;
     color: #404040;
 }
 
-.traveller .skill-label {
+.actor .skill-label {
     display: inline-block;
     width: 140px;
     font-size: 9pt;
 }
 
-.traveller .specialisation {
+.actor .specialisation {
     display: inline-block;
     font-style: italic;
     margin-left: 26px;
     width: 140px;
 }
 
-.traveller .text-title {
+.actor .text-title {
     font-weight: bold;
 }
 
-.traveller .skill-level {
+.actor .skill-level {
     width: 24px;
     height: 16px;
     font-size: 10pt;
@@ -567,7 +567,7 @@
     background-color: #f0f0f0;
 }
 
-.traveller .skill-fixed {
+.actor .skill-fixed {
     width: 24px;
     height: 16px;
     font-size: 10pt;
@@ -581,16 +581,16 @@ input.trained {
     height: 12px;
 }
 
-.traveller .untrained {
+.actor .untrained {
     font-weight: normal;
 }
 
-.traveller .rollType {
+.actor .rollType {
     font-weight: bold;
     color: black;
 }
 
-.traveller .rollTypeActive {
+.actor .rollTypeActive {
     font-weight: bold;
     color: white;
     background: black;
@@ -600,7 +600,7 @@ input.useCharacteristic {
     width: 12px;
 }
 
-.traveller .header-profile .profile-label {
+.actor .header-profile .profile-label {
     font-weight: bold;
 }
 

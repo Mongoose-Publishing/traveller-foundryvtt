@@ -621,6 +621,7 @@
                 "trained": false,
                 "background": true,
                 "requires": "INT",
+                "individual": true,
                 "specialities": {
                     "belter": {
                         "label": "Belter",
