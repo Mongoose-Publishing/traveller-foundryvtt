@@ -1,28 +1,55 @@
 
-export function rollSkill(actor, skill, speciality, characteristic, dm, rollType) {
+export function rollSkill(actor, skill, speciality, cha, dm, rollType) {
     const data = actor.data.data;
+    let text = "";
 
-    let value = 3 - data.skills["jackofalltrades"].value - 3;
-    if (skill.trained) {
-        value = skill.value;
-        if (speciality) {
-            value = speciality.value;
-        }
-    }
+    // Normal, Boon or Bane dice roll.
     let dice = "2D6";
     if (rollType === "boon") {
         dice = "3D6k2";
     } else if (rollType === "bane") {
         dice = "3D6kl2";
     }
-    let chaDM = characteristic.dm
-    dice += " + " + chaDM;
-    dice += " + " + this.value;
+
+    if (cha) {
+        dice += " + " + data.characteristics[cha].dm;
+        text += cha;
+    }
+
+    if (skill) {
+        let value = data.skills["jackofalltrades"].value - 3;
+        text += " + " + skill.label;
+        if (skill.trained) {
+            value = skill.value;
+            if (speciality) {
+                value = speciality.value;
+                text += " (" + speciality.label + ")";
+            }
+        } else {
+            text += " (untrained)";
+        }
+        dice += " + " + value;
+    }
     if (dm > 0) {
         dice += " +" + dm;
+        text += " +" + dm;
     } else if (dm < 0) {
         dice += " " + dm;
+        text += " " + dm;
+    }
+
+    if (rollType === "boon") {
+        text += " <span class='boon'>[Boon]</span>";
+    } else if (rollType === "bane") {
+        text += " <span class='bane'>[Bane]</span>";
     }
 
     let roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
+    if (roll) {
+        roll.toMessage({
+            speaker: ChatMessage.getSpeaker({actor: actor}),
+            flavor: "<span class='skillroll'>" + text + "</span>",
+            rollMode: game.settings.get("core", "rollMode")
+        });
+    }
 }

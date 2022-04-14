@@ -620,3 +620,8 @@ input.useCharacteristic {
 input.skillDialogDM {
     width: 5em;
 }
+
+span.skillroll {
+    font-size: larger;
+    font-weight: bold;
+}

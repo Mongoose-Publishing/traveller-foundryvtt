@@ -1,6 +1,7 @@
 
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
 import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
+import {rollSkill} from "../helpers/dice-rolls.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -244,23 +245,15 @@ export class MgT2ActorSheet extends ActorSheet {
 
     const skill = dataset.skill;
     const spec = dataset.spec;
-    let skillValue = 0;
-    let specValue = 0;
-    let skillLabel = "";
-    let specLabel = "";
     let skillDefault = "";
+    let speciality = null;
 
     if (skill) {
+      skillDefault = data.skills[skill].default;
       if (data.skills[skill].trained) {
-        skillValue = data.skills[skill].value;
-        skillLabel = data.skills[skill].label;
-        skillDefault = data.skills[skill].default;
         if (spec) {
-          specValue = data.skills[skill].specialities[spec].value;
-          specLabel = data.skills[skill].specialities[spec].label;
+          speciality = data.skills[skill].specialities[spec];
         }
-      } else {
-        skillValue = -3;
       }
     }
     let quickRoll = data.settings.quickRolls?true:false;
@@ -269,31 +262,10 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     if (!quickRoll) {
-      let title = skillLabel + (spec ? (" (" + specLabel + ")") : "");
-
-      //let d = new MgT2SkillDialog(actor, skill, spec);
-      //d.render();
-      let dialog = new MgT2SkillDialog(actor, skill, spec).render(true);
+      new MgT2SkillDialog(actor, skill, spec).render(true);
     } else {
-      // Handle rolls that supply the formula directly.
-      if (dataset.roll) {
-        console.log("Label is " + label);
-        console.log("Roll is " + dataset.roll);
-
-        let roller = new Roll(dataset.roll);
-
-        let roll = new Roll(dataset.roll, this.actor.getRollData()).evaluate({async: false});
-        if (roll) {
-          roll.toMessage({
-            speaker: ChatMessage.getSpeaker({actor: this.actor}),
-            flavor: label,
-            rollMode: game.settings.get('core', 'rollMode'),
-          });
-        } else {
-          console.log("There is no roll");
-        }
-        return roll;
-      }
+      // Roll directly with no options.
+      rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal");
     }
 }
 

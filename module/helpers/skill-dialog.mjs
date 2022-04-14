@@ -1,3 +1,4 @@
+import {rollSkill} from "../helpers/dice-rolls.mjs";
 
 export class MgT2SkillDialog extends Application {
     static get defaultOptions() {
@@ -15,6 +16,7 @@ export class MgT2SkillDialog extends Application {
         console.log("constructor:");
 
         console.log("Constructor skill is " + skill);
+        console.log("Constructor spec is " + spec);
         console.log(actor);
 
         this.actor = actor;
@@ -80,41 +82,8 @@ export class MgT2SkillDialog extends Application {
         if (remember) {
             this.skill.default = cha;
         }
+        rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType);
 
-        let dice = "2D6";
-        if (rollType === "boon") {
-            dice = "3D6k2";
-        } else if (rollType === "bane") {
-            dice = "3D6kl2";
-        }
-        let chaDM = this.getData().data.characteristics[cha].dm
-        dice += " + " + chaDM;
-        dice += " + " + this.value + " + " + dm;
-
-        let roll = new Roll(dice, this.actor.getRollData()).evaluate({async: false});
-        if (roll) {
-            let text = cha + "[" + chaDM + "] + " + this.skill.label;
-            if (this.spec) {
-                text += " (" + this.spec.label + ")"
-            }
-            text += " [" + this.value + "]";
-            if (dm > 0) {
-                text += " +" + dm;
-            } else if (dm < 0) {
-                text += " " + dm;
-            }
-            if (rollType === "boon") {
-                text += " <span class='boon'>[Boon]</span>";
-            } else if (rollType === "bane") {
-                text += " <span class='bane'>[Bane]</span>";
-            }
-
-            roll.toMessage({
-                speaker: ChatMessage.getSpeaker({actor: this.actor}),
-                flavor: "<b>" + text + "</b>",
-                rollMode: game.settings.get("core", "rollMode")
-            });
-        }
         this.close();
     }
 
