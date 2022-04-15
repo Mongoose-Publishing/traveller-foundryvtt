@@ -11,14 +11,17 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType) {
         dice = "3D6kl2";
     }
 
-    if (cha) {
+    if (cha && data.characteristics && data.characteristics[cha]) {
         dice += " + " + data.characteristics[cha].dm;
         text += cha;
     }
 
     if (skill) {
         let value = data.skills["jackofalltrades"].value - 3;
-        text += " + " + skill.label;
+        if (text.length > 0) {
+            text += " + ";
+        }
+        text += skill.label;
         if (skill.trained) {
             value = skill.value;
             if (speciality) {

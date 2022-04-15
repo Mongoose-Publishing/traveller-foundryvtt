@@ -23,6 +23,7 @@ export class MgT2SkillDialog extends Application {
 
         const data = actor.data.data;
 
+        this.skillId = skill;
         this.skill = null;
         this.spec = null;
         this.value = -3;
@@ -55,12 +56,14 @@ export class MgT2SkillDialog extends Application {
 
     getData() {
         console.log("getData: Characteristic is " + this.cha);
+        console.log("getData: Type is " + this.actor.type);
         return {
             "actor": this.actor,
             "data": this.data,
             "skill": this.skill,
             "spec": this.spec,
             "value": this.value,
+            "showCha": (this.skill && this.actor.type != "creature"),
             "dm": 0,
             "dicetype": "normal",
             "characteristic": this.cha
@@ -86,8 +89,8 @@ export class MgT2SkillDialog extends Application {
         }
         let rollType = html.find(".skillDialogRollType")[0].value;
 
-        if (remember) {
-            this.skill.default = cha;
+        if (remember && this.skillId) {
+            this.actor.data.data.skills[this.skillId].default = cha;
         }
         rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType);
 

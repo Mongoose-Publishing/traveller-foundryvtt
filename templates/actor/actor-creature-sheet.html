@@ -67,27 +67,57 @@
       <section class="grid grid-3col">
         {{#each data.skills as |skill key|}}
             {{#if skill.creature}}
-            <div class="resource flex-group-left">
-              <div>
-                <input type="checkbox" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
-                <label for="data.skills.{{key}}.value" class="resource-label" style="width: 96px">{{skill.label}}</label>
                 {{#if skill.trained}}
-
-                {{#if skill.specialities}}
-                <input type="text" name="data.skills.{{key}}.value" value="0" data-dtype="Number" style="width: 24px" readonly/>
-
-                {{#each skill.specialities as |spec|}}
-                    <br/><label>{{spec.label}}</label>
-                {{/each}}
-
+                  <div class="resource flex-group-left">
+                      <div>
+                          <input type="checkbox" class="trained"
+                                 name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
+                          <label for="data.skills.{{key}}.value"
+                                 class="resource-label skill-label rollable"
+                                 data-rolltype="skill"
+                                 data-skill="{{key}}"
+                                 data-roll="{{skillRollable ../data skill null}}"
+                                 data-label="{{skillLabel ../data skill null}}"
+                                 title="{{skill.default}} + {{skill.value}}">{{skill.label}}</label>
+                          {{#if skill.specialities}}
+                            <input type="text" value="0" data-dtype="Number" class="skill-fixed" readonly/>
+                            {{#each skill.specialities as |spec i|}}
+                              <br/>
+                              <label class="skill-label specialisation rollable"
+                                     data-rolltype="skill"
+                                     data-skill="{{key}}"
+                                     data-spec="{{i}}"
+                                     data-roll="{{skillRollable ../../data skill spec}}"
+                                     data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
+                              <input type="text"
+                                     name="data.skills.{{key}}.specialities.{{i}}.value"
+                                     value="{{spec.value}}"
+                                     data-dtype="Number"
+                                     class="skill-level"/>
+                            {{/each}}
+                          {{else}}
+                          <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}"
+                                 data-dtype="Number"
+                                 data-rolltype="skill"
+                                 data-skill="{{key}}"
+                                 class="skill-level"/>
+                          {{/if}}
+                      </div>
+                  </div>
                 {{else}}
-                <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" style="width: 24px"/>
+                  <div class="resource flex-group-left">
+                      <div>
+                          <input type="checkbox" class="trained" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
+                          <label for="data.skills.{{key}}.value"
+                                 class="resource-label skill-label rollable untrained"
+                                 data-rollType="skill"
+                                 data-skill="{{key}}"
+                                 data-roll="{{skillRollable ../data skill null}}"
+                                 data-label="{{skillLabel ../data skill null}}">{{skill.label}}</label>
+                          <input type="text" value="{{defaultSkill ../data}}" data-dtype="Number" class="skill-fixed" readonly/>
+                      </div>
+                  </div>
                 {{/if}}
-                {{else}}
-                (-3)
-                {{/if}}
-              </div>
-            </div>
             {{/if}}
         {{/each}}
 

@@ -156,38 +156,8 @@ export class MgT2ActorSheet extends ActorSheet {
         li.addEventListener("dragstart", handler, false);
       });
     }
-
-    html.find(".useCharacteristic").click(ev => this._onUseCharacteristic(ev, this.actor, html));
-
-    html.find(".rollTypeNormal").click(ev => this._onRollTypeChange(ev, this.actor, "normal"));
-    html.find(".rollTypeBoon").click(ev => this._onRollTypeChange(ev, this.actor, "boon"));
-    html.find(".rollTypeBane").click(ev => this._onRollTypeChange(ev, this.actor, "bane"));
-
 }
 
-  /**
-   * Turn the checkboxes for which characteristic to use into zero or one.
-   * If one is selected, deselect all the others. If the selected one is
-   * selected, then de-select it.
-   */
-  async _onUseCharacteristic(event, actor, html) {
-      const header = event.currentTarget;
-      const name = header.name;
-      const char = name.replace(/data.characteristics./, "").replace(/.default/, "");
-      const value = actor.data.data.characteristics[char].default
-
-      console.log("useCharacteristic " + char);
-
-      const chars = actor.data.data.characteristics;
-      for (let ch in chars) {
-          chars[ch].default = false;
-      }
-      html.find(".useCharacteristic").prop("checked", false);
-      if (!value) {
-        html.find(".use-"+char).prop("checked", true);
-        chars[char].default = true;
-      }
-  }
 
   async _onRollTypeChange(event, actor, type) {
     actor.data.data.settings.rollType = type;
@@ -269,68 +239,5 @@ export class MgT2ActorSheet extends ActorSheet {
       // Roll directly with no options.
       rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal");
     }
-}
-
-
-
-  /**
-   * Handle clickable rolls.
-   * @param {Event} event   The originating click event
-   * @private
-   */
-  _onRoll(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-    const dataset = element.dataset;
-
-    // Handle item rolls.
-    if (dataset.rollType) {
-      if (dataset.rollType == 'item') {
-        const itemId = element.closest('.item').dataset.itemId;
-        const item = this.actor.items.get(itemId);
-        if (item) return item.roll();
-      }
-    }
-
-    console.log("_onRoll click event");
-    console.log("Button was " + event.button);
-    console.log("Shift was " + event.shiftKey);
-
-    if (!dataset.roll) {
-      return;
-    }
-    let label = dataset.label ? `[roll] ${dataset.label}` : '';
-    console.log("Roll is " + dataset.roll);
-    console.log("Label is " + label);
-    console.log("RollType is " + dataset.rolltype);
-    console.log("Skill is " + dataset.skill);
-    console.log("Spec is " + dataset.spec);
-    console.log(dataset);
-
-    const skill = dataset.skill;
-    const spec = dataset.spec;
-
-
-      // Handle rolls that supply the formula directly.
-      if (dataset.roll) {
-        console.log("Label is " + label);
-        console.log("Roll is " + dataset.roll);
-
-        let roller = new Roll(dataset.roll);
-
-        let roll = new Roll(dataset.roll, this.actor.getRollData()).evaluate({async: false});
-        if (roll) {
-          roll.toMessage({
-            speaker: ChatMessage.getSpeaker({actor: this.actor}),
-            flavor: label,
-            rollMode: game.settings.get('core', 'rollMode'),
-          });
-        } else {
-          console.log("There is no roll");
-        }
-        return roll;
-      }
-    }
-
-
+  }
 }
