@@ -625,27 +625,33 @@
                 "specialities": {
                     "belter": {
                         "label": "Belter",
-                        "value": 0
+                        "value": 0,
+                        "trained": false
                     },
                     "biologicals": {
                         "label": "Biologicals",
-                        "value": 0
+                        "value": 0,
+                        "trained": false
                     },
                     "civilEngineering": {
                         "label": "Civil Engineering",
-                        "value": 0
+                        "value": 0,
+                        "trained": false
                     },
                     "construction": {
                         "label": "Construction",
-                        "value": 0
+                        "value": 0,
+                        "trained": false
                     },
                     "hydroponics": {
                         "label": "Hydroponics",
-                        "value": 0
+                        "value": 0,
+                        "trained": false
                     },
                     "polymers": {
                         "label": "Polymers",
-                        "value": 0
+                        "value": 0,
+                        "trained": false
                     }
                 }
             },

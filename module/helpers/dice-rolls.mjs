@@ -1,7 +1,11 @@
 
 export function rollSkill(actor, skill, speciality, cha, dm, rollType) {
     const data = actor.data.data;
-    let text = "";
+    let   text = "";
+    let   creatureCheck = false;
+    let   untrainedCheck = false;
+    let   specialityCheck = false;
+    let   skillCheck = false;
 
     // Normal, Boon or Bane dice roll.
     let dice = "2D6";
@@ -12,11 +16,20 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType) {
     }
 
     if (cha && data.characteristics && data.characteristics[cha]) {
-        dice += " + " + data.characteristics[cha].dm;
+        let dm = data.characteristics[cha].dm;
+        dice += " + " + dm;
         text += cha;
+        if (dm < 0) {
+            text += " (" + dm + ")";
+        } else {
+            text += " (+" + dm + ")";
+        }
+    } else {
+        creatureCheck = true;
     }
 
     if (skill) {
+        skillCheck = true;
         let value = data.skills["jackofalltrades"].value - 3;
         if (text.length > 0) {
             text += " + ";
@@ -27,11 +40,17 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType) {
             if (speciality) {
                 value = speciality.value;
                 text += " (" + speciality.label + ")";
+                specialityCheck = true;
             }
         } else {
-            text += " (untrained)";
+            untrainedCheck = true;
         }
         dice += " + " + value;
+        if (value < 0) {
+            text += " (" + value + ")";
+        } else {
+            text += " (+" + value + ")";
+        }
     }
     if (dm > 0) {
         dice += " +" + dm;
@@ -46,12 +65,32 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType) {
     } else if (rollType === "bane") {
         text += " <span class='bane'>[Bane]</span>";
     }
+    console.log("Thumbnail:" + actor.thumbnail);
+
+    let checkText = "Making a skill check";
+
+    if (creatureCheck) {
+        checkText = "Creature skill check";
+    } else if (specialityCheck) {
+        checkText = "Specialisation check";
+    } else if (skillCheck) {
+        checkText = "Skill check";
+    } else {
+        checkText = "Characteristic check";
+    }
+    if (untrainedCheck) {
+        checkText += " (untrained)";
+    }
+
+    text = "<span class='skillroll'>" + text + "</span>";
+    text = "<div><img class='skillcheck-thumb' src='" + actor.thumbnail + "'/>" +
+        checkText + "<br/>" + text + "</div>";
 
     let roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
     if (roll) {
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
-            flavor: "<span class='skillroll'>" + text + "</span>",
+            flavor: text,
             rollMode: game.settings.get("core", "rollMode")
         });
     }

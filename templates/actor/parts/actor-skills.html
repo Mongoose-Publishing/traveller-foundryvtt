@@ -70,7 +70,8 @@
                             data-rollType="skill"
                             data-skill="{{key}}"
                             data-roll="{{skillRollable ../data skill null}}"
-                            data-label="{{skillLabel ../data skill null}}">{{skill.label}}</label>
+                            data-label="{{skillLabel ../data skill null}}"
+                            title="{{skill.default}} + {{defaultSkill ../data}}">{{skill.label}}</label>
                     <input type="text" value="{{defaultSkill ../data}}" data-dtype="Number" class="skill-fixed" readonly/>
                 </div>
             </div>

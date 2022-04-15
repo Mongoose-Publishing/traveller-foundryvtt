@@ -625,3 +625,10 @@ span.skillroll {
     font-size: larger;
     font-weight: bold;
 }
+
+img.skillcheck-thumb {
+    width: 40px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
