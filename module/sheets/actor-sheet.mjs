@@ -259,7 +259,7 @@ export class MgT2ActorSheet extends ActorSheet {
       new MgT2SkillDialog(actor, skill, spec, cha).render(true);
     } else {
       // Roll directly with no options.
-      rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal");
+      rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal", 8);
     }
   }
 }

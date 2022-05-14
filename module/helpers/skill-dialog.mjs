@@ -88,13 +88,14 @@ export class MgT2SkillDialog extends Application {
             remember = html.find(".skillDialogRemember")[0].value;
         }
         let rollType = html.find(".skillDialogRollType")[0].value;
+        let difficulty = parseInt(html.find(".skillDialogDifficulty")[0].value);
 
         if (remember && this.skillId) {
             console.log("Remembering " + cha + " for " + this.skillId);
             this.actor.data.data.skills[this.skillId].default = cha;
             this.actor.update({ "data.skills": this.actor.data.data.skills });
         }
-        rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType);
+        rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType, difficulty);
 
         this.close();
     }

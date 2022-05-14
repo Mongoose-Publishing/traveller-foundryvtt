@@ -634,8 +634,24 @@ input.skillDialogDM {
 }
 
 span.skillroll {
-    font-size: larger;
     font-weight: bold;
+}
+
+span.effectRoll {
+    font-weight: bold;
+    font-size: larger;
+}
+
+span.rollSuccess {
+    color: green;
+}
+
+span.rollMarginal {
+    color: orangered;
+}
+
+span.rollFailure {
+    color: red;
 }
 
 img.skillcheck-thumb {
