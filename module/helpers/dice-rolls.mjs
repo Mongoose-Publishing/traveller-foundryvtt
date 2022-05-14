@@ -81,6 +81,36 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     if (untrainedCheck) {
         checkText += " (untrained)";
     }
+    let difficultyLabel = "";
+    switch (difficulty) {
+        case 0: case 1: case 2: case 3:
+            difficultyLabel = "Simple";
+            break;
+        case 4: case 5:
+            difficultyLabel = "Easy";
+            break;
+        case 6: case 7:
+            difficultyLabel = "Routine";
+            break;
+        case 8: case 9:
+            difficultyLabel = "Average";
+            break;
+        case 10: case 11:
+            difficultyLabel = "Difficult";
+            break;
+        case 12: case 13:
+            difficultyLabel = "Very Difficult";
+            break;
+        case 14: case 15:
+            difficultyLabel = "Formidable";
+            break;
+        case 16:
+            difficultyLabel = "Impossible";
+            break;
+    }
+    if (difficultyLabel != "") {
+        checkText = difficultyLabel + " " + checkText;
+    }
 
     let roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
     if (roll) {
