@@ -26,7 +26,24 @@
                     {{#if skill.specialities}}
                         <input type="text" value="0" data-dtype="Number" class="skill-fixed" readonly/>
                         {{#each skill.specialities as |spec i|}}
-                            {{#if spec.value includeZero=false}}
+                            {{#if skill.individual}}
+                                <br/>
+                                <input type="checkbox" class="spectrained" name="data.skills.{{key}}.specialities.{{i}}.trained"
+                                       {{checked spec.trained}} data-dtype="Boolean" />
+                                <label class="skill-label individual rollable"
+                                       data-roll="{{skillRollable ../../data skill spec}}"
+                                       data-rolltype="skill"
+                                       data-skill="{{key}}"
+                                       data-spec="{{i}}"
+                                       data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
+                                {{#if spec.trained}}
+                                    <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value"
+                                           value="{{spec.value}}" data-dtype="Number" class="skill-level"/>
+                                {{else}}
+                                    <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value"
+                                           value="{{defaultSkill ../../data}}" data-dtype="Number" class="skill-fixed" readonly/>
+                                {{/if}}
+                            {{else if spec.value includeZero=false}}
                                 <br/>
                                 <label class="skill-label specialisation rollable"
                                         data-rolltype="skill"
@@ -48,7 +65,8 @@
                                         data-skill="{{key}}"
                                         data-spec="{{i}}"
                                         data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
-                                <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value" value="{{spec.value}}" data-dtype="Number" class="skill-level"/>
+                                <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value"
+                                       value="{{spec.value}}" data-dtype="Number" class="skill-level"/>
                             {{/if}}
                         {{/each}}
                     {{else}}

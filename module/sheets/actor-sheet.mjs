@@ -66,6 +66,28 @@ export class MgT2ActorSheet extends ActorSheet {
    * @return {undefined}
    */
   _prepareCharacterData(context) {
+    console.log("_prepareCharacterData:");
+    let skills = context.data.skills;
+    console.log(skills);
+    console.log(context.data);
+    let changed = false;
+    for (let skill in skills) {
+      if (skills[skill].individual && skills[skill].specialities) {
+        console.log(skills[skill].label);
+        for (let s in skills[skill].specialities) {
+          let spec = skills[skill].specialities[s];
+          console.log(spec.label);
+          if (spec.trained && spec.value < 0) {
+            console.log("Setting to zero for " + spec.label);
+            spec.value = 0;
+            changed = true;
+          }
+        }
+      }
+    }
+    if (changed) {
+      //context.actor.update({"data.skills": skills });
+    }
   }
 
   /**
