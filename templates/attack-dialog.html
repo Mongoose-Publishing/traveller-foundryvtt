@@ -31,6 +31,19 @@
         </div>
     {{/if}}
 
+    {{#if hasAuto}}
+        <div class="auto">
+            <label for="auto" class="skillDialogLabel">Auto Fire</label>
+            <select class="attackDialogAuto" name="autoFire">
+                {{#select "single"}}
+                    <option value="single">Single Shot</option>
+                    <option value="burst">Burst (+{{auto}})</option>
+                    <option value="full">Full Auto (x{{auto}})</option>
+                {{/select}}
+            </select>
+        </div>
+    {{/if}}
+
     <div class="bonus-selection">
         <label for="dm" class="skillDialogLabel">DM</label>
         <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>

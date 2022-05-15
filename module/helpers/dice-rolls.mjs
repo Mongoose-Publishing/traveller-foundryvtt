@@ -18,11 +18,11 @@ export function getSkillValue(actor, skill, speciality) {
     }
     return -3;
 }
-function hasTrait(traits, trait) {
+export function hasTrait(traits, trait) {
     return traits.toLowerCase().indexOf(trait.toLowerCase()) > -1;
 }
 
-function getTraitValue(traits, trait) {
+export function getTraitValue(traits, trait) {
     traits = traits.toLowerCase();
     trait = trait.toLowerCase();
 
@@ -34,7 +34,7 @@ function getTraitValue(traits, trait) {
     return 0;
 }
 
-export function rollAttack(actor, weapon, skillDM, dm, rollType, range) {
+export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption) {
     const   data = actor.data.data;
     let     content = "Attack";
     let     melee = true;
@@ -126,43 +126,61 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range) {
     if (range) {
         dice += " + " + range;
     }
-    const damageRoll = new Roll(dmg, actor.getRollData()).evaluate({ async: false });
-    let damageTotal = damageRoll.total;
-    const attackRoll = new Roll(dice, actor.getRollData()).evaluate({ async: false });
-    let attackTotal = attackRoll.total;
-    let effect = attackTotal - 8;
-    let critical = (effect >= 6);
-
-    let effectClass = "rollFailure";
-    let effectText = "Miss";
-    if (effect == 0) {
-        effectClass = "rollMarginal";
-        effectText = "Hit";
-    } else if (effect > 0 && effect < 6) {
-        effectClass = "rollSuccess";
-        effectText = `Hit (+${effect})`;
-    } else if (effect >= 6) {
-        effectClass = "rollCritical";
-        effectText = `Critical (+${effect})`;
+    let attacks = 1;
+    if (autoOption && autoOption == "burst") {
+        let autoBonus = getTraitValue(traits, "auto");
+        dmg += " + " + autoBonus;
+    } else if (autoOption && autoOption == "full") {
+        attacks = getTraitValue(traits, "auto");
     }
 
-    content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
-    content += `<b>Damage Roll:</b> ${damageTotal}`;
-    if (!destructive && effect > 0) {
-        content += ` + ${effect} (${damageTotal + effect})`;
-    }
-    if (hasTrait(traits, "ap")) {
-        content += ` AP ${getTraitValue(traits, "ap")}`;
-    }
-    if (hasTrait(traits, "radiation")) {
-        const radRoll = new Roll("2D6 * 20", actor.getRollData()).evaluate({ async: false });
-        content += `<br/><b>Radiation:</b> ${radRoll.total} Rads ☢`;
-        if (destructive) {
-            content += ` (10m)`;
+    const roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
+    for (let attack=1; attack <= attacks; attack++) {
+        if (attacks > 1) {
+            content += `<h3 class="fullauto">Full auto attack ${attack} of ${attacks}</h3>`;
         }
-    }
-    if (hasTrait(traits, "blast")) {
-        content += `<br/><b>Blast Radius:</b> ${getTraitValue(traits, "blast")}m`;
+
+        const damageRoll = new Roll(dmg, actor.getRollData()).evaluate({async: false});
+        let damageTotal = damageRoll.total;
+        const attackRoll = new Roll(dice, actor.getRollData()).evaluate({async: false});
+        let attackTotal = attackRoll.total;
+        let effect = attackTotal - 8;
+        let critical = (effect >= 6);
+
+        let effectClass = "rollFailure";
+        let effectText = "Miss";
+        if (effect == 0) {
+            effectClass = "rollMarginal";
+            effectText = "Hit";
+        } else if (effect > 0 && effect < 6) {
+            effectClass = "rollSuccess";
+            effectText = `Hit (+${effect})`;
+        } else if (effect >= 6) {
+            effectClass = "rollCritical";
+            effectText = `Critical (+${effect})`;
+        }
+
+        content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
+        content += `<b>Damage Roll:</b> ${damageTotal}`;
+        if (!destructive && effect > 0) {
+            content += ` + ${effect} (${damageTotal + effect})`;
+        }
+        if (hasTrait(traits, "ap")) {
+            content += ` AP ${getTraitValue(traits, "ap")}`;
+        }
+        if (hasTrait(traits, "radiation")) {
+            const radRoll = new Roll("2D6 * 20", actor.getRollData()).evaluate({async: false});
+            content += `<br/><b>Radiation:</b> ${radRoll.total} Rads ☢`;
+            if (destructive) {
+                content += ` (10m)`;
+            }
+        }
+        if (hasTrait(traits, "blast")) {
+            content += `<br/><b>Blast Radius:</b> ${getTraitValue(traits, "blast")}m`;
+        }
+        if (attack < attacks) {
+            content += "<br/>";
+        }
     }
 
     if (!rangeBand && baseRange > 0) {
@@ -175,7 +193,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range) {
         content += "</table>";
     }
 
-    attackRoll.toMessage({
+    roll.toMessage({
         speaker: ChatMessage.getSpeaker({actor: actor}),
         content: content,
         rollMode: game.settings.get("core", "rollMode")

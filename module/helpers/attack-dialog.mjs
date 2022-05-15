@@ -1,4 +1,4 @@
-import {rollAttack} from "../helpers/dice-rolls.mjs";
+import {rollAttack, hasTrait, getTraitValue} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
 
 export class MgT2AttackDialog extends Application {
@@ -26,6 +26,11 @@ export class MgT2AttackDialog extends Application {
         this.cha = this.weapon.data.weapon.characteristic;
         this.skill = this.weapon.data.weapon.skill.split(".")[0];
         this.speciality = this.weapon.data.weapon.skill.split(".")[1];
+        this.auto = 1;
+        if (hasTrait(this.weapon.data.weapon.traits, "auto")) {
+            this.auto = getTraitValue(this.weapon.data.weapon.traits, "auto");
+        }
+
 
         // Work out what the skill bonus is.
         this.score = parseInt(getSkillValue(this.actor, this.skill, this.speciality));
@@ -66,6 +71,8 @@ export class MgT2AttackDialog extends Application {
             "shortRange": this.shortRange,
             "longRange": this.longRange,
             "extremeRange": this.extremeRange,
+            "hasAuto": this.auto > 1,
+            "auto": this.auto,
             "dm": 0,
             "score": this.score,
             "cha": this.cha,
@@ -91,8 +98,12 @@ export class MgT2AttackDialog extends Application {
         if (html.find(".attackDialogRange")[0]) {
             rangeDM = parseInt(html.find(".attackDialogRange")[0].value);
         }
+        let autoOption = "single";
+        if (html.find(".attackDialogAuto")[0]) {
+            autoOption = html.find(".attackDialogAuto")[0].value;
+        }
 
-        rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM);
+        rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM, autoOption);
 
         this.close();
     }

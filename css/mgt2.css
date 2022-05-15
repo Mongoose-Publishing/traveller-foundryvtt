@@ -665,3 +665,12 @@ img.skillcheck-thumb {
     margin-right: 4px;
     margin-bottom: 2px;
 }
+
+h3.fullauto {
+    display: block;
+    font-size: larger;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
