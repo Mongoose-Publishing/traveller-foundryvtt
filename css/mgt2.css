@@ -642,6 +642,11 @@ span.effectRoll {
     font-size: larger;
 }
 
+span.rollCritical {
+    color: green;
+    font-weight: bold;
+}
+
 span.rollSuccess {
     color: green;
 }
@@ -655,8 +660,8 @@ span.rollFailure {
 }
 
 img.skillcheck-thumb {
-    width: 40px;
+    width: 48px;
     float: left;
-    margin-right: 5px;
+    margin-right: 4px;
     margin-bottom: 2px;
 }

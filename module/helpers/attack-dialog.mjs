@@ -1,4 +1,4 @@
-import {rollSkill} from "../helpers/dice-rolls.mjs";
+import {rollAttack} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
 
 export class MgT2AttackDialog extends Application {
@@ -86,12 +86,10 @@ export class MgT2AttackDialog extends Application {
         console.log("onRollClick:");
 
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
-        let rangeModifier = parseInt(html.find(".attackDialogRange")[0].value);
+        let rangeDM = parseInt(html.find(".attackDialogRange")[0].value);
         let rollType = html.find(".skillDialogRollType")[0].value;
 
-        console.log("Range Modifier: " + rangeModifier);
-
-        //rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType, difficulty);
+        rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM);
 
         this.close();
     }

@@ -7,22 +7,130 @@ export function getSkillValue(actor, skill, speciality) {
             speciality = skill.split(".")[1];
             skill = skill.split(".")[0];
         }
-        console.log("skill:" + skill);
-        console.log("speciality:" + speciality);
-
         let value = data.skills["jackofalltrades"].value - 3;
-        console.log("Jack value " + value);
         if (data.skills[skill].trained) {
-            console.log("Is trained");
             value = skill.value;
             if (speciality) {
                 value = data.skills[skill].specialities[speciality].value;
             }
         }
-        console.log("getSkillValue:" + value);
         return parseInt(value);
     }
     return -3;
+}
+
+export function rollAttack(actor, weapon, skillDM, dm, rollType, range) {
+    const   data = actor.data.data;
+    let     content = "Attack";
+    let     melee = true;
+
+    const speaker = ChatMessage.getSpeaker({ actor: actor });
+    const rollMode = game.settings.get('core', 'rollMode');
+    const label = `${weapon.name}`;
+
+    let rangeBand = null;
+    let rangeDistance = weapon.data.weapon.range;
+    if (range !== undefined && range !== null) {
+        switch (range) {
+            case +1:
+                rangeBand = "Short";
+                rangeDistance = parseInt(rangeDistance / 4);
+                break;
+            case 0:
+                rangeBand = "Medium";
+                break;
+            case -2:
+                rangeBand = "Long";
+                rangeDistance = parseInt(rangeDistance * 2);
+                break;
+            case -4:
+                rangeBand = "Extreme";
+                rangeDistance = parseInt(rangeDistance * 4);
+                break;
+        }
+    }
+
+    // Normal, Boon or Bane dice roll.
+    let dice = "2D6";
+    if (rollType === "boon") {
+        dice = "3D6k2";
+    } else if (rollType === "bane") {
+        dice = "3D6kl2";
+    }
+    dice += " + " + skillDM;
+
+    // Header information
+    content = `<h2>${weapon.name} ${rangeBand?(" @ " + rangeDistance+"m"):""}</h2><div>`;
+    content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
+    content += `<img class="skillcheck-thumb" src="${weapon.img}"/>`;
+    content += `<b>Skill DM:</b> ${skillDM}`;
+    if (dm && parseInt(dm) < 0) {
+        content += " " + dm;
+    } else if (dm && parseInt(dm) > 0) {
+        content += " +" + dm;
+    }
+    if (rollType && rollType === "boon") {
+        content += "<span class='boon'> (boon)</span>";
+    } else if (rollType && rollType === "bane") {
+        content += "<span class='bane'> (bane)</span>";
+    }
+    content += "<br/>";
+    content += `<b>Damage:</b> ${weapon.data.weapon.damage.toUpperCase()}<br/>`;
+    content += `<b>Range:</b> ${weapon.data.weapon.range}m<br/>`;
+    if (weapon.data.weapon.traits && weapon.data.weapon.traits != "") {
+        content += `<b>Traits:</b> ${weapon.data.weapon.traits}`
+    }
+    content += '</div>';
+    // End of header.
+
+    let dmg = weapon.data.weapon.damage;
+
+    if (dm && parseInt(dm) != 0) {
+        dice += " + " + parseInt(dm);
+    }
+    if (range) {
+        dice += " + " + range;
+    }
+    const damageRoll = new Roll(dmg, actor.getRollData()).evaluate({ async: false });
+    let damageTotal = damageRoll.total;
+    const attackRoll = new Roll(dice, actor.getRollData()).evaluate({ async: false });
+    let attackTotal = attackRoll.total;
+    let effect = attackTotal - 8;
+    let critical = (effect >= 6);
+
+    let effectClass = "rollFailure";
+    let effectText = "Miss";
+    if (effect == 0) {
+        effectClass = "rollMarginal";
+        effectText = "Hit";
+    } else if (effect > 0 && effect < 6) {
+        effectClass = "rollSuccess";
+        effectText = `Hit (+${effect})`;
+    } else if (effect >= 6) {
+        effectClass = "rollCritical";
+        effectText = `Critical (+${effect})`;
+    }
+
+    content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
+    content += `<b>Damage Roll:</b> ${damageTotal}`;
+
+    if (!rangeBand) {
+        range = weapon.data.weapon.range;
+        let shortRange = parseInt(range / 4);
+        let longRange = parseInt(range * 2);
+        let extremeRange = parseInt(range * 4);
+
+        content += "<table><tr><th>Short (+1)</th><th>Medium</th><th>Long (-2)</th><th>Extreme (-4)</th></tr>";
+        content += `<tr><td>${shortRange}m</td><td>${range}m</td><td>${longRange}m</td><td>${extremeRange}m</td></tr>`;
+        content += "</table>";
+    }
+
+    attackRoll.toMessage({
+        speaker: ChatMessage.getSpeaker({actor: actor}),
+        content: content,
+        rollMode: game.settings.get("core", "rollMode")
+    });
+
 }
 
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {

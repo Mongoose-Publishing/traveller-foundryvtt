@@ -1,5 +1,7 @@
 
 import {MgT2AttackDialog } from "../helpers/attack-dialog.mjs";
+import {rollAttack} from "../helpers/dice-rolls.mjs";
+import {getSkillValue} from "../helpers/dice-rolls.mjs";
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -67,7 +69,22 @@ export class MgT2Item extends Item {
     let  content = item.data.weapon.damage + "; " + item.data.weapon.range + "m";
 
     console.log("item.Roll:");
-    new MgT2AttackDialog(this.actor, item).render(true);
+
+    let quickRoll = rollData.settings.quickRolls?true:false;
+    if (event.shiftKey) {
+        quickRoll = !quickRoll;
+    }
+
+    if (item.type == "weapon") {
+        if (!quickRoll) {
+            new MgT2AttackDialog(this.actor, item).render(true);
+        } else {
+            console.log("Quick Attack Roll");
+            let skillDM = getSkillValue(this.actor, item.data.weapon.skill, null);
+            skillDM += parseInt(this.actor.data.data.characteristics[item.data.weapon.characteristic].dm)
+            rollAttack(this.actor, item, skillDM);
+        }
+    }
 
 
     if (item.type == "weapon") {
