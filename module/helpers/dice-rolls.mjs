@@ -18,6 +18,21 @@ export function getSkillValue(actor, skill, speciality) {
     }
     return -3;
 }
+function hasTrait(traits, trait) {
+    return traits.toLowerCase().indexOf(trait.toLowerCase()) > -1;
+}
+
+function getTraitValue(traits, trait) {
+    traits = traits.toLowerCase();
+    trait = trait.toLowerCase();
+
+    if (traits.indexOf(trait) > -1) {
+        traits = traits.substring(traits.indexOf(trait));
+        traits = traits.replace(/[a-z]* *([0-9]*).*/, "$1");
+        return parseInt(traits);
+    }
+    return 0;
+}
 
 export function rollAttack(actor, weapon, skillDM, dm, rollType, range) {
     const   data = actor.data.data;
@@ -28,8 +43,9 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range) {
     const rollMode = game.settings.get('core', 'rollMode');
     const label = `${weapon.name}`;
 
+    let baseRange = weapon.data.weapon.range;
     let rangeBand = null;
-    let rangeDistance = weapon.data.weapon.range;
+    let rangeDistance = baseRange;
     if (range !== undefined && range !== null) {
         switch (range) {
             case +1:
@@ -60,7 +76,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range) {
     dice += " + " + skillDM;
 
     // Header information
-    content = `<h2>${weapon.name} ${rangeBand?(" @ " + rangeDistance+"m"):""}</h2><div>`;
+    content = `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div>`;
     content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
     content += `<img class="skillcheck-thumb" src="${weapon.img}"/>`;
     content += `<b>Skill DM:</b> ${skillDM}`;
@@ -75,15 +91,34 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range) {
         content += "<span class='bane'> (bane)</span>";
     }
     content += "<br/>";
-    content += `<b>Damage:</b> ${weapon.data.weapon.damage.toUpperCase()}<br/>`;
-    content += `<b>Range:</b> ${weapon.data.weapon.range}m<br/>`;
-    if (weapon.data.weapon.traits && weapon.data.weapon.traits != "") {
-        content += `<b>Traits:</b> ${weapon.data.weapon.traits}`
+
+    // Work out damage.
+    let dmg = weapon.data.weapon.damage;
+    let destructive = dmg.indexOf("*") > -1;
+    let damageBonus = weapon.data.weapon.damageBonus;
+    if (damageBonus) {
+        damageBonus = actor.data.data.characteristics[damageBonus].dm;
+        if (damageBonus > 0) {
+            dmg += " +" + damageBonus;
+        } else if (damageBonus < 0) {
+            dmg += " " + damageBonus;
+        }
+    }
+
+    content += `<b>Damage:</b> ${dmg.toUpperCase()}<br/>`;
+    if (baseRange > 0) {
+        content += `<b>Range:</b> ${baseRange}m<br/>`;
+    } else {
+        content += `<b>Melee</b>`;
+    }
+    let traits = weapon.data.weapon.traits;
+    if (traits && traits != "") {
+        content += `<b>Traits:</b> ${traits}`
+    } else {
+        traits = "";
     }
     content += '</div>';
     // End of header.
-
-    let dmg = weapon.data.weapon.damage;
 
     if (dm && parseInt(dm) != 0) {
         dice += " + " + parseInt(dm);
@@ -113,15 +148,30 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range) {
 
     content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
     content += `<b>Damage Roll:</b> ${damageTotal}`;
+    if (!destructive && effect > 0) {
+        content += ` + ${effect} (${damageTotal + effect})`;
+    }
+    if (hasTrait(traits, "ap")) {
+        content += ` AP ${getTraitValue(traits, "ap")}`;
+    }
+    if (hasTrait(traits, "radiation")) {
+        const radRoll = new Roll("2D6 * 20", actor.getRollData()).evaluate({ async: false });
+        content += `<br/><b>Radiation:</b> ${radRoll.total} Rads ☢`;
+        if (destructive) {
+            content += ` (10m)`;
+        }
+    }
+    if (hasTrait(traits, "blast")) {
+        content += `<br/><b>Blast Radius:</b> ${getTraitValue(traits, "blast")}m`;
+    }
 
-    if (!rangeBand) {
-        range = weapon.data.weapon.range;
-        let shortRange = parseInt(range / 4);
-        let longRange = parseInt(range * 2);
-        let extremeRange = parseInt(range * 4);
+    if (!rangeBand && baseRange > 0) {
+        let shortRange = parseInt(baseRange / 4);
+        let longRange = parseInt(baseRange * 2);
+        let extremeRange = parseInt(baseRange * 4);
 
         content += "<table><tr><th>Short (+1)</th><th>Medium</th><th>Long (-2)</th><th>Extreme (-4)</th></tr>";
-        content += `<tr><td>${shortRange}m</td><td>${range}m</td><td>${longRange}m</td><td>${extremeRange}m</td></tr>`;
+        content += `<tr><td>${shortRange}m</td><td>${baseRange}m</td><td>${longRange}m</td><td>${extremeRange}m</td></tr>`;
         content += "</table>";
     }
 

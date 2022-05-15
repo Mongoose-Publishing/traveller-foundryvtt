@@ -16,17 +16,20 @@
         </select>
     </div>
 
-    <div class="range">
-        <label for="range" class="skillDialogLabel">Range</label>
-        <select class="attackDialogRange" name="difficulty">
-            {{#select "0"}}
-                <option value="+1">Short ({{shortRange}}m, +1)</option>
-                <option value="0">Medium ({{range}}m)</option>
-                <option value="-2">Long ({{longRange}}m, -2)</option>
-                <option value="-4">Extreme ({{extremeRange}}m, -4)</option>
-            {{/select}}
-        </select>
-    </div>
+    {{#if melee}}
+    {{else}}
+        <div class="range">
+            <label for="range" class="skillDialogLabel">Range</label>
+            <select class="attackDialogRange" name="difficulty">
+                {{#select "0"}}
+                    <option value="+1">Short ({{shortRange}}m, +1)</option>
+                    <option value="0">Medium ({{range}}m)</option>
+                    <option value="-2">Long ({{longRange}}m, -2)</option>
+                    <option value="-4">Extreme ({{extremeRange}}m, -4)</option>
+                {{/select}}
+            </select>
+        </div>
+    {{/if}}
 
     <div class="bonus-selection">
         <label for="dm" class="skillDialogLabel">DM</label>

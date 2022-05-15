@@ -86,8 +86,11 @@ export class MgT2AttackDialog extends Application {
         console.log("onRollClick:");
 
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
-        let rangeDM = parseInt(html.find(".attackDialogRange")[0].value);
         let rollType = html.find(".skillDialogRollType")[0].value;
+        let rangeDM = null;
+        if (html.find(".attackDialogRange")[0]) {
+            rangeDM = parseInt(html.find(".attackDialogRange")[0].value);
+        }
 
         rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM);
 
