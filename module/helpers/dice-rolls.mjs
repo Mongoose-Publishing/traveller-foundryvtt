@@ -1,4 +1,30 @@
 
+export function getSkillValue(actor, skill, speciality) {
+    const data = actor.data.data;
+
+    if (skill) {
+        if (skill.indexOf(".") > -1) {
+            speciality = skill.split(".")[1];
+            skill = skill.split(".")[0];
+        }
+        console.log("skill:" + skill);
+        console.log("speciality:" + speciality);
+
+        let value = data.skills["jackofalltrades"].value - 3;
+        console.log("Jack value " + value);
+        if (data.skills[skill].trained) {
+            console.log("Is trained");
+            value = skill.value;
+            if (speciality) {
+                value = data.skills[skill].specialities[speciality].value;
+            }
+        }
+        console.log("getSkillValue:" + value);
+        return parseInt(value);
+    }
+    return -3;
+}
+
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
     const data = actor.data.data;
     let   text = "";

@@ -1,0 +1,40 @@
+<form class="flexcol skilldialog">
+
+    <p>
+        <b>{{weapon.name}}</b> {{damage}}<br/>
+        <i>{{cha}} + {{skill}} ({{speciality}}) at {{score}}</i>
+    </p>
+
+    <div class="boon-selection">
+        <label for="dicetype" class="skillDialogLabel">Roll Type</label>
+        <select class="skillDialogRollType" name="dicetype">
+            {{#select "normal"}}
+                <option value="normal">Normal</option>
+                <option value="boon">Boon</option>
+                <option value="bane">Bane</option>
+            {{/select}}
+        </select>
+    </div>
+
+    <div class="range">
+        <label for="range" class="skillDialogLabel">Range</label>
+        <select class="attackDialogRange" name="difficulty">
+            {{#select "0"}}
+                <option value="+1">Short ({{shortRange}}m, +1)</option>
+                <option value="0">Medium ({{range}}m)</option>
+                <option value="-2">Long ({{longRange}}m, -2)</option>
+                <option value="-4">Extreme ({{extremeRange}}m, -4)</option>
+            {{/select}}
+        </select>
+    </div>
+
+    <div class="bonus-selection">
+        <label for="dm" class="skillDialogLabel">DM</label>
+        <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
+    </div>
+
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="skillRoll">Roll</button>
+    </footer>
+
+</form>

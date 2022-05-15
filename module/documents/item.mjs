@@ -1,3 +1,6 @@
+
+import {MgT2AttackDialog } from "../helpers/attack-dialog.mjs";
+
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -62,6 +65,9 @@ export class MgT2Item extends Item {
     const rollData = this.getRollData();
 
     let  content = item.data.weapon.damage + "; " + item.data.weapon.range + "m";
+
+    console.log("item.Roll:");
+    new MgT2AttackDialog(this.actor, item).render(true);
 
 
     if (item.type == "weapon") {
