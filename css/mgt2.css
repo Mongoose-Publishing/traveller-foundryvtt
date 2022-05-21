@@ -674,3 +674,12 @@ h3.fullauto {
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
+
+div.physics {
+    width: 100%;
+    background-color: #F0F0F0;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+}

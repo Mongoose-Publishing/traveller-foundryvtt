@@ -8,6 +8,8 @@ import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
+import { Physics } from "./helpers/chat/physics.mjs";
+
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -30,7 +32,7 @@ Hooks.once('init', async function() {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "2d6",
+    formula: "2d6 - 8",
     decimals: 2
   };
 
@@ -46,6 +48,31 @@ Hooks.once('init', async function() {
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
+});
+
+Hooks.on("chatMessage", function(chatlog, message, chatData) {
+    console.log(`My message was "${message}".`);
+    console.log(chatData);
+
+    if (message.indexOf("/phy") == 0) {
+        let args = message.split(" ");
+        args.shift()
+
+        if (args.length === 0) {
+            Physics.help(chatData);
+            return false;
+        } else if ("planet".startsWith(args[0])) {
+            args.shift();
+            Physics.planetCommand(chatData, args);
+            return false;
+        }
+
+        chatData.content = `<div class="physics">Unre`;
+        chatData.type = 1;
+        ChatMessage.create(chatData);
+        return false;
+    }
+    return;
 });
 
 /* -------------------------------------------- */
