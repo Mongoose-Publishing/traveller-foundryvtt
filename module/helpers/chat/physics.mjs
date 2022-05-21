@@ -197,6 +197,22 @@ Physics.printDistance = function (number) {
   return Physics.printNumber(number) + units;
 };
 
+Physics.printVelocity = function(title, velocity) {
+  let text = "";
+
+  text += `<b>${title}</b>: ${Physics.printNumber(velocity / 1000)}km/s`;
+  if (velocity >= Physics.C) {
+    text += " <i>(!)</i><br/>";
+  } else if (velocity > Physics.C / 10) {
+    text += ` (${(velocity / Physics.C).toFixed(2)}c)<br/>`;
+    let td = Math.sqrt( 1 - (velocity * velocity) / (Physics.C * Physics.C));
+    text += `<b>Time dilation</b>: ${td.toFixed(3)}<br/>`;
+  } else {
+    text += "<br/>";
+  }
+
+  return text;
+};
 
 Physics.help = function(chatData) {
   let text = `<div class="physics">`;
@@ -204,6 +220,9 @@ Physics.help = function(chatData) {
 
   text += `planet [radius] [density]<br/>`;
   text += `planet [radius] [density] [orbit]<br/>`;
+  text += `thrust [g] [distance]<br/>`;
+  text += `ethrust [g] [distance]<br/>`;
+  text += `rocket [wet-mass] [dry-mass] [isp]<br/>`;
   text += `</div>`;
 
   chatData.content = text;
@@ -272,7 +291,8 @@ Physics.planetCommand = function(chatData, args) {
       orbitDistance = Physics.printNumber(orbit / 1000000) + "Kkm";
     }
 
-    text += "<br/>";
+    text += `<br/><h3>${orbitDistance} orbit</h3>`;
+
     if (evo >= Physics.C) {
       text += `<i>No orbits possible</i><br/>`;
     } else {
@@ -295,4 +315,119 @@ Physics.planetCommand = function(chatData, args) {
   chatData.content = text;
   ChatMessage.create(chatData);
 
+};
+
+Physics.thrustCommand = function(chatData, args) {
+  let text = `<div class="physics">`;
+  text += `<h3>Travel Times</h3>`;
+
+  if (args.length < 2) {
+    return;
+  }
+
+  let thrust = Physics.getThrust(args.shift());
+  let distance = Physics.getDistance(args.shift());
+
+  let time = parseInt(2 * Math.sqrt(distance / thrust ));
+  let maxv = thrust * time / 2;
+
+  text += `<b>Thrust</b>: ${Physics.printNumber(thrust)}m/s² (${Physics.printNumber(thrust / Physics.g)}g) <br/>`;
+  text += `<b>Distance</b>: ${Physics.printDistance(distance)}<br/>`;
+
+  text += `<b>Time</b>: ${Physics.printTime(time)}<br/>`;
+  text += Physics.printVelocity("Max Velocity", maxv);
+
+  // But what if we don't want to stop, and just thrust until impact?
+  time = parseInt(Math.sqrt(2 * distance / thrust));
+  maxv = thrust * time;
+
+  text += "<br/>";
+  text += `<b>Time to impact</b>: ${Physics.printTime(time)}<br/>`;
+  text += Physics.printVelocity("Velocity to impact", maxv);
+
+  text += `</div>`;
+
+  chatData.content = text;
+  ChatMessage.create(chatData);
+};
+
+Physics.eThrustCommand = function(chatData, args) {
+  let text = `<div class="physics">`;
+  text += `<h3>Travel Times</h3>`;
+
+  if (args.length < 2) {
+    return;
+  }
+
+  let thrust = Physics.getThrust(args.shift());
+  let distance = Physics.getDistance(args.shift());
+
+
+  let f = Math.acosh( 1 + (thrust / 2) * distance / Math.pow(Physics.C,2 ));
+  // Passage of time as perceived by the ship
+  let shipTime = parseInt ( 2 * ( Physics.C / thrust) * f);
+  // Passage of time as perceived by the outside universe
+  let restTime = parseInt(2 * ( Physics.C / thrust) * Math.sinh(f));
+
+
+  //let maxv = thrust * time / 2;
+
+  text += `<b>Thrust</b>: ${Physics.printNumber(thrust)}m/s² (${Physics.printNumber(thrust / Physics.g)}g) <br/>`;
+  text += `<b>Distance</b>: ${Physics.printDistance(distance)}<br/>`;
+
+  text += `<b>Time</b>: ${Physics.printTime(restTime)}<br/>`;
+  if (restTime * 0.999 > shipTime) {
+    text += `<b>Ship Time</b>: ${Physics.printTime(shipTime)}<br/>`;
+  }
+
+
+  f = Math.acosh( 1 + (thrust) * distance / Math.pow(Physics.C,2 ));
+  // Passage of time as perceived by the ship
+  shipTime = parseInt ( ( Physics.C / thrust) * f);
+  // Passage of time as perceived by the outside universe
+  restTime = parseInt(( Physics.C / thrust) * Math.sinh(f));
+  text += "<br/>";
+  text += `<b>Time to impact</b>: ${Physics.printTime(restTime)}<br/>`;
+  if (restTime * 0.999 > shipTime) {
+    text += `<b>Ship Time to impact</b>: ${Physics.printTime(shipTime)}<br/>`;
+  }
+
+  text += `</div>`;
+  chatData.content = text;
+  ChatMessage.create(chatData);
+};
+
+Physics.rocketCommand = function(chatData, args) {
+  let text = `<div class="physics">`;
+  text += `<h3>Rocket Equation</h3>`;
+
+  if (args.length < 3) {
+    return;
+  }
+  let wet = Physics.getNumber(args.shift());
+  let dry = Physics.getNumber(args.shift());
+  let isp = Physics.getNumber(args.shift());
+
+  if (dry <= 0 || wet <= 0 || isp <= 0) {
+    chatData.content = text + "Invalid values</div>";
+    ChatMessage.create(chatData);
+    return;
+  }
+  let ratio = wet / dry;
+  let log = Math.log(ratio);
+  let deltaVee = log * isp * Physics.g;
+
+  text += `<b>Wet Mass</b>: ${wet.toLocaleString()}<br/>`;
+  text += `<b>Dry Mass</b>: ${dry.toLocaleString()}<br/>`;
+  text += `<b>Mass Ratio</b>: ${Physics.printNumber(ratio)}<br/>`;
+  text += `<b>I<sub>sp</sub></b>: ${Physics.printNumber(isp)}<br/>`;
+  if (deltaVee >= 10000) {
+    text += `<b>Δv</b>: ${Number((deltaVee / 1000.0).toPrecision(4)).toLocaleString()} kms<sup>-1</sup><br/>`;
+  } else {
+    text += `<b>Δv</b>: ${Physics.printNumber(deltaVee)} ms<sup>-1</sup><br/>`;
+  }
+
+  text += `</div>`;
+  chatData.content = text;
+  ChatMessage.create(chatData);
 };

@@ -65,6 +65,18 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
             args.shift();
             Physics.planetCommand(chatData, args);
             return false;
+        } else if ("thrust".startsWith(args[0])) {
+            args.shift();
+            Physics.thrustCommand(chatData, args);
+            return false;
+        } else if ("ethrust".startsWith(args[0])) {
+            args.shift();
+            Physics.eThrustCommand(chatData, args);
+            return false;
+        } else if ("rocket".startsWith(args[0])) {
+            args.shift();
+            Physics.rocketCommand(chatData, args);
+            return false;
         }
 
         chatData.content = `<div class="physics">Unre`;
