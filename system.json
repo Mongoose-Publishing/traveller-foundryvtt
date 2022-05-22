@@ -1,6 +1,6 @@
 {
   "name": "mgt2",
-  "title": "Mongoose Traveller 2e",
+  "title": "Mongoose Traveller 2e (Unofficial)",
   "description": "The Mongoose Traveller system for FoundryVTT!",
   "version": "1.1.0",
   "minimumCoreVersion": "0.8.5",
@@ -17,9 +17,9 @@
       "path": "lang/en.json"
     }
   ],
-  "gridDistance": 1,
+  "gridDistance": 1.5,
   "gridUnits": "m",
-  "primaryTokenAttribute": "health",
+  "primaryTokenAttribute": "hits",
   "secondaryTokenAttribute": "power",
   "url": "",
   "manifest": "",

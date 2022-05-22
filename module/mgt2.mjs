@@ -77,6 +77,10 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
             args.shift();
             Physics.rocketCommand(chatData, args);
             return false;
+        } else if ("apitest".startsWith(args[0])) {
+            args.shift();
+            Physics.getSector(chatData, args);
+            return false;
         }
 
         chatData.content = `<div class="physics">Unre`;

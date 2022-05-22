@@ -431,3 +431,23 @@ Physics.rocketCommand = function(chatData, args) {
   chatData.content = text;
   ChatMessage.create(chatData);
 };
+
+// Just a test of web apis.
+Physics.getSector = function(chatData, args) {
+  if (args.length < 1) {
+    return;
+  }
+
+  let id = parseInt(args.shift());
+
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("GET", "/wgapi/sectors/" + id, false);
+  xmlHttp.send();
+
+  let response = xmlHttp.responseText;
+
+  let obj = JSON.parse(response);
+
+  chatData.content = "Sector is " + obj.name;
+  ChatMessage.create(chatData);
+}
