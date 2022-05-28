@@ -170,15 +170,41 @@ export class MgT2ActorSheet extends ActorSheet {
     html.find('.rollable').click(ev => this._onRollWrapper(ev, this.actor));
 
     // Drag events for macros.
+    let handler = ev => this._onDragStart(ev);
     if (this.actor.owner) {
-      let handler = ev => this._onDragStart(ev);
       html.find('li.item').each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
         li.setAttribute("draggable", true);
         li.addEventListener("dragstart", handler, false);
       });
+
     }
-}
+    html.find('div.skill-draggable').each((i, div) => {
+      if (div.getAttribute("data-rolltype") === "skill") {
+        //console.log(div.getAttribute("data-skill"));
+        let options = {};
+        options.skill = div.getAttribute("data-skill");
+        handler = ev => this._onSkillDragStart(ev, options);
+        div.setAttribute("draggable", true);
+        div.addEventListener("dragstart", handler, options);
+      }
+    });
+  }
+
+  _onSkillDragStart(event, options) {
+    console.log("_onSkillDragStart:");
+    console.log(options);
+    let dragData = {
+      actorId: this.actor.id,
+      sceneId: this.actor.isToken ? cavas.scene?.id : null,
+      tokenId: this.actor.isToken ? this.actor.token.id : null
+    }
+    dragData.data = {
+      dragType: "skill",
+      skillName: options.skill
+    }
+    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  }
 
 
   async _onRollTypeChange(event, actor, type) {

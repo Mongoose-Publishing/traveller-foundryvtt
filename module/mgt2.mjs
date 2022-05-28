@@ -9,6 +9,7 @@ import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
 import { Physics } from "./helpers/chat/physics.mjs";
+import { rollSkill } from "./helpers/dice-rolls.mjs";
 
 
 /* -------------------------------------------- */
@@ -21,7 +22,8 @@ Hooks.once('init', async function() {
   // accessible in global contexts.
   game.mgt2 = {
     MgT2Actor,
-    MgT2Item
+    MgT2Item,
+    rollSkillMacro
   };
 
   // Add custom constants for configuration.
@@ -90,6 +92,64 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     }
     return;
 });
+
+Hooks.once("ready", async function() {
+    Hooks.on("hotbarDrop", (bar, data, slot) => createTravellerMacro(data, slot));
+});
+
+// Dropping a skill on the macro bar. An entire skill tree is dragged,
+// not just a speciality.
+async function createTravellerMacro(data, slot) {
+    console.log("createTravellerMacro:");
+    console.log(data);
+    console.log(slot);
+    let actorId = data.actorId;
+    let dragData = data.data;
+
+    if (dragData.dragType === "skill") {
+        console.log("Have dragged a skill " + dragData.skillName);
+
+        let actor = game.data.actors.find(a => (a._id === actorId));
+        let skill = actor.data.skills[dragData.skillName];
+        let label = skill.label;
+
+        const command = `game.mgt2.rollSkillMacro('${dragData.skillName}')`;
+        let macro = null; //game.macros.entries.find(m => (m.name === dragData.skillName));
+        if (!macro) {
+            macro = await Macro.create({
+                name: label,
+                type: "script",
+                command: command
+            });
+        }
+        game.user.assignHotbarMacro(macro, slot);
+        return false;
+    }
+
+}
+
+function rollSkillMacro(skillName) {
+  console.log("rollSkillMacro: " + skillName);
+
+  const speaker = ChatMessage.getSpeaker();
+  let actor;
+  if (speaker.token) {
+      console.log("We have a token");
+      actor = game.actors.tokens[speaker.token];
+  }
+  if (!actor) {
+      console.log("No actor yet");
+      actor = game.actors.get(speaker.actor);
+  }
+  if (!actor) {
+      console.log("No actor ever");
+      return;
+  }
+  console.log(actor.name);
+
+  rollSkill(actor, skillName, null, "INT");
+
+}
 
 /* -------------------------------------------- */
 /*  Handlebars Helpers                          */

@@ -202,6 +202,8 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
 }
 
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
+    console.log("rollSkill:");
+    console.log(actor);
     const data = actor.data.data;
     let   text = "";
     let   creatureCheck = false;
@@ -228,6 +230,10 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         }
     } else {
         creatureCheck = true;
+    }
+
+    if (typeof skill === 'string' || skill instanceof String) {
+        skill = data.skills[skill];
     }
 
     if (skill) {

@@ -13,7 +13,7 @@
             {{/if}}
         {{else if skill.trained}}
             <div class="resource flex-group-left">
-                <div>
+                <div class="skill-draggable item" data-rolltype="skill" data-skill="{{key}}" data-roll="2d6">
                     <input type="checkbox" class="trained"
                             name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
                     <label for="data.skills.{{key}}.value"
@@ -81,7 +81,7 @@
         {{else if ../data/settings.hideUntrained}}
         {{else}}
             <div class="resource flex-group-left">
-                <div>
+                <div class="skill-draggable" data-rolltype="skill" data-skill="{{key}}">
                     <input type="checkbox" class="trained" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
                     <label for="data.skills.{{key}}.value"
                             class="resource-label skill-label rollable untrained"
