@@ -201,10 +201,64 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
 
 }
 
+function getDifficultyLabel(difficulty) {
+    switch (difficulty) {
+        case 1: case 2: case 3:
+            return "Simple";
+        case 4: case 5:
+            return "Easy";
+        case 6: case 7:
+            return "Routine";
+        case 8: case 9:
+            return "Average";
+        case 10: case 11:
+            return "Difficult";
+        case 12: case 13:
+            return "Very Difficult";
+        case 14: case 15:
+            return "Formidable";
+        case 16:
+            return "Impossible";
+    }
+    return "";
+}
+
+function getEffectLabel(effect) {
+    let effectType = "", effectClass = "";
+    let chain = "+0";
+    if (effect <= -6) {
+        effectType = "Exceptional Failure";
+        effectClass = "rollFailure";
+        chain = "-3";
+    } else if (effect <= -2) {
+        effectType = "Average Failure";
+        effectClass = "rollFailure";
+        chain = "-2";
+    } else if (effect <= -1) {
+        effectType = "Marginal Failure";
+        effectClass = "rollMarginal";
+        chain = "-1";
+    } else if (effect <= 0) {
+        effectType = "Marginal Success";
+        effectClass = "rollSuccess";
+    } else if (effect <= 5) {
+        effectType = "Average Success";
+        effectClass = "rollSuccess";
+        chain = "+1";
+    } else {
+        effectType = "Exceptional Success";
+        effectClass = "rollSuccess";
+        chain = "+2";
+    }
+
+    return `<span class='effectRoll ${effectClass}'>${effectType} [${effect}]</span><br/>Chain Bonus ${chain}`;
+}
+
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
     console.log("rollSkill:");
     console.log(actor);
     const data = actor.data.data;
+    let   title = "";
     let   text = "";
     let   creatureCheck = false;
     let   untrainedCheck = false;
@@ -222,6 +276,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     if (cha && data.characteristics && data.characteristics[cha]) {
         let dm = data.characteristics[cha].dm;
         dice += " + " + dm;
+        title = cha;
         text += cha;
         if (dm < 0) {
             text += " (" + dm + ")";
@@ -237,6 +292,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     }
 
     if (skill) {
+        title += ((title == "")?"":" + ") + skill.label;
         skillCheck = true;
         let value = data.skills["jackofalltrades"].value - 3;
         if (text.length > 0) {
@@ -247,6 +303,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             value = skill.value;
             if (speciality) {
                 value = speciality.value;
+                title += " (" + speciality.label + ")";
                 text += " (" + speciality.label + ")";
                 specialityCheck = true;
             }
@@ -292,35 +349,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     if (difficulty == undefined) {
         difficulty = 8;
     }
-    let difficultyLabel = "";
-    switch (difficulty) {
-        case 0: case undefined: case null:
-            break;
-        case 1: case 2: case 3:
-            difficultyLabel = "Simple";
-            break;
-        case 4: case 5:
-            difficultyLabel = "Easy";
-            break;
-        case 6: case 7:
-            difficultyLabel = "Routine";
-            break;
-        case 8: case 9:
-            difficultyLabel = "Average";
-            break;
-        case 10: case 11:
-            difficultyLabel = "Difficult";
-            break;
-        case 12: case 13:
-            difficultyLabel = "Very Difficult";
-            break;
-        case 14: case 15:
-            difficultyLabel = "Formidable";
-            break;
-        case 16:
-            difficultyLabel = "Impossible";
-            break;
-    }
+    let difficultyLabel = getDifficultyLabel(difficulty);
     if (difficultyLabel != "") {
         checkText = difficultyLabel + " " + checkText;
     }
@@ -330,41 +359,23 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         let total = roll.total;
         console.log("Rolled " + total);
 
-        text = "<span class='skillroll'>" + text + "</span>";
-        text = "<div><img class='skillcheck-thumb' src='" + actor.thumbnail + "'/>" +
-        checkText + "<br/>" + text + "</div>";
-        text += "<br/>"
+        text = `<h2>${title}</h2></h2><div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${text}</div><br/>`;
 
         let effect = total - difficulty;
-        let effectType = "", effectClass = "";
-        let chain = "+0";
-        if (effect <= -6) {
-            effectType = "Exceptional Failure";
-            effectClass = "rollFailure";
-            chain = "-3";
-        } else if (effect <= -2) {
-            effectType = "Average Failure";
-            effectClass = "rollFailure";
-            chain = "-2";
-        } else if (effect <= -1) {
-            effectType = "Marginal Failure";
-            effectClass = "rollMarginal";
-            chain = "-1";
-        } else if (effect <= 0) {
-            effectType = "Marginal Success";
-            effectClass = "rollSuccess";
-        } else if (effect <= 5) {
-            effectType = "Average Success";
-            effectClass = "rollSuccess";
-            chain = "+1";
-        } else {
-            effectType = "Exceptional Success";
-            effectClass = "rollSuccess";
-            chain = "+2";
-        }
+        text += getEffectLabel(effect);
 
-        text += `<span class='effectRoll ${effectClass}'>${effectType} [${effect}]</span><br/>`;
-        text += `Chain Bonus ${chain}`
+        if (skill.specialities != null && speciality == null) {
+            console.log("We have some specialities");
+            console.log(skill.specialities);
+            for (let sp in skill.specialities) {
+                if (skill.specialities[sp].value > 0) {
+                    let stotal = total + skill.specialities[sp].value;
+                    let slabel = skill.specialities[sp].label;
+                    text += `<h3 class="fullauto">${slabel}</h3>`;
+                    text += getEffectLabel(stotal - difficulty);
+                }
+            }
+        }
 
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
