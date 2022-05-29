@@ -119,7 +119,8 @@ async function createTravellerMacro(data, slot) {
             macro = await Macro.create({
                 name: label,
                 type: "script",
-                command: command
+                command: command,
+                img: skill.icon
             });
         }
         game.user.assignHotbarMacro(macro, slot);

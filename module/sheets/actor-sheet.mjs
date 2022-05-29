@@ -196,7 +196,7 @@ export class MgT2ActorSheet extends ActorSheet {
     console.log(options);
     let dragData = {
       actorId: this.actor.id,
-      sceneId: this.actor.isToken ? cavas.scene?.id : null,
+      sceneId: this.actor.isToken ? canvas.scene?.id : null,
       tokenId: this.actor.isToken ? this.actor.token.id : null
     }
     dragData.data = {
