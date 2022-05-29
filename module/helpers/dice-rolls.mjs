@@ -289,9 +289,14 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     if (untrainedCheck) {
         checkText += " (untrained)";
     }
+    if (difficulty == undefined) {
+        difficulty = 8;
+    }
     let difficultyLabel = "";
     switch (difficulty) {
-        case 0: case 1: case 2: case 3:
+        case 0: case undefined: case null:
+            break;
+        case 1: case 2: case 3:
             difficultyLabel = "Simple";
             break;
         case 4: case 5:
