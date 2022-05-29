@@ -251,7 +251,7 @@ function getEffectLabel(effect) {
         chain = "+2";
     }
 
-    return `<span class='effectRoll ${effectClass}'>${effectType} [${effect}]</span><br/>Chain Bonus ${chain}`;
+    return `<span class='effectRoll ${effectClass}'>${effectType} [${effect>=0?"+":""}${effect}]</span><br/>Chain Bonus ${chain}`;
 }
 
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
@@ -261,9 +261,12 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     let   title = "";
     let   text = "";
     let   creatureCheck = false;
+    let   isPerson = false;
     let   untrainedCheck = false;
     let   specialityCheck = false;
     let   skillCheck = false;
+    let   defaultCha = true;
+    let   chaDm = 0;
 
     // Normal, Boon or Bane dice roll.
     let dice = "2D6";
@@ -273,22 +276,44 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         dice = "3D6kl2";
     }
 
-    if (cha && data.characteristics && data.characteristics[cha]) {
-        let dm = data.characteristics[cha].dm;
-        dice += " + " + dm;
-        title = cha;
-        text += cha;
-        if (dm < 0) {
-            text += " (" + dm + ")";
-        } else {
-            text += " (+" + dm + ")";
-        }
-    } else {
-        creatureCheck = true;
+    console.log(actor.type);
+    if (actor.type == "traveller" || actor.type == "npc") {
+        console.log("Is a person");
+        isPerson = true;
+    }
+    if (skill && (typeof skill === 'string' || skill instanceof String)) {
+        skill = data.skills[skill];
     }
 
-    if (typeof skill === 'string' || skill instanceof String) {
-        skill = data.skills[skill];
+    if (isPerson) {
+        console.log("Going into isPerson");
+        if (cha) {
+            defaultCha = false;
+            chaDm = data.characteristics[cha].dm;
+        } else if (skill) {
+            cha = skill.default;
+            if (speciality && speciality.default) {
+                cha = speciality.default;
+            }
+        } else {
+            cha = null;
+        }
+    } else {
+        console.log("This is not a person");
+        creatureCheck = true;
+        cha = null;
+    }
+    console.log("Using default cha " + defaultCha);
+    if (cha) {
+        chaDm = data.characteristics[cha].dm;
+        dice += " + " + chaDm;
+        title = cha;
+        text += cha;
+        if (chaDm < 0) {
+            text += " (" + chaDm + ")";
+        } else {
+            text += " (+" + chaDm + ")";
+        }
     }
 
     if (skill) {
@@ -357,22 +382,26 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     let roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
     if (roll) {
         let total = roll.total;
-        console.log("Rolled " + total);
-
         text = `<h2>${title}</h2></h2><div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${text}</div><br/>`;
 
         let effect = total - difficulty;
-        text += getEffectLabel(effect);
+        text += `<span class="skill-roll">${total}</span> ` + getEffectLabel(effect);
 
         if (skill.specialities != null && speciality == null) {
-            console.log("We have some specialities");
-            console.log(skill.specialities);
             for (let sp in skill.specialities) {
-                if (skill.specialities[sp].value > 0) {
-                    let stotal = total + skill.specialities[sp].value;
-                    let slabel = skill.specialities[sp].label;
-                    text += `<h3 class="fullauto">${slabel}</h3>`;
-                    text += getEffectLabel(stotal - difficulty);
+                let spec = skill.specialities[sp];
+                if (spec.value > 0) {
+                    let stotal = total + spec.value;
+                    let slabel = `${spec.label} (${spec.value})`;
+
+                    if (isPerson && defaultCha && spec.default && spec.default != skill.default) {
+                        stotal -= chaDm;
+                        stotal += data.characteristics[spec.default].dm;
+                        slabel += ` (${spec.default})`;
+                    }
+
+                    text += `<h2 class="subroll">${slabel}</h2>`;
+                    text += `<span class="skill-roll">${stotal}</span> ` + getEffectLabel(stotal - difficulty);
                 }
             }
         }

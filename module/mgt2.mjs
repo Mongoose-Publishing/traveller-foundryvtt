@@ -148,7 +148,12 @@ function rollSkillMacro(skillName) {
   }
   console.log(actor.name);
 
-  rollSkill(actor, skillName, null, "INT");
+  let cha;
+  if (actor.type == "traveller" || actor.type == "npc") {
+      cha = actor.data.data.skills[skillName].default;
+  }
+
+  rollSkill(actor, skillName);
 
 }
 

@@ -675,6 +675,14 @@ h3.fullauto {
     padding-bottom: 0px;
 }
 
+h2.subroll {
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 2px;
+    padding-bottom: 0px;
+}
+
+
 div.physics {
     width: 100%;
     background-color: #F0F0F0;
@@ -682,4 +690,14 @@ div.physics {
     border: 1px solid black;
     border-radius: 5px;
     padding: 3px;
+}
+
+span.skill-roll {
+    background: #DDDD;
+    padding: 1px 4px;
+    border: 1px solid #4b4a44;
+    border-radius: 2px;
+    white-space: nowrap;
+    word-break: break-all;
+    font-size: larger;
 }
