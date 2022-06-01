@@ -160,6 +160,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
             effectText = `Critical (+${effect})`;
         }
 
+        content += `<div class="damage-message">`;
         content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
         content += `<b>Damage Roll:</b> ${damageTotal}`;
         if (!destructive && effect > 0) {
@@ -178,9 +179,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         if (hasTrait(traits, "blast")) {
             content += `<br/><b>Blast Radius:</b> ${getTraitValue(traits, "blast")}m`;
         }
-        if (attack < attacks) {
-            content += "<br/>";
-        }
+        content += `</div>`;
     }
 
     if (!rangeBand && baseRange > 0) {

@@ -701,3 +701,14 @@ span.skill-roll {
     word-break: break-all;
     font-size: larger;
 }
+
+div.damage-message {
+    margin: 3px;
+    padding: 2px;
+}
+
+div.damage-message:hover {
+    border: 1px solid red;
+    border-radius: 2px;
+    background-color: #ff000010;
+}

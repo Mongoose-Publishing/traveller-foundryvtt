@@ -9,6 +9,7 @@ import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
 import { Physics } from "./helpers/chat/physics.mjs";
+import { Tools } from "./helpers/chat/tools.mjs";
 import { rollSkill } from "./helpers/dice-rolls.mjs";
 
 
@@ -34,7 +35,7 @@ Hooks.once('init', async function() {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "2d6 - 8",
+    formula: "2d6 - 8 + max(@DEX, @INT)",
     decimals: 2
   };
 
@@ -52,11 +53,24 @@ Hooks.once('init', async function() {
   return preloadHandlebarsTemplates();
 });
 
+Hooks.on('renderChatMessage', function(app, html) {
+    const damageMessage = html.find(".damage-message")[0];
+    if (damageMessage) {
+        damageMessage.setAttribute("draggable", true);
+
+        damageMessage.addEventListener("dragstart", ev => {
+            return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+        })
+    }
+});
+
+
+
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
     console.log(`My message was "${message}".`);
     console.log(chatData);
 
-    if (message.indexOf("/phy") == 0) {
+    if (message.indexOf("/phy") === 0) {
         let args = message.split(" ");
         args.shift()
 
@@ -85,12 +99,20 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
             return false;
         }
 
-        chatData.content = `<div class="physics">Unre`;
+        chatData.content = `<div class="physics">`;
         chatData.type = 1;
         ChatMessage.create(chatData);
         return false;
     }
-    return;
+
+    if (message.indexOf("/upp") === 0) {
+        let args = message.split(" ");
+        args.shift();
+        Tools.upp(chatData, args);
+        return false;
+    }
+
+    return true;
 });
 
 Hooks.once("ready", async function() {
