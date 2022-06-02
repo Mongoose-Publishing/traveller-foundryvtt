@@ -159,8 +159,16 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
             effectClass = "rollCritical";
             effectText = `Critical (+${effect})`;
         }
+        let damageEffect = damageTotal;
+        if (!destructive && effect > 0) {
+            damageEffect = damageTotal + effect;
+        }
+        let ap = 0;
+        if (hasTrait(traits, "ap")) {
+            ap = getTraitValue(traits, "ap");
+        }
 
-        content += `<div class="damage-message">`;
+        content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}">`;
         content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
         content += `<b>Damage Roll:</b> ${damageTotal}`;
         if (!destructive && effect > 0) {

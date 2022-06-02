@@ -58,6 +58,17 @@ Hooks.on('renderChatMessage', function(app, html) {
     if (damageMessage) {
         damageMessage.setAttribute("draggable", true);
 
+        console.log(damageMessage);
+        let dmg = damageMessage.getAttribute("data-damage");
+        console.log("Damage from message is " + dmg);
+
+        let dragData = {
+            type: "Damage",
+            laser: false,
+            ap: parseInt(damageMessage.getAttribute("data-ap")),
+            damage: parseInt(damageMessage.getAttribute("data-damage"))
+        }
+
         damageMessage.addEventListener("dragstart", ev => {
             return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
         })

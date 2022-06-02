@@ -712,3 +712,24 @@ div.damage-message:hover {
     border-radius: 2px;
     background-color: #ff000010;
 }
+
+form.damage-dialog td {
+    width: 50px;
+}
+
+form.damage-dialog label {
+    font-weight: bold;
+}
+
+form.damage-dialog td.label {
+    text-align: left;
+    font-weight: bold;
+}
+
+form.damage-dialog td.value {
+    text-align: center;
+}
+
+form.damage-dialog div.resource {
+    width: 80px;
+}

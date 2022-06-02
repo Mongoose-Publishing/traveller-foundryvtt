@@ -1,6 +1,7 @@
 
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
 import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
+import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
 
 /**
@@ -44,7 +45,6 @@ export class MgT2ActorSheet extends ActorSheet {
 
     // Prepare character data and items.
     if (actorData.type == 'traveller') {
-        console.log("Actor type is " + actorData.type);
         this._prepareItems(context);
         this._prepareCharacterData(context);
     }
@@ -68,17 +68,12 @@ export class MgT2ActorSheet extends ActorSheet {
   _prepareCharacterData(context) {
     console.log("_prepareCharacterData:");
     let skills = context.data.skills;
-    console.log(skills);
-    console.log(context.data);
     let changed = false;
     for (let skill in skills) {
       if (skills[skill].individual && skills[skill].specialities) {
-        console.log(skills[skill].label);
         for (let s in skills[skill].specialities) {
           let spec = skills[skill].specialities[s];
-          console.log(spec.label);
           if (spec.trained && spec.value < 0) {
-            console.log("Setting to zero for " + spec.label);
             spec.value = 0;
             changed = true;
           }
@@ -110,11 +105,9 @@ export class MgT2ActorSheet extends ActorSheet {
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      console.log("Prepare item " + i.name + " of type " + i.type);
       if (i.type === 'item') {
         gear.push(i);
       } else if (i.type === 'weapon') {
-          console.log("Adding weapon " + i.name);
           weapons.push(i);
       } else if (i.type === 'armour') {
           armour.push(i);
@@ -128,8 +121,6 @@ export class MgT2ActorSheet extends ActorSheet {
     context.weapons = weapons;
     context.armour = armour;
     context.augments = augments;
-
-
     context.features = features;
    }
 
@@ -206,6 +197,38 @@ export class MgT2ActorSheet extends ActorSheet {
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
   }
 
+  async _onDrop(event) {
+    console.log("On Drop!");
+
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData('text/plain'));
+    } catch (err) {
+      console.log("Could not parse data");
+      return false;
+    }
+
+    console.log(data);
+    switch (data.type) {
+      case "Item":
+        return this._onDropItem(event, data);
+      case "Actor":
+        return this._onDropActor(event, data);
+      case "Damage":
+        return this._onDropDamage(event, data);
+    }
+  }
+
+  _onDropDamage(event, data) {
+    const damage = data.damage;
+    const laser = data.laser;
+    const stun = false;
+    const ap = data.ap;
+    const actor = this.actor;
+
+    new MgT2DamageDialog(actor, damage, ap, laser, stun).render(true);
+
+  }
 
   async _onRollTypeChange(event, actor, type) {
     actor.data.data.settings.rollType = type;
