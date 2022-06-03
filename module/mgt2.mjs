@@ -121,6 +121,11 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
         args.shift();
         Tools.upp(chatData, args);
         return false;
+    } else if (message.indexOf("/damage") === 0) {
+        let args = message.split(" ");
+        args.shift();
+        Tools.damage(chatData, args);
+        return false;
     }
 
     return true;

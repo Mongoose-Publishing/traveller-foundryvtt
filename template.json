@@ -142,10 +142,6 @@
             "STR": { "value": 0 },
             "DEX": { "value": 0 },
             "END": { "value": 0 }
-        },
-        "totalHits": {
-            "value": 21,
-            "max": 21
         }
       },
       "skills": {

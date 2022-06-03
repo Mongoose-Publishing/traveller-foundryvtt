@@ -39,3 +39,64 @@ Tools.upp = function(chatData, args) {
     chatData.content = text;
     ChatMessage.create(chatData);
 };
+
+Tools.message = function(chatData, message) {
+    chatData.content = message;
+    chatData.
+    ChatMessage.create(chatData);
+}
+
+Tools.damage = function(chatData, args) {
+    let text=`<div class="tools">`;
+
+    console.log("damage:");
+
+    console.log("chatData:");
+    console.log(chatData);
+    console.log("game:");
+    console.log(game);
+
+    const user = game.users.current;
+    console.log("User name: " + user.name);
+
+    const targets = user.targets;
+    console.log(targets);
+
+
+    if (args.length < 1) {
+        Tools.message(chatData, "You must at least specify the amount of damage");
+        return;
+    }
+    let dmg = parseInt(args.shift());
+    let ap = 0;
+    let isLaser = false;
+    let isStun = false;
+
+    if (!isNaN(args[0])) {
+        ap = parseInt(args.shift());
+    }
+
+    if (targets.size == 0) {
+        Tools.message(chatData, "No tokens are selected");
+        return;
+    }
+
+    for (let target of targets.values()) {
+        console.log(target.data.name);
+
+        let linked = target.data.actorLink;
+        let type = target.data.document._actor.data.type;
+
+        console.log(type);
+
+        if (type == "traveller") {
+            // This is a Traveller, which has a complex damage system.
+        } else {
+            // This is the simple case for NPCs and Creatures.
+
+        }
+
+    }
+
+
+};

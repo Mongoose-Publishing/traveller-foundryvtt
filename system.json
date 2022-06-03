@@ -19,7 +19,7 @@
   ],
   "gridDistance": 1.5,
   "gridUnits": "m",
-  "primaryTokenAttribute": "totalHits",
+  "primaryTokenAttribute": "hits",
   "secondaryTokenAttribute": null,
   "url": "",
   "manifest": "",

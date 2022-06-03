@@ -37,6 +37,7 @@ export class MgT2Actor extends Actor {
     // things organized.
     this._prepareTravellerData(actorData);
     this._prepareNpcData(actorData);
+    this._prepareCreatureData(actorData);
   }
 
 
@@ -84,15 +85,15 @@ export class MgT2Actor extends Actor {
         data.characteristics[char].dm = dm;
     }
 
-    if (data.damage && data.totalHits) {
-        let totalHits = 0;
+    if (data.damage && data.hits) {
+        let hits = 0;
         let maxHits = 0;
 
-        totalHits = data.characteristics.STR.current + data.characteristics.DEX.current + data.characteristics.END.current;
+        hits = data.characteristics.STR.current + data.characteristics.DEX.current + data.characteristics.END.current;
         maxHits = data.characteristics.STR.value + data.characteristics.DEX.value + data.characteristics.END.value;
 
-        data.totalHits.value = totalHits;
-        data.totalHits.max = maxHits;
+        data.hits.value = hits;
+        data.hits.max = maxHits;
     }
 
   }
@@ -110,7 +111,7 @@ export class MgT2Actor extends Actor {
     }
 
     if (data.hits) {
-        let totalHits = 0;
+        let hits = 0;
         let maxHits = 0;
 
         maxHits = data.characteristics.STR.value + data.characteristics.DEX.value + data.characteristics.END.value;
@@ -118,8 +119,16 @@ export class MgT2Actor extends Actor {
         //data.hits.value = maxHits;
         data.hits.max = maxHits;
     }
+  }
+
+  _prepareCreatureData(actorData) {
+      if (actorData.type !== 'creature') return;
+
+
 
   }
+
+
   /**
    * Override getRollData() that's supplied to rolls.
    */
