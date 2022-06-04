@@ -42,7 +42,6 @@ Tools.upp = function(chatData, args) {
 
 Tools.message = function(chatData, message) {
     chatData.content = message;
-    chatData.
     ChatMessage.create(chatData);
 }
 
@@ -67,7 +66,7 @@ Tools.damage = function(chatData, args) {
         Tools.message(chatData, "You must at least specify the amount of damage");
         return;
     }
-    let dmg = parseInt(args.shift());
+    let damage = parseInt(args.shift());
     let ap = 0;
     let isLaser = false;
     let isStun = false;
@@ -82,19 +81,44 @@ Tools.damage = function(chatData, args) {
     }
 
     for (let target of targets.values()) {
-        console.log(target.data.name);
+        let name = target.data.name;
 
         let linked = target.data.actorLink;
         let type = target.data.document._actor.data.type;
 
         console.log(type);
 
+        console.log(name)
+        console.log(target.actor.data);
+
         if (type == "traveller") {
             // This is a Traveller, which has a complex damage system.
+        } else if (target.actor.data.data) {
+            let data = target.actor.data.data;
+            let hits = data.hits.value;
+            let armour = data.armour;
+
+            let dmg = damage;
+            if (armour < dmg) {
+                dmg -= armour;
+                Tools.message(chatData, `${name} takes ${dmg} damage.`);
+            } else {
+                dmg = 0;
+                Tools.message(chatData, "Armour stops all the damage");
+                continue;
+            }
+
+            hits -= dmg;
+            if (hits < 0) {
+                hits = 0;
+            }
+            data.hits.value = hits;
+            target.actor.update({ "data.hits": data.hits });
+            target.refresh(true);
         } else {
-            // This is the simple case for NPCs and Creatures.
 
         }
+
 
     }
 
