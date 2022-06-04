@@ -11,6 +11,7 @@ import { MGT2 } from "./helpers/config.mjs";
 import { Physics } from "./helpers/chat/physics.mjs";
 import { Tools } from "./helpers/chat/tools.mjs";
 import { rollSkill } from "./helpers/dice-rolls.mjs";
+import {MgT2DamageDialog} from "./helpers/damage-dialog.mjs";
 
 
 /* -------------------------------------------- */
@@ -75,7 +76,16 @@ Hooks.on('renderChatMessage', function(app, html) {
     }
 });
 
+Hooks.on('ready', () => {
+   $(document).on('click', '.damage-button', function() {
+       let dmg = $(this).data('damage');
+       let ap = 0;
+       let tl = 0;
+       let options = "";
 
+       Tools.applyDamage(dmg, ap, tl, options);
+   });
+});
 
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
     console.log(`My message was "${message}".`);
@@ -193,6 +203,10 @@ function rollSkillMacro(skillName) {
 
   rollSkill(actor, skillName);
 
+}
+
+function updateData(dmg, ap) {
+    console.log("Doing it here");
 }
 
 /* -------------------------------------------- */

@@ -45,6 +45,69 @@ Tools.message = function(chatData, message) {
     ChatMessage.create(chatData);
 }
 
+// Apply damage to an actor. Needs to calculate armour.
+Tools.applyDamageTo = function(damage, ap, tl, options, actor) {
+    if (!options) {
+        options = "";
+    }
+    if (!damage) {
+        damage = 0;
+    }
+    if (!ap) {
+        ap = 0;
+    }
+    if (!tl) {
+        tl = 0;
+    }
+    if (!actor) {
+        return;
+    }
+
+    let isLaser = options.indexOf("laser") > -1;
+    let isPlasma = options.indexOf("plasma") > -1;
+    let isEnergy = options.indexOf("energy") > -1;
+    let isPsi = options.indexOf("psi") > -1;
+    let isRanged = true;
+
+    let data = actor.data.data;
+
+    let armour = data.armour.protection;
+    if (isLaser && data.armour.laser > armour) {
+        armour = data.armour.laser;
+    } else if (isPlasma && data.armour.plasma > armour) {
+        armour = data.armour.plasma;
+    } else if (isEnergy && data.armour.energy > armour) {
+        armour = data.armour.energy;
+    } else if (isPsi && data.armour.psi > armour) {
+        armour = data.armour.psi;
+    }
+    if (data.armour.archaic && isRanged && tl > data.armour.tl) {
+        // Archaic armour gets halved.
+        armour = parseInt(Math.round(armour / 2));
+    }
+    armour = Math.max(0, armour - ap);
+    damage = Math.max(0, damage - armour);
+
+    console.log("HITS: " + data.hits.value);
+    console.log("DAMAGE: " + damage);
+    data.hits.value = Math.max(0, data.hits.value - damage);
+    actor.update({ "data.hits": data.hits });
+}
+
+// Called from a button press in damage output in the chat.
+Tools.applyDamage = function(damage, ap, tl, options) {
+    console.log("Tools.applyDamage:");
+    const user = game.users.current;
+
+
+    const targets = user.targets;
+    for (let target of targets.values()) {
+        Tools.applyDamageTo(damage, ap, tl, options, target.actor);
+    }
+        console.log(targets);
+}
+
+// Called from a chat command.
 Tools.damage = function(chatData, args) {
     let text=`<div class="tools">`;
 
@@ -68,8 +131,8 @@ Tools.damage = function(chatData, args) {
     }
     let damage = parseInt(args.shift());
     let ap = 0;
-    let isLaser = false;
-    let isStun = false;
+    let tl = 0;
+    let options = "";
 
     if (!isNaN(args[0])) {
         ap = parseInt(args.shift());
@@ -91,34 +154,9 @@ Tools.damage = function(chatData, args) {
         console.log(name)
         console.log(target.actor.data);
 
-        if (type == "traveller") {
-            // This is a Traveller, which has a complex damage system.
-        } else if (target.actor.data.data) {
-            let data = target.actor.data.data;
-            let hits = data.hits.value;
-            let armour = data.armour;
+        Tools.applyDamageTo(damage, ap, tl, options, target.actor);
 
-            let dmg = damage;
-            if (armour < dmg) {
-                dmg -= armour;
-                Tools.message(chatData, `${name} takes ${dmg} damage.`);
-            } else {
-                dmg = 0;
-                Tools.message(chatData, "Armour stops all the damage");
-                continue;
-            }
-
-            hits -= dmg;
-            if (hits < 0) {
-                hits = 0;
-            }
-            data.hits.value = hits;
-            target.actor.update({ "data.hits": data.hits });
-            target.refresh(true);
-        } else {
-
-        }
-
+        //if (type == "traveller") {
 
     }
 

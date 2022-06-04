@@ -144,6 +144,18 @@
             "END": { "value": 0 }
         }
       },
+      "armour": {
+          "protection": 0,
+          "rad": 0,
+          "tl": 0,
+          "archaic": false,
+          "ablat": false,
+          "laser": 0,
+          "plasma": 0,
+          "energy": 0,
+          "fire": 0,
+          "psi": 0
+      },
       "skills": {
         "skills": {
             "admin": {
@@ -908,7 +920,7 @@
       }
     },
     "traveller": {
-      "templates": [ "base", "characteristics", "skills", "damage", "sophont" ],
+      "templates": [ "base", "characteristics", "skills", "damage", "armour", "sophont" ],
       "finance": {
           "cash": 0,
           "pension": 0,
@@ -923,13 +935,11 @@
       }
     },
     "npc": {
-        "templates": [ "base", "characteristics", "skills", "sophont" ],
-        "armour": 0,
+        "templates": [ "base", "characteristics", "skills", "armour", "sophont" ],
         "size": 0
     },
     "creature": {
-        "templates": [ "base", "skills" ],
-        "armour": 0,
+        "templates": [ "base", "skills", "armour" ],
         "size": 0,
         "behaviour": "",
         "traits": ""

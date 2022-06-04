@@ -39,10 +39,6 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     let     content = "Attack";
     let     melee = true;
 
-    const speaker = ChatMessage.getSpeaker({ actor: actor });
-    const rollMode = game.settings.get('core', 'rollMode');
-    const label = `${weapon.name}`;
-
     let baseRange = weapon.data.weapon.range;
     let rangeBand = null;
     let rangeDistance = baseRange;
@@ -78,7 +74,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     // Header information
     content = `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div>`;
     content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
-    content += `<img class="skillcheck-thumb" src="${weapon.img}"/>`;
+    content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
     content += `<b>Skill DM:</b> ${skillDM}`;
     if (dm && parseInt(dm) < 0) {
         content += " " + dm;
@@ -112,7 +108,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         content += `<b>Melee</b>`;
     }
     let traits = weapon.data.weapon.traits;
-    if (traits && traits != "") {
+    if (traits && traits !== "") {
         content += `<b>Traits:</b> ${traits}`
     } else {
         traits = "";
@@ -120,17 +116,17 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     content += '</div>';
     // End of header.
 
-    if (dm && parseInt(dm) != 0) {
+    if (dm && parseInt(dm) !== 0) {
         dice += " + " + parseInt(dm);
     }
     if (range) {
         dice += " + " + range;
     }
     let attacks = 1;
-    if (autoOption && autoOption == "burst") {
+    if (autoOption && autoOption === "burst") {
         let autoBonus = getTraitValue(traits, "auto");
         dmg += " + " + autoBonus;
-    } else if (autoOption && autoOption == "full") {
+    } else if (autoOption && autoOption === "full") {
         attacks = getTraitValue(traits, "auto");
     }
 
@@ -149,7 +145,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
 
         let effectClass = "rollFailure";
         let effectText = "Miss";
-        if (effect == 0) {
+        if (effect === 0) {
             effectClass = "rollMarginal";
             effectText = "Hit";
         } else if (effect > 0 && effect < 6) {
@@ -167,8 +163,11 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         if (hasTrait(traits, "ap")) {
             ap = getTraitValue(traits, "ap");
         }
+        let tl = 0;
+        let options = "";
 
-        content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}">`;
+        content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}">`;
+        content += `<button data-damage="${damageEffect}" class="damage-button">Apply</button>`;
         content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
         content += `<b>Damage Roll:</b> ${damageTotal}`;
         if (!destructive && effect > 0) {
@@ -231,7 +230,7 @@ function getDifficultyLabel(difficulty) {
 }
 
 function getEffectLabel(effect) {
-    let effectType = "", effectClass = "";
+    let effectType, effectClass;
     let chain = "+0";
     if (effect <= -6) {
         effectType = "Exceptional Failure";
@@ -284,7 +283,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     }
 
     console.log(actor.type);
-    if (actor.type == "traveller" || actor.type == "npc") {
+    if (actor.type === "traveller" || actor.type === "npc") {
         console.log("Is a person");
         isPerson = true;
     }
@@ -324,7 +323,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     }
 
     if (skill) {
-        title += ((title == "")?"":" + ") + skill.label;
+        title += ((title === "")?"":" + ") + skill.label;
         skillCheck = true;
         let value = data.skills["jackofalltrades"].value - 3;
         if (text.length > 0) {
@@ -378,11 +377,11 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     if (untrainedCheck) {
         checkText += " (untrained)";
     }
-    if (difficulty == undefined) {
+    if (difficulty === undefined) {
         difficulty = 8;
     }
     let difficultyLabel = getDifficultyLabel(difficulty);
-    if (difficultyLabel != "") {
+    if (difficultyLabel !== "") {
         checkText = difficultyLabel + " " + checkText;
     }
 
@@ -401,7 +400,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                     let stotal = total + spec.value;
                     let slabel = `${spec.label} (${spec.value})`;
 
-                    if (isPerson && defaultCha && spec.default && spec.default != skill.default) {
+                    if (isPerson && defaultCha && spec.default && spec.default !== skill.default) {
                         stotal -= chaDm;
                         stotal += data.characteristics[spec.default].dm;
                         slabel += ` (${spec.default})`;

@@ -733,3 +733,9 @@ form.damage-dialog td.value {
 form.damage-dialog div.resource {
     width: 80px;
 }
+
+button.damage-button {
+    float: right;
+    display: inline;
+    width: auto;
+}
