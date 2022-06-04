@@ -79,9 +79,9 @@ Hooks.on('renderChatMessage', function(app, html) {
 Hooks.on('ready', () => {
    $(document).on('click', '.damage-button', function() {
        let dmg = $(this).data('damage');
-       let ap = 0;
-       let tl = 0;
-       let options = "";
+       let ap = $(this).data("ap");
+       let tl = $(this).data("tl");
+       let options = $(this).data("options");
 
        Tools.applyDamage(dmg, ap, tl, options);
    });

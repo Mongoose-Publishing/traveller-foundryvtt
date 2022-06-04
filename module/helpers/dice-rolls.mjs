@@ -90,6 +90,10 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
 
     // Work out damage.
     let dmg = weapon.data.weapon.damage;
+    let type = weapon.data.weapon.damageType;
+    if (!type) {
+        type == "standard";
+    }
     let destructive = dmg.indexOf("*") > -1;
     let damageBonus = weapon.data.weapon.damageBonus;
     if (damageBonus) {
@@ -101,7 +105,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         }
     }
 
-    content += `<b>Damage:</b> ${dmg.toUpperCase()}<br/>`;
+    content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type==="standard")?"":(" ("+type+")")}<br/>`;
     if (baseRange > 0) {
         content += `<b>Range:</b> ${baseRange}m<br/>`;
     } else {
@@ -163,11 +167,14 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         if (hasTrait(traits, "ap")) {
             ap = getTraitValue(traits, "ap");
         }
-        let tl = 0;
+        let tl = weapon.data.tl;
         let options = "";
+        if (type !== "standard") {
+            options += " " + type;
+        }
 
         content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}">`;
-        content += `<button data-damage="${damageEffect}" class="damage-button">Apply</button>`;
+        content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" class="damage-button">Apply</button>`;
         content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
         content += `<b>Damage Roll:</b> ${damageTotal}`;
         if (!destructive && effect > 0) {

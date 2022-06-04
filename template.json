@@ -968,6 +968,7 @@
             "characteristic": "dex",
             "skill": "melee.unarmed",
             "damageBonus": "",
+            "damageType": "standard",
             "traits": "",
             "sfx": ""
         }
@@ -977,7 +978,11 @@
         "armour": {
             "protection": 0,
             "lasers": 0,
+            "energy": 0,
+            "plasma": 0,
+            "fire": 0,
             "rad": 0,
+            "antique": false,
             "skill": "",
             "strBonus": 0,
             "dexBonus": 0,

@@ -63,6 +63,8 @@ Tools.applyDamageTo = function(damage, ap, tl, options, actor) {
         return;
     }
 
+    console.log(`applyDamageTo: ${damage} AP ${ap} TL ${tl} (${options})`);
+
     let isLaser = options.indexOf("laser") > -1;
     let isPlasma = options.indexOf("plasma") > -1;
     let isEnergy = options.indexOf("energy") > -1;

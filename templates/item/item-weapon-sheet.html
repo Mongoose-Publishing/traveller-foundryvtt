@@ -104,6 +104,19 @@
             </select>
         </div>
 
+          <div class="resource">
+              <label for="data.weapon.damageType" class="resource-label">Damage Type</label><br/>
+              <select name="data.weapon.damageType">
+                  {{#select data.weapon.damageType}}
+                  <option value="standard">Standard</option>
+                  <option value="laser">Laser</option>
+                  <option value="plasma">Plasma</option>
+                  <option value="fire">Fire</option>
+                  <option value="energy">Energy</option>
+                  {{/select}}
+              </select>
+          </div>
+
         <div class="resource grid-span-3">
             <label for="data.weapon.notes" class="resource-label">Notes</label><br/>
             <input type="text" name="data.notes" value="{{data.notes}}" data-dtype="String"/>
