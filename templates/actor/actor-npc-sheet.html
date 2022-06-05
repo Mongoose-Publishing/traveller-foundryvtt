@@ -61,13 +61,16 @@
         <section class="grid grid-4col">
             <div class="resource flex-group-left armour-block">
                 <label for="data.armour.protection" class="resource-label">ARMOUR</label><br/>
-                🛡️ <input class="armour-value" type="text" name="data.armour.protection" title="Standard armour"
+                🛡️ <input class="armour-value" type="text" name="data.armour.protection"
+                           title="Standard armour" readonly
                            value="{{data.armour.protection}}" data-dtype="Number"/><br/>
-                ☢ <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
+                ☢ <input class="armour-value" type="text" name="data.armour.rad"
+                         title="Radiation protection" readonly
                          value="{{data.armour.rad}}" data-dtype="Number"/>
-                🔥 <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy protection"
+                🔥 <input class="armour-value" type="text" name="data.armour.otherProtection"
+                          title="Energy protection" readonly
                           value="{{data.armour.otherProtection}}" data-dtype="Number"/><br/>
-                <input type="text" name="data.armour.otherTypes" title="Energy types"
+                <input type="text" name="data.armour.otherTypes" title="Energy types" readonly
                        value="{{data.armour.otherTypes}}" data-dtype="String"/>
             </div>
             <div class="resource flex-group-center">
@@ -81,10 +84,16 @@
                 <input type="text" name="data.intiative" value="{{data.intiative}}" data-dtype="Number"/>
             </div>
             <div class="resource flex-group-center">
-                <label for="data.hits.max" class="resource-label">HITS</label>
-                <input type="text" name="data.hits.max" value="{{data.hits.max}}" data-dtype="Number"/>
+                <label for="data.hits.value" class="resource-label">HITS</label>
+                <input type="text" name="data.hits.value" value="{{data.hits.value}}"
+                       data-dtype="Number"/>
+                <label for="data.hits.max" class="resource-label">MAX</label>
+                <input type="text" name="data.hits.max" value="{{data.hits.max}}"
+                       readonly data-dtype="Number"/>
             </div>
         </section>
+
+        {{> "systems/mgt2/templates/actor/parts/actor-weapons.html"}}
     </div>
 
     {{!-- Owned Features Tab --}}

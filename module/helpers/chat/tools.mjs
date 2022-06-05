@@ -101,6 +101,14 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor) {
     console.log("DAMAGE: " + damage);
     data.hits.value = Math.max(0, data.hits.value - damage);
     actor.update({ "data.hits": data.hits });
+
+    let chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker(),
+        content: `${actor.data.name} took ${damage} damage`
+    }
+    ChatMessage.create(chatData, {});
+
 }
 
 // Called from a button press in damage output in the chat.
@@ -135,7 +143,7 @@ Tools.damage = function(chatData, args) {
 
 
     if (args.length < 1) {
-        Tools.message(chatData, "You must at least specify the amount of damage");
+        ui.notifications.error("You must at least specify the amount of damage");
         return;
     }
     let damage = parseInt(args.shift());
@@ -149,7 +157,7 @@ Tools.damage = function(chatData, args) {
     }
 
     if (targets.size == 0) {
-        Tools.message(chatData, "No tokens are selected");
+        ui.notifications.error("No tokens are targeted");
         return;
     }
 
