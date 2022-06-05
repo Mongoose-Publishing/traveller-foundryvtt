@@ -319,11 +319,11 @@
   padding: 0 8px;
 }
 
-.traveller .resource-label {
+.resource-label {
   font-weight: bold;
 }
 
-.traveller .items-header {
+.items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
@@ -335,12 +335,12 @@
   font-weight: bold;
 }
 
-.traveller .items-header > * {
+.items-header > * {
   font-size: 14px;
   text-align: center;
 }
 
-.traveller .items-header .item-name {
+.items-header .item-name {
   font-weight: bold;
   padding-left: 5px;
   text-align: left;
@@ -349,7 +349,7 @@
   display: flex;
 }
 
-.traveller .items-list {
+.items-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -358,13 +358,13 @@
   color: #444;
 }
 
-.traveller .items-list .item-list {
+.items-list .item-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.traveller .items-list .item-name {
+.items-list .item-name {
   -webkit-box-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -380,13 +380,13 @@
   display: flex;
 }
 
-.traveller .items-list .item-name h3, .traveller .items-list .item-name h4 {
+.items-list .item-name h3, .items-list .item-name h4 {
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
 }
 
-.traveller .items-list .item-controls {
+.items-list .item-controls {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -398,13 +398,13 @@
   justify-content: flex-end;
 }
 
-.traveller .items-list .item-controls a {
+.items-list .item-controls a {
   font-size: 12px;
   text-align: center;
   margin: 0 6px;
 }
 
-.traveller .items-list .item {
+.items-list .item {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -412,15 +412,15 @@
   border-bottom: 1px solid #c9c7b8;
 }
 
-.traveller .items-list .item:last-child {
+.items-list .item:last-child {
   border-bottom: none;
 }
 
-.traveller .items-list .item .item-name {
+.items-list .item .item-name {
   color: #191813;
 }
 
-.traveller .items-list .item .item-name .item-image {
+.items-list .item .item-name .item-image {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 30px;
   flex: 0 0 30px;
@@ -430,14 +430,14 @@
   margin-right: 5px;
 }
 
-.traveller .items-list .item-prop {
+.items-list .item-prop {
   text-align: center;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
 
-.traveller .items-list .items-header {
+.items-list .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
@@ -449,24 +449,24 @@
   font-weight: bold;
 }
 
-.traveller .items-list .items-header > * {
+.items-list .items-header > * {
   font-size: 12px;
   text-align: center;
 }
 
-.traveller .items-list .items-header .item-name {
+.items-list .items-header .item-name {
   padding-left: 5px;
   text-align: left;
 }
 
-.traveller .item-formula {
+.item-formula {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 200px;
   flex: 0 0 200px;
   padding: 0 8px;
 }
 
-.traveller .item-type {
+.item-type {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 50px;
     flex: 0 0 50px;
@@ -498,9 +498,9 @@
   padding: 0 8px;
 }
 
-.traveller .effects .item .effect-source,
-.traveller .effects .item .effect-duration,
-.traveller .effects .item .effect-controls {
+.effects .item .effect-source,
+.effects .item .effect-duration,
+.effects .item .effect-controls {
   text-align: center;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;

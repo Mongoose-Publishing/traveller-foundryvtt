@@ -47,6 +47,8 @@ export class MgT2ActorSheet extends ActorSheet {
     if (actorData.type == 'traveller') {
         this._prepareItems(context);
         this._prepareCharacterData(context);
+    } else if (actorData.type === 'npc') {
+        this._prepareItems(context);
     }
 
     // Add roll data for TinyMCE editors.
