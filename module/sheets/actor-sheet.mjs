@@ -141,8 +141,24 @@ export class MgT2ActorSheet extends ActorSheet {
            i.update({"data.armour.worn": 0});
        }
      }
-     itemData.worn = 1;
+     itemData.armour.worn = 1;
      item.update({"data.armour.worn": 1});
+     this._calculateArmour(actor);
+   }
+
+   _removeArmour(actor, item) {
+     console.log(`wearArmour: [${actor.name}] [${item.name}]`)
+     const actorData = actor.data.data;
+     const itemData = item.data.data;
+
+     itemData.armour.worn = 0;
+     item.update({"data.armour.worn": 0});
+
+     this._calculateArmour(actor);
+   }
+
+   _calculateArmour(actor) {
+     const actorData = actor.data.data;
 
      let armour = actorData.armour;
      armour.protection = 0;
@@ -151,7 +167,7 @@ export class MgT2ActorSheet extends ActorSheet {
      armour.rad = 0;
      armour.archaic = 0;
      for (let i of actor.items) {
-       if (i.data.data.armour) {
+       if (i.data.data.armour && i.data.data.armour.worn) {
          let armourItem = i.data.data.armour;
 
          armour.protection += armourItem.protection;
@@ -165,9 +181,7 @@ export class MgT2ActorSheet extends ActorSheet {
          }
        }
      }
-     console.log(actor.data.data.armour);
      actor.update({ "data.armour": armour});
-
    }
 
 
@@ -209,8 +223,7 @@ export class MgT2ActorSheet extends ActorSheet {
     html.find('.item-unwear').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
       const item = this.actor.items.get(li.data("itemId"));
-      item.data.data.armour.worn = 0;
-      item.update({"data.armour.worn": 0});
+      this._removeArmour(this.actor, item);
     });
 
     // Active Effect management
