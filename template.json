@@ -146,15 +146,12 @@
       },
       "armour": {
           "protection": 0,
+          "otherProtection": 0,
+          "otherTypes": "",
           "rad": 0,
           "tl": 0,
           "archaic": false,
-          "ablat": false,
-          "laser": 0,
-          "plasma": 0,
-          "energy": 0,
-          "fire": 0,
-          "psi": 0
+          "ablat": false
       },
       "skills": {
         "skills": {
@@ -977,16 +974,14 @@
         "templates": ["base"],
         "armour": {
             "protection": 0,
-            "lasers": 0,
-            "energy": 0,
-            "plasma": 0,
-            "fire": 0,
+            "otherProtection": 0,
+            "otherTypes": "",
             "rad": 0,
-            "antique": false,
+            "archaic": 0,
             "skill": "",
-            "strBonus": 0,
-            "dexBonus": 0,
-            "duration": 0
+            "duration": 0,
+            "layered": 0,
+            "worn": 0
         }
       },
       "augment": {

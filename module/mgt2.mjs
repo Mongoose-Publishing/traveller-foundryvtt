@@ -82,8 +82,9 @@ Hooks.on('ready', () => {
        let ap = $(this).data("ap");
        let tl = $(this).data("tl");
        let options = $(this).data("options");
+       let traits = $(this).data("traits");
 
-       Tools.applyDamage(dmg, ap, tl, options);
+       Tools.applyDamage(dmg, ap, tl, options, traits);
    });
 });
 

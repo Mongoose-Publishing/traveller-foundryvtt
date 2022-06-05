@@ -1,3 +1,4 @@
+import {hasTrait, getTraitValue} from "../dice-rolls.mjs";
 
 export const Tools = {};
 
@@ -46,7 +47,7 @@ Tools.message = function(chatData, message) {
 }
 
 // Apply damage to an actor. Needs to calculate armour.
-Tools.applyDamageTo = function(damage, ap, tl, options, actor) {
+Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor) {
     if (!options) {
         options = "";
     }
@@ -83,6 +84,12 @@ Tools.applyDamageTo = function(damage, ap, tl, options, actor) {
     } else if (isPsi && data.armour.psi > armour) {
         armour = data.armour.psi;
     }
+    if (hasTrait(traits, "lo-pen")) {
+        let lopen = getTraitValue(traits, "lo-pen");
+        if (lopen > 1) {
+            armour *= lopen;
+        }
+    }
     if (data.armour.archaic && isRanged && tl > data.armour.tl) {
         // Archaic armour gets halved.
         armour = parseInt(Math.round(armour / 2));
@@ -97,14 +104,14 @@ Tools.applyDamageTo = function(damage, ap, tl, options, actor) {
 }
 
 // Called from a button press in damage output in the chat.
-Tools.applyDamage = function(damage, ap, tl, options) {
+Tools.applyDamage = function(damage, ap, tl, options, traits) {
     console.log("Tools.applyDamage:");
     const user = game.users.current;
 
 
     const targets = user.targets;
     for (let target of targets.values()) {
-        Tools.applyDamageTo(damage, ap, tl, options, target.actor);
+        Tools.applyDamageTo(damage, ap, tl, options, traits, target.actor);
     }
         console.log(targets);
 }
@@ -135,6 +142,7 @@ Tools.damage = function(chatData, args) {
     let ap = 0;
     let tl = 0;
     let options = "";
+    let traits = "";
 
     if (!isNaN(args[0])) {
         ap = parseInt(args.shift());
@@ -156,11 +164,10 @@ Tools.damage = function(chatData, args) {
         console.log(name)
         console.log(target.actor.data);
 
-        Tools.applyDamageTo(damage, ap, tl, options, target.actor);
+        Tools.applyDamageTo(damage, ap, tl, options, traits, target.actor);
 
         //if (type == "traveller") {
 
     }
-
-
 };
+

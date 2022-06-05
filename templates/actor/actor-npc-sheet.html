@@ -58,26 +58,31 @@
     </div>
 
     <div class="tab combat" data-group="primary" data-tab="combat">
-        <section class="grid grid-5col">
-            <div class="resource flex-group-center">
-                <label for="data.hits.max" class="resource-label">HITS</label>
-                <input type="text" name="data.hits.max" value="{{data.hits.max}}" data-dtype="Number"/>
+        <section class="grid grid-4col">
+            <div class="resource flex-group-left armour-block">
+                <label for="data.armour.protection" class="resource-label">ARMOUR</label><br/>
+                🛡️ <input class="armour-value" type="text" name="data.armour.protection" title="Standard armour"
+                           value="{{data.armour.protection}}" data-dtype="Number"/><br/>
+                ☢ <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
+                         value="{{data.armour.rad}}" data-dtype="Number"/>
+                🔥 <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy protection"
+                          value="{{data.armour.otherProtection}}" data-dtype="Number"/><br/>
+                <input type="text" name="data.armour.otherTypes" title="Energy types"
+                       value="{{data.armour.otherTypes}}" data-dtype="String"/>
             </div>
             <div class="resource flex-group-center">
                 <label for="data.speed" class="resource-label">SPEED</label>
                 <input type="text" name="data.speed" value="{{data.speed}}" data-dtype="Number"/>
-            </div>
-            <div class="resource flex-group-center">
-                <label for="data.armour.protection" class="resource-label">ARMOUR</label>
-                <input type="text" name="data.armour.protection" value="{{data.armour.protection}}" data-dtype="Number"/>
-            </div>
-            <div class="resource flex-group-center">
                 <label for="data.size" class="resource-label">SIZE</label>
                 <input type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
             </div>
             <div class="resource flex-group-center">
                 <label for="data.intiative" class="resource-label">INIT</label>
                 <input type="text" name="data.intiative" value="{{data.intiative}}" data-dtype="Number"/>
+            </div>
+            <div class="resource flex-group-center">
+                <label for="data.hits.max" class="resource-label">HITS</label>
+                <input type="text" name="data.hits.max" value="{{data.hits.max}}" data-dtype="Number"/>
             </div>
         </section>
     </div>

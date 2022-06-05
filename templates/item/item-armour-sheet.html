@@ -3,31 +3,25 @@
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-      <div class="grid grid-4col">
-        <div class="resource">
-          <label class="resource-label">Protection</label>
-          <input type="text" name="data.armour.protection" value="{{data.armour.protection}}" data-dtype="Number"/>
-        </div>
-        <div class="resource">
-          <label class="resource-label">Lasers</label>
-          <input type="text" name="data.armour.lasers" value="{{data.armour.lasers}}" data-dtype="Number"/>
-        </div>
-        <div class="resource">
-          <label class="resource-label">Rad</label>
-          <input type="text" name="data.armour.rad" value="{{data.armour.rad}}" data-dtype="Number"/>
+      <div class="grid grid-2col">
+        <div class="resource armour-block">
+          <label class="resource-label">Protection</label><br/>
+          🛡️ <input class="armour-value" type="text" name="data.armour.protection" title="Standard armour"
+                     value="{{data.armour.protection}}" data-dtype="Number"/><br/>
+          ☢ <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
+                   value="{{data.armour.rad}}" data-dtype="Number"/>
+          🔥 <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy protection"
+                    value="{{data.armour.otherProtection}}" data-dtype="Number"/><br/>
+          <input type="text" name="data.armour.otherTypes" title="Energy types"
+                 value="{{data.armour.otherTypes}}" data-dtype="String"/>
         </div>
         <div class="resource">
           <label class="resource-label">Vacc Suit</label>
           <input type="text" name="data.armour.skill" value="{{data.armour.skill}}" data-dtype="String"/>
-        </div>
-
-        <div class="resource">
-            <label class="resource-label">TL</label>
-            <input type="text" name="data.item.tl" value="{{data.item.tl}}" data-dtype="Number"/>
-        </div>
-        <div class="resource">
-            <label class="resource-label">KG</label>
-            <input type="text" name="data.item.weight" value="{{data.item.weight}}" data-dtype="Number"/>
+          <label class="resource-label">TL</label>
+          <input type="text" name="data.item.tl" value="{{data.item.tl}}" data-dtype="Number"/>
+          <label class="resource-label">KG</label>
+          <input type="text" name="data.item.weight" value="{{data.item.weight}}" data-dtype="Number"/>
         </div>
       </div>
     </div>
@@ -54,13 +48,25 @@
 
       <div class="grid grid-3col">
         <div class="resource">
-          <label class="resource-label">STR bonus</label>
-          <input type="text" name="data.armour.strBonus" value="{{data.armour.strBonus}}" data-dtype="Number"/>
+          <label for="data.armour.layered" class="resource-label">Layered</label>
+
+          <select name="data.armour.layered">
+            {{#select data.armour.layered}}
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            {{/select}}
+          </select>
         </div>
 
         <div class="resource">
-          <label class="resource-label">DEX bonus</label>
-          <input type="text" name="data.armour.dexBonus" value="{{data.armour.dexBonus}}" data-dtype="Number"/>
+          <label for="data.armour.archaic" class="resource-label">Archaic</label>
+
+          <select name="data.armour.archaic">
+            {{#select data.armour.archaic}}
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            {{/select}}
+          </select>
         </div>
 
         <div class="resource">

@@ -124,6 +124,53 @@ export class MgT2ActorSheet extends ActorSheet {
     context.features = features;
    }
 
+   _wearArmour(actor, item) {
+     console.log(`wearArmour: [${actor.name}] [${item.name}]`)
+     const actorData = actor.data.data;
+     const itemData = item.data.data;
+
+     console.log(actorData);
+     console.log(itemData);
+
+     let layered = itemData.armour.layered;
+     console.log(actor.items);
+     for (let i of actor.items) {
+       console.log(i.data.name);
+       if (i.data.data.armour && i.data.data.armour.worn && i.data.data.armour.layered === layered) {
+           i.data.data.armour.worn = 0;
+           i.update({"data.armour.worn": 0});
+       }
+     }
+     itemData.worn = 1;
+     item.update({"data.armour.worn": 1});
+
+     let armour = actorData.armour;
+     armour.protection = 0;
+     armour.otherProtection = 0;
+     armour.otherTypes = "";
+     armour.rad = 0;
+     armour.archaic = 0;
+     for (let i of actor.items) {
+       if (i.data.data.armour) {
+         let armourItem = i.data.data.armour;
+
+         armour.protection += armourItem.protection;
+         armour.otherProtection += armourItem.otherProtection;
+         armour.rad += armourItem.rad;
+         if (armourItem.otherTypes !== "") {
+           armour.otherTypes = armourItem.otherTypes;
+         }
+         if (armourItem.archaic) {
+           armour.archaic = 1;
+         }
+       }
+     }
+     console.log(actor.data.data.armour);
+     actor.update({ "data.armour": armour});
+
+   }
+
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -150,6 +197,20 @@ export class MgT2ActorSheet extends ActorSheet {
       const item = this.actor.items.get(li.data("itemId"));
       item.delete();
       li.slideUp(200, () => this.render(false));
+    });
+
+    html.find('.item-wear').click(ev => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      this._wearArmour(this.actor, item);
+      console.log("worn");
+    });
+
+    html.find('.item-unwear').click(ev => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      item.data.data.armour.worn = 0;
+      item.update({"data.armour.worn": 0});
     });
 
     // Active Effect management

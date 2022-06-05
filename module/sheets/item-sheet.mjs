@@ -60,18 +60,15 @@ export class MgT2ItemSheet extends ItemSheet {
       // Initialize containers.
       const augments = [];
       console.log("_prepareItems:");
-      console.log(context);
-      console.log("after prepare");
-
-      if (context.augments) {
-        console.log("Have found augments list");
-      }
 
       if (!context.item.data.data.armour) {
         console.log("This is not armour");
         return;
       }
       console.log("This is armour");
+
+      let data = context.item.data.data;
+
 
       // Iterate through items, allocating to containers
       if (context.item.data.data.augments) {
@@ -119,7 +116,6 @@ export class MgT2ItemSheet extends ItemSheet {
     if (!item.data.augments) {
       item.data.augments = [];
     }
-    console.log(item.data.augments);
     let i = Object.keys(item.data.augments).length;
 
     item.data.augments[i] = { 'aug': i, 'name': 'Unnamed ' + i, 'char': '', 'charBonus': 0, 'skill': '', 'skillBonus': 0 };
@@ -134,7 +130,6 @@ export class MgT2ItemSheet extends ItemSheet {
 
     console.log("The aug ID is " + aug);
 
-    console.log(item);
 
     delete item.data.augments[aug];
 

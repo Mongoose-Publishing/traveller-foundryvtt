@@ -25,7 +25,7 @@ export class MgT2DamageDialog extends Application {
         this.laser = laser;
         this.stun = stun;
         this.data = data;
-        this.armour = data.armour;
+        this.armour = data.armour.protection;
 
         this.actualDamage = damage;
         if (ap < this.armour) {

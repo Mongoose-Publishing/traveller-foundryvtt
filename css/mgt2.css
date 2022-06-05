@@ -739,3 +739,14 @@ button.damage-button {
     display: inline;
     width: auto;
 }
+
+input.armour-value {
+    width: 50px;
+    text-align: center;
+}
+
+div.armour-block {
+    border: 2px solid #404040;
+    padding: 3px;
+    border-radius: 5px;
+}
