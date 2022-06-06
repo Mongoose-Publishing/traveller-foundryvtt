@@ -31,12 +31,13 @@ export class MgT2AttackDialog extends Application {
             this.auto = getTraitValue(this.weapon.data.weapon.traits, "auto");
         }
 
-
         // Work out what the skill bonus is.
         this.score = parseInt(getSkillValue(this.actor, this.skill, this.speciality));
-        console.log(this.cha);
-        console.log(data.characteristics[this.cha].dm);
-        this.score += parseInt(data.characteristics[this.cha].dm);
+        if (data.characteristics && data.charactertistics[this.cha]) {
+            this.score += parseInt(data.characteristics[this.cha].dm);
+        } else {
+            this.cha = null;
+        }
 
         // Work out the damage.
         this.damage = weapon.data.weapon.damage;

@@ -2,7 +2,11 @@
 
     <p>
         <b>{{weapon.name}}</b> {{damage}}<br/>
-        <i>{{cha}} + {{skill}} ({{speciality}}) at {{score}}</i>
+        {{#if cha}}
+            <i>{{cha}} + {{skill}} ({{speciality}}) at {{score}}</i>
+        {{else}}
+            <i>{{skill}} ({{speciality}}) at {{score}}</i>
+        {{/if}}
     </p>
 
     <div class="boon-selection">
