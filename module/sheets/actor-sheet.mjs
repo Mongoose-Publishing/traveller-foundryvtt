@@ -126,9 +126,9 @@ export class MgT2ActorSheet extends ActorSheet {
     context.armour = armour;
     context.augments = augments;
     context.features = features;
-   }
+  }
 
-   _wearArmour(actor, item) {
+  _wearArmour(actor, item) {
      console.log(`wearArmour: [${actor.name}] [${item.name}]`)
      const actorData = actor.data.data;
      const itemData = item.data.data;

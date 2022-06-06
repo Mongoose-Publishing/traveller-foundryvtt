@@ -167,15 +167,47 @@ Tools.damage = function(chatData, args) {
         let linked = target.data.actorLink;
         let type = target.data.document._actor.data.type;
 
-        console.log(type);
-
-        console.log(name)
-        console.log(target.actor.data);
-
         Tools.applyDamageTo(damage, ap, tl, options, traits, target.actor);
-
-        //if (type == "traveller") {
-
     }
 };
 
+Tools.showSkills = function(chatData) {
+    const user = game.users.current;
+    const selected = canvas.tokens.controlled;
+
+    console.log(selected);
+
+    if (selected.length === 0) {
+        ui.notifications.error("You need to select a token");
+        return;
+    } else if (selected.length > 1) {
+        ui.notifications.error("You must have only one token selected");
+        return;
+    }
+
+    let token = selected[0];
+    let name = token.data.name;
+    console.log(name);
+
+    let text = `<h1>${name}</h1>`;
+
+    let actorId = token.data.actorId;
+    let actor = game.actors.get(actorId);
+    if (!actor) {
+        ui.notifications.error("Unable to find actor " + actorId);
+        return;
+    }
+    let skills = actor.data.data.skills;
+
+    console.log(skills);
+
+    for (let skill in skills) {
+        text += `${skills[skill].label}<br/>`;
+//        text += `${skill.label}<br/>`;
+    }
+
+    this.message(chatData, text);
+
+
+
+}

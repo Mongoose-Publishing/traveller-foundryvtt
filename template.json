@@ -461,6 +461,7 @@
                 "value": 0,
                 "trained": false,
                 "requires": "DEX",
+                "creature": true,
                 "icon": "systems/mgt2/icons/skills/guncombat.svg",
                 "specialities": {
                     "archaic": {

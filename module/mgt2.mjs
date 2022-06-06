@@ -137,6 +137,9 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
         args.shift();
         Tools.damage(chatData, args);
         return false;
+    } else if (message.indexOf("/showskills") === 0) {
+        Tools.showSkills(chatData);
+        return false;
     }
 
     return true;
