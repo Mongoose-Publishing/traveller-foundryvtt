@@ -33,7 +33,7 @@ export class MgT2AttackDialog extends Application {
 
         // Work out what the skill bonus is.
         this.score = parseInt(getSkillValue(this.actor, this.skill, this.speciality));
-        if (data.characteristics && data.charactertistics[this.cha]) {
+        if (data.characteristics && data.characteristics[this.cha]) {
             this.score += parseInt(data.characteristics[this.cha].dm);
         } else {
             this.cha = null;

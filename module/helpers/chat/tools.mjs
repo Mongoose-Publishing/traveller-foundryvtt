@@ -47,7 +47,9 @@ Tools.message = function(chatData, message) {
 }
 
 // Apply damage to an actor. Needs to calculate armour.
-Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor) {
+Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
+    let text = "";
+
     if (!options) {
         options = "";
     }
@@ -95,17 +97,50 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor) {
         armour = parseInt(Math.round(armour / 2));
     }
     armour = Math.max(0, armour - ap);
-    damage = Math.max(0, damage - armour);
+    let actualDamage = Math.max(0, damage - armour);
 
     console.log("HITS: " + data.hits.value);
-    console.log("DAMAGE: " + damage);
-    data.hits.value = Math.max(0, data.hits.value - damage);
-    actor.update({ "data.hits": data.hits });
+    console.log("DAMAGE: " + actualDamage);
+    data.hits.value = Math.max(0 - data.hits.max, data.hits.value - actualDamage);
+    actor.update({"data.hits": data.hits});
+
+    let name = actor.data.name;
+    let maxHits = data.hits.max;
+    if (actualDamage >= (2 * maxHits) / 3) {
+        text += "Ouch! "
+    } else if (actualDamage >= maxHits / 3) {
+        text += "Ouch. ";
+    }
+    text += `${name} took ${actualDamage} hits. `;
+    if (actualDamage < damage * 0.1) {
+        text += "Nearly all of it was stopped by armour. ";
+    } else if (actualDamage < damage * 0.25) {
+        text += "Most of it was stopped by armour. ";
+    } else if (actualDamage < damage * 0.67) {
+        text += "Some of it was stopped by armour.";
+    } else if (actualDamage < damage) {
+        text += "Most of it got through.";
+    }
+    if (token) {
+        console.log("Apply effects to token");
+        if (data.hits.value <= 0) {
+            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": false, "active": false });
+            token.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": true });
+        } else if (data.hits.value <= maxHits * 0.1) {
+            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": false, "active": false });
+            token.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": true });
+        } else if (data.hits.value <= maxHits * 0.5) {
+            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": false, "active": true });
+        } else {
+            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": false, "active": false });
+            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": true, "active": false });
+        }
+    }
 
     let chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker(),
-        content: `${actor.data.name} took ${damage} damage`
+        content: text
     }
     ChatMessage.create(chatData, {});
 
@@ -116,12 +151,10 @@ Tools.applyDamage = function(damage, ap, tl, options, traits) {
     console.log("Tools.applyDamage:");
     const user = game.users.current;
 
-
     const targets = user.targets;
     for (let target of targets.values()) {
-        Tools.applyDamageTo(damage, ap, tl, options, traits, target.actor);
+        Tools.applyDamageTo(damage, ap, tl, options, traits, target.actor, target);
     }
-        console.log(targets);
 }
 
 // Called from a chat command.
@@ -167,7 +200,7 @@ Tools.damage = function(chatData, args) {
         let linked = target.data.actorLink;
         let type = target.data.document._actor.data.type;
 
-        Tools.applyDamageTo(damage, ap, tl, options, traits, target.actor);
+        Tools.applyDamageTo(damage, ap, tl, options, traits, target.actor, target);
     }
 };
 
