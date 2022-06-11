@@ -263,12 +263,13 @@
 }
 
 .system-mgt2 header.sheet-header img.profile-img {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 140px;
-  flex: 0 0 140px;
-  width: 140px;
-  height: 140px;
-  margin-right: 10px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 140px;
+    flex: 0 0 140px;
+    width: 140px;
+    height: 140px;
+    margin-right: 10px;
+    border-radius: 10px;
 }
 
 .sheet-header .header-fields {
@@ -291,10 +292,11 @@
   border-bottom: 0;
 }
 
-.sheet-header h1.charname input {
-  width: 100%;
-  height: 100%;
-  margin: 0;
+h1.charname input {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0;
 }
 
 
@@ -749,4 +751,106 @@ div.armour-block {
     border: 2px solid #404040;
     padding: 3px;
     border-radius: 5px;
+}
+
+.creature-sheet {
+    border: 2px groove #f0f0f0;
+    padding: 5px;
+    align-items: flex-start;
+    display: flex;
+}
+
+.creature-left {
+    width: 180px;
+}
+
+.creature-right {
+    width: auto;
+}
+
+.creature-sheet h1.charname {
+    border: 1px solid #404040;
+    box-shadow: 3px 3px 3px;
+    padding: 2px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.creature-sheet ht.charname input {
+    background-color: white;
+    border: none;
+}
+
+.creature-sheet img.profile-img {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 160px;
+    flex: 0 0 140px;
+    width: 160px;
+    height: 160px;
+    margin-right: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px;
+    margin-bottom: 10px;
+}
+
+.creature-sheet .creature-box {
+    border: 1px solid #404040;
+    box-shadow: 3px 3px 3px;
+    width: 160px;
+    padding: 2px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.creature-sheet .hits-box {
+    text-align: center;
+}
+
+.creature-sheet .creature-attacks li {
+    margin: 0px;
+    padding: 0px;
+}
+
+.creature-sheet .creature-attacks img {
+    text-align: left;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    padding-right: 3px;
+}
+
+.creature-sheet .creature-attacks label {
+    display: inline;
+    font-weight: bold;
+    vertical-align: top;
+    padding-left: 3px;
+}
+
+.box-title {
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.creature-header .header-fields {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin: 0;
+    margin-top: 0;
+    padding-top: 0;
+    vertical-align: top;
+    flex-basis: auto;
+    align-self: flex-start;
+    margin-left: 160px;
+}
+
+
+.creature-header h1.charname {
+    height: 50px;
+    padding: 0px;
+    margin: 0;
+    margin-top: 0;
+    border-bottom: 0;
 }
