@@ -755,12 +755,10 @@ div.armour-block {
     border-radius: 5px;
 }
 
-form.create {
-    background-color: green;
-}
 
 .window-app .window-content {
     background: #A0A0A0;
+    background2: url(/systems/mgt2/images/traveller-background.png);
 }
 
 .creature-sheet {
