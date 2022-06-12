@@ -755,6 +755,14 @@ div.armour-block {
     border-radius: 5px;
 }
 
+form.create {
+    background-color: green;
+}
+
+.window-app .window-content {
+    background: #A0A0A0;
+}
+
 .creature-sheet {
     border: 2px groove #f0f0f0;
     padding: 5px;
@@ -764,8 +772,9 @@ div.armour-block {
 
 .creature-sheet .shadow {
     border: 1px solid #404040;
-    box-shadow: 3px 3px 3px #406040;
+    box-shadow: 3px 3px 3px #404040;
     border-radius: 5px;
+    background-color: #c5c3b4;
 }
 
 .creature-sheet .stats {
@@ -857,19 +866,36 @@ textarea.traits {
     padding-right: 3px;
 }
 
-.creature-sheet .creature-attacks label {
+.creature-sheet label.box-title {
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.creature-sheet .creature-attacks .items-list label {
     display: inline;
     font-weight: bold;
     vertical-align: top;
     padding-left: 3px;
 }
 
-.box-title {
-    font-weight: bold;
-    text-align: center;
-    display: block;
-    margin-bottom: 5px;
+.creature-sheet .creature-armour img {
+    text-align: left;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    padding-right: 3px;
 }
+
+.creature-sheet .creature-armour .items-list label {
+    display: inline;
+    font-weight: bold;
+    vertical-align: top;
+    padding-left: 3px;
+}
+
+
 
 .creature-header .header-fields {
     -webkit-box-flex: 1;

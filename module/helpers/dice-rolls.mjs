@@ -71,6 +71,13 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
     dice += " + " + skillDM;
 
+    if (weapon.data.weapon.attackBonus) {
+        const attackBonus = parseInt(weapon.data.weapon.attackBonus);
+        if (attackBonus != 0) {
+            dice += " + " + attackBonus;
+        }
+    }
+
     // Header information
     content = `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div>`;
     content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
@@ -96,7 +103,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
     let destructive = dmg.indexOf("*") > -1;
     let damageBonus = weapon.data.weapon.damageBonus;
-    if (damageBonus) {
+    if (damageBonus && actor.data.data.characteristics && actor.data.data.characteristics[damageBonus]) {
         damageBonus = actor.data.data.characteristics[damageBonus].dm;
         if (damageBonus > 0) {
             dmg += " +" + damageBonus;

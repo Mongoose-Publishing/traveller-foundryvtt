@@ -48,12 +48,13 @@
 
       <div class="grid grid-3col">
         <div class="resource">
-          <label for="data.armour.layered" class="resource-label">Layered</label>
+          <label for="data.armour.form" class="resource-label">Form</label>
 
-          <select name="data.armour.layered">
-            {{#select data.armour.layered}}
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+          <select name="data.armour.form">
+            {{#select data.armour.form}}
+              <option value="standard">Standard</option>
+              <option value="layered">Layered</option>
+              <option value="natural">Natural</option>
             {{/select}}
           </select>
         </div>

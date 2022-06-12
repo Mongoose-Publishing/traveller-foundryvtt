@@ -115,6 +115,7 @@ export class MgT2ActorSheet extends ActorSheet {
           weapons.push(i);
       } else if (i.type === 'armour') {
           armour.push(i);
+          this._calculateArmour(context.actor);
       } else if (i.type === 'augments') {
           augments.push(i);
       }
@@ -136,11 +137,11 @@ export class MgT2ActorSheet extends ActorSheet {
      console.log(actorData);
      console.log(itemData);
 
-     let layered = itemData.armour.layered;
+     let form = itemData.armour.form;
      console.log(actor.items);
      for (let i of actor.items) {
        console.log(i.data.name);
-       if (i.data.data.armour && i.data.data.armour.worn && i.data.data.armour.layered === layered) {
+       if (i.data.data.armour && i.data.data.armour.worn && i.data.data.armour.form === form) {
            i.data.data.armour.worn = 0;
            i.update({"data.armour.worn": 0});
        }
@@ -162,6 +163,7 @@ export class MgT2ActorSheet extends ActorSheet {
    }
 
    _calculateArmour(actor) {
+    console.log("_calculateArmour:");
      const actorData = actor.data.data;
 
      let armour = actorData.armour;
@@ -171,17 +173,21 @@ export class MgT2ActorSheet extends ActorSheet {
      armour.rad = 0;
      armour.archaic = 0;
      for (let i of actor.items) {
-       if (i.data.data.armour && i.data.data.armour.worn) {
-         let armourItem = i.data.data.armour;
+       if (i.data.data.armour) {
+         const armourData = i.data.data.armour;
+         console.log(i.name + ": " + armourData.form);
+         if (armourData.worn || armourData.form === "natural") {
+           let armourData = i.data.data.armour;
 
-         armour.protection += armourItem.protection;
-         armour.otherProtection += armourItem.otherProtection;
-         armour.rad += armourItem.rad;
-         if (armourItem.otherTypes !== "") {
-           armour.otherTypes = armourItem.otherTypes;
-         }
-         if (armourItem.archaic) {
-           armour.archaic = 1;
+           armour.protection += armourData.protection;
+           armour.otherProtection += armourData.otherProtection;
+           armour.rad += armourData.rad;
+           if (armourData.otherTypes !== "") {
+             armour.otherTypes = armourData.otherTypes;
+           }
+           if (armourData.archaic) {
+             armour.archaic = 1;
+           }
          }
        }
      }
@@ -215,6 +221,7 @@ export class MgT2ActorSheet extends ActorSheet {
       const item = this.actor.items.get(li.data("itemId"));
       item.delete();
       li.slideUp(200, () => this.render(false));
+      this._calculateArmour(this.actor);
     });
 
     html.find('.item-wear').click(ev => {
@@ -325,19 +332,35 @@ export class MgT2ActorSheet extends ActorSheet {
     // Grab any data associated with this control.
     const data = duplicate(header.dataset);
     // Initialize a default name.
-    const name = `New ${type.capitalize()}`;
+    let name = `New ${type.capitalize()}`;
+    if (header.dataset.name) {
+      name = header.dataset.name;
+    }
+    console.log(data);
     // Prepare the item object.
     const itemData = {
       name: name,
       type: type,
       data: data
     };
+    if (header.dataset.img) {
+      itemData.img = header.dataset.img;
+    }
+    if (type === "weapon" && header.dataset.skill) {
+      itemData.data.weapon = {};
+      itemData.data.weapon.skill = header.dataset.skill;
+    }
+    if (type === "armour" && header.dataset.form) {
+      itemData.data.armour = {};
+      itemData.data.armour.form = header.dataset.form;
+    }
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data["type"];
 
     // Finally, create the item!
     return await Item.create(itemData, {parent: this.actor});
   }
+
 
   _onRollWrapper(event, actor) {
     console.log("_onRollWrapper:");

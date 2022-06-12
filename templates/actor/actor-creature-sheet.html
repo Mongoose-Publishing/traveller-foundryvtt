@@ -14,15 +14,40 @@
                        value="{{data.hits.max}}" data-dtype="Number"/>
             </div>
 
-            <div class="creature-box shadow">
+            <div class="creature-box creature-armour shadow">
                 <label class="box-title">🛡️ ARMOUR</label>
 
                 <input class="armour-value" type="text" name="data.armour.protection" title="Protection"
                            value="{{data.armour.protection}}" data-dtype="Number"/>
-                🔥 <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy"
+                <span style="margin-left: 28px">
+                    🔥 <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy"
                           value="{{data.armour.otherProtection}}" data-dtype="Number"/><br/>
-                <input type="text" name="data.armour.otherTypes" title="Energy types"
+                    <input type="text" name="data.armour.otherTypes" title="Energy types"
                        value="{{data.armour.otherTypes}}" data-dtype="String"/>
+                </span>
+
+                <ol class="items-list">
+                    {{#each items as |item id|}}
+                    {{#if item.data.armour}}
+                    <li class="item" data-item-id="{{item._id}}" title="{{item.data.armour.protection}}">
+                        <a class="rollable" data-roll-type="item">
+                            <img src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
+                        </a>
+                        <label>{{item.name}}</label>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    <br/>
+                    {{/if}}
+                    {{/each}}
+                </ol>
+                <a class="item-control item-create" title="Add armour" data-type="armour"
+                   data-name="Natural Armour" data-form="natural"
+                   data-img="systems/mgt2/icons/items/armour-natural.svg">
+                    <i class="fas fa-plus"></i> Add</a>
+
             </div>
 
             <div class="creature-box creature-attacks shadow">
@@ -30,7 +55,8 @@
 
                 <ol class="items-list">
                     {{#each items as |item id|}}
-                        <li class="item" data-item-id="{{item._id}}">
+                        {{#if item.data.weapon}}
+                        <li class="item" data-item-id="{{item._id}}" title="{{item.data.weapon.damage}}">
                             <a class="rollable" data-roll-type="item">
                                 <img src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
                             </a>
@@ -40,8 +66,14 @@
                                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                             </div>
                         </li>
+                    <br/>
+                    {{/if}}
                     {{/each}}
                 </ol>
+                <a class="item-control item-create" title="Create attack" data-type="weapon"
+                   data-name="Add attack" data-damage="1d6" data-skill="melee.natural"
+                   data-img="systems/mgt2/icons/items/melee-natural.svg">
+                    <i class="fas fa-plus"></i> Add</a>
             </div>
         </div>
 
@@ -92,64 +124,6 @@
             </section>
 
         </div>
-  </section>
-
-
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="skills">Skills</a>
-    <a class="item" data-tab="features">Features</a>
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="items">Items</a>
-    <a class="item" data-tab="effects">Effects</a>
-  </nav>
-
-  {{!-- Sheet Body --}}
-  <section class="sheet-body">
-
-    {{!-- Skills Tab --}}
-    <div class="tab skills" data-group="primary" data-tab="skills">
-
-        {{> "systems/mgt2/templates/actor/parts/actor-weapons.html"}}
-    </div>
-
-    {{!-- Owned Features Tab --}}
-    <div class="tab features" data-group="primary" data-tab="features">
-      <section class="grid grid-3col">
-        <aside class="sidebar">
-
-          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-          use both the "grid" and "grid-Ncol" class where "N" can be any number
-          from 1 to 12 and will create that number of columns.  --}}
-        </aside>
-
-        {{!-- For the main features list, span the right two columns --}}
-        <section class="main grid-span-2">
-          {{!-- This is a Handlebars partial. They're stored in the `/parts` folder next to this sheet, and defined in module/helpers/templates.mjs --}}
-          {{> "systems/mgt2/templates/actor/parts/actor-features.html"}}
-        </section>
-
-      </section>
-    </div>
-
-    {{!-- Biography Tab --}}
-    <div class="tab biography" data-group="primary" data-tab="description">
-      {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
-        {{editor content=data.description target="data.description"
-        rollData=rollData button=true owner=owner editable=editable}}
-    </div>
-
-    {{!-- Owned Items Tab --}}
-    <div class="tab items" data-group="primary" data-tab="items">
-       {{> "systems/mgt2/templates/actor/parts/actor-items.html"}}
-    </div>
-
-    {{!-- Active Effects Tab --}}
-    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-      {{> "systems/mgt2/templates/actor/parts/actor-effects.html"}}
-    </div>
-
   </section>
 </form>
 

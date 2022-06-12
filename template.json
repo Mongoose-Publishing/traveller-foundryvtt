@@ -967,6 +967,7 @@
             "skill": "melee.unarmed",
             "damageBonus": "",
             "damageType": "standard",
+            "attackBonus": 0,
             "traits": "",
             "sfx": ""
         }
@@ -981,6 +982,7 @@
             "archaic": 0,
             "skill": "",
             "duration": 0,
+            "form": "standard",
             "layered": 0,
             "worn": 0
         }

@@ -117,7 +117,14 @@
               </select>
           </div>
 
-        <div class="resource grid-span-3">
+          <div class="resource">
+              <label for="data.weapon.attackBonus" class="resource-label">Attack Bonus</label><br/>
+              <input type="text" name="data.weapon.attackBonus"
+                     value="{{data.weapon.attackBonus}}" data-dtype="Number"/>
+          </div>
+
+
+              <div class="resource grid-span-3">
             <label for="data.weapon.notes" class="resource-label">Notes</label><br/>
             <input type="text" name="data.notes" value="{{data.notes}}" data-dtype="String"/>
         </div>
