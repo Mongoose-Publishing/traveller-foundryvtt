@@ -1,7 +1,7 @@
 {
   "name": "mgt2",
   "title": "Mongoose Traveller 2e (Unofficial)",
-  "description": "The Mongoose Traveller system for FoundryVTT!",
+  "description": "An unofficial system for Mongoose Traveller 2e",
   "version": "1.1.0",
   "minimumCoreVersion": "0.8.5",
   "compatibleCoreVersion": "0.8.6",

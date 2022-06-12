@@ -548,7 +548,7 @@ h1.charname input {
 
 .actor .skill-label {
     display: inline-block;
-    width: 140px;
+    width: 100px;
     font-size: 9pt;
 }
 
@@ -556,14 +556,14 @@ h1.charname input {
     display: inline-block;
     font-style: italic;
     margin-left: 26px;
-    width: 140px;
+    width: 100px;
 }
 
 .actor .individual {
     display: inline-block;
     font-style: italic;
     margin-left: 0px;
-    width: 140px;
+    width: 100px;
 }
 
 .actor .text-title {
@@ -767,6 +767,8 @@ div.armour-block {
     align-items: flex-start;
     display: flex;
 }
+
+/* Character sheet for creatures */
 
 .creature-sheet .shadow {
     border: 1px solid #404040;
