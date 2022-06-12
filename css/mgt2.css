@@ -5,7 +5,7 @@
 
 /* Global styles */
 .window-app {
-  font-family: "Orbitron", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .rollable:hover, .rollable:focus {
@@ -315,10 +315,12 @@ h1.charname input {
 .system-mgt2 .tox .tox-editor-container {
     background: #fff;
     height: 100%;
+    min-height: 50px;
 }
 
 .system-mgt2 .tox .tox-edit-area {
   padding: 0 8px;
+    min-height: 50px;
 }
 
 .resource-label {
@@ -760,6 +762,23 @@ div.armour-block {
     display: flex;
 }
 
+.creature-sheet .shadow {
+    border: 1px solid #404040;
+    box-shadow: 3px 3px 3px #406040;
+    border-radius: 5px;
+}
+
+.creature-sheet .stats {
+    padding: 5px;
+}
+
+textarea.traits {
+    height: 50px;
+    vertical-align: top;
+    font-family: "Roboto", sans-serif;
+    font-size: 11pt;
+}
+
 .creature-left {
     width: 180px;
 }
@@ -769,10 +788,7 @@ div.armour-block {
 }
 
 .creature-sheet h1.charname {
-    border: 1px solid #404040;
-    box-shadow: 3px 3px 3px;
     padding: 2px;
-    border-radius: 5px;
     margin-bottom: 10px;
 }
 
@@ -789,22 +805,44 @@ div.armour-block {
     height: 160px;
     margin-right: 10px;
     border-radius: 10px;
-    box-shadow: 3px 3px 3px;
     margin-bottom: 10px;
 }
 
 .creature-sheet .creature-box {
-    border: 1px solid #404040;
-    box-shadow: 3px 3px 3px;
     width: 160px;
     padding: 2px;
-    border-radius: 5px;
     margin-bottom: 10px;
 }
 
 .creature-sheet .hits-box {
     text-align: center;
 }
+
+.creature-sheet .creature-info {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.creature-sheet .skills {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.creature-sheet .description {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.description .editor {
+    min-height: 100px;
+    height: 100%;
+}
+
+.tox-tinymce {
+    min-height: 100px;
+    height: 100%;
+}
+
 
 .creature-sheet .creature-attacks li {
     margin: 0px;

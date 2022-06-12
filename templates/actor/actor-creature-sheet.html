@@ -2,10 +2,10 @@
 
     <section class="creature-sheet">
         <div class="creature-left">
-            <img class="profile-img" src="{{actor.img}}" data-edit="img"
+            <img class="profile-img shadow" src="{{actor.img}}" data-edit="img"
                  title="{{actor.name}}" height="100" width="100"/>
 
-            <div class="creature-box hits-box">
+            <div class="creature-box hits-box shadow">
                 <label for="data.hits.max" class="box-title">❤️ HITS</label>
                 <input class="characteristic-value" type="number" name="data.hits.value"
                        value="{{data.hits.value}}" data-dtype="Number"/>
@@ -14,7 +14,7 @@
                        value="{{data.hits.max}}" data-dtype="Number"/>
             </div>
 
-            <div class="creature-box">
+            <div class="creature-box shadow">
                 <label class="box-title">🛡️ ARMOUR</label>
 
                 <input class="armour-value" type="text" name="data.armour.protection" title="Protection"
@@ -25,7 +25,7 @@
                        value="{{data.armour.otherTypes}}" data-dtype="String"/>
             </div>
 
-            <div class="creature-box creature-attacks">
+            <div class="creature-box creature-attacks shadow">
                 <label class="box-title">ATTACKS</label>
 
                 <ol class="items-list">
@@ -46,11 +46,11 @@
         </div>
 
         <div class="creature-right">
-            <h1 class="charname">
+            <h1 class="charname shadow">
                 <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
             </h1>
 
-            <div class="grid grid-3col">
+            <div class="grid grid-3col shadow stats">
                 <div class="resource flex-group-center">
                     <label for="data.speed" class="text-title">SPEED</label>
                     <input class="characteristic-value" type="number" name="data.speed"
@@ -69,76 +69,28 @@
                            value="{{data.initiative}}" data-dtype="Number"/>
                 </div>
             </div>
-            <div class="resources">
+            <div class="creature-info shadow">
                 <div class="resource flex-group-left">
                     <label class="text-title">Behaviour</label>
-                    <input type="text" name="data.behaviour" value="{{data.behaviour}}" data-dtype="Text"/>
+                    <input type="text" name="data.behaviour"
+                           value="{{data.behaviour}}" data-dtype="Text"/>
                 </div>
-            </div>
-            <div>
+
                 <div class="resource flex-group-left">
                     <label class="text-title">Traits</label>
-                    <input type="text" name="data.traits" value="{{data.traits}}" data-dtype="Text"/>
+                    <textarea class="traits" type="text" name="data.traits"
+                           value="{{data.traits}}" data-dtype="Text">{{data.traits}}</textarea>
                 </div>
             </div>
-            <section class="grid grid-2col">
-                {{#each data.skills as |skill key|}}
-                {{#if skill.creature}}
-                {{#if skill.trained}}
-                <div class="resource flex-group-left">
-                    <div>
-                        <input type="checkbox" class="trained"
-                               name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
-                        <label for="data.skills.{{key}}.value"
-                               class="resource-label skill-label rollable"
-                               data-rolltype="skill"
-                               data-skill="{{key}}"
-                               data-roll="{{skillRollable ../data skill null}}"
-                               data-label="{{skillLabel ../data skill null}}"
-                               title="{{skill.default}} + {{skill.value}}">{{skill.label}}</label>
-                        {{#if skill.specialities}}
-                        <input type="text" value="0" data-dtype="Number" class="skill-fixed" readonly/>
-                        {{#each skill.specialities as |spec i|}}
-                        <br/>
-                        <label class="skill-label specialisation rollable"
-                               data-rolltype="skill"
-                               data-skill="{{key}}"
-                               data-spec="{{i}}"
-                               data-roll="{{skillRollable ../../data skill spec}}"
-                               data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
-                        <input type="text"
-                               name="data.skills.{{key}}.specialities.{{i}}.value"
-                               value="{{spec.value}}"
-                               data-dtype="Number"
-                               class="skill-level"/>
-                        {{/each}}
-                        {{else}}
-                        <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}"
-                               data-dtype="Number"
-                               data-rolltype="skill"
-                               data-skill="{{key}}"
-                               class="skill-level"/>
-                        {{/if}}
-                    </div>
-                </div>
-                {{else}}
-                <div class="resource flex-group-left">
-                    <div>
-                        <input type="checkbox" class="trained" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
-                        <label for="data.skills.{{key}}.value"
-                               class="resource-label skill-label rollable untrained"
-                               data-rollType="skill"
-                               data-skill="{{key}}"
-                               data-roll="{{skillRollable ../data skill null}}"
-                               data-label="{{skillLabel ../data skill null}}">{{skill.label}}</label>
-                        <input type="text" value="{{defaultSkill ../data}}" data-dtype="Number" class="skill-fixed" readonly/>
-                    </div>
-                </div>
-                {{/if}}
-                {{/if}}
-                {{/each}}
+            <div class="skills shadow">
+                {{> "systems/mgt2/templates/actor/parts/creature-skills.html"}}
+            </div>
 
+            <section class="description shadow">
+                {{editor content=data.description target="data.description"
+                         rollData=rollData button=true owner=owner editable=editable}}
             </section>
+
         </div>
   </section>
 
@@ -184,7 +136,8 @@
     {{!-- Biography Tab --}}
     <div class="tab biography" data-group="primary" data-tab="description">
       {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
-      {{editor content=data.biography target="data.biography" rollData=rollData button=true owner=owner editable=editable}}
+        {{editor content=data.description target="data.description"
+        rollData=rollData button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Owned Items Tab --}}
