@@ -687,15 +687,6 @@ h2.subroll {
 }
 
 
-div.physics {
-    width: 100%;
-    background-color: #F0F0F0;
-    color: black;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 3px;
-}
-
 span.skill-roll {
     background: #DDDD;
     padding: 1px 4px;
@@ -755,26 +746,57 @@ div.armour-block {
     border-radius: 5px;
 }
 
+/* Common styles */
 
 .window-app .window-content {
     background: #A0A0A0;
     background2: url(/systems/mgt2/images/traveller-background.png);
 }
 
+
+.shadow {
+    border: 1px solid #404040;
+    box-shadow: 3px 3px 3px #404040;
+    border-radius: 5px;
+    background-color: #c5c3b4;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Item sheets */
+
+.item-sheet {
+    display: flex;
+}
+
+.item-sheet div.sidebar {
+    flex: 0 0 160px;
+    width: 160px;
+}
+
+img.item-img {
+    width: 140px;
+    height: 140px;
+    min-height: 140px;
+    min-width: 140px;
+    margin-right: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 0px;
+}
+
+div.item-side-panel {
+    width: 140px;
+    max-width: 140px;
+}
+
+/* Character sheet for creatures */
+
 .creature-sheet {
     border: 2px groove #f0f0f0;
     padding: 5px;
     align-items: flex-start;
     display: flex;
-}
-
-/* Character sheet for creatures */
-
-.creature-sheet .shadow {
-    border: 1px solid #404040;
-    box-shadow: 3px 3px 3px #404040;
-    border-radius: 5px;
-    background-color: #c5c3b4;
 }
 
 .creature-sheet .stats {
@@ -815,6 +837,7 @@ textarea.traits {
     margin-right: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
+    padding: 0px;
 }
 
 .creature-sheet .creature-box {

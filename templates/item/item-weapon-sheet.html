@@ -1,52 +1,123 @@
 <form class="{{cssClass}} {{item.type}} flexcol" autocomplete="off">
+    <section class="item-sheet">
+        <div class="sidebar">
+            <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
-  <header class="sheet-header grid grid-2col">
-    <div class="header-profile flex-group-left">
-      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+            <div class="shadow item-side-panel">
+                <div class="resource flex-group-center">
+                    <label for="data.weapon.ammo" class="resource-label">Ammo</label>
+                    <input type="text" name="data.weapon.ammo" value="{{data.weapon.ammo}}" data-dtype="Number"/>
+                </div>
 
-      <div>
-        <label class="profile-label">Weapon</label>
-      </div>
-    </div>
+            </div>
 
-    <div class="header-fields flex-group-left">
-      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-
-        {{log item}}
-
-      <div class="resources grid grid-4col">
-        <div class="resource">
-          <label for="data.weapon.damage" class="resource-label">Damage</label>
-          <input type="text" name="data.weapon.damage" value="{{data.weapon.damage}}" data-dtype="String"/>
-        </div>
-        <div class="resource">
-          <label for="data.weapon.range" class="resource-label">Range (m)</label>
-          <input type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
-        </div>
-        <div class="resource">
-          <label for="data.weapon.magazine" class="resource-label">Magazine</label>
-          <input type="text" name="data.weapon.magazine" value="{{data.weapon.magazine}}" data-dtype="Number"/>
-        </div>
-        <div class="resource">
-          <label for="data.weapon.ammo" class="resource-label">Ammo</label>
-          <input type="text" name="data.weapon.ammo" value="{{data.weapon.ammo}}" data-dtype="Number"/>
+            <div class="shadow item-side-panel">
+                <div class="resource flex-group-left">
+                    <label for="data.weapon.notes" class="resource-label">Notes</label><br/>
+                    <input type="text" name="data.notes" value="{{data.notes}}" data-dtype="String"/>
+                </div>
+            </div>
         </div>
 
-        <div class="resource">
-            <label for="data.tl" class="resource-label">TL</label>
-            <input type="text" name="data.tl" value="{{data.tl}}" data-dtype="Number"/>
+        <div class="flex-group-left">
+            <div class="shadow">
+                <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                <div class="resources grid grid-4col flex-group-center">
+                    <div class="resource">
+                        <label for="data.weapon.damage" class="resource-label">Damage</label>
+                        <input type="text" name="data.weapon.damage" value="{{data.weapon.damage}}" data-dtype="String"/>
+                    </div>
+                    <div class="resource">
+                        <label for="data.weapon.range" class="resource-label">Range (m)</label>
+                        <input type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label for="data.weapon.magazine" class="resource-label">Magazine</label>
+                        <input type="text" name="data.weapon.magazine" value="{{data.weapon.magazine}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label for="data.weight" class="resource-label">KG</label>
+                        <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label for="data.tl" class="resource-label">TL</label>
+                        <input type="text" name="data.tl" value="{{data.tl}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource grid-span-3 flex-group-left">
+                        <label for="data.weapon.traits" class="resource-label">Traits</label>
+                        <input type="text" name="data.weapon.traits" value="{{data.weapon.traits}}" data-dtype="String"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow">
+                <div class="resources grid grid-3col flex-group-left">
+                    <div class="resource">
+                        <label for="data.weapon.characteristic" class="resource-label">Characteristic</label><br/>
+                        <select name="data.weapon.characteristic">
+                            {{#select data.weapon.characteristic}}
+                            <option value="STR">STR</option>
+                            <option value="DEX">DEX</option>
+                            <option value="INT">INT</option>
+                            {{/select}}
+                        </select>
+                    </div>
+                    <div class="resource grid-span-2">
+                        <label for="data.weapon.skill" class="resource-label">Skill</label><br/>
+                        <select name="data.weapon.skill">
+                            {{#select data.weapon.skill}}
+                            <option value="-">None</option>
+                            {{#each skills as |skill id|}}
+                                {{#if skill.combat}}
+                                    <option value="{{id}}">{{skill.label}}</option>
+                                {{/if}}
+                                {{#if skill.specialities}}
+                                    {{#each skill.specialities as |spec sid|}}
+                                        {{#if spec.combat}}
+                                            <option value="{{id}}.{{sid}}">{{skill.label}} ({{spec.label}})</option>
+                                        {{/if}}
+                                    {{/each}}
+                                {{/if}}
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                    <div class="resource">
+                        <label for="data.weapon.damageBonus" class="resource-label">Damage DM</label><br/>
+                        <select name="data.weapon.damageBonus">
+                            {{#select data.weapon.damageBonus}}
+                            <option value="">-</option>
+                            <option value="STR">STR</option>
+                            {{/select}}
+                        </select>
+                    </div>
+
+                    <div class="resource">
+                        <label for="data.weapon.damageType" class="resource-label">Damage Type</label><br/>
+                        <select name="data.weapon.damageType">
+                            {{#select data.weapon.damageType}}
+                            <option value="standard">Standard</option>
+                            <option value="laser">Laser</option>
+                            <option value="plasma">Plasma</option>
+                            <option value="fire">Fire</option>
+                            <option value="energy">Energy</option>
+                            {{/select}}
+                        </select>
+                    </div>
+
+                    <div class="resource">
+                        <label for="data.weapon.attackBonus" class="resource-label">Attack DM</label><br/>
+                        <input type="text" name="data.weapon.attackBonus"
+                               value="{{data.weapon.attackBonus}}" data-dtype="Number"/>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="resource">
-            <label for="data.weight" class="resource-label">KG</label>
-            <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
-        </div>
-        <div class="resource grid-span-2">
-            <label for="data.weapon.traits" class="resource-label">Traits</label>
-            <input type="text" name="data.weapon.traits" value="{{data.weapon.traits}}" data-dtype="String"/>
-        </div>
-      </div>
-    </div>
-  </header>
+
+    </section>
+
+
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
@@ -61,72 +132,12 @@
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       {{!-- As you add new fields, add them in here! --}}
 
-      <div class="resources grid grid-3col">
 
-        <div class="resource">
-            <label for="data.weapon.characteristic" class="resource-label">Characteristic</label><br/>
-            <select name="data.weapon.characteristic">
-                {{#select data.weapon.characteristic}}
-                <option value="STR">STR</option>
-                <option value="DEX">DEX</option>
-                <option value="INT">INT</option>
-                {{/select}}
-            </select>
-        </div>
 
-        <div class="resource grid-span-2">
-            <label for="data.weapon.skill" class="resource-label">Skill</label><br/>
-            <select name="data.weapon.skill">
-                {{#select data.weapon.skill}}
-                <option value="athletics.dexterity">Athletics (Dexterity)</option>
-                <option value="melee.unarmed">Melee (Unarmed)</option>
-                <option value="melee.blade">Melee (Blade)</option>
-                <option value="melee.bludgeon">Melee (Bludgeon)</option>
-                <option value="melee.natural">Melee (Natural)</option>
-                <option value="guncombat.archaic">Gun Combat (Archaic)</option>
-                <option value="guncombat.energy">Gun Combat (Energy)</option>
-                <option value="guncombat.slug">Gun Combat (Slug)</option>
-                <option value="heavyweapons.artillery">Heavy Weapons (Artillery)</option>
-                <option value="heavyweapons.portable">Heavy Weapons (Portable)</option>
-                <option value="heavyweapons.vehicle">Heavy Weapons (Vehicle)</option>
-                <option value="explosives">Explosives</option>
-                {{/select}}
-            </select>
-        </div>
 
-        <div class="resource">
-            <label for="data.weapon.damageBonus" class="resource-label">Damage Bonus</label><br/>
-            <select name="data.weapon.damageBonus">
-                {{#select data.weapon.damageBonus}}
-                <option value="">-</option>
-                <option value="STR">STR</option>
-                {{/select}}
-            </select>
-        </div>
-
-          <div class="resource">
-              <label for="data.weapon.damageType" class="resource-label">Damage Type</label><br/>
-              <select name="data.weapon.damageType">
-                  {{#select data.weapon.damageType}}
-                  <option value="standard">Standard</option>
-                  <option value="laser">Laser</option>
-                  <option value="plasma">Plasma</option>
-                  <option value="fire">Fire</option>
-                  <option value="energy">Energy</option>
-                  {{/select}}
-              </select>
-          </div>
-
-          <div class="resource">
-              <label for="data.weapon.attackBonus" class="resource-label">Attack Bonus</label><br/>
-              <input type="text" name="data.weapon.attackBonus"
-                     value="{{data.weapon.attackBonus}}" data-dtype="Number"/>
-          </div>
 
 
               <div class="resource grid-span-3">
-            <label for="data.weapon.notes" class="resource-label">Notes</label><br/>
-            <input type="text" name="data.notes" value="{{data.notes}}" data-dtype="String"/>
         </div>
       </div>
 

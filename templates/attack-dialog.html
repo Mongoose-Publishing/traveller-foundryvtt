@@ -1,60 +1,62 @@
 <form class="flexcol skilldialog">
 
-    <p>
+    <div class="shadow">
         <b>{{weapon.name}}</b> {{damage}}<br/>
         {{#if cha}}
             <i>{{cha}} + {{skill}} ({{speciality}}) at {{score}}</i>
         {{else}}
             <i>{{skill}} ({{speciality}}) at {{score}}</i>
         {{/if}}
-    </p>
-
-    <div class="boon-selection">
-        <label for="dicetype" class="skillDialogLabel">Roll Type</label>
-        <select class="skillDialogRollType" name="dicetype">
-            {{#select "normal"}}
-                <option value="normal">Normal</option>
-                <option value="boon">Boon</option>
-                <option value="bane">Bane</option>
-            {{/select}}
-        </select>
     </div>
 
-    {{#if melee}}
-    {{else}}
-        <div class="range">
-            <label for="range" class="skillDialogLabel">Range</label>
-            <select class="attackDialogRange" name="difficulty">
-                {{#select "0"}}
-                    <option value="+1">Short ({{shortRange}}m, +1)</option>
-                    <option value="0">Medium ({{range}}m)</option>
-                    <option value="-2">Long ({{longRange}}m, -2)</option>
-                    <option value="-4">Extreme ({{extremeRange}}m, -4)</option>
+    <div class="shadow">
+        <div class="boon-selection">
+            <label for="dicetype" class="skillDialogLabel">Roll Type</label>
+            <select class="skillDialogRollType" name="dicetype">
+                {{#select "normal"}}
+                    <option value="normal">Normal</option>
+                    <option value="boon">Boon</option>
+                    <option value="bane">Bane</option>
                 {{/select}}
             </select>
         </div>
-    {{/if}}
 
-    {{#if hasAuto}}
-        <div class="auto">
-            <label for="auto" class="skillDialogLabel">Auto Fire</label>
-            <select class="attackDialogAuto" name="autoFire">
-                {{#select "single"}}
-                    <option value="single">Single Shot</option>
-                    <option value="burst">Burst (+{{auto}})</option>
-                    <option value="full">Full Auto (x{{auto}})</option>
-                {{/select}}
-            </select>
+        {{#if melee}}
+        {{else}}
+            <div class="range">
+                <label for="range" class="skillDialogLabel">Range</label>
+                <select class="attackDialogRange" name="difficulty">
+                    {{#select "0"}}
+                        <option value="+1">Short ({{shortRange}}m, +1)</option>
+                        <option value="0">Medium ({{range}}m)</option>
+                        <option value="-2">Long ({{longRange}}m, -2)</option>
+                        <option value="-4">Extreme ({{extremeRange}}m, -4)</option>
+                    {{/select}}
+                </select>
+            </div>
+        {{/if}}
+
+        {{#if hasAuto}}
+            <div class="auto">
+                <label for="auto" class="skillDialogLabel">Auto Fire</label>
+                <select class="attackDialogAuto" name="autoFire">
+                    {{#select "single"}}
+                        <option value="single">Single Shot</option>
+                        <option value="burst">Burst (+{{auto}})</option>
+                        <option value="full">Full Auto (x{{auto}})</option>
+                    {{/select}}
+                </select>
+            </div>
+        {{/if}}
+
+        <div class="bonus-selection">
+            <label for="dm" class="skillDialogLabel">DM</label>
+            <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
         </div>
-    {{/if}}
-
-    <div class="bonus-selection">
-        <label for="dm" class="skillDialogLabel">DM</label>
-        <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
     </div>
 
     <footer class="sheet-footer flexrow">
-        <button type="submit" name="submit" class="skillRoll">Roll</button>
+        <button type="submit" name="submit" class="skillRoll">Attack</button>
     </footer>
 
 </form>

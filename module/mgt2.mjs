@@ -92,41 +92,6 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     console.log(`My message was "${message}".`);
     console.log(chatData);
 
-    if (message.indexOf("/phy") === 0) {
-        let args = message.split(" ");
-        args.shift()
-
-        if (args.length === 0) {
-            Physics.help(chatData);
-            return false;
-        } else if ("planet".startsWith(args[0])) {
-            args.shift();
-            Physics.planetCommand(chatData, args);
-            return false;
-        } else if ("thrust".startsWith(args[0])) {
-            args.shift();
-            Physics.thrustCommand(chatData, args);
-            return false;
-        } else if ("ethrust".startsWith(args[0])) {
-            args.shift();
-            Physics.eThrustCommand(chatData, args);
-            return false;
-        } else if ("rocket".startsWith(args[0])) {
-            args.shift();
-            Physics.rocketCommand(chatData, args);
-            return false;
-        } else if ("apitest".startsWith(args[0])) {
-            args.shift();
-            Physics.getSector(chatData, args);
-            return false;
-        }
-
-        chatData.content = `<div class="physics">`;
-        chatData.type = 1;
-        ChatMessage.create(chatData);
-        return false;
-    }
-
     if (message.indexOf("/upp") === 0) {
         let args = message.split(" ");
         args.shift();

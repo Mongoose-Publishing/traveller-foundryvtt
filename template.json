@@ -250,6 +250,7 @@
                     "dexterity": {
                         "label": "Dexterity",
                         "default": "DEX",
+                        "combat": true,
                         "value": 0
                     },
                     "endurance": {
@@ -387,6 +388,7 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
+                "combat": true,
                 "icon": "systems/mgt2/icons/skills/explosives.svg"
             },
             "flyer": {
@@ -438,19 +440,23 @@
                 "specialities": {
                     "turret": {
                         "label": "Turret",
+                        "combat": true,
                         "value": 0
                     },
                     "ortillery": {
                         "label": "Ortillery",
+                        "combat": true,
                         "value": 0
                     },
                     "screen": {
                         "label": "Screen",
+                        "combat": true,
                         "value": 0
                     },
                     "capital": {
                         "label": "Capital",
                         "default": "INT",
+                        "combat": true,
                         "value": 0
                     }
                 }
@@ -466,14 +472,17 @@
                 "specialities": {
                     "archaic": {
                         "label": "Archaic",
+                        "combat": true,
                         "value": 0
                     },
                     "energy": {
                         "label": "Energy",
+                        "combat": true,
                         "value": 0
                     },
                     "slug": {
                         "label": "Slug",
+                        "combat": true,
                         "value": 0
                     }
                 }
@@ -488,14 +497,17 @@
                 "specialities": {
                     "artillery": {
                         "label": "Artillery",
+                        "combat": true,
                         "value": 0
                     },
                     "portable": {
                         "label": "Portable",
+                        "combat": true,
                         "value": 0
                     },
                     "vehicle": {
                         "label": "Vehicle",
+                        "combat": true,
                         "value": 0
                     }
                 }
@@ -596,18 +608,22 @@
                 "specialities": {
                     "unarmed": {
                         "label": "Unarmed",
+                        "combat": true,
                         "value": 0
                     },
                     "blade": {
                         "label": "Blade",
+                        "combat": true,
                         "value": 0
                     },
                     "bludgeon": {
                         "label": "Bludgeon",
+                        "combat": true,
                         "value": 0
                     },
                     "natural": {
                         "label": "Natural",
+                        "combat": true,
                         "value": 0
                     }
                 }
