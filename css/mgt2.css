@@ -988,3 +988,9 @@ label.box-title {
     padding: 0px;
     padding-right: 3px;
 }
+
+.skill-options {
+    color: #404040;
+    font-size: smaller;
+}
+

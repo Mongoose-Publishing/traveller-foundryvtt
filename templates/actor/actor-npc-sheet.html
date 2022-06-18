@@ -168,13 +168,6 @@
                     {{!-- Settings Tab --}}
                     <section class="tab settings flexcol" data-group="primary" data-tab="settings">
                         <section class="resources grid grid-3col">
-                            <div class="resource flex-group-left">
-                                <input type="checkbox" name="data.settings.hideUntrained" {{checked data.settings.hideUntrained}} data-dtype="Boolean" />
-                                <label for="data.settings.hideUntrained">Hide untrained skills</label>
-                            </div>
-                        </section>
-                        <hr/>
-                        <section class="resources grid grid-3col">
                             {{#each data.characteristics as | char key | }}
                             <div class="resource flex-group-left">
                                 <input type="checkbox" name="data.characteristics.{{key}}.show" {{checked char.show}} data-dtype="Boolean" />

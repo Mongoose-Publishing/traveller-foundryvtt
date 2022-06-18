@@ -1,3 +1,15 @@
+
+<div class="skill-options">
+    <input class="trained" type="checkbox" name="data.settings.hideUntrained"
+           {{checked data.settings.hideUntrained}} data-dtype="Boolean" />
+    <label for="data.settings.hideUntrained">Trained only</label>
+    <input class="trained" type="checkbox" name="data.settings.onlyBackground"
+           {{checked data.settings.onlyBackground}} data-dtype="Boolean" />
+    <label for="data.settings.onlyBackground">Background only</label>
+</div>
+
+<hr/>
+
 <section class="grid grid-3col">
 {{#each data.skills as |skill key|}}
     {{#if (isChaShown ../data skill.requires)}}
@@ -6,8 +18,7 @@
                 <div class="resource flex-group-left">
                     <div>
                         <input type="checkbox" class="trained" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
-                        <label for="data.skills.{{key}}.value" class="resource-label" style="width: 96px; font-weight: normal">{{skill.label}}</label>
-                        ({{defaultSkill ../data}})
+                        <label for="data.skills.{{key}}.value" class="resource-label skill-label" style="width: 96px; font-weight: normal">{{skill.label}}</label>
                     </div>
                 </div>
             {{/if}}
