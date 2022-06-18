@@ -890,7 +890,7 @@ textarea.traits {
     padding-right: 3px;
 }
 
-.creature-sheet label.box-title {
+label.box-title {
     font-weight: bold;
     text-align: center;
     display: block;
@@ -962,4 +962,29 @@ textarea.traits {
 .bio-box {
     min-height: 200px;
     border: 2px groove #f0f0f0;
+}
+
+.npc-sheet .character-right div.npc-info {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.character-attacks .items-list label {
+    display: inline;
+    font-weight: bold;
+    vertical-align: top;
+    padding-left: 3px;
+}
+
+.character-attacks li {
+    margin: 0px;
+    padding: 0px;
+}
+
+.character-attacks img {
+    text-align: left;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    padding-right: 3px;
 }
