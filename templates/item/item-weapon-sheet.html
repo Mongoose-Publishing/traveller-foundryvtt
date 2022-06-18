@@ -112,43 +112,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </section>
 
-
-
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="attributes">Attributes</a>
-    <a class="item" data-tab="description">Description</a>
-  </nav>
-
-  {{!-- Sheet Body --}}
-  <section class="sheet-body">
-
-    {{!-- Attributes Tab --}}
-    <div class="tab attributes" data-group="primary" data-tab="attributes">
-      {{!-- As you add new fields, add them in here! --}}
-
-
-
-
-
-
-              <div class="resource grid-span-3">
+    <section>
+        <div class="shadow">
+            {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner editable=editable}}
         </div>
-      </div>
+    </section>
 
-      <label>Description</label>
-    </div>
-
-    {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
-        {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner editable=editable}}
-    </div>
-
-
-  </section>
 </form>

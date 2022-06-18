@@ -1,20 +1,83 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
 
+    <section class="npc-sheet">
+        <div class="character-left">
+            <img class="profile-img shadow" src="{{actor.img}}" data-edit="img"
+                 title="{{actor.name}}" height="100" width="100"/>
+
+            <div class="shadow side-panel">
+                <label class="profile-label">Species</label>
+                <input name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
+                <label class="profile-label">Gender</label>
+                <input name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
+            </div>
+        </div>
+
+        <div class="character-right">
+            <h1 class="charname shadow">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+            </h1>
+
+            <div class="shadow">
+                <div class="resources grid grid-6col">
+                    {{#each data.characteristics as | char key | }}
+                    {{#if char.show}}
+                    <div class="resource flex-group-center">
+                        <label for="data.characteristics.{{key}}.value"
+                               class="characteristic-title rollable"
+                               data-roll="{{boonDice ../data}}+@{{key}}" data-label="{{key}}{{boonLabel ../data}}"
+                               title="{{char.label}}">{{key}}</label>
+                        <span class="characteristic-dm">{{numberFormat char.dm sign=true}}</span>
+                        <br/>
+                        <input class="characteristic-value" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="shadow">
+                <div class="resources grid grid-4col">
+                    <div class="resource flex-group-center">
+                        <label for="data.speed" class="resource-label">SPEED</label>
+                        <input type="text" name="data.speed" value="{{data.speed}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label for="data.size" class="resource-label">SIZE</label>
+                        <input type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label for="data.intiative" class="resource-label">INIT</label>
+                        <input type="text" name="data.intiative" value="{{data.intiative}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label for="data.hits.value" class="resource-label">MAX HITS</label>
+                        <!--
+                        <input type="text" name="data.hits.value" value="{{data.hits.value}}"
+                               data-dtype="Number"/> /
+                               -->
+                        <input type="text" name="data.hits.max" value="{{data.hits.max}}"
+                               readonly data-dtype="Number"/>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="shadow">
+
+            </div>
+        </div>
+
+
+    </section>
+
   {{!-- Sheet Header --}}
   <header class="sheet-header grid grid-2col">
     <div class="header-profile flex-group-left">
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="140" width="140"/>
 
-        <div>
-            <label class="profile-label">Species</label>
-            <input name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
-            <label class="profile-label">Gender</label>
-            <input name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
-        </div>
     </div>
 
     <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
 
       {{!-- Traveller Characteristics --}}
       <div class="resources grid grid-3col">
@@ -22,19 +85,6 @@
         and it will add a small amount of padding, a border, and will
         center all of its child elements content and text. --}}
 
-        {{#each data.characteristics as | char key | }}
-            {{#if char.show}}
-                <div class="resource flex-group-center">
-                    <label for="data.characteristics.{{key}}.value"
-                            class="characteristic-title rollable"
-                            data-roll="{{boonDice ../data}}+@{{key}}" data-label="{{key}}{{boonLabel ../data}}"
-                            title="{{char.label}}">{{key}}</label>
-                    <span class="characteristic-dm">{{numberFormat char.dm sign=true}}</span>
-                    <br/>
-                    <input class="characteristic-value" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
-                </div>
-            {{/if}}
-        {{/each}}
     </div>
   </header>
 
@@ -72,24 +122,6 @@
                           value="{{data.armour.otherProtection}}" data-dtype="Number"/><br/>
                 <input type="text" name="data.armour.otherTypes" title="Energy types" readonly
                        value="{{data.armour.otherTypes}}" data-dtype="String"/>
-            </div>
-            <div class="resource flex-group-center">
-                <label for="data.speed" class="resource-label">SPEED</label>
-                <input type="text" name="data.speed" value="{{data.speed}}" data-dtype="Number"/>
-                <label for="data.size" class="resource-label">SIZE</label>
-                <input type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
-            </div>
-            <div class="resource flex-group-center">
-                <label for="data.intiative" class="resource-label">INIT</label>
-                <input type="text" name="data.intiative" value="{{data.intiative}}" data-dtype="Number"/>
-            </div>
-            <div class="resource flex-group-center">
-                <label for="data.hits.value" class="resource-label">HITS</label>
-                <input type="text" name="data.hits.value" value="{{data.hits.value}}"
-                       data-dtype="Number"/>
-                <label for="data.hits.max" class="resource-label">MAX</label>
-                <input type="text" name="data.hits.max" value="{{data.hits.max}}"
-                       readonly data-dtype="Number"/>
             </div>
         </section>
 

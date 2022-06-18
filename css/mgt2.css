@@ -790,6 +790,15 @@ div.item-side-panel {
     max-width: 140px;
 }
 
+.character-left {
+    flex: 0 0 180px;
+    width: 180px;
+}
+
+.character-right {
+    width: auto;
+}
+
 /* Character sheet for creatures */
 
 .creature-sheet {
@@ -810,25 +819,17 @@ textarea.traits {
     font-size: 11pt;
 }
 
-.creature-left {
-    width: 180px;
-}
-
-.creature-right {
-    width: auto;
-}
-
 .creature-sheet h1.charname {
     padding: 2px;
     margin-bottom: 10px;
 }
 
-.creature-sheet ht.charname input {
-    background-color: white;
-    border: none;
+.creature-sheet h1.charname input {
+    _background-color: white;
+    _border: none;
 }
 
-.creature-sheet img.profile-img {
+.character-left img.profile-img {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 160px;
     flex: 0 0 140px;
@@ -940,4 +941,20 @@ textarea.traits {
     margin: 0;
     margin-top: 0;
     border-bottom: 0;
+}
+
+/* NPC Character Sheet */
+
+
+.npc-sheet {
+    border: 2px groove #f0f0f0;
+    padding: 5px;
+    align-items: flex-start;
+    display: flex;
+}
+
+.character-left .side-panel {
+    width: 160px;
+    padding: 2px;
+    margin-bottom: 10px;
 }
