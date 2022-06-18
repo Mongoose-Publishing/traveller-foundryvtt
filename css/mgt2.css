@@ -847,7 +847,7 @@ textarea.traits {
     margin-bottom: 10px;
 }
 
-.creature-sheet .hits-box {
+.hits-box {
     text-align: center;
 }
 
@@ -957,4 +957,9 @@ textarea.traits {
     width: 160px;
     padding: 2px;
     margin-bottom: 10px;
+}
+
+.bio-box {
+    min-height: 200px;
+    border: 2px groove #f0f0f0;
 }
