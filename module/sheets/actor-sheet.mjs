@@ -304,7 +304,7 @@ export class MgT2ActorSheet extends ActorSheet {
     }
   }
 
-  _onDropDamage(event, data) {
+  async _onDropDamage(event, data) {
     const damage = data.damage;
     const laser = data.laser;
     const stun = false;
@@ -312,7 +312,6 @@ export class MgT2ActorSheet extends ActorSheet {
     const actor = this.actor;
 
     new MgT2DamageDialog(actor, damage, ap, laser, stun).render(true);
-
   }
 
   async _onRollTypeChange(event, actor, type) {

@@ -46,6 +46,17 @@ Tools.message = function(chatData, message) {
     ChatMessage.create(chatData);
 }
 
+Tools.applyDamageToCha= function(damage, actorData, cha) {
+    if (damage > 0) {
+        let dmg = Math.min(damage, actorData.characteristics[cha].current);
+        actorData.damage[cha].value += dmg;
+        console.log("Applied " + dmg + " to " + cha);
+
+        return damage - dmg;
+    }
+    return 0;
+}
+
 // Apply damage to an actor. Needs to calculate armour.
 Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     let text = "";
@@ -99,9 +110,33 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     armour = Math.max(0, armour - ap);
     let actualDamage = Math.max(0, damage - armour);
 
-    console.log("HITS: " + data.hits.value);
     console.log("DAMAGE: " + actualDamage);
-    data.hits.value = Math.max(0 - data.hits.max, data.hits.value - actualDamage);
+    if (actor.type === "traveller") {
+        // Travellers don't have hits, n
+        let remaining = actualDamage;
+        // Damage always comes off END first.
+        if (data.damage.END.value < data.characteristics.END.value) {
+            remaining = Tools.applyDamageToCha(remaining, data, "END");
+        }
+        // Now select either STR or DEX. Select the lowest as long as it doesn't take
+        // the characteristic to zero.
+        if (remaining > 0) {
+            let str = data.characteristics.STR.current;
+            if (str <= data.characteristics.DEX.current && str > remaining) {
+                remaining = Tools.applyDamageToCha(remaining, data, "STR");
+                remaining = Tools.applyDamageToCha(remaining, data, "DEX");
+            } else {
+                remaining = Tools.applyDamageToCha(remaining, data, "DEX");
+                remaining = Tools.applyDamageToCha(remaining, data, "STR");
+            }
+        }
+        actor.update({"data.damage": data.damage});
+        return;
+    } else {
+        console.log("HITS: " + data.hits.value);
+        data.hits.value = Math.max(0 - data.hits.max, data.hits.value - actualDamage);
+    }
+
     actor.update({"data.hits": data.hits});
 
     let name = actor.data.name;

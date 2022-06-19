@@ -32,13 +32,15 @@ export class MgT2DamageDialog extends Application {
             this.actualDamage = damage - (this.armour - ap);
         }
 
-        this.DMG_STR = 0;
-        this.DMG_DEX = 0;
-        this.DMG_END = 0;
+        this.DMG_STR = data.damage.STR.value;
+        this.DMG_DEX = data.damage.DEX.value;
+        this.DMG_END = data.damage.END.value;
 
         this.STR = data.characteristics.STR.current;
         this.DEX = data.characteristics.DEX.current;
         this.END = data.characteristics.END.current;
+
+        this.remainingDamage = this.actualDamage;
 
     }
 
@@ -52,9 +54,13 @@ export class MgT2DamageDialog extends Application {
             "stun": this.stun,
             "armour": this.armour,
             "actualDamage": this.actualDamage,
+            "remainingDamage": this.remainingDamage,
             "STR": this.STR,
             "DEX": this.DEX,
-            "END": this.END
+            "END": this.END,
+            "DMG_STR": this.DMG_STR,
+            "DMG_DEX": this.DMG_DEX,
+            "DMG_END": this.DMG_END
         }
     }
 
@@ -65,6 +71,37 @@ export class MgT2DamageDialog extends Application {
 
         const str = html.find(".DMG_STR");
         str.on("change", event => this.updateDamage(event, html));
+
+        html.find(".apply-button").click(ev => {
+           this.applyDamage(ev, html);
+        });
+    }
+
+    applyDamage(event, html) {
+        console.log("apply");
+        console.log(event);
+        let cha = event.currentTarget.dataset.cha;
+
+        let currentDmg = this.getIntValue(html, ".DMG_" + cha);
+        let currentScore = this.getIntValue(html, ".VAL_" + cha);
+        let maxScore = this.getIntValue(html, this.data.characteristics[cha].value);
+
+        console.log("Cha " + cha + " max " + maxScore + " currently " + currentScore + " with dmg " + currentDmg);
+
+        if (this.remainingDamage <= currentScore) {
+            currentDmg += this.remainingDamage;
+            currentScore -= this.remainingDamage;
+            this.remainingDamage = 0;
+        } else {
+            let applyDmg = currentScore;
+            currentDmg += applyDmg;
+            currentScore -= applyDmg;
+            this.remainingDamage -= applyDmg;
+        }
+
+        this.setIntValue(html, ".DMG_"+cha, currentDmg);
+        this.setIntValue(html, ".VAL_"+cha, currentScore);
+        this.setIntValue(html, ".remaining", this.remainingDamage);
     }
 
     getIntValue(html, field) {
@@ -76,6 +113,12 @@ export class MgT2DamageDialog extends Application {
             return parseInt(v);
         }
         return 0;
+    }
+
+    setIntValue(html, field, value) {
+        if (html.find(field) && html.find(field)[0] && html.find(field)[0].value) {
+            html.find(field)[0].value = value;
+        }
     }
 
     updateDamage(event, html) {
