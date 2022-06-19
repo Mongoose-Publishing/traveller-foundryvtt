@@ -361,6 +361,10 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         } else {
             text += " (+" + value + ")";
         }
+    } else {
+        let value = data.skills["jackofalltrades"].value - 3;
+        dice += " " + value;
+        text = "Untrained " + value;
     }
     if (dm > 0) {
         dice += " +" + dm;
@@ -407,7 +411,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         let effect = total - difficulty;
         text += `<span class="skill-roll">${total}</span> ` + getEffectLabel(effect);
 
-        if (skill.specialities != null && speciality == null) {
+        if (skill && skill.specialities != null && speciality == null) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];
                 if (spec.value > 0) {

@@ -14,7 +14,8 @@
             "hideUntrained": false,
             "onlyBackground": false,
             "rollType": "normal",
-            "resetOnRoll": false
+            "resetOnRoll": false,
+            "columns": 6
         }
       },
       "sophont": {
@@ -941,11 +942,8 @@
           "mortgage": 0,
           "otherIncome": 0
       },
-      "attributes": {
-        "level": {
-          "value": 1
-        }
-      }
+      "player": "",
+      "terms": 0
     },
     "npc": {
         "templates": [ "base", "characteristics", "skills", "armour", "sophont" ],

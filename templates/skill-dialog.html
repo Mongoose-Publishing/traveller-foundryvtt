@@ -3,7 +3,11 @@
     {{#if spec}}
         <p>Rolling <b>{{skill.label}} ({{spec.label}})</b> {{value}}</p>
     {{else}}
-        <p>Rolling <b>{{skill.label}}</b> {{value}}</p>
+        {{#if skill}}
+            <p>Rolling <b>{{skill.label}}</b> {{value}}</p>
+        {{else}}
+            <p>Rolling <i>untrained</i> {{value}}</p>
+        {{/if}}
     {{/if}}
 
     {{#if showCha}}

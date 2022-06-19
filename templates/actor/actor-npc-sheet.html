@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <div class="shadow grid grid-6col">
+            <div class="shadow grid grid-{{data.settings.columns}}col">
                 {{#each data.characteristics as | char key | }}
                     {{#if char.show}}
                     <div class="resource flex-group-center">
@@ -100,8 +100,8 @@
                     <input type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.intiative" class="resource-label">INIT</label>
-                    <input type="text" name="data.intiative" value="{{data.intiative}}" data-dtype="Number"/>
+                    <label for="data.initiative" class="resource-label">INIT</label>
+                    <input type="text" name="data.initiative" value="{{data.initiative}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.hits.value" class="resource-label">MAX HITS</label>
@@ -167,6 +167,17 @@
 
                     {{!-- Settings Tab --}}
                     <section class="tab settings flexcol" data-group="primary" data-tab="settings">
+                        <section>
+                            <label for="data.settings.columns">Number of columns in Characteristics</label>
+                            <select name="data.settings.columns">
+                                {{#select data.settings.columns}}
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="6">6</option>
+                                {{/select}}
+                            </select>
+
+                        </section>
                         <section class="resources grid grid-3col">
                             {{#each data.characteristics as | char key | }}
                             <div class="resource flex-group-left">

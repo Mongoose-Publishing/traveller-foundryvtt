@@ -26,7 +26,7 @@ export class MgT2SkillDialog extends Application {
         this.skillId = skill;
         this.skill = null;
         this.spec = null;
-        this.value = -3;
+        this.value = data.skills["jackofalltrades"].value - 3;
         this.cha = cha;
         if (cha) {
             this.characteristic = data.characteristics[cha];
