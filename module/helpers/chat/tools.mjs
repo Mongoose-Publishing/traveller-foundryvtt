@@ -46,6 +46,26 @@ Tools.message = function(chatData, message) {
     ChatMessage.create(chatData);
 }
 
+/**
+ * Gets an array of selected tokens. If any tokens are marked as
+ * targets, then all of them are returned. Otherwise, if there is
+ * a selected token, then that is returned instead.
+ */
+Tools.getSelected = function() {
+    const user = game.users.current;
+    const selected = canvas.tokens.controlled;
+    const targets = user.targets;
+
+    if (targets.size === 0) {
+        return selected;
+    } else {
+        return targets.values();
+    }
+}
+
+
+
+
 Tools.applyDamageToCha= function(damage, actorData, cha) {
     if (damage > 0) {
         let dmg = Math.min(damage, actorData.characteristics[cha].current);
@@ -184,11 +204,16 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
 // Called from a button press in damage output in the chat.
 Tools.applyDamage = function(damage, ap, tl, options, traits) {
     console.log("Tools.applyDamage:");
-    const user = game.users.current;
 
-    const targets = user.targets;
-    for (let target of targets.values()) {
-        Tools.applyDamageTo(damage, ap, tl, options, traits, target.actor, target);
+    let tokens = Tools.getSelected();
+    if (tokens.size === 0) {
+        ui.notifications.error("No tokens selected");
+        return;
+    }
+
+    for (let token of tokens) {
+        console.log("Apply damage to " + token.name);
+        Tools.applyDamageTo(damage, ap, tl, options, traits, token.actor, token);
     }
 }
 
@@ -196,19 +221,13 @@ Tools.applyDamage = function(damage, ap, tl, options, traits) {
 Tools.damage = function(chatData, args) {
     let text=`<div class="tools">`;
 
-    console.log("damage:");
+    console.log("Tools.damage():");
 
-    console.log("chatData:");
-    console.log(chatData);
-    console.log("game:");
-    console.log(game);
-
-    const user = game.users.current;
-    console.log("User name: " + user.name);
-
-    const targets = user.targets;
-    console.log(targets);
-
+    const tokens = Tools.getSelected();
+    if (tokens.size == 0) {
+        ui.notifications.error("No tokens are targeted");
+        return;
+    }
 
     if (args.length < 1) {
         ui.notifications.error("You must at least specify the amount of damage");
@@ -224,20 +243,11 @@ Tools.damage = function(chatData, args) {
         ap = parseInt(args.shift());
     }
 
-    if (targets.size == 0) {
-        ui.notifications.error("No tokens are targeted");
-        return;
-    }
-
-    for (let target of targets.values()) {
-        let name = target.data.name;
-
-        let linked = target.data.actorLink;
-        let type = target.data.document._actor.data.type;
-
-        Tools.applyDamageTo(damage, ap, tl, options, traits, target.actor, target);
+    for (let token of tokens) {
+        Tools.applyDamageTo(damage, ap, tl, options, traits, token.actor, token);
     }
 };
+
 
 Tools.showSkills = function(chatData) {
     const user = game.users.current;

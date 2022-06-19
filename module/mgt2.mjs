@@ -110,6 +110,15 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     return true;
 });
 
+Hooks.on("updateToken", (scene, data, moved) => {
+    console.log("Token changed event");
+    console.log(moved);
+    console.log(data);
+    if (data && data.actorData && data.actorData.hits) {
+        // NPC or Creature has had its HITS changed.
+    }
+});
+
 Hooks.once("ready", async function() {
     Hooks.on("hotbarDrop", (bar, data, slot) => createTravellerMacro(data, slot));
 });
