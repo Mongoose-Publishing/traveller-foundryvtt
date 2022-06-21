@@ -41,6 +41,7 @@
                         <input type="text" value="0" data-dtype="Number" class="skill-fixed" readonly/>
                         {{#each skill.specialities as |spec i|}}
                             {{#if skill.individual}}
+                                {{#if spec.trained}}
                                 <br/>
                                 <input type="checkbox" class="spectrained" name="data.skills.{{key}}.specialities.{{i}}.trained"
                                        {{checked spec.trained}} data-dtype="Boolean" />
@@ -50,10 +51,19 @@
                                        data-skill="{{key}}"
                                        data-spec="{{i}}"
                                        data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
-                                {{#if spec.trained}}
                                     <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value"
                                            value="{{spec.value}}" data-dtype="Number" class="skill-level"/>
+                                {{else if ../../data/settings.hideUntrained}}
                                 {{else}}
+                                    <br/>
+                                    <input type="checkbox" class="spectrained" name="data.skills.{{key}}.specialities.{{i}}.trained"
+                                           {{checked spec.trained}} data-dtype="Boolean" />
+                                    <label class="skill-label individual rollable"
+                                           data-roll="{{skillRollable ../../data skill spec}}"
+                                           data-rolltype="skill"
+                                           data-skill="{{key}}"
+                                           data-spec="{{i}}"
+                                           data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
                                     <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value"
                                            value="{{defaultSkill ../../data}}" data-dtype="Number" class="skill-fixed" readonly/>
                                 {{/if}}

@@ -806,6 +806,7 @@ div.item-side-panel {
     padding: 5px;
     align-items: flex-start;
     display: flex;
+    background: #A0A7A0;
 }
 
 .creature-sheet .stats {
@@ -951,6 +952,7 @@ label.box-title {
     padding: 5px;
     align-items: flex-start;
     display: flex;
+    background: #A7A0A0;
 }
 
 .character-left .side-panel {
