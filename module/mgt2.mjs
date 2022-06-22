@@ -59,9 +59,7 @@ Hooks.on('renderChatMessage', function(app, html) {
     if (damageMessage) {
         damageMessage.setAttribute("draggable", true);
 
-        console.log(damageMessage);
         let dmg = damageMessage.getAttribute("data-damage");
-        console.log("Damage from message is " + dmg);
 
         let dragData = {
             type: "Damage",
@@ -72,7 +70,24 @@ Hooks.on('renderChatMessage', function(app, html) {
 
         damageMessage.addEventListener("dragstart", ev => {
             return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
-        })
+        });
+    }
+
+    const uppMessage = html.find(".upp-data")[0];
+    if (uppMessage) {
+        uppMessage.setAttribute("draggable", true);
+        let dragData = {
+            type: "UPP",
+            STR: parseInt(uppMessage.getAttribute("data-STR")),
+            DEX: parseInt(uppMessage.getAttribute("data-DEX")),
+            END: parseInt(uppMessage.getAttribute("data-END")),
+            INT: parseInt(uppMessage.getAttribute("data-INT")),
+            EDU: parseInt(uppMessage.getAttribute("data-EDU")),
+            SOC: parseInt(uppMessage.getAttribute("data-SOC"))
+        }
+        uppMessage.addEventListener("dragstart", ev => {
+            return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+        });
     }
 });
 
@@ -114,8 +129,10 @@ Hooks.on("updateToken", (scene, data, moved) => {
     console.log("Token changed event");
     console.log(moved);
     console.log(data);
-    if (data && data.actorData && data.actorData.hits) {
+    if (data && data.actorData && data.actorData.data && data.actorData.data.hits) {
         // NPC or Creature has had its HITS changed.
+        console.log(`Token hits changed to ${data.actorData.data.hits.value}`);
+
     }
 });
 

@@ -163,7 +163,6 @@ export class MgT2ActorSheet extends ActorSheet {
    }
 
    _calculateArmour(actor) {
-    console.log("_calculateArmour:");
      const actorData = actor.data.data;
 
      let armour = actorData.armour;
@@ -175,7 +174,6 @@ export class MgT2ActorSheet extends ActorSheet {
      for (let i of actor.items) {
        if (i.data.data.armour) {
          const armourData = i.data.data.armour;
-         console.log(i.name + ": " + armourData.form);
          if (armourData.worn || armourData.form === "natural") {
            let armourData = i.data.data.armour;
 
@@ -301,7 +299,40 @@ export class MgT2ActorSheet extends ActorSheet {
         return this._onDropActor(event, data);
       case "Damage":
         return this._onDropDamage(event, data);
+      case "UPP":
+        return this._onDropUPP(event, data);
     }
+  }
+
+  async _onDropUPP(event, data) {
+    const actor = this.actor;
+
+    if (actor.type === "traveller" || actor.type === "npc") {
+
+      if (actor.data.data.characteristics) {
+        if (data.STR) {
+          actor.data.data.characteristics.STR.value = parseInt(data.STR);
+        }
+        if (data.DEX) {
+          actor.data.data.characteristics.DEX.value = parseInt(data.DEX);
+        }
+        if (data.END) {
+          actor.data.data.characteristics.END.value = parseInt(data.END);
+        }
+        if (data.INT) {
+          actor.data.data.characteristics.INT.value = parseInt(data.INT);
+        }
+        if (data.EDU) {
+          actor.data.data.characteristics.EDU.value = parseInt(data.EDU);
+        }
+        if (data.SOC) {
+          actor.data.data.characteristics.SOC.value = parseInt(data.SOC);
+        }
+        actor.update({ "data.characteristics": actor.data.data.characteristics});
+      }
+
+    }
+
   }
 
   async _onDropDamage(event, data) {

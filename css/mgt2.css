@@ -708,6 +708,19 @@ div.damage-message:hover {
     background-color: #ff000010;
 }
 
+div.upp-data {
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+div.upp-data:hover {
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 2px;
+    background-color: #40404010;
+}
+
 form.damage-dialog td {
     width: 50px;
 }
