@@ -31,11 +31,16 @@ Tools.upp = function(chatData, args) {
             rolls[lowest] = value;
         }
     }
+    let total = 0;
+    for (let i=0; i < 6; i++) {
+        total += rolls[i];
+    }
     text += `<div class="upp-data" data-STR="${rolls[0]}" data-DEX="${rolls[1]}" data-END="${rolls[2]}" data-INT="${rolls[3]}" data-EDU="${rolls[4]}" data-SOC="${rolls[5]}">`;
     text += `<h3>${title}</h3>`;
     for (let i=0; i < 6; i++) {
         text += `<span class="skill-roll">${rolls[i]}</span> `;
     }
+    text += `<br/>Total: ${total}`
     text += `</div></div>`;
 
     chatData.content = text;

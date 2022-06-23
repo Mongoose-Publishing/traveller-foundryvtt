@@ -306,10 +306,15 @@ h1.charname input {
   flex: 0;
 }
 
-.system-mgt2 .sheet-body,
-.system-mgt2 .sheet-body .tab,
-.system-mgt2 .sheet-body .tab .editor {
+.system-mgt2,
+.system-mgt2 .tab,
+.system-mgt2 .tab .editor {
   height: 100%;
+}
+
+.editor {
+    height: 100%;
+    min-height: 50px;
 }
 
 .system-mgt2 .tox .tox-editor-container {
