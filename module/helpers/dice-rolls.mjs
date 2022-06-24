@@ -409,7 +409,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         text = `<h2>${title}</h2></h2><div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${text}</div><br/>`;
 
         let effect = total - difficulty;
-        text += `<span class="skill-roll">${total}</span> ` + getEffectLabel(effect);
+        text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${total}</span> ` + getEffectLabel(effect);
 
         if (skill && skill.specialities != null && speciality == null) {
             for (let sp in skill.specialities) {
@@ -425,7 +425,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                     }
 
                     text += `<h2 class="subroll">${slabel}</h2>`;
-                    text += `<span class="skill-roll">${stotal}</span> ` + getEffectLabel(stotal - difficulty);
+                    text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span> ` + getEffectLabel(stotal - difficulty);
                 }
             }
         }
