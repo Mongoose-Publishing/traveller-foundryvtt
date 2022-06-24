@@ -52,6 +52,9 @@ Tools.message = function(chatData, message) {
     ChatMessage.create(chatData);
 }
 
+
+
+
 /**
  * Gets an array of selected tokens. If any tokens are marked as
  * targets, then all of them are returned. Otherwise, if there is
