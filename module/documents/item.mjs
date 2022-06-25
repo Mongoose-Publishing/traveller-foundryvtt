@@ -82,7 +82,7 @@ export class MgT2Item extends Item {
             console.log("Quick Attack Roll");
             let skillDM = getSkillValue(this.actor, item.data.weapon.skill, null);
             let actorData = this.actor.data.data;
-            if (actorData.characteristics && actorData.characteristcs[item.data.weapon.characteristic]) {
+            if (actorData.characteristics && actorData.characteristics[item.data.weapon.characteristic]) {
                 skillDM += parseInt(this.actor.data.data.characteristics[item.data.weapon.characteristic].dm)
             }
             rollAttack(this.actor, item, skillDM);
