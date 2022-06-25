@@ -22,11 +22,34 @@ Hooks.once('init', async function() {
 
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
-  game.mgt2 = {
-    MgT2Actor,
-    MgT2Item,
-    rollSkillMacro
-  };
+    game.mgt2 = {
+        MgT2Actor,
+        MgT2Item,
+        rollSkillMacro
+    };
+
+    game.settings.register('mgt2', 'verboseSkillRolls', {
+        name: 'Verbose Skill Rolls',
+        hint: 'Displays effect and chain results of skill rolls',
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true,
+        onChange: value => {
+            console.log(`Setting verboseSkillRolls to ${value}`)
+        }
+    });
+    game.settings.register('mgt2', 'useChatIcons', {
+        name: 'Use Chat Icons',
+        hint: 'Displays avatars of the character in skill rolls',
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true,
+        onChange: value => {
+            console.log(`Setting iconsInChat to ${value}`)
+        }
+    });
 
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;

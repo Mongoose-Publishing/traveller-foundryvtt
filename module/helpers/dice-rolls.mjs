@@ -275,8 +275,6 @@ function getEffectLabel(effect) {
 }
 
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
-    console.log("rollSkill:");
-    console.log(actor);
     const data = actor.data.data;
     let   title = "";
     let   text = "";
@@ -296,9 +294,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         dice = "3D6kl2";
     }
 
-    console.log(actor.type);
     if (actor.type === "traveller" || actor.type === "npc") {
-        console.log("Is a person");
         isPerson = true;
     }
     if (skill && (typeof skill === 'string' || skill instanceof String)) {
@@ -306,7 +302,6 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     }
 
     if (isPerson) {
-        console.log("Going into isPerson");
         if (cha) {
             defaultCha = false;
             chaDm = data.characteristics[cha].dm;
@@ -319,11 +314,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             cha = null;
         }
     } else {
-        console.log("This is not a person");
         creatureCheck = true;
         cha = null;
     }
-    console.log("Using default cha " + defaultCha);
     if (cha) {
         chaDm = data.characteristics[cha].dm;
         dice += " + " + chaDm;
@@ -398,18 +391,26 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     if (difficulty === undefined) {
         difficulty = 8;
     }
-    let difficultyLabel = getDifficultyLabel(difficulty);
-    if (difficultyLabel !== "") {
-        checkText = difficultyLabel + " " + checkText;
+    if (game.settings.get("mgt2", "verboseSkillRolls")) {
+        let difficultyLabel = getDifficultyLabel(difficulty);
+        if (difficultyLabel !== "") {
+            checkText = difficultyLabel + " " + checkText;
+        }
     }
 
     let roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
     if (roll) {
         let total = roll.total;
-        text = `<h2>${title}</h2></h2><div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${text}</div><br/>`;
+        if (game.settings.get("mgt2", "useChatIcons")) {
+            text = `<h2>${title}</h2></h2><div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${text}</div><br/>`;
+        } else {
+            text = `<h2>${title}</h2></h2><div>${checkText}<br/>${text}</div><br/>`;
+        }
 
-        let effect = total - difficulty;
-        text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${total}</span> ` + getEffectLabel(effect);
+        if (game.settings.get("mgt2", "verboseSkillRolls")) {
+            let effect = total - difficulty;
+            text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${total}</span> ` + getEffectLabel(effect);
+        }
 
         if (skill && skill.specialities != null && speciality == null) {
             for (let sp in skill.specialities) {
@@ -424,8 +425,12 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                         slabel += ` (${spec.default})`;
                     }
 
-                    text += `<h2 class="subroll">${slabel}</h2>`;
-                    text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span> ` + getEffectLabel(stotal - difficulty);
+                    if (game.settings.get("mgt2", "verboseSkillRolls")) {
+                        text += `<h2 class="subroll">${slabel}</h2>`;
+                        text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span> ` + getEffectLabel(stotal - difficulty);
+                    } else {
+                        text += `<h3 class="subroll">${slabel} <span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span></h3>`;
+                    }
                 }
             }
         }
