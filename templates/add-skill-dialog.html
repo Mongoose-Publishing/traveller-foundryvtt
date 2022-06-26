@@ -1,0 +1,51 @@
+<form class="flexcol add-skill-dialog">
+
+    <p>
+        Add a new skill to the character.
+    </p>
+
+    <label for="label" class="resource-label">Skill Name</label>
+    <input class="skillLabelField" name="label" type="text" data-dtype="String" value="{{label}}"/>
+
+    <label for="shortname" class="resource-label">Short name</label>
+    <input class="skillShortNameField" name="shortname" type="text" data-dtype="String" value="{{shortName}}"/>
+
+    <div class="parent-skill">
+        <label for="parentSkill" class="resource-label">Specialisation of</label>
+        <select class="skillParentSelect" name="parentSkill">
+            {{#select ""}}
+            <option value="">None</option>
+            {{#each data.skills as |skill id|}}
+            <option value="{{id}}">{{skill.label}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+
+
+    <div class="characteristic-selection">
+        <label for="defualt" class="resource-label">Default Characteristic</label>
+        <select class="skillDefaultSelect" name="default">
+            {{#select default}}
+                {{#each data.characteristics as |char id|}}
+                    <option value="{{id}}">{{id}}</option>
+                {{/each}}
+            {{/select}}
+        </select>
+        <br/>
+    </div>
+
+    <div>
+        <label for="combat" class="skillDialogLabel">Combat</label>
+        <input type="checkbox" name="combat" class="skillCombatToggle" value="{{combat}}"/>
+    </div>
+    <div>
+        <label for="background" class="skillDialogLabel">Background</label>
+        <input type="checkbox" name="background" class="skillBackgroundToggle" value="{{background}}"/>
+    </div>
+
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="addNewSkill">Add Skill</button>
+    </footer>
+
+</form>

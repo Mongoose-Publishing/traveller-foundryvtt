@@ -2,6 +2,7 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
 import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
 import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
+import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
 
 /**
@@ -240,8 +241,11 @@ export class MgT2ActorSheet extends ActorSheet {
 
     // Rollable abilities.
     //html.find('.rollable').click(this._onRoll.bind(this));
-
+    // Skill rolls.
     html.find('.rollable').click(ev => this._onRollWrapper(ev, this.actor));
+
+    // Add a new skill
+    html.find('.addNewSkill').click(ev => this._onAddNewSkill(ev, this.actor));
 
     // Drag events for macros.
     let handler = ev => this._onDragStart(ev);
@@ -391,6 +395,10 @@ export class MgT2ActorSheet extends ActorSheet {
     return await Item.create(itemData, {parent: this.actor});
   }
 
+  _onAddNewSkill(event, actor) {
+    console.log("onAddNewSkill:");
+    new MgT2AddSkillDialog(actor).render(true);
+  }
 
   _onRollWrapper(event, actor) {
     console.log("_onRollWrapper:");
