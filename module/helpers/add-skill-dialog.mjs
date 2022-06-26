@@ -74,17 +74,37 @@ export class MgT2AddSkillDialog extends Application {
         console.log(combat);
         console.log(background);
 
-        let skill = {
-            'label': label,
-            'combat': combat,
-            'default': defaultCha,
-            'trained': false,
-            'value': 0,
-            'background': background,
-            'requires': defaultCha,
-            'icon': this.icon
+        if (parent) {
+            if (this.data.skills[parent]) {
+                if (!this.data.skills[parent].specialities) {
+                    this.data.skills[parent].specialities = {};
+                }
+                let skill = {
+                    'label': label,
+                    'combat': true,
+                    'default': defaultCha,
+                    'trained': false,
+                    'value': 0
+                }
+                this.data.skills[parent].specialities[shortname] = skill;
+
+            } else {
+                console.log("Parent skill [" + parent + "] does not exist");
+            }
+        } else {
+            let skill = {
+                'label': label,
+                'combat': combat,
+                'default': defaultCha,
+                'trained': false,
+                'value': 0,
+                'background': background,
+                'requires': defaultCha,
+                'icon': this.icon
+            }
+            this.data.skills[shortname] = skill;
         }
-        this.data.skills[shortname] = skill;
+
         this.actor.update({ "data.skills": this.actor.data.data.skills });
 
         this.close();
