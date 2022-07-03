@@ -48,8 +48,17 @@ export class MgT2ItemSheet extends ItemSheet {
     context.data = itemData.data;
     context.flags = itemData.flags;
 
+    console.log(context.item);
+
     context.characteristics = game.system.template.Actor.templates.characteristics.characteristics;
-    context.skills = game.system.template.Actor.templates.skills.skills;
+
+    // If this belongs to an actor, the actor might have custom skills, so
+    // we need to use the actor's skill list rather than the global one.
+    if (context.item.parent) {
+      context.skills = context.item.parent.data.data.skills;
+    } else {
+      context.skills = game.system.template.Actor.templates.skills.skills;
+    }
 
     this._prepareArmour(context);
 
