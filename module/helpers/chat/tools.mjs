@@ -1,6 +1,55 @@
 import {hasTrait, getTraitValue} from "../dice-rolls.mjs";
+import {Physics} from "./physics.mjs";
 
 export const Tools = {};
+
+Tools.uwp = function(chatData, args) {
+    if (args < 2) {
+        return;
+    }
+    let sector = args.shift();
+    let xy = args.shift();
+
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", `https://travellermap.com/data/${sector}/${xy}`, false);
+    xmlHttp.send();
+
+    let obj = JSON.parse(xmlHttp.responseText);
+
+    if (obj.Worlds.length == 0) {
+        chatData.content = `No world found at ${xy}`;
+    } else {
+        let text = `<div class="tools">`;
+        let data = obj.Worlds[0];
+        text += `<h2>${data.Name} (${data.Hex}) / ${data.Sector}</h2>`;
+        text += `${data.UWP}<br/>`;
+        text += `${data.Remarks}<br/>`;
+        let uwp = data.UWP;
+        text += Tools.uwpToText(uwp);
+        text += "</div>";
+        chatData.content = text;
+
+    }
+    ChatMessage.create(chatData);
+}
+
+Tools.uwpToText = function(uwp) {
+    let text = "<div>";
+
+    let starport = uwp.substring(0, 1);
+    let size = uwp.substring(1, 2);
+    let atmosphere = uwp.substring(2, 3);
+    let hydrosphere = uwp.substring(3, 4);
+
+    text += `<b>Starport:</b> ${starport}<br/>`;
+    text += `<b>Size:</b> ${size}<br/>`;
+
+
+    text += "</div>";
+    return text;
+}
+
+
 
 Tools.upp = function(chatData, args) {
     let text = `<div class="tools">`;

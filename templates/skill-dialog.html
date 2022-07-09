@@ -1,65 +1,73 @@
 <form class="flexcol skilldialog">
 
-    {{#if spec}}
-    <p>Rolling <b>{{skill.label}} ({{spec.label}})</b> {{value}}</p>
-    {{else}}
-    {{#if skill}}
-    <p>Rolling <b>{{skill.label}}</b> {{value}}</p>
-    {{else}}
-    <p>Rolling <i>untrained</i> {{value}}</p>
-    {{/if}}
-    {{/if}}
-
-    {{#if showCha}}
-    <div class="characteristic-selection">
-        <label for="characteristic" class="resource-label skillDilogLabel">Characteristic</label>
-        <select class="skillDialogCha" name="characteristic">
-            {{#select characteristic}}
-            {{#each data.characteristics as |char id|}}
-            {{#if char.show}}
-            <option value="{{id}}">{{id}} ({{char.dm}})</option>
+    <div class="shadow">
+        <h3 class="skill-dialog-title">
+            {{#if showCha}}
+                <select class="skillDialogCha" name="characteristic">
+                    {{#select characteristic}}
+                        {{#each data.characteristics as |char id|}}
+                            {{#if char.show}}
+                                <option value="{{id}}">{{id}} ({{char.dm}})</option>
+                            {{/if}}
+                        {{/each}}
+                    {{/select}}
+                </select>
+                <span> + </span>
             {{/if}}
-            {{/each}}
-            {{/select}}
-        </select>
-        <br/>
-        <label for="remember" class="skillDialogLabel">Remember as default</label>
-        <input type="checkbox" name="remember" class="skillDialogRemember" value="false"/>
-    </div>
-    {{/if}}
+            {{#if spec}}
+                {{skill.label}} ({{spec.label}}) [{{value}}]
+            {{else}}
+                {{#if skill}}
+                    {{skill.label}} [{{value}}]
+                {{else}}
+                    <i>untrained</i> [{{value}}]
+                {{/if}}
+            {{/if}}
+        </h3>
 
-    <div class="boon-selection">
-        <label for="dicetype" class="skillDialogLabel">Roll Type</label>
-        <select class="skillDialogRollType" name="dicetype">
-            {{#select "normal"}}
-            <option value="normal">Normal</option>
-            <option value="boon">Boon</option>
-            <option value="bane">Bane</option>
-            {{/select}}
-        </select>
-    </div>
+        {{#if showCha}}
+            <input type="checkbox" name="remember" class="skillDialogRemember" value="false"/>
+            <label class="remember-cha" for="remember">Remember characteristic</label>
+        {{/if}}
 
-    <div class="difficulty">
-        <label for="difficulty" class="skillDialogLabel">Difficulty</label>
-        <select class="skillDialogDifficulty" name="difficulty">
-            {{#select "8"}}
-            <option value="2">Simple (2+)</option>
-            <option value="4">Easy (4+)</option>
-            <option value="6">Routine (6+)</option>
-            <option value="8">Average (8+)</option>
-            <option value="10">Difficult (10+)</option>
-            <option value="12">Very Difficult (12+)</option>
-            <option value="14">Formidable (14+)</option>
-            <option value="16">Impossible (16+)</option>
-            {{/select}}
-        </select>
-    </div>
 
-    <div class="bonus-selection">
-        <label for="dm" class="skillDialogLabel">DM</label>
-        <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
-    </div>
+        <div class="grid grid-4col">
+            <div class="skill-boon">
+                <label for="dicetype" class="skillDialogLabel">Roll Type</label>
+                <br/>
+                <select class="skillDialogRollType" name="dicetype">
+                    {{#select "normal"}}
+                    <option value="normal">Normal</option>
+                    <option value="boon">Boon</option>
+                    <option value="bane">Bane</option>
+                    {{/select}}
+                </select>
+            </div>
 
+            <div class="skill-difficulty grid-span-2">
+                <label for="difficulty" class="skillDialogLabel">Difficulty</label>
+                <br/>
+                <select class="skillDialogDifficulty" name="difficulty">
+                    {{#select "8"}}
+                    <option value="2">Simple (2+)</option>
+                    <option value="4">Easy (4+)</option>
+                    <option value="6">Routine (6+)</option>
+                    <option value="8">Average (8+)</option>
+                    <option value="10">Difficult (10+)</option>
+                    <option value="12">Very Difficult (12+)</option>
+                    <option value="14">Formidable (14+)</option>
+                    <option value="16">Impossible (16+)</option>
+                    {{/select}}
+                </select>
+            </div>
+
+            <div class="skill-dm">
+                <label for="dm" class="skillDialogLabel">DM</label>
+                <br/>
+                <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
+            </div>
+        </div>
+    </div>
     <footer class="sheet-footer flexrow">
         <button type="submit" name="submit" class="skillRoll">Roll</button>
     </footer>

@@ -450,4 +450,6 @@ Physics.getSector = function(chatData, args) {
 
   chatData.content = "Sector is " + obj.name;
   ChatMessage.create(chatData);
+
 }
+
