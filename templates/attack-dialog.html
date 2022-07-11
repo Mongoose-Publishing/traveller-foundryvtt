@@ -9,7 +9,7 @@
         {{/if}}
     </div>
 
-    <div class="shadow">
+    <div class="shadow grid grid-2col">
         <div class="boon-selection">
             <label for="dicetype" class="skillDialogLabel">Roll Type</label>
             <select class="skillDialogRollType" name="dicetype">
@@ -19,6 +19,11 @@
                     <option value="bane">Bane</option>
                 {{/select}}
             </select>
+        </div>
+
+        <div class="bonus-selection">
+            <label for="dm" class="skillDialogLabel">DM</label>
+            <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
         </div>
 
         {{#if melee}}
@@ -49,14 +54,10 @@
             </div>
         {{/if}}
 
-        <div class="bonus-selection">
-            <label for="dm" class="skillDialogLabel">DM</label>
-            <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
-        </div>
     </div>
 
     <footer class="sheet-footer flexrow">
-        <button type="submit" name="submit" class="skillRoll">Attack</button>
+        <button type="submit" name="submit" class="attackRoll">Attack</button>
     </footer>
 
 </form>

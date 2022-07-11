@@ -267,7 +267,7 @@
     -ms-flex: 0 0 140px;
     flex: 0 0 140px;
     width: 140px;
-    height: 140px;
+    min-height: 140px;
     margin-right: 10px;
     border-radius: 10px;
 }
@@ -653,7 +653,14 @@ button.skillRoll {
     border-radius: 5px;
     border: 1px solid #404040;
     box-shadow: 3px 3px 3px #404040;
+}
 
+button.attackRoll {
+    background-color: #F08070;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid #404040;
+    box-shadow: 3px 3px 3px #404040;
 }
 
 input.skillDialogDM {

@@ -85,7 +85,7 @@ export class MgT2AttackDialog extends Application {
 
     activateListeners(html) {
         super.activateListeners(html);
-        const roll = html.find("button[class='skillRoll']");
+        const roll = html.find("button[class='attackRoll']");
         roll.on("click", event => this.onRollClick(event, html));
     }
 
