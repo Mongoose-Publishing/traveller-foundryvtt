@@ -929,6 +929,14 @@
                 "trained": false,
                 "requires": "PSI",
                 "icon": "systems/mgt2/icons/skills/psi.svg"
+            },
+            "untrained": {
+                "label": "Untrained",
+                "default": "INT",
+                "value": 0,
+                "trained": false,
+                "requires": "XXX",
+                "icon": "systems/mgt2/icons/skills/new.svg"
             }
         }
       }

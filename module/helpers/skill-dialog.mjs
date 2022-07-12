@@ -13,23 +13,21 @@ export class MgT2SkillDialog extends Application {
 
     constructor(actor, skill, spec, cha) {
         super();
-        console.log("constructor:");
-
-        console.log("Constructor skill is " + skill);
-        console.log("Constructor spec is " + spec);
-        console.log(actor);
-
         this.actor = actor;
-
         const data = actor.data.data;
 
         this.skillId = skill;
         this.skill = null;
         this.spec = null;
         this.value = data.skills["jackofalltrades"].value - 3;
+        this.chaOnly = false;
         this.cha = cha;
-        if (cha) {
+        if (cha && data.characteristics && data.characteristics[cha]) {
             this.characteristic = data.characteristics[cha];
+            if (!skill) {
+                this.chaOnly = true;
+                this.value = 0;
+            }
         }
         this.data = data;
         if (skill) {
@@ -64,6 +62,7 @@ export class MgT2SkillDialog extends Application {
             "spec": this.spec,
             "value": this.value,
             "showCha": (this.skill && this.actor.type != "creature"),
+            "chaOnly": this.chaOnly,
             "dm": 0,
             "dicetype": "normal",
             "characteristic": this.cha

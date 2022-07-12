@@ -2,25 +2,29 @@
 
     <div class="shadow">
         <h3 class="skill-dialog-title">
-            {{#if showCha}}
-                <select class="skillDialogCha" name="characteristic">
-                    {{#select characteristic}}
-                        {{#each data.characteristics as |char id|}}
-                            {{#if char.show}}
-                                <option value="{{id}}">{{id}} ({{char.dm}})</option>
-                            {{/if}}
-                        {{/each}}
-                    {{/select}}
-                </select>
-                <span> + </span>
-            {{/if}}
-            {{#if spec}}
-                {{skill.label}} ({{spec.label}}) [{{value}}]
+            {{#if chaOnly}}
+                {{characteristic}}
             {{else}}
-                {{#if skill}}
-                    {{skill.label}} [{{value}}]
+                {{#if showCha}}
+                    <select class="skillDialogCha" name="characteristic">
+                        {{#select characteristic}}
+                            {{#each data.characteristics as |char id|}}
+                                {{#if char.show}}
+                                    <option value="{{id}}">{{id}} ({{char.dm}})</option>
+                                {{/if}}
+                            {{/each}}
+                        {{/select}}
+                    </select>
+                    <span> + </span>
+                {{/if}}
+                {{#if spec}}
+                    {{skill.label}} ({{spec.label}}) [{{value}}]
                 {{else}}
-                    <i>untrained</i> [{{value}}]
+                    {{#if skill}}
+                        {{skill.label}} [{{value}}]
+                    {{else}}
+                        <i>untrained</i> [{{value}}]
+                    {{/if}}
                 {{/if}}
             {{/if}}
         </h3>

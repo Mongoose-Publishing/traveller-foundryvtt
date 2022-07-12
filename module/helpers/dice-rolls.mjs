@@ -286,6 +286,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     let   defaultCha = true;
     let   chaDm = 0;
 
+    console.log("rollSkill:");
+    console.log(`skill [${skill}] char [${cha}] dm [${dm}] spec [${speciality}]`);
+
     // Normal, Boon or Bane dice roll.
     let dice = "2D6";
     if (rollType === "boon") {
@@ -348,16 +351,13 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         } else {
             untrainedCheck = true;
         }
-        dice += " + " + value;
         if (value < 0) {
+            dice += " " + value;
             text += " (" + value + ")";
         } else {
+            dice += " + " + value;
             text += " (+" + value + ")";
         }
-    } else {
-        let value = data.skills["jackofalltrades"].value - 3;
-        dice += " " + value;
-        text = "Untrained " + value;
     }
     if (dm > 0) {
         dice += " +" + dm;
