@@ -20,15 +20,25 @@
             <div class="side-panel armour-box shadow flex-group-center">
                 <label class="box-title">ARMOUR</label>
 
-                🛡 <input class="armour-value" type="text" name="data.armour.protection" title="Protection"
-                          value="{{data.armour.protection}}" data-dtype="Number"/>
-                ☢ <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
-                         value="{{data.armour.rad}}" data-dtype="Number"/>
-
-                🔥 <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy"
-                          value="{{data.armour.otherProtection}}" data-dtype="Number"/><br/>
-                <input type="text" name="data.armour.otherTypes" title="Energy types"
-                       value="{{data.armour.otherTypes}}" data-dtype="String"/>
+                <div class="grid grid-3col">
+                    <div>
+                        <label class="prot-type" title="Protection">🛡</label>
+                        <input class="armour-value" type="text" name="data.armour.protection" title="Protection"
+                              value="{{data.armour.protection}}" data-dtype="Number"/>
+                    </div>
+                    <div>
+                        <label class="prot-type" title="Rad Shielding">☢</label>
+                        <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
+                                 value="{{data.armour.rad}}" data-dtype="Number"/>
+                    </div>
+                    <div>
+                        <label class="prot-type" title="Energy Protection">🔥</label>
+                        <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy"
+                              value="{{data.armour.otherProtection}}" data-dtype="Number"/>
+                    </div>
+                    <input type="text" name="data.armour.otherTypes" title="Energy types" class="grid-span-3"
+                           value="{{data.armour.otherTypes}}" data-dtype="String"/>
+                </div>
             </div>
 
             <div class="side-panel character-attacks shadow">

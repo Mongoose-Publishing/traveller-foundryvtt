@@ -267,6 +267,7 @@
     -ms-flex: 0 0 140px;
     flex: 0 0 140px;
     width: 140px;
+    height: 100%;
     min-height: 140px;
     margin-right: 10px;
     border-radius: 10px;
@@ -778,16 +779,23 @@ button.damage-button {
     width: auto;
 }
 
-input.armour-value {
-    width: 50px;
+div.armour-box {
+}
+
+div.armour-box input.armour-value {
+    width: 45px;
     text-align: center;
 }
 
-div.armour-block {
-    border: 2px solid #404040;
-    padding: 3px;
-    border-radius: 5px;
+div.armour-box label.prot-type {
+    padding-bottom: 5px;
+    display: block;
 }
+
+div.armour-box input {
+    width: 100%;
+}
+
 
 /* Common styles */
 
@@ -878,7 +886,8 @@ textarea.traits {
     -ms-flex: 0 0 160px;
     flex: 0 0 140px;
     width: 160px;
-    height: 160px;
+    height: 100%;
+    min-height: 160px;
     margin-right: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
