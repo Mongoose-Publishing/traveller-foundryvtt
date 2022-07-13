@@ -796,6 +796,10 @@ div.armour-box input {
     width: 100%;
 }
 
+.credits::before {
+    content: "Cr";
+}
+
 
 /* Common styles */
 

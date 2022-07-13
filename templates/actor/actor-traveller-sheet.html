@@ -138,6 +138,7 @@
                 <nav class="sheet-tabs tabs" data-group="primary">
                     <a class="item" data-tab="skills">Skills</a>
                     <a class="item" data-tab="items">Equipment</a>
+                    <a class="item" data-tab="finance">Finance</a>
                     <a class="item" data-tab="biography">Biography</a>
                     <a class="item" data-tab="settings">Settings</a>
                 </nav>
@@ -146,6 +147,32 @@
                     {{!-- Skills Tab --}}
                     <div class="tab skills" data-group="primary" data-tab="skills">
                         {{> "systems/mgt2/templates/actor/parts/actor-skills.html"}}
+                    </div>
+
+                    <div class="tab finance" data-group="primary" data-tab="finance">
+                        <div class="grid grid-3col">
+                            <div>
+                                <label class="profile-label">Cash (Cr)</label>
+                                <input class="credits" name="data.finance.cash" type="text" value="{{data.finance.cash}}"/>
+                            </div>
+                            <div>
+                                <label class="profile-label">Pension (Cr/Year)</label>
+                                <input class="credits"  name="data.finance.pension" type="text" value="{{data.finance.pension}}"/>
+                            </div>
+                            <div>
+                                <label class="profile-label">Other Income (Cr/Year)</label>
+                                <input  class="credits" name="data.finance.otherIncome" type="text" value="{{data.finance.otherIncome}}"/>
+                            </div>
+                            <div>
+                                <label class="profile-label">Medical Debt (Cr)</label>
+                                <input  class="credits" name="data.finance.medicalDebt" type="text" value="{{data.finance.medicalDebt}}"/>
+                            </div>
+                            <div>
+                                <label class="profile-label">Mortgage (Cr/Month)</label>
+                                <input  class="credits" name="data.finance.mortgage" type="text" value="{{data.finance.mortgage}}"/>
+                            </div>
+                        </div>
+
                     </div>
 
                     {{!-- Biography Tab --}}
@@ -172,20 +199,6 @@
                                 <input type="text" name="data.sophont.homeworld" value="{{data.sophont.homeworld}}"
                                        data-dtype="String"/>
                             </div>
-                        </div>
-
-                        <div class="resource grid-span-1">
-                            <label class="profile-label">Cash</label>
-                            <input name="data.finance.cash" type="text" value="{{data.finance.cash}}"/>
-                            <label class="profile-label">Pension</label>
-                            <input name="data.finance.pension" type="text" value="{{data.finance.pension}}"/>
-                            <label class="profile-label">Other Income</label>
-                            <input name="data.finance.otherIncome" type="text" value="{{data.finance.otherIncome}}"/>
-                            <label class="profile-label">Medical Debt</label>
-                            <input name="data.finance.medicalDebt" type="text" value="{{data.finance.medicalDebt}}"/>
-                            <label class="profile-label">Ship Mortgage</label>
-                            <input name="data.finance.mortgage" type="text" value="{{data.finance.mortgage}}"/>
-
                         </div>
 
                         <section class="bio-box">
