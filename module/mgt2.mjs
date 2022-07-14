@@ -50,6 +50,17 @@ Hooks.once('init', async function() {
             console.log(`Setting iconsInChat to ${value}`)
         }
     });
+    game.settings.register('mgt2', 'quickRolls', {
+        name: 'Default to quick rolls',
+        hint: 'Reverse the use of click and shift-click for skill rolls.',
+        scope: 'client',
+        config: true,
+        type: Boolean,
+        default: false,
+        onChange: value => {
+            console.log(`Setting quickRolls to ${value}`)
+        }
+    });
 
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;

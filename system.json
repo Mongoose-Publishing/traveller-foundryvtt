@@ -1,10 +1,10 @@
 {
   "name": "mgt2",
-  "title": "Mongoose Traveller 2e (Unofficial)",
+  "title": "Mongoose Traveller 2e (Very Unofficial)",
   "description": "An unofficial system for Mongoose Traveller 2e",
   "version": "1.1.0",
   "minimumCoreVersion": "0.9",
-  "compatibleCoreVersion": "0.9",
+  "compatibleCoreVersion": "0.9.269",
   "author": "Samuel Penn",
   "esmodules": ["module/mgt2.mjs" ],
   "styles": ["css/mgt2.css"],

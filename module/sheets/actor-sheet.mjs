@@ -438,7 +438,7 @@ export class MgT2ActorSheet extends ActorSheet {
         }
       }
     }
-    let quickRoll = data.settings.quickRolls?true:false;
+    let quickRoll = game.settings.get("mgt2", "quickRolls");
     if (event.shiftKey) {
       quickRoll = !quickRoll;
     }

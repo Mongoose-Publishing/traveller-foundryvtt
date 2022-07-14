@@ -70,7 +70,7 @@ export class MgT2Item extends Item {
 
     console.log("item.Roll:");
 
-    let quickRoll = rollData.settings.quickRolls?true:false;
+    let quickRoll = game.settings.get("mgt2", "quickRolls");
     if (event.shiftKey) {
         quickRoll = !quickRoll;
     }
