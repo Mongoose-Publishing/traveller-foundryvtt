@@ -952,6 +952,7 @@ label.box-title {
     text-align: center;
     display: block;
     margin-bottom: 5px;
+    text-transform: uppercase
 }
 
 .creature-sheet .creature-attacks .items-list label {

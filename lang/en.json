@@ -1,9 +1,30 @@
 {
+  "MGT2.Title": "Mongoose Traveller 2e (Very Unofficial)",
+  "MGT2.Settings.Verbose.Name": "Verbose Skill Rolls",
+  "MGT2.Settings.Verbose.Hint": "Displays effect and chain results of skill rolls.",
+  "MGT2.Settings.ChatIcons.Name": "Use Chat Icons",
+  "MGT2.Settings.ChatIcons.Hint": "Displays avatars of the character in skill rolls.",
+  "MGT2.Settings.QuickRolls.Name": "Default to Quick Rolls",
+  "MGT2.Settings.QuickRolls.Hint": "Reverse the use of click and shift-click for skill rolls.",
 
-  "TRAVELLER.EffectCreate": "Create Effect",
-  "TRAVELLER.EffectToggle": "Toggle Effect",
-  "TRAVELLER.EffectEdit": "Edit Effect",
-  "TRAVELLER.EffectDelete": "Delete Effect",
+  "MGT2.TravellerSheet.Player": "Player",
+  "MGT2.TravellerSheet.Species": "Species",
+  "MGT2.TravellerSheet.Gender": "Gender",
+  "MGT2.TravellerSheet.Age": "Age",
+  "MGT2.TravellerSheet.Speed": "SPEED",
+  "MGT2.TravellerSheet.Size": "SIZE",
+  "MGT2.TravellerSheet.Init": "INIT",
+  "MGT2.TravellerSheet.MaxHits": "MAX HITS",
+
+  "MGT2.TravellerSheet.Skills": "Skills",
+  "MGT2.TravellerSheet.Equipment": "Equipment",
+  "MGT2.TravellerSheet.Finance": "Finance",
+  "MGT2.TravellerSheet.Biography": "Biography",
+  "MGT2.TravellerSheet.Settings": "Settings",
+
+  "MGT2.TravellerSheet.Damage": "Damage",
+  "MGT2.TravellerSheet.Armour": "Armour",
+  "MGT2.TravellerSheet.Attacks": "Attacks",
 
   "TRAVELLER.Add": "Add"
 }

@@ -29,8 +29,8 @@ Hooks.once('init', async function() {
     };
 
     game.settings.register('mgt2', 'verboseSkillRolls', {
-        name: 'Verbose Skill Rolls',
-        hint: 'Displays effect and chain results of skill rolls',
+        name: game.i18n.localize("MGT2.Settings.Verbose.Name"),
+        hint: game.i18n.localize("MGT2.Settings.Verbose.Hint"),
         scope: 'world',
         config: true,
         type: Boolean,
@@ -40,8 +40,8 @@ Hooks.once('init', async function() {
         }
     });
     game.settings.register('mgt2', 'useChatIcons', {
-        name: 'Use Chat Icons',
-        hint: 'Displays avatars of the character in skill rolls',
+        name: game.i18n.localize("MGT2.Settings.ChatIcons.Name"),
+        hint: game.i18n.localize("MGT2.Settings.ChatIcons.Hint"),
         scope: 'world',
         config: true,
         type: Boolean,
@@ -51,8 +51,8 @@ Hooks.once('init', async function() {
         }
     });
     game.settings.register('mgt2', 'quickRolls', {
-        name: 'Default to quick rolls',
-        hint: 'Reverse the use of click and shift-click for skill rolls.',
+        name: game.i18n.localize("MGT2.Settings.QuickRolls.Name"),
+        hint: game.i18n.localize("MGT2.Settings.QuickRolls.Hint"),
         scope: 'client',
         config: true,
         type: Boolean,
@@ -138,9 +138,6 @@ Hooks.on('ready', () => {
 });
 
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
-    console.log(`My message was "${message}".`);
-    console.log(chatData);
-
     if (message.indexOf("/upp") === 0) {
         let args = message.split(" ");
         args.shift();
