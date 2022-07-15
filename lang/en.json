@@ -26,5 +26,23 @@
   "MGT2.TravellerSheet.Armour": "Armour",
   "MGT2.TravellerSheet.Attacks": "Attacks",
 
+  "MGT2.Damage.Okay": "{name} is okay.",
+  "MGT2.Damage.Injured": "{name} is injured.",
+  "MGT2.Damage.Unconscious": "{name} is unconscious.",
+  "MGT2.Damage.Dead": "{name} is dead.",
+  "MGT2.Damage.Destroyed": "{name} is destroyed.",
+
+  "MGT2.Damage.MassiveDamage": "{name} takes massive damage.",
+  "MGT2.Damage.HeavyDamage": "{name} takes heavy damage.",
+  "MGT2.Damage.ModerateDamage": "{name} takes moderate damage.",
+  "MGT2.Damage.LightDamage": "{name} takes light damage.",
+
+  "MGT2.Damage.EvenMoreDead": "They are definitely still dead.",
+  "MGT2.Damage.Killed": "They are killed.",
+  "MGT2.Damage.KnockedOut": "They are knocked unconscious.",
+  "MGT2.Damage.StillOut": "They are still unconscious.",
+  "MGT2.Damage.Hurt": "They are badly hurt.",
+  "MGT2.Damage.StillHurt": "They are badly hurt.",
+
   "TRAVELLER.Add": "Add"
 }

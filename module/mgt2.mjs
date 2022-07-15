@@ -156,13 +156,99 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     return true;
 });
 
-Hooks.on("updateToken", (scene, data, moved) => {
-    console.log("Token changed event");
+Hooks.on("preUpdateToken", (token, data, moved) => {
+    console.log("Token about to change event");
+    console.log(token);
     console.log(moved);
     console.log(data);
     if (data && data.actorData && data.actorData.data && data.actorData.data.hits) {
         // NPC or Creature has had its HITS changed.
-        console.log(`Token hits changed to ${data.actorData.data.hits.value}`);
+
+        let actorId = token.data.actorId;
+        let actor = token._actor;
+        console.log(token.data.name);
+
+        let name = token.data.name;
+        let max = token.data.actorData.data.hits.max[0];
+        let half = parseInt(max / 2);
+        let tenth = parseInt(max / 10);
+        let message = null;
+        let value = data.actorData.data.hits.value;
+        let oldValue = token.data.actorData.data.hits.value;
+        console.log(`NPC Token hits changing to ${value}/${max} from ${oldValue}`);
+
+        let isOkay = false, isInjured = false, isUnconscious = false, isDead = false, isDestroyed = false;
+
+        if (value < oldValue) {
+            // Damage.
+            let damage = oldValue - value;
+            if (damage > max) {
+                // More damage than they have hits.
+                message = game.i18n.format("MGT2.Damage.MassiveDamage", { 'name': name});
+            } else if (damage > half) {
+                // More than half their hits in a single blow.
+                message = game.i18n.format("MGT2.Damage.HeavyDamage", { 'name': name});
+            } else if (damage > 2 * tenth) {
+                message = game.i18n.format("MGT2.Damage.ModerateDamage", { 'name': name});
+            } else {
+                message = game.i18n.format("MGT2.Damage.LightDamage", { 'name': name});
+            }
+            message += " ";
+            if (value <= 0) {
+                isDead = true;
+                if (oldValue > 0) {
+                    message += game.i18n.format("MGT2.Damage.Killed");
+                } else {
+                    message += game.i18n.format("MGT2.Damage.EvenMoreDead");
+                }
+            } else if (value <= tenth) {
+                isUnconscious = true;
+                if (oldValue > tenth) {
+                    message += game.i18n.format("MGT2.Damage.KnockedOut");
+                } else {
+                    message += game.i18n.format("MGT2.Damage.StillOut");
+                }
+            } else if (value <= half) {
+                isInjured = true;
+                if (oldValue > half) {
+                    message += game.i18n.format("MGT2.Damage.Hurt");
+                } else {
+                    message += game.i18n.format("MGT2.Damage.StillHurt");
+                }
+            }
+        } else {
+            // Healing.
+            message = "is feeling better";
+        }
+        /*
+        token.toggleActiveEffect(CONFIG.statusEffects[0], { "overlay": false, "active": false });
+        token.toggleActiveEffect(CONFIG.statusEffects[1], { "overlay": false, "active": false });
+        token.toggleActiveEffect(CONFIG.statusEffects[23], { "overlay": false, "active": false });
+        if (isDead) {
+            token.toggleActiveEffect(CONFIG.statusEffects[0], { "overlay": false, "active": true });
+        } else if (isUnconscious) {
+            token.toggleActiveEffect(CONFIG.statusEffects[1], { "overlay": false, "active": true });
+        } else if (isInjured) {
+            token.toggleActiveEffect(CONFIG.statusEffects[23], { "overlay": false, "active": true });
+        }
+        */
+
+        let text = "<div class='damaged-token'>";
+        if (game.settings.get("mgt2", "useChatIcons")) {
+            text += `<img class='skillcheck-thumb' src='${actor.thumbnail}'/>`;
+        }
+        text += message;
+        text += "</div>";
+
+        let chatData = {
+            user: game.user.id,
+            speaker: {
+              "actor": actorId,
+              "token": token.data._id
+            },
+            content: text
+        }
+        ChatMessage.create(chatData, {});
 
     }
 });
@@ -222,12 +308,11 @@ function rollSkillMacro(skillName) {
   }
   console.log(actor.name);
 
-  let cha;
-  if (actor.type == "traveller" || actor.type == "npc") {
-      cha = actor.data.data.skills[skillName].default;
+  if (game.settings.get("mgt2", "quickRolls")) {
+      rollSkill(actor, skillName);
+  } else {
+      new MgT2SkillDialog(actor, skillName).render(true);
   }
-
-  rollSkill(actor, skillName);
 
 }
 

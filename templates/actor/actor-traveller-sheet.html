@@ -6,7 +6,7 @@
                  title="{{actor.name}}" height="100" width="100"/>
 
             <div class="side-panel hits-box shadow">
-                <label for="data.hits.max" class="box-title">❤️ {{i18n.damage}}</label>
+                <label for="data.hits.max" class="box-title">❤️ {{localize 'MGT2.TravellerSheet.Damage'}}</label>
                 <div class="grid grid-3col">
                     {{#each data.damage as |dmg key|}}
                     <div class="resource flex-group-center">
@@ -18,7 +18,7 @@
             </div>
 
             <div class="side-panel armour-box shadow flex-group-center">
-                <label class="box-title">{{i18n.armour}}</label>
+                <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
 
                 <div class="grid grid-3col">
                     <div>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="side-panel character-attacks shadow">
-                <label class="box-title">{{i18n.attacks}}</label>
+                <label class="box-title">{{localize 'MGT2.TravellerSheet.Attacks'}}</label>
 
                 <ol class="items-list">
                     {{#each items as |item id|}}
@@ -75,19 +75,19 @@
 
             <div class="shadow grid grid-7col">
                 <div class="resource flex-group-left grid-span-2">
-                    <label for="data.player" class="resource-label">{{i18n.player}}</label>
+                    <label for="data.player" class="resource-label">{{localize 'MGT2.TravellerSheet.Player'}}</label>
                     <input name="data.player" type="text" value="{{data.player}}"/>
                 </div>
                 <div class="resource flex-group-left grid-span-2">
-                    <label for="data.sophont.species" class="resource-label">{{i18n.species}}</label>
+                    <label for="data.sophont.species" class="resource-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
                     <input name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
                 </div>
                 <div class="resource flex-group-left grid-span-2">
-                    <label for="data.sophont.gender" class="resource-label">{{i18n.gender}}</label>
+                    <label for="data.sophont.gender" class="resource-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
                     <input name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
                 </div>
                 <div class="resource flex-group-left">
-                    <label for="data.sophont.age" class="resource-label">{{i18n.age}}</label>
+                    <label for="data.sophont.age" class="resource-label">{{localize 'MGT2.TravellerSheet.Age'}}</label>
                     <input name="data.sophont.age" type="text" value="{{data.sophont.age}}"/>
                 </div>
             </div>
@@ -121,26 +121,26 @@
 
             <div class="shadow grid grid-4col">
                 <div class="resource flex-group-center">
-                    <label for="data.speed" class="resource-label">{{i18n.speed}}</label>
+                    <label for="data.speed" class="resource-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
                     <input type="text" name="data.speed" value="{{data.speed}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.size" class="resource-label">{{i18n.size}}</label>
+                    <label for="data.size" class="resource-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
                     <input type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.initiative" class="resource-label">{{i18n.init}}</label>
+                    <label for="data.initiative" class="resource-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
                     <input type="text" name="data.initiative" value="{{data.initiative}}" data-dtype="Number"/>
                 </div>
             </div>
 
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
-                    <a class="item" data-tab="skills">{{i18n.skills}}</a>
-                    <a class="item" data-tab="items">{{i18n.equipment}}</a>
-                    <a class="item" data-tab="finance">{{i18n.finance}}</a>
-                    <a class="item" data-tab="biography">{{i18n.biography}}</a>
-                    <a class="item" data-tab="settings">{{i18n.settings}}</a>
+                    <a class="item" data-tab="skills">{{localize 'MGT2.TravellerSheet.Skills'}}</a>
+                    <a class="item" data-tab="items">{{localize 'MGT2.TravellerSheet.Equipment'}}</a>
+                    <a class="item" data-tab="finance">{{localize 'MGT2.TravellerSheet.Finance'}}</a>
+                    <a class="item" data-tab="biography">{{localize 'MGT2.TravellerSheet.Biography'}}</a>
+                    <a class="item" data-tab="settings">{{localize 'MGT2.TravellerSheet.Settings'}}</a>
                 </nav>
 
                 <div class="sheet-body">

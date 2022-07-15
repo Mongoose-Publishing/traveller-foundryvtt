@@ -43,23 +43,6 @@ export class MgT2ActorSheet extends ActorSheet {
     // Add the actor's data to context.data for easier access, as well as flags.
     context.data = actorData.data;
     context.flags = actorData.flags;
-    context.i18n = {
-      "player": game.i18n.localize("MGT2.TravellerSheet.Player"),
-      "species": game.i18n.localize("MGT2.TravellerSheet.Species"),
-      "gender": game.i18n.localize("MGT2.TravellerSheet.Gender"),
-      "age": game.i18n.localize("MGT2.TravellerSheet.Age"),
-      "speed": game.i18n.localize("MGT2.TravellerSheet.Speed"),
-      "size": game.i18n.localize("MGT2.TravellerSheet.Size"),
-      "init": game.i18n.localize("MGT2.TravellerSheet.Init"),
-      "skills": game.i18n.localize("MGT2.TravellerSheet.Skills"),
-      "equipment": game.i18n.localize("MGT2.TravellerSheet.Equipment"),
-      "finance": game.i18n.localize("MGT2.TravellerSheet.Finance"),
-      "biography": game.i18n.localize("MGT2.TravellerSheet.Biography"),
-      "settings": game.i18n.localize("MGT2.TravellerSheet.Settings"),
-      "damage": game.i18n.localize("MGT2.TravellerSheet.Damage"),
-      "armour": game.i18n.localize("MGT2.TravellerSheet.Armour"),
-      "attacks": game.i18n.localize("MGT2.TravellerSheet.Attacks"),
-    };
 
     // Prepare character data and items.
     if (actorData.type == 'traveller') {

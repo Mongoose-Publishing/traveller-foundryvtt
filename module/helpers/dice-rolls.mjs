@@ -402,9 +402,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     if (roll) {
         let total = roll.total;
         if (game.settings.get("mgt2", "useChatIcons")) {
-            text = `<h2>${title}</h2></h2><div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${text}</div><br/>`;
+            text = `<h2>${title}</h2><div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${text}</div><br/>`;
         } else {
-            text = `<h2>${title}</h2></h2><div>${checkText}<br/>${text}</div><br/>`;
+            text = `<h2>${title}</h2><div>${checkText}<br/>${text}</div><br/>`;
         }
 
         if (game.settings.get("mgt2", "verboseSkillRolls")) {
