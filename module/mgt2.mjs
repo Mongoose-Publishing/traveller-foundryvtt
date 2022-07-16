@@ -158,9 +158,7 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
 
 Hooks.on("preUpdateToken", (token, data, moved) => {
     console.log("Token about to change event");
-    console.log(token);
-    console.log(moved);
-    console.log(data);
+
     if (data && data.actorData && data.actorData.data && data.actorData.data.hits) {
         // NPC or Creature has had its HITS changed.
 
@@ -215,23 +213,40 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
                 } else {
                     message += game.i18n.format("MGT2.Damage.StillHurt");
                 }
+            } else {
+                isOkay = true;
             }
         } else {
             // Healing.
             message = "is feeling better";
         }
-        /*
-        token.toggleActiveEffect(CONFIG.statusEffects[0], { "overlay": false, "active": false });
-        token.toggleActiveEffect(CONFIG.statusEffects[1], { "overlay": false, "active": false });
-        token.toggleActiveEffect(CONFIG.statusEffects[23], { "overlay": false, "active": false });
-        if (isDead) {
-            token.toggleActiveEffect(CONFIG.statusEffects[0], { "overlay": false, "active": true });
+        let tokenObject = token.object;
+        if (isDestroyed) {
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": true });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
+        } else if (isDead) {
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": true });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
         } else if (isUnconscious) {
-            token.toggleActiveEffect(CONFIG.statusEffects[1], { "overlay": false, "active": true });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": true });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
         } else if (isInjured) {
-            token.toggleActiveEffect(CONFIG.statusEffects[23], { "overlay": false, "active": true });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": true });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
+        } else {
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
+            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
         }
-        */
 
         let text = "<div class='damaged-token'>";
         if (game.settings.get("mgt2", "useChatIcons")) {

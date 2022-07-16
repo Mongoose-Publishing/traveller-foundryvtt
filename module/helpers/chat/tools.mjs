@@ -234,21 +234,6 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     } else if (actualDamage < damage) {
         text += "Most of it got through.";
     }
-    if (token) {
-        console.log("Apply effects to token");
-        if (data.hits.value <= 0) {
-            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": false, "active": false });
-            token.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": true });
-        } else if (data.hits.value <= maxHits * 0.1) {
-            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": false, "active": false });
-            token.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": true });
-        } else if (data.hits.value <= maxHits * 0.5) {
-            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": false, "active": true });
-        } else {
-            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": false, "active": false });
-            token.toggleEffect("systems/mgt2/icons/effects/wounded.svg", { "overlay": true, "active": false });
-        }
-    }
 
     let chatData = {
         user: game.user.id,
