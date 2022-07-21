@@ -61,20 +61,36 @@ export class MgT2ItemSheet extends ItemSheet {
     }
 
     this._prepareArmour(context);
+    this._prepareAugment(context);
 
     return context;
+  }
+
+  _prepareAugment(context) {
+    console.log("_prepareAugment: " + context.item.type);
+    if (context.item.type === "augment") {
+      // This is an actual Augment.
+      const data = context.item.data;
+      console.log(data);
+
+      if (!data.augments || data.augments.length === 0) {
+        console.log("This has no modifiers");
+        data.augments = [
+          { "type": "none", "target": "STR", "bonus": 0 }
+        ];
+      } else if (data.augments && data.augments.length > 0) {
+        console.log("This has some modifiers");
+      }
+    }
   }
 
   _prepareArmour(context) {
       // Initialize containers.
       const augments = [];
-      console.log("_prepareItems:");
-
       if (!context.item.data.data.armour) {
-        console.log("This is not armour");
         return;
       }
-      console.log("This is armour");
+      console.log("_prepareArmour:");
 
       let data = context.item.data.data;
 
@@ -120,6 +136,7 @@ export class MgT2ItemSheet extends ItemSheet {
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
   }
+
   async _onAugmentCreate(event, item, html) {
     console.log("_onAugmentCreate:");
     if (!item.data.augments) {

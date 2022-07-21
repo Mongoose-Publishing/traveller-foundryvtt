@@ -156,6 +156,18 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     return true;
 });
 
+Hooks.on("preUpdateActor", (actor, data, options, userId) => {
+   console.log("Actor about to change");
+   console.log(actor);
+   console.log(data);
+
+   if (data.data.hits) {
+       // This is an NPC or Creature
+   } else if (data.data.damage) {
+       // This is a PC.
+   }
+});
+
 Hooks.on("preUpdateToken", (token, data, moved) => {
     console.log("Token about to change event");
 

@@ -79,8 +79,9 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
 
     // Header information
-    content = `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div>`;
-    content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
+    content = `<div class="attack-message">`;
+    content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div class="message-content">`;
+    content += `<div><img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
     content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
     content += `<b>Skill DM:</b> ${skillDM}`;
     if (dm && parseInt(dm) < 0) {
@@ -212,6 +213,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         content += `<tr><td>${shortRange}m</td><td>${baseRange}m</td><td>${longRange}m</td><td>${extremeRange}m</td></tr>`;
         content += "</table>";
     }
+    content += "</div>";
 
     roll.toMessage({
         speaker: ChatMessage.getSpeaker({actor: actor}),
@@ -277,6 +279,7 @@ function getEffectLabel(effect) {
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
     const data = actor.data.data;
     let   title = "";
+    let   skillText = "";
     let   text = "";
     let   creatureCheck = false;
     let   isPerson = false;
@@ -324,11 +327,11 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         chaDm = data.characteristics[cha].dm;
         dice += " + " + chaDm;
         title = cha;
-        text += cha;
+        skillText += cha;
         if (chaDm < 0) {
-            text += " (" + chaDm + ")";
+            skillText += " (" + chaDm + ")";
         } else {
-            text += " (+" + chaDm + ")";
+            skillText += " (+" + chaDm + ")";
         }
     }
 
@@ -336,16 +339,16 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         title += ((title === "")?"":" + ") + skill.label;
         skillCheck = true;
         let value = data.skills["jackofalltrades"].value - 3;
-        if (text.length > 0) {
-            text += " + ";
+        if (skillText.length > 0) {
+            skillText += " + ";
         }
-        text += skill.label;
+        skillText += skill.label;
         if (skill.trained) {
             value = skill.value;
             if (speciality) {
                 value = speciality.value;
                 title += " (" + speciality.label + ")";
-                text += " (" + speciality.label + ")";
+                skillText += " (" + speciality.label + ")";
                 specialityCheck = true;
             }
         } else {
@@ -353,24 +356,24 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         }
         if (value < 0) {
             dice += " " + value;
-            text += " (" + value + ")";
+            skillText += " (" + value + ")";
         } else {
             dice += " + " + value;
-            text += " (+" + value + ")";
+            skillText += " (+" + value + ")";
         }
     }
     if (dm > 0) {
         dice += " +" + dm;
-        text += " +" + dm;
+        skillText += " +" + dm;
     } else if (dm < 0) {
         dice += " " + dm;
-        text += " " + dm;
+        skillText += " " + dm;
     }
 
     if (rollType === "boon") {
-        text += " <span class='boon'>[Boon]</span>";
+        skillText += " <span class='boon'>[Boon]</span>";
     } else if (rollType === "bane") {
-        text += " <span class='bane'>[Bane]</span>";
+        skillText += " <span class='bane'>[Bane]</span>";
     }
     console.log("Thumbnail:" + actor.thumbnail);
 
@@ -400,11 +403,12 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
 
     let roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
     if (roll) {
+        text = `<div class='skill-message'><h2>${title}</h2><div class="message-content">`;
         let total = roll.total;
         if (game.settings.get("mgt2", "useChatIcons")) {
-            text = `<h2>${title}</h2><div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${text}</div><br/>`;
+            text += `<div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${skillText}</div><br/>`;
         } else {
-            text = `<h2>${title}</h2><div>${checkText}<br/>${text}</div><br/>`;
+            text += `<div>${checkText}<br/>${skillText}</div><br/>`;
         }
 
         if (game.settings.get("mgt2", "verboseSkillRolls")) {
@@ -426,7 +430,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                     }
 
                     if (game.settings.get("mgt2", "verboseSkillRolls")) {
-                        text += `<h2 class="subroll">${slabel}</h2>`;
+                        text += `<h3 class="subroll">${slabel}</h3>`;
                         text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span> ` + getEffectLabel(stotal - difficulty);
                     } else {
                         text += `<h3 class="subroll">${slabel} <span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span></h3>`;
@@ -434,6 +438,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                 }
             }
         }
+        text += "</div></div>";
 
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),

@@ -634,6 +634,10 @@ input.useCharacteristic {
     color: red;
 }
 
+.skilldialog {
+    padding: 5px;
+}
+
 .skilldialog h3 {
     font-weight: bold;
     font-size: larger;
@@ -806,23 +810,90 @@ div.armour-box input {
 .window-app .window-content {
     background: #A0A0A0;
     background2: url(/systems/mgt2/images/traveller-background.png);
+    padding: 0px;
 }
 
+/* Sheet Styles */
 
 .shadow {
     border: 1px solid #404040;
-    box-shadow: 3px 3px 3px #404040;
+    box-shadow: 3px 3px 3px #202020;
     border-radius: 5px;
     background-color: #c5c3b4;
     padding: 5px;
     margin-bottom: 10px;
 }
 
-/* Item sheets */
-
 .item-sheet {
     display: flex;
+    padding: 5px;
+    background-color: #72bce8;
 }
+
+.item-sheet .shadow {
+    background-color: #c7ded9;
+}
+
+.traveller-sheet {
+    padding: 5px;
+    align-items: flex-start;
+    display: flex;
+    background-color: #404040;
+}
+
+.creature-sheet {
+    padding: 5px;
+    align-items: flex-start;
+    display: flex;
+    background: #A0A7A0;
+}
+
+.npc-sheet {
+    padding: 5px;
+    align-items: flex-start;
+    display: flex;
+    background: #A7A0A0;
+}
+
+/* Messages */
+
+div.attack-message {
+    border: 3px solid #ff311b;
+    border-radius: 5px;
+    margin-bottom: 2px;
+}
+
+div.attack-message h2 {
+    color: white;
+    background-color: #ff311b;
+    padding: 2px;
+}
+
+div.skill-message {
+    border: 3px solid #f1511b;
+    border-radius: 5px;
+    margin-bottom: 2px;
+}
+
+div.skill-message h2 {
+    color: white;
+    background-color: #f1511b;
+    padding: 2px;
+}
+
+div.skill-message h3 {
+    font-size: large;
+    font-weight: bold;
+    color: #f1511b;
+    padding: 2px;
+    border-bottom: 2px solid #f1511b;
+}
+
+div.message-content {
+    padding: 2px;
+}
+
+/* Item sheets */
 
 .item-sheet div.sidebar {
     flex: 0 0 160px;
@@ -846,8 +917,8 @@ div.item-side-panel {
 }
 
 .character-left {
-    flex: 0 0 180px;
-    width: 180px;
+    flex: 0 0 170px;
+    width: 170px;
 }
 
 .character-right {
@@ -855,14 +926,6 @@ div.item-side-panel {
 }
 
 /* Character sheet for creatures */
-
-.creature-sheet {
-    border: 2px groove #f0f0f0;
-    padding: 5px;
-    align-items: flex-start;
-    display: flex;
-    background: #A0A7A0;
-}
 
 .creature-sheet .stats {
     padding: 5px;
@@ -1003,13 +1066,18 @@ label.box-title {
 
 /* NPC Character Sheet */
 
+.character-right h1.charname {
+    padding: 2px;
+    margin-bottom: 10px;
+    color: #f1511b;
+    background-color: #606060;
+}
 
-.npc-sheet {
-    border: 2px groove #f0f0f0;
-    padding: 5px;
-    align-items: flex-start;
-    display: flex;
-    background: #A7A0A0;
+.character-right h1.charname input {
+    color: #f1511b;
+    _background-color: white;
+    border: none;
+    font-weight: bold;
 }
 
 .character-left .side-panel {
@@ -1058,9 +1126,3 @@ label.roll-untrained {
     float: right;
 }
 
-.traveller-sheet {
-    border: 2px groove #f0f0f0;
-    padding: 5px;
-    align-items: flex-start;
-    display: flex;
-}

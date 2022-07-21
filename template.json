@@ -1029,6 +1029,9 @@
     "armour": {
       "templates": ["base", "armour"]
     },
+    "augment": {
+      "templates": [ "base" ]
+    },
     "feature": {
       "templates": ["base"]
     }
