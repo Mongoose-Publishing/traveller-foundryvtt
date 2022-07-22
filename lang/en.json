@@ -10,11 +10,13 @@
   "MGT2.TravellerSheet.Player": "Player",
   "MGT2.TravellerSheet.Species": "Species",
   "MGT2.TravellerSheet.Gender": "Gender",
+  "MGT2.TravellerSheet.Profession": "Profession",
   "MGT2.TravellerSheet.Age": "Age",
   "MGT2.TravellerSheet.Speed": "SPEED",
   "MGT2.TravellerSheet.Size": "SIZE",
   "MGT2.TravellerSheet.Init": "INIT",
   "MGT2.TravellerSheet.MaxHits": "MAX HITS",
+  "MGT2.TravellerSheet.Hits": "HITS",
 
   "MGT2.TravellerSheet.Skills": "Skills",
   "MGT2.TravellerSheet.Equipment": "Equipment",

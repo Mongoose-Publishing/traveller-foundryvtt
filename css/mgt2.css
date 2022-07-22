@@ -1,7 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap');
+
+:root {
+    --title-bg: #f1511b;
+    --title: white;
+    --panel-bg: #c5c3b4;
+    --sheet-bg: #404040;
+}
 
 /* Global styles */
 .window-app {
@@ -809,17 +815,16 @@ div.armour-box input {
 
 .window-app .window-content {
     background: #A0A0A0;
-    background2: url(/systems/mgt2/images/traveller-background.png);
     padding: 0px;
 }
 
 /* Sheet Styles */
 
 .shadow {
-    border: 1px solid #404040;
+    border: 2px solid var(--title-bg);
     box-shadow: 3px 3px 3px #202020;
     border-radius: 5px;
-    background-color: #c5c3b4;
+    background-color: var(--panel-bg);
     padding: 5px;
     margin-bottom: 10px;
 }
@@ -838,7 +843,7 @@ div.armour-box input {
     padding: 5px;
     align-items: flex-start;
     display: flex;
-    background-color: #404040;
+    background-color: var(--sheet-bg);
 }
 
 .creature-sheet {
@@ -1015,7 +1020,9 @@ label.box-title {
     text-align: center;
     display: block;
     margin-bottom: 5px;
-    text-transform: uppercase
+    text-transform: uppercase;
+    background-color: #f1511b;
+    color: white;
 }
 
 .creature-sheet .creature-attacks .items-list label {
@@ -1066,15 +1073,32 @@ label.box-title {
 
 /* NPC Character Sheet */
 
+.field-label {
+    background-color: #f1511b;
+    font-weight: bold;
+    color: white;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    border-radius: 3px 3px 0px 0px;
+}
+
+.field-value {
+    width: 100%;
+    display: inline-block;
+}
+
 .character-right h1.charname {
     padding: 2px;
     margin-bottom: 10px;
     color: #f1511b;
-    background-color: #606060;
+    _background-color: #606060;
+    background-color: #f1511b;
 }
 
 .character-right h1.charname input {
-    color: #f1511b;
+    color: white;
     _background-color: white;
     border: none;
     font-weight: bold;
@@ -1082,8 +1106,12 @@ label.box-title {
 
 .character-left .side-panel {
     width: 160px;
-    padding: 2px;
+    padding: 0px;
     margin-bottom: 10px;
+}
+
+.inset {
+    padding: 2px;
 }
 
 .bio-box {
