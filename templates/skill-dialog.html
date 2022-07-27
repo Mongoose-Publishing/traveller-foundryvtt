@@ -18,7 +18,12 @@
                     <span> + </span>
                 {{/if}}
                 {{#if spec}}
-                    {{skill.label}} ({{spec.label}}) [{{value}}]
+                    {{skill.label}} ({{spec.label}})
+                    {{#if spec.augmented}}
+                        [{{spec.augmented}}<sup>*</sup>]
+                    {{else}}
+                        [{{value}}]
+                    {{/if}}
                 {{else}}
                     {{#if skill}}
                         {{skill.label}} [{{value}}]

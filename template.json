@@ -1009,12 +1009,12 @@
         }
       },
       "augment": {
-        "augment": {
-            "char": "",
-            "charBonus": 0,
-            "skill": "",
-            "skillBonus": 0
-        }
+        "augments": [{
+            "type": "",
+            "target": "STR",
+            "value": 0,
+            "active": false
+        }]
       }
     },
     "item": {
@@ -1030,7 +1030,7 @@
       "templates": ["base", "armour"]
     },
     "augment": {
-      "templates": [ "base" ]
+      "templates": [ "base", "augment" ]
     },
     "feature": {
       "templates": ["base"]

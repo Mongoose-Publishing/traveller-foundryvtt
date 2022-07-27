@@ -35,6 +35,7 @@ export class MgT2Actor extends Actor {
 
     // Make separate methods for each Actor type (traveller, npc, etc.) to keep
     // things organized.
+    this._prepareEffects(actorData);
     this._prepareTravellerData(actorData);
     this._prepareNpcData(actorData);
     this._prepareCreatureData(actorData);
@@ -55,6 +56,59 @@ export class MgT2Actor extends Actor {
       }
   }
 
+    /**
+     * Check any augments that this actor might have, and modify skills
+     * and characteristics.
+     *
+     * @param actorData
+     * @private
+     */
+  _prepareEffects(actorData) {
+    console.log("_prepareEffects: " + actorData.name);
+    console.log(actorData);
+
+    for (const effect of actorData.effects) {
+        console.log("Has effect");
+        console.log(effect);
+        for (const change of effect.data.changes) {
+            let key = change.key;
+            let mode = parseInt(change.mode);
+            let value = parseInt(change.value);
+
+            console.log(`[${key}] [${mode}] [${value}]`);
+
+            if (key && key.length === 3 && key.toUpperCase() === key) {
+                console.log("Characteristic modifier");
+                if (actorData.data.characteristics && actorData.data.characteristics[key]) {
+                    let cha = actorData.data.characteristics[key];
+                    cha.augmented = parseInt(cha.value) + value;
+                }
+            } else if (key && key.length > 0) {
+                console.log("Skill modifier");
+                let skill = key;
+                let spec = null;
+                if (key.indexOf(".") > -1) {
+                    skill = key.split(".")[0];
+                    spec = key.split(".")[1];
+                }
+                console.log(`Skill [${skill}] spec [${spec}]`);
+                if (actorData.data.skills[skill]) {
+                    let skillData = actorData.data.skills[skill];
+                    if (spec && skillData.specialities[spec]) {
+                        let score = parseInt(skillData.specialities[spec].value);
+                        skillData.specialities[spec].augmented = score + value;
+                    } else if (!spec) {
+                        let score = parseInt(skillData.value);
+                        skillData.augmented = score + value;
+                    }
+                } else {
+                    console.log("No such skill");
+                }
+            }
+        }
+    }
+  }
+
   /**
    * Prepare Character type specific data
    */
@@ -66,6 +120,9 @@ export class MgT2Actor extends Actor {
 
     for (const char in data.characteristics) {
         let value = data.characteristics[char].value;
+        if (data.characteristics[char].augmented) {
+            value = data.characteristics[char].augmented;
+        }
         let dmg = 0;
         if (data.damage && data.damage[char]) {
             dmg = data.damage[char].value;
@@ -106,6 +163,10 @@ export class MgT2Actor extends Actor {
 
     for (const char in data.characteristics) {
         let value = data.characteristics[char].value;
+        if (data.characteristics[char].augmented) {
+            value = data.characteristics[char].augmented;
+            console.log("Augmented value is " + value);
+        }
         let dm = this.getModifier(value);
         data.characteristics[char].dm = dm;
     }

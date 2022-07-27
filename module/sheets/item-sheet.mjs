@@ -47,6 +47,8 @@ export class MgT2ItemSheet extends ItemSheet {
     // Add the actor's data to context.data for easier access, as well as flags.
     context.data = itemData.data;
     context.flags = itemData.flags;
+    context.effects = itemData.effects;
+    context.foo = "Hello World";
 
     console.log(context.item);
 
@@ -70,15 +72,15 @@ export class MgT2ItemSheet extends ItemSheet {
     console.log("_prepareAugment: " + context.item.type);
     if (context.item.type === "augment") {
       // This is an actual Augment.
-      const data = context.item.data;
-      console.log(data);
+      const item = context.item.data;
+      console.log(item);
 
-      if (!data.augments || data.augments.length === 0) {
+      if (!item.data.augments || item.data.augments.length === 0) {
         console.log("This has no modifiers");
-        data.augments = [
-          { "type": "none", "target": "STR", "bonus": 0 }
+        item.data.augments = [
+          { "type": "", "target": "STR", "value": 0, "active": false }
         ];
-      } else if (data.augments && data.augments.length > 0) {
+      } else if (item.data.augments && item.data.augments.length > 0) {
         console.log("This has some modifiers");
       }
     }
@@ -95,14 +97,7 @@ export class MgT2ItemSheet extends ItemSheet {
       let data = context.item.data.data;
 
 
-      // Iterate through items, allocating to containers
-      if (context.item.data.data.augments) {
-        for (let aug in context.item.data.data.augments) {
-          augments.push(aug);
-        }
-      } else {
-        context.item.data.data.augments = [];
-      }
+
       // Assign and return
       context.augments = augments;
   }
@@ -125,16 +120,17 @@ export class MgT2ItemSheet extends ItemSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
 
+    /*
     // Add Inventory Item
     if (html.find('.augment-create')) {
       html.find(".augment-create").click(ev => this._onAugmentCreate(ev, this.object.data, html));
 
       // Delete Inventory Item
-      html.find('.item-delete').click(ev => this._onAugmentDelete(ev, this.object.data, html));
+      html.find('.augment-delete').click(ev => this._onAugmentDelete(ev, this.object.data, html));
     }
-
+    */
     // Active Effect management
-    html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
+    html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.item));
   }
 
   async _onAugmentCreate(event, item, html) {
@@ -143,8 +139,9 @@ export class MgT2ItemSheet extends ItemSheet {
       item.data.augments = [];
     }
     let i = Object.keys(item.data.augments).length;
+    console.log(i);
 
-    item.data.augments[i] = { 'aug': i, 'name': 'Unnamed ' + i, 'char': '', 'charBonus': 0, 'skill': '', 'skillBonus': 0 };
+    item.data.augments[i] = { "type": "", "target": "STR", "value": 0, "active": false };
 
     return;
   }

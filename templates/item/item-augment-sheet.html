@@ -1,78 +1,66 @@
-{{!-- This template is a fallback for when items don't have more specific templates. --}}
-{{!-- Generally, you'll want to make more specific templates when possible. --}}
+
+
 <form class="{{cssClass}} item" autocomplete="off">
-
-
-
-  <header class="sheet-header grid grid-2col">
-    <div class="header-profile flex-group-left">
-      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="140px" height="140px"/>
-    </div>
-
-    <div class="header-fields">
-      <h1 class="charname">
-        <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
-      </h1>
-      <div class="grid grid-2col">
-        <div class="resource">
-          <label class="resource-label">Characteristic</label><br/>
-          <select name="data.augment.char">
-            {{#select data.augment.char}}
-            <option value="">-</option>
-            {{#each characteristics as |char id|}}
-              <option value="{{id}}">{{char.label}}</option>
-            {{/each}}
-            {{/select}}
-          </select>
-        </div>
-        <div class="resource">
-          <label class="resource-label">Bonus</label><br/>
-          <input type="text" name="data.augment.charBonus" value="{{data.augment.charBonus}}" data-dtype="Number"/>
+    <section class="item-sheet">
+        <div class="sidebar">
+            <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         </div>
 
-        <div class="resource">
-          <label class="resource-label">Skill</label><br/>
-          <select name="data.augment.skill">
-            {{#select data.augment.skill}}
-            <option value="">-</option>
-            {{#each skills as |skill id|}}
-              {{#if skill.specialities}}
-                {{#each skill.specialities as |spec sid|}}
-                  <option value="{{id}}.{{sid}}">{{skill.label}} ({{spec.label}})</option>
-                {{/each}}
-              {{else}}
-                <option value="{{id}}">{{skill.label}}</option>
-              {{/if}}
-            {{/each}}
-            {{/select}}
-          </select>
+        <div class="flex-group-left">
+            <h1 class="charname shadow">
+              <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+            </h1>
+
+            <div class="shadow">
+              <div class="resources grid grid-4col flex-group-center">
+                <div class="resource">
+                  <label for="data.weight" class="resource-label">KG</label>
+                  <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
+                </div>
+                <div class="resource">
+                  <label for="data.tl" class="resource-label">TL</label>
+                  <input type="text" name="data.tl" value="{{data.tl}}" data-dtype="Number"/>
+                </div>
+                <div class="resource">
+                  <label for="data.cost" class="resource-label">Cost</label>
+                  <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="shadow">
+                <h2>Augments</h2>
+
+                <ol class="items-list effects-list">
+                    <li class="items-header flexrow" data-effect-type="augment">
+                        <div class="effect-type">Type</div>
+                        <div class="effect-target">Target</div>
+                        <div class="effect-value">Value</div>
+                        <div class="items-controls effect-controls flexrow">
+                            <a class="effect-control" data-action="create" title="{{localize "MGT2.Effects.Create"}}">
+                                <i class="fas fa-plus"></i> {{localize "MGT2.Effects.Create"}}
+                            </a>
+                        </div>
+                    </li>
+                    {{#each effects as |e id|}}
+                        <li class="item effect" data-effect-id="{{e.id}}">
+                            <div class="effect-type">{{e.data.changes.0.mode}}</div>
+                            <div class="effect-target">{{e.data.changes.0.key}}</div>
+                            <div class="effect-value">{{e.data.changes.0.value}}</div>
+                            <div class="item-controls effect-controls flexrow">
+                                <a class="effect-control" data-action="edit" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a class="effect-control" data-action="delete" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ol>
+            </div>
         </div>
-        <div class="resource">
-          <label class="resource-label">Skill Bonus</label><br/>
-          <input type="text" name="data.augment.skillBonus" value="{{data.augment.skillBonus}}" data-dtype="Number"/>
-        </div>
-      </div>
-    </div>
-  </header>
+    </section>
 
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="attributes">Attributes</a>
-  </nav>
 
-  {{!-- Sheet Body --}}
-  <section class="sheet-body">
-
-    {{!-- Attributes Tab --}}
-    <div class="tab attributes" data-group="primary" data-tab="attributes">
-      {{!-- As you add new fields, add them in here! --}}
-    </div>
-
-    {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner editable=editable}}
-    </div>
-
-  </section>
 </form>

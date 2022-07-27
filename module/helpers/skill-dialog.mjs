@@ -77,22 +77,22 @@ export class MgT2SkillDialog extends Application {
 
     async onRollClick(event, html) {
         event.preventDefault();
-        console.log("onRollClick:");
 
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
         let cha = this.cha;
         let remember = false;
         if (html.find(".skillDialogCha")[0]) {
             cha = html.find(".skillDialogCha")[0].value;
-            remember = html.find(".skillDialogRemember")[0].value;
+            remember = html.find(".skillDialogRemember")[0].checked;
         }
         let rollType = html.find(".skillDialogRollType")[0].value;
         let difficulty = parseInt(html.find(".skillDialogDifficulty")[0].value);
 
         if (remember && this.skillId) {
-            console.log("Remembering " + cha + " for " + this.skillId);
             this.actor.data.data.skills[this.skillId].default = cha;
             this.actor.update({ "data.skills": this.actor.data.data.skills });
+        } else if (this.skillId) {
+            this.cha = this.actor.data.data.skills[this.skillId].default;
         }
         rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType, difficulty);
 

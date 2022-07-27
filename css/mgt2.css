@@ -814,7 +814,7 @@ div.armour-box input {
 /* Common styles */
 
 .window-app .window-content {
-    background: #A0A0A0;
+    background: var(--sheet-bg);
     padding: 0px;
 }
 
@@ -850,14 +850,14 @@ div.armour-box input {
     padding: 5px;
     align-items: flex-start;
     display: flex;
-    background: #A0A7A0;
+    background: var(--sheet-bg);
 }
 
 .npc-sheet {
     padding: 5px;
     align-items: flex-start;
     display: flex;
-    background: #A7A0A0;
+    background: var(--sheet-bg);
 }
 
 /* Messages */

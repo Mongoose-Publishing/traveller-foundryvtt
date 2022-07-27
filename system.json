@@ -16,7 +16,7 @@
       "system": "mgt2",
       "module": "mgt2",
       "path": "packs/base-items.db",
-      "entity": "Item"
+      "type": "Item"
     }
   ],
   "languages": [
