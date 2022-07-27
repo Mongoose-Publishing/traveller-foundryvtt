@@ -4,14 +4,15 @@ import { MgT2Item } from "./documents/item.mjs";
 // Import sheet classes.
 import { MgT2ActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
+import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
-import { Physics } from "./helpers/chat/physics.mjs";
 import { Tools } from "./helpers/chat/tools.mjs";
 import { rollSkill } from "./helpers/dice-rolls.mjs";
 import {MgT2DamageDialog} from "./helpers/damage-dialog.mjs";
+import {MgT2Effect} from "./documents/effect.mjs";
 
 
 /* -------------------------------------------- */
@@ -77,12 +78,17 @@ Hooks.once('init', async function() {
   // Define custom Document classes
   CONFIG.Actor.documentClass = MgT2Actor;
   CONFIG.Item.documentClass = MgT2Item;
+  //CONFIG.ActiveEffect.documentClass = MgT2EffectSheet;
+
+  console.log(CONFIG);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("mgt2", MgT2ActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2", MgT2ItemSheet, { makeDefault: true });
+  //ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
+  //ActiveEffects.registerSheet("mgt2", MgT2EffectSheet, { makeDefault: true });
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();

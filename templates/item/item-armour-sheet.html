@@ -1,5 +1,4 @@
-<form class="{{cssClass}}" autocomplete="off">
-
+<form class="{{cssClass}} {{item.type}} flexcol" autocomplete="off">
     <section class="item-sheet">
         <div class="sidebar">
             <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
@@ -46,7 +45,7 @@
                                         placeholder="Name"/></h1>
             <div class="resources grid grid-4col flex-group-left">
                 <div class="resource">
-                <label class="resource-label">🛡 Prot️</label><br/>
+                <label class="resource-label">🛡 Prot</label><br/>
                  <input class="armour-value" type="text" name="data.armour.protection" title="Standard armour"
                            value="{{data.armour.protection}}" data-dtype="Number"/><br/>
               </div>
@@ -86,65 +85,5 @@
         </div>
     </section>
 
-    <section>
-    </section>
 
-
-
-    {{!-- Attributes Tab --}}
-    <div class="tab attributes" data-group="primary" data-tab="attributes">
-      {{!-- As you add new fields, add them in here! --}}
-
-      <div class="grid grid-3col">
-
-      </div>
-
-      <h4>Skill Bonuses</h4>
-
-      <ol class="items-list">
-        <li class="item flexrow items-header">
-          <div class="aug-name">Name</div>
-          <div class="aug-target">Characteristic</div>
-          <div class="aug-bonus">Bonus</div>
-          <div class="aug-target">Skill</div>
-          <div class="aug-bonus">Bonus</div>
-          <div class="item-controls">
-            <a class="item-control augment-create" title="Add Bonus" data-type="item"><i class="fas fa-plus"></i> Add</a>
-          </div>
-        </li>
-        {{#each data.augments as |aug id|}}
-          <li class="aug flexrow" data-item-id="{{id}}">
-            <div class="aug-name">
-              <input type="text" name="data.augments.{{id}}.name" value="{{aug.name}}" data-dtype="String"/>
-            </div>
-            <div class="aug-target">
-              {{log id}}
-              <select name="data.augments.{{id}}.char">
-                {{#select aug.char}}
-                <option value="">-</option>
-                {{#each ../characteristics as |ch cid|}}
-                  {{log ch.label}}
-                  <option value="{{cid}}">{{cid}}</option>
-                {{/each}}
-                {{/select}}
-              </select>
-            </div>
-            <div class="aug-target">
-              <input type="text" name="data.augments.{{id}}.charBonus" value="{{aug.charBonus}}" data-dtype="Number"/>
-            </div>
-            <div class="aug-target">
-              <input type="text" name="data.augments.{{id}}.skill" value="{{aug.skill}}" data-dtype="String"/>
-            </div>
-            <div class="aug-target">
-              <input type="text" name="data.augments.{{id}}.skillBonus" value="{{aug.skillBonus}}" data-dtype="Number"/>
-            </div>
-            <div class="item-controls">
-              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-            </div>
-          </li>
-        {{/each}}
-      </ol>
-    </div>
-
-  </section>
 </form>
