@@ -78,7 +78,7 @@ Hooks.once('init', async function() {
   // Define custom Document classes
   CONFIG.Actor.documentClass = MgT2Actor;
   CONFIG.Item.documentClass = MgT2Item;
-  //CONFIG.ActiveEffect.documentClass = MgT2EffectSheet;
+  CONFIG.ActiveEffect.documentClass = MgT2Effect;
 
   console.log(CONFIG);
 
@@ -87,8 +87,10 @@ Hooks.once('init', async function() {
   Actors.registerSheet("mgt2", MgT2ActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2", MgT2ItemSheet, { makeDefault: true });
-  //ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
-  //ActiveEffects.registerSheet("mgt2", MgT2EffectSheet, { makeDefault: true });
+  DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
+  DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2", MgT2EffectSheet, { makeDefault: true});
+//  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
+//  ActiveEffects.registerSheet("mgt2", MgT2EffectSheet, { makeDefault: true });
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();

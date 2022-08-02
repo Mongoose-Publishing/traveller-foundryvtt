@@ -48,7 +48,7 @@ export class MgT2ItemSheet extends ItemSheet {
     context.data = itemData.data;
     context.flags = itemData.flags;
     context.effects = itemData.effects;
-    context.foo = "Hello World";
+    context.effectTypes = CONFIG.MGT2.EFFECTS;
 
     console.log(context.item);
 

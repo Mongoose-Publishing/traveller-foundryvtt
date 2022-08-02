@@ -17,3 +17,13 @@ MGT2.getStatus = function(actor) {
   console.log(data);
 
 };
+
+MGT2.EFFECTS = {
+  "chaAug": { "targets": "char", "value": true },
+  "chaDM": { "targets": "char", "value": true },
+  "chaBoon": { "targets": "char", "value": false },
+  "chaBane":  { "targets": "char", "value": false },
+  "skillAug":  { "targets": "skills", "value": true },
+  "skillDM": { "targets": "skills", "value": true },
+  "skillExpert": { "targets": "skills", "value": true }
+};

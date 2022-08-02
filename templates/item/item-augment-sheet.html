@@ -28,22 +28,30 @@
             </div>
 
             <div class="shadow">
-                <h2>Augments</h2>
+                <h2>{{localize "MGT2.Effects.AugmentEffects"}}</h2>
+
+                {{#each effectTypes as |eType e|}}
+                    <a class="effect-control" data-effectType="{{e}}">
+                        <i class="fas fa-plus"></i> {{localize (concat 'MGT2.Effects.Type.' e)}}
+                    </a>
+                {{/each}}
 
                 <ol class="items-list effects-list">
-                    <li class="items-header flexrow" data-effect-type="augment">
+                    <li class="items flexrow items-header" data-effect-type="augment">
+                        <div class="effect-type">Name</div>
                         <div class="effect-type">Type</div>
                         <div class="effect-target">Target</div>
                         <div class="effect-value">Value</div>
                         <div class="items-controls effect-controls flexrow">
-                            <a class="effect-control" data-action="create" title="{{localize "MGT2.Effects.Create"}}">
+                            <a class="effect-control" data-action="create" title='{{localize "MGT2.Effects.Create"}}'>
                                 <i class="fas fa-plus"></i> {{localize "MGT2.Effects.Create"}}
                             </a>
                         </div>
                     </li>
                     {{#each effects as |e id|}}
-                        <li class="item effect" data-effect-id="{{e.id}}">
-                            <div class="effect-type">{{e.data.changes.0.mode}}</div>
+                        <li class="items effect flexrow" data-effect-id="{{e.id}}">
+                            <div class="effect-type">{{e.data.label}}</div>
+                            <div class="effect-type">{{e.data.flags.augmentType}}</div>
                             <div class="effect-target">{{e.data.changes.0.key}}</div>
                             <div class="effect-value">{{e.data.changes.0.value}}</div>
                             <div class="item-controls effect-controls flexrow">

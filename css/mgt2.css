@@ -1154,3 +1154,9 @@ label.roll-untrained {
     float: right;
 }
 
+ol.effects-list {
+}
+
+li.effect div {
+    display: flex;
+}

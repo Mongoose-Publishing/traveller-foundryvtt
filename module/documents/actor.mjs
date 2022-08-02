@@ -109,6 +109,10 @@ export class MgT2Actor extends Actor {
     }
   }
 
+  applyActiveEffect() {
+
+  }
+
   /**
    * Prepare Character type specific data
    */

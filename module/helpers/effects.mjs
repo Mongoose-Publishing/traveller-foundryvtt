@@ -6,17 +6,27 @@
  export function onManageActiveEffect(event, owner) {
   event.preventDefault();
   const a = event.currentTarget;
+
+  console.log(a);
+  const action = a?.dataset?.effecttype ? a.dataset.effecttype : null;
+
+  if (action) {
+    let eff = CONFIG.MGT2.EFFECTS[action];
+    if (eff) {
+        return owner.createEmbeddedDocuments("ActiveEffect", [{
+            label: game.i18n.localize("MGT2.Effects.Type." + action),
+            icon: "icons/svg/aura.svg",
+            origin: owner.uuid,
+            disabled: false,
+            flags: { "augmentType": action }
+        }]);
+    }
+  }
+
+
   const li = a.closest("li");
   const effect = li.dataset.effectId ? owner.effects.get(li.dataset.effectId) : null;
   switch ( a.dataset.action ) {
-    case "create":
-      return owner.createEmbeddedDocuments("ActiveEffect", [{
-        label: "New Effect",
-        icon: "icons/svg/aura.svg",
-        origin: owner.uuid,
-        "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
-        disabled: li.dataset.effectType === "inactive"
-      }]);
     case "edit":
       return effect.sheet.render(true);
     case "delete":
