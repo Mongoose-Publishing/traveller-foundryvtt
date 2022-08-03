@@ -43,6 +43,8 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         context.effectTypes = MGT2.EFFECTS;
         context.effectType = MGT2.EFFECTS[context.data.flags.augmentType];
 
+
+
         if (context.effectType.targets == "char") {
             context.targets = {
                 "STR": {"label": "STR"},
@@ -55,9 +57,16 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
                 "melee": {"label": "Melee"},
             };
         } else {
-            context.targets = {
-                "melee": {"label": "Melee"}
-            };
+            context.targets = {};
+            let skills = game.system.template.Actor.templates.skills.skills;
+            for (let id in skills) {
+                context.targets[id] = { "label": skills[id].label };
+                if (skills[id].specialities) {
+                    for (let sid in skills[id].specialities) {
+                        context.targets[id + "." + sid] = { "label": skills[id].label + " (" + skills[id].specialities[sid].label + ")"};
+                    }
+                }
+            }
         }
 
         return context;

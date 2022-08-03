@@ -1154,9 +1154,20 @@ label.roll-untrained {
     float: right;
 }
 
-ol.effects-list {
+ol.effects-list li {
+    display: block;
+    border: 1px solid #404040;
+    padding: 2px;
+    border-radius: 3px;
+    background-color: #40404020;
 }
 
-li.effect div {
-    display: flex;
+ol.effects-list li label {
+    font-weight: bold;
+    display: block;
+}
+
+ol.effects-list li .item-controls {
+    display: block;
+    float: right;
 }
