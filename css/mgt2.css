@@ -908,6 +908,14 @@ div.message-content {
     padding: 2px;
 }
 
+div.skill-intro {
+    line-height: 140%;
+}
+
+div.skill-augment-text {
+    font-style: italic;
+}
+
 /* Item sheets */
 
 .item-sheet div.sidebar {

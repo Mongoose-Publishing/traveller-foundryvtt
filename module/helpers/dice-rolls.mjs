@@ -290,9 +290,6 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     let   chaDm = 0;
     let   skillAugDm = 0;
 
-    console.log("rollSkill:");
-    console.log(`skill [${skill}] char [${cha}] dm [${dm}] spec [${speciality}]`);
-
     // Normal, Boon or Bane dice roll.
     let dice = "2D6";
     if (rollType === "boon") {
@@ -439,13 +436,12 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         text = `<div class='skill-message'><h2>${title}</h2><div class="message-content">`;
         let total = roll.total;
         if (game.settings.get("mgt2", "useChatIcons")) {
-            text += `<div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${skillText}</div><br/>`;
+            text += `<div class="skill-intro"><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${skillText}`;
         } else {
-            text += `<div>${checkText}<br/>${skillText}</div><br/>`;
+            text += `<div class="skill-intro">${checkText}<br/>${skillText}`;
         }
-        if (notes && notes.length > 0) {
-            text += `<div class="skill-augment-text">${notes}</div>`;
-        }
+        text += `<div class="skill-augment-text">${notes}</div>`;
+        text += "</div><br/>";
 
         if (game.settings.get("mgt2", "verboseSkillRolls")) {
             let effect = total - difficulty;
