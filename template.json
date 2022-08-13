@@ -705,6 +705,11 @@
                         "label": "Polymers",
                         "value": 0,
                         "trained": false
+                    },
+                    "robotics": {
+                        "label": "Robotics",
+                        "value": 0,
+                        "trained": false
                     }
                 }
             },

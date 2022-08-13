@@ -537,7 +537,7 @@ Handlebars.registerHelper('rollTypeActive', function(data, type) {
     return "";
 });
 
-Handlebars.isTrained('isTrained', function(skill) {
+Handlebars.registerHelper('isTrained', function(skill) {
     if (skill) {
         if (skill.trained) {
             return true;

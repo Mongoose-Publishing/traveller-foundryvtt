@@ -325,6 +325,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     }
     if (cha) {
         chaDm = data.characteristics[cha].dm;
+        if (data.characteristics[cha].augdm) {
+            chaDm += parseInt(data.characteristics[cha].augdm);
+        }
         dice += " + " + chaDm;
         title = cha;
         skillText += cha;
@@ -335,6 +338,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         }
     }
 
+    let notes = "";
     if (skill) {
         title += ((title === "")?"":" + ") + skill.label;
         skillCheck = true;
@@ -344,13 +348,27 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         }
         skillText += skill.label;
         if (skill.trained) {
-            value = skill.value;
+            value = parseInt(skill.value);
+            if (skill.expert && (cha === "INT" || cha === "EDU")) {
+                value += 1;
+                notes = "Expert Software";
+            }
             if (speciality) {
                 value = speciality.value;
                 title += " (" + speciality.label + ")";
                 skillText += " (" + speciality.label + ")";
                 specialityCheck = true;
+                if (speciality.expert) {
+                    if (parseInt(speciality.expert) > value) {
+                        value = parseInt(speciality.expert);
+                    } else {
+                        value += 1;
+                    }
+                }
             }
+        } else if (skill.expert && (cha === "INT" || cha === "EDU")) {
+            value = parseInt(skill.expert);
+            notes = "Expert Software/" + value;
         } else {
             untrainedCheck = true;
         }
@@ -375,7 +393,6 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     } else if (rollType === "bane") {
         skillText += " <span class='bane'>[Bane]</span>";
     }
-    console.log("Thumbnail:" + actor.thumbnail);
 
     let checkText = "Making a skill check";
 
@@ -409,6 +426,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             text += `<div><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${skillText}</div><br/>`;
         } else {
             text += `<div>${checkText}<br/>${skillText}</div><br/>`;
+        }
+        if (notes && notes.length > 0) {
+            text += `<div class="skill-augment-text">${notes}</div>`;
         }
 
         if (game.settings.get("mgt2", "verboseSkillRolls")) {
