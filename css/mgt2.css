@@ -233,6 +233,16 @@
   text-align: center;
 }
 
+/* Journal Entries */
+
+.journal-sheet .window-content .editable {
+    background-color: #f0ffff;
+}
+.journal-sheet .window-content .editor {
+    background-color: white;
+}
+
+
 /* Styles limited to traveller sheets */
 .system-mgt2 .item-form {
   font-family: "Roboto", sans-serif;

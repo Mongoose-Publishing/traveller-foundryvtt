@@ -22,6 +22,9 @@ export class MgT2SkillDialog extends Application {
         this.value = data.skills["jackofalltrades"].value - 3;
         this.chaOnly = false;
         this.cha = cha;
+        this.expert = 0;
+        this.augment = 0;
+        this.augdm = 0;
         if (cha && data.characteristics && data.characteristics[cha]) {
             this.characteristic = data.characteristics[cha];
             if (!skill) {
@@ -33,8 +36,18 @@ export class MgT2SkillDialog extends Application {
         if (skill) {
             this.skill = data.skills[skill];
             this.cha = this.skill.default;
-            if (data.skills[skill].trained) {
+            if (this.skill.expert) {
+                this.expert = parseInt(this.skill.expert);
+            }
+            if (this.skill.augdm && parseInt(this.skill.augdm) > 0) {
+                this.augdm = parseInt(this.skill.augdm);
+            }
+            if (this.skill.trained) {
                 this.value = this.skill.value;
+
+                if (this.skill.augment && parseInt(this.skill.augment) > 0) {
+                    this.skill.augment = parseInt(this.skill.augment);
+                }
                 if (spec) {
                     this.spec = data.skills[skill].specialities[spec];
                     this.value = this.spec.value;

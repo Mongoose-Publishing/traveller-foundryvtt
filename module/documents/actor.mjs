@@ -35,7 +35,6 @@ export class MgT2Actor extends Actor {
 
     // Make separate methods for each Actor type (traveller, npc, etc.) to keep
     // things organized.
-    this._prepareEffects(actorData);
     this._prepareTravellerData(actorData);
     this._prepareNpcData(actorData);
     this._prepareCreatureData(actorData);
@@ -76,7 +75,7 @@ export class MgT2Actor extends Actor {
             let value = parseInt(change.value);
 
             console.log(`[${key}] [${mode}] [${value}]`);
-
+/*
             if (key && key.length === 3 && key.toUpperCase() === key) {
                 console.log("Characteristic modifier");
                 if (actorData.data.characteristics && actorData.data.characteristics[key]) {
@@ -105,12 +104,17 @@ export class MgT2Actor extends Actor {
                     console.log("No such skill");
                 }
             }
+            */
         }
     }
+
+
   }
 
-  applyActiveEffect() {
-
+  applyActiveEffect(ob1, obj2) {
+    console.log("applyActiveEffect:");
+    console.log(obj1);
+    console.log(obj2);
   }
 
   /**
@@ -124,8 +128,8 @@ export class MgT2Actor extends Actor {
 
     for (const char in data.characteristics) {
         let value = data.characteristics[char].value;
-        if (data.characteristics[char].augmented) {
-            value = data.characteristics[char].augmented;
+        if (data.characteristics[char].augment) {
+            value += parseInt(data.characteristics[char].augment);
         }
         let dmg = 0;
         if (data.damage && data.damage[char]) {

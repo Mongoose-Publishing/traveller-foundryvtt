@@ -193,6 +193,10 @@ export class MgT2ActorSheet extends ActorSheet {
      actor.update({ "data.armour": armour});
    }
 
+   applyActiveEffect() {
+    console.log("sheet.applyActiveEffect:");
+   }
+
 
   /* -------------------------------------------- */
 

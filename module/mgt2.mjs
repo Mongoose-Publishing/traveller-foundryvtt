@@ -292,6 +292,24 @@ Hooks.once("ready", async function() {
     Hooks.on("hotbarDrop", (bar, data, slot) => createTravellerMacro(data, slot));
 });
 
+Hooks.on("applyActiveEffect", (actor, effectData) => {
+   console.log("hook.applyActiveEffect:");
+   console.log(actor);
+   console.log(effectData);
+
+   const actorData = actor.data.data;
+   let key = effectData.KEY;
+   let value = effectData.value;
+   let type = effectData.effect.data.flags.augmentType;
+
+   console.log(type);
+
+   if (type === "chaAug") {
+
+   }
+
+});
+
 // Dropping a skill on the macro bar. An entire skill tree is dragged,
 // not just a speciality.
 async function createTravellerMacro(data, slot) {
@@ -519,8 +537,39 @@ Handlebars.registerHelper('rollTypeActive', function(data, type) {
     return "";
 });
 
+Handlebars.isTrained('isTrained', function(skill) {
+    if (skill) {
+        if (skill.trained) {
+            return true;
+        }
+    }
+    return false;
+});
+
 Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
    return arg1 == arg2;
+});
+
+/**
+ * Given an active effect, display the key in a readable form.
+ */
+Handlebars.registerHelper('effect', function(key) {
+    if (key && key.startsWith("data.characteristics")) {
+        key = key.replaceAll(/[a-z.]/g, "");
+        return key;
+    } else if (key && key.startsWith("data.skills")) {
+        let skills = game.system.template.Actor.templates.skills.skills;
+        key = key.replaceAll(/\.[a-z]*$/g, "");
+        key = key.replaceAll(/data.skills./g, "");
+        let skill = key.replaceAll(/\..*/g, "");
+        if (key.indexOf(".specialities") > -1) {
+            let spec = key.replaceAll(/.*\./g, "");
+            return skills[skill].label + " (" + skills[skill].specialities[spec].label + ")";
+        } else {
+            return skills[skill].label;
+        }
+    }
+    return key;
 });
 
 /* -------------------------------------------- */

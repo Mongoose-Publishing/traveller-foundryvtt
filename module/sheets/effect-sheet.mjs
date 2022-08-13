@@ -1,4 +1,5 @@
 import {MGT2} from "../helpers/config.mjs";
+import {MgT2Effect} from "../documents/effect.mjs";
 
 export class MgT2EffectSheet extends ActiveEffectConfig {
     static get defaultOptions() {
@@ -45,25 +46,23 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
 
 
 
+        let prop =context.effectType.property;
         if (context.effectType.targets == "char") {
-            context.targets = {
-                "STR": {"label": "STR"},
-                "DEX": {"label": "DEX"},
-                "END": {"label": "END"},
-                "INT": {"label": "INT"},
-                "PSI": {"label": "PSI"},
-                "INIT": {"label": "INIT"},
-                "SPEED": {"label": "SPEED"},
-                "melee": {"label": "Melee"},
-            };
+            context.targets = {};
+            for (const k of [ 'STR', 'DEX', 'END', 'INT', 'PSI' ]) {
+                console.log(k);
+                let key = "data.characteristics."+k+"."+prop;
+                context.targets[key] = {"label": k};
+            }
         } else {
             context.targets = {};
             let skills = game.system.template.Actor.templates.skills.skills;
             for (let id in skills) {
-                context.targets[id] = { "label": skills[id].label };
+                let baseKey = "data.skills."+id
+                context.targets[baseKey + "." + prop] = { "label": skills[id].label };
                 if (skills[id].specialities) {
                     for (let sid in skills[id].specialities) {
-                        context.targets[id + "." + sid] = { "label": skills[id].label + " (" + skills[id].specialities[sid].label + ")"};
+                        context.targets[baseKey + ".specialities." + sid + "." + prop] = { "label": skills[id].label + " (" + skills[id].specialities[sid].label + ")"};
                     }
                 }
             }
@@ -83,9 +82,13 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         ae.label = formData.label;
         //ae.flags.augmentType = formData.data.flags.augmentType;
 
+        console.log("formData:");
         console.log(formData);
+        console.log(CONST.ACTIVE_EFFECT_MODES);
 
         const effectData = this.getData();
+        console.log("effectData:");
+        console.log(effectData);
         let changes = effectData?.data?.changes ? effectData.data.changes.map(c => c.toObject(false)) : [];
 
         ae.changes = formData.changes;
