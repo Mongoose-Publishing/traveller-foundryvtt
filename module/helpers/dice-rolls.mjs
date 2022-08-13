@@ -288,6 +288,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     let   skillCheck = false;
     let   defaultCha = true;
     let   chaDm = 0;
+    let   skillAugDm = 0;
 
     console.log("rollSkill:");
     console.log(`skill [${skill}] char [${cha}] dm [${dm}] spec [${speciality}]`);
@@ -340,6 +341,14 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
 
     let notes = "";
     if (skill) {
+        // AugmentDMs are applied to the roll, regardless of the actor's skill level.
+        if (skill.augdm && parseInt(skill.augdm > 0)) {
+            skillAugDm += parseInt(skill.augdm);
+        }
+        if (speciality && speciality.augdm && parseInt(speciality.augdm) > 0) {
+            skillAugDm += parseInt(speciality.augdm);
+        }
+
         title += ((title === "")?"":" + ") + skill.label;
         skillCheck = true;
         let value = data.skills["jackofalltrades"].value - 3;
@@ -369,6 +378,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         } else if (skill.expert && (cha === "INT" || cha === "EDU")) {
             value = parseInt(skill.expert);
             notes = "Expert Software/" + value;
+        } else if (speciality && speciality.expert && (cha === "INT" || cha === "EDU")) {
+            value = speciality.expert;
+            notes = "Expert Software";
         } else {
             untrainedCheck = true;
         }
@@ -379,6 +391,10 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             dice += " + " + value;
             skillText += " (+" + value + ")";
         }
+    }
+    if (skillAugDm != 0) {
+        dice += " + " + skillAugDm + "[Aug]";
+        skillText += " + " + skillAugDm + " [Aug]";
     }
     if (dm > 0) {
         dice += " +" + dm;
