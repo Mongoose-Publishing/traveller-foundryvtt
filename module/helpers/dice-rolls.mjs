@@ -356,8 +356,15 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         if (skill.trained) {
             value = parseInt(skill.value);
             if (skill.expert && (cha === "INT" || cha === "EDU")) {
-                value += 1;
-                notes = "Expert Software";
+                if (parseInt(skill.expert) > value) {
+                    value = parseInt(skill.expert);
+                } else {
+                    value += 1;
+                }
+                notes = "Expert Software/" + skill.expert;
+            }
+            if (skill.augment) {
+                value += parseInt(skill.augment);
             }
             if (speciality) {
                 value = speciality.value;
@@ -370,6 +377,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                     } else {
                         value += 1;
                     }
+                }
+                if (speciality.augment) {
+                    value += parseInt(speciality.augment);
                 }
             }
         } else if (skill.expert && (cha === "INT" || cha === "EDU")) {

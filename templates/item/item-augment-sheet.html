@@ -3,6 +3,15 @@
     <section class="item-sheet">
         <div class="sidebar">
             <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+
+            <div class="shadow item-side-panel">
+                <h3>Add Augment</h3>
+                {{#each effectTypes as |eType e|}}
+                    <a class="effect-control augment-types" data-effectType="{{e}}">
+                        <i class="fas fa-plus"></i><span class="augment-name">{{localize (concat 'MGT2.Effects.Type.' e)}}</span>
+                    </a>
+                {{/each}}
+            </div>
         </div>
 
         <div class="flex-group-left">
@@ -11,7 +20,7 @@
             </h1>
 
             <div class="shadow">
-              <div class="resources grid grid-4col flex-group-center">
+              <div class="resources grid grid-3col flex-group-center">
                 <div class="resource">
                   <label for="data.weight" class="resource-label">KG</label>
                   <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
@@ -30,15 +39,7 @@
             <div class="shadow">
                 <h2>{{localize "MGT2.Effects.AugmentEffects"}}</h2>
 
-                {{#each effectTypes as |eType e|}}
-                    <a class="effect-control" data-effectType="{{e}}">
-                        <i class="fas fa-plus"></i> {{localize (concat 'MGT2.Effects.Type.' e)}}
-                    </a>
-                {{/each}}
-
-                <hr/>
-
-                <ol class="items-list effects-list grid grid-3col">
+                <ol class="items-list effects-list grid grid-2col">
                     {{#each effects as |e id|}}
                         <li class="items effect flexrow" data-effect-id="{{e.id}}">
                             <label>{{e.data.label}}</label>

@@ -948,6 +948,16 @@ div.item-side-panel {
     width: auto;
 }
 
+.augment-types {
+    margin-left: 16px;
+    display: block;
+}
+
+.augment-types i {
+    float: left;
+    margin-left: -16px;
+}
+
 /* Character sheet for creatures */
 
 .creature-sheet .stats {
