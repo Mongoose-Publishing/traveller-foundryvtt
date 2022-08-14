@@ -171,10 +171,11 @@ export class MgT2Actor extends Actor {
 
     for (const char in data.characteristics) {
         let value = data.characteristics[char].value;
-        if (data.characteristics[char].augmented) {
-            value = data.characteristics[char].augmented;
+        if (data.characteristics[char].augment) {
+            value += parseInt(data.characteristics[char].augment);
             console.log("Augmented value is " + value);
         }
+        data.characteristics[char].current = value;
         let dm = this.getModifier(value);
         data.characteristics[char].dm = dm;
     }

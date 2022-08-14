@@ -16,6 +16,9 @@ export class MgT2SkillDialog extends Application {
         this.actor = actor;
         const data = actor.data.data;
 
+        console.log("skill-dialog:");
+        console.log(actor);
+
         this.skillId = skill;
         this.skill = null;
         this.spec = null;

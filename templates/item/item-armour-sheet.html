@@ -82,7 +82,36 @@
           <div class="shadow">
             {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner editable=editable}}
           </div>
+            <div class="shadow">
+                <h2>{{localize "MGT2.Effects.AugmentEffects"}}</h2>
+                {{#each effectTypes as |eType e|}}
+                <a class="effect-control augment-types" data-effectType="{{e}}">
+                    <i class="fas fa-plus"></i><span class="augment-name">{{localize (concat 'MGT2.Effects.Type.' e)}}</span>
+                </a>
+                {{/each}}
+                <hr/>
+
+                <ol class="items-list effects-list grid grid-2col">
+                    {{#each effects as |e id|}}
+                    <li class="items effect flexrow" data-effect-id="{{e.id}}">
+                        <label>{{e.data.label}}</label>
+                        <div class="effect-target">{{effect e.data.changes.0.key}} {{e.data.changes.0.value}}</div>
+                        <div class="item-controls effect-controls flexrow">
+                            <a class="effect-control" data-action="edit" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a class="effect-control" data-action="delete" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+            </div>
+
         </div>
+
+
     </section>
 
 

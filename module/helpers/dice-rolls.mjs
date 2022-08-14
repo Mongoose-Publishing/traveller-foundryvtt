@@ -339,7 +339,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     let notes = "";
     if (skill) {
         // AugmentDMs are applied to the roll, regardless of the actor's skill level.
-        if (skill.augdm && parseInt(skill.augdm > 0)) {
+        if (skill.augdm && parseInt(skill.augdm) > 0) {
             skillAugDm += parseInt(skill.augdm);
         }
         if (speciality && speciality.augdm && parseInt(speciality.augdm) > 0) {
