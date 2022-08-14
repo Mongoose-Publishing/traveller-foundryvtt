@@ -949,13 +949,15 @@ div.item-side-panel {
 }
 
 .augment-types {
-    margin-left: 16px;
+    font-size: smaller;
     display: block;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 2px;
 }
 
 .augment-types i {
-    float: left;
-    margin-left: -16px;
+    padding-right: 3px;
 }
 
 /* Character sheet for creatures */

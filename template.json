@@ -1008,6 +1008,7 @@
             "archaic": 0,
             "skill": "",
             "duration": 0,
+            "sltos": 0,
             "form": "standard",
             "layered": 0,
             "worn": 0
