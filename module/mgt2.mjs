@@ -307,7 +307,6 @@ Hooks.on("applyActiveEffect", (actor, effectData) => {
    if (type === "chaAug") {
 
    }
-
 });
 
 // Dropping a skill on the macro bar. An entire skill tree is dragged,
@@ -548,6 +547,80 @@ Handlebars.registerHelper('isTrained', function(skill) {
 
 Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
    return arg1 == arg2;
+});
+
+// Decide whether to show a skill or not.
+Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
+    let showSkill = false;
+    if (!data.settings.hideUntrained) {
+        showSkill = true;
+    } else if (skill.trained) {
+        showSkill = true;
+    } else if (skill.expert && skill.expert > 0) {
+        showSkill = true;
+    } else if (skill.specialities) {
+
+    }
+    skill.value = parseInt(skill.value);
+    if (isNaN(skill.value) || skill.value < 0) {
+        skill.value = 0;
+    }
+    const dataRoll='data-rolltype="skill" data-roll="2d6"';
+    const dataSkill=`data-skill="${skillId}"`;
+
+    const nameSkill=`data.skills.${skillId}`;
+
+    if (showSkill) {
+        let html = `<div class="resource flex-group-left">`;
+        html += `<div class="skill-draggable item" data-rolltype="skill" data-skill="${skillId}" data-roll="2d6">`;
+        html += `<input type="checkbox" class="trained" name="${nameSkill}.trained" `;
+        if (skill.trained) {
+            html += " checked ";
+        }
+        let title = skill.default + " + " + skill.value;
+        html += `data-dtype="Boolean"/>`;
+        html += `<label for="data.skills.${skillId}.value" class="resource-label skill-label rollable" `;
+        html += `${dataRoll} ${dataSkill} data-label="${title} title="${title}"`;
+        html += `>${skill.label}</label>`;
+
+        // Specialities?
+        if (skill.specialities) {
+            html += `<input type="text" value="0" data-dtype="Number" class="skill-fixed" readonly/>`;
+            for (let sid in skill.specialities) {
+                let spec = skill.specialities[sid];
+                spec.value = parseInt(spec.value);
+                if (isNaN(spec.value) || spec.value < 0) {
+                    spec.value = 0;
+                }
+                let showSpec = false;
+                if (!data.settings.hideUntrained) {
+                    showSpec = true;
+                } else if (spec.value > 0) {
+                    showSpec = true;
+                }
+                if (showSpec) {
+                    let title=`${spec.label}`;
+                    if (spec.expert > 0) {
+                        title += "/" + spec.expert;
+                    }
+
+                    html += "<br/>";
+                    html += `<label class="skill-label specialisation rollable" ${dataRoll} ${dataSkill} `;
+                    html += `data-spec="${sid}" title="${title}">${spec.label}</label>`;
+                    html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
+
+                }
+            }
+        } else {
+            html += `<input class="skill-level" type="text" name="${nameSkill}.value" value="${skill.value}" ${dataRoll} ${dataSkill}"/>`;
+        }
+
+        html += "</div></div>";
+
+        return html;
+    }
+
+    return "";
 });
 
 /**

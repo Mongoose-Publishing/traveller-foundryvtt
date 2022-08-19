@@ -823,7 +823,7 @@ div.armour-box input {
 
 /* Common styles */
 
-.window-app .window-content {
+.mgt2 .window-content {
     background: var(--sheet-bg);
     padding: 0px;
 }

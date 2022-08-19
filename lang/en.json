@@ -46,6 +46,23 @@
   "MGT2.Damage.Hurt": "They are badly hurt.",
   "MGT2.Damage.StillHurt": "They are badly hurt.",
 
+  "MGT2.Item.TL": "TL",
+  "MGT2.Item.Weight": "KG",
+  "MGT2.Item.Cost": "Cost",
+
+  "MGT2.Armour.FormType": "Armour Type",
+  "MGT2.Armour.Form.Standard": "Standard",
+  "MGT2.Armour.Form.Layered": "Layered",
+  "MGT2.Armour.Form.Natural": "Natural",
+  "MGT2.Armour.Archaic": "Archaic",
+  "MGT2.Armour.Duration": "Duration (Hours)",
+  "MGT2.Armour.Slots": "Battledress Slots",
+  "MGT2.Armour.Protection": "Prot",
+  "MGT2.Armour.Rads": "Rads",
+  "MGT2.Armour.Energy": "Energy",
+  "MGT2.Armour.EnergyTypes": "Energy Types",
+  "MGT2.Armour.RequiresSkill": "Requires",
+
   "MGT2.Effects.AugmentEffects": "Augment Effects",
   "MGT2.Effects.Create": "Add",
   "MGT2.Effects.Delete": "Create",
