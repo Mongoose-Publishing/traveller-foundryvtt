@@ -592,7 +592,6 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     if (showSkill && skill.specialities) {
         for (let sid in skill.specialities) {
             let spec = skill.specialities[sid];
-            console.log(skill.label + " " + sid + " " + spec.expert);
             if ((spec.expert && parseInt(spec.expert) > 0) || (spec.dm && parseInt(spec.dm) > 0)) {
                 showSpecs = true;
                 break;
@@ -639,7 +638,8 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
             augmented = true;
             title += " + " + skill.dm;
         }
-        html += `<label for="data.skills.${skillId}.value" class="resource-label skill-label rollable ${augmented?"augmented":""}" `;
+        html += `<label for="data.skills.${skillId}.value" `;
+        html += `class="resource-label skill-label rollable ${skill.trained?"":"untrained"} ${augmented?"augmented":""}" `;
         html += `${dataRoll} ${dataSkill} data-label="${title}" title="${title}"`;
         html += `>${skill.label}</label>`;
 
@@ -653,7 +653,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                     spec.value = 0;
                 }
                 let showSpec = false;
-                if (!trainedOnly) {
+                if (!trainedOnly && skill.trained) {
                     showSpec = true;
                 } else if (parseInt(spec.value) > 0) {
                     showSpec = true;

@@ -570,13 +570,12 @@ h1.charname input {
 
 .actor .skill-label {
     display: inline-block;
-    width: 100px;
+    width: 110px;
     font-size: 9pt;
 }
 
 .augmented {
     color: #006000;
-/*    text-decoration: underline; */
 }
 
 .augmented::after {
@@ -587,7 +586,7 @@ h1.charname input {
     display: inline-block;
     font-style: italic;
     margin-left: 26px;
-    width: 100px;
+    width: 110px;
 }
 
 .actor .individual {
