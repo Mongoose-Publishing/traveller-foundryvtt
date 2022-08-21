@@ -574,6 +574,15 @@ h1.charname input {
     font-size: 9pt;
 }
 
+.augmented {
+    color: #006000;
+/*    text-decoration: underline; */
+}
+
+.augmented::after {
+    content: " *";
+}
+
 .actor .specialisation {
     display: inline-block;
     font-style: italic;

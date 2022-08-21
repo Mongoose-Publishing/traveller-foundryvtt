@@ -1,4 +1,6 @@
 // Import document classes.
+// noinspection JSUnresolvedVariable,JSUnresolvedFunction
+
 import { MgT2Actor } from "./documents/actor.mjs";
 import { MgT2Item } from "./documents/item.mjs";
 // Import sheet classes.
@@ -270,7 +272,7 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
 
         let text = "<div class='damaged-token'>";
         if (game.settings.get("mgt2", "useChatIcons")) {
-            text += `<img class='skillcheck-thumb' src='${actor.thumbnail}'/>`;
+            text += `<img class='skillcheck-thumb' alt="Portrait" src='${actor.thumbnail}'/>`;
         }
         text += message;
         text += "</div>";
@@ -467,8 +469,6 @@ Handlebars.registerHelper('skillRollable', function(data, skill, spec) {
                 break;
             }
         }
-        let chaDM = data[cha];
-
         if (skill.trained) {
             let value = skill.value;
             let label = skill.label;
@@ -552,14 +552,55 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
 // Decide whether to show a skill or not.
 Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     let showSkill = false;
-    if (!data.settings.hideUntrained) {
-        showSkill = true;
-    } else if (skill.trained) {
-        showSkill = true;
-    } else if (skill.expert && skill.expert > 0) {
-        showSkill = true;
-    } else if (skill.specialities) {
+    let showSpecs = false;
+    let trainedOnly = data.settings.hideUntrained;
+    let backgroundOnly = data.settings.onlyBackground;
+    let untrainedLevel = data.skills["jackofalltrades"].value - 3;
 
+    // Don't show a skill if it requires a characteristic that
+    // isn't being used by this actor.
+    if (skill.requires && data.characteristics[skill.requires]) {
+        if (!data.characteristics[skill.requires].show) {
+            return "";
+        }
+    }
+
+    // If backgroundOnly is set, then shortcut to not showing anything.
+    if (backgroundOnly && !skill.background) {
+        return "";
+    } else if (backgroundOnly && skill.background) {
+        showSkill = true;
+    } else if (!trainedOnly || skill.trained) {
+        showSkill = true;
+    } else {
+        if (skill.expert && parseInt(skill.expert) > 0) {
+            showSkill = true;
+        } else if (skill.dm && parseInt(skill.dm) > 0) {
+            showSkill = true;
+        } else if (skill.augment && parseInt(skill.augment) > 0) {
+            showSkill = true;
+        } else if (skill.specialities) {
+            for (let sid in skill.specialities) {
+                let spec = skill.specialities[sid];
+                if ((spec.expert && parseInt(spec.expert) > 0) || (spec.dm && parseInt(spec.dm) > 0)) {
+                    showSkill = true;
+                    break;
+                }
+            }
+        }
+    }
+    if (showSkill && skill.specialities) {
+        for (let sid in skill.specialities) {
+            let spec = skill.specialities[sid];
+            console.log(skill.label + " " + sid + " " + spec.expert);
+            if ((spec.expert && parseInt(spec.expert) > 0) || (spec.dm && parseInt(spec.dm) > 0)) {
+                showSpecs = true;
+                break;
+            }
+        }
+    }
+    if (skill.trained) {
+        showSpecs = true;
     }
     skill.value = parseInt(skill.value);
     if (isNaN(skill.value) || skill.value < 0) {
@@ -572,20 +613,39 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
 
     if (showSkill) {
         let html = `<div class="resource flex-group-left">`;
-        html += `<div class="skill-draggable item" data-rolltype="skill" data-skill="${skillId}" data-roll="2d6">`;
+        html += `<div class="skill-draggable item" ${dataRoll} ${dataSkill}>`;
         html += `<input type="checkbox" class="trained" name="${nameSkill}.trained" `;
         if (skill.trained) {
             html += " checked ";
         }
-        let title = skill.default + " + " + skill.value;
-        html += `data-dtype="Boolean"/>`;
-        html += `<label for="data.skills.${skillId}.value" class="resource-label skill-label rollable" `;
-        html += `${dataRoll} ${dataSkill} data-label="${title} title="${title}"`;
+        html += `data-dtype="Boolean"/> `;
+        let augmented = false;
+
+        let title = skill.default;
+        if (skill.trained) {
+            title += " + " + skill.value;
+        } else {
+            title += " - " + Math.abs(untrainedLevel);
+        }
+        if (skill.expert && skill.expert > 0) {
+            augmented = true;
+            title += " /" + (skill.expert -1);
+        }
+        if (skill.augment && skill.augment > 0) {
+            augmented = true;
+            title += " + " + skill.augment;
+        }
+        if (skill.dm && skill.dm > 0) {
+            augmented = true;
+            title += " + " + skill.dm;
+        }
+        html += `<label for="data.skills.${skillId}.value" class="resource-label skill-label rollable ${augmented?"augmented":""}" `;
+        html += `${dataRoll} ${dataSkill} data-label="${title}" title="${title}"`;
         html += `>${skill.label}</label>`;
 
         // Specialities?
-        if (skill.specialities) {
-            html += `<input type="text" value="0" data-dtype="Number" class="skill-fixed" readonly/>`;
+        if (!backgroundOnly && skill.specialities && showSpecs) {
+            html += `<input type="text" value="${skill.trained?0:untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
             for (let sid in skill.specialities) {
                 let spec = skill.specialities[sid];
                 spec.value = parseInt(spec.value);
@@ -593,26 +653,48 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                     spec.value = 0;
                 }
                 let showSpec = false;
-                if (!data.settings.hideUntrained) {
+                if (!trainedOnly) {
                     showSpec = true;
-                } else if (spec.value > 0) {
+                } else if (parseInt(spec.value) > 0) {
+                    showSpec = true;
+                } else if (spec.expert && parseInt(spec.expert) > 0) {
                     showSpec = true;
                 }
                 if (showSpec) {
-                    let title=`${spec.label}`;
-                    if (spec.expert > 0) {
-                        title += "/" + spec.expert;
+                    let augmented = false;
+                    let title = spec.default?spec.default:skill.default;
+                    if (skill.trained) {
+                        title += " + " + skill.value;
+                    } else {
+                        title += " - " + Math.abs(untrainedLevel);
+                    }
+                    if (spec.expert) {
+                        if (isNaN(spec.expert)) {
+                            spec.expert = null;
+                        } else {
+                            spec.expert = parseInt(spec.expert);
+                            augmented = true;
+                            title += " /" + (spec.expert - 1);
+                        }
                     }
 
                     html += "<br/>";
-                    html += `<label class="skill-label specialisation rollable" ${dataRoll} ${dataSkill} `;
+                    html += `<label class="skill-label ${augmented?"augmented":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
                     html += `data-spec="${sid}" title="${title}">${spec.label}</label>`;
-                    html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
+                    if (skill.trained) {
+                        html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
+                    } else {
+                        html += `<input type="text" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
+                    }
 
                 }
             }
         } else {
-            html += `<input class="skill-level" type="text" name="${nameSkill}.value" value="${skill.value}" ${dataRoll} ${dataSkill}"/>`;
+            if (skill.trained) {
+                html += `<input class="skill-level" type="text" name="${nameSkill}.value" value="${skill.value}" ${dataRoll} ${dataSkill}"/>`;
+            } else {
+                html += `<input type="text" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
+            }
         }
 
         html += "</div></div>";
