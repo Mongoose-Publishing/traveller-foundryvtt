@@ -64,6 +64,30 @@ Hooks.once('init', async function() {
             console.log(`Setting quickRolls to ${value}`)
         }
     });
+    game.settings.register('mgt2', 'skillColumns', {
+        name: game.i18n.localize("MGT2.Settings.SkillColumns.Name"),
+        hint: game.i18n.localize("MGT2.Settings.SkillColumns.Hint"),
+        scope: 'client',
+        config: true,
+        type: String,
+        choices: {
+            "2": game.i18n.localize("MGT2.Settings.SkillColumns.Values.Two"),
+            "3": game.i18n.localize("MGT2.Settings.SkillColumns.Values.Three")
+        },
+        default: "3"
+    });
+    game.settings.register('mgt2', 'skillFormat', {
+        name: game.i18n.localize("MGT2.Settings.SkillFormat.Name"),
+        hint: game.i18n.localize("MGT2.Settings.SkillFormat.Hint"),
+        scope: 'client',
+        config: true,
+        type: String,
+        choices: {
+            "rows": game.i18n.localize("MGT2.Settings.SkillFormat.Values.Rows"),
+            "columns": game.i18n.localize("MGT2.Settings.SkillFormat.Values.Columns")
+        },
+        default: "rows"
+    });
 
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;
@@ -549,6 +573,30 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
    return arg1 == arg2;
 });
 
+Handlebars.registerHelper('skillListClasses', function() {
+    let classes="skillList";
+    let columns = parseInt(game.settings.get("mgt2", "skillColumns"));
+    let format = game.settings.get("mgt2", "skillFormat");
+
+    if (format === "columns") {
+        classes += " skillList-Columns";
+        if (columns === 3) {
+            classes += " skillList-Columns-Three";
+        } else {
+            classes += " skillList-Columns-Two";
+        }
+    } else {
+        classes += " skillList-Rows grid";
+        if (columns === 3) {
+            classes += " skillList-Rows-Three grid-3col";
+        } else {
+            classes += " skillList-Rows-Two grid-2col";
+        }
+    }
+
+    return classes;
+});
+
 // Decide whether to show a skill or not.
 Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     let showSkill = false;
@@ -611,8 +659,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     const nameSkill=`data.skills.${skillId}`;
 
     if (showSkill) {
-        let html = `<div class="resource flex-group-left">`;
-        html += `<div class="skill-draggable item" ${dataRoll} ${dataSkill}>`;
+        let html = `<div class="skillBlock skill-draggable item"  ${dataRoll} ${dataSkill}>`;
         html += `<input type="checkbox" class="trained" name="${nameSkill}.trained" `;
         if (skill.trained) {
             html += " checked ";
@@ -639,7 +686,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
             title += " + " + skill.dm;
         }
         html += `<label for="data.skills.${skillId}.value" `;
-        html += `class="resource-label skill-label rollable ${skill.trained?"":"untrained"} ${augmented?"augmented":""}" `;
+        html += `class="rollable ${skill.trained?"":"untrained"} ${augmented?"augmented":""}" `;
         html += `${dataRoll} ${dataSkill} data-label="${title}" title="${title}"`;
         html += `>${skill.label}</label>`;
 
@@ -678,15 +725,20 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                         }
                     }
 
-                    html += "<br/>";
-                    html += `<label class="skill-label ${augmented?"augmented":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
+                    html += "<div class='specialisationBlock'>";
+                    if (skill.individual) {
+                        html += `<input type="checkbox" class="spectrained" `;
+                        html += `name="${nameSkill}.specialities.${sid}.trained" ${spec.trained?"checked":""} `;
+                        html += `data-dtype="Boolean" />`;
+                    }
+                    html += `<label class="${augmented?"augmented":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
                     html += `data-spec="${sid}" title="${title}">${spec.label}</label>`;
-                    if (skill.trained) {
+                    if (skill.trained && (!skill.individual || spec.trained)) {
                         html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
                     } else {
                         html += `<input type="text" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
                     }
-
+                    html += "</div>";
                 }
             }
         } else {
@@ -697,7 +749,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
             }
         }
 
-        html += "</div></div>";
+        html += "</div>"; // skillBlock
 
         return html;
     }
