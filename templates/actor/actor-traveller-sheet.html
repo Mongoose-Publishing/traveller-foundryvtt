@@ -97,7 +97,7 @@
             <div class="shadow grid grid-{{data.settings.columns}}col">
                 {{#each data.characteristics as | char key | }}
                 {{#if char.show}}
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center characteristic-draggable" data-rolltype="characteristic" data-cha="{{key}}">
                     <label for="data.characteristics.{{key}}.value"
                            class="characteristic-title rollable"
                            data-roll="{{boonDice ../data}}+@{{key}}"

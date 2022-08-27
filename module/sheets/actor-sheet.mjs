@@ -271,6 +271,16 @@ export class MgT2ActorSheet extends ActorSheet {
         div.addEventListener("dragstart", handler, options);
       }
     });
+    html.find('div.characteristic-draggable').each((i, div) => {
+      if (div.getAttribute("data-rolltype") === "characteristic") {
+        //console.log(div.getAttribute("data-skill"));
+        let options = {};
+        options.cha = div.getAttribute("data-cha");
+        handler = ev => this._onCharacteristicDragStart(ev, options);
+        div.setAttribute("draggable", true);
+        div.addEventListener("dragstart", handler, options);
+      }
+    });
   }
 
   _onSkillDragStart(event, options) {
@@ -284,6 +294,20 @@ export class MgT2ActorSheet extends ActorSheet {
     dragData.data = {
       dragType: "skill",
       skillName: options.skill
+    }
+    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  }
+
+  _onCharacteristicDragStart(event, options) {
+    let dragData = {
+      actorId: this.actor.id,
+      sceneId: this.actor.isToken ? canvas.scene?.id : null,
+      tokenId: this.actor.isToken ? this.actor.token.id : null
+    }
+    dragData = {
+      dragType: "characteristic",
+      type: "characteristic",
+      characteristic: options.cha
     }
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
   }
@@ -309,6 +333,8 @@ export class MgT2ActorSheet extends ActorSheet {
         return this._onDropDamage(event, data);
       case "UPP":
         return this._onDropUPP(event, data);
+      case "characteristic":
+        return this._onDropCharacteristic(event, data);
     }
   }
 
@@ -338,9 +364,31 @@ export class MgT2ActorSheet extends ActorSheet {
         }
         actor.update({ "data.characteristics": actor.data.data.characteristics});
       }
+    }
+  }
 
+  async _onDropCharacteristic(event, data) {
+    const actor = this.actor;
+    let node = event.target;
+    let sourceCha = data.characteristic;
+    let targetCha = null;
+    while (node) {
+      if (node.dataset && node.dataset.cha) {
+        targetCha = node.dataset.cha;
+        break;
+      }
+      node = node.parentNode;
     }
 
+    if (targetCha && sourceCha && targetCha != sourceCha) {
+      let actorData = actor.data.data;
+      if (actorData.characteristics[targetCha] && actorData.characteristics[sourceCha]) {
+        let swap = actorData.characteristics[targetCha].value;
+        actorData.characteristics[targetCha].value = actorData.characteristics[sourceCha].value;
+        actorData.characteristics[sourceCha].value = swap;
+        actor.update({ "data.characteristics": actorData.characteristics});
+      }
+    }
   }
 
   async _onDropDamage(event, data) {
