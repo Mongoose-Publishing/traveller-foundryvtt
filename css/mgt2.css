@@ -639,11 +639,13 @@ input.useCharacteristic {
 
 .skillList-Columns-Three {
     columns: 3;
+    column-rule: solid 1px #808080;
     font-size: 10pt;
 }
 
 .skillList-Columns-Two {
     columns: 2;
+    column-rule: solid 1px #808080;
     font-size: 12pt;
     height: 14pt;
 }
@@ -657,6 +659,7 @@ input.useCharacteristic {
     width: 100%;
     display:block;
     margin-top: 1px;
+    margin-bottom: 1px;
 }
 
 .skillBlock label {
