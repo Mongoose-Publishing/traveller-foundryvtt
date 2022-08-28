@@ -647,12 +647,13 @@ input.useCharacteristic {
     columns: 2;
     column-rule: solid 1px #808080;
     font-size: 12pt;
-    height: 14pt;
 }
 
 .skillBlock {
     width: 100%;
     display: block;
+    margin-top: 1px;
+    break-inside: avoid;
 }
 
 .specialisationBlock {
@@ -679,7 +680,7 @@ input.useCharacteristic {
 .skillBlock label.individual {
     display: inline-block;
     font-style: italic;
-    margin-left: 0px;
+    margin-left: 4px;
     width: 100px;
 }
 
@@ -690,6 +691,7 @@ input.useCharacteristic {
 .skillBlock .skill-fixed {
     float: right;
 }
+
 
 .actor .skill-level {
     width: 24px;
@@ -706,7 +708,7 @@ input.useCharacteristic {
     border: none;
 }
 
-.skillBlock input.trained {
+input.trained {
     width: 12px;
     height: 12px;
 }

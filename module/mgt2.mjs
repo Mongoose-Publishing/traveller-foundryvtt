@@ -573,6 +573,35 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
    return arg1 == arg2;
 });
 
+
+Handlebars.registerHelper('augmentedSkill', function(skill, spec) {
+    if (!skill) {
+        return "";
+    }
+    let trained = skill.trained;
+    let value = skill.value;
+    if (skill.individual && spec) {
+        trained = spec.trained;
+    }
+    let html = "";
+    let data = spec?spec:skill;
+
+    if (data.augment && trained && parseInt(data.augment) > 0) {
+        html += `<p class="augmented">Skill Augment +${data.augment}</p>`;
+    }
+    if (data.expert) {
+        html += `<p class="augmented">Expert Software/${data.expert} `;
+        if (trained) {
+            html += "(+1) ";
+        } else {
+            html += `[${data.expert - 1}] `;
+        }
+        html += `EDU/INT max ${data.expert * 2 + 8}</p>`;
+    }
+
+    return html;
+});
+
 Handlebars.registerHelper('skillListClasses', function() {
     let classes="skillList";
     let columns = parseInt(game.settings.get("mgt2", "skillColumns"));
@@ -731,7 +760,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                         html += `name="${nameSkill}.specialities.${sid}.trained" ${spec.trained?"checked":""} `;
                         html += `data-dtype="Boolean" />`;
                     }
-                    html += `<label class="${augmented?"augmented":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
+                    html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
                     html += `data-spec="${sid}" title="${title}">${spec.label}</label>`;
                     if (skill.trained && (!skill.individual || spec.trained)) {
                         html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
