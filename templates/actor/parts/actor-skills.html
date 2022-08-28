@@ -1,131 +1,21 @@
 
-<div class="skill-options">
-    <input class="trained" type="checkbox" name="data.settings.hideUntrained"
-           {{checked data.settings.hideUntrained}} data-dtype="Boolean" />
-    <label for="data.settings.hideUntrained">Trained only</label>
-    <input class="trained" type="checkbox" name="data.settings.onlyBackground"
-           {{checked data.settings.onlyBackground}} data-dtype="Boolean" />
-    <label for="data.settings.onlyBackground">Background only</label>
-    {{#if data.settings.hideUntrained}}
-        <label class="skill-label rollable roll-untrained" data-rolltype="skill" data-skill="untrained" data-roll="2d6">Roll Untrained</label>
-    {{/if}}
-</div>
-
-<hr/>
+{{#if data.characteristics}}
+    <div class="skill-options">
+        <input class="trained" type="checkbox" name="data.settings.hideUntrained"
+               {{checked data.settings.hideUntrained}} data-dtype="Boolean" />
+        <label for="data.settings.hideUntrained">Trained only</label>
+        <input class="trained" type="checkbox" name="data.settings.onlyBackground"
+               {{checked data.settings.onlyBackground}} data-dtype="Boolean" />
+        <label for="data.settings.onlyBackground">Background only</label>
+        {{#if data.settings.hideUntrained}}
+            <label class="skill-label rollable roll-untrained" data-rolltype="skill" data-skill="untrained" data-roll="2d6">Roll Untrained</label>
+        {{/if}}
+    </div>
+    <hr/>
+{{/if}}
 
 <section class="{{skillListClasses}}">
     {{#each data.skills as |skill key|}}
         {{{skillBlock ../data key skill}}}
     {{/each}}
 </section>
-<!--
-<section class="grid grid-3col">
-{{#each data.skills as |skill key|}}
-    {{#if (isChaShown ../data skill.requires)}}
-        {{#if ../data/settings.onlyBackground}}
-            {{#if skill.background}}
-                <div class="resource flex-group-left">
-                    <div>
-                        <input type="checkbox" class="trained" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
-                        <label for="data.skills.{{key}}.value" class="resource-label skill-label" style="width: 96px; font-weight: normal">{{skill.label}}</label>
-                    </div>
-                </div>
-            {{/if}}
-        {{else if skill.trained}}
-            <div class="resource flex-group-left">
-                <div class="skill-draggable item" data-rolltype="skill" data-skill="{{key}}" data-roll="2d6">
-                    <input type="checkbox" class="trained"
-                            name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
-                    <label for="data.skills.{{key}}.value"
-                            class="resource-label skill-label rollable"
-                            data-rolltype="skill"
-                            data-skill="{{key}}"
-                            data-roll="2d6"
-                            data-label="{{skillLabel ../data skill null}}"
-                            title="{{skill.default}} + {{skill.value}}">{{skill.label}}</label>
-                    {{#if skill.specialities}}
-                        <input type="text" value="0" data-dtype="Number" class="skill-fixed" readonly/>
-                        {{#each skill.specialities as |spec i|}}
-                            {{#if skill.individual}}
-                                {{#if spec.trained}}
-                                <br/>
-                                <input type="checkbox" class="spectrained" name="data.skills.{{key}}.specialities.{{i}}.trained"
-                                       {{checked spec.trained}} data-dtype="Boolean" />
-                                <label class="skill-label individual rollable"
-                                       data-roll="{{skillRollable ../../data skill spec}}"
-                                       data-rolltype="skill"
-                                       data-skill="{{key}}"
-                                       data-spec="{{i}}"
-                                       data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
-                                    <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value"
-                                           value="{{spec.value}}" data-dtype="Number" class="skill-level"/>
-                                {{else if ../../data/settings.hideUntrained}}
-                                {{else}}
-                                    <br/>
-                                    <input type="checkbox" class="spectrained" name="data.skills.{{key}}.specialities.{{i}}.trained"
-                                           {{checked spec.trained}} data-dtype="Boolean" />
-                                    <label class="skill-label individual rollable"
-                                           data-roll="2d6"
-                                           data-rolltype="skill"
-                                           data-skill="{{key}}"
-                                           data-spec="{{i}}"
-                                           data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
-                                    <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value"
-                                           value="{{defaultSkill ../../data}}" data-dtype="Number" class="skill-fixed" readonly/>
-                                {{/if}}
-                            {{else if spec.value includeZero=false}}
-                                <br/>
-                                <label class="skill-label specialisation rollable"
-                                        data-rolltype="skill"
-                                        data-skill="{{key}}"
-                                        data-spec="{{i}}"
-                                        data-roll="2d6"
-                                        data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
-                                <input type="text"
-                                        name="data.skills.{{key}}.specialities.{{i}}.value"
-                                        value="{{spec.value}}"
-                                        data-dtype="Number"
-                                        class="skill-level"/>
-                            {{else if ../../data/settings.hideUntrained}}
-                            {{else}}
-                                <br/>
-                                <label class="skill-label specialisation rollable"
-                                        data-roll="2d6"
-                                        data-rolltype="skill"
-                                        data-skill="{{key}}"
-                                        data-spec="{{i}}"
-                                        data-label="{{skillLabel ../../data skill spec}}">{{spec.label}}</label>
-                                <input type="text" name="data.skills.{{key}}.specialities.{{i}}.value"
-                                       value="{{spec.value}}" data-dtype="Number" class="skill-level"/>
-                            {{/if}}
-                        {{/each}}
-                    {{else}}
-                        <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}"
-                               data-dtype="Number"
-                               data-rolltype="skill"
-                               data-skill="{{key}}"
-                               class="skill-level"/>
-                    {{/if}}
-                </div>
-            </div>
-        {{else if ../data/settings.hideUntrained}}
-        {{else}}
-            <div class="resource flex-group-left">
-                <div class="skill-draggable" data-rolltype="skill" data-skill="{{key}}">
-                    <input type="checkbox" class="trained" name="data.skills.{{key}}.trained" {{checked skill.trained}} data-dtype="Boolean" />
-                    <label for="data.skills.{{key}}.value"
-                            class="resource-label skill-label rollable untrained"
-                            data-rollType="skill"
-                            data-skill="{{key}}"
-                            data-roll="2d6"
-                            data-label="{{skillLabel ../data skill null}}"
-                            title="{{skill.default}} + {{defaultSkill ../data}}">{{skill.label}}</label>
-                    <input type="text" value="{{defaultSkill ../data}}" data-dtype="Number" class="skill-fixed" readonly/>
-                </div>
-            </div>
-        {{/if}}
-    {{/if}}
-{{/each}}
-
-</section>
--->

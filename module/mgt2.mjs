@@ -516,36 +516,6 @@ Handlebars.registerHelper('skillRollable', function(data, skill, spec) {
     }
 });
 
-Handlebars.registerHelper('boonDice', function(data) {
-    if (data && data.settings) {
-        let dice = "2d6";
-
-        if (data.settings.rollType === "boon") {
-            dice="3d6k2";
-        } else if (data.settings.rollType === "bane") {
-            dice="3d6kl2";
-        }
-        return dice;
-    } else {
-        return "2d6";
-    }
-});
-
-Handlebars.registerHelper('boonLabel', function(data) {
-    if (data && data.settings) {
-        let label = "";
-
-        if (data.settings.rollType === "boon") {
-            label=" [Boon]";
-        } else if (data.settings.rollType === "bane") {
-            label = " [Bane]";
-        }
-        return label;
-    } else {
-        return "";
-    }
-});
-
 Handlebars.registerHelper('rollType', function(data, type) {
     if (type === data.settings.rollType) {
         return "rollTypeActive";
@@ -633,17 +603,21 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     let trainedOnly = data.settings.hideUntrained;
     let backgroundOnly = data.settings.onlyBackground;
     let untrainedLevel = data.skills["jackofalltrades"].value - 3;
+    let isCreature = data.characteristics?false:true;
+
 
     // Don't show a skill if it requires a characteristic that
     // isn't being used by this actor.
-    if (skill.requires && data.characteristics[skill.requires]) {
+    if (skill.requires && data.characteristics && data.characteristics[skill.requires]) {
         if (!data.characteristics[skill.requires].show) {
             return "";
         }
     }
 
     // If backgroundOnly is set, then shortcut to not showing anything.
-    if (backgroundOnly && !skill.background) {
+    if (isCreature && !skill.creature) {
+        return "";
+    } else if (backgroundOnly && !skill.background) {
         return "";
     } else if (backgroundOnly && skill.background) {
         showSkill = true;
