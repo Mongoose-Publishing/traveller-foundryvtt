@@ -1,5 +1,6 @@
 import {hasTrait, getTraitValue} from "../dice-rolls.mjs";
 import {Physics} from "./physics.mjs";
+import {MgT2DamageDialog} from "../damage-dialog.mjs";
 
 export const Tools = {};
 
@@ -255,8 +256,17 @@ Tools.applyDamage = function(damage, ap, tl, options, traits) {
     }
 
     for (let token of tokens) {
+        if (!token.owner) {
+            // Don't have permission to update token.
+            continue;
+        }
         console.log("Apply damage to " + token.name);
-        Tools.applyDamageTo(damage, ap, tl, options, traits, token.actor, token);
+        if (token.data.actorLink && token.actor.type === "traveller") {
+            console.log("This is a Traveller");
+            new MgT2DamageDialog(token.actor, damage, ap, "", false).render(true);
+        } else {
+            Tools.applyDamageTo(damage, ap, tl, options, traits, token.actor, token);
+        }
     }
 }
 

@@ -867,6 +867,10 @@ form.damage-dialog div.resource {
     width: 80px;
 }
 
+form.damage-dialog div.damage-header {
+    width: 320px;
+}
+
 button.damage-button {
     float: right;
     display: inline;
@@ -1193,15 +1197,15 @@ label.box-title {
     display: inline-block;
 }
 
-.character-right h1.charname {
+h1.charname {
     padding: 2px;
     margin-bottom: 10px;
-    color: #f1511b;
-    _background-color: #606060;
+    color: white;
+    font-weight: bold;
     background-color: #f1511b;
 }
 
-.character-right h1.charname input {
+h1.charname input {
     color: white;
     _background-color: white;
     border: none;

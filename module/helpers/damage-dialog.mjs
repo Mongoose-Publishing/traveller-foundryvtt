@@ -26,10 +26,14 @@ export class MgT2DamageDialog extends Application {
         this.stun = stun;
         this.data = data;
         this.armour = data.armour.protection;
+        this.wounds = "";
 
         this.actualDamage = damage;
         if (ap < this.armour) {
             this.actualDamage = damage - (this.armour - ap);
+        }
+        if (this.actualDamage < 0) {
+            this.actualDamage = 0;
         }
 
         this.DMG_STR = data.damage.STR.value;
@@ -39,6 +43,25 @@ export class MgT2DamageDialog extends Application {
         this.STR = data.characteristics.STR.current;
         this.DEX = data.characteristics.DEX.current;
         this.END = data.characteristics.END.current;
+
+        let totalEND = parseInt(data.characteristics.END.value);
+        if (this.actualDamage === 0) {
+            this.wounds = "-";
+        } else if (this.actualDamage < parseInt(totalEND / 2)) {
+            this.wounds = "Minor Wound"
+        } else if (this.actualDamage <= totalEND) {
+            this.wounds = "Major Wound";
+        } else if (this.actualDamage < totalEND * 2) {
+            this.wounds = "Severe Wound";
+        } else if (this.actualDamage < totalEND * 3) {
+            this.wounds = "Crippling Wound";
+        } else if (this.actualDamage < totalEND * 4) {
+            this.wounds = "Critical Wound";
+        } else if (this.actualDamage < totalEND * 5) {
+            this.wounds = "Mortal Wound";
+        } else {
+            this.wounds = "Devastating";
+        }
 
         this.remainingDamage = this.actualDamage;
 
@@ -60,7 +83,8 @@ export class MgT2DamageDialog extends Application {
             "END": this.END,
             "DMG_STR": this.DMG_STR,
             "DMG_DEX": this.DMG_DEX,
-            "DMG_END": this.DMG_END
+            "DMG_END": this.DMG_END,
+            "wounds": this.wounds
         }
     }
 

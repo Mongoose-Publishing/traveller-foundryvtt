@@ -7,9 +7,11 @@
 
 <form class="flexcol damage-dialog">
 
-    <h2>Damage {{damage}}</h2>
+    <h1 class="charname shadow">
+        {{actor.name}}
+    </h1>
 
-    <section class="grid grid-4col">
+    <div class="shadow grid grid-4col">
         <div class="resource flex-group-center">
             <label for="damage" class="resource-label">DAMAGE</label>
             <input type="text" name="damage" value="{{damage}}" data-dtype="Number"/>
@@ -26,83 +28,99 @@
             <label for="actualDamage" class="resource-label">ACTUAL</label>
             <input type="text" name="actualDamage" value="{{actualDamage}}" data-dtype="Number"/>
         </div>
-    </section>
+    </div>
 
-    <h2>Characteristics</h2>
+    <div class="shadow">
+        <h1>Characteristics</h1>
 
-    <label>To Apply:</label>
-    <input class="characteristic-readonly remaining"
-           type="number" min="0" max="20" step="1"
-           name="remainingDamage"
-           value="{{remainingDamage}}"
-           data-dtype="Number" readonly/>
-
-    <table>
-        <tr>
-            <th></th>
-            <th>Total</th>
-            <th>Current</th>
-            <th>Damage</th>
-            <th/>
-        </tr>
-        <tr>
-            <td><label class="resource-label">STR</label></td>
-            <td class="value">{{data.characteristics.STR.value}}</td>
-            <td class="value">
-                <input class="characteristic-readonly VAL_STR"
-                       type="number" min="0" max="20" step="1"
-                       name="STR"
-                       value="{{STR}}"
+        <div class="damage-header grid grid-4col">
+            <div class="flex-group-center">
+                <label>To Apply:</label>
+                <input class="characteristic-readonly remaining"
+                       type="number"
+                       name="remainingDamage"
+                       value="{{remainingDamage}}"
                        data-dtype="Number" readonly/>
-            </td>
-            <td class="value">
-                <input class="damage-value DMG_STR"
-                       type="number" min="0" step="1"
-                       name="DMG_STR" value="{{DMG_STR}}"
-                       data-dtype="Number"/>
+            </div>
 
-            </td>
-            <td><button class="apply-button" data-cha="STR" type="button">Apply</button></td>
-        </tr>
-        <tr>
-            <td><label class="resource-label">DEX</label></td>
-            <td class="value">{{data.characteristics.DEX.value}}</td>
-            <td class="value">
-                <input class="characteristic-readonly VAL_DEX"
-                       type="number" min="0" max="20" step="1"
-                       name="DEX"
-                       value="{{DEX}}"
-                       data-dtype="Number" readonly/>
-            </td>
-            <td class="value">
-                <input class="damage-value DMG_DEX"
-                       type="number" min="0" step="1"
-                       name="DMG_DEX" value="{{DMG_DEX}}"
-                       data-dtype="Number"/>
+            <div class="flex-group-left grid-span-2">
+                <label>Wound Effect</label>
+                <input class="characteristic-readonly remaining"
+                       type="text"
+                       name="woundEffects"
+                       value="{{wounds}}"
+                       data-dtype="String" readonly/>
+            </div>
 
-            </td>
-            <td><button class="apply-button" data-cha="DEX" type="button">Apply</button></td>
-        </tr>
-        <tr>
-            <td><label class="resource-label">END</label></td>
-            <td class="value">{{data.characteristics.END.value}}</td>
-            <td class="value">
-                <input class="characteristic-readonly VAL_END"
-                       type="number" min="0" max="20" step="1"
-                       name="END"
-                       value="{{END}}"
-                       data-dtype="Number" readonly/>
-            </td>
-            <td class="value">
-                <input class="damage-value DMG_END"
-                       type="number" min="0" step="1"
-                       name="DMG_END" value="{{DMG_END}}"
-                       data-dtype="Number"/>
+        </div>
 
-            </td>
-            <td><button class="apply-button" data-cha="END" type="button">Apply</button></td>
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <th></th>
+                <th>Total</th>
+                <th>Current</th>
+                <th>Damage</th>
+                <th/>
+            </tr>
+            <tr>
+                <td><label class="resource-label">STR</label></td>
+                <td class="value">{{data.characteristics.STR.value}}</td>
+                <td class="value">
+                    <input class="characteristic-readonly VAL_STR"
+                           type="number" min="0" max="20" step="1"
+                           name="STR"
+                           value="{{STR}}"
+                           data-dtype="Number" readonly/>
+                </td>
+                <td class="value">
+                    <input class="damage-value DMG_STR"
+                           type="number" min="0" step="1"
+                           name="DMG_STR" value="{{DMG_STR}}"
+                           data-dtype="Number"/>
+
+                </td>
+                <td><button class="apply-button" data-cha="STR" type="button">Apply</button></td>
+            </tr>
+            <tr>
+                <td><label class="resource-label">DEX</label></td>
+                <td class="value">{{data.characteristics.DEX.value}}</td>
+                <td class="value">
+                    <input class="characteristic-readonly VAL_DEX"
+                           type="number" min="0" max="20" step="1"
+                           name="DEX"
+                           value="{{DEX}}"
+                           data-dtype="Number" readonly/>
+                </td>
+                <td class="value">
+                    <input class="damage-value DMG_DEX"
+                           type="number" min="0" step="1"
+                           name="DMG_DEX" value="{{DMG_DEX}}"
+                           data-dtype="Number"/>
+
+                </td>
+                <td><button class="apply-button" data-cha="DEX" type="button">Apply</button></td>
+            </tr>
+            <tr>
+                <td><label class="resource-label">END</label></td>
+                <td class="value">{{data.characteristics.END.value}}</td>
+                <td class="value">
+                    <input class="characteristic-readonly VAL_END"
+                           type="number" min="0" max="20" step="1"
+                           name="END"
+                           value="{{END}}"
+                           data-dtype="Number" readonly/>
+                </td>
+                <td class="value">
+                    <input class="damage-value DMG_END"
+                           type="number" min="0" step="1"
+                           name="DMG_END" value="{{DMG_END}}"
+                           data-dtype="Number"/>
+
+                </td>
+                <td><button class="apply-button" data-cha="END" type="button">Apply</button></td>
+            </tr>
+        </table>
+    </div>
 
     <footer class="sheet-footer flexrow">
         <button type="submit" name="submit" class="damageDone">Done</button>
