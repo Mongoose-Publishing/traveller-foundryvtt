@@ -24,7 +24,7 @@ export class MgT2ActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/mgt2/templates/actor/actor-${this.actor.data.type}-sheet.html`;
+    return `systems/mgt2/templates/actor/actor-${this.actor.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -38,19 +38,22 @@ export class MgT2ActorSheet extends ActorSheet {
     const context = super.getData();
 
     // Use a safe clone of the actor data for further operations.
-    const actorData = context.actor.data;
+    const actorData = context.actor.system;
+    const type = context.actor.type;
+    console.log("getData: ACTOR-SHEET");
+    console.log(context.actor);
 
     // Add the actor's data to context.data for easier access, as well as flags.
-    context.data = actorData.data;
+    context.data = actorData;
     context.flags = actorData.flags;
 
     // Prepare character data and items.
-    if (actorData.type == 'traveller') {
+    if (type == 'traveller') {
         this._prepareItems(context);
-        this._prepareCharacterData(context);
-    } else if (actorData.type === 'npc') {
+        //this._prepareCharacterData(context);
+    } else if (type === 'npc') {
         this._prepareItems(context);
-    } else if (actorData.type === 'creature') {
+    } else if (type === 'creature') {
         this._prepareItems(context);
     }
 
@@ -58,7 +61,7 @@ export class MgT2ActorSheet extends ActorSheet {
     context.rollData = context.actor.getRollData();
 
     // Prepare active effects
-    context.effects = prepareActiveEffectCategories(this.actor.effects);
+    context.effects = prepareActiveEffectCategories(context.actor.effects);
 
     return context;
   }
@@ -106,12 +109,13 @@ export class MgT2ActorSheet extends ActorSheet {
     const armour = [];
     const augments = [];
     console.log("_prepareItems:");
+    console.log(context);
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
       if (i.type === 'item') {
-        gear.push(i);
+          gear.push(i);
       } else if (i.type === 'weapon') {
           weapons.push(i);
       } else if (i.type === 'armour') {
@@ -132,8 +136,8 @@ export class MgT2ActorSheet extends ActorSheet {
 
   _wearArmour(actor, item) {
      console.log(`wearArmour: [${actor.name}] [${item.name}]`)
-     const actorData = actor.data.data;
-     const itemData = item.data.data;
+     const actorData = actor.system;
+     const itemData = item.system;
 
      console.log(actorData);
      console.log(itemData);
@@ -141,30 +145,30 @@ export class MgT2ActorSheet extends ActorSheet {
      let form = itemData.armour.form;
      console.log(actor.items);
      for (let i of actor.items) {
-       console.log(i.data.name);
-       if (i.data.data.armour && i.data.data.armour.worn && i.data.data.armour.form === form) {
-           i.data.data.armour.worn = 0;
-           i.update({"data.armour.worn": 0});
+       console.log(i);
+       if (i.system.armour && i.system.armour.worn && i.system.armour.form === form) {
+           i.system.armour.worn = 0;
+           i.update({"system.armour.worn": 0});
        }
      }
      itemData.armour.worn = 1;
-     item.update({"data.armour.worn": 1});
+     item.update({"system.armour.worn": 1});
      this._calculateArmour(actor);
    }
 
    _removeArmour(actor, item) {
      console.log(`wearArmour: [${actor.name}] [${item.name}]`)
-     const actorData = actor.data.data;
-     const itemData = item.data.data;
+     const actorData = actor.system;
+     const itemData = item.system;
 
      itemData.armour.worn = 0;
-     item.update({"data.armour.worn": 0});
+     item.update({"system.armour.worn": 0});
 
      this._calculateArmour(actor);
    }
 
    _calculateArmour(actor) {
-     const actorData = actor.data.data;
+     const actorData = actor.system;
 
      let armour = actorData.armour;
      armour.protection = 0;
@@ -173,10 +177,10 @@ export class MgT2ActorSheet extends ActorSheet {
      armour.rad = 0;
      armour.archaic = 0;
      for (let i of actor.items) {
-       if (i.data.data.armour) {
-         const armourData = i.data.data.armour;
+       if (i.system.armour) {
+         const armourData = i.system.armour;
          if (armourData.worn || armourData.form === "natural") {
-           let armourData = i.data.data.armour;
+           let armourData = i.system.armour;
 
            armour.protection += armourData.protection;
            armour.otherProtection += armourData.otherProtection;
@@ -343,26 +347,26 @@ export class MgT2ActorSheet extends ActorSheet {
 
     if (actor.type === "traveller" || actor.type === "npc") {
 
-      if (actor.data.data.characteristics) {
+      if (actor.system.characteristics) {
         if (data.STR) {
-          actor.data.data.characteristics.STR.value = parseInt(data.STR);
+          actor.system.characteristics.STR.value = parseInt(data.STR);
         }
         if (data.DEX) {
-          actor.data.data.characteristics.DEX.value = parseInt(data.DEX);
+          actor.system.characteristics.DEX.value = parseInt(data.DEX);
         }
         if (data.END) {
-          actor.data.data.characteristics.END.value = parseInt(data.END);
+          actor.system.characteristics.END.value = parseInt(data.END);
         }
         if (data.INT) {
-          actor.data.data.characteristics.INT.value = parseInt(data.INT);
+          actor.system.characteristics.INT.value = parseInt(data.INT);
         }
         if (data.EDU) {
-          actor.data.data.characteristics.EDU.value = parseInt(data.EDU);
+          actor.system.characteristics.EDU.value = parseInt(data.EDU);
         }
         if (data.SOC) {
-          actor.data.data.characteristics.SOC.value = parseInt(data.SOC);
+          actor.system.characteristics.SOC.value = parseInt(data.SOC);
         }
-        actor.update({ "data.characteristics": actor.data.data.characteristics});
+        actor.update({ "system.characteristics": actor.system.characteristics});
       }
     }
   }

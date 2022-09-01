@@ -195,15 +195,16 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
    console.log(actor);
    console.log(data);
 
-   if (data.data.hits) {
+   if (data.hits) {
        // This is an NPC or Creature
-   } else if (data.data.damage) {
+   } else if (data.damage) {
        // This is a PC.
    }
 });
 
 Hooks.on("preUpdateToken", (token, data, moved) => {
     console.log("Token about to change event");
+    return;
 
     if (data && data.actorData && data.actorData.data && data.actorData.data.hits) {
         // NPC or Creature has had its HITS changed.
@@ -323,7 +324,7 @@ Hooks.on("applyActiveEffect", (actor, effectData) => {
    console.log(actor);
    console.log(effectData);
 
-   const actorData = actor.data.data;
+   const actorData = actor.system;
    let key = effectData.KEY;
    let value = effectData.value;
    let type = effectData.effect.data.flags.augmentType;
