@@ -11,130 +11,131 @@ import {rollSkill} from "../helpers/dice-rolls.mjs";
  */
 export class MgT2ActorSheet extends ActorSheet {
 
-  /** @override */
-  static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
-      classes: ["mgt2", "sheet", "actor"],
-      template: "systems/mgt2/templates/actor/actor-sheet.html",
-      width: 720,
-      height: 600,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
-    });
-  }
-
-  /** @override */
-  get template() {
-    return `systems/mgt2/templates/actor/actor-${this.actor.type}-sheet.html`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  getData() {
-    // Retrieve the data structure from the base sheet. You can inspect or log
-    // the context variable to see the structure, but some key properties for
-    // sheets are the actor object, the data object, whether or not it's
-    // editable, the items array, and the effects array.
-    const context = super.getData();
-
-    // Use a safe clone of the actor data for further operations.
-    const actorData = context.actor.system;
-    const type = context.actor.type;
-    console.log("getData: ACTOR-SHEET");
-    console.log(context.actor);
-
-    // Add the actor's data to context.data for easier access, as well as flags.
-    context.data = actorData;
-    context.system = actorData;
-    context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
-    context.flags = actorData.flags;
-
-    // Prepare character data and items.
-    if (type == 'traveller') {
-        this._prepareItems(context);
-        //this._prepareCharacterData(context);
-    } else if (type === 'npc') {
-        this._prepareItems(context);
-    } else if (type === 'creature') {
-        this._prepareItems(context);
+    /** @override */
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            classes: ["mgt2", "sheet", "actor"],
+            template: "systems/mgt2/templates/actor/actor-sheet.html",
+            width: 720,
+            height: 600,
+            tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
+        });
     }
 
-    // Add roll data for TinyMCE editors.
-    context.rollData = context.actor.getRollData();
+    /** @override */
+    get template() {
+        return `systems/mgt2/templates/actor/actor-${this.actor.type}-sheet.html`;
+    }
 
-    // Prepare active effects
-    context.effects = prepareActiveEffectCategories(context.actor.effects);
+    /* -------------------------------------------- */
 
-    return context;
-  }
+    /** @override */
+    getData() {
+        // Retrieve the data structure from the base sheet. You can inspect or log
+        // the context variable to see the structure, but some key properties for
+        // sheets are the actor object, the data object, whether or not it's
+        // editable, the items array, and the effects array.
+        const context = super.getData();
 
-  /**
-   * Organize and classify Items for Character sheets.
-   *
-   * @param {Object} actorData The actor to prepare.
-   *
-   * @return {undefined}
-   */
-  _prepareCharacterData(context) {
-    console.log("_prepareCharacterData:");
-    let skills = context.data.skills;
-    let changed = false;
-    for (let skill in skills) {
-      if (skills[skill].individual && skills[skill].specialities) {
-        for (let s in skills[skill].specialities) {
-          let spec = skills[skill].specialities[s];
-          if (spec.trained && spec.value < 0) {
-            spec.value = 0;
-            changed = true;
-          }
+        // Use a safe clone of the actor data for further operations.
+        const actorData = context.actor.system;
+        const type = context.actor.type;
+        console.log("getData: ACTOR-SHEET");
+        console.log(context.actor);
+
+        // Add the actor's data to context.data for easier access, as well as flags.
+        context.data = actorData;
+        context.system = actorData;
+        context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
+        context.flags = actorData.flags;
+
+        // Prepare character data and items.
+        if (type == 'traveller') {
+            this._prepareItems(context);
+            //this._prepareCharacterData(context);
+        } else if (type === 'npc') {
+            this._prepareItems(context);
+        } else if (type === 'creature') {
+            this._prepareItems(context);
         }
-      }
-    }
-    if (changed) {
-      //context.actor.update({"data.skills": skills });
-    }
-  }
 
-  /**
-   * Organize and classify Items for Character sheets.
-   *
-   * @param {Object} actorData The actor to prepare.
-   *
-   * @return {undefined}
-   */
-  _prepareItems(context) {
-    // Initialize containers.
-    const gear = [];
-    const features = [];
+        // Add roll data for TinyMCE editors.
+        context.rollData = context.actor.getRollData();
 
-    const weapons = [];
-    const armour = [];
-    const augments = [];
-    console.log("_prepareItems:");
-    console.log(context);
-    // Iterate through items, allocating to containers
-    for (let i of context.items) {
-      i.img = i.img || DEFAULT_TOKEN;
-      // Append to gear.
-      if (i.type === 'item') {
-          gear.push(i);
-      } else if (i.type === 'weapon') {
-          weapons.push(i);
-      } else if (i.type === 'armour') {
-          armour.push(i);
-          this._calculateArmour(context.actor);
-      } else if (i.type === 'augments') {
-          augments.push(i);
-      }
+        // Prepare active effects
+        context.effects = prepareActiveEffectCategories(context.actor.effects);
+
+        return context;
     }
 
-    // Assign and return
-    context.gear = gear;
-    context.weapons = weapons;
-    context.armour = armour;
-    context.augments = augments;
-    context.features = features;
-  }
+    /**
+     * Organize and classify Items for Character sheets.
+     *
+     * @param {Object} actorData The actor to prepare.
+     *
+     * @return {undefined}
+     */
+    _prepareCharacterData(context) {
+        console.log("_prepareCharacterData:");
+        let skills = context.data.skills;
+        let changed = false;
+        for (let skill in skills) {
+            if (skills[skill].individual && skills[skill].specialities) {
+                for (let s in skills[skill].specialities) {
+                    let spec = skills[skill].specialities[s];
+                    if (spec.trained && spec.value < 0) {
+                        spec.value = 0;
+                        changed = true;
+                    }
+                }
+            }
+        }
+        if (changed) {
+            //context.actor.update({"data.skills": skills });
+        }
+    }
+
+    /**
+     * Organize and classify Items for Character sheets.
+     *
+     * @param {Object} actorData The actor to prepare.
+     *
+     * @return {undefined}
+     */
+    _prepareItems(context) {
+        console.log("actor-sheet.mjs:_prepareItems()");
+        // Initialize containers.
+        const gear = [];
+        const features = [];
+
+        const weapons = [];
+        const armour = [];
+        const augments = [];
+        console.log(context);
+        // Iterate through items, allocating to containers
+        for (let i of context.items) {
+            i.img = i.img || DEFAULT_TOKEN;
+            // Append to gear.
+            if (i.type === 'item') {
+                gear.push(i);
+            } else if (i.type === 'weapon') {
+                weapons.push(i);
+            } else if (i.type === 'armour') {
+                armour.push(i);
+                this._calculateArmour(context.actor);
+            } else if (i.type === 'augments') {
+                augments.push(i);
+            }
+        }
+
+        // Assign and return
+        context.gear = gear;
+        context.weapons = weapons;
+        context.armour = armour;
+        context.augments = augments;
+        context.features = features;
+        console.log("END _prepareItems()");
+    }
 
   _wearArmour(actor, item) {
      console.log(`wearArmour: [${actor.name}] [${item.name}]`)
@@ -200,7 +201,7 @@ export class MgT2ActorSheet extends ActorSheet {
    }
 
    applyActiveEffect() {
-    console.log("sheet.applyActiveEffect:");
+        console.log("sheet.applyActiveEffect:");
    }
 
 

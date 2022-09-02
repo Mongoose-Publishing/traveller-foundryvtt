@@ -40,14 +40,6 @@ export class MgT2Item extends Item {
         console.log("item.mjs:roll()");
         const item = this.data;
 
-        // Initialize chat data.
-        const speaker = ChatMessage.getSpeaker({ actor: this.actor });
-        const rollMode = game.settings.get('core', 'rollMode');
-        const label = `[${item.type}] ${item.name}`;
-        const rollData = this.getRollData();
-
-        console.log("item.Roll:");
-
         let quickRoll = game.settings.get("mgt2", "quickRolls");
         if (event.shiftKey) {
             quickRoll = !quickRoll;
