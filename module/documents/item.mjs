@@ -22,7 +22,8 @@ export class MgT2Item extends Item {
      * @private
      */
     getRollData() {
-        console.log("item.mjs: getRollData()");
+        console.log("getRollData()");
+        console.log(this);
         // If present, return the actor's roll data.
         if ( !this.actor ) return null;
         const rollData = this.actor.getRollData();
@@ -37,7 +38,6 @@ export class MgT2Item extends Item {
      * @private
      */
     async roll() {
-        console.log("item.mjs:roll()");
         const item = this.data;
 
         let quickRoll = game.settings.get("mgt2", "quickRolls");

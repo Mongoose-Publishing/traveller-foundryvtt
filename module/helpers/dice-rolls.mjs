@@ -1,6 +1,6 @@
 
 export function getSkillValue(actor, skill, speciality) {
-    const data = actor.data.data;
+    const data = actor.system;
 
     if (skill) {
         if (skill.indexOf(".") > -1) {
@@ -35,7 +35,7 @@ export function getTraitValue(traits, trait) {
 }
 
 export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption) {
-    const   data = actor.data.data;
+    const   data = actor.system;
     let     content = "Attack";
     let     melee = true;
 
@@ -104,8 +104,8 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
     let destructive = dmg.indexOf("*") > -1;
     let damageBonus = weapon.data.weapon.damageBonus;
-    if (damageBonus && actor.data.data.characteristics && actor.data.data.characteristics[damageBonus]) {
-        damageBonus = actor.data.data.characteristics[damageBonus].dm;
+    if (damageBonus && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
+        damageBonus = actor.system.characteristics[damageBonus].dm;
         if (damageBonus > 0) {
             dmg += " +" + damageBonus;
         } else if (damageBonus < 0) {
@@ -277,7 +277,7 @@ function getEffectLabel(effect) {
 }
 
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
-    const data = actor.data.data;
+    const data = actor.system;
     let   title = "";
     let   skillText = "";
     let   text = "";

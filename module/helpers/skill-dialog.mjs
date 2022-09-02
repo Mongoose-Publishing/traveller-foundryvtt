@@ -14,7 +14,7 @@ export class MgT2SkillDialog extends Application {
     constructor(actor, skill, spec, cha) {
         super();
         this.actor = actor;
-        const data = actor.data.data;
+        const data = actor.system;
 
         console.log("skill-dialog:");
         console.log(actor);
@@ -105,10 +105,10 @@ export class MgT2SkillDialog extends Application {
         let difficulty = parseInt(html.find(".skillDialogDifficulty")[0].value);
 
         if (remember && this.skillId) {
-            this.actor.data.data.skills[this.skillId].default = cha;
-            this.actor.update({ "data.skills": this.actor.data.data.skills });
+            this.actor.system.skills[this.skillId].default = cha;
+            this.actor.update({ "system.skills": this.actor.system.skills });
         } else if (this.skillId) {
-            this.cha = this.actor.data.data.skills[this.skillId].default;
+            this.cha = this.actor.system.skills[this.skillId].default;
         }
         rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType, difficulty);
 
