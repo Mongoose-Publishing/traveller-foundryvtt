@@ -415,7 +415,7 @@ Handlebars.registerHelper('concat', function() {
 });
 
 Handlebars.registerHelper('toLowerCase', function(str) {
-  return str.toLowerCase();
+    return str.toLowerCase();
 });
 
 Handlebars.registerHelper('isChaShown', function(data, ch) {
@@ -573,6 +573,11 @@ Handlebars.registerHelper('augmentedSkill', function(skill, spec) {
     return html;
 });
 
+/**
+ * Outputs the list of CSS classes to be used by the skill block.
+ * Reads the system settings to determine the number of columns to use and
+ * whether we are row first or column first.
+ */
 Handlebars.registerHelper('skillListClasses', function() {
     let classes="skillList";
     let columns = parseInt(game.settings.get("mgt2", "skillColumns"));
@@ -765,13 +770,13 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
  * Given an active effect, display the key in a readable form.
  */
 Handlebars.registerHelper('effect', function(key) {
-    if (key && key.startsWith("data.characteristics")) {
+    if (key && key.startsWith("system.characteristics")) {
         key = key.replaceAll(/[a-z.]/g, "");
         return key;
-    } else if (key && key.startsWith("data.skills")) {
+    } else if (key && key.startsWith("system.skills")) {
         let skills = game.system.template.Actor.templates.skills.skills;
         key = key.replaceAll(/\.[a-z]*$/g, "");
-        key = key.replaceAll(/data.skills./g, "");
+        key = key.replaceAll(/system.skills./g, "");
         let skill = key.replaceAll(/\..*/g, "");
         if (key.indexOf(".specialities") > -1) {
             let spec = key.replaceAll(/.*\./g, "");

@@ -45,6 +45,8 @@ export class MgT2ActorSheet extends ActorSheet {
 
     // Add the actor's data to context.data for easier access, as well as flags.
     context.data = actorData;
+    context.system = actorData;
+    context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
     context.flags = actorData.flags;
 
     // Prepare character data and items.

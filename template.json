@@ -973,13 +973,11 @@
     "types": ["item", "feature", "weapon", "armour", "augment" ],
     "templates": {
       "base": {
-        "name": "",
         "description": "Item Description",
         "tl": 0,
         "weight": 0,
         "cost": 0,
         "notes": "",
-        "augments": [],
         "active": false
       },
       "weapon": {

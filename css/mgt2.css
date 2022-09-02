@@ -1279,3 +1279,25 @@ ol.effects-list li .item-controls {
     display: block;
     float: right;
 }
+
+/* Journal related styling */
+section.briefing {
+    background-color: #f0f0f0;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    margin-left: 12px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap');
+section.briefing h2 {
+    font-family: 'Anton', sans-serif;
+    background-color: black;
+    color: white;
+    padding: 2px;
+    padding-left: 5px;
+    margin: -3px;
+    margin-bottom: 3px;
+}
+
+

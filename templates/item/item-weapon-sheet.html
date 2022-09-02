@@ -1,6 +1,11 @@
 <form class="{{cssClass}} {{item.type}} flexcol" autocomplete="off">
+    {{log "ITEM"}}
+    {{log item}}
+    {{log "DATA"}}
+    {{log data}}
     <section class="item-sheet">
         <div class="sidebar">
+
             <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
             <div class="shadow item-side-panel">
@@ -11,15 +16,10 @@
 
             </div>
 
-            <div class="shadow item-side-panel">
-                <div class="resource flex-group-left">
-                    <label for="data.weapon.notes" class="resource-label">Notes</label><br/>
-                    <input type="text" name="data.notes" value="{{data.notes}}" data-dtype="String"/>
-                </div>
-            </div>
         </div>
 
         <div class="flex-group-left">
+
             <div class="shadow">
                 <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
                 <div class="resources grid grid-4col flex-group-center">
@@ -113,8 +113,11 @@
                 </div>
             </div>
             <div class="shadow">
-                {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner editable=editable}}
+                {{editor
+                    enrichedDescription target="system.description"
+                    button=true editable=editable}}
             </div>
         </div>
+
     </section>
 </form>

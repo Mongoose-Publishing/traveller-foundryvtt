@@ -98,7 +98,9 @@
                 </div>
           </div>
           <div class="shadow">
-            {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner editable=editable}}
+              {{editor
+                  enrichedDescription target="system.description"
+                  button=true editable=editable}}
           </div>
             <div class="shadow">
                 <h2>{{localize "MGT2.Effects.AugmentEffects"}}</h2>
