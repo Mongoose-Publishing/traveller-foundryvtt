@@ -3,13 +3,21 @@
 <form class="{{cssClass}} item" autocomplete="off">
 
     <section class="shadow">
-        <h1 class="charname">
-            <input name="system.term.number" type="number" value="{{item.system.term.number}}" placeholder="Num"/>
-            <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
-        </h1>
+        <div class="grid grid-8col">
+            <div class="grid-span-1">
+                <label class="resource-label">Term</label><br/>
+                <input name="system.term.number" type="number" value="{{item.system.term.number}}" placeholder="Num"/>
+            </div>
+
+            <div class="grid-span-7">
+                <label class="resource-label">Career</label><br/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+            </div>
+        </div>
+
     </section>
 
-    <section class="shadow">
+    <section class="shadow history-description">
         {{editor enrichedDescription target="system.description" button=true editable=editable}}
     </section>
 

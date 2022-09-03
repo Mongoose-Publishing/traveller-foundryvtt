@@ -1,26 +1,26 @@
 <h2>Career Terms</h2>
 
-<ol class="items-list">
-    <li class="item flexrow items-header armour">
-        <div class="item-prop">No.</div>
-        <div class="career-name">Career</div>
-        <div class="career-notes">Notes</div>
+<ol class="history-list">
+    <li class="item flexrow history-header">
+        <div class="history-number">No.</div>
+        <div class="history-name">Career</div>
+        <div class="history-notes">Notes</div>
         <div class="item-controls">
             <a class="item-control item-create" title="Create term" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add term</a>
         </div>
     </li>
     {{#each terms as |item id|}}
         <li class="item flexrow" data-item-id="{{item._id}}">
-            <div class="item-prop">
+            <div class="history-number">
                 <label class="resource-label">{{item.system.term.number}}</label>
             </div>
 
-            <div class="career-name">
+            <div class="history-name">
                 <label class="resource-label">{{item.name}}</label>
             </div>
 
-            <div class="career-notes">
-                {{{item.system.description}}}
+            <div class="history-notes">
+                {{toPlainText item.system.description}}
             </div>
 
             <div class="item-controls">
@@ -37,8 +37,8 @@
     Contacts, allies and rivals encountered during character generation.
 </p>
 
-<ol class="items-list">
-    <li class="item flexrow items-header armour">
+<ol class="history-list">
+    <li class="item flexrow history-header">
         <div class="item-name">Name</div>
         <div class="item-prop">Relation</div>
         <div class="item-prop">Notes</div>
@@ -52,7 +52,7 @@
                 <label class="resource-label">{{item.name}}</label>
             </div>
 
-            <div class="item-prop">
+            <div class="notes">
                 <label class="resource-label">{{localize (concat 'MGT2.History.Relation.' item.system.associate.relationship)}}</label>
             </div>
 

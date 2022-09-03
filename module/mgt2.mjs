@@ -418,6 +418,18 @@ Handlebars.registerHelper('toLowerCase', function(str) {
     return str.toLowerCase();
 });
 
+Handlebars.registerHelper('toPlainText', function(html) {
+    if (html) {
+        let text = html.replace(/<[^>]*>/g, "");
+        if (text.length > 120) {
+            text = text.substring(0, 117) + "...";
+        }
+        return text;
+    } else {
+        return "";
+    }
+});
+
 Handlebars.registerHelper('isChaShown', function(data, ch) {
     if (data.characteristics[ch]) {
         return data.characteristics[ch].show;
