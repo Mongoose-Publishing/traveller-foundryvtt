@@ -111,6 +111,7 @@ export class MgT2ActorSheet extends ActorSheet {
         const weapons = [];
         const armour = [];
         const augments = [];
+        const terms = [];
         console.log(context);
         // Iterate through items, allocating to containers
         for (let i of context.items) {
@@ -125,6 +126,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 this._calculateArmour(context.actor);
             } else if (i.type === 'augments') {
                 augments.push(i);
+            } else if (i.type === 'term') {
+                terms.push(i);
             }
         }
 
@@ -134,6 +137,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.armour = armour;
         context.augments = augments;
         context.features = features;
+        context.terms = terms;
         console.log("END _prepareItems()");
     }
 
@@ -409,7 +413,7 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     async _onRollTypeChange(event, actor, type) {
-        actor.data.data.settings.rollType = type;
+        actor.system.settings.rollType = type;
     }
 
     /**
@@ -429,7 +433,6 @@ export class MgT2ActorSheet extends ActorSheet {
         if (header.dataset.name) {
             name = header.dataset.name;
         }
-        console.log(data);
         // Prepare the item object.
         const itemData = {
             name: name,
@@ -446,6 +449,24 @@ export class MgT2ActorSheet extends ActorSheet {
         if (type === "armour" && header.dataset.form) {
             itemData.data.armour = {};
             itemData.data.armour.form = header.dataset.form;
+        }
+        if (type === "term") {
+            console.log("ADDING A TERM");
+            console.log(this.actor);
+            let number = 1;
+            for (let i of this.actor.items) {
+                if (i.type === "term") {
+                    number++;
+                }
+            }
+
+            itemData.name = `New term ${number}`;
+            itemData.description = "-";
+            itemData.data.term = {};
+            itemData.data.term.number = number;
+        }
+        if (type === "associate") {
+            itemData.name = "Unnamed";
         }
         // Remove the type from the dataset since it's in the itemData.type prop.
         delete itemData.data["type"];

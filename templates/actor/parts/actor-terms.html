@@ -1,0 +1,60 @@
+<h2>Career Terms</h2>
+
+<ol class="items-list">
+    <li class="item flexrow items-header armour">
+        <div class="item-prop">No.</div>
+        <div class="career-name">Career</div>
+        <div class="career-notes">Notes</div>
+        <div class="item-controls">
+            <a class="item-control item-create" title="Create item" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add term</a>
+        </div>
+    </li>
+    {{#each terms as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+            <div class="item-prop">
+                <label class="resource-label">{{item.data.term.number}}</label>
+            </div>
+
+            <div class="item-name">
+                <label class="resource-label">{{item.name}}</label>
+            </div>
+
+            <div class="career-notes">
+                {{item.system.description}}
+            </div>
+
+            <div class="item-controls">
+                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+        </li>
+    {{/each}}
+</ol>
+
+<h2>Associates</h2>
+
+<ol class="items-list">
+    <li class="item flexrow items-header armour">
+        <div class="item-name">Career</div>
+        <div class="item-prop">Notes</div>
+        <div class="item-controls">
+            <a class="item-control item-create" title="Create item" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add term</a>
+        </div>
+    </li>
+    {{#each terms as |item id|}}
+    <li class="item flexrow" data-item-id="{{item._id}}">
+        <div class="item-name">
+            <label class="resource-label">{{item.name}}</label>
+        </div>
+
+        <div class="item-prop">
+            <label class="resource-label">{{item.notes}}</label>
+        </div>
+
+        <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+        </div>
+    </li>
+    {{/each}}
+</ol>

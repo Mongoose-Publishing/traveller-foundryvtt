@@ -1,0 +1,16 @@
+{{!-- This template is a fallback for when items don't have more specific templates. --}}
+{{!-- Generally, you'll want to make more specific templates when possible. --}}
+<form class="{{cssClass}} item" autocomplete="off">
+
+    <section class="shadow">
+        <h1 class="charname">
+            <input name="system.term.number" type="number" value="{{item.system.term.number}}" placeholder="Num"/>
+            <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+        </h1>
+    </section>
+
+    <section class="shadow">
+        {{editor enrichedDescription target="system.description" button=true editable=editable}}
+    </section>
+
+</form>

@@ -501,6 +501,42 @@ h1.charname input {
     text-align: left;
 }
 
+li.items-header .career-name {
+    font-weight: bold;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    text-align: left;
+    color: black;
+}
+
+li.items-header .career-notes {
+    font-weight: bold;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    text-align: left;
+    color: black;
+}
+
+.items-list .career-name {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    padding: 0 2px;
+    border-bottom: 1px solid #c9c7b8;
+}
+
+.items-list .career-notes {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    padding: 0 2px;
+    border-bottom: 1px solid #c9c7b8;
+    align-text: left;
+}
+
+
 .actor .item-prop {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 50px;

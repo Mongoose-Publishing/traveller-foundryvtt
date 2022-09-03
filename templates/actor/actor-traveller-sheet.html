@@ -142,6 +142,7 @@
                     <a class="item" data-tab="items">{{localize 'MGT2.TravellerSheet.Equipment'}}</a>
                     <a class="item" data-tab="finance">{{localize 'MGT2.TravellerSheet.Finance'}}</a>
                     <a class="item" data-tab="biography">{{localize 'MGT2.TravellerSheet.Biography'}}</a>
+                    <a class="item" data-tab="history">{{localize 'MGT2.TravellerSheet.History'}}</a>
                     <a class="item" data-tab="settings">{{localize 'MGT2.TravellerSheet.Settings'}}</a>
                 </nav>
 
@@ -207,6 +208,13 @@
                             {{editor
                                 enrichedDescription target="system.description"
                                 button=true editable=editable}}
+                        </section>
+
+                    </div>
+
+                    <div class="tab history" data-group="primary" data-tab="history">
+                        <section>
+                            {{> "systems/mgt2/templates/actor/parts/actor-terms.html"}}
                         </section>
                     </div>
 

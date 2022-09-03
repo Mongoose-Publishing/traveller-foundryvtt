@@ -970,10 +970,9 @@
     }
   },
   "Item": {
-    "types": ["item", "feature", "weapon", "armour", "augment" ],
+    "types": ["item", "feature", "weapon", "armour", "augment", "term", "relationship" ],
     "templates": {
       "base": {
-        "description": "Item Description",
         "tl": 0,
         "weight": 0,
         "cost": 0,
@@ -1006,7 +1005,7 @@
             "archaic": 0,
             "skill": "",
             "duration": 0,
-            "sltos": 0,
+            "slots": 0,
             "form": "standard",
             "layered": 0,
             "worn": 0
@@ -1019,10 +1018,25 @@
             "value": 0,
             "active": false
         }]
+      },
+      "term": {
+          "term": {
+              "number": 0
+          }
+      },
+      "relationship": {
+          "relationship": {
+              "type": "contact",
+              "affinity": 0,
+              "enmity": 0,
+              "power": 0,
+              "influence": 0
+          }
       }
     },
     "item": {
       "templates": ["base" ],
+      "description": "Item Description",
       "quantity": 1,
       "formula": "2d6 + @str"
     },
@@ -1038,6 +1052,12 @@
     },
     "feature": {
       "templates": ["base"]
+    },
+    "term": {
+      "templates": [ "term" ]
+    },
+    "associate": {
+      "templates": [ "associate" ]
     }
   }
 }
