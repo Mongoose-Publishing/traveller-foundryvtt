@@ -112,7 +112,8 @@ export class MgT2ActorSheet extends ActorSheet {
         const armour = [];
         const augments = [];
         const terms = [];
-        console.log(context);
+        const associates = [];
+
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
@@ -128,6 +129,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 augments.push(i);
             } else if (i.type === 'term') {
                 terms.push(i);
+            } else if (i.type === "associate") {
+                associates.push(i);
             }
         }
 
@@ -138,6 +141,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.augments = augments;
         context.features = features;
         context.terms = terms;
+        context.associates = associates;
         console.log("END _prepareItems()");
     }
 
@@ -146,13 +150,8 @@ export class MgT2ActorSheet extends ActorSheet {
         const actorData = actor.system;
         const itemData = item.system;
 
-        console.log(actorData);
-        console.log(itemData);
-
         let form = itemData.armour.form;
-        console.log(actor.items);
         for (let i of actor.items) {
-            console.log(i);
             if (i.system.armour && i.system.armour.worn && i.system.armour.form === form) {
                 i.system.armour.worn = 0;
                 i.update({"system.armour.worn": 0});
@@ -451,8 +450,6 @@ export class MgT2ActorSheet extends ActorSheet {
             itemData.data.armour.form = header.dataset.form;
         }
         if (type === "term") {
-            console.log("ADDING A TERM");
-            console.log(this.actor);
             let number = 1;
             for (let i of this.actor.items) {
                 if (i.type === "term") {
@@ -467,6 +464,8 @@ export class MgT2ActorSheet extends ActorSheet {
         }
         if (type === "associate") {
             itemData.name = "Unnamed";
+            itemData.data.associate = {};
+            itemData.data.associate.relationship = "contact";
         }
         // Remove the type from the dataset since it's in the itemData.type prop.
         delete itemData.data["type"];

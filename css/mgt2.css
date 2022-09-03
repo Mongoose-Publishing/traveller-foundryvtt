@@ -508,6 +508,7 @@ li.items-header .career-name {
     align-items: start;
     text-align: left;
     color: black;
+    width: 40px;
 }
 
 li.items-header .career-notes {
@@ -525,6 +526,12 @@ li.items-header .career-notes {
     align-items: start;
     padding: 0 2px;
     border-bottom: 1px solid #c9c7b8;
+    vertical-align: top;
+    width: 40px;
+}
+
+.career-name label {
+    vertical-align: top;
 }
 
 .items-list .career-notes {
@@ -534,6 +541,7 @@ li.items-header .career-notes {
     padding: 0 2px;
     border-bottom: 1px solid #c9c7b8;
     align-text: left;
+    vertical-align: top;
 }
 
 

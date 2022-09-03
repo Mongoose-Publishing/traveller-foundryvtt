@@ -970,7 +970,7 @@
     }
   },
   "Item": {
-    "types": ["item", "feature", "weapon", "armour", "augment", "term", "relationship" ],
+    "types": ["item", "feature", "weapon", "armour", "augment", "term", "associate" ],
     "templates": {
       "base": {
         "tl": 0,
@@ -1024,9 +1024,9 @@
               "number": 0
           }
       },
-      "relationship": {
-          "relationship": {
-              "type": "contact",
+      "associate": {
+          "associate": {
+              "relationship": "contact",
               "affinity": 0,
               "enmity": 0,
               "power": 0,

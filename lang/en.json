@@ -83,5 +83,22 @@
   "MGT2.Effects.Type.skillDM": "Skill DM",
   "MGT2.Effects.Type.skillExpert": "Expert Program",
 
+  "MGT2.History.CareerTerms": "Career Terms",
+  "MGT2.History.Career": "Career",
+  "MGT2.History.Notes": "Notes",
+  "MGT2.History.AddTerm": "Add term",
+  "MGT2.History.Associates": "Associates",
+  "MGT2.History.Relationship": "Relationship",
+  "MGT2.History.Relation.contact": "Contact",
+  "MGT2.History.Relation.ally": "Ally",
+  "MGT2.History.Relation.rival": "Rival",
+  "MGT2.History.Relation.enemy": "Enemy",
+  "MGT2.History.Relation.Affinity": "Affinity",
+  "MGT2.History.Relation.Enmity": "Enmity",
+  "MGT2.History.Relation.Power": "Power",
+  "MGT2.History.Relation.Influence": "Influence",
+
+
+
   "TRAVELLER.Add": "Add"
 }
