@@ -421,6 +421,7 @@ export class MgT2ActorSheet extends ActorSheet {
      * @private
      */
     async _onItemCreate(event) {
+        console.log("_onItemCreate:");
         event.preventDefault();
         const header = event.currentTarget;
         // Get the type of item to create.
@@ -463,9 +464,9 @@ export class MgT2ActorSheet extends ActorSheet {
             itemData.data.term.number = number;
         }
         if (type === "associate") {
-            itemData.name = "Unnamed";
+            itemData.name = "Unnamed " + header.dataset.relation;
             itemData.data.associate = {};
-            itemData.data.associate.relationship = "contact";
+            itemData.data.associate.relationship = header.dataset.relation;
         }
         // Remove the type from the dataset since it's in the itemData.type prop.
         delete itemData.data["type"];

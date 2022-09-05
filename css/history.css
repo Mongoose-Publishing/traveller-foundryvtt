@@ -1,4 +1,15 @@
 
+.add-associate {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 2px;
+    margin-right: 8px;
+}
+
+.add-associate:hover {
+    background-color: #707070;
+    cursor: pointer;
+}
 
 .history-list {
     list-style: none;
@@ -7,6 +18,7 @@
     overflow-y: auto;
     scrollbar-width: thin;
     color: #444;
+    margin-bottom: 24px;
 }
 
 .history-list .history-header item {
@@ -59,9 +71,15 @@ ol.history-list div.history-notes {
     flex: 1;
 }
 
-ol.history-list div.item-controls {
+ol.history-list div.history-relation {
     flex: none;
     width: 7em;
+}
+
+ol.history-list div.item-controls {
+    flex: none;
+    width: 4em;
+    text-align: right;
 }
 
 li.items-header .career-notes {

@@ -6,7 +6,7 @@
         <div class="history-name">Career</div>
         <div class="history-notes">Notes</div>
         <div class="item-controls">
-            <a class="item-control item-create" title="Create term" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add term</a>
+            <a class="item-control item-create" title="Create term" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add</a>
         </div>
     </li>
     {{#each terms as |item id|}}
@@ -36,27 +36,33 @@
 <p>
     Contacts, allies and rivals encountered during character generation.
 </p>
+<p>
+    <label class="item-create add-associate" data-type="associate" data-relation="contact"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.contact'}}</label>
+    <label class="item-create add-associate" data-type="associate" data-relation="ally"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.ally'}}</label>
+    <label class="item-create add-associate" data-type="associate" data-relation="rival"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.rival'}}</label>
+    <label class="item-create add-associate" data-type="associate" data-relation="enemy"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.enemy'}}</label>
+</p>
 
 <ol class="history-list">
     <li class="item flexrow history-header">
-        <div class="item-name">Name</div>
-        <div class="item-prop">Relation</div>
-        <div class="item-prop">Notes</div>
+        <div class="history-relation">Relation</div>
+        <div class="history-name">Name</div>
+        <div class="history-notes">Notes</div>
         <div class="item-controls">
-            <a class="item-control item-create" title="Create associate" data-name="Associate" data-type="associate"><i class="fas fa-plus"></i> Add associate</a>
+
         </div>
     </li>
     {{#each associates as |item id|}}
         <li class="item flexrow" data-item-id="{{item._id}}">
-            <div class="item-name">
-                <label class="resource-label">{{item.name}}</label>
-            </div>
-
-            <div class="notes">
+            <div class="history-relation">
                 <label class="resource-label">{{localize (concat 'MGT2.History.Relation.' item.system.associate.relationship)}}</label>
             </div>
 
-            <div class="item-prop">
+            <div class="history-name">
+                <label class="resource-label">{{item.name}}</label>
+            </div>
+
+            <div class="history-notes">
                 {{{item.system.description}}}
             </div>
 
