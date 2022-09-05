@@ -21,14 +21,14 @@ export class MgT2AttackDialog extends Application {
         this.actor = actor;
         this.weapon = weapon;
 
-        const data = actor.data.data;
+        const data = actor.system;
         this.data = data;
-        this.cha = this.weapon.data.weapon.characteristic;
-        this.skill = this.weapon.data.weapon.skill.split(".")[0];
-        this.speciality = this.weapon.data.weapon.skill.split(".")[1];
+        this.cha = this.weapon.system.weapon.characteristic;
+        this.skill = this.weapon.system.weapon.skill.split(".")[0];
+        this.speciality = this.weapon.system.weapon.skill.split(".")[1];
         this.auto = 1;
-        if (hasTrait(this.weapon.data.weapon.traits, "auto")) {
-            this.auto = getTraitValue(this.weapon.data.weapon.traits, "auto");
+        if (hasTrait(this.weapon.system.weapon.traits, "auto")) {
+            this.auto = getTraitValue(this.weapon.system.weapon.traits, "auto");
         }
 
         // Work out what the skill bonus is.
@@ -40,13 +40,13 @@ export class MgT2AttackDialog extends Application {
         }
 
         // Work out the damage.
-        this.damage = weapon.data.weapon.damage;
+        this.damage = weapon.system.weapon.damage;
         this.damage = this.damage.toUpperCase().replace(/D6/, "D");
         this.damage = this.damage.replace(/ *\* *10/, "D");
 
         console.log("Weapon skill total " + this.score);
 
-        this.range = parseInt(this.weapon.data.weapon.range);
+        this.range = parseInt(this.weapon.system.weapon.range);
         console.log("Range: " + this.range);
         this.melee = true;
         if (this.range > 0) {

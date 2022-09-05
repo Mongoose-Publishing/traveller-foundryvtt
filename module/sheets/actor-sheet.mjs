@@ -391,7 +391,7 @@ export class MgT2ActorSheet extends ActorSheet {
         }
 
         if (targetCha && sourceCha && targetCha != sourceCha) {
-            let actorData = actor.data.data;
+            let actorData = actor.system;
             if (actorData.characteristics[targetCha] && actorData.characteristics[sourceCha]) {
                 let swap = actorData.characteristics[targetCha].value;
                 actorData.characteristics[targetCha].value = actorData.characteristics[sourceCha].value;
@@ -459,7 +459,7 @@ export class MgT2ActorSheet extends ActorSheet {
             }
 
             itemData.name = `New term ${number}`;
-            itemData.description = "-";
+            itemData.data.description = "Events, mishaps and promotions.";
             itemData.data.term = {};
             itemData.data.term.number = number;
         }

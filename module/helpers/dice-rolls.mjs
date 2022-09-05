@@ -39,7 +39,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     let     content = "Attack";
     let     melee = true;
 
-    let baseRange = weapon.data.weapon.range;
+    let baseRange = weapon.system.weapon.range;
     let rangeBand = null;
     let rangeDistance = baseRange;
     if (range !== undefined && range !== null) {
@@ -71,8 +71,8 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
     dice += " + " + skillDM;
 
-    if (weapon.data.weapon.attackBonus) {
-        const attackBonus = parseInt(weapon.data.weapon.attackBonus);
+    if (weapon.system.weapon.attackBonus) {
+        const attackBonus = parseInt(weapon.system.weapon.attackBonus);
         if (attackBonus != 0) {
             dice += " + " + attackBonus;
         }
@@ -97,13 +97,13 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     content += "<br/>";
 
     // Work out damage.
-    let dmg = weapon.data.weapon.damage;
-    let type = weapon.data.weapon.damageType;
+    let dmg = weapon.system.weapon.damage;
+    let type = weapon.system.weapon.damageType;
     if (!type) {
         type == "standard";
     }
     let destructive = dmg.indexOf("*") > -1;
-    let damageBonus = weapon.data.weapon.damageBonus;
+    let damageBonus = weapon.system.weapon.damageBonus;
     if (damageBonus && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
         damageBonus = actor.system.characteristics[damageBonus].dm;
         if (damageBonus > 0) {
@@ -119,7 +119,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     } else {
         content += `<b>Melee</b>`;
     }
-    let traits = weapon.data.weapon.traits;
+    let traits = weapon.system.weapon.traits;
     if (traits && traits !== "") {
         content += `<b>Traits:</b> ${traits}`
     } else {
@@ -175,7 +175,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         if (hasTrait(traits, "ap")) {
             ap = getTraitValue(traits, "ap");
         }
-        let tl = weapon.data.tl;
+        let tl = weapon.system.tl;
         let options = "";
         if (type !== "standard") {
             options += " " + type;

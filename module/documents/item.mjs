@@ -38,7 +38,7 @@ export class MgT2Item extends Item {
      * @private
      */
     async roll() {
-        const item = this.data;
+        const item = this;
 
         let quickRoll = game.settings.get("mgt2", "quickRolls");
         if (event.shiftKey) {
@@ -50,10 +50,10 @@ export class MgT2Item extends Item {
                 new MgT2AttackDialog(this.actor, item).render(true);
             } else {
                 console.log("Quick Attack Roll");
-                let skillDM = getSkillValue(this.actor, item.data.weapon.skill, null);
+                let skillDM = getSkillValue(this.actor, item.system.weapon.skill, null);
                 let actorData = this.actor.system;
-                if (actorData.characteristics && actorData.characteristics[item.data.weapon.characteristic]) {
-                    skillDM += parseInt(this.actor.data.data.characteristics[item.data.weapon.characteristic].dm)
+                if (actorData.characteristics && actorData.characteristics[item.system.weapon.characteristic]) {
+                    skillDM += parseInt(this.actor.system.characteristics[item.system.weapon.characteristic].dm)
                 }
                 rollAttack(this.actor, item, skillDM);
             }
