@@ -467,12 +467,163 @@ export class MgT2ActorSheet extends ActorSheet {
             itemData.name = "Unnamed " + header.dataset.relation;
             itemData.data.associate = {};
             itemData.data.associate.relationship = header.dataset.relation;
+            itemData.data.description = this._setAssociate(itemData.data.associate);
         }
         // Remove the type from the dataset since it's in the itemData.type prop.
         delete itemData.data["type"];
 
         // Finally, create the item!
         return await Item.create(itemData, {parent: this.actor});
+    }
+
+    _setAssociate(associate) {
+        let affinity = "", enmity = "";
+
+        if (associate.relationship === "contact") {
+            affinity = "1d6+1";
+            enmity = "1d6-1";
+        } else if (associate.relationship === "ally") {
+            affinity = "2d6";
+            enmity = "0";
+        } else if (associate.relationship === "rival") {
+            affinity = "1d6-1";
+            enmity = "1d6+1";
+        } else if (associate.relationship === "enemy") {
+            affinity = "0";
+            enmity = "2d6";
+        } else {
+            return "";
+        }
+        let roll = new Roll(affinity, this.actor.getRollData()).evaluate({async: false});
+        associate.affinity = this._getAffinity(roll.total);
+        roll = new Roll(enmity, this.actor.getRollData()).evaluate({async: false});
+        associate.enmity = 0 - this._getAffinity(roll.total);
+
+        let description = "";
+        switch (associate.affinity) {
+            case 1:
+                description += "Vaguely well inclined. ";
+                break;
+            case 2:
+                description += "Positively inclined. "
+                break;
+            case 3:
+                description += "Very positively inclined. ";
+                break;
+            case 4:
+                description += "Loyal friend. "
+                break;
+            case 5:
+                description += "Love. ";
+                break;
+            case 6:
+                description += "Fanatical. "
+                break;
+        }
+        switch (associate.enmity) {
+            case 1:
+                description += "Mistrustful. ";
+                break;
+            case 2:
+                description += "Negatively inclined. ";
+                break;
+            case 3:
+                description += "Very negatively inclined. ";
+                break;
+            case 4:
+                description += "Hatred. ";
+                break;
+            case 5:
+                description += "Bitter hatred. ";
+                break;
+            case 6:
+                description += "Blinded by hate. ";
+                break;
+        }
+        roll = new Roll("2D6", this.actor.getRollData()).evaluate({async: false});
+        let power = roll.total;
+        roll = new Roll("2D6", this.actor.getRollData()).evaluate({async: false});
+        let influence = roll.total;
+
+        switch (power) {
+            case 2: case 3: case 4: case 5:
+                associate.power = 0;
+                break;
+            case 6: case 7:
+                associate.power = 1;
+                description += "Weak. ";
+                break;
+            case 8:
+                associate.power = 2;
+                description += "Useful. ";
+                break;
+            case 9:
+                associate.power = 3;
+                description += "Moderately powerful. "
+                break;
+            case 10:
+                associate.power = 4;
+                description += "Powerful. ";
+                break;
+            case 11:
+                associate.power = 5;
+                description += "Very Powerful. ";
+                break;
+            case 12:
+                associate.power = 6;
+                description += "Major Player. ";
+                break;
+        }
+        switch (influence) {
+            case 2: case 3: case 4: case 5:
+                associate.influence = 0;
+                break;
+            case 6: case 7:
+                associate.power = 1;
+                description += "Little influence. ";
+                break;
+            case 8:
+                associate.power = 2;
+                description += "Some Influence. ";
+                break;
+            case 9:
+                associate.power = 3;
+                description += "Influential. ";
+                break;
+            case 10:
+                associate.power = 4;
+                description += "Highly Influential. ";
+                break;
+            case 11:
+                associate.power = 5;
+                description += "Extremely Influential. ";
+                break;
+            case 12:
+                associate.power = 6;
+                description += "Kingmaker.";
+                break;
+        }
+
+
+        return "<p>" + description + "</p>";
+    }
+
+    _getAffinity(affinity) {
+        if (affinity <= 2) {
+            return 0;
+        } else if (affinity <= 4) {
+            return 1;
+        } else if (affinity <= 6) {
+            return 2;
+        } else if (affinity <= 8) {
+            return 3;
+        } else if (affinity <= 10) {
+            return 4;
+        } else if (affinity === 11) {
+            return 5;
+        } else {
+            return 6;
+        }
     }
 
     _onAddNewSkill(event, actor) {

@@ -1,4 +1,5 @@
 import {onManageActiveEffect} from "../helpers/effects.mjs";
+import {rollAttack} from "../helpers/dice-rolls.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -87,5 +88,12 @@ export class MgT2ItemSheet extends ItemSheet {
 
         // Active Effect management
         html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.item));
+
+        html.find(".damageDone").click(ev => this._rollDamage(this.item));
+    }
+
+    _rollDamage(item) {
+        console.log("_rollDamage:");
+        rollAttack(null, item, 0, 0);
     }
 }

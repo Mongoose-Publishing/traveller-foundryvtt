@@ -35,7 +35,7 @@ export function getTraitValue(traits, trait) {
 }
 
 export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption) {
-    const   data = actor.system;
+    const   data = actor?actor.system:null;
     let     content = "Attack";
     let     melee = true;
 
@@ -81,7 +81,10 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     // Header information
     content = `<div class="attack-message">`;
     content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div class="message-content">`;
-    content += `<div><img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
+    content += "<div>";
+    if (actor) {
+        content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
+    }
     content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
     content += `<b>Skill DM:</b> ${skillDM}`;
     if (dm && parseInt(dm) < 0) {
@@ -104,7 +107,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
     let destructive = dmg.indexOf("*") > -1;
     let damageBonus = weapon.system.weapon.damageBonus;
-    if (damageBonus && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
+    if (damageBonus && actor && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
         damageBonus = actor.system.characteristics[damageBonus].dm;
         if (damageBonus > 0) {
             dmg += " +" + damageBonus;
@@ -142,18 +145,22 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         attacks = getTraitValue(traits, "auto");
     }
 
-    const roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
+    const roll = new Roll(dice, actor?actor.getRollData():null).evaluate({async: false});
+    let damageRoll = null;
     for (let attack=1; attack <= attacks; attack++) {
         if (attacks > 1) {
             content += `<h3 class="fullauto">Full auto attack ${attack} of ${attacks}</h3>`;
         }
 
-        const damageRoll = new Roll(dmg, actor.getRollData()).evaluate({async: false});
+        damageRoll = new Roll(dmg, actor?actor.getRollData():null).evaluate({async: false});
         let damageTotal = damageRoll.total;
-        const attackRoll = new Roll(dice, actor.getRollData()).evaluate({async: false});
-        let attackTotal = attackRoll.total;
-        let effect = attackTotal - 8;
-        let critical = (effect >= 6);
+
+        let effect = 0, attackTotal = 0;
+        if (actor) {
+            const attackRoll = new Roll(dice, actor ? actor.getRollData() : null).evaluate({async: false});
+            attackTotal = attackRoll.total;
+            effect = attackTotal - 8;
+        }
 
         let effectClass = "rollFailure";
         let effectText = "Miss";
@@ -183,7 +190,11 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
 
         content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;
         content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}" class="damage-button">Apply</button>`;
-        content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
+        if (actor) {
+            content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
+        } else {
+            content += "<br/>";
+        }
         content += `<b>Damage Roll:</b> ${damageTotal}`;
         if (!destructive && effect > 0) {
             content += ` + ${effect} (${damageTotal + effect})`;
@@ -215,11 +226,19 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
     content += "</div>";
 
-    roll.toMessage({
-        speaker: ChatMessage.getSpeaker({actor: actor}),
-        content: content,
-        rollMode: game.settings.get("core", "rollMode")
-    });
+    if (actor) {
+        roll.toMessage({
+            speaker: ChatMessage.getSpeaker({actor: actor}),
+            content: content,
+            rollMode: game.settings.get("core", "rollMode")
+        });
+    } else {
+        damageRoll.toMessage({
+            speaker: ChatMessage.getSpeaker({actor: actor}),
+            flavor: content,
+            rollMode: game.settings.get("core", "rollMode")
+        });
+    }
 
 }
 

@@ -25,6 +25,7 @@
   "MGT2.TravellerSheet.Init": "INIT",
   "MGT2.TravellerSheet.MaxHits": "MAX HITS",
   "MGT2.TravellerSheet.Hits": "HITS",
+  "MGT2.TravellerSheet.Rads": "RADS",
 
   "MGT2.TravellerSheet.Skills": "Skills",
   "MGT2.TravellerSheet.Equipment": "Equipment",
@@ -98,6 +99,12 @@
   "MGT2.History.Relation.Power": "Power",
   "MGT2.History.Relation.Influence": "Influence",
 
+  "MGT2.Finance.Cash": "Cash (Cr)",
+  "MGT2.Finance.Pension": "Pension (Cr/Year)",
+  "MGT2.Finance.OtherIncome": "Other Income (Cr/Year)",
+  "MGT2.Finance.MedicalDebt": "Medical Debt (Cr)",
+  "MGT2.Finance.Mortgage": "Mortgage (Cr/Month)",
+  "MGT2.Finance.LivingCosts": "Living Costs (Cr/Month)",
 
 
   "TRAVELLER.Add": "Add"

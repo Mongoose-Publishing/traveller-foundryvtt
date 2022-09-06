@@ -5,6 +5,7 @@
       "base": {
         "speed": 6,
         "initiative": 0,
+        "rads": 0,
         "hits": {
             "value": 21,
             "max": 21
@@ -22,6 +23,7 @@
         "sophont": {
             "age": 18,
             "species": "Vilani",
+            "speciesTraits": "",
             "gender": "",
             "weight": 70,
             "height": 175,
@@ -142,7 +144,10 @@
         "damage": {
             "STR": { "value": 0 },
             "DEX": { "value": 0 },
-            "END": { "value": 0 }
+            "END": { "value": 0 },
+            "PSI": { "value": 0 },
+            "LCK": { "value": 0 },
+            "SAN": { "value": 0 }
         }
       },
       "armour": {
@@ -953,6 +958,7 @@
           "pension": 0,
           "medicalDebt": 0,
           "mortgage": 0,
+          "livingCosts": 0,
           "otherIncome": 0
       },
       "player": "",

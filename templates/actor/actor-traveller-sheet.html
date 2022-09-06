@@ -9,10 +9,12 @@
                 <label for="data.hits.max" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
                 <div class="grid grid-3col inset">
                     {{#each data.damage as |dmg key|}}
-                        <div class="resource flex-group-center">
-                            <label for="data.damage.{{key}}" class="resource-label">{{key}}</label>
-                            <input type="text" name="data.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
-                        </div>
+                        {{#if (isChaShown ../data key)}}
+                            <div class="resource flex-group-center">
+                                <label for="data.damage.{{key}}" class="resource-label">{{key}}</label>
+                                <input type="text" name="data.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
+                            </div>
+                        {{/if}}
                     {{/each}}
                 </div>
             </div>
@@ -134,6 +136,10 @@
                     <label for="data.initiative" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
                     <input class="field-value" type="text" name="data.initiative" value="{{data.initiative}}" data-dtype="Number"/>
                 </div>
+                <div class="resource flex-group-center">
+                    <label for="data.rads" class="field-label">{{localize 'MGT2.TravellerSheet.Rads'}}</label>
+                    <input class="field-value" type="text" name="data.rads" value="{{data.rads}}" data-dtype="Number"/>
+                </div>
             </div>
 
             <div class="shadow">
@@ -155,24 +161,28 @@
                     <div class="tab finance" data-group="primary" data-tab="finance">
                         <div class="grid grid-3col">
                             <div>
-                                <label class="profile-label">Cash (Cr)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.Cash'}}</label>
                                 <input class="credits" name="data.finance.cash" type="text" value="{{data.finance.cash}}"/>
                             </div>
                             <div>
-                                <label class="profile-label">Pension (Cr/Year)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.Pension'}}</label>
                                 <input class="credits"  name="data.finance.pension" type="text" value="{{data.finance.pension}}"/>
                             </div>
                             <div>
-                                <label class="profile-label">Other Income (Cr/Year)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.OtherIncome'}}</label>
                                 <input  class="credits" name="data.finance.otherIncome" type="text" value="{{data.finance.otherIncome}}"/>
                             </div>
                             <div>
-                                <label class="profile-label">Medical Debt (Cr)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.MedicalDebt'}}</label>
                                 <input  class="credits" name="data.finance.medicalDebt" type="text" value="{{data.finance.medicalDebt}}"/>
                             </div>
                             <div>
-                                <label class="profile-label">Mortgage (Cr/Month)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.Mortgage'}}</label>
                                 <input  class="credits" name="data.finance.mortgage" type="text" value="{{data.finance.mortgage}}"/>
+                            </div>
+                            <div>
+                                <label class="profile-label">Liv{{localize 'MGT2.Finance.LivingCosts'}}</label>
+                                <input  class="credits" name="data.finance.livingCosts" type="text" value="{{data.finance.livingCosts}}"/>
                             </div>
                         </div>
 

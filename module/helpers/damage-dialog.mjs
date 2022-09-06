@@ -18,7 +18,7 @@ export class MgT2DamageDialog extends Application {
         console.log(actor);
 
         this.actor = actor;
-        const data = actor.data.data;
+        const data = actor.system;
 
         this.damage = damage;
         this.ap = ap;
@@ -165,8 +165,6 @@ export class MgT2DamageDialog extends Application {
         let end = this.getIntValue(html, ".DMG_END");
 
         console.log(`STR ${str}, DEX ${dex}, END ${end}`);
-
-        console.log(this.actor.data.data.damage);
 
         let total = str + dex + end;
         let damage = this.data.damage;
