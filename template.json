@@ -14,9 +14,10 @@
         "settings": {
             "hideUntrained": false,
             "onlyBackground": false,
-            "rollType": "normal",
             "resetOnRoll": false,
-            "columns": 6
+            "columns": 6,
+            "lockCharacteristics": false,
+            "lockSkills": false
         }
       },
       "sophont": {

@@ -12,18 +12,29 @@ export class MgT2AddSkillDialog extends Application {
         return options;
     }
 
-    constructor(actor) {
+    constructor(actor, skillId, skill, specId, spec) {
         super();
         console.log("MgT2AddSkillDialog:");
+
+        if (skill) {
+            console.log(skill);
+        }
 
         console.log(actor);
 
         this.actor = actor;
 
-        this.data = actor.data.data;
+        this.data = actor.system;
+        this.isEdit = false;
+        if (skill || spec) {
+            this.isEdit = true;
+        }
 
-        this.options.title = "Add a new skill";
-
+        if (this.isEdit) {
+            this.options.title = "Edit skill";
+        } else {
+            this.options.title = "Add a new skill";
+        }
         this.label = "New Skill"
         this.shortName = "newskill";
         this.default = "INT";
@@ -32,6 +43,30 @@ export class MgT2AddSkillDialog extends Application {
         this.individual = false;
         this.icon = "systems/mgt2/icons/skills/new.svg";
         this.parent = "";
+        this.value = 0;
+        this.trained = false;
+
+        if (spec) {
+            this.label = spec.label;
+            this.shortName = specId;
+            if (spec.default) this.default = spec.default;
+            this.combat = spec.combat;
+            this.parent = skillId;
+            this.value = spec.value;
+            if (spec.trained) {
+                this.trained = spec.trained;
+            }
+        } else if (skill) {
+            this.label = skill.label;
+            this.shortName = skillId;
+            this.default = skill.default;
+            this.background = skill.background;
+            this.combat = skill.combat;
+            this.individual = skill.individual;
+            this.icon = skill.icon;
+            this.value = skill.value;
+            this.trained = skill.trained;
+        }
     }
 
     getData() {
@@ -47,6 +82,7 @@ export class MgT2AddSkillDialog extends Application {
             "combat": this.combat,
             "individual": this.individual,
             "icon": this.icon,
+            "isEdit": this.isEdit,
             "parent": this.parent
         }
     }
@@ -105,7 +141,7 @@ export class MgT2AddSkillDialog extends Application {
             this.data.skills[shortname] = skill;
         }
 
-        this.actor.update({ "data.skills": this.actor.data.data.skills });
+        this.actor.update({ "system.skills": this.actor.system.skills });
 
         this.close();
     }
@@ -115,4 +151,4 @@ export class MgT2AddSkillDialog extends Application {
     }
 }
 
-window.MgT2SkillDialog = MgT2SkillDialog;
+//window.MgT2SkillDialog = MgT2SkillDialog;

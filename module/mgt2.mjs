@@ -626,8 +626,8 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
 
     // Don't show a skill if it requires a characteristic that
     // isn't being used by this actor.
-    if (skill.requires && data.characteristics && data.characteristics[skill.requires]) {
-        if (!data.characteristics[skill.requires].show) {
+    if (skill.requires && !isCreature) {
+        if (!data.characteristics[skill.requires] || !data.characteristics[skill.requires].show) {
             return "";
         }
     }

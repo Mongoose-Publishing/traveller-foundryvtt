@@ -1,4 +1,5 @@
 import {rollSkill} from "../helpers/dice-rolls.mjs";
+import {MgT2AddSkillDialog} from "./add-skill-dialog.mjs";
 
 export class MgT2SkillDialog extends Application {
     static get defaultOptions() {
@@ -21,6 +22,7 @@ export class MgT2SkillDialog extends Application {
 
         this.skillId = skill;
         this.skill = null;
+        this.specId = null;
         this.spec = null;
         this.value = data.skills["jackofalltrades"].value - 3;
         this.chaOnly = false;
@@ -52,6 +54,7 @@ export class MgT2SkillDialog extends Application {
                     this.skill.augment = parseInt(this.skill.augment);
                 }
                 if (spec) {
+                    this.specId = spec;
                     this.spec = data.skills[skill].specialities[spec];
                     this.value = this.spec.value;
                 }
@@ -81,14 +84,15 @@ export class MgT2SkillDialog extends Application {
             "chaOnly": this.chaOnly,
             "dm": 0,
             "dicetype": "normal",
-            "characteristic": this.cha
-        }
+            "characteristic": this.cha        }
     }
 
     activateListeners(html) {
         super.activateListeners(html);
         const roll = html.find("button[class='skillRoll']");
         roll.on("click", event => this.onRollClick(event, html));
+
+        html.find(".edit-skill").on("click", event => this.onSkillEdit(event, html));
     }
 
     async onRollClick(event, html) {
@@ -113,6 +117,12 @@ export class MgT2SkillDialog extends Application {
         rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType, difficulty);
 
         this.close();
+    }
+
+    async onSkillEdit(event, html) {
+        event.preventDefault();
+
+        new MgT2AddSkillDialog(this.actor, this.skillId, this.skill, this.specId, this.spec).render(true);
     }
 
     async _updateObject(event, formData) {

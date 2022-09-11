@@ -7,9 +7,11 @@
     <label for="label" class="resource-label">Skill Name</label>
     <input class="skillLabelField" name="label" type="text" data-dtype="String" value="{{label}}"/>
 
-    <label for="shortname" class="resource-label">Short name</label>
-    <input class="skillShortNameField" name="shortname" type="text" data-dtype="String" value="{{shortName}}"/>
-
+    {{#if isEdit}}
+    {{else}}
+        <label for="shortname" class="resource-label">Short name</label>
+        <input class="skillShortNameField" name="shortname" type="text" data-dtype="String" value="{{shortName}}"/>
+    {{/if}}
     <div class="parent-skill">
         <label for="parentSkill" class="resource-label">Specialisation of</label>
         <select class="skillParentSelect" name="parentSkill">
@@ -24,7 +26,7 @@
 
 
     <div class="characteristic-selection">
-        <label for="defualt" class="resource-label">Default Characteristic</label>
+        <label for="default" class="resource-label">Default Characteristic</label>
         <select class="skillDefaultSelect" name="default">
             {{#select default}}
                 {{#each data.characteristics as |char id|}}

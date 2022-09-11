@@ -1302,4 +1302,7 @@ section.briefing h2 {
     margin-bottom: 3px;
 }
 
-
+span.edit-skill {
+    float: right;
+    font-size: small;
+}
