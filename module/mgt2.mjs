@@ -349,7 +349,7 @@ async function createTravellerMacro(data, slot) {
         console.log("Have dragged a skill " + dragData.skillName);
 
         let actor = game.data.actors.find(a => (a._id === actorId));
-        let skill = actor.ssytem.skills[dragData.skillName];
+        let skill = actor.system.skills[dragData.skillName];
         let label = skill.label;
 
         const command = `game.mgt2.rollSkillMacro('${dragData.skillName}')`;

@@ -7,21 +7,29 @@
     <label for="label" class="resource-label">Skill Name</label>
     <input class="skillLabelField" name="label" type="text" data-dtype="String" value="{{label}}"/>
 
-    {{#if isEdit}}
-    {{else}}
-        <label for="shortname" class="resource-label">Short name</label>
-        <input class="skillShortNameField" name="shortname" type="text" data-dtype="String" value="{{shortName}}"/>
-    {{/if}}
+    <label for="shortname" class="resource-label">Short name</label>
+    <input class="skillShortNameField" name="shortname" type="text"
+           data-dtype="String" value="{{shortName}}"
+           {{#if isEdit}}readonly{{/if}}
+    />
+
     <div class="parent-skill">
         <label for="parentSkill" class="resource-label">Specialisation of</label>
-        <select class="skillParentSelect" name="parentSkill">
-            {{#select ""}}
-            <option value="">None</option>
-            {{#each data.skills as |skill id|}}
-            <option value="{{id}}">{{skill.label}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
+        {{#if isEdit}}
+            <input class="skillParentSelect" name="parentSkill" type="text"
+                   data-dtype="String" value="{{parentLabel}}" readonly />
+        {{else}}
+            <select class="skillParentSelect" name="parentSkill">
+                {{log parent}}
+                {{#select parent}}
+                    <option value="">None</option>
+                    {{#each data.skills as |skill id|}}
+                        {{log id}}
+                        <option value="{{id}}">{{skill.label}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+        {{/if}}
     </div>
 
 
@@ -47,7 +55,10 @@
     </div>
 
     <footer class="sheet-footer flexrow">
-        <button type="submit" name="submit" class="addNewSkill">Add Skill</button>
+        <button type="submit" name="submit" class="addNewSkill">Save</button>
+        {{#if isEdit}}
+            <button type="submit" name="submit" class="deleteSkill">Delete</button>
+        {{/if}}
     </footer>
 
 </form>

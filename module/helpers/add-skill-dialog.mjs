@@ -43,6 +43,7 @@ export class MgT2AddSkillDialog extends Application {
         this.individual = false;
         this.icon = "systems/mgt2/icons/skills/new.svg";
         this.parent = "";
+        this.parentLabel = "";
         this.value = 0;
         this.trained = false;
 
@@ -52,6 +53,8 @@ export class MgT2AddSkillDialog extends Application {
             if (spec.default) this.default = spec.default;
             this.combat = spec.combat;
             this.parent = skillId;
+            this.parentLabel = skill.label;
+            console.log(this.parent);
             this.value = spec.value;
             if (spec.trained) {
                 this.trained = spec.trained;
@@ -83,14 +86,20 @@ export class MgT2AddSkillDialog extends Application {
             "individual": this.individual,
             "icon": this.icon,
             "isEdit": this.isEdit,
-            "parent": this.parent
+            "parent": this.parent,
+            "parentLabel": this.parentLabel
         }
     }
 
     activateListeners(html) {
         super.activateListeners(html);
-        const roll = html.find("button[class='addNewSkill']");
-        roll.on("click", event => this.onAddClick(event, html));
+        const add = html.find("button[class='addNewSkill']");
+        add.on("click", event => this.onAddClick(event, html));
+
+        const del = html.find("button[class='deleteSkill']")
+        if (del) {
+            del.on("click", event => this.onDeleteClick(event, html));
+        }
     }
 
     async onAddClick(event, html) {
@@ -144,6 +153,21 @@ export class MgT2AddSkillDialog extends Application {
         this.actor.update({ "system.skills": this.actor.system.skills });
 
         this.close();
+    }
+
+    async onDeleteClick(event, html) {
+        event.preventDefault();
+        console.log("onDeleteClick:");
+
+        if (this.isEdit) {
+            console.log(this.actor.system.skills.explosives);
+            delete this.actor.system.skills.explosives;
+            console.log(this.actor.system.skills.explosives);
+            this.actor.update({ "system.skills": this.actor.system.skills });
+            this.actor.delete( "system.skills.explosives");
+            this.close();
+        }
+
     }
 
     async _updateObject(event, formData) {
