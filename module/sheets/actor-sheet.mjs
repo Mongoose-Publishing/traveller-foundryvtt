@@ -4,6 +4,7 @@ import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
 import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
+import {MgT2Item} from "../documents/item.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -40,8 +41,6 @@ export class MgT2ActorSheet extends ActorSheet {
         // Use a safe clone of the actor data for further operations.
         const actorData = context.actor.system;
         const type = context.actor.type;
-        console.log("getData: ACTOR-SHEET");
-        console.log(context.actor);
 
         // Add the actor's data to context.data for easier access, as well as flags.
         context.data = actorData;
@@ -145,6 +144,55 @@ export class MgT2ActorSheet extends ActorSheet {
         console.log("END _prepareItems()");
     }
 
+    /**
+     * Set status to be "owned". This is stuff owned but not carried.
+     */
+    _moveToOwned(actor, item) {
+        console.log(`moveToOwned: [${actor.name}] [${item.name}]`);
+    }
+
+    /**
+     * Set status to be "carried". This is stuff carried.
+     */
+    _moveToCarried(actor, item) {
+        console.log(`moveToCarried: [${actor.name}] [${item.name}]`);
+    }
+
+    /**
+     * Set status to be "held". This is stuff being actively used.
+     * @param actor
+     * @param item
+     * @private
+     */
+    _moveToActive(actor, item) {
+
+    }
+
+    _setItemStatus(actor, item, status) {
+        console.log(`activateItem: [${actor.name}] [${item.name}]`)
+        const itemData = item.system;
+
+        if (item.type === "armour") {
+            console.log("THIS IS ARMOUR");
+            let form = itemData.armour.form;
+            if (status === MgT2Item.ACTIVE) {
+                for (let i of actor.items) {
+                    if (i.system.armour && i.system.armour.worn && i.system.armour.form === form) {
+                        i.system.armour.worn = 0;
+                        i.update({"system.armour.worn": 0});
+                    }
+                }
+                itemData.armour.worn = 1;
+            } else {
+                itemData.armour.worn = 0;
+            }
+            item.update({ "system.armour.worn": itemData.armour.worn });
+            this._calculateArmour(actor);
+        }
+        itemData.status = status;
+        item.update({ "system.status": status });
+    }
+
     _wearArmour(actor, item) {
         console.log(`wearArmour: [${actor.name}] [${item.name}]`)
         const actorData = actor.system;
@@ -184,9 +232,11 @@ export class MgT2ActorSheet extends ActorSheet {
         armour.archaic = 0;
         for (let i of actor.items) {
             if (i.system.armour) {
+                console.log("ARMOUR IS " + i.name);
                 const armourData = i.system.armour;
                 if (armourData.worn || armourData.form === "natural") {
                     let armourData = i.system.armour;
+                    console.log("  is worn");
 
                     armour.protection += armourData.protection;
                     armour.otherProtection += armourData.otherProtection;
@@ -210,32 +260,48 @@ export class MgT2ActorSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  activateListeners(html) {
-    super.activateListeners(html);
+    /** @override */
+    activateListeners(html) {
+        super.activateListeners(html);
 
-    // Render the item sheet for viewing/editing prior to the editable check.
-    html.find('.item-edit').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("itemId"));
-      item.sheet.render(true);
-    });
+        // Render the item sheet for viewing/editing prior to the editable check.
+        html.find('.item-edit').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            item.sheet.render(true);
+        });
 
-    // -------------------------------------------------------------
-    // Everything below here is only needed if the sheet is editable
-    if (!this.isEditable) return;
+        // -------------------------------------------------------------
+        // Everything below here is only needed if the sheet is editable
+        if (!this.isEditable) return;
 
-    // Add Inventory Item
-    html.find('.item-create').click(this._onItemCreate.bind(this));
+        // Add Inventory Item
+        html.find('.item-create').click(this._onItemCreate.bind(this));
 
-    // Delete Inventory Item
-    html.find('.item-delete').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("itemId"));
-      item.delete();
-      li.slideUp(200, () => this.render(false));
-      this._calculateArmour(this.actor);
-    });
+        // Delete Inventory Item
+        html.find('.item-delete').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            item.delete();
+            li.slideUp(200, () => this.render(false));
+            this._calculateArmour(this.actor);
+        });
+
+        html.find('.item-activate').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            this._setItemStatus(this.actor, item, MgT2Item.ACTIVE);
+        });
+        html.find('.item-deactivate').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            this._setItemStatus(this.actor, item, MgT2Item.CARRIED);
+        });
+        html.find('.item-store').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            this._setItemStatus(this.actor, item, MgT2Item.OWNED);
+        });
 
     html.find('.item-wear').click(ev => {
       const li = $(ev.currentTarget).parents(".item");

@@ -1306,3 +1306,28 @@ span.edit-skill {
     float: right;
     font-size: small;
 }
+
+.actor-items {
+    padding-bottom: 12px;
+}
+
+.actor-items .item {
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px #202020;
+    padding: 2px;
+    text-align: left;
+    margin-bottom: 2px;
+}
+
+.actor-items .item img {
+    width: 48px;
+    height: 48px;
+    border: none;
+    float: left;
+    padding-right: 3px;
+}
+
+.actor-items .item h4 {
+    font-weight: bold;
+}

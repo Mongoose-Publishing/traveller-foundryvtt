@@ -5,10 +5,17 @@
     {{log data}}
     <section class="item-sheet">
         <div class="sidebar">
-
             <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
             <div class="shadow item-side-panel">
+                <div class="resource flex-group-center">
+                    <label for="data.weapon.magazine" class="resource-label">Magazine Size</label>
+                    <input type="text" name="data.weapon.magazine" value="{{data.weapon.magazine}}" data-dtype="Number"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.weapon.magazineCost" class="resource-label">Magazine Cost</label>
+                    <input type="text" name="data.weapon.magazineCost" value="{{data.weapon.magazineCost}}" data-dtype="Number"/>
+                </div>
                 <div class="resource flex-group-center">
                     <label for="data.weapon.ammo" class="resource-label">Ammo</label>
                     <input type="text" name="data.weapon.ammo" value="{{data.weapon.ammo}}" data-dtype="Number"/>
@@ -18,11 +25,9 @@
             <div class="shadow item-side-panel">
                 <button type="submit" name="submit" class="damageDone">Damage <i class="fas fa-dice"></i></button>
             </div>
-
         </div>
 
         <div class="flex-group-left">
-
             <div class="shadow">
                 <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
                 <div class="resources grid grid-4col flex-group-center">
@@ -35,12 +40,12 @@
                         <input type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
-                        <label for="data.weapon.magazine" class="resource-label">Magazine</label>
-                        <input type="text" name="data.weapon.magazine" value="{{data.weapon.magazine}}" data-dtype="Number"/>
-                    </div>
-                    <div class="resource">
                         <label for="data.weight" class="resource-label">KG</label>
                         <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label for="data.cost" class="resource-label">Cost</label>
+                        <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
                         <label for="data.tl" class="resource-label">TL</label>
@@ -89,13 +94,25 @@
                         <label for="data.weapon.damageBonus" class="resource-label">Damage DM</label><br/>
                         <select name="data.weapon.damageBonus">
                             {{#select data.weapon.damageBonus}}
-                            <option value="">-</option>
-                            <option value="STR">STR</option>
+                                <option value="">-</option>
+                                <option value="STR">STR</option>
                             {{/select}}
                         </select>
                     </div>
 
                     <div class="resource">
+                        <label for="data.weapon.attackBonus" class="resource-label">Attack DM</label><br/>
+                        <input type="text" name="data.weapon.attackBonus"
+                               value="{{data.weapon.attackBonus}}" data-dtype="Number"/>
+                    </div>
+
+                    <div class="resource">
+                        <label for="data.weapon.parryBonus" class="resource-label">Parry DM</label><br/>
+                        <input type="text" name="data.weapon.parryBonus"
+                               value="{{data.weapon.parryBonus}}" data-dtype="Number"/>
+                    </div>
+
+                    <div class="resource grid-span-2">
                         <label for="data.weapon.damageType" class="resource-label">Damage Type</label><br/>
                         <select name="data.weapon.damageType">
                             {{#select data.weapon.damageType}}
@@ -107,12 +124,6 @@
                             {{/select}}
                         </select>
                     </div>
-
-                    <div class="resource">
-                        <label for="data.weapon.attackBonus" class="resource-label">Attack DM</label><br/>
-                        <input type="text" name="data.weapon.attackBonus"
-                               value="{{data.weapon.attackBonus}}" data-dtype="Number"/>
-                    </div>
                 </div>
             </div>
             <div class="shadow">
@@ -121,6 +132,5 @@
                     button=true editable=editable}}
             </div>
         </div>
-
     </section>
 </form>

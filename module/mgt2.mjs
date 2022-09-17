@@ -543,6 +543,82 @@ Handlebars.registerHelper('rollTypeActive', function(data, type) {
     return "";
 });
 
+Handlebars.registerHelper('isItemActive', function(item) {
+    if (item.system.status === MgT2Item.WORN || item.system.status === MgT2Item.ACTIVE) {
+        return true;
+    }
+    return false;
+});
+
+Handlebars.registerHelper('isItemCarried', function(item) {
+    if (item.system.status === MgT2Item.CARRIED) {
+        return true;
+    }
+    return false;
+});
+
+Handlebars.registerHelper('isItemOwned', function(item) {
+    if (item.system.status === MgT2Item.ACTIVE || item.system.status === MgT2Item.WORN || item.system.status === MgT2Item.CARRIED) {
+        return false;
+    }
+    if (item.system.status === MgT2Item.OWNED) {
+        return true;
+    }
+    if (item.type === "term" || item.type === "associate") {
+        return false;
+    }
+    return true;
+});
+
+
+Handlebars.registerHelper('activateItem', function(item) {
+    if (item.system.status === MgT2Item.WORN || item.system.status === MgT2Item.ACTIVE) {
+        return "";
+    }
+
+    let title="Activate item";
+    let icon="fa-hand-fist";
+    if (item.type === "armour") {
+        title = "Wear armour";
+        icon = "fa-shirt";
+    }
+    return `<a class="item-control item-activate" title="${title}"><i class="fas ${icon}"></i></a>`;
+});
+
+Handlebars.registerHelper('deactivateItem', function(item) {
+    if (!item.system.status || item.system.status === MgT2Item.CARRIED || item.system.status === MgT2Item.OWNED) {
+        return "";
+    }
+
+    let title="Deactivate item";
+    let icon="fa-suitcase";
+    if (item.type === "armour") {
+        title = "Remove armour";
+    } else if (item.type === "weapon") {
+        title = "Put away weapon";
+    }
+    return `<a class="item-control item-deactivate" title="${title}"><i class="fas ${icon}"></i></a>`;
+});
+
+Handlebars.registerHelper('storeItem', function(item) {
+    if (!item.system.status || item.system.status === MgT2Item.OWNED) {
+        return "";
+    }
+    let title="Store item";
+    let icon="fa-arrow-down-to-square";
+    return `<a class="item-control item-store" title="${title}"><i class="fas ${icon}"></i></a>`;
+});
+
+Handlebars.registerHelper('carryItem', function(item) {
+    if (item.system.status === MgT2Item.CARRIED) {
+        return "";
+    }
+    let title="Carry item";
+    let icon="fa-suitcase";
+    return `<a class="item-control item-store" title="${title}"><i class="fas ${icon}"></i></a>`;
+});
+
+
 Handlebars.registerHelper('isTrained', function(skill) {
     if (skill) {
         if (skill.trained) {

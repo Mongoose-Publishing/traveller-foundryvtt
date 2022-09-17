@@ -8,6 +8,11 @@ import {getSkillValue} from "../helpers/dice-rolls.mjs";
  * @extends {Item}
  */
 export class MgT2Item extends Item {
+    static OWNED = "owned";
+    static WORN = "worn";
+    static ACTIVE = "active";
+    static CARRIED = "carried";
+
     /**
      * Augment the basic Item data model with additional dynamic data.
      */
