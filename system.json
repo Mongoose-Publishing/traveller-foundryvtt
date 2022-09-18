@@ -7,7 +7,7 @@
   "compatibleCoreVersion": "10",
   "author": "Samuel Penn",
   "esmodules": ["module/mgt2.mjs" ],
-  "styles": ["css/mgt2.css", "css/history.css" ],
+  "styles": ["css/mgt2.css", "css/history.css", "css/items.css" ],
   "scripts": [ ],
   "packs": [
     {

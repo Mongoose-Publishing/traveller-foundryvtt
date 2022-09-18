@@ -117,8 +117,6 @@ export class MgT2ActorSheet extends ActorSheet {
             i.img = i.img || DEFAULT_TOKEN;
             console.log(i.system.status);
             if (i.system.status === MgT2Item.CARRIED) {
-                console.log("Carrying " + i.name + " with weight of " + i.system.weight);
-                console.log(i);
                 weight += parseInt(i.system.weight);
             } else if (i.system.status === MgT2Item.ACTIVE && i.type != "armour") {
                 weight += parseInt(i.system.weight);
@@ -140,7 +138,6 @@ export class MgT2ActorSheet extends ActorSheet {
         }
 
         this.actor.system.weightCarried = weight;
-        console.log(this.actor.system);
 
         // Assign and return
         context.gear = gear;
@@ -149,30 +146,6 @@ export class MgT2ActorSheet extends ActorSheet {
         context.terms = terms;
         context.associates = associates;
         console.log("END _prepareItems()");
-    }
-
-    /**
-     * Set status to be "owned". This is stuff owned but not carried.
-     */
-    _moveToOwned(actor, item) {
-        console.log(`moveToOwned: [${actor.name}] [${item.name}]`);
-    }
-
-    /**
-     * Set status to be "carried". This is stuff carried.
-     */
-    _moveToCarried(actor, item) {
-        console.log(`moveToCarried: [${actor.name}] [${item.name}]`);
-    }
-
-    /**
-     * Set status to be "held". This is stuff being actively used.
-     * @param actor
-     * @param item
-     * @private
-     */
-    _moveToActive(actor, item) {
-
     }
 
     _setItemStatus(actor, item, status) {
@@ -186,7 +159,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 for (let i of actor.items) {
                     if (i.system.armour && i.system.armour.worn && i.system.armour.form === form) {
                         i.system.armour.worn = 0;
-                        i.update({"system.armour.worn": 0});
+                        i.system.status = MgT2Item.CARRIED;
+                        i.update({"system.armour.worn": 0, "system.status": MgT2Item.CARRIED });
                     }
                 }
                 itemData.armour.worn = 1;
