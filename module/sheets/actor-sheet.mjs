@@ -121,11 +121,14 @@ export class MgT2ActorSheet extends ActorSheet {
                 console.log(i);
                 for (const effect of i.effects) {
                     effect.disabled = false;
+                    effect.transfer = true;
                 }
             } else {
+                console.log(i);
                 for (const effect of i.effects) {
                     console.log("Disabling effect for " + i.name);
                     effect.disabled = true;
+                    effect.transfer = false;
                 }
             }
 
