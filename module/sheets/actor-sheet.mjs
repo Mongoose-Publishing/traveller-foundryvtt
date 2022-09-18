@@ -105,40 +105,47 @@ export class MgT2ActorSheet extends ActorSheet {
         console.log("actor-sheet.mjs:_prepareItems()");
         // Initialize containers.
         const gear = [];
-        const features = [];
-
         const weapons = [];
         const armour = [];
-        const augments = [];
         const terms = [];
         const associates = [];
+
+        let weight = 0;
 
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
+            console.log(i.system.status);
+            if (i.system.status === MgT2Item.CARRIED) {
+                console.log("Carrying " + i.name + " with weight of " + i.system.weight);
+                console.log(i);
+                weight += parseInt(i.system.weight);
+            } else if (i.system.status === MgT2Item.ACTIVE && i.type != "armour") {
+                weight += parseInt(i.system.weight);
+            }
             // Append to gear.
-            if (i.type === 'item') {
-                gear.push(i);
-            } else if (i.type === 'weapon') {
+            if (i.type === 'weapon') {
                 weapons.push(i);
             } else if (i.type === 'armour') {
                 armour.push(i);
                 this._calculateArmour(context.actor);
-            } else if (i.type === 'augments') {
-                augments.push(i);
             } else if (i.type === 'term') {
                 terms.push(i);
             } else if (i.type === "associate") {
                 associates.push(i);
+            } else {
+                // Everything else.
+                gear.push(i);
             }
         }
+
+        this.actor.system.weightCarried = weight;
+        console.log(this.actor.system);
 
         // Assign and return
         context.gear = gear;
         context.weapons = weapons;
         context.armour = armour;
-        context.augments = augments;
-        context.features = features;
         context.terms = terms;
         context.associates = associates;
         console.log("END _prepareItems()");
@@ -301,6 +308,11 @@ export class MgT2ActorSheet extends ActorSheet {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
             this._setItemStatus(this.actor, item, MgT2Item.OWNED);
+        });
+        html.find('.item-carry').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            this._setItemStatus(this.actor, item, MgT2Item.CARRIED);
         });
 
     html.find('.item-wear').click(ev => {

@@ -615,7 +615,7 @@ Handlebars.registerHelper('carryItem', function(item) {
     }
     let title="Carry item";
     let icon="fa-suitcase";
-    return `<a class="item-control item-store" title="${title}"><i class="fas ${icon}"></i></a>`;
+    return `<a class="item-control item-carry" title="${title}"><i class="fas ${icon}"></i></a>`;
 });
 
 
