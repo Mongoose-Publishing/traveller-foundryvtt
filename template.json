@@ -7,6 +7,9 @@
         "initiative": 0,
         "rads": 0,
         "weightCarried": 0,
+        "heavyLoad": 0,
+        "maxLoad": 0,
+        "physicalDM": 0,
         "hits": {
             "value": 21,
             "max": 21
@@ -158,9 +161,9 @@
           "otherTypes": "",
           "rad": 0,
           "tl": 0,
-          "archaic": false,
-          "ablat": false,
-          "powered": false
+          "archaic": 0,
+          "ablat": 0,
+          "powered": 0
       },
       "skills": {
         "skills": {
@@ -1018,16 +1021,12 @@
             "slots": 0,
             "form": "standard",
             "layered": 0,
+            "ablat": 0,
+            "powered": 0,
             "worn": 0
         }
       },
       "augment": {
-        "augments": [{
-            "type": "",
-            "target": "STR",
-            "value": 0,
-            "active": false
-        }]
       },
       "term": {
           "term": {

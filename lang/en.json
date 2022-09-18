@@ -72,6 +72,8 @@
   "MGT2.Armour.Energy": "Energy",
   "MGT2.Armour.EnergyTypes": "Energy Types",
   "MGT2.Armour.RequiresSkill": "Requires",
+  "MGT2.Armour.Powered": "Powered",
+  "MGT2.Armour.Ablative": "Ablative",
 
   "MGT2.Effects.AugmentEffects": "Augment Effects",
   "MGT2.Effects.Create": "Add",

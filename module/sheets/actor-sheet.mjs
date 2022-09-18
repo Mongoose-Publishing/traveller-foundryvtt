@@ -115,11 +115,30 @@ export class MgT2ActorSheet extends ActorSheet {
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
-            console.log(i.system.status);
+
+            if (i.system.status === MgT2Item.ACTIVE) {
+                // Work out if augments are active or not.
+                console.log(i);
+                for (const effect of i.effects) {
+                    effect.disabled = false;
+                }
+            } else {
+                for (const effect of i.effects) {
+                    console.log("Disabling effect for " + i.name);
+                    effect.disabled = true;
+                }
+            }
+
             if (i.system.status === MgT2Item.CARRIED) {
                 weight += parseInt(i.system.weight);
-            } else if (i.system.status === MgT2Item.ACTIVE && i.type != "armour") {
-                weight += parseInt(i.system.weight);
+            } else if (i.system.status === MgT2Item.ACTIVE) {
+                if (i.type == "armour") {
+                    if (!i.system.armour.powered) {
+                        weight += parseInt(i.system.weight / 4);
+                    }
+                } else {
+                    weight += parseInt(i.system.weight);
+                }
             }
             // Append to gear.
             if (i.type === 'weapon') {
@@ -213,11 +232,9 @@ export class MgT2ActorSheet extends ActorSheet {
         armour.archaic = 0;
         for (let i of actor.items) {
             if (i.system.armour) {
-                console.log("ARMOUR IS " + i.name);
                 const armourData = i.system.armour;
                 if (armourData.worn || armourData.form === "natural") {
                     let armourData = i.system.armour;
-                    console.log("  is worn");
 
                     armour.protection += armourData.protection;
                     armour.otherProtection += armourData.otherProtection;

@@ -1,4 +1,23 @@
 
+<div class="grid grid-3col">
+    <div class="resource flex-group-center">
+        <label class="field-label">Heavy Load</label>
+        <input class="field-value" type="text" value="{{data.heavyLoad}}kg" readonly/>
+    </div>
+    <div class="resource flex-group-center">
+        <label class="field-label">Max Load</label>
+        <input class="field-value" type="text" value="{{data.maxLoad}}kg" readonly/>
+    </div>
+
+    <div class="resource flex-group-center">
+        <label class="field-label">Weight Carried</label>
+        <input class="field-value" type="text" value="{{data.weightCarried}}kg" readonly/>
+    </div>
+
+</div>
+
+<hr/>
+
 <h2>Items in use</h2>
 
 <ol class="items-list actor-items grid grid-3col">
@@ -7,7 +26,9 @@
             <li class="item item-armour" data-item-id="{{item._id}}">
                 <img src="{{item.img}}"/>
                 <h4>{{item.name}}</h4>
-                <span>{{item.system.weight}}kg</span>
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
+                {{/if}}
                 <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
                 <div class="item-controls">
                     {{{deactivateItem item}}}
@@ -23,8 +44,10 @@
             <li class="item item-weapon" data-item-id="{{item._id}}">
                 <img src="{{item.img}}"/>
                 <h4>{{item.name}}</h4>
-                <label>Weight:</label> <span>{{item.system.weight}}</span>
-                <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
+                {{/if}}
+                <span>{{item.system.weapon.damage}}</span>
                 <div class="item-controls">
                     {{{deactivateItem item}}}
                     {{{storeItem item}}}
@@ -35,27 +58,27 @@
         {{/if}}
     {{/each}}
     {{#each gear as |item id|}}
-    {{#if (isItemOwned item)}}
-    <li class="item" data-item-id="{{item._id}}">
-        <img src="{{item.img}}"/>
-        <h4>{{item.name}}</h4>
-        {{#if item.system.weight  includeZero=false}}
-        <span>{{item.system.weight}}kg</span>
+        {{#if (isItemActive item)}}
+            <li class="item" data-item-id="{{item._id}}">
+                <img src="{{item.img}}"/>
+                <h4>{{item.name}}</h4>
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
+                {{/if}}
+                {{#if item.system.tl includeZero=false}}
+                    <span>TL {{item.system.tl}}</span>
+                {{/if}}
+                {{#if item.system.cost includeZero=false}}
+                    <span>Cr{{item.system.cost}}</span>
+                {{/if}}
+                <div class="item-controls">
+                    {{{activateItem item}}}
+                    {{{carryItem item}}}
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </li>
         {{/if}}
-        {{#if item.system.tl includeZero=false}}
-        <span>TL {{item.system.tl}}</span>
-        {{/if}}
-        {{#if item.system.cost includeZero=false}}
-        <span>Cr{{item.system.cost}}</span>
-        {{/if}}
-        <div class="item-controls">
-            {{{activateItem item}}}
-            {{{carryItem item}}}
-            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-        </div>
-    </li>
-    {{/if}}
     {{/each}}
     <li></li>
 </ol>
@@ -68,7 +91,9 @@
             <li class="item item-armour" data-item-id="{{item._id}}">
                 <img src="{{item.img}}"/>
                 <h4>{{item.name}}</h4>
-                <span>{{item.system.weight}} kg</span>
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
+                {{/if}}
                 <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
                 <div class="item-controls">
                     {{{activateItem item}}}
@@ -84,7 +109,9 @@
             <li class="item item-weapon" data-item-id="{{item._id}}">
                 <img src="{{item.img}}"/>
                 <h4>{{item.name}}</h4>
-                <label>Weight:</label> <span>{{item.system.weight}}</span>
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
+                {{/if}}
                 <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
                 <div class="item-controls">
                     {{{activateItem item}}}
@@ -96,27 +123,27 @@
         {{/if}}
     {{/each}}
     {{#each gear as |item id|}}
-    {{#if (isItemOwned item)}}
-    <li class="item item-gear" data-item-id="{{item._id}}">
-        <img src="{{item.img}}"/>
-        <h4>{{item.name}}</h4>
-        {{#if item.system.weight  includeZero=false}}
-        <span>{{item.system.weight}}kg</span>
+        {{#if (isItemCarried item)}}
+            <li class="item item-gear" data-item-id="{{item._id}}">
+                <img src="{{item.img}}"/>
+                <h4>{{item.name}}</h4>
+                {{#if item.system.weight  includeZero=false}}
+                <span>{{item.system.weight}}kg</span>
+                {{/if}}
+                {{#if item.system.tl includeZero=false}}
+                <span>TL {{item.system.tl}}</span>
+                {{/if}}
+                {{#if item.system.cost includeZero=false}}
+                <span>Cr{{item.system.cost}}</span>
+                {{/if}}
+                <div class="item-controls">
+                    {{{activateItem item}}}
+                    {{{carryItem item}}}
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </li>
         {{/if}}
-        {{#if item.system.tl includeZero=false}}
-        <span>TL {{item.system.tl}}</span>
-        {{/if}}
-        {{#if item.system.cost includeZero=false}}
-        <span>Cr{{item.system.cost}}</span>
-        {{/if}}
-        <div class="item-controls">
-            {{{activateItem item}}}
-            {{{carryItem item}}}
-            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-        </div>
-    </li>
-    {{/if}}
     {{/each}}
     <li></li>
 </ol>
@@ -129,7 +156,9 @@
             <li class="item item-armour" data-item-id="{{item._id}}">
                 <img src="{{item.img}}"/>
                 <h4>{{item.name}}</h4>
-                <span>{{item.system.weight}} kg</span>
+                {{#if item.system.weight  includeZero=false}}
+                <span>{{item.system.weight}}kg</span>
+                {{/if}}
                 <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
                 <div class="item-controls">
                     {{{activateItem item}}}
@@ -145,7 +174,9 @@
             <li class="item item-weapon" data-item-id="{{item._id}}">
                 <img src="{{item.img}}"/>
                 <h4>{{item.name}}</h4>
-                <label>Weight:</label> <span>{{item.system.weight}}</span>
+                {{#if item.system.weight  includeZero=false}}
+                <span>{{item.system.weight}}kg</span>
+                {{/if}}
                 <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
                 <div class="item-controls">
                     {{{activateItem item}}}

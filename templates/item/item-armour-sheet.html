@@ -28,6 +28,28 @@
                 </div>
 
                 <div class="resource">
+                    <label for="data.armour.ablat" class="resource-label">{{localize "MGT2.Armour.Ablative"}}</label>
+                    <br/>
+                    <select name="data.armour.ablat">
+                        {{#select data.armour.ablat}}
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                        {{/select}}
+                    </select>
+                </div>
+
+                <div class="resource">
+                    <label for="data.armour.powered" class="resource-label">{{localize "MGT2.Armour.Powered"}}</label>
+                    <br/>
+                    <select name="data.armour.powered">
+                        {{#select data.armour.powered}}
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                        {{/select}}
+                    </select>
+                </div>
+
+                <div class="resource">
                     <label class="resource-label">{{localize "MGT2.Armour.Duration"}}</label>
                     <br/>
                     <input type="text" name="data.armour.duration" value="{{data.armour.duration}}" data-dtype="Number"/>

@@ -114,11 +114,45 @@ export class MgT2Actor extends Actor {
 
   }
 
-  applyActiveEffect(ob1, obj2) {
-    console.log("applyActiveEffect:");
-    console.log(obj1);
-    console.log(obj2);
-  }
+    applyActiveEffect(ob1, obj2) {
+        console.log("applyActiveEffect:");
+        console.log(obj1);
+        console.log(obj2);
+    }
+
+    _prepareEncumbrance(actorData) {
+        console.log("_prepareEncumbrance:");
+
+        if (!actorData.system) {
+            return;
+        }
+        let data = actorData.system;
+        let heavyLoad = 0;
+
+        if (data.characteristics) {
+            const ch = data.characteristics;
+            if (ch['STR']) {
+                heavyLoad += parseInt(ch['STR'].current);
+            }
+            if (ch['END']) {
+                heavyLoad += parseInt(ch['END'].current);
+            }
+        }
+        if (data.skills) {
+            if (data.skills['athletics'] && data.skills['athletics'].trained) {
+                console.log("has athletics");
+                const ath = data.skills['athletics'];
+                if (ath.specialities && ath.specialities.strength) {
+                    heavyLoad += parseInt(ath.specialities.strength.value);
+                }
+                if (ath.specialities && ath.specialities.endurance) {
+                    heavyLoad += parseInt(ath.specialities.endurance.value);
+                }
+            }
+        }
+        data.heavyLoad = heavyLoad;
+        data.maxLoad = heavyLoad * 2;
+    }
 
     /**
      * Prepare Character type specific data
@@ -160,6 +194,7 @@ export class MgT2Actor extends Actor {
             data.hits.value = hits;
             data.hits.max = maxHits;
         }
+        this._prepareEncumbrance(actorData);
     }
 
     _prepareNpcData(actor) {
@@ -186,6 +221,7 @@ export class MgT2Actor extends Actor {
             //data.hits.value = maxHits;
             actorData.hits.max = maxHits;
         }
+        this._prepareEncumbrance(actorData);
     }
 
     _prepareCreatureData(actorData) {
