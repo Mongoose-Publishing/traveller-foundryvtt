@@ -89,7 +89,7 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         const effectData = this.getData();
         console.log("effectData:");
         console.log(effectData);
-        let changes = effectData?.data?.changes ? effectData.data.changes.map(c => c.toObject(false)) : [];
+        let changes = effectData?.changes ? effectData.changes.map(c => c.toObject(false)) : [];
 
         ae.changes = formData.changes;
 

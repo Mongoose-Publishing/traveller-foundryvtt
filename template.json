@@ -159,7 +159,8 @@
           "rad": 0,
           "tl": 0,
           "archaic": false,
-          "ablat": false
+          "ablat": false,
+          "powered": false
       },
       "skills": {
         "skills": {
