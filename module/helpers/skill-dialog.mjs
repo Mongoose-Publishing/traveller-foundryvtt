@@ -1,4 +1,5 @@
 import {rollSkill} from "../helpers/dice-rolls.mjs";
+import {MgT2AddSkillDialog} from "./add-skill-dialog.mjs";
 
 export class MgT2SkillDialog extends Application {
     static get defaultOptions() {
@@ -14,13 +15,14 @@ export class MgT2SkillDialog extends Application {
     constructor(actor, skill, spec, cha) {
         super();
         this.actor = actor;
-        const data = actor.data.data;
+        const data = actor.system;
 
         console.log("skill-dialog:");
         console.log(actor);
 
         this.skillId = skill;
         this.skill = null;
+        this.specId = null;
         this.spec = null;
         this.value = data.skills["jackofalltrades"].value - 3;
         this.chaOnly = false;
@@ -52,6 +54,7 @@ export class MgT2SkillDialog extends Application {
                     this.skill.augment = parseInt(this.skill.augment);
                 }
                 if (spec) {
+                    this.specId = spec;
                     this.spec = data.skills[skill].specialities[spec];
                     this.value = this.spec.value;
                 }
@@ -81,14 +84,15 @@ export class MgT2SkillDialog extends Application {
             "chaOnly": this.chaOnly,
             "dm": 0,
             "dicetype": "normal",
-            "characteristic": this.cha
-        }
+            "characteristic": this.cha        }
     }
 
     activateListeners(html) {
         super.activateListeners(html);
         const roll = html.find("button[class='skillRoll']");
         roll.on("click", event => this.onRollClick(event, html));
+
+        html.find(".edit-skill").on("click", event => this.onSkillEdit(event, html));
     }
 
     async onRollClick(event, html) {
@@ -105,14 +109,20 @@ export class MgT2SkillDialog extends Application {
         let difficulty = parseInt(html.find(".skillDialogDifficulty")[0].value);
 
         if (remember && this.skillId) {
-            this.actor.data.data.skills[this.skillId].default = cha;
-            this.actor.update({ "data.skills": this.actor.data.data.skills });
+            this.actor.system.skills[this.skillId].default = cha;
+            this.actor.update({ "system.skills": this.actor.system.skills });
         } else if (this.skillId) {
-            this.cha = this.actor.data.data.skills[this.skillId].default;
+            this.cha = this.actor.system.skills[this.skillId].default;
         }
         rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType, difficulty);
 
         this.close();
+    }
+
+    async onSkillEdit(event, html) {
+        event.preventDefault();
+
+        new MgT2AddSkillDialog(this.actor, this.skillId, this.skill, this.specId, this.spec).render(true);
     }
 
     async _updateObject(event, formData) {

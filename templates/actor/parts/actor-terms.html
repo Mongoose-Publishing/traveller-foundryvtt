@@ -1,0 +1,75 @@
+<h2>Career Terms</h2>
+
+<ol class="history-list">
+    <li class="item flexrow history-header">
+        <div class="history-number">No.</div>
+        <div class="history-name">Career</div>
+        <div class="history-notes">Notes</div>
+        <div class="item-controls">
+            <a class="item-control item-create" title="Create term" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add</a>
+        </div>
+    </li>
+    {{#each terms as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+            <div class="history-number">
+                <label class="resource-label">{{item.system.term.number}}</label>
+            </div>
+
+            <div class="history-name">
+                <label class="resource-label">{{item.name}}</label>
+            </div>
+
+            <div class="history-notes">
+                {{toPlainText item.system.description}}
+            </div>
+
+            <div class="item-controls">
+                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+        </li>
+    {{/each}}
+</ol>
+
+<h2>Associates</h2>
+
+<p>
+    Contacts, allies and rivals encountered during character generation.
+</p>
+<p>
+    <label class="item-create add-associate" data-type="associate" data-relation="contact"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.contact'}}</label>
+    <label class="item-create add-associate" data-type="associate" data-relation="ally"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.ally'}}</label>
+    <label class="item-create add-associate" data-type="associate" data-relation="rival"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.rival'}}</label>
+    <label class="item-create add-associate" data-type="associate" data-relation="enemy"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.enemy'}}</label>
+</p>
+
+<ol class="history-list">
+    <li class="item flexrow history-header">
+        <div class="history-relation">Relation</div>
+        <div class="history-name">Name</div>
+        <div class="history-notes">Notes</div>
+        <div class="item-controls">
+
+        </div>
+    </li>
+    {{#each associates as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+            <div class="history-relation">
+                <label class="resource-label">{{localize (concat 'MGT2.History.Relation.' item.system.associate.relationship)}}</label>
+            </div>
+
+            <div class="history-name">
+                <label class="resource-label">{{item.name}}</label>
+            </div>
+
+            <div class="history-notes">
+                {{toPlainText item.system.description}}
+            </div>
+
+            <div class="item-controls">
+                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+        </li>
+    {{/each}}
+</ol>

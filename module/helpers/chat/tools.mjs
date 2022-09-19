@@ -261,7 +261,8 @@ Tools.applyDamage = function(damage, ap, tl, options, traits) {
             continue;
         }
         console.log("Apply damage to " + token.name);
-        if (token.data.actorLink && token.actor.type === "traveller") {
+        console.log(token);
+        if (token.document.actorLink && token.actor.type === "traveller") {
             console.log("This is a Traveller");
             new MgT2DamageDialog(token.actor, damage, ap, "", false).render(true);
         } else {

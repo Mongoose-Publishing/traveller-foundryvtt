@@ -4,36 +4,35 @@
  * @param {Actor|Item} owner      The owning entity which manages this effect
  */
  export function onManageActiveEffect(event, owner) {
-  event.preventDefault();
-  const a = event.currentTarget;
+    event.preventDefault();
+    const a = event.currentTarget;
 
-  console.log(a);
-  const action = a?.dataset?.effecttype ? a.dataset.effecttype : null;
+    const action = a?.dataset?.effecttype ? a.dataset.effecttype : null;
 
-  if (action) {
-    let eff = CONFIG.MGT2.EFFECTS[action];
-    if (eff) {
-        return owner.createEmbeddedDocuments("ActiveEffect", [{
-            label: game.i18n.localize("MGT2.Effects.Type." + action),
-            icon: "icons/svg/aura.svg",
-            origin: owner.uuid,
-            disabled: false,
-            flags: { "augmentType": action }
-        }]);
+    if (action) {
+        let eff = CONFIG.MGT2.EFFECTS[action];
+        if (eff) {
+            return owner.createEmbeddedDocuments("ActiveEffect", [{
+                label: game.i18n.localize("MGT2.Effects.Type." + action),
+                icon: "icons/svg/aura.svg",
+                origin: owner.uuid,
+                disabled: false,
+                flags: { "augmentType": action }
+            }]);
+        }
     }
-  }
 
 
-  const li = a.closest("li");
-  const effect = li.dataset.effectId ? owner.effects.get(li.dataset.effectId) : null;
-  switch ( a.dataset.action ) {
-    case "edit":
-      return effect.sheet.render(true);
-    case "delete":
-      return effect.delete();
-    case "toggle":
-      return effect.update({disabled: !effect.data.disabled});
-  }
+    const li = a.closest("li");
+    const effect = li.dataset.effectId ? owner.effects.get(li.dataset.effectId) : null;
+    switch ( a.dataset.action ) {
+        case "edit":
+          return effect.sheet.render(true);
+        case "delete":
+          return effect.delete();
+        case "toggle":
+          return effect.update({disabled: !effect.data.disabled});
+    }
 }
 
 /**
@@ -65,7 +64,7 @@ export function prepareActiveEffectCategories(effects) {
     // Iterate over active effects, classifying them into categories
     for ( let e of effects ) {
       e._getSourceName(); // Trigger a lookup for the source name
-      if ( e.data.disabled ) categories.inactive.effects.push(e);
+      if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
       else categories.passive.effects.push(e);
     }

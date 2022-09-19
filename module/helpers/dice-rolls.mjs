@@ -1,6 +1,6 @@
 
 export function getSkillValue(actor, skill, speciality) {
-    const data = actor.data.data;
+    const data = actor.system;
 
     if (skill) {
         if (skill.indexOf(".") > -1) {
@@ -35,11 +35,11 @@ export function getTraitValue(traits, trait) {
 }
 
 export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption) {
-    const   data = actor.data.data;
+    const   data = actor?actor.system:null;
     let     content = "Attack";
     let     melee = true;
 
-    let baseRange = weapon.data.weapon.range;
+    let baseRange = weapon.system.weapon.range;
     let rangeBand = null;
     let rangeDistance = baseRange;
     if (range !== undefined && range !== null) {
@@ -71,8 +71,8 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
     dice += " + " + skillDM;
 
-    if (weapon.data.weapon.attackBonus) {
-        const attackBonus = parseInt(weapon.data.weapon.attackBonus);
+    if (weapon.system.weapon.attackBonus) {
+        const attackBonus = parseInt(weapon.system.weapon.attackBonus);
         if (attackBonus != 0) {
             dice += " + " + attackBonus;
         }
@@ -81,7 +81,10 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     // Header information
     content = `<div class="attack-message">`;
     content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div class="message-content">`;
-    content += `<div><img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
+    content += "<div>";
+    if (actor) {
+        content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
+    }
     content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
     content += `<b>Skill DM:</b> ${skillDM}`;
     if (dm && parseInt(dm) < 0) {
@@ -97,15 +100,15 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     content += "<br/>";
 
     // Work out damage.
-    let dmg = weapon.data.weapon.damage;
-    let type = weapon.data.weapon.damageType;
+    let dmg = weapon.system.weapon.damage;
+    let type = weapon.system.weapon.damageType;
     if (!type) {
         type == "standard";
     }
     let destructive = dmg.indexOf("*") > -1;
-    let damageBonus = weapon.data.weapon.damageBonus;
-    if (damageBonus && actor.data.data.characteristics && actor.data.data.characteristics[damageBonus]) {
-        damageBonus = actor.data.data.characteristics[damageBonus].dm;
+    let damageBonus = weapon.system.weapon.damageBonus;
+    if (damageBonus && actor && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
+        damageBonus = actor.system.characteristics[damageBonus].dm;
         if (damageBonus > 0) {
             dmg += " +" + damageBonus;
         } else if (damageBonus < 0) {
@@ -119,7 +122,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     } else {
         content += `<b>Melee</b>`;
     }
-    let traits = weapon.data.weapon.traits;
+    let traits = weapon.system.weapon.traits;
     if (traits && traits !== "") {
         content += `<b>Traits:</b> ${traits}`
     } else {
@@ -142,18 +145,22 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         attacks = getTraitValue(traits, "auto");
     }
 
-    const roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
+    const roll = new Roll(dice, actor?actor.getRollData():null).evaluate({async: false});
+    let damageRoll = null;
     for (let attack=1; attack <= attacks; attack++) {
         if (attacks > 1) {
             content += `<h3 class="fullauto">Full auto attack ${attack} of ${attacks}</h3>`;
         }
 
-        const damageRoll = new Roll(dmg, actor.getRollData()).evaluate({async: false});
+        damageRoll = new Roll(dmg, actor?actor.getRollData():null).evaluate({async: false});
         let damageTotal = damageRoll.total;
-        const attackRoll = new Roll(dice, actor.getRollData()).evaluate({async: false});
-        let attackTotal = attackRoll.total;
-        let effect = attackTotal - 8;
-        let critical = (effect >= 6);
+
+        let effect = 0, attackTotal = 0;
+        if (actor) {
+            const attackRoll = new Roll(dice, actor ? actor.getRollData() : null).evaluate({async: false});
+            attackTotal = attackRoll.total;
+            effect = attackTotal - 8;
+        }
 
         let effectClass = "rollFailure";
         let effectText = "Miss";
@@ -175,7 +182,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         if (hasTrait(traits, "ap")) {
             ap = getTraitValue(traits, "ap");
         }
-        let tl = weapon.data.tl;
+        let tl = weapon.system.tl;
         let options = "";
         if (type !== "standard") {
             options += " " + type;
@@ -183,7 +190,11 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
 
         content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;
         content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}" class="damage-button">Apply</button>`;
-        content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
+        if (actor) {
+            content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
+        } else {
+            content += "<br/>";
+        }
         content += `<b>Damage Roll:</b> ${damageTotal}`;
         if (!destructive && effect > 0) {
             content += ` + ${effect} (${damageTotal + effect})`;
@@ -215,11 +226,19 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
     content += "</div>";
 
-    roll.toMessage({
-        speaker: ChatMessage.getSpeaker({actor: actor}),
-        content: content,
-        rollMode: game.settings.get("core", "rollMode")
-    });
+    if (actor) {
+        roll.toMessage({
+            speaker: ChatMessage.getSpeaker({actor: actor}),
+            content: content,
+            rollMode: game.settings.get("core", "rollMode")
+        });
+    } else {
+        damageRoll.toMessage({
+            speaker: ChatMessage.getSpeaker({actor: actor}),
+            flavor: content,
+            rollMode: game.settings.get("core", "rollMode")
+        });
+    }
 
 }
 
@@ -277,7 +296,7 @@ function getEffectLabel(effect) {
 }
 
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
-    const data = actor.data.data;
+    const data = actor.system;
     let   title = "";
     let   skillText = "";
     let   text = "";

@@ -5,6 +5,11 @@
       "base": {
         "speed": 6,
         "initiative": 0,
+        "rads": 0,
+        "weightCarried": 0,
+        "heavyLoad": 0,
+        "maxLoad": 0,
+        "physicalDM": 0,
         "hits": {
             "value": 21,
             "max": 21
@@ -13,15 +18,17 @@
         "settings": {
             "hideUntrained": false,
             "onlyBackground": false,
-            "rollType": "normal",
             "resetOnRoll": false,
-            "columns": 6
+            "columns": 6,
+            "lockCharacteristics": false,
+            "lockSkills": false
         }
       },
       "sophont": {
         "sophont": {
             "age": 18,
             "species": "Vilani",
+            "speciesTraits": "",
             "gender": "",
             "weight": 70,
             "height": 175,
@@ -142,7 +149,10 @@
         "damage": {
             "STR": { "value": 0 },
             "DEX": { "value": 0 },
-            "END": { "value": 0 }
+            "END": { "value": 0 },
+            "PSI": { "value": 0 },
+            "LCK": { "value": 0 },
+            "SAN": { "value": 0 }
         }
       },
       "armour": {
@@ -151,8 +161,9 @@
           "otherTypes": "",
           "rad": 0,
           "tl": 0,
-          "archaic": false,
-          "ablat": false
+          "archaic": 0,
+          "ablat": 0,
+          "powered": 0
       },
       "skills": {
         "skills": {
@@ -953,6 +964,7 @@
           "pension": 0,
           "medicalDebt": 0,
           "mortgage": 0,
+          "livingCosts": 0,
           "otherIncome": 0
       },
       "player": "",
@@ -970,27 +982,26 @@
     }
   },
   "Item": {
-    "types": ["item", "feature", "weapon", "armour", "augment" ],
+    "types": ["item", "feature", "weapon", "armour", "augment", "term", "associate" ],
     "templates": {
       "base": {
-        "name": "",
-        "description": "Item Description",
         "tl": 0,
         "weight": 0,
         "cost": 0,
         "notes": "",
-        "augments": [],
-        "active": false
+        "active": false,
+        "status": null
       },
       "weapon": {
-        "templates":["base"],
         "weapon": {
             "range": 0,
             "damage": "1d6",
             "magazine": 0,
             "ammo": 0,
+            "magazineCost": 0,
             "characteristic": "dex",
             "skill": "melee.unarmed",
+            "parryBonus": 0,
             "damageBonus": "",
             "damageType": "standard",
             "attackBonus": 0,
@@ -999,7 +1010,6 @@
         }
       },
       "armour": {
-        "templates": ["base"],
         "armour": {
             "protection": 0,
             "otherProtection": 0,
@@ -1008,23 +1018,34 @@
             "archaic": 0,
             "skill": "",
             "duration": 0,
-            "sltos": 0,
+            "slots": 0,
             "form": "standard",
             "layered": 0,
+            "ablat": 0,
+            "powered": 0,
             "worn": 0
         }
       },
       "augment": {
-        "augments": [{
-            "type": "",
-            "target": "STR",
-            "value": 0,
-            "active": false
-        }]
+      },
+      "term": {
+          "term": {
+              "number": 0
+          }
+      },
+      "associate": {
+          "associate": {
+              "relationship": "contact",
+              "affinity": 0,
+              "enmity": 0,
+              "power": 0,
+              "influence": 0
+          }
       }
     },
     "item": {
       "templates": ["base" ],
+      "description": "Item Description",
       "quantity": 1,
       "formula": "2d6 + @str"
     },
@@ -1040,6 +1061,12 @@
     },
     "feature": {
       "templates": ["base"]
+    },
+    "term": {
+      "templates": [ "term" ]
+    },
+    "associate": {
+      "templates": [ "associate" ]
     }
   }
 }

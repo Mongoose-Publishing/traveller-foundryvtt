@@ -1,0 +1,24 @@
+{{!-- This template is a fallback for when items don't have more specific templates. --}}
+{{!-- Generally, you'll want to make more specific templates when possible. --}}
+<form class="{{cssClass}} item" autocomplete="off">
+
+    <section class="shadow">
+        <div class="grid grid-8col">
+            <div class="grid-span-1">
+                <label class="resource-label">Term</label><br/>
+                <input name="system.term.number" type="number" value="{{item.system.term.number}}" placeholder="Num"/>
+            </div>
+
+            <div class="grid-span-7">
+                <label class="resource-label">Career</label><br/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="shadow history-description">
+        {{editor enrichedDescription target="system.description" button=true editable=editable}}
+    </section>
+
+</form>

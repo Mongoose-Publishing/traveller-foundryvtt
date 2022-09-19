@@ -28,6 +28,28 @@
                 </div>
 
                 <div class="resource">
+                    <label for="data.armour.ablat" class="resource-label">{{localize "MGT2.Armour.Ablative"}}</label>
+                    <br/>
+                    <select name="data.armour.ablat">
+                        {{#select data.armour.ablat}}
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                        {{/select}}
+                    </select>
+                </div>
+
+                <div class="resource">
+                    <label for="data.armour.powered" class="resource-label">{{localize "MGT2.Armour.Powered"}}</label>
+                    <br/>
+                    <select name="data.armour.powered">
+                        {{#select data.armour.powered}}
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                        {{/select}}
+                    </select>
+                </div>
+
+                <div class="resource">
                     <label class="resource-label">{{localize "MGT2.Armour.Duration"}}</label>
                     <br/>
                     <input type="text" name="data.armour.duration" value="{{data.armour.duration}}" data-dtype="Number"/>
@@ -51,15 +73,15 @@
                 <div class="resources grid grid-3col flex-group-left">
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.TL"}}</label>
-                        <input type="text" name="data.item.tl" value="{{data.item.tl}}" data-dtype="Number"/>
+                        <input type="text" name="data.tl" value="{{data.tl}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.Weight"}}</label>
-                        <input type="text" name="data.item.weight" value="{{data.item.weight}}" data-dtype="Number"/>
+                        <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.Cost"}}</label>
-                        <input type="text" name="data.item.cost" value="{{data.item.cost}}" data-dtype="Number"/>
+                        <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
@@ -98,7 +120,9 @@
                 </div>
           </div>
           <div class="shadow">
-            {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner editable=editable}}
+              {{editor
+                  enrichedDescription target="system.description"
+                  button=true editable=editable}}
           </div>
             <div class="shadow">
                 <h2>{{localize "MGT2.Effects.AugmentEffects"}}</h2>
@@ -116,8 +140,8 @@
                 <ol class="items-list effects-list grid grid-2col">
                     {{#each effects as |e id|}}
                     <li class="items effect flexrow" data-effect-id="{{e.id}}">
-                        <label>{{e.data.label}}</label>
-                        <div class="effect-target">{{effect e.data.changes.0.key}} {{e.data.changes.0.value}}</div>
+                        <label>{{e.label}}</label>
+                        <div class="effect-target">{{effect e.changes.0.key}} {{e.changes.0.value}}</div>
                         <div class="item-controls effect-controls flexrow">
                             <a class="effect-control" data-action="edit" title="Edit">
                                 <i class="fas fa-edit"></i>

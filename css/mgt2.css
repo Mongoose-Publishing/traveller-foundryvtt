@@ -270,8 +270,8 @@
 
 .sheet-header .header-profile {
     width: 140px;
-    margin-top: 0px;
-    padding-top: 0px;
+    margin-top: 0;
+    padding-top: 0;
     max-width: 140px;
     vertical-align: top;
     flex-basis: auto;
@@ -303,7 +303,7 @@
 
 .sheet-header h1.charname {
   height: 50px;
-  padding: 0px;
+  padding: 0;
   margin: 0;
   margin-top: 0;
   border-bottom: 0;
@@ -312,7 +312,7 @@
 h1.charname input {
     width: 100%;
     height: 100%;
-    padding: 0px;
+    padding: 0;
     margin: 0;
 }
 
@@ -500,6 +500,8 @@ h1.charname input {
     text-transform: capitalize;
     text-align: left;
 }
+
+
 
 .actor .item-prop {
     -webkit-box-flex: 0;
@@ -800,15 +802,15 @@ h3.fullauto {
     font-size: larger;
     font-weight: bold;
     margin-top: 8px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 h2.subroll {
     display: block;
     margin-top: 8px;
     margin-bottom: 2px;
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 
@@ -903,7 +905,7 @@ div.armour-box input {
 
 .mgt2 .window-content {
     background: var(--sheet-bg);
-    padding: 0px;
+    padding: 0;
 }
 
 /* Sheet Styles */
@@ -1009,7 +1011,7 @@ img.item-img {
     margin-right: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
-    padding: 0px;
+    padding: 0;
 }
 
 div.item-side-panel {
@@ -1071,7 +1073,7 @@ textarea.traits {
     margin-right: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
-    padding: 0px;
+    padding: 0;
 }
 
 .creature-sheet .creature-box {
@@ -1111,15 +1113,15 @@ textarea.traits {
 
 
 .creature-sheet .creature-attacks li {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 .creature-sheet .creature-attacks img {
     text-align: left;
     float: left;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     padding-right: 3px;
 }
 
@@ -1143,8 +1145,8 @@ label.box-title {
 .creature-sheet .creature-armour img {
     text-align: left;
     float: left;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     padding-right: 3px;
 }
 
@@ -1173,7 +1175,7 @@ label.box-title {
 
 .creature-header h1.charname {
     height: 50px;
-    padding: 0px;
+    padding: 0;
     margin: 0;
     margin-top: 0;
     border-bottom: 0;
@@ -1189,7 +1191,7 @@ label.box-title {
     text-align: center;
     display: inline-block;
     text-transform: uppercase;
-    border-radius: 3px 3px 0px 0px;
+    border-radius: 3px 3px 0 0;
 }
 
 .field-value {
@@ -1214,7 +1216,7 @@ h1.charname input {
 
 .character-left .side-panel {
     width: 160px;
-    padding: 0px;
+    padding: 0;
     margin-bottom: 10px;
 }
 
@@ -1240,15 +1242,15 @@ h1.charname input {
 }
 
 .character-attacks li {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 .character-attacks img {
     text-align: left;
     float: left;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     padding-right: 3px;
 }
 
@@ -1279,3 +1281,29 @@ ol.effects-list li .item-controls {
     display: block;
     float: right;
 }
+
+/* Journal related styling */
+section.briefing {
+    background-color: #f0f0f0;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    margin-left: 12px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap');
+section.briefing h2 {
+    font-family: 'Anton', sans-serif;
+    background-color: black;
+    color: white;
+    padding: 2px;
+    padding-left: 5px;
+    margin: -3px;
+    margin-bottom: 3px;
+}
+
+span.edit-skill {
+    float: right;
+    font-size: small;
+}
+

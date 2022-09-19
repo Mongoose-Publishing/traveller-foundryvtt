@@ -25,11 +25,13 @@
   "MGT2.TravellerSheet.Init": "INIT",
   "MGT2.TravellerSheet.MaxHits": "MAX HITS",
   "MGT2.TravellerSheet.Hits": "HITS",
+  "MGT2.TravellerSheet.Rads": "RADS",
 
   "MGT2.TravellerSheet.Skills": "Skills",
   "MGT2.TravellerSheet.Equipment": "Equipment",
   "MGT2.TravellerSheet.Finance": "Finance",
   "MGT2.TravellerSheet.Biography": "Biography",
+  "MGT2.TravellerSheet.History": "History",
   "MGT2.TravellerSheet.Settings": "Settings",
 
   "MGT2.TravellerSheet.Damage": "Damage",
@@ -70,6 +72,8 @@
   "MGT2.Armour.Energy": "Energy",
   "MGT2.Armour.EnergyTypes": "Energy Types",
   "MGT2.Armour.RequiresSkill": "Requires",
+  "MGT2.Armour.Powered": "Powered",
+  "MGT2.Armour.Ablative": "Ablative",
 
   "MGT2.Effects.AugmentEffects": "Augment Effects",
   "MGT2.Effects.Create": "Add",
@@ -81,6 +85,29 @@
   "MGT2.Effects.Type.skillAug": "Skill Augment",
   "MGT2.Effects.Type.skillDM": "Skill DM",
   "MGT2.Effects.Type.skillExpert": "Expert Program",
+
+  "MGT2.History.CareerTerms": "Career Terms",
+  "MGT2.History.Career": "Career",
+  "MGT2.History.Notes": "Notes",
+  "MGT2.History.AddTerm": "Add term",
+  "MGT2.History.Associates": "Associates",
+  "MGT2.History.Relationship": "Relationship",
+  "MGT2.History.Relation.contact": "Contact",
+  "MGT2.History.Relation.ally": "Ally",
+  "MGT2.History.Relation.rival": "Rival",
+  "MGT2.History.Relation.enemy": "Enemy",
+  "MGT2.History.Relation.Affinity": "Affinity",
+  "MGT2.History.Relation.Enmity": "Enmity",
+  "MGT2.History.Relation.Power": "Power",
+  "MGT2.History.Relation.Influence": "Influence",
+
+  "MGT2.Finance.Cash": "Cash (Cr)",
+  "MGT2.Finance.Pension": "Pension (Cr/Year)",
+  "MGT2.Finance.OtherIncome": "Other Income (Cr/Year)",
+  "MGT2.Finance.MedicalDebt": "Medical Debt (Cr)",
+  "MGT2.Finance.Mortgage": "Mortgage (Cr/Month)",
+  "MGT2.Finance.LivingCosts": "Living Costs (Cr/Month)",
+
 
   "TRAVELLER.Add": "Add"
 }

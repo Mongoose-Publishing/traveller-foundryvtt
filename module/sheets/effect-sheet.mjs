@@ -44,13 +44,10 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         context.effectTypes = MGT2.EFFECTS;
         context.effectType = MGT2.EFFECTS[context.data.flags.augmentType];
 
-
-
         let prop =context.effectType.property;
         if (context.effectType.targets == "char") {
             context.targets = {};
             for (const k of [ 'STR', 'DEX', 'END', 'INT', 'PSI' ]) {
-                console.log(k);
                 let key = "data.characteristics."+k+"."+prop;
                 context.targets[key] = {"label": k};
             }
@@ -80,19 +77,17 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
 
         let ae = foundry.utils.duplicate(this.object);
         ae.label = formData.label;
-        //ae.flags.augmentType = formData.data.flags.augmentType;
 
         console.log("formData:");
         console.log(formData);
         console.log(CONST.ACTIVE_EFFECT_MODES);
 
-        const effectData = this.getData();
-        console.log("effectData:");
-        console.log(effectData);
-        let changes = effectData?.data?.changes ? effectData.data.changes.map(c => c.toObject(false)) : [];
-
+        ae.disabled = formData.disabled;
+        ae.transfer = formData.transfer;
         ae.changes = formData.changes;
 
+        console.log("updated object:");
+        console.log(ae);
 
         return this.object.update(ae);
     }

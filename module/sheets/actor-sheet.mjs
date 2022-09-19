@@ -4,6 +4,7 @@ import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
 import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
+import {MgT2Item} from "../documents/item.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -11,221 +12,287 @@ import {rollSkill} from "../helpers/dice-rolls.mjs";
  */
 export class MgT2ActorSheet extends ActorSheet {
 
-  /** @override */
-  static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
-      classes: ["mgt2", "sheet", "actor"],
-      template: "systems/mgt2/templates/actor/actor-sheet.html",
-      width: 720,
-      height: 600,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
-    });
-  }
-
-  /** @override */
-  get template() {
-    return `systems/mgt2/templates/actor/actor-${this.actor.data.type}-sheet.html`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  getData() {
-    // Retrieve the data structure from the base sheet. You can inspect or log
-    // the context variable to see the structure, but some key properties for
-    // sheets are the actor object, the data object, whether or not it's
-    // editable, the items array, and the effects array.
-    const context = super.getData();
-
-    // Use a safe clone of the actor data for further operations.
-    const actorData = context.actor.data;
-
-    // Add the actor's data to context.data for easier access, as well as flags.
-    context.data = actorData.data;
-    context.flags = actorData.flags;
-
-    // Prepare character data and items.
-    if (actorData.type == 'traveller') {
-        this._prepareItems(context);
-        this._prepareCharacterData(context);
-    } else if (actorData.type === 'npc') {
-        this._prepareItems(context);
-    } else if (actorData.type === 'creature') {
-        this._prepareItems(context);
+    /** @override */
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            classes: ["mgt2", "sheet", "actor"],
+            template: "systems/mgt2/templates/actor/actor-sheet.html",
+            width: 720,
+            height: 600,
+            tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
+        });
     }
 
-    // Add roll data for TinyMCE editors.
-    context.rollData = context.actor.getRollData();
+    /** @override */
+    get template() {
+        return `systems/mgt2/templates/actor/actor-${this.actor.type}-sheet.html`;
+    }
 
-    // Prepare active effects
-    context.effects = prepareActiveEffectCategories(this.actor.effects);
+    /* -------------------------------------------- */
 
-    return context;
-  }
+    /** @override */
+    getData() {
+        // Retrieve the data structure from the base sheet. You can inspect or log
+        // the context variable to see the structure, but some key properties for
+        // sheets are the actor object, the data object, whether or not it's
+        // editable, the items array, and the effects array.
+        const context = super.getData();
 
-  /**
-   * Organize and classify Items for Character sheets.
-   *
-   * @param {Object} actorData The actor to prepare.
-   *
-   * @return {undefined}
-   */
-  _prepareCharacterData(context) {
-    console.log("_prepareCharacterData:");
-    let skills = context.data.skills;
-    let changed = false;
-    for (let skill in skills) {
-      if (skills[skill].individual && skills[skill].specialities) {
-        for (let s in skills[skill].specialities) {
-          let spec = skills[skill].specialities[s];
-          if (spec.trained && spec.value < 0) {
-            spec.value = 0;
-            changed = true;
-          }
+        // Use a safe clone of the actor data for further operations.
+        const actorData = context.actor.system;
+        const type = context.actor.type;
+
+        // Add the actor's data to context.data for easier access, as well as flags.
+        context.data = actorData;
+        context.system = actorData;
+        context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
+        context.flags = actorData.flags;
+
+        // Prepare character data and items.
+        if (type == 'traveller') {
+            this._prepareItems(context);
+            //this._prepareCharacterData(context);
+        } else if (type === 'npc') {
+            this._prepareItems(context);
+        } else if (type === 'creature') {
+            this._prepareItems(context);
         }
-      }
-    }
-    if (changed) {
-      //context.actor.update({"data.skills": skills });
-    }
-  }
 
-  /**
-   * Organize and classify Items for Character sheets.
-   *
-   * @param {Object} actorData The actor to prepare.
-   *
-   * @return {undefined}
-   */
-  _prepareItems(context) {
-    // Initialize containers.
-    const gear = [];
-    const features = [];
+        // Add roll data for TinyMCE editors.
+        context.rollData = context.actor.getRollData();
 
-    const weapons = [];
-    const armour = [];
-    const augments = [];
-    console.log("_prepareItems:");
-    // Iterate through items, allocating to containers
-    for (let i of context.items) {
-      i.img = i.img || DEFAULT_TOKEN;
-      // Append to gear.
-      if (i.type === 'item') {
-        gear.push(i);
-      } else if (i.type === 'weapon') {
-          weapons.push(i);
-      } else if (i.type === 'armour') {
-          armour.push(i);
-          this._calculateArmour(context.actor);
-      } else if (i.type === 'augments') {
-          augments.push(i);
-      }
+        // Prepare active effects
+        context.effects = prepareActiveEffectCategories(context.actor.effects);
+
+        return context;
     }
 
-    // Assign and return
-    context.gear = gear;
-    context.weapons = weapons;
-    context.armour = armour;
-    context.augments = augments;
-    context.features = features;
-  }
+    /**
+     * Organize and classify Items for Character sheets.
+     *
+     * @param {Object} actorData The actor to prepare.
+     *
+     * @return {undefined}
+     */
+    _prepareCharacterData(context) {
+        console.log("_prepareCharacterData:");
+        let skills = context.data.skills;
+        let changed = false;
+        for (let skill in skills) {
+            if (skills[skill].individual && skills[skill].specialities) {
+                for (let s in skills[skill].specialities) {
+                    let spec = skills[skill].specialities[s];
+                    if (spec.trained && spec.value < 0) {
+                        spec.value = 0;
+                        changed = true;
+                    }
+                }
+            }
+        }
+        if (changed) {
+            //context.actor.update({"data.skills": skills });
+        }
+    }
 
-  _wearArmour(actor, item) {
-     console.log(`wearArmour: [${actor.name}] [${item.name}]`)
-     const actorData = actor.data.data;
-     const itemData = item.data.data;
+    /**
+     * Organize and classify Items for Character sheets.
+     *
+     * @param {Object} actorData The actor to prepare.
+     *
+     * @return {undefined}
+     */
+    _prepareItems(context) {
+        console.log("actor-sheet.mjs:_prepareItems()");
+        // Initialize containers.
+        const gear = [];
+        const weapons = [];
+        const armour = [];
+        const terms = [];
+        const associates = [];
 
-     console.log(actorData);
-     console.log(itemData);
+        let weight = 0;
 
-     let form = itemData.armour.form;
-     console.log(actor.items);
-     for (let i of actor.items) {
-       console.log(i.data.name);
-       if (i.data.data.armour && i.data.data.armour.worn && i.data.data.armour.form === form) {
-           i.data.data.armour.worn = 0;
-           i.update({"data.armour.worn": 0});
-       }
-     }
-     itemData.armour.worn = 1;
-     item.update({"data.armour.worn": 1});
-     this._calculateArmour(actor);
-   }
+        // Iterate through items, allocating to containers
+        for (let i of context.items) {
+            i.img = i.img || DEFAULT_TOKEN;
 
-   _removeArmour(actor, item) {
-     console.log(`wearArmour: [${actor.name}] [${item.name}]`)
-     const actorData = actor.data.data;
-     const itemData = item.data.data;
+            if (i.system.status === MgT2Item.CARRIED) {
+                weight += parseInt(i.system.weight);
+            } else if (i.system.status === MgT2Item.EQUIPPED) {
+                if (i.type == "armour") {
+                    if (!i.system.armour.powered) {
+                        weight += parseInt(i.system.weight / 4);
+                    }
+                } else {
+                    weight += parseInt(i.system.weight);
+                }
+            }
+            // Append to gear.
+            if (i.type === 'weapon') {
+                weapons.push(i);
+            } else if (i.type === 'armour') {
+                armour.push(i);
+                this._calculateArmour(context.actor);
+            } else if (i.type === 'term') {
+                terms.push(i);
+            } else if (i.type === "associate") {
+                associates.push(i);
+            } else {
+                // Everything else.
+                gear.push(i);
+            }
+        }
 
-     itemData.armour.worn = 0;
-     item.update({"data.armour.worn": 0});
+        this.actor.system.weightCarried = weight;
 
-     this._calculateArmour(actor);
-   }
+        // Assign and return
+        context.gear = gear;
+        context.weapons = weapons;
+        context.armour = armour;
+        context.terms = terms;
+        context.associates = associates;
+        console.log("END _prepareItems()");
+    }
 
-   _calculateArmour(actor) {
-     const actorData = actor.data.data;
+    _setItemStatus(actor, item, status) {
+        console.log(`activateItem: [${actor.name}] [${item.name}]`)
+        const itemData = item.system;
 
-     let armour = actorData.armour;
-     armour.protection = 0;
-     armour.otherProtection = 0;
-     armour.otherTypes = "";
-     armour.rad = 0;
-     armour.archaic = 0;
-     for (let i of actor.items) {
-       if (i.data.data.armour) {
-         const armourData = i.data.data.armour;
-         if (armourData.worn || armourData.form === "natural") {
-           let armourData = i.data.data.armour;
+        if (item.type === "armour") {
+            let form = itemData.armour.form;
+            if (status === MgT2Item.EQUIPPED) {
+                for (let i of actor.items) {
+                    if (i.system.armour && i.system.armour.worn && i.system.armour.form === form) {
+                        i.system.armour.worn = 0;
+                        i.system.status = MgT2Item.CARRIED;
+                        i.update({"system.armour.worn": 0, "system.status": MgT2Item.CARRIED });
+                    }
+                }
+                itemData.armour.worn = 1;
+            } else {
+                itemData.armour.worn = 0;
+            }
+            item.update({ "system.armour.worn": itemData.armour.worn });
+            this._calculateArmour(actor);
+        }
+        const isActive = (status === MgT2Item.EQUIPPED);
 
-           armour.protection += armourData.protection;
-           armour.otherProtection += armourData.otherProtection;
-           armour.rad += armourData.rad;
-           if (armourData.otherTypes !== "") {
-             armour.otherTypes = armourData.otherTypes;
-           }
-           if (armourData.archaic) {
-             armour.archaic = 1;
-           }
-         }
-       }
-     }
-     actor.update({ "data.armour": armour});
-   }
+        itemData.status = status;
+        item.update({ "system.status": status });
+    }
 
-   applyActiveEffect() {
-    console.log("sheet.applyActiveEffect:");
-   }
+    _wearArmour(actor, item) {
+        console.log(`wearArmour: [${actor.name}] [${item.name}]`)
+        const actorData = actor.system;
+        const itemData = item.system;
+
+        let form = itemData.armour.form;
+        for (let i of actor.items) {
+            if (i.system.armour && i.system.armour.worn && i.system.armour.form === form) {
+                i.system.armour.worn = 0;
+                i.update({"system.armour.worn": 0});
+            }
+        }
+        itemData.armour.worn = 1;
+        item.update({"system.armour.worn": 1});
+        this._calculateArmour(actor);
+    }
+
+    _removeArmour(actor, item) {
+        console.log(`wearArmour: [${actor.name}] [${item.name}]`)
+        const actorData = actor.system;
+        const itemData = item.system;
+
+        itemData.armour.worn = 0;
+        item.update({"system.armour.worn": 0});
+
+        this._calculateArmour(actor);
+    }
+
+    _calculateArmour(actor) {
+        const actorData = actor.system;
+
+        let armour = actorData.armour;
+        armour.protection = 0;
+        armour.otherProtection = 0;
+        armour.otherTypes = "";
+        armour.rad = 0;
+        armour.archaic = 0;
+        for (let i of actor.items) {
+            if (i.system.armour) {
+                const armourData = i.system.armour;
+                if (armourData.worn || armourData.form === "natural") {
+                    let armourData = i.system.armour;
+
+                    armour.protection += armourData.protection;
+                    armour.otherProtection += armourData.otherProtection;
+                    armour.rad += armourData.rad;
+                    if (armourData.otherTypes !== "") {
+                        armour.otherTypes = armourData.otherTypes;
+                    }
+                    if (armourData.archaic) {
+                        armour.archaic = 1;
+                    }
+                }
+            }
+        }
+        actor.update({ "data.armour": armour});
+    }
+
+    applyActiveEffect() {
+        console.log("sheet.applyActiveEffect:");
+    }
 
 
   /* -------------------------------------------- */
 
-  /** @override */
-  activateListeners(html) {
-    super.activateListeners(html);
+    /** @override */
+    activateListeners(html) {
+        super.activateListeners(html);
 
-    // Render the item sheet for viewing/editing prior to the editable check.
-    html.find('.item-edit').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("itemId"));
-      item.sheet.render(true);
-    });
+        // Render the item sheet for viewing/editing prior to the editable check.
+        html.find('.item-edit').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            item.sheet.render(true);
+        });
 
-    // -------------------------------------------------------------
-    // Everything below here is only needed if the sheet is editable
-    if (!this.isEditable) return;
+        // -------------------------------------------------------------
+        // Everything below here is only needed if the sheet is editable
+        if (!this.isEditable) return;
 
-    // Add Inventory Item
-    html.find('.item-create').click(this._onItemCreate.bind(this));
+        // Add Inventory Item
+        html.find('.item-create').click(this._onItemCreate.bind(this));
 
-    // Delete Inventory Item
-    html.find('.item-delete').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("itemId"));
-      item.delete();
-      li.slideUp(200, () => this.render(false));
-      this._calculateArmour(this.actor);
-    });
+        // Delete Inventory Item
+        html.find('.item-delete').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            item.delete();
+            li.slideUp(200, () => this.render(false));
+            this._calculateArmour(this.actor);
+        });
+
+        html.find('.item-activate').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            this._setItemStatus(this.actor, item, MgT2Item.EQUIPPED);
+        });
+        html.find('.item-deactivate').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            this._setItemStatus(this.actor, item, MgT2Item.CARRIED);
+        });
+        html.find('.item-store').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            this._setItemStatus(this.actor, item, MgT2Item.OWNED);
+        });
+        html.find('.item-carry').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            this._setItemStatus(this.actor, item, MgT2Item.CARRIED);
+        });
 
     html.find('.item-wear').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
@@ -283,223 +350,392 @@ export class MgT2ActorSheet extends ActorSheet {
     });
   }
 
-  _onSkillDragStart(event, options) {
-    console.log("_onSkillDragStart:");
-    console.log(options);
-    let dragData = {
-      actorId: this.actor.id,
-      sceneId: this.actor.isToken ? canvas.scene?.id : null,
-      tokenId: this.actor.isToken ? this.actor.token.id : null
-    }
-    dragData.data = {
-      dragType: "skill",
-      skillName: options.skill
-    }
-    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
-  }
-
-  _onCharacteristicDragStart(event, options) {
-    let dragData = {
-      actorId: this.actor.id,
-      sceneId: this.actor.isToken ? canvas.scene?.id : null,
-      tokenId: this.actor.isToken ? this.actor.token.id : null
-    }
-    dragData = {
-      dragType: "characteristic",
-      type: "characteristic",
-      characteristic: options.cha
-    }
-    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
-  }
-
-  async _onDrop(event) {
-    console.log("On Drop!");
-
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData('text/plain'));
-    } catch (err) {
-      console.log("Could not parse data");
-      return false;
-    }
-
-    console.log(data);
-    switch (data.type) {
-      case "Item":
-        return this._onDropItem(event, data);
-      case "Actor":
-        return this._onDropActor(event, data);
-      case "Damage":
-        return this._onDropDamage(event, data);
-      case "UPP":
-        return this._onDropUPP(event, data);
-      case "characteristic":
-        return this._onDropCharacteristic(event, data);
-    }
-  }
-
-  async _onDropUPP(event, data) {
-    const actor = this.actor;
-
-    if (actor.type === "traveller" || actor.type === "npc") {
-
-      if (actor.data.data.characteristics) {
-        if (data.STR) {
-          actor.data.data.characteristics.STR.value = parseInt(data.STR);
+    _onSkillDragStart(event, options) {
+        console.log("_onSkillDragStart:");
+        console.log(options);
+        let dragData = {
+            actorId: this.actor.id,
+            sceneId: this.actor.isToken ? canvas.scene?.id : null,
+            tokenId: this.actor.isToken ? this.actor.token.id : null
         }
-        if (data.DEX) {
-          actor.data.data.characteristics.DEX.value = parseInt(data.DEX);
+        dragData.data = {
+            dragType: "skill",
+            skillName: options.skill
         }
-        if (data.END) {
-          actor.data.data.characteristics.END.value = parseInt(data.END);
-        }
-        if (data.INT) {
-          actor.data.data.characteristics.INT.value = parseInt(data.INT);
-        }
-        if (data.EDU) {
-          actor.data.data.characteristics.EDU.value = parseInt(data.EDU);
-        }
-        if (data.SOC) {
-          actor.data.data.characteristics.SOC.value = parseInt(data.SOC);
-        }
-        actor.update({ "data.characteristics": actor.data.data.characteristics});
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
       }
-    }
-  }
 
-  async _onDropCharacteristic(event, data) {
-    const actor = this.actor;
-    let node = event.target;
-    let sourceCha = data.characteristic;
-    let targetCha = null;
-    while (node) {
-      if (node.dataset && node.dataset.cha) {
-        targetCha = node.dataset.cha;
-        break;
-      }
-      node = node.parentNode;
-    }
-
-    if (targetCha && sourceCha && targetCha != sourceCha) {
-      let actorData = actor.data.data;
-      if (actorData.characteristics[targetCha] && actorData.characteristics[sourceCha]) {
-        let swap = actorData.characteristics[targetCha].value;
-        actorData.characteristics[targetCha].value = actorData.characteristics[sourceCha].value;
-        actorData.characteristics[sourceCha].value = swap;
-        actor.update({ "data.characteristics": actorData.characteristics});
-      }
-    }
-  }
-
-  async _onDropDamage(event, data) {
-    const damage = data.damage;
-    const laser = data.laser;
-    const stun = false;
-    const ap = data.ap;
-    const actor = this.actor;
-
-    new MgT2DamageDialog(actor, damage, ap, laser, stun).render(true);
-  }
-
-  async _onRollTypeChange(event, actor, type) {
-    actor.data.data.settings.rollType = type;
-  }
-
-  /**
-   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
-   * @param {Event} event   The originating click event
-   * @private
-   */
-  async _onItemCreate(event) {
-    event.preventDefault();
-    const header = event.currentTarget;
-    // Get the type of item to create.
-    const type = header.dataset.type;
-    // Grab any data associated with this control.
-    const data = duplicate(header.dataset);
-    // Initialize a default name.
-    let name = `New ${type.capitalize()}`;
-    if (header.dataset.name) {
-      name = header.dataset.name;
-    }
-    console.log(data);
-    // Prepare the item object.
-    const itemData = {
-      name: name,
-      type: type,
-      data: data
-    };
-    if (header.dataset.img) {
-      itemData.img = header.dataset.img;
-    }
-    if (type === "weapon" && header.dataset.skill) {
-      itemData.data.weapon = {};
-      itemData.data.weapon.skill = header.dataset.skill;
-    }
-    if (type === "armour" && header.dataset.form) {
-      itemData.data.armour = {};
-      itemData.data.armour.form = header.dataset.form;
-    }
-    // Remove the type from the dataset since it's in the itemData.type prop.
-    delete itemData.data["type"];
-
-    // Finally, create the item!
-    return await Item.create(itemData, {parent: this.actor});
-  }
-
-  _onAddNewSkill(event, actor) {
-    console.log("onAddNewSkill:");
-    new MgT2AddSkillDialog(actor).render(true);
-  }
-
-  _onRollWrapper(event, actor) {
-    console.log("_onRollWrapper:");
-
-    event.preventDefault();
-    const element = event.currentTarget;
-    const dataset = element.dataset;
-
-    // Handle item rolls.
-    if (dataset.rollType) {
-      if (dataset.rollType == 'item') {
-        const itemId = element.closest('.item').dataset.itemId;
-        const item = this.actor.items.get(itemId);
-        if (item) return item.roll();
-      }
-    }
-
-    if (!dataset.roll) {
-      return;
-    }
-    let label = dataset.label ? `[roll] ${dataset.label}` : '';
-
-    const data = actor.data.data;
-
-    const skill = dataset.skill;
-    const spec = dataset.spec;
-    const cha = dataset.cha;
-
-    let skillDefault = dataset.cha?dataset.cha:"";
-    let speciality = null;
-
-    if (skill) {
-      skillDefault = data.skills[skill].default;
-      if (data.skills[skill].trained) {
-        if (spec) {
-          speciality = data.skills[skill].specialities[spec];
+    _onCharacteristicDragStart(event, options) {
+        let dragData = {
+            actorId: this.actor.id,
+            sceneId: this.actor.isToken ? canvas.scene?.id : null,
+            tokenId: this.actor.isToken ? this.actor.token.id : null
         }
-      }
-    }
-    let quickRoll = game.settings.get("mgt2", "quickRolls");
-    if (event.shiftKey) {
-      quickRoll = !quickRoll;
+        dragData = {
+            dragType: "characteristic",
+            type: "characteristic",
+            characteristic: options.cha
+        }
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
     }
 
-    if (!quickRoll) {
-      new MgT2SkillDialog(actor, skill, spec, cha).render(true);
-    } else {
-      // Roll directly with no options.
-      rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal", 8);
+    async _onDrop(event) {
+        console.log("On Drop!");
+
+        let data;
+        try {
+            data = JSON.parse(event.dataTransfer.getData('text/plain'));
+        } catch (err) {
+            console.log("Could not parse data");
+            return false;
+        }
+
+        console.log(data);
+        switch (data.type) {
+        case "Item":
+            return this._onDropItem(event, data);
+        case "Actor":
+            return this._onDropActor(event, data);
+        case "Damage":
+            return this._onDropDamage(event, data);
+        case "UPP":
+            return this._onDropUPP(event, data);
+        case "characteristic":
+            return this._onDropCharacteristic(event, data);
+        }
     }
+
+    async _onDropUPP(event, data) {
+        const actor = this.actor;
+
+        if (actor.type === "traveller" || actor.type === "npc") {
+
+            if (actor.system.characteristics) {
+                if (data.STR) {
+                    actor.system.characteristics.STR.value = parseInt(data.STR);
+                }
+                if (data.DEX) {
+                    actor.system.characteristics.DEX.value = parseInt(data.DEX);
+                }
+                if (data.END) {
+                    actor.system.characteristics.END.value = parseInt(data.END);
+                }
+                if (data.INT) {
+                    actor.system.characteristics.INT.value = parseInt(data.INT);
+                }
+                if (data.EDU) {
+                    actor.system.characteristics.EDU.value = parseInt(data.EDU);
+                }
+                if (data.SOC) {
+                    actor.system.characteristics.SOC.value = parseInt(data.SOC);
+                }
+                actor.update({ "system.characteristics": actor.system.characteristics});
+            }
+        }
+    }
+
+    async _onDropCharacteristic(event, data) {
+        const actor = this.actor;
+        let node = event.target;
+        let sourceCha = data.characteristic;
+        let targetCha = null;
+        while (node) {
+            if (node.dataset && node.dataset.cha) {
+                targetCha = node.dataset.cha;
+                break;
+            }
+            node = node.parentNode;
+        }
+
+        if (targetCha && sourceCha && targetCha != sourceCha) {
+            let actorData = actor.system;
+            if (actorData.characteristics[targetCha] && actorData.characteristics[sourceCha]) {
+                let swap = actorData.characteristics[targetCha].value;
+                actorData.characteristics[targetCha].value = actorData.characteristics[sourceCha].value;
+                actorData.characteristics[sourceCha].value = swap;
+                actor.update({ "data.characteristics": actorData.characteristics});
+            }
+        }
   }
+
+    async _onDropDamage(event, data) {
+        const damage = data.damage;
+        const laser = data.laser;
+        const stun = false;
+        const ap = data.ap;
+        const actor = this.actor;
+
+        new MgT2DamageDialog(actor, damage, ap, laser, stun).render(true);
+    }
+
+    async _onRollTypeChange(event, actor, type) {
+        actor.system.settings.rollType = type;
+    }
+
+    /**
+     * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
+     * @param {Event} event   The originating click event
+     * @private
+     */
+    async _onItemCreate(event) {
+        console.log("_onItemCreate:");
+        event.preventDefault();
+        const header = event.currentTarget;
+        // Get the type of item to create.
+        const type = header.dataset.type;
+        // Grab any data associated with this control.
+        const data = duplicate(header.dataset);
+        // Initialize a default name.
+        let name = `New ${type.capitalize()}`;
+        if (header.dataset.name) {
+            name = header.dataset.name;
+        }
+        // Prepare the item object.
+        const itemData = {
+            name: name,
+            type: type,
+            data: data
+        };
+        if (header.dataset.img) {
+            itemData.img = header.dataset.img;
+        }
+        if (type === "weapon" && header.dataset.skill) {
+            itemData.data.weapon = {};
+            itemData.data.weapon.skill = header.dataset.skill;
+        }
+        if (type === "armour" && header.dataset.form) {
+            itemData.data.armour = {};
+            itemData.data.armour.form = header.dataset.form;
+        }
+        if (type === "term") {
+            let number = 1;
+            for (let i of this.actor.items) {
+                if (i.type === "term") {
+                    number++;
+                }
+            }
+
+            itemData.name = `New term ${number}`;
+            itemData.data.description = "Events, mishaps and promotions.";
+            itemData.data.term = {};
+            itemData.data.term.number = number;
+        }
+        if (type === "associate") {
+            itemData.name = "Unnamed " + header.dataset.relation;
+            itemData.data.associate = {};
+            itemData.data.associate.relationship = header.dataset.relation;
+            itemData.data.description = this._setAssociate(itemData.data.associate);
+        }
+        // Remove the type from the dataset since it's in the itemData.type prop.
+        delete itemData.data["type"];
+
+        // Finally, create the item!
+        return await Item.create(itemData, {parent: this.actor});
+    }
+
+    _setAssociate(associate) {
+        let affinity = "", enmity = "";
+
+        if (associate.relationship === "contact") {
+            affinity = "1d6+1";
+            enmity = "1d6-1";
+        } else if (associate.relationship === "ally") {
+            affinity = "2d6";
+            enmity = "0";
+        } else if (associate.relationship === "rival") {
+            affinity = "1d6-1";
+            enmity = "1d6+1";
+        } else if (associate.relationship === "enemy") {
+            affinity = "0";
+            enmity = "2d6";
+        } else {
+            return "";
+        }
+        let roll = new Roll(affinity, this.actor.getRollData()).evaluate({async: false});
+        associate.affinity = this._getAffinity(roll.total);
+        roll = new Roll(enmity, this.actor.getRollData()).evaluate({async: false});
+        associate.enmity = 0 - this._getAffinity(roll.total);
+
+        let description = "";
+        switch (associate.affinity) {
+            case 1:
+                description += "Vaguely well inclined. ";
+                break;
+            case 2:
+                description += "Positively inclined. "
+                break;
+            case 3:
+                description += "Very positively inclined. ";
+                break;
+            case 4:
+                description += "Loyal friend. "
+                break;
+            case 5:
+                description += "Love. ";
+                break;
+            case 6:
+                description += "Fanatical. "
+                break;
+        }
+        switch (associate.enmity) {
+            case 1:
+                description += "Mistrustful. ";
+                break;
+            case 2:
+                description += "Negatively inclined. ";
+                break;
+            case 3:
+                description += "Very negatively inclined. ";
+                break;
+            case 4:
+                description += "Hatred. ";
+                break;
+            case 5:
+                description += "Bitter hatred. ";
+                break;
+            case 6:
+                description += "Blinded by hate. ";
+                break;
+        }
+        roll = new Roll("2D6", this.actor.getRollData()).evaluate({async: false});
+        let power = roll.total;
+        roll = new Roll("2D6", this.actor.getRollData()).evaluate({async: false});
+        let influence = roll.total;
+
+        switch (power) {
+            case 2: case 3: case 4: case 5:
+                associate.power = 0;
+                break;
+            case 6: case 7:
+                associate.power = 1;
+                description += "Weak. ";
+                break;
+            case 8:
+                associate.power = 2;
+                description += "Useful. ";
+                break;
+            case 9:
+                associate.power = 3;
+                description += "Moderately powerful. "
+                break;
+            case 10:
+                associate.power = 4;
+                description += "Powerful. ";
+                break;
+            case 11:
+                associate.power = 5;
+                description += "Very Powerful. ";
+                break;
+            case 12:
+                associate.power = 6;
+                description += "Major Player. ";
+                break;
+        }
+        switch (influence) {
+            case 2: case 3: case 4: case 5:
+                associate.influence = 0;
+                break;
+            case 6: case 7:
+                associate.power = 1;
+                description += "Little influence. ";
+                break;
+            case 8:
+                associate.power = 2;
+                description += "Some Influence. ";
+                break;
+            case 9:
+                associate.power = 3;
+                description += "Influential. ";
+                break;
+            case 10:
+                associate.power = 4;
+                description += "Highly Influential. ";
+                break;
+            case 11:
+                associate.power = 5;
+                description += "Extremely Influential. ";
+                break;
+            case 12:
+                associate.power = 6;
+                description += "Kingmaker.";
+                break;
+        }
+
+
+        return "<p>" + description + "</p>";
+    }
+
+    _getAffinity(affinity) {
+        if (affinity <= 2) {
+            return 0;
+        } else if (affinity <= 4) {
+            return 1;
+        } else if (affinity <= 6) {
+            return 2;
+        } else if (affinity <= 8) {
+            return 3;
+        } else if (affinity <= 10) {
+            return 4;
+        } else if (affinity === 11) {
+            return 5;
+        } else {
+            return 6;
+        }
+    }
+
+    _onAddNewSkill(event, actor) {
+        console.log("onAddNewSkill:");
+        new MgT2AddSkillDialog(actor).render(true);
+    }
+
+    _onRollWrapper(event, actor) {
+        console.log("_onRollWrapper:");
+
+        event.preventDefault();
+        const element = event.currentTarget;
+        const dataset = element.dataset;
+
+        // Handle item rolls.
+        if (dataset.rollType) {
+            if (dataset.rollType === 'item') {
+                const itemId = element.closest('.item').dataset.itemId;
+                const item = this.actor.items.get(itemId);
+                if (item) return item.roll();
+            }
+        }
+
+        if (!dataset.roll) {
+            return;
+        }
+        let label = dataset.label ? `[roll] ${dataset.label}` : '';
+
+        const data = actor.system;
+
+        const skill = dataset.skill;
+        const spec = dataset.spec;
+        const cha = dataset.cha;
+
+        let skillDefault = dataset.cha?dataset.cha:"";
+        let speciality = null;
+
+        if (skill) {
+            skillDefault = data.skills[skill].default;
+            if (data.skills[skill].trained) {
+                if (spec) {
+                    speciality = data.skills[skill].specialities[spec];
+                }
+            }
+        }
+        let quickRoll = game.settings.get("mgt2", "quickRolls");
+        if (event.shiftKey) {
+            quickRoll = !quickRoll;
+        }
+
+        if (!quickRoll) {
+            new MgT2SkillDialog(actor, skill, spec, cha).render(true);
+        } else {
+            // Roll directly with no options.
+            rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal", 8);
+        }
+    }
 }

@@ -27,8 +27,7 @@ Hooks.once('init', async function() {
   // accessible in global contexts.
     game.mgt2 = {
         MgT2Actor,
-        MgT2Item,
-        rollSkillMacro
+        MgT2Item
     };
 
     game.settings.register('mgt2', 'verboseSkillRolls', {
@@ -195,15 +194,16 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
    console.log(actor);
    console.log(data);
 
-   if (data.data.hits) {
+   if (data.hits) {
        // This is an NPC or Creature
-   } else if (data.data.damage) {
+   } else if (data.damage) {
        // This is a PC.
    }
 });
 
 Hooks.on("preUpdateToken", (token, data, moved) => {
     console.log("Token about to change event");
+    return;
 
     if (data && data.actorData && data.actorData.data && data.actorData.data.hits) {
         // NPC or Creature has had its HITS changed.
@@ -323,7 +323,7 @@ Hooks.on("applyActiveEffect", (actor, effectData) => {
    console.log(actor);
    console.log(effectData);
 
-   const actorData = actor.data.data;
+   const actorData = actor.system;
    let key = effectData.KEY;
    let value = effectData.value;
    let type = effectData.effect.data.flags.augmentType;
@@ -348,7 +348,7 @@ async function createTravellerMacro(data, slot) {
         console.log("Have dragged a skill " + dragData.skillName);
 
         let actor = game.data.actors.find(a => (a._id === actorId));
-        let skill = actor.data.skills[dragData.skillName];
+        let skill = actor.system.skills[dragData.skillName];
         let label = skill.label;
 
         const command = `game.mgt2.rollSkillMacro('${dragData.skillName}')`;
@@ -414,7 +414,19 @@ Handlebars.registerHelper('concat', function() {
 });
 
 Handlebars.registerHelper('toLowerCase', function(str) {
-  return str.toLowerCase();
+    return str.toLowerCase();
+});
+
+Handlebars.registerHelper('toPlainText', function(html) {
+    if (html) {
+        let text = html.replace(/<[^>]*>/g, "");
+        if (text.length > 120) {
+            text = text.substring(0, 117) + "...";
+        }
+        return text;
+    } else {
+        return "";
+    }
 });
 
 Handlebars.registerHelper('isChaShown', function(data, ch) {
@@ -530,6 +542,79 @@ Handlebars.registerHelper('rollTypeActive', function(data, type) {
     return "";
 });
 
+Handlebars.registerHelper('isItemEquipped', function(item) {
+    if (item.system.status === MgT2Item.EQUIPPED) {
+        return true;
+    }
+    return false;
+});
+
+Handlebars.registerHelper('isItemCarried', function(item) {
+    if (item.system.status === MgT2Item.CARRIED) {
+        return true;
+    }
+    return false;
+});
+
+Handlebars.registerHelper('isItemOwned', function(item) {
+    if (item.system.status === MgT2Item.EQUIPPED || item.system.status === MgT2Item.CARRIED) {
+        return false;
+    }
+    if (item.type === "term" || item.type === "associate") {
+        return false;
+    }
+    return true;
+});
+
+
+Handlebars.registerHelper('equipItem', function(item) {
+    if (item.system.status === MgT2Item.EQUIPPED) {
+        return "";
+    }
+
+    let title="Activate item";
+    let icon="fa-hand-fist";
+    if (item.type === "armour") {
+        title = "Wear armour";
+        icon = "fa-shirt";
+    }
+    return `<a class="item-control item-activate" title="${title}"><i class="fas ${icon}"></i></a>`;
+});
+
+Handlebars.registerHelper('deactivateItem', function(item) {
+    if (!item.system.status || item.system.status === MgT2Item.CARRIED || item.system.status === MgT2Item.OWNED) {
+        return "";
+    }
+
+    let title="Deactivate item";
+    let icon="fa-suitcase";
+    if (item.type === "armour") {
+        title = "Remove armour";
+    } else if (item.type === "weapon") {
+        title = "Put away weapon";
+    }
+    return `<a class="item-control item-deactivate" title="${title}"><i class="fas ${icon}"></i></a>`;
+});
+
+Handlebars.registerHelper('storeItem', function(item) {
+    if (!item.system.status || item.system.status === MgT2Item.OWNED) {
+        return "";
+    }
+    let title="Store item";
+    let icon="fa-arrow-down-to-square";
+    return `<a class="item-control item-store" title="${title}"><i class="fas ${icon}"></i></a>`;
+});
+
+Handlebars.registerHelper('carryItem', function(item) {
+    if (item.system.status === MgT2Item.CARRIED) {
+        return "";
+    }
+    let title="Carry item";
+    let icon="fa-suitcase";
+    return `<a class="item-control item-carry" title="${title}"><i class="fas ${icon}"></i></a>`;
+});
+
+
 Handlebars.registerHelper('isTrained', function(skill) {
     if (skill) {
         if (skill.trained) {
@@ -572,6 +657,11 @@ Handlebars.registerHelper('augmentedSkill', function(skill, spec) {
     return html;
 });
 
+/**
+ * Outputs the list of CSS classes to be used by the skill block.
+ * Reads the system settings to determine the number of columns to use and
+ * whether we are row first or column first.
+ */
 Handlebars.registerHelper('skillListClasses', function() {
     let classes="skillList";
     let columns = parseInt(game.settings.get("mgt2", "skillColumns"));
@@ -608,8 +698,8 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
 
     // Don't show a skill if it requires a characteristic that
     // isn't being used by this actor.
-    if (skill.requires && data.characteristics && data.characteristics[skill.requires]) {
-        if (!data.characteristics[skill.requires].show) {
+    if (skill.requires && !isCreature) {
+        if (!data.characteristics[skill.requires] || !data.characteristics[skill.requires].show) {
             return "";
         }
     }
@@ -764,13 +854,13 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
  * Given an active effect, display the key in a readable form.
  */
 Handlebars.registerHelper('effect', function(key) {
-    if (key && key.startsWith("data.characteristics")) {
+    if (key && key.startsWith("system.characteristics")) {
         key = key.replaceAll(/[a-z.]/g, "");
         return key;
-    } else if (key && key.startsWith("data.skills")) {
+    } else if (key && key.startsWith("system.skills")) {
         let skills = game.system.template.Actor.templates.skills.skills;
         key = key.replaceAll(/\.[a-z]*$/g, "");
-        key = key.replaceAll(/data.skills./g, "");
+        key = key.replaceAll(/system.skills./g, "");
         let skill = key.replaceAll(/\..*/g, "");
         if (key.indexOf(".specialities") > -1) {
             let spec = key.replaceAll(/.*\./g, "");

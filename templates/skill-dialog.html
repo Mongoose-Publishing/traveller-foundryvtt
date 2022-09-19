@@ -1,6 +1,8 @@
 <form class="flexcol skilldialog">
 
     <div class="shadow">
+        <span class="edit-skill">Edit</span>
+
         <h3 class="skill-dialog-title">
             {{#if chaOnly}}
                 {{characteristic}}
@@ -33,6 +35,7 @@
                 {{/if}}
             {{/if}}
         </h3>
+
 
         {{#if showCha}}
             <input type="checkbox" name="remember" class="skillDialogRemember" value="false"/>

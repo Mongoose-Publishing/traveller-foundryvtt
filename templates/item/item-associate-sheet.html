@@ -1,0 +1,50 @@
+{{!-- This template is a fallback for when items don't have more specific templates. --}}
+{{!-- Generally, you'll want to make more specific templates when possible. --}}
+<form class="{{cssClass}} item" autocomplete="off">
+
+    <section class="shadow">
+        <h1 class="charname">
+            <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+        </h1>
+    </section>
+
+    <section class="shadow">
+        <div class="resources grid grid-3col flex-group-center">
+            <div class="resource">
+                <label for="system.associate.relationship" class="resource-label">{{localize 'MGT2.History.Relationship'}}</label>
+                <br/>
+                <select name="system.associate.relationship">
+                    {{#select system.associate.relationship}}
+                        <option value="contact">{{localize 'MGT2.History.Relation.contact'}}</option>
+                        <option value="ally">{{localize 'MGT2.History.Relation.ally'}}</option>
+                        <option value="rival">{{localize 'MGT2.History.Relation.rival'}}</option>
+                        <option value="enemy">{{localize 'MGT2.History.Relation.enemy'}}</option>
+                    {{/select}}
+                </select>
+            </div>
+            <div class="resource">
+                <label for="system.associate.affinity" class="resource-label">{{localize 'MGT2.History.Relation.Affinity'}}</label>
+                <input type="text" name="system.associate.affinity" value="{{system.associate.affinity}}" data-dtype="Number"/>
+            </div>
+            <div class="resource">
+                <label for="system.associate.enmity" class="resource-label">{{localize 'MGT2.History.Relation.Enmity'}}</label>
+                <input type="text" name="system.associate.enmity" value="{{system.associate.enmity}}" data-dtype="Number"/>
+            </div>
+
+            <div class="resource">
+                <label for="system.associate.power" class="resource-label">{{localize 'MGT2.History.Relation.Power'}}</label>
+                <input type="text" name="system.associate.power" value="{{system.associate.power}}" data-dtype="Number"/>
+            </div>
+            <div class="resource">
+                <label for="system.associate.influence" class="resource-label">{{localize 'MGT2.History.Relation.Influence'}}</label>
+                <input type="text" name="system.associate.influence" value="{{system.associate.influence}}" data-dtype="Number"/>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="shadow">
+        {{editor enrichedDescription target="system.description" button=true editable=editable}}
+    </section>
+
+</form>

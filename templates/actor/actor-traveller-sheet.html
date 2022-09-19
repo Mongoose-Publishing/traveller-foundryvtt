@@ -9,10 +9,12 @@
                 <label for="data.hits.max" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
                 <div class="grid grid-3col inset">
                     {{#each data.damage as |dmg key|}}
-                    <div class="resource flex-group-center">
-                        <label for="data.damage.{{key}}" class="resource-label">{{key}}</label>
-                        <input type="text" name="data.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
-                    </div>
+                        {{#if (isChaShown ../data key)}}
+                            <div class="resource flex-group-center">
+                                <label for="data.damage.{{key}}" class="resource-label">{{key}}</label>
+                                <input type="text" name="data.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
+                            </div>
+                        {{/if}}
                     {{/each}}
                 </div>
             </div>
@@ -47,19 +49,21 @@
                 <div class="inset">
                     <ol class="items-list">
                         {{#each items as |item id|}}
-                        {{#if item.data.weapon}}
-                        <li class="item" data-item-id="{{item._id}}" title="{{item.data.weapon.damage}}">
-                            <a class="rollable" data-roll-type="item">
-                                <img src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
-                            </a>
-                            <label>{{item.name}}</label>
-                            <div class="item-controls">
-                                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                            </div>
-                        </li>
-                        <br/>
-                        {{/if}}
+                            {{#if item.system.weapon}}
+                                {{#if (isItemEquipped item)}}
+                                    <li class="item" data-item-id="{{item._id}}" title="{{item.system.weapon.damage}}">
+                                        <a class="rollable" data-roll-type="item">
+                                            <img src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
+                                        </a>
+                                        <label>{{item.name}}</label>
+                                        <div class="item-controls">
+                                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </li>
+                                    <br/>
+                                {{/if}}
+                            {{/if}}
                         {{/each}}
                     </ol>
                     <a class="item-control item-create" title="Create attack" data-type="weapon"
@@ -134,6 +138,10 @@
                     <label for="data.initiative" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
                     <input class="field-value" type="text" name="data.initiative" value="{{data.initiative}}" data-dtype="Number"/>
                 </div>
+                <div class="resource flex-group-center">
+                    <label for="data.rads" class="field-label">{{localize 'MGT2.TravellerSheet.Rads'}}</label>
+                    <input class="field-value" type="text" name="data.rads" value="{{data.rads}}" data-dtype="Number"/>
+                </div>
             </div>
 
             <div class="shadow">
@@ -142,6 +150,7 @@
                     <a class="item" data-tab="items">{{localize 'MGT2.TravellerSheet.Equipment'}}</a>
                     <a class="item" data-tab="finance">{{localize 'MGT2.TravellerSheet.Finance'}}</a>
                     <a class="item" data-tab="biography">{{localize 'MGT2.TravellerSheet.Biography'}}</a>
+                    <a class="item" data-tab="history">{{localize 'MGT2.TravellerSheet.History'}}</a>
                     <a class="item" data-tab="settings">{{localize 'MGT2.TravellerSheet.Settings'}}</a>
                 </nav>
 
@@ -154,24 +163,28 @@
                     <div class="tab finance" data-group="primary" data-tab="finance">
                         <div class="grid grid-3col">
                             <div>
-                                <label class="profile-label">Cash (Cr)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.Cash'}}</label>
                                 <input class="credits" name="data.finance.cash" type="text" value="{{data.finance.cash}}"/>
                             </div>
                             <div>
-                                <label class="profile-label">Pension (Cr/Year)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.Pension'}}</label>
                                 <input class="credits"  name="data.finance.pension" type="text" value="{{data.finance.pension}}"/>
                             </div>
                             <div>
-                                <label class="profile-label">Other Income (Cr/Year)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.OtherIncome'}}</label>
                                 <input  class="credits" name="data.finance.otherIncome" type="text" value="{{data.finance.otherIncome}}"/>
                             </div>
                             <div>
-                                <label class="profile-label">Medical Debt (Cr)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.MedicalDebt'}}</label>
                                 <input  class="credits" name="data.finance.medicalDebt" type="text" value="{{data.finance.medicalDebt}}"/>
                             </div>
                             <div>
-                                <label class="profile-label">Mortgage (Cr/Month)</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.Mortgage'}}</label>
                                 <input  class="credits" name="data.finance.mortgage" type="text" value="{{data.finance.mortgage}}"/>
+                            </div>
+                            <div>
+                                <label class="profile-label">Liv{{localize 'MGT2.Finance.LivingCosts'}}</label>
+                                <input  class="credits" name="data.finance.livingCosts" type="text" value="{{data.finance.livingCosts}}"/>
                             </div>
                         </div>
 
@@ -204,8 +217,16 @@
                         </div>
 
                         <section class="bio-box">
-                            {{editor content=data.description target="data.description" rollData=rollData
-                            button=true owner=owner editable=editable}}
+                            {{editor
+                                enrichedDescription target="system.description"
+                                button=true editable=editable}}
+                        </section>
+
+                    </div>
+
+                    <div class="tab history" data-group="primary" data-tab="history">
+                        <section>
+                            {{> "systems/mgt2/templates/actor/parts/actor-terms.html"}}
                         </section>
                     </div>
 
@@ -227,7 +248,6 @@
                             </select>
 
                             <button name="addNewSkill" class="addNewSkill">Add New Skill</button>
-
                         </section>
                         <section class="resources grid grid-3col">
                             {{#each data.characteristics as | char key | }}
