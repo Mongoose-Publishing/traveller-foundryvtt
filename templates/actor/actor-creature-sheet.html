@@ -29,8 +29,8 @@
 
                     <ol class="items-list">
                         {{#each items as |item id|}}
-                        {{#if item.data.armour}}
-                        <li class="item" data-item-id="{{item._id}}" title="{{item.data.armour.protection}}">
+                        {{#if item.system.armour}}
+                        <li class="item" data-item-id="{{item._id}}" title="{{item.system.armour.protection}}">
                             <a class="rollable" data-roll-type="item">
                                 <img src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
                             </a>
@@ -57,8 +57,8 @@
                 <div class="inset">
                     <ol class="items-list">
                         {{#each items as |item id|}}
-                            {{#if item.data.weapon}}
-                            <li class="item" data-item-id="{{item._id}}" title="{{item.data.weapon.damage}}">
+                            {{#if item.system.weapon}}
+                            <li class="item" data-item-id="{{item._id}}" title="{{item.system.weapon.damage}}">
                                 <a class="rollable" data-roll-type="item">
                                     <img src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
                                 </a>
@@ -122,8 +122,9 @@
             </div>
 
             <section class="description shadow">
-                {{editor content=data.description target="data.description"
-                         rollData=rollData button=true owner=owner editable=editable}}
+                {{editor
+                    enrichedDescription target="system.description"
+                    button=true editable=editable}}
             </section>
 
         </div>

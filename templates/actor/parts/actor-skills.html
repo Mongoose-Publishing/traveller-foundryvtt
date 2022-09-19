@@ -7,6 +7,12 @@
         <input class="trained" type="checkbox" name="data.settings.onlyBackground"
                {{checked data.settings.onlyBackground}} data-dtype="Boolean" />
         <label for="data.settings.onlyBackground">Background only</label>
+        {{#if data.characteristics}}
+        <b>|</b>
+        <input class="trained" type="text" name="data.physicalDM" value="{{data.physicalDM}}" readonly/>
+        <label for="data.physicalDM">Physical DM</label>
+        {{/if}}
+
         {{#if data.settings.hideUntrained}}
             <label class="skill-label rollable roll-untrained" data-rolltype="skill" data-skill="untrained" data-roll="2d6">Roll Untrained</label>
         {{/if}}

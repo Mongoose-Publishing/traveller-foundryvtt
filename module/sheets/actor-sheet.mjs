@@ -111,6 +111,7 @@ export class MgT2ActorSheet extends ActorSheet {
         const associates = [];
 
         let weight = 0;
+        let skillNeeded = -3;
 
         // Iterate through items, allocating to containers
         for (let i of context.items) {
@@ -122,6 +123,9 @@ export class MgT2ActorSheet extends ActorSheet {
                 if (i.type == "armour") {
                     if (!i.system.armour.powered) {
                         weight += parseInt(i.system.weight / 4);
+                    }
+                    if (i.system.armour.skill && parseInt(i.system.armour.skill) > skillNeeded) {
+                        skillNeeded = parseInt(i.system.armour.skill);
                     }
                 } else {
                     weight += parseInt(i.system.weight);
@@ -144,6 +148,22 @@ export class MgT2ActorSheet extends ActorSheet {
         }
 
         this.actor.system.weightCarried = weight;
+        this.actor.system.physicalDM = 0;
+        if (weight > this.actor.system.heavyLoad) {
+            this.actor.system.physicalDM = -2;
+        }
+        if (skillNeeded >= 0) {
+            let vaccSkill = -3;
+            let vs = this.actor.system.skills.vaccsuit;
+            if (vs && vs.trained) {
+                vaccSkill = parseInt(vs.value);
+                if (vaccSkill < skillNeeded) {
+                    this.actor.system.physicalDM -= (skillNeeded - vaccSkill);
+                }
+            } else {
+                this.actor.system.physicalDM += vaccSkill;
+            }
+        }
 
         // Assign and return
         context.gear = gear;
