@@ -341,6 +341,11 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         cha = null;
     }
     if (cha) {
+        if (cha === "STR" || cha === "DEX" || cha === "END") {
+            if (data.physicalDM) {
+                dm += parseInt(data.physicalDM);
+            }
+        }
         chaDm = data.characteristics[cha].dm;
         if (data.characteristics[cha].augdm) {
             chaDm += parseInt(data.characteristics[cha].augdm);

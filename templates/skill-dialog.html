@@ -44,6 +44,12 @@
 
         {{{augmentedSkill skill spec}}}
 
+        {{#if physicalDM includeZero=false}}
+            <p>
+                Physical DM {{physicalDM}}
+            </p>
+        {{/if}}
+
         <div class="grid grid-4col">
             <div class="skill-boon">
                 <label for="dicetype" class="skillDialogLabel">Roll Type</label>

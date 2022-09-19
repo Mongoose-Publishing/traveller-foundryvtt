@@ -30,6 +30,8 @@ export class MgT2SkillDialog extends Application {
         this.expert = 0;
         this.augment = 0;
         this.augdm = 0;
+        this.penalty = 0;
+
         if (cha && data.characteristics && data.characteristics[cha]) {
             this.characteristic = data.characteristics[cha];
             if (!skill) {
@@ -69,11 +71,10 @@ export class MgT2SkillDialog extends Application {
         if (this.spec) {
             this.options.title += " (" + this.spec.label + ")";
         }
+        this.penalty = data.physicalDM;
     }
 
     getData() {
-        console.log("getData: Characteristic is " + this.cha);
-        console.log("getData: Type is " + this.actor.type);
         return {
             "actor": this.actor,
             "data": this.data,
@@ -84,7 +85,9 @@ export class MgT2SkillDialog extends Application {
             "chaOnly": this.chaOnly,
             "dm": 0,
             "dicetype": "normal",
-            "characteristic": this.cha        }
+            "physicalDM": this.penalty,
+            "characteristic": this.cha
+        }
     }
 
     activateListeners(html) {
