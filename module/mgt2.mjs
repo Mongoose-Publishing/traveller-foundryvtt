@@ -27,8 +27,7 @@ Hooks.once('init', async function() {
   // accessible in global contexts.
     game.mgt2 = {
         MgT2Actor,
-        MgT2Item,
-        rollSkillMacro
+        MgT2Item
     };
 
     game.settings.register('mgt2', 'verboseSkillRolls', {
@@ -543,8 +542,8 @@ Handlebars.registerHelper('rollTypeActive', function(data, type) {
     return "";
 });
 
-Handlebars.registerHelper('isItemActive', function(item) {
-    if (item.system.status === MgT2Item.WORN || item.system.status === MgT2Item.ACTIVE) {
+Handlebars.registerHelper('isItemEquipped', function(item) {
+    if (item.system.status === MgT2Item.EQUIPPED) {
         return true;
     }
     return false;
@@ -558,11 +557,8 @@ Handlebars.registerHelper('isItemCarried', function(item) {
 });
 
 Handlebars.registerHelper('isItemOwned', function(item) {
-    if (item.system.status === MgT2Item.ACTIVE || item.system.status === MgT2Item.WORN || item.system.status === MgT2Item.CARRIED) {
+    if (item.system.status === MgT2Item.EQUIPPED || item.system.status === MgT2Item.CARRIED) {
         return false;
-    }
-    if (item.system.status === MgT2Item.OWNED) {
-        return true;
     }
     if (item.type === "term" || item.type === "associate") {
         return false;
@@ -571,8 +567,8 @@ Handlebars.registerHelper('isItemOwned', function(item) {
 });
 
 
-Handlebars.registerHelper('activateItem', function(item) {
-    if (item.system.status === MgT2Item.WORN || item.system.status === MgT2Item.ACTIVE) {
+Handlebars.registerHelper('equipItem', function(item) {
+    if (item.system.status === MgT2Item.EQUIPPED) {
         return "";
     }
 

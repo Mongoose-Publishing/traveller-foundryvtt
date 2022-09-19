@@ -116,25 +116,9 @@ export class MgT2ActorSheet extends ActorSheet {
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
 
-            if (i.system.status === MgT2Item.ACTIVE) {
-                // Work out if augments are active or not.
-                console.log(i);
-                for (const effect of i.effects) {
-                    effect.disabled = false;
-                    effect.transfer = true;
-                }
-            } else {
-                console.log(i);
-                for (const effect of i.effects) {
-                    console.log("Disabling effect for " + i.name);
-                    effect.disabled = true;
-                    effect.transfer = false;
-                }
-            }
-
             if (i.system.status === MgT2Item.CARRIED) {
                 weight += parseInt(i.system.weight);
-            } else if (i.system.status === MgT2Item.ACTIVE) {
+            } else if (i.system.status === MgT2Item.EQUIPPED) {
                 if (i.type == "armour") {
                     if (!i.system.armour.powered) {
                         weight += parseInt(i.system.weight / 4);
@@ -175,9 +159,8 @@ export class MgT2ActorSheet extends ActorSheet {
         const itemData = item.system;
 
         if (item.type === "armour") {
-            console.log("THIS IS ARMOUR");
             let form = itemData.armour.form;
-            if (status === MgT2Item.ACTIVE) {
+            if (status === MgT2Item.EQUIPPED) {
                 for (let i of actor.items) {
                     if (i.system.armour && i.system.armour.worn && i.system.armour.form === form) {
                         i.system.armour.worn = 0;
@@ -192,6 +175,8 @@ export class MgT2ActorSheet extends ActorSheet {
             item.update({ "system.armour.worn": itemData.armour.worn });
             this._calculateArmour(actor);
         }
+        const isActive = (status === MgT2Item.EQUIPPED);
+
         itemData.status = status;
         item.update({ "system.status": status });
     }
@@ -291,7 +276,7 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.item-activate').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
-            this._setItemStatus(this.actor, item, MgT2Item.ACTIVE);
+            this._setItemStatus(this.actor, item, MgT2Item.EQUIPPED);
         });
         html.find('.item-deactivate').click(ev => {
             const li = $(ev.currentTarget).parents(".item");

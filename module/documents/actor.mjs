@@ -1,3 +1,5 @@
+import { MgT2Item } from "../documents/item.mjs";
+
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -13,11 +15,27 @@ export class MgT2Actor extends Actor {
     super.prepareData();
   }
 
-  /** @override */
-  prepareBaseData() {
-    // Data modifications in this step occur before processing embedded
-    // documents or derived data.
-  }
+    /** @override */
+    prepareBaseData() {
+        // Data modifications in this step occur before processing embedded
+        // documents or derived data.
+        console.log(`prepareBaseData: [${this.name}]`);
+
+        const actorData = this;
+
+        for (const effect of this.effects) {
+            const source = effect._source._id;
+            const origin = effect.origin.replaceAll(/.*Item./g, "");
+            const item = this.items.get(origin);
+            if (item) {
+                if (item.system.status === MgT2Item.EQUIPPED) {
+                    effect.isSuppressed = false;
+                } else {
+                    effect.isSuppressed = true;
+                }
+            }
+        }
+    }
 
     /**
      * @override
@@ -30,10 +48,9 @@ export class MgT2Actor extends Actor {
      */
     prepareDerivedData() {
         const actorData = this;
-        const data = actorData;
         const flags = actorData.flags.traveller || {};
 
-        console.log("preapreDerivedData:");
+        console.log("prepareDerivedData:");
         console.log(actorData);
 
         // Make separate methods for each Actor type (traveller, npc, etc.) to keep
@@ -66,18 +83,19 @@ export class MgT2Actor extends Actor {
      * @private
      */
   _prepareEffects(actorData) {
+      return;
     console.log("_prepareEffects: " + actorData.name);
     console.log(actorData);
 
     for (const effect of actorData.effects) {
-        console.log("Has effect");
-        console.log(effect);
+        //console.log("Has effect");
+        //console.log(effect);
         for (const change of effect.data.changes) {
             let key = change.key;
             let mode = parseInt(change.mode);
             let value = parseInt(change.value);
 
-            console.log(`[${key}] [${mode}] [${value}]`);
+            //console.log(`[${key}] [${mode}] [${value}]`);
 /*
             if (key && key.length === 3 && key.toUpperCase() === key) {
                 console.log("Characteristic modifier");
@@ -140,7 +158,6 @@ export class MgT2Actor extends Actor {
         }
         if (data.skills) {
             if (data.skills['athletics'] && data.skills['athletics'].trained) {
-                console.log("has athletics");
                 const ath = data.skills['athletics'];
                 if (ath.specialities && ath.specialities.strength) {
                     heavyLoad += parseInt(ath.specialities.strength.value);

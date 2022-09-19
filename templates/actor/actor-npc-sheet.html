@@ -45,8 +45,8 @@
                     <ol class="items-list">
                         {{#each items as |item id|}}
                             {{#if item.system.weapon}}
-                                {{#if (isItemActive item)}}
-                                    <li class="item" data-item-id="{{item._id}}" title="{{item.data.weapon.damage}}">
+                                {{#if (isItemEquipped item)}}
+                                    <li class="item" data-item-id="{{item._id}}" title="{{item.system.weapon.damage}}">
                                         <a class="rollable" data-roll-type="item">
                                             <img src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
                                         </a>
@@ -171,8 +171,9 @@
                         </div>
 
                         <section class="bio-box">
-                            {{editor content=data.description target="data.description" rollData=rollData
-                                    button=true owner=owner editable=editable}}
+                            {{editor
+                                enrichedDescription target="system.description"
+                                button=true editable=editable}}
                         </section>
                     </div>
 

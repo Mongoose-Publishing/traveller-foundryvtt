@@ -22,7 +22,7 @@
 
 <ol class="items-list actor-items grid grid-3col">
     {{#each armour as |item id|}}
-        {{#if (isItemActive item)}}
+        {{#if (isItemEquipped item)}}
             <li class="item item-armour" data-item-id="{{item._id}}">
                 <img src="{{item.img}}"/>
                 <h4>{{item.name}}</h4>
@@ -31,7 +31,7 @@
                 {{/if}}
                 <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
                 <div class="item-controls">
-                    {{{deactivateItem item}}}
+                    {{{carryItem item}}}
                     {{{storeItem item}}}
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -40,7 +40,7 @@
         {{/if}}
     {{/each}}
     {{#each weapons as |item id|}}
-        {{#if (isItemActive item)}}
+        {{#if (isItemEquipped item)}}
             <li class="item item-weapon" data-item-id="{{item._id}}">
                 <img src="{{item.img}}"/>
                 <h4>{{item.name}}</h4>
@@ -49,7 +49,7 @@
                 {{/if}}
                 <span>{{item.system.weapon.damage}}</span>
                 <div class="item-controls">
-                    {{{deactivateItem item}}}
+                    {{{carryItem item}}}
                     {{{storeItem item}}}
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -58,7 +58,7 @@
         {{/if}}
     {{/each}}
     {{#each gear as |item id|}}
-        {{#if (isItemActive item)}}
+        {{#if (isItemEquipped item)}}
             <li class="item" data-item-id="{{item._id}}">
                 <img src="{{item.img}}"/>
                 <h4>{{item.name}}</h4>
@@ -72,7 +72,7 @@
                     <span>Cr{{item.system.cost}}</span>
                 {{/if}}
                 <div class="item-controls">
-                    {{{activateItem item}}}
+                    {{{equipItem item}}}
                     {{{carryItem item}}}
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -96,7 +96,7 @@
                 {{/if}}
                 <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
                 <div class="item-controls">
-                    {{{activateItem item}}}
+                    {{{equipItem item}}}
                     {{{storeItem item}}}
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -114,7 +114,7 @@
                 {{/if}}
                 <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
                 <div class="item-controls">
-                    {{{activateItem item}}}
+                    {{{equipItem item}}}
                     {{{storeItem item}}}
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -137,7 +137,7 @@
                 <span>Cr{{item.system.cost}}</span>
                 {{/if}}
                 <div class="item-controls">
-                    {{{activateItem item}}}
+                    {{{equipItem item}}}
                     {{{carryItem item}}}
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -161,7 +161,7 @@
                 {{/if}}
                 <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
                 <div class="item-controls">
-                    {{{activateItem item}}}
+                    {{{equipItem item}}}
                     {{{carryItem item}}}
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -179,7 +179,7 @@
                 {{/if}}
                 <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
                 <div class="item-controls">
-                    {{{activateItem item}}}
+                    {{{equipItem item}}}
                     {{{carryItem item}}}
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -202,7 +202,7 @@
                     <span>Cr{{item.system.cost}}</span>
                 {{/if}}
                 <div class="item-controls">
-                    {{{activateItem item}}}
+                    {{{equipItem item}}}
                     {{{carryItem item}}}
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
