@@ -27,7 +27,8 @@ Hooks.once('init', async function() {
   // accessible in global contexts.
     game.mgt2 = {
         MgT2Actor,
-        MgT2Item
+        MgT2Item,
+        rollSkillMacro
     };
 
     game.settings.register('mgt2', 'verboseSkillRolls', {
