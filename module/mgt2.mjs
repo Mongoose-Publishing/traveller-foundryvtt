@@ -185,6 +185,9 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     } else if (message.indexOf("/showskills") === 0) {
         Tools.showSkills(chatData);
         return false;
+    } else if (message.indexOf("/renumber") === 0) {
+        Tools.renumber();
+        return false;
     }
 
     return true;

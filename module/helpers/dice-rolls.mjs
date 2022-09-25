@@ -203,7 +203,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
             content += ` AP ${getTraitValue(traits, "ap")}`;
         }
         if (hasTrait(traits, "radiation")) {
-            const radRoll = new Roll("2D6 * 20", actor.getRollData()).evaluate({async: false});
+            const radRoll = new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate({async: false});
             content += `<br/><b>Radiation:</b> ${radRoll.total} Rads ☢`;
             if (destructive) {
                 content += ` (10m)`;

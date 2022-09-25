@@ -122,6 +122,61 @@ Tools.getSelected = function() {
     }
 }
 
+Tools.renumber = function() {
+    const selected = Tools.getSelected();
+
+    console.log("Tools.rename:");
+
+    if (selected.length === 0) {
+        ui.notifications.error("No tokens selected");
+        return;
+    }
+    const allTokens = selected[0].scene.tokens;
+
+    let number = 1;
+    for (let token of selected) {
+        if (!token.owner) {
+            // Don't have permission to update token.
+            continue;
+        }
+        console.log("Renaming " + token.name);
+        let baseName = token.name;
+        if (baseName.indexOf("#") > -1) {
+            let count = 0;
+            for (let t of allTokens) {
+                if (baseName === t.name && !count) {
+                    count++;
+                } else if (baseName === t.name) {
+                    // We have a duplicate.
+                    baseName = token.name.replaceAll(/ *#.*/g, "");
+                    console.log("Change [" + token.name + "] [" + baseName + "]");
+                    count++;
+                    break;
+                }
+            }
+            if (count < 2) {
+                continue;
+            }
+        }
+        let done = false;
+        while (!done) {
+            name = baseName + " #" + number++;
+            done = true;
+            for (let t of allTokens) {
+                if (name === t.name) {
+                    console.log("Found a collision with " + t.name);
+                    done = false;
+                    break;
+                }
+            }
+        }
+        console.log("Renamed to " + token.name);
+        token.document.update({ "name": name });
+
+    }
+
+}
+
 
 
 

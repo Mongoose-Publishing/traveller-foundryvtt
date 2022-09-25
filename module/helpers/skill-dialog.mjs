@@ -59,9 +59,17 @@ export class MgT2SkillDialog extends Application {
                     this.specId = spec;
                     this.spec = data.skills[skill].specialities[spec];
                     this.value = this.spec.value;
+                    if (this.spec.expert) {
+                        this.expert = parseInt(this.spec.expert);
+                    }
                 }
             } else {
                 this.value = data.skills["jackofalltrades"].value - 3;
+                if (spec && data.skills[skill].specialities[spec].expert) {
+                    this.specId = spec;
+                    this.spec = data.skills[skill].specialities[spec];
+                    this.expert = parseInt(this.spec.expert);
+                }
             }
             this.options.title = this.skill.label;
         } else if (cha) {
