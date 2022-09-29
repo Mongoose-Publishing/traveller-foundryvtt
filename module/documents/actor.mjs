@@ -114,7 +114,6 @@ export class MgT2Actor extends Actor {
         }
         data.heavyLoad = heavyLoad;
         data.maxLoad = heavyLoad * 2;
-
     }
 
     /**
@@ -184,7 +183,7 @@ export class MgT2Actor extends Actor {
             //data.hits.value = maxHits;
             actorData.hits.max = maxHits;
         }
-        this._prepareEncumbrance(actorData);
+        this._prepareEncumbrance(actor);
     }
 
     _prepareCreatureData(actorData) {
