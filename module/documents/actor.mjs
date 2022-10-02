@@ -116,14 +116,24 @@ export class MgT2Actor extends Actor {
         data.maxLoad = heavyLoad * 2;
     }
 
+    _prepareInitiative(actorData) {
+        if (!actorData.system) {
+            return;
+        }
+        const dex = parseInt(actorData.system.characteristics["DEX"].dm);
+        const int = parseInt(actorData.system.characteristics["INT"].dm);
+
+        actorData.system.initiative = Math.max(int, dex);
+    }
+
     /**
      * Prepare Character type specific data
      */
-    _prepareTravellerData(actorData) {
-        if (actorData.type !== 'traveller') return;
+    _prepareTravellerData(actor) {
+        if (actor.type !== 'traveller') return;
 
         // Make modifications to data here. For example:
-        const data = actorData.system;
+        const data = actor.system;
 
         for (const char in data.characteristics) {
             let value = data.characteristics[char].value;
@@ -156,7 +166,8 @@ export class MgT2Actor extends Actor {
             data.hits.value = hits;
             data.hits.max = maxHits;
         }
-        this._prepareEncumbrance(actorData);
+        this._prepareEncumbrance(actor);
+        this._prepareInitiative(actor);
     }
 
     _prepareNpcData(actor) {
@@ -184,6 +195,7 @@ export class MgT2Actor extends Actor {
             actorData.hits.max = maxHits;
         }
         this._prepareEncumbrance(actor);
+        this._prepareInitiative(actor);
     }
 
     _prepareCreatureData(actorData) {

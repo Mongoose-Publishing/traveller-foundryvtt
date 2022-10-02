@@ -34,7 +34,7 @@ export function getTraitValue(traits, trait) {
     return 0;
 }
 
-export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption) {
+export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry) {
     const   data = actor?actor.system:null;
     let     content = "Attack";
     let     melee = true;
@@ -131,6 +131,24 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     content += '</div>';
     // End of header.
 
+    if (actor && actor.system.characteristics) {
+        let str = parseInt(actor.system["STR"]);
+        let bulky = 0;
+        if (hasTrait(traits, "verybulky")) {
+            if (str < 2) {
+                bulky = (2 - str);
+            }
+        } else if (hasTrait(traits, "bulky")) {
+            if (str < 1) {
+                bulky =  (1 - str);
+            }
+        }
+        if (bulky > 0) {
+            content += `<b>Bulky Weapon:</b> -${bulky}`;
+            dm -= bulky;
+        }
+    }
+
     if (dm && parseInt(dm) !== 0) {
         dice += " + " + parseInt(dm);
     }
@@ -188,31 +206,39 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
             options += " " + type;
         }
 
-        content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;
-        content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}" class="damage-button">Apply</button>`;
-        if (actor) {
-            content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
-        } else {
-            content += "<br/>";
-        }
-        content += `<b>Damage Roll:</b> ${damageTotal}`;
-        if (!destructive && effect > 0) {
-            content += ` + ${effect} (${damageTotal + effect})`;
-        }
-        if (hasTrait(traits, "ap")) {
-            content += ` AP ${getTraitValue(traits, "ap")}`;
-        }
-        if (hasTrait(traits, "radiation")) {
-            const radRoll = new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate({async: false});
-            content += `<br/><b>Radiation:</b> ${radRoll.total} Rads ☢`;
-            if (destructive) {
-                content += ` (10m)`;
+        if (isParry) {
+            if (actor) {
+                content += `<b>Parry Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
+            } else {
+                content += "<br/>";
             }
+        } else {
+            content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;
+            content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}" class="damage-button">Apply</button>`;
+            if (actor) {
+                content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
+            } else {
+                content += "<br/>";
+            }
+            content += `<b>Damage Roll:</b> ${damageTotal}`;
+            if (!destructive && effect > 0) {
+                content += ` + ${effect} (${damageTotal + effect})`;
+            }
+            if (hasTrait(traits, "ap")) {
+                content += ` AP ${getTraitValue(traits, "ap")}`;
+            }
+            if (hasTrait(traits, "radiation")) {
+                const radRoll = new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate({async: false});
+                content += `<br/><b>Radiation:</b> ${radRoll.total} Rads ☢`;
+                if (destructive) {
+                    content += ` (10m)`;
+                }
+            }
+            if (hasTrait(traits, "blast")) {
+                content += `<br/><b>Blast Radius:</b> ${getTraitValue(traits, "blast")}m`;
+            }
+            content += `</div>`;
         }
-        if (hasTrait(traits, "blast")) {
-            content += `<br/><b>Blast Radius:</b> ${getTraitValue(traits, "blast")}m`;
-        }
-        content += `</div>`;
     }
 
     if (!rangeBand && baseRange > 0) {
@@ -381,7 +407,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             value = parseInt(skill.value);
             if (skill.expert && (cha === "INT" || cha === "EDU")) {
                 if (parseInt(skill.expert) > value) {
-                    value = parseInt(skill.expert);
+                    value = parseInt(skill.expert) - 1;
                 } else {
                     value += 1;
                 }
@@ -397,7 +423,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                 specialityCheck = true;
                 if (speciality.expert) {
                     if (parseInt(speciality.expert) > value) {
-                        value = parseInt(speciality.expert);
+                        value = parseInt(speciality.expert) - 1;
                     } else {
                         value += 1;
                     }
@@ -407,10 +433,10 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                 }
             }
         } else if (skill.expert && parseInt(skill.expert) > 0 && (cha === "INT" || cha === "EDU")) {
-            value = parseInt(skill.expert - 1);
+            value = parseInt(skill.expert) - 1;
             notes = "Expert Software/" + value;
         } else if (speciality && speciality.expert && (cha === "INT" || cha === "EDU")) {
-            value = speciality.expert;
+            value = parseInt(speciality.expert) - 1;
             notes = "Expert Software";
         } else {
             untrainedCheck = true;

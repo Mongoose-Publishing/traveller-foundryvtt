@@ -54,6 +54,8 @@ export class MgT2AttackDialog extends Application {
             this.shortRange = parseInt(this.range / 4);
             this.longRange = parseInt(this.range * 2);
             this.extremeRange = parseInt(this.range * 4);
+        } else {
+            this.parryBonus = weapon.system.weapon.parryBonus;
         }
 
         this.options.title = this.weapon.name;
@@ -80,13 +82,16 @@ export class MgT2AttackDialog extends Application {
             "skill": this.data.skills[this.skill].label,
             "speciality": this.data.skills[this.skill].specialities[this.speciality].label,
             "dicetype": "normal",
+            "parryBonus": this.parryBonus
         }
     }
 
     activateListeners(html) {
         super.activateListeners(html);
-        const roll = html.find("button[class='attackRoll']");
-        roll.on("click", event => this.onRollClick(event, html));
+        const attack = html.find("button[class='attackRoll']");
+        attack.on("click", event => this.onRollClick(event, html));
+        const parry = html.find("button[class='parryRoll']");
+        parry.on("click", event => this.onParryClick(event, html));
     }
 
     async onRollClick(event, html) {
@@ -105,6 +110,21 @@ export class MgT2AttackDialog extends Application {
         }
 
         rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM, autoOption);
+
+        this.close();
+    }
+
+    async onParryClick(event, html) {
+        event.preventDefault();
+        console.log("onParryClick:");
+
+        let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
+        if (this.parryBonus) {
+            dm += this.parryBonus;
+        }
+        let rollType = html.find(".skillDialogRollType")[0].value;
+
+        rollAttack(this.actor, this.weapon, this.score, dm, rollType, null, null, true);
 
         this.close();
     }

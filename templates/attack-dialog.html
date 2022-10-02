@@ -57,6 +57,9 @@
     </div>
 
     <footer class="sheet-footer flexrow">
+        {{#if parryBonus}}
+            <button type="submit" name="submit" class="parryRoll">Parry (+{{parryBonus}})</button>
+        {{/if}}
         <button type="submit" name="submit" class="attackRoll">Attack</button>
     </footer>
 
