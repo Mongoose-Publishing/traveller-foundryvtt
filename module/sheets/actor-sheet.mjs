@@ -120,8 +120,8 @@ export class MgT2ActorSheet extends ActorSheet {
             if (i.system.status === MgT2Item.CARRIED) {
                 weight += parseInt(i.system.weight);
             } else if (i.system.status === MgT2Item.EQUIPPED) {
-                if (i.type == "armour") {
-                    if (!i.system.armour.powered) {
+                if (i.type === "armour") {
+                    if (!i.system.armour.powered || parseInt(i.system.armour.powered) === 0) {
                         weight += parseInt(i.system.weight / 4);
                     }
                     if (i.system.armour.skill && parseInt(i.system.armour.skill) > skillNeeded) {

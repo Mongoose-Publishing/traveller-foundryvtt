@@ -56,6 +56,9 @@ export class MgT2AttackDialog extends Application {
             this.extremeRange = parseInt(this.range * 4);
         } else {
             this.parryBonus = weapon.system.weapon.parryBonus;
+            if (!this.parryBonus) {
+                this.parryBonus = 0;
+            }
         }
 
         this.options.title = this.weapon.name;
