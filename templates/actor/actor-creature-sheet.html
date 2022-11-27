@@ -6,12 +6,13 @@
                  title="{{actor.name}}" height="100" width="100"/>
 
             <div class="side-panel hits-box shadow">
-                <label for="data.hits.max" class="box-title">{{localize 'MGT2.TravellerSheet.Hits'}}</label>
-                <input class="characteristic-value" type="number" name="data.hits.value"
-                       value="{{data.hits.value}}" data-dtype="Number"/>
-                /
-                <input class="characteristic-value" type="number" name="data.hits.max"
-                       value="{{data.hits.max}}" data-dtype="Number"/>
+                <label for="data.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                <input class="characteristic-value" type="number" name="data.hits.damage"
+                       title="Damage taken"
+                       value="{{data.hits.damage}}" data-dtype="Number"/>
+
+                <span>HITS {{data.hits.value}} / {{data.hits.max}}</span>
+                <br/><br/>
             </div>
 
             <div class="side-panel creature-armour shadow">
@@ -85,23 +86,33 @@
                 <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
             </h1>
 
-            <div class="grid grid-3col shadow stats">
+            <div class="grid grid-4col shadow stats">
                 <div class="resource flex-group-center">
                     <label for="data.speed" class="text-title">SPEED</label>
                     <input class="characteristic-value" type="number" name="data.speed"
+                           title="Speed (metres/round)"
                            value="{{data.speed}}" data-dtype="Number"/>
                 </div>
 
                 <div class="resource flex-group-center">
                     <label for="data.size" class="text-title">SIZE</label>
                     <input class="characteristic-value" type="number" name="data.size"
+                           title="Size"
                            value="{{data.size}}" data-dtype="Number"/>
                 </div>
 
                 <div class="resource flex-group-center">
                     <label for="data.initiative" class="text-title">INITIATIVE</label>
                     <input class="characteristic-value" type="number" name="data.initiative"
+                           title="Initiative bonus"
                            value="{{data.initiative}}" data-dtype="Number"/>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="data.hits.max" class="text-title">MAX HITS</label>
+                    <input class="characteristic-value" type="number" name="data.hits.max"
+                           title="Maximum Hits"
+                           value="{{data.hits.max}}" data-dtype="Number"/>
                 </div>
             </div>
             <div class="creature-info shadow">

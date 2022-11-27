@@ -194,19 +194,86 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
 });
 
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
-   console.log("Actor about to change");
+   console.log("preUpdateActor:");
+   console.log(">>>>");
    console.log(actor);
    console.log(data);
+   console.log(options);
+   console.log(userId);
+   console.log("<<<<");
 
-   if (data.hits) {
+   if (data?.system?.hits) {
        // This is an NPC or Creature
-   } else if (data.damage) {
-       // This is a PC.
+       console.log("preUpdateActor: HITS");
+
+       let hits = data.system.hits;
+
    }
 });
 
 Hooks.on("preUpdateToken", (token, data, moved) => {
-    console.log("Token about to change event");
+    console.log("preUpdateToken:");
+    console.log(">>>>");
+    console.log(token);
+    console.log(data);
+    console.log("<<<<");
+
+    if (token?.actorData?.actorLink) {
+        console.log("This is linked to an actor");
+    } else if (data?.actorData?.system?.hits) {
+        console.log(`No actor link, but hits for [${token.name}] have changed`);
+        let hits = parseInt(data.actorData.system.hits.value);
+        let preHits = parseInt(token.actor.system.hits.value);
+        let damage = parseInt(token.actor.system.hits.damage);
+        console.log("New hits: " + hits);
+        console.log("Pre hits: " + preHits);
+        console.log("Damage  : " + damage);
+        let max = parseInt(token.actor.system.hits.max);
+        console.log("Max hits:" + max);
+
+        if (hits != preHits) {
+            console.log("Setting damage");
+            token.actor.system.hits.damage = max - hits;
+            //token.actor.update({"data.hits.damage": token.actor.system.hits.damage });
+        }
+
+        if (hits <= preHits) {
+            // Taken damage.
+            let half = parseInt(max / 2);
+            let tenth = parseInt(max / 10);
+
+            let tokenObject = token.object;
+            if (hits <= 0) {
+                // Token is dead.
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": true });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
+            } else if (hits <= tenth) {
+                // Token is unconscious.
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": true });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
+            } else if (hits <= half) {
+                // Token is bloodied.
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": true });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
+            } else {
+                // Token is okay.
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
+                tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
+            }
+        } else {
+            // Healed. Nothing to say.
+            return;
+        }
+    }
+
     return;
 
     if (data && data.actorData && data.actorData.data && data.actorData.data.hits) {

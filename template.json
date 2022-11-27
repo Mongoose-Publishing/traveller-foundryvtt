@@ -12,7 +12,8 @@
         "physicalDM": 0,
         "hits": {
             "value": 21,
-            "max": 21
+            "max": 21,
+            "damage": 0
         },
         "description": "",
         "settings": {

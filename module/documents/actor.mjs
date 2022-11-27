@@ -37,6 +37,27 @@ export class MgT2Actor extends Actor {
         }
     }
 
+    modifyTokenAttribute(attribute, value, isDelta, isBar) {
+        console.log(`modifyTokenAttribute: [${attribute}] [${value}] ${isDelta} ${isBar}`);
+
+        console.log(this.system.hits);
+        if (this.type === "traveller") {
+            console.log("Traveller");
+        } else {
+            console.log("NPC or Creature");
+            let hits = this.system.hits;
+            if (isDelta) {
+                hits.damage -= parseInt(value);
+            } else {
+                hits.damage = hits.max - parseInt(value);
+            }
+            hits.value = hits.max - hits.damage;
+            console.log("Changed value to " + hits.value);
+        }
+
+        return this.update({"system.hits": this.system.hits });
+    }
+
     /**
      * @override
      * Augment the basic actor data with additional dynamic data. Typically,
@@ -187,19 +208,29 @@ export class MgT2Actor extends Actor {
         if (actorData.hits) {
             let hits = 0;
             let maxHits = 0;
+            let damage = actorData.hits.damage?parseInt(actorData.hits.damage):0;
 
             maxHits = actorData.characteristics.STR.value + actorData.characteristics.DEX.value +
                 actorData.characteristics.END.value;
 
-            //data.hits.value = maxHits;
             actorData.hits.max = maxHits;
+            actorData.hits.value = maxHits - actorData.hits.damage;
         }
         this._prepareEncumbrance(actor);
         this._prepareInitiative(actor);
     }
 
-    _prepareCreatureData(actorData) {
-        if (actorData.type !== 'creature') return;
+    _prepareCreatureData(actor) {
+        if (actor.type !== 'creature') return;
+
+        const actorData = actor.system;
+
+        if (actorData.hits) {
+            if (!actorData.hits.damage) {
+                actorData.hits.damage = 0;
+            }
+            actorData.hits.value = parseInt(actorData.hits.max) - parseInt(actorData.hits.damage);
+        }
     }
 
 

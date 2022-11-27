@@ -212,6 +212,7 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     }
 
     console.log(`applyDamageTo: ${damage} AP ${ap} TL ${tl} (${options})`);
+    console.log(token);
 
     let isLaser = options.indexOf("laser") > -1;
     let isPlasma = options.indexOf("plasma") > -1;
@@ -219,7 +220,7 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     let isPsi = options.indexOf("psi") > -1;
     let isRanged = true;
 
-    let data = actor.data.data;
+    let data = actor.system;
 
     let armour = data.armour.protection;
     if (isLaser && data.armour.laser > armour) {
@@ -246,7 +247,7 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
 
     console.log("DAMAGE: " + actualDamage);
     if (actor.type === "traveller") {
-        // Travellers don't have hits, n
+        // Travellers don't have hits
         let remaining = actualDamage;
         // Damage always comes off END first.
         if (data.damage.END.value < data.characteristics.END.value) {
@@ -268,12 +269,15 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
         return;
     } else {
         console.log("HITS: " + data.hits.value);
-        data.hits.value = Math.max(0 - data.hits.max, data.hits.value - actualDamage);
+        if (!data.hits.damage) {
+            data.hits.damage = 0;
+        }
+        data.hits.damage += actualDamage;
+        data.hits.value = parseInt(data.hits.max) - parseInt(data.hits.damage);
     }
-
     actor.update({"data.hits": data.hits});
 
-    let name = actor.data.name;
+    let name = token?token.name:actor.name;
     let maxHits = data.hits.max;
     if (actualDamage >= (2 * maxHits) / 3) {
         text += "Ouch! "

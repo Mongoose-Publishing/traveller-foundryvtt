@@ -231,6 +231,8 @@ export class MgT2ActorSheet extends ActorSheet {
 
     _calculateArmour(actor) {
         const actorData = actor.system;
+        console.log("_calculateArmour: ");
+        console.log(actorData);
 
         let armour = actorData.armour;
         armour.protection = 0;
@@ -256,7 +258,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
         }
-        actor.update({ "data.armour": armour});
+        actor.update({ "system.armour": armour});
     }
 
     applyActiveEffect() {
