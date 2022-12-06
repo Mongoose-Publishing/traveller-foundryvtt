@@ -1307,3 +1307,15 @@ span.edit-skill {
     font-size: small;
 }
 
+.hits-box label.left-label {
+    text-align: left;
+    margin-left: 2px;
+    padding-top: 2px;
+    display: inline-block;
+    width: 96px;
+}
+
+.hits-box input {
+    height: 24px;
+    margin-bottom: 5px;
+}

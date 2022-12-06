@@ -7,27 +7,45 @@
 
             <div class="side-panel hits-box shadow">
                 <label for="data.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
-                <input class="characteristic-value" type="number" name="data.hits.damage"
-                       title="Damage taken"
-                       value="{{data.hits.damage}}" data-dtype="Number"/>
 
-                <span>HITS {{data.hits.value}} / {{data.hits.max}}</span>
-                <br/><br/>
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                    <input class="characteristic-value" type="number" name="data.hits.damage"
+                           title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
+                           value="{{data.hits.damage}}" data-dtype="Number"/>
+                </div>
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
+                    <input class="characteristic-readonly" type="number"
+                           title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
+                           value="{{data.hits.value}}"/>
+                </div>
             </div>
 
             <div class="side-panel creature-armour shadow">
                 <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
 
-                <div class="inset">
-                    <input class="armour-value" type="text" name="data.armour.protection" title="Protection"
+                <div class="grid grid-3col inset">
+                    <div>
+                        <label class="prot-type" title="Protection">Prot</label>
+                        <input class="armour-value" type="text" name="data.armour.protection" title="Protection"
                                value="{{data.armour.protection}}" data-dtype="Number"/>
-                    <span style="margin-left: 28px">
-                        🔥 <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy"
-                              value="{{data.armour.otherProtection}}" data-dtype="Number"/><br/>
-                        <input type="text" name="data.armour.otherTypes" title="Energy types"
+                    </div>
+                    <div>
+                        <label class="prot-type" title="Rad Shielding">Rad</label>
+                        <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
+                               value="{{data.armour.rad}}" data-dtype="Number"/>
+                    </div>
+                    <div>
+                        <label class="prot-type" title="Energy Protection">🔥</label>
+                        <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy"
+                               value="{{data.armour.otherProtection}}" data-dtype="Number"/>
+                    </div>
+                    <input type="text" name="data.armour.otherTypes" title="Energy types" class="grid-span-3"
                            value="{{data.armour.otherTypes}}" data-dtype="String"/>
-                    </span>
+                </div>
 
+                <div class="inset">
                     <ol class="items-list">
                         {{#each items as |item id|}}
                         {{#if item.system.armour}}

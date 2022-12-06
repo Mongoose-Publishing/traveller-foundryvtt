@@ -301,7 +301,6 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
         content: text
     }
     ChatMessage.create(chatData, {});
-
 }
 
 // Called from a button press in damage output in the chat.

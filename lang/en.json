@@ -37,6 +37,8 @@
   "MGT2.TravellerSheet.Damage": "Damage",
   "MGT2.TravellerSheet.Armour": "Armour",
   "MGT2.TravellerSheet.Attacks": "Attacks",
+  "MGT2.TravellerSheet.DamageTaken": "Damage Taken",
+  "MGT2.TravellerSheet.HitsRemaining": "Hits Remaining",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",

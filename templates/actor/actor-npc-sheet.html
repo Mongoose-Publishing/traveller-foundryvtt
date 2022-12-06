@@ -8,12 +8,18 @@
             <div class="side-panel hits-box shadow">
                 <label for="data.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
 
-                <input class="characteristic-value" type="number" name="data.hits.damage"
-                       title="Damage taken"
-                       value="{{data.hits.damage}}" data-dtype="Number"/>
-
-                <span>HITS {{data.hits.value}} / {{data.hits.max}}</span>
-                <br/><br/>
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                    <input class="characteristic-value" type="number" name="data.hits.damage"
+                           title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
+                           value="{{data.hits.damage}}" data-dtype="Number"/>
+                </div>
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
+                    <input class="characteristic-readonly" type="number"
+                           title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
+                           value="{{data.hits.value}}"/>
+                </div>
             </div>
 
             <div class="side-panel armour-box shadow flex-group-center">

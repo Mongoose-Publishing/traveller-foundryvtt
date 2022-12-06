@@ -213,14 +213,11 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
 
 Hooks.on("preUpdateToken", (token, data, moved) => {
     console.log("preUpdateToken:");
-    console.log(">>>>");
-    console.log(token);
-    console.log(data);
-    console.log("<<<<");
 
     if (token?.actorData?.actorLink) {
         console.log("This is linked to an actor");
-    } else if (data?.actorData?.system?.hits) {
+    }
+    if (data?.actorData?.system?.hits) {
         console.log(`No actor link, but hits for [${token.name}] have changed`);
         let hits = parseInt(data.actorData.system.hits.value);
         let preHits = parseInt(token.actor.system.hits.value);
@@ -231,32 +228,42 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
         let max = parseInt(token.actor.system.hits.max);
         console.log("Max hits:" + max);
 
-        if (hits != preHits) {
-            console.log("Setting damage");
-            token.actor.system.hits.damage = max - hits;
-            //token.actor.update({"data.hits.damage": token.actor.system.hits.damage });
-        }
-
         if (hits <= preHits) {
             // Taken damage.
             let half = parseInt(max / 2);
             let tenth = parseInt(max / 10);
 
+            let text = "";
+            let flavor = "Takes ${preHits - hits} damage.";
+            let takenDamage = preHits - hits;
+            if (takenDamage >= max) {
+                text = `${token.name} takes massive amounts of damage. `;
+            } else if (takenDamage >= (max * 2) / 3) {
+                text = `${token.name} is hurt badly. `;
+            } else if (takenDamage >= (max / 3)) {
+                text = `${token.name} is hurt. `;
+            } else {
+                text = `${token.name} is a little hurt. `;
+            }
+
             let tokenObject = token.object;
             if (hits <= 0) {
                 // Token is dead.
+                text += `They are dead.`;
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": true });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
             } else if (hits <= tenth) {
                 // Token is unconscious.
+                text += `They are knock unconscious.`;
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": true });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
             } else if (hits <= half) {
                 // Token is bloodied.
+                text += `They are shaken.`;
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": true });
@@ -268,6 +275,13 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
             }
+            let chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker(),
+                content: text,
+                flavor: flavor
+            }
+            ChatMessage.create(chatData, {});
         } else {
             // Healed. Nothing to say.
             return;

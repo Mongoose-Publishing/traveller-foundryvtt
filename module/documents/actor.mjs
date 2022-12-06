@@ -1,4 +1,5 @@
 import { MgT2Item } from "../documents/item.mjs";
+import { Tools } from "../helpers/chat/tools.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -37,12 +38,25 @@ export class MgT2Actor extends Actor {
         }
     }
 
+    /**
+     * Called when an attribute on a token is directly modified by the user.
+     * Used for updating damage on the actor.
+     */
     modifyTokenAttribute(attribute, value, isDelta, isBar) {
         console.log(`modifyTokenAttribute: [${attribute}] [${value}] ${isDelta} ${isBar}`);
 
         console.log(this.system.hits);
         if (this.type === "traveller") {
             console.log("Traveller");
+            let damage = parseInt(value);
+            if (isDelta && damage < 0) {
+                damage = Math.abs(damage);
+                console.log("Applying " + damage);
+                damage = Tools.applyDamageToCha(damage, this.system, "END");
+                damage = Tools.applyDamageToCha(damage, this.system, "STR");
+                damage = Tools.applyDamageToCha(damage, this.system, "DEX");
+            }
+            return this.update({"system.damage": this.system.damage });
         } else {
             console.log("NPC or Creature");
             let hits = this.system.hits;
@@ -53,9 +67,8 @@ export class MgT2Actor extends Actor {
             }
             hits.value = hits.max - hits.damage;
             console.log("Changed value to " + hits.value);
+            return this.update({"system.hits": this.system.hits });
         }
-
-        return this.update({"system.hits": this.system.hits });
     }
 
     /**
