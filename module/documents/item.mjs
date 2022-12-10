@@ -41,7 +41,7 @@ export class MgT2Item extends Item {
      * @param {Event} event   The originating click event
      * @private
      */
-    async roll() {
+    async roll(event) {
         const item = this;
 
         let quickRoll = game.settings.get("mgt2", "quickRolls");

@@ -1,6 +1,7 @@
 
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
 import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
+import {MgT2XPDialog } from "../helpers/xp-dialog.mjs";
 import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
@@ -752,8 +753,9 @@ export class MgT2ActorSheet extends ActorSheet {
         if (event.shiftKey) {
             quickRoll = !quickRoll;
         }
-
-        if (!quickRoll) {
+        if (event.ctrlKey) {
+            new MgT2XPDialog(actor, skill, spec, cha).render(true);
+        } else if (!quickRoll) {
             new MgT2SkillDialog(actor, skill, spec, cha).render(true);
         } else {
             // Roll directly with no options.

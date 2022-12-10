@@ -1,0 +1,63 @@
+<form class="flexcol skilldialog">
+
+    <div class="shadow">
+        <span class="edit-skill">Edit</span>
+
+        <h3 class="skill-dialog-title">
+            {{#if chaOnly}}
+                {{characteristic}}
+            {{else}}
+                {{#if spec}}
+                    {{skill.label}} ({{spec.label}})
+                    {{#if spec.augmented}}
+                        [{{spec.augmented}}<sup>*</sup>]
+                    {{else}}
+                        [{{value}}]
+                    {{/if}}
+                {{else}}
+                    {{#if skill}}
+                        {{skill.label}} [{{value}}]
+                    {{else}}
+                        <i>untrained</i> [{{value}}]
+                    {{/if}}
+                {{/if}}
+            {{/if}}
+        </h3>
+
+        <div class="grid grid-4col">
+            <div class="xpgrid">
+                <label for="dicetype" class="skillDialogLabel">Level</label>
+                <br/>
+                <span>{{value}}</span>
+            </div>
+
+            <div class="xpgrid">
+                <label for="difficulty" class="skillDialogLabel">Cost</label>
+                <br/>
+                <span>{{cost}}</span>
+            </div>
+
+            <div class="xpgrid">
+                <label for="xp" class="skillDialogLabel">XP</label>
+                <br/>
+                <input class="skillXPxp" name="xp" type="text" data-dtype="Number" value="{{xp}}"/>
+            </div>
+
+            <div class="xpgrid">
+                <label for="bonus" class="skillDialogLabel">Bonus DM</label>
+                <br/>
+                <input class="skillXPbonus" name="bonus" type="text" data-dtype="Number" value="{{bonus}}"/>
+            </div>
+
+            <div class="skill-bonus grid-span-4">
+                <label for="notes" class="skillDialogLabel">Skill notes</label>
+                <br/>
+                <input class="skillXPnotes" name="notes" type="text" data-dtype="String" value="{{notes}}"/>
+            </div>
+        </div>
+    </div>
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="save">Save <i class="fas fa-dice"></i></button>
+    </footer>
+
+</form>

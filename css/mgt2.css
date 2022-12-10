@@ -1319,3 +1319,15 @@ span.edit-skill {
     height: 24px;
     margin-bottom: 5px;
 }
+
+.xpgrid {
+    width: 5em;
+}
+
+.skillBonus {
+    width: 5em;
+}
+
+.skillNotes {
+    width: 5em;
+}
