@@ -371,6 +371,12 @@ export class MgT2ActorSheet extends ActorSheet {
         div.addEventListener("dragstart", handler, options);
       }
     });
+    html.find('li.item').each((i, li) => {
+        let options = {};
+        handler = ev => this._onDragStart(ev);
+        li.setAttribute("draggable", true);
+        li.addEventListener("dragstart", handler, options);
+    });
   }
 
     _onSkillDragStart(event, options) {
@@ -403,8 +409,6 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     async _onDrop(event) {
-        console.log("On Drop!");
-
         let data;
         try {
             data = JSON.parse(event.dataTransfer.getData('text/plain'));
@@ -412,10 +416,18 @@ export class MgT2ActorSheet extends ActorSheet {
             console.log("Could not parse data");
             return false;
         }
+        const allowed = Hooks.call("dropActorSheetData", this.actor, this, data);
+        if ( allowed === false ) return;
 
-        console.log(data);
         switch (data.type) {
         case "Item":
+            console.log("ON_DROP_ITEM");
+            console.log(data);
+            console.log(this.actor);
+            console.log(this);
+            let targetActor = this.actor;
+
+
             return this._onDropItem(event, data);
         case "Actor":
             return this._onDropActor(event, data);
@@ -426,6 +438,36 @@ export class MgT2ActorSheet extends ActorSheet {
         case "characteristic":
             return this._onDropCharacteristic(event, data);
         }
+        return true;
+    }
+
+    /**
+     * Override item drop. Need to remove item from source character.
+     */
+    async _onDropItem(event, data) {
+        super._onDropItem(event, data);
+
+        if (!data || !data.uuid || data.uuid.indexOf("Actor") != 0) {
+            // This hasn't been dragged from another actor.
+            return true;
+        }
+
+        let actor = this.actor;
+        let srcActorId = data.uuid.replace(/Actor\.([a-z0-9]*)\..*/gi, "$1");
+        let itemId = data.uuid.replace(/Actor\.[a-z0-9]*\.Item\.([a-z0-9]*)/gi, "$1");
+
+        console.log("This actor id:" + actor.uuid);
+        console.log("Src Actor id: " + srcActorId);
+
+        if (actor.uuid.indexOf(srcActorId) === -1) {
+            // Move between different actors.
+            let srcActor = game.actors.get(srcActorId);
+            if (srcActor) {
+                srcActor.deleteEmbeddedDocuments("Item", [itemId]);
+            }
+        }
+        return true;
+
     }
 
     async _onDropUPP(event, data) {
@@ -761,5 +803,29 @@ export class MgT2ActorSheet extends ActorSheet {
             // Roll directly with no options.
             rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal", 8);
         }
+    }
+}
+
+export class MgT2NPCActorSheet extends MgT2ActorSheet {
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            classes: ["mgt2", "sheet", "actor"],
+            template: "systems/mgt2/templates/actor/actor-sheet.html",
+            width: 720,
+            height: 600,
+            tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
+        });
+    }
+}
+
+export class MgT2CreatureActorSheet extends MgT2ActorSheet {
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            classes: ["mgt2", "sheet", "actor"],
+            template: "systems/mgt2/templates/actor/actor-sheet.html",
+            width: 600,
+            height: 600,
+            tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
+        });
     }
 }

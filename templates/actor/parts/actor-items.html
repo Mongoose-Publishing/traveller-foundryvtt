@@ -30,12 +30,14 @@
                     <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
-                <div class="item-controls">
-                    {{{carryItem item}}}
-                    {{{storeItem item}}}
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{carryItem item}}}
+                        {{{storeItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
             </li>
         {{/if}}
     {{/each}}
@@ -48,12 +50,14 @@
                     <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 <span>{{item.system.weapon.damage}}</span>
-                <div class="item-controls">
-                    {{{carryItem item}}}
-                    {{{storeItem item}}}
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{carryItem item}}}
+                        {{{storeItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
             </li>
         {{/if}}
     {{/each}}
@@ -71,12 +75,14 @@
                 {{#if item.system.cost includeZero=false}}
                     <span>Cr{{item.system.cost}}</span>
                 {{/if}}
-                <div class="item-controls">
-                    {{{equipItem item}}}
-                    {{{carryItem item}}}
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{equipItem item}}}
+                        {{{carryItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
             </li>
         {{/if}}
     {{/each}}
@@ -95,12 +101,14 @@
                     <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
-                <div class="item-controls">
-                    {{{equipItem item}}}
-                    {{{storeItem item}}}
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{equipItem item}}}
+                        {{{storeItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
             </li>
         {{/if}}
     {{/each}}
@@ -113,12 +121,14 @@
                     <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
-                <div class="item-controls">
-                    {{{equipItem item}}}
-                    {{{storeItem item}}}
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{equipItem item}}}
+                        {{{storeItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
             </li>
         {{/if}}
     {{/each}}
@@ -136,12 +146,14 @@
                 {{#if item.system.cost includeZero=false}}
                 <span>Cr{{item.system.cost}}</span>
                 {{/if}}
-                <div class="item-controls">
-                    {{{equipItem item}}}
-                    {{{carryItem item}}}
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{equipItem item}}}
+                        {{{carryItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
             </li>
         {{/if}}
     {{/each}}
@@ -160,12 +172,14 @@
                 <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
-                <div class="item-controls">
-                    {{{equipItem item}}}
-                    {{{carryItem item}}}
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{equipItem item}}}
+                        {{{carryItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
             </li>
         {{/if}}
     {{/each}}
@@ -178,12 +192,14 @@
                 <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
-                <div class="item-controls">
-                    {{{equipItem item}}}
-                    {{{carryItem item}}}
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{equipItem item}}}
+                        {{{carryItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
             </li>
         {{/if}}
     {{/each}}
@@ -201,12 +217,14 @@
                 {{#if item.system.cost includeZero=false}}
                     <span>Cr{{item.system.cost}}</span>
                 {{/if}}
-                <div class="item-controls">
-                    {{{equipItem item}}}
-                    {{{carryItem item}}}
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{equipItem item}}}
+                        {{{carryItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
             </li>
         {{/if}}
     {{/each}}

@@ -110,9 +110,11 @@ Hooks.once('init', async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("mgt2", MgT2ActorSheet, { makeDefault: true });
+  Actors.registerSheet("mgt2", MgT2ActorSheet, { label: "Traveller Sheet", makeDefault: true });
+//  Actors.registerSheet("mgt2", MgT2NPCActorSheet, { label: "NPC Sheet", types: [ "npc"], makeDefault: false });
+//  Actors.registerSheet("mgt2", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("mgt2", MgT2ItemSheet, { makeDefault: true });
+  Items.registerSheet("mgt2", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
   DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
   DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
@@ -126,8 +128,6 @@ Hooks.on('renderChatMessage', function(app, html) {
     const damageMessage = html.find(".damage-message")[0];
     if (damageMessage) {
         damageMessage.setAttribute("draggable", true);
-
-        let dmg = damageMessage.getAttribute("data-damage");
 
         let dragData = {
             type: "Damage",
@@ -399,6 +399,8 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
     }
 });
 
+
+
 Hooks.once("ready", async function() {
     Hooks.on("hotbarDrop", (bar, data, slot) => createTravellerMacro(data, slot));
 });
@@ -419,6 +421,8 @@ Hooks.on("applyActiveEffect", (actor, effectData) => {
 
    }
 });
+
+
 
 // Dropping a skill on the macro bar. An entire skill tree is dragged,
 // not just a speciality.
@@ -933,6 +937,22 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     }
 
     return "";
+});
+
+Handlebars.registerHelper('isOwner', function(key) {
+    console.log("isOwner");
+    console.log(key);
+    return key.owner;
+});
+
+Handlebars.registerHelper('isObserver', function(key) {
+    console.log(key);
+    return true;
+});
+
+Handlebars.registerHelper('isLimited', function(key) {
+    console.log(key);
+    return true;
 });
 
 /**
