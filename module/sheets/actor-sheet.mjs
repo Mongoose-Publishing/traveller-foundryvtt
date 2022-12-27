@@ -280,6 +280,10 @@ export class MgT2ActorSheet extends ActorSheet {
             item.sheet.render(true);
         });
 
+        // Skill rolls.
+        // Anyone who can see the skills should be able to roll them.
+        html.find('.rollable').click(ev => this._onRollWrapper(ev, this.actor));
+
         // -------------------------------------------------------------
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
@@ -333,10 +337,6 @@ export class MgT2ActorSheet extends ActorSheet {
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
 
-    // Rollable abilities.
-    //html.find('.rollable').click(this._onRoll.bind(this));
-    // Skill rolls.
-    html.find('.rollable').click(ev => this._onRollWrapper(ev, this.actor));
 
     // Add a new skill
     html.find('.addNewSkill').click(ev => this._onAddNewSkill(ev, this.actor));
@@ -416,18 +416,8 @@ export class MgT2ActorSheet extends ActorSheet {
             console.log("Could not parse data");
             return false;
         }
-        const allowed = Hooks.call("dropActorSheetData", this.actor, this, data);
-        if ( allowed === false ) return;
-
         switch (data.type) {
         case "Item":
-            console.log("ON_DROP_ITEM");
-            console.log(data);
-            console.log(this.actor);
-            console.log(this);
-            let targetActor = this.actor;
-
-
             return this._onDropItem(event, data);
         case "Actor":
             return this._onDropActor(event, data);

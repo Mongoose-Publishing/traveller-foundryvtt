@@ -940,19 +940,15 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
 });
 
 Handlebars.registerHelper('isOwner', function(key) {
-    console.log("isOwner");
-    console.log(key);
     return key.owner;
 });
 
 Handlebars.registerHelper('isObserver', function(key) {
-    console.log(key);
-    return true;
+    return key.document.permission >= 2;
 });
 
 Handlebars.registerHelper('isLimited', function(key) {
-    console.log(key);
-    return true;
+    return key.document.permission >= 2;
 });
 
 /**

@@ -150,8 +150,12 @@
                     <a class="item" data-tab="items">{{localize 'MGT2.TravellerSheet.Equipment'}}</a>
                     <a class="item" data-tab="finance">{{localize 'MGT2.TravellerSheet.Finance'}}</a>
                     <a class="item" data-tab="biography">{{localize 'MGT2.TravellerSheet.Biography'}}</a>
-                    <a class="item" data-tab="history">{{localize 'MGT2.TravellerSheet.History'}}</a>
-                    <a class="item" data-tab="settings">{{localize 'MGT2.TravellerSheet.Settings'}}</a>
+                    {{#if (isObserver .)}}
+                        <a class="item" data-tab="history">{{localize 'MGT2.TravellerSheet.History'}}</a>
+                    {{/if}}
+                    {{#if (isOwner .)}}
+                        <a class="item" data-tab="settings">{{localize 'MGT2.TravellerSheet.Settings'}}</a>
+                    {{/if}}
                 </nav>
 
                 <div class="sheet-body">
@@ -183,7 +187,7 @@
                                 <input  class="credits" name="data.finance.mortgage" type="text" value="{{data.finance.mortgage}}"/>
                             </div>
                             <div>
-                                <label class="profile-label">Liv{{localize 'MGT2.Finance.LivingCosts'}}</label>
+                                <label class="profile-label">{{localize 'MGT2.Finance.LivingCosts'}}</label>
                                 <input  class="credits" name="data.finance.livingCosts" type="text" value="{{data.finance.livingCosts}}"/>
                             </div>
                         </div>
@@ -224,18 +228,23 @@
 
                     </div>
 
+                    {{#if (isObserver .)}}
                     <div class="tab history" data-group="primary" data-tab="history">
                         <section>
                             {{> "systems/mgt2/templates/actor/parts/actor-terms.html"}}
                         </section>
                     </div>
+                    {{/if}}
 
+                    {{#if (isObserver .)}}
                     {{!-- Owned Items Tab --}}
                     <div class="tab items" data-group="primary" data-tab="items">
                         {{> "systems/mgt2/templates/actor/parts/actor-items.html"}}
                     </div>
+                    {{/if}}
 
                     {{!-- Settings Tab --}}
+                    {{#if (isOwner .)}}
                     <section class="tab settings flexcol" data-group="primary" data-tab="settings">
                         <section>
                             <label for="data.settings.columns">Number of columns in Characteristics</label>
@@ -246,8 +255,8 @@
                                 <option value="6">6</option>
                                 {{/select}}
                             </select>
-
-                            <button name="addNewSkill" class="addNewSkill">Add New Skill</button>
+                            <br/>
+                            <span name="addNewSkill" class="addNewSkill">Add New Skill</span>
                         </section>
                         <section class="resources grid grid-3col">
                             {{#each data.characteristics as | char key | }}
@@ -258,6 +267,7 @@
                             {{/each}}
                         </section>
                     </section>
+                    {{/if}}
                 </div>
             </div>
         </div>
