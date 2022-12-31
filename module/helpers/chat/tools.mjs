@@ -294,13 +294,14 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     } else if (actualDamage < damage) {
         text += "Most of it got through.";
     }
-
+/*
     let chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker(),
         content: text
     }
     ChatMessage.create(chatData, {});
+*/
 }
 
 // Called from a button press in damage output in the chat.

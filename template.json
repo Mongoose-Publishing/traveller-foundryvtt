@@ -968,6 +968,7 @@
           "livingCosts": 0,
           "otherIncome": 0
       },
+      "size": 0,
       "player": "",
       "terms": 0
     },
@@ -1047,12 +1048,11 @@
     "item": {
       "templates": ["base" ],
       "description": "Item Description",
-      "quantity": 1,
-      "formula": "2d6 + @str"
+      "quantity": 1
     },
     "weapon": {
       "templates": ["base", "weapon"],
-      "quantity": 0
+      "quantity": 1
     },
     "armour": {
       "templates": ["base", "armour"]

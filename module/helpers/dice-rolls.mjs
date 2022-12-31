@@ -158,7 +158,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     let attacks = 1;
     if (autoOption && autoOption === "burst") {
         let autoBonus = getTraitValue(traits, "auto");
-        dmg += " + " + autoBonus;
+        dmg += " + " + autoBonus * destructive?10:1;
     } else if (autoOption && autoOption === "full") {
         attacks = getTraitValue(traits, "auto");
     }
@@ -250,6 +250,10 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         content += `<tr><td>${shortRange}m</td><td>${baseRange}m</td><td>${longRange}m</td><td>${extremeRange}m</td></tr>`;
         content += "</table>";
     }
+
+    if (weapon.system.notes && weapon.system.notes.length > 0) {
+        content += `<span class="weapon-notes">${weapon.system.notes}</span>`;
+    }
     content += "</div>";
 
     if (actor) {
@@ -334,6 +338,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     let   defaultCha = true;
     let   chaDm = 0;
     let   skillAugDm = 0;
+    let   bonusDM = 0;
 
     // Normal, Boon or Bane dice roll.
     let dice = "2D6";
@@ -396,6 +401,14 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             skillAugDm += parseInt(speciality.augdm);
         }
 
+        if (speciality && speciality.bonus) {
+            dm = parseInt(dm) + parseInt(speciality.bonus);
+            notes += `${speciality.notes} (${speciality.bonus}) `;
+        } else if (skill.bonus) {
+            dm = parseInt(dm) + parseInt(skill.bonus);
+            notes += `${skill.notes} (${skill.bonus}) `;
+        }
+
         title += ((title === "")?"":" + ") + skill.label;
         skillCheck = true;
         let value = data.skills["jackofalltrades"].value - 3;
@@ -411,7 +424,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                 } else {
                     value += 1;
                 }
-                notes = "Expert Software/" + skill.expert;
+                notes += "Expert Software/" + skill.expert;
             }
             if (skill.augment) {
                 value += parseInt(skill.augment);

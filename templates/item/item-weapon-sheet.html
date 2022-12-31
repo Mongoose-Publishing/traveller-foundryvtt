@@ -1,8 +1,4 @@
 <form class="{{cssClass}} {{item.type}} flexcol" autocomplete="off">
-    {{log "ITEM"}}
-    {{log item}}
-    {{log "DATA"}}
-    {{log data}}
     <section class="item-sheet">
         <div class="sidebar">
             <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
@@ -112,7 +108,7 @@
                                value="{{data.weapon.parryBonus}}" data-dtype="Number"/>
                     </div>
 
-                    <div class="resource grid-span-2">
+                    <div class="resource">
                         <label for="data.weapon.damageType" class="resource-label">Damage Type</label><br/>
                         <select name="data.weapon.damageType">
                             {{#select data.weapon.damageType}}
@@ -123,6 +119,11 @@
                             <option value="energy">Energy</option>
                             {{/select}}
                         </select>
+                    </div>
+                    <div class="resource grid-span-2">
+                        <label for="data.notes" class="resource-label">Notes</label><br/>
+                        <input type="text" name="data.notes"
+                               value="{{data.notes}}" data-dtype="String"/>
                     </div>
                 </div>
             </div>

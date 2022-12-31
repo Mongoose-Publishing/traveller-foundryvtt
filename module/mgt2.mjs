@@ -17,6 +17,7 @@ import {MgT2DamageDialog} from "./helpers/damage-dialog.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
 
 
+
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
@@ -98,7 +99,7 @@ Hooks.once('init', async function() {
    */
   CONFIG.Combat.initiative = {
     formula: "2d6 - 8 + @initiative",
-    decimals: 2
+    decimals: 0
   };
 
   // Define custom Document classes
@@ -106,7 +107,8 @@ Hooks.once('init', async function() {
   CONFIG.Item.documentClass = MgT2Item;
   CONFIG.ActiveEffect.documentClass = MgT2Effect;
 
-  console.log(CONFIG);
+  //CONFIG.debug.hooks = true;
+  //console.log(CONFIG);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -193,6 +195,18 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     return true;
 });
 
+Hooks.on("createItem", (item) => {
+    if (item.img == "icons/svg/item-bag.svg") {
+        item.img = "systems/mgt2/icons/items/item.svg";
+    }
+});
+
+Hooks.on("createActor", (item) => {
+    if (item.img == "icons/svg/mystery-man.svg") {
+        item.img = "systems/mgt2/icons/actors/traveller.svg";
+    }
+});
+
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
    console.log("preUpdateActor:");
    console.log(">>>>");
@@ -202,11 +216,29 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
    console.log(userId);
    console.log("<<<<");
 
-   if (data?.system?.hits) {
+   if (data?.system?.damage) {
        // This is an NPC or Creature
        console.log("preUpdateActor: HITS");
 
-       let hits = data.system.hits;
+       let endDmg = parseInt(data.system.damage.END.value);
+       let strDmg = parseInt(data.system.damage.STR.value);
+       let dexDmg = parseInt(data.system.damage.DEX.value);
+       let endMax = actor.system.characteristics.END.value;
+       let strMax = actor.system.characteristics.STR.value;
+       let dexMax = actor.system.characteristics.DEX.value;
+
+       console.log(`STR ${strMax} DEX ${dexMax} END ${endMax}`);
+
+       let status = CONFIG.MGT2.STATUS.OKAY;
+       if (endDmg >= endMax) {
+           status = CONFIG.MGT2.STATUS.HURT;
+       }
+       if (strDmg >= strMax && dexDmg >= dexMax) {
+           status = CONFIG.MGT2.STATUS.DEAD;
+       } else if (strDmg > strMax || dexDmg > dexMax) {
+           status = CONFIG.MGT2.STATUS.UNCONSCIOUS;
+       }
+
 
    }
 });
@@ -216,35 +248,27 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
 
     if (token?.actorData?.actorLink) {
         console.log("This is linked to an actor");
+        let end = token.actor.system.characteristics.END.value;
+        let str = token.actor.system.characteristics.STR.value;
+        let dex = token.actor.system.characteristics.DEX.value;
+
+        console.log(`STR ${str} DEX ${dex} END ${end}`);
     }
     if (data?.actorData?.system?.hits) {
-        console.log(`No actor link, but hits for [${token.name}] have changed`);
         let hits = parseInt(data.actorData.system.hits.value);
-        let preHits = parseInt(token.actor.system.hits.value);
-        let damage = parseInt(token.actor.system.hits.damage);
-        console.log("New hits: " + hits);
-        console.log("Pre hits: " + preHits);
-        console.log("Damage  : " + damage);
         let max = parseInt(token.actor.system.hits.max);
-        console.log("Max hits:" + max);
 
-        if (hits <= preHits) {
-            // Taken damage.
+        let actorType = token._actor.type;
+        if (actorType === "traveller") {
+            // Travellers use their characteristics as hitpoints.
+            // HITS is just a sum of STR, DEX and END for purposes of
+            // showing the resource bar.
+        } else if (actorType === "creature" || actorType === "npc") {
+            // NPCs and Creatures use a generic HITS value.
             let half = parseInt(max / 2);
             let tenth = parseInt(max / 10);
 
             let text = "";
-            let flavor = "Takes ${preHits - hits} damage.";
-            let takenDamage = preHits - hits;
-            if (takenDamage >= max) {
-                text = `${token.name} takes massive amounts of damage. `;
-            } else if (takenDamage >= (max * 2) / 3) {
-                text = `${token.name} is hurt badly. `;
-            } else if (takenDamage >= (max / 3)) {
-                text = `${token.name} is hurt. `;
-            } else {
-                text = `${token.name} is a little hurt. `;
-            }
 
             let tokenObject = token.object;
             if (hits <= 0) {
@@ -256,7 +280,7 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
             } else if (hits <= tenth) {
                 // Token is unconscious.
-                text += `They are knock unconscious.`;
+                text += `They are unconscious.`;
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": true });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
@@ -275,128 +299,20 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
                 tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
             }
-            let chatData = {
-                user: game.user.id,
-                speaker: ChatMessage.getSpeaker(),
-                content: text,
-                flavor: flavor
+            if (text.length > 0) {
+                let chatData = {
+                    user: game.user.id,
+                    speaker: ChatMessage.getSpeaker(),
+                    content: text
+                }
+                ChatMessage.create(chatData, {});
             }
-            ChatMessage.create(chatData, {});
         } else {
             // Healed. Nothing to say.
             return;
         }
     }
-
-    return;
-
-    if (data && data.actorData && data.actorData.data && data.actorData.data.hits) {
-        // NPC or Creature has had its HITS changed.
-
-        let actorId = token.data.actorId;
-        let actor = token._actor;
-        console.log(token.data.name);
-
-        let name = token.data.name;
-        let max = token.data.actorData.data.hits.max[0];
-        let half = parseInt(max / 2);
-        let tenth = parseInt(max / 10);
-        let message = null;
-        let value = data.actorData.data.hits.value;
-        let oldValue = token.data.actorData.data.hits.value;
-        console.log(`NPC Token hits changing to ${value}/${max} from ${oldValue}`);
-
-        let isOkay = false, isInjured = false, isUnconscious = false, isDead = false, isDestroyed = false;
-
-        if (value < oldValue) {
-            // Damage.
-            let damage = oldValue - value;
-            if (damage > max) {
-                // More damage than they have hits.
-                message = game.i18n.format("MGT2.Damage.MassiveDamage", { 'name': name});
-            } else if (damage > half) {
-                // More than half their hits in a single blow.
-                message = game.i18n.format("MGT2.Damage.HeavyDamage", { 'name': name});
-            } else if (damage > 2 * tenth) {
-                message = game.i18n.format("MGT2.Damage.ModerateDamage", { 'name': name});
-            } else {
-                message = game.i18n.format("MGT2.Damage.LightDamage", { 'name': name});
-            }
-            message += " ";
-            if (value <= 0) {
-                isDead = true;
-                if (oldValue > 0) {
-                    message += game.i18n.format("MGT2.Damage.Killed");
-                } else {
-                    message += game.i18n.format("MGT2.Damage.EvenMoreDead");
-                }
-            } else if (value <= tenth) {
-                isUnconscious = true;
-                if (oldValue > tenth) {
-                    message += game.i18n.format("MGT2.Damage.KnockedOut");
-                } else {
-                    message += game.i18n.format("MGT2.Damage.StillOut");
-                }
-            } else if (value <= half) {
-                isInjured = true;
-                if (oldValue > half) {
-                    message += game.i18n.format("MGT2.Damage.Hurt");
-                } else {
-                    message += game.i18n.format("MGT2.Damage.StillHurt");
-                }
-            } else {
-                isOkay = true;
-            }
-        } else {
-            // Healing.
-            message = "is feeling better";
-        }
-        let tokenObject = token.object;
-        if (isDestroyed) {
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": true });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
-        } else if (isDead) {
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": true });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
-        } else if (isUnconscious) {
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": true });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
-        } else if (isInjured) {
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": true });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
-        } else {
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/dead.svg", { "overlay": true, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", { "overlay": true, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/injured.svg", { "overlay": false, "active": false });
-            tokenObject.toggleEffect("systems/mgt2/icons/effects/destroyed.svg", { "overlay": true, "active": false });
-        }
-
-        let text = "<div class='damaged-token'>";
-        if (game.settings.get("mgt2", "useChatIcons")) {
-            text += `<img class='skillcheck-thumb' alt="Portrait" src='${actor.thumbnail}'/>`;
-        }
-        text += message;
-        text += "</div>";
-
-        let chatData = {
-            user: game.user.id,
-            speaker: {
-              "actor": actorId,
-              "token": token.data._id
-            },
-            content: text
-        }
-        ChatMessage.create(chatData, {});
-
-    }
+    return true;
 });
 
 
