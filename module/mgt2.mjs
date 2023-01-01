@@ -320,8 +320,10 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
 
 Hooks.once("ready", async function() {
     Hooks.on("hotbarDrop", (bar, data, slot) => {
-        createTravellerMacro(data, slot);
-        return false;
+        if (data.type === "Item" || data.data?.dragType === "skill") {
+            createTravellerMacro(data, slot);
+            return false;
+        }
     });
 });
 
@@ -356,8 +358,10 @@ async function createTravellerMacro(data, slot) {
         let command = null;
         if (item.type === "weapon") {
             command = `game.mgt2.rollAttackMacro('${item.name}')`;
+        } else {
+            command = `Hotbar.toggleDocumentSheet("${item.uuid}")`;
         }
-
+        
         if (command) {
             let macro = await Macro.create({
                 name: label,
