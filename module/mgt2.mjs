@@ -29,7 +29,8 @@ Hooks.once('init', async function() {
     game.mgt2 = {
         MgT2Actor,
         MgT2Item,
-        rollSkillMacro
+        rollSkillMacro,
+        rollAttackMacro
     };
 
     game.settings.register('mgt2', 'verboseSkillRolls', {
@@ -318,7 +319,10 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
 
 
 Hooks.once("ready", async function() {
-    Hooks.on("hotbarDrop", (bar, data, slot) => createTravellerMacro(data, slot));
+    Hooks.on("hotbarDrop", (bar, data, slot) => {
+        createTravellerMacro(data, slot);
+        return false;
+    });
 });
 
 Hooks.on("applyActiveEffect", (actor, effectData) => {
@@ -338,20 +342,35 @@ Hooks.on("applyActiveEffect", (actor, effectData) => {
    }
 });
 
-
-
 // Dropping a skill on the macro bar. An entire skill tree is dragged,
 // not just a speciality.
 async function createTravellerMacro(data, slot) {
     console.log("createTravellerMacro:");
-    console.log(data);
-    console.log(slot);
     let actorId = data.actorId;
     let dragData = data.data;
 
-    if (dragData.dragType === "skill") {
-        console.log("Have dragged a skill " + dragData.skillName);
+    if (data.type === "Item") {
+        let item = await Item.fromDropData(data);
+        let label = item.name;
 
+        let command = null;
+        if (item.type === "weapon") {
+            command = `game.mgt2.rollAttackMacro('${item.name}')`;
+        }
+
+        if (command) {
+            let macro = await Macro.create({
+                name: label,
+                type: "script",
+                command: command,
+                img: item.img
+            });
+            game.user.assignHotbarMacro(macro, slot);
+        } else {
+            ui.notifications.warn(`Don't know what to do with "${label}"`);
+        }
+        return false;
+    } else if (dragData.dragType === "skill") {
         let actor = game.data.actors.find(a => (a._id === actorId));
         let skill = actor.system.skills[dragData.skillName];
         let label = skill.label;
@@ -396,7 +415,28 @@ function rollSkillMacro(skillName) {
   } else {
       new MgT2SkillDialog(actor, skillName).render(true);
   }
+}
 
+function rollAttackMacro(itemName) {
+    console.log("rollAttackMacro: ");
+    const speaker = ChatMessage.getSpeaker();
+    let actor;
+    if (speaker.token) {
+        actor = game.actors.tokens[speaker.token];
+    }
+    if (!actor) {
+        actor = game.actors.get(speaker.actor);
+    }
+    if (!actor) {
+        return ui.notifications.warn(`No actor is selected to use "${itemName}" with`);
+    }
+
+    let item = actor.items.find(i => (i.name === itemName));
+    if (!item) {
+        return ui.notifications.warn(`${actor.name} does not have item "${itemName}"`);
+    }
+
+    new MgT2AttackDialog(actor, item).render(true);
 }
 
 function updateData(dmg, ap) {
