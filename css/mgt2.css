@@ -792,6 +792,9 @@ span.rollFailure {
 
 img.skillcheck-thumb {
     width: 48px;
+    height: 48px;
+    object-fit: cover;
+    object-position: 0% 0%;
     float: left;
     margin-right: 4px;
     margin-bottom: 2px;

@@ -361,7 +361,7 @@ async function createTravellerMacro(data, slot) {
         } else {
             command = `Hotbar.toggleDocumentSheet("${item.uuid}")`;
         }
-        
+
         if (command) {
             let macro = await Macro.create({
                 name: label,
