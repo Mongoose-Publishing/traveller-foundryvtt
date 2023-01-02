@@ -158,7 +158,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     let attacks = 1;
     if (autoOption && autoOption === "burst") {
         let autoBonus = getTraitValue(traits, "auto");
-        dmg += " + " + autoBonus * destructive?10:1;
+        dmg += " + " + parseInt(autoBonus * destructive?10:1);
     } else if (autoOption && autoOption === "full") {
         attacks = getTraitValue(traits, "auto");
     }

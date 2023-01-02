@@ -202,9 +202,15 @@ Hooks.on("createItem", (item) => {
     }
 });
 
-Hooks.on("createActor", (item) => {
-    if (item.img == "icons/svg/mystery-man.svg") {
-        item.img = "systems/mgt2/icons/actors/traveller.svg";
+Hooks.on("createActor", (actor) => {
+    if (actor.img == "icons/svg/mystery-man.svg") {
+        if (actor.type === "creature") {
+            actor.img = "systems/mgt2/icons/actors/creature.svg";
+        } else if (actor.type === "traveller") {
+            actor.img = "systems/mgt2/icons/actors/traveller-white.svg";
+        } else {
+            actor.img = "systems/mgt2/icons/actors/traveller-red.svg";
+        }
     }
 });
 

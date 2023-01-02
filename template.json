@@ -5,6 +5,7 @@
       "base": {
         "speed": 6,
         "initiative": 0,
+        "size": 0,
         "rads": 0,
         "weightCarried": 0,
         "heavyLoad": 0,
@@ -20,7 +21,7 @@
             "hideUntrained": false,
             "onlyBackground": false,
             "resetOnRoll": false,
-            "columns": 6,
+            "columns": 3,
             "lockCharacteristics": false,
             "lockSkills": false
         }
@@ -968,17 +969,14 @@
           "livingCosts": 0,
           "otherIncome": 0
       },
-      "size": 0,
       "player": "",
       "terms": 0
     },
     "npc": {
-        "templates": [ "base", "characteristics", "skills", "armour", "sophont" ],
-        "size": 0
+        "templates": [ "base", "characteristics", "skills", "armour", "sophont" ]
     },
     "creature": {
         "templates": [ "base", "skills", "armour" ],
-        "size": 0,
         "behaviour": "",
         "traits": ""
     }
