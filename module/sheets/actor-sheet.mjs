@@ -49,10 +49,11 @@ export class MgT2ActorSheet extends ActorSheet {
         context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
         context.flags = actorData.flags;
 
+        console.log("getData: " + context.actor.name);
+
         // Prepare character data and items.
         if (type == 'traveller') {
             this._prepareItems(context);
-            //this._prepareCharacterData(context);
         } else if (type === 'npc') {
             this._prepareItems(context);
         } else if (type === 'creature') {
@@ -66,33 +67,6 @@ export class MgT2ActorSheet extends ActorSheet {
         context.effects = prepareActiveEffectCategories(context.actor.effects);
 
         return context;
-    }
-
-    /**
-     * Organize and classify Items for Character sheets.
-     *
-     * @param {Object} actorData The actor to prepare.
-     *
-     * @return {undefined}
-     */
-    _prepareCharacterData(context) {
-        console.log("_prepareCharacterData:");
-        let skills = context.data.skills;
-        let changed = false;
-        for (let skill in skills) {
-            if (skills[skill].individual && skills[skill].specialities) {
-                for (let s in skills[skill].specialities) {
-                    let spec = skills[skill].specialities[s];
-                    if (spec.trained && spec.value < 0) {
-                        spec.value = 0;
-                        changed = true;
-                    }
-                }
-            }
-        }
-        if (changed) {
-            //context.actor.update({"data.skills": skills });
-        }
     }
 
     /**
@@ -137,7 +111,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 weapons.push(i);
             } else if (i.type === 'armour') {
                 armour.push(i);
-                this._calculateArmour(context.actor);
+                this._calculateArmour(context);
             } else if (i.type === 'term') {
                 terms.push(i);
             } else if (i.type === "associate") {
@@ -176,25 +150,19 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     _setItemStatus(actor, item, status) {
-        console.log(`activateItem: [${actor.name}] [${item.name}]`)
+        console.log(`activateItem: [${actor.name}] [${item.name}] to [${status}]`)
         const itemData = item.system;
 
         if (item.type === "armour") {
             let form = itemData.armour.form;
             if (status === MgT2Item.EQUIPPED) {
                 for (let i of actor.items) {
-                    if (i.system.armour && i.system.armour.worn && i.system.armour.form === form) {
-                        i.system.armour.worn = 0;
+                    if (i.system.armour && i.system.status === MgT2Item.EQUIPPED && i.system.armour.form === form) {
                         i.system.status = MgT2Item.CARRIED;
-                        i.update({"system.armour.worn": 0, "system.status": MgT2Item.CARRIED });
+                        i.update({"system.status": MgT2Item.CARRIED });
                     }
                 }
-                itemData.armour.worn = 1;
-            } else {
-                itemData.armour.worn = 0;
             }
-            item.update({ "system.armour.worn": itemData.armour.worn });
-            this._calculateArmour(actor);
         }
         const isActive = (status === MgT2Item.EQUIPPED);
 
@@ -202,38 +170,8 @@ export class MgT2ActorSheet extends ActorSheet {
         item.update({ "system.status": status });
     }
 
-    _wearArmour(actor, item) {
-        console.log(`wearArmour: [${actor.name}] [${item.name}]`)
-        const actorData = actor.system;
-        const itemData = item.system;
-
-        let form = itemData.armour.form;
-        for (let i of actor.items) {
-            if (i.system.armour && i.system.armour.worn && i.system.armour.form === form) {
-                i.system.armour.worn = 0;
-                i.update({"system.armour.worn": 0});
-            }
-        }
-        itemData.armour.worn = 1;
-        item.update({"system.armour.worn": 1});
-        this._calculateArmour(actor);
-    }
-
-    _removeArmour(actor, item) {
-        console.log(`wearArmour: [${actor.name}] [${item.name}]`)
-        const actorData = actor.system;
-        const itemData = item.system;
-
-        itemData.armour.worn = 0;
-        item.update({"system.armour.worn": 0});
-
-        this._calculateArmour(actor);
-    }
-
-    _calculateArmour(actor) {
-        const actorData = actor.system;
-        console.log("_calculateArmour: ");
-        console.log(actorData);
+    _calculateArmour(context) {
+        const actorData = context.system;
 
         let armour = actorData.armour;
         armour.protection = 0;
@@ -241,10 +179,10 @@ export class MgT2ActorSheet extends ActorSheet {
         armour.otherTypes = "";
         armour.rad = 0;
         armour.archaic = 0;
-        for (let i of actor.items) {
+        for (let i of context.items) {
             if (i.system.armour) {
                 const armourData = i.system.armour;
-                if (armourData.worn || armourData.form === "natural") {
+                if (armourData.form === "natural" || i.system.status === MgT2Item.EQUIPPED) {
                     let armourData = i.system.armour;
 
                     armour.protection += armourData.protection;
@@ -259,7 +197,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
         }
-        actor.update({ "system.armour": armour});
+        context.actor.update({"system.armour": armour});
     }
 
     applyActiveEffect() {
@@ -320,19 +258,6 @@ export class MgT2ActorSheet extends ActorSheet {
             const item = this.actor.items.get(li.data("itemId"));
             this._setItemStatus(this.actor, item, MgT2Item.CARRIED);
         });
-
-    html.find('.item-wear').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("itemId"));
-      this._wearArmour(this.actor, item);
-      console.log("worn");
-    });
-
-    html.find('.item-unwear').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("itemId"));
-      this._removeArmour(this.actor, item);
-    });
 
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
