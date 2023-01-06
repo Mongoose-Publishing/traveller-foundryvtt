@@ -2,6 +2,7 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
 import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
 import {MgT2XPDialog } from "../helpers/xp-dialog.mjs";
+import {MgT2QuantityDialog } from "../helpers/quantity-dialog.mjs";
 import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
@@ -72,7 +73,7 @@ export class MgT2ActorSheet extends ActorSheet {
     /**
      * Organize and classify Items for Character sheets.
      *
-     * @param {Object} actorData The actor to prepare.
+     * @param {Object} context The actor to prepare.
      *
      * @return {undefined}
      */
@@ -93,7 +94,7 @@ export class MgT2ActorSheet extends ActorSheet {
             i.img = i.img || DEFAULT_TOKEN;
 
             if (i.system.status === MgT2Item.CARRIED) {
-                weight += parseInt(i.system.weight);
+                weight += parseFloat(i.system.weight) * parseFloat(i.system.quantity);
             } else if (i.system.status === MgT2Item.EQUIPPED) {
                 if (i.type === "armour") {
                     if (!i.system.armour.powered || parseInt(i.system.armour.powered) === 0) {
@@ -367,18 +368,21 @@ export class MgT2ActorSheet extends ActorSheet {
             return true;
         }
 
+        if (event.shiftKey) {
+            // If shift is held down on drop, copy rather than move.
+            return;
+        }
         let actor = this.actor;
         let srcActorId = data.uuid.replace(/Actor\.([a-z0-9]*)\..*/gi, "$1");
         let itemId = data.uuid.replace(/Actor\.[a-z0-9]*\.Item\.([a-z0-9]*)/gi, "$1");
-
-        console.log("This actor id:" + actor.uuid);
-        console.log("Src Actor id: " + srcActorId);
 
         if (actor.uuid.indexOf(srcActorId) === -1) {
             // Move between different actors.
             let srcActor = game.actors.get(srcActorId);
             if (srcActor) {
+                let item = srcActor.items.get(itemId);
                 srcActor.deleteEmbeddedDocuments("Item", [itemId]);
+                ui.notifications.info(`Moved '${item.name}' from '${srcActor.name}' to '${actor.name}'`);
             }
         }
         return true;

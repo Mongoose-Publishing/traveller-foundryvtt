@@ -1,0 +1,26 @@
+<form class="flexcol skilldialog">
+
+    <div class="shadow">
+        <h3 class="skill-dialog-title">
+            How many items to move?
+        </h3>
+
+        <div>
+            <label for="quantity" class="skillDialogLabel">How many? </label>
+            <select class="quantity" name="quantity">
+                {{#select "one"}}
+                    <option value="one">One item</option>
+                    <option value="all">All items ({{max}})</option>
+                    <option value="custom">Custom amount</option>
+                {{/select}}
+            </select>
+            <br/>
+            <label for="number" class="skillDialogLabel">Custom</label>
+            <input class="skillDialogDM" name="number" type="text" data-dtype="Number" value="{{number}}"/>
+        </div>
+    </div>
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="save">Save <i class="fas fa-dice"></i></button>
+    </footer>
+
+</form>

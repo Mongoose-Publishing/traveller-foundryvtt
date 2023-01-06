@@ -982,7 +982,7 @@
     }
   },
   "Item": {
-    "types": ["item", "feature", "weapon", "armour", "augment", "term", "associate" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate" ],
     "templates": {
       "base": {
         "tl": 0,
@@ -990,6 +990,7 @@
         "cost": 0,
         "notes": "",
         "active": false,
+        "quantity": 1,
         "status": null
       },
       "weapon": {
@@ -1045,21 +1046,16 @@
     },
     "item": {
       "templates": ["base" ],
-      "description": "Item Description",
-      "quantity": 1
+      "description": "Item Description"
     },
     "weapon": {
-      "templates": ["base", "weapon"],
-      "quantity": 1
+      "templates": ["base", "weapon"]
     },
     "armour": {
       "templates": ["base", "armour"]
     },
     "augment": {
       "templates": [ "base", "augment" ]
-    },
-    "feature": {
-      "templates": ["base"]
     },
     "term": {
       "templates": [ "term" ]
