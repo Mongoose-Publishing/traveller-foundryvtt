@@ -55,6 +55,14 @@ Hooks.once('init', async function() {
             console.log(`Setting iconsInChat to ${value}`)
         }
     });
+    game.settings.register('mgt2', 'useEncumbrance', {
+        name: game.i18n.localize("MGT2.Settings.UseEncumbrance.Name"),
+        hint: game.i18n.localize("MGT2.Settings.UseEncumbrance.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true
+    });
     game.settings.register('mgt2', 'quickRolls', {
         name: game.i18n.localize("MGT2.Settings.QuickRolls.Name"),
         hint: game.i18n.localize("MGT2.Settings.QuickRolls.Hint"),

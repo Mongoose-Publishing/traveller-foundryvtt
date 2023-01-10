@@ -14,6 +14,8 @@
   "MGT2.Settings.SkillFormat.Hint": "Format of skill lists, either row first or column first",
   "MGT2.Settings.SkillFormat.Values.Rows": "Rows",
   "MGT2.Settings.SkillFormat.Values.Columns": "Columns",
+  "MGT2.Settings.UseEncumbrance.Name": "Use encumbrance",
+  "MGT2.Settings.UseEncumbrance.Hint": "If enabled, automatically applies penalties due to encumbrance",
 
   "MGT2.TravellerSheet.Player": "Player",
   "MGT2.TravellerSheet.Species": "Species",

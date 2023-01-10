@@ -160,6 +160,22 @@ export class MgT2Actor extends Actor {
         actorData.system.initiative = Math.max(int, dex);
     }
 
+    _countSkillLevels(skillData) {
+      console.log("_countSkillLevels:");
+      let total = 0;
+      for (var s in skillData) {
+          if (skillData[s].trained) {
+              total += parseInt(skillData[s].value);
+              if (skillData[s].specialities) {
+                  for (var sp in skillData[s].specialities) {
+                      total += parseInt(skillData[s].specialities[sp].value);
+                  }
+              }
+          }
+      }
+      return total;
+    }
+
     /**
      * Prepare Character type specific data
      */
@@ -168,6 +184,12 @@ export class MgT2Actor extends Actor {
 
         // Make modifications to data here. For example:
         const data = actor.system;
+
+        let totalSkills = this._countSkillLevels(data.skills);
+        data.totalSkills = totalSkills;
+        let maxSkills = (parseInt(data.characteristics.INT.value) +
+            parseInt(data.characteristics.EDU.value)) * 3;
+        data.maxSkills = maxSkills;
 
         for (const char in data.characteristics) {
             let value = data.characteristics[char].value;
@@ -207,6 +229,12 @@ export class MgT2Actor extends Actor {
     _prepareNpcData(actor) {
         if (actor.type !== 'npc') return;
         const actorData = actor.system;
+
+        let totalSkills = this._countSkillLevels(actorData.skills);
+        actorData.totalSkills = totalSkills;
+        let maxSkills = (parseInt(actorData.characteristics.INT.value) +
+            parseInt(actorData.characteristics.EDU.value)) * 3;
+        actorData.maxSkills = maxSkills;
 
         for (const char in actorData.characteristics) {
             let value = actorData.characteristics[char].value;

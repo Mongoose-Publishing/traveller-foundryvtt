@@ -125,8 +125,10 @@ export class MgT2ActorSheet extends ActorSheet {
 
         this.actor.system.weightCarried = weight;
         this.actor.system.physicalDM = 0;
-        if (weight > this.actor.system.heavyLoad) {
-            this.actor.system.physicalDM = -2;
+        if ( game.settings.get("mgt2", "useEncumbrance")) {
+            if (weight > this.actor.system.heavyLoad) {
+                this.actor.system.physicalDM = -2;
+            }
         }
         if (skillNeeded >= 0) {
             let vaccSkill = -3;
