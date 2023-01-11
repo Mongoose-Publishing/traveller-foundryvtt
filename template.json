@@ -10,7 +10,26 @@
         "weightCarried": 0,
         "heavyLoad": 0,
         "maxLoad": 0,
-        "physicalDM": 0,
+        "modifiers": {
+            "encumbrance": {
+                "custom": 0,
+                "auto": 0,
+                "effect": 0,
+                "dm": 0
+            },
+            "physical": {
+                "custom": 0,
+                "auto": 0,
+                "effect": 0,
+                "dm": 0
+            },
+            "melee": {
+                "custom": 0,
+                "auto": 0,
+                "effect": 0,
+                "dm": 0
+            }
+        },
         "hits": {
             "value": 21,
             "max": 21,

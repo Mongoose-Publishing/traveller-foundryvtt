@@ -70,6 +70,18 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         dice = "3D6kl2";
     }
     dice += " + " + skillDM;
+    if (data.modifiers.encumbrance.dm != 0) {
+        dice += " + " + parseInt(data.modifiers.encumbrance.dm);
+    }
+    if (baseRange === 0) {
+        if (data.modifiers.melee.dm != 0) {
+            dice += " + " + parseInt(data.modifiers.melee.dm);
+        }
+    } else {
+        if (data.modifiers.physical.dm != 0) {
+            dice += " + " + parseInt(data.modifiers.physical.dm);
+        }
+    }
 
     if (weapon.system.weapon.attackBonus) {
         const attackBonus = parseInt(weapon.system.weapon.attackBonus);
@@ -373,8 +385,11 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     }
     if (cha) {
         if (cha === "STR" || cha === "DEX" || cha === "END") {
-            if (data.physicalDM) {
-                dm += parseInt(data.physicalDM);
+            if (data.modifiers.encumbrance.dm) {
+                dm += parseInt(data.modifiers.encumbrance.dm);
+            }
+            if (data.modifiers.physical.dm) {
+                dm += parseInt(data.modifiers.physical.dm);
             }
         }
         chaDm = data.characteristics[cha].dm;

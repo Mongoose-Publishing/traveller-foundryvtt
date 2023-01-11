@@ -943,6 +943,10 @@ Handlebars.registerHelper('effect', function(key) {
         } else {
             return skills[skill].label;
         }
+    } else if (key && key.startsWith("system.modifiers")) {
+        key = key.replaceAll(/system\.modifiers\./g, "");
+        key = key.replaceAll(/\.effect/g, "");
+        return key
     }
     return key;
 });

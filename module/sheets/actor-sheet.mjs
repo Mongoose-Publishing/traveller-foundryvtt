@@ -67,6 +67,16 @@ export class MgT2ActorSheet extends ActorSheet {
         // Prepare active effects
         context.effects = prepareActiveEffectCategories(context.actor.effects);
 
+        // Work out bonuses and penalties
+        if (actorData.modifiers) {
+            let enc = actorData.modifiers.encumbrance;
+            enc.dm = enc.custom + enc.auto + enc.effect;
+            let phy = actorData.modifiers.physical;
+            phy.dm = phy.custom + phy.auto + phy.effect;
+            let melee = actorData.modifiers.melee;
+            melee.dm = melee.custom + melee.auto + melee.effect;
+        }
+
         return context;
     }
 
@@ -124,10 +134,10 @@ export class MgT2ActorSheet extends ActorSheet {
         }
 
         this.actor.system.weightCarried = weight;
-        this.actor.system.physicalDM = 0;
+        this.actor.system.modifiers.encumbrance.auto = 0;
         if ( game.settings.get("mgt2", "useEncumbrance")) {
             if (weight > this.actor.system.heavyLoad) {
-                this.actor.system.physicalDM = -2;
+                this.actor.system.modifiers.encumbrance.auto = -2;
             }
         }
         if (skillNeeded >= 0) {
@@ -136,10 +146,10 @@ export class MgT2ActorSheet extends ActorSheet {
             if (vs && vs.trained) {
                 vaccSkill = parseInt(vs.value);
                 if (vaccSkill < skillNeeded) {
-                    this.actor.system.physicalDM -= (skillNeeded - vaccSkill);
+                    this.actor.system.modifiers.encumbrance.auto -= (skillNeeded - vaccSkill);
                 }
             } else {
-                this.actor.system.physicalDM += vaccSkill;
+                this.actor.system.modifiers.encumbrance.auto += vaccSkill;
             }
         }
 

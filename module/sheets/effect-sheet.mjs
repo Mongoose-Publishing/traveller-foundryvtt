@@ -47,11 +47,11 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         let prop =context.effectType.property;
         if (context.effectType.targets == "char") {
             context.targets = {};
-            for (const k of [ 'STR', 'DEX', 'END', 'INT', 'PSI' ]) {
-                let key = "data.characteristics."+k+"."+prop;
+            for (const k of ['STR', 'DEX', 'END', 'INT', 'PSI']) {
+                let key = "data.characteristics." + k + "." + prop;
                 context.targets[key] = {"label": k};
             }
-        } else {
+        } else if (context.effectType.targets == "skills") {
             context.targets = {};
             let skills = game.system.template.Actor.templates.skills.skills;
             for (let id in skills) {
@@ -63,6 +63,11 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
                     }
                 }
             }
+        } else {
+            context.targets = {};
+            context.targets["data.modifiers.encumbrance." + prop] = { "label": "Encumbrance DM" };
+            context.targets["data.modifiers.physical." + prop] = { "label": "Physical DM" };
+            context.targets["data.modifiers.melee." + prop] = { "label": "Melee DM" };
         }
 
         return context;

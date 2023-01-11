@@ -31,7 +31,8 @@ MGT2.EFFECT_TYPES = {
   "CHA_BANE": "chaBane",
   "SKILL_AUG": "skillAug",
   "SKILL_DM": "skillDM",
-  "SKILL_EXPERT": "skillExpert"
+  "SKILL_EXPERT": "skillExpert",
+  "DM": "miscDM"
 };
 
 MGT2.EFFECTS = {
@@ -41,5 +42,6 @@ MGT2.EFFECTS = {
   "chaBane":  { "targets": "char", "value": false, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE },
   "skillAug":  { "targets": "skills", "value": true, "property": "augment", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "skillDM": { "targets": "skills", "value": true, "property": "augdm", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
-  "skillExpert": { "targets": "skills", "value": true, "property": "expert", mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE }
+  "skillExpert": { "targets": "skills", "value": true, "property": "expert", mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE },
+  "miscDM": { "targets": "misc", "value": true, "property": "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD }
 };
