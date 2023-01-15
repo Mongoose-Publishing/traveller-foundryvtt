@@ -1334,3 +1334,12 @@ span.edit-skill {
 .skillNotes {
     width: 5em;
 }
+
+.addNewSkill {
+    font-weight: bold;
+}
+.addNewSkill:hover {
+    color: #000;
+    text-shadow: 0 0 10px red;
+    cursor: pointer;
+}

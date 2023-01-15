@@ -1,0 +1,109 @@
+<section>
+    <div class="resources grid grid-4col">
+        <div class="resource flex-group-center">
+            <label for="data.totalSkills" class="resource-label">Skills Learned</label>
+            <input type="text" name="data.totalSkills" value="{{data.totalSkills}}"
+                   data-dtype="Number" readonly/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.maxSkills" class="resource-label">Max Skills</label>
+            <input type="text" name="data.maxSkills" value="{{data.maxSkills}}"
+                   data-dtype="Number"/>
+        </div>
+        <div>
+            <label for="data.settings.columns" class="resource-label">Characteristics</label><br/>
+            <select name="data.settings.columns">
+                {{#select data.settings.columns}}
+                <option value="3">3 columns</option>
+                <option value="4">4 columns</option>
+                <option value="6">6 columns</option>
+                {{/select}}
+            </select>
+
+        </div>
+        <div class=""resource flex-group-center">
+            <br/>
+            <span name="addNewSkill" class="addNewSkill item">+Add New Skill</span>
+        </div>
+    </div>
+    <h3>Encumbrance DM</h3>
+    <div class="resources grid grid-4col">
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.encumbrance.custom" class="resource-label">Custom</label>
+            <input type="text" name="data.modifiers.encumbrance.custom" value="{{data.modifiers.encumbrance.custom}}"
+                   data-dtype="Number" class="characteristic-value"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.encumbrance.auto" class="resource-label">Auto</label>
+            <input type="text" name="data.modifiers.encumbrance.auto" value="{{data.modifiers.encumbrance.auto}}"
+                   data-dtype="Number" class="characteristic-readonly" readonly/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.encumbrance.effect" class="resource-label">From Items</label>
+            <input type="text" name="data.modifiers.encumbrance.effect" value="{{data.modifiers.encumbrance.effect}}"
+                   data-dtype="Number" class="characteristic-readonly" readonly/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.encumbrance.dm" class="resource-label">Total DM</label>
+            <input type="text" name="data.modifiers.encumbrance.dm" value="{{data.modifiers.encumbrance.dm}}"
+                   data-dtype="Number" class="characteristic-readonly" readonly/>
+        </div>
+    </div>
+    <h3>Physical DM</h3>
+    <div class="resources grid grid-4col">
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.physical.custom" class="resource-label">Custom</label>
+            <input type="text" name="data.modifiers.physical.custom" value="{{data.modifiers.physical.custom}}"
+                   data-dtype="Number" class="characteristic-value"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.physical.auto" class="resource-label">Auto</label>
+            <input type="text" name="data.modifiers.physical.auto" value="{{data.modifiers.physical.auto}}"
+                   data-dtype="Number" class="characteristic-readonly" readonly/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.physical.effect" class="resource-label">From Items</label>
+            <input type="text" name="data.modifiers.physical.effect" value="{{data.modifiers.physical.effect}}"
+                   data-dtype="Number" class="characteristic-readonly" readonly/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.physical.dm" class="resource-label">Total DM</label>
+            <input type="text" name="data.modifiers.physical.dm" value="{{data.modifiers.physical.dm}}"
+                   data-dtype="Number" class="characteristic-readonly" readonly/>
+        </div>
+    </div>
+    <h3>Melee DM</h3>
+    <div class="resources grid grid-4col">
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.melee.custom" class="resource-label">Custom</label>
+            <input type="text" name="data.modifiers.melee.custom" value="{{data.modifiers.melee.custom}}"
+                   data-dtype="Number" class="characteristic-value"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.melee.auto" class="resource-label">Auto</label>
+            <input type="text" name="data.modifiers.melee.auto" value="{{data.modifiers.melee.auto}}"
+                   data-dtype="Number" class="characteristic-readonly" readonly/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.melee.effect" class="resource-label">From Items</label>
+            <input type="text" name="data.modifiers.melee.effect" value="{{data.modifiers.melee.effect}}"
+                   data-dtype="Number" class="characteristic-readonly" readonly/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="data.modifiers.melee.dm" class="resource-label">Total DM</label>
+            <input type="text" name="data.modifiers.melee.dm" value="{{data.modifiers.melee.dm}}"
+                   data-dtype="Number" class="characteristic-readonly" readonly/>
+        </div>
+    </div>
+
+</section>
+<br/>
+<h3>Display Characteristics</h3>
+<section class="resources grid grid-3col">
+    {{#each data.characteristics as | char key | }}
+    <div class="resource flex-group-left">
+        <input type="checkbox" name="data.characteristics.{{key}}.show" {{checked char.show}} data-dtype="Boolean" />
+        <label for="data.characteristics.{{key}}.value" title="{{char.label}}">{{key}}</label>
+    </div>
+    {{/each}}
+</section>

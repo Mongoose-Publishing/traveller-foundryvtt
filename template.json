@@ -143,7 +143,7 @@
                 "show": false,
                 "default": false
             },
-            "SAN": {
+            "STY": {
                 "label": "Sanity",
                 "value": 7,
                 "current": 7,
@@ -173,7 +173,7 @@
             "END": { "value": 0 },
             "PSI": { "value": 0 },
             "LCK": { "value": 0 },
-            "SAN": { "value": 0 }
+            "STY": { "value": 0 }
         }
       },
       "armour": {

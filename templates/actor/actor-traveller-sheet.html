@@ -245,28 +245,9 @@
 
                     {{!-- Settings Tab --}}
                     {{#if (isOwner .)}}
-                    <section class="tab settings flexcol" data-group="primary" data-tab="settings">
-                        <section>
-                            <label for="data.settings.columns">Number of columns in Characteristics</label>
-                            <select name="data.settings.columns">
-                                {{#select data.settings.columns}}
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="6">6</option>
-                                {{/select}}
-                            </select>
-                            <br/>
-                            <span name="addNewSkill" class="addNewSkill">Add New Skill</span>
+                        <section class="tab settings flexcol" data-group="primary" data-tab="settings">
+                            {{> "systems/mgt2/templates/actor/parts/actor-settings.html"}}
                         </section>
-                        <section class="resources grid grid-3col">
-                            {{#each data.characteristics as | char key | }}
-                            <div class="resource flex-group-left">
-                                <input type="checkbox" name="data.characteristics.{{key}}.show" {{checked char.show}} data-dtype="Boolean" />
-                                <label for="data.characteristics.{{key}}.value" title="{{char.label}}">{{key}}</label>
-                            </div>
-                            {{/each}}
-                        </section>
-                    </section>
                     {{/if}}
                 </div>
             </div>
