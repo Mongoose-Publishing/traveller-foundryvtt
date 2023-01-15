@@ -926,6 +926,15 @@ Handlebars.registerHelper('isLimited', function(key) {
     return key.document.permission >= 2;
 });
 
+Handlebars.registerHelper('termYear', function(data, term) {
+    if (term < 1) {
+        term = 1;
+    }
+
+    return 1105;
+});
+
+
 /**
  * Given an active effect, display the key in a readable form.
  */

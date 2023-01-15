@@ -989,7 +989,11 @@
           "otherIncome": 0
       },
       "player": "",
-      "terms": 0
+      "terms": 0,
+      "startAge": 18,
+      "termLength": 4,
+      "entryYear": 1105,
+      "entryAge": 18
     },
     "npc": {
         "templates": [ "base", "characteristics", "skills", "armour", "sophont" ]

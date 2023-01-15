@@ -55,6 +55,14 @@ export class MgT2ActorSheet extends ActorSheet {
         // Prepare character data and items.
         if (type == 'traveller') {
             this._prepareItems(context);
+            actorData.birthYear = parseInt(actorData.entryYear) - parseInt(actorData.startAge);
+            let numTerms = context.terms.length;
+            let year = parseInt(actorData.entryYear) - parseInt(actorData.termLength) * numTerms;
+            for (let t of context.terms) {
+                t.system.term.startYear = year;
+                year += parseInt(actorData.termLength);
+            }
+            actorData.entryAge = parseInt(actorData.startAge) + parseInt(actorData.termLength) * numTerms;
         } else if (type === 'npc') {
             this._prepareItems(context);
         } else if (type === 'creature') {
@@ -210,7 +218,9 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
         }
-        context.actor.update({"system.armour": armour});
+        if (context.actor) {
+            context.actor.update({"system.armour": armour});
+        }
     }
 
     applyActiveEffect() {

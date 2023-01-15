@@ -560,6 +560,10 @@ h1.charname input {
     margin-bottom: 1px;
 }
 
+.actor .input-value {
+    background-color: #F0F0F0;
+}
+
 .actor .characteristic-value {
     background-color: #F0F0F0;
     width: 3em;

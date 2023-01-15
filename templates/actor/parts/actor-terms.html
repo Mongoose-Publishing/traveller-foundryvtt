@@ -1,8 +1,36 @@
 <h2>Career Terms</h2>
 
+<div class="resources grid grid-5col">
+    <div class="resource flex-group-center" title="Age of character when character generation begins">
+        <label for="data.startAge" class="resource-label">Start Age</label><br/>
+        <input type="text" name="data.startAge" value="{{data.startAge}}"
+               data-dtype="Number" class="input-value"/>
+    </div>
+    <div class="resource flex-group-center" title="Length of each term, in years">
+        <label for="data.termLength" class="resource-label">Term Length</label><br/>
+        <input type="text" name="data.termLength" value="{{data.termLength}}"
+               data-dtype="Number" class="input-value"/>
+    </div>
+    <div class="resource flex-group-center" title="Year you enter the campaign">
+        <label for="data.entryYear" class="resource-label">Entry Year</label><br/>
+        <input type="text" name="data.entryYear" value="{{data.entryYear}}"
+               data-dtype="Number" class="input-value"/>
+    </div>
+    <div class="resource flex-group-center" title="Age when you enter the campaign">
+        <label for="data.entryAge" class="resource-label">Entry Age</label><br/>
+        <input type="text" name="data.entryAge" value="{{data.entryAge}}"
+               data-dtype="Number" readonly/>
+    </div>
+    <div class="resource flex-group-center" title="Age when you were born">
+        <label for="data.birthYear" class="resource-label">Year Born</label><br/>
+        <input type="text" name="data.birthYear" value="{{data.birthYear}}"
+               data-dtype="Number" readonly/>
+    </div>
+</div>
+
 <ol class="history-list">
     <li class="item flexrow history-header">
-        <div class="history-number">No.</div>
+        <div class="history-number">Year</div>
         <div class="history-name">Career</div>
         <div class="history-notes">Notes</div>
         <div class="item-controls">
@@ -12,7 +40,7 @@
     {{#each terms as |item id|}}
         <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="history-number">
-                <label class="resource-label">{{item.system.term.number}}</label>
+                <label class="resource-label">{{item.system.term.startYear}}</label>
             </div>
 
             <div class="history-name">
