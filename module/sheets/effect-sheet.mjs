@@ -48,14 +48,14 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         if (context.effectType.targets == "char") {
             context.targets = {};
             for (const k of ['STR', 'DEX', 'END', 'INT', 'PSI']) {
-                let key = "data.characteristics." + k + "." + prop;
+                let key = "system.characteristics." + k + "." + prop;
                 context.targets[key] = {"label": k};
             }
         } else if (context.effectType.targets == "skills") {
             context.targets = {};
             let skills = game.system.template.Actor.templates.skills.skills;
             for (let id in skills) {
-                let baseKey = "data.skills."+id
+                let baseKey = "system.skills."+id
                 context.targets[baseKey + "." + prop] = { "label": skills[id].label };
                 if (skills[id].specialities) {
                     for (let sid in skills[id].specialities) {
@@ -65,9 +65,9 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
             }
         } else {
             context.targets = {};
-            context.targets["data.modifiers.encumbrance." + prop] = { "label": "Encumbrance DM" };
-            context.targets["data.modifiers.physical." + prop] = { "label": "Physical DM" };
-            context.targets["data.modifiers.melee." + prop] = { "label": "Melee DM" };
+            context.targets["system.modifiers.encumbrance." + prop] = { "label": "Encumbrance DM" };
+            context.targets["system.modifiers.physical." + prop] = { "label": "Physical DM" };
+            context.targets["system.modifiers.melee." + prop] = { "label": "Melee DM" };
         }
 
         return context;

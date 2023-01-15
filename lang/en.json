@@ -66,7 +66,8 @@
 
   "MGT2.Armour.FormType": "Armour Type",
   "MGT2.Armour.Form.Standard": "Standard",
-  "MGT2.Armour.Form.Layered": "Layered",
+  "MGT2.Armour.Form.Layered": "Anti-Energy",
+  "MGT2.Armour.Form.Stackable": "Stackable",
   "MGT2.Armour.Form.Natural": "Natural",
   "MGT2.Armour.Archaic": "Archaic",
   "MGT2.Armour.Duration": "Duration (Hours)",
