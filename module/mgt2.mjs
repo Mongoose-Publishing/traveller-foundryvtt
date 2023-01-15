@@ -234,7 +234,8 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
    if (data?.system?.damage) {
        // This is an NPC or Creature
        console.log("preUpdateActor: HITS");
-
+       console.log(data.system.damage);
+       // TODO: Not all these will be set. So breaks and doesn't work.
        let endDmg = parseInt(data.system.damage.END.value);
        let strDmg = parseInt(data.system.damage.STR.value);
        let dexDmg = parseInt(data.system.damage.DEX.value);

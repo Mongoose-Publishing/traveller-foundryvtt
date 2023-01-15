@@ -384,19 +384,8 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         cha = null;
     }
     if (cha) {
-        if (cha === "STR" || cha === "DEX" || cha === "END") {
-            if (data.modifiers.encumbrance.dm) {
-                dm += parseInt(data.modifiers.encumbrance.dm);
-            }
-            if (data.modifiers.physical.dm) {
-                dm += parseInt(data.modifiers.physical.dm);
-            }
-        }
         chaDm = data.characteristics[cha].dm;
-        if (data.characteristics[cha].augdm) {
-            chaDm += parseInt(data.characteristics[cha].augdm);
-        }
-        dice += " + " + chaDm;
+        dice += ` ${chaDm>=0?"+":""}${chaDm}[${cha}]`;
         title = cha;
         skillText += cha;
         if (chaDm < 0) {
@@ -404,7 +393,26 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         } else {
             skillText += " (+" + chaDm + ")";
         }
+        // AugmentDM is a straight bonus to any roll using that characteristic.
+        if (data.characteristics[cha].augdm && parseInt(data.characteristics[cha].augdm) != 0) {
+            let chaAugDm = parseInt(data.characteristics[cha].augdm);
+            dice += ` ${(chaAugDm>=0)?"+":""}${chaAugDm}[AugDM]`;
+            skillText += " (" + chaAugDm + "Aug)";
+        }
+        if (cha === "STR" || cha === "DEX" || cha === "END") {
+            if (data.modifiers.encumbrance.dm) {
+                let encDm = parseInt(data.modifiers.encumbrance.dm);
+                dice += ` ${(encDm>=0)?"+":""}${encDm}[Enc]`;
+                skillText += ` (${encDm}Enc)`;
+            }
+            if (data.modifiers.physical.dm) {
+                let phyDm = parseInt(data.modifiers.physical.dm);
+                dice += ` ${(phyDm>=0)?"+":""}${phyDm}[Phy]`;
+                skillText += ` (${phyDm}Phy)`;
+            }
+        }
     }
+    console.log(skillText);
 
     let notes = "";
     if (skill) {
