@@ -214,24 +214,19 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     console.log(`applyDamageTo: ${damage} AP ${ap} TL ${tl} (${options})`);
     console.log(token);
 
-    let isLaser = options.indexOf("laser") > -1;
-    let isPlasma = options.indexOf("plasma") > -1;
-    let isEnergy = options.indexOf("energy") > -1;
-    let isPsi = options.indexOf("psi") > -1;
+    let data = actor.system;
     let isRanged = true;
 
-    let data = actor.system;
-
-    let armour = data.armour.protection;
-    if (isLaser && data.armour.laser > armour) {
-        armour = data.armour.laser;
-    } else if (isPlasma && data.armour.plasma > armour) {
-        armour = data.armour.plasma;
-    } else if (isEnergy && data.armour.energy > armour) {
-        armour = data.armour.energy;
-    } else if (isPsi && data.armour.psi > armour) {
-        armour = data.armour.psi;
+    let armour = parseInt(data.armour.protection);
+    if (options != "") {
+        if (data.armour.otherTypes.indexOf(options) > -1) {
+            armour += parseInt(data.armour.otherProtection);
+        }
     }
+    if (armour < 0) {
+        armour = 0;
+    }
+
     if (hasTrait(traits, "lo-pen")) {
         let lopen = getTraitValue(traits, "lo-pen");
         if (lopen > 1) {
@@ -323,7 +318,7 @@ Tools.applyDamage = function(damage, ap, tl, options, traits) {
         console.log(token);
         if (token.document.actorLink && token.actor.type === "traveller") {
             console.log("This is a Traveller");
-            new MgT2DamageDialog(token.actor, damage, ap, "", false).render(true);
+            new MgT2DamageDialog(token.actor, damage, ap, options?options:"", false).render(true);
         } else {
             Tools.applyDamageTo(damage, ap, tl, options, traits, token.actor, token);
         }

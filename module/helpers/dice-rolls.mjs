@@ -215,7 +215,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         let tl = weapon.system.tl;
         let options = "";
         if (type !== "standard") {
-            options += " " + type;
+            options = type;
         }
 
         if (isParry) {
