@@ -1,0 +1,39 @@
+<form class="{{cssClass}} {{item.type}} flexcol" autocomplete="off">
+  <section class="item-sheet">
+    <div class="sidebar">
+      <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+
+      <div class="shadow item-side-panel">
+        <div class="resource flex-group-center">
+          <label for="system.quantity" class="resource-label">Quantity</label>
+          <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-group-left">
+      <div class="shadow">
+        <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        <div class="resources grid grid-4col flex-group-center">
+          <div class="resource">
+            <label for="system.weight" class="resource-label">KG</label>
+            <input type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
+          </div>
+          <div class="resource">
+            <label for="system.cost" class="resource-label">Cost</label>
+            <input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+          </div>
+          <div class="resource">
+            <label for="system.tl" class="resource-label">TL</label>
+            <input type="text" name="system.tl" value="{{system.tl}}" data-dtype="Number"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="shadow">
+        {{editor enrichedDescription target="system.description"
+        button=true editable=editable}}
+      </div>
+    </div>
+  </section>
+</form>

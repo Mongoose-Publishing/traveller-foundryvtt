@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["traveller", "npc", "creature" ],
+    "types": ["traveller", "npc", "creature", "spacecraft" ],
     "templates": {
       "base": {
         "speed": 6,
@@ -1002,10 +1002,30 @@
         "templates": [ "base", "skills", "armour" ],
         "behaviour": "",
         "traits": ""
+    },
+    "spacecraft": {
+        "templates": [],
+        "dtons": 100,
+        "armour": 0,
+        "radshielding": 0,
+        "hits": {
+          "value": 80,
+          "max": 80,
+          "damage": 0
+        },
+        "power": {
+          "value": 0,
+          "max": 10,
+          "used": 0
+        },
+        "cargo": 20,
+        "mdrive": 1,
+        "rdrive": 0,
+        "jdrive": 1
     }
   },
   "Item": {
-    "types": ["item", "weapon", "armour", "augment", "term", "associate" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware" ],
     "templates": {
       "base": {
         "tl": 0,
@@ -1065,6 +1085,23 @@
               "power": 0,
               "influence": 0
           }
+      },
+      "cargo": {
+          "quantity": 1,
+          "cost": 100,
+          "availability": "All",
+          "purchaseDM": "",
+          "saleDM": "",
+          "tons": "2D6 * 10",
+          "illegal": false
+      },
+      "hardware": {
+          "tons": 0,
+          "tl": 0,
+          "cost": 0,
+          "power": 0,
+          "enabled": true,
+          "quantity": 1
       }
     },
     "item": {
@@ -1085,6 +1122,12 @@
     },
     "associate": {
       "templates": [ "associate" ]
+    },
+    "cargo": {
+      "templates": [ "cargo"]
+    },
+    "hardware": {
+      "templates": [ "hardware" ]
     }
   }
 }

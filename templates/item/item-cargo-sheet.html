@@ -1,0 +1,47 @@
+<form class="{{cssClass}} {{item.type}} flexcol" autocomplete="off">
+  <section class="item-sheet">
+    <div class="sidebar">
+      <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+
+      <div class="shadow item-side-panel">
+        <div class="resource flex-group-center">
+          <label for="system.quantity" class="resource-label">Quantity</label>
+          <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-group-left">
+      <div class="shadow">
+        <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        <div class="resources grid grid-2col flex-group-center">
+          <div class="resource">
+            <label for="system.cost" class="resource-label">Base Price</label>
+            <input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+          </div>
+          <div class="resource">
+            <label for="system.tons" class="resource-label">Tons</label>
+            <input type="text" name="system.tons" value="{{system.tons}}" data-dtype="String"/>
+          </div>
+        </div>
+        <div class="resource">
+          <label for="system.availability" class="resource-label">Availability</label>
+          <input type="text" name="system.availability" value="{{system.availability}}" data-dtype="String"/>
+        </div>
+          <div class="resource">
+            <label for="system.purchaseDM" class="resource-label">Purchase DM</label>
+            <input type="text" name="system.purchaseDM" value="{{system.purchaseDM}}" data-dtype="String"/>
+          </div>
+          <div class="resource">
+            <label for="system.saleDM" class="resource-label">Sale DM</label>
+            <input type="text" name="system.saleDM" value="{{system.saleDM}}" data-dtype="String"/>
+          </div>
+      </div>
+
+      <div class="shadow">
+        {{editor enrichedDescription target="system.description"
+        button=true editable=editable}}
+      </div>
+    </div>
+  </section>
+</form>

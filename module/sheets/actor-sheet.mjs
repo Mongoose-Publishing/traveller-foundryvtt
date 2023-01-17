@@ -67,6 +67,8 @@ export class MgT2ActorSheet extends ActorSheet {
             this._prepareItems(context);
         } else if (type === 'creature') {
             this._prepareItems(context);
+        } else if (type === 'spacecraft') {
+            this._prepareSpacecraftItems(context);
         }
 
         // Add roll data for TinyMCE editors.
@@ -86,6 +88,49 @@ export class MgT2ActorSheet extends ActorSheet {
         }
 
         return context;
+    }
+
+    /**
+     * Similar to prepareItems, but optimised for spacecraft.
+     * Spacecraft have a locker, which has standard items in it.
+     * They have cargo, which is freight being transported for sale.
+     * They have hardware, which is ship systems.
+     * @param context
+     * @private
+     */
+    _prepareSpacecraftItems(context) {
+        const cargo = [];
+        const locker = [];
+        const hardware = [];
+
+        let cargoUsed = 0;
+
+        for (let i of context.items) {
+            console.log(`${i.name}: ${i.type}`);
+            if (i.type === 'cargo') {
+                console.log("Cargo");
+                cargo.push(i);
+                console.log(i);
+                let q = parseInt(i.system.quantity);
+                if (q > 0) {
+                    cargoUsed += q;
+                }
+            } else if (i.type === 'hardware') {
+                hardware.push(i);
+            } else {
+                locker.push(i);
+            }
+        }
+        context.cargo = cargo;
+        context.locker = locker;
+        context.hardware = hardware;
+
+        context.cargoUsed = cargoUsed;
+        context.cargoRemaining = parseInt(context.system.cargo) - cargoUsed;
+
+        console.log(cargoUsed);
+        console.log(context.cargoRemaining);
+
     }
 
     /**
@@ -194,32 +239,34 @@ export class MgT2ActorSheet extends ActorSheet {
     _calculateArmour(context) {
         const actorData = context.system;
 
-        let armour = actorData.armour;
-        armour.protection = 0;
-        armour.otherProtection = 0;
-        armour.otherTypes = "";
-        armour.rad = 0;
-        armour.archaic = 0;
-        for (let i of context.items) {
-            if (i.system.armour) {
-                const armourData = i.system.armour;
-                if (armourData.form === "natural" || i.system.status === MgT2Item.EQUIPPED) {
-                    let armourData = i.system.armour;
+        if (context.actor && (context.actor.type === 'traveller' || context.actor.type === 'npc' || context.actor.type === 'creature')) {
+            let armour = actorData.armour;
+            armour.protection = 0;
+            armour.otherProtection = 0;
+            armour.otherTypes = "";
+            armour.rad = 0;
+            armour.archaic = 0;
+            for (let i of context.items) {
+                if (i.system.armour) {
+                    const armourData = i.system.armour;
+                    if (armourData.form === "natural" || i.system.status === MgT2Item.EQUIPPED) {
+                        let armourData = i.system.armour;
 
-                    armour.protection += armourData.protection;
-                    armour.otherProtection += armourData.otherProtection;
-                    armour.rad += armourData.rad;
-                    if (armourData.otherTypes !== "") {
-                        armour.otherTypes = armourData.otherTypes;
-                    }
-                    if (armourData.archaic) {
-                        armour.archaic = 1;
+                        armour.protection += armourData.protection;
+                        armour.otherProtection += armourData.otherProtection;
+                        armour.rad += armourData.rad;
+                        if (armourData.otherTypes !== "") {
+                            armour.otherTypes = armourData.otherTypes;
+                        }
+                        if (armourData.archaic) {
+                            armour.archaic = 1;
+                        }
                     }
                 }
             }
-        }
-        if (context.actor) {
-            context.actor.update({"system.armour": armour});
+            if (context.actor) {
+                context.actor.update({"system.armour": armour});
+            }
         }
     }
 

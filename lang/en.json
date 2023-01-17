@@ -42,6 +42,17 @@
   "MGT2.TravellerSheet.DamageTaken": "Damage Taken",
   "MGT2.TravellerSheet.HitsRemaining": "Hits Remaining",
 
+  "MGT2.TravellerSheet.DTons": "Tonnage",
+  "MGT2.TravellerSheet.Power": "Power",
+  "MGT2.TravellerSheet.MDrive": "M-Drive",
+  "MGT2.TravellerSheet.RDrive": "R-Drive",
+  "MGT2.TravellerSheet.JDrive": "J-Drive",
+  "MGT2.TravellerSheet.ShipsLocker": "Ship's Locker",
+  "MGT2.TravellerSheet.CargoHold": "Cargo Hold",
+  "MGT2.TravellerSheet.CargoSpace": "Cargo Space",
+  "MGT2.TravellerSheet.CargoUsed": "Used",
+  "MGT2.TravellerSheet.CargoRemaining": "Remaining",
+
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",
   "MGT2.Damage.Unconscious": "{name} is unconscious.",
