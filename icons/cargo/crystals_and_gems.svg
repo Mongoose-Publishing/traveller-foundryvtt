@@ -5,7 +5,7 @@
    viewBox="0 0 135.46666 135.46667"
    version="1.1"
    id="svg8"
-   sodipodi:docname="biochemicals.svg"
+   sodipodi:docname="crystals_and_gems.svg"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -67,8 +67,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="237.5"
-     inkscape:cy="234.28571"
+     inkscape:cx="151.78571"
+     inkscape:cy="330.71429"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -170,30 +170,16 @@
      id="layer1">
     <path
        style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 27.516666,101.6 c 0,0 7.646114,-12.46914 14.816666,-16.933336 7.170552,-4.464196 36.212193,6.116056 42.614586,-0.281249 C 91.350312,77.98811 80.20006,45.268066 84.666664,38.099999 89.133268,30.931932 101.6,27.516666 101.6,27.516666"
-       id="path1372"
-       sodipodi:nodetypes="czzzc" />
+       d="m 67.73333,42.33333 -25.4,16.933333 25.4,42.333337 25.4,-42.333337 z"
+       id="path1136" />
     <path
        style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 112.18333,40.216665 c 0,0 -3.13153,14.304552 -10.30208,18.768748 -7.170552,4.464196 -36.212193,-6.116056 -42.614586,0.281249 -6.402394,6.397305 4.747858,34.884016 0.281254,42.052088 -4.466604,7.16806 -17.214586,17.21458 -17.214586,17.21458"
-       id="path1372-0"
-       sodipodi:nodetypes="czzzc" />
+       d="m 42.33333,59.266663 25.4,8.466667 25.4,-8.466667"
+       id="path1138" />
     <path
        style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="M 57.149997,65.616663 78.316663,86.78333"
-       id="path3633" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="M 69.849996,57.149997 86.78333,76.199996"
-       id="path3635" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="M 86.783331,35.983332 103.71666,57.149997"
-       id="path3637"
+       d="m 67.73333,42.33333 1e-6,59.26667"
+       id="path1140"
        sodipodi:nodetypes="cc" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 35.983333,91.016663 16.93333,19.049997"
-       id="path3639" />
   </g>
 </svg>

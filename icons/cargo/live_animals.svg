@@ -5,7 +5,7 @@
    viewBox="0 0 135.46666 135.46667"
    version="1.1"
    id="svg8"
-   sodipodi:docname="biochemicals.svg"
+   sodipodi:docname="live_animals.svg"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -170,30 +170,63 @@
      id="layer1">
     <path
        style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 27.516666,101.6 c 0,0 7.646114,-12.46914 14.816666,-16.933336 7.170552,-4.464196 36.212193,6.116056 42.614586,-0.281249 C 91.350312,77.98811 80.20006,45.268066 84.666664,38.099999 89.133268,30.931932 101.6,27.516666 101.6,27.516666"
-       id="path1372"
-       sodipodi:nodetypes="czzzc" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 112.18333,40.216665 c 0,0 -3.13153,14.304552 -10.30208,18.768748 -7.170552,4.464196 -36.212193,-6.116056 -42.614586,0.281249 -6.402394,6.397305 4.747858,34.884016 0.281254,42.052088 -4.466604,7.16806 -17.214586,17.21458 -17.214586,17.21458"
-       id="path1372-0"
-       sodipodi:nodetypes="czzzc" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="M 57.149997,65.616663 78.316663,86.78333"
-       id="path3633" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="M 69.849996,57.149997 86.78333,76.199996"
-       id="path3635" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="M 86.783331,35.983332 103.71666,57.149997"
-       id="path3637"
+       d="m 44.449999,69.849998 c 0,50.799992 50.799998,50.799992 50.799998,0"
+       id="path1224"
        sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
+       id="rect1499"
+       width="16.933332"
+       height="16.933332"
+       x="48.683331"
+       y="50.799999"
+       rx="8.4666662"
+       ry="8.4666662" />
+    <rect
+       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
+       id="rect1501"
+       width="16.933332"
+       height="16.933332"
+       x="76.199997"
+       y="50.799999"
+       rx="8.4666662"
+       ry="8.4666662" />
     <path
        style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 35.983333,91.016663 16.93333,19.049997"
-       id="path3639" />
+       d="M 78.316664,48.683331 C 99.48333,31.75 112.18333,29.633333 112.18333,29.633333 94.778327,46.061328 94.039682,52.206877 95.249997,57.149998"
+       id="path1638"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
+       d="M 61.383331,48.68333 C 40.216665,31.749999 27.516666,29.633332 27.516666,29.633332 44.921668,46.061327 45.660313,52.206876 44.449998,57.149997"
+       id="path1638-0"
+       sodipodi:nodetypes="ccc" />
+    <rect
+       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
+       id="rect903"
+       width="21.166666"
+       height="12.7"
+       x="59.266666"
+       y="76.199997"
+       rx="8.4666662"
+       ry="8.4666662" />
+    <rect
+       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
+       id="rect905"
+       width="2.1166666"
+       height="2.1166666"
+       x="65.616661"
+       y="82.549995"
+       rx="8.4666662"
+       ry="2.1166666" />
+    <rect
+       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
+       id="rect907"
+       width="2.1166666"
+       height="2.1166666"
+       x="71.966667"
+       y="82.549995"
+       rx="8.4666662"
+       ry="2.1166666" />
   </g>
 </svg>
