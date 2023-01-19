@@ -5,7 +5,7 @@
    viewBox="0 0 135.46666 135.46667"
    version="1.1"
    id="svg8"
-   sodipodi:docname="biochemicals.svg"
+   sodipodi:docname="illegal_biochemicals.svg"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -70,7 +70,7 @@
      inkscape:cx="380.32243"
      inkscape:cy="175.76654"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      inkscape:document-rotation="0"
      showgrid="true"
      inkscape:window-width="2560"
@@ -110,10 +110,9 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Background"
-     sodipodi:insensitive="true">
+     inkscape:label="Background">
     <rect
-       style="opacity:0.997213;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+       style="opacity:0.997213;fill:#a00000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
        id="rect957"
        width="118.53333"
        height="118.53333"
@@ -122,7 +121,7 @@
        rx="8.46667"
        ry="8.4666662" />
     <rect
-       style="opacity:0.997213;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+       style="opacity:0.997213;fill:#a00000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
        id="rect1598"
        width="110.06667"
        height="110.06667"
@@ -131,7 +130,7 @@
        rx="2.1166666"
        ry="2.1166666" />
     <rect
-       style="opacity:0.997213;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+       style="opacity:0.997213;fill:#a00000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
        id="rect1295"
        width="16.933332"
        height="16.933332"
@@ -140,7 +139,7 @@
        rx="2.1166663"
        ry="2.1166666" />
     <rect
-       style="opacity:0.997213;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+       style="opacity:0.997213;fill:#a00000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
        id="rect1295-0"
        width="16.933332"
        height="16.933332"
@@ -149,7 +148,7 @@
        rx="2.1166663"
        ry="2.1166666" />
     <rect
-       style="opacity:0.997213;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+       style="opacity:0.997213;fill:#a00000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
        id="rect1295-6"
        width="16.933332"
        height="16.933332"
@@ -158,7 +157,7 @@
        rx="2.1166663"
        ry="2.1166666" />
     <rect
-       style="opacity:0.997213;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+       style="opacity:0.997213;fill:#a00000;fill-opacity:1;stroke:#b3b3b3;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
        id="rect1295-2"
        width="16.933332"
        height="16.933332"
