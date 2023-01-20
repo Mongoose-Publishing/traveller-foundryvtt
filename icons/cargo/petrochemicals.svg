@@ -5,7 +5,7 @@
    viewBox="0 0 135.46666 135.46667"
    version="1.1"
    id="svg8"
-   sodipodi:docname="crystals_and_gems.svg"
+   sodipodi:docname="petrochemicals.svg"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -66,9 +66,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="151.78571"
-     inkscape:cy="330.71429"
+     inkscape:zoom="1.979899"
+     inkscape:cx="205.3135"
+     inkscape:cy="181.32238"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -169,17 +169,45 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 67.73333,42.33333 -25.4,16.933333 25.4,42.333337 25.4,-42.333337 z"
-       id="path1136" />
+       id="rect1709"
+       style="opacity:0.997213;fill:#333333;stroke:#ffffff;stroke-width:3.99999;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+       d="M 256 128 C 242.704 128 232 138.704 232 152 L 232 192 C 232 205.296 242.704 216 256 216 L 328 216 C 341.296 216 352 205.296 352 192 L 352 152 C 352 138.704 341.296 128 328 128 L 256 128 z M 272 136 L 328 136 C 332.43199 136 336 139.568 336 144 C 336 148.432 332.43199 152 328 152 L 272 152 C 267.56801 152 264 148.432 264 144 C 264 139.568 267.56801 136 272 136 z "
+       transform="scale(0.26458333)" />
+    <g
+       id="g2216"
+       transform="rotate(-45,52.296706,45.946704)">
+      <rect
+         style="opacity:0.997213;fill:#333333;stroke:#ffffff;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+         id="rect1816-6"
+         width="6.3500018"
+         height="6.3499975"
+         x="50.799995"
+         y="35.983334"
+         rx="2.1166675"
+         ry="2.1166627" />
+      <rect
+         style="opacity:0.997213;fill:#333333;stroke:#ffffff;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+         id="rect1816"
+         width="14.816667"
+         height="6.3499999"
+         x="46.566666"
+         y="40.216667"
+         rx="2.1166639"
+         ry="4.2333331" />
+    </g>
     <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 42.33333,59.266663 25.4,8.466667 25.4,-8.466667"
-       id="path1138" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 67.73333,42.33333 1e-6,59.26667"
-       id="path1140"
-       sodipodi:nodetypes="cc" />
+       id="rect959"
+       style="opacity:0.997213;fill:#333333;stroke:#ffffff;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:bevel;stroke-opacity:0.999964;stop-color:#000000"
+       d="m 59.266665,33.866666 h 8.466666 l 0.08259,8.466666 h 16.850741 c 4.690534,0 8.466667,3.776133 8.466667,8.466666 v 42.333334 c 0,4.690533 -3.776133,8.466668 -8.466667,8.466668 H 50.799999 c -4.690533,0 -8.466667,-3.776135 -8.466667,-8.466668 V 50.799998 c 6.35,-6.349999 10.254182,-10.254182 16.933333,-16.933332 z"
+       sodipodi:nodetypes="cccsssssscc" />
+    <rect
+       style="opacity:0.997213;fill:#cccccc;stroke:#000000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999964;stop-color:#000000"
+       id="rect2240"
+       width="33.866665"
+       height="33.866665"
+       x="50.799999"
+       y="59.266666"
+       rx="2.1166666"
+       ry="2.1166639" />
   </g>
 </svg>

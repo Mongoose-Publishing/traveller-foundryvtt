@@ -5,7 +5,7 @@
    viewBox="0 0 135.46666 135.46667"
    version="1.1"
    id="svg8"
-   sodipodi:docname="live_animals.svg"
+   sodipodi:docname="spices.svg"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -66,9 +66,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="237.5"
-     inkscape:cy="234.28571"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="89.3985"
+     inkscape:cy="126.26907"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -169,64 +169,23 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="m 44.449999,69.849998 c 0,50.799992 50.799998,50.799992 50.799998,0"
-       id="path1224"
-       sodipodi:nodetypes="cc" />
-    <rect
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect1499"
-       width="16.933332"
-       height="16.933332"
-       x="48.683331"
-       y="50.799999"
-       rx="8.4666662"
-       ry="8.4666662" />
-    <rect
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect1501"
-       width="16.933332"
-       height="16.933332"
-       x="76.199997"
-       y="50.799999"
-       rx="8.4666662"
-       ry="8.4666662" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="M 78.316664,48.683331 C 99.48333,31.75 112.18333,29.633333 112.18333,29.633333 94.778327,46.061328 94.039682,52.206877 95.249997,57.149998"
-       id="path1638"
+       style="opacity:0.997213;fill:#5599ff;stroke:#000000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:bevel;stroke-opacity:0.999964;stop-color:#000000"
+       d="m 33.866666,67.73333 c 25.399999,-16.933332 42.333332,-16.933332 67.733334,1e-6 -25.400002,16.933333 -42.333335,16.933333 -67.733334,0"
+       id="path975"
        sodipodi:nodetypes="ccc" />
-    <path
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       d="M 61.383331,48.68333 C 40.216665,31.749999 27.516666,29.633332 27.516666,29.633332 44.921668,46.061327 45.660313,52.206876 44.449998,57.149997"
-       id="path1638-0"
-       sodipodi:nodetypes="ccc" />
-    <rect
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect903"
-       width="21.166666"
-       height="12.7"
-       x="59.266666"
-       y="76.199997"
-       rx="8.4666662"
-       ry="8.4666662" />
-    <rect
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect905"
-       width="2.1166666"
-       height="2.1166666"
-       x="65.616661"
-       y="82.549995"
-       rx="8.4666662"
-       ry="2.1166666" />
-    <rect
-       style="opacity:0.997213;fill:none;stroke:#f9f9f9;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect907"
-       width="2.1166666"
-       height="2.1166666"
-       x="71.966667"
-       y="82.549995"
-       rx="8.4666662"
-       ry="2.1166666" />
+    <ellipse
+       style="opacity:0.997213;fill:#0000ff;stroke:#000000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:bevel;stroke-opacity:0.999964;stop-color:#000000"
+       id="path1360"
+       cx="67.617165"
+       cy="67.73333"
+       rx="11.541356"
+       ry="12.7" />
+    <ellipse
+       style="opacity:0.997213;fill:#00112b;stroke:#000000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:bevel;stroke-opacity:0.999964;stop-color:#000000"
+       id="path1500"
+       cx="67.817284"
+       cy="67.527168"
+       rx="8.6150284"
+       ry="7.0378203" />
   </g>
 </svg>
