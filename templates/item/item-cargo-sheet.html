@@ -5,8 +5,13 @@
 
       <div class="shadow item-side-panel">
         <div class="resource flex-group-center">
-          <label for="system.quantity" class="resource-label">Quantity</label>
-          <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+          <label for="system.quantity" class="resource-label">Quantity</label><br/>
+
+          <div class="incdec">
+            <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
+            <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+            <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
+          </div>
         </div>
       </div>
     </div>
@@ -20,8 +25,9 @@
             <input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
           </div>
           <div class="resource">
-            <label for="system.tons" class="resource-label">Tons</label>
-            <input type="text" name="system.tons" value="{{system.tons}}" data-dtype="String"/>
+            <label for="system.tons" class="resource-label">Tons</label><br/>
+            <input class="item-tons" type="text" name="system.tons" value="{{system.tons}}" data-dtype="String"/>
+            <span class="quantity-roll rollable"><i class="fas fa-dice"></i></span>
           </div>
         </div>
         <div class="resource">

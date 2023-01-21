@@ -17,6 +17,14 @@
       "module": "mgt2",
       "path": "packs/base-items.db",
       "type": "Item"
+    },
+    {
+      "name": "cargo-items",
+      "label": "Cargo",
+      "system": "mgt2",
+      "module": "mgt2",
+      "path": "packs/cargo-items.db",
+      "type": "Item"
     }
   ],
   "languages": [

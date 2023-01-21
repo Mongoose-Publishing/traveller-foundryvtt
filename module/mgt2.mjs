@@ -632,7 +632,7 @@ Handlebars.registerHelper('isItemOwned', function(item) {
 
 
 Handlebars.registerHelper('equipItem', function(item) {
-    if (item.system.status === MgT2Item.EQUIPPED) {
+    if (item.system.status === MgT2Item.EQUIPPED || item.system.weight === undefined) {
         return "";
     }
 
@@ -646,7 +646,7 @@ Handlebars.registerHelper('equipItem', function(item) {
 });
 
 Handlebars.registerHelper('deactivateItem', function(item) {
-    if (!item.system.status || item.system.status === MgT2Item.CARRIED || item.system.status === MgT2Item.OWNED) {
+    if (!item.system.status || item.system.status === MgT2Item.CARRIED || item.system.status === MgT2Item.OWNED || item.system.weight === undefined) {
         return "";
     }
 
@@ -661,7 +661,7 @@ Handlebars.registerHelper('deactivateItem', function(item) {
 });
 
 Handlebars.registerHelper('storeItem', function(item) {
-    if (!item.system.status || item.system.status === MgT2Item.OWNED) {
+    if (!item.system.status || item.system.status === MgT2Item.OWNED || item.system.weight === undefined) {
         return "";
     }
     let title="Store item";
@@ -670,7 +670,7 @@ Handlebars.registerHelper('storeItem', function(item) {
 });
 
 Handlebars.registerHelper('carryItem', function(item) {
-    if (item.system.status === MgT2Item.CARRIED) {
+    if (item.system.status === MgT2Item.CARRIED || item.system.weight === undefined) {
         return "";
     }
     let title="Carry item";

@@ -90,10 +90,39 @@ export class MgT2ItemSheet extends ItemSheet {
         html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.item));
 
         html.find(".damageDone").click(ev => this._rollDamage(this.item));
+
+        html.find(".quantity-inc").click(ev => this._incrementQuantity(this.item));
+        html.find(".quantity-dec").click(ev => this._decrementQuantity(this.item));
+        html.find(".quantity-roll").click(ev => this._rollQuantity(this.item));
     }
 
     _rollDamage(item) {
         console.log("_rollDamage:");
         rollAttack(null, item, 0, 0);
+    }
+
+    _incrementQuantity(item) {
+        if (item.system.quantity) {
+            item.system.quantity++;
+            item.update({"system.quantity": item.system.quantity });
+        }
+    }
+
+    _decrementQuantity(item) {
+        if (item.system.quantity && parseInt(item.system.quantity) > 1) {
+            item.system.quantity--;
+            item.update({"system.quantity": item.system.quantity });
+        }
+    }
+
+    // Used by cargo items.
+    _rollQuantity(item) {
+        if (item.system.quantity !== undefined && item.system.tons !== undefined) {
+            let tons = item.system.tons;
+            let roll = new Roll(tons, null).evaluate({async: false});
+            let quantity = parseInt(roll.total);
+            item.system.quantity = quantity;
+            item.update({"system.quantity": item.system.quantity });
+        }
     }
 }

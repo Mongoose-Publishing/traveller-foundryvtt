@@ -156,18 +156,20 @@ export class MgT2ActorSheet extends ActorSheet {
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
 
-            if (i.system.status === MgT2Item.CARRIED) {
-                weight += parseFloat(i.system.weight) * parseFloat(i.system.quantity);
-            } else if (i.system.status === MgT2Item.EQUIPPED) {
-                if (i.type === "armour") {
-                    if (!i.system.armour.powered || parseInt(i.system.armour.powered) === 0) {
-                        weight += parseInt(i.system.weight / 4);
+            if (i.system.weight !== undefined) {
+                if (i.system.status === MgT2Item.CARRIED) {
+                    weight += parseFloat(i.system.weight) * parseFloat(i.system.quantity);
+                } else if (i.system.status === MgT2Item.EQUIPPED) {
+                    if (i.type === "armour") {
+                        if (!i.system.armour.powered || parseInt(i.system.armour.powered) === 0) {
+                            weight += parseInt(i.system.weight / 4);
+                        }
+                        if (i.system.armour.skill && parseInt(i.system.armour.skill) > skillNeeded) {
+                            skillNeeded = parseInt(i.system.armour.skill);
+                        }
+                    } else {
+                        weight += parseInt(i.system.weight);
                     }
-                    if (i.system.armour.skill && parseInt(i.system.armour.skill) > skillNeeded) {
-                        skillNeeded = parseInt(i.system.armour.skill);
-                    }
-                } else {
-                    weight += parseInt(i.system.weight);
                 }
             }
             // Append to gear.

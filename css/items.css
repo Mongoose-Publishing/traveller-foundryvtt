@@ -31,3 +31,15 @@ li.item-weapon {
 .item-armour {
     background-color: #c5d3b4;
 }
+
+.incdec i {
+    font-size: larger;
+}
+
+.incdec input {
+    width: 5em;
+}
+
+input.item-tons {
+    width: 7em;
+}
