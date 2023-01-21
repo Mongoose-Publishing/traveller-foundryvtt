@@ -86,16 +86,16 @@
                         <ol class="items-list actor-items grid grid-3col">
                         {{#each locker as |item id|}}
                             <li class="item item-gear" data-item-id="{{item._id}}">
-                                <img src="{{item.img}}"/>
-                                <h4>{{item.name}}</h4>
+                                <h4 title="{{item.name}}">{{item.name}}</h4>
+                                <img title="{{item.name}}" src="{{item.img}}"/>
                                 {{#if item.system.weight  includeZero=false}}
-                                <span>{{item.system.weight}}kg</span>
+                                    <span>{{item.system.weight}}kg</span>
                                 {{/if}}
                                 {{#if item.system.tl includeZero=false}}
-                                <span>TL {{item.system.tl}}</span>
+                                    <span>TL {{item.system.tl}}</span>
                                 {{/if}}
                                 {{#if item.system.cost includeZero=false}}
-                                <span>Cr{{item.system.cost}}</span>
+                                    <span>Cr{{item.system.cost}}</span>
                                 {{/if}}
                                 <div class="item-controls">
                                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -127,14 +127,15 @@
 
                         <ol class="items-list actor-items grid grid-3col">
                             {{#each cargo as |item id|}}
-                            <li class="item item-gear" data-item-id="{{item._id}}">
-                                <img src="{{item.img}}"/>
-                                <h4>{{item.name}}</h4>
+                            <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
+                                <h4 title="{{item.name}}">{{item.name}}</h4>
+                                <img title="{{item.name}}" src="{{item.img}}"/>
                                 {{#if item.system.quantity  includeZero=false}}
-                                <span>{{item.system.quantity}}dt</span>
+                                    <span>{{item.system.quantity}}dt</span>
+                                    <br/>
                                 {{/if}}
                                 {{#if item.system.cost includeZero=false}}
-                                <span>Cr{{item.system.cost}}</span>
+                                    <span>Cr{{item.system.cost}}</span>
                                 {{/if}}
                                 <div class="item-controls">
                                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

@@ -10,6 +10,7 @@
     padding: 2px;
     text-align: left;
     margin-bottom: 2px;
+    background-color: #F0F0F0;
 }
 
 .actor-items .item img {
@@ -21,14 +22,24 @@
 }
 
 .actor-items .item h4 {
+    margin: -2px -2px 2px -2px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid black;
+    background-color: #C0C0C0;
+    color: black;
     font-weight: bold;
 }
 
-li.item-weapon {
+.actor-items li.item-weapon h4 {
     background-color: #e0c0b0;
 }
 
-.item-armour {
+.actor-items .item-armour h4 {
     background-color: #c5d3b4;
 }
 
@@ -43,3 +54,18 @@ li.item-weapon {
 input.item-tons {
     width: 7em;
 }
+
+
+.ship-cargo h4 {
+    margin: -2px -2px 0px -2px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid black;
+    background-color: #C0C0C0;
+    color: black;
+}
+
