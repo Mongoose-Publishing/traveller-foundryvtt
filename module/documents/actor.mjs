@@ -146,6 +146,10 @@ export class MgT2Actor extends Actor {
                 }
             }
         }
+        if (data.modifiers.encumbrance.multiplierBonus) {
+            let mult = 1 + parseFloat(data.modifiers.encumbrance.multiplierBonus);
+            heavyLoad *= mult;
+        }
         data.heavyLoad = heavyLoad;
         data.maxLoad = heavyLoad * 2;
     }

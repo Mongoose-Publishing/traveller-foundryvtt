@@ -81,6 +81,9 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         if (data.modifiers.physical.dm != 0) {
             dice += " + " + parseInt(data.modifiers.physical.dm);
         }
+        if (data.modifiers.guncombat.dm != 0 && weapon.system.weapon.skill.indexOf("guncombat") == 0) {
+            dice += " + " + parseInt(data.modifiers.guncombat.dm);
+        }
     }
 
     if (weapon.system.weapon.attackBonus) {

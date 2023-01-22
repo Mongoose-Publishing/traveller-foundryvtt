@@ -85,6 +85,21 @@ export class MgT2ActorSheet extends ActorSheet {
             phy.dm = phy.custom + phy.auto + phy.effect;
             let melee = actorData.modifiers.melee;
             melee.dm = melee.custom + melee.auto + melee.effect;
+            let guncombat = actorData.modifiers.guncombat;
+            if (!guncombat) {
+                guncombat = { "dm": 0, "custom": 0, "auto": 0, "effect": 0 };
+            } else {
+                if (isNaN(guncombat.custom)) {
+                    guncombat.custom = 0;
+                }
+                if (isNaN(guncombat.auto)) {
+                    guncombat.auto = 0;
+                }
+                if (isNaN(guncombat.effect)) {
+                    guncombat.effect = 0;
+                }
+            }
+            guncombat.dm = guncombat.custom + guncombat.auto + guncombat.effect;
         }
 
         return context;

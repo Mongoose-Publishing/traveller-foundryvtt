@@ -65,9 +65,11 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
             }
         } else {
             context.targets = {};
+            context.targets["system.modifiers.encumbrance.multiplierBonus" ] = { "label": "Carry Multiplier" };
             context.targets["system.modifiers.encumbrance." + prop] = { "label": "Encumbrance DM" };
             context.targets["system.modifiers.physical." + prop] = { "label": "Physical DM" };
             context.targets["system.modifiers.melee." + prop] = { "label": "Melee DM" };
+            context.targets["system.modifiers.guncombat." + prop] = { "label": "Gun Combat DM" };
         }
 
         return context;

@@ -980,6 +980,9 @@ Handlebars.registerHelper('effect', function(key) {
             return skills[skill].label;
         }
     } else if (key && key.startsWith("system.modifiers")) {
+        if (key === "system.modifiers.encumbrance.multiplierBonus") {
+            return "Encumbrance Multiplier"
+        }
         key = key.replaceAll(/system\.modifiers\./g, "");
         key = key.replaceAll(/\.effect/g, "");
         return key
