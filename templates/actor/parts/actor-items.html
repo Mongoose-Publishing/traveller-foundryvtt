@@ -26,14 +26,14 @@
             <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
                 <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                 <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                {{#if item.system.weight  includeZero=false}}
-                    <span>{{item.system.weight}}kg</span>
-                {{/if}}
                 {{#if item.system.armour}}
-                    <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
+                <label>Prot:</label> <span>{{formula ../actor item.system.armour.protection}}</span><br/>
                 {{/if}}
                 {{#if item.system.weapon}}
-                    <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
+                <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span><br/>
+                {{/if}}
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 {{#if (isOwner ..)}}
                     <div class="item-controls">
@@ -57,14 +57,14 @@
             <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
                 <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                 <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                {{#if item.system.weight  includeZero=false}}
-                    <span>{{item.system.weight}}kg</span>
-                {{/if}}
                 {{#if item.system.armour}}
-                    <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
+                <label>Prot:</label> <span>{{formula ../actor item.system.armour.protection}}</span><br/>
                 {{/if}}
                 {{#if item.system.weapon}}
-                    <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
+                <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span><br/>
+                {{/if}}
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 {{#if (isOwner ..)}}
                     <div class="item-controls">
@@ -88,14 +88,14 @@
             <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
                 <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                 <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                {{#if item.system.weight  includeZero=false}}
-                <span>{{item.system.weight}}kg</span>
-                {{/if}}
                 {{#if item.system.armour}}
-                    <label>Prot:</label> <span>{{item.system.armour.protection}}</span>
+                    <label>Prot:</label> <span>{{formula ../actor item.system.armour.protection}}</span><br/>
                 {{/if}}
                 {{#if item.system.weapon}}
-                    <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span>
+                    <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span><br/>
+                {{/if}}
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 {{#if (isOwner ..)}}
                     <div class="item-controls">

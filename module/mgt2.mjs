@@ -703,6 +703,22 @@ Handlebars.registerHelper('nameQuantity', function(item) {
    return name;
 });
 
+Handlebars.registerHelper('formula', function(actor, value) {
+    console.log("formula:");
+    console.log(actor);
+    console.log(value);
+    if (value === undefined || value === null || value == "") {
+        return "";
+    } else if (!isNaN(value)) {
+        return value;
+    } else if (actor === undefined || actor === null) {
+        return "";
+    } else {
+        let roll = new Roll(value, actor.getRollData()).evaluate({async: false});
+        return roll.total;
+    }
+});
+
 Handlebars.registerHelper('augmentedSkill', function(skill, spec) {
     if (!skill) {
         return "";

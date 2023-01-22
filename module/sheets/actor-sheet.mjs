@@ -253,8 +253,33 @@ export class MgT2ActorSheet extends ActorSheet {
                     if (armourData.form === "natural" || i.system.status === MgT2Item.EQUIPPED) {
                         let armourData = i.system.armour;
 
-                        armour.protection += armourData.protection;
-                        armour.otherProtection += armourData.otherProtection;
+                        // Handle standard protection
+                        let prot = armourData.protection;
+
+                        if (prot == "") {
+                            // Nothing to do.
+                        } else if (!isNaN(prot)) {
+                            armour.protection += parseInt(prot);
+                        } else {
+                            // Not a number, so might be a formula.
+                            let roll = new Roll(prot, context.actor.getRollData()).evaluate({async: false});
+                            prot = roll.total;
+                            armour.protection += prot;
+                        }
+
+                        // Handle energy protection.
+                        let other = armourData.otherProtection;
+                        if (other == "") {
+                            // Nothing to do.
+                        } else if (!isNaN(other)) {
+                            armour.otherProtection += parseInt(other);
+                        } else {
+                            // Other protection is not a number, so might be a formula.
+                            let roll = new Roll(other, context.actor.getRollData()).evaluate({async: false});
+                            other = roll.total;
+                            armour.otherProtection += other;
+                        }
+
                         armour.rad += armourData.rad;
                         if (armourData.otherTypes !== "") {
                             armour.otherTypes = armourData.otherTypes;
