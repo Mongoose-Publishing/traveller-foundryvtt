@@ -26,8 +26,6 @@ export class MgT2Item extends Item {
      * @private
      */
     getRollData() {
-        console.log("getRollData()");
-        console.log(this);
         // If present, return the actor's roll data.
         if ( !this.actor ) return null;
         const rollData = this.actor.getRollData();
@@ -53,7 +51,6 @@ export class MgT2Item extends Item {
             if (!quickRoll) {
                 new MgT2AttackDialog(this.actor, item).render(true);
             } else {
-                console.log("Quick Attack Roll");
                 let skillDM = getSkillValue(this.actor, item.system.weapon.skill, null);
                 let actorData = this.actor.system;
                 if (actorData.characteristics && actorData.characteristics[item.system.weapon.characteristic]) {

@@ -55,6 +55,10 @@ export class MgT2ItemSheet extends ItemSheet {
         context.effects = item.effects;
         context.effectTypes = CONFIG.MGT2.EFFECTS;
 
+        if (!context.data.quantity) {
+            context.data.quantity = 1;
+        }
+
         context.characteristics = game.system.template.Actor.templates.characteristics.characteristics;
 
         // If this belongs to an actor, the actor might have custom skills, so
@@ -117,8 +121,8 @@ export class MgT2ItemSheet extends ItemSheet {
 
     // Used by cargo items.
     _rollQuantity(item) {
-        if (item.system.quantity !== undefined && item.system.tons !== undefined) {
-            let tons = item.system.tons;
+        if (item.system.quantity !== undefined && item.system.cargo.tons !== undefined) {
+            let tons = item.system.cargo.tons;
             let roll = new Roll(tons, null).evaluate({async: false});
             let quantity = parseInt(roll.total);
             item.system.quantity = quantity;

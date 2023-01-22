@@ -6,19 +6,19 @@
                  title="{{actor.name}}" height="100" width="100"/>
 
             <div class="side-panel hits-box shadow">
-                <label for="data.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                <label for="data.spacecraft.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
 
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
                     <input class="characteristic-value" type="number" name="data.hits.damage"
                            title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
-                           value="{{data.hits.damage}}" data-dtype="Number"/>
+                           value="{{data.spacecraft.hits.damage}}" data-dtype="Number"/>
                 </div>
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
                     <input class="characteristic-readonly" type="number"
                            title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
-                           value="{{data.hits.value}}"/>
+                           value="{{data.spacecraft.hits.value}}"/>
                 </div>
             </div>
 
@@ -27,13 +27,13 @@
 
                 <div>
                     <label class="prot-type" title="Protection">Armour</label>
-                    <input class="armour-value" type="text" name="data.armour" title="Armour"
-                           value="{{data.armour}}" data-dtype="Number"/>
+                    <input class="armour-value" type="text" name="data.spacecraft.armour" title="Armour"
+                           value="{{data.spacecraft.armour}}" data-dtype="Number"/>
                 </div>
                 <div>
                     <label class="prot-type" title="Rad Shielding">Rad Shielding</label>
-                    <input class="armour-value" type="text" name="data.radshielding" title="Radiation protection"
-                           value="{{data.radshielding}}" data-dtype="Number"/>
+                    <input class="armour-value" type="text" name="data.spacecraft.radShielding" title="Radiation protection"
+                           value="{{data.spacecraft.radShielding}}" data-dtype="Number"/>
                 </div>
             </div>
         </div>
@@ -45,32 +45,32 @@
 
             <div class="shadow grid grid-5col">
                 <div class="resource flex-group-center">
-                    <label for="data.dtons" class="field-label">{{localize 'MGT2.TravellerSheet.DTons'}}</label>
-                    <input class="field-value" name="data.dtons" type="text" value="{{data.dtons}}"/>
+                    <label for="data.spacecraft.dtons" class="field-label">{{localize 'MGT2.TravellerSheet.DTons'}}</label>
+                    <input class="field-value" name="data.spacecraft.dtons" type="text" value="{{data.spacecraft.dtons}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
-                    <input class="field-value" name="data.hits.max" type="text" value="{{data.hits.max}}"/>
+                    <label for="data.spacecraft.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
+                    <input class="field-value" name="data.spacecraft.hits.max" type="text" value="{{data.spacecraft.hits.max}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.CargoHold'}}</label>
-                    <input class="field-value" name="data.cargo" type="text" value="{{data.cargo}}"/>
+                    <label for="data.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.CargoHold'}}</label>
+                    <input class="field-value" name="data.spacecraft.cargo" type="text" value="{{data.spacecraft.cargo}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.jdrive" class="field-label">{{localize 'MGT2.TravellerSheet.JDrive'}}</label>
-                    <input class="field-value" name="data.jdrive" type="text" value="{{data.jdrive}}"/>
+                    <label for="data.spacecraft.jdrive" class="field-label">{{localize 'MGT2.TravellerSheet.JDrive'}}</label>
+                    <input class="field-value" name="data.spacecraft.jdrive" type="text" value="{{data.spacecraft.jdrive}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.mdrive" class="field-label">{{localize 'MGT2.TravellerSheet.MDrive'}}</label>
-                    <input class="field-value" name="data.mdrive" type="text" value="{{data.mdrive}}"/>
+                    <label for="data.spacecraft.mdrive" class="field-label">{{localize 'MGT2.TravellerSheet.MDrive'}}</label>
+                    <input class="field-value" name="data.spacecraft.mdrive" type="text" value="{{data.spacecraft.mdrive}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.rdrive" class="field-label">{{localize 'MGT2.TravellerSheet.RDrive'}}</label>
-                    <input class="field-value" name="data.rdrive" type="text" value="{{data.rdrive}}"/>
+                    <label for="data.spacecraft.rdrive" class="field-label">{{localize 'MGT2.TravellerSheet.RDrive'}}</label>
+                    <input class="field-value" name="data.spacecraft.rdrive" type="text" value="{{data.spacecraft.rdrive}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
-                    <input class="field-value" name="data.power.max" type="text" value="{{data.power.max}}"/>
+                    <label for="data.spacecraft.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
+                    <input class="field-value" name="data.spacecraft.power.max" type="text" value="{{data.spacecraft.power.max}}"/>
                 </div>
             </div>
 
@@ -86,8 +86,8 @@
                         <ol class="items-list actor-items grid grid-3col">
                         {{#each locker as |item id|}}
                             <li class="item item-gear" data-item-id="{{item._id}}">
-                                <h4 title="{{item.name}}">{{item.name}}</h4>
-                                <img title="{{item.name}}" src="{{item.img}}"/>
+                                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
                                 {{#if item.system.weight  includeZero=false}}
                                     <span>{{item.system.weight}}kg</span>
                                 {{/if}}
@@ -128,14 +128,14 @@
                         <ol class="items-list actor-items grid grid-3col">
                             {{#each cargo as |item id|}}
                             <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
-                                <h4 title="{{item.name}}">{{item.name}}</h4>
-                                <img title="{{item.name}}" src="{{item.img}}"/>
+                                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
                                 {{#if item.system.quantity  includeZero=false}}
                                     <span>{{item.system.quantity}}dt</span>
                                     <br/>
                                 {{/if}}
-                                {{#if item.system.cost includeZero=false}}
-                                    <span>Cr{{item.system.cost}}</span>
+                                {{#if item.system.cargo.price includeZero=false}}
+                                    <span>Cr{{item.system.cargo.price}}</span>
                                 {{/if}}
                                 <div class="item-controls">
                                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

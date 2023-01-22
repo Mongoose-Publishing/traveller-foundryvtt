@@ -6,7 +6,11 @@
       <div class="shadow item-side-panel">
         <div class="resource flex-group-center">
           <label for="system.quantity" class="resource-label">Quantity</label>
-          <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+          <div class="incdec">
+            <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
+            <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+            <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
+          </div>
         </div>
       </div>
     </div>

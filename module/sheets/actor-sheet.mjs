@@ -108,7 +108,6 @@ export class MgT2ActorSheet extends ActorSheet {
         for (let i of context.items) {
             console.log(`${i.name}: ${i.type}`);
             if (i.type === 'cargo') {
-                console.log("Cargo");
                 cargo.push(i);
                 console.log(i);
                 let q = parseInt(i.system.quantity);
@@ -126,7 +125,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.hardware = hardware;
 
         context.cargoUsed = cargoUsed;
-        context.cargoRemaining = parseInt(context.system.cargo) - cargoUsed;
+        context.cargoRemaining = parseInt(context.system.spacecraft.cargo) - cargoUsed;
 
         console.log(cargoUsed);
         console.log(context.cargoRemaining);
@@ -168,7 +167,7 @@ export class MgT2ActorSheet extends ActorSheet {
                             skillNeeded = parseInt(i.system.armour.skill);
                         }
                     } else {
-                        weight += parseInt(i.system.weight);
+                        weight += parseFloat(i.system.weight) * parseFloat(i.system.quantity);
                     }
                 }
             }

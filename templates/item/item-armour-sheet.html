@@ -4,6 +4,17 @@
             <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
             <div class="shadow item-side-panel">
+                <div class="resource flex-group-center">
+                    <label for="data.quantity" class="resource-label">Quantity</label>
+                    <div class="incdec">
+                        <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
+                        <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
+                        <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow item-side-panel">
                 <div class="resource">
                     <label for="data.armour.form" class="resource-label">{{localize "MGT2.Armour.FormType"}}</label>
                     <br/>

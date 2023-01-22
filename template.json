@@ -1005,23 +1005,26 @@
     },
     "spacecraft": {
         "templates": [],
-        "dtons": 100,
-        "armour": 0,
-        "radshielding": 0,
-        "hits": {
-          "value": 80,
-          "max": 80,
-          "damage": 0
-        },
-        "power": {
-          "value": 0,
-          "max": 10,
-          "used": 0
-        },
-        "cargo": 20,
-        "mdrive": 1,
-        "rdrive": 0,
-        "jdrive": 1
+        "spacecraft": {
+            "dtons": 100,
+            "configuration": "standard",
+            "armour": 0,
+            "radShielding": 0,
+            "hits": {
+                "value": 80,
+                "max": 80,
+                "damage": 0
+            },
+            "power": {
+                "value": 0,
+                "max": 10,
+                "used": 0
+            },
+            "cargo": 20,
+            "mdrive": 1,
+            "rdrive": 0,
+            "jdrive": 1
+        }
     }
   },
   "Item": {
@@ -1087,21 +1090,21 @@
           }
       },
       "cargo": {
-          "quantity": 1,
-          "cost": 100,
-          "availability": "All",
-          "purchaseDM": "",
-          "saleDM": "",
-          "tons": "2D6 * 10",
-          "illegal": false
+          "cargo": {
+              "cost": 100,
+              "availability": "All",
+              "purchaseDM": "",
+              "saleDM": "",
+              "tons": "2D6 * 10",
+              "illegal": false
+          }
       },
       "hardware": {
-          "tons": 0,
-          "tl": 0,
-          "cost": 0,
-          "power": 0,
-          "enabled": true,
-          "quantity": 1
+          "hardware": {
+              "tons": 0,
+              "power": 0,
+              "enabled": true
+          }
       }
     },
     "item": {
@@ -1124,10 +1127,11 @@
       "templates": [ "associate" ]
     },
     "cargo": {
-      "templates": [ "cargo"]
+      "templates": [ "cargo"],
+      "quantity": 1
     },
     "hardware": {
-      "templates": [ "hardware" ]
+      "templates": [ "base","hardware" ]
     }
   }
 }

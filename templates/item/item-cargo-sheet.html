@@ -21,26 +21,26 @@
         <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
         <div class="resources grid grid-2col flex-group-center">
           <div class="resource">
-            <label for="system.cost" class="resource-label">Base Price</label>
-            <input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+            <label for="system.cargo.price" class="resource-label">Base Price</label>
+            <input type="text" name="system.cargo.price" value="{{system.cargo.price}}" data-dtype="Number"/>
           </div>
           <div class="resource">
-            <label for="system.tons" class="resource-label">Tons</label><br/>
-            <input class="item-tons" type="text" name="system.tons" value="{{system.tons}}" data-dtype="String"/>
+            <label for="system.cargo.tons" class="resource-label">Tons</label><br/>
+            <input class="item-tons" type="text" name="system.cargo.tons" value="{{system.cargo.tons}}" data-dtype="String"/>
             <span class="quantity-roll rollable"><i class="fas fa-dice"></i></span>
           </div>
         </div>
         <div class="resource">
-          <label for="system.availability" class="resource-label">Availability</label>
-          <input type="text" name="system.availability" value="{{system.availability}}" data-dtype="String"/>
+          <label for="system.cargo.availability" class="resource-label">Availability</label>
+          <input type="text" name="system.cargo.availability" value="{{system.cargo.availability}}" data-dtype="String"/>
         </div>
           <div class="resource">
-            <label for="system.purchaseDM" class="resource-label">Purchase DM</label>
-            <input type="text" name="system.purchaseDM" value="{{system.purchaseDM}}" data-dtype="String"/>
+            <label for="system.cargo.purchaseDM" class="resource-label">Purchase DM</label>
+            <input type="text" name="system.cargo.purchaseDM" value="{{system.cargo.purchaseDM}}" data-dtype="String"/>
           </div>
           <div class="resource">
-            <label for="system.saleDM" class="resource-label">Sale DM</label>
-            <input type="text" name="system.saleDM" value="{{system.saleDM}}" data-dtype="String"/>
+            <label for="system.cargo.saleDM" class="resource-label">Sale DM</label>
+            <input type="text" name="system.cargo.saleDM" value="{{system.cargo.saleDM}}" data-dtype="String"/>
           </div>
       </div>
 

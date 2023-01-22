@@ -24,8 +24,8 @@
     {{#each items as |item id|}}
         {{#if (isItemEquipped item)}}
             <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
-                <h4 title="{{item.name}}">{{item.name}}</h4>
-                <img title="{{item.name}}" src="{{item.img}}"/>
+                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
                 {{#if item.system.weight  includeZero=false}}
                     <span>{{item.system.weight}}kg</span>
                 {{/if}}
@@ -55,8 +55,8 @@
     {{#each items as |item id|}}
         {{#if (isItemCarried item)}}
             <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
-                <h4 title="{{item.name}}">{{item.name}}</h4>
-                <img title="{{item.name}}" src="{{item.img}}"/>
+                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
                 {{#if item.system.weight  includeZero=false}}
                     <span>{{item.system.weight}}kg</span>
                 {{/if}}
@@ -86,8 +86,8 @@
     {{#each armour as |item id|}}
         {{#if (isItemOwned item)}}
             <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
-                <h4 title="{{item.name}}">{{item.name}}</h4>
-                <img title="{{item.name}}" src="{{item.img}}"/>
+                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
                 {{#if item.system.weight  includeZero=false}}
                 <span>{{item.system.weight}}kg</span>
                 {{/if}}

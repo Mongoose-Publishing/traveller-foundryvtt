@@ -692,6 +692,16 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
    return arg1 == arg2;
 });
 
+Handlebars.registerHelper('nameQuantity', function(item) {
+   let name = item.name;
+   let quantity = item.system.quantity;
+
+   if (quantity && parseInt(quantity) > 1) {
+       quantity = parseInt(quantity);
+       name = `${name} x${quantity}`;
+   }
+   return name;
+});
 
 Handlebars.registerHelper('augmentedSkill', function(skill, spec) {
     if (!skill) {
