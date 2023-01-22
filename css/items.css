@@ -44,7 +44,7 @@
     background-color: #c5d3b4;
 }
 
-.item-controls {
+.actor-items .item-controls {
     position: absolute;
     bottom: 0px;
     right: 0px;
@@ -76,3 +76,6 @@ input.item-tons {
     color: black;
 }
 
+.effects-list {
+    position: relative;
+}
