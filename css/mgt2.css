@@ -794,15 +794,6 @@ span.rollFailure {
     color: red;
 }
 
-img.skillcheck-thumb {
-    width: 48px;
-    height: 48px;
-    object-fit: cover;
-    object-position: 0% 0%;
-    float: left;
-    margin-right: 4px;
-    margin-bottom: 2px;
-}
 
 h3.fullauto {
     display: block;
@@ -997,6 +988,24 @@ div.message-content {
 
 div.skill-intro {
     line-height: 140%;
+}
+
+img.skillcheck-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    object-position: 0% 0%;
+    float: left;
+    margin-right: 4px;
+    margin-bottom: 2px;
+}
+
+div.skill-with-icon {
+    margin-left: 50px;
+}
+
+div.skill-without-icon {
+
 }
 
 div.skill-augment-text {

@@ -166,9 +166,12 @@ export class MgT2ActorSheet extends ActorSheet {
         let weight = 0;
         let skillNeeded = -3;
 
+        console.log("_prepareItems: " + this.actor.name);
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
+
+            console.log(i);
 
             if (i.system.weight !== undefined) {
                 if (i.system.status === MgT2Item.CARRIED) {
@@ -257,6 +260,16 @@ export class MgT2ActorSheet extends ActorSheet {
 
         if (context.actor && (context.actor.type === 'traveller' || context.actor.type === 'npc' || context.actor.type === 'creature')) {
             let armour = actorData.armour;
+            if (!armour) {
+                armour = {
+                    'protection': 0,
+                    'otherProtection': 0,
+                    'otherTypes': "",
+                    'rad': 0,
+                    'archaic': 0
+                }
+                actorData.armour = armour;
+            }
             armour.protection = 0;
             armour.otherProtection = 0;
             armour.otherTypes = "";

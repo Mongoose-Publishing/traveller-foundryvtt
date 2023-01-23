@@ -86,6 +86,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         }
     }
 
+
     if (weapon.system.weapon.attackBonus) {
         const attackBonus = parseInt(weapon.system.weapon.attackBonus);
         if (attackBonus != 0) {
@@ -340,6 +341,27 @@ function getEffectLabel(effect) {
     return `<span class='effectRoll ${effectClass}'>${effectType} [${effect>=0?"+":""}${effect}]</span><br/>Chain Bonus ${chain}`;
 }
 
+function getSkillBonus(data, skill, speciality) {
+    let bonus = 0;
+
+    if (skill && (typeof skill === 'string' || skill instanceof String)) {
+        skill = data.skills[skill];
+    }
+
+    if (speciality && (typeof speciality === 'string' || skill instanceof String)) {
+        speciality = skill.specialities[speciality];
+    }
+
+    if (skill.augdm != null) {
+        bonus += parseInt(skill.augdm);
+    }
+    if (skill.bonus) {
+
+    }
+
+    return bonus;
+}
+
 export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
     const data = actor.system;
     let   title = "";
@@ -417,22 +439,31 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     }
     console.log(skillText);
 
+    // There are several ways of adding bonuses to a roll.
+    // .bonus - Generic bonus that is manually set on a skill
+    // .augment - Bonus which applies to the skill level, only if the skill is trained
+    // .augdm - Bonus that always applies to the skill roll.
+    // .expert - Expert software, which sets or gives bonus to a skill.
     let notes = "";
     if (skill) {
         // AugmentDMs are applied to the roll, regardless of the actor's skill level.
-        if (skill.augdm && parseInt(skill.augdm) > 0) {
+        if (skill.augdm && parseInt(skill.augdm) != 0) {
             skillAugDm += parseInt(skill.augdm);
+            notes += `DM (${skill.augdm}) `;
         }
-        if (speciality && speciality.augdm && parseInt(speciality.augdm) > 0) {
+        if (speciality && speciality.augdm && parseInt(speciality.augdm) != 0) {
             skillAugDm += parseInt(speciality.augdm);
+            notes += `Spec DM (${speciality.augdm}) `;
         }
 
-        if (speciality && speciality.bonus) {
-            dm = parseInt(dm) + parseInt(speciality.bonus);
-            notes += `${speciality.notes} (${speciality.bonus}) `;
-        } else if (skill.bonus) {
-            dm = parseInt(dm) + parseInt(skill.bonus);
+        // The bonus is set manually, and always applied to the roll.
+        if (skill.bonus && parseInt(skill.bonus) != 0) {
+            skillAugDm += parseInt(skill.bonus);
             notes += `${skill.notes} (${skill.bonus}) `;
+        }
+        if (speciality && speciality.bonus && parseInt(speciality.bonus) != 0) {
+            skillAugDm += parseInt(speciality.bonus);
+            notes += `${speciality.notes} (${speciality.bonus}) `;
         }
 
         title += ((title === "")?"":" + ") + skill.label;
@@ -526,7 +557,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     if (game.settings.get("mgt2", "verboseSkillRolls")) {
         let difficultyLabel = getDifficultyLabel(difficulty);
         if (difficultyLabel !== "") {
-            checkText = difficultyLabel + " " + checkText;
+            checkText = `<b>${difficultyLabel}</b> ${checkText}`;
         }
     }
 
@@ -535,10 +566,12 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         text = `<div class='skill-message'><h2>${title}</h2><div class="message-content">`;
         let total = roll.total;
         if (game.settings.get("mgt2", "useChatIcons")) {
-            text += `<div class="skill-intro"><img class='skillcheck-thumb' src='${actor.thumbnail}'/>${checkText}<br/>${skillText}`;
+            text += `<img class='skillcheck-thumb' src='${actor.thumbnail}'/>`;
+            text += `<div class="skill-with-icon">`;
         } else {
-            text += `<div class="skill-intro">${checkText}<br/>${skillText}`;
+            text += `<div class="skill-without-icon">`;
         }
+        text += `<span class="skill-intro">${checkText}</span><br/>${skillText}`;
         text += `<div class="skill-augment-text">${notes}</div>`;
         text += "</div><br/>";
 
