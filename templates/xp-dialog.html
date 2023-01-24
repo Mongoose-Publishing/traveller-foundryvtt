@@ -55,6 +55,42 @@
                 <input class="skillXPnotes" name="notes" type="text" data-dtype="String" value="{{notes}}"/>
             </div>
         </div>
+        <h3>Effects</h3>
+        <div class="grid grid-4col">
+            {{#if spec}}
+                <div class="xpgrid">
+                    <label class="skillDialogLabel">DM</label>
+                    <br/>
+                    <input class="augdm" readonly name="spec.dm" type="text" data-dtype="Number" value="{{spec.augdm}}"/>
+                </div>
+                <div class="xpgrid">
+                    <label class="skillDialogLabel">Aug</label>
+                    <br/>
+                    <input class="augment" readonly name="spec.augment" type="text" data-dtype="Number" value="{{spec.augment}}"/>
+                </div>
+                <div class="xpgrid">
+                    <label class="skillDialogLabel">Expert</label>
+                    <br/>
+                    <input class="expert" readonly name="spec.expert" type="text" data-dtype="Number" value="{{spec.expert}}"/>
+                </div>
+            {{else}}
+                <div class="xpgrid">
+                    <label class="skillDialogLabel">DM</label>
+                    <br/>
+                    <input class="augdm" readonly name="skill.dm" type="text" data-dtype="Number" value="{{skill.augdm}}"/>
+                </div>
+                <div class="xpgrid">
+                    <label class="skillDialogLabel">Aug</label>
+                    <br/>
+                    <input class="augment" readonly name="skill.augment" type="text" data-dtype="Number" value="{{skill.augment}}"/>
+                </div>
+                <div class="xpgrid">
+                    <label class="skillDialogLabel">Expert</label>
+                    <br/>
+                    <input class="expert" readonly name="skill.expert" type="text" data-dtype="Number" value="{{skill.expert}}"/>
+                </div>
+            {{/if}}
+        </div>
     </div>
     <footer class="sheet-footer flexrow">
         <button type="submit" name="submit" class="save">Save <i class="fas fa-dice"></i></button>

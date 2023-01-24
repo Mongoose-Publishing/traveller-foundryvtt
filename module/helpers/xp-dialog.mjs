@@ -122,19 +122,24 @@ export class MgT2XPDialog extends Application {
             this.spec.xp = xp;
             this.spec.bonus = bonus;
             this.spec.notes = notes;
+
+            //this.spec.augdm = parseInt(html.find("input[class='augdm']")[0].value);
+            //this.spec.augment = parseInt(html.find("input[class='augment']")[0].value);
+            //this.spec.expert = parseInt(html.find("input[class='expert']")[0].value);
         } else if (this.skill) {
             this.skill.xp = xp;
             this.skill.bonus = bonus;
             this.skill.notes = notes;
 
-            console.log("XP is " + xp);
+            // this.skill.augdm = parseInt(html.find("input[class='augdm']")[0].value);
+            // this.skill.augment = parseInt(html.find("input[class='augment']")[0].value);
+            // this.skill.expert = parseInt(html.find("input[class='expert']")[0].value);
 
             this.actor.system.skills[this.skillId].xp = xp;
             this.actor.system.skills[this.skillId].bonus = bonus;
             this.actor.system.skills[this.skillId].notes = notes;
-
-            this.actor.update({ "system.skills": this.actor.system.skills });
         }
+        this.actor.update({ "system.skills": this.actor.system.skills });
 
         this.close();
     }

@@ -374,8 +374,12 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     let   skillCheck = false;
     let   defaultCha = true;
     let   chaDm = 0;
-    let   skillAugDm = 0;
-    let   bonusDM = 0;
+
+    // Keep track of bonuses and penalties.
+    let skillDM = 0, skillAug = 0, skillBonus = 0
+    let specDM = 0, specAug = 0, specBonus = 0;
+    let skillNotes = "";
+    let specNotes = "";
 
     // Normal, Boon or Bane dice roll.
     let dice = "2D6";
@@ -422,22 +426,21 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         if (data.characteristics[cha].augdm && parseInt(data.characteristics[cha].augdm) != 0) {
             let chaAugDm = parseInt(data.characteristics[cha].augdm);
             dice += ` ${(chaAugDm>=0)?"+":""}${chaAugDm}[AugDM]`;
-            skillText += " (" + chaAugDm + "Aug)";
+            skillNotes += " (" + chaAugDm + "Aug)";
         }
         if (cha === "STR" || cha === "DEX" || cha === "END") {
             if (data.modifiers.encumbrance.dm) {
                 let encDm = parseInt(data.modifiers.encumbrance.dm);
                 dice += ` ${(encDm>=0)?"+":""}${encDm}[Enc]`;
-                skillText += ` (${encDm}Enc)`;
+                skillNotes += ` (${encDm}Enc)`;
             }
             if (data.modifiers.physical.dm) {
                 let phyDm = parseInt(data.modifiers.physical.dm);
                 dice += ` ${(phyDm>=0)?"+":""}${phyDm}[Phy]`;
-                skillText += ` (${phyDm}Phy)`;
+                skillNotes += ` (${phyDm}Phy)`;
             }
         }
     }
-    console.log(skillText);
 
     // There are several ways of adding bonuses to a roll.
     // .bonus - Generic bonus that is manually set on a skill
@@ -445,25 +448,26 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     // .augdm - Bonus that always applies to the skill roll.
     // .expert - Expert software, which sets or gives bonus to a skill.
     let notes = "";
+
     if (skill) {
         // AugmentDMs are applied to the roll, regardless of the actor's skill level.
         if (skill.augdm && parseInt(skill.augdm) != 0) {
-            skillAugDm += parseInt(skill.augdm);
-            notes += `DM (${skill.augdm}) `;
+            skillDM += parseInt(skill.augdm);
+            skillNotes += `DM&nbsp;(${parseInt(skill.augdm)}) `;
         }
         if (speciality && speciality.augdm && parseInt(speciality.augdm) != 0) {
-            skillAugDm += parseInt(speciality.augdm);
-            notes += `Spec DM (${speciality.augdm}) `;
+            specDM += parseInt(speciality.augdm);
+            specNotes += `DM&nbsp;(${parseInt(speciality.augdm)}) `;
         }
 
         // The bonus is set manually, and always applied to the roll.
         if (skill.bonus && parseInt(skill.bonus) != 0) {
-            skillAugDm += parseInt(skill.bonus);
-            notes += `${skill.notes} (${skill.bonus}) `;
+            skillDM += parseInt(skill.bonus);
+            skillNotes += `${skill.notes}&nbsp;(${parseInt(skill.bonus)}) `;
         }
         if (speciality && speciality.bonus && parseInt(speciality.bonus) != 0) {
-            skillAugDm += parseInt(speciality.bonus);
-            notes += `${speciality.notes} (${speciality.bonus}) `;
+            specDM += parseInt(speciality.bonus);
+            specNotes += `${speciality.notes}&nbsp;(${speciality.bonus}) `;
         }
 
         title += ((title === "")?"":" + ") + skill.label;
@@ -481,10 +485,11 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                 } else {
                     value += 1;
                 }
-                notes += "Expert Software/" + skill.expert;
+                skillNotes += `Expert/${skill.expert}`;
             }
             if (skill.augment) {
                 value += parseInt(skill.augment);
+                //skillNotes += `Aug&nbsp;${skill.augment}`;
             }
             if (speciality) {
                 value = speciality.value;
@@ -494,12 +499,14 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                 if (speciality.expert) {
                     if (parseInt(speciality.expert) > value) {
                         value = parseInt(speciality.expert) - 1;
+                        specNotes += `Expert/${spec.expert}`;
                     } else {
                         value += 1;
                     }
                 }
-                if (speciality.augment) {
+                if (speciality.augment && !isNaN(speciality.augment) && parseInt(speciality.augment) !== 0) {
                     value += parseInt(speciality.augment);
+                    //specNotes += `Aug&nbsp;${speciality.augment}`
                 }
             }
         } else if (skill.expert && parseInt(skill.expert) > 0 && (cha === "INT" || cha === "EDU")) {
@@ -519,9 +526,8 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             skillText += " (+" + value + ")";
         }
     }
-    if (skillAugDm != 0) {
-        dice += " + " + skillAugDm + "[Aug]";
-        skillText += " + " + skillAugDm + " [Aug]";
+    if (skillDM !== 0) {
+        dice += " + " + skillDM + "[AugDM]";
     }
     if (dm > 0) {
         dice += " +" + dm;
@@ -572,7 +578,10 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             text += `<div class="skill-without-icon">`;
         }
         text += `<span class="skill-intro">${checkText}</span><br/>${skillText}`;
-        text += `<div class="skill-augment-text">${notes}</div>`;
+        text += `<div class="skill-augment-text">${skillNotes}</div>`;
+        if (specNotes != "") {
+            text += `<div class="skill-augment-text">${specNotes}</div>`;
+        }
         text += "</div><br/>";
 
         if (game.settings.get("mgt2", "verboseSkillRolls")) {
@@ -587,6 +596,24 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                     let stotal = total + spec.value;
                     let slabel = `${spec.label} (${spec.value})`;
 
+                    console.log(spec);
+                    specDM = 0;
+                    specAug = 0;
+                    specBonus = 0;
+                    specNotes = "";
+                    if (spec.augment && !isNaN(spec.augment) && parseInt(spec.augment) != 0) {
+                        stotal += parseInt(spec.augment);
+                        slabel = `${spec.label} (${spec.value + spec.augment})`;
+                    }
+                    if (spec.augdm && !isNaN(spec.augdm) && parseInt(spec.augdm) != 0) {
+                        stotal += parseInt(spec.augdm);
+                        specNotes += `DM ${parseInt(spec.augdm)} `;
+                    }
+                    if (spec.bonus && !isNaN(spec.bonus) && parseInt(spec.bonus) != 0) {
+                        stotal += parseInt(spec.bonus);
+                        specNotes += `${spec.notes} ${parseInt(spec.bonus)} `
+                    }
+
                     if (isPerson && defaultCha && spec.default && spec.default !== skill.default) {
                         stotal -= chaDm;
                         stotal += data.characteristics[spec.default].dm;
@@ -595,6 +622,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
 
                     if (game.settings.get("mgt2", "verboseSkillRolls")) {
                         text += `<h3 class="subroll">${slabel}</h3>`;
+                        if (specNotes != "") {
+                            text += `<div class="skill-augment-text">${specNotes}</div>`;
+                        }
                         text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span> ` + getEffectLabel(stotal - difficulty);
                     } else {
                         text += `<h3 class="subroll">${slabel} <span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span></h3>`;
