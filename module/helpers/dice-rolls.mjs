@@ -35,14 +35,14 @@ export function getTraitValue(traits, trait) {
 }
 
 export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry) {
-    const   data = actor?actor.system:null;
+    const   system = actor?actor.system:null;
     let     content = "Attack";
     let     melee = true;
 
     let baseRange = weapon.system.weapon.range;
     let rangeBand = null;
     let rangeDistance = baseRange;
-    if (range !== undefined && range !== null) {
+    if (range !== undefined && range !== null && !isParry) {
         switch (range) {
             case +1:
                 rangeBand = "Short";
@@ -70,22 +70,23 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         dice = "3D6kl2";
     }
     dice += " + " + skillDM;
-    if (data.modifiers.encumbrance.dm != 0) {
-        dice += " + " + parseInt(data.modifiers.encumbrance.dm);
+    if (system) {
+        if (system.modifiers && system.modifiers.encumbrance.dm != 0) {
+            dice += " + " + parseInt(system.modifiers.encumbrance.dm);
+        }
+        if (baseRange === 0) {
+            if (system.modifiers && system.modifiers.melee.dm != 0) {
+                dice += " + " + parseInt(system.modifiers.melee.dm);
+            }
+        } else {
+            if (system.modifiers && system.modifiers.physical.dm != 0) {
+                dice += " + " + parseInt(system.modifiers.physical.dm);
+            }
+            if (system.modifiers && system.modifiers.guncombat.dm != 0 && weapon.system.weapon.skill.indexOf("guncombat") == 0) {
+                dice += " + " + parseInt(system.modifiers.guncombat.dm);
+            }
+        }
     }
-    if (baseRange === 0) {
-        if (data.modifiers.melee.dm != 0) {
-            dice += " + " + parseInt(data.modifiers.melee.dm);
-        }
-    } else {
-        if (data.modifiers.physical.dm != 0) {
-            dice += " + " + parseInt(data.modifiers.physical.dm);
-        }
-        if (data.modifiers.guncombat.dm != 0 && weapon.system.weapon.skill.indexOf("guncombat") == 0) {
-            dice += " + " + parseInt(data.modifiers.guncombat.dm);
-        }
-    }
-
 
     if (weapon.system.weapon.attackBonus) {
         const attackBonus = parseInt(weapon.system.weapon.attackBonus);
@@ -132,11 +133,13 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         }
     }
 
-    content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type==="standard")?"":(" ("+type+")")}<br/>`;
-    if (baseRange > 0) {
-        content += `<b>Range:</b> ${baseRange}m<br/>`;
-    } else {
-        content += `<b>Melee</b>`;
+    if (!isParry) {
+        content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type === "standard") ? "" : (" (" + type + ")")}<br/>`;
+        if (baseRange > 0) {
+            content += `<b>Range:</b> ${baseRange}m<br/>`;
+        } else {
+            content += `<b>Melee</b>`;
+        }
     }
     let traits = weapon.system.weapon.traits;
     if (traits && traits !== "") {
@@ -223,10 +226,11 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         }
 
         if (isParry) {
+            let parryBonus = parseInt(weapon.system.weapon.parryBonus);
             if (actor) {
-                content += `<b>Parry Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
+                content += `<b>Parry DM:</b> ${skillDM + parryBonus}<br/><br/>`;
             } else {
-                content += "<br/>";
+                content += `<b>Parry DM:</b> ${parryBonus}<br/><br/>`;
             }
         } else {
             content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;

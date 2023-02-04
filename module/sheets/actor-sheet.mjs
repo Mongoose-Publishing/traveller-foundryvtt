@@ -100,6 +100,13 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
             guncombat.dm = guncombat.custom + guncombat.auto + guncombat.effect;
+        } else {
+            actorData.modifiers = {
+                encumbrance: { custom: 0, auto: 0, effect: 0, dm: 0, multiplierBonus: 0 },
+                physical: { custom: 0, auto: 0, effect: 0, dm: 0 },
+                melee: { custom: 0, auto: 0, effect: 0, dm: 0 },
+                guncombat: { custom: 0, auto: 0, effect: 0, dm: 0 },
+            };
         }
 
         return context;

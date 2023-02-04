@@ -33,6 +33,7 @@ export class MgT2AttackDialog extends Application {
 
         // Work out what the skill bonus is.
         this.score = parseInt(getSkillValue(this.actor, this.skill, this.speciality));
+        this.parryScore = this.score;
         if (data.characteristics && data.characteristics[this.cha]) {
             this.score += parseInt(data.characteristics[this.cha].dm);
         } else {
@@ -85,7 +86,8 @@ export class MgT2AttackDialog extends Application {
             "skill": this.data.skills[this.skill].label,
             "speciality": this.data.skills[this.skill].specialities[this.speciality].label,
             "dicetype": "normal",
-            "parryBonus": this.parryBonus
+            "parryBonus": this.parryBonus,
+            "parryScore": this.parryScore
         }
     }
 
@@ -122,12 +124,14 @@ export class MgT2AttackDialog extends Application {
         console.log("onParryClick:");
 
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
+        console.log("Parry DM is equal to " + dm);
         if (this.parryBonus) {
             dm += this.parryBonus;
         }
         let rollType = html.find(".skillDialogRollType")[0].value;
+        console.log("Parry DM is equal to " + dm);
 
-        rollAttack(this.actor, this.weapon, this.score, dm, rollType, null, null, true);
+        rollAttack(this.actor, this.weapon, this.parryScore, dm, rollType, null, null, true);
 
         this.close();
     }
