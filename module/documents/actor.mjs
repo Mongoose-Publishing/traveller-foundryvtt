@@ -26,13 +26,15 @@ export class MgT2Actor extends Actor {
 
         for (const effect of this.effects) {
             const source = effect._source._id;
-            const origin = effect.origin.replaceAll(/.*Item./g, "");
-            const item = this.items.get(origin);
-            if (item) {
-                if (item.system.status === MgT2Item.EQUIPPED) {
-                    effect.isSuppressed = false;
-                } else {
-                    effect.isSuppressed = true;
+            if (effect.origin) {
+                const origin = effect.origin.replaceAll(/.*Item./g, "");
+                const item = this.items.get(origin);
+                if (item) {
+                    if (item.system.status === MgT2Item.EQUIPPED) {
+                        effect.isSuppressed = false;
+                    } else {
+                        effect.isSuppressed = true;
+                    }
                 }
             }
         }
@@ -161,7 +163,14 @@ export class MgT2Actor extends Actor {
         const dex = parseInt(actorData.system.characteristics["DEX"].dm);
         const int = parseInt(actorData.system.characteristics["INT"].dm);
 
-        actorData.system.initiative = Math.max(int, dex);
+        if (!isNaN(actorData.system.initiative)) {
+            actorData.system.initiative = {
+                base: 0,
+                value: 0
+            }
+        }
+        actorData.system.initiative.base = Math.max(int, dex);
+        actorData.system.initiative.value = actorData.system.initiative.base;
     }
 
     _countSkillLevels(skillData) {

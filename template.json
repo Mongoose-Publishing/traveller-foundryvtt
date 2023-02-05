@@ -3,8 +3,14 @@
     "types": ["traveller", "npc", "creature", "spacecraft" ],
     "templates": {
       "base": {
-        "speed": 6,
-        "initiative": 0,
+        "speed": {
+            "base": 6,
+            "value": 6
+        },
+        "initiative": {
+            "base": 0,
+            "value": 0
+        },
         "size": 0,
         "rads": 0,
         "weightCarried": 0,
@@ -31,6 +37,18 @@
                 "dm": 0
             },
             "guncombat": {
+                "custom": 0,
+                "auto": 0,
+                "effect": 0,
+                "dm": 0
+            },
+            "speed":  {
+                "custom": 0,
+                "auto": 0,
+                "effect": 0,
+                "dm": 0
+            },
+            "initiative": {
                 "custom": 0,
                 "auto": 0,
                 "effect": 0,
