@@ -12,7 +12,7 @@
                         {{#if (isChaShown ../data key)}}
                             <div class="resource flex-group-center">
                                 <label for="data.damage.{{key}}" class="resource-label">{{key}}</label>
-                                <input type="text" name="data.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
+                                <input class="writable" type="text" name="data.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
                             </div>
                         {{/if}}
                     {{/each}}
@@ -58,7 +58,6 @@
                                         <label>{{item.name}}</label>
                                         <div class="item-controls">
                                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                                         </div>
                                     </li>
                                     <br/>
@@ -66,10 +65,6 @@
                             {{/if}}
                         {{/each}}
                     </ol>
-                    <a class="item-control item-create" title="Create attack" data-type="weapon"
-                       data-name="Add weapon" data-damage="1d6" data-skill="guncombat.slug"
-                       data-img="systems/mgt2/icons/items/gun-slug.svg">
-                        <i class="fas fa-plus"></i> Add</a>
                 </div>
             </div>
         </div>
@@ -82,19 +77,19 @@
             <div class="shadow grid grid-7col">
                 <div class="resource flex-group-left grid-span-2">
                     <label for="data.player" class="field-label">{{localize 'MGT2.TravellerSheet.Player'}}</label>
-                    <input class="field-value" name="data.player" type="text" value="{{data.player}}"/>
+                    <input class="field-value writable" name="data.player" type="text" value="{{data.player}}"/>
                 </div>
                 <div class="resource flex-group-left grid-span-2">
                     <label for="data.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
-                    <input class="field-value" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
+                    <input class="field-value writable" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
                 </div>
                 <div class="resource flex-group-left grid-span-2">
                     <label for="data.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
-                    <input class="field-value" name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
+                    <input class="field-value writable" name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
                 </div>
                 <div class="resource flex-group-left">
                     <label for="data.sophont.age" class="field-label">{{localize 'MGT2.TravellerSheet.Age'}}</label>
-                    <input class="field-value" name="data.sophont.age" type="text" value="{{data.sophont.age}}"/>
+                    <input class="field-value writable" name="data.sophont.age" type="text" value="{{data.sophont.age}}"/>
                 </div>
             </div>
 
@@ -128,15 +123,18 @@
             <div class="shadow grid grid-4col">
                 <div class="resource flex-group-center">
                     <label for="data.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
-                    <input class="field-value" type="text" name="data.speed.base" value="{{data.speed.base}}" data-dtype="Number"/>
+                    <input class="field-value" type="text" name="data.speed.base"
+                           value="{{data.speed.base}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
-                    <input class="field-value" type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
+                    <input class="field-value" type="text" name="data.size"
+                           value="{{data.size}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.initiative.base" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
-                    <input class="field-value" type="text" name="data.initiative.base" value="{{data.initiative.base}}" data-dtype="Number"/>
+                    <input class="field-value" type="text" name="data.initiative.base"
+                           value="{{data.initiative.base}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.rads" class="field-label">{{localize 'MGT2.TravellerSheet.Rads'}}</label>
