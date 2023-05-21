@@ -393,7 +393,44 @@ Tools.showSkills = function(chatData) {
     }
 
     this.message(chatData, text);
+}
 
+Tools.currentTime = function(chatData, args) {
+    const user = game.users.current;
+    let year = game.settings.get("mgt2", "currentYear");
+    let day = game.settings.get("mgt2", "currentDay");
 
+    if (user.isGM && args.length > 0) {
+        let value = args.shift();
+        let inc = false;
+        let y = false;
+        if (value.startsWith("+")) {
+            inc = true;
+        };
+        if (value.match("[0-9]+y.*")) {
+            year = parseInt(year) + parseInt(value);
+        } else {
+            day = parseInt(day) + parseInt(value);
+        }
 
+        while (parseInt(day) > 365) {
+            year++;
+            day-=365;
+        }
+        while (parseInt(day) < 1) {
+            year--;
+            day+=365;
+        }
+        game.settings.set("mgt2", "currentYear", year);
+        game.settings.set("mgt2", "currentDay", day);
+    } else if (args.length > 0) {
+        ui.notifications.error("Only the GM can set the date and time");
+    }
+    if (parseInt(day) < 10) {
+        day = "00" + day;
+    } else if (parseInt(day) < 100) {
+        day = "0" + day;
+    }
+    let text = "It is currently " + year + "-" + day;
+    this.message(chatData, text);
 }

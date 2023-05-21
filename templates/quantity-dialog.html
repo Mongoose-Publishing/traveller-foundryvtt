@@ -10,13 +10,21 @@
             <select class="quantity" name="quantity">
                 {{#select "one"}}
                     <option value="one">One item</option>
+                    {{#if half}}
+                        <option value="half">Half ({{half}})</option>
+                    {{/if}}
                     <option value="all">All items ({{max}})</option>
-                    <option value="custom">Custom amount</option>
+                    <option value="custom">Custom</option>
                 {{/select}}
             </select>
             <br/>
             <label for="number" class="skillDialogLabel">Custom</label>
-            <input class="skillDialogDM" name="number" type="text" data-dtype="Number" value="{{number}}"/>
+
+            <div class="incdec">
+                <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
+                <input class="number" type="text" name="number" value="{{number}}" data-dtype="Number"/>
+                <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
+            </div>
         </div>
     </div>
     <footer class="sheet-footer flexrow">

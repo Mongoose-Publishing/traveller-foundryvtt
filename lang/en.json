@@ -16,6 +16,10 @@
   "MGT2.Settings.SkillFormat.Values.Columns": "Columns",
   "MGT2.Settings.UseEncumbrance.Name": "Use encumbrance",
   "MGT2.Settings.UseEncumbrance.Hint": "If enabled, automatically applies penalties due to encumbrance",
+  "MGT2.Settings.CurrentYear.Name": "Year",
+  "MGT2.Settings.CurrentYear.Hint": "The current year of the campaign",
+  "MGT2.Settings.CurrentDay.Name": "Day",
+  "MGT2.Settings.CurrentDay.Hint": "The current day of the campaign",
 
   "MGT2.TravellerSheet.Player": "Player",
   "MGT2.TravellerSheet.Species": "Species",

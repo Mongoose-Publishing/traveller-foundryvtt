@@ -50,8 +50,6 @@ export class MgT2ActorSheet extends ActorSheet {
         context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
         context.flags = actorData.flags;
 
-        console.log("getData: " + context.actor.name);
-
         // Prepare character data and items.
         if (type == 'traveller') {
             this._prepareItems(context);
@@ -128,7 +126,6 @@ export class MgT2ActorSheet extends ActorSheet {
         let cargoUsed = 0;
 
         for (let i of context.items) {
-            console.log(`${i.name}: ${i.type}`);
             if (i.type === 'cargo') {
                 cargo.push(i);
                 console.log(i);
@@ -177,8 +174,6 @@ export class MgT2ActorSheet extends ActorSheet {
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
-
-            console.log(i);
 
             if (i.system.weight !== undefined) {
                 if (i.system.status === MgT2Item.CARRIED) {
@@ -502,6 +497,7 @@ export class MgT2ActorSheet extends ActorSheet {
             // If shift is held down on drop, copy rather than move.
             return;
         }
+
         let actor = this.actor;
         let srcActorId = data.uuid.replace(/Actor\.([a-z0-9]*)\..*/gi, "$1");
         let itemId = data.uuid.replace(/Actor\.[a-z0-9]*\.Item\.([a-z0-9]*)/gi, "$1");
@@ -511,12 +507,16 @@ export class MgT2ActorSheet extends ActorSheet {
             let srcActor = game.actors.get(srcActorId);
             if (srcActor) {
                 let item = srcActor.items.get(itemId);
-                srcActor.deleteEmbeddedDocuments("Item", [itemId]);
-                ui.notifications.info(`Moved '${item.name}' from '${srcActor.name}' to '${actor.name}'`);
+
+                if (item.system.quantity > 1) {
+                    new MgT2QuantityDialog(srcActor, actor, item).render(true);
+                } else {
+                    srcActor.deleteEmbeddedDocuments("Item", [itemId]);
+                    ui.notifications.info(`Moved '${item.name}' from '${srcActor.name}' to '${actor.name}'`);
+                }
             }
         }
         return true;
-
     }
 
     async _onDropUPP(event, data) {

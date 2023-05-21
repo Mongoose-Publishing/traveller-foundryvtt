@@ -99,6 +99,23 @@ Hooks.once('init', async function() {
         default: "rows"
     });
 
+    game.settings.register('mgt2', 'currentYear', {
+       name: game.i18n.localize("MGT2.Settings.CurrentYear.Name"),
+       hint: game.i18n.localize("MGT2.Settings.CurrentYear.Hint"),
+       scope: 'world',
+       config: true,
+       type: Number,
+       default: 1105
+    });
+    game.settings.register('mgt2', 'currentDay', {
+        name: game.i18n.localize("MGT2.Settings.CurrentDay.Name"),
+        hint: game.i18n.localize("MGT2.Settings.CurrentDay.Hint"),
+        scope: 'world',
+        config: true,
+        type: Number,
+        default: 1
+    });
+
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;
 
@@ -198,6 +215,11 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
         return false;
     } else if (message.indexOf("/renumber") === 0) {
         Tools.renumber();
+        return false;
+    } else if (message.indexOf("/time") === 0) {
+        let args = message.split(" ");
+        args.shift();
+        Tools.currentTime(chatData, args);
         return false;
     }
 
@@ -704,9 +726,6 @@ Handlebars.registerHelper('nameQuantity', function(item) {
 });
 
 Handlebars.registerHelper('formula', function(actor, value) {
-    console.log("formula:");
-    console.log(actor);
-    console.log(value);
     if (value === undefined || value === null || value == "") {
         return "";
     } else if (!isNaN(value)) {

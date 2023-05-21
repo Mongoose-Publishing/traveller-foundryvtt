@@ -86,9 +86,6 @@ export class MgT2Actor extends Actor {
         const actorData = this;
         const flags = actorData.flags.traveller || {};
 
-        console.log("prepareDerivedData:");
-        console.log(actorData);
-
         // Make separate methods for each Actor type (traveller, npc, etc.) to keep
         // things organized.
         this._prepareTravellerData(actorData);
@@ -120,8 +117,6 @@ export class MgT2Actor extends Actor {
     }
 
     _prepareEncumbrance(actorData) {
-        console.log("_prepareEncumbrance:");
-
         if (!actorData.system) {
             return;
         }
@@ -174,7 +169,6 @@ export class MgT2Actor extends Actor {
     }
 
     _countSkillLevels(skillData) {
-      console.log("_countSkillLevels:");
       let total = 0;
       for (var s in skillData) {
           if (skillData[s].trained) {
@@ -256,7 +250,7 @@ export class MgT2Actor extends Actor {
                 console.log("Augmented value is " + value);
             }
             actorData.characteristics[char].current = value;
-            actorData.characteristics[char].dm = this.getModifier(value);;
+            actorData.characteristics[char].dm = this.getModifier(value);
         }
 
         if (actorData.hits) {

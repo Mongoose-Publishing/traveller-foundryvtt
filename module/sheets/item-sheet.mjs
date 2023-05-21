@@ -63,7 +63,7 @@ export class MgT2ItemSheet extends ItemSheet {
 
         // If this belongs to an actor, the actor might have custom skills, so
         // we need to use the actor's skill list rather than the global one.
-        if (context.item.parent) {
+        if (context.item.parent && context.item.parent.system.skills) {
             context.skills = context.item.parent.system.skills;
         } else {
             context.skills = game.system.template.Actor.templates.skills.skills;

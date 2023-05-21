@@ -191,7 +191,6 @@ export class MgT2DamageDialog extends Application {
 
         this.actor.update({ "data.damage": this.data.damage });
 
-
         this.close();
     }
 
