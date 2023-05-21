@@ -1,43 +1,99 @@
 <form class="{{cssClass}} {{item.type}} flexcol" autocomplete="off">
   <section class="item-sheet">
     <div class="sidebar">
-      <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
-      <div class="shadow item-side-panel">
-        <div class="resource flex-group-center">
-          <label for="system.quantity" class="resource-label">Quantity</label>
-          <div class="incdec">
-            <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
-            <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
-            <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
+        <div class="shadow item-side-panel">
+          <div class="resource flex-group-center">
+            <label for="system.quantity" class="resource-label">Quantity</label>
+            <div class="incdec">
+              <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
+              <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+              <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
+            </div>
           </div>
         </div>
-      </div>
+
+        <div class="shadow item-side-panel">
+            <div class="resources flex-group-center">
+                <div class="resource">
+                    <label for="system.hardware.tons" class="resource-label">TONS</label>
+                    <input type="text" name="system.hardware.tons" value="{{system.hardware.tons}}" data-dtype="Number"/>
+                </div>
+                <div class="resource">
+                    <label for="system.hardware.power" class="resource-label">POWER</label>
+                    <input type="text" name="system.hardware.power" value="{{system.hardware.power}}" data-dtype="Number"/>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="flex-group-left">
-      <div class="shadow">
-        <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-        <div class="resources grid grid-4col flex-group-center">
-          <div class="resource">
-            <label for="system.weight" class="resource-label">KG</label>
-            <input type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
-          </div>
-          <div class="resource">
-            <label for="system.cost" class="resource-label">Cost</label>
-            <input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
-          </div>
-          <div class="resource">
-            <label for="system.tl" class="resource-label">TL</label>
-            <input type="text" name="system.tl" value="{{system.tl}}" data-dtype="Number"/>
-          </div>
+        <div class="shadow">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+            <div class="resources grid grid-4col flex-group-center">
+                <div class="resource">
+                    <label for="system.cost" class="resource-label">Cost (MCr)</label>
+                    <input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+                </div>
+                <div class="resource">
+                    <label for="system.tl" class="resource-label">TL</label>
+                    <input type="text" name="system.tl" value="{{system.tl}}" data-dtype="Number"/>
+                </div>
+                <div class="resource">
+                    <label for="system.hardware.system" class="resource-label">System</label>
+                    <select class="hardwareSystemType" name="system.hardware.system">
+                      {{#select system.hardware.system}}
+                      <option value="general">General</option>
+                      <option value="jump">Jump</option>
+                      <option value="m-drive">M-Drive</option>
+                      <option value="r-drive">R-Drive</option>
+                      <option value="fuel">Fuel</option>
+                      <option value="weapon">Weapon</option>
+                      {{/select}}
+                    </select>
+                </div>
+                <div class="resource">
+                    {{#if (ifEquals system.hardware.system "jump")}}
+                      <label class="resource-label">Jump</label>
+                    {{else if (ifEquals system.hardware.system "m-drive")}}
+                      <label class="resource-label">Thrust</label>
+                    {{else if (ifEquals system.hardware.system "r-drive")}}
+                      <label class="resource-label">Thrust</label>
+                    {{else}}
+                      <label class="resource-label">Rating</label>
+                    {{/if}}
+                    <input type="text" name="system.hardware.rating" value="{{system.hardware.rating}}" data-dtype="Number"/>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="shadow">
-        {{editor enrichedDescription target="system.description"
-        button=true editable=editable}}
-      </div>
+        <div class="shadow">
+            <div class="resources grid grid-3col flex-group-center">
+                <div class="resource">
+                    <label class="resource-label">TONS</label>
+                    <input type="text" name="system.hardware.tonnage.tons"
+                           value="{{system.hardware.tonnage.tons}}" data-type="Number"/>
+                </div>
+                <div class="resource">
+                    <label class="resource-label">%</label>
+                    <input type="text" name="system.hardware.tonnage.percent"
+                           value="{{system.hardware.tonnage.percent}}" data-type="Number"/>
+                </div>
+                <div class="resource">
+                    <label class="resource-label">MCr/TON</label>
+                    <input type="text" name="system.hardware.tonnage.cost"
+                           value="{{system.hardware.tonnage.cost}}" data-type="Number"/>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="shadow">
+            {{editor enrichedDescription target="system.description"
+            button=true editable=editable}}
+        </div>
     </div>
   </section>
 </form>
