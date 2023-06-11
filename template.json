@@ -525,6 +525,7 @@
                 "value": 0,
                 "trained": false,
                 "requires": "DEX",
+                "creature": true,
                 "icon": "systems/mgt2/icons/skills/guncombat.svg",
                 "specialities": {
                     "archaic": {
@@ -1030,16 +1031,16 @@
     },
     "spacecraft": {
         "templates": [],
+        "hits": {
+            "value": 80,
+            "max": 80,
+            "damage": 0
+        },
         "spacecraft": {
             "dtons": 100,
             "configuration": "standard",
             "armour": 0,
             "radShielding": 0,
-            "hits": {
-                "value": 80,
-                "max": 80,
-                "damage": 0
-            },
             "power": {
                 "value": 0,
                 "max": 10,

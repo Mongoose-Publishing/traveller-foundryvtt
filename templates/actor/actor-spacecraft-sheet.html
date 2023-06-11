@@ -7,19 +7,19 @@
                  title="{{actor.name}}" height="100" width="100"/>
 
             <div class="side-panel hits-box shadow">
-                <label for="data.spacecraft.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                <label for="system.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
 
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
                     <input class="characteristic-value" type="number" name="data.hits.damage"
                            title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
-                           value="{{data.spacecraft.hits.damage}}" data-dtype="Number"/>
+                           value="{{data.hits.damage}}" data-dtype="Number"/>
                 </div>
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
                     <input class="characteristic-readonly" type="number"
                            title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
-                           value="{{data.spacecraft.hits.value}}"/>
+                           value="{{data.hits.value}}"/>
                 </div>
             </div>
 
@@ -50,8 +50,8 @@
                     <input class="field-value" name="data.spacecraft.dtons" type="text" value="{{data.spacecraft.dtons}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.spacecraft.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
-                    <input class="field-value" name="data.spacecraft.hits.max" type="text" value="{{data.spacecraft.hits.max}}"/>
+                    <label for="data.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
+                    <input class="field-value" name="data.hits.max" type="text" value="{{data.hits.max}}"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.CargoHold'}}</label>

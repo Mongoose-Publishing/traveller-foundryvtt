@@ -122,7 +122,6 @@ export class MgT2ActorSheet extends ActorSheet {
         const cargo = [];
         const locker = [];
         const hardware = [];
-
         let cargoUsed = 0;
 
         for (let i of context.items) {

@@ -24,6 +24,13 @@ export class MgT2Actor extends Actor {
 
         const actorData = this;
 
+        if (this.system.hits && this.type != "traveller") {
+            let hits = this.system.hits;
+            if (hits.value != (hits.max - hits.damage)) {
+                hits.value = parseInt(hits.max) - parseInt(hits.damage);
+            }
+        }
+
         for (const effect of this.effects) {
             const source = effect._source._id;
             if (effect.origin) {
@@ -58,9 +65,9 @@ export class MgT2Actor extends Actor {
                 damage = Tools.applyDamageToCha(damage, this.system, "STR");
                 damage = Tools.applyDamageToCha(damage, this.system, "DEX");
             }
-            return this.update({"system.damage": this.system.damage });
+            return this.update({"system.damage": this.system.damage});
         } else {
-            console.log("NPC or Creature");
+            console.log("NPC, Creature or Spacecraft");
             let hits = this.system.hits;
             if (isDelta) {
                 hits.damage -= parseInt(value);
