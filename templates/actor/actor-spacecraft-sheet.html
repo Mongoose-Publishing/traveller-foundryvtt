@@ -80,6 +80,8 @@
                 <nav class="sheet-tabs tabs" data-group="primary">
                     <a class="item" data-tab="locker">{{localize 'MGT2.TravellerSheet.ShipsLocker'}}</a>
                     <a class="item" data-tab="cargo">{{localize 'MGT2.TravellerSheet.CargoHold'}}</a>
+                    <a class="item" data-tab="hardware">{{localize 'MGT2.TravellerSheet.ShipsHardware'}}</a>
+                    <a class="item" data-tab="notes">{{localize 'MGT2.TravellerSheet.ShipsNotes'}}</a>
                 </nav>
 
                 <div class="sheet-body">
@@ -112,7 +114,7 @@
                         <div class="grid grid-3col">
                             <div class="resource flex-group-center">
                                 <label class="field-label">{{localize 'MGT2.TravellerSheet.CargoSpace'}}</label>
-                                <input class="field-value" type="text" value="{{system.cargo}}dt" readonly/>
+                                <input class="field-value" type="text" value="{{system.spacecraft.cargo}}dt" readonly/>
                             </div>
                             <div class="resource flex-group-center">
                                 <label class="field-label">{{localize 'MGT2.TravellerSheet.CargoUsed'}}</label>
@@ -123,7 +125,6 @@
                                 <label class="field-label">{{localize 'MGT2.TravellerSheet.CargoRemaining'}}</label>
                                 <input class="field-value" type="text" value="{{cargoRemaining}}dt" readonly/>
                             </div>
-
                         </div>
 
                         <ol class="items-list actor-items grid grid-3col">
@@ -145,6 +146,54 @@
                             </li>
                             {{/each}}
                         </ol>
+                    </div>
+
+                    <div class="tab items" data-tab="hardware">
+                        <div class="grid grid-3col">
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.DTons'}}</label>
+                                <input class="field-value" type="text" value="{{system.spacecraft.dtons}}dt" readonly/>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.DTonsUsed'}}</label>
+                                <input class="field-value" type="text" value="{{dtonsUsed}}dt" readonly/>
+                            </div>
+
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.DTonsRemaining'}}</label>
+                                <input class="field-value" type="text" value="{{dtonsRemaining}}dt" readonly/>
+                            </div>
+                        </div>
+
+                        <ol class="items-list actor-items grid grid-3col">
+                            {{#each hardware as |item id|}}
+                            <li class="item item-gear" data-item-id="{{item._id}}">
+                                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+                                {{#if item.system.weight  includeZero=false}}
+                                <span>{{item.system.weight}}kg</span>
+                                {{/if}}
+                                {{#if item.system.tl includeZero=false}}
+                                <span>TL {{item.system.tl}}</span>
+                                {{/if}}
+                                {{#if item.system.cost includeZero=false}}
+                                <span>Cr{{item.system.cost}}</span>
+                                {{/if}}
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ol>
+                    </div>
+
+                    <div class="tab items" data-tab="notes">
+                        <section class="description shadow">
+                            {{editor
+                            enrichedDescription target="system.description"
+                            button=true editable=editable}}
+                        </section>
                     </div>
                 </div>
             </div>

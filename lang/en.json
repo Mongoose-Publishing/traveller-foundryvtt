@@ -53,9 +53,13 @@
   "MGT2.TravellerSheet.JDrive": "J-Drive",
   "MGT2.TravellerSheet.ShipsLocker": "Ship's Locker",
   "MGT2.TravellerSheet.CargoHold": "Cargo Hold",
+  "MGT2.TravellerSheet.ShipsHardware": "Hardware",
+  "MGT2.TravellerSheet.ShipsNotes": "Notes",
   "MGT2.TravellerSheet.CargoSpace": "Cargo Space",
   "MGT2.TravellerSheet.CargoUsed": "Used",
   "MGT2.TravellerSheet.CargoRemaining": "Remaining",
+  "MGT2.TravellerSheet.DTonsUsed": "Used",
+  "MGT2.TravellerSheet.DTonsRemaining": "Remaining",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",

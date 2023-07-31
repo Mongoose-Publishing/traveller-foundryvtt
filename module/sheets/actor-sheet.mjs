@@ -123,6 +123,7 @@ export class MgT2ActorSheet extends ActorSheet {
         const locker = [];
         const hardware = [];
         let cargoUsed = 0;
+        let dtonsUsed = 0;
 
         for (let i of context.items) {
             if (i.type === 'cargo') {
@@ -134,6 +135,27 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             } else if (i.type === 'hardware') {
                 hardware.push(i);
+                let h = i.system.hardware;
+                let t = parseInt(h.tons);
+                if (t == 0) {
+                    t = parseInt(h.tonnage.percent);
+                    t = (t * parseInt(context.system.spacecraft.dtons)) / 100;
+                    t += parseInt(h.tonnage.tons);
+                }
+                if (t < parseInt(h.tonnage.minimum)) {
+                    t = parseInt(h.tonnage.minimum);
+                }
+                dtonsUsed += t;
+
+                if (h.system == "j-drive") {
+                    context.system.spacecraft.jdrive = parseInt(h.rating);
+                }
+                if (h.system == "m-drive") {
+                    context.system.spacecraft.mdrive = parseInt(h.rating);
+                }
+                if (h.system == "r-drive") {
+                    context.system.spacecraft.rdrive = parseInt(h.rating);
+                }
             } else {
                 locker.push(i);
             }
@@ -144,6 +166,8 @@ export class MgT2ActorSheet extends ActorSheet {
 
         context.cargoUsed = cargoUsed;
         context.cargoRemaining = parseInt(context.system.spacecraft.cargo) - cargoUsed;
+        context.dtonsUsed = dtonsUsed;
+        context.dtonsRemaining = parseInt(context.system.spacecraft.dtons) - dtonsUsed;
 
         console.log(cargoUsed);
         console.log(context.cargoRemaining);
