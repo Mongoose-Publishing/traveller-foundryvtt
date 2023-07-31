@@ -45,21 +45,24 @@
                     <select class="hardwareSystemType" name="system.hardware.system">
                       {{#select system.hardware.system}}
                       <option value="general">General</option>
-                      <option value="jump">Jump</option>
+                      <option value="j-drive">Jump</option>
                       <option value="m-drive">M-Drive</option>
                       <option value="r-drive">R-Drive</option>
+                      <option value="power">Power</option>
                       <option value="fuel">Fuel</option>
                       <option value="weapon">Weapon</option>
                       {{/select}}
                     </select>
                 </div>
                 <div class="resource">
-                    {{#if (ifEquals system.hardware.system "jump")}}
+                    {{#if (ifEquals system.hardware.system "j-drive")}}
                       <label class="resource-label">Jump</label>
                     {{else if (ifEquals system.hardware.system "m-drive")}}
                       <label class="resource-label">Thrust</label>
                     {{else if (ifEquals system.hardware.system "r-drive")}}
                       <label class="resource-label">Thrust</label>
+                    {{else if (ifEquals system.hardware.system "power")}}
+                      <label class="resource-label">Power</label>
                     {{else}}
                       <label class="resource-label">Rating</label>
                     {{/if}}

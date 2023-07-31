@@ -138,7 +138,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 let h = i.system.hardware;
                 let t = parseInt(h.tons);
                 if (t == 0) {
-                    t = parseInt(h.tonnage.percent);
+                    t = parseFloat(h.tonnage.percent);
                     t = (t * parseInt(context.system.spacecraft.dtons)) / 100;
                     t += parseInt(h.tonnage.tons);
                 }
