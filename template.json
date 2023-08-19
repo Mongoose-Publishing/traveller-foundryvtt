@@ -1041,6 +1041,7 @@
             "configuration": "standard",
             "armour": 0,
             "radShielding": 0,
+            "computer": 0,
             "power": {
                 "value": 0,
                 "max": 10,

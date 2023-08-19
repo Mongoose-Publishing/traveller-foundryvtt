@@ -125,10 +125,11 @@ export class MgT2ActorSheet extends ActorSheet {
         let cargoUsed = 0;
         let dtonsUsed = 0;
 
+        console.log(context);
+
         for (let i of context.items) {
             if (i.type === 'cargo') {
                 cargo.push(i);
-                console.log(i);
                 let q = parseInt(i.system.quantity);
                 if (q > 0) {
                     cargoUsed += q;
@@ -137,23 +138,44 @@ export class MgT2ActorSheet extends ActorSheet {
                 hardware.push(i);
                 let h = i.system.hardware;
                 let t = parseInt(h.tons);
-                if (t == 0) {
-                    t = parseFloat(h.tonnage.percent);
-                    t = (t * parseInt(context.system.spacecraft.dtons)) / 100;
-                    t += parseInt(h.tonnage.tons);
-                }
-                if (t < parseInt(h.tonnage.minimum)) {
-                    t = parseInt(h.tonnage.minimum);
-                }
-                dtonsUsed += t;
+                let rating = parseInt(h.rating);
 
-                if (h.system == "j-drive") {
+                if (h.system === "armour") {
+                    t = (rating * h.tonnage.percent * parseInt(context.system.spacecraft.dtons)) / 100;
+                    let conf = context.system.spacecraft.configuration;
+                    if (conf === "streamlined") {
+                        t *= 1.2;
+                    } else if (conf === "sphere") {
+                        t *= 0.9;
+                    } else if (conf === "close") {
+                        t *= 1.5;
+                    } else if (conf === "dispersed") {
+                        t *= 2;
+                    }
+                    context.system.spacecraft.armour = rating;
+                } else {
+                    if (t === 0) {
+                        t = parseFloat(h.tonnage.percent);
+                        t = (t * parseInt(context.system.spacecraft.dtons)) / 100;
+                        t += parseInt(h.tonnage.tons);
+                    }
+                    if (t < parseInt(h.tonnage.minimum)) {
+                        t = parseInt(h.tonnage.minimum);
+                    }
+                    if (t !== i.system.hardware.tons) {
+                        i.system.hardware.tons = t * i.system.quantity;
+                        console.log(i);
+                    }
+                }
+                dtonsUsed += t * i.system.quantity;
+
+                if (h.system === "j-drive") {
                     context.system.spacecraft.jdrive = parseInt(h.rating);
                 }
-                if (h.system == "m-drive") {
+                if (h.system === "m-drive") {
                     context.system.spacecraft.mdrive = parseInt(h.rating);
                 }
-                if (h.system == "r-drive") {
+                if (h.system === "r-drive") {
                     context.system.spacecraft.rdrive = parseInt(h.rating);
                 }
             } else {
@@ -309,7 +331,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         // Handle standard protection
                         let prot = armourData.protection;
 
-                        if (prot == "") {
+                        if (prot === "") {
                             // Nothing to do.
                         } else if (!isNaN(prot)) {
                             armour.protection += parseInt(prot);
@@ -322,7 +344,7 @@ export class MgT2ActorSheet extends ActorSheet {
 
                         // Handle energy protection.
                         let other = armourData.otherProtection;
-                        if (other == "") {
+                        if (other === "") {
                             // Nothing to do.
                         } else if (!isNaN(other)) {
                             armour.otherProtection += parseInt(other);
@@ -470,11 +492,6 @@ export class MgT2ActorSheet extends ActorSheet {
 
     _onCharacteristicDragStart(event, options) {
         let dragData = {
-            actorId: this.actor.id,
-            sceneId: this.actor.isToken ? canvas.scene?.id : null,
-            tokenId: this.actor.isToken ? this.actor.token.id : null
-        }
-        dragData = {
             dragType: "characteristic",
             type: "characteristic",
             characteristic: options.cha
@@ -511,7 +528,7 @@ export class MgT2ActorSheet extends ActorSheet {
     async _onDropItem(event, data) {
         super._onDropItem(event, data);
 
-        if (!data || !data.uuid || data.uuid.indexOf("Actor") != 0) {
+        if (!data || !data.uuid || data.uuid.indexOf("Actor") !== 0) {
             // This hasn't been dragged from another actor.
             return true;
         }

@@ -60,6 +60,7 @@
   "MGT2.TravellerSheet.CargoRemaining": "Remaining",
   "MGT2.TravellerSheet.DTonsUsed": "Used",
   "MGT2.TravellerSheet.DTonsRemaining": "Remaining",
+  "MGT2.TravellerSheet.Configuration": "Configuration",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",
