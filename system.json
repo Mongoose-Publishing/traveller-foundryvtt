@@ -2,9 +2,9 @@
   "name": "mgt2",
   "title": "Mongoose Traveller 2e",
   "description": "An unofficial system for Mongoose Traveller 2e",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "minimumCoreVersion": "10",
-  "compatibleCoreVersion": "10",
+  "compatibleCoreVersion": "11",
   "author": "Samuel Penn",
   "esmodules": ["module/mgt2.mjs" ],
   "styles": ["css/mgt2.css", "css/history.css", "css/items.css" ],
@@ -24,6 +24,14 @@
       "system": "mgt2",
       "module": "mgt2",
       "path": "packs/cargo-items.db",
+      "type": "Item"
+    },
+    {
+      "name": "spaceship-hardware",
+      "label": "Spaceship Hardware",
+      "system": "mgt2",
+      "module": "mgt2",
+      "path": "packs/spaceship-hardware.db",
       "type": "Item"
     }
   ],

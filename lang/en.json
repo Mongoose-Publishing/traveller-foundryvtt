@@ -61,6 +61,9 @@
   "MGT2.TravellerSheet.DTonsUsed": "Used",
   "MGT2.TravellerSheet.DTonsRemaining": "Remaining",
   "MGT2.TravellerSheet.Configuration": "Configuration",
+  "MGT2.TravellerSheet.Fuel": "Fuel",
+  "MGT2.TravellerSheet.CurrentFuel": "Current (dT)",
+  "MGT2.TravellerSheet.MaxFuel": "Max (dT)",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",

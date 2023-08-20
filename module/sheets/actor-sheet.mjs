@@ -139,6 +139,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 let h = i.system.hardware;
                 let t = parseInt(h.tons);
                 let rating = parseInt(h.rating);
+                console.log(i.name);
 
                 if (h.system === "armour") {
                     t = (rating * h.tonnage.percent * parseInt(context.system.spacecraft.dtons)) / 100;
@@ -153,6 +154,10 @@ export class MgT2ActorSheet extends ActorSheet {
                         t *= 2;
                     }
                     context.system.spacecraft.armour = rating;
+                } else if (h.system === "fuel") {
+                    t = rating;
+                    console.log("Fuel is " + t);
+                    context.system.spacecraft.fuel.max = rating;
                 } else {
                     if (t === 0) {
                         t = parseFloat(h.tonnage.percent);

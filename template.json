@@ -1047,6 +1047,10 @@
                 "max": 10,
                 "used": 0
             },
+            "fuel": {
+                "value": 0,
+                "max": 0
+            },
             "cargo": 20,
             "mdrive": 1,
             "rdrive": 0,

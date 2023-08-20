@@ -23,6 +23,23 @@
                 </div>
             </div>
 
+            <div class="side-panel hits-box shadow">
+                <label for="system.fuel" class="box-title">{{localize 'MGT2.TravellerSheet.Fuel'}}</label>
+
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.CurrentFuel'}}</label>
+                    <input class="characteristic-value" type="number" name="data.spacecraft.fuel.value"
+                           title="{{localize 'MGT2.TravellerSheet.CurrentFuel'}}"
+                           value="{{data.spacecraft.fuel.value}}" data-dtype="Number"/>
+                </div>
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.MaxFuel'}}</label>
+                    <input class="characteristic-readonly" type="number"
+                           title="{{localize 'MGT2.TravellerSheet.MaxFuel'}}"
+                           value="{{data.spacecraft.fuel.max}}"/>
+                </div>
+            </div>
+
             <div class="side-panel armour-box shadow flex-group-center">
                 <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
 
