@@ -64,6 +64,8 @@
                       <label class="resource-label">Thrust</label>
                     {{else if (ifEquals system.hardware.system "power")}}
                       <label class="resource-label">Power</label>
+                    {{else if (ifEquals system.hardware.system "armour")}}
+                      <label class="resource-label">Armour</label>
                     {{else}}
                       <label class="resource-label">Rating</label>
                     {{/if}}
@@ -74,26 +76,39 @@
 
         <div class="shadow">
             <div class="resources grid grid-4col flex-group-center">
-                <div class="resource">
-                    <label class="resource-label">TONS</label>
-                    <input type="text" name="system.hardware.tonnage.tons"
-                           value="{{system.hardware.tonnage.tons}}" data-type="Number"/>
-                </div>
-                <div class="resource">
-                    <label class="resource-label">%</label>
-                    <input type="text" name="system.hardware.tonnage.percent"
-                           value="{{system.hardware.tonnage.percent}}" data-type="Number"/>
-                </div>
-                <div class="resource">
-                    <label class="resource-label">Minimum</label>
-                    <input type="text" name="system.hardware.tonnage.minimum"
-                           value="{{system.hardware.tonnage.minimum}}" data-type="Number"/>
-                </div>
-                <div class="resource">
-                    <label class="resource-label">MCr/TON</label>
-                    <input type="text" name="system.hardware.tonnage.cost"
-                           value="{{system.hardware.tonnage.cost}}" data-type="Number"/>
-                </div>
+                {{#if (ifEquals system.hardware.system "armour")}}
+                    <div class="resource">
+                        <label class="resource-label">%</label>
+                        <input type="text" name="system.hardware.tonnage.percent"
+                               value="{{system.hardware.tonnage.percent}}" data-type="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label class="resource-label">MCr/TON</label>
+                        <input type="text" name="system.hardware.tonnage.cost"
+                               value="{{system.hardware.tonnage.cost}}" data-type="Number"/>
+                    </div>
+                {{else}}
+                    <div class="resource">
+                        <label class="resource-label">TONS</label>
+                        <input type="text" name="system.hardware.tonnage.tons"
+                               value="{{system.hardware.tonnage.tons}}" data-type="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label class="resource-label">%</label>
+                        <input type="text" name="system.hardware.tonnage.percent"
+                               value="{{system.hardware.tonnage.percent}}" data-type="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label class="resource-label">Minimum</label>
+                        <input type="text" name="system.hardware.tonnage.minimum"
+                               value="{{system.hardware.tonnage.minimum}}" data-type="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label class="resource-label">MCr/TON</label>
+                        <input type="text" name="system.hardware.tonnage.cost"
+                               value="{{system.hardware.tonnage.cost}}" data-type="Number"/>
+                    </div>
+                {{/if}}
             </div>
         </div>
 

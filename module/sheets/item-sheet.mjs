@@ -103,8 +103,19 @@ export class MgT2ItemSheet extends ItemSheet {
                 item.update({"system.hardware.tons": item.system.hardware.tons})
                 item.update({"system.cost": item.system.cost})
             }
-        }
+        } else {
+            var tons = parseFloat(item.system.hardware.tons);
+            var percent = parseFloat(item.system.hardware.tonnage.percent);
+            var rating = parseInt(item.system.hardware.rating);
+            var base = parseInt(item.system.hardware.tonnage.tons);
 
+            item.system.hardware.tons = base + (shipTons * percent * rating) / 100.0;
+            item.system.cost = parseInt(item.system.hardware.tonnage.cost * item.system.hardware.tons);
+            if (tons != item.system.hardware.tons) {
+                item.update({"system.hardware.tons": item.system.hardware.tons})
+                item.update({"system.cost": item.system.cost})
+            }
+        }
     }
 
 
