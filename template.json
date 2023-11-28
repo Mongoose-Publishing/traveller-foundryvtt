@@ -1141,7 +1141,8 @@
                   "percent": 0,
                   "cost": 0,
                   "minimum": 0
-              }
+              },
+              "powerPerTon": 0
           }
       }
     },

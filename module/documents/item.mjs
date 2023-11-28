@@ -12,6 +12,8 @@ export class MgT2Item extends Item {
     static CARRIED = "carried";
     static OWNED = "owned";
 
+
+
     /**
      * Augment the basic Item data model with additional dynamic data.
      */

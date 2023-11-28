@@ -51,7 +51,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.flags = actorData.flags;
 
         // Prepare character data and items.
-        if (type == 'traveller') {
+        if (type === 'traveller') {
             this._prepareItems(context);
             actorData.birthYear = parseInt(actorData.entryYear) - parseInt(actorData.startAge);
             let numTerms = context.terms.length;
@@ -137,7 +137,7 @@ export class MgT2ActorSheet extends ActorSheet {
             } else if (i.type === 'hardware') {
                 hardware.push(i);
                 let h = i.system.hardware;
-                let t = parseInt(h.tons);
+                let t = parseFloat(h.tons);
                 let rating = parseInt(h.rating);
                 console.log(i.name);
 
@@ -154,6 +154,8 @@ export class MgT2ActorSheet extends ActorSheet {
                         t *= 2;
                     }
                     context.system.spacecraft.armour = rating;
+                    i.system.hardware.tons = t;
+                    //i.update({"system.hardware.tons": t });
                 } else if (h.system === "fuel") {
                     t = rating;
                     console.log("Fuel is " + t);

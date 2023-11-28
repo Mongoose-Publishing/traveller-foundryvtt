@@ -1,5 +1,6 @@
 import {onManageActiveEffect} from "../helpers/effects.mjs";
 import {rollAttack} from "../helpers/dice-rolls.mjs";
+import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -69,10 +70,42 @@ export class MgT2ItemSheet extends ItemSheet {
             context.skills = game.system.template.Actor.templates.skills.skills;
         }
 
+        if (context.item.type === "hardware" && context.item.parent != null) {
+            this.calculateShipHardware(context.item)
+        }
+
         return context;
     }
 
     /* -------------------------------------------- */
+
+    calculateShipHardware(item) {
+        console.log("calculateShipHardware: " + item.name);
+
+        let ship = item.parent;
+        if (ship === null || ship.type !== "spacecraft") {
+            return;
+        }
+
+        // We only do this if the item is part of an existing ship.
+        var shipTons = ship.system.spacecraft.dtons;
+
+        // Calculate armour tonnage.
+        if (item.system.hardware.system === "armour") {
+            var tons = parseFloat(item.system.hardware.tons);
+            var percent = parseFloat(item.system.hardware.tonnage.percent);
+            var multiplier = getArmourMultiplier(ship);
+            var armour = parseInt(item.system.hardware.rating);
+
+            item.system.hardware.tons = (armour * shipTons * percent * multiplier) / 100.0;
+            item.system.cost = parseInt(item.system.hardware.tonnage.cost * item.system.hardware.tons);
+            if (tons != item.system.hardware.tons) {
+                item.update({"system.hardware.tons": item.system.hardware.tons})
+                item.update({"system.cost": item.system.cost})
+            }
+        }
+
+    }
 
 
     /** @override */

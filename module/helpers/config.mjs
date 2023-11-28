@@ -18,6 +18,18 @@ MGT2.UNCONSCIOUS = 1;
 MGT2.HURT = 2;
 MGT2.OKAY = 3;
 
+
+MGT2.HARDWARE_GENERAL = "general";
+MGT2.HARDWARE_ARMOUR = "armour";
+MGT2.HARDWARE_JUMP = "jump";
+
+MGT2.SHIP_CONFIGURATION = new Map([
+    [ "standard", 1.0 ],
+    [ "streamlined", 1.2 ],
+    [ "sphere", 0.9 ],
+    [ "dispersed", 2.0 ]
+]);
+
 MGT2.getStatus = function(actor) {
 
   const data = actor.data.data;
