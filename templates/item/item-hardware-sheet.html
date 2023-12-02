@@ -52,6 +52,7 @@
                       <option value="fuel">Fuel</option>
                       <option value="weapon">Weapon</option>
                       <option value="armour">Armour</option>
+                      <option value="cargo">Cargo</option>
                       {{/select}}
                     </select>
                 </div>
@@ -66,6 +67,10 @@
                       <label class="resource-label">Power</label>
                     {{else if (ifEquals system.hardware.system "armour")}}
                       <label class="resource-label">Armour</label>
+                    {{else if (ifEquals system.hardware.system "fuel")}}
+                      <label class="resource-label">Fuel (t)</label>
+                    {{else if (ifEquals system.hardware.system "cargo")}}
+                      <label class="resource-label">Cargo (t)</label>
                     {{else}}
                       <label class="resource-label">Rating</label>
                     {{/if}}
@@ -74,6 +79,9 @@
             </div>
         </div>
 
+        {{#if (ifEquals system.hardware.system "fuel")}}
+        {{else if (ifEquals system.hardware.system "cargo")}}
+        {{else}}
         <div class="shadow">
             <div class="resources grid grid-4col flex-group-center">
                 {{#if (ifEquals system.hardware.system "armour")}}
@@ -81,6 +89,17 @@
                         <label class="resource-label">%</label>
                         <input type="text" name="system.hardware.tonnage.percent"
                                value="{{system.hardware.tonnage.percent}}" data-type="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label class="resource-label">MCr/TON</label>
+                        <input type="text" name="system.hardware.tonnage.cost"
+                               value="{{system.hardware.tonnage.cost}}" data-type="Number"/>
+                    </div>
+                {{else if (ifEquals system.hardware.system "power")}}
+                    <div class="resource">
+                        <label class="resource-label">Power/TON</label>
+                        <input type="text" name="system.hardware.powerPerTon"
+                               value="{{system.hardware.powerPerTon}}" data-type="Number"/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">MCr/TON</label>
@@ -111,7 +130,7 @@
                 {{/if}}
             </div>
         </div>
-
+        {{/if}}
 
 
         <div class="shadow">

@@ -725,6 +725,15 @@ Handlebars.registerHelper('nameQuantity', function(item) {
    return name;
 });
 
+Handlebars.registerHelper('number', function(value) {
+    return value.toLocaleString("en-GB");
+});
+
+Handlebars.registerHelper('quantity', function(item, value) {
+   return value * item.system.quantity;
+});
+
+
 Handlebars.registerHelper('formula', function(actor, value) {
     if (value === undefined || value === null || value == "") {
         return "";

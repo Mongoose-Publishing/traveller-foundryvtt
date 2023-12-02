@@ -1136,6 +1136,10 @@
               "tons": 0,
               "power": 0,
               "rating": 0,
+              "variables": {
+                  "max": 0,
+                  "tl": ""
+              },
               "tonnage": {
                   "tons": 0,
                   "percent": 0,

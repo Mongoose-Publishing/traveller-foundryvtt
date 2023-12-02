@@ -103,6 +103,34 @@ export class MgT2ItemSheet extends ItemSheet {
                 item.update({"system.hardware.tons": item.system.hardware.tons})
                 item.update({"system.cost": item.system.cost})
             }
+        } else if (item.system.hardware.system === "fuel") {
+            var tons = parseFloat(item.system.hardware.tons);
+            var rating = parseFloat(item.system.hardware.rating);
+            if (tons !== rating) {
+                item.system.hardware.tons = rating;
+                item.update({"system.hardware.tons": item.system.hardware.tons})
+                item.update({"system.cost": 0})
+            }
+        } else if (item.system.hardware.system === "power") {
+            let powerPerTon = parseInt(item.system.hardware.powerPerTon);
+            let tons = parseInt(item.system.hardware.tons);
+            let rating = parseInt(item.system.hardware.rating);
+
+            if (powerPerTon < 1) {
+                item.system.hardware.powerPerTon = 1
+                item.update({"system.hardware.powerPerTon": 1 });
+            } else {
+                if (parseInt(rating / powerPerTon) != tons) {
+                    tons = parseInt(rating / powerPerTon);
+                    if (tons < 1) tons = 1;
+                }
+                if (tons != parseInt(item.system.hardware.tons)) {
+                    item.system.hardware.tons = tons;
+                    item.system.cost = item.system.hardware.tonnage.cost * tons;
+                    item.update({"system.hardware.tons": item.system.hardware.tons})
+                    item.update({"system.cost": item.system.cost})
+                }
+            }
         } else {
             var tons = parseFloat(item.system.hardware.tons);
             var percent = parseFloat(item.system.hardware.tonnage.percent);
@@ -110,7 +138,9 @@ export class MgT2ItemSheet extends ItemSheet {
             var base = parseInt(item.system.hardware.tonnage.tons);
 
             item.system.hardware.tons = base + (shipTons * percent * rating) / 100.0;
-            item.system.cost = parseInt(item.system.hardware.tonnage.cost * item.system.hardware.tons);
+            if (parseFloat(item.system.hardware.tonnage.cost) > 0) {
+                item.system.cost = parseInt(item.system.hardware.tonnage.cost * item.system.hardware.tons);
+            }
             if (tons != item.system.hardware.tons) {
                 item.update({"system.hardware.tons": item.system.hardware.tons})
                 item.update({"system.cost": item.system.cost})

@@ -163,12 +163,12 @@
                             <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
                                 <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                                 <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                                {{#if item.system.quantity  includeZero=false}}
+                                {{#if item.system.quantity includeZero=false}}
                                     <span>{{item.system.quantity}}dt</span>
                                     <br/>
                                 {{/if}}
                                 {{#if item.system.cargo.price includeZero=false}}
-                                    <span>Cr{{item.system.cargo.price}}</span>
+                                    <span>Cr{{number item.system.cargo.price}}</span>
                                 {{/if}}
                                 <div class="item-controls">
                                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -202,13 +202,13 @@
                                 <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                                 <img title="{{nameQuantity item}}" src="{{item.img}}"/>
                                 {{#if item.system.hardware.tons  includeZero=false}}
-                                <span>{{item.system.hardware.tons}}dT</span>
+                                    <span>{{quantity item item.system.hardware.tons}}dT</span>
                                 {{/if}}
                                 {{#if item.system.tl includeZero=false}}
-                                <span>TL {{item.system.tl}}</span>
+                                    <span>TL {{item.system.tl}}</span>
                                 {{/if}}
                                 {{#if item.system.cost includeZero=false}}
-                                <span>Cr{{item.system.cost}}</span>
+                                    <span>MCr{{quantity item item.system.cost}}</span>
                                 {{/if}}
                                 <div class="item-controls">
                                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
