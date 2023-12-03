@@ -80,22 +80,23 @@
             <div class="shadow grid grid-3col">
                 <div class="resource flex-group-left">
                     <label for="data.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
-                    <input class="field-value" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
+                    <input class="field-value writable" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
                 </div>
                 <div class="resource flex-group-left">
                     <label for="data.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
-                    <input class="field-value" name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
+                    <input class="field-value writable" name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
                 </div>
                 <div class="resource flex-group-left">
                     <label for="data.sophont.profession" class="field-label">{{localize 'MGT2.TravellerSheet.Profession'}}</label>
-                    <input class="field-value" name="data.sophont.profession" type="text" value="{{data.sophont.profession}}"/>
+                    <input class="field-value writable" name="data.sophont.profession" type="text" value="{{data.sophont.profession}}"/>
                 </div>
             </div>
 
             <div class="shadow grid grid-{{data.settings.columns}}col">
                 {{#each data.characteristics as | char key | }}
                     {{#if char.show}}
-                    <div class="resource flex-group-center">
+                    <div class="resource flex-group-center characteristic-draggable"
+                         data-rolltype="characteristic" data-cha="{{key}}">
                         <label for="data.characteristics.{{key}}.value"
                                class="characteristic-title rollable"
                                data-roll="2d6+@{{key}}" data-label="{{key}}"
@@ -112,11 +113,11 @@
             <div class="shadow grid grid-4col">
                 <div class="resource flex-group-center">
                     <label for="data.speed.base" class="field-label">SPEED</label>
-                    <input class="field-value" type="text" name="data.speed.base" value="{{data.speed.base}}" data-dtype="Number"/>
+                    <input class="field-value writable" type="text" name="data.speed.base" value="{{data.speed.base}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.size" class="field-label">SIZE</label>
-                    <input class="field-value" type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
+                    <input class="field-value writable" type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.initiative.base" class="field-label">INIT</label>

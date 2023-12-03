@@ -1138,7 +1138,8 @@
               "rating": 0,
               "variables": {
                   "max": 0,
-                  "tl": ""
+                  "tl": "",
+                  "cost": 0
               },
               "tonnage": {
                   "tons": 0,

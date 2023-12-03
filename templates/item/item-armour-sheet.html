@@ -8,7 +8,7 @@
                     <label for="data.quantity" class="resource-label">Quantity</label>
                     <div class="incdec">
                         <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
-                        <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
                         <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
                     </div>
                 </div>
@@ -85,65 +85,66 @@
                 <div class="resources grid grid-3col flex-group-left">
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.TL"}}</label>
-                        <input type="text" name="data.tl" value="{{data.tl}}" data-dtype="Number"/>
-<!--
-                        <select name="data.tl">
+              <!--          <input type="text" name="data.tl" value="{{data.tl}}" data-dtype="Number"/>-->
+                        <br/>
+                        <select class="expand writable" name="data.tl" title="Typical TL item is available">
                             {{#select data.tl}}
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
+                            <option value="0">0 ({{localize "MGT2.Item.Tech.0"}})</option>
+                            <option value="1">1 ({{localize "MGT2.Item.Tech.1"}})</option>
+                            <option value="2">2 ({{localize "MGT2.Item.Tech.2"}})</option>
+                            <option value="3">3 ({{localize "MGT2.Item.Tech.3"}})</option>
+                            <option value="4">4 ({{localize "MGT2.Item.Tech.4"}})</option>
+                            <option value="5">5 ({{localize "MGT2.Item.Tech.5"}})</option>
+                            <option value="6">6 ({{localize "MGT2.Item.Tech.6"}})</option>
+                            <option value="7">7 ({{localize "MGT2.Item.Tech.7"}})</option>
+                            <option value="8">8 ({{localize "MGT2.Item.Tech.8"}})</option>
+                            <option value="9">9 ({{localize "MGT2.Item.Tech.9"}})</option>
+                            <option value="10">10 ({{localize "MGT2.Item.Tech.10"}})</option>
+                            <option value="11">11 ({{localize "MGT2.Item.Tech.11"}})</option>
+                            <option value="12">12 ({{localize "MGT2.Item.Tech.12"}})</option>
+                            <option value="13">13 ({{localize "MGT2.Item.Tech.13"}})</option>
+                            <option value="14">14 ({{localize "MGT2.Item.Tech.14"}})</option>
+                            <option value="15">15 ({{localize "MGT2.Item.Tech.15"}})</option>
+                            <option value="16">16 ({{localize "MGT2.Item.Tech.16"}})</option>
+                            <option value="17">17 ({{localize "MGT2.Item.Tech.17"}})</option>
                             {{/select}}
                         </select>
--->
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.Weight"}}</label>
-                        <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.Cost"}}</label>
-                        <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Armour.Protection"}}</label><br/>
-                        <input class="armour-value" type="text" name="data.armour.protection" title="Standard armour"
+                        <input class="armour-value writable" type="text" name="data.armour.protection" title="Standard armour"
                            value="{{data.armour.protection}}" data-dtype="String"/><br/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Armour.Rads"}}</label><br/>
-                        <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
+                        <input class="writable armour-value" type="text" name="data.armour.rad" title="Radiation protection"
                              value="{{data.armour.rad}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Armour.Energy"}}</label><br/>
-                        <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy protection"
+                        <input class="writable armour-value" type="text" name="data.armour.otherProtection" title="Energy protection"
                                value="{{data.armour.otherProtection}}" data-dtype="String"/><br/>
                     </div>
 
                     <div class="resource grid-span-2">
                         <label class="resource-label">{{localize "MGT2.Armour.EnergyTypes"}}</label>
                         <input type="text" name="data.armour.otherTypes" title="Energy types"
+                               class="writable"
                                value="{{data.armour.otherTypes}}" data-dtype="String"/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Armour.RequiresSkill"}}</label>
-                        <select name="data.armour.skill">
+                        <br/>
+                        <select class="expand writable" name="data.armour.skill">
                             {{#select data.armour.skill}}
                                 <option value="">-</option>
                                 <option value="0">Vacc Suit 0</option>

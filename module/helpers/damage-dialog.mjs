@@ -6,7 +6,7 @@ export class MgT2DamageDialog extends Application {
         options.template = "systems/mgt2/templates/damage-dialog.html";
         options.width = "auto";
         options.height = "auto";
-        options.title = "Apply Damage";
+        options.title = game.i18n.localize("MGT2.DamageDialog.Title");
 
         return options;
     }
@@ -47,20 +47,28 @@ export class MgT2DamageDialog extends Application {
         let totalEND = parseInt(data.characteristics.END.value);
         if (this.actualDamage === 0) {
             this.wounds = "-";
+            this.woundsEffect = "";
         } else if (this.actualDamage < parseInt(totalEND / 2)) {
-            this.wounds = "Minor Wound"
+            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Minor");
+            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.MinorEffect");
         } else if (this.actualDamage <= totalEND) {
-            this.wounds = "Major Wound";
+            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Major");
+            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.MajorEffect");
         } else if (this.actualDamage < totalEND * 2) {
-            this.wounds = "Severe Wound";
+            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Severe");
+            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.SevereEffect");
         } else if (this.actualDamage < totalEND * 3) {
-            this.wounds = "Crippling Wound";
+            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Crippling");
+            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.CripplingEffect");
         } else if (this.actualDamage < totalEND * 4) {
-            this.wounds = "Critical Wound";
+            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Critical");
+            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.CriticalEffect");
         } else if (this.actualDamage < totalEND * 5) {
-            this.wounds = "Mortal Wound";
+            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Mortal");
+            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.MortalEffect");
         } else {
-            this.wounds = "Devastating";
+            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Devastating");
+            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.DevastatingEffect");
         }
 
         this.remainingDamage = this.actualDamage;
@@ -84,7 +92,8 @@ export class MgT2DamageDialog extends Application {
             "DMG_STR": this.DMG_STR,
             "DMG_DEX": this.DMG_DEX,
             "DMG_END": this.DMG_END,
-            "wounds": this.wounds
+            "wounds": this.wounds,
+            "woundsEffect": this.woundsEffect
         }
     }
 

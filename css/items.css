@@ -79,3 +79,7 @@ input.item-tons {
 .effects-list {
     position: relative;
 }
+
+.expand {
+    width: 100%;
+}

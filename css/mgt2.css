@@ -5,7 +5,7 @@
 :root {
     --title-bg: #f1511b;
     --title: white;
-    --panel-bg: #c5c3b4;
+    --panel-bg: #c5c3b4E0;
     --sheet-bg: #404040;
 }
 
@@ -921,6 +921,7 @@ div.armour-box input {
     display: flex;
     padding: 5px;
     background-color: #72bce8;
+    background-image: url(traveller-hexes.png);
 }
 
 .item-sheet .shadow {
@@ -932,6 +933,7 @@ div.armour-box input {
     align-items: flex-start;
     display: flex;
     background-color: var(--sheet-bg);
+    background-image: url(traveller-hexes.png);
 }
 
 .creature-sheet {
@@ -939,6 +941,7 @@ div.armour-box input {
     align-items: flex-start;
     display: flex;
     background: var(--sheet-bg);
+    background-image: url(traveller-hexes.png);
 }
 
 .npc-sheet {
@@ -946,6 +949,7 @@ div.armour-box input {
     align-items: flex-start;
     display: flex;
     background: var(--sheet-bg);
+    background-image: url(traveller-hexes.png);
 }
 
 /* Messages */

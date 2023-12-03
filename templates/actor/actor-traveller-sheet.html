@@ -96,7 +96,8 @@
             <div class="shadow grid grid-{{data.settings.columns}}col">
                 {{#each data.characteristics as | char key | }}
                 {{#if char.show}}
-                <div class="resource flex-group-center characteristic-draggable" data-rolltype="characteristic" data-cha="{{key}}">
+                <div class="resource flex-group-center characteristic-draggable"
+                     data-rolltype="characteristic" data-cha="{{key}}">
                     <label for="data.characteristics.{{key}}.value"
                            class="characteristic-title rollable"
                            data-roll="2d6+@{{key}}"
@@ -123,12 +124,12 @@
             <div class="shadow grid grid-4col">
                 <div class="resource flex-group-center">
                     <label for="data.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
-                    <input class="field-value" type="text" name="data.speed.base"
+                    <input class="field-value writable" type="text" name="data.speed.base"
                            value="{{data.speed.base}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
-                    <input class="field-value" type="text" name="data.size"
+                    <input class="field-value writable" type="text" name="data.size"
                            value="{{data.size}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
@@ -138,7 +139,7 @@
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.rads" class="field-label">{{localize 'MGT2.TravellerSheet.Rads'}}</label>
-                    <input class="field-value" type="text" name="data.rads" value="{{data.rads}}" data-dtype="Number"/>
+                    <input class="field-value writable" type="text" name="data.rads" value="{{data.rads}}" data-dtype="Number"/>
                 </div>
             </div>
 
@@ -164,29 +165,29 @@
 
                     <div class="tab finance" data-group="primary" data-tab="finance">
                         <div class="grid grid-3col">
-                            <div>
+                            <div class="resource">
                                 <label class="profile-label">{{localize 'MGT2.Finance.Cash'}}</label>
-                                <input class="credits" name="data.finance.cash" type="text" value="{{data.finance.cash}}"/>
+                                <input class="credits writable" name="data.finance.cash" type="text" value="{{data.finance.cash}}"/>
                             </div>
-                            <div>
+                            <div class="resource">
                                 <label class="profile-label">{{localize 'MGT2.Finance.Pension'}}</label>
-                                <input class="credits"  name="data.finance.pension" type="text" value="{{data.finance.pension}}"/>
+                                <input class="credits writable"  name="data.finance.pension" type="text" value="{{data.finance.pension}}"/>
                             </div>
-                            <div>
+                            <div class="resource">
                                 <label class="profile-label">{{localize 'MGT2.Finance.OtherIncome'}}</label>
-                                <input  class="credits" name="data.finance.otherIncome" type="text" value="{{data.finance.otherIncome}}"/>
+                                <input  class="credits writable" name="data.finance.otherIncome" type="text" value="{{data.finance.otherIncome}}"/>
                             </div>
-                            <div>
+                            <div class="resource">
                                 <label class="profile-label">{{localize 'MGT2.Finance.MedicalDebt'}}</label>
-                                <input  class="credits" name="data.finance.medicalDebt" type="text" value="{{data.finance.medicalDebt}}"/>
+                                <input  class="credits writable" name="data.finance.medicalDebt" type="text" value="{{data.finance.medicalDebt}}"/>
                             </div>
-                            <div>
+                            <div class="resource">
                                 <label class="profile-label">{{localize 'MGT2.Finance.Mortgage'}}</label>
-                                <input  class="credits" name="data.finance.mortgage" type="text" value="{{data.finance.mortgage}}"/>
+                                <input  class="credits writable" name="data.finance.mortgage" type="text" value="{{data.finance.mortgage}}"/>
                             </div>
-                            <div>
+                            <div class="resource">
                                 <label class="profile-label">{{localize 'MGT2.Finance.LivingCosts'}}</label>
-                                <input  class="credits" name="data.finance.livingCosts" type="text" value="{{data.finance.livingCosts}}"/>
+                                <input  class="credits writable" name="data.finance.livingCosts" type="text" value="{{data.finance.livingCosts}}"/>
                             </div>
                         </div>
 
