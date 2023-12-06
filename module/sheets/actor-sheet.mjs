@@ -320,7 +320,8 @@ export class MgT2ActorSheet extends ActorSheet {
                     'otherProtection': 0,
                     'otherTypes': "",
                     'rad': 0,
-                    'archaic': 0
+                    'archaic': 0,
+                    'name': null
                 }
                 actorData.armour = armour;
             }
@@ -329,11 +330,13 @@ export class MgT2ActorSheet extends ActorSheet {
             armour.otherTypes = "";
             armour.rad = 0;
             armour.archaic = 0;
+            armour.name = null;
             for (let i of context.items) {
                 if (i.system.armour) {
                     const armourData = i.system.armour;
                     if (armourData.form === "natural" || i.system.status === MgT2Item.EQUIPPED) {
                         let armourData = i.system.armour;
+                        let used = false;
 
                         // Handle standard protection
                         let prot = armourData.protection;
@@ -342,11 +345,13 @@ export class MgT2ActorSheet extends ActorSheet {
                             // Nothing to do.
                         } else if (!isNaN(prot)) {
                             armour.protection += parseInt(prot);
+                            used = true;
                         } else {
                             // Not a number, so might be a formula.
                             let roll = new Roll(prot, context.actor.getRollData()).evaluate({async: false});
                             prot = roll.total;
                             armour.protection += prot;
+                            used = true;
                         }
 
                         // Handle energy protection.
@@ -355,11 +360,13 @@ export class MgT2ActorSheet extends ActorSheet {
                             // Nothing to do.
                         } else if (!isNaN(other)) {
                             armour.otherProtection += parseInt(other);
+                            used = true;
                         } else {
                             // Other protection is not a number, so might be a formula.
                             let roll = new Roll(other, context.actor.getRollData()).evaluate({async: false});
                             other = roll.total;
                             armour.otherProtection += other;
+                            used = true;
                         }
 
                         armour.rad += armourData.rad;
@@ -368,6 +375,14 @@ export class MgT2ActorSheet extends ActorSheet {
                         }
                         if (armourData.archaic) {
                             armour.archaic = 1;
+                        }
+
+                        if (used) {
+                            if (armour.name) {
+                                armour.name = armour.name + "; " + i.name;
+                            } else {
+                                armour.name = i.name;
+                            }
                         }
                     }
                 }

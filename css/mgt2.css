@@ -880,6 +880,23 @@ button.damage-button {
 div.armour-box {
 }
 
+div.armour-box label.armour-name {
+    _font-size: smaller;
+    text-align: left;
+    font-style: italic;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    border-bottom: 1px solid #404040;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+div.armour-box label.prot-type {
+    font-weight: bold;
+}
+
 div.armour-box input.armour-value {
     width: 45px;
     text-align: center;
