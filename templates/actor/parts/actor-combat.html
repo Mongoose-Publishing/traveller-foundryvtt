@@ -1,0 +1,56 @@
+
+{{#if data.armour.name}}
+  <div class="side-panel armour-box shadow flex-group-center">
+    <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
+    <label class="armour-name" title="{{data.armour.name}}">{{data.armour.name}}</label>
+
+    <div class="grid grid-3col inset">
+      <div>
+        <label class="prot-type" title="Protection">Prot</label>
+        <input class="armour-value" type="text" name="data.armour.protection" title="Protection"
+               value="{{data.armour.protection}}" readonly data-dtype="Number"/>
+      </div>
+      <div>
+        <label class="prot-type" title="Rad Shielding">Rad</label>
+        <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
+               value="{{data.armour.rad}}" readonly data-dtype="Number"/>
+      </div>
+      {{#if data.armour.otherProtection}}
+      <div>
+        <label class="prot-type" title="Energy Protection">🔥</label>
+        <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy"
+               value="{{data.armour.otherProtection}}" readonly data-dtype="Number"/>
+      </div>
+      <input type="text" name="data.armour.otherTypes" title="Energy types" class="grid-span-3"
+             value="{{data.armour.otherTypes}}" readonly data-dtype="String"/>
+      {{/if}}
+    </div>
+  </div>
+{{/if}}
+
+{{#if activeWeapons}}
+  <div class="side-panel character-attacks shadow">
+    <label class="box-title">{{localize 'MGT2.TravellerSheet.Attacks'}}</label>
+
+    <div class="inset">
+      <ol class="items-list">
+        {{#each items as |item id|}}
+        {{#if item.system.weapon}}
+        {{#if (isItemEquipped item)}}
+        <li class="item" data-item-id="{{item._id}}" title="{{item.system.weapon.damage}}">
+          <a class="rollable" data-roll-type="item">
+            <img src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
+          </a>
+          <label>{{item.name}}</label>
+          <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+          </div>
+        </li>
+        <br/>
+        {{/if}}
+        {{/if}}
+        {{/each}}
+      </ol>
+    </div>
+  </div>
+{{/if}}

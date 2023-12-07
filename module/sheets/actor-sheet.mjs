@@ -215,6 +215,7 @@ export class MgT2ActorSheet extends ActorSheet {
         // Initialize containers.
         const gear = [];
         const weapons = [];
+        const activeWeapons = [];
         const armour = [];
         const terms = [];
         const associates = [];
@@ -246,6 +247,9 @@ export class MgT2ActorSheet extends ActorSheet {
             // Append to gear.
             if (i.type === 'weapon') {
                 weapons.push(i);
+                if (i.system.status === MgT2Item.EQUIPPED) {
+                    activeWeapons.push(i);
+                }
             } else if (i.type === 'armour') {
                 armour.push(i);
                 this._calculateArmour(context);
@@ -282,6 +286,7 @@ export class MgT2ActorSheet extends ActorSheet {
         // Assign and return
         context.gear = gear;
         context.weapons = weapons;
+        context.activeWeapons = activeWeapons;
         context.armour = armour;
         context.terms = terms;
         context.associates = associates;

@@ -549,7 +549,7 @@ h1.charname input {
 .actor .characteristic-dm {
     font-weight: bold;
     font-size: 10pt;
-    background-color: white;
+    background-color: #F79080;
     border: 1pt solid black;
     text-align: center;
     border-radius: 25%;
@@ -1240,7 +1240,7 @@ label.box-title {
 }
 
 .resource .writable {
-    background-color: #E0E0E0;
+    background-color: #D8D8D8;
 }
 
 h1.charname {
