@@ -74,6 +74,9 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         if (system.modifiers && system.modifiers.encumbrance.dm !== 0) {
             dice += " + " + parseInt(system.modifiers.encumbrance.dm);
         }
+        if (system.modifiers && system.modifiers.reaction.dm !== 0) {
+            dice += " + " + parseInt(system.modifiers.reaction.dm);
+        }
         if (baseRange === 0) {
             if (system.modifiers && system.modifiers.melee.dm !== 0) {
                 dice += " + " + parseInt(system.modifiers.melee.dm);
@@ -443,6 +446,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                 dice += ` ${(phyDm>=0)?"+":""}${phyDm}[Phy]`;
                 skillNotes += ` (${phyDm}Phy)`;
             }
+        }
+        if (data.modifiers.reaction && data.modifiers.reaction.dm < 0) {
+            dice += ` ${data.modifiers.reaction.dm}[Dodge]`;
         }
     }
 
