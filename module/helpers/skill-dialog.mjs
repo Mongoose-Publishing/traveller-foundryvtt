@@ -89,7 +89,7 @@ export class MgT2SkillDialog extends Application {
             "skill": this.skill,
             "spec": this.spec,
             "value": this.value,
-            "showCha": (this.skill && this.actor.type != "creature"),
+            "showCha": (this.skill && this.actor.type !== "creature"),
             "chaOnly": this.chaOnly,
             "dm": 0,
             "dicetype": "normal",

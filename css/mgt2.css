@@ -911,6 +911,12 @@ div.armour-box input {
     width: 100%;
 }
 
+span.combatButton {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 5em;
+}
+
 .credits::before {
     content: "Cr";
 }

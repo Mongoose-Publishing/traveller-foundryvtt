@@ -456,6 +456,16 @@ export class MgT2ActorSheet extends ActorSheet {
             const item = this.actor.items.get(li.data("itemId"));
             this._setItemStatus(this.actor, item, MgT2Item.CARRIED);
         });
+        // Dodge reaction
+        html.find('.dodgeRoll').click(ev => {
+            this._rollDodge(this.actor);
+        });
+        html.find('.clearDodge').click(ev => {
+            this._clearDodge(this.actor);
+        });
+        html.find('initRoll').click(ev => {
+            this._initRoll(this.actor);
+        });
 
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
@@ -501,6 +511,55 @@ export class MgT2ActorSheet extends ActorSheet {
         li.addEventListener("dragstart", handler, options);
     });
   }
+
+    _rollDodge(actor) {
+        console.log("_rollDodge:");
+
+        let dodge = 0;
+        const dex = Math.max(0, parseInt(actor.system["DEX"]));
+        if (dex > 0) {
+            dodge = dex;
+        }
+        const skill = parseInt(actor.system.skills["athletics"].specialities["dexterity"].value);
+        if (skill > 0) {
+            dodge += skill;
+        }
+        if (!actor.system.modifiers.reaction) {
+            actor.system.modifiers.reaction = { "dm" : -1 }
+        } else {
+            actor.system.modifiers.reaction.dm = parseInt(actor.system.modifiers.reaction.dm) -1;
+            actor.update({ "system.modifiers.reaction": actor.system.modifiers.reaction});
+        }
+
+        // Header information
+        let content = `<div class="attack-message">`;
+        content += `<h2>Reaction Dodge</h2><div class="message-content">`;
+        content += "<div>";
+        if (actor) {
+            content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
+        }
+        content += `<b>DEX DM</b> ${dex} <b>Athletics</b> ${skill}<br/>`;
+        content += `<b>Dodge:</b> ${dodge}<br/>`;
+        content += `<b>Reaction Penalty:</b> ${actor.system.modifiers.reaction.dm}<br/>`;
+        content += '</div>';
+
+        let chatData = {
+            user: game.user.id,
+            speaker: ChatMessage.getSpeaker(),
+            content: content
+        }
+        ChatMessage.create(chatData, {});
+
+    }
+
+    _clearDodge(actor) {
+        actor.system.modifiers.reaction = { "dm": 0 };
+        actor.update({"system.modifiers.reaction": actor.system.modifiers.reaction });
+    }
+
+    _rollInit(actor) {
+
+    }
 
     _onSkillDragStart(event, options) {
         console.log("_onSkillDragStart:");
@@ -628,7 +687,7 @@ export class MgT2ActorSheet extends ActorSheet {
             node = node.parentNode;
         }
 
-        if (targetCha && sourceCha && targetCha != sourceCha) {
+        if (targetCha && sourceCha && targetCha !== sourceCha) {
             let actorData = actor.system;
             if (actorData.characteristics[targetCha] && actorData.characteristics[sourceCha]) {
                 let swap = actorData.characteristics[targetCha].value;

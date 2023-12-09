@@ -71,18 +71,18 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
     dice += " + " + skillDM;
     if (system) {
-        if (system.modifiers && system.modifiers.encumbrance.dm != 0) {
+        if (system.modifiers && system.modifiers.encumbrance.dm !== 0) {
             dice += " + " + parseInt(system.modifiers.encumbrance.dm);
         }
         if (baseRange === 0) {
-            if (system.modifiers && system.modifiers.melee.dm != 0) {
+            if (system.modifiers && system.modifiers.melee.dm !== 0) {
                 dice += " + " + parseInt(system.modifiers.melee.dm);
             }
         } else {
-            if (system.modifiers && system.modifiers.physical.dm != 0) {
+            if (system.modifiers && system.modifiers.physical.dm !== 0) {
                 dice += " + " + parseInt(system.modifiers.physical.dm);
             }
-            if (system.modifiers && system.modifiers.guncombat.dm != 0 && weapon.system.weapon.skill.indexOf("guncombat") == 0) {
+            if (system.modifiers && system.modifiers.guncombat.dm !== 0 && weapon.system.weapon.skill.indexOf("guncombat") === 0) {
                 dice += " + " + parseInt(system.modifiers.guncombat.dm);
             }
         }
@@ -90,7 +90,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
 
     if (weapon.system.weapon.attackBonus) {
         const attackBonus = parseInt(weapon.system.weapon.attackBonus);
-        if (attackBonus != 0) {
+        if (attackBonus !== 0) {
             dice += " + " + attackBonus;
         }
     }
@@ -100,7 +100,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div class="message-content">`;
     content += "<div>";
     if (actor) {
-        content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
+        content += `<img class="skillcheck-thumb" alt="${actor.name}" src="${actor.thumbnail}"/>`;
     }
     content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
     content += `<b>Skill DM:</b> ${skillDM}`;
@@ -120,7 +120,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     let dmg = weapon.system.weapon.damage;
     let type = weapon.system.weapon.damageType;
     if (!type) {
-        type == "standard";
+        type = "standard";
     }
     let destructive = dmg.indexOf("*") > -1;
     let damageBonus = weapon.system.weapon.damageBonus;

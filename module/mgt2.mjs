@@ -227,13 +227,13 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
 });
 
 Hooks.on("createItem", (item) => {
-    if (item.img == "icons/svg/item-bag.svg") {
+    if (item.img === "icons/svg/item-bag.svg") {
         item.img = "systems/mgt2/icons/items/item.svg";
     }
 });
 
 Hooks.on("createActor", (actor) => {
-    if (actor.img == "icons/svg/mystery-man.svg") {
+    if (actor.img === "icons/svg/mystery-man.svg") {
         if (actor.type === "creature") {
             actor.img = "systems/mgt2/icons/actors/creature.svg";
         } else if (actor.type === "traveller") {
@@ -379,6 +379,30 @@ Hooks.on("applyActiveEffect", (actor, effectData) => {
    if (type === "chaAug") {
 
    }
+});
+
+Hooks.on("combatTurn", (combat, data, options) => {
+   console.log("combatTurn:");
+
+   // This is the actor which just finished their turn.
+   let combatant = combat.combatant.actor;
+    // Reset any reaction penalties back to zero.
+   if (combatant.system.modifiers.reaction && combatant.system.modifiers.reaction.dm !== 0) {
+       combatant.system.modifiers.reaction.dm = 0;
+       combatant.update({ "system.modifiers.reaction": combatant.system.modifiers.reaction});
+   }
+});
+
+Hooks.on("combatRound", (combat, data, options) => {
+    console.log("combatTurn:");
+
+    // This is the actor which just finished their turn.
+    let combatant = combat.combatant.actor;
+    // Reset any reaction penalties back to zero.
+    if (combatant.system.modifiers.reaction && combatant.system.modifiers.reaction.dm !== 0) {
+        combatant.system.modifiers.reaction.dm = 0;
+        combatant.update({ "system.modifiers.reaction": combatant.system.modifiers.reaction});
+    }
 });
 
 // Dropping a skill on the macro bar. An entire skill tree is dragged,

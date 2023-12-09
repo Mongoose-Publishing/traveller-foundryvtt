@@ -24,9 +24,9 @@ export class MgT2Actor extends Actor {
 
         const actorData = this;
 
-        if (this.system.hits && this.type != "traveller") {
+        if (this.system.hits && this.type !== "traveller") {
             let hits = this.system.hits;
-            if (hits.value != (hits.max - hits.damage)) {
+            if (hits.value !== (hits.max - hits.damage)) {
                 hits.value = parseInt(hits.max) - parseInt(hits.damage);
             }
         }
@@ -37,11 +37,7 @@ export class MgT2Actor extends Actor {
                 const origin = effect.origin.replaceAll(/.*Item./g, "");
                 const item = this.items.get(origin);
                 if (item) {
-                    if (item.system.status === MgT2Item.EQUIPPED) {
-                        effect.isSuppressed = false;
-                    } else {
-                        effect.isSuppressed = true;
-                    }
+                    effect.isSuppressed = item.system.status !== MgT2Item.EQUIPPED;
                 }
             }
         }

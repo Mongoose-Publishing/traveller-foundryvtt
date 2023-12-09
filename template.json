@@ -53,6 +53,9 @@
                 "auto": 0,
                 "effect": 0,
                 "dm": 0
+            },
+            "reaction": {
+                "dm": 0
             }
         },
         "hits": {
