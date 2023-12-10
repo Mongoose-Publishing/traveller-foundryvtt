@@ -13,6 +13,17 @@ import {MgT2Item} from "../documents/item.mjs";
  * @extends {ActorSheet}
  */
 export class MgT2ActorSheet extends ActorSheet {
+    static BEHAVIOUR = [
+        "carrionEater", "chaser", "easter", "filter", "gatherer", "grazer",
+        "hunter", "hijacker", "intimidator", "killer", "intermittent", "pouncer",
+        "reducer", "siren", "trapper"
+    ];
+    static TRAITS = [
+      "alarm", "amphibious", "armour", "bioelectricity", "camouflaged",
+        "diseased", "echolocation", "fastMetabolism", "flyer", "heightenedSenses",
+        "irVision", "uvVision", "large", "poison", "psionic", "slowMetabolosim",
+        "small"
+    ];
 
     /** @override */
     static get defaultOptions() {
@@ -690,7 +701,15 @@ export class MgT2ActorSheet extends ActorSheet {
         const ap = data.ap;
         const actor = this.actor;
 
-        new MgT2DamageDialog(actor, damage, ap, laser, stun).render(true);
+        if (actor.type === "traveller") {
+            new MgT2DamageDialog(actor, damage, ap, laser, stun).render(true);
+        } else {
+            // NPC, Creature or something else.
+            console.log(actor.system.hits);
+            actor.system.hits.damage += data.damage;
+            actor.update({ "system.hits": actor.system.hits });
+
+        }
     }
 
     async _onRollTypeChange(event, actor, type) {

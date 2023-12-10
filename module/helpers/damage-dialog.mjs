@@ -35,6 +35,12 @@ export class MgT2DamageDialog extends Application {
         if (this.actualDamage < 0) {
             this.actualDamage = 0;
         }
+        if (!data.damage) {
+            // This is a creature or NPC. Shouldn't be called.
+            data.hits.damage += this.actualDamage;
+            this.actor.update({ "data.damage": this.data.damage });
+            return;
+        }
 
         this.DMG_STR = data.damage.STR.value;
         this.DMG_DEX = data.damage.DEX.value;

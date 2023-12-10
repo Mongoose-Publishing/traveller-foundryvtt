@@ -290,12 +290,12 @@ export class MgT2Actor extends Actor {
             }
             actorData.hits.value = parseInt(actorData.hits.max) - parseInt(actorData.hits.damage);
         }
-
+/*
         actorData.initiative = {
             base: 0,
             value: 0
         }
-
+*/
         // Also calculate Dodge ability.
         let dodge = 0;
         let dodgeSkill = parseInt(actorData.skills["athletics"].specialities["dexterity"].value);
