@@ -458,7 +458,7 @@ export class MgT2ActorSheet extends ActorSheet {
         });
         // Dodge reaction
         html.find('.dodgeRoll').click(ev => {
-            this._rollDodge(this.actor);
+            this._rollDodge(ev, this.actor);
         });
         html.find('.clearDodge').click(ev => {
             this._clearDodge(this.actor);
@@ -512,8 +512,13 @@ export class MgT2ActorSheet extends ActorSheet {
     });
   }
 
-    _rollDodge(actor) {
+    _rollDodge(event, actor) {
         console.log("_rollDodge:");
+
+        if (event.shiftKey) {
+            this._clearDodge(actor);
+            return;
+        }
 
         let dodge = 0;
         const dex = Math.max(0, parseInt(actor.system["DEX"]));
@@ -530,26 +535,6 @@ export class MgT2ActorSheet extends ActorSheet {
             actor.system.modifiers.reaction.dm = parseInt(actor.system.modifiers.reaction.dm) -1;
             actor.update({ "system.modifiers.reaction": actor.system.modifiers.reaction});
         }
-
-        // Header information
-        let content = `<div class="attack-message">`;
-        content += `<h2>Reaction Dodge</h2><div class="message-content">`;
-        content += "<div>";
-        if (actor) {
-            content += `<img class="skillcheck-thumb" src="${actor.thumbnail}"/>`;
-        }
-        content += `<b>DEX DM</b> ${dex} <b>Athletics</b> ${skill}<br/>`;
-        content += `<b>Dodge:</b> ${dodge}<br/>`;
-        content += `<b>Reaction Penalty:</b> ${actor.system.modifiers.reaction.dm}<br/>`;
-        content += '</div>';
-
-        let chatData = {
-            user: game.user.id,
-            speaker: ChatMessage.getSpeaker(),
-            content: content
-        }
-        ChatMessage.create(chatData, {});
-
     }
 
     _clearDodge(actor) {

@@ -1241,8 +1241,19 @@ label.box-title {
     width: 100%;
     display: inline-block;
     margin: 0;
-    padding: 0;
+    padding: 1px 3px;
     border-radius: 0 0 3px 3px;
+    border: solid 1px var(--color-border-light-tertiary);
+    height: var(--form-field-height);
+    background-color: rgba(0, 0, 0, 0.05);
+    text-align: inherit;
+    line-height: inherit;
+    vertical-align: text-bottom;
+}
+
+input.with-roller {
+    width: 60%;
+    text-align: left;
 }
 
 .resource .writable {

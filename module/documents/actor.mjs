@@ -169,6 +169,14 @@ export class MgT2Actor extends Actor {
         }
         actorData.system.initiative.base = Math.max(int, dex);
         actorData.system.initiative.value = actorData.system.initiative.base;
+
+        // Also calculate Dodge ability.
+        let dodge = Math.max(dex, 0);
+        let dodgeSkill = parseInt(actorData.system.skills["athletics"].specialities["dexterity"].value);
+        if (dodgeSkill > 0) {
+            dodge += dodgeSkill;
+        }
+        actorData.system.dodge = dodge;
     }
 
     _countSkillLevels(skillData) {
@@ -282,6 +290,19 @@ export class MgT2Actor extends Actor {
             }
             actorData.hits.value = parseInt(actorData.hits.max) - parseInt(actorData.hits.damage);
         }
+
+        actorData.initiative = {
+            base: 0,
+            value: 0
+        }
+
+        // Also calculate Dodge ability.
+        let dodge = 0;
+        let dodgeSkill = parseInt(actorData.skills["athletics"].specialities["dexterity"].value);
+        if (dodgeSkill > 0) {
+            dodge += dodgeSkill;
+        }
+        actorData.dodge = dodge;
     }
 
 
