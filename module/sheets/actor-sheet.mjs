@@ -7,6 +7,7 @@ import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
 import {MgT2Item} from "../documents/item.mjs";
+import {Tools} from "../helpers/chat/tools.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -705,10 +706,7 @@ export class MgT2ActorSheet extends ActorSheet {
             new MgT2DamageDialog(actor, damage, ap, laser, stun).render(true);
         } else {
             // NPC, Creature or something else.
-            console.log(actor.system.hits);
-            actor.system.hits.damage += data.damage;
-            actor.update({ "system.hits": actor.system.hits });
-
+            Tools.applyDamageTo(damage, ap, data.tl, data.options, data.traits, actor, null);
         }
     }
 

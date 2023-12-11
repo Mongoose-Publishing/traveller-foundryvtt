@@ -19,10 +19,17 @@ export function getSkillValue(actor, skill, speciality) {
     return -3;
 }
 export function hasTrait(traits, trait) {
-    return traits.toLowerCase().indexOf(trait.toLowerCase()) > -1;
+    if (traits) {
+        return traits.toLowerCase().indexOf(trait.toLowerCase()) > -1;
+    } else {
+        return false;
+    }
 }
 
 export function getTraitValue(traits, trait) {
+    if (!traits || ! trait) {
+        return 0;
+    }
     traits = traits.toLowerCase();
     trait = trait.toLowerCase();
 

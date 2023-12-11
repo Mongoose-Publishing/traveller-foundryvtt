@@ -218,7 +218,7 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     let isRanged = true;
 
     let armour = parseInt(data.armour.protection);
-    if (options != "") {
+    if (options !== "") {
         if (data.armour.otherTypes.indexOf(options) > -1) {
             armour += parseInt(data.armour.otherProtection);
         }
