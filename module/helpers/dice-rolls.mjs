@@ -242,9 +242,17 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
             } else {
                 content += `<b>Parry DM:</b> ${parryBonus}<br/><br/>`;
             }
+            if (actor) {
+                if (actor.system.modifiers && actor.system.modifiers.reaction) {
+                    actor.system.modifiers.reaction.dm -= 1;
+                } else {
+                    actor.system.modifiers.reaction = { dm : -1 };
+                }
+                actor.update({ "system.modifiers.reaction": actor.system.modifiers.reaction });
+            }
         } else {
             content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;
-            content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}" class="damage-button">Apply</button>`;
+            content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}" class="damage-button">Apply (${damageEffect})</button>`;
             if (actor) {
                 content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
             } else {

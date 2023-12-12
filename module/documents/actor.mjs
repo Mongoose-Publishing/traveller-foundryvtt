@@ -203,11 +203,9 @@ export class MgT2Actor extends Actor {
         // Make modifications to data here. For example:
         const data = actor.system;
 
-        let totalSkills = this._countSkillLevels(data.skills);
-        data.totalSkills = totalSkills;
-        let maxSkills = (parseInt(data.characteristics.INT.value) +
+        data.totalSkills = this._countSkillLevels(data.skills);
+        data.maxSkills = (parseInt(data.characteristics.INT.value) +
             parseInt(data.characteristics.EDU.value)) * 3;
-        data.maxSkills = maxSkills;
 
         for (const char in data.characteristics) {
             let value = data.characteristics[char].value;
@@ -248,11 +246,9 @@ export class MgT2Actor extends Actor {
         if (actor.type !== 'npc') return;
         const actorData = actor.system;
 
-        let totalSkills = this._countSkillLevels(actorData.skills);
-        actorData.totalSkills = totalSkills;
-        let maxSkills = (parseInt(actorData.characteristics.INT.value) +
+        actorData.totalSkills = this._countSkillLevels(actorData.skills);
+        actorData.maxSkills = (parseInt(actorData.characteristics.INT.value) +
             parseInt(actorData.characteristics.EDU.value)) * 3;
-        actorData.maxSkills = maxSkills;
 
         for (const char in actorData.characteristics) {
             let value = actorData.characteristics[char].value;
@@ -265,11 +261,8 @@ export class MgT2Actor extends Actor {
         }
 
         if (actorData.hits) {
-            let hits = 0;
-            let maxHits = 0;
-            let damage = actorData.hits.damage?parseInt(actorData.hits.damage):0;
-
-            maxHits = actorData.characteristics.STR.value + actorData.characteristics.DEX.value +
+            let maxHits = actorData.characteristics.STR.value +
+                actorData.characteristics.DEX.value +
                 actorData.characteristics.END.value;
 
             actorData.hits.max = maxHits;

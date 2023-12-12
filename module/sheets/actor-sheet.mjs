@@ -116,6 +116,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 physical: { custom: 0, auto: 0, effect: 0, dm: 0 },
                 melee: { custom: 0, auto: 0, effect: 0, dm: 0 },
                 guncombat: { custom: 0, auto: 0, effect: 0, dm: 0 },
+                reaction: { dm: 0 }
             };
         }
 
