@@ -211,6 +211,19 @@
   "MGT2.Finance.Mortgage": "Mortgage (Cr/Month)",
   "MGT2.Finance.LivingCosts": "Living Costs (Cr/Month)",
 
+  "TYPES.Actor.traveller": "Traveller",
+  "TYPES.Actor.npc": "NPC",
+  "TYPES.Actor.creature": "Creature",
+  "TYPES.Actor.spacecraft": "Spacecraft",
+
+  "TYPES.Item.item": "General Item",
+  "TYPES.Item.weapon": "Weapon",
+  "TYPES.Item.armour": "Armour",
+  "TYPES.Item.augment": "Augmentation",
+  "TYPES.Item.cargo": "Cargo",
+  "TYPES.Item.hardware": "Spacecraft Hardware",
+  "TYPES.Item.term": "Term",
+  "TYPES.Item.associatte": "Associate",
 
   "TRAVELLER.Add": "Add"
 }
