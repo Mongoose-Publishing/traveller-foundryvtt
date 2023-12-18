@@ -14,10 +14,6 @@ export class MgT2AttackDialog extends Application {
 
     constructor(actor, weapon) {
         super();
-        console.log("MgT2AttackDialog:");
-        console.log(actor);
-        console.log(weapon);
-
         this.actor = actor;
         this.weapon = weapon;
 
@@ -29,6 +25,14 @@ export class MgT2AttackDialog extends Application {
         this.auto = 1;
         if (hasTrait(this.weapon.system.weapon.traits, "auto")) {
             this.auto = getTraitValue(this.weapon.system.weapon.traits, "auto");
+        }
+        this.currentAmmo = this.weapon.system.weapon.ammo;
+        this.outOfAmmo = false;
+        if (this.weapon.system.weapon.magazine > 0) {
+            this.auto = Math.min(this.auto, this.currentAmmo);
+            if (this.auto === 0) {
+                this.outOfAmmo = true;
+            }
         }
 
         // Work out what the skill bonus is.
@@ -44,8 +48,6 @@ export class MgT2AttackDialog extends Application {
         this.damage = weapon.system.weapon.damage;
         this.damage = this.damage.toUpperCase().replace(/D6/, "D");
         this.damage = this.damage.replace(/ *\* *10/, "D");
-
-        console.log("Weapon skill total " + this.score);
 
         this.range = parseInt(this.weapon.system.weapon.range);
         console.log("Range: " + this.range);
@@ -87,7 +89,9 @@ export class MgT2AttackDialog extends Application {
             "speciality": this.data.skills[this.skill].specialities[this.speciality].label,
             "dicetype": "normal",
             "parryBonus": this.parryBonus,
-            "parryScore": this.parryScore
+            "parryScore": this.parryScore,
+            "outOfAmmo": this.outOfAmmo,
+            "currentAmmo": this.currentAmmo
         }
     }
 
@@ -112,6 +116,13 @@ export class MgT2AttackDialog extends Application {
         let autoOption = "single";
         if (html.find(".attackDialogAuto")[0]) {
             autoOption = html.find(".attackDialogAuto")[0].value;
+        }
+        if (this.outOfAmmo) {
+            autoOption = "noammo";
+        } else {
+            let shotsFired = this.auto;
+            this.weapon.system.weapon.ammo -= shotsFired;
+            this.weapon.update({"system.weapon": this.weapon.system.weapon});
         }
 
         rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM, autoOption);

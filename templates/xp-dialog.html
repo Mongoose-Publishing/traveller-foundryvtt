@@ -25,34 +25,34 @@
         </h3>
 
         <div class="grid grid-4col">
-            <div class="xpgrid">
+            <div class="xpgrid resource">
                 <label for="dicetype" class="skillDialogLabel">Level</label>
                 <br/>
                 <span>{{value}}</span>
             </div>
 
-            <div class="xpgrid">
+            <div class="xpgrid resource">
                 <label for="difficulty" class="skillDialogLabel">Cost</label>
                 <br/>
                 <span>{{cost}}</span>
             </div>
 
-            <div class="xpgrid">
+            <div class="xpgrid resource">
                 <label for="xp" class="skillDialogLabel">XP</label>
                 <br/>
-                <input class="skillXPxp" name="xp" type="text" data-dtype="Number" value="{{xp}}"/>
+                <input class="skillXPxp writable" name="xp" type="text" data-dtype="Number" value="{{xp}}"/>
             </div>
 
-            <div class="xpgrid">
+            <div class="xpgrid resource">
                 <label for="bonus" class="skillDialogLabel">Bonus DM</label>
                 <br/>
-                <input class="skillXPbonus" name="bonus" type="text" data-dtype="Number" value="{{bonus}}"/>
+                <input class="skillXPbonus writable" name="bonus" type="text" data-dtype="Number" value="{{bonus}}"/>
             </div>
 
-            <div class="skill-bonus grid-span-4">
+            <div class="skill-bonus grid-span-4 resource">
                 <label for="notes" class="skillDialogLabel">Skill notes</label>
                 <br/>
-                <input class="skillXPnotes" name="notes" type="text" data-dtype="String" value="{{notes}}"/>
+                <input class="skillXPnotes writable" name="notes" type="text" data-dtype="String" value="{{notes}}"/>
             </div>
         </div>
         <h3>Effects</h3>

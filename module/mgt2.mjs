@@ -5,6 +5,8 @@ import { MgT2Actor } from "./documents/actor.mjs";
 import { MgT2Item } from "./documents/item.mjs";
 // Import sheet classes.
 import { MgT2ActorSheet } from "./sheets/actor-sheet.mjs";
+import { MgT2NPCActorSheet } from "./sheets/actor-sheet.mjs";
+import { MgT2CreatureActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 
@@ -139,8 +141,8 @@ Hooks.once('init', async function() {
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("mgt2", MgT2ActorSheet, { label: "Traveller Sheet", makeDefault: true });
-//  Actors.registerSheet("mgt2", MgT2NPCActorSheet, { label: "NPC Sheet", types: [ "npc"], makeDefault: false });
-//  Actors.registerSheet("mgt2", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
+  Actors.registerSheet("mgt2", MgT2NPCActorSheet, { label: "NPC Sheet", types: [ "npc"], makeDefault: false });
+  Actors.registerSheet("mgt2", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
   DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
@@ -197,6 +199,21 @@ Hooks.on('ready', () => {
 
        Tools.applyDamage(dmg, ap, tl, options, traits);
    });
+
+   /*
+   $(document).on('click', '.damage-plus-button', function(e) {
+        console.log("plus click");
+        console.log(e);
+        let apply = e.currentTarget.nextSibling;
+        console.log(apply);
+        let damage = apply.dataset.damage;
+        console.log(damage);
+        damage++;
+        apply.textContent = "Apply (" + damage + ")";
+        apply.dataset.damage = damage;
+        //e.currentTarget.parent.dataset.damage = damage;
+   });
+   */
 });
 
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
@@ -228,7 +245,17 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
 
 Hooks.on("createItem", (item) => {
     if (item.img === "icons/svg/item-bag.svg") {
-        item.img = "systems/mgt2/icons/items/item.svg";
+        if (item.type === "weapon") {
+            item.img = "systems/mgt2/icons/items/gun-slug.svg";
+        } else if (item.type === "armour") {
+            item.img = "systems/mgt2/icons/items/armour-light.svg";
+        } else if (item.type === "augment") {
+            item.img = "systems/mgt2/icons/items/cybernetic.svg";
+        } else if (item.type === "cargo") {
+            item.img = "systems/mgt2/icons/cargo/cargo.svg";
+        } else {
+            item.img = "systems/mgt2/icons/items/item.svg";
+        }
     }
 });
 

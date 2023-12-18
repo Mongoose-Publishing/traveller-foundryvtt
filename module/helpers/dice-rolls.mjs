@@ -190,6 +190,9 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         dmg += " + " + parseInt(autoBonus * destructive?10:1);
     } else if (autoOption && autoOption === "full") {
         attacks = getTraitValue(traits, "auto");
+    } else if (autoOption && autoOption === "noammo") {
+        attacks = 0;
+        content += "<p>No ammo</p>";
     }
 
     const roll = new Roll(dice, actor?actor.getRollData():null).evaluate({async: false});

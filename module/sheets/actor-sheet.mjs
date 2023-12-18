@@ -15,7 +15,7 @@ import {Tools} from "../helpers/chat/tools.mjs";
  */
 export class MgT2ActorSheet extends ActorSheet {
     static BEHAVIOUR = [
-        "carrionEater", "chaser", "easter", "filter", "gatherer", "grazer",
+        "carrionEater", "chaser", "eater", "filter", "gatherer", "grazer",
         "hunter", "hijacker", "intimidator", "killer", "intermittent", "pouncer",
         "reducer", "siren", "trapper"
     ];
@@ -62,6 +62,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
         context.flags = actorData.flags;
 
+
         // Prepare character data and items.
         if (type === 'traveller') {
             this._prepareItems(context);
@@ -77,6 +78,7 @@ export class MgT2ActorSheet extends ActorSheet {
             this._prepareItems(context);
         } else if (type === 'creature') {
             this._prepareItems(context);
+
         } else if (type === 'spacecraft') {
             this._prepareSpacecraftItems(context);
         }
