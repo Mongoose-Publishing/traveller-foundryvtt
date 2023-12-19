@@ -58,6 +58,8 @@
          d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
          id="path862" />
     </marker>
+    <style
+       id="style25">.cls-1{fill:#838bc5;}.cls-2{fill:#65c8d0;}</style>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -66,18 +68,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="222.99117"
-     inkscape:cy="281.32748"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="159.6041"
+     inkscape:cy="18.182746"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="true"
-     inkscape:window-width="2560"
-     inkscape:window-height="1349"
-     inkscape:window-x="1200"
-     inkscape:window-y="240"
-     inkscape:window-maximized="1"
+     inkscape:window-width="1519"
+     inkscape:window-height="842"
+     inkscape:window-x="2230"
+     inkscape:window-y="305"
+     inkscape:window-maximized="0"
      inkscape:snap-grids="true"
      units="px"
      inkscape:pagecheckerboard="false">
@@ -168,41 +170,102 @@
      inkscape:label="Icon"
      inkscape:groupmode="layer"
      id="layer1">
-    <rect
-       style="opacity:0.997213;fill:#e6e6e6;stroke:#ffffff;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect983"
-       width="71.966667"
-       height="10.583333"
-       x="33.866665"
-       y="38.100002"
-       rx="2.1166666"
-       ry="2.1166666" />
-    <rect
-       style="opacity:0.997213;fill:#e6e6e6;stroke:#ffffff;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect983-4"
-       width="71.966667"
-       height="10.583333"
-       x="33.866665"
-       y="52.916668"
-       rx="2.1166666"
-       ry="2.1166666" />
-    <rect
-       style="opacity:0.997213;fill:#e6e6e6;stroke:#ffffff;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect983-0"
-       width="71.966667"
-       height="10.583333"
-       x="33.866665"
-       y="67.733337"
-       rx="2.1166666"
-       ry="2.1166666" />
-    <rect
-       style="opacity:0.997213;fill:#e6e6e6;stroke:#ffffff;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect983-6"
-       width="71.966667"
-       height="10.583333"
-       x="33.866665"
-       y="82.549995"
-       rx="2.1166666"
-       ry="2.1166666" />
+    <g
+       id="g87"
+       transform="matrix(1.7386139,0,0,1.7386139,12.210698,12.140622)"
+       style="stroke-width:1.90226">
+      <path
+         class="cls-1"
+         d="m 32.92,18 a 6,6 0 0 1 1.47,-1 l 1.45,-2.45 A 4.65,4.65 0 0 0 36.5,12.17 4.71,4.71 0 0 0 27.78,9.69 l -2.35,3.81 a 9.36,9.36 0 0 1 7.49,4.5 z"
+         id="path29"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-2"
+         d="m 29.75,22.73 2.17,-3.52 c 0.1,-0.15 0.2,-0.29 0.31,-0.43 A 8.35,8.35 0 0 0 24.84,14.5 v 0 l -2.49,4 a 9.49,9.49 0 0 1 7.4,4.23 z"
+         id="path31"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-1"
+         d="m 26.7,27.66 2.47,-4 a 8.52,8.52 0 0 0 -7.29,-4.17 h -0.14 l -2.48,4 a 9.52,9.52 0 0 1 7.44,4.17 z"
+         id="path33"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-2"
+         d="m 23.66,32.59 2.47,-4 a 8.5,8.5 0 0 0 -7.25,-4.1 h -0.23 l -2.48,4 a 9.5,9.5 0 0 1 7.49,4.1 z"
+         id="path35"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-1"
+         d="m 20.49,37.73 2.59,-4.2 a 8.49,8.49 0 0 0 -7.2,-4 h -0.32 l -3.48,5.63 a 6.47,6.47 0 0 1 8.41,2.59 z"
+         id="path37"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-1"
+         d="m 32.78,19.73 -2.34,3.79 a 9.53,9.53 0 0 1 7.94,5.25 l 2.46,-4.18 a 4.65,4.65 0 0 0 0.66,-2.38 4.71,4.71 0 0 0 -8.72,-2.48 z"
+         id="path39"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-1"
+         d="m 34.78,34.89 a 8.55,8.55 0 0 0 -7.9,-5.39 h -0.14 l -2.48,4 a 9.49,9.49 0 0 1 8.17,5.36 z"
+         id="path41"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-2"
+         d="m 15.08,46.49 4.79,-7.76 a 5.45,5.45 0 0 0 -5,-3.23 5.5,5.5 0 0 0 0,11 z"
+         id="path43"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-2"
+         d="M 37.75,29.84 A 8.49,8.49 0 0 0 29.88,24.5 h -0.05 l -2.48,4 a 9.54,9.54 0 0 1 8,5.3 z"
+         id="path45"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-2"
+         d="m 23.88,34.5 h -0.23 l -2.47,4 a 9.52,9.52 0 0 1 8.28,5.42 l 2.34,-4 A 8.52,8.52 0 0 0 23.88,34.5 Z"
+         id="path47"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-2"
+         d="m 33.76,38.59 -5.18,8.81 a 5.45,5.45 0 0 0 4.3,2.1 5.49,5.49 0 0 0 0.88,-10.91 z"
+         id="path49"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-1"
+         d="m 42.45,22.91 a 5.51,5.51 0 0 1 -0.75,2.18 l -1.25,2.12 a 9.58,9.58 0 0 1 5,4.67 l 2.35,-4 a 8.52,8.52 0 0 0 -5.35,-4.97 z"
+         id="path51"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-2"
+         d="m 39.94,28.08 -2.44,4.15 a 9.64,9.64 0 0 1 5,4.7 l 2.34,-4 a 8.56,8.56 0 0 0 -4.9,-4.85 z"
+         id="path53"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-2"
+         d="m 42.88,17.5 h -0.05 l -1.12,1.82 a 5.72,5.72 0 0 1 0.77,2.56 9.47,9.47 0 0 1 5.92,4.95 l 2.35,-4 A 8.49,8.49 0 0 0 42.88,17.5 Z"
+         id="path55"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-1"
+         d="m 49.78,10.5 a 4.73,4.73 0 0 0 -4,2.23 l -2.34,3.79 a 9.52,9.52 0 0 1 7.94,5.25 l 2.46,-4.18 A 4.65,4.65 0 0 0 54.5,15.21 4.72,4.72 0 0 0 49.78,10.5 Z"
+         id="path57"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-1"
+         d="m 20.88,39.5 h -0.32 l -3.48,5.63 a 6.43,6.43 0 0 1 2.8,-0.64 6.5,6.5 0 0 1 6.31,5 L 28.82,45 a 8.49,8.49 0 0 0 -7.94,-5.5 z"
+         id="path59"
+         style="stroke-width:1.90226" />
+      <circle
+         class="cls-2"
+         cx="19.879999"
+         cy="51"
+         r="5.5"
+         id="circle61"
+         style="stroke-width:1.90226" />
+      <path
+         class="cls-1"
+         d="m 37,33.1 -2.68,4.56 a 6.47,6.47 0 0 1 4.88,4.82 L 41.82,38 A 8.55,8.55 0 0 0 37,33.1 Z"
+         id="path63"
+         style="stroke-width:1.90226" />
+    </g>
   </g>
 </svg>

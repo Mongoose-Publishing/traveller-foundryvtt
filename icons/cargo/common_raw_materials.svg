@@ -58,6 +58,8 @@
          d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
          id="path862" />
     </marker>
+    <style
+       id="style69">.cls-1{fill:#ba9bc9;}.cls-2{fill:#65c8d0;}.cls-3{fill:#838bc5;}.cls-4{fill:#f4ecce;}</style>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -66,18 +68,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="222.99117"
-     inkscape:cy="281.32748"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="525.27932"
+     inkscape:cy="240.4163"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="true"
-     inkscape:window-width="2560"
-     inkscape:window-height="1409"
-     inkscape:window-x="3760"
-     inkscape:window-y="240"
-     inkscape:window-maximized="1"
+     inkscape:window-width="1519"
+     inkscape:window-height="842"
+     inkscape:window-x="2213"
+     inkscape:window-y="610"
+     inkscape:window-maximized="0"
      inkscape:snap-grids="true"
      units="px"
      inkscape:pagecheckerboard="false">
@@ -168,41 +170,48 @@
      inkscape:label="Icon"
      inkscape:groupmode="layer"
      id="layer1">
-    <rect
-       style="opacity:0.997213;fill:#e6e6e6;stroke:#ffffff;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect983"
-       width="71.966667"
-       height="10.583333"
-       x="33.866665"
-       y="38.100002"
-       rx="2.1166666"
-       ry="2.1166666" />
-    <rect
-       style="opacity:0.997213;fill:#e6e6e6;stroke:#ffffff;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect983-4"
-       width="71.966667"
-       height="10.583333"
-       x="33.866665"
-       y="52.916668"
-       rx="2.1166666"
-       ry="2.1166666" />
-    <rect
-       style="opacity:0.997213;fill:#e6e6e6;stroke:#ffffff;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect983-0"
-       width="71.966667"
-       height="10.583333"
-       x="33.866665"
-       y="67.733337"
-       rx="2.1166666"
-       ry="2.1166666" />
-    <rect
-       style="opacity:0.997213;fill:#e6e6e6;stroke:#ffffff;stroke-width:2.11667;stroke-opacity:0.999964;stop-color:#000000"
-       id="rect983-6"
-       width="71.966667"
-       height="10.583333"
-       x="33.866665"
-       y="82.549995"
-       rx="2.1166666"
-       ry="2.1166666" />
+    <g
+       id="g98"
+       transform="matrix(1.5716808,0,0,1.5716808,21.763305,21.19117)"
+       style="stroke-width:2.1043">
+      <polygon
+         class="cls-1"
+         points="7.5,27.79 36.5,56.79 36.5,46.21 7.5,17.21 "
+         id="polygon73"
+         style="stroke-width:2.1043" />
+      <polygon
+         class="cls-2"
+         points="55.79,35.5 26.79,6.5 16.21,6.5 45.21,35.5 "
+         id="polygon75"
+         style="stroke-width:2.1043" />
+      <polygon
+         class="cls-2"
+         points="18.79,16.5 8.21,16.5 37.21,45.5 47.79,45.5 "
+         id="polygon77"
+         style="stroke-width:2.1043" />
+      <path
+         class="cls-1"
+         d="M 19.35,15.65 44.5,40.79 v -4.58 l -29,-29 V 15.5 H 19 a 0.47,0.47 0 0 1 0.35,0.15 z"
+         id="path79"
+         style="stroke-width:2.1043" />
+      <path
+         class="cls-3"
+         d="m 45.5,41.79 3.85,3.86 A 0.49,0.49 0 0 1 49.5,46 v 1.5 h 7 v -11 h -11 z"
+         id="path81"
+         style="stroke-width:2.1043" />
+      <rect
+         class="cls-3"
+         height="11"
+         width="11"
+         x="37.5"
+         y="46.5"
+         id="rect83"
+         style="stroke-width:2.1043" />
+      <path
+         class="cls-4"
+         d="m 57.71,35.29 -30,-30 A 1,1 0 0 0 27,5 H 15 a 1,1 0 0 0 -1,1 v 9 H 7 a 1,1 0 0 0 -1,1 v 12 a 1,1 0 0 0 0.29,0.71 l 30,30 A 1,1 0 0 0 37,59 h 12 a 1,1 0 0 0 1,-1 v -9 h 7 a 1,1 0 0 0 1,-1 V 36 A 1,1 0 0 0 57.71,35.29 Z M 54.59,35 h -9.18 l -28,-28 h 9.18 z M 9.41,17 h 9.18 l 28,28 H 37.41 Z M 16,8.41 l 28,28 v 3.18 L 19.71,15.29 A 1,1 0 0 0 19,15 h -3 z m -8,10 28,28 v 9.18 L 8,27.59 Z M 48,57 H 38 V 47 H 48 Z M 56,47 H 50 V 46 A 1,1 0 0 0 49.71,45.29 L 46,41.59 V 37 h 10 z"
+         id="path85"
+         style="stroke-width:2.1043" />
+    </g>
   </g>
 </svg>
