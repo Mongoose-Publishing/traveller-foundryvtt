@@ -1251,6 +1251,26 @@ label.box-title {
     vertical-align: text-bottom;
 }
 
+.statusWarn {
+    display: inline-block;
+    background-color: #D08040;
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 3px;
+    border: 3px solid #D08040;
+}
+
+.statusBad {
+    display: inline-block;
+    background-color: #E00000;
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 3px;
+    border: 3px solid #E00000;
+}
+
 input.with-roller {
     width: 60%;
     text-align: left;

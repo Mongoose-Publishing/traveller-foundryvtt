@@ -16,6 +16,11 @@
         "weightCarried": 0,
         "heavyLoad": 0,
         "maxLoad": 0,
+        "status": {
+            "woundLevel": 0,
+            "stunned": false,
+            "fatigued": false
+        },
         "modifiers": {
             "encumbrance": {
                 "custom": 0,

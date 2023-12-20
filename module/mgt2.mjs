@@ -15,8 +15,8 @@ import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
 import { Tools } from "./helpers/chat/tools.mjs";
 import { rollSkill } from "./helpers/dice-rolls.mjs";
-import {MgT2DamageDialog} from "./helpers/damage-dialog.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
+import { migrateWorld } from "./migration.mjs";
 
 
 
@@ -34,6 +34,13 @@ Hooks.once('init', async function() {
         rollSkillMacro,
         rollAttackMacro
     };
+
+    game.settings.register("mgt2", "systemSchemaVersion", {
+        config: false,
+        scope: "world",
+        type: Number,
+        default: 0
+    });
 
     game.settings.register('mgt2', 'verboseSkillRolls', {
         name: game.i18n.localize("MGT2.Settings.Verbose.Name"),
@@ -190,6 +197,17 @@ Hooks.on('renderChatMessage', function(app, html) {
 });
 
 Hooks.on('ready', () => {
+    if (game.user.isGM) {
+        // Do we need to run a migration?
+        const LATEST_SCHEMA_VERSION = 1;
+        const currentVersion = parseInt(game.settings.get("mgt2", "systemSchemaVersion"));
+        console.log(`Schema version is ${currentVersion}`);
+        if (!currentVersion || currentVersion < LATEST_SCHEMA_VERSION) {
+            migrateWorld(currentVersion);
+            //game.settings.set("mgt2", "systemSchemaVersion", LATEST_SCHEMA_VERSION);
+        }
+    }
+    // Need to add click event to all existing chat damage buttons.
    $(document).on('click', '.damage-button', function() {
        let dmg = $(this).data('damage');
        let ap = $(this).data("ap");
@@ -199,22 +217,8 @@ Hooks.on('ready', () => {
 
        Tools.applyDamage(dmg, ap, tl, options, traits);
    });
-
-   /*
-   $(document).on('click', '.damage-plus-button', function(e) {
-        console.log("plus click");
-        console.log(e);
-        let apply = e.currentTarget.nextSibling;
-        console.log(apply);
-        let damage = apply.dataset.damage;
-        console.log(damage);
-        damage++;
-        apply.textContent = "Apply (" + damage + ")";
-        apply.dataset.damage = damage;
-        //e.currentTarget.parent.dataset.damage = damage;
-   });
-   */
 });
+
 
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
     if (message.indexOf("/upp") === 0) {

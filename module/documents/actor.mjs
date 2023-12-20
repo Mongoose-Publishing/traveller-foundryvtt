@@ -1,5 +1,6 @@
 import { MgT2Item } from "../documents/item.mjs";
 import { Tools } from "../helpers/chat/tools.mjs";
+import {MGT2} from "../helpers/config.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -198,7 +199,10 @@ export class MgT2Actor extends Actor {
      * Prepare Character type specific data
      */
     _prepareTravellerData(actor) {
+        console.log(`_prepareTravellerData ${actor.name}`);
         if (actor.type !== 'traveller') return;
+
+        console.log(`Preparing traveller data for ${actor.name}`);
 
         // Make modifications to data here. For example:
         const data = actor.system;
@@ -227,6 +231,38 @@ export class MgT2Actor extends Actor {
             }
             data.characteristics[char].current = value;
             data.characteristics[char].dm = this.getModifier(value);
+        }
+        let statsDown = 0;
+        if (data.characteristics.END.current < 1) {
+            statsDown ++;
+        }
+        if (data.characteristics.STR.current < 1) {
+            statsDown ++;
+        }
+        if (data.characteristics.DEX.current < 1) {
+            statsDown ++;
+        }
+        console.log(`Number of stats down is ${statsDown}`);
+        let woundLevel = MGT2.STATUS.OKAY;
+        switch (statsDown) {
+            case 0:
+                woundLevel = MGT2.STATUS.OKAY;
+                break;
+            case 1:
+                woundLevel = MGT2.STATUS.HURT;
+                break;
+            case 2:
+                woundLevel = MGT2.STATUS.UNCONSCIOUS;
+                break;
+            case 3:
+                woundLevel = MGT2.STATUS.DISABLED;
+                break;
+        }
+        console.log(`Wound level is ${woundLevel}`);
+        if (woundLevel != data.status.woundLevel) {
+            console.log("Setting woundLevel to " + woundLevel);
+            data.status.woundLevel = woundLevel;
+            this.update({"system.status": data.status });
         }
 
         if (data.damage && data.hits) {

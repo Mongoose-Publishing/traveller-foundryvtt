@@ -121,6 +121,10 @@ export class MgT2ActorSheet extends ActorSheet {
                 reaction: { dm: 0 }
             };
         }
+        console.log(actorData.status);
+        if (actorData.status && actorData.status.woundLevel > 1) {
+            context.hasStatus = true;
+        }
 
         return context;
     }
@@ -283,6 +287,8 @@ export class MgT2ActorSheet extends ActorSheet {
         if ( game.settings.get("mgt2", "useEncumbrance")) {
             if (weight > this.actor.system.heavyLoad) {
                 this.actor.system.modifiers.encumbrance.auto = -2;
+                this.actor.system.status.encumbered = true;
+                context.hasStatus = true;
             }
         }
         if (skillNeeded >= 0) {
@@ -292,9 +298,11 @@ export class MgT2ActorSheet extends ActorSheet {
                 vaccSkill = parseInt(vs.value);
                 if (vaccSkill < skillNeeded) {
                     this.actor.system.modifiers.encumbrance.auto -= (skillNeeded - vaccSkill);
+                    this.actor.system.status.vaccSuit = true;
                 }
             } else {
                 this.actor.system.modifiers.encumbrance.auto += vaccSkill;
+                this.actor.system.status.vaccSuit = true;
             }
         }
 
