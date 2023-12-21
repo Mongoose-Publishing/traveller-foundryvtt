@@ -122,6 +122,35 @@ Tools.getSelected = function() {
     }
 }
 
+Tools.setStatusFor = function(actor, args, status) {
+    if (args.includes(status)) {
+        actor.system.status[status] = true;
+    }
+    if (args.includes("-" + status)) {
+        actor.system.status[status] = false;
+    }
+}
+
+Tools.setStatus = function(chatData, args) {
+    const selected = Tools.getSelected();
+
+    if (selected.length === 0) {
+        ui.notifications("No tokens selected");
+        return;
+    }
+    for (let token of selected) {
+        if (!token.owner) {
+            continue;
+        }
+        let actor = token.actor;
+        if (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature") {
+            Tools.setStatusFor(actor, args, "stunned");
+            Tools.setStatusFor(actor, args, "fatigued");
+            actor.update({ "system.status": actor.system.status });
+        }
+    }
+}
+
 Tools.renumber = function() {
     const selected = Tools.getSelected();
 
@@ -254,10 +283,10 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
             let str = data.characteristics.STR.current;
             if (str <= data.characteristics.DEX.current && str > remaining) {
                 remaining = Tools.applyDamageToCha(remaining, data, "STR");
-                remaining = Tools.applyDamageToCha(remaining, data, "DEX");
+                Tools.applyDamageToCha(remaining, data, "DEX");
             } else {
                 remaining = Tools.applyDamageToCha(remaining, data, "DEX");
-                remaining = Tools.applyDamageToCha(remaining, data, "STR");
+                Tools.applyDamageToCha(remaining, data, "STR");
             }
         }
         actor.update({"data.damage": data.damage});
@@ -270,7 +299,7 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
         data.hits.damage += actualDamage;
         data.hits.value = parseInt(data.hits.max) - parseInt(data.hits.damage);
     }
-    actor.update({"data.hits": data.hits});
+    actor.update({"system.hits": data.hits});
 
     let name = token?token.name:actor.name;
     let maxHits = data.hits.max;
@@ -406,7 +435,7 @@ Tools.currentTime = function(chatData, args) {
         let y = false;
         if (value.startsWith("+")) {
             inc = true;
-        };
+        }
         if (value.match("[0-9]+y.*")) {
             year = parseInt(year) + parseInt(value);
         } else {

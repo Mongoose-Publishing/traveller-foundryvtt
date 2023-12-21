@@ -242,6 +242,11 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
         args.shift();
         Tools.currentTime(chatData, args);
         return false;
+    } else if (message.indexOf("/status") === 0) {
+        let args = message.split(" ");
+        args.shift();
+        Tools.setStatus(chatData, args);
+        return false;
     }
 
     return true;
@@ -1072,6 +1077,24 @@ Handlebars.registerHelper('effect', function(key) {
         return key
     }
     return key;
+});
+
+/**
+ * Do we need to display the list of status effects for this actor?
+ * Does not check to see if a traveller, npc or creature.
+ */
+Handlebars.registerHelper('hasStatus', function(actorData) {
+   if (actorData.status) {
+        const status = actorData.status;
+
+        if (parseInt(status.woundLevel) > 1) {
+            return true;
+        }
+        if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit) {
+            return true;
+        }
+   }
+   return false;
 });
 
 /* -------------------------------------------- */
