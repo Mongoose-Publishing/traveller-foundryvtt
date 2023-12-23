@@ -30,6 +30,7 @@ export class MgT2Actor extends Actor {
             if (hits.value !== (hits.max - hits.damage)) {
                 hits.value = parseInt(hits.max) - parseInt(hits.damage);
             }
+            hits.tmpDamage = Math.min(hits.tmpDamage, hits.damage);
         }
 
         for (const effect of this.effects) {
@@ -231,6 +232,11 @@ export class MgT2Actor extends Actor {
             }
             data.characteristics[char].current = value;
             data.characteristics[char].dm = this.getModifier(value);
+        }
+        if (data.damage.END.tmp > data.damage.END.value) {
+            data.damage.END.tmp = data.damage.END.value;
+            data.status.stunned = false;
+            data.status.stunnedRounds = 0;
         }
         let statsDown = 0;
         if (data.characteristics.END.current < 1) {

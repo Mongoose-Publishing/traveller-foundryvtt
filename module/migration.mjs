@@ -20,6 +20,9 @@ function migrateActorData(actor, fromVersion) {
         if (actor.system.status && (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature")) {
             actor.system.status.stunnedRounds = parseInt(0);
         }
+        if (actor.system.hits && (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature")) {
+            actor.system.hits.tmpDamage = parseInt(0);
+        }
     }
     return {};
 }
@@ -57,7 +60,7 @@ export async function migrateWorld(fromVersion) {
     }
 
     for (let pack of game.packs) {
-        if (pack.metadata.package != "world") {
+        if (pack.metadata.package !== "world") {
             continue;
         }
     }

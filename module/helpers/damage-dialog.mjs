@@ -191,8 +191,9 @@ export class MgT2DamageDialog extends Application {
 
         if (this.stun) {
             // 'tmp' tracks how much of the current damage is temporary.
+            let added = end - damage.END.value;
             damage.END.value = parseInt(damage.END.value) + end;
-            damage.END.tmp = Math.min(damage.END.value, parseInt(damage.END.tmp) + end);
+            damage.END.tmp = Math.min(damage.END.value, parseInt(damage.END.tmp) + added);
             if (remaining > 0) {
                 this.data.status.stunned = true;
                 this.data.status.stunnedRounds += remaining;
