@@ -240,7 +240,7 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
         return;
     }
 
-    console.log(`applyDamageTo: ${damage} AP ${ap} TL ${tl} (${options})`);
+    console.log(`applyDamageTo: ${damage} AP ${ap} TL ${tl} (${options}) (${traits})`);
     console.log(token);
 
     let data = actor.system;
@@ -269,13 +269,15 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     armour = Math.max(0, armour - ap);
     let actualDamage = Math.max(0, damage - armour);
 
+    let stun = hasTrait(traits, "stun");
+
     console.log("DAMAGE: " + actualDamage);
     if (actor.type === "traveller") {
         // Travellers don't have hits
         let remaining = actualDamage;
         // Damage always comes off END first.
         if (data.damage.END.value < data.characteristics.END.value) {
-            remaining = Tools.applyDamageToCha(remaining, data, "END");
+            remaining = Tools.applyDamageToCha(remaining, data, "END", stun);
         }
         // Now select either STR or DEX. Select the lowest as long as it doesn't take
         // the characteristic to zero.
@@ -300,32 +302,6 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
         data.hits.value = parseInt(data.hits.max) - parseInt(data.hits.damage);
     }
     actor.update({"system.hits": data.hits});
-
-    let name = token?token.name:actor.name;
-    let maxHits = data.hits.max;
-    if (actualDamage >= (2 * maxHits) / 3) {
-        text += "Ouch! "
-    } else if (actualDamage >= maxHits / 3) {
-        text += "Ouch. ";
-    }
-    text += `${name} took ${actualDamage} hits. `;
-    if (actualDamage < damage * 0.1) {
-        text += "Nearly all of it was stopped by armour. ";
-    } else if (actualDamage < damage * 0.25) {
-        text += "Most of it was stopped by armour. ";
-    } else if (actualDamage < damage * 0.67) {
-        text += "Some of it was stopped by armour.";
-    } else if (actualDamage < damage) {
-        text += "Most of it got through.";
-    }
-/*
-    let chatData = {
-        user: game.user.id,
-        speaker: ChatMessage.getSpeaker(),
-        content: text
-    }
-    ChatMessage.create(chatData, {});
-*/
 }
 
 // Called from a button press in damage output in the chat.
@@ -347,7 +323,7 @@ Tools.applyDamage = function(damage, ap, tl, options, traits) {
         console.log(token);
         if (token.document.actorLink && token.actor.type === "traveller") {
             console.log("This is a Traveller");
-            new MgT2DamageDialog(token.actor, damage, ap, options?options:"", false).render(true);
+            new MgT2DamageDialog(token.actor, damage, ap, options?options:"", traits?traits:"").render(true);
         } else {
             Tools.applyDamageTo(damage, ap, tl, options, traits, token.actor, token);
         }

@@ -101,6 +101,7 @@
   "MGT2.Damage.Wound.Critical": "Critical Wound",
   "MGT2.Damage.Wound.Mortal": "Mortal Wound",
   "MGT2.Damage.Wound.Devastating": "Devastating Wound",
+  "MGT2.Damage.Wound.Stun": "Stun",
 
   "MGT2.Damage.Wound.MinorEffect": "-",
   "MGT2.Damage.Wound.MajorEffect": "Body part injured",
@@ -109,6 +110,7 @@
   "MGT2.Damage.Wound.CriticalEffect": "Location out of action and suffers permanent damage",
   "MGT2.Damage.Wound.MortalEffect": "Location is destroyed",
   "MGT2.Damage.Wound.DevastatingEffect": "Location completely destroyed",
+  "MGT2.Damage.Wound.StunEffect": "Temporary stun damage",
 
   "MGT2.Item.TL": "Tech Level",
   "MGT2.Item.Weight": "Weight (KG)",

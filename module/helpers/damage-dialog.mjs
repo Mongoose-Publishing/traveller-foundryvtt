@@ -1,4 +1,4 @@
-import {rollSkill} from "../helpers/dice-rolls.mjs";
+import {hasTrait} from "../helpers/dice-rolls.mjs";
 
 export class MgT2DamageDialog extends Application {
     static get defaultOptions() {
@@ -11,7 +11,7 @@ export class MgT2DamageDialog extends Application {
         return options;
     }
 
-    constructor(actor, damage, ap, laser, stun) {
+    constructor(actor, damage, ap, laser, traits) {
         super();
         console.log("DamageDialog constructor:");
 
@@ -23,7 +23,7 @@ export class MgT2DamageDialog extends Application {
         this.damage = damage;
         this.ap = ap;
         this.laser = laser;
-        this.stun = stun;
+        this.stun = hasTrait(traits, "stun");
         this.data = data;
         this.armour = data.armour.protection;
         this.wounds = "";
@@ -41,6 +41,7 @@ export class MgT2DamageDialog extends Application {
             this.actor.update({ "data.damage": this.data.damage });
             return;
         }
+        console.log(`MgT2DamageDialog: ${this.actualDamage} ${this.stun}`);
 
         this.DMG_STR = data.damage.STR.value;
         this.DMG_DEX = data.damage.DEX.value;
@@ -54,6 +55,9 @@ export class MgT2DamageDialog extends Application {
         if (this.actualDamage === 0) {
             this.wounds = "-";
             this.woundsEffect = "";
+        } else if (this.stun) {
+            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Stun");
+            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.StunEffect");
         } else if (this.actualDamage < parseInt(totalEND / 2)) {
             this.wounds = game.i18n.localize("MGT2.Damage.Wound.Minor");
             this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.MinorEffect");
@@ -178,15 +182,27 @@ export class MgT2DamageDialog extends Application {
         let str = this.getIntValue(html, ".DMG_STR");
         let dex = this.getIntValue(html, ".DMG_DEX");
         let end = this.getIntValue(html, ".DMG_END");
+        let remaining = this.getIntValue(html, ".remaining")
 
         console.log(`STR ${str}, DEX ${dex}, END ${end}`);
 
         let total = str + dex + end;
         let damage = this.data.damage;
 
-        damage.STR.value = parseInt(damage.STR.value) + str;
-        damage.DEX.value = parseInt(damage.DEX.value) + dex;
-        damage.END.value = parseInt(damage.END.value) + end;
+        if (this.stun) {
+            // 'tmp' tracks how much of the current damage is temporary.
+            damage.END.value = parseInt(damage.END.value) + end;
+            damage.END.tmp = Math.min(damage.END.value, parseInt(damage.END.tmp) + end);
+            if (remaining > 0) {
+                this.data.status.stunned = true;
+                this.data.status.stunnedRounds += remaining;
+                this.actor.update({ "data.status": this.data.status });
+            }
+        } else {
+            damage.STR.value = parseInt(damage.STR.value) + str;
+            damage.DEX.value = parseInt(damage.DEX.value) + dex;
+            damage.END.value = parseInt(damage.END.value) + end;
+        }
 
         if (damage.STR.value > this.data.characteristics.STR.value) {
             damage.STR.value = this.data.characteristics.STR.value;

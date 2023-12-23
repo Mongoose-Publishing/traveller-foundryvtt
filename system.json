@@ -2,7 +2,7 @@
   "name": "mgt2",
   "title": "Mongoose Traveller 2e",
   "description": "An unofficial system for Mongoose Traveller 2e",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "minimumCoreVersion": "10",
   "compatibleCoreVersion": "11",
   "author": "Samuel Penn",

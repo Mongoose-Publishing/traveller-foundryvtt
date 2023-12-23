@@ -199,12 +199,12 @@ Hooks.on('renderChatMessage', function(app, html) {
 Hooks.on('ready', () => {
     if (game.user.isGM) {
         // Do we need to run a migration?
-        const LATEST_SCHEMA_VERSION = 1;
+        const LATEST_SCHEMA_VERSION = 2;
         const currentVersion = parseInt(game.settings.get("mgt2", "systemSchemaVersion"));
         console.log(`Schema version is ${currentVersion}`);
         if (!currentVersion || currentVersion < LATEST_SCHEMA_VERSION) {
             migrateWorld(currentVersion);
-            //game.settings.set("mgt2", "systemSchemaVersion", LATEST_SCHEMA_VERSION);
+            game.settings.set("mgt2", "systemSchemaVersion", LATEST_SCHEMA_VERSION);
         }
     }
     // Need to add click event to all existing chat damage buttons.
@@ -402,10 +402,6 @@ Hooks.once("ready", async function() {
 });
 
 Hooks.on("applyActiveEffect", (actor, effectData) => {
-   console.log("hook.applyActiveEffect:");
-   console.log(actor);
-   console.log(effectData);
-
    const actorData = actor.system;
    let key = effectData.KEY;
    let value = effectData.value;
@@ -419,15 +415,24 @@ Hooks.on("applyActiveEffect", (actor, effectData) => {
 });
 
 Hooks.on("combatTurn", (combat, data, options) => {
-   console.log("combatTurn:");
+    console.log("combatTurn:");
 
-   // This is the actor which just finished their turn.
-   let combatant = combat.combatant.actor;
+    // This is the actor which just finished their turn.
+    let combatant = combat.combatant.actor;
     // Reset any reaction penalties back to zero.
-   if (combatant.system.modifiers.reaction && combatant.system.modifiers.reaction.dm !== 0) {
+    if (combatant.system.modifiers.reaction && combatant.system.modifiers.reaction.dm !== 0) {
        combatant.system.modifiers.reaction.dm = 0;
        combatant.update({ "system.modifiers.reaction": combatant.system.modifiers.reaction});
-   }
+    }
+    // If stunned, reduce rounds left to be stunned
+    if (combatant.system.status.stunned) {
+        combatant.system.status.stunnedRounds -=1;
+        if (combatant.system.status.stunnedRounds < 1) {
+            combatant.system.status.stunned = false;
+            combatant.system.status.stunnedRounds = 0;
+        }
+        combatant.update({ "system.status": combatant.system.status});
+    }
 });
 
 Hooks.on("combatRound", (combat, data, options) => {
@@ -439,6 +444,15 @@ Hooks.on("combatRound", (combat, data, options) => {
     if (combatant.system.modifiers.reaction && combatant.system.modifiers.reaction.dm !== 0) {
         combatant.system.modifiers.reaction.dm = 0;
         combatant.update({ "system.modifiers.reaction": combatant.system.modifiers.reaction});
+    }
+    // If stunned, reduce rounds left to be stunned
+    if (combatant.system.status.stunned) {
+        combatant.system.status.stunnedRounds -=1;
+        if (combatant.system.status.stunnedRounds < 1) {
+            combatant.system.status.stunned = false;
+            combatant.system.status.stunnedRounds = 0;
+        }
+        combatant.update({ "system.status": combatant.system.status});
     }
 });
 

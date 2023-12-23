@@ -63,6 +63,8 @@
                 <th>Damage</th>
                 <th/>
             </tr>
+            {{#if stun}}
+            {{else}}
             <tr>
                 <td><label class="resource-label">STR</label></td>
                 <td class="value">{{data.characteristics.STR.value}}</td>
@@ -101,6 +103,7 @@
                 </td>
                 <td><button class="apply-button" data-cha="DEX" type="button">Apply</button></td>
             </tr>
+            {{/if}}
             <tr>
                 <td><label class="resource-label">END</label></td>
                 <td class="value">{{data.characteristics.END.value}}</td>
