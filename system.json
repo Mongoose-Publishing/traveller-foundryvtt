@@ -34,6 +34,22 @@
       "module": "mgt2",
       "path": "packs/spaceship-hardware.db",
       "type": "Item"
+    },
+    {
+      "name": "character-careers",
+      "label": "Careers",
+      "system": "mgt2",
+      "module": "mgt2",
+      "path": "packs/character-careers.db",
+      "type": "Item"
+    },
+    {
+      "name": "mongoose-traveller",
+      "label": "Mongoose Traveller",
+      "system": "mgt2",
+      "module": "mgt2",
+      "path": "packs/mongoose-traveller.db",
+      "type": "Adventure"
     }
   ],
   "languages": [

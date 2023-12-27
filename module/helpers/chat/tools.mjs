@@ -300,6 +300,19 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
         }
         data.hits.damage += actualDamage;
         data.hits.value = parseInt(data.hits.max) - parseInt(data.hits.damage);
+        if (stun) {
+            data.hits.tmpDamage += actualDamage;
+        }
+        if (data.hits.tmpDamage > data.hits.damage) {
+            data.hits.tmpDamage = data.hits.damage;
+        }
+        if (data.characteristics) {
+            if (data.hits.tmpDamage > data.characteristics.END.value) {
+                data.status.stunned = true;
+                data.status.stunnedRounds = 1;
+                actor.update({"system.status": data.status});
+            }
+        }
     }
     actor.update({"system.hits": data.hits});
 }

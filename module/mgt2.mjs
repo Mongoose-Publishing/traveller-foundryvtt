@@ -240,7 +240,7 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     } else if (message.indexOf("/time") === 0) {
         let args = message.split(" ");
         args.shift();
-        Tools.currentTime(chatData, args);
+        Tools.currentTime(chatData, args);html
         return false;
     } else if (message.indexOf("/status") === 0) {
         let args = message.split(" ");
@@ -262,9 +262,12 @@ Hooks.on("createItem", (item) => {
             item.img = "systems/mgt2/icons/items/cybernetic.svg";
         } else if (item.type === "cargo") {
             item.img = "systems/mgt2/icons/cargo/cargo.svg";
+        } else if (item.type === "term") {
+            item.img = "systems/mgt2/icons/misc/career.svg";
         } else {
             item.img = "systems/mgt2/icons/items/item.svg";
         }
+        item.update("img", item.img);
     }
 });
 
@@ -288,6 +291,12 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
    console.log(options);
    console.log(userId);
    console.log("<<<<");
+
+   if (actor?.system?.status) {
+       if (actor.system.status.woundLevel > 1) {
+            console.log("This actor is unconscious. Can we set the token?");
+       }
+   }
 
    if (data?.system?.damage) {
        // This is an NPC or Creature
@@ -320,24 +329,26 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
 
 Hooks.on("preUpdateToken", (token, data, moved) => {
     console.log("preUpdateToken:");
+    console.log(token);
 
-    if (token?.actorData?.actorLink) {
-        console.log("This is linked to an actor");
-        let end = token.actor.system.characteristics.END.value;
-        let str = token.actor.system.characteristics.STR.value;
-        let dex = token.actor.system.characteristics.DEX.value;
-
-        console.log(`STR ${str} DEX ${dex} END ${end}`);
-    }
-    if (data?.actorData?.system?.hits) {
-        let hits = parseInt(data.actorData.system.hits.value);
+    if (data?.actor?.system?.hits) {
+        let hits = parseInt(data.actor.system.hits.value);
         let max = parseInt(token.actor.system.hits.max);
 
-        let actorType = token._actor.type;
+        let actorType = token.actor.type;
         if (actorType === "traveller") {
             // Travellers use their characteristics as hitpoints.
             // HITS is just a sum of STR, DEX and END for purposes of
             // showing the resource bar.
+            console.log(data);
+            if (data.actor.system.status) {
+                if (actor.system.status.woundLevel > 1) {
+                    tokenObject.toggleEffect("systems/mgt2/icons/effects/unconscious.svg", {
+                        "overlay": true,
+                        "active": false
+                    });
+                }
+            }
         } else if (actorType === "creature" || actorType === "npc") {
             // NPCs and Creatures use a generic HITS value.
             let half = parseInt(max / 2);
