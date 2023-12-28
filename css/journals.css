@@ -1,0 +1,134 @@
+
+
+
+/* Journal Entries */
+
+.journal-sheet {
+}
+
+.sheet.journal-entry section.journal-entry-content {
+    background: #a5a7a9;
+}
+
+.journal-sheet .window-content .editable {
+    background-color: #eff0f0;
+}
+.journal-sheet .window-content .editor {
+    background-color: white;
+}
+
+
+/* Career Definitions */
+
+div.journal-career {
+    background-color: #eff0f0;
+    padding: 0.25em;
+}
+
+.journal-sheet form.journal-header input.title {
+    font-family: Anton;
+    text-transform: uppercase;
+    background-color: #f1511b;
+    color: white;
+}
+
+div.journal-career div.career-intro {
+}
+
+div.journal-career div.career-aside {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-bottom: 0.5em;
+    box-shadow: 5px 5px 5px #a0bfbf;
+    border: 1px solid black;
+    float: left;
+    width: 300px;
+    font-size: larger;
+}
+
+div.journal-career div.career-right {
+    margin-left: 300px;
+}
+
+div.journal-career div.career-right table {
+    margin-left: 1em;
+    margin-right: 1em;
+    width: auto;
+}
+
+div.journal-career div.career-right table td {
+    padding: 2px;
+}
+
+
+div.journal-career th {
+    text-align: left;
+    color: #f1511b;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    vertical-align: bottom;
+}
+
+div.journal-career td {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+div.journal-career table {
+    border: 1px solid #f1511b;
+    margin-left: 3em;
+    margin-right: 3em;
+    box-shadow: 5px 5px 5px #a0bfbf;
+}
+
+div.title-and-table {
+    clear: both;
+}
+
+div.title-for-table {
+}
+
+div.journal-career h1 {
+    font-family: Anton;
+    font-weight: normal;
+    color: white;
+    background: #67696f;
+    text-transform: uppercase;
+}
+
+div.title-and-table table {
+}
+
+div.journal-career h2 {
+    font-family: Anton;
+    color: white;
+    background-color: #67696f;
+    position: relative;
+    padding-left: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    text-transform: uppercase;
+}
+
+div.journal-career h2:before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    border-top: 12px solid #eff0f0;
+    border-right: 12px solid #67696f;
+    width: 0;
+}
+
+div.journal-career h2:after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    border-top: 12px solid #eff0f0;
+    border-left: 12px solid #67696f;
+    width: 0;
+}
+
+div.journal-career h3 {
+    font-family: Anton;
+    text-transform: uppercase;
+}

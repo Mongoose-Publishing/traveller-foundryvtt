@@ -7,7 +7,7 @@
   "compatibleCoreVersion": "11",
   "author": "Samuel Penn",
   "esmodules": ["module/mgt2.mjs" ],
-  "styles": ["css/mgt2.css", "css/history.css", "css/items.css" ],
+  "styles": ["css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css" ],
   "background": "systems/mgt2/images/traveller.png",
   "scripts": [ ],
   "packs": [

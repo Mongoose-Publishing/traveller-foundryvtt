@@ -233,15 +233,6 @@
   text-align: center;
 }
 
-/* Journal Entries */
-
-.journal-sheet .window-content .editable {
-    background-color: #f0ffff;
-}
-.journal-sheet .window-content .editor {
-    background-color: white;
-}
-
 
 /* Styles limited to traveller sheets */
 .system-mgt2 .item-form {
@@ -1422,57 +1413,3 @@ span.edit-skill {
     cursor: pointer;
 }
 
-div.journal-career {
-    background-color: #f0ffff;
-}
-
-div.journal-career th {
-    text-align: left;
-    color: #f1511b;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    vertical-align: bottom;
-}
-
-div.journal-career td {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-}
-
-div.journal-career table {
-    border: 1px solid #f1511b;
-    margin-left: 3em;
-    margin-right: 3em;
-    box-shadow: 5px 5px 5px #a0bfbf;
-}
-
-div.journal-career h1 {
-    font-weight: bold;
-    color: #f1511b;
-}
-
-div.journal-career h2 {
-    color: white;
-    background-color: #67696f;
-    position: relative;
-    padding-left: 1em;
-    margin-left: 1em;
-}
-
-div.journal-career h2:before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    border-top: 12px solid #f0ffff;
-    border-right: 12px solid #67696f;
-    width: 0;
-}
-
-div.journal-career h2:after {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    border-top: 12px solid #f0ffff;
-    border-left: 12px solid #67696f;
-    width: 0;
-}
