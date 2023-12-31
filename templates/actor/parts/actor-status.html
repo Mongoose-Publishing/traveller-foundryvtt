@@ -21,6 +21,11 @@
     {{#if data.status.stunned}}
       {{{showStatus data "stunned"}}}
     {{/if}}
+    {{#if data.status.highGravity}}{{{showStatus data "highGravity"}}}{{/if}}
+    {{#if data.status.lowGravity}}{{{showStatus data "lowGravity"}}}{{/if}}
+    {{#if data.status.zeroGravity}}{{{showStatus data "zeroGravity"}}}{{/if}}
+    {{#if data.status.diseased}}{{{showStatus data "diseased"}}}{{/if}}
+    {{#if data.status.poisoned}}{{{showStatus data "poisoned"}}}{{/if}}
     {{{showStatus data "reaction"}}}
   </div>
 {{/if}}

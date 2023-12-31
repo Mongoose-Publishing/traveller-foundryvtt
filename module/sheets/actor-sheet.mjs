@@ -489,6 +489,21 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.statusDead').click(ev => {
             this._clearDead(this.actor);
         });
+        html.find('.statusHighGravity').click(ev => {
+           this._clearStatus(this.actor, 'highGravity');
+        });
+        html.find('.statusLowGravity').click(ev => {
+            this._clearStatus(this.actor, 'lowGravity');
+        });
+        html.find('.statusZeroGravity').click(ev => {
+            this._clearStatus(this.actor, 'zeroGravity');
+        });
+        html.find('.statusDiseased').click(ev => {
+            this._clearStatus(this.actor, 'diseased');
+        });
+        html.find('.statusPoisoned').click(ev => {
+            this._clearStatus(this.actor, 'poisoned');
+        });
         html.find('initRoll').click(ev => {
             this._initRoll(this.actor);
         });
@@ -578,6 +593,11 @@ export class MgT2ActorSheet extends ActorSheet {
     _clearStunned(actor) {
         actor.system.status.stunned = false;
         actor.system.status.stunnedRounds = 0;
+        actor.update({"system.status": actor.system.status });
+    }
+
+    _clearStatus(actor, status) {
+        actor.system.status[status] = false;
         actor.update({"system.status": actor.system.status });
     }
 

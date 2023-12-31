@@ -81,8 +81,8 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         if (system.modifiers && system.modifiers.encumbrance.dm !== 0) {
             dice += " + " + parseInt(system.modifiers.encumbrance.dm);
         }
-        if (system.modifiers && system.modifiers.reaction.dm !== 0) {
-            dice += " + " + parseInt(system.modifiers.reaction.dm);
+        if (system.modifiers && system.status.reaction !== 0) {
+            dice += " + " + parseInt(system.status.reaction);
         }
         if (baseRange === 0) {
             if (system.modifiers && system.modifiers.melee.dm !== 0) {
@@ -246,12 +246,10 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
                 content += `<b>Parry DM:</b> ${parryBonus}<br/><br/>`;
             }
             if (actor) {
-                if (actor.system.modifiers && actor.system.modifiers.reaction) {
-                    actor.system.modifiers.reaction.dm -= 1;
-                } else {
-                    actor.system.modifiers.reaction = { dm : -1 };
+                if (actor.system.status) {
+                    actor.system.status -= 1;
                 }
-                actor.update({ "system.modifiers.reaction": actor.system.modifiers.reaction });
+                actor.update({ "system.status": actor.system.status });
             }
         } else {
             content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;
@@ -448,7 +446,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             skillText += " (+" + chaDm + ")";
         }
         // AugmentDM is a straight bonus to any roll using that characteristic.
-        if (data.characteristics[cha].augdm && parseInt(data.characteristics[cha].augdm) != 0) {
+        if (data.characteristics[cha].augdm && parseInt(data.characteristics[cha].augdm) !== 0) {
             let chaAugDm = parseInt(data.characteristics[cha].augdm);
             dice += ` ${(chaAugDm>=0)?"+":""}${chaAugDm}[AugDM]`;
             skillNotes += " (" + chaAugDm + "Aug)";
@@ -465,8 +463,8 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                 skillNotes += ` (${phyDm}Phy)`;
             }
         }
-        if (data.modifiers.reaction && data.modifiers.reaction.dm < 0) {
-            dice += ` ${data.modifiers.reaction.dm}[Dodge]`;
+        if (data.status.reaction < 0) {
+            dice += ` ${data.status.reaction}[Dodge]`;
         }
     }
 
@@ -479,21 +477,21 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
 
     if (skill) {
         // AugmentDMs are applied to the roll, regardless of the actor's skill level.
-        if (skill.augdm && parseInt(skill.augdm) != 0) {
+        if (skill.augdm && parseInt(skill.augdm) !== 0) {
             skillDM += parseInt(skill.augdm);
             skillNotes += `DM&nbsp;(${parseInt(skill.augdm)}) `;
         }
-        if (speciality && speciality.augdm && parseInt(speciality.augdm) != 0) {
+        if (speciality && speciality.augdm && parseInt(speciality.augdm) !== 0) {
             specDM += parseInt(speciality.augdm);
             specNotes += `DM&nbsp;(${parseInt(speciality.augdm)}) `;
         }
 
         // The bonus is set manually, and always applied to the roll.
-        if (skill.bonus && parseInt(skill.bonus) != 0) {
+        if (skill.bonus && parseInt(skill.bonus) !== 0) {
             skillDM += parseInt(skill.bonus);
             skillNotes += `${skill.notes}&nbsp;(${parseInt(skill.bonus)}) `;
         }
-        if (speciality && speciality.bonus && parseInt(speciality.bonus) != 0) {
+        if (speciality && speciality.bonus && parseInt(speciality.bonus) !== 0) {
             specDM += parseInt(speciality.bonus);
             specNotes += `${speciality.notes}&nbsp;(${speciality.bonus}) `;
         }
@@ -571,8 +569,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         skillText += " <span class='bane'>[Bane]</span>";
     }
 
-    let checkText = "Making a skill check";
-
+    let checkText;
     if (creatureCheck) {
         checkText = "Creature skill check";
     } else if (specialityCheck) {
@@ -600,14 +597,14 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         text = `<div class='skill-message'><h2>${title}</h2><div class="message-content">`;
         let total = roll.total;
         if (game.settings.get("mgt2", "useChatIcons")) {
-            text += `<img class='skillcheck-thumb' src='${actor.thumbnail}'/>`;
+            text += `<img class='skillcheck-thumb' src='${actor.thumbnail}' alt='${actor.name}'/>`;
             text += `<div class="skill-with-icon">`;
         } else {
             text += `<div class="skill-without-icon">`;
         }
         text += `<span class="skill-intro">${checkText}</span><br/>${skillText}`;
         text += `<div class="skill-augment-text">${skillNotes}</div>`;
-        if (specNotes != "") {
+        if (specNotes !== "") {
             text += `<div class="skill-augment-text">${specNotes}</div>`;
         }
         text += "</div><br/>";

@@ -1118,7 +1118,9 @@ Handlebars.registerHelper('hasStatus', function(actorData) {
         if (parseInt(status.woundLevel) > 1 || parseInt(status.reaction) < 0) {
             return true;
         }
-        if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit) {
+        if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit ||
+            status.lowGravity || status.highGravity || status.zeroGravity ||
+            status.diseased || status.poisoned) {
             return true;
         }
    }
@@ -1149,6 +1151,16 @@ Handlebars.registerHelper('showStatus', function(actorData, status) {
            }
            label += ` (${actorData.status.reaction})`;
            label += ` <i class="fas fa-xmark statusReaction"> </i>`;
+       } else if (status === "highGravity") {
+           label += ` <i class="fas fa-xmark statusHighGravity"> </i>`;
+       } else if (status === "lowGravity") {
+           label += ` <i class="fas fa-xmark statusLowGravity"> </i>`;
+       } else if (status === "zeroGravity") {
+           label += ` <i class="fas fa-xmark statuszeroGravity"> </i>`;
+       } else if (status === "diseased") {
+           label += ` <i class="fas fa-xmark statusDiseased"> </i>`;
+       } else if (status === "poisoned") {
+           label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
        }
 
        return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;

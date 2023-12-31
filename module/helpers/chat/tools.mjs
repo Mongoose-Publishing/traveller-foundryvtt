@@ -146,6 +146,11 @@ Tools.setStatus = function(chatData, args) {
         if (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature") {
             Tools.setStatusFor(actor, args, "stunned");
             Tools.setStatusFor(actor, args, "fatigued");
+            Tools.setStatusFor(actor, args, "highGravity");
+            Tools.setStatusFor(actor, args, "lowGravity");
+            Tools.setStatusFor(actor, args, "zeroGravity");
+            Tools.setStatusFor(actor, args, "poisoned");
+            Tools.setStatusFor(actor, args, "diseased");
             actor.update({ "system.status": actor.system.status });
         }
     }

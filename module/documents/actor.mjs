@@ -265,7 +265,7 @@ export class MgT2Actor extends Actor {
                 break;
         }
         console.log(`Wound level is ${woundLevel}`);
-        if (woundLevel != data.status.woundLevel) {
+        if (woundLevel !== data.status.woundLevel) {
             console.log("Setting woundLevel to " + woundLevel);
             data.status.woundLevel = woundLevel;
             this.update({"system.status": data.status });

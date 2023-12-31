@@ -56,6 +56,11 @@
   "MGT2.TravellerSheet.StatusLabel.disabled": "Disabled",
   "MGT2.TravellerSheet.StatusLabel.dead": "Dead",
   "MGT2.TravellerSheet.StatusLabel.reaction": "Reaction",
+  "MGT2.TravellerSheet.StatusLabel.highGravity": "High Gravity",
+  "MGT2.TravellerSheet.StatusLabel.lowGravity": "Low Gravity",
+  "MGT2.TravellerSheet.StatusLabel.zeroGravity": "Zero Gravity",
+  "MGT2.TravellerSheet.StatusLabel.poisoned": "Poisoned",
+  "MGT2.TravellerSheet.StatusLabel.diseased": "Diseased",
 
   "MGT2.TravellerSheet.DTons": "Tonnage",
   "MGT2.TravellerSheet.Power": "Power",
