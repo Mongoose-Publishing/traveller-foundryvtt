@@ -199,7 +199,7 @@ Hooks.on('renderChatMessage', function(app, html) {
 Hooks.on('ready', () => {
     if (game.user.isGM) {
         // Do we need to run a migration?
-        const LATEST_SCHEMA_VERSION = 2;
+        const LATEST_SCHEMA_VERSION = 3;
         const currentVersion = parseInt(game.settings.get("mgt2", "systemSchemaVersion"));
         console.log(`Schema version is ${currentVersion}`);
         if (!currentVersion || currentVersion < LATEST_SCHEMA_VERSION) {
@@ -267,7 +267,7 @@ Hooks.on("createItem", (item) => {
         } else {
             item.img = "systems/mgt2/icons/items/item.svg";
         }
-        item.update("img", item.img);
+        item.update({ "img": item.img });
     }
 });
 
@@ -431,9 +431,9 @@ Hooks.on("combatTurn", (combat, data, options) => {
     // This is the actor which just finished their turn.
     let combatant = combat.combatant.actor;
     // Reset any reaction penalties back to zero.
-    if (combatant.system.modifiers.reaction && combatant.system.modifiers.reaction.dm !== 0) {
-       combatant.system.modifiers.reaction.dm = 0;
-       combatant.update({ "system.modifiers.reaction": combatant.system.modifiers.reaction});
+    if (combatant.system.status && combatant.system.status.reaction !== 0) {
+       combatant.system.status.reaction = 0;
+       combatant.update({ "system.status": combatant.system.status});
     }
     // If stunned, reduce rounds left to be stunned
     if (combatant.system.status.stunned) {
@@ -452,9 +452,9 @@ Hooks.on("combatRound", (combat, data, options) => {
     // This is the actor which just finished their turn.
     let combatant = combat.combatant.actor;
     // Reset any reaction penalties back to zero.
-    if (combatant.system.modifiers.reaction && combatant.system.modifiers.reaction.dm !== 0) {
-        combatant.system.modifiers.reaction.dm = 0;
-        combatant.update({ "system.modifiers.reaction": combatant.system.modifiers.reaction});
+    if (combatant.system.status && combatant.system.status.reaction !== 0) {
+        combatant.system.status.reaction = 0;
+        combatant.update({ "system.status": combatant.system.status});
     }
     // If stunned, reduce rounds left to be stunned
     if (combatant.system.status.stunned) {
@@ -592,6 +592,9 @@ Handlebars.registerHelper('toLowerCase', function(str) {
 Handlebars.registerHelper('toPlainText', function(html) {
     if (html) {
         let text = html.replace(/<[^>]*>/g, "");
+
+        text = text.replace(/@UUID.*\{(.*)\}/, "$1");
+        text = text.replace(/&.*;/, "");
         if (text.length > 120) {
             text = text.substring(0, 117) + "...";
         }
@@ -1112,7 +1115,7 @@ Handlebars.registerHelper('hasStatus', function(actorData) {
    if (actorData.status) {
         const status = actorData.status;
 
-        if (parseInt(status.woundLevel) > 1) {
+        if (parseInt(status.woundLevel) > 1 || parseInt(status.reaction) < 0) {
             return true;
         }
         if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit) {
@@ -1120,6 +1123,37 @@ Handlebars.registerHelper('hasStatus', function(actorData) {
         }
    }
    return false;
+});
+
+Handlebars.registerHelper('showStatus', function(actorData, status) {
+   if (actorData.status) {
+       let type = "statusWarn";
+       let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
+
+       if (status === "fatigued") {
+           label += ` <i class="fas fa-xmark statusFatigued"> </i>`;
+       } else if (status === "stunned") {
+           label += ` (${actorData.status.stunnedRounds})`;
+           label += ` <i class="fas fa-xmark statusStunned"> </i>`;
+           type = "statusBad";
+       } else if (status === "dead") {
+           label += ` <i class="fas fa-xmark statusDead"> </i>`;
+           type = "statusBad";
+       } else if (status === "unconscious") {
+           type = "statusBad";
+       } else if (status === "disabled") {
+           type = "statusBad";
+       } else if (status === "reaction") {
+           if (actorData.status.reaction === 0) {
+               return "";
+           }
+           label += ` (${actorData.status.reaction})`;
+           label += ` <i class="fas fa-xmark statusReaction"> </i>`;
+       }
+
+       return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
+   }
+   return "";
 });
 
 /* -------------------------------------------- */

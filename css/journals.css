@@ -33,6 +33,7 @@ div.journal-career {
 }
 
 div.journal-career div.career-intro {
+    padding-bottom: 1em;
 }
 
 div.journal-career div.career-aside {
@@ -60,7 +61,6 @@ div.journal-career div.career-right table td {
     padding: 2px;
 }
 
-
 div.journal-career th {
     text-align: left;
     color: #f1511b;
@@ -76,28 +76,44 @@ div.journal-career td {
 
 div.journal-career table {
     border: 1px solid #f1511b;
-    margin-left: 3em;
-    margin-right: 3em;
+    margin-left: 1em;
+    margin-right: 1em;
     box-shadow: 5px 5px 5px #a0bfbf;
-}
-
-div.title-and-table {
-    clear: both;
-}
-
-div.title-for-table {
+    width: 90%;
 }
 
 div.journal-career h1 {
+    clear: both;
     font-family: Anton;
     font-weight: normal;
     color: white;
     background: #67696f;
     text-transform: uppercase;
+    position: relative;
+    padding-left: 1em;
+    margin-left: 0.5em;
+    margin-right: 1em;
+    width: 90%;
 }
 
-div.title-and-table table {
+div.journal-career h1:before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    border-top: 16px solid #eff0f0;
+    border-right: 16px solid #67696f;
+    width: 0;
 }
+
+div.journal-career h1:after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    border-top: 16px solid #eff0f0;
+    border-left: 16px solid #67696f;
+    width: 0;
+}
+
 
 div.journal-career h2 {
     font-family: Anton;

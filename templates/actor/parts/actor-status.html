@@ -1,40 +1,27 @@
 {{#if (hasStatus data)}}
   <div class="shadow">
     {{#if (ifEquals data.status.woundLevel 2)}}
-    <div class="resource flex-group-center statusBad">
-      <label>Unconscious</label>
-    </div>
+      {{{showStatus data "unconscious"}}}
     {{/if}}
     {{#if (ifEquals data.status.woundLevel 3)}}
-    <div class="resource flex-group-center statusBad">
-      <label>Disabled</label>
-    </div>
+      {{{showStatus data "disabled"}}}
     {{/if}}
     {{#if (ifEquals data.status.woundLevel 4)}}
-    <div class="resource flex-group-center statusBad">
-      <label>Dead</label>
-    </div>
+      {{{showStatus data "dead"}}}
     {{/if}}
     {{#if data.status.encumbered}}
-    <div class="resource flex-group-center statusWarn">
-      <label>Encumbered</label>
-    </div>
+      {{{showStatus data "encumbered"}}}
     {{/if}}
     {{#if data.status.vaccSuit}}
-    <div class="resource flex-group-center statusWarn">
-      <label>VaccSuit</label>
-    </div>
+      {{{showStatus data "vaccSuit"}}}
     {{/if}}
     {{#if data.status.fatigued}}
-    <div class="resource flex-group-center statusWarn">
-      <label>Fatigued</label>
-    </div>
+      {{{showStatus data "fatigued"}}}
     {{/if}}
     {{#if data.status.stunned}}
-    <div class="resource flex-group-center statusBad">
-      <label>Stunned ({{data.status.stunnedRounds}})</label>
-    </div>
+      {{{showStatus data "stunned"}}}
     {{/if}}
+    {{{showStatus data "reaction"}}}
   </div>
 {{/if}}
 

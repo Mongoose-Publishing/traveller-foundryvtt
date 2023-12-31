@@ -20,6 +20,7 @@
             "woundLevel": 0,
             "stunned": false,
             "stunnedRounds": 0,
+            "reaction": 0,
             "fatigued": false
         },
         "modifiers": {
@@ -58,9 +59,6 @@
                 "custom": 0,
                 "auto": 0,
                 "effect": 0,
-                "dm": 0
-            },
-            "reaction": {
                 "dm": 0
             }
         },

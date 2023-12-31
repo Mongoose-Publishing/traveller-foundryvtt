@@ -117,8 +117,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 encumbrance: { custom: 0, auto: 0, effect: 0, dm: 0, multiplierBonus: 0 },
                 physical: { custom: 0, auto: 0, effect: 0, dm: 0 },
                 melee: { custom: 0, auto: 0, effect: 0, dm: 0 },
-                guncombat: { custom: 0, auto: 0, effect: 0, dm: 0 },
-                reaction: { dm: 0 }
+                guncombat: { custom: 0, auto: 0, effect: 0, dm: 0 }
             };
         }
         return context;
@@ -478,8 +477,17 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.dodgeRoll').click(ev => {
             this._rollDodge(ev, this.actor);
         });
-        html.find('.clearDodge').click(ev => {
+        html.find('.statusReaction').click(ev => {
             this._clearDodge(this.actor);
+        });
+        html.find('.statusStunned').click(ev => {
+            this._clearStunned(this.actor);
+        });
+        html.find('.statusFatigued').click(ev => {
+            this._clearFatigued(this.actor);
+        });
+        html.find('.statusDead').click(ev => {
+            this._clearDead(this.actor);
         });
         html.find('initRoll').click(ev => {
             this._initRoll(this.actor);
@@ -533,11 +541,6 @@ export class MgT2ActorSheet extends ActorSheet {
     _rollDodge(event, actor) {
         console.log("_rollDodge:");
 
-        if (event.shiftKey) {
-            this._clearDodge(actor);
-            return;
-        }
-
         let dodge = 0;
         const dex = Math.max(0, parseInt(actor.system["DEX"]));
         if (dex > 0) {
@@ -547,17 +550,35 @@ export class MgT2ActorSheet extends ActorSheet {
         if (skill > 0) {
             dodge += skill;
         }
-        if (!actor.system.modifiers.reaction) {
-            actor.system.modifiers.reaction = { "dm" : -1 }
-        } else {
-            actor.system.modifiers.reaction.dm = parseInt(actor.system.modifiers.reaction.dm) -1;
-            actor.update({ "system.modifiers.reaction": actor.system.modifiers.reaction});
+        console.log(`Dodge skill is ${dodge}`);
+        if (dodge > 0) {
+            if (!actor.system.status.reaction) {
+                actor.system.status.reaction = 0;
+            }
+            actor.system.status.reaction = parseInt(actor.system.status.reaction) - 1;
+            actor.update({"system.status": actor.system.status});
         }
     }
 
+    _clearDead(actor) {
+        actor.system.status.woundLevel = Math.min(actor.system.status.woundLevel, 3);
+        actor.update({"system.status": actor.system.status });
+    }
+
+    _clearFatigued(actor) {
+        actor.system.status.fatigued = false;
+        actor.update({"system.status": actor.system.status });
+    }
+
     _clearDodge(actor) {
-        actor.system.modifiers.reaction = { "dm": 0 };
-        actor.update({"system.modifiers.reaction": actor.system.modifiers.reaction });
+        actor.system.status.reaction = 0;
+        actor.update({"system.status": actor.system.status });
+    }
+
+    _clearStunned(actor) {
+        actor.system.status.stunned = false;
+        actor.system.status.stunnedRounds = 0;
+        actor.update({"system.status": actor.system.status });
     }
 
     _rollInit(actor) {
@@ -619,6 +640,15 @@ export class MgT2ActorSheet extends ActorSheet {
 
         if (!data || !data.uuid || data.uuid.indexOf("Actor") !== 0) {
             // This hasn't been dragged from another actor.
+
+            // Is it a non-physical item, such as a Term or Relationship?
+            let itemId = data.uuid.replace(/Item\./, "");
+            let item = game.items.get(itemId);
+
+            if (item && item.type === "term" && this.actor.type === "traveller") {
+                await this._onDropTerm(item);
+            }
+
             return true;
         }
 
@@ -646,6 +676,40 @@ export class MgT2ActorSheet extends ActorSheet {
             }
         }
         return true;
+    }
+
+    // Drop a Term onto an Actor. Only applies to Travellers.
+    async _onDropTerm(item) {
+        let actor = this.actor;
+
+        console.log(`Dropping term ${item.name} on ${actor.name}`);
+
+        // Need to ensure that this item is added to the end of the list of
+        // term items.
+        console.log(actor.items);
+        let lastSort = 1;
+        let countTerms = 0;
+        let updates = [];
+        for (let i of actor.items) {
+            if (i.type === "term") {
+                countTerms ++;
+                console.log(i.name);
+                if (i.sort > lastSort) {
+                    lastSort = i.sort;
+                }
+            }
+        }
+        let update = duplicate(item);
+        update.system.term.number = countTerms +1;
+        update.sort = lastSort + 100;
+        update.name = update.name + " " + update.system.term.number;
+        console.log(`Dragged in a term item ${update.name} at term ${update.system.term.number} / ${countTerms}`);
+        console.log(update);
+        updates.push(update);
+        actor.updateEmbeddedDocuments("Item", updates);
+//        item.update({ "system.term": item.system.term });
+  //      item.update({ "sort": item.sort, "name": item.name });
+
     }
 
     async _onDropUPP(event, data) {

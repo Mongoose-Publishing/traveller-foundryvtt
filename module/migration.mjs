@@ -24,11 +24,16 @@ function migrateActorData(actor, fromVersion) {
             actor.system.hits.tmpDamage = parseInt(0);
         }
     }
+    if (fromVersion < 3) {
+        if (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature") {
+            actor.system.status.reaction = 0;
+        }
+    }
     return {};
 }
 
 export async function migrateWorld(fromVersion) {
-    console.log("**** MIGRATE SCHEMA TO v2 ****");
+    console.log("**** MIGRATE SCHEMA TO v3 ****");
 
     for (let actor of game.actors.contents) {
         const updateData = migrateActorData(actor, fromVersion);

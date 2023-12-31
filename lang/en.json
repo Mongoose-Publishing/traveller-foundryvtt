@@ -47,6 +47,16 @@
   "MGT2.TravellerSheet.DamageTaken": "Damage Taken",
   "MGT2.TravellerSheet.HitsRemaining": "Hits Remaining",
 
+  "MGT2.TravellerSheet.StatusLabel.fatigued": "Fatigued",
+  "MGT2.TravellerSheet.StatusLabel.encumbered": "Encumbered",
+  "MGT2.TravellerSheet.StatusLabel.overLoaded": "Over Loaded",
+  "MGT2.TravellerSheet.StatusLabel.stunned": "Stunned",
+  "MGT2.TravellerSheet.StatusLabel.vaccSuit": "Vacc Suit",
+  "MGT2.TravellerSheet.StatusLabel.unconscious": "Unconscious",
+  "MGT2.TravellerSheet.StatusLabel.disabled": "Disabled",
+  "MGT2.TravellerSheet.StatusLabel.dead": "Dead",
+  "MGT2.TravellerSheet.StatusLabel.reaction": "Reaction",
+
   "MGT2.TravellerSheet.DTons": "Tonnage",
   "MGT2.TravellerSheet.Power": "Power",
   "MGT2.TravellerSheet.MDrive": "M-Drive",
