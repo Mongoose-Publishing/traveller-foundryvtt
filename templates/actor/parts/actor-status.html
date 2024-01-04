@@ -1,32 +1,22 @@
-{{#if (hasStatus data)}}
+{{#if (hasStatus actor)}}
   <div class="shadow">
-    {{#if (ifEquals data.status.woundLevel 2)}}
-      {{{showStatus data "unconscious"}}}
-    {{/if}}
-    {{#if (ifEquals data.status.woundLevel 3)}}
-      {{{showStatus data "disabled"}}}
-    {{/if}}
-    {{#if (ifEquals data.status.woundLevel 4)}}
-      {{{showStatus data "dead"}}}
-    {{/if}}
-    {{#if data.status.encumbered}}
-      {{{showStatus data "encumbered"}}}
-    {{/if}}
-    {{#if data.status.vaccSuit}}
-      {{{showStatus data "vaccSuit"}}}
-    {{/if}}
-    {{#if data.status.fatigued}}
-      {{{showStatus data "fatigued"}}}
-    {{/if}}
-    {{#if data.status.stunned}}
-      {{{showStatus data "stunned"}}}
-    {{/if}}
-    {{#if data.status.highGravity}}{{{showStatus data "highGravity"}}}{{/if}}
-    {{#if data.status.lowGravity}}{{{showStatus data "lowGravity"}}}{{/if}}
-    {{#if data.status.zeroGravity}}{{{showStatus data "zeroGravity"}}}{{/if}}
-    {{#if data.status.diseased}}{{{showStatus data "diseased"}}}{{/if}}
-    {{#if data.status.poisoned}}{{{showStatus data "poisoned"}}}{{/if}}
-    {{{showStatus data "reaction"}}}
+    {{#if actor.flags.mgt2.dead}}{{{showStatus actor "dead"}}}{{/if}}
+    {{#if actor.flags.mgt2.disabled}}{{{showStatus actor "dead"}}}{{/if}}
+    {{#if actor.flags.mgt2.unconscious}}{{{showStatus actor "unconscious"}}}{{/if}}
+
+    {{#if actor.flags.mgt2.diseased}}{{{showStatus actor "diseased"}}}{{/if}}
+    {{#if actor.flags.mgt2.poisoned}}{{{showStatus actor "poisoned"}}}{{/if}}
+
+    {{#if actor.flags.mgt2.stunned}}{{{showStatus actor "stunned"}}}{{/if}}
+    {{#if actor.flags.mgt2.encumbered}}{{{showStatus actor "encumbered"}}}{{/if}}
+    {{#if actor.flags.mgt2.vaccSuit}}{{{showStatus actor "vaccSuit"}}}{{/if}}
+    {{#if actor.flags.mgt2.fatigued}}{{{showStatus actor "fatigued"}}}{{/if}}
+
+    {{#if actor.flags.mgt2.highGravity}}{{{showStatus actor "highGravity"}}}{{/if}}
+    {{#if actor.flags.mgt2.lowGravity}}{{{showStatus actor "lowGravity"}}}{{/if}}
+    {{#if actor.flags.mgt2.zeroGravity}}{{{showStatus actor "zeroGravity"}}}{{/if}}
+
+    {{{showStatus actor "reaction"}}}
   </div>
 {{/if}}
 

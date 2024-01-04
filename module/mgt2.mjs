@@ -284,47 +284,53 @@ Hooks.on("createActor", (actor) => {
 });
 
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
-   console.log("preUpdateActor:");
-   console.log(">>>>");
-   console.log(actor);
-   console.log(data);
-   console.log(options);
-   console.log(userId);
-   console.log("<<<<");
+    if (data?.system?.damage) {
+        // This is a Traveller with full damage by stat
+        const damage = data.system.damage;
+        let endDmg = parseInt(damage.END?damage.END.value:actor.system.damage.END.value);
+        let strDmg = parseInt(damage.STR?damage.STR.value:actor.system.damage.STR.value);
+        let dexDmg = parseInt(damage.DEX?damage.DEX.value:actor.system.damage.DEX.value);
+        let endMax = actor.system.characteristics.END.value;
+        let strMax = actor.system.characteristics.STR.value;
+        let dexMax = actor.system.characteristics.DEX.value;
 
-   if (actor?.system?.status) {
-       if (actor.system.status.woundLevel > 1) {
-            console.log("This actor is unconscious. Can we set the token?");
-       }
-   }
+        let atZero = 0;
+        if (endDmg >= endMax) atZero++;
+        if (dexDmg >= dexMax) atZero++;
+        if (strDmg >= strMax) atZero++;
+        switch (atZero) {
+            case 2:
+                actor.setFlag("mgt2", "unconscious", true);
+                actor.unsetFlag("mgt2", "disabled");
+                actor.unsetFlag("mgt2", "dead");
+                break;
+            case 3:
+                actor.setFlag("mgt2", "disabled", true);
+                break;
+            default:
+                actor.unsetFlag("mgt2", "unconscious");
+                actor.unsetFlag("mgt2", "disabled");
+                actor.unsetFlag("mgt2", "dead");
+        }
+    } else if (data?.system?.hits) {
+        // This is an NPC or Creature
+        let dmg = data.system.hits.damage?data.system.hits.damage:actor.system.hits.damage;
+        let max = data.system.hits.max?data.system.hits.max:actor.system.hits.max;
 
-   if (data?.system?.damage) {
-       // This is an NPC or Creature
-       const damage = data.system.damage;
-       console.log("preUpdateActor: HITS");
-       console.log(data.system.damage);
-       // TODO: Not all these will be set. So breaks and doesn't work.
-       let endDmg = parseInt(damage.END?damage.END.value:0);
-       let strDmg = parseInt(damage.STR?damage.STR.value:0);
-       let dexDmg = parseInt(damage.DEX?damage.DEX.value:0);
-       let endMax = actor.system.characteristics.END.value;
-       let strMax = actor.system.characteristics.STR.value;
-       let dexMax = actor.system.characteristics.DEX.value;
-
-       console.log(`STR ${strMax} DEX ${dexMax} END ${endMax}`);
-
-       let status = CONFIG.MGT2.STATUS.OKAY;
-       if (endDmg >= endMax) {
-           status = CONFIG.MGT2.STATUS.HURT;
-       }
-       if (strDmg >= strMax && dexDmg >= dexMax) {
-           status = CONFIG.MGT2.STATUS.DEAD;
-       } else if (strDmg > strMax || dexDmg > dexMax) {
-           status = CONFIG.MGT2.STATUS.UNCONSCIOUS;
-       }
-
-
-   }
+        if (dmg >= max) {
+            actor.setFlag("mgt2", "dead", "true");
+            actor.unsetFlag("mgt2", "unconscious");
+            actor.unsetFlag("mgt2", "disabled");
+        } else if (dmg >= max * 0.667) {
+            actor.setFlag("mgt2", "unconscious", "true");
+            actor.unsetFlag("mgt2", "dead");
+            actor.unsetFlag("mgt2", "disabled");
+        } else {
+            actor.unsetFlag("mgt2", "unconscious");
+            actor.unsetFlag("mgt2", "disabled");
+            actor.unsetFlag("mgt2", "dead");
+        }
+    }
 });
 
 Hooks.on("preUpdateToken", (token, data, moved) => {
@@ -332,6 +338,7 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
     console.log(token);
 
     if (data?.actor?.system?.hits) {
+        console.log(`preUpdateToken: "${token.name}" has hits`);
         let hits = parseInt(data.actor.system.hits.value);
         let max = parseInt(token.actor.system.hits.max);
 
@@ -426,44 +433,44 @@ Hooks.on("applyActiveEffect", (actor, effectData) => {
 });
 
 Hooks.on("combatTurn", (combat, data, options) => {
-    console.log("combatTurn:");
-
     // This is the actor which just finished their turn.
     let combatant = combat.combatant.actor;
     // Reset any reaction penalties back to zero.
-    if (combatant.system.status && combatant.system.status.reaction !== 0) {
-       combatant.system.status.reaction = 0;
-       combatant.update({ "system.status": combatant.system.status});
-    }
+    combatant.unsetFlag("mgt2", "reaction");
+
     // If stunned, reduce rounds left to be stunned
-    if (combatant.system.status.stunned) {
-        combatant.system.status.stunnedRounds -=1;
-        if (combatant.system.status.stunnedRounds < 1) {
-            combatant.system.status.stunned = false;
-            combatant.system.status.stunnedRounds = 0;
+    let stunned = combatant.getFlag("mgt2", "stunned");
+    if (stunned) {
+        let rounds = combatant.getFlag("mgt2", "stunnedRounds");
+        rounds = rounds?parseInt(rounds):0;
+
+        if (--rounds < 1) {
+            combatant.unsetFlag("mgt2", "stunned");
+            combatant.unsetFlag("mgt2", "stunnedRounds");
+        } else {
+            combatant.setFlag("mgt2", "stunnedRounds", rounds);
         }
-        combatant.update({ "system.status": combatant.system.status});
     }
 });
 
 Hooks.on("combatRound", (combat, data, options) => {
-    console.log("combatTurn:");
-
     // This is the actor which just finished their turn.
     let combatant = combat.combatant.actor;
     // Reset any reaction penalties back to zero.
-    if (combatant.system.status && combatant.system.status.reaction !== 0) {
-        combatant.system.status.reaction = 0;
-        combatant.update({ "system.status": combatant.system.status});
-    }
+    combatant.unsetFlag("mgt2", "reaction");
+
     // If stunned, reduce rounds left to be stunned
-    if (combatant.system.status.stunned) {
-        combatant.system.status.stunnedRounds -=1;
-        if (combatant.system.status.stunnedRounds < 1) {
-            combatant.system.status.stunned = false;
-            combatant.system.status.stunnedRounds = 0;
+    let stunned = combatant.getFlag("mgt2", "stunned");
+    if (stunned) {
+        let rounds = combatant.getFlag("mgt2", "stunnedRounds");
+        rounds = rounds?parseInt(rounds):0;
+
+        if (--rounds < 1) {
+            combatant.unsetFlag("mgt2", "stunned");
+            combatant.unsetFlag("mgt2", "stunnedRounds");
+        } else {
+            combatant.setFlag("mgt2", "stunnedRounds", rounds);
         }
-        combatant.update({ "system.status": combatant.system.status});
     }
 });
 
@@ -1111,61 +1118,66 @@ Handlebars.registerHelper('effect', function(key) {
  * Do we need to display the list of status effects for this actor?
  * Does not check to see if a traveller, npc or creature.
  */
-Handlebars.registerHelper('hasStatus', function(actorData) {
-   if (actorData.status) {
-        const status = actorData.status;
+Handlebars.registerHelper('hasStatus', function(actor) {
+    const status = actor.flags.mgt2;
+    console.log(status);
+    if (!status) return false;
 
-        if (parseInt(status.woundLevel) > 1 || parseInt(status.reaction) < 0) {
-            return true;
-        }
-        if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit ||
-            status.lowGravity || status.highGravity || status.zeroGravity ||
-            status.diseased || status.poisoned) {
-            return true;
-        }
-   }
-   return false;
+    if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit ||
+        status.lowGravity || status.highGravity || status.zeroGravity ||
+        status.diseased || status.poisoned || status.dead || status.unconscious ||
+        status.disabled) {
+        return true;
+    }
+    return false;
 });
 
-Handlebars.registerHelper('showStatus', function(actorData, status) {
-   if (actorData.status) {
-       let type = "statusWarn";
-       let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
+Handlebars.registerHelper('showStatus', function(actor, status) {
+   let type = "statusWarn";
+   let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
 
-       if (status === "fatigued") {
-           label += ` <i class="fas fa-xmark statusFatigued"> </i>`;
-       } else if (status === "stunned") {
-           label += ` (${actorData.status.stunnedRounds})`;
-           label += ` <i class="fas fa-xmark statusStunned"> </i>`;
-           type = "statusBad";
-       } else if (status === "dead") {
-           label += ` <i class="fas fa-xmark statusDead"> </i>`;
-           type = "statusBad";
-       } else if (status === "unconscious") {
-           type = "statusBad";
-       } else if (status === "disabled") {
-           type = "statusBad";
-       } else if (status === "reaction") {
-           if (actorData.status.reaction === 0) {
-               return "";
-           }
-           label += ` (${actorData.status.reaction})`;
-           label += ` <i class="fas fa-xmark statusReaction"> </i>`;
-       } else if (status === "highGravity") {
-           label += ` <i class="fas fa-xmark statusHighGravity"> </i>`;
-       } else if (status === "lowGravity") {
-           label += ` <i class="fas fa-xmark statusLowGravity"> </i>`;
-       } else if (status === "zeroGravity") {
-           label += ` <i class="fas fa-xmark statuszeroGravity"> </i>`;
-       } else if (status === "diseased") {
-           label += ` <i class="fas fa-xmark statusDiseased"> </i>`;
-       } else if (status === "poisoned") {
-           label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
+   if (status === "fatigued") {
+       label += ` <i class="fas fa-xmark statusFatigued"> </i>`;
+   } else if (status === "stunned") {
+       if (parseInt(actor.getFlag("mgt2", "stunnedRounds")) > 0) {
+           label += ` (${actor.getFlag("mgt2", "stunnedRounds")})`;
        }
-
-       return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
+       label += ` <i class="fas fa-xmark statusStunned"> </i>`;
+       type = "statusBad";
+   } else if (status === "dead") {
+       label += ` <i class="fas fa-xmark statusDead"> </i>`;
+       type = "statusBad";
+   } else if (status === "unconscious") {
+       type = "statusBad";
+       label += ` <i class="fas fa-xmark statusUnconscious"> </i>`;
+   } else if (status === "disabled") {
+       label += ` <i class="fas fa-xmark statusDisabled"> </i>`;
+       type = "statusBad";
+   } else if (status === "reaction") {
+       if (!(parseInt(actor.getFlag("mgt2", "reaction")) < 0)) {
+           return "";
+       }
+       label += ` (${actor.getFlag("mgt2", "reaction")})`;
+       label += ` <i class="fas fa-xmark statusReaction"> </i>`;
+   } else if (status === "highGravity") {
+       label += ` <i class="fas fa-xmark statusHighGravity"> </i>`;
+   } else if (status === "lowGravity") {
+       label += ` <i class="fas fa-xmark statusLowGravity"> </i>`;
+   } else if (status === "zeroGravity") {
+       label += ` <i class="fas fa-xmark statuszeroGravity"> </i>`;
+   } else if (status === "diseased") {
+       label += ` <i class="fas fa-xmark statusDiseased"> </i>`;
+   } else if (status === "poisoned") {
+       label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
+   } else if (status === "disabled") {
+       type = "statusBad";
+       label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
+   } else if (status === "dead") {
+       type = "statusBad";
+       label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
    }
-   return "";
+
+   return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
 });
 
 /* -------------------------------------------- */

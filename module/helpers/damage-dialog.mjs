@@ -195,9 +195,10 @@ export class MgT2DamageDialog extends Application {
             damage.END.value = parseInt(damage.END.value) + end;
             damage.END.tmp = Math.min(damage.END.value, parseInt(damage.END.tmp) + added);
             if (remaining > 0) {
-                this.data.status.stunned = true;
-                this.data.status.stunnedRounds += remaining;
-                this.actor.update({ "data.status": this.data.status });
+                this.actor.setFlag("mgt2", "stunned", true);
+                this.actor.setFlag("mgt2", "stunnedRounds",
+                    this.actor.getFlag("mgt2", "stunnedRounds")?
+                        parseInt(this.actor.getFlag("mgt2", "stunnedRounds"))+remaining:remaining);
             }
         } else {
             damage.STR.value = parseInt(damage.STR.value) + str;
@@ -222,6 +223,20 @@ export class MgT2DamageDialog extends Application {
         console.log(this.data.damage);
 
         this.actor.update({ "data.damage": this.data.damage });
+
+        let atZero = 0;
+        if (str >= this.data.characteristics.STR.value) atZero++;
+        if (dex >= this.data.characteristics.DEX.value) atZero++;
+        if (end >= this.data.characteristics.END.value) atZero++;
+
+        switch (atZero) {
+            case 2:
+                this.actor.setFlag("mgt2", "unconscious", true);
+                break;
+            case 3:
+                this.actor.setFlag("mgt2", "disabled", true);
+                break;
+        }
 
         this.close();
     }

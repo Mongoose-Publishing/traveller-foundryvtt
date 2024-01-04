@@ -484,7 +484,7 @@ export class MgT2ActorSheet extends ActorSheet {
             this._clearStunned(this.actor);
         });
         html.find('.statusFatigued').click(ev => {
-            this._clearFatigued(this.actor);
+            this._clearStatus(this.actor, "fatigued");
         });
         html.find('.statusDead').click(ev => {
             this._clearDead(this.actor);
@@ -503,6 +503,15 @@ export class MgT2ActorSheet extends ActorSheet {
         });
         html.find('.statusPoisoned').click(ev => {
             this._clearStatus(this.actor, 'poisoned');
+        });
+        html.find('.statusUnconscious').click(ev => {
+            this._clearStatus(this.actor, 'unconscious');
+        });
+        html.find('.statusDisabled').click(ev => {
+            this._clearStatus(this.actor, 'disabled');
+        });
+        html.find('.statusDead').click(ev => {
+            this._clearStatus(this.actor, 'dead');
         });
         html.find('initRoll').click(ev => {
             this._initRoll(this.actor);
@@ -567,12 +576,15 @@ export class MgT2ActorSheet extends ActorSheet {
         }
         console.log(`Dodge skill is ${dodge}`);
         if (dodge > 0) {
-            if (!actor.system.status.reaction) {
-                actor.system.status.reaction = 0;
-            }
-            actor.system.status.reaction = parseInt(actor.system.status.reaction) - 1;
-            actor.update({"system.status": actor.system.status});
+            let current = actor.getFlag("mgt2", "reaction");
+            if (!current) current = 0;
+
+            actor.setFlag("mgt2", "reaction", parseInt(current) - 1);
         }
+    }
+
+    _clearDodge(actor) {
+        actor.unsetFlag("mgt2", "reaction");
     }
 
     _clearDead(actor) {
@@ -580,25 +592,13 @@ export class MgT2ActorSheet extends ActorSheet {
         actor.update({"system.status": actor.system.status });
     }
 
-    _clearFatigued(actor) {
-        actor.system.status.fatigued = false;
-        actor.update({"system.status": actor.system.status });
-    }
-
-    _clearDodge(actor) {
-        actor.system.status.reaction = 0;
-        actor.update({"system.status": actor.system.status });
-    }
-
     _clearStunned(actor) {
-        actor.system.status.stunned = false;
-        actor.system.status.stunnedRounds = 0;
-        actor.update({"system.status": actor.system.status });
+        actor.unsetFlag("mgt2", "stunned");
+        actor.unsetFlag("mgt2", "stunnedRounds");
     }
 
     _clearStatus(actor, status) {
-        actor.system.status[status] = false;
-        actor.update({"system.status": actor.system.status });
+        actor.unsetFlag("mgt2", status);
     }
 
     _rollInit(actor) {

@@ -124,10 +124,10 @@ Tools.getSelected = function() {
 
 Tools.setStatusFor = function(actor, args, status) {
     if (args.includes(status)) {
-        actor.system.status[status] = true;
+        actor.setFlag("mgt2", status, true);
     }
     if (args.includes("-" + status)) {
-        actor.system.status[status] = false;
+        actor.unsetFlag("mgt2", status);
     }
 }
 
@@ -151,6 +151,10 @@ Tools.setStatus = function(chatData, args) {
             Tools.setStatusFor(actor, args, "zeroGravity");
             Tools.setStatusFor(actor, args, "poisoned");
             Tools.setStatusFor(actor, args, "diseased");
+            Tools.setStatusFor(actor, args, "unconscious");
+            Tools.setStatusFor(actor, args, "disabled");
+            Tools.setStatusFor(actor, args, "dead");
+            Tools.setStatusFor(actor, args, "destroyed");
             actor.update({ "system.status": actor.system.status });
         }
     }

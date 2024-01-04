@@ -233,43 +233,6 @@ export class MgT2Actor extends Actor {
             data.characteristics[char].current = value;
             data.characteristics[char].dm = this.getModifier(value);
         }
-        if (data.damage.END.tmp > data.damage.END.value) {
-            data.damage.END.tmp = data.damage.END.value;
-            data.status.stunned = false;
-            data.status.stunnedRounds = 0;
-        }
-        let statsDown = 0;
-        if (data.characteristics.END.current < 1) {
-            statsDown ++;
-        }
-        if (data.characteristics.STR.current < 1) {
-            statsDown ++;
-        }
-        if (data.characteristics.DEX.current < 1) {
-            statsDown ++;
-        }
-        console.log(`Number of stats down is ${statsDown}`);
-        let woundLevel = MGT2.STATUS.OKAY;
-        switch (statsDown) {
-            case 0:
-                woundLevel = MGT2.STATUS.OKAY;
-                break;
-            case 1:
-                woundLevel = MGT2.STATUS.HURT;
-                break;
-            case 2:
-                woundLevel = MGT2.STATUS.UNCONSCIOUS;
-                break;
-            case 3:
-                woundLevel = MGT2.STATUS.DISABLED;
-                break;
-        }
-        console.log(`Wound level is ${woundLevel}`);
-        if (woundLevel !== data.status.woundLevel) {
-            console.log("Setting woundLevel to " + woundLevel);
-            data.status.woundLevel = woundLevel;
-            this.update({"system.status": data.status });
-        }
 
         if (data.damage && data.hits) {
             let hits = data.characteristics.STR.current + data.characteristics.DEX.current +
