@@ -278,13 +278,24 @@ export class MgT2ActorSheet extends ActorSheet {
 
         this.actor.system.weightCarried = weight;
         this.actor.system.modifiers.encumbrance.auto = 0;
-        this.actor.system.status.encumbered = false;
+
+        // Only update the actor if the flag has changed.
+        let wasEncumbered = !!this.actor.getFlag("mgt2", "encumbered");
+        let wasVaccSuit = !!this.actor.getFlag("mgt2", "vaccSuit");
+        let isVaccSuit = false;
+
+        console.log(`wasEncumbered ${wasEncumbered} wasVaccSuit ${wasVaccSuit}`);
         if ( game.settings.get("mgt2", "useEncumbrance")) {
             if (weight > this.actor.system.heavyLoad) {
                 this.actor.system.modifiers.encumbrance.auto = -2;
-                this.actor.system.status.encumbered = true;
+                if (!wasEncumbered) {
+                    this.actor.setFlag("mgt2", "encumbered", true);
+                }
+            } else if (wasEncumbered) {
+                this.actor.setFlag("mgt2", "encumbered", false);
             }
         }
+
         if (skillNeeded >= 0) {
             let vaccSkill = -3;
             let vs = this.actor.system.skills.vaccsuit;
@@ -292,11 +303,20 @@ export class MgT2ActorSheet extends ActorSheet {
                 vaccSkill = parseInt(vs.value);
                 if (vaccSkill < skillNeeded) {
                     this.actor.system.modifiers.encumbrance.auto -= (skillNeeded - vaccSkill);
-                    this.actor.system.status.vaccSuit = true;
+                    isVaccSuit = true;
                 }
             } else {
                 this.actor.system.modifiers.encumbrance.auto += vaccSkill;
-                this.actor.system.status.vaccSuit = true;
+                isVaccSuit = true;
+            }
+        }
+        if (isVaccSuit !== wasVaccSuit) {
+            if (isVaccSuit) {
+                // Causes infinite loop. Why?
+                //this.actor.setFlag("mgt2", "vaccSuit", true);
+            } else {
+                // Causes infinite loop. Why?
+                //this.actor.setFlag("mgt2", "vaccSuit", false);
             }
         }
 

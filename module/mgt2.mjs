@@ -1120,7 +1120,6 @@ Handlebars.registerHelper('effect', function(key) {
  */
 Handlebars.registerHelper('hasStatus', function(actor) {
     const status = actor.flags.mgt2;
-    console.log(status);
     if (!status) return false;
 
     if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit ||
