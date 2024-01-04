@@ -3,31 +3,19 @@ function migrateActorData(actor, fromVersion) {
     console.log(`MIGRATE ACTOR DATA ${fromVersion}`);
     if (fromVersion < 1) {
         console.log("Converting to v2 (Status Effects)");
-        // Migration from before schema tracking was put in place.
-        if (!actor.system.status && (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature")) {
-            actor.system.status = {
-                "woundLevel": 0,
-                "stunned": false,
-                "fatigued": false
-            }
-        }
+        // No longer used, so no point adding them.
     }
     if (fromVersion < 2) {
         console.log("Converting to v2 (Stun Damage)");
         if (actor.system.damage && actor.type === "traveller") {
             actor.system.damage.END.tmp = parseInt(0);
         }
-        if (actor.system.status && (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature")) {
-            actor.system.status.stunnedRounds = parseInt(0);
-        }
         if (actor.system.hits && (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature")) {
             actor.system.hits.tmpDamage = parseInt(0);
         }
     }
     if (fromVersion < 3) {
-        if (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature") {
-            actor.system.status.reaction = 0;
-        }
+        // Undone.
     }
     return {};
 }
