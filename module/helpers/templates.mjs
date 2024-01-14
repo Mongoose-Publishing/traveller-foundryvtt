@@ -14,6 +14,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/mgt2/templates/actor/parts/actor-weapons.html",
         "systems/mgt2/templates/actor/parts/actor-terms.html",
         "systems/mgt2/templates/actor/parts/actor-settings.html",
+        "systems/mgt2/templates/actor/parts/actor-id-card.html",
         "systems/mgt2/templates/item/parts/item-general.html"
     ]);
 };

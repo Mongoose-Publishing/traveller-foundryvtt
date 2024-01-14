@@ -76,26 +76,45 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     } else if (rollType === "bane") {
         dice = "3D6kl2";
     }
-    dice += " + " + skillDM;
+
+    if (skillDM !== 0) {
+        dice += ` + ${skillDM}`;
+    }
     if (system) {
         if (system.modifiers && system.modifiers.encumbrance.dm !== 0) {
-            dice += " + " + parseInt(system.modifiers.encumbrance.dm);
-        }
-        if (system.modifiers && system.status.reaction !== 0) {
-            dice += " + " + parseInt(system.status.reaction);
+            dice += ` - ${Math.abs(parseInt(system.modifiers.encumbrance.dm))}[Enc]`;
         }
         if (baseRange === 0) {
             if (system.modifiers && system.modifiers.melee.dm !== 0) {
-                dice += " + " + parseInt(system.modifiers.melee.dm);
+                if (system.modifiers.melee.dm > 0) {
+                    dice += ` + ${parseInt(system.modifiers.melee.dm)}[Melee]`;
+                } else {
+                    dice += ` - ${Math.abs(parseInt(system.modifiers.melee.dm))}[Melee]`;
+                }
             }
         } else {
-            if (system.modifiers && system.modifiers.physical.dm !== 0) {
-                dice += " + " + parseInt(system.modifiers.physical.dm);
-            }
             if (system.modifiers && system.modifiers.guncombat.dm !== 0 && weapon.system.weapon.skill.indexOf("guncombat") === 0) {
-                dice += " + " + parseInt(system.modifiers.guncombat.dm);
+                if (system.modifiers.guncombat.dm > 0) {
+                    dice += ` + ${parseInt(system.modifiers.guncombat.dm)}[Guns]`;
+                } else {
+                    dice += ` - ${Math.abs(parseInt(system.modifiers.guncombat.dm))}[Guns]`;
+                }
             }
         }
+        if (system.modifiers && system.modifiers.physical.dm !== 0) {
+            if (system.modifiers.physical.dm > 0) {
+                dice += ` + ${parseInt(system.modifiers.physical.dm)}[Phy]`;
+            } else {
+                dice += ` - ${Math.abs(parseInt(system.modifiers.physical.dm))}[Phy]`;
+            }
+        }
+    }
+    if (actor && actor.flags.mgt2.reaction) {
+        let react = Math.abs(parseInt(actor.flags.mgt2.reaction));
+        if (react !== 0) {
+            dice += ` - ${react}[Dodge]`;
+        }
+
     }
 
     if (weapon.system.weapon.attackBonus) {
@@ -179,10 +198,18 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
     }
 
     if (dm && parseInt(dm) !== 0) {
-        dice += " + " + parseInt(dm);
+        if (dm > 0) {
+            dice += ` + ${parseInt(dm)}`;
+        } else {
+            dice += ` - ${Math.abs(parseInt(dm))}`;
+        }
     }
     if (range) {
-        dice += " + " + range;
+        if (range > 0) {
+            dice += ` + ${range}[Range]`;
+        } else {
+            dice += ` - ${Math.abs(range)}[Range]`;
+        }
     }
     let attacks = 1;
     if (autoOption && autoOption === "burst") {
@@ -252,30 +279,36 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
                 actor.update({ "system.status": actor.system.status });
             }
         } else {
-            content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;
-            content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}" class="damage-button">Apply (${damageEffect})</button>`;
-            if (actor) {
-                content += `<b>Attack Roll:</b> ${attackTotal} <span class="${effectClass}">${effectText}</span><br/>`;
-            } else {
-                content += "<br/>";
-            }
-            content += `<b>Damage Roll:</b> ${damageTotal}`;
+            let dmgText = `Damage ${damageTotal}`;
             if (!destructive && effect > 0) {
-                content += ` + ${effect} (${damageTotal + effect})`;
+                dmgText += `&nbsp;+&nbsp;${effect}&nbsp;(${damageTotal + effect})`;
             }
             if (hasTrait(traits, "ap")) {
-                content += ` AP ${getTraitValue(traits, "ap")}`;
+                dmgText += ` /&nbsp;AP&nbsp;${getTraitValue(traits, "ap")}`;
             }
             if (hasTrait(traits, "radiation")) {
                 const radRoll = new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate({async: false});
-                content += `<br/><b>Radiation:</b> ${radRoll.total} Rads ☢`;
+                dmgText += ` /&nbsp;${radRoll.total} Rads`;
                 if (destructive) {
-                    content += ` (10m)`;
+                    dmgText += `&nbsp;(10m)`;
                 }
             }
             if (hasTrait(traits, "blast")) {
-                content += `<br/><b>Blast Radius:</b> ${getTraitValue(traits, "blast")}m`;
+                dmgText += ` /&nbsp;Blast&nbsp;${getTraitValue(traits, "blast")}m`;
             }
+
+            if (actor) {
+                content += `${dice}<br/>`
+                content += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${attackTotal}</span> <span class="${effectClass}">${effectText}</span><br/>`;
+            } else {
+                content += "<br/>";
+            }
+            content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;
+            content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" 
+                            data-options="${options}" 
+                            data-traits="${traits}" 
+                            class="damage-button">${dmgText}</button>`;
+
             content += `</div>`;
         }
     }
@@ -463,8 +496,12 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                 skillNotes += ` (${phyDm}Phy)`;
             }
         }
-        if (data.status.reaction < 0) {
-            dice += ` ${data.status.reaction}[Dodge]`;
+        let reaction = actor.getFlag("mgt2", "reaction");
+        if (reaction) {
+            reaction = parseInt(reaction);
+            if (reaction < 0) {
+                dice += ` ${reaction}[Dodge]`;
+            }
         }
     }
 
@@ -611,7 +648,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
 
         if (game.settings.get("mgt2", "verboseSkillRolls")) {
             let effect = total - difficulty;
-            text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${total}</span> ` + getEffectLabel(effect);
+            text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${total}</span> ` + getEffectLabel(effect);
         }
 
         if (skill && skill.specialities != null && speciality == null) {
@@ -650,9 +687,9 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                         if (specNotes != "") {
                             text += `<div class="skill-augment-text">${specNotes}</div>`;
                         }
-                        text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span> ` + getEffectLabel(stotal - difficulty);
+                        text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${stotal}</span> ` + getEffectLabel(stotal - difficulty);
                     } else {
-                        text += `<h3 class="subroll">${slabel} <span class="skill-roll inline-roll inline-result"><i class="fas fa-dice-d20"> </i> ${stotal}</span></h3>`;
+                        text += `<h3 class="subroll">${slabel} <span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${stotal}</span></h3>`;
                     }
                 }
             }

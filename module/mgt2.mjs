@@ -1125,11 +1125,16 @@ Handlebars.registerHelper('hasStatus', function(actor) {
     if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit ||
         status.lowGravity || status.highGravity || status.zeroGravity ||
         status.diseased || status.poisoned || status.dead || status.unconscious ||
-        status.disabled) {
+        status.disabled || status.reaction) {
         return true;
     }
     return false;
 });
+
+Handlebars.registerHelper('toHex', function(value) {
+    return parseInt(value).toString(16).toUpperCase();
+});
+
 
 Handlebars.registerHelper('showStatus', function(actor, status) {
    let type = "statusWarn";

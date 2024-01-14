@@ -1,0 +1,58 @@
+<section class="id-card">
+    <img src="{{actor.img}}" data-edit="img"
+         title="{{actor.name}}" height="150" width="150"/>
+
+    <div class="id-card">
+        <h1 class="charname shadow">
+            <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+        </h1>
+
+        <div class="info">
+            <div class="resource flex-group-left">
+                <label for="data.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
+                <input class="field-value writable" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
+            </div>
+            <div class="resource flex-group-left">
+                <label for="data.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
+                <input class="field-value writable" name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
+            </div>
+            <div class="resource flex-group-left">
+                <label for="data.sophont.homeworld" class="field-label">{{localize 'MGT2.TravellerSheet.HomeWorld'}}</label>
+                <input class="field-value writable" name="data.sophont.homeworld" type="text" value="{{data.sophont.homeworld}}"/>
+            </div>
+        </div>
+
+        <div class="upp">
+            <span class="upp">{{toHex data.characteristics.STR.value}}</span>
+            <span class="upp">{{toHex data.characteristics.DEX.value}}</span>
+            <span class="upp">{{toHex data.characteristics.END.value}}</span>
+            <span class="upp">{{toHex data.characteristics.INT.value}}</span>
+            <span class="upp">{{toHex data.characteristics.EDU.value}}</span>
+            <span class="upp">{{toHex data.characteristics.SOC.value}}</span>
+
+            <div class="resource flex-group-left profession">
+                <label for="data.sophont.profession" class="field-label">{{localize 'MGT2.TravellerSheet.Profession'}}</label>
+                <input class="field-value writable" name="data.sophont.profession" type="text" value="{{data.sophont.profession}}"/>
+            </div>
+        </div>
+
+        <div class="card-skills">
+            {{#each data.skills as |skill key|}}
+                {{#if skill.trained}}
+                    {{#if skill.specialities}}
+                        {{#each skill.specialities as |spec skey|}}
+                            {{#if spec.value includeZero=false}}
+                                <span>{{skill.label}} ({{spec.label}})/{{spec.value}}</span>
+                            {{/if}}
+                        {{/each}}
+                    {{else}}
+                        <span>{{skill.label}}/{{skill.value}}</span>
+                    {{/if}}
+                {{/if}}
+            {{/each}}
+
+        </div>
+
+    </div>
+</section>
+

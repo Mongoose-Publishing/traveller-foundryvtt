@@ -1,5 +1,5 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
-
+    {{#if true}}
     <section class="npc-sheet">
         <div class="character-left">
             <img class="profile-img shadow" src="{{actor.img}}" data-edit="img"
@@ -162,6 +162,8 @@
 
 
     </section>
-
+    {{else}}
+    {{> "systems/mgt2/templates/actor/parts/actor-id-card.html"}}
+    {{/if}}
 </form>
 

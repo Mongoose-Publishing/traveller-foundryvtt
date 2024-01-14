@@ -506,9 +506,6 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.statusFatigued').click(ev => {
             this._clearStatus(this.actor, "fatigued");
         });
-        html.find('.statusDead').click(ev => {
-            this._clearDead(this.actor);
-        });
         html.find('.statusHighGravity').click(ev => {
            this._clearStatus(this.actor, 'highGravity');
         });
@@ -608,8 +605,8 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     _clearDead(actor) {
-        actor.system.status.woundLevel = Math.min(actor.system.status.woundLevel, 3);
-        actor.update({"system.status": actor.system.status });
+        //actor.system.status.woundLevel = Math.min(actor.system.status.woundLevel, 3);
+        //actor.update({"system.status": actor.system.status });
     }
 
     _clearStunned(actor) {

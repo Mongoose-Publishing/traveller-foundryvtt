@@ -863,9 +863,8 @@ form.damage-dialog div.damage-header {
 }
 
 button.damage-button {
-    float: right;
-    display: inline;
-    width: auto;
+    text-align: center;
+    width: 100%;
 }
 
 div.armour-box {
@@ -1413,3 +1412,53 @@ span.edit-skill {
     cursor: pointer;
 }
 
+section.id-card {
+    background-color: #E0E0E0;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 15px;
+    min-width: 680px;
+    max-height: 300px;
+}
+
+section.id-card img {
+    border-radius: 10px;
+    float: left;
+}
+
+section.id-card div.id-card {
+    margin-left: 160px;
+}
+
+section.id-card span.upp {
+    border: 2px solid #A0A0A0;
+    border-radius: 5px;
+    margin-right: 5px;
+    padding: 10px;
+    font-size: x-large;
+    width: 2em;
+    display: inline-block;
+    text-align: center;
+}
+
+section.id-card div.info {
+    width: 10em;
+    float: left;
+}
+
+section.id-card div.upp {
+    float: right;
+    padding-top: 1em;
+}
+
+section.id-card div.profession {
+    margin-top: 1.5em;
+}
+
+section.id-card div.card-skills {
+    clear: both;
+}
+
+section.id-card div.card-skills span {
+    display: inline-block;
+}
