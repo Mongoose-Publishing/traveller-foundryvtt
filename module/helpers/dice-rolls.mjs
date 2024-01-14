@@ -109,7 +109,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
             }
         }
     }
-    if (actor && actor.flags.mgt2.reaction) {
+    if (actor && actor.flags?.mgt2?.reaction) {
         let react = Math.abs(parseInt(actor.flags.mgt2.reaction));
         if (react !== 0) {
             dice += ` - ${react}[Dodge]`;
@@ -298,7 +298,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
             }
 
             if (actor) {
-                content += `${dice}<br/>`
+                content += `<b>Attack Roll:</b> ${dice}<br/>`
                 content += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${attackTotal}</span> <span class="${effectClass}">${effectText}</span><br/>`;
             } else {
                 content += "<br/>";
