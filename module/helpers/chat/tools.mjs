@@ -383,7 +383,6 @@ Tools.damage = function(chatData, args) {
     }
 };
 
-
 Tools.showSkills = function(chatData) {
     const user = game.users.current;
     const selected = canvas.tokens.controlled;

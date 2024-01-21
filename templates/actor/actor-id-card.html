@@ -35,22 +35,15 @@
                 <input class="field-value writable" name="data.sophont.profession" type="text" value="{{data.sophont.profession}}"/>
             </div>
         </div>
-
+        <br/>
         <div class="card-skills">
-            {{#each data.skills as |skill key|}}
-                {{#if skill.trained}}
-                    {{#if skill.specialities}}
-                        {{#each skill.specialities as |spec skey|}}
-                            {{#if spec.value includeZero=false}}
-                                <span>{{skill.label}} ({{spec.label}})/{{spec.value}}</span>
-                            {{/if}}
-                        {{/each}}
-                    {{else}}
-                        <span>{{skill.label}}/{{skill.value}}</span>
-                    {{/if}}
-                {{/if}}
-            {{/each}}
+            <div class="grid grid-3col">
+                {{{showSimpleSkills actor}}}
+            </div>
+        </div>
 
+        <div class="description">
+            {{{actor.system.description}}}
         </div>
 
     </div>

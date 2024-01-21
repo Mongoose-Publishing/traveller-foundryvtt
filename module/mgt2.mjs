@@ -17,6 +17,7 @@ import { Tools } from "./helpers/chat/tools.mjs";
 import { rollSkill } from "./helpers/dice-rolls.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
 import { migrateWorld } from "./migration.mjs";
+import { NpcIdCard } from "./helpers/id-card.mjs";
 
 
 
@@ -157,9 +158,20 @@ Hooks.once('init', async function() {
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
 //  ActiveEffects.registerSheet("mgt2", MgT2EffectSheet, { makeDefault: true });
 
+
+    // Sockets
+    game.socket.on("system.mgt2", (data) => {
+       console.log("system.mgt2 socket event");
+       if (data.type === "showIdCard") {
+           let actor = data.actor;
+           new NpcIdCard(actor).render(true);
+       }
+    });
+
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
 });
+
 
 Hooks.on('renderChatMessage', function(app, html) {
     const damageMessage = html.find(".damage-message")[0];
@@ -473,6 +485,8 @@ Hooks.on("combatRound", (combat, data, options) => {
         }
     }
 });
+
+
 
 // Dropping a skill on the macro bar. An entire skill tree is dragged,
 // not just a speciality.
@@ -1182,6 +1196,37 @@ Handlebars.registerHelper('showStatus', function(actor, status) {
    }
 
    return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
+});
+
+Handlebars.registerHelper('showSimpleSkills', function(actor) {
+   if (actor && actor.system && actor.system.skills) {
+       let skills = actor.system.skills;
+       let html = "";
+
+       for (let key in skills) {
+           let skill = skills[key];
+
+           if (skill.trained) {
+               let showParent = true;
+               if (skill.specialities) {
+                    for (let specKey in skill.specialities) {
+                        let spec = skill.specialities[specKey];
+                        if (spec.value > 0) {
+                            showParent = false;
+                            html += `<div>${skill.label}&nbsp;(${spec.label})/${spec.value}</div>`;
+                        }
+                    }
+               }
+               if (showParent) {
+                   html += `${skill.label}/${skill.value} `;
+               }
+           }
+       }
+       return html;
+   } else {
+       return "";
+   }
+
 });
 
 /* -------------------------------------------- */

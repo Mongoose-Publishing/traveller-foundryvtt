@@ -3,8 +3,10 @@
   "title": "Mongoose Traveller 2e",
   "description": "An unofficial system for Mongoose Traveller 2e",
   "version": "0.4.8",
-  "minimumCoreVersion": "10",
-  "compatibleCoreVersion": "11",
+  "compatibility": {
+    "minimum": 10,
+    "verified": 11
+  },
   "author": "Samuel Penn",
   "esmodules": ["module/mgt2.mjs" ],
   "styles": ["css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css" ],
@@ -59,6 +61,7 @@
       "path": "lang/en.json"
     }
   ],
+  "socket": true,
   "gridDistance": 1.5,
   "gridUnits": "m",
   "primaryTokenAttribute": "hits",

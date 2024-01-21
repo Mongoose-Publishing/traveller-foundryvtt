@@ -29,8 +29,8 @@
                 <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
             </h1>
 
-            <div class="shadow grid grid-3col">
-                <div class="resource flex-group-left">
+            <div class="shadow grid grid-5col">
+                <div class="resource flex-group-left grid-span-2">
                     <label for="data.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
                     <input class="field-value writable" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
                 </div>
@@ -38,8 +38,11 @@
                     <label for="data.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
                     <input class="field-value writable" name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
                 </div>
-                <div class="resource flex-group-left">
-                    <label for="data.sophont.profession" class="field-label">{{localize 'MGT2.TravellerSheet.Profession'}}</label>
+                <div class="resource flex-group-left grid-span-2">
+                    <label for="data.sophont.profession" class="field-label">
+                        {{localize 'MGT2.TravellerSheet.Profession'}}
+                        <span class="showIdCard"><i class="fa-solid fa-id-card"></i></span>
+                    </label>
                     <input class="field-value writable" name="data.sophont.profession" type="text" value="{{data.sophont.profession}}"/>
                 </div>
             </div>

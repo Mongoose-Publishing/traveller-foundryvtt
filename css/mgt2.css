@@ -33,6 +33,7 @@
 .grid-3col {
   grid-column: span 3 / span 3;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
 }
 
 .grid-4col {
@@ -1414,11 +1415,11 @@ span.edit-skill {
 
 section.id-card {
     background-color: #E0E0E0;
-    margin: 1em;
+    margin: 0.5em;
     padding: 1em;
     border-radius: 15px;
     min-width: 680px;
-    max-height: 300px;
+    max-height: 400px;
 }
 
 section.id-card img {
@@ -1461,4 +1462,18 @@ section.id-card div.card-skills {
 
 section.id-card div.card-skills span {
     display: inline-block;
+}
+
+section.id-card div.upp {
+    margin-bottom: 1em;
+}
+
+section.id-card .showIdCard {
+    font-size: large;
+}
+
+.card-skills {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.25em;
 }

@@ -7,6 +7,9 @@ export class MgT2DamageDialog extends Application {
         options.width = "auto";
         options.height = "auto";
         options.title = game.i18n.localize("MGT2.DamageDialog.Title");
+        options.shareable = true;
+        options.popOut = true;
+        options.resizable = true;
 
         return options;
     }

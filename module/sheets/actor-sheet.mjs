@@ -8,6 +8,7 @@ import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
 import {MgT2Item} from "../documents/item.mjs";
 import {Tools} from "../helpers/chat/tools.mjs";
+import {NpcIdCard} from "../helpers/id-card.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -532,6 +533,15 @@ export class MgT2ActorSheet extends ActorSheet {
         });
         html.find('initRoll').click(ev => {
             this._initRoll(this.actor);
+        });
+        html.find('.showIdCard').click(ev => {
+            console.log("Click the show ID card");
+            console.log(this.actor);
+           game.socket.emit("system.mgt2", {
+               type: "showIdCard",
+               actor: this.actor
+           });
+            new NpcIdCard(this.actor).render(true);
         });
 
     // Active Effect management
