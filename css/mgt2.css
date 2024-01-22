@@ -1415,16 +1415,35 @@ span.edit-skill {
 
 section.id-card {
     background-color: #E0E0E0;
-    margin: 0.5em;
-    padding: 1em;
+    margin: 0.25em;
+    padding: 0.5em;
     border-radius: 15px;
-    min-width: 680px;
+    min-width: 540px;
     max-height: 400px;
+    font-family: "Courier";
+}
+
+section.id-card .id-side {
+    float: left;
+    width: 160px;
+}
+
+section.id-card h4 {
+    display: block;
+    font-weight:bold;
+    margin-top: 5px;
+    border-bottom: 1px solid #A0A0A0;
+    width: 100%;
+}
+
+section.id-card .id-data span {
+    display: block;
+    background-color: #E4E4E4;
+    width: 100%;
 }
 
 section.id-card img {
     border-radius: 10px;
-    float: left;
 }
 
 section.id-card div.id-card {
@@ -1440,6 +1459,7 @@ section.id-card span.upp {
     width: 2em;
     display: inline-block;
     text-align: center;
+    font-family: "Courier";
 }
 
 section.id-card div.info {
@@ -1448,20 +1468,11 @@ section.id-card div.info {
 }
 
 section.id-card div.upp {
-    float: right;
     padding-top: 1em;
 }
 
 section.id-card div.profession {
     margin-top: 1.5em;
-}
-
-section.id-card div.card-skills {
-    clear: both;
-}
-
-section.id-card div.card-skills span {
-    display: inline-block;
 }
 
 section.id-card div.upp {
@@ -1473,7 +1484,23 @@ section.id-card .showIdCard {
 }
 
 .card-skills {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 0.25em;
+    border-bottom: 1px solid #E4E4E4;
+}
+
+.skill-list {
+    xdisplay: inline;
+    list-style: none;
+    margin-block-start: 0px;
+}
+
+.skill-list li {
+    display: inline;
+}
+
+.skill-list li:after {
+    content: ", ";
+}
+
+.skill-list li:last-child:after {
+    content: "";
 }

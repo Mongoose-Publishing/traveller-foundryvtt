@@ -1213,16 +1213,16 @@ Handlebars.registerHelper('showSimpleSkills', function(actor) {
                         let spec = skill.specialities[specKey];
                         if (spec.value > 0) {
                             showParent = false;
-                            html += `<div>${skill.label}&nbsp;(${spec.label})/${spec.value}</div>`;
+                            html += `<li>${skill.label}&nbsp;(${spec.label})/${spec.value}</li>`;
                         }
                     }
                }
                if (showParent) {
-                   html += `${skill.label}/${skill.value} `;
+                   html += `<li>${skill.label}/${skill.value}</li>`;
                }
            }
        }
-       return html;
+       return "<ul class='skill-list'>" + html + "</ul>";
    } else {
        return "";
    }

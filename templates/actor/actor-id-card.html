@@ -1,26 +1,35 @@
 <section class="id-card">
-    <img src="{{actor.img}}" data-edit="img"
-         title="{{actor.name}}" height="150" width="150"/>
+    <div class="id-side">
+        <img src="{{actor.img}}" data-edit="img"
+             title="{{actor.name}}" height="150" width="150"/>
+
+        <div class="info">
+            {{#if data.sophont.species}}
+            <div class="id-data">
+                <h4>{{localize 'MGT2.TravellerSheet.Species'}}</h4>
+                <span>{{data.sophont.species}}</span>
+            </div>
+            {{/if}}
+            {{#if data.sophont.gender}}
+            <div class="id-data">
+                <h4>{{localize 'MGT2.TravellerSheet.Gender'}}</h4>
+                <span>{{data.sophont.gender}}</span>
+            </div>
+            {{/if}}
+            {{#if data.sophont.homeworld}}
+            <div class="id-data">
+                <h4>{{localize 'MGT2.TravellerSheet.HomeWorld'}}</h4>
+                <span>{{data.sophont.homeworld}}</span>
+            </div>
+            {{/if}}
+        </div>
+
+    </div>
 
     <div class="id-card">
         <h1 class="charname shadow">
             <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
         </h1>
-
-        <div class="info">
-            <div class="resource flex-group-left">
-                <label for="data.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
-                <input class="field-value writable" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
-            </div>
-            <div class="resource flex-group-left">
-                <label for="data.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
-                <input class="field-value writable" name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
-            </div>
-            <div class="resource flex-group-left">
-                <label for="data.sophont.homeworld" class="field-label">{{localize 'MGT2.TravellerSheet.HomeWorld'}}</label>
-                <input class="field-value writable" name="data.sophont.homeworld" type="text" value="{{data.sophont.homeworld}}"/>
-            </div>
-        </div>
 
         <div class="upp">
             <span class="upp">{{toHex data.characteristics.STR.value}}</span>
@@ -30,16 +39,16 @@
             <span class="upp">{{toHex data.characteristics.EDU.value}}</span>
             <span class="upp">{{toHex data.characteristics.SOC.value}}</span>
 
-            <div class="resource flex-group-left profession">
-                <label for="data.sophont.profession" class="field-label">{{localize 'MGT2.TravellerSheet.Profession'}}</label>
-                <input class="field-value writable" name="data.sophont.profession" type="text" value="{{data.sophont.profession}}"/>
+            {{#if data.sophont.profession}}
+            <div class="id-data">
+                <h4>{{localize 'MGT2.TravellerSheet.Profession'}}</h4>
+                <span>{{data.sophont.profession}}</span>
             </div>
+            {{/if}}
         </div>
-        <br/>
         <div class="card-skills">
-            <div class="grid grid-3col">
-                {{{showSimpleSkills actor}}}
-            </div>
+            <h4>Qualifiations</h4>
+            <span>{{{showSimpleSkills actor}}}</span>
         </div>
 
         <div class="description">

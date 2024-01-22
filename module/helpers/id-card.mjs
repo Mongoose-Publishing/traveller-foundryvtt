@@ -10,7 +10,7 @@ export class NpcIdCard extends Application {
             template: "systems/mgt2/templates/actor/actor-id-card.html",
             popOut: true,
             shareable: true,
-            width: 700,
+            width: 560,
             height: 400
         });
         return options;
