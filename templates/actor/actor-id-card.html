@@ -28,7 +28,8 @@
 
     <div class="id-card">
         <h1 class="charname shadow">
-            <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+            {{actor.name}}
+            {{#if users}}<i class="id-share fa-regular fa-share-from-square"></i>{{/if}}
         </h1>
 
         <div class="upp">
@@ -54,7 +55,6 @@
         <div class="description">
             {{{actor.system.description}}}
         </div>
-
     </div>
 </section>
 

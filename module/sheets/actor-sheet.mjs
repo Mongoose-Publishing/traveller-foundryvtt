@@ -535,12 +535,6 @@ export class MgT2ActorSheet extends ActorSheet {
             this._initRoll(this.actor);
         });
         html.find('.showIdCard').click(ev => {
-            console.log("Click the show ID card");
-            console.log(this.actor);
-           game.socket.emit("system.mgt2", {
-               type: "showIdCard",
-               actor: this.actor
-           });
             new NpcIdCard(this.actor).render(true);
         });
 

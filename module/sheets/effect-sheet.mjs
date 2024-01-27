@@ -35,23 +35,24 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         return `${path}/active-effect-config.html`;
     }
 
-    getData(options) {
+    async getData(options) {
         // Retrieve base data structure.
-        const context = super.getData(options);
+        const context = await super.getData(options);
 
-        console.log("effect-sheet.getData:");
-        console.log(context.data.flags);
+        console.log(context);
+
+
         context.effectTypes = MGT2.EFFECTS;
         context.effectType = MGT2.EFFECTS[context.data.flags.augmentType];
 
         let prop =context.effectType.property;
-        if (context.effectType.targets == "char") {
+        if (context.effectType.targets === "char") {
             context.targets = {};
             for (const k of ['STR', 'DEX', 'END', 'INT', 'PSI']) {
                 let key = "system.characteristics." + k + "." + prop;
                 context.targets[key] = {"label": k};
             }
-        } else if (context.effectType.targets == "skills") {
+        } else if (context.effectType.targets === "skills") {
             context.targets = {};
             let skills = game.system.template.Actor.templates.skills.skills;
             for (let id in skills) {

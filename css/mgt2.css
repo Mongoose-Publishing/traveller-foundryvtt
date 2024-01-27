@@ -1485,12 +1485,23 @@ section.id-card .showIdCard {
 
 .card-skills {
     border-bottom: 1px solid #E4E4E4;
+    height: 100px;
+    scrollbar-color: #808080 #D0D0D0;
+    overflow-y: auto;
+}
+
+.card-skills h4 {
+    margin: 0px;
+    margin-bottom: 2px;
+    padding-top: 0px;
 }
 
 .skill-list {
     xdisplay: inline;
     list-style: none;
     margin-block-start: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 .skill-list li {
@@ -1503,4 +1514,14 @@ section.id-card .showIdCard {
 
 .skill-list li:last-child:after {
     content: "";
+}
+
+.id-card div.description {
+    height: 80px;
+    scrollbar-color: #808080 #D0D0D0;
+    overflow-y: auto;
+}
+
+.id-share {
+    float: right;
 }

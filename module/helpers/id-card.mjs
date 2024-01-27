@@ -6,12 +6,12 @@ export class NpcIdCard extends Application {
 
         mergeObject(options, {
             editable: false,
-            resizable: true,
+            resizable: false,
             template: "systems/mgt2/templates/actor/actor-id-card.html",
             popOut: true,
             shareable: true,
-            width: 560,
-            height: 400
+            width: 600,
+            height: 420
         });
         return options;
     }
@@ -23,10 +23,38 @@ export class NpcIdCard extends Application {
     }
 
     getData() {
+        let users = null;
+        let current = game.users.current;
+
+        if (current.isGM) {
+            users = [];
+            for (let u of game.users) {
+                if (u.id !== current.id && u.active) {
+                    console.log(u);
+                    users.push(u);
+                }
+            }
+        }
+
         return {
             "actor": this. actor,
-            "data": this.data
+            "data": this.data,
+            "users": users
         }
+    }
+
+    activateListeners(html) {
+        html.find('.id-share').click(ev => {
+            this._shareId();
+        })
+    }
+
+    _shareId() {
+        console.log("Share!");
+        game.socket.emit("system.mgt2", {
+            type: "showIdCard",
+            actor: this.actor
+        });
     }
 
 
