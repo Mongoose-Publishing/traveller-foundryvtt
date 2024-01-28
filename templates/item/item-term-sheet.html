@@ -1,21 +1,20 @@
-{{!-- This template is a fallback for when items don't have more specific templates. --}}
-{{!-- Generally, you'll want to make more specific templates when possible. --}}
-<form class="{{cssClass}} item" autocomplete="off">
+<form class="{{cssClass}} item career" autocomplete="off">
 
-    <section class="shadow">
-        <div class="grid grid-8col">
-            <div class="grid-span-1">
-                <label class="resource-label">Term</label><br/>
-                <input name="system.term.number" type="number" value="{{item.system.term.number}}" placeholder="Num"/>
-            </div>
+    <img class="career" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
-            <div class="grid-span-7">
-                <label class="resource-label">Career</label><br/>
-                <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
-            </div>
+    <h1 class="career"><input name="name" type="text" value="{{item.name}}" placeholder="Career Type"/></h1>
+
+    <div class="grid grid-8col">
+        <div class="grid-span-1">
+            <label class="resource-label">Term</label><br/>
+            <input name="system.term.number" type="number" value="{{item.system.term.number}}" placeholder="Num"/>
         </div>
 
-    </section>
+        <div class="grid-span-7">
+            <label class="resource-label">Assignment</label><br/>
+            <input name="assignment" type="text" value="{{item.term.assignment}}" placeholder="Assignment"/>
+        </div>
+    </div>
 
     <section class="shadow history-description">
         {{editor enrichedDescription target="system.description" button=true editable=editable}}

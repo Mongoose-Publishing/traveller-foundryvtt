@@ -83,3 +83,45 @@ input.item-tons {
 .expand {
     width: 100%;
 }
+
+form.career {
+    _background-color: #eff0f0;
+    background-color: #a5a7a9;
+}
+
+img.career {
+    width: 128px;
+    height: 128px;
+    float: left;
+}
+
+h1.career {
+    margin-left: 128px;
+    padding-left: 8px;
+    background-color: #f1511b;
+    height: 40px;
+    border: none;
+}
+
+h1.career input {
+    height: 100%;
+    color: white;
+    border: 0px;
+    vertical-align: middle;
+}
+
+form.career div.grid {
+    margin-left: 132px;
+}
+
+form.career div.grid input {
+    background-color: #eff0f0;
+}
+
+form.career section.history-description {
+    clear: both;
+    margin-top: 8px;
+    width: 100%;
+    bottom: 0px;
+    background-color: #eff0f0;
+}

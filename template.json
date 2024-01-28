@@ -1111,7 +1111,8 @@
       },
       "term": {
           "term": {
-              "number": 0
+              "number": 0,
+              "assignment": ""
           }
       },
       "associate": {
