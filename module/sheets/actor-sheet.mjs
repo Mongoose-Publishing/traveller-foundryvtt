@@ -474,6 +474,12 @@ export class MgT2ActorSheet extends ActorSheet {
             this._calculateArmour(this.actor);
         });
 
+        html.find('.item-reload').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            this._reloadWeapon(item);
+        });
+
         html.find('.item-activate').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
@@ -613,9 +619,10 @@ export class MgT2ActorSheet extends ActorSheet {
         //actor.update({"system.status": actor.system.status });
     }
 
-    _clearStunned(actor) {
-        actor.unsetFlag("mgt2", "stunned");
-        actor.unsetFlag("mgt2", "stunnedRounds");
+    async _clearStunned(actor) {
+        // Unsetting two flags in a row seems to cause problems without an 'await'.
+        await actor.unsetFlag("mgt2", "stunned");
+        await actor.unsetFlag("mgt2", "stunnedRounds");
     }
 
     _clearStatus(actor, status) {
@@ -624,6 +631,13 @@ export class MgT2ActorSheet extends ActorSheet {
 
     _rollInit(actor) {
 
+    }
+
+    _reloadWeapon(item) {
+        if (item.system.weapon) {
+            item.system.weapon.ammo = item.system.weapon.magazine;
+            item.update({"system.weapon": item.system.weapon});
+        }
     }
 
     _onSkillDragStart(event, options) {

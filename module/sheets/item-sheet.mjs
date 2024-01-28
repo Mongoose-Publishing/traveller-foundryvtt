@@ -92,20 +92,20 @@ export class MgT2ItemSheet extends ItemSheet {
 
         // Calculate armour tonnage.
         if (item.system.hardware.system === "armour") {
-            var tons = parseFloat(item.system.hardware.tons);
-            var percent = parseFloat(item.system.hardware.tonnage.percent);
+            let tons = parseFloat(item.system.hardware.tons);
+            let percent = parseFloat(item.system.hardware.tonnage.percent);
             var multiplier = getArmourMultiplier(ship);
             var armour = parseInt(item.system.hardware.rating);
 
             item.system.hardware.tons = (armour * shipTons * percent * multiplier) / 100.0;
             item.system.cost = parseInt(item.system.hardware.tonnage.cost * item.system.hardware.tons);
-            if (tons != item.system.hardware.tons) {
+            if (tons !== item.system.hardware.tons) {
                 item.update({"system.hardware.tons": item.system.hardware.tons})
                 item.update({"system.cost": item.system.cost})
             }
         } else if (item.system.hardware.system === "fuel") {
-            var tons = parseFloat(item.system.hardware.tons);
-            var rating = parseFloat(item.system.hardware.rating);
+            let tons = parseFloat(item.system.hardware.tons);
+            let rating = parseFloat(item.system.hardware.rating);
             if (tons !== rating) {
                 item.system.hardware.tons = rating;
                 item.update({"system.hardware.tons": item.system.hardware.tons})
@@ -120,11 +120,11 @@ export class MgT2ItemSheet extends ItemSheet {
                 item.system.hardware.powerPerTon = 1
                 item.update({"system.hardware.powerPerTon": 1 });
             } else {
-                if (parseInt(rating / powerPerTon) != tons) {
+                if (parseInt(rating / powerPerTon) !== tons) {
                     tons = parseInt(rating / powerPerTon);
                     if (tons < 1) tons = 1;
                 }
-                if (tons != parseInt(item.system.hardware.tons)) {
+                if (tons !== parseInt(item.system.hardware.tons)) {
                     item.system.hardware.tons = tons;
                     item.system.cost = item.system.hardware.tonnage.cost * tons;
                     item.update({"system.hardware.tons": item.system.hardware.tons})
@@ -141,7 +141,7 @@ export class MgT2ItemSheet extends ItemSheet {
             if (parseFloat(item.system.hardware.tonnage.cost) > 0) {
                 item.system.cost = parseInt(item.system.hardware.tonnage.cost * item.system.hardware.tons);
             }
-            if (tons != item.system.hardware.tons) {
+            if (tons !== item.system.hardware.tons) {
                 item.update({"system.hardware.tons": item.system.hardware.tons})
                 item.update({"system.cost": item.system.cost})
             }

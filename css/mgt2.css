@@ -902,6 +902,56 @@ div.armour-box input {
     width: 100%;
 }
 
+li.active-weapon label.weapon-name {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+ol.items-list li.active-weapon {
+    display: block;
+    clear: both;
+    border: 1px solid #404040;
+    height: 64px;
+    margin-bottom: 8px;
+}
+
+ol.items-list li.active-weapon:last-child {
+    border: 1px solid #404040;
+}
+
+li.active-weapon img {
+    border: 1px solid #A0A0A0;
+}
+
+li.active-weapon .item-attack {
+    background: #FF4040;
+    border-shaow: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+li.active-weapon .item-reload {
+    background: #408040;
+    border-shaow: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+li.active-weapon .item-edit {
+    background: #404040;
+    border-shaow: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 span.combatButton {
     border: 2px solid black;
     border-radius: 5px;

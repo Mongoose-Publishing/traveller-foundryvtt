@@ -299,7 +299,6 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
 
             if (actor) {
                 content += `<b>Attack Roll:</b> ${dice}<br/>`
-                content += `<b>Attack Roll:</b> ${dice}<br/>`
                 content += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${attackTotal}</span> <span class="${effectClass}">${effectText}</span><br/>`;
             } else {
                 content += "<br/>";
