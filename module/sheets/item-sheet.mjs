@@ -132,18 +132,26 @@ export class MgT2ItemSheet extends ItemSheet {
                 }
             }
         } else {
-            var tons = parseFloat(item.system.hardware.tons);
-            var percent = parseFloat(item.system.hardware.tonnage.percent);
-            var rating = parseInt(item.system.hardware.rating);
-            var base = parseInt(item.system.hardware.tonnage.tons);
+            let tons = parseFloat(item.system.hardware.tons);
+            let percent = parseFloat(item.system.hardware.tonnage.percent);
+            let rating = parseInt(item.system.hardware.rating);
+            let base = parseInt(item.system.hardware.tonnage.tons);
+            let power = parseFloat(item.system.hardware.power);
 
             item.system.hardware.tons = base + (shipTons * percent * rating) / 100.0;
+
             if (parseFloat(item.system.hardware.tonnage.cost) > 0) {
                 item.system.cost = parseInt(item.system.hardware.tonnage.cost * item.system.hardware.tons);
             }
             if (tons !== item.system.hardware.tons) {
                 item.update({"system.hardware.tons": item.system.hardware.tons})
                 item.update({"system.cost": item.system.cost})
+            }
+            if (parseFloat(item.system.hardware.powerPerTon) > 0) {
+                item.system.hardware.power = parseFloat(item.system.hardware.powerPerTon) * item.system.hardware.tons;
+            }
+            if (power !== item.system.hardware.power) {
+                item.update({"system.hardware.power": item.system.hardware.power});
             }
         }
     }

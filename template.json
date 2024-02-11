@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["traveller", "npc", "creature", "spacecraft" ],
+    "types": ["traveller", "npc", "creature", "spacecraft", "package" ],
     "templates": {
       "base": {
         "speed": {
@@ -1032,6 +1032,10 @@
         "behaviour": "",
         "traits": ""
     },
+    "package": {
+        "templates": [ "base", "characteristics", "skills", "sophont" ],
+        "cash": 0
+    },
     "spacecraft": {
         "templates": [],
         "hits": {
@@ -1055,9 +1059,9 @@
                 "max": 0
             },
             "cargo": 20,
-            "mdrive": 1,
+            "mdrive": 0,
             "rdrive": 0,
-            "jdrive": 1
+            "jdrive": 0
         }
     }
   },

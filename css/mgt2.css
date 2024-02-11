@@ -1575,3 +1575,7 @@ section.id-card .showIdCard {
 .id-share {
     float: right;
 }
+
+.side-values input {
+    margin-bottom: 5px;
+}

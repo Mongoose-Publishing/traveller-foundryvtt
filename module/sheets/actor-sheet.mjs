@@ -63,9 +63,8 @@ export class MgT2ActorSheet extends ActorSheet {
         context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
         context.flags = actorData.flags;
 
-
         // Prepare character data and items.
-        if (type === 'traveller') {
+        if (type === 'traveller' || type === 'package') {
             this._prepareItems(context);
             let numTerms = context.terms.length;
             let year = parseInt(actorData.entryYear) - parseInt(actorData.termLength) * numTerms;
@@ -79,7 +78,6 @@ export class MgT2ActorSheet extends ActorSheet {
             this._prepareItems(context);
         } else if (type === 'creature') {
             this._prepareItems(context);
-
         } else if (type === 'spacecraft') {
             this._prepareSpacecraftItems(context);
         }
@@ -133,11 +131,23 @@ export class MgT2ActorSheet extends ActorSheet {
      * @private
      */
     _prepareSpacecraftItems(context) {
+        const actorData = context.actor.system;
         const cargo = [];
         const locker = [];
         const hardware = [];
         let cargoUsed = 0;
         let dtonsUsed = 0;
+        let powerTotal = 0;
+        let powerUsed = parseInt(actorData.spacecraft.dtons) * 0.2;
+
+        let hits = parseInt(actorData.spacecraft.dtons) / 2.5;
+        if (hits !== actorData.hits.max) {
+            actorData.hits.max = hits;
+        }
+
+        actorData.spacecraft.mdrive = 0;
+        actorData.spacecraft.rdrive = 0;
+        actorData.spacecraft.jdrive = 0;
 
         console.log(context);
 
@@ -154,6 +164,16 @@ export class MgT2ActorSheet extends ActorSheet {
                 let t = parseFloat(h.tons);
                 let rating = parseInt(h.rating);
                 console.log(i.name);
+
+                if (h.system === "power") {
+                    powerTotal += parseFloat(h.powerPerTon) * t;
+                } else {
+                    if (parseFloat(h.power) > 0) {
+                        powerUsed += parseFloat(h.power);
+                    } else if (parseFloat(h.powerPerTon) > 0) {
+                        powerUsed += parseFloat(h.powerPerTon) * t;
+                    }
+                }
 
                 if (h.system === "armour") {
                     t = (rating * h.tonnage.percent * parseInt(context.system.spacecraft.dtons)) / 100;
@@ -207,10 +227,14 @@ export class MgT2ActorSheet extends ActorSheet {
         context.locker = locker;
         context.hardware = hardware;
 
+        actorData.spacecraft.cargo = parseInt(actorData.spacecraft.dtons) - parseFloat(dtonsUsed);
         context.cargoUsed = cargoUsed;
-        context.cargoRemaining = parseInt(context.system.spacecraft.cargo) - cargoUsed;
+        context.cargoRemaining = parseFloat(context.system.spacecraft.cargo) - cargoUsed;
         context.dtonsUsed = dtonsUsed;
-        context.dtonsRemaining = parseInt(context.system.spacecraft.dtons) - dtonsUsed;
+        context.dtonsRemaining = parseFloat(context.system.spacecraft.dtons) - dtonsUsed;
+
+        actorData.spacecraft.power.max = powerTotal;
+        actorData.spacecraft.power.used = powerUsed;
 
         console.log(cargoUsed);
         console.log(context.cargoRemaining);
@@ -687,6 +711,75 @@ export class MgT2ActorSheet extends ActorSheet {
         return true;
     }
 
+    async _onDropActor(event, data) {
+        console.log("_onDropActor:");
+        console.log(data);
+        let actorId = data.uuid.replace(/Actor\./, "");
+        let actor = game.actors.get(actorId);
+        console.log(actor);
+        if (actor && actor.type === "package") {
+            console.log("Dropping a package " + actor.name);
+
+            for (let c in actor.system.characteristics) {
+                let bonus = parseInt(actor.system.characteristics[c].value);
+                console.log(c + ":" + bonus);
+                if (bonus !== 0) {
+                    this.actor.system.characteristics[c].value += bonus;
+                }
+            }
+            await this.actor.update({ "system.characteristics": this.actor.system.characteristics});
+
+            for (let s in actor.system.skills) {
+                let skill = actor.system.skills[s];
+                let target = this.actor.system.skills[s];
+                if (skill.trained) {
+                    target.trained = true;
+                    if (skill.value > target.value) {
+                        target.value = skill.value;
+                    }
+                    // TODO: Need to handle specialisations
+                    if (skill.specialities) {
+                        for (let sp in skill.specialities) {
+                            let spec = skill.specialities[sp];
+                            if (target.specialities[sp]) {
+                                if (spec.trained) {
+                                    target.specialities[sp].trained = true;
+                                }
+                                if (spec.value > target.specialities[sp].value) {
+                                    target.specialities[sp].value = spec.value;
+                                }
+                            } else {
+                                target.specialities[sp] = spec;
+                            }
+                        }
+                    }
+
+                }
+            }
+            await this.actor.update({ "system.skills": this.actor.system.skills});
+
+            if (actor.system.cash && parseInt(actor.system.cash) > 0) {
+                if (this.actor.system.finance) {
+                    this.actor.system.finance.cash =
+                        parseInt(this.actor.system.finance.cash) + parseInt(actor.system.cash);
+                    await this.actor.update({"system.finance": this.actor.system.finance});
+                }
+            }
+
+            // Now copy any items across
+            for (let item of actor.items) {
+                const itemData = {
+                    name: item.name,
+                    img: item.img,
+                    type: item.type,
+                    system: item.system
+                };
+                await Item.create(itemData, {parent: this.actor});
+            }
+
+        }
+    }
+
     /**
      * Override item drop. Need to remove item from source character.
      */
@@ -700,7 +793,7 @@ export class MgT2ActorSheet extends ActorSheet {
             let itemId = data.uuid.replace(/Item\./, "");
             let item = game.items.get(itemId);
 
-            if (item && item.type === "term" && this.actor.type === "traveller") {
+            if (item && item.type === "term" && (this.actor.type === "traveller" || this.actor.type === "package")) {
                 await this._onDropTerm(item);
             }
 

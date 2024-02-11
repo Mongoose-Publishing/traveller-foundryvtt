@@ -82,7 +82,7 @@
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
-                    <input class="field-value" name="data.hits.max" type="text" value="{{data.hits.max}}"/>
+                    <input class="field-value" readonly name="data.hits.max" type="text" value="{{data.hits.max}}"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.CargoHold'}}</label>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.spacecraft.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
-                    <input class="field-value" name="data.spacecraft.power.max" readonly type="text" value="{{data.spacecraft.power.max}}"/>
+                    <input class="field-value" readonly type="text" value="{{data.spacecraft.power.used}} / {{data.spacecraft.power.max}}"/>
                 </div>
             </div>
 

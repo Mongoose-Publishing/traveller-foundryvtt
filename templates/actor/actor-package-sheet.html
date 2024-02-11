@@ -1,0 +1,193 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+    <section class="npc-sheet">
+        <div class="character-left">
+            <img class="profile-img shadow" src="{{actor.img}}" data-edit="img"
+                 title="{{actor.name}}" height="100" width="100"/>
+
+            <div class="shadow side-panel side-values">
+                <div class="resource flex-group-center">
+                    <label for="data.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
+                    <input class="field-value writable" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.sophont.profession" class="field-label">
+                        {{localize 'MGT2.TravellerSheet.Profession'}}
+                    </label>
+                    <input class="field-value writable" name="data.sophont.profession" type="text" value="{{data.sophont.profession}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.cash" class="field-label">CASH</label>
+                    <input class="field-value writable" type="text" name="data.cash" value="{{data.cash}}" data-dtype="Number"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.speed.base" class="field-label">SPEED</label>
+                    <input class="field-value writable" type="text" name="data.speed.base" value="{{data.speed.base}}" data-dtype="Number"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.size" class="field-label">SIZE</label>
+                    <input class="field-value writable" type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="character-right">
+            <h1 class="charname shadow">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+            </h1>
+
+            {{!-- Biography Tab --}}
+            <div class="shadow">
+                    {{editor
+                    enrichedDescription target="system.description"
+                    button=true editable=editable}}
+            </div>
+
+            <div class="shadow grid grid-6col">
+                {{#each data.characteristics as | char key | }}
+                    {{#if char.show}}
+                    <div class="resource flex-group-center characteristic-draggable"
+                         data-rolltype="characteristic" data-cha="{{key}}">
+                        <label class="characteristic-title"
+                               title="{{char.label}}">{{key}}</label>
+                        <br/>
+                        <input class="characteristic-value writable" type="number" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                    </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+
+            <div class="shadow">
+                <div class="skill-options">
+                    <input class="trained" type="checkbox" name="data.settings.hideUntrained"
+                           {{checked data.settings.hideUntrained}} data-dtype="Boolean" />
+                    <label for="data.settings.hideUntrained">Trained only</label>
+                    <span name="addNewSkill" class="addNewSkill item">+Add New Skill</span>
+                </div>
+                <hr/>
+
+                <section class="{{skillListClasses}}">
+                    {{#each data.skills as |skill key|}}
+                    {{{skillBlock ../data key skill}}}
+                    {{/each}}
+                </section>
+            </div>
+
+            <div class="shadow">
+                <ol class="items-list actor-items grid grid-3col">
+                    {{#each items as |item id|}}
+                    {{#if (isItemOwned item)}}
+                    <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
+                        <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                        <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+                        {{#if item.system.armour}}
+                        <label>Prot:</label> <span>{{formula ../actor item.system.armour.protection}}</span><br/>
+                        {{/if}}
+                        {{#if item.system.weapon}}
+                        <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span><br/>
+                        {{/if}}
+                        {{#if item.system.weight  includeZero=false}}
+                        <span>{{item.system.weight}}kg</span>
+                        {{/if}}
+                        {{#if (isOwner ..)}}
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                        {{/if}}
+                    </li>
+                    {{/if}}
+                    {{/each}}
+                    <li></li>
+                </ol>
+            </div>
+
+
+            <div class="shadow">
+                <nav class="sheet-tabs tabs" data-group="primary">
+                    <a class="item" data-tab="history">History</a>
+                </nav>
+
+                <div class="sheet-body">
+
+                    <div class="tab history" data-group="primary" data-tab="history">
+                        <section>
+                            <ol class="history-list">
+                                <li class="item flexrow history-header">
+                                    <div class="history-name">Career</div>
+                                    <div class="history-notes">Notes</div>
+                                    <div class="item-controls">
+                                        <a class="item-control item-create" title="Create term" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add</a>
+                                    </div>
+                                </li>
+                            {{#each terms as |item id|}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <div class="history-name">
+                                    <label class="resource-label">{{item.name}}</label>
+                                </div>
+
+                                <div class="history-notes">
+                                    {{toPlainText item.system.description}}
+                                </div>
+
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                            </ol>
+
+                            <p>
+                                <label class="item-create add-associate" data-type="associate" data-relation="contact"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.contact'}}</label>
+                                <label class="item-create add-associate" data-type="associate" data-relation="ally"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.ally'}}</label>
+                                <label class="item-create add-associate" data-type="associate" data-relation="rival"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.rival'}}</label>
+                                <label class="item-create add-associate" data-type="associate" data-relation="enemy"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.enemy'}}</label>
+                            </p>
+
+                            <ol class="history-list">
+                                <li class="item flexrow history-header">
+                                    <div class="history-relation">Relation</div>
+                                    <div class="history-name">Name</div>
+                                    <div class="history-notes">Notes</div>
+                                    <div class="item-controls">
+
+                                    </div>
+                                </li>
+                                {{#each associates as |item id|}}
+                                <li class="item flexrow" data-item-id="{{item._id}}">
+                                    <div class="history-relation">
+                                        <label class="resource-label">{{localize (concat 'MGT2.History.Relation.' item.system.associate.relationship)}}</label>
+                                    </div>
+
+                                    <div class="history-name">
+                                        <label class="resource-label">{{item.name}}</label>
+                                    </div>
+
+                                    <div class="history-notes">
+                                        {{toPlainText item.system.description}}
+                                    </div>
+
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                                {{/each}}
+                            </ol>
+
+                        </section>
+                    </div>
+
+                    {{!-- Settings Tab --}}
+                    {{#if (isOwner .)}}
+                        <section class="tab settings flexcol" data-group="primary" data-tab="settings">
+                            {{> "systems/mgt2/templates/actor/parts/actor-settings.html"}}
+                        </section>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
