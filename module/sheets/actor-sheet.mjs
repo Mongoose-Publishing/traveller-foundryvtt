@@ -713,10 +713,9 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _onDropActor(event, data) {
         console.log("_onDropActor:");
-        console.log(data);
         let actorId = data.uuid.replace(/Actor\./, "");
         let actor = game.actors.get(actorId);
-        console.log(actor);
+
         if (actor && actor.type === "package") {
             console.log("Dropping a package " + actor.name);
 
@@ -725,6 +724,9 @@ export class MgT2ActorSheet extends ActorSheet {
                 console.log(c + ":" + bonus);
                 if (bonus !== 0) {
                     this.actor.system.characteristics[c].value += bonus;
+                    if (this.actor.system.characteristics[c].value < 1) {
+                        this.actor.system.characteristics[c].value = 1;
+                    }
                 }
             }
             await this.actor.update({ "system.characteristics": this.actor.system.characteristics});
@@ -737,7 +739,6 @@ export class MgT2ActorSheet extends ActorSheet {
                     if (skill.value > target.value) {
                         target.value = skill.value;
                     }
-                    // TODO: Need to handle specialisations
                     if (skill.specialities) {
                         for (let sp in skill.specialities) {
                             let spec = skill.specialities[sp];
@@ -747,6 +748,9 @@ export class MgT2ActorSheet extends ActorSheet {
                                 }
                                 if (spec.value > target.specialities[sp].value) {
                                     target.specialities[sp].value = spec.value;
+                                }
+                                if (spec.boon) {
+                                    target.specialities[sp].boon = spec.boon;
                                 }
                             } else {
                                 target.specialities[sp] = spec;
@@ -760,6 +764,9 @@ export class MgT2ActorSheet extends ActorSheet {
                 if (skill.notes && skill.notes !== "") {
                     target.notes = skill.notes;
                 }
+                if (skill.boon) {
+                    target.boon = skill.boon;
+                }
             }
             await this.actor.update({ "system.skills": this.actor.system.skills});
 
@@ -769,6 +776,15 @@ export class MgT2ActorSheet extends ActorSheet {
                         parseInt(this.actor.system.finance.cash) + parseInt(actor.system.cash);
                     await this.actor.update({"system.finance": this.actor.system.finance});
                 }
+            }
+            if (actor.system.sophont.species && this.actor.system.sophont) {
+                this.actor.system.sophont.species = actor.system.sophont.species;
+            }
+            if (actor.system.sophont.profession && this.actor.system.sophont) {
+                this.actor.system.sophont.profession = actor.system.sophont.profession;
+            }
+            if (this.actor.system.sophont) {
+                await this.actor.update({"system.sophont": this.actor.system.sophont});
             }
 
             // Now copy any items across
@@ -781,7 +797,6 @@ export class MgT2ActorSheet extends ActorSheet {
                 };
                 await Item.create(itemData, {parent: this.actor});
             }
-
         }
     }
 

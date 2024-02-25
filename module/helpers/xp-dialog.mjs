@@ -44,6 +44,7 @@ export class MgT2XPDialog extends Application {
             this.xp = parseInt(this.skill.xp?this.skill.xp:0);
             this.bonus = parseInt(this.skill.bonus?this.skill.bonus:0);
             this.notes = this.skill.notes?this.skill.notes:"";
+            this.boon = this.skill.boon;
             if (this.skill.trained) {
                 this.value = this.skill.value;
                 this.trained = true;
@@ -55,6 +56,7 @@ export class MgT2XPDialog extends Application {
                     this.xp = parseInt(this.spec.xp?this.spec.xp:0);
                     this.bonus = parseInt(this.spec.bonus?this.spec.bonus:0);
                     this.notes = this.spec.notes?this.spec.notes:"";
+                    this.boon = this.spec.boon;
                 }
             }
             this.options.title = this.skill.label;
@@ -84,7 +86,8 @@ export class MgT2XPDialog extends Application {
             "cost": this.cost,
             "xp": this.xp,
             "bonus": this.bonus,
-            "notes": this.notes
+            "notes": this.notes,
+            "boon": this.boon
         }
     }
 
@@ -92,6 +95,19 @@ export class MgT2XPDialog extends Application {
         super.activateListeners(html);
         const save = html.find("button[class='save']");
         save.on("click", event => this.onSaveClick(event, html));
+
+        html.find(".clearEffects").click(ev => {
+           if (this.spec) {
+               this.spec.augdm = 0;
+               this.spec.augment = 0;
+               this.spec.expert = 0;
+           } else {
+               this.skill.augdm = 0;
+               this.skill.augment = 0;
+               this.skill.expert = 0;
+           }
+           // TODO: Need to update the dialog.
+        });
     }
 
     getIntValue(html, fieldName) {
@@ -112,6 +128,10 @@ export class MgT2XPDialog extends Application {
         let xp = this.getIntValue(html, "skillXPxp");
         let bonus = this.getIntValue(html, "skillXPbonus");
         let notes = html.find("input.skillXPnotes")[0].value;
+        let boon = html.find("select.skillXPboon")[0].value;
+        if (boon) {
+            console.log("Boon is set to " + boon);
+        }
 
         // The required cost to go up a level.
         let cost = 1;
@@ -134,6 +154,11 @@ export class MgT2XPDialog extends Application {
             this.spec.xp = xp;
             this.spec.bonus = bonus;
             this.spec.notes = notes;
+            if (boon) {
+                this.spec.boon = boon;
+            } else {
+                this.spec.boon = null;
+            }
 
             //this.spec.augdm = parseInt(html.find("input[class='augdm']")[0].value);
             //this.spec.augment = parseInt(html.find("input[class='augment']")[0].value);
@@ -142,6 +167,11 @@ export class MgT2XPDialog extends Application {
             this.skill.xp = xp;
             this.skill.bonus = bonus;
             this.skill.notes = notes;
+            if (boon) {
+                this.actor.system.skills[this.skillId].boon = boon;
+            } else {
+                this.actor.system.skills[this.skillId].boon = null;
+            }
 
             // this.skill.augdm = parseInt(html.find("input[class='augdm']")[0].value);
             // this.skill.augment = parseInt(html.find("input[class='augment']")[0].value);

@@ -1442,6 +1442,10 @@ span.edit-skill {
     margin-bottom: 5px;
 }
 
+.xpdialog {
+    width: 25em;
+}
+
 .xpgrid {
     width: 5em;
 }

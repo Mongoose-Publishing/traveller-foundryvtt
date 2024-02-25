@@ -437,19 +437,19 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
     let skillNotes = "";
     let specNotes = "";
 
-    // Normal, Boon or Bane dice roll.
-    let dice = "2D6";
-    if (rollType === "boon") {
-        dice = "3D6k2";
-    } else if (rollType === "bane") {
-        dice = "3D6kl2";
-    }
-
     if (actor.type === "traveller" || actor.type === "npc") {
         isPerson = true;
     }
     if (skill && (typeof skill === 'string' || skill instanceof String)) {
         skill = data.skills[skill];
+    }
+
+    // Normal, Boon or Bane dice roll.
+    let dice = "2D6";
+    if (rollType === "boon" || (skill && skill.boon === "boon") || (speciality && speciality.boon === "boon")) {
+        dice = "3D6k2";
+    } else if (rollType === "bane" || (skill && skill.boon === "bane") || (speciality && speciality.boon === "bane")) {
+        dice = "3D6kl2";
     }
 
     if (isPerson) {
@@ -522,7 +522,6 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             specDM += parseInt(speciality.augdm);
             specNotes += `DM&nbsp;(${parseInt(speciality.augdm)}) `;
         }
-
         // The bonus is set manually, and always applied to the roll.
         if (skill.bonus && parseInt(skill.bonus) !== 0) {
             skillDM += parseInt(skill.bonus);
