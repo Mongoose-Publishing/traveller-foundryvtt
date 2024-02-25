@@ -753,7 +753,12 @@ export class MgT2ActorSheet extends ActorSheet {
                             }
                         }
                     }
-
+                }
+                if (skill.bonus !== 0) {
+                    target.bonus = skill.bonus;
+                }
+                if (skill.notes && skill.notes !== "") {
+                    target.notes = skill.notes;
                 }
             }
             await this.actor.update({ "system.skills": this.actor.system.skills});

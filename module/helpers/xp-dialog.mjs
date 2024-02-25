@@ -94,12 +94,24 @@ export class MgT2XPDialog extends Application {
         save.on("click", event => this.onSaveClick(event, html));
     }
 
+    getIntValue(html, fieldName) {
+        let field = html.find(`input.${fieldName}`);
+        let value = 0;
+        if (field) {
+            field = field[0];
+            if (field) {
+                value = parseInt(field.value);
+            }
+        }
+        return value;
+    }
+
     async onSaveClick(event, html) {
         event.preventDefault();
 
-        let xp = parseInt(html.find("input[class='skillXPxp']")[0].value);
-        let bonus = parseInt(html.find("input[class='skillXPbonus']")[0].value);
-        let notes = html.find("input[class='skillXPnotes']")[0].value;
+        let xp = this.getIntValue(html, "skillXPxp");
+        let bonus = this.getIntValue(html, "skillXPbonus");
+        let notes = html.find("input.skillXPnotes")[0].value;
 
         // The required cost to go up a level.
         let cost = 1;

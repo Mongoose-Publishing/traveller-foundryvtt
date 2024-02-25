@@ -289,6 +289,11 @@ Hooks.on("createActor", (actor) => {
             actor.img = "systems/mgt2/icons/actors/creature.svg";
         } else if (actor.type === "traveller") {
             actor.img = "systems/mgt2/icons/actors/traveller-white.svg";
+        } else if (actor.type === "package") {
+            for (let c in actor.system.characteristics) {
+                actor.system.characteristics[c].value = 0;
+                actor.system.characteristics[c].current = 0;
+            }
         } else {
             actor.img = "systems/mgt2/icons/actors/traveller-red.svg";
         }
