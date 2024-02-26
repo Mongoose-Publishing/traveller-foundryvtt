@@ -180,6 +180,8 @@ export class MgT2ItemSheet extends ItemSheet {
         html.find(".quantity-inc").click(ev => this._incrementQuantity(this.item));
         html.find(".quantity-dec").click(ev => this._decrementQuantity(this.item));
         html.find(".quantity-roll").click(ev => this._rollQuantity(this.item));
+
+        html.find(".randomiseRelationship").click(ev => this._randomiseRelationship(this.item));
     }
 
     _rollDamage(item) {
@@ -209,6 +211,74 @@ export class MgT2ItemSheet extends ItemSheet {
             let quantity = parseInt(roll.total);
             item.system.quantity = quantity;
             item.update({"system.quantity": item.system.quantity });
+        }
+    }
+
+    _randomiseRelationship(item) {
+        let affinity = "", enmity = "";
+
+        let associate = item.system.associate;
+        if (associate.relationship === "contact") {
+            affinity = "1d6+1";
+            enmity = "1d6-1";
+        } else if (associate.relationship === "ally") {
+            affinity = "2d6";
+            enmity = "0";
+        } else if (associate.relationship === "rival") {
+            affinity = "1d6-1";
+            enmity = "1d6+1";
+        } else if (associate.relationship === "enemy") {
+            affinity = "0";
+            enmity = "2d6";
+        } else {
+            return "";
+        }
+        let roll = new Roll(affinity, null).evaluate({async: false});
+        associate.affinity = this._getAffinity(roll.total);
+        roll = new Roll(enmity, null).evaluate({async: false});
+        associate.enmity = 0 - this._getAffinity(roll.total);
+        associate.power = this._getPowerOrInfluence();
+        associate.influence = this._getPowerOrInfluence();
+
+        item.update({"system.associate": associate});
+    }
+
+    _getPowerOrInfluence() {
+        const roll = new Roll("2D6", null).evaluate({async: false});
+        switch (roll.total) {
+            case 2: case 3: case 4: case 5:
+                return 0;
+            case 6: case 7:
+                return 1;
+            case 8:
+                return 2;
+            case 9:
+                return 3;
+            case 10:
+                return 4;
+            case 11:
+                return 5;
+            case 12:
+                return 6;
+        }
+        return 0;
+    }
+
+    _getAffinity(affinity) {
+        if (affinity <= 2) {
+            return 0;
+        } else if (affinity <= 4) {
+            return 1;
+        } else if (affinity <= 6) {
+            return 2;
+        } else if (affinity <= 8) {
+            return 3;
+        } else if (affinity <= 10) {
+            return 4;
+        } else if (affinity === 11) {
+            return 5;
+        } else {
+            return 6;
         }
     }
 }

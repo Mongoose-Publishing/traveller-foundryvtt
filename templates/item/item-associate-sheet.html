@@ -9,19 +9,20 @@
     </section>
 
     <section class="shadow">
-        <div class="resources grid grid-3col flex-group-left">
-            <div class="resource">
-                <label for="system.associate.relationship" class="resource-label">{{localize 'MGT2.History.Relationship'}}</label>
-                <br/>
-                <select name="system.associate.relationship">
-                    {{#select system.associate.relationship}}
-                        <option value="contact">{{localize 'MGT2.History.Relation.contact'}}</option>
-                        <option value="ally">{{localize 'MGT2.History.Relation.ally'}}</option>
-                        <option value="rival">{{localize 'MGT2.History.Relation.rival'}}</option>
-                        <option value="enemy">{{localize 'MGT2.History.Relation.enemy'}}</option>
-                    {{/select}}
-                </select>
-            </div>
+        <div class="resource">
+            <label for="system.associate.relationship" class="resource-label">{{localize 'MGT2.History.Relationship'}}</label>
+            <br/>
+            <select name="system.associate.relationship">
+                {{#select system.associate.relationship}}
+                <option value="contact">{{localize 'MGT2.History.Relation.contact'}}</option>
+                <option value="ally">{{localize 'MGT2.History.Relation.ally'}}</option>
+                <option value="rival">{{localize 'MGT2.History.Relation.rival'}}</option>
+                <option value="enemy">{{localize 'MGT2.History.Relation.enemy'}}</option>
+                {{/select}}
+            </select>
+            <span class="rollable fa-regular randomiseRelationship" title="Randomise relationship"><i class="fa fa-dice"> </i></span>
+        </div>
+        <div class="resources grid grid-2col flex-group-left">
             <div class="resource">
                 <label for="system.associate.affinity" class="resource-label">{{localize 'MGT2.History.Relation.Affinity'}}</label>
                 <select name="system.associate.affinity">
