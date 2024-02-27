@@ -1234,6 +1234,20 @@ Handlebars.registerHelper('showSimpleSkills', function(actor) {
 
 });
 
+Handlebars.registerHelper('chaStatus', function(cha) {
+    if (cha) {
+        if (cha.current > cha.value) {
+            return "dmHigh";
+        } else if (cha.current < cha.value) {
+            return "dmLow";
+        } else {
+            return "dm";
+        }
+    } else {
+        return "";
+    }
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

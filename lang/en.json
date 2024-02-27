@@ -229,6 +229,13 @@
   "MGT2.Finance.Mortgage": "Mortgage (Cr/Month)",
   "MGT2.Finance.LivingCosts": "Living Costs (Cr/Month)",
 
+  "MGT2.EditSkill.Edit": "Edit skill",
+  "MGT2.EditSkill.Add": "Add new skill",
+  "MGT2.EditSkill.SkillName": "Skill Label",
+  "MGT2.EditSkill.SkillNameDesc": "The label shown for the skill on the character sheet",
+  "MGT2.EditSkill.ShortName": "Short Name",
+  "MGT2.EditSkill.ShortNameDesc": "The internal name used to identify the skill",
+
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",
   "TYPES.Actor.creature": "Creature",

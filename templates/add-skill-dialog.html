@@ -1,37 +1,42 @@
 <form class="flexcol add-skill-dialog">
 
-    <p>
-        Add a new skill to the character.
-    </p>
+    <div class="grid grid-2col">
+        <div class="resource grid-span-2">
+            <label for="label" class="resource-label">{{localize 'MGT2.EditSkill.SkillName'}}</label>
+            <input class="skillLabelField writable" name="label" type="text"
+                   data-dtype="String" value="{{label}}" title="{{localize 'MGT2.EditSkill.SkillNameDesc'}}"/>
+        </div>
 
-    <label for="label" class="resource-label">Skill Name</label>
-    <input class="skillLabelField" name="label" type="text" data-dtype="String" value="{{label}}"/>
+        <div class="resource">
+            <label for="shortname" class="resource-label">{{localize 'MGT2.EditSkill.ShortName'}}</label>
+            <input class="skillShortNameField" name="shortname" type="text"
+                   data-dtype="String" value="{{shortName}}"
+                   title="{{localize 'MGT2.EditSkill.ShortNameDesc'}}"
+                   {{#if isEdit}}readonly{{/if}}
+            />
+        </div>
 
-    <label for="shortname" class="resource-label">Short name</label>
-    <input class="skillShortNameField" name="shortname" type="text"
-           data-dtype="String" value="{{shortName}}"
-           {{#if isEdit}}readonly{{/if}}
-    />
-
-    <div class="parent-skill">
-        <label for="parentSkill" class="resource-label">Specialisation of</label>
-        {{#if isEdit}}
-            <input class="skillParentSelect" name="parentSkill" type="text"
-                   data-dtype="String" value="{{parentLabel}}" readonly />
-        {{else}}
-            <select class="skillParentSelect" name="parentSkill">
-                {{log parent}}
-                {{#select parent}}
+        <div class="resource">
+            <div class="parent-skill">
+                <label for="parentSkill" class="resource-label">Specialisation of</label><br/>
+                {{#if isEdit}}
+                <input class="skillParentSelect" name="parentSkill" type="text"
+                       data-dtype="String" value="{{parentLabel}}" readonly />
+                {{else}}
+                <select class="skillParentSelect" name="parentSkill">
+                    {{log parent}}
+                    {{#select parent}}
                     <option value="">None</option>
                     {{#each data.skills as |skill id|}}
-                        {{log id}}
-                        <option value="{{id}}">{{skill.label}}</option>
+                    {{log id}}
+                    <option value="{{id}}">{{skill.label}}</option>
                     {{/each}}
-                {{/select}}
-            </select>
-        {{/if}}
+                    {{/select}}
+                </select>
+                {{/if}}
+            </div>
+        </div>
     </div>
-
 
     <div class="characteristic-selection">
         <label for="default" class="resource-label">Default Characteristic</label>

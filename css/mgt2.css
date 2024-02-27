@@ -541,7 +541,6 @@ h1.charname input {
 .actor .characteristic-dm {
     font-weight: bold;
     font-size: 10pt;
-    background-color: #F79080;
     border: 1pt solid black;
     text-align: center;
     border-radius: 25%;
@@ -550,6 +549,21 @@ h1.charname input {
     width: 2em;
     display: inline-block;
     margin-bottom: 1px;
+}
+
+.actor .dm {
+    background-color: #A0A0A0;
+    color: #000000;
+}
+
+.actor .dmHigh {
+    background-color: #80F080;
+    color: #000000;
+}
+
+.actor .dmLow {
+    background-color: #F08080;
+    color: #000000;
 }
 
 .actor .input-value {

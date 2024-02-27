@@ -57,7 +57,7 @@
                                data-roll="2d6+@{{key}}" data-label="{{key}}"
                                data-cha="{{key}}"
                                title="{{char.label}}">{{key}}</label>
-                        <span class="characteristic-dm">{{numberFormat char.dm sign=true}}</span>
+                        <span class="characteristic-dm {{chaStatus char}}">{{numberFormat char.dm sign=true}}</span>
                         <br/>
                         <input class="characteristic-value writable" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
                     </div>

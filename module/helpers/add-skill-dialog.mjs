@@ -31,9 +31,13 @@ export class MgT2AddSkillDialog extends Application {
         }
 
         if (this.isEdit) {
-            this.options.title = "Edit skill";
+            this.options.title = game.i18n.localize("MGT2.EditSkill.Edit");
+            this.options.title += " - " + skillId;
+            if (spec) {
+                this.options.title += " (" + specId + ")";
+            }
         } else {
-            this.options.title = "Add a new skill";
+            this.options.title = game.i18n.localize("MGT2.EditSkill.Add");
         }
         this.label = "New Skill"
         this.shortName = "newskill";

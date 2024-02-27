@@ -58,7 +58,9 @@
                            data-label="{{key}}"
                            data-cha="{{key}}"
                            title="{{char.label}}">{{key}}</label>
-                    <span class="characteristic-dm">{{numberFormat char.dm sign=true}}</span>
+                    <span class="characteristic-dm {{chaStatus char}}">
+                        {{numberFormat char.dm sign=true}}
+                    </span>
                     <br/>
                     <input class="characteristic-readonly"
                            type="number" min="0" max="20" step="1"
