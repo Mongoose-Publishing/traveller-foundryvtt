@@ -777,13 +777,47 @@ export class MgT2ActorSheet extends ActorSheet {
                     await this.actor.update({"system.finance": this.actor.system.finance});
                 }
             }
-            if (actor.system.sophont.species && this.actor.system.sophont) {
-                this.actor.system.sophont.species = actor.system.sophont.species;
-            }
-            if (actor.system.sophont.profession && this.actor.system.sophont) {
-                this.actor.system.sophont.profession = actor.system.sophont.profession;
-            }
             if (this.actor.system.sophont) {
+                let isMale = false, isFemale = false;
+
+                if (this.actor.system.sophont.gender) {
+                    let gender = this.actor.system.sophont.gender.toLowerCase();
+                    if (gender.startsWith("m")) {
+                        isMale = true;
+                    } else if (gender.startsWith("f")) {
+                        isFemale = true;
+                    }
+                }
+                let str = parseInt(this.actor.system.characteristics["STR"].value) - 7;
+                let dex = parseInt(this.actor.system.characteristics["DEX"].value) - 7;
+                let end = parseInt(this.actor.system.characteristics["END"].value) - 7;
+
+                if (actor.system.sophont.species) {
+                    this.actor.system.sophont.species = actor.system.sophont.species;
+                }
+                if (actor.system.sophont.profession) {
+                    this.actor.system.sophont.profession = actor.system.sophont.profession;
+                }
+                if (actor.system.sophont.weight) {
+                    let weight = parseInt(actor.system.sophont.weight);
+                    if (weight > 0) {
+                        weight += isMale?7:0;
+                        weight -= isFemale?7:0;
+                        weight += str + parseInt(end/2) - parseInt(dex / 2);
+                        this.actor.system.sophont.weight = weight +
+                            Math.floor(Math.random() * 6) - Math.floor(Math.random() * 6);
+                    }
+                }
+                if (actor.system.sophont.height) {
+                    let height = parseInt(actor.system.sophont.height);
+                    if (height > 0) {
+                        height += isMale?7:0;
+                        height -= isFemale?7:0;
+                        height += parseInt(str/2);
+                        this.actor.system.sophont.height = height +
+                            Math.floor(Math.random()*6) - Math.floor(Math.random()*6);
+                    }
+                }
                 await this.actor.update({"system.sophont": this.actor.system.sophont});
             }
 
