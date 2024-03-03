@@ -74,6 +74,7 @@ export class MgT2ActorSheet extends ActorSheet {
             }
             actorData.entryAge = parseInt(actorData.startAge) + parseInt(actorData.termLength) * numTerms;
             actorData.birthYear = parseInt(actorData.entryYear) - parseInt(actorData.entryAge);
+            actorData.sophont.age = parseInt(game.settings.get("mgt2", "currentYear")) - actorData.birthYear;
         } else if (type === 'npc') {
             this._prepareItems(context);
         } else if (type === 'creature') {
@@ -880,7 +881,7 @@ export class MgT2ActorSheet extends ActorSheet {
         return true;
     }
 
-    // Drop a Term onto an Actor. Only applies to Travellers.
+    // Drop a Term onto an Actor. Only applies to Travellers or Packages.
     async _onDropTerm(item) {
         let actor = this.actor;
 
@@ -901,17 +902,18 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
         }
+        /*
         let update = duplicate(item);
         update.system.term.number = countTerms +1;
         update.sort = lastSort + 100;
         update.name = update.name + " " + update.system.term.number;
         console.log(`Dragged in a term item ${update.name} at term ${update.system.term.number} / ${countTerms}`);
         console.log(update);
-        updates.push(update);
-        actor.updateEmbeddedDocuments("Item", updates);
-//        item.update({ "system.term": item.system.term });
+        await item.update({ "system.term": item.system.term });
+//        updates.push(update);
+//        actor.updateEmbeddedDocuments("Item", updates);
   //      item.update({ "sort": item.sort, "name": item.name });
-
+*/
     }
 
     async _onDropUPP(event, data) {
