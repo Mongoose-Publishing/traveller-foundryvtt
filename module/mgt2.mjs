@@ -1011,10 +1011,11 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
             augmented = true;
             title += " + " + skill.dm;
         }
+        let hasXp = (skill.xp && skill.xp > 0);
         html += `<label for="data.skills.${skillId}.value" `;
         html += `class="rollable ${skill.trained?"":"untrained"} ${augmented?"augmented":""}" `;
         html += `${dataRoll} ${dataSkill} data-label="${title}" title="${title}"`;
-        html += `>${skill.label}</label>`;
+        html += `>${skill.label}${hasXp?"<sup>+</sup>":""}</label>`;
 
         // Specialities?
         if (!backgroundOnly && skill.specialities && showSpecs) {
@@ -1057,8 +1058,9 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                         html += `name="${nameSkill}.specialities.${sid}.trained" ${spec.trained?"checked":""} `;
                         html += `data-dtype="Boolean" />`;
                     }
+                    let hasXp = (spec.xp && spec.xp > 0);
                     html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
-                    html += `data-spec="${sid}" title="${title}">${spec.label}</label>`;
+                    html += `data-spec="${sid}" title="${title}">${spec.label}${hasXp?"<sup>+</sup>":""}</label>`;
                     if (skill.trained && (!skill.individual || spec.trained)) {
                         html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
                     } else {

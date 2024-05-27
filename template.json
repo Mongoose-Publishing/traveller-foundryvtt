@@ -68,7 +68,8 @@
             "resetOnRoll": false,
             "columns": 3,
             "lockCharacteristics": false,
-            "lockSkills": false
+            "lockSkills": false,
+            "autoAge":  false
         }
       },
       "sophont": {

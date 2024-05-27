@@ -19,7 +19,10 @@
                 <option value="6">6 columns</option>
                 {{/select}}
             </select>
-
+        </div>
+        <div class="resource flex-group-left">
+            <input type="checkbox" name="data.settings.autoAge" {{checked data.settings.autoAge}} data-dtype="Boolean" />
+            <label for="data.settings.autoAge" class="resource-label">Calculate age from date</label>
         </div>
         <div class="resource flex-group-center">
             <br/>

@@ -74,7 +74,9 @@ export class MgT2ActorSheet extends ActorSheet {
             }
             actorData.entryAge = parseInt(actorData.startAge) + parseInt(actorData.termLength) * numTerms;
             actorData.birthYear = parseInt(actorData.entryYear) - parseInt(actorData.entryAge);
-            actorData.sophont.age = parseInt(game.settings.get("mgt2", "currentYear")) - actorData.birthYear;
+            if (actorData.settings.autoAge) {
+                actorData.sophont.age = parseInt(game.settings.get("mgt2", "currentYear")) - actorData.birthYear;
+            }
         } else if (type === 'npc') {
             this._prepareItems(context);
         } else if (type === 'creature') {
