@@ -1,76 +1,45 @@
+# Icon Licenses
 
-Skill icons from https://game-icons.net/
-CC BY 
+## Skills Icons
 
-
-## Cargo
-
-Most icons taken from svgrepo.com, licensed as CC0 or PD.
-
-Coloured (mostly) by Availability
+Source: https://game-icons.net/
+License: CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
 
 
-### High Tech
+## Cargo Icons
 
-Advanced Electronics
-Advanced Machine Parts
-Advanced Manufactured Goods
-Advanced Vehicles
-Advanced Weapons
-Cybernetics
-Medical Supplies
-Vehicles
+Source: https://svgrepo.com/
+Licenses: CC0 or PD
 
-### Agricultural
+## Items Icons
 
-Biochemicals
-Live Animals
-Spices
-Textiles
-Wood
-
-### Common
-
-Common Consumables
-Common Electronics
-Common Industrial Goods
-Common Manufactured Goods
-Common Ore
-Common Ore
-Common Raw Materials
+Author: Samuel Penn
+License: CC0
 
 
-### Illegal
+## Hardware Icons
 
-Exotics
-Illegal Biochemicals
-Illegal Cybernetics
-Illegal Drugs
-Illegal Luxuries
-Illegal Weapons
+Author: Samuel Penn
+Source: https://gitlab.com/samuelpenn/traveller-dungeondraft
+License: CC0
 
-### Industrial
+## Actor Icons
 
-Robots
-Crystals & Gems
-Precious Metals
-Radioactives
-Uncommon Ore
-Uncommon Raw Materials
-Polymers
-Petrochemicals
-Pharmaceuticals
+Author: Samuel Penn
+License: CC0
 
-### Luxuries
+### Exceptions
 
-Luxury Consumables
-Luxury Goods
+Source: https://game-icons.net/
+License: CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
 
+creature.svg: https://game-icons.net/1x1/lorc/dinosaur-rex.html
+creature-green.svg: https://game-icons.net/1x1/lorc/gecko.html
+creature-red.svg: https://game-icons.net/1x1/delapouite/gorilla.html
+creature-blue.svg: https://game-icons.net/1x1/lorc/parrot-head.html
+creature-gold.svg: https://game-icons.net/1x1/lorc/octopus.html
 
-### Special
+## Effects Icons
 
-Freight Incidental
-Freight Major
-Freight Minor
-Mail
-
+Source: https://game-icons.net/
+License: CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
