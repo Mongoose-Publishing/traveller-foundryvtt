@@ -1,4 +1,9 @@
 
+
+section.item-sheet .shadow {
+    border: 2px solid #202040;
+}
+
 .actor-items {
     padding-bottom: 12px;
 }
@@ -93,6 +98,10 @@ img.career {
     width: 128px;
     height: 128px;
     float: left;
+}
+
+.item-sheet h1.charname {
+    background-color: #72bce8;
 }
 
 h1.career {

@@ -8,7 +8,7 @@
                     <label for="data.quantity" class="resource-label">Quantity</label>
                     <div class="incdec">
                         <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
-                        <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
                         <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
                     </div>
                 </div>
@@ -17,15 +17,15 @@
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
                     <label for="data.weapon.magazine" class="resource-label">Magazine Size</label>
-                    <input type="text" name="data.weapon.magazine" value="{{data.weapon.magazine}}" data-dtype="Number"/>
+                    <input class="writable" type="text" name="data.weapon.magazine" value="{{data.weapon.magazine}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.weapon.magazineCost" class="resource-label">Magazine Cost</label>
-                    <input type="text" name="data.weapon.magazineCost" value="{{data.weapon.magazineCost}}" data-dtype="Number"/>
+                    <input class="writable" type="text" name="data.weapon.magazineCost" value="{{data.weapon.magazineCost}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.weapon.ammo" class="resource-label">Ammo</label>
-                    <input type="text" name="data.weapon.ammo" value="{{data.weapon.ammo}}" data-dtype="Number"/>
+                    <input class="writable" type="text" name="data.weapon.ammo" value="{{data.weapon.ammo}}" data-dtype="Number"/>
                 </div>
             </div>
 
@@ -35,32 +35,35 @@
         </div>
 
         <div class="flex-group-left">
+            <h1 class="charname shadow">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+            </h1>
             <div class="shadow">
-                <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-                <div class="resources grid grid-4col flex-group-center">
+                <div class="resources grid grid-3col flex-group-center">
                     <div class="resource">
-                        <label for="data.weapon.damage" class="resource-label">Damage</label>
-                        <input type="text" name="data.weapon.damage" value="{{data.weapon.damage}}" data-dtype="String"/>
-                    </div>
-                    <div class="resource">
-                        <label for="data.weapon.range" class="resource-label">Range (m)</label>
-                        <input type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
+                        {{> "systems/mgt2/templates/item/parts/item-techLevel.html"}}
                     </div>
                     <div class="resource">
                         <label for="data.weight" class="resource-label">KG</label>
-                        <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
                         <label for="data.cost" class="resource-label">Cost</label>
-                        <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+                    </div>
+
+                    <div class="resource">
+                        <label for="data.weapon.damage" class="resource-label">Damage</label>
+                        <input class="writable" type="text" name="data.weapon.damage" value="{{data.weapon.damage}}" data-dtype="String"/>
                     </div>
                     <div class="resource">
-                        <label for="data.tl" class="resource-label">TL</label>
-                        <input type="text" name="data.tl" value="{{data.tl}}" data-dtype="Number"/>
+                        <label for="data.weapon.range" class="resource-label">Range (m)</label>
+                        <input class="writable" type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
                     </div>
                     <div class="resource grid-span-3 flex-group-left">
                         <label for="data.weapon.traits" class="resource-label">Traits</label>
-                        <input type="text" name="data.weapon.traits" value="{{data.weapon.traits}}" data-dtype="String"/>
+                        <input class="writable" type="text" name="data.weapon.traits" placeholder="List of weapon traits"
+                               value="{{data.weapon.traits}}" data-dtype="String"/>
                     </div>
                 </div>
             </div>
@@ -69,7 +72,7 @@
                 <div class="resources grid grid-3col flex-group-left">
                     <div class="resource">
                         <label for="data.weapon.characteristic" class="resource-label">Characteristic</label><br/>
-                        <select name="data.weapon.characteristic">
+                        <select class="writable" name="data.weapon.characteristic">
                             {{#select data.weapon.characteristic}}
                             <option value="STR">STR</option>
                             <option value="DEX">DEX</option>
@@ -79,7 +82,7 @@
                     </div>
                     <div class="resource grid-span-2">
                         <label for="data.weapon.skill" class="resource-label">Skill</label><br/>
-                        <select name="data.weapon.skill">
+                        <select class="writable" name="data.weapon.skill">
                             {{#select data.weapon.skill}}
                             <option value="-">None</option>
                             {{#each skills as |skill id|}}
@@ -99,7 +102,7 @@
                     </div>
                     <div class="resource">
                         <label for="data.weapon.damageBonus" class="resource-label">Damage DM</label><br/>
-                        <select name="data.weapon.damageBonus">
+                        <select class="writable" name="data.weapon.damageBonus">
                             {{#select data.weapon.damageBonus}}
                                 <option value="">-</option>
                                 <option value="STR">STR</option>
@@ -109,19 +112,19 @@
 
                     <div class="resource">
                         <label for="data.weapon.attackBonus" class="resource-label">Attack DM</label><br/>
-                        <input type="text" name="data.weapon.attackBonus"
+                        <input class="writable" type="text" name="data.weapon.attackBonus"
                                value="{{data.weapon.attackBonus}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
                         <label for="data.weapon.parryBonus" class="resource-label">Parry DM</label><br/>
-                        <input type="text" name="data.weapon.parryBonus"
+                        <input class="writable" type="text" name="data.weapon.parryBonus"
                                value="{{data.weapon.parryBonus}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
                         <label for="data.weapon.damageType" class="resource-label">Damage Type</label><br/>
-                        <select name="data.weapon.damageType">
+                        <select class="writable" name="data.weapon.damageType">
                             {{#select data.weapon.damageType}}
                             <option value="standard">Standard</option>
                             <option value="laser">Laser</option>
@@ -133,7 +136,7 @@
                     </div>
                     <div class="resource grid-span-2">
                         <label for="data.notes" class="resource-label">Notes</label><br/>
-                        <input type="text" name="data.notes"
+                        <input class="writable" type="text" name="data.notes" placeholder="Text shown when used"
                                value="{{data.notes}}" data-dtype="String"/>
                     </div>
                 </div>
