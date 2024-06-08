@@ -16,8 +16,10 @@
         </div>
 
         <div class="flex-group-left">
+            <h1 class="charname shadow">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+            </h1>
             <div class="shadow">
-                <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
                 <div class="resources grid grid-3col flex-group-center">
                     <div class="resource">
                         <label for="system.tl" class="resource-label">{{localize "MGT2.Item.TL"}}</label>
