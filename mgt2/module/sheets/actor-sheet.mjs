@@ -67,10 +67,14 @@ export class MgT2ActorSheet extends ActorSheet {
         if (type === 'traveller' || type === 'package') {
             this._prepareItems(context);
             let numTerms = context.terms.length;
-            let year = parseInt(actorData.entryYear) - parseInt(actorData.termLength) * numTerms;
+            let numYears = 0;
+            for (let t of context.terms) {
+                numYears += parseInt(t.system.term.termLength);
+            }
+            let year = parseInt(actorData.entryYear) - numYears;
             for (let t of context.terms) {
                 t.system.term.startYear = year;
-                year += parseInt(actorData.termLength);
+                year += parseInt(t.system.term.termLength);
             }
             actorData.entryAge = parseInt(actorData.startAge) + parseInt(actorData.termLength) * numTerms;
             actorData.birthYear = parseInt(actorData.entryYear) - parseInt(actorData.entryAge);

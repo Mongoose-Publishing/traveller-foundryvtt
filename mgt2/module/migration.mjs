@@ -16,6 +16,18 @@ function migrateActorData(actor, fromVersion) {
     }
     if (fromVersion < 3) {
         // Undone.
+        return actor.system;
+    }
+    return {};
+}
+
+function migrateItemData(item, fromVersion) {
+    console.log(`MIGRATE ITEM DATA ${fromVersion}`);
+    if (fromVersion < 4) {
+        if (item.system.term) {
+            item.system.term.termLength = 4;
+            return item.system;
+        }
     }
     return {};
 }
@@ -28,6 +40,14 @@ export async function migrateWorld(fromVersion) {
         if (!foundry.utils.isEmpty(updateData)) {
             console.log(`Migrating Actor entity ${actor.name} from ${fromVersion}`);
             await actor.update(updateData);
+        }
+    }
+
+    for (let item of game.items.contents) {
+        const updateData = migrateItemData(item, fromVersion);
+        if (!foundry.utils.isEmpty(updateData)) {
+            console.log(`Migrating Item entity ${item.name} from ${fromVersion}`);
+            await item.update(updateData);
         }
     }
 

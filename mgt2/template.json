@@ -1117,6 +1117,7 @@
       "term": {
           "term": {
               "number": 0,
+              "termLength": 4,
               "assignment": ""
           }
       },

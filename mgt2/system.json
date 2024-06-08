@@ -2,7 +2,7 @@
   "name": "mgt2",
   "title": "Mongoose Traveller 2e",
   "description": "An unofficial system for Mongoose Traveller 2e",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "compatibility": {
     "minimum": 10,
     "verified": 11
@@ -34,8 +34,7 @@
       "system": "mgt2",
       "module": "mgt2",
       "path": "packs/traveller-docs",
-      "type": "JournalEntry",
-      "flags": { "display":  "table-of-contents"}
+      "type": "JournalEntry"
     }
   ],
   "languages": [
