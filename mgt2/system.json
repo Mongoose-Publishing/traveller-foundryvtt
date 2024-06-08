@@ -27,6 +27,15 @@
       "module": "mgt2",
       "path": "packs/base-items.db",
       "type": "Item"
+    },
+    {
+      "name": "traveller-docs",
+      "label": "Traveller Docs",
+      "system": "mgt2",
+      "module": "mgt2",
+      "path": "packs/traveller-docs",
+      "type": "JournalEntry",
+      "flags": { "display":  "table-of-contents"}
     }
   ],
   "languages": [
