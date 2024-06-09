@@ -17,6 +17,7 @@ then
 
     for pack in $PACKS
     do
+        mkdir -p packs/$pack
         fvtt package pack -n $pack --in packs/_source/$pack/
     done
 elif [ "$cmd" = "unpack" ]
