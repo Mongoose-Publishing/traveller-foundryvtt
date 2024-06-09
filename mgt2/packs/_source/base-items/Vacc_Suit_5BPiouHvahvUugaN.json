@@ -1,0 +1,60 @@
+{
+  "_id": "5BPiouHvahvUugaN",
+  "name": "Vacc Suit",
+  "type": "armour",
+  "img": "systems/mgt2/icons/items/vacc-suit.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "tl": "8",
+    "weight": 28,
+    "cost": 0,
+    "notes": "",
+    "active": false,
+    "quantity": 1,
+    "status": null,
+    "armour": {
+      "protection": "4",
+      "otherProtection": "0",
+      "otherTypes": "",
+      "rad": 15,
+      "archaic": "0",
+      "skill": "1",
+      "duration": 0,
+      "slots": 0,
+      "form": "standard",
+      "layered": "0",
+      "ablat": "0",
+      "powered": "0",
+      "worn": false,
+      "antique": false,
+      "strBonus": null,
+      "dexBonus": null
+    },
+    "name": "",
+    "description": "Item Description",
+    "augments": [],
+    "templates": [
+      "base"
+    ],
+    "item": {
+      "tl": 8,
+      "weight": 1
+    }
+  },
+  "ownership": {
+    "default": 0,
+    "QlyRLFLquZkYH4lQ": 3
+  },
+  "_stats": {
+    "systemId": "mgt2",
+    "systemVersion": "0.4.8",
+    "coreVersion": "11.315",
+    "createdTime": null,
+    "modifiedTime": 1717350810932,
+    "lastModifiedBy": "g9J0FYGXWOC9wpm4"
+  },
+  "_key": "!items!5BPiouHvahvUugaN"
+}

@@ -1,0 +1,65 @@
+{
+  "folder": "81lpHPvcOeOkc8gf",
+  "name": "Characters",
+  "_id": "I3AuPYIeiMu19Rli",
+  "pages": [
+    {
+      "sort": 0,
+      "name": "Actors",
+      "type": "text",
+      "_id": "E7N9IuqnifbJcQUp",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>There are multiple types of actors.</p><h2>Traveller</h2><p><em>Travellers</em> represent player characters.</p><ul><li><p>Full list of characteristics</p></li><li><p>Full list of skills</p></li><li><p>Damage is applied to characteristics</p></li><li><p>Equipment can be assigned</p></li><li><p>Has a full career history</p></li></ul><p></p><h2>NPC</h2><p>NPCs are simplified versions of Travellers, designed to be used for less important characters.</p><ul><li><p>Full list of characteristics</p></li><li><p>Full list of skills</p></li><li><p>Damage is applied to a unified HITS total</p></li></ul><p></p><h2>Creature</h2><p>Creatures represent animals which lack human intelligence.</p><ul><li><p>Have no characteristics</p></li><li><p>Have a limited set of skills</p></li><li><p>Damage is applied to a unified HITS total</p></li></ul><p></p><h2>Package</h2><p>A package is a template that can be applied to a Traveller or NPC. They can be used to define simplified career packages (such as those found in the Traveller Companion), or used to set up packages of skills to quickly build up NPCs.</p><p>Dragging a Package on top of a Traveller of NPC character sheet will copy skills, items and other attributes onto the destination character.</p><p>Characteristics are specified as modifiers (-1 / 0 / +2 etc), and will modify the UPP of the destination character.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "ownership": {
+        "default": -1,
+        "Uzw5MJmM0BRE3sSL": 3
+      },
+      "flags": {
+        "core": {
+          "sourceId": "JournalEntry.83nkkP7aeGF22kG6.JournalEntryPage.E7N9IuqnifbJcQUp"
+        }
+      },
+      "_stats": {
+        "systemId": "mgt2",
+        "systemVersion": "0.4.9",
+        "coreVersion": "11.315",
+        "createdTime": 1717535877534,
+        "modifiedTime": 1717925698655,
+        "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+      },
+      "_key": "!journal.pages!I3AuPYIeiMu19Rli.E7N9IuqnifbJcQUp"
+    }
+  ],
+  "sort": 200000,
+  "ownership": {
+    "default": 0,
+    "Uzw5MJmM0BRE3sSL": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "JournalEntry.I3AuPYIeiMu19Rli"
+    }
+  },
+  "_stats": {
+    "systemId": "mgt2",
+    "systemVersion": "0.4.9",
+    "coreVersion": "11.315",
+    "createdTime": 1717857385616,
+    "modifiedTime": 1717925698655,
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+  },
+  "_key": "!journal!I3AuPYIeiMu19Rli"
+}

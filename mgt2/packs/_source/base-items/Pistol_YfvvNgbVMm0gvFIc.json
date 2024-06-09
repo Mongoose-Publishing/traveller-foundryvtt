@@ -1,0 +1,57 @@
+{
+  "_id": "YfvvNgbVMm0gvFIc",
+  "name": "Pistol",
+  "type": "weapon",
+  "img": "systems/mgt2/icons/items/gun-slug.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "tl": "6",
+    "weight": 1,
+    "cost": 0,
+    "notes": "",
+    "active": false,
+    "quantity": 1,
+    "status": null,
+    "weapon": {
+      "range": 10,
+      "damage": "3D6-3",
+      "magazine": 15,
+      "ammo": 15,
+      "magazineCost": 0,
+      "characteristic": "DEX",
+      "skill": "guncombat.slug",
+      "parryBonus": 0,
+      "damageBonus": "",
+      "damageType": "standard",
+      "attackBonus": 0,
+      "traits": "Auto 2",
+      "sfx": "There is a bang"
+    },
+    "name": "",
+    "description": "<p>Typical hand gun.</p>",
+    "augments": [],
+    "templates": [
+      "base"
+    ],
+    "item": {
+      "tl": 5,
+      "weight": 1
+    }
+  },
+  "ownership": {
+    "default": 0,
+    "QlyRLFLquZkYH4lQ": 3
+  },
+  "_stats": {
+    "systemId": "mgt2",
+    "systemVersion": "0.4.9",
+    "coreVersion": "11.315",
+    "createdTime": null,
+    "modifiedTime": 1717941415036,
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+  },
+  "_key": "!items!YfvvNgbVMm0gvFIc"
+}

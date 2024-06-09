@@ -1091,8 +1091,7 @@
             "damageBonus": "",
             "damageType": "standard",
             "attackBonus": 0,
-            "traits": "",
-            "sfx": ""
+            "traits": ""
         }
       },
       "armour": {

@@ -1,0 +1,57 @@
+{
+  "_id": "uTtH5mXI2i0byiXO",
+  "name": "Unarmed",
+  "type": "weapon",
+  "img": "systems/mgt2/icons/items/melee-unarmed.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "tl": "0",
+    "weight": 0,
+    "cost": 0,
+    "notes": "",
+    "active": false,
+    "quantity": 1,
+    "status": null,
+    "weapon": {
+      "range": 0,
+      "damage": "1D6",
+      "magazine": 0,
+      "ammo": 0,
+      "magazineCost": 0,
+      "characteristic": "STR",
+      "skill": "melee.unarmed",
+      "parryBonus": 0,
+      "damageBonus": "",
+      "damageType": "standard",
+      "attackBonus": 0,
+      "traits": "",
+      "sfx": ""
+    },
+    "name": "",
+    "description": "<p>Unarmed strike from a human or someone without natural weapons.</p>",
+    "augments": [],
+    "templates": [
+      "base"
+    ],
+    "item": {
+      "tl": 0,
+      "weight": 0
+    }
+  },
+  "ownership": {
+    "default": 0,
+    "QlyRLFLquZkYH4lQ": 3
+  },
+  "_stats": {
+    "systemId": "mgt2",
+    "systemVersion": "0.4.9",
+    "coreVersion": "11.315",
+    "createdTime": null,
+    "modifiedTime": 1717923716556,
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+  },
+  "_key": "!items!uTtH5mXI2i0byiXO"
+}

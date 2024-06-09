@@ -1,0 +1,57 @@
+{
+  "_id": "jpCFZhjVPdDmTVWk",
+  "name": "Half-Plate",
+  "type": "armour",
+  "img": "systems/mgt2/icons/items/armour-heavy.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "tl": "0",
+    "weight": 0,
+    "cost": 0,
+    "notes": "",
+    "active": false,
+    "quantity": 1,
+    "status": null,
+    "armour": {
+      "protection": "5",
+      "otherProtection": "0",
+      "otherTypes": "",
+      "rad": 0,
+      "archaic": "1",
+      "skill": "",
+      "duration": 0,
+      "slots": 0,
+      "form": "standard",
+      "layered": "0",
+      "ablat": "0",
+      "powered": "0",
+      "worn": false
+    },
+    "name": "",
+    "description": "Item Description",
+    "augments": [],
+    "templates": [
+      "base"
+    ],
+    "item": {
+      "tl": 2,
+      "weight": 12
+    }
+  },
+  "ownership": {
+    "default": 0,
+    "QlyRLFLquZkYH4lQ": 3
+  },
+  "_stats": {
+    "systemId": "mgt2",
+    "systemVersion": "0.4.8",
+    "coreVersion": "11.315",
+    "createdTime": null,
+    "modifiedTime": 1717350867249,
+    "lastModifiedBy": "g9J0FYGXWOC9wpm4"
+  },
+  "_key": "!items!jpCFZhjVPdDmTVWk"
+}
