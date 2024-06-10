@@ -28,7 +28,7 @@ export class MgT2DamageDialog extends Application {
         this.laser = laser;
         this.stun = hasTrait(traits, "stun");
         this.data = data;
-        this.armour = data.armour.protection;
+        this.armour = data.armour?.protection ?? 0;
         this.wounds = "";
 
         this.actualDamage = damage;
