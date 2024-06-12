@@ -3,6 +3,28 @@
 This is an implementation of Mongoose Traveller 2e for FoundryVTT.
 It currently supports Foundry v11.
 
+## Build
+
+### Compendium Packs
+
+Objects in compendium packs are stored as individual JSON files.
+  * Use `mkpacks pack` to convert from JSON to binary DB format.
+  * Use `mkpacks unpack` to convert from binary DB format to JSON.
+
+These scripts assume that the foundry CLI `fvtt` is present and
+configured. The `dataPath` should be set to the local mgt2 directory.
+
+e.g.
+
+```
+fvtt configure set dataPath $PWD/mgt2/
+```
+
+### Releases
+
+Use `release.sh` to create a release file. This will also increment the
+patch version number automatically unless an argument is passed to the
+script.
 
 ## Object Types
 
