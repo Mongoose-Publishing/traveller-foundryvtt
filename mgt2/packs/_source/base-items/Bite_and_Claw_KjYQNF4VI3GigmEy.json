@@ -24,7 +24,7 @@
       "characteristic": "STR",
       "skill": "melee.natural",
       "parryBonus": 0,
-      "damageBonus": "",
+      "damageBonus": "STR",
       "damageType": "standard",
       "attackBonus": 0,
       "traits": "",
@@ -46,8 +46,8 @@
     "systemVersion": "0.4.9",
     "coreVersion": "11.315",
     "createdTime": null,
-    "modifiedTime": 1717941320992,
-    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+    "modifiedTime": 1718218726277,
+    "lastModifiedBy": "v2VrVDrL2xAhTj3z"
   },
   "_key": "!items!KjYQNF4VI3GigmEy"
 }

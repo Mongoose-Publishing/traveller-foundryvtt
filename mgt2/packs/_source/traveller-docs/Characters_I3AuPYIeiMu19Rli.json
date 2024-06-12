@@ -41,6 +41,41 @@
         "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
       },
       "_key": "!journal.pages!I3AuPYIeiMu19Rli.E7N9IuqnifbJcQUp"
+    },
+    {
+      "sort": 100000,
+      "name": "Skills",
+      "type": "text",
+      "_id": "OUm7ywmOo99aQK7v",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A skill can be rolled by clicking the skill on the character sheet.</p><p>This will bring up a dialog that allows you to select which characteristic to use, set a difficulty and add a Dice Modifier.</p><p>By default a target difficulty of 8 is assumed.</p><p>If you roll a parent skill with one or more specialities, the final result for the parent and all the non-zero specialities will be given.</p><h2>Quick Rolls</h2><p>Holding shift when clicking a skill will perform a quick roll, which skips the dialog and assumes defaults on everything.</p><p>The configurable <strong>Default to Quick Rolls</strong> can be used to reverse this behaviour. If selected, clicking a skill with perform a roll with default settings, and holding shift will open the dialog.</p><h2>Experience</h2><p>Holding Ctrl when clicking on a skill will open the experience menu for this skill. This allows you to:</p><ul><li><p>Add experience points to the skill. These will automatically increase the skill when the dialog is closed if the experience is enough.</p></li><li><p>Add a permanent DM bonus to the skill. This is useful for racial bonuses.</p></li></ul><h2>Hot bar</h2><p>Skills can be dragged to the hot bar. Clicking (or shift clicking) on the hot bar icon will roll that skill for the currently selected token.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "ownership": {
+        "default": -1,
+        "Uzw5MJmM0BRE3sSL": 3
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "mgt2",
+        "systemVersion": "0.4.9",
+        "coreVersion": "11.315",
+        "createdTime": 1718229795342,
+        "modifiedTime": 1718230082528,
+        "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+      },
+      "_key": "!journal.pages!I3AuPYIeiMu19Rli.OUm7ywmOo99aQK7v"
     }
   ],
   "sort": 200000,
@@ -58,7 +93,7 @@
     "systemVersion": "0.4.9",
     "coreVersion": "11.315",
     "createdTime": 1717857385616,
-    "modifiedTime": 1717925698655,
+    "modifiedTime": 1718230082528,
     "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
   },
   "_key": "!journal!I3AuPYIeiMu19Rli"

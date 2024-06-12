@@ -17,7 +17,7 @@
     "status": null,
     "weapon": {
       "range": 20,
-      "damage": "3d6",
+      "damage": "3D6",
       "magazine": 100,
       "ammo": 100,
       "magazineCost": 0,
@@ -51,8 +51,8 @@
     "systemVersion": "0.4.9",
     "coreVersion": "11.315",
     "createdTime": null,
-    "modifiedTime": 1717940041073,
-    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+    "modifiedTime": 1718218714700,
+    "lastModifiedBy": "v2VrVDrL2xAhTj3z"
   },
   "_key": "!items!WYllyo2CcK7dFU42"
 }
