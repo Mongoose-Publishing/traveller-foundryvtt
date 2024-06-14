@@ -55,6 +55,11 @@
             </div>
 
             <div class="shadow grid grid-6col">
+                <div class="resource grid-span-6">
+                    <input class="trained" type="checkbox" name="data.settings.useCustomDice"
+                           {{checked data.settings.useCustomDice}} data-type="Boolean"/>
+                    <label for="data.settings.useCustomDice">Use Custom Dice</label>
+                </div>
                 {{#each data.characteristics as | char key | }}
                     {{#if char.show}}
                     <div class="resource flex-group-center characteristic-draggable"
@@ -62,7 +67,11 @@
                         <label class="characteristic-title"
                                title="{{char.label}}">{{key}}</label>
                         <br/>
-                        <input class="characteristic-value writable" type="number" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                        {{#if ../data.settings.useCustomDice}}
+                            <input class="characteristic-dice writable" type="text" name="data.characteristics.{{key}}.dice" value="{{char.dice}}" data-dtype="Text" placeholder="2D6"/>
+                        {{else}}
+                            <input class="characteristic-value writable" type="number" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                        {{/if}}
                     </div>
                     {{/if}}
                 {{/each}}
@@ -117,6 +126,7 @@
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
                     <a class="item" data-tab="history">History</a>
+                    <a class="item" data-tab="settings">Settings</a>
                 </nav>
 
                 <div class="sheet-body">

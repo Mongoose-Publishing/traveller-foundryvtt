@@ -727,12 +727,28 @@ export class MgT2ActorSheet extends ActorSheet {
             console.log("Dropping a package " + actor.name);
 
             for (let c in actor.system.characteristics) {
-                let bonus = parseInt(actor.system.characteristics[c].value);
-                console.log(c + ":" + bonus);
-                if (bonus !== 0) {
-                    this.actor.system.characteristics[c].value += bonus;
-                    if (this.actor.system.characteristics[c].value < 1) {
-                        this.actor.system.characteristics[c].value = 1;
+                if (actor.system.settings.useCustomDice) {
+                    // Rather than this being a bonus, it is a new dice roll.
+                    if (!actor.system.characteristics[c].show) {
+                        this.actor.system.characteristics[c].show = false;
+                        continue;
+                    }
+                    this.actor.system.characteristics[c].show = true;
+                    let dice = actor.system.characteristics[c].dice;
+                    if (!dice || dice === "") {
+                        dice = "2D6";
+                    }
+                    console.log(c + ": " + dice);
+                    let uppRoll = new Roll(dice, null).evaluate({async: false});
+                    this.actor.system.characteristics[c].value = uppRoll.total;
+                } else {
+                    let bonus = parseInt(actor.system.characteristics[c].value);
+                    console.log(c + ":" + bonus);
+                    if (bonus !== 0) {
+                        this.actor.system.characteristics[c].value += bonus;
+                        if (this.actor.system.characteristics[c].value < 1) {
+                            this.actor.system.characteristics[c].value = 1;
+                        }
                     }
                 }
             }
