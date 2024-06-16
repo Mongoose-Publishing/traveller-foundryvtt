@@ -2,7 +2,7 @@
   "name": "mgt2",
   "title": "Mongoose Traveller 2e",
   "description": "An unofficial system for Mongoose Traveller 2e",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "compatibility": {
     "minimum": 10,
     "verified": 11
@@ -25,7 +25,7 @@
       "label": "Base Items",
       "system": "mgt2",
       "module": "mgt2",
-      "path": "packs/base-items.db",
+      "path": "packs/base-items",
       "type": "Item"
     },
     {

@@ -296,11 +296,13 @@ Hooks.on("createActor", (actor) => {
                 actor.system.characteristics[c].value = 0;
                 actor.system.characteristics[c].current = 0;
             }
+            actor.update({ "system.characteristics": actor.system.characteristics });
         } else if (actor.type === "spacecraft") {
             actor.img = `systems/mgt2/images/tokens/spacecraft/white/far_trader.webp`;
         } else {
             actor.img = "systems/mgt2/icons/actors/traveller-red.svg";
         }
+        actor.update({ "img": actor.img });
     }
 });
 

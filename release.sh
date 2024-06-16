@@ -11,8 +11,8 @@ fi
 version=${minor}.${patch}
 echo $version
 
-sed -i "s/\"version\": \".*\",/\"version\": \"$version\",/" mgt2/module.json
-sed -i "s#/raw/v[0-9.]*/#/raw/v${version}/#" mgt2/module.json
+sed -i "s/\"version\": \".*\",/\"version\": \"$version\",/" mgt2/system.json
+sed -i "s#/raw/v[0-9.]*/#/raw/v${version}/#" mgt2/system.json
 mkdir -p release
 
 # Build the binary db files. Export to json, clean, then rebuild.
