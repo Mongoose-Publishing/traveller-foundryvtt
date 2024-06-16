@@ -285,15 +285,19 @@ Hooks.on("createItem", (item) => {
 
 Hooks.on("createActor", (actor) => {
     if (actor.img === "icons/svg/mystery-man.svg") {
+        let colours = [ "white", "blue", "gold", "green", "red" ];
         if (actor.type === "creature") {
-            actor.img = "systems/mgt2/icons/actors/creature.svg";
-        } else if (actor.type === "traveller") {
-            actor.img = "systems/mgt2/icons/actors/traveller-white.svg";
+            actor.img = `systems/mgt2/icons/actors/creature-${colours[colours.length * Math.random() | 0]}.svg`;
+        } else if (actor.type === "traveller" || actor.type === "npc") {
+            actor.img = `systems/mgt2/icons/actors/traveller-${colours[colours.length * Math.random() | 0]}.svg`;
         } else if (actor.type === "package") {
+            actor.img = `systems/mgt2/icons/actors/traveller-grey.svg`;
             for (let c in actor.system.characteristics) {
                 actor.system.characteristics[c].value = 0;
                 actor.system.characteristics[c].current = 0;
             }
+        } else if (actor.type === "spacecraft") {
+            actor.img = `systems/mgt2/images/tokens/spacecraft/white/far_trader.webp`;
         } else {
             actor.img = "systems/mgt2/icons/actors/traveller-red.svg";
         }
