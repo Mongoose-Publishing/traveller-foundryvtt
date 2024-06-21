@@ -1117,7 +1117,8 @@
           "term": {
               "number": 0,
               "termLength": 4,
-              "assignment": ""
+              "assignment": "",
+              "randomTerm": false
           }
       },
       "associate": {

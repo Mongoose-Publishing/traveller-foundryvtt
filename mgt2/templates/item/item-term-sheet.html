@@ -17,7 +17,13 @@
 
         <div class="grid-span-6">
             <label class="resource-label">Assignment</label><br/>
-            <input name="assignment" type="text" value="{{item.term.assignment}}" placeholder="Assignment"/>
+            <input name="system.term.assignment" type="text" value="{{system.term.assignment}}" placeholder="Assignment"/>
+        </div>
+
+        <div class="grid-span-8">
+            <input class="trained" type="checkbox" name="system.term.randomTerm"
+                   {{checked system.term.randomTerm}} data-type="Boolean"/>
+            <label for="system.term.randomTerm">Random term length</label>
         </div>
     </div>
 

@@ -759,9 +759,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 let target = this.actor.system.skills[s];
                 if (skill.trained) {
                     target.trained = true;
-                    if (skill.value > target.value) {
-                        target.value = skill.value;
-                    }
+                    target.value = Math.max(4, parseInt(target.value) + parseInt(skill.value));
                     if (skill.specialities) {
                         for (let sp in skill.specialities) {
                             let spec = skill.specialities[sp];
@@ -769,9 +767,8 @@ export class MgT2ActorSheet extends ActorSheet {
                                 if (spec.trained) {
                                     target.specialities[sp].trained = true;
                                 }
-                                if (spec.value > target.specialities[sp].value) {
-                                    target.specialities[sp].value = spec.value;
-                                }
+                                target.specialities[sp].value = Math.max(4,
+                                    parseInt(target.specialities[sp].value) + parseInt(spec.value));
                                 if (spec.boon) {
                                     target.specialities[sp].boon = spec.boon;
                                 }
@@ -852,6 +849,9 @@ export class MgT2ActorSheet extends ActorSheet {
                     type: item.type,
                     system: item.system
                 };
+                if (itemData.type === "term" && itemData.system.term.randomTerm) {
+                    itemData.system.term.termLength = new Roll("3D6", null).evaluate({async: false}).total;
+                }
                 await Item.create(itemData, {parent: this.actor});
             }
         }
