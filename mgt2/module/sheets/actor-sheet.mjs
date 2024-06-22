@@ -723,7 +723,7 @@ export class MgT2ActorSheet extends ActorSheet {
         let actorId = data.uuid.replace(/Actor\./, "");
         let actor = game.actors.get(actorId);
 
-        if (actor && actor.type === "package") {
+        if (actor && actor.type === "package" && (this.actor.type === "traveller" || this.actor.type === "npc")) {
             console.log("Dropping a package " + actor.name);
 
             for (let c in actor.system.characteristics) {
@@ -759,7 +759,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 let target = this.actor.system.skills[s];
                 if (skill.trained) {
                     target.trained = true;
-                    target.value = Math.max(4, parseInt(target.value) + parseInt(skill.value));
+                    target.value = Math.min(4, parseInt(target.value) + parseInt(skill.value));
                     if (skill.specialities) {
                         for (let sp in skill.specialities) {
                             let spec = skill.specialities[sp];
@@ -767,7 +767,7 @@ export class MgT2ActorSheet extends ActorSheet {
                                 if (spec.trained) {
                                     target.specialities[sp].trained = true;
                                 }
-                                target.specialities[sp].value = Math.max(4,
+                                target.specialities[sp].value = Math.min(4,
                                     parseInt(target.specialities[sp].value) + parseInt(spec.value));
                                 if (spec.boon) {
                                     target.specialities[sp].boon = spec.boon;
@@ -847,7 +847,7 @@ export class MgT2ActorSheet extends ActorSheet {
                     name: item.name,
                     img: item.img,
                     type: item.type,
-                    system: item.system
+                    system: deepClone(item.system)
                 };
                 if (itemData.type === "term" && itemData.system.term.randomTerm) {
                     itemData.system.term.termLength = new Roll("3D6", null).evaluate({async: false}).total;
