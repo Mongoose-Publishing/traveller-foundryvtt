@@ -61,7 +61,7 @@ then
 else
   release="main"
   sed -i "s/\"version\": \".*\",/\"version\": \"${version}\",/" mgt2/system.json
-  sed -i "s#/raw/[vmain0-9.]*/#/raw/main/#" mgt2/system.json
+  sed -i "s#/raw/[vmain0-9.]*/#/raw/$(git branch --show-current)/#" mgt2/system.json
 fi
 # Zip up system archive, minus the source json.
 zip -x ./mgt2/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2

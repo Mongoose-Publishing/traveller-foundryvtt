@@ -230,7 +230,7 @@
                 "value": 0,
                 "trained": false,
                 "requires": "INT",
-                "icon": "system/mgt2/icons/skills/advocate.svg"
+                "icon": "systems/mgt2/icons/skills/advocate.svg"
             },
             "animals": {
                 "label": "Animals",
