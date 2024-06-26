@@ -68,8 +68,8 @@
                 </div>
                 <div class="resource flex-group-center grid-span-2">
                     <label for="data.spacecraft.configuration" class="field-label">{{localize 'MGT2.TravellerSheet.Configuration'}}</label>
-                    <select class="configurationType" style="width:100%" name="data.spacecraft.configuration">
-                        {{#select data.spacecraft.configuration}}
+                    <select class="configurationType" style="width:100%" name="system.spacecraft.configuration">
+                        {{#select system.spacecraft.configuration}}
                         <option value="standard">Standard</option>
                         <option value="streamlined">Streamlined</option>
                         <option value="sphere">Sphere</option>
@@ -109,6 +109,7 @@
 
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
+                    <a class="item" data-tab="crew">{{localize 'MGT2.TravellerSheet.ShipsCrew'}}</a>
                     <a class="item" data-tab="locker">{{localize 'MGT2.TravellerSheet.ShipsLocker'}}</a>
                     <a class="item" data-tab="cargo">{{localize 'MGT2.TravellerSheet.CargoHold'}}</a>
                     <a class="item" data-tab="hardware">{{localize 'MGT2.TravellerSheet.ShipsHardware'}}</a>
@@ -225,6 +226,42 @@
                             enrichedDescription target="system.description"
                             button=true editable=editable}}
                         </section>
+                    </div>
+
+                    <div class="tab items" data-tab="crew">
+                        <h3>Crew</h3>
+
+                        <ol class="items-list actor-crew-list grid grid-3col">
+                            {{#each crew as |crewMember|}}
+                                <li class="actor-crew" data-actor-id="{{crewMember._id}}">
+                                    <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
+                                    <img title="{{crewMember.name}}" src="{{crewMember.img}}"/>
+
+                                    {{{showCrewInfo system crewMember}}}
+
+                                    <div class="item-controls">
+                                        <a class="item-control crew-passenger" title="Make passenger"><i class="fas fa-suitcase"></i></a>
+                                        <a class="item-control crew-delete" title="Remove Crew"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ol>
+
+                        <h3>Passengers</h3>
+
+                        <ol class="items-list actor-crew-list grid grid-3col">
+                            {{#each passengers as |crewMember|}}
+                            <li class="actor-crew" data-actor-id="{{crewMember._id}}">
+                                <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
+                                <img title="{{crewMember.name}}" src="{{crewMember.img}}"/>
+
+                                <div class="item-controls">
+                                    <a class="item-control passenger-crew" title="Make crew"><i class="fas fa-person-military-pointing"></i></a>
+                                    <a class="item-control passenger-delete" title="Remove Crew"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ol>
                     </div>
                 </div>
             </div>

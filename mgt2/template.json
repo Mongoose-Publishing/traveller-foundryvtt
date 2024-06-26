@@ -213,6 +213,13 @@
           "ablat": 0,
           "powered": 0
       },
+      "crewed": {
+          "crewed": {
+              "crew": {},
+              "passengers": {},
+              "roles": [ "NONE", "PILOT" ]
+          }
+      },
       "skills": {
         "skills": {
             "admin": {
@@ -1038,7 +1045,7 @@
         "cash": 0
     },
     "spacecraft": {
-        "templates": [],
+        "templates": [ "crewed" ],
         "hits": {
             "value": 80,
             "max": 80,

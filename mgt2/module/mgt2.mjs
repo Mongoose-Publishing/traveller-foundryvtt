@@ -1256,6 +1256,13 @@ Handlebars.registerHelper('chaStatus', function(cha) {
     }
 });
 
+Handlebars.registerHelper('showCrewInfo', function(vehicleData, actor) {
+    console.log(vehicleData);
+    console.log(actor);
+
+    return "Crew";
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

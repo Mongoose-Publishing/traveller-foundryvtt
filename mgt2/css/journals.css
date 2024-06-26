@@ -17,6 +17,37 @@
     background-color: white;
 }
 
+/* Documentation */
+
+.journal-sheet h1 {
+    color: #f1511b;
+    text-transform: uppercase;
+    border-bottom: 3px solid #f1511b;
+    font-weight: bold;
+}
+
+.journal-sheet h2 {
+    color: black;
+    text-transform: uppercase;
+    border: none;
+    font-weight: bold;
+}
+
+.journal-sheet h3 {
+    color: black;
+    text-transform: uppercase;
+    border: none;
+    font-weight: bold;
+}
+
+.journal-sheet .callout {
+    background-color: #90D0e8;
+    border: 1px solid black;
+    border-radius: 1em;
+    padding: 0.5em;
+    float: right;
+    width: 30%;
+}
 
 /* Career Definitions */
 

@@ -87,6 +87,7 @@ export class MgT2ActorSheet extends ActorSheet {
             this._prepareItems(context);
         } else if (type === 'spacecraft') {
             this._prepareSpacecraftItems(context);
+            this._prepareSpacecraftCrew(context);
         }
 
         // Add roll data for TinyMCE editors.
@@ -155,8 +156,6 @@ export class MgT2ActorSheet extends ActorSheet {
         actorData.spacecraft.mdrive = 0;
         actorData.spacecraft.rdrive = 0;
         actorData.spacecraft.jdrive = 0;
-
-        console.log(context);
 
         for (let i of context.items) {
             if (i.type === 'cargo') {
@@ -242,10 +241,27 @@ export class MgT2ActorSheet extends ActorSheet {
 
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;
+    }
 
-        console.log(cargoUsed);
-        console.log(context.cargoRemaining);
+    _prepareSpacecraftCrew(context) {
+        const actorData = context.actor.system;
+        const crew = [];
+        const passengers = [];
 
+        for (let actorId in actorData.crewed.crew) {
+            let actor = game.actors.get(actorId);
+            if (actor) {
+                crew.push(actor);
+            }
+        }
+        for (let actorId in actorData.crewed.passengers) {
+            let actor = game.actors.get(actorId);
+            if (actor) {
+                passengers.push(actor);
+            }
+        }
+        context.crew = crew;
+        context.passengers = passengers;
     }
 
     /**
@@ -531,6 +547,32 @@ export class MgT2ActorSheet extends ActorSheet {
             const item = this.actor.items.get(li.data("itemId"));
             this._setItemStatus(this.actor, item, MgT2Item.CARRIED);
         });
+
+        html.find('.crew-delete').click(ev => {
+            const li = $(ev.currentTarget).parents(".actor-crew");
+            const actorId = li.data("actorId");
+            this.actor.update({[`system.crewed.crew.-=${actorId}`]: null});
+        });
+
+        html.find('.passenger-delete').click(ev => {
+            const li = $(ev.currentTarget).parents(".actor-crew");
+            const actorId = li.data("actorId");
+            this.actor.update({[`system.crewed.passengers.-=${actorId}`]: null});
+        });
+
+        html.find('.crew-passenger').click(ev => {
+            const li = $(ev.currentTarget).parents(".actor-crew");
+            const actorId = li.data("actorId");
+            this._moveCrewToPassenger(this.actor, actorId);
+        });
+
+        html.find('.passenger-crew').click(ev => {
+            const li = $(ev.currentTarget).parents(".actor-crew");
+            const actorId = li.data("actorId");
+            console.log(`Passenger to crew for ${actorId}`);
+            this._movePassengerToCrew(this.actor, actorId);
+        });
+
         // Dodge reaction
         html.find('.dodgeRoll').click(ev => {
             this._rollDodge(ev, this.actor);
@@ -621,8 +663,6 @@ export class MgT2ActorSheet extends ActorSheet {
   }
 
     _rollDodge(event, actor) {
-        console.log("_rollDodge:");
-
         let dodge = 0;
         const dex = Math.max(0, parseInt(actor.system["DEX"]));
         if (dex > 0) {
@@ -632,7 +672,6 @@ export class MgT2ActorSheet extends ActorSheet {
         if (skill > 0) {
             dodge += skill;
         }
-        console.log(`Dodge skill is ${dodge}`);
         if (dodge > 0) {
             let current = actor.getFlag("mgt2", "reaction");
             if (!current) current = 0;
@@ -670,6 +709,17 @@ export class MgT2ActorSheet extends ActorSheet {
             item.update({"system.weapon": item.system.weapon});
         }
     }
+
+    async _movePassengerToCrew(actor, actorId) {
+        await actor.update({[`system.crewed.passengers.-=${actorId}`]: null});
+        await actor.update({[`system.crewed.crew.${actorId}`]: { "role": "NONE"}});
+    }
+
+    async _moveCrewToPassenger(actor, actorId) {
+        await actor.update({[`system.crewed.crew.-=${actorId}`]: null});
+        await actor.update({[`system.crewed.passengers.${actorId}`]: { "role": "STANDARD"}});
+    }
+
 
     _onSkillDragStart(event, options) {
         console.log("_onSkillDragStart:");
@@ -723,7 +773,24 @@ export class MgT2ActorSheet extends ActorSheet {
         let actorId = data.uuid.replace(/Actor\./, "");
         let actor = game.actors.get(actorId);
 
-        if (actor && actor.type === "package" && (this.actor.type === "traveller" || this.actor.type === "npc")) {
+        if (!actor) {
+            return;
+        }
+        if (this.actor.type === "spacecraft" && (actor.type === "traveller" || actor.type === "npc")) {
+            console.log(`Adding new crew member ${actor._id}`);
+            if (!this.actor.system.crewed) {
+                this.actor.system.crewed = { "crew": {}, "passengers": {}, "roles": [] };
+            }
+            // this.actor.update(
+            //     { key: { roles: ['UNDESIGNATED'] }}
+            // );
+            this.actor.update({[`system.crewed.passengers.${actor._id}`]: { roles: [ "NONE" ] }});
+
+            // this.actor.system.crewed.crew[actor._id] = {
+            //    "roles": [ "UNDESIGNATED" ]
+            // };
+            // await this.actor.update({"system.crewed": this.actor.system.crewed });
+        } else if (actor.type === "package" && (this.actor.type === "traveller" || this.actor.type === "npc")) {
             console.log("Dropping a package " + actor.name);
 
             for (let c in actor.system.characteristics) {
