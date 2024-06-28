@@ -16,17 +16,18 @@ export class MgT2QuantityDialog extends Application {
         this.srcActor = srcActor;
         this.destActor = destActor;
         this.srcItem = srcItem;
-        this.maxQuantity = srcItem.system.quantity;
-        this.number = 1;
+        this.maxQuantity = parseInt(srcItem.system.quantity);
+        this.transferNumber = 1;
 
         this.options.title = "Move " + srcItem.name + " to " + destActor.name;
     }
 
     getData() {
+        console.log("Number is " + this.transferNumber);
         return {
             "max": this.maxQuantity,
             "half": (this.maxQuantity > 3)?parseInt(this.maxQuantity/2):0,
-            "number": this.number
+            "transferNumber": this.transferNumber
         }
     }
 
@@ -42,13 +43,14 @@ export class MgT2QuantityDialog extends Application {
 
     _changeQuantity(change, html) {
         console.log(change);
-        this.number += change;
-        if (this.number < 1) {
-            this.number = 1;
-        } else if (this.number > this.maxQuantity) {
-            this.number = this.maxQuantity;
+        this.transferNumber += change;
+        if (this.transferNumber < 1) {
+            this.transferNumber = 1;
+        } else if (this.transferNumber > this.maxQuantity) {
+            this.transferNumber = this.maxQuantity;
         }
-        html.find(".number")[0].value = this.number;
+        html.find(".number")[0].value = this.transferNumber;
+        html.find(".quantity")[0].value = "custom";
     }
 
     _getCount(option) {
@@ -65,15 +67,15 @@ export class MgT2QuantityDialog extends Application {
             return this.maxQuantity;
         } else {
             // Number is the custom number.
-            return this.number;
+            return this.transferNumber;
         }
     }
 
     _selectQuantity(html) {
         let option = html.find(".quantity")[0].value;
-        this.number = this._getCount(option);
-        console.log("Setting number to be " + this.number);
-        html.find(".number")[0].value = this.number;
+        this.transferNumber = this._getCount(option);
+        console.log("Setting number to be " + this.transferNumber);
+        html.find(".number")[0].value = this.transferNumber;
     }
 
     async onSaveClick(event, html) {

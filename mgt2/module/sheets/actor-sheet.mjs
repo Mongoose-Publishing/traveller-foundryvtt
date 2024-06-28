@@ -862,7 +862,8 @@ export class MgT2ActorSheet extends ActorSheet {
      */
     async _onDropItem(event, data) {
         super._onDropItem(event, data);
-
+        console.log("**** _onDropItem() ****");
+        console.log(data);
         if (!data || !data.uuid || data.uuid.indexOf("Actor") !== 0) {
             // This hasn't been dragged from another actor.
 
@@ -886,13 +887,16 @@ export class MgT2ActorSheet extends ActorSheet {
         let srcActorId = data.uuid.replace(/Actor\.([a-z0-9]*)\..*/gi, "$1");
         let itemId = data.uuid.replace(/Actor\.[a-z0-9]*\.Item\.([a-z0-9]*)/gi, "$1");
 
+        console.log("Trying the drop item stuff");
         if (actor.uuid.indexOf(srcActorId) === -1) {
+            console.log("uuid is -1");
             // Move between different actors.
             let srcActor = game.actors.get(srcActorId);
             if (srcActor) {
+                console.log("Source actor");
                 let item = srcActor.items.get(itemId);
 
-                if (item.system.quantity > 1) {
+                if (parseInt(item.system.quantity) > 1) {
                     new MgT2QuantityDialog(srcActor, actor, item).render(true);
                 } else {
                     srcActor.deleteEmbeddedDocuments("Item", [itemId]);
