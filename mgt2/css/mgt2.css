@@ -1451,6 +1451,19 @@ span.edit-skill {
     width: 96px;
 }
 
+.supply-box label.left-label {
+    text-align: left;
+    margin-left: 2px;
+    padding-top: 2px;
+    display: inline-block;
+    width: 80px;
+}
+
+.supply-box .supply {
+    width: 64px;
+    text-align: right;
+}
+
 .hits-box input {
     height: 24px;
     margin-bottom: 5px;
@@ -1596,4 +1609,26 @@ section.id-card .showIdCard {
 
 .side-values input {
     margin-bottom: 5px;
+}
+
+.crew-member-dialog .crew-portrait {
+    width: 64px;
+    height: 64px;
+}
+
+.crew-member-dialog .role-name {
+    text-transform: capitalize;
+    margin-bottom: 6px;
+}
+
+.crew-member-dialog .role-list {
+    width: 400px;
+}
+
+.crew-member-dialog div.role-name-header {
+    width: 150px;
+}
+
+.crew-member-dialog span.role-name {
+    font-weight: bold;
 }

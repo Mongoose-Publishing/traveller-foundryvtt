@@ -5,6 +5,7 @@ import {MgT2XPDialog } from "../helpers/xp-dialog.mjs";
 import {MgT2QuantityDialog } from "../helpers/quantity-dialog.mjs";
 import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
+import {MgT2CrewMemberDialog } from "../helpers/crew-member-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
 import {MgT2Item} from "../documents/item.mjs";
 import {Tools} from "../helpers/chat/tools.mjs";
@@ -143,6 +144,7 @@ export class MgT2ActorSheet extends ActorSheet {
         const cargo = [];
         const locker = [];
         const hardware = [];
+        const roles = [];
         let cargoUsed = 0;
         let dtonsUsed = 0;
         let powerTotal = 0;
@@ -164,6 +166,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 if (q > 0) {
                     cargoUsed += q;
                 }
+            } else if (i.type === "role") {
+                roles.push(i);
             } else if (i.type === 'hardware') {
                 hardware.push(i);
                 let h = i.system.hardware;
@@ -232,6 +236,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.cargo = cargo;
         context.locker = locker;
         context.hardware = hardware;
+        context.roles = roles;
 
         actorData.spacecraft.cargo = parseInt(actorData.spacecraft.dtons) - parseFloat(dtonsUsed);
         context.cargoUsed = cargoUsed;
@@ -552,6 +557,14 @@ export class MgT2ActorSheet extends ActorSheet {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
             this.actor.update({[`system.crewed.crew.-=${actorId}`]: null});
+        });
+
+        html.find('.crew-edit').click(ev => {
+            const li = $(ev.currentTarget).parents(".actor-crew");
+            const actorId = li.data("actorId");
+            const crew = game.actors.get(actorId);
+            new MgT2CrewMemberDialog(crew, this.actor).render(true);
+
         });
 
         html.find('.passenger-delete').click(ev => {
@@ -929,7 +942,8 @@ export class MgT2ActorSheet extends ActorSheet {
      */
     async _onDropItem(event, data) {
         super._onDropItem(event, data);
-
+        console.log("**** _onDropItem() ****");
+        console.log(data);
         if (!data || !data.uuid || data.uuid.indexOf("Actor") !== 0) {
             // This hasn't been dragged from another actor.
 
@@ -953,13 +967,16 @@ export class MgT2ActorSheet extends ActorSheet {
         let srcActorId = data.uuid.replace(/Actor\.([a-z0-9]*)\..*/gi, "$1");
         let itemId = data.uuid.replace(/Actor\.[a-z0-9]*\.Item\.([a-z0-9]*)/gi, "$1");
 
+        console.log("Trying the drop item stuff");
         if (actor.uuid.indexOf(srcActorId) === -1) {
+            console.log("uuid is -1");
             // Move between different actors.
             let srcActor = game.actors.get(srcActorId);
             if (srcActor) {
+                console.log("Source actor");
                 let item = srcActor.items.get(itemId);
 
-                if (item.system.quantity > 1) {
+                if (parseInt(item.system.quantity) > 1) {
                     new MgT2QuantityDialog(srcActor, actor, item).render(true);
                 } else {
                     srcActor.deleteEmbeddedDocuments("Item", [itemId]);

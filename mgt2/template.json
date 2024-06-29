@@ -190,6 +190,13 @@
                 "current": 0,
                 "show": false,
                 "default": false
+            },
+            "REP": {
+                "label": "Reputation",
+                "value": 0,
+                "current": 0,
+                "show": false,
+                "default": false
             }
         }
       },
@@ -217,7 +224,8 @@
           "crewed": {
               "crew": {},
               "passengers": {},
-              "roles": [ "NONE", "PILOT" ]
+              "roles": {
+              }
           }
       },
       "skills": {
@@ -1069,12 +1077,25 @@
             "cargo": 20,
             "mdrive": 0,
             "rdrive": 0,
-            "jdrive": 0
+            "jdrive": 0,
+            "navy":  {
+                "naval": false,
+                "supplies": {
+                    "value": 0,
+                    "max": 0
+                },
+                "cei": {
+                    "value": 7,
+                    "current": 7
+                },
+                "morale": 7,
+                "divisions": { }
+            }
         }
     }
   },
   "Item": {
-    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role" ],
     "templates": {
       "base": {
         "tl": 0,
@@ -1165,6 +1186,16 @@
                   "minimum": 0
               },
               "powerPerTon": 0
+          }
+      },
+      "role": {
+          "role": {
+              "description": "",
+              "action": "chat",
+              "chat": "",
+              "characteristic": null,
+              "skill": null,
+              "weaponId": null
           }
       }
     },

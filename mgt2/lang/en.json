@@ -82,6 +82,9 @@
   "MGT2.TravellerSheet.Fuel": "Fuel",
   "MGT2.TravellerSheet.CurrentFuel": "Current (dT)",
   "MGT2.TravellerSheet.MaxFuel": "Max (dT)",
+  "MGT2.TravellerSheet.Supplies": "Supplies",
+  "MGT2.TravellerSheet.CurrentSupplies": "Current",
+  "MGT2.TravellerSheet.MaxSupplies": "Max",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",
@@ -251,6 +254,7 @@
   "TYPES.Item.hardware": "Spacecraft Hardware",
   "TYPES.Item.term": "Term",
   "TYPES.Item.associate": "Associate",
+  "TYPES.Item.role": "Role",
 
   "TRAVELLER.Add": "Add"
 }

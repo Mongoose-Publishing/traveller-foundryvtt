@@ -16,6 +16,24 @@ function migrateActorData(actor, fromVersion) {
     }
     if (fromVersion < 3) {
         // Undone.
+    }
+    if (fromVersion < 5) {
+        console.log("Converting to v5 (Spacecraft Naval data");
+        if (actor.type === "spacecraft") {
+            actor.system.spacecraft.navy = {
+                "navy": false,
+                "supplies": {
+                    "value": 0,
+                    "max": 0
+                },
+                "cei": {
+                    "value": 7,
+                    "current": 7
+                },
+                "morale": 7,
+                "divisions": { }
+            };
+        }
         return actor.system;
     }
     return {};
@@ -33,7 +51,7 @@ function migrateItemData(item, fromVersion) {
 }
 
 export async function migrateWorld(fromVersion) {
-    console.log("**** MIGRATE SCHEMA TO v3 ****");
+    console.log("**** MIGRATE SCHEMA TO v5 ****");
 
     for (let actor of game.actors.contents) {
         const updateData = migrateActorData(actor, fromVersion);

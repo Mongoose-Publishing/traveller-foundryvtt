@@ -1,0 +1,44 @@
+{{!-- This template is a fallback for when items don't have more specific templates. --}}
+{{!-- Generally, you'll want to make more specific templates when possible. --}}
+<form class="{{cssClass}} {{item.type}}" autocomplete="off">
+  <div class="item-sheet">
+    <div class="sidebar">
+      <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    </div>
+
+    <div class="flex-group-left">
+      <h1 class="charname shadow">
+        <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+      </h1>
+
+      <div class="shadow">
+        <div class="resources grid grid-3col flex-group-left">
+          <div class="resource">
+            <label for="system.role.action" class="resource-label">Action</label>
+            <br/>
+            <select class="expand writable" name="system.role.action">
+              {{#select system.role.action}}
+              <option value="chat">Chat</option>
+              <option value="skill">Skill</option>
+              <option value="weapon">Weapon</option>
+              {{/select}}
+            </select>
+          </div>
+
+          <div class="resource">
+            <label for="system.role.chat" class="resource-label">Chat</label>
+            <input name="system.role.chat" type="text" value="{{system.role.chat}}"/>
+          </div>
+          <div class="resource">
+            <label for="system.role.characteristic" class="resource-label">Characteristic</label>
+            <input name="system.role.characteristic" type="text" value="{{system.role.characteristic}}"/>
+          </div>
+          <div class="resource">
+            <label for="system.role.skill" class="resource-label">Skill</label>
+            <input name="system.role.skill" type="text" value="{{system.role.skill}}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

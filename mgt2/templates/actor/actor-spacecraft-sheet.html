@@ -40,6 +40,25 @@
                 </div>
             </div>
 
+            {{#if system.spacecraft.navy.naval}}
+                <div class="side-panel supply-box shadow">
+                    <label for="system.supplies" class="box-title">{{localize 'MGT2.TravellerSheet.Supplies'}}</label>
+
+                    <div>
+                        <label class="left-label">{{localize 'MGT2.TravellerSheet.CurrentSupplies'}}</label>
+                        <input class="characteristic-value supply" type="number" name="system.spacecraft.navy.supplies.value"
+                               title="{{localize 'MGT2.TravellerSheet.CurrentSupplies'}}"
+                               value="{{system.spacecraft.navy.supplies.value}}" data-dtype="Number"/>
+                    </div>
+                    <div>
+                        <label class="left-label">{{localize 'MGT2.TravellerSheet.MaxSupplies'}}</label>
+                        <input class="characteristic-value supply" type="number"
+                               title="{{localize 'MGT2.TravellerSheet.MaxSupplies'}}"
+                               value="{{system.spacecraft.navy.supplies.max}}"/>
+                    </div>
+                </div>
+            {{/if}}
+
             <div class="side-panel armour-box shadow flex-group-center">
                 <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
 
@@ -106,6 +125,28 @@
                 </div>
             </div>
 
+            {{#if system.spacecraft.navy.naval}}
+                <div class="shadow">
+                    <div class="grid grid-5col">
+                        <div class="resource flex-group-center">
+                            <label for="system.spacecraft.navy.cei.value" class="field-label">CEI</label>
+                            <input class="field-value writable" name="system.spacecraft.navy.cei.value" type="number"
+                                   value="{{system.spacecraft.navy.cei.value}}"/>
+                        </div>
+                        <div class="resource flex-group-center">
+                            <label for="system.spacecraft.navy.cei.current" class="field-label">ECEI</label>
+                            <input class="field-value writable" name="system.spacecraft.navy.cei.current" type="number"
+                                   value="{{system.spacecraft.navy.cei.current}}"/>
+                        </div>
+
+                        <div class="resource flex-group-center">
+                            <label for="system.spacecraft.navy.morale" class="field-label">Morale</label>
+                            <input class="field-value writable" name="system.spacecraft.navy.morale" type="number"
+                                   value="{{system.spacecraft.navy.morale}}"/>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
 
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
@@ -221,6 +262,30 @@
                     </div>
 
                     <div class="tab items" data-tab="notes">
+                        <div class="resources grid grid-3col">
+                            <div class="resource flex-group-left">
+                                <input type="checkbox" name="system.spacecraft.navy.naval" {{checked system.spacecraft.navy.naval}} data-dtype="Boolean" />
+                                <label for="system.spacecraft.navy.naval" class="resource-label">Naval vessel</label>
+                            </div>
+
+                            {{#if system.spacecraft.navy.naval}}
+                                Divisions
+                            {{/if}}
+                        </div>
+
+                        <ol class="items-list actor-items grid grid-3col">
+                            {{#each roles as |item id|}}
+                            <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
+                                <h4>{{item.name}}</h4>
+                                <img src="{{item.img}}"/>
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ol>
+
                         <section class="description shadow">
                             {{editor
                             enrichedDescription target="system.description"
@@ -240,28 +305,37 @@
                                     {{{showCrewInfo system crewMember}}}
 
                                     <div class="item-controls">
-                                        <a class="item-control crew-passenger" title="Make passenger"><i class="fas fa-suitcase"></i></a>
-                                        <a class="item-control crew-delete" title="Remove Crew"><i class="fas fa-trash"></i></a>
+                                        <a class="item-control crew-passenger" title="Make passenger">
+                                            <i class="fas fa-suitcase"></i></a>
+                                        <a class="item-control crew-edit" title="Edit Crew Position">
+                                            <i class="fas fa-edit"></i></a>
+                                        <a class="item-control crew-delete" title="Remove Crew">
+                                            <i class="fas fa-trash"></i></a>
                                     </div>
                                 </li>
                             {{/each}}
                         </ol>
+                        <br/>
 
-                        <h3>Passengers</h3>
+                        {{#if passengers}}
+                            <h3>Passengers</h3>
 
-                        <ol class="items-list actor-crew-list grid grid-3col">
-                            {{#each passengers as |crewMember|}}
-                            <li class="actor-crew" data-actor-id="{{crewMember._id}}">
-                                <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
-                                <img title="{{crewMember.name}}" src="{{crewMember.img}}"/>
+                            <ol class="items-list actor-crew-list grid grid-3col">
+                                {{#each passengers as |crewMember|}}
+                                <li class="actor-crew" data-actor-id="{{crewMember._id}}">
+                                    <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
+                                    <img title="{{crewMember.name}}" src="{{crewMember.img}}"/>
 
-                                <div class="item-controls">
-                                    <a class="item-control passenger-crew" title="Make crew"><i class="fas fa-person-military-pointing"></i></a>
-                                    <a class="item-control passenger-delete" title="Remove Crew"><i class="fas fa-trash"></i></a>
-                                </div>
-                            </li>
-                            {{/each}}
-                        </ol>
+                                    <div class="item-controls">
+                                        <a class="item-control passenger-crew" title="Make crew">
+                                            <i class="fas fa-person-military-pointing"></i></a>
+                                        <a class="item-control passenger-delete" title="Remove Crew">
+                                            <i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                                {{/each}}
+                            </ol>
+                        {{/if}}
                     </div>
                 </div>
             </div>
