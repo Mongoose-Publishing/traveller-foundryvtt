@@ -835,6 +835,20 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
    return arg1 == arg2;
 });
 
+Handlebars.registerHelper('concat', function(arg1, arg2, arg3, arg4, arg5) {
+    let text = "";
+
+    if (typeof arg1 === 'string' || arg1 instanceof String) text += arg1;
+    if (typeof arg2 === 'string' || arg2 instanceof String) text += arg2;
+    if (typeof arg3 === 'string' || arg3 instanceof String) text += arg3;
+    if (typeof arg4 === 'string' || arg4 instanceof String) text += arg4;
+    if (typeof arg5 === 'string' || arg5 instanceof String) text += arg5;
+
+    console.log("Concat " + text);
+
+    return text;
+});
+
 Handlebars.registerHelper('nameQuantity', function(item) {
    let name = item.name;
    let quantity = item.system.quantity;

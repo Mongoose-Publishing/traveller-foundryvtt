@@ -42,7 +42,23 @@
             {{#if (ifEquals action.action "skill") }}
               <div class="resource">
                 <label for="system.role.actions.{{id}}.skill" class="resource-label">Skill</label>
+                <br/>
+                <!--
                 <input name="system.role.actions.{{id}}.skill" type="text" value="{{action.skill}}"/>
+                -->
+                <select class="writable" name="system.role.actions.{{id}}.skill">
+                  {{#select action.skill}}
+                    <option value="-">None</option>
+                    {{#each ../skills as |skill skid|}}
+                      <option value="{{skid}}">{{skill.label}}</option>
+                        {{#if skill.specialities}}
+                          {{#each skill.specialities as |spec spid|}}
+                            <option value="{{skid}}.{{spid}}">{{skill.label}} ({{spec.label}})</option>
+                          {{/each}}
+                        {{/if}}
+                    {{/each}}
+                  {{/select}}
+                </select>
               </div>
             {{/if}}
           </div>

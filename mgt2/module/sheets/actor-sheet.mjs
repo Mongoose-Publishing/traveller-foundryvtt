@@ -756,6 +756,11 @@ export class MgT2ActorSheet extends ActorSheet {
                 content: `<b>${actorCrew.name} aboard '${shipActor.name}':</b><br/>${action.chat}`
             }
             ChatMessage.create(chatData, {});
+        } else if (action.action === "skill") {
+            let skill = action.skill.replaceAll(/\..*/g, "");
+            let spec = (action.skill.indexOf(".") > 0)?(action.skill.replaceAll(/.*\./g, "")):null;
+
+            new MgT2SkillDialog(actorCrew, skill, spec).render(true);
         }
     }
 
