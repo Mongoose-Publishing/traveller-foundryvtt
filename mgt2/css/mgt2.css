@@ -1632,3 +1632,14 @@ section.id-card .showIdCard {
 .crew-member-dialog span.role-name {
     font-weight: bold;
 }
+
+.actor-crew .role-action-buttons {
+    clear: left;
+}
+
+.actor-crew .role-action-button {
+    width: 32px;
+    display: inline-block;
+    padding-top: 0;
+    margin-top: 0;
+}

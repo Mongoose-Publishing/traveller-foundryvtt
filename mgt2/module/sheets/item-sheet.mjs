@@ -224,6 +224,7 @@ export class MgT2ItemSheet extends ItemSheet {
     }
 
     _addRollAction(item) {
+        console.log(item.system);
         let actions = item.system.role.actions;
 
         if (!actions) {

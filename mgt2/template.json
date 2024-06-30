@@ -1190,12 +1190,8 @@
       },
       "role": {
           "role": {
-              "description": "",
-              "action": "chat",
-              "chat": "",
-              "characteristic": null,
-              "skill": null,
-              "weaponId": null
+              "actions": {},
+              "description": ""
           }
       }
     },
@@ -1224,6 +1220,9 @@
     },
     "hardware": {
       "templates": [ "base","hardware" ]
+    },
+    "role": {
+        "templates": [ "role" ]
     }
   }
 }

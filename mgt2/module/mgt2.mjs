@@ -1257,20 +1257,29 @@ Handlebars.registerHelper('chaStatus', function(cha) {
 });
 
 Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
-    console.log("showCrewInfo");
-    console.log(actorShip);
-    console.log(actorCrew);
-
     let html = "";
     let roles = actorShip.system.crewed.crew[actorCrew.id];
-    console.log(roles);
+    let roleItems = [];
+    // Top level list of role names.
     for (let id in roles) {
         let roleItem = actorShip.items.get(id);
         html += `<span>${roleItem.name}</span><br/>`;
+        roleItems.push(roleItem);
     }
+    // List of actions from all of those roles
+    html += `<div class="role-action-buttons">`;
+    for (let role of roleItems) {
+        for (let id in role.system.role.actions) {
+            let action = role.system.role.actions[id];
+            html += `<div class="role-action-button" data-action-id="${id}" data-role-id="${role.id}" data-crew-id="${actorCrew.id}"><img src="${role.img}" title="${action.title}"/></div>`;
+        }
+    }
+    html += `</div>`;
 
     return html;
 });
+
+
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */

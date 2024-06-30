@@ -586,6 +586,15 @@ export class MgT2ActorSheet extends ActorSheet {
             this._movePassengerToCrew(this.actor, actorId);
         });
 
+        html.find('.role-action-button').click(ev => {
+           const div = $(ev.currentTarget);
+           const actorId = div.data("crewId");
+           const roleId = div.data("roleId");
+           const actionId = div.data("actionId");
+           console.log(actorId + ", " + roleId + ", " + actionId);
+           this._runCrewAction(this.actor, actorId, roleId, actionId);
+        });
+
         // Dodge reaction
         html.find('.dodgeRoll').click(ev => {
             this._rollDodge(ev, this.actor);
@@ -733,6 +742,22 @@ export class MgT2ActorSheet extends ActorSheet {
         await actor.update({[`system.crewed.passengers.${actorId}`]: { "role": "STANDARD"}});
     }
 
+    _runCrewAction(shipActor, actorCrewId, roleId, actionId) {
+        const actorCrew = game.actors.get(actorCrewId);
+        const itemRole = shipActor.items.get(roleId);
+        const action = itemRole.system.role.actions[actionId];
+
+        console.log(action.title);
+
+        if (action.action === "chat") {
+            let chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker(),
+                content: `<b>${actorCrew.name} aboard '${shipActor.name}':</b><br/>${action.chat}`
+            }
+            ChatMessage.create(chatData, {});
+        }
+    }
 
     _onSkillDragStart(event, options) {
         console.log("_onSkillDragStart:");
