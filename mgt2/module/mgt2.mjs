@@ -1273,23 +1273,17 @@ Handlebars.registerHelper('chaStatus', function(cha) {
 Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
     let html = "";
     let roles = actorShip.system.crewed.crew[actorCrew.id];
-    let roleItems = [];
-    // Top level list of role names.
+
     for (let id in roles) {
         let roleItem = actorShip.items.get(id);
-        html += `<span>${roleItem.name}</span><br/>`;
-        roleItems.push(roleItem);
-    }
-    // List of actions from all of those roles
-    html += `<div class="role-action-buttons">`;
-    for (let role of roleItems) {
-        for (let id in role.system.role.actions) {
-            let action = role.system.role.actions[id];
-            html += `<div class="role-action-button" data-action-id="${id}" data-role-id="${role.id}" data-crew-id="${actorCrew.id}"><img src="${role.img}" title="${action.title}"/></div>`;
+        html += `<span class="role-title">${roleItem.name}</span>`;
+        html += `<div class="role-action-buttons">`;
+        for (let id in roleItem.system.role.actions) {
+            let action = roleItem.system.role.actions[id];
+            html += `<span class="role-action-button" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}"><img class="action" src="${roleItem.img}" title="${action.title}"/></span>`;
         }
+        html += "</div>";
     }
-    html += `</div>`;
-
     return html;
 });
 

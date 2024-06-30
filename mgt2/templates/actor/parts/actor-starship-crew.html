@@ -8,7 +8,7 @@
                 <img title="{{crewMember.name}}" src="{{crewMember.img}}"/>
 
                 {{{showCrewInfo ../actor crewMember}}}
-
+                <br/>
                 <div class="item-controls">
                     <a class="item-control crew-passenger" title="Make passenger">
                         <i class="fas fa-suitcase"></i></a>
@@ -17,9 +17,6 @@
                     <a class="item-control crew-delete" title="Remove Crew">
                         <i class="fas fa-trash"></i></a>
                 </div>
-                {{#if crewMember.roles}}
-                Foo bar baz
-                {{/if}}
             </li>
         {{/each}}
     </ol>

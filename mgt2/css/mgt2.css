@@ -1633,13 +1633,28 @@ section.id-card .showIdCard {
     font-weight: bold;
 }
 
+.actor-crew .role-title {
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+    font-weight: bold;
+}
+
 .actor-crew .role-action-buttons {
-    clear: left;
+    _clear: left;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
 }
 
 .actor-crew .role-action-button {
-    width: 32px;
     display: inline-block;
-    padding-top: 0;
-    margin-top: 0;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.actor-crew .role-action-button img.action {
+    margin: 0 4px 0 0;
+    padding: 0 4px 0 0;
+    height: 32px;
+    width: 32px;
 }

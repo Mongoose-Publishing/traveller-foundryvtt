@@ -254,7 +254,7 @@
   "TYPES.Item.hardware": "Spacecraft Hardware",
   "TYPES.Item.term": "Career Term",
   "TYPES.Item.associate": "Background Associate",
-  "TYPES.Item.role": "Ship Role",
+  "TYPES.Item.role": "Crew Role",
 
   "TRAVELLER.Add": "Add"
 }
