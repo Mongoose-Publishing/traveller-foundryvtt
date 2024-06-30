@@ -11,33 +11,42 @@
         <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
       </h1>
 
-      <div class="shadow">
-        <div class="resources grid grid-3col flex-group-left">
-          <div class="resource">
-            <label for="system.role.action" class="resource-label">Action</label>
-            <br/>
-            <select class="expand writable" name="system.role.action">
-              {{#select system.role.action}}
-              <option value="chat">Chat</option>
-              <option value="skill">Skill</option>
-              <option value="weapon">Weapon</option>
-              {{/select}}
-            </select>
-          </div>
-
-          <div class="resource">
-            <label for="system.role.chat" class="resource-label">Chat</label>
-            <input name="system.role.chat" type="text" value="{{system.role.chat}}"/>
-          </div>
-          <div class="resource">
-            <label for="system.role.characteristic" class="resource-label">Characteristic</label>
-            <input name="system.role.characteristic" type="text" value="{{system.role.characteristic}}"/>
-          </div>
-          <div class="resource">
-            <label for="system.role.skill" class="resource-label">Skill</label>
-            <input name="system.role.skill" type="text" value="{{system.role.skill}}"/>
+      {{#each system.role.actions as |action id|}}
+        <div class="shadow">
+          <h2>
+            <input class="charname" name="system.role.actions.{{id}}.title"
+              value="{{action.title}}"/>
+          </h2>
+          <div class="resource grid grid-3col flex-group-left">
+            <div class="resource">
+              <label for="system.role.actions.{{id}}.action" class="resource-label">Action</label>
+              <br/>
+              <select class="expand writable" name="system.role.actions.{{id}}.action">
+                {{#select action.action}}
+                  <option value="chat">Chat</option>
+                  <option value="skill">Skill</option>
+                  <option value="weapon">Weapon</option>
+                {{/select}}
+              </select>
+            </div>
+            {{#if (ifEquals action.action "chat") }}
+              <div class="resource grid-span-2">
+                <label for="system.role.actions.{{id}}.chat" class="resource-label">Chat</label>
+                <input name="system.role.actions.{{id}}.chat" type="text" value="{{action.chat}}"/>
+              </div>
+            {{/if}}
+            {{#if (ifEquals action.action "skill") }}
+              <div class="resource">
+                <label for="system.role.actions.{{id}}.skill" class="resource-label">Skill</label>
+                <input name="system.role.actions.{{id}}.skill" type="text" value="{{action.skill}}"/>
+              </div>
+            {{/if}}
           </div>
         </div>
+      {{/each}}
+
+      <div class="item-controls">
+          <a class="role-action-add" title="Create term" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add action</a>
       </div>
     </div>
   </div>

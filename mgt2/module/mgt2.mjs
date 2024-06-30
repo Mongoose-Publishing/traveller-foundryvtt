@@ -1256,11 +1256,20 @@ Handlebars.registerHelper('chaStatus', function(cha) {
     }
 });
 
-Handlebars.registerHelper('showCrewInfo', function(vehicleData, actor) {
-    console.log(vehicleData);
-    console.log(actor);
+Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
+    console.log("showCrewInfo");
+    console.log(actorShip);
+    console.log(actorCrew);
 
-    return "Crew";
+    let html = "";
+    let roles = actorShip.system.crewed.crew[actorCrew.id];
+    console.log(roles);
+    for (let id in roles) {
+        let roleItem = actorShip.items.get(id);
+        html += `<span>${roleItem.name}</span><br/>`;
+    }
+
+    return html;
 });
 
 /* -------------------------------------------- */

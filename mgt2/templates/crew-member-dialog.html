@@ -11,12 +11,9 @@
     </div>
 
     <div>
-        <h4>Role Assignment</h4>
         <ol class="items-list role-list">
             <li class="item flexrow">
-                <div class="role-name-header">Role</div>
-                <div>Action</div>
-                <div>Skill</div>
+                <div class="role-name-header">Role Assignment</div>
             </li>
             {{#each shipRoles as |role|}}
                 <li class="item flexrow" data-item-id="{{role.id}}">
@@ -25,9 +22,6 @@
                                {{checked role.assigned}} data-dtype="Boolean"/>
                         <span class="role-name">{{role.name}}</span>
                     </div>
-
-                    <span>{{role.action}}</span>
-                    <span>{{role.skill}}</span>
                 </li>
             {{/each}}
         </ol>

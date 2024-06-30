@@ -182,6 +182,9 @@ export class MgT2ItemSheet extends ItemSheet {
         html.find(".quantity-roll").click(ev => this._rollQuantity(this.item));
 
         html.find(".randomiseRelationship").click(ev => this._randomiseRelationship(this.item));
+
+        // Role Items
+        html.find(".role-action-add").click(ev => this._addRollAction(this.item));
     }
 
     _rollDamage(item) {
@@ -212,6 +215,27 @@ export class MgT2ItemSheet extends ItemSheet {
             item.system.quantity = quantity;
             item.update({"system.quantity": item.system.quantity });
         }
+    }
+
+    _addRollAction(item) {
+        let actions = item.system.role.actions;
+
+        if (!actions) {
+            actions = {};
+            actions[Date.now().toString(36)-1] = {
+                "action": item.system.role.action,
+                "skill": item.system.role.skill,
+                "characteristic": item.system.role.characteristic,
+                "chat": item.system.chat
+            }
+        }
+        actions[Date.now().toString(36)] = {
+            "title": "Action",
+            "action": "chat",
+            "chat": ""
+        }
+        item.update({"system.role.actions": actions });
+
     }
 
     _randomiseRelationship(item) {

@@ -725,7 +725,7 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _movePassengerToCrew(actor, actorId) {
         await actor.update({[`system.crewed.passengers.-=${actorId}`]: null});
-        await actor.update({[`system.crewed.crew.${actorId}`]: { "role": "NONE"}});
+        await actor.update({[`system.crewed.crew.${actorId}`]: { } });
     }
 
     async _moveCrewToPassenger(actor, actorId) {

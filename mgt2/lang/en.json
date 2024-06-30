@@ -252,9 +252,9 @@
   "TYPES.Item.augment": "Augmentation",
   "TYPES.Item.cargo": "Cargo",
   "TYPES.Item.hardware": "Spacecraft Hardware",
-  "TYPES.Item.term": "Term",
-  "TYPES.Item.associate": "Associate",
-  "TYPES.Item.role": "Role",
+  "TYPES.Item.term": "Career Term",
+  "TYPES.Item.associate": "Background Associate",
+  "TYPES.Item.role": "Ship Role",
 
   "TRAVELLER.Add": "Add"
 }

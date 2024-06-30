@@ -1,0 +1,54 @@
+<h3>Crew</h3>
+
+{{#if crew}}
+    <ol class="items-list actor-crew-list grid grid-3col">
+        {{#each crew as |crewMember|}}
+            <li class="actor-crew" data-actor-id="{{crewMember._id}}">
+                <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
+                <img title="{{crewMember.name}}" src="{{crewMember.img}}"/>
+
+                {{{showCrewInfo ../actor crewMember}}}
+
+                <div class="item-controls">
+                    <a class="item-control crew-passenger" title="Make passenger">
+                        <i class="fas fa-suitcase"></i></a>
+                    <a class="item-control crew-edit" title="Edit Crew Position">
+                        <i class="fas fa-edit"></i></a>
+                    <a class="item-control crew-delete" title="Remove Crew">
+                        <i class="fas fa-trash"></i></a>
+                </div>
+                {{#if crewMember.roles}}
+                Foo bar baz
+                {{/if}}
+            </li>
+        {{/each}}
+    </ol>
+{{else}}
+    {{#if passengers}}
+        <p>No passengers are assigned as crew members.</p>
+    {{else}}
+        <p>Drag Travellers or NPCs to this ship to add crew members</p>
+    {{/if}}
+{{/if}}
+
+<br/>
+
+{{#if passengers}}
+    <h3>Passengers</h3>
+
+    <ol class="items-list actor-crew-list grid grid-3col">
+        {{#each passengers as |crewMember|}}
+        <li class="actor-crew" data-actor-id="{{crewMember._id}}">
+            <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
+            <img title="{{crewMember.name}}" src="{{crewMember.img}}"/>
+
+            <div class="item-controls">
+                <a class="item-control passenger-crew" title="Make crew">
+                    <i class="fas fa-person-military-pointing"></i></a>
+                <a class="item-control passenger-delete" title="Remove Crew">
+                    <i class="fas fa-trash"></i></a>
+            </div>
+        </li>
+        {{/each}}
+    </ol>
+{{/if}}
