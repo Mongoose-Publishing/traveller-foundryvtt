@@ -175,3 +175,7 @@ form.career section.history-description {
     bottom: 0px;
     background-color: #eff0f0;
 }
+
+.role-action .item-controls {
+    float: right;
+}

@@ -185,6 +185,12 @@ export class MgT2ItemSheet extends ItemSheet {
 
         // Role Items
         html.find(".role-action-add").click(ev => this._addRollAction(this.item));
+
+        html.find(".role-action-delete").click(ev => {
+            const d = $(ev.currentTarget).parents(".role-action");
+            const id = d.data("actionId");
+            this._deleteRollAction(this.item, id)
+        });
     }
 
     _rollDamage(item) {
@@ -235,7 +241,12 @@ export class MgT2ItemSheet extends ItemSheet {
             "chat": ""
         }
         item.update({"system.role.actions": actions });
+    }
 
+    _deleteRollAction(item, id) {
+        let actions = item.system.role.actions;
+
+        item.update({[`system.role.actions.-=${id}`]: null});
     }
 
     _randomiseRelationship(item) {

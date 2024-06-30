@@ -12,11 +12,15 @@
       </h1>
 
       {{#each system.role.actions as |action id|}}
-        <div class="shadow">
+        <div class="shadow role-action" data-action-id="{{id}}">
           <h2>
-            <input class="charname" name="system.role.actions.{{id}}.title"
+            <input class="role-action-name" name="system.role.actions.{{id}}.title"
               value="{{action.title}}"/>
           </h2>
+          <div class="item-controls">
+            <a class="role-action-delete" title="Delete action"><i class="fas fa-trash"></i></a>
+          </div>
+
           <div class="resource grid grid-3col flex-group-left">
             <div class="resource">
               <label for="system.role.actions.{{id}}.action" class="resource-label">Action</label>
@@ -46,7 +50,7 @@
       {{/each}}
 
       <div class="item-controls">
-          <a class="role-action-add" title="Create term" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add action</a>
+          <a class="role-action-add" title="Add new action" data-name="Action" data-type="action"><i class="fas fa-plus"></i> Add action</a>
       </div>
     </div>
   </div>
