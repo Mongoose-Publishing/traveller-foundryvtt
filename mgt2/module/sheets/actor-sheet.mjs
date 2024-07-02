@@ -760,7 +760,7 @@ export class MgT2ActorSheet extends ActorSheet {
             let skill = action.skill.replaceAll(/\..*/g, "");
             let spec = (action.skill.indexOf(".") > 0)?(action.skill.replaceAll(/.*\./g, "")):null;
 
-            new MgT2SkillDialog(actorCrew, skill, spec).render(true);
+            new MgT2SkillDialog(actorCrew, skill, spec, null, parseInt(action.dm?action.dm:0)).render(true);
         }
     }
 

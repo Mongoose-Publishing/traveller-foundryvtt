@@ -12,7 +12,7 @@ export class MgT2SkillDialog extends Application {
         return options;
     }
 
-    constructor(actor, skill, spec, cha) {
+    constructor(actor, skill, spec, cha, defaultDm) {
         super();
         this.actor = actor;
         const data = actor.system;
@@ -31,6 +31,7 @@ export class MgT2SkillDialog extends Application {
         this.augment = 0;
         this.augdm = 0;
         this.penalty = 0;
+        this.defaultDm = defaultDm?defaultDm:0;
 
         if (cha && data.characteristics && data.characteristics[cha]) {
             this.characteristic = data.characteristics[cha];
@@ -91,7 +92,7 @@ export class MgT2SkillDialog extends Application {
             "value": this.value,
             "showCha": (this.skill && this.actor.type !== "creature"),
             "chaOnly": this.chaOnly,
-            "dm": 0,
+            "dm": this.defaultDm,
             "dicetype": "normal",
             "physicalDM": this.penalty,
             "characteristic": this.cha

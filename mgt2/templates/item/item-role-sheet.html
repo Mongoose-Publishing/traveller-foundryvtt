@@ -21,7 +21,7 @@
             <a class="role-action-delete" title="Delete action"><i class="fas fa-trash"></i></a>
           </div>
 
-          <div class="resource grid grid-3col flex-group-left">
+          <div class="resource grid grid-4col flex-group-left">
             <div class="resource">
               <label for="system.role.actions.{{id}}.action" class="resource-label">Action</label>
               <br/>
@@ -36,11 +36,11 @@
             {{#if (ifEquals action.action "chat") }}
               <div class="resource grid-span-2">
                 <label for="system.role.actions.{{id}}.chat" class="resource-label">Chat</label>
-                <input name="system.role.actions.{{id}}.chat" type="text" value="{{action.chat}}"/>
+                <input class="writable" name="system.role.actions.{{id}}.chat" type="text" value="{{action.chat}}"/>
               </div>
             {{/if}}
             {{#if (ifEquals action.action "skill") }}
-              <div class="resource">
+              <div class="resource grid-span-2">
                 <label for="system.role.actions.{{id}}.skill" class="resource-label">Skill</label>
                 <br/>
                 <!--
@@ -59,6 +59,11 @@
                     {{/each}}
                   {{/select}}
                 </select>
+              </div>
+              <div class="resource">
+                <label for="system.role.actions.{{id}}.dm" class="resource-label">DM</label>
+                <br/>
+                <input class="writable" name="system.role.actions.{{id}}.dm" type="number" value="{{action.dm}}"/>
               </div>
             {{/if}}
           </div>
