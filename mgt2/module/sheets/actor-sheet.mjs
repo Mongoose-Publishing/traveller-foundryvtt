@@ -559,6 +559,11 @@ export class MgT2ActorSheet extends ActorSheet {
             this.actor.update({[`system.crewed.crew.-=${actorId}`]: null});
         });
 
+        html.find('.embedded-actor-portrait').click(ev => {
+           const actorId = $(ev.currentTarget).data("actorId");
+           game.actors.get(actorId).sheet.render(true);
+        });
+
         html.find('.crew-edit').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");

@@ -5,7 +5,7 @@
         {{#each crew as |crewMember|}}
             <li class="actor-crew" data-actor-id="{{crewMember._id}}">
                 <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
-                <img title="{{crewMember.name}}" src="{{crewMember.img}}"/>
+                <img class="embedded-actor-portrait" data-actor-id="{{crewMember._id}}" title="{{crewMember.name}}" src="{{crewMember.img}}"/>
 
                 {{{showCrewInfo ../actor crewMember}}}
                 <br/>
@@ -37,7 +37,7 @@
         {{#each passengers as |crewMember|}}
         <li class="actor-crew" data-actor-id="{{crewMember._id}}">
             <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
-            <img title="{{crewMember.name}}" src="{{crewMember.img}}"/>
+            <img class="embedded-actor-portrait" data-actor-id="{{crewMember._id}}"  title="{{crewMember.name}}" src="{{crewMember.img}}"/>
 
             <div class="item-controls">
                 <a class="item-control passenger-crew" title="Make crew">
