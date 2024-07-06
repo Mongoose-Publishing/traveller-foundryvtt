@@ -71,7 +71,7 @@ export class MgT2ItemSheet extends ItemSheet {
         }
 
         if (context.item.type === "hardware" && context.item.parent != null) {
-            this.calculateShipHardware(context.item)
+            this.calculateShipHardware(context, context.item)
         }
 
         return context;
@@ -79,7 +79,7 @@ export class MgT2ItemSheet extends ItemSheet {
 
     /* -------------------------------------------- */
 
-    calculateShipHardware(item) {
+    calculateShipHardware(context, item) {
         console.log("calculateShipHardware: " + item.name);
 
         let ship = item.parent;
@@ -88,7 +88,7 @@ export class MgT2ItemSheet extends ItemSheet {
         }
 
         // We only do this if the item is part of an existing ship.
-        var shipTons = ship.system.spacecraft.dtons;
+        let shipTons = ship.system.spacecraft.dtons;
 
         // Calculate armour tonnage.
         if (item.system.hardware.system === "armour") {
@@ -118,7 +118,7 @@ export class MgT2ItemSheet extends ItemSheet {
 
             if (powerPerTon < 1) {
                 item.system.hardware.powerPerTon = 1
-                item.update({"system.hardware.powerPerTon": 1 });
+                item.update({"system.hardware.powerPerTon": 1});
             } else {
                 if (parseInt(rating / powerPerTon) !== tons) {
                     tons = parseInt(rating / powerPerTon);
@@ -131,6 +131,23 @@ export class MgT2ItemSheet extends ItemSheet {
                     item.update({"system.cost": item.system.cost})
                 }
             }
+        } else if (item.system.hardware.system === "weapon") {
+            let availableWeapons = [];
+            let activeWeapons = [];
+            if (item.system.hardware.weapons) {
+                for (let wpnId in item.system.hardware.weapons) {
+                    let wpn = ship.items.get(wpnId);
+                    activeWeapons.push(wpn);
+                }
+            }
+
+            for (let wpn of ship.items) {
+                if (wpn.type === "weapon" && wpn.system.weapon.scale === "spacecraft") {
+                    availableWeapons.push(wpn);
+                }
+            }
+            context.availableWeapons = availableWeapons;
+            context.activeWeapons = activeWeapons;
         } else {
             let tons = parseFloat(item.system.hardware.tons);
             let percent = parseFloat(item.system.hardware.tonnage.percent);
@@ -190,6 +207,50 @@ export class MgT2ItemSheet extends ItemSheet {
             const d = $(ev.currentTarget).parents(".role-action");
             const id = d.data("actionId");
             this._deleteRollAction(this.item, id)
+        });
+
+        html.find(".item-add-wpn").click(ev => {
+           const w = $(ev.currentTarget).parents(".ship-weapon");
+           const id = w.data("itemId");
+           if (this.item.system.hardware) {
+               const hardware = this.item.system.hardware;
+               if (!hardware.weapons) {
+                   hardware.weapons = {};
+               }
+               // Can it fit?
+               let currentWeapons = 0;
+               for (let w in hardware.weapons) {
+                   currentWeapons += hardware.weapons[w].quantity;
+               }
+               console.log("Current count " + currentWeapons);
+               let maxWeapons = parseInt(hardware.mount.replaceAll(/[^0-9]/g, ""));
+               if (isNaN(maxWeapons)) maxWeapons = 1;
+               if (currentWeapons < maxWeapons) {
+                   if (hardware.weapons[id]) {
+                       hardware.weapons[id].quantity++;
+                   } else {
+                       hardware.weapons[id] = {"active": true, "quantity": 1};
+                   }
+                   this.item.update({"system.hardware.weapons": hardware.weapons});
+               }
+           }
+        });
+
+        html.find(".item-del-wpn").click(ev => {
+            const w = $(ev.currentTarget).parents(".ship-weapon");
+            const id = w.data("itemId");
+            if (this.item.system.hardware) {
+                if (this.item.system.hardware.weapons) {
+                    if (this.item.system.hardware.weapons[id]) {
+                        let q = parseInt(this.item.system.hardware.weapons[id].quantity);
+                        if (q > 1) {
+                            this.item.update({[`system.hardware.weapons.${id}.quantity`]: q-1});
+                        } else {
+                            this.item.update({[`system.hardware.weapons.-=${id}`]: null});
+                        }
+                    }
+                }
+            }
         });
     }
 

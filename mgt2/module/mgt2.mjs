@@ -835,6 +835,25 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
    return arg1 == arg2;
 });
 
+Handlebars.registerHelper('ifStartsWith', function(arg1, arg2) {
+    if (arg1 && arg2) {
+        return arg1.startsWith(arg2);
+    }
+    return false;
+});
+
+Handlebars.registerHelper('mountedWeaponsCount', function(mount, wpn) {
+    if (mount.hardware.weapons) {
+        if (mount.hardware.weapons[wpn._id]) {
+            let q = parseInt(mount.hardware.weapons[wpn._id].quantity);
+            if (q > 1) {
+                return "x" + q;
+            }
+        }
+    }
+    return "";
+});
+
 Handlebars.registerHelper('concat', function(arg1, arg2, arg3, arg4, arg5) {
     let text = "";
 

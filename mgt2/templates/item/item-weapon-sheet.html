@@ -53,18 +53,75 @@
                     </div>
 
                     <div class="resource">
+                        <label for="data.weapon.scale" class="resource-label">Scale</label>
+                        <br/>
+                        <select class="expand writable" name="data.weapon.scale" title="Weapon Scale">
+                            {{#select data.weapon.scale}}
+                            <option value="traveller">Traveller</option>
+                            <option value="vehicle">Vehicle</option>
+                            <option value="spacecraft">Spacecraft</option>
+                            {{/select}}
+                        </select>
+                    </div>
+
+                    <div class="resource">
                         <label for="data.weapon.damage" class="resource-label">Damage</label>
                         <input class="writable" type="text" name="data.weapon.damage" value="{{data.weapon.damage}}" data-dtype="String"/>
                     </div>
+
                     <div class="resource">
-                        <label for="data.weapon.range" class="resource-label">Range (m)</label>
+                    {{#if (ifEquals data.weapon.scale "spacecraft")}}
+                        <label for="data.weapon.spaceRange" class="resource-label">{{localize "MGT2.Item.RangeSpace"}}</label>
+                        <select class="expand writable" name="data.weapon.spaceRange" title="Range of spacecraft weapon">
+                            {{#select data.weapon.spaceRange}}
+                            <option value=adjacent">{{localize "MGT2.Item.SpaceRange.adjacent"}}</option>
+                            <option value="close">{{localize "MGT2.Item.SpaceRange.close"}}</option>
+                            <option value="short">{{localize "MGT2.Item.SpaceRange.short"}}</option>
+                            <option value="medium">{{localize "MGT2.Item.SpaceRange.medium"}}</option>
+                            <option value="long">{{localize "MGT2.Item.SpaceRange.long"}}</option>
+                            <option value="verylong">{{localize "MGT2.Item.SpaceRange.verylong"}}</option>
+                            <option value="distant">{{localize "MGT2.Item.SpaceRange.distant"}}</option>
+                            {{/select}}
+                        </select>
+                    {{else if (ifEquals data.weapon.scale "vehicle")}}
+                        <label class="resource-label">{{localize "MGT2.Item.RangeKM"}}</label>
+                        <br/>
                         <input class="writable" type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
+                    {{else}}
+                        <label class="resource-label">{{localize "MGT2.Item.RangeM"}}</label>
+                        <br/>
+                        <input class="writable" type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
+                    {{/if}}
                     </div>
+
                     <div class="resource grid-span-3 flex-group-left">
                         <label for="data.weapon.traits" class="resource-label">Traits</label>
                         <input class="writable" type="text" name="data.weapon.traits" placeholder="List of weapon traits"
                                value="{{data.weapon.traits}}" data-dtype="String"/>
                     </div>
+
+                    {{#if (ifEquals data.weapon.scale "spacecraft")}}
+                        <div class="resource">
+                            <label for="data.weapon.mount" class="resource-label">{{localize "MGT2.Item.Mount"}}</label>
+                            <select class="expand writable" name="data.weapon.mount" title="Mounting">
+                                {{#select data.weapon.mount}}
+                                <option value="fixed">{{localize "MGT2.Item.SpaceMount.Fixed"}}</option>
+                                <option value="turret">{{localize "MGT2.Item.SpaceMount.Turret"}}</option>
+                                <option value="barbette">{{localize "MGT2.Item.SpaceMount.Barbette"}}</option>
+                                <option value="bay.small">{{localize "MGT2.Item.SpaceMount.BaySmall"}}</option>
+                                <option value="bay.medium">{{localize "MGT2.Item.SpaceMount.BayMedium"}}</option>
+                                <option value="bay.large">{{localize "MGT2.Item.SpaceMount.BayLarge"}}</option>
+                                <option value="spinal">{{localize "MGT2.Item.SpaceMount.Spinal"}}</option>
+                                {{/select}}
+                            </select>
+                        </div>
+
+                        <div class="resource">
+                            <label class="resource-label">{{localize "MGT2.Item.Power"}}</label>
+                            <br/>
+                            <input class="writable" type="text" name="data.weapon.power" value="{{data.weapon.power}}" data-dtype="Number"/>
+                        </div>
+                    {{/if}}
                 </div>
             </div>
 

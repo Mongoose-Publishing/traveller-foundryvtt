@@ -73,16 +73,74 @@
                       <label class="resource-label">Fuel (t)</label>
                     {{else if (ifEquals system.hardware.system "cargo")}}
                       <label class="resource-label">Cargo (t)</label>
+                    {{else if (ifEquals system.hardware.system "weapon")}}
+                      <label class="resource-label">Mount</label>
                     {{else}}
                       <label class="resource-label">Rating</label>
                     {{/if}}
-                    <input type="text" name="system.hardware.rating" value="{{system.hardware.rating}}" data-dtype="Number"/>
+
+                    {{#if (ifEquals system.hardware.system "weapon")}}
+                        <select class="hardwareSystemType" name="system.hardware.mount">
+                            {{#select system.hardware.mount}}
+                                <option value="turret1">{{localize "MGT2.Item.SpaceMount.Turret1"}}</option>
+                                <option value="turret2">{{localize "MGT2.Item.SpaceMount.Turret2"}}</option>
+                                <option value="turret3">{{localize "MGT2.Item.SpaceMount.Turret3"}}</option>
+                                <option value="turret4">{{localize "MGT2.Item.SpaceMount.Turret4"}}</option>
+                                <option value="barbette">{{localize "MGT2.Item.SpaceMount.Barbette"}}</option>
+                                <option value="bay.small">{{localize "MGT2.Item.SpaceMount.BaySmall"}}</option>
+                                <option value="bay.medium">{{localize "MGT2.Item.SpaceMount.BayMedium"}}</option>
+                                <option value="bay.large">{{localize "MGT2.Item.SpaceMount.BayLarge"}}</option>
+                                <option value="spinal">{{localize "MGT2.Item.SpaceMount.Spinal"}}</option>
+                            {{/select}}
+                        </select>
+                    {{else}}
+                        <input type="text" name="system.hardware.rating" value="{{system.hardware.rating}}" data-dtype="Number"/>
+                    {{/if}}
                 </div>
             </div>
         </div>
 
         {{#if (ifEquals system.hardware.system "fuel")}}
         {{else if (ifEquals system.hardware.system "cargo")}}
+        {{else if (ifEquals system.hardware.system "weapon")}}
+            <div class="shadow">
+                {{#if activeWeapons}}
+                    <h4>Mounted Weapons</h4>
+                    <ol class="items-list actor-items grid grid-3col">
+                        {{#each activeWeapons as |wpn|}}
+                        <li class="item item-gear ship-weapon" data-item-id="{{wpn._id}}">
+                            <h4>{{wpn.name}} {{mountedWeaponsCount ../system wpn}}</h4>
+                            <div>{{localize (concat "MGT2.Item.SpaceRange." wpn.system.weapon.spaceRange)}}</div>
+                            <div>{{wpn.system.weapon.damage}}</div>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-del-wpn" title="Remove from mount"><i class="fas fa-minus"></i></a>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ol>
+                {{/if}}
+                {{#if availableWeapons}}
+                    <h4>Available</h4>
+                    <ol class="items-list actor-items grid grid-3col">
+                        {{#each availableWeapons as |wpn|}}
+                            {{#if (ifStartsWith ../system.hardware.mount wpn.system.weapon.mount)}}
+                                <li class="item item-gear ship-weapon" data-item-id="{{wpn._id}}">
+                                    <h4>{{wpn.name}}</h4>
+                                    <div>{{localize (concat "MGT2.Item.SpaceRange." wpn.system.weapon.spaceRange)}}</div>
+                                    <div>{{wpn.system.weapon.damage}}</div>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-add-wpn" title="Add to mount"><i class="fas fa-plus"></i></a>
+                                    </div>
+                                </li>
+                            {{/if}}
+                        {{/each}}
+                    </ol>
+                {{else}}
+                    <p>Add some spacecraft scale weapons to the ship</p>
+                {{/if}}
+            </div>
         {{else}}
         <div class="shadow">
             <div class="resources grid grid-4col flex-group-center">
@@ -138,7 +196,6 @@
             </div>
         </div>
         {{/if}}
-
 
         <div class="shadow">
             {{editor enrichedDescription target="system.description"

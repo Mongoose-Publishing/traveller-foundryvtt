@@ -145,6 +145,7 @@ export class MgT2ActorSheet extends ActorSheet {
         const locker = [];
         const hardware = [];
         const roles = [];
+        const shipWeapons = [];
         let cargoUsed = 0;
         let dtonsUsed = 0;
         let powerTotal = 0;
@@ -229,6 +230,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 if (h.system === "r-drive") {
                     context.system.spacecraft.rdrive = parseInt(h.rating);
                 }
+            } else if (i.type === "weapon" && i.system.weapon.scale === "spacecraft") {
+                shipWeapons.push(i);
             } else {
                 locker.push(i);
             }
@@ -237,6 +240,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.locker = locker;
         context.hardware = hardware;
         context.roles = roles;
+        context.shipWeapons = shipWeapons;
 
         actorData.spacecraft.cargo = parseInt(actorData.spacecraft.dtons) - parseFloat(dtonsUsed);
         context.cargoUsed = cargoUsed;
