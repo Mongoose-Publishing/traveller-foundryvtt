@@ -1,0 +1,46 @@
+{
+  "name": "Pilot",
+  "type": "role",
+  "img": "systems/mgt2/icons/items/crew_role.svg",
+  "system": {
+    "role": {
+      "actions": {
+        "lybofso7": {
+          "title": "Landing at Port",
+          "action": "skill",
+          "chat": "",
+          "skill": "pilot.spacecraft",
+          "dm": 2
+        },
+        "lybp35kd": {
+          "title": "Landing in Wild",
+          "action": "skill",
+          "chat": "",
+          "skill": "pilot.spacecraft",
+          "dm": 0
+        }
+      },
+      "description": ""
+    }
+  },
+  "effects": [],
+  "folder": "eElDlFei05r9Idke",
+  "ownership": {
+    "default": 0,
+    "Uzw5MJmM0BRE3sSL": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "mgt2",
+    "systemVersion": "0.6.4",
+    "coreVersion": "11.315",
+    "createdTime": 1720364212718,
+    "modifiedTime": 1720367195045,
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+  },
+  "_id": "zBuzVmSFHNixz6K1",
+  "sort": 0,
+  "_key": "!items!zBuzVmSFHNixz6K1"
+}

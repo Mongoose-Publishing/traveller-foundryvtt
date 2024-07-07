@@ -17,6 +17,10 @@
     background-color: white;
 }
 
+.journal-entry-content .locked {
+    background-color: white;
+}
+
 /* Documentation */
 
 .journal-sheet h1 {
@@ -43,10 +47,22 @@
 .journal-sheet .callout {
     background-color: #90D0e8;
     border: 1px solid black;
-    border-radius: 1em;
-    padding: 0.5em;
+    border-radius: 8px;
+    padding: 0;
     float: right;
     width: 30%;
+}
+
+.journal-sheet .callout h4 {
+    font-size: larger;
+    font-weight: bold;
+    font-style: italic;
+    text-transform: uppercase;
+    padding-bottom: 2px;
+}
+
+.journal-sheet .callout p {
+    margin: 0.5em;
 }
 
 /* Career Definitions */

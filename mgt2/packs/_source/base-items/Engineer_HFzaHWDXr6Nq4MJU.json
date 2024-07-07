@@ -1,0 +1,53 @@
+{
+  "name": "Engineer",
+  "type": "role",
+  "img": "systems/mgt2/icons/items/crew_role.svg",
+  "system": {
+    "role": {
+      "actions": {
+        "lybohc5d": {
+          "title": "Jump",
+          "action": "skill",
+          "chat": "",
+          "skill": "engineer.jDrive",
+          "dm": 4
+        },
+        "lyboht8t": {
+          "title": "Overload Power",
+          "action": "skill",
+          "chat": "",
+          "skill": "engineer.power",
+          "dm": -2
+        },
+        "lyboi8o8": {
+          "title": "Overload Drive",
+          "action": "skill",
+          "chat": "",
+          "skill": "engineer.mDrive",
+          "dm": -2
+        }
+      },
+      "description": ""
+    }
+  },
+  "effects": [],
+  "folder": "eElDlFei05r9Idke",
+  "ownership": {
+    "default": 0,
+    "Uzw5MJmM0BRE3sSL": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "mgt2",
+    "systemVersion": "0.6.4",
+    "coreVersion": "11.315",
+    "createdTime": 1720364288589,
+    "modifiedTime": 1720367197481,
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+  },
+  "_id": "HFzaHWDXr6Nq4MJU",
+  "sort": 0,
+  "_key": "!items!HFzaHWDXr6Nq4MJU"
+}

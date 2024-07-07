@@ -1,0 +1,46 @@
+{
+  "folder": "eElDlFei05r9Idke",
+  "name": "Astrogator",
+  "type": "role",
+  "img": "systems/mgt2/icons/items/crew_role.svg",
+  "system": {
+    "role": {
+      "actions": {
+        "lybp4toj": {
+          "title": "Jump-1",
+          "action": "skill",
+          "chat": "",
+          "skill": "astrogation",
+          "dm": 3
+        },
+        "lybp5t2x": {
+          "title": "Jump-2",
+          "action": "skill",
+          "chat": "",
+          "skill": "astrogation",
+          "dm": 2
+        }
+      },
+      "description": ""
+    }
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Uzw5MJmM0BRE3sSL": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "mgt2",
+    "systemVersion": "0.6.4",
+    "coreVersion": "11.315",
+    "createdTime": 1720365386673,
+    "modifiedTime": 1720367199456,
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+  },
+  "_id": "8u1yBIkGf5HHW4ZA",
+  "sort": 100000,
+  "_key": "!items!8u1yBIkGf5HHW4ZA"
+}

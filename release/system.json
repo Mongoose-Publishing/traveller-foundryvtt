@@ -2,7 +2,7 @@
   "name": "mgt2",
   "title": "Mongoose Traveller 2e",
   "description": "An unofficial system for Mongoose Traveller 2e",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "compatibility": {
     "minimum": 10,
     "verified": 11

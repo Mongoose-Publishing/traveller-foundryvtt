@@ -4,8 +4,8 @@
   "type": "weapon",
   "img": "systems/mgt2/icons/items/melee-natural.svg",
   "effects": [],
-  "folder": null,
-  "sort": 0,
+  "folder": "bXGbV4AjDY6AJGxk",
+  "sort": 100000,
   "flags": {},
   "system": {
     "tl": "0",
@@ -16,6 +16,7 @@
     "quantity": 1,
     "status": null,
     "weapon": {
+      "scale": "traveller",
       "range": 0,
       "damage": "1D6",
       "magazine": 0,
@@ -43,11 +44,11 @@
   },
   "_stats": {
     "systemId": "mgt2",
-    "systemVersion": "0.4.9",
+    "systemVersion": "0.6.4",
     "coreVersion": "11.315",
     "createdTime": null,
-    "modifiedTime": 1718218726277,
-    "lastModifiedBy": "v2VrVDrL2xAhTj3z"
+    "modifiedTime": 1720367179236,
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
   },
   "_key": "!items!KjYQNF4VI3GigmEy"
 }
