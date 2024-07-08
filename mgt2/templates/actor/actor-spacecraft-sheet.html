@@ -11,15 +11,15 @@
 
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
-                    <input class="characteristic-value" type="number" name="data.hits.damage"
+                    <input class="characteristic-value" type="number" name="system.hits.damage"
                            title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
-                           value="{{data.hits.damage}}" data-dtype="Number"/>
+                           value="{{system.hits.damage}}" data-dtype="Number"/>
                 </div>
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
                     <input class="characteristic-readonly" type="number"
                            title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
-                           value="{{data.hits.value}}"/>
+                           value="{{system.hits.value}}"/>
                 </div>
             </div>
 
@@ -30,13 +30,13 @@
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.CurrentFuel'}}</label>
                     <input class="characteristic-value" type="number" name="data.spacecraft.fuel.value"
                            title="{{localize 'MGT2.TravellerSheet.CurrentFuel'}}"
-                           value="{{data.spacecraft.fuel.value}}" data-dtype="Number"/>
+                           value="{{system.spacecraft.fuel.value}}" data-dtype="Number"/>
                 </div>
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.MaxFuel'}}</label>
                     <input class="characteristic-readonly" type="number"
                            title="{{localize 'MGT2.TravellerSheet.MaxFuel'}}"
-                           value="{{data.spacecraft.fuel.max}}"/>
+                           value="{{system.spacecraft.fuel.max}}"/>
                 </div>
             </div>
 
@@ -62,16 +62,17 @@
             <div class="side-panel armour-box shadow flex-group-center">
                 <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
 
-                <div>
+                <div class="resource">
                     <label class="prot-type" title="Protection">Armour</label>
-                    <input class="armour-value" type="text" name="data.spacecraft.armour" title="Armour"
-                           value="{{data.spacecraft.armour}}" data-dtype="Number"/>
+                    <input class="armour-value writable" type="text" name="system.spacecraft.armour" title="Armour"
+                           value="{{system.spacecraft.armour}}" data-dtype="Number"/>
                 </div>
-                <div>
+                <div class="resource">
                     <label class="prot-type" title="Rad Shielding">Rad Shielding</label>
-                    <input class="armour-value" type="text" name="data.spacecraft.radShielding" title="Radiation protection"
-                           value="{{data.spacecraft.radShielding}}" data-dtype="Number"/>
+                    <input class="armour-value writable" type="text" name="system.spacecraft.radShielding" title="Radiation protection"
+                           value="{{system.spacecraft.radShielding}}" data-dtype="Number"/>
                 </div>
+                <br/>
             </div>
         </div>
 
@@ -82,12 +83,12 @@
 
             <div class="shadow grid grid-5col">
                 <div class="resource flex-group-center">
-                    <label for="data.spacecraft.dtons" class="field-label">{{localize 'MGT2.TravellerSheet.DTons'}}</label>
-                    <input class="field-value" name="data.spacecraft.dtons" type="text" value="{{data.spacecraft.dtons}}"/>
+                    <label for="system.spacecraft.dtons" class="field-label">{{localize 'MGT2.TravellerSheet.DTons'}}</label>
+                    <input class="field-value writable" name="system.spacecraft.dtons" type="text" value="{{system.spacecraft.dtons}}"/>
                 </div>
                 <div class="resource flex-group-center grid-span-2">
-                    <label for="data.spacecraft.configuration" class="field-label">{{localize 'MGT2.TravellerSheet.Configuration'}}</label>
-                    <select class="configurationType" style="width:100%" name="system.spacecraft.configuration">
+                    <label for="system.spacecraft.configuration" class="field-label">{{localize 'MGT2.TravellerSheet.Configuration'}}</label>
+                    <select class="configurationType writable" style="width:100%" name="system.spacecraft.configuration">
                         {{#select system.spacecraft.configuration}}
                         <option value="standard">Standard</option>
                         <option value="streamlined">Streamlined</option>
