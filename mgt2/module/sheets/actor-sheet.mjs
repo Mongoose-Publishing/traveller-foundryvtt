@@ -298,11 +298,13 @@ export class MgT2ActorSheet extends ActorSheet {
 
         let weight = 0;
         let skillNeeded = -3;
+        let vs = this.actor.system.skills.vaccsuit;
 
         console.log("_prepareItems: " + this.actor.name);
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
+            i.cssStyle = "";
 
             if (i.system.weight !== undefined) {
                 if (i.system.status === MgT2Item.CARRIED) {
@@ -314,6 +316,9 @@ export class MgT2ActorSheet extends ActorSheet {
                         }
                         if (i.system.armour.skill && parseInt(i.system.armour.skill) > skillNeeded) {
                             skillNeeded = parseInt(i.system.armour.skill);
+                            if (!vs || !vs.trained || skillNeeded > parseInt(vs.value)) {
+                                i.cssStyle = "vaccsuit";
+                            }
                         }
                     } else {
                         weight += parseFloat(i.system.weight) * parseFloat(i.system.quantity);
@@ -361,7 +366,6 @@ export class MgT2ActorSheet extends ActorSheet {
 
         if (skillNeeded >= 0) {
             let vaccSkill = -3;
-            let vs = this.actor.system.skills.vaccsuit;
             if (vs && vs.trained) {
                 vaccSkill = parseInt(vs.value);
                 if (vaccSkill < skillNeeded) {

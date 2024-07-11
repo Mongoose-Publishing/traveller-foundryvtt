@@ -179,3 +179,7 @@ form.career section.history-description {
 .role-action .item-controls {
     float: right;
 }
+
+li.vaccsuit {
+    box-shadow: 0px 4px 4px #FF0000 !important;
+}
