@@ -1062,9 +1062,15 @@
         "spacecraft": {
             "dtons": 100,
             "configuration": "standard",
+            "tl": 12,
             "armour": 0,
             "radShielding": 0,
-            "computer": 0,
+            "computer": {
+                "processing": 0,
+                "core": false,
+                "bis": false,
+                "fib": false
+            },
             "power": {
                 "value": 0,
                 "max": 10,

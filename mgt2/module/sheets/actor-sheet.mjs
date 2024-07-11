@@ -759,10 +759,14 @@ export class MgT2ActorSheet extends ActorSheet {
 
     _runCrewAction(shipActor, actorCrewId, roleId, actionId) {
         const actorCrew = game.actors.get(actorCrewId);
+        if (!actorCrew) {
+            return;
+        }
         const itemRole = shipActor.items.get(roleId);
+        if (!itemRole) {
+            return;
+        }
         const action = itemRole.system.role.actions[actionId];
-
-        console.log(action.title);
 
         if (action.action === "chat") {
             let chatData = {

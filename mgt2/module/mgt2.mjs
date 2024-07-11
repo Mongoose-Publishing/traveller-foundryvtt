@@ -1295,13 +1295,15 @@ Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
 
     for (let id in roles) {
         let roleItem = actorShip.items.get(id);
-        html += `<span class="role-title">${roleItem.name}</span>`;
-        html += `<div class="role-action-buttons">`;
-        for (let id in roleItem.system.role.actions) {
-            let action = roleItem.system.role.actions[id];
-            html += `<span class="role-action-button" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}"><img class="action" src="${roleItem.img}" title="${action.title}"/></span>`;
+        if (roleItem) {
+            html += `<span class="role-title">${roleItem.name}</span>`;
+            html += `<div class="role-action-buttons">`;
+            for (let id in roleItem.system.role.actions) {
+                let action = roleItem.system.role.actions[id];
+                html += `<span class="role-action-button" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}"><img class="action" src="${roleItem.img}" title="${action.title}"/></span>`;
+            }
+            html += "</div>";
         }
-        html += "</div>";
     }
     return html;
 });

@@ -86,6 +86,24 @@
                     <label for="system.spacecraft.dtons" class="field-label">{{localize 'MGT2.TravellerSheet.DTons'}}</label>
                     <input class="field-value writable" name="system.spacecraft.dtons" type="text" value="{{system.spacecraft.dtons}}"/>
                 </div>
+                <div class="resource flex-group-center">
+                    <label for="system.spacecraft.tl" class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+                    <select class="configurationType writable" style="width:100%" name="system.spacecraft.tl">
+                        {{#select system.spacecraft.tl}}
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        {{/select}}
+                    </select>
+                </div>
                 <div class="resource flex-group-center grid-span-2">
                     <label for="system.spacecraft.configuration" class="field-label">{{localize 'MGT2.TravellerSheet.Configuration'}}</label>
                     <select class="configurationType writable" style="width:100%" name="system.spacecraft.configuration">

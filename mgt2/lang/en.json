@@ -85,6 +85,7 @@
   "MGT2.TravellerSheet.Supplies": "Supplies",
   "MGT2.TravellerSheet.CurrentSupplies": "Current",
   "MGT2.TravellerSheet.MaxSupplies": "Max",
+  "MGT2.TravellerSheet.TechLevel": "TL",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",
