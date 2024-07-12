@@ -265,6 +265,12 @@
   "MGT2.EditSkill.ShortName": "Short Name",
   "MGT2.EditSkill.ShortNameDesc": "The internal name used to identify the skill",
 
+  "MGT2.Warn.HotBar.NewActor": "Cannot assign hot bar skills for a new actor",
+  "MGT2.Info.HotBar.AssignedSkill": "Assigned skill '{skill}' to the hot bar",
+  "MGT2.Warn.HotBar.SelectActorSkill": "Please select an actor before using a hot bar skill",
+  "MGT2.Warn.HotBar.SelectActorItem": "No actor is selected to use {item} with",
+  "MGT2.Warn.HotBar.ActorNotHaveItem": "Actor '{actor}' does not have item '{item}'",
+
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",
   "TYPES.Actor.creature": "Creature",

@@ -530,7 +530,11 @@ async function createTravellerMacro(data, slot) {
         }
         return false;
     } else if (dragData.dragType === "skill") {
-        let actor = game.data.actors.find(a => (a._id === actorId));
+        let actor = game.actors.find(a => (a._id === actorId));
+        if (!actor) {
+            ui.notifications.warn(game.i18n.localize("MGT2.Warn.HotBar.NewActor"));
+            return false;
+        }
         let skill = actor.system.skills[dragData.skillName];
         let label = skill.label;
 
@@ -544,6 +548,7 @@ async function createTravellerMacro(data, slot) {
                 img: skill.icon
             });
         }
+        ui.notifications.info(game.i18n.format("MGT2.Info.HotBar.AssignedSkill", { skill: label}));
         game.user.assignHotbarMacro(macro, slot);
         return false;
     }
@@ -556,18 +561,15 @@ function rollSkillMacro(skillName) {
   const speaker = ChatMessage.getSpeaker();
   let actor;
   if (speaker.token) {
-      console.log("We have a token");
       actor = game.actors.tokens[speaker.token];
   }
   if (!actor) {
-      console.log("No actor yet");
       actor = game.actors.get(speaker.actor);
   }
   if (!actor) {
-      console.log("No actor ever");
+      ui.notifications.warn(game.i18n.localize("MGT2.Warn.HotBar.SelectActorSkill"));
       return;
   }
-  console.log(actor.name);
 
   if (game.settings.get("mgt2", "quickRolls")) {
       rollSkill(actor, skillName);
@@ -587,12 +589,12 @@ function rollAttackMacro(itemName) {
         actor = game.actors.get(speaker.actor);
     }
     if (!actor) {
-        return ui.notifications.warn(`No actor is selected to use "${itemName}" with`);
+        return ui.notifications.warn(game.i18n.format("MGT2.Warn.HotBar.SelectActorItem", {item: itemName }));
     }
 
     let item = actor.items.find(i => (i.name === itemName));
     if (!item) {
-        return ui.notifications.warn(`${actor.name} does not have item "${itemName}"`);
+        return ui.notifications.warn(game.i18n.format("MGT2.Warn.HotBar.ActorNotHaveItem", {actor: actor.name, item: itemName }));
     }
 
     new MgT2AttackDialog(actor, item).render(true);

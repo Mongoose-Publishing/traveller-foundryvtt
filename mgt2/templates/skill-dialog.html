@@ -38,8 +38,10 @@
 
 
         {{#if showCha}}
-            <input type="checkbox" name="remember" class="skillDialogRemember" value="false"/>
-            <label class="remember-cha" for="remember">Remember characteristic</label>
+            <label class="skillDialogRemember">
+                <input type="checkbox" name="remember" value="false"/>
+                <span>Remember characteristic</span>
+            </label>
         {{/if}}
 
         {{{augmentedSkill skill spec}}}

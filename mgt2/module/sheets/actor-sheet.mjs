@@ -63,6 +63,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.system = actorData;
         context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
         context.flags = actorData.flags;
+        context.currentYear = game.settings.get("mgt2", "currentYear");
 
         // Prepare character data and items.
         if (type === 'traveller' || type === 'package') {

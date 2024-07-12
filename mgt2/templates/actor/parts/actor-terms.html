@@ -1,6 +1,11 @@
 <h2>Career Terms</h2>
 
 <div class="resources grid grid-5col">
+    <div class="resource flex-group-center" title="Current year in the campaign">
+        <label for="data.currentYear" class="resource-label">Current Year</label><br/>
+        <input type="text" name="data.currentYear" value="{{currentYear}}"
+               data-dtype="Number" readonly/>
+    </div>
     <div class="resource flex-group-center" title="Age of character when character generation begins">
         <label for="data.startAge" class="resource-label">Start Age</label><br/>
         <input type="text" name="data.startAge" value="{{data.startAge}}"

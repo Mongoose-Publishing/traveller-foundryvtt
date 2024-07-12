@@ -740,14 +740,21 @@ input.spectrained {
     padding: 5px;
 }
 
-.skilldialog h3 {
+.skilldialog h3.skill-dialog-title {
     font-weight: bold;
-    font-size: larger;
+    font-size: 10pt;
 }
 
-.remember-cha {
+.skillDialogRemember {
+}
+
+.skillDialogRemember input {
     vertical-align: center;
-    padding-botton: 3px;
+    height: 16px;
+}
+
+.skillDialogRemember span {
+    display: inline-block;
 }
 
 .skillDialogLabel {
@@ -1658,3 +1665,4 @@ section.id-card .showIdCard {
     height: 32px;
     width: 32px;
 }
+
