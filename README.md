@@ -1,8 +1,13 @@
 # Mongoose Traveller for FoundryVTT
 
+THE SYSTEM IDENTIFIER CURRENTLY CLASHES WITH ANOTHER IDENTIFIER IN FOUNDRY.
+A COMPATIBILITY BREAKING CHANGE MAY NEED TO BE MADE TO RESOLVE THIS.
+
 This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v11.
 it is currently in beta, so suggestions and bug reports are greatly appreciated. The basic game rules
 are currently supported, but new features are being added all the time.
+
+![Mongoose Traveller on Foundry](docs/traveller-foundry.png)
 
 Currently, it provides support for:
 * Character sheets for Travellers (PCs), NPCs and Creatures are provided.
