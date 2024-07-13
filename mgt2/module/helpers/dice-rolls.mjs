@@ -654,7 +654,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];
                 if (spec.value > 0) {
-                    let stotal = total + spec.value;
+                    let stotal = parseInt(total) + parseInt(spec.value);
                     let slabel = `${spec.label} (${spec.value})`;
 
                     console.log(spec);
@@ -676,8 +676,8 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                     }
 
                     if (isPerson && defaultCha && spec.default && spec.default !== skill.default) {
-                        stotal -= chaDm;
-                        stotal += data.characteristics[spec.default].dm;
+                        stotal -= parseInt(chaDm);
+                        stotal += parseInt(data.characteristics[spec.default].dm);
                         slabel += ` (${spec.default})`;
                     }
 
