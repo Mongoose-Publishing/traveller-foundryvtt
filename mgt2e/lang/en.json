@@ -42,6 +42,11 @@
   "MGT2.TravellerSheet.Settings": "Settings",
   "MGT2.TravellerSheet.HomeWorld": "Homeworld",
 
+  "MGT2.TravellerSheet.Terms": "Terms",
+  "MGT2.TravellerSheet.Height": "Height (cm)",
+  "MGT2.TravellerSheet.Weight": "Weight (kg)",
+  "MGT2.TravellerSheet.Homeworld": "Homeworld",
+
   "MGT2.TravellerSheet.Damage": "Damage",
   "MGT2.TravellerSheet.Armour": "Armour",
   "MGT2.TravellerSheet.Attacks": "Attacks",
@@ -86,6 +91,11 @@
   "MGT2.TravellerSheet.CurrentSupplies": "Current",
   "MGT2.TravellerSheet.MaxSupplies": "Max",
   "MGT2.TravellerSheet.TechLevel": "TL",
+  "MGT2.TravellerSheet.TrainedOnly": "Trained only",
+  "MGT2.TravellerSheet.BackgroundOnly": "Background only",
+  "MGT2.TravellerSheet.EncumbrancePenalty": "Enc",
+  "MGT2.TravellerSheet.PhysicalPenalty": "Physical",
+  "MGT2.TravellerSheet.RollUntrained": "Roll untrained",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",

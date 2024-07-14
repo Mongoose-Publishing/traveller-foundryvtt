@@ -3,21 +3,21 @@
     <div class="skill-options">
         <input class="trained" type="checkbox" name="data.settings.hideUntrained"
                {{checked data.settings.hideUntrained}} data-dtype="Boolean" />
-        <label for="data.settings.hideUntrained">Trained only</label>
+        <label for="data.settings.hideUntrained">{{localize 'MGT2.TravellerSheet.TrainedOnly'}}</label>
         <input class="trained" type="checkbox" name="data.settings.onlyBackground"
                {{checked data.settings.onlyBackground}} data-dtype="Boolean" />
-        <label for="data.settings.onlyBackground">Background only</label>
+        <label for="data.settings.onlyBackground">{{localize 'MGT2.TravellerSheet.BackgroundOnly'}}</label>
         {{#if data.characteristics}}
         <b>|</b>
         <input class="trained" type="text" name="data.modifiers.encumbrance.dm" value="{{data.modifiers.encumbrance.dm}}" readonly/>
-        <label for="data.modifiers.encumbrance.dm">Enc</label>
+        <label for="data.modifiers.encumbrance.dm">{{localize 'MGT2.TravellerSheet.EncumbrancePenalty'}}</label>
         <b>|</b>
         <input class="trained" type="text" name="data.modifiers.physical.dm" value="{{data.modifiers.physical.dm}}" readonly/>
-        <label for="data.modifiers.physical.dm">Physical</label>
+        <label for="data.modifiers.physical.dm">{{localize 'MGT2.TravellerSheet.PhysicalPenalty'}}</label>
         {{/if}}
 
         {{#if data.settings.hideUntrained}}
-            <label class="skill-label rollable roll-untrained" data-rolltype="skill" data-skill="untrained" data-roll="2d6">Roll Untrained</label>
+            <label class="skill-label rollable roll-untrained" data-rolltype="skill" data-skill="untrained" data-roll="2d6">{{localize 'MGT2.TravellerSheet.RollUntrained'}}</label>
         {{/if}}
     </div>
     <hr/>

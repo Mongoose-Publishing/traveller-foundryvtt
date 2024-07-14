@@ -29,7 +29,7 @@
       },
       "flags": {},
       "_stats": {
-        "systemId": "mgt2e",
+        "systemId": "mgt2",
         "systemVersion": "0.4.9",
         "coreVersion": "11.315",
         "createdTime": 1717537853687,
@@ -50,7 +50,7 @@
     }
   },
   "_stats": {
-    "systemId": "mgt2e",
+    "systemId": "mgt2",
     "systemVersion": "0.4.9",
     "coreVersion": "11.315",
     "createdTime": 1717537836176,

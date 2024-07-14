@@ -5,15 +5,15 @@
   "type": "Item",
   "_id": "bXGbV4AjDY6AJGxk",
   "sort": 0,
-  "color": null,
+  "color": "#f1511b",
   "flags": {},
   "_stats": {
     "systemId": "mgt2e",
-    "systemVersion": "0.6.4",
+    "systemVersion": "0.8.0",
     "coreVersion": "11.315",
     "createdTime": 1720367176880,
-    "modifiedTime": 1720367176880,
-    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+    "modifiedTime": 1720985975778,
+    "lastModifiedBy": "KjVCQnLdKUJeJDZy"
   },
   "_key": "!folders!bXGbV4AjDY6AJGxk"
 }

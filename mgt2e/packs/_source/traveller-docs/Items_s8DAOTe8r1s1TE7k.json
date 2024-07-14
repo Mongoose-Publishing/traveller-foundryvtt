@@ -15,7 +15,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>There are multiple types of items.</p><p></p><h1>Carried Items</h1><p>These are physical items that can be carried by Travellers and NPCs. They have a weight and to an actor's encumbrance.</p><p>Each carried item has a Tech Level, Cost and Weight.</p><p>Such items have three possible states on the actor sheet:</p><p><strong>Active</strong> - Worn or held in the hand. These are ready to be used.</p><p><strong>Carried</strong> - Being carried, but not in use.</p><p><strong>Stored</strong> - These are owned by the Traveller, but not currently 'at hand'.</p><p></p><p></p><h2>Weapon</h2><p>Weapons appear in the list of attack items.</p><p></p><h2>Armour</h2><p>Armour adds a to an actor's ability to resist damage. Normally, only one item or armour can be worn at a time. Wearing an item of armour when one is already being worn will move the other to 'carried'.</p><p></p><h2>Augmentation</h2><p>Augmentations give bonuses to an actor, in the form of bonuses to characteristics or skills. They are normally cyberware or biological implants or drugs. There are several types, which vary by how they add bonuses.</p><p><strong>Augment</strong> - Increases a characteristic or skill by the given value.</p><p><strong>DM</strong> - Adds a bonus or penalty to rolls involving the characteristic or skill.</p><p><strong>Boon / Bane</strong> - Causes rolls for this characteristic or skill to be rolled with a boon or a bane.</p><p><strong>Expert Program</strong> - Follows the rules of expert software.</p><p><strong>Other</strong> - Specialist bonuses.</p><p></p><p></p><h3>General Items</h3><p>Everything else. General Items don't have any game effect other than having a weight and cost.</p><p></p><h1>Spacecraft Items</h1><p></p><h2>Cargo</h2><p>Freight which can be traded and sold.</p><p></p><h2>Hardware</h2><p>Spacecraft hardware, such as jump drives, weapons and power systems.</p><p></p><h1>Meta Items</h1><p>Such items represent things on the character sheet, but aren't physical things in the world.</p><p></p><h2>Term</h2><p>A career term during character generation.</p><p></p><h2>Associate</h2><p>An ally, enemy, contact or rival that is gained during character generation.</p><p></p>"
+        "content": "<p>There are multiple types of items.</p><p></p><h1>Carried Items</h1><p>These are physical items that can be carried by Travellers and NPCs. They have a weight and to an actor's encumbrance.</p><p>Each carried item has a Tech Level, Cost and Weight.</p><p>Such items have three possible states on the actor sheet:</p><p><strong>Active</strong> - Worn or held in the hand. These are ready to be used.</p><p><strong>Carried</strong> - Being carried, but not in use.</p><p><strong>Stored</strong> - These are owned by the Traveller, but not currently 'at hand'.</p><p></p><p></p><h2>Weapon</h2><p>Weapons appear in the list of attack items. Weapons have a scale, which is either Traveller, Vehicle or Starship. This affects what type of actor can use it.</p><p></p><h2>Armour</h2><p>Armour adds a to an actor's ability to resist damage. Normally, only one item or armour can be worn at a time. Wearing an item of armour when one is already being worn will move the other to 'carried'.</p><p></p><h2>Augmentation</h2><p>Augmentations give bonuses to an actor, in the form of bonuses to characteristics or skills. They are normally cyberware or biological implants or drugs. There are several types, which vary by how they add bonuses.</p><p><strong>Augment</strong> - Increases a characteristic or skill by the given value.</p><p><strong>DM</strong> - Adds a bonus or penalty to rolls involving the characteristic or skill.</p><p><strong>Boon / Bane</strong> - Causes rolls for this characteristic or skill to be rolled with a boon or a bane.</p><p><strong>Expert Program</strong> - Follows the rules of expert software.</p><p><strong>Other</strong> - Specialist bonuses.</p><p></p><p></p><h3>General Items</h3><p>Everything else. General Items don't have any game effect other than having a weight and cost.</p><p></p><h1>Spacecraft Items</h1><p></p><h2>Cargo</h2><p>Freight which can be traded and sold.</p><p></p><h2>Hardware</h2><p>Spacecraft hardware, such as jump drives, weapons and power systems.</p><p></p><h1>Meta Items</h1><p>Such items represent things on the character sheet, but aren't physical things in the world.</p><p></p><h2>Term</h2><p>A career term during character generation.</p><p></p><h2>Associate</h2><p>An ally, enemy, contact or rival that is gained during character generation.</p><p></p>"
       },
       "video": {
         "controls": true,
@@ -30,11 +30,11 @@
       "flags": {},
       "_stats": {
         "systemId": "mgt2e",
-        "systemVersion": "0.4.8",
+        "systemVersion": "0.8.0",
         "coreVersion": "11.315",
         "createdTime": 1717860730537,
-        "modifiedTime": 1717864062467,
-        "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+        "modifiedTime": 1720989505384,
+        "lastModifiedBy": "KjVCQnLdKUJeJDZy"
       },
       "_key": "!journal.pages!s8DAOTe8r1s1TE7k.3cfgP1fZ6XPrvCmF"
     }
@@ -51,11 +51,11 @@
   },
   "_stats": {
     "systemId": "mgt2e",
-    "systemVersion": "0.4.8",
+    "systemVersion": "0.8.0",
     "coreVersion": "11.315",
     "createdTime": 1717857394561,
-    "modifiedTime": 1717864110439,
-    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+    "modifiedTime": 1720989505384,
+    "lastModifiedBy": "KjVCQnLdKUJeJDZy"
   },
   "_key": "!journal!s8DAOTe8r1s1TE7k"
 }

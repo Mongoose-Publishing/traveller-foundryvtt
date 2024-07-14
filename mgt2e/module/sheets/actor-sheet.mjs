@@ -78,7 +78,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 t.system.term.startYear = year;
                 year += parseInt(t.system.term.termLength);
             }
-            actorData.entryAge = parseInt(actorData.startAge) + parseInt(actorData.termLength) * numTerms;
+            actorData.entryAge = parseInt(actorData.startAge) + numYears;
             actorData.birthYear = parseInt(actorData.entryYear) - parseInt(actorData.entryAge);
             if (actorData.settings.autoAge) {
                 actorData.sophont.age = parseInt(game.settings.get("mgt2e", "currentYear")) - actorData.birthYear;
