@@ -2,7 +2,7 @@
   "folder": "eElDlFei05r9Idke",
   "name": "Astrogator",
   "type": "role",
-  "img": "systems/mgt2e/icons/items/crew_role.svg",
+  "img": "systems/mgt2/icons/items/crew_role.svg",
   "system": {
     "role": {
       "actions": {
@@ -33,7 +33,7 @@
     "core": {}
   },
   "_stats": {
-    "systemId": "mgt2e",
+    "systemId": "mgt2",
     "systemVersion": "0.6.4",
     "coreVersion": "11.315",
     "createdTime": 1720365386673,
