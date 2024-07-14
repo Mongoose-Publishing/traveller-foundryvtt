@@ -16,7 +16,7 @@ fvtt package | grep "System mgt2e" || die "Run fvtt package workon mgt2e"
 
 cd mgt2e || die "Cannot find directory 'mgt2e'"
 
-PACKS="base-items traveller-docs"
+PACKS="base-actors base-items traveller-docs"
 
 if [ "$cmd" = "pack" ]
 then

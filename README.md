@@ -1,6 +1,6 @@
 # Mongoose Traveller for FoundryVTT
 
-**BRANCH TO CHANGE SYSTEM IDENTIFIER:** This is an incompatible breaking change with previous versions.
+**Version:**  0.8.1
 
 This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v11.
 it is currently in beta, so suggestions and bug reports are greatly appreciated. The basic game rules

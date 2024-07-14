@@ -1,8 +1,8 @@
 {
   "name": "mgt2e",
   "title": "Mongoose Traveller 2e",
-  "description": "An unofficial system for Mongoose Traveller 2e",
-  "version": "0.8.0",
+  "description": "A system for Mongoose Traveller 2e",
+  "version": "0.8.1",
   "compatibility": {
     "minimum": 11,
     "verified": 11
@@ -22,15 +22,23 @@
   "packs": [
     {
       "name": "base-items",
-      "label": "Base Items",
+      "label": "MgT2e Base Items",
       "system": "mgt2e",
       "module": "mgt2e",
       "path": "packs/base-items",
       "type": "Item"
     },
     {
+      "name": "base-actors",
+      "label": "MgT2e Characters",
+      "system": "mgt2e",
+      "module": "mgt2e",
+      "path": "packs/base-actors",
+      "type": "Actor"
+    },
+    {
       "name": "traveller-docs",
-      "label": "Traveller Docs",
+      "label": "MgT2e Docs",
       "system": "mgt2e",
       "module": "mgt2e",
       "path": "packs/traveller-docs",
