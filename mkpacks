@@ -5,9 +5,16 @@
 # Unpack the files to create source files from the compendium databases.
 #
 
+function die {
+    echo $*
+    exit 1
+}
+
 cmd=$1
 
-cd mgt2e || exit 2
+fvtt package | grep "System mgt2e" || die "Run fvtt package workon mgt2e"
+
+cd mgt2e || die "Cannot find directory 'mgt2e'"
 
 PACKS="base-items traveller-docs"
 

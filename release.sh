@@ -1,5 +1,11 @@
 #!/bin/bash
 
+
+function die {
+    echo $*
+    exit 1
+}
+
 if [ ! -d ./mgt2e ]
 then
   echo "Cannot find 'mgt2e' system directory"
@@ -52,9 +58,9 @@ version=${major}.${minor}.${patch}
 
 
 # Build the binary db files. Export to json, clean, then rebuild.
-./mkpacks unpack
+./mkpacks unpack || die "Unable to unpack compendiums"
 rm -fr ./mgt2e/packs/[a-z]*
-./mkpacks pack
+./mkpacks pack || die "Unable to pack compendiums"
 
 # If we want to create a branch, do so.
 mkdir -p release
