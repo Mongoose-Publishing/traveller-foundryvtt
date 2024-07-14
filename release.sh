@@ -1,6 +1,12 @@
 #!/bin/bash
 
-version=$(cat mgt2/system.json | jq -r .version)
+if [ ! -d ./mgt2e ]
+then
+  echo "Cannot find 'mgt2e' system directory"
+  exit 2
+fi
+
+version=$(cat mgt2e/system.json | jq -r .version)
 patch=$(echo $version | sed 's/.*\.//')
 minor=$(echo $version | sed 's/[0-9]*\.\([0-9]*\)\.[0-9]*/\1/')
 major=$(echo $version | sed 's/\..*//g')
@@ -47,7 +53,7 @@ version=${major}.${minor}.${patch}
 
 # Build the binary db files. Export to json, clean, then rebuild.
 ./mkpacks unpack
-rm -fr ./mgt2/packs/[a-z]*
+rm -fr ./mgt2e/packs/[a-z]*
 ./mkpacks pack
 
 # If we want to create a branch, do so.
@@ -56,16 +62,16 @@ if [ ! -z $branch ]
 then
   release="v${version}"
   git checkout -b v${version}
-  sed -i "s/\"version\": \".*\",/\"version\": \"$version\",/" mgt2/system.json
-  sed -i "s#/raw/[vmain0-9.]*/#/raw/v${version}/#" mgt2/system.json
+  sed -i "s/\"version\": \".*\",/\"version\": \"$version\",/" mgt2e/system.json
+  sed -i "s#/raw/[vmain0-9.]*/#/raw/v${version}/#" mgt2e/system.json
 else
   release="main"
-  sed -i "s/\"version\": \".*\",/\"version\": \"${version}\",/" mgt2/system.json
-  sed -i "s#/raw/[vmain0-9.]*/#/raw/$(git branch --show-current)/#" mgt2/system.json
+  sed -i "s/\"version\": \".*\",/\"version\": \"${version}\",/" mgt2e/system.json
+  sed -i "s#/raw/[vmain0-9.]*/#/raw/$(git branch --show-current)/#" mgt2e/system.json
 fi
 # Zip up system archive, minus the source json.
-zip -x ./mgt2/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2
-cp mgt2/system.json release/system.json
+zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
+cp mgt2e/system.json release/system.json
 
 echo "Created release ${version} in branch ${release}"
 

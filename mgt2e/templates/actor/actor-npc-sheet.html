@@ -1,0 +1,172 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+    {{#if true}}
+    <section class="npc-sheet">
+        <div class="character-left">
+            <img class="profile-img shadow" src="{{actor.img}}" data-edit="img"
+                 title="{{actor.name}}" height="100" width="100"/>
+
+            <div class="side-panel hits-box shadow">
+                <label for="data.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                    <input class="characteristic-value" type="number" name="data.hits.damage"
+                           title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
+                           value="{{data.hits.damage}}" data-dtype="Number"/>
+                </div>
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
+                    <input class="characteristic-readonly" type="number"
+                           title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
+                           value="{{data.hits.value}}"/>
+                </div>
+            </div>
+            {{> "systems/mgt2e/templates/actor/parts/actor-combat.html"}}
+        </div>
+
+        <div class="character-right">
+            <h1 class="charname shadow">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+            </h1>
+
+            <div class="shadow grid grid-5col">
+                <div class="resource flex-group-left grid-span-2">
+                    <label for="data.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
+                    <input class="field-value writable" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="data.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
+                    <input class="field-value writable" name="data.sophont.gender" type="text" value="{{data.sophont.gender}}"/>
+                </div>
+                <div class="resource flex-group-left grid-span-2">
+                    <label for="data.sophont.profession" class="field-label">
+                        {{localize 'MGT2.TravellerSheet.Profession'}}
+                        <span class="showIdCard"><i class="fa-solid fa-id-card"></i></span>
+                    </label>
+                    <input class="field-value writable" name="data.sophont.profession" type="text" value="{{data.sophont.profession}}"/>
+                </div>
+            </div>
+
+            <div class="shadow grid grid-{{data.settings.columns}}col">
+                {{#each data.characteristics as | char key | }}
+                    {{#if char.show}}
+                    <div class="resource flex-group-center characteristic-draggable"
+                         data-rolltype="characteristic" data-cha="{{key}}">
+                        <label for="data.characteristics.{{key}}.value"
+                               class="characteristic-title rollable"
+                               data-roll="2d6+@{{key}}" data-label="{{key}}"
+                               data-cha="{{key}}"
+                               title="{{char.label}}">{{key}}</label>
+                        <span class="characteristic-dm {{chaStatus char}}">{{numberFormat char.dm sign=true}}</span>
+                        <br/>
+                        <input class="characteristic-value writable" type="number" min="0" max="20" step="1" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                    </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+
+            <div class="shadow grid grid-5col">
+                <div class="resource flex-group-center">
+                    <label for="data.speed.base" class="field-label">SPEED</label>
+                    <input class="field-value writable" type="text" name="data.speed.base" value="{{data.speed.base}}" data-dtype="Number"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.size" class="field-label">SIZE</label>
+                    <input class="field-value writable" type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.initiative.base" class="field-label">INIT</label>
+                    <input class="field-value" type="text" name="data.initiative.base"
+                           value="{{data.initiative.base}}" data-dtype="Number" readonly/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.hits.value" class="field-label">MAX HITS</label>
+                    <!--
+                    <input type="text" name="data.hits.value" value="{{data.hits.value}}"
+                           data-dtype="Number"/> /
+                           -->
+                    <input class="field-value" type="text" name="data.hits.max" value="{{data.hits.max}}"
+                           readonly data-dtype="Number"/>
+                </div>
+                <div class="resource flex-group-center dodgeRoll" title="Click to dodge, shift-click to reset">
+                    <label for="data.dodge" class="field-label">
+                        <i class="fas fa-dice"></i>
+                        {{localize 'MGT2.TravellerSheet.Dodge'}}
+
+                    </label>
+                    <input class="field-value" type="text" _name="data.dodge"
+                           value="{{data.dodge}}" data-dtype="Number" readonly/>
+                </div>
+            </div>
+
+            {{> "systems/mgt2e/templates/actor/parts/actor-status.html"}}
+
+            <div class="shadow">
+                <nav class="sheet-tabs tabs" data-group="primary">
+                    <a class="item" data-tab="skills">Skills</a>
+                    <a class="item" data-tab="items">Equipment</a>
+                    <a class="item" data-tab="biography">Biography</a>
+                    <a class="item" data-tab="settings">Settings</a>
+                </nav>
+
+                <div class="sheet-body">
+                    {{!-- Skills Tab --}}
+                    <div class="tab skills" data-group="primary" data-tab="skills">
+                        {{> "systems/mgt2e/templates/actor/parts/actor-skills.html"}}
+                    </div>
+
+                    {{!-- Biography Tab --}}
+                    <div class="tab biography" data-group="primary" data-tab="biography">
+
+                        <div class="resources grid grid-5col">
+                            <div class="resource flex-group-center">
+                                <label for="data.sophont.age" class="resource-label">Age</label>
+                                <input type="text" name="data.sophont.age" value="{{data.sophont.age}}"
+                                       data-dtype="Number"/>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label for="data.sophont.height" class="resource-label">Height (cm)</label>
+                                <input type="text" name="data.sophont.height" value="{{data.sophont.height}}"
+                                       data-dtype="Number"/>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label for="data.sophont.weight" class="resource-label">Weight (kg)</label>
+                                <input type="text" name="data.sophont.weight" value="{{data.sophont.weight}}"
+                                       data-dtype="Number"/>
+                            </div>
+                            <div class="resource flex-group-left grid-span-2">
+                                <label for="data.sophont.homeworld" class="resource-label">Homeworld</label>
+                                <input type="text" name="data.sophont.homeworld" value="{{data.sophont.homeworld}}"
+                                       data-dtype="String"/>
+                            </div>
+                        </div>
+
+                        <section class="bio-box">
+                            {{editor
+                                enrichedDescription target="system.description"
+                                button=true editable=editable}}
+                        </section>
+                    </div>
+
+                    {{!-- Owned Items Tab --}}
+                    <div class="tab items" data-group="primary" data-tab="items">
+                        {{> "systems/mgt2e/templates/actor/parts/actor-items.html"}}
+                    </div>
+
+                    {{!-- Settings Tab --}}
+                    {{#if (isOwner .)}}
+                        <section class="tab settings flexcol" data-group="primary" data-tab="settings">
+                            {{> "systems/mgt2e/templates/actor/parts/actor-settings.html"}}
+                        </section>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    {{else}}
+    {{> "systems/mgt2e/templates/actor/parts/actor-id-card.html"}}
+    {{/if}}
+</form>
+

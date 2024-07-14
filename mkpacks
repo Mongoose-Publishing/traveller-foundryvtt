@@ -7,7 +7,7 @@
 
 cmd=$1
 
-cd mgt2
+cd mgt2e || exit 2
 
 PACKS="base-items traveller-docs"
 

@@ -1,0 +1,54 @@
+{
+  "_id": "KjYQNF4VI3GigmEy",
+  "name": "Bite and Claw",
+  "type": "weapon",
+  "img": "systems/mgt2e/icons/items/melee-natural.svg",
+  "effects": [],
+  "folder": "bXGbV4AjDY6AJGxk",
+  "sort": 100000,
+  "flags": {},
+  "system": {
+    "tl": "0",
+    "weight": 0,
+    "cost": 0,
+    "notes": "",
+    "active": false,
+    "quantity": 1,
+    "status": null,
+    "weapon": {
+      "scale": "traveller",
+      "range": 0,
+      "damage": "1D6",
+      "magazine": 0,
+      "ammo": 0,
+      "magazineCost": 0,
+      "characteristic": "STR",
+      "skill": "melee.natural",
+      "parryBonus": 0,
+      "damageBonus": "STR",
+      "damageType": "standard",
+      "attackBonus": 0,
+      "traits": "",
+      "sfx": ""
+    },
+    "name": "",
+    "description": "<p>Natural weapon for a creature.</p>",
+    "augments": [],
+    "templates": [
+      "base"
+    ]
+  },
+  "ownership": {
+    "default": 0,
+    "QlyRLFLquZkYH4lQ": 3
+  },
+  "_stats": {
+    "systemId": "mgt2e",
+    "systemVersion": "0.6.4",
+    "coreVersion": "11.315",
+    "createdTime": null,
+    "modifiedTime": 1720367179236,
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+  },
+  "_key": "!items!KjYQNF4VI3GigmEy"
+}

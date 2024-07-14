@@ -1,0 +1,93 @@
+{
+  "folder": "81lpHPvcOeOkc8gf",
+  "name": "Contents",
+  "_id": "83nkkP7aeGF22kG6",
+  "pages": [
+    {
+      "sort": 0,
+      "name": "Mongoose Traveller 2e",
+      "type": "text",
+      "_id": "ayw6ZYSVAbgjXPGE",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>This is a FoundryVTT system for <strong>Mongoose Traveller 2e</strong>. It provides character sheets and support for game rules.</p><p></p><p>@UUID[JournalEntry.I3AuPYIeiMu19Rli]{Characters and Skills}</p><p></p><p>@UUID[JournalEntry.s8DAOTe8r1s1TE7k]{Creating and Using Items}</p><p></p><p>@UUID[JournalEntry.daLn8GLKHRgnJBax]{Chat Commands}</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "ownership": {
+        "default": -1,
+        "Uzw5MJmM0BRE3sSL": 3
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "mgt2e",
+        "systemVersion": "0.4.9",
+        "coreVersion": "11.315",
+        "createdTime": 1717857026252,
+        "modifiedTime": 1717925528116,
+        "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+      },
+      "_key": "!journal.pages!83nkkP7aeGF22kG6.ayw6ZYSVAbgjXPGE"
+    },
+    {
+      "sort": 100000,
+      "name": "Compendiums",
+      "type": "text",
+      "_id": "oQyLbsHcJKDIUhQM",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>There are a number of Compendium packs included with the system.</p><p></p><p>Traveller Docs - This pack, contains documentation on how to use the system.</p><p>Base Items - Some basic items.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "ownership": {
+        "default": -1,
+        "Uzw5MJmM0BRE3sSL": 3
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "mgt2e",
+        "systemVersion": "0.4.8",
+        "coreVersion": "11.315",
+        "createdTime": 1717857565755,
+        "modifiedTime": 1717857611861,
+        "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+      },
+      "_key": "!journal.pages!83nkkP7aeGF22kG6.oQyLbsHcJKDIUhQM"
+    }
+  ],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Uzw5MJmM0BRE3sSL": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "mgt2e",
+    "systemVersion": "0.4.9",
+    "coreVersion": "11.315",
+    "createdTime": 1717535860858,
+    "modifiedTime": 1717925528116,
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+  },
+  "_key": "!journal!83nkkP7aeGF22kG6"
+}

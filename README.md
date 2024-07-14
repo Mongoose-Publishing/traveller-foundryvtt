@@ -1,7 +1,6 @@
 # Mongoose Traveller for FoundryVTT
 
-THE SYSTEM IDENTIFIER CURRENTLY CLASHES WITH ANOTHER IDENTIFIER IN FOUNDRY.
-A COMPATIBILITY BREAKING CHANGE MAY NEED TO BE MADE TO RESOLVE THIS.
+**BRANCH TO CHANGE SYSTEM IDENTIFIER:** This is an incompatible breaking change with previous versions.
 
 This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v11.
 it is currently in beta, so suggestions and bug reports are greatly appreciated. The basic game rules
@@ -37,7 +36,7 @@ configured. The `dataPath` should be set to the local mgt2 directory.
 e.g.
 
 ```
-fvtt configure set dataPath $PWD/mgt2/
+fvtt configure set dataPath $PWD/mgt2e/
 ```
 
 ### Releases

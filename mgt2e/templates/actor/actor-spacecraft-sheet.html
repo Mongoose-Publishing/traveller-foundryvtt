@@ -1,0 +1,346 @@
+
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+
+    <section class="npc-sheet">
+        <div class="character-left">
+            <img class="profile-img shadow" src="{{actor.img}}" data-edit="img"
+                 title="{{actor.name}}" height="100" width="100"/>
+
+            <div class="side-panel hits-box shadow">
+                <label for="system.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                    <input class="characteristic-value" type="number" name="system.hits.damage"
+                           title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
+                           value="{{system.hits.damage}}" data-dtype="Number"/>
+                </div>
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
+                    <input class="characteristic-readonly" type="number"
+                           title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
+                           value="{{system.hits.value}}"/>
+                </div>
+            </div>
+
+            <div class="side-panel hits-box shadow">
+                <label for="system.fuel" class="box-title">{{localize 'MGT2.TravellerSheet.Fuel'}}</label>
+
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.CurrentFuel'}}</label>
+                    <input class="characteristic-value" type="number" name="data.spacecraft.fuel.value"
+                           title="{{localize 'MGT2.TravellerSheet.CurrentFuel'}}"
+                           value="{{system.spacecraft.fuel.value}}" data-dtype="Number"/>
+                </div>
+                <div>
+                    <label class="left-label">{{localize 'MGT2.TravellerSheet.MaxFuel'}}</label>
+                    <input class="characteristic-readonly" type="number"
+                           title="{{localize 'MGT2.TravellerSheet.MaxFuel'}}"
+                           value="{{system.spacecraft.fuel.max}}"/>
+                </div>
+            </div>
+
+            {{#if system.spacecraft.navy.naval}}
+                <div class="side-panel supply-box shadow">
+                    <label for="system.supplies" class="box-title">{{localize 'MGT2.TravellerSheet.Supplies'}}</label>
+
+                    <div>
+                        <label class="left-label">{{localize 'MGT2.TravellerSheet.CurrentSupplies'}}</label>
+                        <input class="characteristic-value supply" type="number" name="system.spacecraft.navy.supplies.value"
+                               title="{{localize 'MGT2.TravellerSheet.CurrentSupplies'}}"
+                               value="{{system.spacecraft.navy.supplies.value}}" data-dtype="Number"/>
+                    </div>
+                    <div>
+                        <label class="left-label">{{localize 'MGT2.TravellerSheet.MaxSupplies'}}</label>
+                        <input class="characteristic-value supply" type="number"
+                               title="{{localize 'MGT2.TravellerSheet.MaxSupplies'}}"
+                               value="{{system.spacecraft.navy.supplies.max}}"/>
+                    </div>
+                </div>
+            {{/if}}
+
+            <div class="side-panel armour-box shadow flex-group-center">
+                <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
+
+                <div class="resource">
+                    <label class="prot-type" title="Protection">Armour</label>
+                    <input class="armour-value writable" type="text" name="system.spacecraft.armour" title="Armour"
+                           value="{{system.spacecraft.armour}}" data-dtype="Number"/>
+                </div>
+                <div class="resource">
+                    <label class="prot-type" title="Rad Shielding">Rad Shielding</label>
+                    <input class="armour-value writable" type="text" name="system.spacecraft.radShielding" title="Radiation protection"
+                           value="{{system.spacecraft.radShielding}}" data-dtype="Number"/>
+                </div>
+                <br/>
+            </div>
+        </div>
+
+        <div class="character-right">
+            <h1 class="charname shadow">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+            </h1>
+
+            <div class="shadow grid grid-5col">
+                <div class="resource flex-group-center">
+                    <label for="system.spacecraft.dtons" class="field-label">{{localize 'MGT2.TravellerSheet.DTons'}}</label>
+                    <input class="field-value writable" name="system.spacecraft.dtons" type="text" value="{{system.spacecraft.dtons}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.spacecraft.tl" class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+                    <select class="configurationType writable" style="width:100%" name="system.spacecraft.tl">
+                        {{#select system.spacecraft.tl}}
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        {{/select}}
+                    </select>
+                </div>
+                <div class="resource flex-group-center grid-span-2">
+                    <label for="system.spacecraft.configuration" class="field-label">{{localize 'MGT2.TravellerSheet.Configuration'}}</label>
+                    <select class="configurationType writable" style="width:100%" name="system.spacecraft.configuration">
+                        {{#select system.spacecraft.configuration}}
+                        <option value="standard">Standard</option>
+                        <option value="streamlined">Streamlined</option>
+                        <option value="sphere">Sphere</option>
+                        <option value="close">Close Structure</option>
+                        <option value="dispersed">Dispersed Structure</option>
+                        <option value="planetoid">Planetoid</option>
+                        <option value="buffered">Buffered Planetoid</option>
+                        {{/select}}
+                    </select>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
+                    <input class="field-value" readonly name="data.hits.max" type="text" value="{{data.hits.max}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.CargoHold'}}</label>
+                    <input class="field-value" name="data.spacecraft.cargo" readonly type="text" value="{{data.spacecraft.cargo}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.spacecraft.jdrive" class="field-label">{{localize 'MGT2.TravellerSheet.JDrive'}}</label>
+                    <input class="field-value" name="data.spacecraft.jdrive" readonly type="text" value="{{data.spacecraft.jdrive}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.spacecraft.mdrive" class="field-label">{{localize 'MGT2.TravellerSheet.MDrive'}}</label>
+                    <input class="field-value" name="data.spacecraft.mdrive" readonly type="text" value="{{data.spacecraft.mdrive}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.spacecraft.rdrive" class="field-label">{{localize 'MGT2.TravellerSheet.RDrive'}}</label>
+                    <input class="field-value" name="data.spacecraft.rdrive" readonly type="text" value="{{data.spacecraft.rdrive}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="data.spacecraft.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
+                    <input class="field-value" readonly type="text" value="{{data.spacecraft.power.used}} / {{data.spacecraft.power.max}}"/>
+                </div>
+            </div>
+
+            {{#if system.spacecraft.navy.naval}}
+                <div class="shadow">
+                    <div class="grid grid-5col">
+                        <div class="resource flex-group-center">
+                            <label for="system.spacecraft.navy.cei.value" class="field-label">CEI</label>
+                            <input class="field-value writable" name="system.spacecraft.navy.cei.value" type="number"
+                                   value="{{system.spacecraft.navy.cei.value}}"/>
+                        </div>
+                        <div class="resource flex-group-center">
+                            <label for="system.spacecraft.navy.cei.current" class="field-label">ECEI</label>
+                            <input class="field-value writable" name="system.spacecraft.navy.cei.current" type="number"
+                                   value="{{system.spacecraft.navy.cei.current}}"/>
+                        </div>
+
+                        <div class="resource flex-group-center">
+                            <label for="system.spacecraft.navy.morale" class="field-label">Morale</label>
+                            <input class="field-value writable" name="system.spacecraft.navy.morale" type="number"
+                                   value="{{system.spacecraft.navy.morale}}"/>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+
+            <div class="shadow">
+                <nav class="sheet-tabs tabs" data-group="primary">
+                    <a class="item" data-tab="crew">{{localize 'MGT2.TravellerSheet.ShipsCrew'}}</a>
+                    <a class="item" data-tab="locker">{{localize 'MGT2.TravellerSheet.ShipsLocker'}}</a>
+                    <a class="item" data-tab="cargo">{{localize 'MGT2.TravellerSheet.CargoHold'}}</a>
+                    <a class="item" data-tab="hardware">{{localize 'MGT2.TravellerSheet.ShipsHardware'}}</a>
+                    <a class="item" data-tab="notes">{{localize 'MGT2.TravellerSheet.ShipsNotes'}}</a>
+                </nav>
+
+                <div class="sheet-body">
+                    <div class="tab items" data-tab="locker">
+                        <ol class="items-list actor-items grid grid-3col">
+                        {{#each locker as |item id|}}
+                            <li class="item item-gear" data-item-id="{{item._id}}">
+                                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+                                {{#if item.system.weight  includeZero=false}}
+                                    <span>{{item.system.weight}}kg</span>
+                                {{/if}}
+                                {{#if item.system.tl includeZero=false}}
+                                    <span>TL {{item.system.tl}}</span>
+                                {{/if}}
+                                {{#if item.system.cost includeZero=false}}
+                                    <span>Cr{{item.system.cost}}</span>
+                                {{/if}}
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                        {{/each}}
+                        </ol>
+                    </div>
+
+                    <div class="tab items" data-group="primary" data-tab="cargo">
+
+                        <div class="grid grid-3col">
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.CargoSpace'}}</label>
+                                <input class="field-value" type="text" value="{{system.spacecraft.cargo}}dt" readonly/>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.CargoUsed'}}</label>
+                                <input class="field-value" type="text" value="{{cargoUsed}}dt" readonly/>
+                            </div>
+
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.CargoRemaining'}}</label>
+                                <input class="field-value" type="text" value="{{cargoRemaining}}dt" readonly/>
+                            </div>
+                        </div>
+
+                        <ol class="items-list actor-items grid grid-3col">
+                            {{#each cargo as |item id|}}
+                            <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
+                                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+                                {{#if item.system.quantity includeZero=false}}
+                                    <span>{{item.system.quantity}}dt</span>
+                                    <br/>
+                                {{/if}}
+                                {{#if item.system.cargo.price includeZero=false}}
+                                    <span>Cr{{number item.system.cargo.price}}</span>
+                                {{/if}}
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ol>
+                    </div>
+
+                    <div class="tab items" data-tab="hardware">
+                        <div class="grid grid-3col">
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.DTons'}}</label>
+                                <input class="field-value" type="text" value="{{system.spacecraft.dtons}}dt" readonly/>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.DTonsUsed'}}</label>
+                                <input class="field-value" type="text" value="{{dtonsUsed}}dt" readonly/>
+                            </div>
+
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.DTonsRemaining'}}</label>
+                                <input class="field-value" type="text" value="{{dtonsRemaining}}dt" readonly/>
+                            </div>
+                        </div>
+
+                        <ol class="items-list actor-items grid grid-3col">
+                            {{#each hardware as |item id|}}
+                            <li class="item item-gear" data-item-id="{{item._id}}">
+                                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+                                {{#if item.system.hardware.tons  includeZero=false}}
+                                    <span>{{quantity item item.system.hardware.tons}}dT</span>
+                                {{/if}}
+                                {{#if item.system.tl includeZero=false}}
+                                    <span>TL {{item.system.tl}}</span>
+                                {{/if}}
+                                {{#if item.system.cost includeZero=false}}
+                                    <span>MCr{{quantity item item.system.cost}}</span>
+                                {{/if}}
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ol>
+                    </div>
+
+                    <div class="tab items" data-tab="notes">
+                        <div class="resources grid grid-3col">
+                            <div class="resource flex-group-left">
+                                <input type="checkbox" name="system.spacecraft.navy.naval" {{checked system.spacecraft.navy.naval}} data-dtype="Boolean" />
+                                <label for="system.spacecraft.navy.naval" class="resource-label">Naval vessel</label>
+                            </div>
+
+                            {{#if system.spacecraft.navy.naval}}
+                                Divisions
+                            {{/if}}
+                        </div>
+
+
+                        <section class="description shadow">
+                            {{editor
+                            enrichedDescription target="system.description"
+                            button=true editable=editable}}
+                        </section>
+
+                        {{#if roles}}
+                            <h2>Available Crew Roles</h2>
+                            <ol class="items-list actor-items grid grid-3col">
+                                {{#each roles as |item id|}}
+                                <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
+                                    <h4>{{item.name}}</h4>
+                                    <img src="{{item.img}}"/>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                                {{/each}}
+                            </ol>
+                        {{/if}}
+
+                        {{#if shipWeapons}}
+                            <h2>Available Weapons</h2>
+                            <ol class="items-list actor-items grid grid-3col">
+                                {{#each shipWeapons as |item id|}}
+                                <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
+                                    <h4>{{item.name}}</h4>
+                                    <img src="{{item.img}}"/>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                                {{/each}}
+                            </ol>
+                        {{/if}}
+                    </div>
+
+                    <div class="tab items" data-tab="crew">
+                        {{> "systems/mgt2e/templates/actor/parts/actor-starship-crew.html"}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+</form>
+
