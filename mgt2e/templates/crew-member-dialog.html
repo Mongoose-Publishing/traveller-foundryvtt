@@ -1,31 +1,53 @@
 <form class="flexcol crew-member-dialog">
 
-    <div class="grid grid-2col">
-        <div class="resource">
-            <img class="crew-portrait" src="{{actorCrew.img}}"/>
-        </div>
+    <div class="crew-role-header">
+        <img class="crew-portrait" src="{{actorCrew.img}}"/>
 
-        <div class="resource">
-
+        <div class="crew-info">
+            {{#if actorCrew.system.sophont.profession}}
+                <h4>{{actorCrew.system.sophont.profession}}</h4>
+            {{/if}}
+            {{toHex actorCrew.system.characteristics.STR.value}}
+            {{toHex actorCrew.system.characteristics.DEX.value}}
+            {{toHex actorCrew.system.characteristics.END.value}}
+            {{toHex actorCrew.system.characteristics.INT.value}}
+            {{toHex actorCrew.system.characteristics.EDU.value}}
+            {{toHex actorCrew.system.characteristics.SOC.value}}
         </div>
     </div>
 
-    <div>
-        <ol class="items-list role-list">
-            <li class="item flexrow">
-                <div class="role-name-header">Role Assignment</div>
-            </li>
-            {{#each shipRoles as |role|}}
-                <li class="item flexrow" data-item-id="{{role.id}}">
-                    <div>
-                        <input class="assign-role" type="checkbox" name="checked-{{role.id}}"
-                               {{checked role.assigned}} data-dtype="Boolean"/>
-                        <span class="role-name">{{role.name}}</span>
-                    </div>
-                </li>
-            {{/each}}
-        </ol>
-
+    <div class="crew-role-body">
+        <h4>Assign Roles</h4>
+        {{#if shipRoles}}
+            <ol class="items-list role-list grid grid-2col">
+                {{#each shipRoles as |role|}}
+                    <li class="item crew-role" data-item-id="{{role.id}}">
+                        <h4>
+                            <input class="assign-role" type="checkbox" name="checked-{{role.id}}"
+                                   {{checked role.assigned}} data-dtype="Boolean"/>
+                            <span class="role-name">{{role.name}}</span><br/>
+                        </h4>
+                        <div>
+                            {{#each role.actions as |action actionId|}}
+                                <span class="role-action-button inline-role"
+                                      data-action-id="{{actionId}}"
+                                      data-role-id="{{ role.id }}"
+                                      data-crew-id="{{ ../../actorCrewId }}"
+                                >
+                                    <h5>{{action.title}}</h5>
+                                    {{#if action.skill}}
+                                        <span class="action-skill">{{skillToLabel action.skill}}</span>
+                                    {{/if}}
+                                </span>
+                            {{/each}}
+                        </div>
+                    </li>
+                {{/each}}
+            </ol>
+            <br/>
+        {{else}}
+            <p>There are no available roles. You need to add some.</p>
+        {{/if}}
     </div>
 
     <footer class="sheet-footer flexrow">

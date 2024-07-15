@@ -79,5 +79,7 @@ fi
 zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
 cp mgt2e/system.json release/system.json
 
+sed -i "s/\(\*\*Version:\*\* \).*/\1 ${version}/g" README.md
+
 echo "Created release ${version} in branch ${release}"
 

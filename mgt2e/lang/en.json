@@ -281,6 +281,15 @@
   "MGT2.Warn.HotBar.SelectActorItem": "No actor is selected to use {item} with",
   "MGT2.Warn.HotBar.ActorNotHaveItem": "Actor '{actor}' does not have item '{item}'",
 
+  "MGT2.Warn.Crew.NoCrewActor": "Cannot find crew actor with id '{crewId}'",
+  "MGT2.Warn.Crew.NoRoleItem": "Cannot find role with id '{roleId}'",
+
+  "MGT2.Role.RoleAssignment": "Role Assignment",
+  "MGT2.Role.RoleActions": "Actions",
+  "MGT2.Role.NoRoleAssigned": "No roles assigned",
+  "MGT2.Role.NoCrewAssigned": "No passengers are assigned as crew members",
+  "MGT2.Role.NoCrewOrPassengers": "Drag Travellers or NPCs to this ship to add crew members",
+
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",
   "TYPES.Actor.creature": "Creature",

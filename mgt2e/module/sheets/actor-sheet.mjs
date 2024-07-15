@@ -571,7 +571,7 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.crew-delete').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
-            this.actor.update({[`system.crewed.crew.-=${actorId}`]: null});
+            this._deleteCrewMember(this.actor, actorId);
         });
 
         html.find('.embedded-actor-portrait').click(ev => {
@@ -583,7 +583,7 @@ export class MgT2ActorSheet extends ActorSheet {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
             const crew = game.actors.get(actorId);
-            new MgT2CrewMemberDialog(crew, this.actor).render(true);
+            new MgT2CrewMemberDialog(crew, this.actor, this).render(true);
 
         });
 
@@ -752,6 +752,10 @@ export class MgT2ActorSheet extends ActorSheet {
         }
     }
 
+    async _deleteCrewMember(actor, actorId) {
+        await actor.update({[`system.crewed.crew.-=${actorId}`]: null});
+    }
+
     async _movePassengerToCrew(actor, actorId) {
         await actor.update({[`system.crewed.passengers.-=${actorId}`]: null});
         await actor.update({[`system.crewed.crew.${actorId}`]: { } });
@@ -763,12 +767,15 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     _runCrewAction(shipActor, actorCrewId, roleId, actionId) {
+        console.log("_runCrewAction: " + actorCrewId);
         const actorCrew = game.actors.get(actorCrewId);
         if (!actorCrew) {
+            ui.notifications.warn(game.i18n.format("MGT2.Warn.Crew.NoCrewActor", { crewId: actorCrewId}));
             return;
         }
         const itemRole = shipActor.items.get(roleId);
         if (!itemRole) {
+            ui.notifications.warn(game.i18n.format("MGT2.Warn.Crew.NoCrewActor", { roleId: roleId}));
             return;
         }
         const action = itemRole.system.role.actions[actionId];

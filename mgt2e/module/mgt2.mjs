@@ -1298,18 +1298,42 @@ Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
     for (let id in roles) {
         let roleItem = actorShip.items.get(id);
         if (roleItem) {
-            html += `<span class="role-title">${roleItem.name}</span>`;
+            html += `<div class="role-action-item"><span class="role-title">${roleItem.name}</span>`;
             html += `<div class="role-action-buttons">`;
             for (let id in roleItem.system.role.actions) {
                 let action = roleItem.system.role.actions[id];
                 html += `<span class="role-action-button" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}"><img class="action" src="${roleItem.img}" title="${action.title}"/></span>`;
             }
-            html += "</div>";
+            html += "</div></div>";
         }
+    }
+    if (!html) {
+        html =  game.i18n.localize("MGT2.Role.NoRoleAssigned");
     }
     return html;
 });
 
+Handlebars.registerHelper('skillToLabel', function(skillName) {
+    let skillId = skillName.replaceAll(/\..*/g, "");
+    let specId = (skillName.indexOf(".") < 0)?null:skillName.replaceAll(/.*\./g, "");
+
+    console.log(skillId + " - " + specId);
+
+    let skills = game.system.template.Actor.templates.skills.skills;
+    let label = "";
+    if (skills[skillId]) {
+        label = skills[skillId].label;
+        if (specId && skills[skillId].specialities) {
+            if (skills[skillId].specialities[specId]) {
+                label += " (" + skills[skillId].specialities[specId].label + ")";
+            }
+        }
+    } else {
+        return "Unknown skill";
+    }
+
+    return label;
+});
 
 
 /* -------------------------------------------- */
