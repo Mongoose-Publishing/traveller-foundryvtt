@@ -843,12 +843,9 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     async _onDropActor(event, data) {
-        console.log("_onDropActor:");
-        let actorId = data.uuid.replace(/Actor\./, "");
-        let actor = game.actors.get(actorId);
-
+        let actor = await fromUuid(data.uuid);
         if (!actor) {
-            return;
+           return;
         }
         if (this.actor.type === "spacecraft" && (actor.type === "traveller" || actor.type === "npc")) {
             console.log(`Adding new crew member ${actor._id}`);
