@@ -76,6 +76,7 @@ else
   sed -i "s#/raw/[vmain0-9.]*/#/raw/$(git branch --show-current)/#" mgt2e/system.json
 fi
 # Zip up system archive, minus the source json.
+rm -f release/mongoose-traveller.zip
 zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
 cp mgt2e/system.json release/system.json
 
