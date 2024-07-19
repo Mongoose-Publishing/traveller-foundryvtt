@@ -255,10 +255,10 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     let data = actor.system;
     let isRanged = true;
 
-    let armour = parseInt(data.armour.protection);
+    let armour = parseInt(data.armour?data.armour.protection:0);
     if (options !== "") {
         if (data.armour.otherTypes.indexOf(options) > -1) {
-            armour += parseInt(data.armour.otherProtection);
+            armour += parseInt(data.armour?data.armour.otherProtection:0);
         }
     }
     if (armour < 0) {
@@ -271,7 +271,7 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
             armour *= lopen;
         }
     }
-    if (data.armour.archaic && isRanged && tl > data.armour.tl) {
+    if (data.armour && data.armour.archaic && isRanged && tl > data.armour.tl) {
         // Archaic armour gets halved.
         armour = parseInt(Math.round(armour / 2));
     }
@@ -280,7 +280,6 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
 
     let stun = hasTrait(traits, "stun");
 
-    console.log("DAMAGE: " + actualDamage);
     if (actor.type === "traveller") {
         // Travellers don't have hits
         let remaining = actualDamage;
