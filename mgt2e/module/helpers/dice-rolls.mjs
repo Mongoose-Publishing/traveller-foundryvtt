@@ -384,14 +384,15 @@ function getEffectLabel(effect) {
     } else if (effect <= 0) {
         effectType = "Marginal Success";
         effectClass = "rollSuccess";
+        chain = "+1";
     } else if (effect <= 5) {
         effectType = "Average Success";
         effectClass = "rollSuccess";
-        chain = "+1";
+        chain = "+2";
     } else {
         effectType = "Exceptional Success";
         effectClass = "rollSuccess";
-        chain = "+2";
+        chain = "+3";
     }
 
     return `<span class='effectRoll ${effectClass}'>${effectType} [${effect>=0?"+":""}${effect}]</span><br/>Chain Bonus ${chain}`;
