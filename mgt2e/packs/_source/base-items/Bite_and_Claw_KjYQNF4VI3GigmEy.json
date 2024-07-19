@@ -2,7 +2,7 @@
   "_id": "KjYQNF4VI3GigmEy",
   "name": "Bite and Claw",
   "type": "weapon",
-  "img": "systems/mgt2/icons/items/melee-natural.svg",
+  "img": "systems/mgt2e/icons/items/melee-natural.svg",
   "effects": [],
   "folder": "bXGbV4AjDY6AJGxk",
   "sort": 100000,
@@ -43,7 +43,7 @@
     "QlyRLFLquZkYH4lQ": 3
   },
   "_stats": {
-    "systemId": "mgt2",
+    "systemId": "mgt2e",
     "systemVersion": "0.6.4",
     "coreVersion": "11.315",
     "createdTime": null,

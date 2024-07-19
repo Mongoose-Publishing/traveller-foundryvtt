@@ -2,7 +2,7 @@
   "_id": "uTtH5mXI2i0byiXO",
   "name": "Unarmed",
   "type": "weapon",
-  "img": "systems/mgt2/icons/items/melee-unarmed.svg",
+  "img": "systems/mgt2e/icons/items/melee-unarmed.svg",
   "effects": [],
   "folder": "bXGbV4AjDY6AJGxk",
   "sort": 200000,
@@ -47,7 +47,7 @@
     "QlyRLFLquZkYH4lQ": 3
   },
   "_stats": {
-    "systemId": "mgt2",
+    "systemId": "mgt2e",
     "systemVersion": "0.6.4",
     "coreVersion": "11.315",
     "createdTime": null,
