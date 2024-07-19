@@ -72,9 +72,9 @@
                     <div class="resource">
                     {{#if (ifEquals data.weapon.scale "spacecraft")}}
                         <label for="data.weapon.spaceRange" class="resource-label">{{localize "MGT2.Item.RangeSpace"}}</label>
-                        <select class="expand writable" name="data.weapon.spaceRange" title="Range of spacecraft weapon">
-                            {{#select data.weapon.spaceRange}}
-                            <option value=adjacent">{{localize "MGT2.Item.SpaceRange.adjacent"}}</option>
+                        <select class="expand writable" name="system.weapon.spaceRange" title="Range of spacecraft weapon">
+                            {{#select system.weapon.spaceRange}}
+                            <option value="adjacent">{{localize "MGT2.Item.SpaceRange.adjacent"}}</option>
                             <option value="close">{{localize "MGT2.Item.SpaceRange.close"}}</option>
                             <option value="short">{{localize "MGT2.Item.SpaceRange.short"}}</option>
                             <option value="medium">{{localize "MGT2.Item.SpaceRange.medium"}}</option>

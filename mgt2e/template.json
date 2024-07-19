@@ -336,6 +336,7 @@
                     "strength": {
                         "label": "Strength",
                         "default": "STR",
+                        "combat": true,
                         "value": 0
                     }
                 }

@@ -1406,6 +1406,9 @@ export class MgT2ActorSheet extends ActorSheet {
             if (data.skills[skill].trained) {
                 if (spec) {
                     speciality = data.skills[skill].specialities[spec];
+                    if (speciality.default) {
+                        skillDefault = speciality.default;
+                    }
                 }
             }
         }

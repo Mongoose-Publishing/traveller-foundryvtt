@@ -60,6 +60,9 @@ export class MgT2SkillDialog extends Application {
                     this.specId = spec;
                     this.spec = data.skills[skill].specialities[spec];
                     this.value = this.spec.value;
+                    if (this.spec.default) {
+                        this.cha = this.spec.default;
+                    }
                     if (this.spec.expert) {
                         this.expert = parseInt(this.spec.expert);
                     }
@@ -115,13 +118,17 @@ export class MgT2SkillDialog extends Application {
         let remember = false;
         if (html.find(".skillDialogCha")[0]) {
             cha = html.find(".skillDialogCha")[0].value;
-            remember = html.find(".skillDialogRemember")[0].checked;
+            remember = html.find(".rememberChaCheck")[0].checked;
         }
         let rollType = html.find(".skillDialogRollType")[0].value;
         let difficulty = parseInt(html.find(".skillDialogDifficulty")[0].value);
 
         if (remember && this.skillId) {
-            this.actor.system.skills[this.skillId].default = cha;
+            if (this.spec) {
+                this.actor.system.skills[this.skillId].specialities[this.specId].default = cha;
+            } else {
+                this.actor.system.skills[this.skillId].default = cha;
+            }
             this.actor.update({ "system.skills": this.actor.system.skills });
         } else if (this.skillId) {
             this.cha = this.actor.system.skills[this.skillId].default;
