@@ -16,13 +16,14 @@ export class MgT2DamageDialog extends Application {
 
     constructor(actor, damage, ap, laser, traits) {
         super();
-        console.log("DamageDialog constructor:");
+        console.log("DamageDialog:");
 
         console.log(actor);
 
         this.actor = actor;
         const data = actor.system;
 
+        console.log(traits);
         this.damage = damage;
         this.ap = ap;
         this.laser = laser;

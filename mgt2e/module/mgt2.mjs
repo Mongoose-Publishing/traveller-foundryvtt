@@ -182,7 +182,10 @@ Hooks.on('renderChatMessage', function(app, html) {
             type: "Damage",
             laser: false,
             ap: parseInt(damageMessage.getAttribute("data-ap")),
-            damage: parseInt(damageMessage.getAttribute("data-damage"))
+            damage: parseInt(damageMessage.getAttribute("data-damage")),
+            traits: damageMessage.getAttribute("data-traits"),
+            options: damageMessage.getAttribute("data-options"),
+            tl: parseInt(damageMessage.getAttribute("data-tl"))
         }
 
         damageMessage.addEventListener("dragstart", ev => {
@@ -284,6 +287,7 @@ Hooks.on("createItem", (item) => {
 });
 
 Hooks.on("createActor", (actor) => {
+    console.log("createActor:");
     if (actor.img === "icons/svg/mystery-man.svg") {
         let colours = [ "white", "blue", "gold", "green", "red" ];
         if (actor.type === "creature") {
@@ -307,6 +311,7 @@ Hooks.on("createActor", (actor) => {
 });
 
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
+    console.log("**** preUpdateActor:");
     if (data?.system?.damage) {
         // This is a Traveller with full damage by stat
         const damage = data.system.damage;
@@ -321,6 +326,7 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
         if (endDmg >= endMax) atZero++;
         if (dexDmg >= dexMax) atZero++;
         if (strDmg >= strMax) atZero++;
+        console.log("atZero:" + atZero);
         switch (atZero) {
             case 2:
                 actor.setFlag("mgt2e", "unconscious", true);
@@ -1181,7 +1187,7 @@ Handlebars.registerHelper('effect', function(key) {
  * Does not check to see if a traveller, npc or creature.
  */
 Handlebars.registerHelper('hasStatus', function(actor) {
-    const status = actor.flags.mgt2;
+    const status = actor.flags.mgt2e;
     if (!status) return false;
 
     if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit ||
@@ -1199,6 +1205,8 @@ Handlebars.registerHelper('toHex', function(value) {
 
 
 Handlebars.registerHelper('showStatus', function(actor, status) {
+    console.log("showStatus:" + status);
+    console.log(actor);
    let type = "statusWarn";
    let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
 

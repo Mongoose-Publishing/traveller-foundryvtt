@@ -110,7 +110,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         }
     }
     if (actor && actor.flags?.mgt2?.reaction) {
-        let react = Math.abs(parseInt(actor.flags.mgt2.reaction));
+        let react = Math.abs(parseInt(actor.flags.mgt2e.reaction));
         if (react !== 0) {
             dice += ` - ${react}[Dodge]`;
         }

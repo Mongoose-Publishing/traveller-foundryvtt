@@ -257,7 +257,7 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
 
     let armour = parseInt(data.armour?data.armour.protection:0);
     if (options !== "") {
-        if (data.armour.otherTypes.indexOf(options) > -1) {
+        if (data.armour && data.armour.otherTypes.indexOf(options) > -1) {
             armour += parseInt(data.armour?data.armour.otherProtection:0);
         }
     }
@@ -316,9 +316,11 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
         }
         if (data.characteristics) {
             if (data.hits.tmpDamage > data.characteristics.END.value) {
-                data.status.stunned = true;
-                data.status.stunnedRounds = 1;
-                actor.update({"system.status": data.status});
+                let remaining = data.hits.tmpDamage - data.characteristics.END.value;
+                actor.setFlag("mgt2e", "stunned", true);
+                actor.setFlag("mgt2e", "stunnedRounds",
+                    actor.getFlag("mgt2e", "stunnedRounds")?
+                        parseInt(actor.getFlag("mgt2e", "stunnedRounds"))+remaining:remaining);
             }
         }
     }

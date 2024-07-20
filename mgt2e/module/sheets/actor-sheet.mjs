@@ -1136,12 +1136,12 @@ export class MgT2ActorSheet extends ActorSheet {
     async _onDropDamage(event, data) {
         const damage = data.damage;
         const laser = data.laser;
-        const stun = false;
         const ap = data.ap;
         const actor = this.actor;
+        const traits = data.traits;
 
         if (actor.type === "traveller") {
-            new MgT2DamageDialog(actor, damage, ap, laser, stun).render(true);
+            new MgT2DamageDialog(actor, damage, ap, laser, traits).render(true);
         } else {
             // NPC, Creature or something else.
             Tools.applyDamageTo(damage, ap, data.tl, data.options, data.traits, actor, null);

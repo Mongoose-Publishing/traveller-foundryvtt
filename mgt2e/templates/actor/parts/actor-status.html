@@ -1,20 +1,20 @@
 {{#if (hasStatus actor)}}
   <div class="shadow">
-    {{#if actor.flags.mgt2.dead}}{{{showStatus actor "dead"}}}{{/if}}
-    {{#if actor.flags.mgt2.disabled}}{{{showStatus actor "dead"}}}{{/if}}
-    {{#if actor.flags.mgt2.unconscious}}{{{showStatus actor "unconscious"}}}{{/if}}
+    {{#if actor.flags.mgt2e.dead}}{{{showStatus actor "dead"}}}{{/if}}
+    {{#if actor.flags.mgt2e.disabled}}{{{showStatus actor "dead"}}}{{/if}}
+    {{#if actor.flags.mgt2e.unconscious}}{{{showStatus actor "unconscious"}}}{{/if}}
 
-    {{#if actor.flags.mgt2.diseased}}{{{showStatus actor "diseased"}}}{{/if}}
-    {{#if actor.flags.mgt2.poisoned}}{{{showStatus actor "poisoned"}}}{{/if}}
+    {{#if actor.flags.mgt2e.diseased}}{{{showStatus actor "diseased"}}}{{/if}}
+    {{#if actor.flags.mgt2e.poisoned}}{{{showStatus actor "poisoned"}}}{{/if}}
 
-    {{#if actor.flags.mgt2.stunned}}{{{showStatus actor "stunned"}}}{{/if}}
-    {{#if actor.flags.mgt2.encumbered}}{{{showStatus actor "encumbered"}}}{{/if}}
-    {{#if actor.flags.mgt2.vaccSuit}}{{{showStatus actor "vaccSuit"}}}{{/if}}
-    {{#if actor.flags.mgt2.fatigued}}{{{showStatus actor "fatigued"}}}{{/if}}
+    {{#if actor.flags.mgt2e.stunned}}{{{showStatus actor "stunned"}}}{{/if}}
+    {{#if actor.flags.mgt2e.encumbered}}{{{showStatus actor "encumbered"}}}{{/if}}
+    {{#if actor.flags.mgt2e.vaccSuit}}{{{showStatus actor "vaccSuit"}}}{{/if}}
+    {{#if actor.flags.mgt2e.fatigued}}{{{showStatus actor "fatigued"}}}{{/if}}
 
-    {{#if actor.flags.mgt2.highGravity}}{{{showStatus actor "highGravity"}}}{{/if}}
-    {{#if actor.flags.mgt2.lowGravity}}{{{showStatus actor "lowGravity"}}}{{/if}}
-    {{#if actor.flags.mgt2.zeroGravity}}{{{showStatus actor "zeroGravity"}}}{{/if}}
+    {{#if actor.flags.mgt2e.highGravity}}{{{showStatus actor "highGravity"}}}{{/if}}
+    {{#if actor.flags.mgt2e.lowGravity}}{{{showStatus actor "lowGravity"}}}{{/if}}
+    {{#if actor.flags.mgt2e.zeroGravity}}{{{showStatus actor "zeroGravity"}}}{{/if}}
 
     {{{showStatus actor "reaction"}}}
   </div>
