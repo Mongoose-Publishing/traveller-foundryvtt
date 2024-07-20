@@ -68,13 +68,13 @@ if [ ! -z $branch ]
 then
   release="v${version}"
   git checkout -b v${version}
-  sed -i "s/\"version\": \".*\",/\"version\": \"$version\",/" mgt2e/system.json
-  sed -i "s#/raw/[vmain0-9.]*/#/raw/v${version}/#" mgt2e/system.json
-else
-  release="main"
-  sed -i "s/\"version\": \".*\",/\"version\": \"${version}\",/" mgt2e/system.json
-  sed -i "s#/raw/[vmain0-9.]*/#/raw/$(git branch --show-current)/#" mgt2e/system.json
 fi
+
+release=$(git branch --show-current)
+
+sed -i "s/\"version\": \".*\",/\"version\": \"${version}\",/" mgt2e/system.json
+sed -i "s#/raw/[vmain0-9.]*/#/raw/${release}/#" mgt2e/system.json
+
 # Zip up system archive, minus the source json.
 rm -f release/mongoose-traveller.zip
 zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e

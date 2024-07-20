@@ -58,7 +58,7 @@
   "primaryTokenAttribute": "hits",
   "secondaryTokenAttribute": null,
   "url": "",
-  "manifest": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/mgt2e/release/system.json",
-  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/mgt2e/release/mongoose-traveller.zip",
+  "manifest": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/v0.9.0/release/system.json",
+  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/v0.9.0/release/mongoose-traveller.zip",
   "license": "LICENSE.txt"
 }
