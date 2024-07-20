@@ -1,7 +1,7 @@
 {
-  "name": "Solomani",
+  "name": "Human",
   "type": "package",
-  "img": "systems/mgt2e/icons/actors/traveller-white.svg",
+  "img": "systems/mgt2e/icons/actors/traveller-grey.svg",
   "system": {
     "speed": {
       "base": 6,
@@ -61,7 +61,7 @@
       "damage": 0,
       "tmpDamage": 0
     },
-    "description": "<p>The Solomani are a human major race. They originated on Terra, and didn't leave until they invented their own Jump drives.</p>\n<p>Drag this onto a character sheet to apply characteristics and background.</p>",
+    "description": "<p>Humans ultimately originated on Terra. This package can be dragged onto an actor sheet in order to apply characteristics.</p>",
     "settings": {
       "hideUntrained": true,
       "onlyBackground": false,
@@ -299,6 +299,7 @@
           "strength": {
             "label": "Strength",
             "default": "STR",
+            "combat": true,
             "value": 0
           }
         }
@@ -986,11 +987,11 @@
     },
     "sophont": {
       "age": 18,
-      "species": "Vilani",
+      "species": "Human",
       "speciesTraits": "",
       "gender": "",
       "weight": 80,
-      "height": 172,
+      "height": 171,
       "profession": "",
       "homeworld": ""
     },
@@ -998,7 +999,7 @@
     "maxSkills": null
   },
   "prototypeToken": {
-    "name": "Solomani",
+    "name": "Human",
     "displayName": 0,
     "actorLink": false,
     "appendNumber": false,
@@ -1062,7 +1063,7 @@
   },
   "items": [
     {
-      "name": "Solomani",
+      "name": "New term 1",
       "type": "term",
       "system": {
         "term": {
@@ -1072,10 +1073,10 @@
           "randomTerm": false
         },
         "name": "Term",
-        "description": "<p>A Solomani, a human descended from Terra.</p>"
+        "description": "<p>A human.</p>"
       },
-      "_id": "IB09TMP8O4ETUA5k",
-      "img": "systems/mgt2e/icons/misc/career.svg",
+      "_id": "9C4weE30XWGOwGG6",
+      "img": "systems/mgt2e/icons/actors/traveller-grey.svg",
       "effects": [],
       "folder": null,
       "sort": 0,
@@ -1086,13 +1087,76 @@
       "flags": {},
       "_stats": {
         "systemId": "mgt2e",
-        "systemVersion": "0.8.0",
+        "systemVersion": "0.9.0",
         "coreVersion": "11.315",
-        "createdTime": 1720985808140,
-        "modifiedTime": 1720985833967,
+        "createdTime": 1721479631665,
+        "modifiedTime": 1721479681733,
         "lastModifiedBy": "KjVCQnLdKUJeJDZy"
       },
-      "_key": "!actors.items!9HJpZSTPydMQ6ldF.IB09TMP8O4ETUA5k"
+      "_key": "!actors.items!Fq5fsrvRAEXRxurY.9C4weE30XWGOwGG6"
+    },
+    {
+      "_id": "EKeeioF23WiBgczK",
+      "name": "Unarmed",
+      "type": "weapon",
+      "img": "systems/mgt2e/icons/items/melee-unarmed.svg",
+      "effects": [],
+      "folder": "bXGbV4AjDY6AJGxk",
+      "sort": 200000,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.mgt2e.base-items.Item.uTtH5mXI2i0byiXO"
+        }
+      },
+      "system": {
+        "tl": "0",
+        "weight": 0,
+        "cost": 0,
+        "notes": "",
+        "active": false,
+        "quantity": 1,
+        "status": null,
+        "weapon": {
+          "scale": "traveller",
+          "range": 0,
+          "damage": "1D6",
+          "magazine": 0,
+          "ammo": 0,
+          "magazineCost": 0,
+          "characteristic": "STR",
+          "skill": "melee.unarmed",
+          "parryBonus": 0,
+          "damageBonus": "",
+          "damageType": "standard",
+          "attackBonus": 0,
+          "traits": "",
+          "sfx": ""
+        },
+        "name": "",
+        "description": "<p>Unarmed strike from a human or someone without natural weapons.</p>",
+        "augments": [],
+        "templates": [
+          "base"
+        ],
+        "item": {
+          "tl": 0,
+          "weight": 0
+        }
+      },
+      "ownership": {
+        "default": 0,
+        "QlyRLFLquZkYH4lQ": 3,
+        "KjVCQnLdKUJeJDZy": 3
+      },
+      "_stats": {
+        "systemId": "mgt2e",
+        "systemVersion": "0.9.0",
+        "coreVersion": "11.315",
+        "createdTime": 1721479777059,
+        "modifiedTime": 1721479777059,
+        "lastModifiedBy": "KjVCQnLdKUJeJDZy"
+      },
+      "_key": "!actors.items!Fq5fsrvRAEXRxurY.EKeeioF23WiBgczK"
     }
   ],
   "effects": [],
@@ -1106,13 +1170,13 @@
   },
   "_stats": {
     "systemId": "mgt2e",
-    "systemVersion": "0.8.0",
+    "systemVersion": "0.9.0",
     "coreVersion": "11.315",
-    "createdTime": 1720985739090,
-    "modifiedTime": 1720986046843,
+    "createdTime": 1721479602768,
+    "modifiedTime": 1721479818741,
     "lastModifiedBy": "KjVCQnLdKUJeJDZy"
   },
-  "_id": "9HJpZSTPydMQ6ldF",
-  "sort": 0,
-  "_key": "!actors!9HJpZSTPydMQ6ldF"
+  "_id": "Fq5fsrvRAEXRxurY",
+  "sort": 100000,
+  "_key": "!actors!Fq5fsrvRAEXRxurY"
 }
