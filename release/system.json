@@ -2,7 +2,7 @@
   "name": "mgt2e",
   "title": "Mongoose Traveller 2e",
   "description": "A system for Mongoose Traveller 2e",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "compatibility": {
     "minimum": 11,
     "verified": 11
@@ -30,7 +30,7 @@
     },
     {
       "name": "base-actors",
-      "label": "MgT2e Characters",
+      "label": "MgT2e Base Actors",
       "system": "mgt2e",
       "module": "mgt2e",
       "path": "packs/base-actors",
@@ -38,7 +38,7 @@
     },
     {
       "name": "traveller-docs",
-      "label": "MgT2e Docs",
+      "label": "MgT2e Base Docs",
       "system": "mgt2e",
       "module": "mgt2e",
       "path": "packs/traveller-docs",
@@ -58,7 +58,7 @@
   "primaryTokenAttribute": "hits",
   "secondaryTokenAttribute": null,
   "url": "",
-  "manifest": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/v0.9.0/release/system.json",
-  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/v0.9.0/release/mongoose-traveller.zip",
+  "manifest": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/main/release/system.json",
+  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/main/release/mongoose-traveller.zip",
   "license": "LICENSE.txt"
 }

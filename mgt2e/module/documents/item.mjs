@@ -35,6 +35,38 @@ export class MgT2Item extends Item {
     }
 
     /**
+     * Used to do some validation when item is dropped onto an actor.
+     * Not all actors support all item types.
+     */
+    _preCreate(data, options, userId) {
+        if (this.actor) {
+            console.log(`Adding item '${this.type}' to '${this.actor.type}'`);
+            // This item is being dropped onto an Actor object.
+            if (this.actor.type === "spacecraft") {
+                if (this.type === "term" || this.type === "associate") {
+                    ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.OnlyOnCharacter",
+                        { item: this.name, type: this.type }));
+                    return false;
+                }
+            } else {
+                if (this.type === "cargo" || this.type === "hardware" || this.type === "role") {
+                    ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.NotOnCharacter",
+                        { item: this.name, type: this.type }));
+                    return false;
+                }
+                if (this.actor.type === "npc" || this.actor.type === "creature") {
+                    if (this.type === "term" || this.type === "associate") {
+                        ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.CareerOnNPC"))
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Handle clickable rolls.
      * @param {Event} event   The originating click event
      * @private
