@@ -862,8 +862,8 @@ export class MgT2ActorSheet extends ActorSheet {
             // };
             // await this.actor.update({"system.crewed": this.actor.system.crewed });
         } else if (actor.type === "package" && (this.actor.type === "traveller" || this.actor.type === "npc")) {
-            console.log("Dropping a package " + actor.name);
-
+            ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackage",
+                { package: actor.name, actor: this.actor.name }));
             for (let c in actor.system.characteristics) {
                 if (actor.system.settings.useCustomDice) {
                     // Rather than this being a bonus, it is a new dice roll.
@@ -876,12 +876,10 @@ export class MgT2ActorSheet extends ActorSheet {
                     if (!dice || dice === "") {
                         dice = "2D6";
                     }
-                    console.log(c + ": " + dice);
                     let uppRoll = new Roll(dice, null).evaluate({async: false});
                     this.actor.system.characteristics[c].value = uppRoll.total;
                 } else {
                     let bonus = parseInt(actor.system.characteristics[c].value);
-                    console.log(c + ":" + bonus);
                     if (bonus !== 0) {
                         this.actor.system.characteristics[c].value += bonus;
                         if (this.actor.system.characteristics[c].value < 1) {
@@ -987,9 +985,15 @@ export class MgT2ActorSheet extends ActorSheet {
                     type: item.type,
                     system: deepClone(item.system)
                 };
+                if (this.actor.type === "npc" && (itemData.type === "term" || itemData.type === "associate")) {
+                    // NPCs don't have career terms or associates.
+                    continue;
+                }
                 if (itemData.type === "term" && itemData.system.term.randomTerm) {
                     itemData.system.term.termLength = new Roll("3D6", null).evaluate({async: false}).total;
                 }
+                ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackageItem",
+                    { item: item.name, actor: this.actor.name }));
                 await Item.create(itemData, {parent: this.actor});
             }
         }
@@ -1418,6 +1422,42 @@ export class MgT2ActorSheet extends ActorSheet {
             // Roll directly with no options.
             rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal", 8);
         }
+    }
+
+    async _onSubmit(event, updateData, preventClose, preventRender) {
+
+        console.log("_onSubmit:");
+        console.log(updateData);
+        console.log(this.actor);
+
+        if (this.actor.type === "spacecraft" && game.settings.get("mgt2e", "autoResizeSpacecraft")) {
+            let size = 1;
+            let dtons = this.actor.system.spacecraft.dtons;
+            if (dtons < 30) {
+                size = 1;
+            } else if (dtons < 100) {
+                size = 2;
+            } else if (dtons < 300) {
+                size = 3;
+            } else if (dtons < 1000) {
+                size = 4;
+            } else if (dtons < 3000) {
+                size = 5;
+            } else {
+                size = 6;
+            }
+            if (this.actor.prototypeToken) {
+                if (this.actor.prototypeToken.width !== size || this.actor.prototypeToken.height !== size) {
+                    this.actor.prototypeToken.width = size;
+                    this.actor.prototypeToken.height = size;
+                    this.actor.update({"prototypeToken": this.actor.prototypeToken });
+                }
+            }
+            //this.actor._source.prototypeToken.width = size;
+            //this.actor._source.prototypeToken.height = size;
+        }
+
+        await super._onSubmit(event, updateData, preventClose, preventRender);
     }
 }
 

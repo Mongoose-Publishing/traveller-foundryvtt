@@ -1,5 +1,10 @@
 # Release Notes
 
+## Unreleased
+
+* Auto resize starship tokens based on tonnage
+* Quietly squash warnings about adding careers and associates to NPCs when adding a package
+* Handle boon/bane flag correctly on skills which default to boon or bane
 
 ## v0.9.1 (Beta)
 

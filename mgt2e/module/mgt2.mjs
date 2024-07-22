@@ -125,6 +125,14 @@ Hooks.once('init', async function() {
         type: Number,
         default: 1
     });
+    game.settings.register('mgt2e', 'autoResizeSpacecraft', {
+        name: game.i18n.localize("MGT2.Settings.AutoResizeSpacecraft.Name"),
+        hint: game.i18n.localize("MGT2.Settings.AutoResizeSpacecraft.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true
+    });
 
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;

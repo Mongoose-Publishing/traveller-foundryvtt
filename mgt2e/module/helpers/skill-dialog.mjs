@@ -32,6 +32,7 @@ export class MgT2SkillDialog extends Application {
         this.augdm = 0;
         this.penalty = 0;
         this.defaultDm = defaultDm?defaultDm:0;
+        this.boonBane = "normal";
 
         if (cha && data.characteristics && data.characteristics[cha]) {
             this.characteristic = data.characteristics[cha];
@@ -49,6 +50,11 @@ export class MgT2SkillDialog extends Application {
             }
             if (this.skill.augdm && parseInt(this.skill.augdm) > 0) {
                 this.augdm = parseInt(this.skill.augdm);
+            }
+            if (this.skill.boon === "boon") {
+                this.boonBane = "boon";
+            } else if (this.skill.bane === "bane") {
+                this.boonBane = "bane";
             }
             if (this.skill.trained) {
                 this.value = this.skill.value;
@@ -98,7 +104,8 @@ export class MgT2SkillDialog extends Application {
             "dm": this.defaultDm,
             "dicetype": "normal",
             "physicalDM": this.penalty,
-            "characteristic": this.cha
+            "characteristic": this.cha,
+            "boonBane": this.boonBane
         }
     }
 

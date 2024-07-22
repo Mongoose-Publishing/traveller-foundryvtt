@@ -20,6 +20,8 @@
   "MGT2.Settings.CurrentYear.Hint": "The current year of the campaign",
   "MGT2.Settings.CurrentDay.Name": "Day",
   "MGT2.Settings.CurrentDay.Hint": "The current day of the campaign",
+  "MGT2.Settings.AutoResizeSpacecraft.Name": "Resize spacecraft tokens",
+  "MGT2.Settings.AutoResizeSpacecraft.Hint": "Size of tokens for spacecraft are automatically set according to their tonnage",
 
   "MGT2.TravellerSheet.Player": "Player",
   "MGT2.TravellerSheet.Species": "Species",
@@ -288,6 +290,8 @@
   "MGT2.Warn.Drop.OnlyOnCharacter": "Items of type '{type}' can only be added to characters",
   "MGT2.Warn.Drop.NotOnCharacter": "Cannot drop items of type '{type}' on a character",
   "MGT2.Warn.Drop.CareerOnNPC": "NPCs and Creatures cannot be given career terms or associates",
+  "MGT2.Info.Drop.DropPackage": "Adding package '{package}' to '{actor}'",
+  "MGT2.Info.Drop.DropPackageItem": "Adding item '{item}' to '{actor}'",
 
   "MGT2.Role.RoleAssignment": "Role Assignment",
   "MGT2.Role.RoleActions": "Actions",
