@@ -53,3 +53,51 @@ MGT2.EFFECTS = {
   "skillExpert": { "targets": "skills", "value": true, "property": "expert", mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE },
   "miscDM": { "targets": "misc", "value": true, "property": "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD }
 };
+
+MGT2.CREATURES = {
+  "behaviours": {
+    "herbivore": [], "omnivore": [], "carnivore": [], "scavenger": [],
+    "carrionEater": ["recon"],
+    "chaser": [ "athletics.dexterity", "athletics.endurance" ],
+    "eater": [ ],
+    "filter": [ ],
+    "gatherer": [ "stealth" ],
+    "grazer": [ ],
+    "hunter": [ "survival" ],
+    "hijacker": [ ],
+    "intimidator": [ "persuade" ],
+    "killer": [ "melee.natural" ],
+    "intermittent": [ ],
+    "pouncer": [ "stealth", "recon", "athletic.dexterity", "athletics.strength" ],
+    "reducer": [ ],
+    "siren": [ "deception" ],
+    "trapper": [ ]
+  },
+  "traits": {
+    "alarm": { },
+    "amphibious": {},
+    "camouflaged": {},
+    "diseased": {},
+    "echolocation": {},
+    "fastMetabolism": {},
+    "flyer": {},
+    "heightenedSenses": {},
+    "iuVision": {},
+    "poison": {},
+    "psionic": {},
+    "slowMetabolism": {}
+  },
+  "sizes": {
+    "-4": { "label": "small", "damage": "1", "minHits": 1, "maxHits": 2, "width": 1 },
+    "-3": { "label": "small", "damage": "1D3", "minHits": 3, "maxHits": 5, "width": 1 },
+    "-2": { "label": "small", "damage": "1D3", "minHits": 6, "maxHits": 7, "width": 1 },
+    "-1": { "label": "small", "damage": "1D6", "minHits": 8, "maxHits": 13, "width": 1 },
+    "0": { "label": "medium", "damage": "1D6", "minHits": 14, "maxHits": 28, "width": 1 },
+    "1": { "label": "large", "damage": "2D6", "minHits": 29, "maxHits": 35, "width": 1 },
+    "2": { "label": "large", "damage": "3D6", "minHits": 36, "maxHits": 49, "width": 2 },
+    "3": { "label": "large", "damage": "4D6", "minHits": 50, "maxHits": 70, "width": 2 },
+    "4": { "label": "large", "damage": "5D6", "minHits": 71, "maxHits": 90, "width": 3 },
+    "5": { "label": "large", "damage": "6D6", "minHits": 91, "maxHits": 125, "width": 3 },
+    "6": { "label": "large", "damage": "7D6", "minHits": 125, "maxHits": 250, "width": 4 }
+  }
+};

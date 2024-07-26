@@ -9,6 +9,7 @@ import {MgT2CrewMemberDialog } from "../helpers/crew-member-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
 import {MgT2Item} from "../documents/item.mjs";
 import {Tools} from "../helpers/chat/tools.mjs";
+import { MGT2 } from "../helpers/config.mjs";
 import {NpcIdCard} from "../helpers/id-card.mjs";
 
 /**
@@ -129,6 +130,23 @@ export class MgT2ActorSheet extends ActorSheet {
                 guncombat: { custom: 0, auto: 0, effect: 0, dm: 0 }
             };
         }
+
+        if (type === "creature") {
+            context.behaviours = {};
+            context.behaviours[""] = "";
+            context.haveBehaviours = {};
+            for (let b in CONFIG.MGT2.CREATURES.behaviours) {
+                if (actorData.behaviour.indexOf(b) === -1) {
+                    context.behaviours[b] = game.i18n.localize("MGT2.Creature.Behaviour." + b);
+                } else {
+                    context.haveBehaviours[b] = {
+                        "label": game.i18n.localize("MGT2.Creature.Behaviour." + b),
+                        "title": game.i18n.localize("MGT2.Creature.BehaviourText." + b)
+                    }
+                }
+            }
+        }
+
         return context;
     }
 
@@ -615,6 +633,19 @@ export class MgT2ActorSheet extends ActorSheet {
            this._runCrewAction(this.actor, actorId, roleId, actionId);
         });
 
+        // Events that only apply to creatures.
+        if (this.actor.type === "creature") {
+            html.find('.behaviour-selector').click(ev => {
+               const value = $(ev.currentTarget).val();
+               this._creatureSelectBehaviour(value);
+            });
+            html.find('.behaviour-remove').click(ev => {
+                const b = $(ev.currentTarget).parents(".behaviour-item");
+                this._creatureRemoveBehaviour(b.data("behaviourId"));
+            })
+        }
+
+
         // Dodge reaction
         html.find('.dodgeRoll').click(ev => {
             this._rollDodge(ev, this.actor);
@@ -703,6 +734,90 @@ export class MgT2ActorSheet extends ActorSheet {
         li.addEventListener("dragstart", handler, options);
     });
   }
+
+    async _creatureSelectBehaviour(selectedBehaviour) {
+        // Creatures can have multiple behaviours.
+        if (this.actor.system.behaviour) {
+            this.actor.system.behaviour += " " + selectedBehaviour;
+        } else {
+            this.actor.system.behaviour = selectedBehaviour;
+        }
+        await this.actor.update({'system.behaviour': this.actor.system.behaviour });
+
+        // Select skills which this behaviour has associated with it.
+        let b = MGT2.CREATURES.behaviours[selectedBehaviour];
+        let skills = this.actor.system.skills;
+        for (let s in b) {
+            let skill = b[s];
+            let spec = null;
+            if (skill.indexOf(".") > -1) {
+                spec = skill.replace(/.*\./, "");
+                skill = skill.replace(/\..*/, "");
+            }
+            if (skills[skill]) {
+                skills[skill].trained = true;
+                if (spec && skills[skill].specialities && skills[skill].specialities[spec]) {
+                    let ss = skills[skill].specialities[spec];
+                    if (ss.value < 1) {
+                        ss.value = 1;
+                    }
+                }
+            }
+        }
+        await this.actor.update({'system.skills': this.actor.system.skills});
+    }
+
+    async _creatureRemoveBehaviour(removedBehaviour) {
+        if (this.actor.system.behaviour) {
+            console.log(this.actor.system.behaviour);
+            console.log(removedBehaviour);
+            this.actor.system.behaviour = this.actor.system.behaviour.replace(removedBehaviour, "");
+            this.actor.system.behaviour = this.actor.system.behaviour.replace("  ", "");
+            console.log(this.actor.system.behaviour);
+
+            await this.actor.update({'system.behaviour': this.actor.system.behaviour });
+
+            // Remove skills associated with this behaviour.
+            let b = MGT2.CREATURES.behaviours[removedBehaviour];
+            let skills = this.actor.system.skills;
+            for (let s in b) {
+                let skill = b[s];
+                let spec = null;
+                if (skill.indexOf(".") > -1) {
+                    spec = skill.replace(/.*\./, "");
+                    skill = skill.replace(/\..*/, "");
+                }
+                if (skills[skill]) {
+                    if (!spec) {
+                        // The simple case.
+                        if (skills[skill].trained && skills[skill].value === 0) {
+                            skills[skill].trained = false;
+                        }
+                    } else if (skills[skill].specialities && skills[skill].specialities[spec]) {
+                        let ss = skills[skill].specialities[spec];
+                        if (ss.value < 2) {
+                            ss.value = 0;
+                            if (skill.individual) {
+                                ss.trained = false;
+                            }
+                        }
+                        // If there are no other specialities defined, untrain the parent skill.
+                        let untrainParent = true;
+                        for (ss in skills[skill].specialities) {
+                            if (skills[skill].specialities[ss].value > 0) {
+                                untrainParent = false;
+                                break;
+                            }
+                        }
+                        if (untrainParent) {
+                            skills[skill].trained = false;
+                        }
+                    }
+                }
+            }
+            await this.actor.update({'system.skills': this.actor.system.skills});
+        }
+    }
 
     _rollDodge(event, actor) {
         let dodge = 0;

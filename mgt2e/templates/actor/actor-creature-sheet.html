@@ -106,20 +106,34 @@
 
             <div class="shadow grid grid-5col">
                 <div class="resource flex-group-center">
-                    <label for="data.speed.base" class="field-label">SPEED</label>
+                    <label for="data.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
                     <input class="field-value writable" type="text" name="data.speed.base" value="{{data.speed.base}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.size" class="field-label">SIZE</label>
-                    <input class="field-value writable" type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
+                    <label for="data.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
+                    <select class="expand writable" name="data.size">
+                        {{#select data.size}}
+                            <option value="-4">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-4)</option>
+                            <option value="-3">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-3)</option>
+                            <option value="-2">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-2)</option>
+                            <option value="-1">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-1)</option>
+                            <option value="0">{{localize "MGT2.TravellerSheet.SizeClass.medium"}} (0)</option>
+                            <option value="1">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+1)</option>
+                            <option value="2">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+2)</option>
+                            <option value="3">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+3)</option>
+                            <option value="4">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+4)</option>
+                            <option value="5">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+5)</option>
+                            <option value="6">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+6)</option>
+                        {{/select}}
+                    </select>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.initiative.base" class="field-label">INIT</label>
+                    <label for="data.initiative.base" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
                     <input class="field-value writable" type="text" name="data.initiative.base" value="{{data.initiative.base}}"
                            data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.hits.value" class="field-label">MAX HITS</label>
+                    <label for="data.hits.value" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
                     <input class="field-value writable" type="text" name="data.hits.max" value="{{data.hits.max}}"
                            data-dtype="Number"/>
                 </div>
@@ -136,15 +150,22 @@
 
             <div class="creature-info shadow">
                 <div class="resource flex-group-left">
-                    <label class="text-title">Behaviour <i class="fa fa-add"></i></label>
-                    <input type="text" name="data.behaviour" class="writable"
-                           value="{{data.behaviour}}" data-dtype="Text"/>
+                    <label class="text-title">Behaviour </label>
+                    <span style="display: inline-block; float:right">
+                    <i class="fa fa-add"></i> <select class="behaviour-selector">
+                        {{selectOptions behaviours }}
+                    </select>
+                    </span>
+                    <div class="behaviour-field">
+                        {{{showBehaviours data.behaviour}}}
+                    </div>
+                    <br/>
                 </div>
 
                 <div class="resource flex-group-left">
                     <label class="text-title">Traits</label>
-                    <textarea class="traits" type="text" name="data.traits" class="writable"
-                           value="{{data.traits}}" data-dtype="Text">{{data.traits}}</textarea>
+                    <textarea class="traits writable" type="text" name="data.traits"
+                           value="{{data.traits}}" data-dtype="text">{{data.traits}}</textarea>
                 </div>
             </div>
 

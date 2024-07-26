@@ -103,10 +103,14 @@
 
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
-                    <a class="item" data-tab="skills">Skills</a>
-                    <a class="item" data-tab="items">Equipment</a>
+                    {{#if (isObserver .)}}
+                        <a class="item" data-tab="skills">Skills</a>
+                        <a class="item" data-tab="items">Equipment</a>
+                    {{/if}}
                     <a class="item" data-tab="biography">Biography</a>
-                    <a class="item" data-tab="settings">Settings</a>
+                    {{#if (isOwner .)}}
+                        <a class="item" data-tab="settings">Settings</a>
+                    {{/if}}
                 </nav>
 
                 <div class="sheet-body">

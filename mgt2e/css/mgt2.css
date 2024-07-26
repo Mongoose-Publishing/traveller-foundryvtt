@@ -1372,6 +1372,10 @@ h1.charname input {
     border: 2px groove #f0f0f0;
 }
 
+.bio-box editor {
+    height: 100%;
+}
+
 .character-right div.npc-info {
     display: flex;
     flex: 0 0 auto;
@@ -1739,3 +1743,21 @@ section.id-card .showIdCard {
     width: 32px;
 }
 
+.behaviour-field {
+    clear: right;
+    width: 100%;
+    height: 32px;
+    border: 1px solid black;
+    background-color: #D8D8D8;
+}
+
+.behaviour-field .behaviour-item {
+    display: inline-block;
+    background-color: #f1511b;
+    color: white;
+    padding: 3px;
+    border: 1px solid black;
+    border-radius: 2px;
+    margin: 2px;
+    margin-right: 0.5em;
+}

@@ -1333,8 +1333,6 @@ Handlebars.registerHelper('skillToLabel', function(skillName) {
     let skillId = skillName.replaceAll(/\..*/g, "");
     let specId = (skillName.indexOf(".") < 0)?null:skillName.replaceAll(/.*\./g, "");
 
-    console.log(skillId + " - " + specId);
-
     let skills = game.system.template.Actor.templates.skills.skills;
     let label = "";
     if (skills[skillId]) {
@@ -1349,6 +1347,22 @@ Handlebars.registerHelper('skillToLabel', function(skillName) {
     }
 
     return label;
+});
+
+Handlebars.registerHelper('showBehaviours', function(behaviours) {
+   // 'behaviours' is a string of space separated behaviour values.
+   // Want to return <span> elements with localised names.
+   let html = "";
+   let list = behaviours.split(" ");
+   for (let b in list) {
+       if (list[b].length > 0) {
+           html += `<span class='behaviour-item' title='${game.i18n.localize("MGT2.Creature.BehaviourText." + list[b])}' data-behaviour-id='${list[b]}'>`;
+           html += `${game.i18n.localize("MGT2.Creature.Behaviour." + list[b])} `;
+           html += `<i class="fas fa-xmark behaviour-remove"> </i></span>`;
+       }
+   }
+
+   return html;
 });
 
 

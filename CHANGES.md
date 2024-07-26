@@ -2,9 +2,11 @@
 
 ## Unreleased
 
-* Auto resize starship tokens based on tonnage
 * Quietly squash warnings about adding careers and associates to NPCs when adding a package
 * Handle boon/bane flag correctly on skills which default to boon or bane
+* Auto resize starship tokens based on tonnage
+* Modification to what players can see on NPCs sheet based on permissions.
+* Improvements to character sheet for creatures for handling behaviours.
 
 ## v0.9.1 (Beta)
 
