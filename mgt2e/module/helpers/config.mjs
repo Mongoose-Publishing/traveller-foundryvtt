@@ -81,15 +81,21 @@ MGT2.CREATURES = {
   "traits": {
     "alarm": { },
     "amphibious": {},
-    "camouflaged": { "skills": [ ] },
+    "camouflaged": { "skills": [ { skill: "stealth", bonus: 2 }] },
     "diseased": {},
     "echolocation": {},
     "fastMetabolism": { "value": 1 },
-    "flyer": { "value": 3, "choices": [ "slow", "medium", "fast" ]},
-    "heightenedSenses": { "skills": [ ] },
+    "flyer": { "value": 3, "choices": [ "verySlow", "slow", "medium", "high", "fast", "veryFast", "subsonic", "supersonic", "hypersonic" ]},
+    "heightenedSenses": { "skills": [ { "skill": "recon", "bonus": 2 }] },
     "iuVision": {},
     "poison": {},
-    "psionic": { "value": 7 },
+    "psionic": { "value": 7, "characteristic": "PSI", "skills": [
+        { skill: "telepathy", show: true },
+        { skill: "clairvoyane", show: true },
+        { skill: "telekinesis", show: true },
+        { skill: "awareness", show: true },
+        { skill: "teleportation", show: true }
+      ] },
     "slowMetabolism": { "value": 1 }
   },
   "sizes": {
