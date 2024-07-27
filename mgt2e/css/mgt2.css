@@ -1761,3 +1761,7 @@ section.id-card .showIdCard {
     margin: 2px;
     margin-right: 0.5em;
 }
+
+.behaviour-field .behaviour-style-diet {
+    background-color: #802000;
+}

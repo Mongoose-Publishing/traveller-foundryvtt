@@ -1356,7 +1356,12 @@ Handlebars.registerHelper('showBehaviours', function(behaviours) {
    let list = behaviours.split(" ");
    for (let b in list) {
        if (list[b].length > 0) {
-           html += `<span class='behaviour-item' title='${game.i18n.localize("MGT2.Creature.BehaviourText." + list[b])}' data-behaviour-id='${list[b]}'>`;
+           let style = "";
+           console.log(CONFIG.MGT2.CREATURES.behaviours[list[b]]);
+           if (CONFIG.MGT2.CREATURES.behaviours[list[b]]?.group) {
+               style = CONFIG.MGT2.CREATURES.behaviours[list[b]].group;
+           }
+           html += `<span class='behaviour-item ${style?"behaviour-style-"+style:""}' title='${game.i18n.localize("MGT2.Creature.BehaviourText." + list[b])}' data-behaviour-id='${list[b]}'>`;
            html += `${game.i18n.localize("MGT2.Creature.Behaviour." + list[b])} `;
            html += `<i class="fas fa-xmark behaviour-remove"> </i></span>`;
        }

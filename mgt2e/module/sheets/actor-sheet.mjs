@@ -745,7 +745,8 @@ export class MgT2ActorSheet extends ActorSheet {
         await this.actor.update({'system.behaviour': this.actor.system.behaviour });
 
         // Select skills which this behaviour has associated with it.
-        let b = MGT2.CREATURES.behaviours[selectedBehaviour];
+        let b = MGT2.CREATURES.behaviours[selectedBehaviour].skills;
+        if (!b) return;
         let skills = this.actor.system.skills;
         for (let s in b) {
             let skill = b[s];
@@ -769,16 +770,15 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _creatureRemoveBehaviour(removedBehaviour) {
         if (this.actor.system.behaviour) {
-            console.log(this.actor.system.behaviour);
-            console.log(removedBehaviour);
             this.actor.system.behaviour = this.actor.system.behaviour.replace(removedBehaviour, "");
-            this.actor.system.behaviour = this.actor.system.behaviour.replace("  ", "");
+            this.actor.system.behaviour = this.actor.system.behaviour.replace("  ", " ");
             console.log(this.actor.system.behaviour);
 
             await this.actor.update({'system.behaviour': this.actor.system.behaviour });
 
             // Remove skills associated with this behaviour.
-            let b = MGT2.CREATURES.behaviours[removedBehaviour];
+            let b = MGT2.CREATURES.behaviours[removedBehaviour].skills;
+            if (!b) return;
             let skills = this.actor.system.skills;
             for (let s in b) {
                 let skill = b[s];
