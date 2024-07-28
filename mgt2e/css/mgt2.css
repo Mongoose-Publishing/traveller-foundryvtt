@@ -1746,8 +1746,9 @@ section.id-card .showIdCard {
 .behaviour-field {
     clear: right;
     width: 100%;
-    height: 32px;
+    min-height: 32px;
     border: 1px solid black;
+    padding: 2px;
     background-color: #D8D8D8;
 }
 
@@ -1764,4 +1765,23 @@ section.id-card .showIdCard {
 
 .behaviour-field .behaviour-style-diet {
     background-color: #802000;
+}
+
+.behaviour-field .trait-item {
+    display: inline-block;
+    background-color: #f1511b;
+    color: white;
+    padding: 3px 0 3px 0;
+    border: 1px solid black;
+    border-radius: 2px;
+    margin: 2px;
+    margin-right: 0.5em;
+}
+
+.behaviour-field .trait-item .fas {
+    display: inline-block;
+    height: 100%;
+    padding: 5px;
+    margin: -3px 0 -3px 0;
+    background-color: #b03010;
 }

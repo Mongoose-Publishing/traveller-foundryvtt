@@ -148,7 +148,7 @@
   "MGT2.Creature.BehaviourText.sophont": "Intelligent",
   "MGT2.Creature.BehaviourText.trapper": "Creates traps to catch prey",
 
-  "MGT2.Creature.Trait.alarm": "Trapper",
+  "MGT2.Creature.Trait.alarm": "Alarm",
   "MGT2.Creature.Trait.amphibious": "Amphibious",
   "MGT2.Creature.Trait.camouflaged": "Camouflaged",
   "MGT2.Creature.Trait.diseased": "Diseased",
@@ -160,6 +160,17 @@
   "MGT2.Creature.Trait.poison": "Poison",
   "MGT2.Creature.Trait.psionic": "Psionic",
   "MGT2.Creature.Trait.slowMetabolism": "Slow Metabolism",
+
+  "MGT2.Creature.TraitChoice.flyer.idle": "Idle",
+  "MGT2.Creature.TraitChoice.flyer.verySlow": "Very Slow",
+  "MGT2.Creature.TraitChoice.flyer.slow": "Slow",
+  "MGT2.Creature.TraitChoice.flyer.medium": "Medium",
+  "MGT2.Creature.TraitChoice.flyer.high": "High",
+  "MGT2.Creature.TraitChoice.flyer.fast": "Fast",
+  "MGT2.Creature.TraitChoice.flyer.veryFast": "Very Fast",
+  "MGT2.Creature.TraitChoice.flyer.subsonic": "Subsonic",
+  "MGT2.Creature.TraitChoice.flyer.supersonic": "Supersonic",
+  "MGT2.Creature.TraitChoice.flyer.hypersonic": "Hypersonic",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",

@@ -1370,6 +1370,56 @@ Handlebars.registerHelper('showBehaviours', function(behaviours) {
    return html;
 });
 
+Handlebars.registerHelper('showTraits', function(traits) {
+    // 'behaviours' is a string of space separated behaviour values. Some will have values
+    // Want to return <span> elements with localised names.
+    let html = "";
+    let list = traits.split(",");
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let trait = list[i].trim();
+            let value = null;
+            if (trait.indexOf(" ") > -1) {
+                value = trait.split(" ")[1].trim();
+                trait = trait.split(" ")[0].trim();
+            }
+            let data = CONFIG.MGT2.CREATURES.traits[trait];
+            if (data) {
+                html += `<span class='trait-item' data-trait-id='${trait}'>`;
+                if (data.set) {
+                    value = parseInt(value);
+                    if (value > data.min) {
+                        html += `<i class="fas fa-minus trait-minus"> </i>`;
+                    }
+                    if (value < data.max) {
+                        html += `<i class="fas fa-plus trait-plus"> </i>`;
+                    }
+                } else if (data.choices) {
+                    value = parseInt(value);
+                    if (value > 0) {
+                        html += `<i class="fas fa-minus trait-minus"> </i>`;
+                    }
+                    if (value < data.choices.length-1) {
+                        html += `<i class="fas fa-plus trait-plus"> </i>`;
+                    }
+                }
+
+                html += `&nbsp;${game.i18n.localize("MGT2.Creature.Trait." + trait)} `;
+                if (data.choices) {
+                    html += `(${game.i18n.localize("MGT2.Creature.TraitChoice."+trait+"."+data.choices[value])}) `;
+                } else if (value) {
+                    html += `(${(value > 0) ? "+" + value : value}) `;
+                }
+                html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i></span>`;
+            } else {
+                console.log(`WARN: Trait [${trait}] is invalid in [${traits}]`);
+            }
+        }
+    }
+
+    return html;
+});
+
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */

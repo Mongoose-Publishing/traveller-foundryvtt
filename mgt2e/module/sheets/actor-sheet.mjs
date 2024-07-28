@@ -145,6 +145,17 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                 }
             }
+
+            context.traits = {};
+            context.traits[""] = "";
+            for (let t in CONFIG.MGT2.CREATURES.traits) {
+                if (actorData.traits.indexOf(t) === -1) {
+                    if (!CONFIG.MGT2.CREATURES.traits[t].conflict ||
+                        actorData.traits.indexOf(CONFIG.MGT2.CREATURES.traits[t].conflict) === -1) {
+                        context.traits[t] = game.i18n.localize("MGT2.Creature.Trait." + t);
+                    }
+                }
+            }
         }
 
         return context;
@@ -642,7 +653,24 @@ export class MgT2ActorSheet extends ActorSheet {
             html.find('.behaviour-remove').click(ev => {
                 const b = $(ev.currentTarget).parents(".behaviour-item");
                 this._creatureRemoveBehaviour(b.data("behaviourId"));
-            })
+            });
+
+            html.find('.traits-selector').click(ev => {
+                const value = $(ev.currentTarget).val();
+                this._creatureSelectTrait(value);
+            });
+            html.find('.trait-remove').click(ev => {
+                const t = $(ev.currentTarget).parents(".trait-item");
+                this._creatureRemoveTrait(t.data("traitId"));
+            });
+            html.find('.trait-minus').click(ev => {
+                const t = $(ev.currentTarget).parents(".trait-item");
+                this._creatureTraitModify(t.data("traitId"), -1);
+            });
+            html.find('.trait-plus').click(ev => {
+                const t = $(ev.currentTarget).parents(".trait-item");
+                this._creatureTraitModify(t.data("traitId"), 1);
+            });
         }
 
 
@@ -816,6 +844,119 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
             await this.actor.update({'system.skills': this.actor.system.skills});
+        }
+    }
+
+    async _creatureSelectTrait(selectedTrait) {
+        console.log("_creatureSelectTrait: " + selectedTrait);
+        const traitData = MGT2.CREATURES.traits[selectedTrait];
+        if (traitData) {
+            let traitText = selectedTrait;
+            console.log(traitData);
+
+            if (traitData.set) {
+                if (parseInt(traitData.max) > 0) {
+                    traitText += " 1";
+                    await this.actor.update({[`system.${traitData.set}`]: 1 });
+                } else {
+                    traitText += " -1";
+                    await this.actor.update({[`system.${traitData.set}`]: -1 });
+                }
+            } else if (traitData.choices) {
+                if (traitData.default) {
+                    traitText += ` ${traitData.default}`;
+                } else {
+                    traitText += ` ${traitData.choices[0]}`;
+                }
+                console.log(traitText);
+            }
+            if (this.actor.system.traits && this.actor.system.traits.length > 0) {
+                this.actor.system.traits += ", " + traitText;
+            } else {
+                this.actor.system.traits = traitText;
+            }
+        }
+        await this.actor.update({'system.traits': this.actor.system.traits });
+        return;
+        // Select skills which this behaviour has associated with it.
+        let b = MGT2.CREATURES.behaviours[selectedBehaviour].skills;
+        if (!b) return;
+        let skills = this.actor.system.skills;
+        for (let s in b) {
+            let skill = b[s];
+            let spec = null;
+            if (skill.indexOf(".") > -1) {
+                spec = skill.replace(/.*\./, "");
+                skill = skill.replace(/\..*/, "");
+            }
+            if (skills[skill]) {
+                skills[skill].trained = true;
+                if (spec && skills[skill].specialities && skills[skill].specialities[spec]) {
+                    let ss = skills[skill].specialities[spec];
+                    if (ss.value < 1) {
+                        ss.value = 1;
+                    }
+                }
+            }
+        }
+        await this.actor.update({'system.skills': this.actor.system.skills});
+    }
+
+    async _creatureRemoveTrait(trait) {
+        const traitData = MGT2.CREATURES.traits[trait];
+        if (traitData) {
+            const text = this.actor.getCreatureTrait(trait);
+            let reg = new RegExp(`${trait}[^,$]*,?`, "g");
+            let traits = this.actor.system.traits.replace(reg, "").replace(/[ ,]*$/g, "");
+            await this.actor.update({
+                'system.traits': traits
+            });
+            if (traitData.set) {
+                await this.actor.update({
+                    [`system.${traitData.set}`]: 0
+                });
+            }
+        }
+    }
+
+    async _creatureTraitModify(trait, modifier) {
+        const traitData = MGT2.CREATURES.traits[trait];
+        if (traitData) {
+            const text = this.actor.getCreatureTrait(trait);
+            if (traitData.set) {
+                // Can increment or decrement.
+                let value = parseInt(text.replace(/[^-0-9]/g, ""));
+                value += parseInt(modifier);
+                if (value < parseInt(traitData.min)) {
+                    // Too low, don't change.
+                } else if (value > parseInt(traitData.max)) {
+                    // Too high, don't change.
+                } else {
+                    // We can change.
+                    const updated = trait + " " + value;
+                    let traits = this.actor.system.traits;
+                    let reg = new RegExp(`${trait}[^,$]*`, "g");
+                    await this.actor.update({
+                        'system.traits': traits.replace(reg, updated),
+                        [`system.${traitData.set}`]: value
+                    });
+                }
+            } else if (traitData.choices) {
+                let value = parseInt(text.replace(/[^-0-9]/g, ""));
+                value += parseInt(modifier);
+                if (value < 0) {
+                    // Too low, don't change.
+                } else if (value >= traitData.choices.length) {
+                    // Too high, don't change.
+                } else {
+                    // We can change.
+                    const updated = trait + " " + value;
+                    let traits = this.actor.system.traits;
+                    let reg = new RegExp(`${trait}[^,$]*`, "g");
+                    await this.actor.update({'system.traits': traits.replace(reg, updated)
+                    });
+                }
+            }
         }
     }
 

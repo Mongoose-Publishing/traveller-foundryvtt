@@ -129,7 +129,7 @@
                 </div>
                 <div class="resource flex-group-center">
                     <label for="data.initiative.base" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
-                    <input class="field-value writable" type="text" name="data.initiative.base" value="{{data.initiative.base}}"
+                    <input class="field-value" readonly type="text" name="data.initiative.base" value="{{data.initiative.base}}"
                            data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
@@ -164,8 +164,15 @@
 
                 <div class="resource flex-group-left">
                     <label class="text-title">Traits</label>
-                    <textarea class="traits writable" type="text" name="data.traits"
-                           value="{{data.traits}}" data-dtype="text">{{data.traits}}</textarea>
+                    <span style="display: inline-block; float:right">
+                        <i class="fa fa-add"></i> <select class="traits-selector">
+                            {{selectOptions traits }}
+                        </select>
+                    </span>
+                    <div class="behaviour-field">
+                        {{{showTraits data.traits}}}
+                    </div>
+                    <br/>
                 </div>
             </div>
 

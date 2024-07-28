@@ -84,11 +84,10 @@ MGT2.CREATURES = {
     "camouflaged": { "skills": [ { skill: "stealth", bonus: 2 }] },
     "diseased": {},
     "echolocation": {},
-    "fastMetabolism": { "value": 1 },
-    "flyer": { "value": 3, "choices": [ "verySlow", "slow", "medium", "high", "fast", "veryFast", "subsonic", "supersonic", "hypersonic" ]},
+    "fastMetabolism": { "set": "initiative.base", "min": 1, "max": 6, "conflict": "slowMetabolism" },
+    "flyer": { "default": 3, "choices": [ "idle", "verySlow", "slow", "medium", "high", "fast", "veryFast", "subsonic", "supersonic", "hypersonic" ]},
     "heightenedSenses": { "skills": [ { "skill": "recon", "bonus": 2 }] },
     "iuVision": {},
-    "poison": {},
     "psionic": { "value": 7, "characteristic": "PSI", "skills": [
         { skill: "telepathy", show: true },
         { skill: "clairvoyane", show: true },
@@ -96,7 +95,7 @@ MGT2.CREATURES = {
         { skill: "awareness", show: true },
         { skill: "teleportation", show: true }
       ] },
-    "slowMetabolism": { "value": 1 }
+    "slowMetabolism": { "set": "initiative.base", "min": -6, "max": -1, "conflict": "fastMetabolism" }
   },
   "sizes": {
     "-4": { "label": "small", "damage": "1", "minHits": 1, "maxHits": 2, "width": 1 },

@@ -333,4 +333,15 @@ export class MgT2Actor extends Actor {
 
   }
 
+  getCreatureTrait(trait) {
+      if (this.type === "creature" && this.system.traits) {
+          const traits = this.system.traits;
+          if (traits.indexOf(trait) > -1) {
+              const regex = new RegExp(`.*\(${trait}[^,$]*\).*`, "g");
+              return traits.replace(regex, "$1");
+          }
+      }
+      return null;
+  }
+
 }
