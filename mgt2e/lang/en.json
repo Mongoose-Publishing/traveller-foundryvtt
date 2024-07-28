@@ -103,6 +103,7 @@
   "MGT2.TravellerSheet.SizeClass.small": "Small",
   "MGT2.TravellerSheet.SizeClass.medium": "Medium",
   "MGT2.TravellerSheet.SizeClass.large": "Large",
+  "MGT2.TravellerSheet.SizeRecommendedHits": "Typically {min} to {max}",
 
   "MGT2.Creature.Behaviour.herbivore": "Herbivore",
   "MGT2.Creature.Behaviour.omnivore": "Omnivore",

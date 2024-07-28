@@ -156,6 +156,15 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                 }
             }
+            console.log(actorData.size);
+            if (CONFIG.MGT2.CREATURES.sizes[actorData.size]) {
+                context.suggestedHits = game.i18n.format("MGT2.TravellerSheet.SizeRecommendedHits",
+                    {   "min": CONFIG.MGT2.CREATURES.sizes[actorData.size].minHits,
+                        "max": CONFIG.MGT2.CREATURES.sizes[actorData.size].maxHits
+                    });
+            } else {
+                context.suggestedHits = "";
+            }
         }
 
         return context;

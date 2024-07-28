@@ -1355,7 +1355,7 @@ Handlebars.registerHelper('skillToLabel', function(skillName) {
     return label;
 });
 
-Handlebars.registerHelper('showBehaviours', function(behaviours) {
+Handlebars.registerHelper('showBehaviours', function(key, behaviours) {
    // 'behaviours' is a string of space separated behaviour values.
    // Want to return <span> elements with localised names.
    let html = "";
@@ -1368,14 +1368,17 @@ Handlebars.registerHelper('showBehaviours', function(behaviours) {
            }
            html += `<span class='behaviour-item ${style?"behaviour-style-"+style:""}' title='${game.i18n.localize("MGT2.Creature.BehaviourText." + list[b])}' data-behaviour-id='${list[b]}'>`;
            html += `${game.i18n.localize("MGT2.Creature.Behaviour." + list[b])} `;
-           html += `<i class="fas fa-xmark behaviour-remove"> </i></span>`;
+           if (key.owner) {
+               html += `<i class="fas fa-xmark behaviour-remove"> </i>`;
+           }
+           html += `</span>`;
        }
    }
 
    return html;
 });
 
-Handlebars.registerHelper('showTraits', function(traits) {
+Handlebars.registerHelper('showTraits', function(key, traits) {
     // 'behaviours' is a string of space separated behaviour values. Some will have values
     // Want to return <span> elements with localised names.
     let html = "";
@@ -1391,39 +1394,45 @@ Handlebars.registerHelper('showTraits', function(traits) {
             let data = CONFIG.MGT2.CREATURES.traits[trait];
             if (data) {
                 html += `<span class='trait-item' data-trait-id='${trait}'>`;
-                if (data.set) {
-                    value = parseInt(value);
-                    if (value > data.min) {
-                        html += `<i class="fas fa-minus trait-minus"> </i>`;
-                    }
-                    if (value < data.max) {
-                        html += `<i class="fas fa-plus trait-plus"> </i>`;
-                    }
-                } else if (data.choices) {
-                    value = parseInt(value);
-                    if (value > 0) {
-                        html += `<i class="fas fa-minus trait-minus"> </i>`;
-                    }
-                    if (value < data.choices.length-1) {
-                        html += `<i class="fas fa-plus trait-plus"> </i>`;
-                    }
-                } else if (data.value) {
-                    value = parseInt(value);
-                    if (value > 1) {
-                        html += `<i class="fas fa-minus trait-minus"> </i>`;
-                    }
-                    if (value < 21) {
-                        html += `<i class="fas fa-plus trait-plus"> </i>`;
+                if (key.owner) {
+                    if (data.set) {
+                        value = parseInt(value);
+                        if (value > data.min) {
+                            html += `<i class="fas fa-minus trait-minus"> </i>`;
+                        }
+                        if (value < data.max) {
+                            html += `<i class="fas fa-plus trait-plus"> </i>`;
+                        }
+                    } else if (data.choices) {
+                        value = parseInt(value);
+                        if (value > 0) {
+                            html += `<i class="fas fa-minus trait-minus"> </i>`;
+                        }
+                        if (value < data.choices.length - 1) {
+                            html += `<i class="fas fa-plus trait-plus"> </i>`;
+                        }
+                    } else if (data.value) {
+                        value = parseInt(value);
+                        if (value > 1) {
+                            html += `<i class="fas fa-minus trait-minus"> </i>`;
+                        }
+                        if (value < 21) {
+                            html += `<i class="fas fa-plus trait-plus"> </i>`;
+                        }
                     }
                 }
-
                 html += `&nbsp;${game.i18n.localize("MGT2.Creature.Trait." + trait)} `;
                 if (data.choices) {
                     html += `(${game.i18n.localize("MGT2.Creature.TraitChoice."+trait+"."+data.choices[value])}) `;
                 } else if (value) {
                     html += `(${(value > 0 && !data.value) ? "+" + value : value}) `;
                 }
-                html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i></span>`;
+                if (key.owner) {
+                    html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i>`;
+                } else {
+                    html += "&nbsp;";
+                }
+                html += "</span>";
             } else {
                 console.log(`WARN: Trait [${trait}] is invalid in [${traits}]`);
             }

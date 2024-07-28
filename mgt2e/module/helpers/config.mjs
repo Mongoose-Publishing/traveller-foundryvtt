@@ -93,12 +93,12 @@ MGT2.CREATURES = {
     "slowMetabolism": { "set": "initiative.base", "min": -6, "max": -1, "conflict": "fastMetabolism" }
   },
   "sizes": {
-    "-4": { "label": "small", "damage": "1", "minHits": 1, "maxHits": 2, "width": 1 },
-    "-3": { "label": "small", "damage": "1D3", "minHits": 3, "maxHits": 5, "width": 1 },
-    "-2": { "label": "small", "damage": "1D3", "minHits": 6, "maxHits": 7, "width": 1 },
+    "-4": { "label": "small", "damage": "1", "minHits": 1, "maxHits": 2, "width": 0.5 },
+    "-3": { "label": "small", "damage": "1D3", "minHits": 3, "maxHits": 5, "width": 0.5 },
+    "-2": { "label": "small", "damage": "1D3", "minHits": 6, "maxHits": 7, "width": 0.5 },
     "-1": { "label": "small", "damage": "1D6", "minHits": 8, "maxHits": 13, "width": 1 },
     "0": { "label": "medium", "damage": "1D6", "minHits": 14, "maxHits": 28, "width": 1 },
-    "1": { "label": "large", "damage": "2D6", "minHits": 29, "maxHits": 35, "width": 1 },
+    "1": { "label": "large", "damage": "2D6", "minHits": 29, "maxHits": 35, "width": 2 },
     "2": { "label": "large", "damage": "3D6", "minHits": 36, "maxHits": 49, "width": 2 },
     "3": { "label": "large", "damage": "4D6", "minHits": 50, "maxHits": 70, "width": 2 },
     "4": { "label": "large", "damage": "5D6", "minHits": 71, "maxHits": 90, "width": 3 },
