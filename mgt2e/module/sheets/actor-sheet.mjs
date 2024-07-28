@@ -210,7 +210,6 @@ export class MgT2ActorSheet extends ActorSheet {
                 let h = i.system.hardware;
                 let t = parseFloat(h.tons);
                 let rating = parseInt(h.rating);
-                console.log(i.name);
 
                 if (h.system === "power") {
                     powerTotal += parseFloat(h.powerPerTon) * t;
@@ -239,7 +238,6 @@ export class MgT2ActorSheet extends ActorSheet {
                     //i.update({"system.hardware.tons": t });
                 } else if (h.system === "fuel") {
                     t = rating;
-                    console.log("Fuel is " + t);
                     context.system.spacecraft.fuel.max = rating;
                 } else {
                     if (t === 0) {
@@ -252,7 +250,6 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                     if (t !== i.system.hardware.tons) {
                         i.system.hardware.tons = t * i.system.quantity;
-                        console.log(i);
                     }
                 }
                 dtonsUsed += t * i.system.quantity;
@@ -317,7 +314,6 @@ export class MgT2ActorSheet extends ActorSheet {
      * @return {undefined}
      */
     _prepareItems(context) {
-        console.log("actor-sheet.mjs:_prepareItems()");
         // Initialize containers.
         const gear = [];
         const weapons = [];
@@ -330,7 +326,6 @@ export class MgT2ActorSheet extends ActorSheet {
         let skillNeeded = -3;
         let vs = this.actor.system.skills.vaccsuit;
 
-        console.log("_prepareItems: " + this.actor.name);
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
@@ -382,7 +377,6 @@ export class MgT2ActorSheet extends ActorSheet {
         let wasVaccSuit = !!this.actor.getFlag("mgt2e", "vaccSuit");
         let isVaccSuit = false;
 
-        console.log(`wasEncumbered ${wasEncumbered} wasVaccSuit ${wasVaccSuit}`);
         if ( game.settings.get("mgt2e", "useEncumbrance")) {
             if (weight > this.actor.system.heavyLoad) {
                 this.actor.system.modifiers.encumbrance.auto = -2;
@@ -428,7 +422,6 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     _setItemStatus(actor, item, status) {
-        console.log(`activateItem: [${actor.name}] [${item.name}] to [${status}]`)
         const itemData = item.system;
 
         if (item.type === "armour") {
@@ -631,7 +624,6 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.passenger-crew').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
-            console.log(`Passenger to crew for ${actorId}`);
             this._movePassengerToCrew(this.actor, actorId);
         });
 
@@ -640,7 +632,6 @@ export class MgT2ActorSheet extends ActorSheet {
            const actorId = div.data("crewId");
            const roleId = div.data("roleId");
            const actionId = div.data("actionId");
-           console.log(actorId + ", " + roleId + ", " + actionId);
            this._runCrewAction(this.actor, actorId, roleId, actionId);
         });
 
@@ -800,8 +791,6 @@ export class MgT2ActorSheet extends ActorSheet {
         if (this.actor.system.behaviour) {
             this.actor.system.behaviour = this.actor.system.behaviour.replace(removedBehaviour, "");
             this.actor.system.behaviour = this.actor.system.behaviour.replace("  ", " ");
-            console.log(this.actor.system.behaviour);
-
             await this.actor.update({'system.behaviour': this.actor.system.behaviour });
 
             // Remove skills associated with this behaviour.
@@ -848,11 +837,9 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     async _creatureSelectTrait(selectedTrait) {
-        console.log("_creatureSelectTrait: " + selectedTrait);
         const traitData = MGT2.CREATURES.traits[selectedTrait];
         if (traitData) {
             let traitText = selectedTrait;
-            console.log(traitData);
 
             if (traitData.set) {
                 if (parseInt(traitData.max) > 0) {
@@ -868,7 +855,18 @@ export class MgT2ActorSheet extends ActorSheet {
                 } else {
                     traitText += ` ${traitData.choices[0]}`;
                 }
-                console.log(traitText);
+            } else if (traitData.skills) {
+                const skills = this.actor.system.skills;
+                for (let s in traitData.skills) {
+                    let skill = traitData.skills[s];
+                    if (skills[skill.skill]) {
+                        skills[skill.skill].bonus = skill.bonus;
+                        skills[skill.skill].notes = game.i18n.localize("MGT2.Creature.Trait."+selectedTrait);
+                        await this.actor.update({'system.skills': skills});
+                    }
+                }
+            } else if (traitData.value) {
+                traitText += ` ${traitData.value}`;
             }
             if (this.actor.system.traits && this.actor.system.traits.length > 0) {
                 this.actor.system.traits += ", " + traitText;
@@ -915,6 +913,16 @@ export class MgT2ActorSheet extends ActorSheet {
                 await this.actor.update({
                     [`system.${traitData.set}`]: 0
                 });
+            } else if (traitData.skills) {
+                const skills = this.actor.system.skills;
+                for (let s in traitData.skills) {
+                    let skill = traitData.skills[s];
+                    if (skills[skill.skill]) {
+                        skills[skill.skill].bonus = 0;
+                        skills[skill.skill].notes = null;
+                        await this.actor.update({'system.skills': skills});
+                    }
+                }
             }
         }
     }
@@ -953,8 +961,21 @@ export class MgT2ActorSheet extends ActorSheet {
                     const updated = trait + " " + value;
                     let traits = this.actor.system.traits;
                     let reg = new RegExp(`${trait}[^,$]*`, "g");
-                    await this.actor.update({'system.traits': traits.replace(reg, updated)
-                    });
+                    await this.actor.update({'system.traits': traits.replace(reg, updated)});
+                }
+            } else if (traitData.value) {
+                let value = parseInt(text.replace(/[^-0-9]/g, ""));
+                value += parseInt(modifier);
+                if (value < 1) {
+                    // Too low, don't change.
+                } else if (value > 21) {
+                    // Too high, don't change.
+                } else {
+                    // We can change.
+                    const updated = trait + " " + value;
+                    let traits = this.actor.system.traits;
+                    let reg = new RegExp(`${trait}[^,$]*`, "g");
+                    await this.actor.update({'system.traits': traits.replace(reg, updated)});
                 }
             }
         }
@@ -1288,7 +1309,6 @@ export class MgT2ActorSheet extends ActorSheet {
             // Move between different actors.
             let srcActor = game.actors.get(srcActorId);
             if (srcActor) {
-                console.log("Source actor");
                 let item = srcActor.items.get(itemId);
 
                 if (parseInt(item.system.quantity) > 1) {
@@ -1306,18 +1326,14 @@ export class MgT2ActorSheet extends ActorSheet {
     async _onDropTerm(item) {
         let actor = this.actor;
 
-        console.log(`Dropping term ${item.name} on ${actor.name}`);
-
         // Need to ensure that this item is added to the end of the list of
         // term items.
-        console.log(actor.items);
         let lastSort = 1;
         let countTerms = 0;
         let updates = [];
         for (let i of actor.items) {
             if (i.type === "term") {
                 countTerms ++;
-                console.log(i.name);
                 if (i.sort > lastSort) {
                     lastSort = i.sort;
                 }

@@ -72,6 +72,7 @@ MGT2.CREATURES = {
     "intimidator": { "skills": [ "persuade" ] },
     "killer": { "skills": [ "melee.natural" ] },
     "intermittent": { "skills": [ ] },
+    "mindless": { "skills": [ ] },
     "pouncer": { "skills": [ "stealth", "recon", "athletic.dexterity", "athletics.strength" ] },
     "reducer": { "skills": [ ] },
     "siren": { "skills": [ "deception" ] },
@@ -86,15 +87,9 @@ MGT2.CREATURES = {
     "echolocation": {},
     "fastMetabolism": { "set": "initiative.base", "min": 1, "max": 6, "conflict": "slowMetabolism" },
     "flyer": { "default": 3, "choices": [ "idle", "verySlow", "slow", "medium", "high", "fast", "veryFast", "subsonic", "supersonic", "hypersonic" ]},
-    "heightenedSenses": { "skills": [ { "skill": "recon", "bonus": 2 }] },
+    "heightenedSenses": { "skills": [ { "skill": "recon", "bonus": 1 }, { "skill": "survival", "bonus": 1 }] },
     "iuVision": {},
-    "psionic": { "value": 7, "characteristic": "PSI", "skills": [
-        { skill: "telepathy", show: true },
-        { skill: "clairvoyane", show: true },
-        { skill: "telekinesis", show: true },
-        { skill: "awareness", show: true },
-        { skill: "teleportation", show: true }
-      ] },
+    "psionic": { "value": 7, "characteristic": "PSI" },
     "slowMetabolism": { "set": "initiative.base", "min": -6, "max": -1, "conflict": "fastMetabolism" }
   },
   "sizes": {

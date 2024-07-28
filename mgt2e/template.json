@@ -979,6 +979,7 @@
                 "value": 0,
                 "trained": false,
                 "requires": "PSI",
+                "trait": "psionic",
                 "icon": "systems/mgt2e/icons/skills/psi.svg"
             },
             "clairvoyance": {
@@ -987,6 +988,7 @@
                 "value": 0,
                 "trained": false,
                 "requires": "PSI",
+                "trait": "psionic",
                 "icon": "systems/mgt2e/icons/skills/psi.svg"
             },
             "telekinesis": {
@@ -995,6 +997,7 @@
                 "value": 0,
                 "trained": false,
                 "requires": "PSI",
+                "trait": "psionic",
                 "icon": "systems/mgt2e/icons/skills/psi.svg"
             },
             "awareness": {
@@ -1003,6 +1006,7 @@
                 "value": 0,
                 "trained": false,
                 "requires": "PSI",
+                "trait": "psionic",
                 "icon": "systems/mgt2e/icons/skills/psi.svg"
             },
             "teleportation": {
@@ -1011,6 +1015,7 @@
                 "value": 0,
                 "trained": false,
                 "requires": "PSI",
+                "trait": "psionic",
                 "icon": "systems/mgt2e/icons/skills/psi.svg"
             },
             "untrained": {

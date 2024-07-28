@@ -983,7 +983,6 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     let untrainedLevel = data.skills["jackofalltrades"].value - 3;
     let isCreature = data.characteristics?false:true;
 
-
     // Don't show a skill if it requires a characteristic that
     // isn't being used by this actor.
     if (skill.requires && !isCreature) {
@@ -994,7 +993,11 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
 
     // If backgroundOnly is set, then shortcut to not showing anything.
     if (isCreature && !skill.creature) {
-        return "";
+        if (skill.trait && data.traits && data.traits.indexOf(skill.trait) > -1) {
+            showSkill = true;
+        } else {
+            return "";
+        }
     } else if (backgroundOnly && !skill.background) {
         return "";
     } else if (backgroundOnly && skill.background) {
@@ -1053,6 +1056,9 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
             title += " + " + skill.value;
         } else {
             title += " - " + Math.abs(untrainedLevel);
+        }
+        if (skill.bonus && skill.bonus > 0) {
+            augmented = true;
         }
         if (skill.expert && skill.expert > 0) {
             augmented = true;
@@ -1357,7 +1363,6 @@ Handlebars.registerHelper('showBehaviours', function(behaviours) {
    for (let b in list) {
        if (list[b].length > 0) {
            let style = "";
-           console.log(CONFIG.MGT2.CREATURES.behaviours[list[b]]);
            if (CONFIG.MGT2.CREATURES.behaviours[list[b]]?.group) {
                style = CONFIG.MGT2.CREATURES.behaviours[list[b]].group;
            }
@@ -1402,13 +1407,21 @@ Handlebars.registerHelper('showTraits', function(traits) {
                     if (value < data.choices.length-1) {
                         html += `<i class="fas fa-plus trait-plus"> </i>`;
                     }
+                } else if (data.value) {
+                    value = parseInt(value);
+                    if (value > 1) {
+                        html += `<i class="fas fa-minus trait-minus"> </i>`;
+                    }
+                    if (value < 21) {
+                        html += `<i class="fas fa-plus trait-plus"> </i>`;
+                    }
                 }
 
                 html += `&nbsp;${game.i18n.localize("MGT2.Creature.Trait." + trait)} `;
                 if (data.choices) {
                     html += `(${game.i18n.localize("MGT2.Creature.TraitChoice."+trait+"."+data.choices[value])}) `;
                 } else if (value) {
-                    html += `(${(value > 0) ? "+" + value : value}) `;
+                    html += `(${(value > 0 && !data.value) ? "+" + value : value}) `;
                 }
                 html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i></span>`;
             } else {
