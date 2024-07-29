@@ -205,6 +205,7 @@ export class MgT2ActorSheet extends ActorSheet {
         actorData.spacecraft.rdrive = 0;
         actorData.spacecraft.jdrive = 0;
 
+        actorData.spacecraft.cargo = 0;
         for (let i of context.items) {
             if (i.type === 'cargo') {
                 cargo.push(i);
@@ -248,6 +249,9 @@ export class MgT2ActorSheet extends ActorSheet {
                 } else if (h.system === "fuel") {
                     t = rating;
                     context.system.spacecraft.fuel.max = rating;
+                } else if (h.system === "cargo") {
+                    actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
+                    t = parseFloat(i.system.hardware.rating);
                 } else {
                     if (t === 0) {
                         t = parseFloat(h.tonnage.percent);
@@ -258,7 +262,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         t = parseInt(h.tonnage.minimum);
                     }
                     if (t !== i.system.hardware.tons) {
-                        i.system.hardware.tons = t * i.system.quantity;
+                        i.system.hardware.tons = t * parseInt(i.system.quantity);
                     }
                 }
                 dtonsUsed += t * i.system.quantity;
@@ -284,11 +288,10 @@ export class MgT2ActorSheet extends ActorSheet {
         context.roles = roles;
         context.shipWeapons = shipWeapons;
 
-        actorData.spacecraft.cargo = parseInt(actorData.spacecraft.dtons) - parseFloat(dtonsUsed);
-        context.cargoUsed = cargoUsed;
+        context.dtonsUsed = Math.round(dtonsUsed * 100) / 100;
+        context.cargoUsed = Math.round(cargoUsed * 100) / 100;
         context.cargoRemaining = parseFloat(context.system.spacecraft.cargo) - cargoUsed;
-        context.dtonsUsed = dtonsUsed;
-        context.dtonsRemaining = parseFloat(context.system.spacecraft.dtons) - dtonsUsed;
+        context.dtonsRemaining = parseInt(context.system.spacecraft.dtons) - dtonsUsed;
 
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;

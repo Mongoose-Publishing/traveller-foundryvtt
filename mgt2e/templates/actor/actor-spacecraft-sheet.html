@@ -28,7 +28,7 @@
 
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.CurrentFuel'}}</label>
-                    <input class="characteristic-value" type="number" name="data.spacecraft.fuel.value"
+                    <input class="characteristic-value" type="number" name="system.spacecraft.fuel.value"
                            title="{{localize 'MGT2.TravellerSheet.CurrentFuel'}}"
                            value="{{system.spacecraft.fuel.value}}" data-dtype="Number"/>
                 </div>
@@ -119,28 +119,28 @@
                     </select>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
-                    <input class="field-value" readonly name="data.hits.max" type="text" value="{{data.hits.max}}"/>
+                    <label for="system.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
+                    <input class="field-value" readonly name="system.hits.max" type="text" value="{{system.hits.max}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.CargoHold'}}</label>
-                    <input class="field-value" name="data.spacecraft.cargo" readonly type="text" value="{{data.spacecraft.cargo}}"/>
+                    <label for="system.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.CargoHold'}}</label>
+                    <input class="field-value" name="system.spacecraft.cargo" readonly type="text" value="{{system.spacecraft.cargo}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.spacecraft.jdrive" class="field-label">{{localize 'MGT2.TravellerSheet.JDrive'}}</label>
-                    <input class="field-value" name="data.spacecraft.jdrive" readonly type="text" value="{{data.spacecraft.jdrive}}"/>
+                    <label for="system.spacecraft.jdrive" class="field-label">{{localize 'MGT2.TravellerSheet.JDrive'}}</label>
+                    <input class="field-value" name="system.spacecraft.jdrive" readonly type="text" value="{{system.spacecraft.jdrive}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.spacecraft.mdrive" class="field-label">{{localize 'MGT2.TravellerSheet.MDrive'}}</label>
-                    <input class="field-value" name="data.spacecraft.mdrive" readonly type="text" value="{{data.spacecraft.mdrive}}"/>
+                    <label for="system.spacecraft.mdrive" class="field-label">{{localize 'MGT2.TravellerSheet.MDrive'}}</label>
+                    <input class="field-value" name="system.spacecraft.mdrive" readonly type="text" value="{{system.spacecraft.mdrive}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.spacecraft.rdrive" class="field-label">{{localize 'MGT2.TravellerSheet.RDrive'}}</label>
-                    <input class="field-value" name="data.spacecraft.rdrive" readonly type="text" value="{{data.spacecraft.rdrive}}"/>
+                    <label for="system.spacecraft.rdrive" class="field-label">{{localize 'MGT2.TravellerSheet.RDrive'}}</label>
+                    <input class="field-value" name="system.spacecraft.rdrive" readonly type="text" value="{{system.spacecraft.rdrive}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.spacecraft.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
-                    <input class="field-value" readonly type="text" value="{{data.spacecraft.power.used}} / {{data.spacecraft.power.max}}"/>
+                    <label for="system.spacecraft.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
+                    <input class="field-value" readonly type="text" value="{{system.spacecraft.power.used}} / {{system.spacecraft.power.max}}"/>
                 </div>
             </div>
 
