@@ -222,7 +222,7 @@ Hooks.on('renderChatMessage', function(app, html) {
 Hooks.on('ready', () => {
     if (game.user.isGM) {
         // Do we need to run a migration?
-        const LATEST_SCHEMA_VERSION = 5;
+        const LATEST_SCHEMA_VERSION = 6;
         const currentVersion = parseInt(game.settings.get("mgt2e", "systemSchemaVersion"));
         console.log(`Schema version is ${currentVersion}`);
         if (!currentVersion || currentVersion < LATEST_SCHEMA_VERSION) {
@@ -315,6 +315,9 @@ Hooks.on("createActor", (actor) => {
             actor.img = "systems/mgt2e/icons/actors/traveller-red.svg";
         }
         actor.update({ "img": actor.img });
+    }
+    if (actor.type === "npc") {
+        actor.update({"system.settings.columns": 6 });
     }
 });
 

@@ -1,3 +1,4 @@
+import { MGT2 } from "./helpers/config.mjs";
 
 function migrateActorData(actor, fromVersion) {
     console.log(`MIGRATE ACTOR DATA ${fromVersion}`);
@@ -34,8 +35,33 @@ function migrateActorData(actor, fromVersion) {
                 "divisions": { }
             };
         }
+    }
+    if (fromVersion < 6) {
+        console.log("Converting to v6 (Creature traits and behaviours");
+        if (actor.type === "creature" && actor.system.behaviour != null) {
+            const oldBehaviours = actor.system.behaviour.toLowerCase();
+            let updated = "";
+            for (let b in CONFIG.MGT2.CREATURES.behaviours) {
+                if (oldBehaviours.indexOf(b.toLowerCase()) > -1) {
+                    updated += (updated.length>0?" ":"") + b;
+                    console.log(updated);
+                }
+            }
+            actor.system.behaviour = updated;
+        }
+        if (actor.type === "creature" && actor.system.traits != null) {
+            const oldTraits = actor.system.traits.toLowerCase();
+            let updated = "";
+            for (let t in CONFIG.MGT2.CREATURES.traits) {
+                if (oldTraits.indexOf(t.toLowerCase()) > -1) {
+                    updated += (updated.length>0?",":"") + t;
+                }
+            }
+            actor.system.traits = updated;
+        }
         return actor.system;
     }
+
     return {};
 }
 
@@ -51,7 +77,7 @@ function migrateItemData(item, fromVersion) {
 }
 
 export async function migrateWorld(fromVersion) {
-    console.log("**** MIGRATE SCHEMA TO v5 ****");
+    console.log("**** MIGRATE SCHEMA TO v6 ****");
 
     for (let actor of game.actors.contents) {
         const updateData = migrateActorData(actor, fromVersion);
