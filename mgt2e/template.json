@@ -1047,7 +1047,10 @@
       "entryAge": 18
     },
     "npc": {
-        "templates": [ "base", "characteristics", "skills", "armour", "sophont" ]
+        "templates": [ "base", "characteristics", "skills", "armour", "sophont" ],
+        "finance": {
+            "cash": 0
+        }
     },
     "creature": {
         "templates": [ "base", "skills", "armour" ],

@@ -122,26 +122,31 @@
                     {{!-- Biography Tab --}}
                     <div class="tab biography" data-group="primary" data-tab="biography">
 
-                        <div class="resources grid grid-5col">
+                        <div class="resources grid grid-6col">
                             <div class="resource flex-group-center">
                                 <label for="data.sophont.age" class="resource-label">Age</label>
                                 <input type="text" name="data.sophont.age" value="{{data.sophont.age}}"
-                                       data-dtype="Number"/>
+                                       class="writable" data-dtype="Number"/>
                             </div>
                             <div class="resource flex-group-center">
                                 <label for="data.sophont.height" class="resource-label">Height (cm)</label>
                                 <input type="text" name="data.sophont.height" value="{{data.sophont.height}}"
-                                       data-dtype="Number"/>
+                                       class="writable" data-dtype="Number"/>
                             </div>
                             <div class="resource flex-group-center">
                                 <label for="data.sophont.weight" class="resource-label">Weight (kg)</label>
                                 <input type="text" name="data.sophont.weight" value="{{data.sophont.weight}}"
-                                       data-dtype="Number"/>
+                                       class="writable" data-dtype="Number"/>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label for="data.finance.cash" class="resource-label">Credits</label>
+                                <input type="text" name="data.finance.cash" value="{{data.finance.cash}}"
+                                       class="writable" data-dtype="Number"/>
                             </div>
                             <div class="resource flex-group-left grid-span-2">
                                 <label for="data.sophont.homeworld" class="resource-label">Homeworld</label>
                                 <input type="text" name="data.sophont.homeworld" value="{{data.sophont.homeworld}}"
-                                       data-dtype="String"/>
+                                       class="writable" data-dtype="String"/>
                             </div>
                         </div>
 
