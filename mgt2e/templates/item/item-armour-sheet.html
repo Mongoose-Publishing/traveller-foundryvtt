@@ -5,10 +5,10 @@
 
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
-                    <label for="data.quantity" class="resource-label">Quantity</label>
+                    <label for="system.quantity" class="resource-label">Quantity</label>
                     <div class="incdec">
                         <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
-                        <input class="writable" type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
                         <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
                     </div>
                 </div>
@@ -16,10 +16,10 @@
 
             <div class="shadow item-side-panel">
                 <div class="resource">
-                    <label for="data.armour.form" class="resource-label">{{localize "MGT2.Armour.FormType"}}</label>
+                    <label for="system.armour.form" class="resource-label">{{localize "MGT2.Armour.FormType"}}</label>
                     <br/>
-                    <select name="data.armour.form">
-                        {{#select data.armour.form}}
+                    <select name="system.armour.form">
+                        {{#select system.armour.form}}
                             <option value="standard">{{localize "MGT2.Armour.Form.Standard"}}</option>
                             <option value="layered">{{localize "MGT2.Armour.Form.Layered"}}</option>
                             <option value="stackable">{{localize "MGT2.Armour.Form.Stackable"}}</option>
@@ -29,10 +29,10 @@
                 </div>
 
                 <div class="resource">
-                    <label for="data.armour.archaic" class="resource-label">{{localize "MGT2.Armour.Archaic"}}</label>
+                    <label for="system.armour.archaic" class="resource-label">{{localize "MGT2.Armour.Archaic"}}</label>
                     <br/>
-                    <select name="data.armour.archaic">
-                      {{#select data.armour.archaic}}
+                    <select name="system.armour.archaic">
+                      {{#select system.armour.archaic}}
                           <option value="0">No</option>
                           <option value="1">Yes</option>
                       {{/select}}
@@ -40,10 +40,10 @@
                 </div>
 
                 <div class="resource">
-                    <label for="data.armour.ablat" class="resource-label">{{localize "MGT2.Armour.Ablative"}}</label>
+                    <label for="system.armour.ablat" class="resource-label">{{localize "MGT2.Armour.Ablative"}}</label>
                     <br/>
-                    <select name="data.armour.ablat">
-                        {{#select data.armour.ablat}}
+                    <select name="system.armour.ablat">
+                        {{#select system.armour.ablat}}
                         <option value="0">No</option>
                         <option value="1">Yes</option>
                         {{/select}}
@@ -51,10 +51,10 @@
                 </div>
 
                 <div class="resource">
-                    <label for="data.armour.powered" class="resource-label">{{localize "MGT2.Armour.Powered"}}</label>
+                    <label for="system.armour.powered" class="resource-label">{{localize "MGT2.Armour.Powered"}}</label>
                     <br/>
-                    <select name="data.armour.powered">
-                        {{#select data.armour.powered}}
+                    <select name="system.armour.powered">
+                        {{#select system.armour.powered}}
                         <option value="0">No</option>
                         <option value="1">Yes</option>
                         {{/select}}
@@ -64,14 +64,14 @@
                 <div class="resource">
                     <label class="resource-label">{{localize "MGT2.Armour.Duration"}}</label>
                     <br/>
-                    <input type="text" name="data.armour.duration" value="{{data.armour.duration}}" data-dtype="Number"/>
+                    <input type="text" name="system.armour.duration" value="{{system.armour.duration}}" data-dtype="Number"/>
                 </div>
 
                 <div class="resource">
                     <label class="resource-label">{{localize "MGT2.Armour.Slots"}}</label>
                     <br/>
-                    <input class="armour-value" type="text" name="data.armour.slots" title="Slots"
-                           value="{{data.armour.slots}}" data-dtype="Number"/><br/>
+                    <input class="armour-value" type="text" name="system.armour.slots" title="Slots"
+                           value="{{system.armour.slots}}" data-dtype="Number"/><br/>
                 </div>
             </div>
         </div>
@@ -85,8 +85,8 @@
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.TL"}}</label>
                         <br/>
-                        <select class="expand writable" name="data.tl" title="Typical TL item is available">
-                            {{#select data.tl}}
+                        <select class="expand writable" name="system.tl" title="Typical TL item is available">
+                            {{#select system.tl}}
                             <option value="0">0 ({{localize "MGT2.Item.Tech.0"}})</option>
                             <option value="1">1 ({{localize "MGT2.Item.Tech.1"}})</option>
                             <option value="2">2 ({{localize "MGT2.Item.Tech.2"}})</option>
@@ -110,40 +110,40 @@
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.Weight"}}</label>
-                        <input class="writable" type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.Cost"}}</label>
-                        <input class="writable" type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Armour.Protection"}}</label><br/>
-                        <input class="armour-value writable" type="text" name="data.armour.protection" title="Standard armour"
-                           value="{{data.armour.protection}}" data-dtype="String"/><br/>
+                        <input class="armour-value writable" type="text" name="system.armour.protection" title="Standard armour"
+                           value="{{system.armour.protection}}" data-dtype="String"/><br/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Armour.Rads"}}</label><br/>
-                        <input class="writable armour-value" type="text" name="data.armour.rad" title="Radiation protection"
-                             value="{{data.armour.rad}}" data-dtype="Number"/>
+                        <input class="writable armour-value" type="text" name="system.armour.rad" title="Radiation protection"
+                             value="{{system.armour.rad}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Armour.Energy"}}</label><br/>
-                        <input class="writable armour-value" type="text" name="data.armour.otherProtection" title="Energy protection"
-                               value="{{data.armour.otherProtection}}" data-dtype="String"/><br/>
+                        <input class="writable armour-value" type="text" name="system.armour.otherProtection" title="Energy protection"
+                               value="{{system.armour.otherProtection}}" data-dtype="String"/><br/>
                     </div>
 
                     <div class="resource grid-span-2">
                         <label class="resource-label">{{localize "MGT2.Armour.EnergyTypes"}}</label>
-                        <input type="text" name="data.armour.otherTypes" title="Energy types"
+                        <input type="text" name="system.armour.otherTypes" title="Energy types"
                                class="writable"
-                               value="{{data.armour.otherTypes}}" data-dtype="String"/>
+                               value="{{system.armour.otherTypes}}" data-dtype="String"/>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Armour.RequiresSkill"}}</label>
                         <br/>
-                        <select class="expand writable" name="data.armour.skill">
-                            {{#select data.armour.skill}}
+                        <select class="expand writable" name="system.armour.skill">
+                            {{#select system.armour.skill}}
                                 <option value="">-</option>
                                 <option value="0">Vacc Suit 0</option>
                                 <option value="1">Vacc Suit 1</option>

@@ -5,10 +5,10 @@
 
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
-                    <label for="data.quantity" class="resource-label">Quantity</label>
+                    <label for="system.quantity" class="resource-label">Quantity</label>
                     <div class="incdec">
                         <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
-                        <input class="writable" type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
                         <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
                     </div>
                 </div>
@@ -16,16 +16,16 @@
 
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
-                    <label for="data.weapon.magazine" class="resource-label">Magazine Size</label>
-                    <input class="writable" type="text" name="data.weapon.magazine" value="{{data.weapon.magazine}}" data-dtype="Number"/>
+                    <label for="system.weapon.magazine" class="resource-label">Magazine Size</label>
+                    <input class="writable" type="text" name="system.weapon.magazine" value="{{system.weapon.magazine}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.weapon.magazineCost" class="resource-label">Magazine Cost</label>
-                    <input class="writable" type="text" name="data.weapon.magazineCost" value="{{data.weapon.magazineCost}}" data-dtype="Number"/>
+                    <label for="system.weapon.magazineCost" class="resource-label">Magazine Cost</label>
+                    <input class="writable" type="text" name="system.weapon.magazineCost" value="{{system.weapon.magazineCost}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.weapon.ammo" class="resource-label">Ammo</label>
-                    <input class="writable" type="text" name="data.weapon.ammo" value="{{data.weapon.ammo}}" data-dtype="Number"/>
+                    <label for="system.weapon.ammo" class="resource-label">Ammo</label>
+                    <input class="writable" type="text" name="system.weapon.ammo" value="{{system.weapon.ammo}}" data-dtype="Number"/>
                 </div>
             </div>
 
@@ -44,19 +44,19 @@
                         {{> "systems/mgt2e/templates/item/parts/item-techLevel.html"}}
                     </div>
                     <div class="resource">
-                        <label for="data.weight" class="resource-label">KG</label>
-                        <input class="writable" type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
+                        <label for="system.weight" class="resource-label">KG</label>
+                        <input class="writable" type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
-                        <label for="data.cost" class="resource-label">Cost</label>
-                        <input class="writable" type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+                        <label for="system.cost" class="resource-label">Cost</label>
+                        <input class="writable" type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
-                        <label for="data.weapon.scale" class="resource-label">Scale</label>
+                        <label for="system.weapon.scale" class="resource-label">Scale</label>
                         <br/>
-                        <select class="expand writable" name="data.weapon.scale" title="Weapon Scale">
-                            {{#select data.weapon.scale}}
+                        <select class="expand writable" name="system.weapon.scale" title="Weapon Scale">
+                            {{#select system.weapon.scale}}
                             <option value="traveller">Traveller</option>
                             <option value="vehicle">Vehicle</option>
                             <option value="spacecraft">Spacecraft</option>
@@ -65,13 +65,13 @@
                     </div>
 
                     <div class="resource">
-                        <label for="data.weapon.damage" class="resource-label">Damage</label>
-                        <input class="writable" type="text" name="data.weapon.damage" value="{{data.weapon.damage}}" data-dtype="String"/>
+                        <label for="system.weapon.damage" class="resource-label">Damage</label>
+                        <input class="writable" type="text" name="system.weapon.damage" value="{{system.weapon.damage}}" data-dtype="String"/>
                     </div>
 
                     <div class="resource">
-                    {{#if (ifEquals data.weapon.scale "spacecraft")}}
-                        <label for="data.weapon.spaceRange" class="resource-label">{{localize "MGT2.Item.RangeSpace"}}</label>
+                    {{#if (ifEquals system.weapon.scale "spacecraft")}}
+                        <label for="system.weapon.spaceRange" class="resource-label">{{localize "MGT2.Item.RangeSpace"}}</label>
                         <select class="expand writable" name="system.weapon.spaceRange" title="Range of spacecraft weapon">
                             {{#select system.weapon.spaceRange}}
                             <option value="adjacent">{{localize "MGT2.Item.SpaceRange.adjacent"}}</option>
@@ -83,28 +83,28 @@
                             <option value="distant">{{localize "MGT2.Item.SpaceRange.distant"}}</option>
                             {{/select}}
                         </select>
-                    {{else if (ifEquals data.weapon.scale "vehicle")}}
+                    {{else if (ifEquals system.weapon.scale "vehicle")}}
                         <label class="resource-label">{{localize "MGT2.Item.RangeKM"}}</label>
                         <br/>
-                        <input class="writable" type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="system.weapon.range" value="{{system.weapon.range}}" data-dtype="Number"/>
                     {{else}}
                         <label class="resource-label">{{localize "MGT2.Item.RangeM"}}</label>
                         <br/>
-                        <input class="writable" type="text" name="data.weapon.range" value="{{data.weapon.range}}" data-dtype="Number"/>
+                        <input class="writable" type="text" name="system.weapon.range" value="{{system.weapon.range}}" data-dtype="Number"/>
                     {{/if}}
                     </div>
 
                     <div class="resource grid-span-3 flex-group-left">
-                        <label for="data.weapon.traits" class="resource-label">Traits</label>
-                        <input class="writable" type="text" name="data.weapon.traits" placeholder="List of weapon traits"
-                               value="{{data.weapon.traits}}" data-dtype="String"/>
+                        <label for="system.weapon.traits" class="resource-label">Traits</label>
+                        <input class="writable" type="text" name="system.weapon.traits" placeholder="List of weapon traits"
+                               value="{{system.weapon.traits}}" data-dtype="String"/>
                     </div>
 
-                    {{#if (ifEquals data.weapon.scale "spacecraft")}}
+                    {{#if (ifEquals system.weapon.scale "spacecraft")}}
                         <div class="resource">
-                            <label for="data.weapon.mount" class="resource-label">{{localize "MGT2.Item.Mount"}}</label>
-                            <select class="expand writable" name="data.weapon.mount" title="Mounting">
-                                {{#select data.weapon.mount}}
+                            <label for="system.weapon.mount" class="resource-label">{{localize "MGT2.Item.Mount"}}</label>
+                            <select class="expand writable" name="system.weapon.mount" title="Mounting">
+                                {{#select system.weapon.mount}}
                                 <option value="fixed">{{localize "MGT2.Item.SpaceMount.Fixed"}}</option>
                                 <option value="turret">{{localize "MGT2.Item.SpaceMount.Turret"}}</option>
                                 <option value="barbette">{{localize "MGT2.Item.SpaceMount.Barbette"}}</option>
@@ -119,7 +119,7 @@
                         <div class="resource">
                             <label class="resource-label">{{localize "MGT2.Item.Power"}}</label>
                             <br/>
-                            <input class="writable" type="text" name="data.weapon.power" value="{{data.weapon.power}}" data-dtype="Number"/>
+                            <input class="writable" type="text" name="system.weapon.power" value="{{system.weapon.power}}" data-dtype="Number"/>
                         </div>
                     {{/if}}
                 </div>
@@ -128,9 +128,9 @@
             <div class="shadow">
                 <div class="resources grid grid-3col flex-group-left">
                     <div class="resource">
-                        <label for="data.weapon.characteristic" class="resource-label">Characteristic</label><br/>
-                        <select class="writable" name="data.weapon.characteristic">
-                            {{#select data.weapon.characteristic}}
+                        <label for="system.weapon.characteristic" class="resource-label">Characteristic</label><br/>
+                        <select class="writable" name="system.weapon.characteristic">
+                            {{#select system.weapon.characteristic}}
                             <option value="STR">STR</option>
                             <option value="DEX">DEX</option>
                             <option value="INT">INT</option>
@@ -138,9 +138,9 @@
                         </select>
                     </div>
                     <div class="resource grid-span-2">
-                        <label for="data.weapon.skill" class="resource-label">Skill</label><br/>
-                        <select class="writable" name="data.weapon.skill">
-                            {{#select data.weapon.skill}}
+                        <label for="system.weapon.skill" class="resource-label">Skill</label><br/>
+                        <select class="writable" name="system.weapon.skill">
+                            {{#select system.weapon.skill}}
                             <option value="-">None</option>
                             {{#each skills as |skill id|}}
                                 {{#if skill.combat}}
@@ -158,9 +158,9 @@
                         </select>
                     </div>
                     <div class="resource">
-                        <label for="data.weapon.damageBonus" class="resource-label">Damage DM</label><br/>
-                        <select class="writable" name="data.weapon.damageBonus">
-                            {{#select data.weapon.damageBonus}}
+                        <label for="system.weapon.damageBonus" class="resource-label">Damage DM</label><br/>
+                        <select class="writable" name="system.weapon.damageBonus">
+                            {{#select system.weapon.damageBonus}}
                                 <option value="">-</option>
                                 <option value="STR">STR</option>
                             {{/select}}
@@ -168,21 +168,21 @@
                     </div>
 
                     <div class="resource">
-                        <label for="data.weapon.attackBonus" class="resource-label">Attack DM</label><br/>
-                        <input class="writable" type="text" name="data.weapon.attackBonus"
-                               value="{{data.weapon.attackBonus}}" data-dtype="Number"/>
+                        <label for="system.weapon.attackBonus" class="resource-label">Attack DM</label><br/>
+                        <input class="writable" type="text" name="system.weapon.attackBonus"
+                               value="{{system.weapon.attackBonus}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
-                        <label for="data.weapon.parryBonus" class="resource-label">Parry DM</label><br/>
-                        <input class="writable" type="text" name="data.weapon.parryBonus"
-                               value="{{data.weapon.parryBonus}}" data-dtype="Number"/>
+                        <label for="system.weapon.parryBonus" class="resource-label">Parry DM</label><br/>
+                        <input class="writable" type="text" name="system.weapon.parryBonus"
+                               value="{{system.weapon.parryBonus}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
-                        <label for="data.weapon.damageType" class="resource-label">Damage Type</label><br/>
-                        <select class="writable" name="data.weapon.damageType">
-                            {{#select data.weapon.damageType}}
+                        <label for="system.weapon.damageType" class="resource-label">Damage Type</label><br/>
+                        <select class="writable" name="system.weapon.damageType">
+                            {{#select system.weapon.damageType}}
                             <option value="standard">Standard</option>
                             <option value="laser">Laser</option>
                             <option value="plasma">Plasma</option>
@@ -192,9 +192,9 @@
                         </select>
                     </div>
                     <div class="resource grid-span-2">
-                        <label for="data.notes" class="resource-label">Notes</label><br/>
-                        <input class="writable" type="text" name="data.notes" placeholder="Text shown when used"
-                               value="{{data.notes}}" data-dtype="String"/>
+                        <label for="system.notes" class="resource-label">Notes</label><br/>
+                        <input class="writable" type="text" name="system.notes" placeholder="Text shown when used"
+                               value="{{system.notes}}" data-dtype="String"/>
                     </div>
                 </div>
             </div>

@@ -56,8 +56,8 @@ export class MgT2ItemSheet extends ItemSheet {
         context.effects = item.effects;
         context.effectTypes = CONFIG.MGT2.EFFECTS;
 
-        if (!context.data.quantity) {
-            context.data.quantity = 1;
+        if (!context.system.quantity) {
+            context.system.quantity = 1;
         }
 
         context.characteristics = game.system.template.Actor.templates.characteristics.characteristics;
