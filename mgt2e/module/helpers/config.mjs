@@ -54,6 +54,20 @@ MGT2.EFFECTS = {
   "miscDM": { "targets": "misc", "value": true, "property": "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD }
 };
 
+MGT2.COMPUTERS = {
+  "techLevel": {
+    "7": { computer: 5, core: 0 },
+    "8": { computer: 5, core: 0 },
+    "9": { computer: 10, core: 40 },
+    "10": { computer: 10, core: 50 },
+    "11": { computer: 15, core: 60 },
+    "12": { computer: 20, core: 70 },
+    "13": { computer: 25, core: 80 },
+    "14": { computer: 30, core: 90 },
+    "15": { computer: 35, core: 100 }
+  }
+};
+
 MGT2.CREATURES = {
   "behaviours": {
     "herbivore": { "skills": [], "group": "diet" },

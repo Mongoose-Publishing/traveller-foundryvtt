@@ -173,6 +173,7 @@
                     <a class="item" data-tab="locker">{{localize 'MGT2.TravellerSheet.ShipsLocker'}}</a>
                     <a class="item" data-tab="cargo">{{localize 'MGT2.TravellerSheet.CargoHold'}}</a>
                     <a class="item" data-tab="hardware">{{localize 'MGT2.TravellerSheet.ShipsHardware'}}</a>
+                    <a class="item" data-tab="computer">{{localize 'MGT2.TravellerSheet.ShipsComputer'}}</a>
                     <a class="item" data-tab="notes">{{localize 'MGT2.TravellerSheet.ShipsNotes'}}</a>
                 </nav>
 
@@ -335,7 +336,47 @@
                     <div class="tab items" data-tab="crew">
                         {{> "systems/mgt2e/templates/actor/parts/actor-starship-crew.html"}}
                     </div>
-                </div>
+
+                    <div class="tab items" data-tab="computer">
+                        <div class="grid grid-5col">
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+                                <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.tl">
+                                    {{#select system.spacecraft.computer.tl}}
+                                    <option value="7">7</option>
+                                    <option value="9">9</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    {{/select}}
+                                </select>
+                            </div>
+
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.Processing'}}</label>
+                                <input class="field-value" type="text" value="{{system.spacecraft.computer.processing}}" readonly/>
+                            </div>
+
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.ComputerCore'}}</label>
+                                <input type="checkbox" name="system.spacecraft.computer.core" {{checked system.spacecraft.computer.core}} data-dtype="Boolean" />
+                                <label for="system.spacecraft.computer.core" class="resource-label"/>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.bis'}}</label>
+                                <input type="checkbox" name="system.spacecraft.computer.bis" {{checked system.spacecraft.computer.bis}} data-dtype="Boolean" />
+                                <label for="system.spacecraft.computer.bis" class="resource-label"/>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.TravellerSheet.fib'}}</label>
+                                <input type="checkbox" name="system.spacecraft.computer.fib" {{checked system.spacecraft.computer.fib}} data-dtype="Boolean" />
+                                <label for="system.spacecraft.computer.fib" class="resource-label"/>
+                            </div>
+                        </div>
+
+                    </div>
             </div>
         </div>
 

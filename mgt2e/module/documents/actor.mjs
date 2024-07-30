@@ -45,6 +45,27 @@ export class MgT2Actor extends Actor {
         }
     }
 
+    _preUpdate(changes, options, user) {
+        if (this.type === "spacecraft") {
+            if (changes.system.spacecraft.computer) {
+                let tl = this.system.spacecraft.computer.tl;
+                let core = this.system.spacecraft.computer.core;
+                let fib = this.system.spacecraft.computer.fib;
+                let bis = this.system.spacecraft.computer.bis;
+
+                const c = changes.system.spacecraft.computer;
+                if (c.tl !== undefined) tl = c.tl;
+                if (c.core !== undefined) core = c.core;
+
+                if (core) {
+                    changes.system.spacecraft.computer.processing = CONFIG.MGT2.COMPUTERS.techLevel[tl].core;
+                } else {
+                    changes.system.spacecraft.computer.processing = CONFIG.MGT2.COMPUTERS.techLevel[tl].computer;
+                }
+            }
+        }
+    }
+
     /**
      * Called when an attribute on a token is directly modified by the user.
      * Used for updating damage on the actor.

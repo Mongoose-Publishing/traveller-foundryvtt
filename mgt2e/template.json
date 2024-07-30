@@ -1076,6 +1076,7 @@
             "radShielding": 0,
             "computer": {
                 "processing": 0,
+                "tl": 7,
                 "core": false,
                 "bis": false,
                 "fib": false
