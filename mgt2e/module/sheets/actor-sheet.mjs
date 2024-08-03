@@ -1684,11 +1684,12 @@ export class MgT2ActorSheet extends ActorSheet {
             rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal", 8);
         }
     }
-
-    async _onSubmit2(event, updateData, preventClose, preventRender) {
+/*
+    async _onSubmit(event, updateData, preventClose, preventRender) {
         console.log("_onSubmit:");
         console.log(updateData);
         console.log(this.actor);
+        console.log(preventRender);
 
         if (this.actor.type === "spacecraft" && game.settings.get("mgt2e", "autoResizeSpacecraft")) {
             let size = 1;
@@ -1717,8 +1718,10 @@ export class MgT2ActorSheet extends ActorSheet {
             //this.actor._source.prototypeToken.height = size;
         }
 
-        await super._onSubmit(event, updateData, preventClose, preventRender);
+        await super._onSubmit(event, updateData, preventClose, false);
+        this.render();
     }
+    */
 }
 
 export class MgT2NPCActorSheet extends MgT2ActorSheet {

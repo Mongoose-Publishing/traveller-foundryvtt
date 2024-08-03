@@ -44,12 +44,6 @@ export class MgT2Actor extends Actor {
     }
 
     _preUpdate(changes, options, user) {
-        console.log("_preUpdate:");
-        console.log(changes);
-        console.log("after data dump");
-        console.log(changes.system);
-        console.log("that was system");
-
         if (this.type === "spacecraft") {
             if (changes.system.spacecraft.computer) {
                 let tl = this.system.spacecraft.computer.tl;
@@ -67,24 +61,21 @@ export class MgT2Actor extends Actor {
                     changes.system.spacecraft.computer.processing = CONFIG.MGT2.COMPUTERS.techLevel[tl].computer;
                 }
             }
-
         }
     }
 
+    /*
     _onUpdate(changed, options, userId) {
-        console.log("_onUpdate:");
+        super._onUpdate(changed, options, userId);
     }
+    */
 
     /**
      * Called when an attribute on a token is directly modified by the user.
      * Used for updating damage on the actor.
      */
     modifyTokenAttribute(attribute, value, isDelta, isBar) {
-        console.log(`modifyTokenAttribute: [${attribute}] [${value}] ${isDelta} ${isBar}`);
-
-        console.log(this.system.hits);
         if (this.type === "traveller") {
-            console.log("Traveller");
             let damage = parseInt(value);
             if (isDelta && damage < 0) {
                 damage = Math.abs(damage);
@@ -95,7 +86,6 @@ export class MgT2Actor extends Actor {
             }
             return this.update({"system.damage": this.system.damage});
         } else {
-            console.log("NPC, Creature or Spacecraft");
             let hits = this.system.hits;
             if (isDelta) {
                 hits.damage -= parseInt(value);
@@ -103,7 +93,6 @@ export class MgT2Actor extends Actor {
                 hits.damage = hits.max - parseInt(value);
             }
             hits.value = hits.max - hits.damage;
-            console.log("Changed value to " + hits.value);
             return this.update({"system.hits": this.system.hits });
         }
     }
@@ -230,10 +219,8 @@ export class MgT2Actor extends Actor {
      * Prepare Character type specific data
      */
     _prepareTravellerData(actor) {
-        console.log(`_prepareTravellerData ${actor.name}`);
         if (actor.type !== 'traveller') return;
-
-        console.log(`Preparing traveller data for ${actor.name}`);
+        console.log(`_prepareTravellerData: ${actor.name}`);
 
         const sys = actor.system;
 
