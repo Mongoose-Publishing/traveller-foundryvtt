@@ -61,7 +61,7 @@ export class MgT2ItemSheet extends ItemSheet {
         }
 
         console.log(game.system);
-        context.characteristics = MGT2.CHARACTERISTICS; 
+        context.characteristics = MGT2.CHARACTERISTICS;
 
         // If this belongs to an actor, the actor might have custom skills, so
         // we need to use the actor's skill list rather than the global one.
