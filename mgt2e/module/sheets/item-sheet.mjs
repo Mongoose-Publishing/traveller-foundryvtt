@@ -1,6 +1,7 @@
 import {onManageActiveEffect} from "../helpers/effects.mjs";
 import {rollAttack} from "../helpers/dice-rolls.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
+import { MGT2 } from "../helpers/config.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -60,7 +61,7 @@ export class MgT2ItemSheet extends ItemSheet {
         }
 
         console.log(game.system);
-        context.characteristics = game.system.template.Actor.templates.characteristics.characteristics;
+        context.characteristics = MGT2.CHARACTERISTICS; 
 
         // If this belongs to an actor, the actor might have custom skills, so
         // we need to use the actor's skill list rather than the global one.

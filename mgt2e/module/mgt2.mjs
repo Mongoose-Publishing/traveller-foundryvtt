@@ -294,8 +294,34 @@ Hooks.on("createItem", (item) => {
     }
 });
 
+
+
+/**
+ * Fired after actor has been created from data in template.json.
+ * We need to fill in from CONFIG structures. We need to do it this
+ * way since V12, since we can't access the template.json in V12.
+ */
 Hooks.on("createActor", (actor) => {
     console.log("createActor:");
+
+    if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
+        // Need to add characteristics.
+        for (let c of [
+            "STR", "DEX", "END", "INT", "EDU", "SOC",
+            "CHA", "TER", "PSI", "WLT", "LCK", "MRL",
+            "STY", "RES", "FOL", "REP" ]) {
+            console.log(c);
+            actor.system.characteristics[c] = JSON.parse(
+                JSON.stringify(MGT2.CHARACTERISTICS[c])
+            );
+            if (actor.type === "package") {
+                actor.system.characteristics[c].value = 0;
+                actor.system.characteristics[c].current = 0;
+            }
+        }
+        actor.update({ "system.characteristics": actor.system.characteristics });
+    }
+
     if (actor.img === "icons/svg/mystery-man.svg") {
         let colours = [ "white", "blue", "gold", "green", "red" ];
         if (actor.type === "creature") {
@@ -304,11 +330,6 @@ Hooks.on("createActor", (actor) => {
             actor.img = `systems/mgt2e/icons/actors/traveller-${colours[colours.length * Math.random() | 0]}.svg`;
         } else if (actor.type === "package") {
             actor.img = `systems/mgt2e/icons/actors/traveller-grey.svg`;
-            for (let c in actor.system.characteristics) {
-                actor.system.characteristics[c].value = 0;
-                actor.system.characteristics[c].current = 0;
-            }
-            actor.update({ "system.characteristics": actor.system.characteristics });
         } else if (actor.type === "spacecraft") {
             actor.img = `systems/mgt2e/images/tokens/spacecraft/white/far_trader.webp`;
         } else {
@@ -323,6 +344,7 @@ Hooks.on("createActor", (actor) => {
 
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
     console.log("**** preUpdateActor:");
+    console.log(actor);
     if (data?.system?.damage) {
         // This is a Traveller with full damage by stat
         const damage = data.system.damage;

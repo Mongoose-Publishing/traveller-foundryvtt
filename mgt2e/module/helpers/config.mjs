@@ -1,11 +1,5 @@
 export const MGT2 = {};
 
-// Define constants here, such as:
-MGT2.foobar = {
-  'bas': 'MGT2.bas',
-  'bar': 'MGT2.bar'
-};
-
 MGT2.STATUS = {
   OKAY: 0,
   HURT: 1,
@@ -32,6 +26,30 @@ MGT2.getStatus = function(actor) {
   console.log(data);
 
 };
+
+MGT2.CHARACTERISTICS = {
+  "STR": { "value": 7, "current": 7, "show": true,  "default": false  },
+  "DEX": { "value": 7, "current": 7, "show": true,  "default": false  },
+  "END": { "value": 7, "current": 7, "show": true,  "default": false  },
+  "INT": { "value": 7, "current": 7, "show": true,  "default": false  },
+  "EDU": { "value": 7, "current": 7, "show": true,  "default": false  },
+  "SOC": { "value": 7, "current": 7, "show": true,  "default": false  },
+  "CHA": { "value": 7, "current": 7, "show": false, "default": false  },
+  "TER": { "value": 0, "current": 0, "show": false, "default": false  },
+  "PSI": { "value": 0, "current": 0, "show": false, "default": false  },
+  "WLT": { "value": 7, "current": 7, "show": false, "default": false  },
+  "LCK": { "value": 7, "current": 7, "show": false, "default": false  },
+  "MRL": { "value": 7, "current": 7, "show": false, "default": false  },
+  "STY": { "value": 7, "current": 7, "show": false, "default": false  },
+  "RES": { "value": 7, "current": 7, "show": false, "default": false  },
+  "FOL": { "value": 0, "current": 0, "show": false, "default": false  },
+  "REP": { "value": 0, "current": 0, "show": false, "default": false  }
+};
+
+MGT2.SKILLS = {
+
+};
+
 MGT2.EFFECT_TYPES = {
   "CHA_AUG": "chaAug",
   "CHA_DM": "chaDM",

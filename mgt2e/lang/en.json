@@ -23,6 +23,26 @@
   "MGT2.Settings.AutoResizeSpacecraft.Name": "Resize spacecraft tokens",
   "MGT2.Settings.AutoResizeSpacecraft.Hint": "Size of tokens for spacecraft are automatically set according to their tonnage",
 
+  "MGT2.Characteristics.STR": "Strength",
+  "MGT2.Characteristics.DEX": "Dexterity",
+  "MGT2.Characteristics.END": "Endurance",
+  "MGT2.Characteristics.INT": "Intellect",
+  "MGT2.Characteristics.EDU": "Education",
+  "MGT2.Characteristics.SOC": "Social Standing",
+  "MGT2.Characteristics.CHA": "Charisma",
+  "MGT2.Characteristics.TER": "Territory",
+  "MGT2.Characteristics.PSI": "Psionic Strength",
+  "MGT2.Characteristics.WLT": "Wealth",
+  "MGT2.Characteristics.LCK": "Luck",
+  "MGT2.Characteristics.MRL": "Morale",
+  "MGT2.Characteristics.STY": "Sanity",
+  "MGT2.Characteristics.RES": "Resolve",
+  "MGT2.Characteristics.FOL": "Following",
+  "MGT2.Characteristics.REP": "Reputation",
+
+  "MGT2.Skills.admin": "Admin",
+
+
   "MGT2.TravellerSheet.Player": "Player",
   "MGT2.TravellerSheet.Species": "Species",
   "MGT2.TravellerSheet.Gender": "Gender",

@@ -129,7 +129,7 @@
     {{#each system.characteristics as | char key | }}
     <div class="resource flex-group-left">
         <input type="checkbox" name="system.characteristics.{{key}}.show" {{checked char.show}} data-dtype="Boolean" />
-        <label for="system.characteristics.{{key}}.value" title="{{char.label}}">{{key}}</label>
+        <label for="system.characteristics.{{key}}.value" title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
     </div>
     {{/each}}
 </section>

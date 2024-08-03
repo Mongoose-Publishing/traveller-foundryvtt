@@ -68,9 +68,9 @@
                                title="{{char.label}}">{{key}}</label>
                         <br/>
                         {{#if ../system.settings.useCustomDice}}
-                            <input class="characteristic-dice writable" type="text" name="system.characteristics.{{key}}.dice" value="{{char.dice}}" data-dtype="Text" placeholder="2D6"/>
+                            <input class="characteristic-dice writable" type="text" name="system.characteristics.{{key}}.dice" value="{{localize (concat 'MGT2.Characteristics.' key) }}" data-dtype="Text" placeholder="2D6"/>
                         {{else}}
-                            <input class="characteristic-value writable" type="number" name="system.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                            <input class="characteristic-value writable" type="number" name="system.characteristics.{{key}}.value" value="{{localize (concat 'MGT2.Characteristics.' key) }}" data-dtype="Number"/>
                         {{/if}}
                     </div>
                     {{/if}}

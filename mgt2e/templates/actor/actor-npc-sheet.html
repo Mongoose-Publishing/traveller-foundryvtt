@@ -56,7 +56,7 @@
                                class="characteristic-title rollable"
                                data-roll="2d6+@{{key}}" data-label="{{key}}"
                                data-cha="{{key}}"
-                               title="{{char.label}}">{{key}}</label>
+                               title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
                         <span class="characteristic-dm {{chaStatus char}}">{{numberFormat char.dm sign=true}}</span>
                         <br/>
                         <input class="characteristic-value writable" type="number" min="0" max="20" step="1" name="system.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
