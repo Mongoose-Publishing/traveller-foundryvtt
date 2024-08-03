@@ -144,12 +144,12 @@
                             <option value="-">None</option>
                             {{#each skills as |skill id|}}
                                 {{#if skill.combat}}
-                                    <option value="{{id}}">{{skill.label}}</option>
+                                    <option value="{{id}}">{{localize (concat "MGT2.Skills." id)}}</option>
                                 {{/if}}
                                 {{#if skill.specialities}}
                                     {{#each skill.specialities as |spec sid|}}
                                         {{#if spec.combat}}
-                                            <option value="{{id}}.{{sid}}">{{skill.label}} ({{spec.label}})</option>
+                                            <option value="{{id}}.{{sid}}">{{localize (concat "MGT2.Skills." id)}} ({{localize (concat "MGT2.Skills." sid)}})</option>
                                         {{/if}}
                                     {{/each}}
                                 {{/if}}

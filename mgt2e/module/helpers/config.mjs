@@ -47,7 +47,279 @@ MGT2.CHARACTERISTICS = {
 };
 
 MGT2.SKILLS = {
-
+    "admin": { "default": "EDU", "background": true, "requires": "INT" },
+    "advocate": { "default": "EDU", "requires": "INT" },
+    "animals": { "default": "INT", "background": true, "requires": "INT",
+      "specialities": {
+        "handling": { "default": "DEX" },
+        "vetinary": { "default": "EDU" },
+        "training": { "default": "INT" }
+      }
+    },
+    "art": { "default": "INT", "background": true, "requires": "INT",
+      "specialities": {
+        "performer": { },
+        "holography": { },
+        "instrument": { },
+        "visualMedia": { },
+        "write": { }
+      }
+    },
+    "astrogation": { "default": "EDU", "requires": "INT" },
+    "athletics": { "default": "DEX", "background": true, "creature": true, "requires": "DEX",
+      "specialities": {
+        "dexterity": { "default": "DEX", "combat": true },
+        "endurance": { "default": "END" },
+        "strength": { "default": "STR", "combat": true }
+      }
+    },
+    "broker": { "default": "INT", "requires": "INT" },
+    "carouse": { "default": "SOC", "background": true, "requires": "INT" },
+    "deception": { "default": "INT", "requires": "INT", "creature": true },
+    "diplomat": { "default": "SOC", "requires": "INT" },
+    "drive": { "default": "DEX", "background": true, "requires": "DEX",
+      "specialities": {
+        "hovercraft": { },
+        "mole": { },
+        "track": { },
+        "walker": { },
+        "wheel": { }
+      }
+    },
+    "electronics": { "default": "EDU", "background": true, "requires": "INT",
+      "specialities": {
+        "comms": {  },
+        "computers": {  },
+        "remoteOps": {  },
+        "sensors": {  }
+      }
+    },
+    "engineer": { "default": "EDU", "requires": "INT",
+      "specialities": {
+        "mDrive": {  },
+        "jDrive": {  },
+        "lifeSupport": {  },
+        "power": { }
+      }
+    },
+    "explosives": {
+      "default": "EDU",
+      "requires": "INT",
+      "combat": true
+    },
+    "flyer": { "default": "DEX", "background": true, "requires": "DEX", "specialities": {
+        "airship": { }, "grav": { }, "ornithopter": { }, "rotor": { }, "wing": { } }
+    },
+    "gambler": { "default": "INT", "requires": "INT"  },
+    "gunner": { "default": "DEX", "requires": "INT", "specialities": {
+        "turret": { "combat": true },
+        "ortillery": { "combat": true },
+        "screen": { "combat": true },
+        "capital": { "default": "INT", "combat": true }
+      }
+    },
+    "guncombat": { "default": "DEX", "requires": "DEX", "creature": true,
+      "specialities": {
+        "archaic": {
+          "combat": true
+        },
+        "energy": {
+          "combat": true
+        },
+        "slug": {
+          "combat": true
+        }
+      }
+    },
+    "heavyweapons": {
+      "default": "DEX",
+      "requires": "INT",
+      "specialities": {
+        "artillery": {
+          "combat": true
+        },
+        "portable": {
+          "combat": true
+        },
+        "vehicle": {
+          "combat": true
+        }
+      }
+    },
+    "independence": {
+      "default": "INT",
+      "requires": "TER"
+    },
+    "investigate": {
+      "default": "INT",
+      "requires": "INT"
+    },
+    "jackofalltrades": {
+      "default": "INT",
+      "requires": "INT"
+    },
+    "language": {
+      "default": "EDU",
+      "background": true,
+      "requires": "INT",
+      "specialities": {
+        "galanglic": {
+        },
+        "vilani": {
+        },
+        "zdetl": {
+        },
+        "oynprith": {
+        },
+        "trokh": {
+        },
+        "gvegh": {
+        }
+      }
+    },
+    "leadership": {
+      "default": "SOC",
+      "requires": "INT"
+    },
+    "mechanic": {
+      "default": "EDU",
+      "background": true,
+      "requires": "INT"
+    },
+    "medic": {
+      "default": "EDU",
+      "background": true,
+      "requires": "INT"
+    },
+    "melee": {
+      "default": "DEX",
+      "requires": "DEX",
+      "creature": true,
+      "specialities": {
+        "unarmed": {
+          "combat": true
+        },
+        "blade": {
+          "combat": true
+        },
+        "bludgeon": {
+          "combat": true
+        },
+        "natural": {
+          "combat": true
+        }
+      }
+    },
+    "navigation": {
+      "default": "INT",
+      "requires": "INT"
+    },
+    "persuade": {
+      "default": "SOC",
+      "requires": "INT",
+      "creature": true
+    },
+    "pilot": {
+      "default": "DEX",
+      "requires": "INT",
+      "specialities": {
+        "smallCraft": {
+        },
+        "spacecraft": {
+        },
+        "capitalShips": {
+        }
+      }
+    },
+    "profession": {
+      "default": "INT",
+      "background": true,
+      "requires": "INT",
+      "individual": true,
+      "specialities": {
+        "belter": {
+        },
+        "biologicals": {
+        },
+        "civilEngineering": {
+        },
+        "construction": {
+        },
+        "hydroponics": {
+        },
+        "polymers": {
+        },
+        "robotics": {
+        }
+      }
+    },
+    "recon": {
+      "default": "INT",
+      "requires": "INT",
+      "creature": true
+    },
+    "science": {
+      "default": "EDU",
+      "background": true,
+      "requires": "INT",
+      "specialities": {
+        "archaeology": {
+        },
+        "astronomy": {
+        },
+        "biology": {
+        },
+        "chemistry": {
+        },
+        "cosmology": {
+        },
+        "cybernetics": {
+        },
+        "economics": {
+        },
+        "genetics": {
+        },
+        "history": {
+        },
+        "linquistics": {
+        },
+        "philosophy": {
+        },
+        "physics": {
+        },
+        "planetology": {
+        },
+        "psionicology": {
+        },
+        "psycology": {
+        },
+        "robotics": {
+        },
+        "sophontology": {
+        },
+        "xenology": {
+        }
+      }
+    },
+    "seafarer": {      "default": "INT",      "background": true,      "requires": "INT",      "specialities": {
+      "oceanShips": { },
+        "personal": { },
+        "sail": { },
+        "submarine": { }
+      }
+    },
+    "stealth": { "default": "DEX", "requires": "INT", "creature": true },
+    "steward": { "default": "SOC", "requires": "INT" },
+    "streetwise": { "default": "INT", "background": true, "requires": "INT" },
+    "survival": { "default": "EDU", "background": true, "requires": "INT", "creature": true },
+    "tactics": { "default": "EDU",  "requires": "INT", "specialities": { "military": { }, "naval": { } } },
+    "vaccsuit": { "default": "DEX", "background": true, "requires": "INT" },
+    "telepathy": { "default": "PSI", "requires": "PSI", "trait": "psionic", "icon": "systems/mgt2e/icons/skills/psi.svg"    },
+    "clairvoyance": { "default": "PSI", "requires": "PSI", "trait": "psionic", "icon": "systems/mgt2e/icons/skills/psi.svg"    },
+    "telekinesis": { "default": "PSI", "requires": "PSI", "trait": "psionic", "icon": "systems/mgt2e/icons/skills/psi.svg"    },
+    "awareness": { "default": "PSI", "requires": "PSI", "trait": "psionic", "icon": "systems/mgt2e/icons/skills/psi.svg"    },
+    "teleportation": { "default": "PSI", "requires": "PSI", "trait": "psionic", "icon": "systems/mgt2e/icons/skills/psi.svg"    },
+    "untrained": { "default": "INT", "requires": "XXX" }
 };
 
 MGT2.EFFECT_TYPES = {

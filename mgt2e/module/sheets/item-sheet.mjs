@@ -68,7 +68,7 @@ export class MgT2ItemSheet extends ItemSheet {
         if (context.item.parent && context.item.parent.system.skills) {
             context.skills = context.item.parent.system.skills;
         } else {
-            context.skills = game.system.template.Actor.templates.skills.skills;
+            context.skills = MGT2.SKILLS;
         }
 
         if (context.item.type === "hardware" && context.item.parent != null) {

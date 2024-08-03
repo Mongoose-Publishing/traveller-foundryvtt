@@ -47,10 +47,10 @@
                   {{#select action.skill}}
                     <option value="-">None</option>
                     {{#each ../skills as |skill skid|}}
-                      <option value="{{skid}}">{{skill.label}}</option>
+                      <option value="{{skid}}">{{localize (concat "MGT2.Skills." skid)}}</option>
                         {{#if skill.specialities}}
                           {{#each skill.specialities as |spec spid|}}
-                            <option value="{{skid}}.{{spid}}">{{skill.label}} ({{spec.label}})</option>
+                            <option value="{{skid}}.{{spid}}">{{localize (concat "MGT2.Skills." skid)}} ({{localize (concat "MGT2.Skills." spid)}})</option>
                           {{/each}}
                         {{/if}}
                     {{/each}}
