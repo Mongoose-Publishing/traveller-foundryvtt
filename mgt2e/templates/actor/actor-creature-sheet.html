@@ -6,19 +6,19 @@
                  title="{{actor.name}}" height="100" width="100"/>
 
             <div class="side-panel hits-box shadow">
-                <label for="data.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                <label for="system.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
 
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
-                    <input class="characteristic-value" type="number" name="data.hits.damage"
+                    <input class="characteristic-value" type="number" name="system.hits.damage"
                            title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
-                           value="{{data.hits.damage}}" data-dtype="Number"/>
+                           value="{{system.hits.damage}}" data-dtype="Number"/>
                 </div>
                 <div>
                     <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
                     <input class="characteristic-readonly" type="number"
                            title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
-                           value="{{data.hits.value}}"/>
+                           value="{{system.hits.value}}"/>
                 </div>
             </div>
 
@@ -28,21 +28,21 @@
                 <div class="grid grid-3col inset flex-group-center">
                     <div>
                         <label class="prot-type" title="Protection">Prot</label>
-                        <input class="armour-value" type="text" name="data.armour.protection" title="Protection"
-                               value="{{data.armour.protection}}" data-dtype="Number"/>
+                        <input class="armour-value" type="text" name="system.armour.protection" title="Protection"
+                               value="{{system.armour.protection}}" data-dtype="Number"/>
                     </div>
                     <div>
                         <label class="prot-type" title="Rad Shielding">Rad</label>
-                        <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
-                               value="{{data.armour.rad}}" data-dtype="Number"/>
+                        <input class="armour-value" type="text" name="system.armour.rad" title="Radiation protection"
+                               value="{{system.armour.rad}}" data-dtype="Number"/>
                     </div>
                     <div>
                         <label class="prot-type" title="Energy Protection">🔥</label>
-                        <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy"
-                               value="{{data.armour.otherProtection}}" data-dtype="Number"/>
+                        <input class="armour-value" type="text" name="system.armour.otherProtection" title="Energy"
+                               value="{{system.armour.otherProtection}}" data-dtype="Number"/>
                     </div>
-                    <input type="text" name="data.armour.otherTypes" title="Energy types" class="grid-span-3"
-                           value="{{data.armour.otherTypes}}" data-dtype="String"/>
+                    <input type="text" name="system.armour.otherTypes" title="Energy types" class="grid-span-3"
+                           value="{{system.armour.otherTypes}}" data-dtype="String"/>
                 </div>
 
                 <div class="inset">
@@ -106,13 +106,13 @@
 
             <div class="shadow grid grid-5col">
                 <div class="resource flex-group-center">
-                    <label for="data.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
-                    <input class="field-value writable" type="text" name="data.speed.base" value="{{data.speed.base}}" data-dtype="Number"/>
+                    <label for="system.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
+                    <input class="field-value writable" type="text" name="system.speed.base" value="{{system.speed.base}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
-                    <select class="expand writable" name="data.size">
-                        {{#select data.size}}
+                    <label for="system.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
+                    <select class="expand writable" name="system.size">
+                        {{#select system.size}}
                             <option value="-4">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-4)</option>
                             <option value="-3">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-3)</option>
                             <option value="-2">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-2)</option>
@@ -128,23 +128,23 @@
                     </select>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.initiative.base" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
-                    <input class="field-value" readonly type="text" name="data.initiative.base" value="{{data.initiative.base}}"
+                    <label for="system.initiative.base" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
+                    <input class="field-value" readonly type="text" name="system.initiative.base" value="{{system.initiative.base}}"
                            data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center" title="{{suggestedHits}}">
-                    <label for="data.hits.value" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
-                    <input class="field-value writable" type="text" name="data.hits.max" value="{{data.hits.max}}"
+                    <label for="system.hits.value" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
+                    <input class="field-value writable" type="text" name="system.hits.max" value="{{system.hits.max}}"
                            data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center dodgeRoll" title="Click to dodge, shift-click to reset">
-                    <label for="data.dodge" class="field-label">
+                    <label for="system.dodge" class="field-label">
                         <i class="fas fa-dice"></i>
                         {{localize 'MGT2.TravellerSheet.Dodge'}}
 
                     </label>
-                    <input class="field-value" type="text" _name="data.dodge"
-                           value="{{data.dodge}}{{#if data.modifiers.reaction.dm includeZero=false}} ({{data.modifiers.reaction.dm}}){{/if}}" data-dtype="Number" readonly/>
+                    <input class="field-value" type="text" _name="system.dodge"
+                           value="{{system.dodge}}{{#if system.modifiers.reaction.dm includeZero=false}} ({{system.modifiers.reaction.dm}}){{/if}}" data-dtype="Number" readonly/>
                 </div>
             </div>
 
@@ -159,7 +159,7 @@
                     </span>
                     {{/if}}
                     <div class="behaviour-field">
-                        {{{showBehaviours . data.behaviour}}}
+                        {{{showBehaviours . system.behaviour}}}
                     </div>
                     <br/>
                 </div>
@@ -174,7 +174,7 @@
                     </span>
                     {{/if}}
                     <div class="behaviour-field">
-                        {{{showTraits . data.traits}}}
+                        {{{showTraits . system.traits}}}
                     </div>
                     <br/>
                 </div>

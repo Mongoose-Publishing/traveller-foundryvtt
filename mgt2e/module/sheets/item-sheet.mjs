@@ -50,7 +50,6 @@ export class MgT2ItemSheet extends ItemSheet {
 
         // Add the actor's data to context.data for easier access, as well as flags.
         context.enrichedDescription = TextEditor.enrichHTML(this.object.system.description, {async: false});
-        context.data = item.system;
         context.system = item.system;
         context.flags = item.flags;
         context.effects = item.effects;
@@ -60,6 +59,7 @@ export class MgT2ItemSheet extends ItemSheet {
             context.system.quantity = 1;
         }
 
+        console.log(game.system);
         context.characteristics = game.system.template.Actor.templates.characteristics.characteristics;
 
         // If this belongs to an actor, the actor might have custom skills, so

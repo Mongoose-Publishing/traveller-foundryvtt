@@ -23,8 +23,6 @@ export class MgT2Actor extends Actor {
         // documents or derived data.
         console.log(`prepareBaseData: [${this.name}]`);
 
-        const actorData = this;
-
         if (this.system.hits && this.type !== "traveller") {
             let hits = this.system.hits;
             if (hits.value !== (hits.max - hits.damage)) {
@@ -46,6 +44,12 @@ export class MgT2Actor extends Actor {
     }
 
     _preUpdate(changes, options, user) {
+        console.log("_preUpdate:");
+        console.log(changes);
+        console.log("after data dump");
+        console.log(changes.system);
+        console.log("that was system");
+
         if (this.type === "spacecraft") {
             if (changes.system.spacecraft.computer) {
                 let tl = this.system.spacecraft.computer.tl;
@@ -63,7 +67,12 @@ export class MgT2Actor extends Actor {
                     changes.system.spacecraft.computer.processing = CONFIG.MGT2.COMPUTERS.techLevel[tl].computer;
                 }
             }
+
         }
+    }
+
+    _onUpdate(changed, options, userId) {
+        console.log("_onUpdate:");
     }
 
     /**
@@ -146,11 +155,11 @@ export class MgT2Actor extends Actor {
         if (!actorData.system) {
             return;
         }
-        let data = actorData.system;
+        let sys = actorData.system;
         let heavyLoad = 0;
 
-        if (data.characteristics) {
-            const ch = data.characteristics;
+        if (sys.characteristics) {
+            const ch = sys.characteristics;
             if (ch['STR']) {
                 heavyLoad += parseInt(ch['STR'].current);
             }
@@ -158,9 +167,9 @@ export class MgT2Actor extends Actor {
                 heavyLoad += parseInt(ch['END'].current);
             }
         }
-        if (data.skills) {
-            if (data.skills['athletics'] && data.skills['athletics'].trained) {
-                const ath = data.skills['athletics'];
+        if (sys.skills) {
+            if (sys.skills['athletics'] && sys.skills['athletics'].trained) {
+                const ath = sys.skills['athletics'];
                 if (ath.specialities && ath.specialities.strength) {
                     heavyLoad += parseInt(ath.specialities.strength.value);
                 }
@@ -169,12 +178,12 @@ export class MgT2Actor extends Actor {
                 }
             }
         }
-        if (data.modifiers.encumbrance.multiplierBonus) {
-            let mult = 1 + parseFloat(data.modifiers.encumbrance.multiplierBonus);
+        if (sys.modifiers.encumbrance.multiplierBonus) {
+            let mult = 1 + parseFloat(sys.modifiers.encumbrance.multiplierBonus);
             heavyLoad *= mult;
         }
-        data.heavyLoad = heavyLoad;
-        data.maxLoad = heavyLoad * 2;
+        sys.heavyLoad = heavyLoad;
+        sys.maxLoad = heavyLoad * 2;
     }
 
     _prepareInitiative(actorData) {
@@ -226,43 +235,42 @@ export class MgT2Actor extends Actor {
 
         console.log(`Preparing traveller data for ${actor.name}`);
 
-        // Make modifications to data here. For example:
-        const data = actor.system;
+        const sys = actor.system;
 
-        data.totalSkills = this._countSkillLevels(data.skills);
-        data.maxSkills = (parseInt(data.characteristics.INT.value) +
-            parseInt(data.characteristics.EDU.value)) * 3;
+        sys.totalSkills = this._countSkillLevels(sys.skills);
+        sys.maxSkills = (parseInt(sys.characteristics.INT.value) +
+            parseInt(sys.characteristics.EDU.value)) * 3;
 
-        for (const char in data.characteristics) {
-            let value = data.characteristics[char].value;
-            if (data.characteristics[char].augment) {
-                value += parseInt(data.characteristics[char].augment);
+        for (const char in sys.characteristics) {
+            let value = sys.characteristics[char].value;
+            if (sys.characteristics[char].augment) {
+                value += parseInt(sys.characteristics[char].augment);
             }
             let dmg = 0;
-            if (data.damage && data.damage[char]) {
-                dmg = data.damage[char].value;
+            if (sys.damage && sys.damage[char]) {
+                dmg = sys.damage[char].value;
                 if (dmg < 0) {
                     dmg = 0;
-                    data.damage[char].value = dmg;
+                    sys.damage[char].value = dmg;
                 }
                 if (dmg > value) {
                     dmg = value;
-                    data.damage[char].value = dmg;
+                    sys.damage[char].value = dmg;
                 }
                 value -= dmg;
             }
-            data.characteristics[char].current = value;
-            data.characteristics[char].dm = this.getModifier(value);
+            sys.characteristics[char].current = value;
+            sys.characteristics[char].dm = this.getModifier(value);
         }
 
-        if (data.damage && data.hits) {
-            let hits = data.characteristics.STR.current + data.characteristics.DEX.current +
-                data.characteristics.END.current;
-            let maxHits = data.characteristics.STR.value + data.characteristics.DEX.value +
-                data.characteristics.END.value;
+        if (sys.damage && sys.hits) {
+            let hits = sys.characteristics.STR.current + sys.characteristics.DEX.current +
+                sys.characteristics.END.current;
+            let maxHits = sys.characteristics.STR.value + sys.characteristics.DEX.value +
+                sys.characteristics.END.value;
 
-            data.hits.value = hits;
-            data.hits.max = maxHits;
+            sys.hits.value = hits;
+            sys.hits.max = maxHits;
         }
         this._prepareEncumbrance(actor);
         this._prepareInitiative(actor);

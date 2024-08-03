@@ -52,7 +52,7 @@ Tools.uwpToText = function(uwp) {
 
 
 
-Tools.upp = function(chatData, args) {
+Tools.upp = async function(chatData, args) {
     let text = `<div class="tools">`;
 
     let extra = 0;
@@ -65,11 +65,11 @@ Tools.upp = function(chatData, args) {
     let rolls = [];
 
     for (let i=0; i < 6; i++) {
-        const roll = new Roll("2d6").evaluate({async: false});
+        const roll = await new Roll("2d6").evaluate();
         rolls[i] = roll.total;
     }
     while (extra-- > 0) {
-        const roll = new Roll("2d6").evaluate({async: false});
+        const roll = await new Roll("2d6").evaluate();
         let value = roll.total;
         let lowest = 0;
         for (let i=0; i < 6; i++) {
@@ -255,14 +255,17 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     let data = actor.system;
     let isRanged = true;
 
-    let armour = parseInt(data.armour?data.armour.protection:0);
-    if (options !== "") {
-        if (data.armour && data.armour.otherTypes.indexOf(options) > -1) {
-            armour += parseInt(data.armour?data.armour.otherProtection:0);
+    let armour = 0;
+    if (data.armour) {
+        let armour = parseInt(data.armour.protection);
+        if (options !== "") {
+            if (data.armour.otherTypes && data.armour.otherTypes.indexOf(options) > -1) {
+                armour += data.armour.otherProtection?parseInt(data.armour.otherProtection):0;
+            }
         }
-    }
-    if (armour < 0) {
-        armour = 0;
+        if (armour < 0) {
+            armour = 0;
+        }
     }
 
     if (hasTrait(traits, "lo-pen")) {
@@ -302,7 +305,6 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
         actor.update({"data.damage": data.damage});
         return;
     } else {
-        console.log("HITS: " + data.hits.value);
         if (!data.hits.damage) {
             data.hits.damage = 0;
         }

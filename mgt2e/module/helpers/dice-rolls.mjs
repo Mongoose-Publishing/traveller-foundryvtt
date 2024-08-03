@@ -41,7 +41,7 @@ export function getTraitValue(traits, trait) {
     return 0;
 }
 
-export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry) {
+export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry) {
     const   system = actor?actor.system:null;
     let     content = "Attack";
     let     melee = true;
@@ -222,19 +222,19 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
         content += "<p>No ammo</p>";
     }
 
-    const roll = new Roll(dice, actor?actor.getRollData():null).evaluate({async: false});
+    const roll = await new Roll(dice, actor?actor.getRollData():null).evaluate();
     let damageRoll = null;
     for (let attack=1; attack <= attacks; attack++) {
         if (attacks > 1) {
             content += `<h3 class="fullauto">Full auto attack ${attack} of ${attacks}</h3>`;
         }
 
-        damageRoll = new Roll(dmg, actor?actor.getRollData():null).evaluate({async: false});
+        damageRoll = await new Roll(dmg, actor?actor.getRollData():null).evaluate();
         let damageTotal = damageRoll.total;
 
         let effect = 0, attackTotal = 0;
         if (actor) {
-            const attackRoll = new Roll(dice, actor ? actor.getRollData() : null).evaluate({async: false});
+            const attackRoll = await new Roll(dice, actor ? actor.getRollData() : null).evaluate();
             attackTotal = attackRoll.total;
             effect = attackTotal - 8;
         }
@@ -287,7 +287,7 @@ export function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOpti
                 dmgText += ` /&nbsp;AP&nbsp;${getTraitValue(traits, "ap")}`;
             }
             if (hasTrait(traits, "radiation")) {
-                const radRoll = new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate({async: false});
+                const radRoll = await new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate();
                 dmgText += ` /&nbsp;${radRoll.total} Rads`;
                 if (destructive) {
                     dmgText += `&nbsp;(10m)`;
@@ -419,7 +419,7 @@ function getSkillBonus(data, skill, speciality) {
     return bonus;
 }
 
-export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
+export async function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
     const data = actor.system;
     let   title = "";
     let   skillText = "";
@@ -629,7 +629,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
         }
     }
 
-    let roll = new Roll(dice, actor.getRollData()).evaluate({async: false});
+    let roll = await new Roll(dice, actor.getRollData()).evaluate();
     if (roll) {
         text = `<div class='skill-message'><h2>${title}</h2><div class="message-content">`;
         let total = roll.total;
@@ -663,15 +663,15 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
                     specAug = 0;
                     specBonus = 0;
                     specNotes = "";
-                    if (spec.augment && !isNaN(spec.augment) && parseInt(spec.augment) != 0) {
+                    if (spec.augment && !isNaN(spec.augment) && parseInt(spec.augment) !== 0) {
                         stotal += parseInt(spec.augment);
                         slabel = `${spec.label} (${spec.value + spec.augment})`;
                     }
-                    if (spec.augdm && !isNaN(spec.augdm) && parseInt(spec.augdm) != 0) {
+                    if (spec.augdm && !isNaN(spec.augdm) && parseInt(spec.augdm) !== 0) {
                         stotal += parseInt(spec.augdm);
                         specNotes += `DM ${parseInt(spec.augdm)} `;
                     }
-                    if (spec.bonus && !isNaN(spec.bonus) && parseInt(spec.bonus) != 0) {
+                    if (spec.bonus && !isNaN(spec.bonus) && parseInt(spec.bonus) !== 0) {
                         stotal += parseInt(spec.bonus);
                         specNotes += `${spec.notes} ${parseInt(spec.bonus)} `
                     }
@@ -684,7 +684,7 @@ export function rollSkill(actor, skill, speciality, cha, dm, rollType, difficult
 
                     if (game.settings.get("mgt2e", "verboseSkillRolls")) {
                         text += `<h3 class="subroll">${slabel}</h3>`;
-                        if (specNotes != "") {
+                        if (specNotes !== "") {
                             text += `<div class="skill-augment-text">${specNotes}</div>`;
                         }
                         text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${stotal}</span> ` + getEffectLabel(stotal - difficulty);

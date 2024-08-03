@@ -1,28 +1,28 @@
 
-{{#if data.armour.name}}
+{{#if system.armour.name}}
   <div class="side-panel armour-box shadow flex-group-center">
     <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
-    <label class="armour-name" title="{{data.armour.name}}">{{data.armour.name}}</label>
+    <label class="armour-name" title="{{system.armour.name}}">{{system.armour.name}}</label>
 
     <div class="grid grid-3col inset">
       <div>
         <label class="prot-type" title="Protection">Prot</label>
-        <input class="armour-value" type="text" name="data.armour.protection" title="Protection"
-               value="{{data.armour.protection}}" readonly data-dtype="Number"/>
+        <input class="armour-value" type="text" name="system.armour.protection" title="Protection"
+               value="{{system.armour.protection}}" readonly data-dtype="Number"/>
       </div>
       <div>
         <label class="prot-type" title="Rad Shielding">Rad</label>
-        <input class="armour-value" type="text" name="data.armour.rad" title="Radiation protection"
-               value="{{data.armour.rad}}" readonly data-dtype="Number"/>
+        <input class="armour-value" type="text" name="system.armour.rad" title="Radiation protection"
+               value="{{system.armour.rad}}" readonly data-dtype="Number"/>
       </div>
-      {{#if data.armour.otherProtection}}
+      {{#if system.armour.otherProtection}}
       <div>
         <label class="prot-type" title="Energy Protection">🔥</label>
-        <input class="armour-value" type="text" name="data.armour.otherProtection" title="Energy"
-               value="{{data.armour.otherProtection}}" readonly data-dtype="Number"/>
+        <input class="armour-value" type="text" name="system.armour.otherProtection" title="Energy"
+               value="{{system.armour.otherProtection}}" readonly data-dtype="Number"/>
       </div>
-      <input type="text" name="data.armour.otherTypes" title="Energy types" class="grid-span-3"
-             value="{{data.armour.otherTypes}}" readonly data-dtype="String"/>
+      <input type="text" name="system.armour.otherTypes" title="Energy types" class="grid-span-3"
+             value="{{system.armour.otherTypes}}" readonly data-dtype="String"/>
       {{/if}}
     </div>
   </div>

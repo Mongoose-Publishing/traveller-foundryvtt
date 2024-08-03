@@ -51,7 +51,7 @@ export class MgT2ActorSheet extends ActorSheet {
     getData() {
         // Retrieve the data structure from the base sheet. You can inspect or log
         // the context variable to see the structure, but some key properties for
-        // sheets are the actor object, the data object, whether or not it's
+        // sheets are the actor object, the data object, whether it's
         // editable, the items array, and the effects array.
         const context = super.getData();
 
@@ -60,7 +60,6 @@ export class MgT2ActorSheet extends ActorSheet {
         const type = context.actor.type;
 
         // Add the actor's data to context.data for easier access, as well as flags.
-        context.data = actorData;
         context.system = actorData;
         context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
         context.flags = actorData.flags;
@@ -453,7 +452,7 @@ export class MgT2ActorSheet extends ActorSheet {
         item.update({ "system.status": status });
     }
 
-    _calculateArmour(context) {
+    async _calculateArmour(context) {
         const actorData = context.system;
 
         if (context.actor && (context.actor.type === 'traveller' || context.actor.type === 'npc' || context.actor.type === 'creature')) {
@@ -492,7 +491,7 @@ export class MgT2ActorSheet extends ActorSheet {
                             used = true;
                         } else {
                             // Not a number, so might be a formula.
-                            let roll = new Roll(prot, context.actor.getRollData()).evaluate({async: false});
+                            let roll = await new Roll(prot, context.actor.getRollData()).evaluate();
                             prot = roll.total;
                             armour.protection += prot;
                             used = true;
@@ -507,7 +506,7 @@ export class MgT2ActorSheet extends ActorSheet {
                             used = true;
                         } else {
                             // Other protection is not a number, so might be a formula.
-                            let roll = new Roll(other, context.actor.getRollData()).evaluate({async: false});
+                            let roll = await new Roll(other, context.actor.getRollData()).evaluate();
                             other = roll.total;
                             armour.otherProtection += other;
                             used = true;
@@ -887,29 +886,6 @@ export class MgT2ActorSheet extends ActorSheet {
             }
         }
         await this.actor.update({'system.traits': this.actor.system.traits });
-        return;
-        // Select skills which this behaviour has associated with it.
-        let b = MGT2.CREATURES.behaviours[selectedBehaviour].skills;
-        if (!b) return;
-        let skills = this.actor.system.skills;
-        for (let s in b) {
-            let skill = b[s];
-            let spec = null;
-            if (skill.indexOf(".") > -1) {
-                spec = skill.replace(/.*\./, "");
-                skill = skill.replace(/\..*/, "");
-            }
-            if (skills[skill]) {
-                skills[skill].trained = true;
-                if (spec && skills[skill].specialities && skills[skill].specialities[spec]) {
-                    let ss = skills[skill].specialities[spec];
-                    if (ss.value < 1) {
-                        ss.value = 1;
-                    }
-                }
-            }
-        }
-        await this.actor.update({'system.skills': this.actor.system.skills});
     }
 
     async _creatureRemoveTrait(trait) {
@@ -1165,7 +1141,7 @@ export class MgT2ActorSheet extends ActorSheet {
                     if (!dice || dice === "") {
                         dice = "2D6";
                     }
-                    let uppRoll = new Roll(dice, null).evaluate({async: false});
+                    let uppRoll = await new Roll(dice, null).evaluate();
                     this.actor.system.characteristics[c].value = uppRoll.total;
                 } else {
                     let bonus = parseInt(actor.system.characteristics[c].value);
@@ -1279,7 +1255,8 @@ export class MgT2ActorSheet extends ActorSheet {
                     continue;
                 }
                 if (itemData.type === "term" && itemData.system.term.randomTerm) {
-                    itemData.system.term.termLength = new Roll("3D6", null).evaluate({async: false}).total;
+                    let r = await new Roll("3D6", null).evaluate();
+                    itemData.system.term.termLength = r.total;
                 }
                 ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackageItem",
                     { item: item.name, actor: this.actor.name }));
@@ -1413,7 +1390,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 let swap = actorData.characteristics[targetCha].value;
                 actorData.characteristics[targetCha].value = actorData.characteristics[sourceCha].value;
                 actorData.characteristics[sourceCha].value = swap;
-                actor.update({ "data.characteristics": actorData.characteristics});
+                actor.update({ "system.characteristics": actorData.characteristics});
             }
         }
   }
@@ -1459,18 +1436,18 @@ export class MgT2ActorSheet extends ActorSheet {
         const itemData = {
             name: name,
             type: type,
-            data: data
+            system: data
         };
         if (header.dataset.img) {
             itemData.img = header.dataset.img;
         }
         if (type === "weapon" && header.dataset.skill) {
-            itemData.data.weapon = {};
-            itemData.data.weapon.skill = header.dataset.skill;
+            itemData.system.weapon = {};
+            itemData.system.weapon.skill = header.dataset.skill;
         }
         if (type === "armour" && header.dataset.form) {
-            itemData.data.armour = {};
-            itemData.data.armour.form = header.dataset.form;
+            itemData.system.armour = {};
+            itemData.system.armour.form = header.dataset.form;
         }
         if (type === "term") {
             let number = 1;
@@ -1481,24 +1458,24 @@ export class MgT2ActorSheet extends ActorSheet {
             }
 
             itemData.name = `New term ${number}`;
-            itemData.data.description = "Events, mishaps and promotions.";
-            itemData.data.term = {};
-            itemData.data.term.number = number;
+            itemData.system.description = "Events, mishaps and promotions.";
+            itemData.system.term = {};
+            itemData.system.term.number = number;
         }
         if (type === "associate") {
             itemData.name = "Unnamed " + header.dataset.relation;
-            itemData.data.associate = {};
-            itemData.data.associate.relationship = header.dataset.relation;
-            itemData.data.description = this._setAssociate(itemData.data.associate);
+            itemData.system.associate = {};
+            itemData.system.associate.relationship = header.dataset.relation;
+            itemData.system.description = this._setAssociate(itemData.data.associate);
         }
         // Remove the type from the dataset since it's in the itemData.type prop.
-        delete itemData.data["type"];
+        delete itemData.system["type"];
 
         // Finally, create the item!
         return await Item.create(itemData, {parent: this.actor});
     }
 
-    _setAssociate(associate) {
+    async _setAssociate(associate) {
         let affinity = "", enmity = "";
 
         if (associate.relationship === "contact") {
@@ -1516,9 +1493,9 @@ export class MgT2ActorSheet extends ActorSheet {
         } else {
             return "";
         }
-        let roll = new Roll(affinity, this.actor.getRollData()).evaluate({async: false});
+        let roll = await new Roll(affinity, this.actor.getRollData()).evaluate();
         associate.affinity = this._getAffinity(roll.total);
-        roll = new Roll(enmity, this.actor.getRollData()).evaluate({async: false});
+        roll = await new Roll(enmity, this.actor.getRollData()).evaluate();
         associate.enmity = 0 - this._getAffinity(roll.total);
 
         let description = "";
@@ -1562,9 +1539,9 @@ export class MgT2ActorSheet extends ActorSheet {
                 description += "Blinded by hate. ";
                 break;
         }
-        roll = new Roll("2D6", this.actor.getRollData()).evaluate({async: false});
+        roll = await new Roll("2D6", this.actor.getRollData()).evaluate();
         let power = roll.total;
-        roll = new Roll("2D6", this.actor.getRollData()).evaluate({async: false});
+        roll = await new Roll("2D6", this.actor.getRollData()).evaluate();
         let influence = roll.total;
 
         switch (power) {
@@ -1708,8 +1685,7 @@ export class MgT2ActorSheet extends ActorSheet {
         }
     }
 
-    async _onSubmit(event, updateData, preventClose, preventRender) {
-
+    async _onSubmit2(event, updateData, preventClose, preventRender) {
         console.log("_onSubmit:");
         console.log(updateData);
         console.log(this.actor);

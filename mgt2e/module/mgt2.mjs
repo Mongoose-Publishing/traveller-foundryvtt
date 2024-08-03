@@ -1043,7 +1043,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     const dataRoll='data-rolltype="skill" data-roll="2d6"';
     const dataSkill=`data-skill="${skillId}"`;
 
-    const nameSkill=`data.skills.${skillId}`;
+    const nameSkill=`system.skills.${skillId}`;
 
     if (showSkill) {
         let html = `<div class="skillBlock skill-draggable item"  ${dataRoll} ${dataSkill}>`;
@@ -1076,7 +1076,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
             title += " + " + skill.dm;
         }
         let hasXp = (skill.xp && skill.xp > 0);
-        html += `<label for="data.skills.${skillId}.value" `;
+        html += `<label for="system.skills.${skillId}.value" `;
         html += `class="rollable ${skill.trained?"":"untrained"} ${augmented?"augmented":""}" `;
         html += `${dataRoll} ${dataSkill} data-label="${title}" title="${title}"`;
         html += `>${skill.label}${hasXp?"<sup>+</sup>":""}</label>`;

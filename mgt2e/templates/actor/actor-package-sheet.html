@@ -6,36 +6,36 @@
 
             <div class="shadow side-panel side-values">
                 <div class="resource flex-group-center">
-                    <label for="data.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
-                    <input class="field-value writable" name="data.sophont.species" type="text" value="{{data.sophont.species}}"/>
+                    <label for="system.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
+                    <input class="field-value writable" name="system.sophont.species" type="text" value="{{system.sophont.species}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.sophont.profession" class="field-label">
+                    <label for="system.sophont.profession" class="field-label">
                         {{localize 'MGT2.TravellerSheet.Profession'}}
                     </label>
-                    <input class="field-value writable" name="data.sophont.profession" type="text" value="{{data.sophont.profession}}"/>
+                    <input class="field-value writable" name="system.sophont.profession" type="text" value="{{system.sophont.profession}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="data.cash" class="field-label">{{localize 'MGT2.Finance.Cash'}}</label>
-                    <input class="field-value writable" type="text" name="data.cash" value="{{data.cash}}" data-dtype="Number"/>
+                    <label for="system.cash" class="field-label">{{localize 'MGT2.Finance.Cash'}}</label>
+                    <input class="field-value writable" type="text" name="system.cash" value="{{system.cash}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <div class="grid grid-2col">
                         <div class="resource flex-group-center">
-                            <label for="data.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
-                            <input class="field-value writable" type="text" name="data.speed.base" value="{{data.speed.base}}" data-dtype="Number"/>
+                            <label for="system.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
+                            <input class="field-value writable" type="text" name="system.speed.base" value="{{system.speed.base}}" data-dtype="Number"/>
                         </div>
                         <div class="resource flex-group-center">
-                            <label for="data.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
-                            <input class="field-value writable" type="text" name="data.size" value="{{data.size}}" data-dtype="Number"/>
+                            <label for="system.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
+                            <input class="field-value writable" type="text" name="system.size" value="{{system.size}}" data-dtype="Number"/>
                         </div>
                         <div class="resource flex-group-center">
-                            <label for="data.sophont.height" class="field-label">{{localize 'MGT2.TravellerSheet.Height'}}</label>
-                            <input class="field-value writable" type="text" name="data.sophont.height" value="{{data.sophont.height}}" data-dtype="Number"/>
+                            <label for="system.sophont.height" class="field-label">{{localize 'MGT2.TravellerSheet.Height'}}</label>
+                            <input class="field-value writable" type="text" name="system.sophont.height" value="{{system.sophont.height}}" data-dtype="Number"/>
                         </div>
                         <div class="resource flex-group-center">
-                            <label for="data.sophont.weight" class="field-label">{{localize 'MGT2.TravellerSheet.Weight'}}</label>
-                            <input class="field-value writable" type="text" name="data.sophont.weight" value="{{data.sophont.weight}}" data-dtype="Number"/>
+                            <label for="system.sophont.weight" class="field-label">{{localize 'MGT2.TravellerSheet.Weight'}}</label>
+                            <input class="field-value writable" type="text" name="system.sophont.weight" value="{{system.sophont.weight}}" data-dtype="Number"/>
                         </div>
                     </div>
                 </div>
@@ -56,21 +56,21 @@
 
             <div class="shadow grid grid-6col">
                 <div class="resource grid-span-6">
-                    <input class="trained" type="checkbox" name="data.settings.useCustomDice"
-                           {{checked data.settings.useCustomDice}} data-type="Boolean"/>
-                    <label for="data.settings.useCustomDice">{{localize 'MGT2.TravellerSheet.UseCustomDice'}}</label>
+                    <input class="trained" type="checkbox" name="system.settings.useCustomDice"
+                           {{checked system.settings.useCustomDice}} data-type="Boolean"/>
+                    <label for="system.settings.useCustomDice">{{localize 'MGT2.TravellerSheet.UseCustomDice'}}</label>
                 </div>
-                {{#each data.characteristics as | char key | }}
+                {{#each system.characteristics as | char key | }}
                     {{#if char.show}}
                     <div class="resource flex-group-center characteristic-draggable"
                          data-rolltype="characteristic" data-cha="{{key}}">
                         <label class="characteristic-title"
                                title="{{char.label}}">{{key}}</label>
                         <br/>
-                        {{#if ../data.settings.useCustomDice}}
-                            <input class="characteristic-dice writable" type="text" name="data.characteristics.{{key}}.dice" value="{{char.dice}}" data-dtype="Text" placeholder="2D6"/>
+                        {{#if ../system.settings.useCustomDice}}
+                            <input class="characteristic-dice writable" type="text" name="system.characteristics.{{key}}.dice" value="{{char.dice}}" data-dtype="Text" placeholder="2D6"/>
                         {{else}}
-                            <input class="characteristic-value writable" type="number" name="data.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                            <input class="characteristic-value writable" type="number" name="system.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
                         {{/if}}
                     </div>
                     {{/if}}
@@ -79,16 +79,16 @@
 
             <div class="shadow">
                 <div class="skill-options">
-                    <input class="trained" type="checkbox" name="data.settings.hideUntrained"
-                           {{checked data.settings.hideUntrained}} data-dtype="Boolean" />
-                    <label for="data.settings.hideUntrained">Trained only</label>
+                    <input class="trained" type="checkbox" name="system.settings.hideUntrained"
+                           {{checked system.settings.hideUntrained}} data-dtype="Boolean" />
+                    <label for="system.settings.hideUntrained">Trained only</label>
                     <span name="addNewSkill" class="addNewSkill item">+Add New Skill</span>
                 </div>
                 <hr/>
 
                 <section class="{{skillListClasses}}">
-                    {{#each data.skills as |skill key|}}
-                    {{{skillBlock ../data key skill}}}
+                    {{#each system.skills as |skill key|}}
+                    {{{skillBlock ../system key skill}}}
                     {{/each}}
                 </section>
             </div>

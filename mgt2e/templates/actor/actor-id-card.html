@@ -4,22 +4,22 @@
              title="{{actor.name}}" height="150" width="150"/>
 
         <div class="info">
-            {{#if data.sophont.species}}
+            {{#if system.sophont.species}}
             <div class="id-data">
                 <h4>{{localize 'MGT2.TravellerSheet.Species'}}</h4>
-                <span>{{data.sophont.species}}</span>
+                <span>{{system.sophont.species}}</span>
             </div>
             {{/if}}
-            {{#if data.sophont.gender}}
+            {{#if system.sophont.gender}}
             <div class="id-data">
                 <h4>{{localize 'MGT2.TravellerSheet.Gender'}}</h4>
-                <span>{{data.sophont.gender}}</span>
+                <span>{{system.sophont.gender}}</span>
             </div>
             {{/if}}
-            {{#if data.sophont.homeworld}}
+            {{#if system.sophont.homeworld}}
             <div class="id-data">
                 <h4>{{localize 'MGT2.TravellerSheet.HomeWorld'}}</h4>
-                <span>{{data.sophont.homeworld}}</span>
+                <span>{{system.sophont.homeworld}}</span>
             </div>
             {{/if}}
         </div>
@@ -33,17 +33,17 @@
         </h1>
 
         <div class="upp">
-            <span class="upp">{{toHex data.characteristics.STR.value}}</span>
-            <span class="upp">{{toHex data.characteristics.DEX.value}}</span>
-            <span class="upp">{{toHex data.characteristics.END.value}}</span>
-            <span class="upp">{{toHex data.characteristics.INT.value}}</span>
-            <span class="upp">{{toHex data.characteristics.EDU.value}}</span>
-            <span class="upp">{{toHex data.characteristics.SOC.value}}</span>
+            <span class="upp">{{toHex system.characteristics.STR.value}}</span>
+            <span class="upp">{{toHex system.characteristics.DEX.value}}</span>
+            <span class="upp">{{toHex system.characteristics.END.value}}</span>
+            <span class="upp">{{toHex system.characteristics.INT.value}}</span>
+            <span class="upp">{{toHex system.characteristics.EDU.value}}</span>
+            <span class="upp">{{toHex system.characteristics.SOC.value}}</span>
 
-            {{#if data.sophont.profession}}
+            {{#if system.sophont.profession}}
             <div class="id-data">
                 <h4>{{localize 'MGT2.TravellerSheet.Profession'}}</h4>
-                <span>{{data.sophont.profession}}</span>
+                <span>{{system.sophont.profession}}</span>
             </div>
             {{/if}}
         </div>
