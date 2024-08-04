@@ -32,6 +32,12 @@ export class MgT2DamageDialog extends Application {
         this.armour = data.armour?.protection ?? 0;
         this.wounds = "";
 
+        if (data.armour && data.armour.otherTypes && this.laser && this.laser.trim().length > 0) {
+            if (data.armour.otherTypes.toLowerCase().indexOf(this.laser.toLowerCase()) > -1) {
+                this.armour += parseInt(data.armour.otherProtection);
+            }
+        }
+
         this.actualDamage = damage;
         if (ap < this.armour) {
             this.actualDamage = damage - (this.armour - ap);
@@ -45,7 +51,7 @@ export class MgT2DamageDialog extends Application {
             this.actor.update({ "data.damage": this.data.damage });
             return;
         }
-        console.log(`MgT2DamageDialog: ${this.actualDamage} ${this.stun}`);
+        console.log(`MgT2DamageDialog: ${this.actualDamage} ${this.stun} ${this.laser}`);
 
         this.DMG_STR = data.damage.STR.value;
         this.DMG_DEX = data.damage.DEX.value;

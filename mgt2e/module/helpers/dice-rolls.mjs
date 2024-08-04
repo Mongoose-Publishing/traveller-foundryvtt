@@ -1,3 +1,24 @@
+/**
+ * Get the l10n'd label for a skill. If a label is set directly on the skill,
+ * we use that. This is used for custom skills.
+ *
+ * @param skill     Skill to get label for.
+ * @returns {string|*}
+ */
+export function skillLabel(skill) {
+    if (!skill) {
+        return "";
+    }
+    if (skill.label && skill.label.length > 0) {
+        return skill.label;
+    } else {
+        let label = game.i18n.localize("MGT2.Skills." + skill.id);
+        if (label.indexOf("MGT2.Skills.") === 0) {
+            label = skill.id;
+        }
+        return label;
+    }
+}
 
 export function getSkillValue(actor, skill, speciality) {
     const data = actor.system;
@@ -533,13 +554,13 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
             specNotes += `${speciality.notes}&nbsp;(${speciality.bonus}) `;
         }
 
-        title += ((title === "")?"":" + ") + skill.label;
+        title += ((title === "")?"":" + ") + skillLabel(skill);
         skillCheck = true;
         let value = data.skills["jackofalltrades"].value - 3;
         if (skillText.length > 0) {
             skillText += " + ";
         }
-        skillText += skill.label;
+        skillText += skillLabel(skill);
         if (skill.trained) {
             value = parseInt(skill.value);
             if (skill.expert && (cha === "INT" || cha === "EDU")) {
@@ -556,8 +577,8 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
             }
             if (speciality) {
                 value = speciality.value;
-                title += " (" + speciality.label + ")";
-                skillText += " (" + speciality.label + ")";
+                title += " (" + skillLabel(speciality) + ")";
+                skillText += " (" + skillLabel(speciality) + ")";
                 specialityCheck = true;
                 if (speciality.expert) {
                     if (parseInt(speciality.expert) > value) {
@@ -656,7 +677,7 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
                 let spec = skill.specialities[sp];
                 if (spec.value > 0) {
                     let stotal = parseInt(total) + parseInt(spec.value);
-                    let slabel = `${spec.label} (${spec.value})`;
+                    let slabel = `${skillLabel(spec)} (${spec.value})`;
 
                     console.log(spec);
                     specDM = 0;
@@ -665,7 +686,7 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
                     specNotes = "";
                     if (spec.augment && !isNaN(spec.augment) && parseInt(spec.augment) !== 0) {
                         stotal += parseInt(spec.augment);
-                        slabel = `${spec.label} (${spec.value + spec.augment})`;
+                        slabel = `${skillLabel(spec)} (${spec.value + spec.augment})`;
                     }
                     if (spec.augdm && !isNaN(spec.augdm) && parseInt(spec.augdm) !== 0) {
                         stotal += parseInt(spec.augdm);

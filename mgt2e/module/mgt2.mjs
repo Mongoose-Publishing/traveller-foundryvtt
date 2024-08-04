@@ -15,6 +15,7 @@ import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
 import { Tools } from "./helpers/chat/tools.mjs";
 import { rollSkill } from "./helpers/dice-rolls.mjs";
+import { skillLabel } from "./helpers/dice-rolls.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
 import { migrateWorld } from "./migration.mjs";
 import { NpcIdCard } from "./helpers/id-card.mjs";
@@ -304,8 +305,10 @@ Hooks.on("createItem", (item) => {
 Hooks.on("createActor", (actor) => {
     console.log("createActor:");
 
+    // Copy in characteristics where needed.
     if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
-        // Need to add characteristics.
+        // Need to add characteristics. We want them in a specific order, otherwise
+        // they get sorted alphabetically.
         for (let c of [
             "STR", "DEX", "END", "INT", "EDU", "SOC",
             "CHA", "TER", "PSI", "WLT", "LCK", "MRL",
@@ -320,6 +323,26 @@ Hooks.on("createActor", (actor) => {
             }
         }
         actor.update({ "system.characteristics": actor.system.characteristics });
+    }
+
+    // Copy in skills where needed.
+    if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
+        // Need to add characteristics.
+        for (let s in MGT2.SKILLS) {
+            console.log(s);
+            actor.system.skills[s] = JSON.parse(
+                JSON.stringify(MGT2.SKILLS[s])
+            )
+            actor.system.skills[s].id = s;
+            actor.system.skills[s].value = 0;
+            if (actor.system.skills[s].specialities) {
+                for (let sp in actor.system.skills[s].specialities) {
+                    actor.system.skills[s].specialities[sp].id = sp;
+                    actor.system.skills[s].specialities[sp].value = 0;
+                }
+            }
+        }
+        actor.update({ "system.skills": actor.system.skills });
     }
 
     if (actor.img === "icons/svg/mystery-man.svg") {
@@ -708,9 +731,9 @@ Handlebars.registerHelper('skillLabel', function(data, skill, spec) {
         let type = "";
 
         if (data.settings.rollType === "boon") {
-            type = " [Boon]";
+            type = ` [${game.i18n.localize("MGT2.TravellerSheet.Boon")}]`;
         } else if (data.settings.rollType === "bane") {
-            type = " [Bane]";
+            type = ` [${game.i18n.localize("MGT2.TravellerSheet.Bane")}]`;
         }
 
         const chars = data.characteristics;
@@ -723,12 +746,12 @@ Handlebars.registerHelper('skillLabel', function(data, skill, spec) {
 
         if (skill.trained) {
             if (spec) {
-                return cha + " + " + skill.label + " (" + spec.label + ")" + type;
+                return `${cha} + ${skillLabel(skill)} (${skillLabel(spec)}) ${type}`;
             } else {
-                return cha + " + " + skill.label + type;
+                return `${cha} + ${skillLabel(skill)} ${type}`;
             }
         } else {
-            return cha + " + " + skill.label + " (untrained)" + type;
+            return `${cha} + ${skillLabel(skill)}  (${game.i18n.localize("MGT2.TravellerSheet.Untrained")}) ${type}`;
         }
     } else {
         return "Roll";
@@ -1098,10 +1121,11 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
             title += " + " + skill.dm;
         }
         let hasXp = (skill.xp && skill.xp > 0);
+        let label = skillLabel(skill);
         html += `<label for="system.skills.${skillId}.value" `;
         html += `class="rollable ${skill.trained?"":"untrained"} ${augmented?"augmented":""}" `;
         html += `${dataRoll} ${dataSkill} data-label="${title}" title="${title}"`;
-        html += `>${skill.label}${hasXp?"<sup>+</sup>":""}</label>`;
+        html += `>${label}${hasXp?"<sup>+</sup>":""}</label>`;
 
         // Specialities?
         if (!backgroundOnly && skill.specialities && showSpecs) {
@@ -1145,8 +1169,9 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                         html += `data-dtype="Boolean" />`;
                     }
                     let hasXp = (spec.xp && spec.xp > 0);
+                    let label = skillLabel(spec);
                     html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
-                    html += `data-spec="${sid}" title="${title}">${spec.label}${hasXp?"<sup>+</sup>":""}</label>`;
+                    html += `data-spec="${sid}" title="${title}">${label}${hasXp?"<sup>+</sup>":""}</label>`;
                     if (skill.trained && (!skill.individual || spec.trained)) {
                         html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
                     } else {
