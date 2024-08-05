@@ -516,6 +516,8 @@
   "MGT2.Warn.HotBar.SelectActorItem": "No actor is selected to use {item} with",
   "MGT2.Warn.HotBar.ActorNotHaveItem": "Actor '{actor}' does not have item '{item}'",
 
+  "MGT2.Error.CombatNoSelection": "You must target or select a token",
+
   "MGT2.Warn.Crew.NoCrewActor": "Cannot find crew actor with id '{crewId}'",
   "MGT2.Warn.Crew.NoRoleItem": "Cannot find role with id '{roleId}'",
 

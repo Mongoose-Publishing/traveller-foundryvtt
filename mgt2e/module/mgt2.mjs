@@ -927,8 +927,6 @@ Handlebars.registerHelper('concat', function(arg1, arg2, arg3, arg4, arg5) {
     if (typeof arg4 === 'string' || arg4 instanceof String) text += arg4;
     if (typeof arg5 === 'string' || arg5 instanceof String) text += arg5;
 
-    console.log("Concat " + text);
-
     return text;
 });
 

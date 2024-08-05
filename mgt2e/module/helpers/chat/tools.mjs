@@ -250,24 +250,21 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     }
 
     console.log(`applyDamageTo: ${damage} AP ${ap} TL ${tl} (${options}) (${traits})`);
-    console.log(token);
 
     let data = actor.system;
     let isRanged = true;
-
     let armour = 0;
+
     if (data.armour) {
-        let armour = parseInt(data.armour.protection);
+        armour = parseInt(data.armour.protection);
         if (options !== "") {
+            console.log(data.armour);
             if (data.armour.otherTypes && data.armour.otherTypes.indexOf(options) > -1) {
                 armour += data.armour.otherProtection?parseInt(data.armour.otherProtection):0;
             }
         }
-        if (armour < 0) {
-            armour = 0;
-        }
+        armour = Math.max(0, armour);
     }
-
     if (hasTrait(traits, "lo-pen")) {
         let lopen = getTraitValue(traits, "lo-pen");
         if (lopen > 1) {
@@ -316,7 +313,7 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
         if (data.hits.tmpDamage > data.hits.damage) {
             data.hits.tmpDamage = data.hits.damage;
         }
-        if (data.characteristics) {
+        if (stun && data.characteristics) {
             if (data.hits.tmpDamage > data.characteristics.END.value) {
                 let remaining = data.hits.tmpDamage - data.characteristics.END.value;
                 actor.setFlag("mgt2e", "stunned", true);
@@ -335,7 +332,7 @@ Tools.applyDamage = function(damage, ap, tl, options, traits) {
 
     let tokens = Tools.getSelected();
     if (tokens.size === 0) {
-        ui.notifications.error("No tokens selected");
+        ui.notifications.error(game.i18n.localize("MGT2.Error.CombatNoSelection"));
         return;
     }
 
