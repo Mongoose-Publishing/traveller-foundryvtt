@@ -56,16 +56,14 @@ Tools.upp = async function(chatData, args) {
     let text = `<div class="tools">`;
 
     let extra = 0;
-
-    if (args.length > 0) {
+    while (args.length > 0) {
         extra = Math.max(0, parseInt(args.shift()));
     }
     const title = `UPP ${(extra>0)?" (with "+extra+" extra rolls)":""}`;
 
     let rolls = [];
-
     for (let i=0; i < 6; i++) {
-        const roll = await new Roll("2d6").evaluate();
+        const roll = await new Roll("2D6").evaluate();
         rolls[i] = roll.total;
     }
     while (extra-- > 0) {

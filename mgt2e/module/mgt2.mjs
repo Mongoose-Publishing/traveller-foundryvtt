@@ -313,6 +313,10 @@ Hooks.on("createActor", (actor) => {
             "STR", "DEX", "END", "INT", "EDU", "SOC",
             "CHA", "TER", "PSI", "WLT", "LCK", "MRL",
             "STY", "RES", "FOL", "REP" ]) {
+
+            if (actor.system.characteristics[c]) {
+                continue;
+            }
             console.log(c);
             actor.system.characteristics[c] = JSON.parse(
                 JSON.stringify(MGT2.CHARACTERISTICS[c])
@@ -327,8 +331,11 @@ Hooks.on("createActor", (actor) => {
 
     // Copy in skills where needed.
     if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
-        // Need to add characteristics.
+        // Need to add skills.
         for (let s in MGT2.SKILLS) {
+            if (actor.system.skills[s]) {
+                continue;
+            }
             console.log(s);
             actor.system.skills[s] = JSON.parse(
                 JSON.stringify(MGT2.SKILLS[s])
