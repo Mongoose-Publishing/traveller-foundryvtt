@@ -1133,7 +1133,21 @@ export class MgT2ActorSheet extends ActorSheet {
 
             let html=`<div class="chat-package">`;
             html += `<h3>${actor.name}</h3>`;
-            html += `<p>${this.actor.name}</p>`;
+            html += `<p><b>${this.actor.name}</b></p>`;
+
+            if (actor.system.description && actor.system.description.length > 0) {
+                html += `<div class="popup-text">${actor.system.description}</div>`;
+            }
+
+            if (actor.system.sophont.profession && actor.system.sophont.professsion.length > 0) {
+                html += `<p><b>Profession:</b> ${actor.system.sophont.profession}</p>`;
+            }
+            if (actor.system.size !== this.actor.system.size) {
+                html += `<p><b>Size:</b> ${actor.system.size}</p>`;
+            }
+            if (actor.system.speed.base !== this.actor.system.speed.base) {
+                html += `<p><b>Speed:</b> ${actor.system.speed.base}</p>`;
+            }
 
             html += `<div class="stats grid grid-3col">`;
             for (let c in actor.system.characteristics) {
@@ -1150,6 +1164,7 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                     let uppRoll = await new Roll(dice, null).evaluate();
                     this.actor.system.characteristics[c].value = uppRoll.total;
+                    this.actor.system.characteristics[c].roll = dice;
                     html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${dice}<br/>${uppRoll.total}</span></div>`;
                 } else {
                     if (!actor.system.characteristics[c].show) {
@@ -1161,7 +1176,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         if (this.actor.system.characteristics[c].value < 1) {
                             this.actor.system.characteristics[c].value = 1;
                         }
-                        html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${bonus}</span></div>`;
+                        html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${(bonus>0)?"+":""}${bonus}</span></div>`;
                     }
                 }
             }
@@ -1235,7 +1250,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         parseInt(this.actor.system.finance.cash) + parseInt(actor.system.cash);
                     await this.actor.update({"system.finance": this.actor.system.finance});
                 }
-                benefitsText += `<p>Cash: +Cr${actor.system.cash}</p>`;
+                benefitsText += `<p>Cash: Cr${actor.system.cash}</p>`;
             }
             if (this.actor.system.sophont) {
                 let isMale = false, isFemale = false;
@@ -1306,7 +1321,8 @@ export class MgT2ActorSheet extends ActorSheet {
 
                 if (itemData.type !== "term") {
                     if (itemData.type === "associate") {
-                        benefitsText += `<p>${item.system.associate.relationship}: ${item.name}</p>`;
+                        let rel = game.i18n.localize("MGT2.History.Relation." + item.system.associate.relationship);
+                        benefitsText += `<p>${rel}: ${item.name}</p>`;
                     } else {
                         benefitsText += `<p>${item.name}</p>`;
                     }
@@ -1324,10 +1340,14 @@ export class MgT2ActorSheet extends ActorSheet {
                     this.actor.update({"system.settings.autoAge": true});
                 }
                 html += `<h4>Careers</h4>`;
-                html += `<p>${term.name} - ${term.system.term.termLength} years</p>`;
+                if (term.system.term.termLength > 0) {
+                    html += `<p>${term.name} - ${term.system.term.termLength} years</p>`;
+                } else {
+                    html += `<p>${term.name}</p>`;
+                }
             }
 
-            html += `</dv>`;
+            html += `</div>`;
 
             let chatData = {
                 user: game.user.id,

@@ -1844,3 +1844,14 @@ div.chat-package img {
     width: 16px;
     height: 16px;
 }
+
+div.popup-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+div.popup-text:hover {
+    -webkit-line-clamp: unset;
+}
