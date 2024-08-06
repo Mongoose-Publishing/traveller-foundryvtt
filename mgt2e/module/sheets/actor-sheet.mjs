@@ -7,6 +7,7 @@ import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {MgT2CrewMemberDialog } from "../helpers/crew-member-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
+import {skillLabel} from "../helpers/dice-rolls.mjs";
 import {MgT2Item} from "../documents/item.mjs";
 import {Tools} from "../helpers/chat/tools.mjs";
 import { MGT2 } from "../helpers/config.mjs";
@@ -1129,6 +1130,12 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (actor.type === "package" && (this.actor.type === "traveller" || this.actor.type === "npc")) {
             ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackage",
                 { package: actor.name, actor: this.actor.name }));
+
+            let html=`<div class="chat-package">`;
+            html += `<h3>${actor.name}</h3>`;
+            html += `<p>${this.actor.name}</p>`;
+
+            html += `<div class="stats grid grid-3col">`;
             for (let c in actor.system.characteristics) {
                 if (actor.system.settings.useCustomDice) {
                     // Rather than this being a bonus, it is a new dice roll.
@@ -1143,21 +1150,29 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                     let uppRoll = await new Roll(dice, null).evaluate();
                     this.actor.system.characteristics[c].value = uppRoll.total;
+                    html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${dice}<br/>${uppRoll.total}</span></div>`;
                 } else {
+                    if (!actor.system.characteristics[c].show) {
+                        continue;
+                    }
                     let bonus = parseInt(actor.system.characteristics[c].value);
-                    if (bonus !== 0) {
+                    if (!isNaN(bonus) && bonus !== 0) {
                         this.actor.system.characteristics[c].value += bonus;
                         if (this.actor.system.characteristics[c].value < 1) {
                             this.actor.system.characteristics[c].value = 1;
                         }
+                        html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${bonus}</span></div>`;
                     }
                 }
             }
+            html += `</div>`;
             await this.actor.update({ "system.characteristics": this.actor.system.characteristics});
 
+            let skillText = "";
             for (let s in actor.system.skills) {
                 let skill = actor.system.skills[s];
                 let target = this.actor.system.skills[s];
+                let text = null;
                 if (skill.trained) {
                     target.trained = true;
                     target.value = Math.min(4, parseInt(target.value) + parseInt(skill.value));
@@ -1173,10 +1188,25 @@ export class MgT2ActorSheet extends ActorSheet {
                                 if (spec.boon) {
                                     target.specialities[sp].boon = spec.boon;
                                 }
+                                if (spec.bonus !== 0) {
+                                    target.specialities[sp].bonus = spec.bonus;
+                                }
                             } else {
                                 target.specialities[sp] = spec;
                             }
+                            if (spec.trained || spec.value > 0) {
+                                text = `${skillLabel(skill)} (${skillLabel(spec)}) ${spec.value}`;
+                                if (spec.bonus && spec.bonus !== 0) {
+                                    text += ` [${spec.bonus}]`;
+                                }
+                                if (spec.boon) {
+                                    text += ` [${spec.boon}]`;
+                                }
+                            }
                         }
+                    }
+                    if (!text) {
+                        text = `${skillLabel(skill)} ${skill.value}`;
                     }
                 }
                 if (skill.bonus !== 0) {
@@ -1188,15 +1218,24 @@ export class MgT2ActorSheet extends ActorSheet {
                 if (skill.boon) {
                     target.boon = skill.boon;
                 }
+                if (text) {
+                    skillText += `<li>${text}</li>`;
+                }
+            }
+            if (skillText.length > 0) {
+                html += `<h4>Skills</h4>`;
+                html += `<ol class="skill-list">${skillText}</ol>`;
             }
             await this.actor.update({ "system.skills": this.actor.system.skills});
 
+            let benefitsText = "";
             if (actor.system.cash && parseInt(actor.system.cash) > 0) {
                 if (this.actor.system.finance) {
                     this.actor.system.finance.cash =
                         parseInt(this.actor.system.finance.cash) + parseInt(actor.system.cash);
                     await this.actor.update({"system.finance": this.actor.system.finance});
                 }
+                benefitsText += `<p>Cash: +Cr${actor.system.cash}</p>`;
             }
             if (this.actor.system.sophont) {
                 let isMale = false, isFemale = false;
@@ -1227,6 +1266,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         weight += str + parseInt(end/2) - parseInt(dex / 2);
                         this.actor.system.sophont.weight = weight +
                             Math.floor(Math.random() * 6) - Math.floor(Math.random() * 6);
+                        html += `<p>Weight: ${weight}kg</p>`;
                     }
                 }
                 if (actor.system.sophont.height) {
@@ -1237,12 +1277,14 @@ export class MgT2ActorSheet extends ActorSheet {
                         height += parseInt(str/2);
                         this.actor.system.sophont.height = height +
                             Math.floor(Math.random()*6) - Math.floor(Math.random()*6);
+                        html += `<p>Height: ${height}cm</p>`;
                     }
                 }
                 await this.actor.update({"system.sophont": this.actor.system.sophont});
             }
 
             // Now copy any items across
+            let term = null;
             for (let item of actor.items) {
                 const itemData = {
                     name: item.name,
@@ -1261,7 +1303,39 @@ export class MgT2ActorSheet extends ActorSheet {
                 ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackageItem",
                     { item: item.name, actor: this.actor.name }));
                 await Item.create(itemData, {parent: this.actor});
+
+                if (itemData.type !== "term") {
+                    if (itemData.type === "associate") {
+                        benefitsText += `<p>${item.system.associate.relationship}: ${item.name}</p>`;
+                    } else {
+                        benefitsText += `<p>${item.name}</p>`;
+                    }
+                } else {
+                    term = itemData;
+                }
             }
+            if (benefitsText.length > 0) {
+                html += `<h4>Benefits</h4>`;
+                html += benefitsText;
+            }
+
+            if (term) {
+                if (!this.actor.system.settings.autoAge && term.system.term.termLength > 0) {
+                    this.actor.update({"system.settings.autoAge": true});
+                }
+                html += `<h4>Careers</h4>`;
+                html += `<p>${term.name} - ${term.system.term.termLength} years</p>`;
+            }
+
+            html += `</dv>`;
+
+            let chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker(),
+                content: html
+            }
+            ChatMessage.create(chatData, {});
+
         }
     }
 

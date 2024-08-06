@@ -1785,3 +1785,62 @@ section.id-card .showIdCard {
     margin: -3px 0 -3px 0;
     background-color: #b03010;
 }
+
+div.chat-package {
+    background-color: #404040;
+    border-radius: 0 30px 0 0;
+    padding: 3px;
+}
+
+div.chat-package {
+    color: white;
+}
+
+div.chat-package h3 {
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: large;
+    color: #f1511b;
+    text-transform: uppercase;
+}
+
+div.chat-package h4 {
+    color: #f1511b;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+div.chat-package .stats {
+    width: 100%;
+}
+
+div.chat-package .stats .stat {
+    display: inline-block;
+    border: 1px solid black;
+    padding 2px;
+    margin: 1px;
+    text-align: center;
+}
+
+div.chat-package .stats .stat .stat-hdr {
+    background-color: #f1511b;
+    color: #404040;
+    font-weight: bold;
+    display:block;
+    width: 100%;
+}
+
+div.chat-package .stats .stat .stat-val {
+    color: white;
+    width: 100%;
+    display: block;
+    font-weight: bold;
+}
+
+div.chat-package ol.skill-list {
+}
+
+div.chat-package img {
+    width: 16px;
+    height: 16px;
+}
