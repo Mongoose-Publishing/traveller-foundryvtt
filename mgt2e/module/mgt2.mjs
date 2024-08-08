@@ -317,7 +317,6 @@ Hooks.on("createActor", (actor) => {
             if (actor.system.characteristics[c]) {
                 continue;
             }
-            console.log(c);
             actor.system.characteristics[c] = JSON.parse(
                 JSON.stringify(MGT2.CHARACTERISTICS[c])
             );
@@ -336,7 +335,6 @@ Hooks.on("createActor", (actor) => {
             if (actor.system.skills[s]) {
                 continue;
             }
-            console.log(s);
             actor.system.skills[s] = JSON.parse(
                 JSON.stringify(MGT2.SKILLS[s])
             )

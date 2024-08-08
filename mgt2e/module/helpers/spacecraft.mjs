@@ -7,15 +7,15 @@ export function getArmourMultiplier(ship) {
         return 0;
     }
 
-    var dtons = ship.system.spacecraft.dtons;
-    var configuration = ship.system.spacecraft.configuration;
+    let dtons = ship.system.spacecraft.dtons;
+    let configuration = ship.system.spacecraft.configuration;
 
-    var shapeMultiplier = MGT2.SHIP_CONFIGURATION.get(configuration);
-    if (shapeMultiplier === null) {
-        shapeMultiplier = 1.0;
+    let shapeMultiplier = 1.0;
+    if (MGT2.SHIP_CONFIGURATION[configuration]) {
+        shapeMultiplier = MGT2.SHIP_CONFIGURATION[configuration].armour;
     }
-    console.log("    shape: " + shapeMultiplier);
-    var sizeMultiplier = 1.0;
+
+    let sizeMultiplier = 1.0;
     if (dtons < 16) {
         sizeMultiplier = 4.0;
     } else if (dtons < 26) {
@@ -23,7 +23,6 @@ export function getArmourMultiplier(ship) {
     } else if (dtons < 100) {
         sizeMultiplier = 2.0;
     }
-    console.log("    size: " + sizeMultiplier);
 
     return shapeMultiplier * sizeMultiplier;
 }

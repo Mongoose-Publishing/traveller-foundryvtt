@@ -159,12 +159,36 @@ export class MgT2ActorSheet extends ActorSheet {
             console.log(actorData.size);
             if (CONFIG.MGT2.CREATURES.sizes[actorData.size]) {
                 context.suggestedHits = game.i18n.format("MGT2.TravellerSheet.SizeRecommendedHits",
-                    {   "min": CONFIG.MGT2.CREATURES.sizes[actorData.size].minHits,
+                    {
+                        "min": CONFIG.MGT2.CREATURES.sizes[actorData.size].minHits,
                         "max": CONFIG.MGT2.CREATURES.sizes[actorData.size].maxHits
                     });
             } else {
                 context.suggestedHits = "";
             }
+        } else if (type === "spacecraft") {
+            context.selectShipTL = { };
+            for (let tl=7 ; tl <= 17; tl++) {
+                context.selectShipTL[`${tl}`] = `${tl} - ${game.i18n.localize("MGT2.Item.Tech."+tl)}`;
+            }
+            context.selectShipConfig = { };
+            for (let c in CONFIG.MGT2.SHIP_CONFIGURATION) {
+                context.selectShipConfig[c] = game.i18n.localize("MGT2.Spacecraft.Configuration." + c);
+            }
+        } else if (type === "traveller" || type === "npc" || type === "package") {
+            context.selectSize = {
+                "-4": "Small -4",
+                "-3": "Small -3",
+                "-2": "Small -2",
+                "-1": "Small -1",
+                "0": "0",
+                "1": "Large +1",
+                "2": "Large +2",
+                "3": "Large +3",
+                "4": "Large +4",
+                "5": "Large +5",
+                "6": "Large +6"
+            };
         }
 
         return context;
@@ -1148,6 +1172,15 @@ export class MgT2ActorSheet extends ActorSheet {
             if (actor.system.speed.base !== this.actor.system.speed.base) {
                 html += `<p><b>Speed:</b> ${actor.system.speed.base}</p>`;
             }
+            if (!isNaN(actor.system.speed.base) && parseInt(actor.system.speed.base) > 0) {
+                this.actor.system.speed.base = actor.system.speed.base;
+                this.actor.system.speed.value = actor.system.speed.base;
+                await this.actor.update({"system.speed": this.actor.system.speed });
+            }
+            if (!isNaN(actor.system.size)) {
+                this.actor.system.size = parseInt(actor.system.size);
+                await this.actor.update({"system.size": this.actor.system.size });
+            }
 
             html += `<div class="stats grid grid-3col">`;
             for (let c in actor.system.characteristics) {
@@ -1188,7 +1221,12 @@ export class MgT2ActorSheet extends ActorSheet {
                 let skill = actor.system.skills[s];
                 let target = this.actor.system.skills[s];
                 let text = null;
-                if (skill.trained) {
+                if (skill && !target) {
+                    target = this.actor.system.skills[s] = JSON.parse(
+                        JSON.stringify(skill)
+                    )
+                    text = `+<b>${skillLabel(skill)}</b>`;
+                } else if (skill.trained) {
                     target.trained = true;
                     target.value = Math.min(4, parseInt(target.value) + parseInt(skill.value));
                     if (skill.specialities) {

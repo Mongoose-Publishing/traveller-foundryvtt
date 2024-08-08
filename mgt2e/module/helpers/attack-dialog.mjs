@@ -1,4 +1,4 @@
-import {rollAttack, hasTrait, getTraitValue} from "../helpers/dice-rolls.mjs";
+import {rollAttack, hasTrait, getTraitValue, skillLabel} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
 
 export class MgT2AttackDialog extends Application {
@@ -85,8 +85,8 @@ export class MgT2AttackDialog extends Application {
             "dm": 0,
             "score": this.score,
             "cha": this.cha,
-            "skill": this.data.skills[this.skill].label,
-            "speciality": this.data.skills[this.skill].specialities[this.speciality].label,
+            "skill": skillLabel(this.data.skills[this.skill]),
+            "speciality": (this.skill && this.skill.specialities)?skillLabel(this.data.skills[this.skill].specialities[this.speciality]):"",
             "dicetype": "normal",
             "parryBonus": this.parryBonus,
             "parryScore": this.parryScore,

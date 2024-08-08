@@ -28,8 +28,8 @@ export function getSkillValue(actor, skill, speciality) {
             speciality = skill.split(".")[1];
             skill = skill.split(".")[0];
         }
-        let value = data.skills["jackofalltrades"].value - 3;
-        if (data.skills[skill].trained) {
+        let value = parseInt(data.skills["jackofalltrades"].value) - 3;
+        if (data.skills[skill] && data.skills[skill].trained) {
             value = skill.value;
             if (speciality) {
                 value = data.skills[skill].specialities[speciality].value;

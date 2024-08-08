@@ -332,6 +332,14 @@
   "MGT2.Creature.TraitChoice.flyer.supersonic": "Supersonic",
   "MGT2.Creature.TraitChoice.flyer.hypersonic": "Hypersonic",
 
+  "MGT2.Spacecraft.Configuration.standard": "Standard",
+  "MGT2.Spacecraft.Configuration.streamlined": "Streamlined",
+  "MGT2.Spacecraft.Configuration.sphere": "Sphere",
+  "MGT2.Spacecraft.Configuration.close": "Close Structure",
+  "MGT2.Spacecraft.Configuration.dispersed": "Dispersed Structure",
+  "MGT2.Spacecraft.Configuration.planetoid": "Planetoid",
+  "MGT2.Spacecraft.Configuration.buffered": "Buffered Planetoid",
+
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",
   "MGT2.Damage.Unconscious": "{name} is unconscious.",

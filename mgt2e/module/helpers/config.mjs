@@ -13,15 +13,17 @@ MGT2.HARDWARE_GENERAL = "general";
 MGT2.HARDWARE_ARMOUR = "armour";
 MGT2.HARDWARE_JUMP = "jump";
 
-MGT2.SHIP_CONFIGURATION = new Map([
-    [ "standard", 1.0 ],
-    [ "streamlined", 1.2 ],
-    [ "sphere", 0.9 ],
-    [ "dispersed", 2.0 ]
-]);
+MGT2.SHIP_CONFIGURATION = {
+  "standard":    { "armour": 1.0, "cost": 1.0, "hull": 1.0, "volume": 1.0, "streamlined": "partial" },
+  "streamlined": { "armour": 1.2, "cost": 1.2, "hull": 1.0, "volume": 1.0, "streamlined": "yes" },
+  "dispersed":   { "armour": 2.0, "cost": 0.5, "hull": 0.9, "volume": 1.0, "streamlined": "no" },
+  "sphere": { "armour": 0.9, "cost": 1.1, "hull": 1.0, "volume": 1.0, "streamlined": "partial" },
+  "close": { "armour": 1.5, "cost": 0.8, "hull": 1.0, "volume": 1.0, "streamlined": "partial" },
+  "planetoid": { "armour": 1.0, "cost": 0.08, "hull": 1.25, "volume": 0.8, "streamlined": "no" },
+  "buffered": { "armour": 1.0, "cost": 0.08, "hull": 1.5, "volume": 0.65, "streamlined": "no" }
+};
 
 MGT2.getStatus = function(actor) {
-
   const data = actor.data.data;
   console.log(data);
 
