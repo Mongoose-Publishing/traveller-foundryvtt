@@ -6,25 +6,33 @@
 
     <div class="grid grid-8col">
         <div class="grid-span-1">
-            <label class="resource-label">Term</label><br/>
+            <label class="resource-label">{{localize "MGT2.Item.Term.Number"}}</label><br/>
             <input name="system.term.number" type="number" value="{{item.system.term.number}}" placeholder="Num"/>
         </div>
 
-        <div class="grid-span-1">
-            <label class="resource-label">Length</label><br/>
-            <input name="system.term.termLength" type="number" value="{{item.system.term.termLength}}" placeholder="Years"/>
-        </div>
+        {{#if system.term.randomTerm}}
+            <div class="grid-span-1">
+                <label class="resource-label">{{localize "MGT2.Item.Term.RandomLength"}}</label><br/>
+                <input name="system.term.randomLength" type="text" value="{{item.system.term.randomLength}}" placeholder="3D6"/>
+            </div>
+        {{else}}
+            <div class="grid-span-1">
+                <label class="resource-label">{{localize "MGT2.Item.Term.Length"}}</label><br/>
+                <input name="system.term.termLength" type="number" value="{{item.system.term.termLength}}" placeholder="4"/>
+            </div>
+        {{/if}}
 
         <div class="grid-span-6">
-            <label class="resource-label">Assignment</label><br/>
-            <input name="system.term.assignment" type="text" value="{{system.term.assignment}}" placeholder="Assignment"/>
+            <label class="resource-label">{{localize "MGT2.Item.Term.Assignment"}}</label><br/>
+            <input name="system.term.assignment" type="text" value="{{system.term.assignment}}" placeholder="{{localize "MGT2.Item.Term.Assignment"}}"/>
         </div>
 
         <div class="grid-span-8">
             <input class="trained" type="checkbox" name="system.term.randomTerm"
                    {{checked system.term.randomTerm}} data-type="Boolean"/>
-            <label for="system.term.randomTerm">Random term length</label>
+            <label for="system.term.randomTerm">{{localize "MGT2.Item.Term.RandomTerm"}}</label>
         </div>
+
     </div>
 
     <section class="shadow history-description">
