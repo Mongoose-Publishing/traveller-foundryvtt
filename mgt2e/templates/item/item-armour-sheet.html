@@ -128,16 +128,26 @@
                              value="{{system.armour.rad}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
-                        <label class="resource-label">{{localize "MGT2.Armour.Energy"}}</label><br/>
+                        <label class="resource-label">{{localize "MGT2.Armour.Energy"}}</label>
+                        <br/>
                         <input class="writable armour-value" type="text" name="system.armour.otherProtection" title="Energy protection"
                                value="{{system.armour.otherProtection}}" data-dtype="String"/><br/>
                     </div>
 
                     <div class="resource grid-span-2">
                         <label class="resource-label">{{localize "MGT2.Armour.EnergyTypes"}}</label>
-                        <input type="text" name="system.armour.otherTypes" title="Energy types"
-                               class="writable"
-                               value="{{system.armour.otherTypes}}" data-dtype="String"/>
+                        {{#if (isOwner .)}}
+                        <span style="display: inline-block; float: right">
+                            <i class="fa fa-add"></i><select class="energy-selector">
+                            {{selectOptions energyTypes }}
+                        </select>
+                        </span>
+                        {{/if}}
+                        <div class="energy-field">
+                            {{#each haveEnergy as |en id|}}
+                                <div class="energy-item" data-energy-id="{{id}}">{{en}}&nbsp;<i class="fas fa-xmark energy-remove"> </i></div>
+                            {{/each}}
+                        </div>
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Armour.RequiresSkill"}}</label>

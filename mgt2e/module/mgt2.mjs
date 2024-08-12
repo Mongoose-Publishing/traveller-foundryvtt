@@ -371,8 +371,9 @@ Hooks.on("createActor", (actor) => {
 });
 
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
-    console.log("**** preUpdateActor:");
+    console.log("**** Hooks.preUpdateActor:");
     console.log(actor);
+    console.log(data);
     if (data?.system?.damage) {
         // This is a Traveller with full damage by stat
         const damage = data.system.damage;
@@ -382,6 +383,8 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
         let endMax = actor.system.characteristics.END.value;
         let strMax = actor.system.characteristics.STR.value;
         let dexMax = actor.system.characteristics.DEX.value;
+
+        console.log(`Damage is STR ${strDmg} DEX ${dexDmg} END ${endDmg}`);
 
         let atZero = 0;
         if (endDmg >= endMax) atZero++;
@@ -1479,6 +1482,54 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
                     html += `(${game.i18n.localize("MGT2.Creature.TraitChoice."+trait+"."+data.choices[value])}) `;
                 } else if (value) {
                     html += `(${(value > 0 && !data.value) ? "+" + value : value}) `;
+                }
+                if (key.owner) {
+                    html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i>`;
+                } else {
+                    html += "&nbsp;";
+                }
+                html += "</span>";
+            } else {
+                console.log(`WARN: Trait [${trait}] is invalid in [${traits}]`);
+            }
+        }
+    }
+
+    return html;
+});
+
+
+Handlebars.registerHelper('showWeaponTraits', function(key, traits) {
+    // 'traits' are comma separated list of weapon traits. Some may have associated values.
+
+    console.log("showWeaponTraits: [" + traits + "]");
+    let html = "";
+    let list = traits.split(",");
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let trait = list[i].trim().toLowerCase();
+            let value = null;
+            if (trait.indexOf(" ") > -1) {
+                value = trait.split(" ")[1].trim();
+                trait = trait.split(" ")[0].trim();
+            }
+            let data = CONFIG.MGT2.WEAPONS.traits[trait];
+            if (data) {
+                html += `<span class='trait-item' data-trait-id='${trait}'>`;
+                if (key.owner) {
+                    if (data.value) {
+                        value = parseInt(value);
+                        if (value > parseInt(data.min)) {
+                            html += `<i class="fas fa-minus trait-minus"> </i>`;
+                        }
+                        if (value < parseInt(data.max)) {
+                            html += `<i class="fas fa-plus trait-plus"> </i>`;
+                        }
+                    }
+                }
+                html += `&nbsp;${game.i18n.localize("MGT2.Item.WeaponTrait.Label." + trait)} `;
+                if (value) {
+                    html += `${value} `;
                 }
                 if (key.owner) {
                     html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i>`;

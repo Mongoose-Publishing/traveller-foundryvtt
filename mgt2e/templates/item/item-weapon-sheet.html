@@ -96,6 +96,16 @@
 
                     <div class="resource grid-span-3 flex-group-left">
                         <label for="system.weapon.traits" class="resource-label">Traits</label>
+                        {{#if (isOwner .)}}
+                            <span style="display: inline-block; float: right">
+                                <i class="fa fa-add"></i><select class="trait-selector">
+                                {{selectOptions weaponTraits }}
+                            </select>
+                            </span>
+                        {{/if}}
+                        <div class="energy-field">
+                            {{{showWeaponTraits . system.weapon.traits}}}
+                        </div>
                         <input class="writable" type="text" name="system.weapon.traits" placeholder="List of weapon traits"
                                value="{{system.weapon.traits}}" data-dtype="String"/>
                     </div>

@@ -1,5 +1,5 @@
 import {onManageActiveEffect} from "../helpers/effects.mjs";
-import {rollAttack} from "../helpers/dice-rolls.mjs";
+import {rollAttack, hasTrait, getTraitValue} from "../helpers/dice-rolls.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 
@@ -60,7 +60,6 @@ export class MgT2ItemSheet extends ItemSheet {
             context.system.quantity = 1;
         }
 
-        console.log(game.system);
         context.characteristics = MGT2.CHARACTERISTICS;
 
         // If this belongs to an actor, the actor might have custom skills, so
@@ -73,6 +72,27 @@ export class MgT2ItemSheet extends ItemSheet {
 
         if (context.item.type === "hardware" && context.item.parent != null) {
             this.calculateShipHardware(context, context.item)
+        } else if (context.item.type === "armour") {
+            context.energyTypes = {};
+            context.energyTypes[""] = "";
+            context.haveEnergy = {};
+            for (let e of CONFIG.MGT2.WEAPONS.energyTypes) {
+                if (context.item.system.armour.otherTypes.toLowerCase().indexOf(e) === -1) {
+                    context.energyTypes[e] = game.i18n.localize("MGT2.Item.EnergyType." + e);
+                } else {
+                    context.haveEnergy[e] = game.i18n.localize("MGT2.Item.EnergyType." + e);
+                }
+            }
+            console.log(context.energyTypes);
+        } else if (context.item.type === "weapon") {
+            context.weaponTraits = {};
+            context.weaponTraits[""] = "";
+            let traits = context.item.system.weapon.traits;
+            for (let trait in CONFIG.MGT2.WEAPONS.traits) {
+                if (!hasTrait(traits, trait)) {
+                    context.weaponTraits[trait] = game.i18n.localize("MGT2.Item.WeaponTrait.Label."+trait);
+                }
+            }
         }
 
         return context;
@@ -253,6 +273,66 @@ export class MgT2ItemSheet extends ItemSheet {
                 }
             }
         });
+
+        html.find(".energy-remove").click(ev => {
+            const e = $(ev.currentTarget).parents(".energy-item");
+            const id = e.data("energyId");
+            console.log(id);
+            console.log(`[${this.item.system.armour.otherTypes}]`);
+
+            let otherTypes = this.item.system.armour.otherTypes.toLowerCase();
+            otherTypes = otherTypes.replace(id, "");
+            otherTypes = otherTypes.replace("  ", "").trim();
+
+            this.item.update({"system.armour.otherTypes": otherTypes});
+        });
+
+        html.find(".energy-selector").click(ev => {
+            const value = $(ev.currentTarget).val();
+            let otherTypes = this.item.system.armour.otherTypes.toLowerCase();
+            otherTypes += " " + value;
+
+            this.item.update({"system.armour.otherTypes": otherTypes.trim()});
+
+        });
+
+        html.find(".trait-selector").click(ev => {
+            const value = $(ev.currentTarget).val();
+            this._selectWeaponTrait(value);
+        });
+
+        html.find(".trait-remove").click(ev => {
+            const e = $(ev.currentTarget).parents(".trait-item");
+            this._removeWeaponTrait(e.data("traitId"));
+        });
+    }
+
+    async _selectWeaponTrait(selectedTrait) {
+        const traitData = MGT2.WEAPONS.traits[selectedTrait];
+        if (traitData) {
+            let traitText = selectedTrait;
+
+            if (traitData.value) {
+                traitText += ` ${traitData.value}`;
+            }
+            if (this.item.system.weapon.traits && this.item.system.weapon.traits.length > 0) {
+                this.item.system.weapon.traits += ", " + traitText;
+            } else {
+                this.item.system.weapon.traits = traitText;
+            }
+        }
+        await this.item.update({'system.weapon.traits': this.item.system.weapon.traits });
+    }
+
+    async _removeWeaponTrait(trait) {
+        const traitData = MGT2.WEAPONS.traits[trait];
+        if (traitData) {
+            let reg = new RegExp(`${trait}[^,$]*,?`, "g");
+            let traits = this.item.system.weapon.traits.toLowerCase().replace(reg, "").replace(/[ ,]*$/g, "");
+            await this.item.update({
+                'system.weapon.traits': traits
+            });
+        }
     }
 
     _rollDamage(item) {
