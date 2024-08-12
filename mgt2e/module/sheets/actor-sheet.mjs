@@ -131,6 +131,12 @@ export class MgT2ActorSheet extends ActorSheet {
             };
         }
 
+        context.selectColumns = {
+            "3": "3 columns",
+            "4": "4 columns",
+            "6": "6 columns"
+        }
+
         if (type === "creature") {
             context.behaviours = {};
             context.behaviours[""] = "";
@@ -145,7 +151,6 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                 }
             }
-
             context.traits = {};
             context.traits[""] = "";
             for (let t in CONFIG.MGT2.CREATURES.traits) {
@@ -156,7 +161,6 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                 }
             }
-            console.log(actorData.size);
             if (CONFIG.MGT2.CREATURES.sizes[actorData.size]) {
                 context.suggestedHits = game.i18n.format("MGT2.TravellerSheet.SizeRecommendedHits",
                     {
@@ -1163,7 +1167,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 html += `<div class="popup-text">${actor.system.description}</div>`;
             }
 
-            if (actor.system.sophont.profession && actor.system.sophont.professsion.length > 0) {
+            if (actor.system.sophont.profession && actor.system.sophont.profession.length > 0) {
                 html += `<p><b>Profession:</b> ${actor.system.sophont.profession}</p>`;
             }
             if (actor.system.size !== this.actor.system.size) {

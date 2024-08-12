@@ -360,6 +360,10 @@ MGT2.COMPUTERS = {
   }
 };
 
+MGT2.WEAPONS = {
+    "energyTypes": [ "laser", "plasma", "fire", "energy" ]
+}
+
 MGT2.CREATURES = {
   "behaviours": {
     "herbivore": { "skills": [], "group": "diet" },

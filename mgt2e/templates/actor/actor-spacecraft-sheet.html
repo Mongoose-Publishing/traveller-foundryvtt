@@ -322,15 +322,7 @@
                             <div class="resource flex-group-center">
                                 <label class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
                                 <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.tl">
-                                    {{#select system.spacecraft.computer.tl}}
-                                    <option value="7">7</option>
-                                    <option value="9">9</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    {{/select}}
+                                    {{selectOptions selectShipTL selected=system.spacecraft.computer.tl}}
                                 </select>
                             </div>
 

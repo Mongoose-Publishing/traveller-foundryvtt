@@ -85,8 +85,10 @@
                 </div>
                 <div class="resource flex-group-center">
                     <label for="system.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
+                    <input class="field-value writable" type="text" name="system.size" value="{{system.size}}" data-dtype="Number"/>
+                    <!--
                     <select class="expand writable" style="text-align: center" name="system.size">
-                        {{#select system.size}}
+                        {#select system.size}}
                         <option value="-4">-4</option>
                         <option value="-3">-3</option>
                         <option value="-2">-2</option>
@@ -98,8 +100,9 @@
                         <option value="4">+4</option>
                         <option value="5">+5</option>
                         <option value="6">+6</option>
-                        {{/select}}
+                        {/select}}
                     </select>
+                    -->
                 </div>
                 <div class="resource flex-group-center">
                     <label for="system.rads" class="field-label">{{localize 'MGT2.TravellerSheet.Rads'}}</label>

@@ -13,11 +13,7 @@
         <div>
             <label for="system.settings.columns" class="resource-label">Characteristics</label><br/>
             <select name="system.settings.columns">
-                {{#select system.settings.columns}}
-                <option value="3">3 columns</option>
-                <option value="4">4 columns</option>
-                <option value="6">6 columns</option>
-                {{/select}}
+                {{selectOptions selectColumns selected=system.settings.columns}}
             </select>
         </div>
         <div class="resource flex-group-left">

@@ -335,7 +335,7 @@ Tools.applyDamage = function(damage, ap, tl, options, traits) {
     }
 
     for (let token of tokens) {
-        if (!token.owner) {
+        if (!token.isOwner) {
             // Don't have permission to update token.
             continue;
         }

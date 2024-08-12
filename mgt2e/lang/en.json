@@ -409,6 +409,18 @@
   "MGT2.Item.Tech.16": "High",
   "MGT2.Item.Tech.17": "High",
 
+  "MGT2.Item.Term.Number": "Term",
+  "MGT2.Item.Term.Length": "Years",
+  "MGT2.Item.Term.RandomLength": "Roll",
+  "MGT2.Item.Term.Assignment": "Assignment",
+  "MGT2.Item.Term.RandomTerm": "Random term length",
+
+  "MGT2.Item.EnergyType.standard": "Standard",
+  "MGT2.Item.EnergyType.laser": "Laser",
+  "MGT2.Item.EnergyType.plasma": "Plasma",
+  "MGT2.Item.EnergyType.fire": "Fire",
+  "MGT2.Item.EnergyType.energy": "Energy",
+
   "MGT2.Item.RangeM": "Range (m)",
   "MGT2.Item.RangeKM": "Range (km)",
   "MGT2.Item.RangeSpace": "Range",
