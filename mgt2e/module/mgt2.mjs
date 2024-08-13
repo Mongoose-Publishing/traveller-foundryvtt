@@ -1507,7 +1507,7 @@ Handlebars.registerHelper('showWeaponTraits', function(key, traits) {
     let list = traits.split(",");
     for (let i in list) {
         if (list[i].length > 0) {
-            let trait = list[i].trim().toLowerCase();
+            let trait = list[i].trim();
             let value = null;
             if (trait.indexOf(" ") > -1) {
                 value = trait.split(" ")[1].trim();
@@ -1515,7 +1515,7 @@ Handlebars.registerHelper('showWeaponTraits', function(key, traits) {
             }
             let data = CONFIG.MGT2.WEAPONS.traits[trait];
             if (data) {
-                html += `<span class='trait-item' data-trait-id='${trait}'>`;
+                html += `<span class='pill weapon-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Item.WeaponTrait.Text."+trait)}'>`;
                 if (key.owner) {
                     if (data.value) {
                         value = parseInt(value);

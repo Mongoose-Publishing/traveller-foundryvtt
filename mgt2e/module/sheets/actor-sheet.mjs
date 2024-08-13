@@ -1354,8 +1354,13 @@ export class MgT2ActorSheet extends ActorSheet {
                     continue;
                 }
                 if (itemData.type === "term" && itemData.system.term.randomTerm) {
-                    let r = await new Roll("3D6", null).evaluate();
+                    let dice = "3D6";
+                    if (itemData.system.term.randomLength) {
+                        dice = itemData.system.term.randomLength;
+                    }
+                    let r = await new Roll(dice, null).evaluate();
                     itemData.system.term.termLength = r.total;
+                    itemData.system.term.randomTerm = false;
                 }
                 ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackageItem",
                     { item: item.name, actor: this.actor.name }));

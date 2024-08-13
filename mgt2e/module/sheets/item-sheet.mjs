@@ -275,7 +275,7 @@ export class MgT2ItemSheet extends ItemSheet {
         });
 
         html.find(".energy-remove").click(ev => {
-            const e = $(ev.currentTarget).parents(".energy-item");
+            const e = $(ev.currentTarget).parents(".energy-pill");
             const id = e.data("energyId");
             console.log(id);
             console.log(`[${this.item.system.armour.otherTypes}]`);
@@ -302,9 +302,18 @@ export class MgT2ItemSheet extends ItemSheet {
         });
 
         html.find(".trait-remove").click(ev => {
-            const e = $(ev.currentTarget).parents(".trait-item");
+            const e = $(ev.currentTarget).parents(".weapon-pill");
             this._removeWeaponTrait(e.data("traitId"));
         });
+
+        html.find(".trait-minus").click(ev => {
+            const value = $(ev.currentTarget).parents(".weapon-pill");
+            this._modifyWeaponTrait(value.data("traitId"), ev.shiftKey?-5:-1);
+        })
+        html.find(".trait-plus").click(ev => {
+            const value = $(ev.currentTarget).parents(".weapon-pill");
+            this._modifyWeaponTrait(value.data("traitId"), ev.shiftKey?5:1);
+        })
     }
 
     async _selectWeaponTrait(selectedTrait) {
@@ -327,12 +336,38 @@ export class MgT2ItemSheet extends ItemSheet {
     async _removeWeaponTrait(trait) {
         const traitData = MGT2.WEAPONS.traits[trait];
         if (traitData) {
-            let reg = new RegExp(`${trait}[^,$]*,?`, "g");
+            let reg = new RegExp(`(^|[, ])${trait}[^,]*($|[, ])`, "g");
             let traits = this.item.system.weapon.traits.toLowerCase().replace(reg, "").replace(/[ ,]*$/g, "");
             await this.item.update({
                 'system.weapon.traits': traits
             });
         }
+    }
+
+    async _modifyWeaponTrait(trait, modifier) {
+        console.log(`_modifyWeaponTrait: [${trait}] [${modifier}]`);
+        const traitData = MGT2.WEAPONS.traits[trait];
+        if (traitData) {
+            const text = this.item.getWeaponTrait(trait);
+            console.log(text);
+            if (traitData.value) {
+                let value = parseInt(text.replace(/[^-0-9]/g, ""));
+                value += parseInt(modifier);
+                if (value < traitData.min) {
+                    // Too low, don't change.
+                    value = traitData.min;
+                } else if (value > traitData.max) {
+                    // Too high, don't change.
+                    value = traitData.max;
+                }
+                // We can change.
+                const updated = trait + " " + value;
+                let traits = this.item.system.weapon.traits;
+                let reg = new RegExp(`${trait}[^,$]*`, "g");
+                await this.item.update({'system.weapon.traits': traits.replace(reg, updated)});
+            }
+        }
+
     }
 
     _rollDamage(item) {

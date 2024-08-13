@@ -137,15 +137,15 @@
                     <div class="resource grid-span-2">
                         <label class="resource-label">{{localize "MGT2.Armour.EnergyTypes"}}</label>
                         {{#if (isOwner .)}}
-                        <span style="display: inline-block; float: right">
-                            <i class="fa fa-add"></i><select class="energy-selector">
-                            {{selectOptions energyTypes }}
-                        </select>
-                        </span>
+                            <span style="display: inline-block; float: right">
+                                <i class="fa fa-add"></i><select class="energy-selector">
+                                {{selectOptions energyTypes }}
+                            </select>
+                            </span>
                         {{/if}}
-                        <div class="energy-field">
+                        <div class="pill-container">
                             {{#each haveEnergy as |en id|}}
-                                <div class="energy-item" data-energy-id="{{id}}">{{en}}&nbsp;<i class="fas fa-xmark energy-remove"> </i></div>
+                                <div class="pill energy-pill" data-energy-id="{{id}}">{{en}}&nbsp;<i class="fas fa-xmark energy-remove"> </i></div>
                             {{/each}}
                         </div>
                     </div>

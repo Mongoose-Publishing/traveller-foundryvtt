@@ -41,7 +41,8 @@ export function getSkillValue(actor, skill, speciality) {
 }
 export function hasTrait(traits, trait) {
     if (traits) {
-        return traits.toLowerCase().indexOf(trait.toLowerCase()) > -1;
+        const regex = new RegExp(`(^|[, ])${trait}[^,]*($|[, ])`, 'gi');
+        return traits.match(regex) != null;
     } else {
         return false;
     }

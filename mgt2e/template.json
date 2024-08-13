@@ -253,7 +253,8 @@
               "number": 0,
               "termLength": 4,
               "assignment": "",
-              "randomTerm": false
+              "randomTerm": false,
+              "randomLength": ""
           }
       },
       "associate": {

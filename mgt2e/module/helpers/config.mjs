@@ -363,19 +363,19 @@ MGT2.COMPUTERS = {
 MGT2.WEAPONS = {
     "energyTypes": [ "laser", "plasma", "fire", "energy" ],
     "traits": {
-        "ap": { "value": 1, "min": 1, "max": 99, "conflict": "lopen" },
-        "auto": { "value": 2, "min": 1, "max": 99 },
+        "ap": { "value": 1, "min": 1, "max": 99, "conflict": "loPen" },
+        "auto": { "value": 2, "min": 2, "max": 99 },
         "blast": { "value": 1, "min": 1, "max": 100 },
-        "bulky": { "conflict": "verybulky" },
+        "bulky": { "conflict": "veryBulky" },
         "destructive": { },
-        "lasersight": { },
-        "lopen": { "value": 2, "min": 2, "max": 99, "conflict": "ap" },
+        "laserSight": { },
+        "loPen": { "value": 2, "min": 2, "max": 99, "conflict": "ap" },
         "radiation": { },
         "scope": { },
         "smart": { },
         "stun": { },
-        "verybulky": { "conflict": "bulky" },
-        "zerog": { }
+        "veryBulky": { "conflict": "bulky" },
+        "zeroG": { }
     }
 }
 
