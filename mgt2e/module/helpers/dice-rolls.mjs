@@ -5,16 +5,17 @@
  * @param skill     Skill to get label for.
  * @returns {string|*}
  */
-export function skillLabel(skill) {
+export function skillLabel(skill, skillId) {
     if (!skill) {
         return "";
     }
     if (skill.label && skill.label.length > 0) {
         return skill.label;
     } else {
-        let label = game.i18n.localize("MGT2.Skills." + skill.id);
+        if (!skillId) skillId = skill.id;
+        let label = game.i18n.localize("MGT2.Skills." + skillId);
         if (label.indexOf("MGT2.Skills.") === 0) {
-            label = skill.id;
+            label = skillId;
         }
         return label;
     }

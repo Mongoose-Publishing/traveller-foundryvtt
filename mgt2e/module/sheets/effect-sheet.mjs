@@ -1,4 +1,6 @@
 import {MGT2} from "../helpers/config.mjs";
+import { skillLabel } from "../helpers/dice-rolls.mjs";
+
 import {MgT2Effect} from "../documents/effect.mjs";
 
 export class MgT2EffectSheet extends ActiveEffectConfig {
@@ -38,10 +40,6 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
     async getData(options) {
         // Retrieve base data structure.
         const context = await super.getData(options);
-
-        console.log(context);
-
-
         context.effectTypes = MGT2.EFFECTS;
         context.effectType = MGT2.EFFECTS[context.data.flags.augmentType];
 
@@ -54,13 +52,13 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
             }
         } else if (context.effectType.targets === "skills") {
             context.targets = {};
-            let skills = game.system.template.Actor.templates.skills.skills;
+            let skills = MGT2.SKILLS;
             for (let id in skills) {
                 let baseKey = "system.skills."+id
-                context.targets[baseKey + "." + prop] = { "label": skills[id].label };
+                context.targets[baseKey + "." + prop] = { "label": skillLabel(skills[id], id) };
                 if (skills[id].specialities) {
                     for (let sid in skills[id].specialities) {
-                        context.targets[baseKey + ".specialities." + sid + "." + prop] = { "label": skills[id].label + " (" + skills[id].specialities[sid].label + ")"};
+                        context.targets[baseKey + ".specialities." + sid + "." + prop] = { "label": skillLabel(skills[id], id) + " (" + skillLabel(skills[id].specialities[sid], sid) + ")"};
                     }
                 }
             }

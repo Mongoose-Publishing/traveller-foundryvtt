@@ -365,7 +365,7 @@ MGT2.WEAPONS = {
     "traits": {
         "ap": { "value": 1, "min": 1, "max": 99, "conflict": "loPen" },
         "auto": { "value": 2, "min": 2, "max": 99 },
-        "blast": { "value": 1, "min": 1, "max": 100 },
+        "blast": { "value": 1, "min": 1, "max": 10000 },
         "bulky": { "conflict": "veryBulky" },
         "destructive": { },
         "laserSight": { },

@@ -1,4 +1,5 @@
 import { MGT2 } from "./helpers/config.mjs";
+import {getTraitValue} from "./helpers/dice-rolls.mjs";
 
 function migrateActorData(actor, fromVersion) {
     console.log(`MIGRATE ACTOR DATA ${fromVersion}`);
@@ -65,6 +66,13 @@ function migrateActorData(actor, fromVersion) {
     return {};
 }
 
+function addWeaponTrait(traits, trait) {
+    if (traits && traits.length > 0) {
+        return traits + ", " + trait;
+    }
+    return trait;
+}
+
 function migrateItemData(item, fromVersion) {
     console.log(`MIGRATE ITEM DATA ${fromVersion}`);
     if (fromVersion < 4) {
@@ -73,11 +81,56 @@ function migrateItemData(item, fromVersion) {
             return item.system;
         }
     }
+    if (fromVersion < 7) {
+        if (item.system.armour && item.system.armour.otherTypes) {
+            item.system.armour.otherTypes = item.system.armour.otherTypes.toLowerCase();
+            return item.system;
+        }
+        if (item.system.weapon && item.system.weapon.traits) {
+            let traits = item.system.weapon.traits.toLowerCase();
+            let updated = "";
+
+            if (traits.match("verybulky") || traits.match("very bulky")) {
+                updated = addWeaponTrait(updated, "veryBulky");
+            } else if (traits.match("bulky")) {
+                updated = addWeaponTrait(updated, "bulky");
+            }
+            if (traits.match("zerog") || traits.match("zero-g")) {
+                updated = addWeaponTrait(updated, "zeroG");
+            }
+            for (let t of [ "stun", "scope", "destructive", "laserSight", "smart", "radiation"]) {
+              if (traits.match(t.toLowerCase())) {
+                  updated = addWeaponTrait(updated, t);
+              }
+            }
+            if (traits.match("lopen")) {
+                let lopen = getTraitValue(traits, "lopen");
+                if (lopen && !isNaN(lopen) && parseInt(lopen) > 0) {
+                    updated = addWeaponTrait(updated, "loPen");
+                }
+            } else if (traits.match("lo-pen")) {
+                let lopen = getTraitValue(traits, "lo-pen");
+                if (lopen && !isNaN(lopen) && parseInt(lopen) > 0) {
+                    updated = addWeaponTrait(updated, "loPen");
+                }
+            }
+            for (let t of [ "ap", "blast", "auto" ]) {
+                if (traits.match(t)) {
+                    let value = getTraitValue(traits, t);
+                    if (value && !isNaN(value) && parseInt(value) > 0) {
+                        updated = addWeaponTrait(updated, `${t} ${value}`);
+                    }
+                }
+            }
+            item.system.weapon.traits = updated;
+            return item.system;
+        }
+    }
     return {};
 }
 
 export async function migrateWorld(fromVersion) {
-    console.log("**** MIGRATE SCHEMA TO v6 ****");
+    console.log("**** MIGRATE SCHEMA TO v7 ****");
 
     for (let actor of game.actors.contents) {
         const updateData = migrateActorData(actor, fromVersion);
@@ -120,5 +173,29 @@ export async function migrateWorld(fromVersion) {
         if (pack.metadata.package !== "world") {
             continue;
         }
+        const packType = pack.metadata.type;
+        if (!["Item"].includes(packType)) {
+            console.log(`Ignoring pack ${pack.metadata.label}`);
+            continue;
+        }
+        console.log(`Migrating pack ${pack.metadata.label}`);
+        const wasLocked = pack.locked;
+        await pack.configure( { locked: false });
+        await pack.migrate();
+        const documents = await pack.getDocuments();
+
+        for (let document of documents) {
+            let updateData = {};
+            switch (packType) {
+                case "Item":
+                    updateData = migrateItemData(document, fromVersion);
+                    if (!foundry.utils.isEmpty(updateData)) {
+                        console.log(`Migrating pack Item entity ${document.name} from ${fromVersion}`);
+                        await document.update(updateData);
+                    }
+                    break;
+            }
+        }
+        await pack.configure({locked: wasLocked});
     }
 }

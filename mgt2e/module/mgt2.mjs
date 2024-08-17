@@ -223,7 +223,7 @@ Hooks.on('renderChatMessage', function(app, html) {
 Hooks.on('ready', () => {
     if (game.user.isGM) {
         // Do we need to run a migration?
-        const LATEST_SCHEMA_VERSION = 6;
+        const LATEST_SCHEMA_VERSION = 7;
         const currentVersion = parseInt(game.settings.get("mgt2e", "systemSchemaVersion"));
         console.log(`Schema version is ${currentVersion}`);
         if (!currentVersion || currentVersion < LATEST_SCHEMA_VERSION) {
@@ -1231,15 +1231,15 @@ Handlebars.registerHelper('effect', function(key) {
         key = key.replaceAll(/[a-z.]/g, "");
         return key;
     } else if (key && key.startsWith("system.skills")) {
-        let skills = game.system.template.Actor.templates.skills.skills;
+        let skills = MGT2.SKILLS;
         key = key.replaceAll(/\.[a-z]*$/g, "");
         key = key.replaceAll(/system.skills./g, "");
         let skill = key.replaceAll(/\..*/g, "");
         if (key.indexOf(".specialities") > -1) {
             let spec = key.replaceAll(/.*\./g, "");
-            return skills[skill].label + " (" + skills[skill].specialities[spec].label + ")";
+            return `${skillLabel(skills[skill], skill)} (${skillLabel(skills[skill].specialities[spec], spec)})`;
         } else {
-            return skills[skill].label;
+            return skillLabel(skills[skill], skill);
         }
     } else if (key && key.startsWith("system.modifiers")) {
         if (key === "system.modifiers.encumbrance.multiplierBonus") {
@@ -1395,7 +1395,7 @@ Handlebars.registerHelper('skillToLabel', function(skillName) {
     let skillId = skillName.replaceAll(/\..*/g, "");
     let specId = (skillName.indexOf(".") < 0)?null:skillName.replaceAll(/.*\./g, "");
 
-    let skills = game.system.template.Actor.templates.skills.skills;
+    let skills = MGT2.SKILLS;
     let label = "";
     if (skills[skillId]) {
         label = skills[skillId].label;
