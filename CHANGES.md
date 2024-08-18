@@ -5,6 +5,31 @@
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
 
+## v0.10.0
+
+### Breaking Changes
+
+The changes made to Creatures in 0.9.2 have been replicated to Items. Weapon traits now display
+as options in a select box, rather than being a free text field. This requires enforcing the
+format being used. This is good, because if it was wrong before a trait would just be ignored.
+Conversion is done on migration, trying to preserve any existing weapon traits. We try to be
+as generous as we can in interpretation, but only support the core weapon traits.
+
+### Changes
+
+* Moved list of skills and characteristics from template.json to code. This is needed as part
+  of migrating to v12. Skills are copied into an actor when one is created.
+* Skill names now have some i18n support.
+* Weapons and armour now use UX design from Creatures, hardcoding the list of traits and damage
+  types and providing a selectable list of options.
+* Career terms can now specify what dice to roll for random career length, rather than assuming 3D6.
+* Fix bug where a stunned NPC would always take stun damage after being stunned once.
+* Updates to data structure references in HTML for better v12 support.
+* Added initial support for computer systems on spacecraft.
+* Changed to using 'cargo' item type to calculate cargo hold on spacecraft, rather than just
+  assuming it is all remaining volume.
+* Added icons for fuel tanks and cargo hold.
+
 ## v0.9.2 (Beta)
 
 ### Breaking Changes

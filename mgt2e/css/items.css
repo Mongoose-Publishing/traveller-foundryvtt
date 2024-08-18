@@ -219,3 +219,8 @@ li.vaccsuit {
     background-color: #36a0de;
     color: white;
 }
+
+.error-pill {
+    color: red;
+    font-style: italic;
+}

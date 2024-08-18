@@ -1,8 +1,23 @@
 import { MGT2 } from "./helpers/config.mjs";
 import {getTraitValue} from "./helpers/dice-rolls.mjs";
 
-function migrateActorData(actor, fromVersion) {
-    console.log(`MIGRATE ACTOR DATA ${fromVersion}`);
+async function migrateActorData(actor, fromVersion) {
+    console.log(`MIGRATE ACTOR ${actor.name} FROM ${fromVersion}`);
+    console.log(actor);
+    if (actor.items) {
+        for (let item of actor.items) {
+            console.log(`Actor ${actor.name} has item ${item.name}`);
+            console.log(item);
+            if (item && item.update) {
+                const updateData = migrateItemData(item, fromVersion);
+                if (!foundry.utils.isEmpty(updateData)) {
+                    console.log(`Migrating Item entity ${item.name} from ${fromVersion} for ${actor.name}`);
+                    await item.update(updateData);
+                }
+            }
+        }
+    }
+
     if (fromVersion < 1) {
         console.log("Converting to v2 (Status Effects)");
         // No longer used, so no point adding them.
@@ -20,7 +35,7 @@ function migrateActorData(actor, fromVersion) {
         // Undone.
     }
     if (fromVersion < 5) {
-        console.log("Converting to v5 (Spacecraft Naval data");
+        console.log("Converting to v5 (Spacecraft Naval data)");
         if (actor.type === "spacecraft") {
             actor.system.spacecraft.navy = {
                 "navy": false,
@@ -38,7 +53,7 @@ function migrateActorData(actor, fromVersion) {
         }
     }
     if (fromVersion < 6) {
-        console.log("Converting to v6 (Creature traits and behaviours");
+        console.log("Converting to v6 (Creature traits and behaviours)");
         if (actor.type === "creature" && actor.system.behaviour != null) {
             const oldBehaviours = actor.system.behaviour.toLowerCase();
             let updated = "";
@@ -81,7 +96,7 @@ function migrateItemData(item, fromVersion) {
         }
     }
     if (fromVersion < 7) {
-        console.log("Converting to v7 (Weapon and armour traits");
+        console.log("Converting to v7 (Weapon and armour traits)");
         if (item.system.armour && item.system.armour.otherTypes) {
             item.system.armour.otherTypes = item.system.armour.otherTypes.toLowerCase();
             return item.system;
@@ -89,6 +104,7 @@ function migrateItemData(item, fromVersion) {
         if (item.system.weapon && item.system.weapon.traits) {
             let traits = item.system.weapon.traits.toLowerCase();
             let updated = "";
+            console.log(item.system.weapon.traits);
 
             if (traits.match("verybulky") || traits.match("very bulky")) {
                 updated = addWeaponTrait(updated, "veryBulky");
@@ -122,6 +138,7 @@ function migrateItemData(item, fromVersion) {
                     }
                 }
             }
+            console.log(updated);
             item.system.weapon.traits = updated;
             return item.system;
         }

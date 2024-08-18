@@ -334,14 +334,11 @@ export class MgT2ItemSheet extends ItemSheet {
     }
 
     async _removeWeaponTrait(trait) {
-        const traitData = MGT2.WEAPONS.traits[trait];
-        if (traitData) {
-            let reg = new RegExp(`(^|[, ])${trait}[^,]*($|[, ])`, "g");
-            let traits = this.item.system.weapon.traits.toLowerCase().replace(reg, "").replace(/[ ,]*$/g, "");
-            await this.item.update({
-                'system.weapon.traits': traits
-            });
-        }
+        let reg = new RegExp(`(^|[, ])${trait}[^,]*($|[, ])`, "gi");
+        let traits = this.item.system.weapon.traits.replace(reg, "").replace(/[ ,]*$/g, "");
+        await this.item.update({
+            'system.weapon.traits': traits
+        });
     }
 
     async _modifyWeaponTrait(trait, modifier) {

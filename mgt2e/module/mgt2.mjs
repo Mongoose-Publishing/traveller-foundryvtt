@@ -1514,6 +1514,10 @@ Handlebars.registerHelper('showWeaponTraits', function(key, traits) {
                 trait = trait.split(" ")[0].trim();
             }
             let data = CONFIG.MGT2.WEAPONS.traits[trait];
+            if (!data) {
+                trait = trait.toLowerCase();
+                data = CONFIG.MGT2.WEAPONS.traits[trait];
+            }
             if (data) {
                 html += `<span class='pill weapon-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Item.WeaponTrait.Text."+trait)}'>`;
                 if (key.owner) {
@@ -1538,6 +1542,16 @@ Handlebars.registerHelper('showWeaponTraits', function(key, traits) {
                 }
                 html += "</span>";
             } else {
+                html += `<span class='pill weapon-pill error-pill' data-trait-id='${trait}' title="Unknown trait">${trait}`;
+                if (value) {
+                    html += ` ${value}`;
+                }
+                if (key.owner) {
+                    html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i>`;
+                } else {
+                    html += "&nbsp;";
+                }
+                html += "</span>";
                 console.log(`WARN: Trait [${trait}] is invalid in [${traits}]`);
             }
         }

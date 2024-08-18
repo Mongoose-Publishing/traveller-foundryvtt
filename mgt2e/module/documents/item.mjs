@@ -102,13 +102,12 @@ export class MgT2Item extends Item {
     }
 
     getWeaponTrait(trait) {
-        console.log(this);
         if (this.type === "weapon" && this.system.weapon) {
             const traits = this.system.weapon.traits;
-            console.log(traits);
-            const regex = new RegExp(`.*[^a-zA-Z]\(${trait}[^,$]*\).*`, "g");
-            if (traits.match(regex)) {
-                return traits.replace(regex, "$1").replace(",", "").trim();
+            const regex = new RegExp(`(^|[^a-z])${trait}[^,]*`, "gi");
+            const m = traits.match(regex);
+            if (m) {
+                return m[0].replace(",", "").trim();
             }
         }
         return null;
