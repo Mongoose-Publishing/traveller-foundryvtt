@@ -45,7 +45,6 @@ function migrateActorData(actor, fromVersion) {
             for (let b in CONFIG.MGT2.CREATURES.behaviours) {
                 if (oldBehaviours.indexOf(b.toLowerCase()) > -1) {
                     updated += (updated.length>0?" ":"") + b;
-                    console.log(updated);
                 }
             }
             actor.system.behaviour = updated;
@@ -82,6 +81,7 @@ function migrateItemData(item, fromVersion) {
         }
     }
     if (fromVersion < 7) {
+        console.log("Converting to v7 (Weapon and armour traits");
         if (item.system.armour && item.system.armour.otherTypes) {
             item.system.armour.otherTypes = item.system.armour.otherTypes.toLowerCase();
             return item.system;
