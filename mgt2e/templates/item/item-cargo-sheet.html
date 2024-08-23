@@ -34,16 +34,51 @@
         </div>
         <div class="resource">
           <label for="system.cargo.availability" class="resource-label">Availability</label>
-          <input type="text" name="system.cargo.availability" value="{{system.cargo.availability}}" data-dtype="String"/>
+          {{#if (isOwner .)}}
+            {{#if availability}}
+              <span style="display: inline-block; float: right">
+                  <i class="fa fa-add"></i><select class="availability-selector">
+                     {{selectOptions availability }}
+                  </select>
+              </span>
+            {{/if}}
+          {{/if}}
+          <div class="pill-container">
+            {{#each haveAvailability as |a id|}}
+              <div class="pill cargo-pill" data-trait-id="{{id}}">{{a}}&nbsp;<i class="fas fa-xmark avail-remove"> </i></div>
+            {{/each}}
+          </div>
+          <br/>
         </div>
-          <div class="resource">
+
+        <div class="resource">
             <label for="system.cargo.purchaseDM" class="resource-label">Purchase DM</label>
-            <input type="text" name="system.cargo.purchaseDM" value="{{system.cargo.purchaseDM}}" data-dtype="String"/>
-          </div>
-          <div class="resource">
+            {{#if (isOwner .)}}
+            <span style="display: inline-block; float: right">
+                <i class="fa fa-add"></i><select class="purchase-selector">
+                   {{selectOptions purchaseTraits }}
+                </select>
+            </span>
+            {{/if}}
+            <div class="pill-container purchase">
+              {{{showCargoTraits . system.cargo.purchaseDM}}}
+            </div>
+          <br/>
+        </div>
+
+        <div class="resource">
             <label for="system.cargo.saleDM" class="resource-label">Sale DM</label>
-            <input type="text" name="system.cargo.saleDM" value="{{system.cargo.saleDM}}" data-dtype="String"/>
-          </div>
+            {{#if (isOwner .)}}
+            <span style="display: inline-block; float: right">
+                <i class="fa fa-add"></i><select class="sale-selector">
+                   {{selectOptions saleTraits }}
+                </select>
+            </span>
+            {{/if}}
+            <div class="pill-container sale">
+              {{{showCargoTraits . system.cargo.saleDM}}}
+            </div>
+        </div>
       </div>
 
       <div class="shadow">

@@ -224,3 +224,8 @@ li.vaccsuit {
     color: red;
     font-style: italic;
 }
+
+.cargo-pill {
+    background-color: #36a0de;
+    color: white;
+}

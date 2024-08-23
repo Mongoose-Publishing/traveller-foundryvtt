@@ -112,4 +112,27 @@ export class MgT2Item extends Item {
         }
         return null;
     }
+
+    getCargoTrait(field, code) {
+        if (this.type === "cargo" && this.system.cargo) {
+            const traits = this.system.cargo[field];
+            const regex = new RegExp(`(^|[^a-z])${code}[^,]*`, "g");
+            const m = traits.match(regex);
+            if (m) {
+                return m[0].replace(",", "").trim();
+            }
+        }
+        return null;
+    }
+
+    hasCargoAvailability(code) {
+        if (this.type === "cargo" && this.system.cargo) {
+            const traits = this.system.cargo.availability;
+            const regex = new RegExp(`(^|[^a-z])${code}[^,]*`, "g");
+            if (traits.match(regex)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

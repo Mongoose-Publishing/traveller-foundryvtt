@@ -93,6 +93,42 @@ export class MgT2ItemSheet extends ItemSheet {
                     context.weaponTraits[trait] = game.i18n.localize("MGT2.Item.WeaponTrait.Label."+trait);
                 }
             }
+        } else if (item.type === "cargo") {
+            context.availability = {};
+            context.haveAvailability = {};
+            context.purchaseTraits = {};
+            context.saleTraits = {};
+
+            context.availability[""] = "";
+            if (!item.hasCargoAvailability("All")) {
+                if (!item.system.cargo.availability) {
+                    context.availability["All"] = game.i18n.localize("MGT2.Trade.All");
+                }
+                for (let trait in CONFIG.MGT2.TRADE.codes) {
+                    if (!hasTrait(context.item.system.cargo.availability, trait)) {
+                        context.availability[trait] = game.i18n.localize("MGT2.Trade." + trait);
+                    } else {
+                        context.haveAvailability[trait] = game.i18n.localize("MGT2.Trade." + trait);
+                    }
+                }
+            } else {
+                context.haveAvailability["All"] = game.i18n.localize("MGT2.Trade.All");
+                context.availability = null;
+            }
+            context.purchaseTraits[""] = "";
+            for (let trait in CONFIG.MGT2.TRADE.codes) {
+                if (!hasTrait(item.system.cargo.purchaseDM, trait)) {
+                    context.purchaseTraits[trait] = game.i18n.localize("MGT2.Trade." + trait);
+                }
+            }
+            context.saleTraits[""] = "";
+            for (let trait in CONFIG.MGT2.TRADE.codes) {
+                if (!hasTrait(item.system.cargo.saleDM, trait)) {
+                    context.saleTraits[trait] = game.i18n.localize("MGT2.Trade." + trait);
+                }
+            }
+
+
         }
 
         return context;
@@ -296,24 +332,120 @@ export class MgT2ItemSheet extends ItemSheet {
 
         });
 
-        html.find(".trait-selector").click(ev => {
-            const value = $(ev.currentTarget).val();
-            this._selectWeaponTrait(value);
-        });
+        if (this.item.type === "weapon") {
+            html.find(".trait-selector").click(ev => {
+                const value = $(ev.currentTarget).val();
+                this._selectWeaponTrait(value);
+            });
 
-        html.find(".trait-remove").click(ev => {
-            const e = $(ev.currentTarget).parents(".weapon-pill");
-            this._removeWeaponTrait(e.data("traitId"));
-        });
+            html.find(".trait-remove").click(ev => {
+                const e = $(ev.currentTarget).parents(".weapon-pill");
+                this._removeWeaponTrait(e.data("traitId"));
+            });
+            html.find(".trait-minus").click(ev => {
+                const value = $(ev.currentTarget).parents(".weapon-pill");
+                this._modifyWeaponTrait(value.data("traitId"), ev.shiftKey ? -5 : -1);
+            })
+            html.find(".trait-plus").click(ev => {
+                const value = $(ev.currentTarget).parents(".weapon-pill");
+                this._modifyWeaponTrait(value.data("traitId"), ev.shiftKey ? 5 : 1);
+            })
+        } else if (this.item.type === "cargo") {
+            html.find(".availability-selector").click(ev => {
+                const value = $(ev.currentTarget).val();
+                if (this.item.system.cargo.availability.length > 0) {
+                    this.item.system.cargo.availability += `, ${value}`;
+                } else {
+                    this.item.system.cargo.availability = `${value}`;
+                }
+                this.item.update({ "system.cargo": this.item.system.cargo });
+            });
+            html.find(".avail-remove").click(ev => {
+                const e = $(ev.currentTarget).parents(".cargo-pill");
+                this._removeCargoTrait("availability", e.data("traitId"));
+            });
 
-        html.find(".trait-minus").click(ev => {
-            const value = $(ev.currentTarget).parents(".weapon-pill");
-            this._modifyWeaponTrait(value.data("traitId"), ev.shiftKey?-5:-1);
-        })
-        html.find(".trait-plus").click(ev => {
-            const value = $(ev.currentTarget).parents(".weapon-pill");
-            this._modifyWeaponTrait(value.data("traitId"), ev.shiftKey?5:1);
-        })
+            html.find(".purchase-selector").click(ev => {
+                const value = $(ev.currentTarget).val();
+                if (this.item.system.cargo.purchaseDM.length > 0) {
+                    this.item.system.cargo.purchaseDM += `, ${value} 0`;
+                } else {
+                    this.item.system.cargo.purchaseDM = `${value} 0`;
+                }
+                this.item.update({ "system.cargo": this.item.system.cargo });
+            });
+
+            html.find(".sale-selector").click(ev => {
+                const value = $(ev.currentTarget).val();
+                if (this.item.system.cargo.saleDM.length > 0) {
+                    this.item.system.cargo.saleDM += `, ${value} 0`;
+                } else {
+                    this.item.system.cargo.saleDM = `${value} 0`;
+                }
+                this.item.update({ "system.cargo": this.item.system.cargo });
+            });
+
+            html.find(".trait-remove").click(ev => {
+                const e = $(ev.currentTarget).parents(".cargo-pill");
+                let field = null;
+                if (e.parents(".purchase").length === 1) {
+                    field = "purchaseDM";
+                } else if (e.parents(".sale").length === 1) {
+                    field = "saleDM";
+                }
+                this._removeCargoTrait(field, e.data("traitId"));
+            });
+            html.find(".trait-minus").click(ev => {
+                const value = $(ev.currentTarget).parents(".cargo-pill");
+                let field = null;
+                if (value.parents(".purchase").length === 1) {
+                    field = "purchaseDM";
+                } else if (value.parents(".sale").length === 1) {
+                    field = "saleDM";
+                }
+                this._modifyCargoTrait(value.data("traitId"), field, -1);
+            })
+            html.find(".trait-plus").click(ev => {
+                const value = $(ev.currentTarget).parents(".cargo-pill");
+                let field = null;
+                if (value.parents(".purchase").length === 1) {
+                    field = "purchaseDM";
+                } else if (value.parents(".sale").length === 1) {
+                    field = "saleDM";
+                }
+                this._modifyCargoTrait(value.data("traitId"), field, 1);
+            })
+        }
+    }
+
+    async _modifyCargoTrait(trait, field, modifier) {
+        console.log(`_modifyCargoTrait: [${trait}] [${field}] [${modifier}]`);
+        const traitData = MGT2.TRADE.codes[trait];
+        if (traitData) {
+            const text = this.item.getCargoTrait(field, trait);
+            if (traitData) {
+                let value = parseInt(text.replace(/[^-0-9]/g, ""));
+                value += parseInt(modifier);
+                value = Math.min(12, value);
+                value = Math.max(-12, value);
+                // We can change.
+                const updated = trait + " " + value;
+                let traits = this.item.system.cargo[field];
+                let reg = new RegExp(`${trait}[^,$]*`, "g");
+                this.item.system.cargo[field] = traits.replace(reg, updated);
+                await this.item.update({"system.cargo": this.item.system.cargo});
+            }
+        }
+    }
+
+    async _removeCargoTrait(field, trait) {
+        console.log(`_removeCargoTrait: [${field}] [${trait}]`);
+        let reg = new RegExp(`(^|[, ])${trait}[^,]*($|[, ])`, "gi");
+        let traits = this.item.system.cargo[field].replace(reg, "").replace(/[ ,]*$/g, "");
+        this.item.system.cargo[field] = traits;
+        await this.item.update({
+            'system.cargo': this.item.system.cargo
+        });
     }
 
     async _selectWeaponTrait(selectedTrait) {

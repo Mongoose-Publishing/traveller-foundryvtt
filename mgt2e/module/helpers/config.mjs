@@ -29,6 +29,33 @@ MGT2.getStatus = function(actor) {
 
 };
 
+MGT2.TRADE = {
+    "codes": {
+        "Ag": {},
+        "As": {},
+        "Ba": {},
+        "De": {},
+        "Fl": {},
+        "Ga": {},
+        "Hi": {},
+        "HT": {},
+        "Ic": {},
+        "In": {},
+        "Lo": {},
+        "LT": {},
+        "Na": {},
+        "Ni": {},
+        "Po": {},
+        "Ri": {},
+        "Va": {},
+        "Wa": {}
+    },
+    "zones": {
+        "Amber": {},
+        "Red": {}
+    }
+}
+
 MGT2.CHARACTERISTICS = {
   "STR": { "value": 7, "current": 7, "show": true,  "default": false  },
   "DEX": { "value": 7, "current": 7, "show": true,  "default": false  },

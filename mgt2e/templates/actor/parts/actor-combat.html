@@ -6,22 +6,22 @@
 
     <div class="grid grid-3col inset">
       <div>
-        <label class="prot-type" title="Protection">Prot</label>
-        <input class="armour-value" type="text" name="system.armour.protection" title="Protection"
+        <label class="prot-type" title="Protection">{{localize 'MGT2.TravellerSheet.Prot'}}</label>
+        <input class="armour-value" type="text" name="system.armour.protection" title="{{localize 'MGT2.TravellerSheet.Protection'}}"
                value="{{system.armour.protection}}" readonly data-dtype="Number"/>
       </div>
       <div>
-        <label class="prot-type" title="Rad Shielding">Rad</label>
-        <input class="armour-value" type="text" name="system.armour.rad" title="Radiation protection"
+        <label class="prot-type" title="Rad Shielding">{{localize 'MGT2.TravellerSheet.Rad'}}</label>
+        <input class="armour-value" type="text" name="system.armour.rad" title="{{localize 'MGT2.TravellerSheet.Radiation'}}"
                value="{{system.armour.rad}}" readonly data-dtype="Number"/>
       </div>
       {{#if system.armour.otherProtection}}
       <div>
-        <label class="prot-type" title="Energy Protection">🔥</label>
-        <input class="armour-value" type="text" name="system.armour.otherProtection" title="Energy"
+        <label class="prot-type" title="{{localize 'MGT2.TravellerSheet.Energy'}}">🔥</label>
+        <input class="armour-value" type="text" name="system.armour.otherProtection" title="{{localize 'MGT2.TravellerSheet.Energy'}}"
                value="{{system.armour.otherProtection}}" readonly data-dtype="Number"/>
       </div>
-      <input type="text" name="system.armour.otherTypes" title="Energy types" class="grid-span-3"
+      <input type="text" name="system.armour.otherTypes" title="{{localize 'MGT2.TravellerSheet.EnergyTypes'}}" class="grid-span-3"
              value="{{system.armour.otherTypes}}" readonly data-dtype="String"/>
       {{/if}}
     </div>
