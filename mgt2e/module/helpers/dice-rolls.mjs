@@ -195,7 +195,7 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
     }
     let traits = weapon.system.weapon.traits;
     if (traits && traits !== "") {
-        content += `<b>Traits:</b> ${traits}`
+        content += `<b>Traits:</b> ${weapon.printWeaponTraits()}`
     } else {
         traits = "";
     }
@@ -205,7 +205,7 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
     if (actor && actor.system.characteristics) {
         let str = parseInt(actor.system["STR"]);
         let bulky = 0;
-        if (hasTrait(traits, "verybulky")) {
+        if (hasTrait(traits, "veryBulky")) {
             if (str < 2) {
                 bulky = (2 - str);
             }

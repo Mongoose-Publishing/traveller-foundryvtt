@@ -113,6 +113,29 @@ export class MgT2Item extends Item {
         return null;
     }
 
+    printWeaponTraits() {
+        let text = "";
+        if (this.type === "weapon" && this.system.weapon) {
+            const traits = this.system.weapon.traits.split(",");
+            for (let t of traits) {
+                const trait = t.replaceAll(/[^a-zA-Z]/g, "");
+                const value = t.replaceAll(/[^0-9]/g, "");
+                if (CONFIG.MGT2.WEAPONS.traits[trait]) {
+                    let label = game.i18n.localize("MGT2.Item.WeaponTrait.Label." + trait);
+
+                    if (text) {
+                        text += ", ";
+                    }
+                    text += label;
+                    if (value) {
+                        text += " " + value;
+                    }
+                }
+            }
+        }
+        return text;
+    }
+
     getCargoTrait(field, code) {
         if (this.type === "cargo" && this.system.cargo) {
             const traits = this.system.cargo[field];

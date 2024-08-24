@@ -5,7 +5,7 @@
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
 
-## v0.10.0
+## v0.10.0 (Beta)
 
 ### Breaking Changes
 
@@ -22,6 +22,7 @@ as generous as we can in interpretation, but only support the core weapon traits
 * Skill names now have some i18n support.
 * Weapons and armour now use UX design from Creatures, hardcoding the list of traits and damage
   types and providing a selectable list of options.
+* The Cargo sheet now uses the new UX design for trade bonuses.
 * Career terms can now specify what dice to roll for random career length, rather than assuming 3D6.
 * Fix bug where a stunned NPC would always take stun damage after being stunned once.
 * Updates to data structure references in HTML for better v12 support.
