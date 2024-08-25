@@ -27,7 +27,13 @@
                     {{#select parent}}
                     <option value="">None</option>
                     {{#each data.skills as |skill id|}}
-                    <option value="{{id}}">{{skill.label}}</option>
+                        <option value="{{id}}">
+                            {{#if skill.label}}
+                                {{skill.label}}
+                            {{else}}
+                                {{localize (concat 'MGT2.Skills.' skill.id)}}
+                            {{/if}}
+                        </option>
                     {{/each}}
                     {{/select}}
                 </select>
