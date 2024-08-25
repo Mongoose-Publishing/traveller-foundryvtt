@@ -122,7 +122,6 @@ export class MgT2Item extends Item {
                 const value = t.replaceAll(/[^0-9]/g, "");
                 if (CONFIG.MGT2.WEAPONS.traits[trait]) {
                     let label = game.i18n.localize("MGT2.Item.WeaponTrait.Label." + trait);
-
                     if (text) {
                         text += ", ";
                     }

@@ -30,6 +30,8 @@ as generous as we can in interpretation, but only support the core weapon traits
 * Changed to using 'cargo' item type to calculate cargo hold on spacecraft, rather than just
   assuming it is all remaining volume.
 * Added icons for fuel tanks and cargo hold.
+* Adding a template to an actor now outputs the results.
+* Added tokens for Lab Ship and Empress Marava.
 
 ## v0.9.2 (Beta)
 
