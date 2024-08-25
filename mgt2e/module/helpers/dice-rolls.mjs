@@ -190,12 +190,12 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
         if (baseRange > 0) {
             content += `<b>Range:</b> ${baseRange}m<br/>`;
         } else {
-            content += `<b>Melee</b>`;
+            content += `<b>Melee</b><br/>`;
         }
     }
     let traits = weapon.system.weapon.traits;
     if (traits && traits !== "") {
-        content += `<b>Traits:</b> ${weapon.printWeaponTraits()}`
+        content += `<b>Traits:</b> ${weapon.printWeaponTraits()}<br/>`
     } else {
         traits = "";
     }
