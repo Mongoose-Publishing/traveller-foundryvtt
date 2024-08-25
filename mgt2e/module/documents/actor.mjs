@@ -45,7 +45,7 @@ export class MgT2Actor extends Actor {
 
     _preUpdate(changes, options, user) {
         if (this.type === "spacecraft") {
-            if (changes.system.spacecraft.computer) {
+            if (changes?.system?.spacecraft?.computer) {
                 let tl = this.system.spacecraft.computer.tl;
                 let core = this.system.spacecraft.computer.core;
                 let fib = this.system.spacecraft.computer.fib;
@@ -193,9 +193,11 @@ export class MgT2Actor extends Actor {
 
         // Also calculate Dodge ability.
         let dodge = Math.max(dex, 0);
-        let dodgeSkill = parseInt(actorData.system.skills["athletics"].specialities["dexterity"].value);
-        if (dodgeSkill > 0) {
-            dodge += dodgeSkill;
+        if (actorData.system.skills["athletics"] && actorData.system.skills["athletics"].specialities) {
+            let dodgeSkill = parseInt(actorData.system.skills["athletics"].specialities["dexterity"].value);
+            if (dodgeSkill > 0) {
+                dodge += dodgeSkill;
+            }
         }
         actorData.system.dodge = dodge;
     }
@@ -224,9 +226,17 @@ export class MgT2Actor extends Actor {
 
         const sys = actor.system;
 
-        sys.totalSkills = this._countSkillLevels(sys.skills);
-        sys.maxSkills = (parseInt(sys.characteristics.INT.value) +
-            parseInt(sys.characteristics.EDU.value)) * 3;
+        if (sys.characteristics.INT && sys.characteristics.EDU) {
+            sys.totalSkills = this._countSkillLevels(sys.skills);
+            sys.maxSkills = (parseInt(sys.characteristics.INT.value) +
+                parseInt(sys.characteristics.EDU.value)) * 3;
+        } else {
+            sys.maxSkills = 0;
+        }
+
+        if (!sys.characteristics.STR || !sys.characteristics.DEX || !sys.characteristics.END) {
+            return;
+        }
 
         for (const char in sys.characteristics) {
             let value = sys.characteristics[char].value;

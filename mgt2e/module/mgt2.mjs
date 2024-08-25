@@ -1605,3 +1605,4 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
 
 Hooks.once("ready", async function() {
 });
+

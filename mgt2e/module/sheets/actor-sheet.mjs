@@ -1170,18 +1170,18 @@ export class MgT2ActorSheet extends ActorSheet {
             if (actor.system.sophont.profession && actor.system.sophont.profession.length > 0) {
                 html += `<p><b>Profession:</b> ${actor.system.sophont.profession}</p>`;
             }
-            if (actor.system.size !== this.actor.system.size) {
-                html += `<p><b>Size:</b> ${actor.system.size}</p>`;
-            }
-            if (actor.system.speed.base !== this.actor.system.speed.base) {
-                html += `<p><b>Speed:</b> ${actor.system.speed.base}</p>`;
-            }
             if (!isNaN(actor.system.speed.base) && parseInt(actor.system.speed.base) > 0) {
+                if (actor.system.speed.base !== this.actor.system.speed.base && actor.system.speed.base !== null) {
+                    html += `<p><b>Speed:</b> ${actor.system.speed.base}</p>`;
+                }
                 this.actor.system.speed.base = actor.system.speed.base;
                 this.actor.system.speed.value = actor.system.speed.base;
                 await this.actor.update({"system.speed": this.actor.system.speed });
             }
             if (!isNaN(actor.system.size)) {
+                if (actor.system.size !== this.actor.system.size) {
+                    html += `<p><b>Size:</b> ${actor.system.size}</p>`;
+                }
                 this.actor.system.size = parseInt(actor.system.size);
                 await this.actor.update({"system.size": this.actor.system.size });
             }
