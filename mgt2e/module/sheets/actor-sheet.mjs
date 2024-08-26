@@ -6,6 +6,7 @@ import {MgT2QuantityDialog } from "../helpers/quantity-dialog.mjs";
 import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {MgT2CrewMemberDialog } from "../helpers/crew-member-dialog.mjs";
+import {MgT2SpacecraftAttackDialog } from "../helpers/spacecraft-attack-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
 import {skillLabel} from "../helpers/dice-rolls.mjs";
 import {MgT2Item} from "../documents/item.mjs";
@@ -1086,6 +1087,12 @@ export class MgT2ActorSheet extends ActorSheet {
             let spec = (action.skill.indexOf(".") > 0)?(action.skill.replaceAll(/.*\./g, "")):null;
 
             new MgT2SkillDialog(actorCrew, skill, spec, null, parseInt(action.dm?action.dm:0)).render(true);
+        } else if (action.action === "weapon") {
+            let weaponId = action.weapon;
+            let weaponItem = shipActor.items.get(weaponId);
+            let dm = parseInt(action.dm);
+            console.log(weaponItem);
+            new MgT2SpacecraftAttackDialog(shipActor, actorCrew, weaponItem, dm).render(true);
         }
     }
 

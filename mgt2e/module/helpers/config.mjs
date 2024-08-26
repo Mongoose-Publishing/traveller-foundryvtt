@@ -23,6 +23,16 @@ MGT2.SHIP_CONFIGURATION = {
   "buffered": { "armour": 1.0, "cost": 0.08, "hull": 1.5, "volume": 0.65, "streamlined": "no" }
 };
 
+MGT2.SPACE_RANGES = {
+    "adjacent": { "distance": 1, "dm": 0 },
+    "close": { "distance": 10, "dm": 0 },
+    "short": { "distance": 1250, "dm": 1 },
+    "medium": { "distance": 10000, "dm": 0 },
+    "long": { "distance": 25000, "dm": -2 },
+    "verylong": { "distance": 50000, "dm": -4 },
+    "distant": { "distance": 200000, "dm": -6 }
+}
+
 MGT2.getStatus = function(actor) {
   const data = actor.data.data;
   console.log(data);

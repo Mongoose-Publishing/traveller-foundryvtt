@@ -127,8 +127,20 @@ export class MgT2ItemSheet extends ItemSheet {
                     context.saleTraits[trait] = game.i18n.localize("MGT2.Trade." + trait);
                 }
             }
-
-
+        } else if (item.type === "role") {
+            context.weapons = {};
+            context.weapons[""] = "";
+            if (context.item.parent && context.item.parent.type === "spacecraft") {
+                const spacecraft = context.item.parent;
+                console.log(spacecraft);
+                for (let i of spacecraft.items) {
+                    if (i.type === "hardware" && i.system.hardware.system === "weapon") {
+                        console.log(i);
+                        context.weapons[i._id] = i.name;
+                    }
+                }
+                console.log(context.weapons);
+            }
         }
 
         return context;

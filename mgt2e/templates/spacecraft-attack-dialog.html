@@ -1,0 +1,58 @@
+<form class="flexcol starshipattack">
+
+
+    <div class="shadow">
+        <img class="attack-actor" src="{{gunner.img}}" width="40px"/>
+        <h4>{{gunner.name}}</h4>
+
+        <p>
+            {{gunnerSkillLabel}}
+        </p>
+
+    </div>
+
+    <div class="shadow">
+        <img class="attack-actor" src="{{starship.img}}" width="40px"/>
+        <h4>{{starship.name}}</h4>
+
+        <select name="weaponSelected">
+            {{selectOptions weaponSelect selected=weaponSelected}}
+        </select>
+
+        <div>
+            <label>Range</label>
+
+            <select class="attackDialogRange" name="range">
+                {{selectOptions ranges selected=range}}
+            </select>
+        </div>
+
+    </div>
+
+    <div class="shadow grid grid-2col">
+        <div class="boon-selection">
+            <label for="dicetype" class="skillDialogLabel">Roll Type</label>
+            <select class="skillDialogRollType" name="dicetype">
+                {{#select "normal"}}
+                    <option value="normal">Normal</option>
+                    <option value="boon">Boon</option>
+                    <option value="bane">Bane</option>
+                {{/select}}
+            </select>
+        </div>
+
+        <div class="bonus-selection">
+            <label for="dm" class="skillDialogLabel">DM</label>
+            <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
+        </div>
+
+    </div>
+
+    <footer class="sheet-footer flexrow">
+        {{#if parryBonus includeZero=true}}
+            <button type="submit" name="submit" class="parryRoll">Parry (+{{parryBonus}})</button>
+        {{/if}}
+        <button type="submit" name="submit" class="attackRoll">Attack</button>
+    </footer>
+
+</form>

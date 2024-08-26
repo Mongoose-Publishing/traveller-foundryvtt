@@ -1380,7 +1380,15 @@ Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
             html += `<div class="role-action-buttons">`;
             for (let id in roleItem.system.role.actions) {
                 let action = roleItem.system.role.actions[id];
-                html += `<span class="role-action-button" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}"><img class="action" src="${roleItem.img}" title="${action.title}"/></span>`;
+                let icon = "fa-comment";
+                if (action.action === "weapon") {
+                    icon = "fa-crosshairs";
+                } else if (action.action === "skill") {
+                    icon = "fa-dice";
+                }
+                html += `<span class="role-action-button" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}">`;
+                html += `<i class="fa-regular ${icon}"></i> ${action.title}`;
+                html += `</span>`;
             }
             html += "</div></div>";
         }
@@ -1598,6 +1606,9 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
     return html;
 });
 
+Handlebars.registerHelper('selectedWeaponId', function(actions, id) {
+   return actions[id].weapon;
+});
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */

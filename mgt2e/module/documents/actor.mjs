@@ -370,4 +370,59 @@ export class MgT2Actor extends Actor {
       return null;
   }
 
+  getSkillLabel(skill, showValue) {
+      if (!skill) {
+          return "";
+      }
+      let skillId = skill;
+      let specId = null;
+      if (skill.indexOf(".") > -1) {
+          skillId = skill.replaceAll(/\..*/g, "");
+          specId = skill.replaceAll(/.*\./g, "");
+      }
+      let text = "";
+      let spec = null;
+      skill = this.system.skills[skillId];
+      if (!skill) {
+          return "";
+      }
+      if (skill.label) {
+          text = skill.label;
+      } else {
+          text = game.i18n.localize("MGT2.Skills." + skillId);
+          if (text.indexOf("MGT2.Skills") === 0) {
+              text = skillId;
+          }
+      }
+      if (specId) {
+          if (skill.specialities && skill.specialities[specId]) {
+              spec = skill.specialities[specId];
+              if (spec.label) {
+                  text += ` (${spec.label})`;
+              } else {
+                let label =  game.i18n.localize("MGT2.Skills." + specId);
+                if (label.indexOf("MGT2.Skills") === 0) {
+                    text += ` (${specId})`;
+                } else {
+                    text += ` (${label})`;
+                }
+              }
+          }
+      }
+
+      if (showValue) {
+          let value = -3;
+          if (skill.trained && spec) {
+              value = spec.value;
+          } else if (skill.trained) {
+              value = skill.value;
+          }
+          text += ` ${value}`;
+      }
+
+      return text;
+  }
+
+
+
 }

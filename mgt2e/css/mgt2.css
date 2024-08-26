@@ -1732,8 +1732,18 @@ section.id-card .showIdCard {
 
 .actor-crew .role-action-button {
     display: inline-block;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
+    border: 1px solid black;
+    padding: 2px 5px 2px 5px;
+    background-color: #f1511b;
+    color: white;
+    border-radius: 5px;
+    margin-right: 3px;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+
+.actor-crew .role-action-button:hover {
+    box-shadow: 0 2px 5px #800000;
 }
 
 .actor-crew .role-action-button img.action {
@@ -1854,4 +1864,15 @@ div.popup-text {
 
 div.popup-text:hover {
     -webkit-line-clamp: unset;
+}
+
+.starshipattack img.attack-actor {
+    float: left;
+    margin-right: 8px;
+    width: 40px;
+}
+
+.starshipattack h4 {
+    font-weight: bold;
+    font-size: larger;
 }
