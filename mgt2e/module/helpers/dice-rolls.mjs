@@ -367,6 +367,56 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
 
 }
 
+export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
+    let text = "";
+
+    let score = gunner.getWeaponSkill(weaponItem, options);
+
+    let dice = `${options.results.dice} + ${score}`;
+    console.log(dice);
+    console.log(options);
+    const attackRoll = await new Roll(dice, gunner?gunner.getRollData():null).evaluate();
+    const damageRoll = await new Roll(weaponItem.system.weapon.damage, null).evaluate();
+
+    let dmgText = damageRoll.total;
+
+    text = `
+        <div class="attack-message">
+            <h2>${weaponItem.name}</h2>
+            <div class="message-content">
+                <div>
+                    <img class="skillcheck-thumb" src="${starship.thumbnail}" title="${starship.name}"/>
+                    <img class="skillcheck-thumb" src="${gunner.thumbnail}" title="${gunner.name}"/>
+                    <b>${options.results.label} ${score}</b><br/>
+                    ${game.i18n.localize("MGT2.Item.SpaceRange." + options.range)}<br/>
+                    ${weaponItem.system.weapon.damage}<br/>
+                </div>
+                
+                <hr/>
+                <div class="rollResult">
+                    <b>Attack Roll: </b>
+                    <span class="skill-roll inline-roll inline-result">
+                        <i class="fas fa-dice"> </i> ${attackRoll.total}
+                    </span>
+                </div>
+                <hr/>
+                <div class="damage-message" data-damage="${damageRoll.total}" data-options="${options}">
+                    <button data-damage="${damageRoll.total}" data-options="${options}" class="damage-button">
+                        ${dmgText}
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    attackRoll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: starship }),
+        content: text,
+        rollMode: game.settings.get("core", "rollMode")
+    });
+
+}
+
 function getDifficultyLabel(difficulty) {
     switch (difficulty) {
         case 1: case 2: case 3:

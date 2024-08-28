@@ -370,6 +370,141 @@ export class MgT2Actor extends Actor {
       return null;
   }
 
+  getUntrained() {
+      let score = -3;
+      if (this.system.skills["jackofalltrades"]) {
+          let joat = parseInt(this.system.skills["jackofalltrades"].value);
+          if (joat > 0) {
+              score += joat;
+          }
+      }
+      return score;
+  }
+
+  getWeaponSkill(weaponItem, options) {
+      let score = this.getUntrained();
+
+      if (weaponItem && weaponItem?.system?.weapon) {
+          let cha = weaponItem.system.weapon.characteristic;
+          let skill = weaponItem.system.weapon.skill;
+
+          if (!isNaN(weaponItem.system.weapon.dm)) {
+              if (!options.dm) {
+                  options.dm = 0;
+              }
+              options.dm += parseInt(weaponItem.system.weapon.dm);
+          }
+
+          score = this.getSkillValue(skill, options);
+      }
+
+      return score;
+  }
+
+    /**
+     * Gets dice modifier for the given skill. Includes any bonuses for augments and
+     * other modifiers on the characteristic or skill. Also includes global modifiers,
+     * such as encumbrance or reaction penalties.
+     *
+     * @param skillId   Skill to get bonus for (skillId or skillId.specId)
+     * @param options   Optional modifiers. Breakdown is returned in options.results
+     * @returns {number}
+     */
+  getSkillValue(skillId, options) {
+      let score = this.getUntrained();
+      console.log(`Untrained: ${skillId} ${score}`);
+      if (!options) {
+          options = { "results": {} };
+      } else {
+          options.results = {
+              "cha": null,
+              "chadm": 0,
+              "base": null,
+              "expert": 0,
+              "augmentation": 0,
+              "augdm": 0,
+              "bonus": 0,
+              "label": this.getSkillLabel(skillId),
+              "dice": "2D6"
+          };
+      }
+
+      let id = skillId;
+      let spId = null;
+      let cha = null;
+      if (skillId.indexOf(".") > -1) {
+          id = skillId.split(".")[0];
+          spId = skillId.split(".")[1];
+      }
+      if (this.system.skills[id]) {
+          let skill = this.system.skills[id];
+          let spec = null;
+          if (spId && skill.specialities && skill.specialities[spId]) {
+              spec = skill.specialities[spId];
+          }
+          console.log(skill);
+          console.log(spec);
+
+          // Set characteristic to use.
+          if (options.cha) {
+              cha = options.cha;
+          } else {
+              if (skill.default) {
+                  cha = skill.default;
+              }
+              if (spec && spec.default) {
+                  cha = spec.default;
+              }
+          }
+
+          if (skill.trained) {
+              if (spec) {
+                  score = isNaN(spec.value)?0:parseInt(spec.value);
+                  options.results.base = score;
+                  if (!isNaN(spec.expert) && parseInt(spec.expert) > score) {
+                      score = parseInt(spec.expert) - 1;
+                      options.results.expert = score;
+                  }
+                  // Only adds if skill is trained.
+                  if (!isNaN(spec.augmentation)) {
+                      score += parseInt(spec.augmentation);
+                  }
+              } else {
+                  score = isNaN(skill.value)?0:parseInt(skill.value);
+                  options.results.base = score;
+                  if (!isNaN(skill.expert) && parseInt(skill.expert) > score) {
+                      score = parseInt(skill.expert) - 1;
+                  }
+                  // Only adds if skill is trained.
+                  if (!isNaN(skill.augmentation)) {
+                      score += parseInt(skill.augmentation);
+                  }
+              }
+          }
+          // The following are always applied. Parent and specialities stack.
+          if (!isNaN(skill.bonus)) {
+              score += parseInt(skill.bonus);
+              options.results.bonus += parseInt(skill.bonus);
+          }
+          if (!isNaN(skill.augdm)) {
+              score += parseInt(skill.augdm);
+              options.results.augdm += parseInt(skill.augdm);
+          }
+          if (spec && !isNaN(spec.bonus)) {
+              score += parseInt(spec.bonus);
+              options.results.bonus += parseInt(spec.bonus);
+          }
+          if (spec && !isNaN(spec.augdm)) {
+              score += parseInt(spec.augdm);
+              options.results.augdm += parseInt(spec.augdm);
+          }
+      }
+
+      // Apply global penalties.
+
+      return score;
+  }
+
   getSkillLabel(skill, showValue) {
       if (!skill) {
           return "";
@@ -411,7 +546,7 @@ export class MgT2Actor extends Actor {
       }
 
       if (showValue) {
-          let value = -3;
+          let value = this.getUntrained();
           if (skill.trained && spec) {
               value = spec.value;
           } else if (skill.trained) {

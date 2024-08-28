@@ -1,4 +1,4 @@
-import {rollAttack, hasTrait, getTraitValue} from "../helpers/dice-rolls.mjs";
+import {rollSpaceAttack, hasTrait, getTraitValue} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
 
 export class MgT2SpacecraftAttackDialog extends Application {
@@ -18,17 +18,17 @@ export class MgT2SpacecraftAttackDialog extends Application {
         this.gunner = gunnerActor;
         this.mount = weaponMount;
 
+        if (!this.mount) {
+            ui.notifications.error(game.i18n.localize("MGT2.Error.NoWeaponMount"));
+            return;
+        }
+
         this.weaponSelect = {};
         this.weaponSelected = null;
         this.weaponItem = null;
         this.dm = isNaN(dm)?0:parseInt(dm);
         this.ranges = {};
         this.range = "medium";
-
-        for (let r in CONFIG.MGT2.SPACE_RANGES ) {
-            console.log(r);
-            this.ranges[r] = game.i18n.localize("MGT2.Item.SpaceRange." + r) + ` (${CONFIG.MGT2.SPACE_RANGES[r].dm})`;
-        }
 
         if (this.mount.type === "hardware" && this.mount.system.hardware.system === "weapon") {
             console.log(this.mount);
@@ -50,6 +50,12 @@ export class MgT2SpacecraftAttackDialog extends Application {
             console.log(this.weaponSelect);
         } else {
             return;
+        }
+        for (let r in CONFIG.MGT2.SPACE_RANGES ) {
+            this.ranges[r] = game.i18n.localize("MGT2.Item.SpaceRange." + r) + ` (${CONFIG.MGT2.SPACE_RANGES[r].dm})`;
+            if (r === this.weaponItem.system.weapon.spaceRange) {
+                break;
+            }
         }
 
     }
@@ -80,36 +86,28 @@ export class MgT2SpacecraftAttackDialog extends Application {
         event.preventDefault();
         console.log("onRollClick:");
 
-
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
         let rollType = html.find(".skillDialogRollType")[0].value;
+        let range = null;
         let rangeDM = null;
         if (html.find(".attackDialogRange")[0]) {
-            let range = html.find(".attackDialogRange")[0].value;
+            range = html.find(".attackDialogRange")[0].value;
             rangeDM = parseInt(CONFIG.MGT2.SPACE_RANGES[range].dm);
         }
 
-        //rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM, autoOption);
-
-        this.close();
-    }
-
-    async onParryClick(event, html) {
-        event.preventDefault();
-        console.log("onParryClick:");
-
-        let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
-        console.log("Parry DM is equal to " + dm);
-        if (this.parryBonus) {
-            dm += this.parryBonus;
+        let options = {
+            "DM": dm,
+            "skill": 0,
+            "range": range,
+            "rangeDM": rangeDM,
+            "rollType": rollType
         }
-        let rollType = html.find(".skillDialogRollType")[0].value;
-        console.log("Parry DM is equal to " + dm);
 
-        rollAttack(this.actor, this.weapon, this.parryScore, dm, rollType, null, null, true);
+        rollSpaceAttack(this.starship, this.gunner, this.weaponItem, options);
 
         this.close();
     }
+
 
     async _updateObject(event, formData) {
         console.log("_updateObject:");
