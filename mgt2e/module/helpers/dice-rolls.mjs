@@ -403,12 +403,20 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     title = addTitle(title, options, "dm");
     title = addTitle(title, options, "rangedm");
 
+    let mount = weaponItem.system.weapon.mount;
+    let multiplier = 1;
+    if (CONFIG.MGT2.SPACE_MOUNTS[mount]) {
+        multiplier = parseInt(CONFIG.MGT2.SPACE_MOUNTS[mount].multiplier);
+    }
+
     let dataOptions = {
         "damage": damageRoll.total + effect,
-        "multiplier": 1,
+        "multiplier": multiplier,
         "scale": weaponItem.system.weapon.scale,
         "traits": weaponItem.system.weapon.traits
     };
+
+
     let json = JSON.stringify(dataOptions);
 
     text = `
@@ -432,8 +440,8 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                     Effect ${(effect>0)?"+":""}${effect}
                 </div>
                 <hr/>
-                <div class="damage-message" data-damage="${damageRoll.total + effect}" data-options='${json}'>
-                    <button data-damage="${damageRoll.total + effect}" data-options='${json}' class="damage-button">
+                <div class="damage-message" data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}'>
+                    <button data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}' class="damage-button">
                         ${dmgText}
                     </button>
                 </div>

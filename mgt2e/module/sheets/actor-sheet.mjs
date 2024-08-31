@@ -1552,15 +1552,16 @@ export class MgT2ActorSheet extends ActorSheet {
         const actor = this.actor;
         const traits = data.traits;
         const options = data.options;
-
-        console.log(data);
+        const vers = data.vers;
 
         if (actor.type === "traveller") {
             new MgT2DamageDialog(actor, damage, ap, laser, traits).render(true);
-        } else if (options) {
+        } else if (vers && options) {
+            console.log("Applying v2 damage");
             this.actor.applyDamage(damage, JSON.parse(options));
         } else {
             // NPC, Creature or something else.
+            console.log("Applying v1 damage");
             Tools.applyDamageTo(damage, ap, data.tl, data.options, data.traits, actor, null);
         }
     }

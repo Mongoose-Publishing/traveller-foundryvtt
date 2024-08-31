@@ -612,6 +612,8 @@
   "MGT2.EditSkill.ShortName": "Short Name",
   "MGT2.EditSkill.ShortNameDesc": "The internal name used to identify the skill",
 
+  "MGT2.Info.Damage": "{actor} takes {damage} hits",
+
   "MGT2.Error.NoWeaponMount": "Vehicle has no weapon mounted for this action",
 
   "MGT2.Warn.HotBar.NewActor": "Cannot assign hot bar skills for a new actor",

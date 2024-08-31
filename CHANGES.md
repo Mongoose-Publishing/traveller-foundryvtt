@@ -8,6 +8,10 @@
 
 ## v0.10.1 (Beta)
 
+Started adding support for spacecraft shooting at things. This is currently in alpha.
+Damage applied by spacecraft attacks may be inconsistent depending on how it is applied
+(dragged to sheet compared to applied to a token, or based on type of actor target).
+
 * Weapon attack option has been added to crew roles.
 * Crew role skill check can now specify difficulty of a task, and the characteristic to use.
 * Bugs fixed around display of skill labels.

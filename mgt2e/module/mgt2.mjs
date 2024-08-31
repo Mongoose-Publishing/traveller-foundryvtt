@@ -193,6 +193,7 @@ Hooks.on('renderChatMessage', function(app, html) {
             ap: parseInt(damageMessage.getAttribute("data-ap")),
             damage: parseInt(damageMessage.getAttribute("data-damage")),
             traits: damageMessage.getAttribute("data-traits"),
+            vers: damageMessage.getAttribute("data-vers"),
             options: damageMessage.getAttribute("data-options"),
             tl: parseInt(damageMessage.getAttribute("data-tl"))
         }
@@ -372,8 +373,6 @@ Hooks.on("createActor", (actor) => {
 
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
     console.log("**** Hooks.preUpdateActor:");
-    console.log(actor);
-    console.log(data);
     if (data?.system?.damage) {
         // This is a Traveller with full damage by stat
         const damage = data.system.damage;

@@ -385,25 +385,42 @@ export class MgT2Actor extends Actor {
       console.log(`applyDamage: [${this.name}] [${damage}]`);
       console.log(options);
 
+      let armour = 0;
       if (this.type === "spacecraft") {
           if (options.scale !== "spacecraft") {
               damage = parseInt(damage / 10);
           }
           let armour = parseInt(this.system.spacecraft.armour);
-          if (options.ap) {
-              let ap = parseInt(options.ap);
-              armour = Math.max(0, armour - ap);
+      } else if (this.type === "npc" || this.type === "creature") {
+          if (options.scale === "spacecraft") {
+              damage *= 10;
           }
-          damage = Math.max(0, damage - armour);
-
-          if (options.multiplier && parseInt(options.multiplier) > 1) {
-              damage += parseInt(options.multiplier);
+          if (this.system.armour) {
+              armour = parseInt(data.armour.protection);
+              if (options.damageType !== "") {
+                  let armourData = this.system.armour;
+                  if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
+                      armour += armourData.otherProtection?parseInt(armourData.otherProtection):0;
+                  }
+              }
+              armour = Math.max(0, armour);
           }
-          this.system.hits.damage += damage;
-          this.system.hits.value = this.system.hits.max - this.system.hits.damage;
-          this.update({"system.hits": this.system.hits});
       }
+      if (options.ap) {
+          let ap = parseInt(options.ap);
+          armour = Math.max(0, armour - ap);
+      }
+      damage = Math.max(0, damage - armour);
 
+      if (options.multiplier && parseInt(options.multiplier) > 1) {
+          damage *= parseInt(options.multiplier);
+      }
+      ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
+          { "actor": this.name, "damage": damage}))
+
+      this.system.hits.damage += damage;
+      this.system.hits.value = this.system.hits.max - this.system.hits.damage;
+      this.update({"system.hits": this.system.hits});
   }
 
   getWeaponSkill(weaponItem, options) {
