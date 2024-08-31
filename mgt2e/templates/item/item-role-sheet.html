@@ -34,12 +34,27 @@
               </select>
             </div>
             {{#if (ifEquals action.action "chat") }}
-              <div class="resource grid-span-2">
+              <div class="resource grid-span-3">
                 <label for="system.role.actions.{{id}}.chat" class="resource-label">Chat</label>
                 <input class="writable" name="system.role.actions.{{id}}.chat" type="text" value="{{action.chat}}"/>
               </div>
             {{/if}}
             {{#if (ifEquals action.action "skill") }}
+              <div class="resource">
+                <label for="system.role.actions.{{id}}.cha" class="resource-label">Cha</label>
+                <br/>
+                <select class="writable" name="system.role.actions.{{id}}.cha">
+                  {{#select action.cha}}
+                    <option value="">-</option>
+                    <option value="STR">STR</option>
+                    <option value="DEX">DEX</option>
+                    <option value="END">END</option>
+                    <option value="INT">INT</option>
+                    <option value="EDU">EDU</option>
+                    <option value="SOC">SOC</option>
+                  {{/select}}
+                </select>
+              </div>
               <div class="resource grid-span-2">
                 <label for="system.role.actions.{{id}}.skill" class="resource-label">Skill</label>
                 <br/>
@@ -56,6 +71,11 @@
                     {{/each}}
                   {{/select}}
                 </select>
+              </div>
+              <div class="resource">
+                <label for="system.role.actions.{{id}}.target" class="resource-label">Target</label>
+                <br/>
+                <input class="writable" name="system.role.actions.{{id}}.target" type="number" value="{{action.target}}"/>
               </div>
               <div class="resource">
                 <label for="system.role.actions.{{id}}.dm" class="resource-label">DM</label>

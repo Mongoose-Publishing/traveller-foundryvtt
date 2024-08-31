@@ -1085,8 +1085,10 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (action.action === "skill") {
             let skill = action.skill.replaceAll(/\..*/g, "");
             let spec = (action.skill.indexOf(".") > 0)?(action.skill.replaceAll(/.*\./g, "")):null;
+            let cha = action.cha;
+            let target = isNaN(action.target)?null:parseInt(action.target);
 
-            new MgT2SkillDialog(actorCrew, skill, spec, null, parseInt(action.dm?action.dm:0)).render(true);
+            new MgT2SkillDialog(actorCrew, skill, spec, cha, parseInt(action.dm?action.dm:0), target).render(true);
         } else if (action.action === "weapon") {
             let weaponId = action.weapon;
             let weaponItem = shipActor.items.get(weaponId);
@@ -1549,9 +1551,14 @@ export class MgT2ActorSheet extends ActorSheet {
         const ap = data.ap;
         const actor = this.actor;
         const traits = data.traits;
+        const options = data.options;
+
+        console.log(data);
 
         if (actor.type === "traveller") {
             new MgT2DamageDialog(actor, damage, ap, laser, traits).render(true);
+        } else if (options) {
+            this.actor.applyDamage(damage, JSON.parse(options));
         } else {
             // NPC, Creature or something else.
             Tools.applyDamageTo(damage, ap, data.tl, data.options, data.traits, actor, null);

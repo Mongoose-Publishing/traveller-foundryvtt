@@ -30,7 +30,18 @@ MGT2.SPACE_RANGES = {
     "medium": { "distance": 10000, "dm": 0 },
     "long": { "distance": 25000, "dm": -2 },
     "verylong": { "distance": 50000, "dm": -4 },
-    "distant": { "distance": 200000, "dm": -6 }
+    "distant": { "distance": 300000, "dm": -6 },
+    "verydistant": { "distance": 5000000, "dm": -12 },
+    "far": { "distance": 1000000000, "dm": -18 }
+}
+
+MGT2.SPACE_MOUNTS = {
+    "turret": { "multiplier": 1, "hardpoints": 1 },
+    "barbette": { "multiplier": 3, "hardpoints": 1 },
+    "bay.small": { "multiplier": 10, "hardpoints": 1 },
+    "bay.medium": { "multiplier": 20, "hardpoints": 1 },
+    "bay.large": { "multiplier": 100, "hardpoints": 5 },
+    "spinal": { "multiplier": 1000, "hardpoints": 0.01 }
 }
 
 MGT2.getStatus = function(actor) {

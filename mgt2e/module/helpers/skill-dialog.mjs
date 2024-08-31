@@ -12,7 +12,7 @@ export class MgT2SkillDialog extends Application {
         return options;
     }
 
-    constructor(actor, skill, spec, cha, defaultDm) {
+    constructor(actor, skill, spec, cha, defaultDm, target) {
         super();
         this.actor = actor;
         const data = actor.system;
@@ -33,6 +33,12 @@ export class MgT2SkillDialog extends Application {
         this.penalty = 0;
         this.defaultDm = defaultDm?defaultDm:0;
         this.boonBane = "normal";
+        this.target = 8;
+        this.skillText = "";
+
+        if (target) {
+            this.target = parseInt(target);
+        }
 
         if (cha && data.characteristics && data.characteristics[cha]) {
             this.characteristic = data.characteristics[cha];
@@ -87,8 +93,11 @@ export class MgT2SkillDialog extends Application {
             this.value = this.characteristic.dm;
         }
         if (this.spec) {
-            this.options.title += " (" + this.spec.label + ")";
+            this.skillText = actor.getSkillLabel(skill + "." + spec, false);
+        } else {
+            this.skillText = actor.getSkillLabel(skill, false);
         }
+        this.options.title = this.skillText;
         this.penalty = data.physicalDM;
     }
 
@@ -98,6 +107,7 @@ export class MgT2SkillDialog extends Application {
             "data": this.data,
             "skill": this.skill,
             "spec": this.spec,
+            "skillText": this.skillText,
             "value": this.value,
             "showCha": (this.skill && this.actor.type !== "creature"),
             "chaOnly": this.chaOnly,
@@ -105,6 +115,7 @@ export class MgT2SkillDialog extends Application {
             "dicetype": "normal",
             "physicalDM": this.penalty,
             "characteristic": this.cha,
+            "target": this.target,
             "boonBane": this.boonBane
         }
     }

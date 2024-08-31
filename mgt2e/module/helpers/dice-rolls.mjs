@@ -367,18 +367,49 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
 
 }
 
+function addTitle(text, options, property) {
+    if (options && options.results) {
+        let value = options.results[property];
+        if (!isNaN(value) && parseInt(value) !== 0) {
+            value = parseInt(value);
+            if (value > 0) {
+                value = "+" + value;
+            }
+            text += ` ${property} ${value}`;
+        }
+    }
+    return text;
+}
+
 export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let text = "";
 
-    let score = gunner.getWeaponSkill(weaponItem, options);
+    let score = gunner.getAttackSkill(weaponItem, options);
 
     let dice = `${options.results.dice} + ${score}`;
     console.log(dice);
     console.log(options);
     const attackRoll = await new Roll(dice, gunner?gunner.getRollData():null).evaluate();
+    let effect = Math.max(0, attackRoll.total - 8);
     const damageRoll = await new Roll(weaponItem.system.weapon.damage, null).evaluate();
 
-    let dmgText = damageRoll.total;
+    let dmgText = `Damage ${damageRoll.total}`;
+    if (effect > 0) {
+        dmgText += ` (+${effect})`;
+    }
+
+    let title = `${options.results["cha"]} ${options.results["chadm"]} Skill ${options.results["base"]}`;
+    title = addTitle(title, options, "weapon");
+    title = addTitle(title, options, "dm");
+    title = addTitle(title, options, "rangedm");
+
+    let dataOptions = {
+        "damage": damageRoll.total + effect,
+        "multiplier": 1,
+        "scale": weaponItem.system.weapon.scale,
+        "traits": weaponItem.system.weapon.traits
+    };
+    let json = JSON.stringify(dataOptions);
 
     text = `
         <div class="attack-message">
@@ -387,7 +418,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                 <div>
                     <img class="skillcheck-thumb" src="${starship.thumbnail}" title="${starship.name}"/>
                     <img class="skillcheck-thumb" src="${gunner.thumbnail}" title="${gunner.name}"/>
-                    <b>${options.results.label} ${score}</b><br/>
+                    <b title="${title}">${options.results.label} ${score}</b><br/>
                     ${game.i18n.localize("MGT2.Item.SpaceRange." + options.range)}<br/>
                     ${weaponItem.system.weapon.damage}<br/>
                 </div>
@@ -398,10 +429,11 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                     <span class="skill-roll inline-roll inline-result">
                         <i class="fas fa-dice"> </i> ${attackRoll.total}
                     </span>
+                    Effect ${(effect>0)?"+":""}${effect}
                 </div>
                 <hr/>
-                <div class="damage-message" data-damage="${damageRoll.total}" data-options="${options}">
-                    <button data-damage="${damageRoll.total}" data-options="${options}" class="damage-button">
+                <div class="damage-message" data-damage="${damageRoll.total + effect}" data-options='${json}'>
+                    <button data-damage="${damageRoll.total + effect}" data-options='${json}' class="damage-button">
                         ${dmgText}
                     </button>
                 </div>
@@ -418,23 +450,8 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
 }
 
 function getDifficultyLabel(difficulty) {
-    switch (difficulty) {
-        case 1: case 2: case 3:
-            return "Simple";
-        case 4: case 5:
-            return "Easy";
-        case 6: case 7:
-            return "Routine";
-        case 8: case 9:
-            return "Average";
-        case 10: case 11:
-            return "Difficult";
-        case 12: case 13:
-            return "Very Difficult";
-        case 14: case 15:
-            return "Formidable";
-        case 16:
-            return "Impossible";
+    if (difficulty >= 0 && difficulty <= 16) {
+        return game.i18n.localize("MGT2.TaskDifficulty." + difficulty);
     }
     return "";
 }

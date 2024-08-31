@@ -381,25 +381,79 @@ export class MgT2Actor extends Actor {
       return score;
   }
 
+  applyDamage(damage, options) {
+      console.log(`applyDamage: [${this.name}] [${damage}]`);
+      console.log(options);
+
+      if (this.type === "spacecraft") {
+          if (options.scale !== "spacecraft") {
+              damage = parseInt(damage / 10);
+          }
+          let armour = parseInt(this.system.spacecraft.armour);
+          if (options.ap) {
+              let ap = parseInt(options.ap);
+              armour = Math.max(0, armour - ap);
+          }
+          damage = Math.max(0, damage - armour);
+
+          if (options.multiplier && parseInt(options.multiplier) > 1) {
+              damage += parseInt(options.multiplier);
+          }
+          this.system.hits.damage += damage;
+          this.system.hits.value = this.system.hits.max - this.system.hits.damage;
+          this.update({"system.hits": this.system.hits});
+      }
+
+  }
+
   getWeaponSkill(weaponItem, options) {
       let score = this.getUntrained();
 
       if (weaponItem && weaponItem?.system?.weapon) {
-          let cha = weaponItem.system.weapon.characteristic;
           let skill = weaponItem.system.weapon.skill;
-
-          if (!isNaN(weaponItem.system.weapon.dm)) {
-              if (!options.dm) {
-                  options.dm = 0;
+          if (options) {
+              if (!options["cha"]) {
+                  options["cha"] = weaponItem.system.weapon.characteristic;
               }
-              options.dm += parseInt(weaponItem.system.weapon.dm);
           }
 
           score = this.getSkillValue(skill, options);
+          if (options) {
+              if (!options.results) {
+                  options.results = {};
+              }
+              options.results["cha"] = weaponItem.system.weapon.characteristic;
+          }
       }
 
       return score;
   }
+
+  getAttackSkill(weaponItem, options) {
+      if (weaponItem && weaponItem?.system?.weapon) {
+          let score = this.getWeaponSkill(weaponItem, options);
+
+          if (!isNaN(weaponItem.system.weapon.attackBonus)) {
+              score += parseInt(weaponItem.system.weapon.attackBonus);
+              if (options?.results) {
+                  options.results["weapon"] = parseInt(weaponItem.system.weapon.attackBonus);
+              }
+          }
+          return score;
+      }
+      return this.getUntrained();
+  }
+    getParrySkill(weaponItem, options) {
+        if (weaponItem && weaponItem?.system?.weapon) {
+            let score = this.getWeaponSkill(weaponItem, options);
+
+            if (!isNaN(weaponItem.system.weapon.parryBonus)) {
+                score += parseInt(weaponItem.system.weapon.parryBonus);
+            }
+            return score;
+        }
+        return this.getUntrained();
+    }
 
     /**
      * Gets dice modifier for the given skill. Includes any bonuses for augments and
@@ -456,6 +510,7 @@ export class MgT2Actor extends Actor {
                   cha = spec.default;
               }
           }
+          options.results.cha = cha;
 
           if (skill.trained) {
               if (spec) {
@@ -500,7 +555,15 @@ export class MgT2Actor extends Actor {
           }
       }
 
-      // Apply global penalties.
+      // Apply global modifiers.
+      if (!isNaN(options.dm)) {
+          score += parseInt(options.dm);
+          options.results["dm"] = parseInt(options.dm);
+      }
+      if (cha && this.system[cha]) {
+          score += parseInt(this.system[cha]);
+          options.results["chadm"] = parseInt(this.system[cha]);
+      }
 
       return score;
   }

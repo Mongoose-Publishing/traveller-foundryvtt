@@ -96,11 +96,11 @@ export class MgT2SpacecraftAttackDialog extends Application {
         }
 
         let options = {
-            "DM": dm,
+            "dm": dm,
             "skill": 0,
             "range": range,
-            "rangeDM": rangeDM,
-            "rollType": rollType
+            "rangedm": rangeDM,
+            "boon": rollType
         }
 
         rollSpaceAttack(this.starship, this.gunner, this.weaponItem, options);

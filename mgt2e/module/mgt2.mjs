@@ -1407,9 +1407,16 @@ Handlebars.registerHelper('skillToLabel', function(skillName) {
     let label = "";
     if (skills[skillId]) {
         label = skills[skillId].label;
+        if (!label) {
+            label = game.i18n.localize("MGT2.Skills." + skillId);
+        }
         if (specId && skills[skillId].specialities) {
             if (skills[skillId].specialities[specId]) {
-                label += " (" + skills[skillId].specialities[specId].label + ")";
+                if (skills[skillId].specialities[specId].label) {
+                    label += ` (skills[skillId].specialities[specId].label)`;
+                } else {
+                    label += ` (${game.i18n.localize("MGT2.Skills." + specId)})`;
+                }
             }
         }
     } else {

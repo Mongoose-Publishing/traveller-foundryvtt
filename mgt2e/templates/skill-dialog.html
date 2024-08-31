@@ -20,7 +20,7 @@
                     <span> + </span>
                 {{/if}}
                 {{#if spec}}
-                    {{skill.label}} ({{spec.label}})
+                    {{skillText}}
                     {{#if spec.augmented}}
                         [{{spec.augmented}}<sup>*</sup>]
                     {{else}}
@@ -28,7 +28,7 @@
                     {{/if}}
                 {{else}}
                     {{#if skill}}
-                        {{skill.label}} [{{value}}]
+                        {{skillText}} [{{value}}]
                     {{else}}
                         <i>untrained</i> [{{value}}]
                     {{/if}}
@@ -69,7 +69,7 @@
                 <label for="difficulty" class="skillDialogLabel">Difficulty</label>
                 <br/>
                 <select class="skillDialogDifficulty" name="difficulty">
-                    {{#select "8"}}
+                    {{#select target}}
                     <option value="2">Simple (2+)</option>
                     <option value="4">Easy (4+)</option>
                     <option value="6">Routine (6+)</option>
