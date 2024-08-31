@@ -4,6 +4,17 @@
 
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
+* Some things silently fail on Foundry v12.
+
+## v0.10.1 (Beta)
+
+* Weapon attack option has been added to crew roles.
+* Crew role skill check can now specify difficulty of a task, and the characteristic to use.
+* Bugs fixed around display of skill labels.
+* Bug which prevented spacecraft from being updated if a computer wasn't set fixed.
+* Backend reworking of how skills are calculated.
+* Fixed bugs with display of the NPC ID card.
+
 
 ## v0.10.0 (Beta)
 

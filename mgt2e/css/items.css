@@ -68,6 +68,11 @@ section.item-sheet .shadow {
     padding-right: 3px;
 }
 
+.actor-items .item img.small {
+    width: 32px;
+    height: 32px;
+}
+
 .actor-items .item h4 {
     margin: -2px -2px 2px -2px;
     padding-left: 3px;

@@ -4,22 +4,22 @@
              title="{{actor.name}}" height="150" width="150"/>
 
         <div class="info">
-            {{#if system.sophont.species}}
+            {{#if actor.system.sophont.species}}
             <div class="id-data">
                 <h4>{{localize 'MGT2.TravellerSheet.Species'}}</h4>
-                <span>{{system.sophont.species}}</span>
+                <span>{{actor.system.sophont.species}}</span>
             </div>
             {{/if}}
-            {{#if system.sophont.gender}}
+            {{#if actor.system.sophont.gender}}
             <div class="id-data">
                 <h4>{{localize 'MGT2.TravellerSheet.Gender'}}</h4>
-                <span>{{system.sophont.gender}}</span>
+                <span>{{actor.system.sophont.gender}}</span>
             </div>
             {{/if}}
-            {{#if system.sophont.homeworld}}
+            {{#if actor.system.sophont.homeworld}}
             <div class="id-data">
                 <h4>{{localize 'MGT2.TravellerSheet.HomeWorld'}}</h4>
-                <span>{{system.sophont.homeworld}}</span>
+                <span>{{actor.system.sophont.homeworld}}</span>
             </div>
             {{/if}}
         </div>
@@ -32,18 +32,19 @@
             {{#if users}}<i class="id-share fa-regular fa-share-from-square"></i>{{/if}}
         </h1>
 
+        {{log system}}
         <div class="upp">
-            <span class="upp">{{toHex system.characteristics.STR.value}}</span>
-            <span class="upp">{{toHex system.characteristics.DEX.value}}</span>
-            <span class="upp">{{toHex system.characteristics.END.value}}</span>
-            <span class="upp">{{toHex system.characteristics.INT.value}}</span>
-            <span class="upp">{{toHex system.characteristics.EDU.value}}</span>
-            <span class="upp">{{toHex system.characteristics.SOC.value}}</span>
+            <span class="upp">{{toHex actor.system.characteristics.STR.value}}</span>
+            <span class="upp">{{toHex actor.system.characteristics.DEX.value}}</span>
+            <span class="upp">{{toHex actor.system.characteristics.END.value}}</span>
+            <span class="upp">{{toHex actor.system.characteristics.INT.value}}</span>
+            <span class="upp">{{toHex actor.system.characteristics.EDU.value}}</span>
+            <span class="upp">{{toHex actor.system.characteristics.SOC.value}}</span>
 
-            {{#if system.sophont.profession}}
+            {{#if actor.system.sophont.profession}}
             <div class="id-data">
                 <h4>{{localize 'MGT2.TravellerSheet.Profession'}}</h4>
-                <span>{{system.sophont.profession}}</span>
+                <span>{{actor.system.sophont.profession}}</span>
             </div>
             {{/if}}
         </div>

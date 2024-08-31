@@ -1270,6 +1270,7 @@ Handlebars.registerHelper('hasStatus', function(actor) {
 });
 
 Handlebars.registerHelper('toHex', function(value) {
+    console.log(value);
     return parseInt(value).toString(16).toUpperCase();
 });
 
@@ -1339,12 +1340,12 @@ Handlebars.registerHelper('showSimpleSkills', function(actor) {
                         let spec = skill.specialities[specKey];
                         if (spec.value > 0) {
                             showParent = false;
-                            html += `<li>${skill.label.replace(/ /, "&nbsp;")}&nbsp;(${spec.label.replace(/ /, "&nbsp;")})/${spec.value}</li>`;
+                            html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})/${spec.value}</li>`;
                         }
                     }
                }
                if (showParent) {
-                   html += `<li>${skill.label.replace(/ /, "&nbsp;")}/${skill.value}</li>`;
+                   html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}/${skill.value}</li>`;
                }
            }
        }

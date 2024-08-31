@@ -19,6 +19,7 @@ export class MgT2SkillDialog extends Application {
 
         console.log("skill-dialog:");
         console.log(actor);
+        console.log(cha);
 
         this.skillId = skill;
         this.skill = null;
@@ -41,7 +42,7 @@ export class MgT2SkillDialog extends Application {
         }
 
         if (cha && data.characteristics && data.characteristics[cha]) {
-            this.characteristic = data.characteristics[cha];
+            this.cha = cha;
             if (!skill) {
                 this.chaOnly = true;
                 this.value = 0;
@@ -50,7 +51,9 @@ export class MgT2SkillDialog extends Application {
         this.data = data;
         if (skill) {
             this.skill = data.skills[skill];
-            this.cha = this.skill.default;
+            if (!this.cha) {
+                this.cha = this.skill.default;
+            }
             if (this.skill.expert) {
                 this.expert = parseInt(this.skill.expert);
             }
@@ -72,7 +75,7 @@ export class MgT2SkillDialog extends Application {
                     this.specId = spec;
                     this.spec = data.skills[skill].specialities[spec];
                     this.value = this.spec.value;
-                    if (this.spec.default) {
+                    if (this.spec.default && !this.cha) {
                         this.cha = this.spec.default;
                     }
                     if (this.spec.expert) {
@@ -89,6 +92,7 @@ export class MgT2SkillDialog extends Application {
             }
             this.options.title = this.skill.label;
         } else if (cha) {
+            this.characteristic = data.characteristics[cha];
             this.options.title = this.characteristic.label;
             this.value = this.characteristic.dm;
         }
@@ -99,6 +103,8 @@ export class MgT2SkillDialog extends Application {
         }
         this.options.title = this.skillText;
         this.penalty = data.physicalDM;
+
+        console.log(`Using characteristic ${this.cha}`);
     }
 
     getData() {
