@@ -18,6 +18,7 @@ Damage applied by spacecraft attacks may be inconsistent depending on how it is 
 * Bug which prevented spacecraft from being updated if a computer wasn't set fixed.
 * Backend reworking of how skills are calculated.
 * Fixed bugs with display of the NPC ID card.
+* Fixed bug with skill icon.
 
 
 ## v0.10.0 (Beta)

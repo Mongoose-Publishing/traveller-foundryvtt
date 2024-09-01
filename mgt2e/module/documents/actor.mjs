@@ -585,6 +585,17 @@ export class MgT2Actor extends Actor {
       return score;
   }
 
+  getSkillIcon(skillId) {
+      let skill = this.system.skills[skillId.replaceAll(/\..*/g, "")];
+      if (!skill) {
+          return "systems/mgt2e/icons/skills/untrained.svg";
+      }
+      if (skill.icon) {
+          return skill.icon;
+      }
+      return `systems/mgt2e/icons/skills/${skillId}.svg`;
+  }
+
   getSkillLabel(skill, showValue) {
       if (!skill) {
           return "";

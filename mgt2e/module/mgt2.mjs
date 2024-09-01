@@ -347,6 +347,9 @@ Hooks.on("createActor", (actor) => {
                     actor.system.skills[s].specialities[sp].value = 0;
                 }
             }
+            if (!actor.system.skills[s].icon) {
+                actor.system.skills[s].icon = `systems/mgt2e/icons/skills/${s}.svg`;
+            }
         }
         actor.update({ "system.skills": actor.system.skills });
     }
@@ -605,7 +608,7 @@ async function createTravellerMacro(data, slot) {
             return false;
         }
         let skill = actor.system.skills[dragData.skillName];
-        let label = skill.label;
+        let label = actor.getSkillLabel(dragData.skillName);
 
         const command = `game.mgt2e.rollSkillMacro('${dragData.skillName}')`;
         let macro = null; //game.macros.entries.find(m => (m.name === dragData.skillName));
@@ -614,7 +617,7 @@ async function createTravellerMacro(data, slot) {
                 name: label,
                 type: "script",
                 command: command,
-                img: skill.icon
+                img: actor.getSkillIcon(dragData.skillName)
             });
         }
         ui.notifications.info(game.i18n.format("MGT2.Info.HotBar.AssignedSkill", { skill: label}));
