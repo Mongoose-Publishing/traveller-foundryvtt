@@ -1614,7 +1614,11 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
 });
 
 Handlebars.registerHelper('selectedWeaponId', function(actions, id) {
-   return actions[id].weapon;
+    if (actions && id && actions[id]) {
+        return actions[id].weapon;
+    } else {
+        return "";
+    }
 });
 
 

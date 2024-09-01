@@ -37,6 +37,10 @@ export class MgT2SpacecraftAttackDialog extends Application {
             for (let w in weapons) {
                 console.log(`Weapon id in mount: ${w}`);
                 let wpnItem = this.starship.items.get(w);
+                if (!wpnItem) {
+                    ui.notifications.error(`Weapon item [${w}] does not exist`);
+                    continue;
+                }
                 if (!this.weaponSelected) {
                     this.weaponSelected = w;
                     this.weaponItem = wpnItem;

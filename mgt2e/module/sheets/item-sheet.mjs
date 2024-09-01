@@ -206,7 +206,13 @@ export class MgT2ItemSheet extends ItemSheet {
             if (item.system.hardware.weapons) {
                 for (let wpnId in item.system.hardware.weapons) {
                     let wpn = ship.items.get(wpnId);
-                    activeWeapons.push(wpn);
+                    if (wpn) {
+                        activeWeapons.push(wpn);
+                    } else {
+                        console.log(`Weapon [${wpnId}] does not exist in [${item.name}]`);
+                        delete item.system.hardware.weapons[wpnId];
+                        item.update({"system.hardware.weapons": item.system.hardware.weapons});
+                    }
                 }
             }
 
