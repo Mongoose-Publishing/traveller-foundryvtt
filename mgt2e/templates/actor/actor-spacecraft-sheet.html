@@ -287,6 +287,11 @@
                                 <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
                                     <h4>{{item.name}}</h4>
                                     <img src="{{item.img}}" class="small"/>
+                                    <ol class="comma-list small-text">
+                                        {{#each item.system.role.actions as |action|}}
+                                            <li>{{action.title}}</li>
+                                        {{/each}}
+                                    </ol>
                                     <div class="item-controls">
                                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                                         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

@@ -616,6 +616,7 @@
 
   "MGT2.Error.NoWeaponMount": "Vehicle has no weapon mounted for this action",
   "MGT2.Error.RoleInUse": "Cannot delete role {roleName} because it is assigned to crew member {actorName}",
+  "MGT2.Error.WeaponInUse": "Cannot delete weapon {wpnName} because it is assigned to {mountName}",
 
   "MGT2.Warn.HotBar.NewActor": "Cannot assign hot bar skills for a new actor",
   "MGT2.Info.HotBar.AssignedSkill": "Assigned skill '{skill}' to the hot bar",

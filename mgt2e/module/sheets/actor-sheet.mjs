@@ -600,8 +600,8 @@ export class MgT2ActorSheet extends ActorSheet {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
 
-            // Don't allow a role to be deleted if it is in use.
             if (item && item.type === "role" && item.parent) {
+                // Don't allow a role to be deleted if it is in use.
                 let parent = item.parent;
                 let crew = parent.system.crewed.crew;
                 for (let c in parent.system.crewed.crew) {
@@ -613,6 +613,24 @@ export class MgT2ActorSheet extends ActorSheet {
                             )
                         );
                         return;
+                    }
+                }
+            } else if (item && item.type === "weapon") {
+                let parent = item.parent;
+                if (parent && parent.type === "spacecraft" && item.system.weapon.scale === "spacecraft") {
+                    // Check to see if item is being used by a weapon mount.
+                    for (let i of parent.items) {
+                        if (i.type === "hardware" && i.system.hardware.system === "weapon") {
+                            let wpns = i.system.hardware.weapons;
+                            if (wpns[item._id]) {
+                                ui.notifications.error(
+                                    game.i18n.format("MGT2.Error.WeaponInUse",
+                                        { "wpnName": item.name, "mountName": i.name }
+                                    )
+                                );
+                                return;
+                            }
+                        }
                     }
                 }
             }
@@ -1065,7 +1083,14 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     async _deleteCrewMember(actor, actorId) {
-        await actor.update({[`system.crewed.crew.-=${actorId}`]: null});
+        if (Object.keys(actor.system.crewed.crew).length === 1) {
+            let crewed = actor.system.crewed;
+            crewed.crew = {};
+            await actor.update({[`system.crewed`]: crewed});
+        } else {
+            await actor.update({[`system.crewed.crew.-=${actorId}`]: null});
+        }
+        console.log(Object.keys(actor.system.crewed.crew).length);
     }
 
     async _movePassengerToCrew(actor, actorId) {

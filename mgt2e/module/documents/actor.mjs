@@ -41,6 +41,7 @@ export class MgT2Actor extends Actor {
                 }
             }
         }
+        console.log("prepareBaseData: Complete");
     }
 
     _preUpdate(changes, options, user) {
