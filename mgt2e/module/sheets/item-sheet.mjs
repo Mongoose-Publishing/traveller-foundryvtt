@@ -570,7 +570,6 @@ export class MgT2ItemSheet extends ItemSheet {
 
     _deleteRollAction(item, id) {
         let actions = item.system.role.actions;
-
         item.update({[`system.role.actions.-=${id}`]: null});
     }
 

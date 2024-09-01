@@ -599,6 +599,23 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.item-delete').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
+
+            // Don't allow a role to be deleted if it is in use.
+            if (item && item.type === "role" && item.parent) {
+                let parent = item.parent;
+                let crew = parent.system.crewed.crew;
+                for (let c in parent.system.crewed.crew) {
+                    if (crew[c][item._id]) {
+                        let actor = game.actors.get(c);
+                        ui.notifications.error(
+                            game.i18n.format("MGT2.Error.RoleInUse",
+                                { "roleName": item.name, "actorName": actor?actor.name:"?" }
+                            )
+                        );
+                        return;
+                    }
+                }
+            }
             item.delete();
             li.slideUp(200, () => this.render(false));
             this._calculateArmour(this.actor);
