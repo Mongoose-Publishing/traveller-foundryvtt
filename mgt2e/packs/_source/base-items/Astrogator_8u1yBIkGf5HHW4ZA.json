@@ -11,14 +11,18 @@
           "action": "skill",
           "chat": "",
           "skill": "astrogation",
-          "dm": 3
+          "dm": -1,
+          "cha": "EDU",
+          "target": 4
         },
         "lybp5t2x": {
           "title": "Jump-2",
           "action": "skill",
           "chat": "",
           "skill": "astrogation",
-          "dm": 2
+          "dm": -2,
+          "cha": "EDU",
+          "target": 4
         }
       },
       "description": ""
@@ -34,11 +38,11 @@
   },
   "_stats": {
     "systemId": "mgt2e",
-    "systemVersion": "0.6.4",
+    "systemVersion": "0.10.1",
     "coreVersion": "11.315",
     "createdTime": 1720365386673,
-    "modifiedTime": 1720367199456,
-    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+    "modifiedTime": 1725187224192,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "8u1yBIkGf5HHW4ZA",
   "sort": 100000,

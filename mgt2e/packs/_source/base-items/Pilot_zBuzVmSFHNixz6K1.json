@@ -6,18 +6,22 @@
     "role": {
       "actions": {
         "lybofso7": {
-          "title": "Landing at Port",
+          "title": "Port Landing",
           "action": "skill",
           "chat": "",
           "skill": "pilot.spacecraft",
-          "dm": 2
+          "dm": 0,
+          "cha": "DEX",
+          "target": 6
         },
         "lybp35kd": {
-          "title": "Landing in Wild",
+          "title": "Wild Landing",
           "action": "skill",
           "chat": "",
           "skill": "pilot.spacecraft",
-          "dm": 0
+          "dm": 0,
+          "cha": "DEX",
+          "target": 8
         }
       },
       "description": ""
@@ -34,11 +38,11 @@
   },
   "_stats": {
     "systemId": "mgt2e",
-    "systemVersion": "0.6.4",
+    "systemVersion": "0.10.1",
     "coreVersion": "11.315",
     "createdTime": 1720364212718,
-    "modifiedTime": 1720367195045,
-    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+    "modifiedTime": 1725187340383,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "zBuzVmSFHNixz6K1",
   "sort": 0,

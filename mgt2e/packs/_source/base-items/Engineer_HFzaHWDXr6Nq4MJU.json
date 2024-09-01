@@ -10,21 +10,27 @@
           "action": "skill",
           "chat": "",
           "skill": "engineer.jDrive",
-          "dm": 4
+          "dm": null,
+          "cha": "EDU",
+          "target": 4
         },
         "lyboht8t": {
           "title": "Overload Power",
           "action": "skill",
           "chat": "",
           "skill": "engineer.power",
-          "dm": -2
+          "dm": null,
+          "cha": "INT",
+          "target": 10
         },
         "lyboi8o8": {
           "title": "Overload Drive",
           "action": "skill",
           "chat": "",
           "skill": "engineer.mDrive",
-          "dm": -2
+          "dm": null,
+          "cha": "INT",
+          "target": 10
         }
       },
       "description": ""
@@ -41,11 +47,11 @@
   },
   "_stats": {
     "systemId": "mgt2e",
-    "systemVersion": "0.6.4",
+    "systemVersion": "0.10.1",
     "coreVersion": "11.315",
     "createdTime": 1720364288589,
-    "modifiedTime": 1720367197481,
-    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+    "modifiedTime": 1725187252997,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "HFzaHWDXr6Nq4MJU",
   "sort": 0,

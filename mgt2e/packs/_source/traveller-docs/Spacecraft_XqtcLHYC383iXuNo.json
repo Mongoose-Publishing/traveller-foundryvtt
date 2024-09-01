@@ -1,0 +1,92 @@
+{
+  "folder": "81lpHPvcOeOkc8gf",
+  "name": "Spacecraft",
+  "_id": "XqtcLHYC383iXuNo",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Crew Roles",
+      "type": "text",
+      "_id": "M6w2juT3bwCbEXdU",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Travellers and NPCs can be dragged onto a spacecraft to assign them as passengers. They can then be promoted to crew members.</p><p>Each crew member can be granted one or more roles. A role allows the crew member to perform actions directly from the spacecraft sheet, with predefined difficulties and modifiers.</p><h2>Creating a Role</h2><p>To create a new role, create a \"Crew Role\" item, and give it a name. Actions can then be added to the role depending on what you want the role to do.</p><h3>Chat</h3><p>A chat action will simply output a message to the chat. This can be used for describing actions or flavour text.</p><h3>Skill</h3><p>A skill action will make a skill check using the crew member's own skills. You can select the skill to be rolled, along with optionally specificying a characteristic to use (otherwise the character's default will be used for that skill).</p><p>You can set a skill target number (defaults to 8) and specify a DM to apply to the check. Specifying a target of 6 or adding a DM of +2 have much the same effect, but conceptually they can be different.</p><p>A Jump astrogation check is dificulty 4, with a -1 DM per parsec of distance, so you could either specify a target of 5 for a 1 parsec jump, or set the target to 4 with a DM of -1.</p><h3>Weapon</h3><p>You can assign a weapon to be fired. This requires selecting a weapon from the ship, so until the role is applied to the ship weapon attacks can't be set up.</p><p>For a role assigned to a ship, you will be given a list of weapon mounts to select from.</p><h2>Assign Role to Ship</h2><p>Dragging the crew role item to a ship will add it to the list of available roles. These are listed on the Notes tab of the spacecraft's sheet.</p><p>A role can be edited or deleted from this tab.</p><h2>Assign Role to Crew</h2><p>To assign a role to a crew member, go to the Crew tab and edit a crew member. You will be given a list of available roles to select from. A crew member can have multiple roles assigned to them.</p><p>Once a role is assigned, a button for each task will appear on that crew member's entry. Click it to perform the action.</p><p></p><p></p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "mgt2e",
+        "systemVersion": "0.10.1",
+        "coreVersion": "11.315",
+        "createdTime": 1725187463182,
+        "modifiedTime": 1725188117952,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!XqtcLHYC383iXuNo.M6w2juT3bwCbEXdU"
+    },
+    {
+      "sort": 200000,
+      "name": "Spacecraft Weapons",
+      "type": "text",
+      "_id": "qLZ9BdVEeSIbwc57",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Adding weapons to a spacecraft is a four step process. </p><ol><li><p>Add a spacecraft scale weapon to the ship.</p></li><li><p>Create a mount point for the weapon.</p></li><li><p>Assign the weapon to the mount.</p></li><li><p>Assign a role to a crew member to fire the weapon.</p></li></ol><h2>Add Weapon to Spacecraft</h2><p>If a Weapon item with a scale of 'Spacecraft' is dragged onto the ship's sheet, then it will be made available for adding to mount points. A weapon can be assigned to multiple mounts, so you only need to add one of each weapon type.</p><p>The full list of available weapons is displayed in the Notes tab of a spacecraft's sheet.</p><h2>Create a Mount</h2><p>Add a hardware item of type Weapon. This creates a weapon mounting (such as a turret, bay or spinal mount) which can have a weapon assigned to it.</p><p>Weapon mounts appear in the Hardware tab of a spacecraft.</p><h2>Assign Weapon to Mount</h2><p>If you edit the weapon mount, then you should see a list of available weapons that can be assigned to that weapon. Weapons need to have the same mounting type. So a Small Bay weapon mount will only display weapons with a mount type of Small Bay.</p><p>You can normally add only a single weapon to a mount. The exception is for double, triple and quad turrets that allow multiple weapons to be assigned (or the same weapon to be assigned multiple times).</p><p>You can increase the quantity of weapon mounts, which means that there are multiple different turrets or bays with that type of weapon.</p><h2>Assign a Role</h2><p>Once a weapon has been setup and added to a mount, you can then assign that weapon to the 'Weapon' task in a crew role.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "mgt2e",
+        "systemVersion": "0.10.1",
+        "coreVersion": "11.315",
+        "createdTime": 1725188139416,
+        "modifiedTime": 1725188403553,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!XqtcLHYC383iXuNo.qLZ9BdVEeSIbwc57"
+    }
+  ],
+  "sort": 500000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "mgt2e",
+    "systemVersion": "0.10.1",
+    "coreVersion": "11.315",
+    "createdTime": 1725187432135,
+    "modifiedTime": 1725188403553,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!journal!XqtcLHYC383iXuNo"
+}
