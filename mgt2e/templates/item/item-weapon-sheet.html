@@ -14,6 +14,7 @@
                 </div>
             </div>
 
+            {{#if (item.useAmmo)}}
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
                     <label for="system.weapon.magazine" class="resource-label">Magazine Size</label>
@@ -28,6 +29,7 @@
                     <input class="writable" type="text" name="system.weapon.ammo" value="{{system.weapon.ammo}}" data-dtype="Number"/>
                 </div>
             </div>
+            {{/if}}
 
             <div class="shadow item-side-panel">
                 <button type="submit" name="submit" class="damageDone">Damage <i class="fas fa-dice"></i></button>

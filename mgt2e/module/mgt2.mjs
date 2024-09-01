@@ -1617,6 +1617,7 @@ Handlebars.registerHelper('selectedWeaponId', function(actions, id) {
    return actions[id].weapon;
 });
 
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

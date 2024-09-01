@@ -157,4 +157,20 @@ export class MgT2Item extends Item {
         }
         return false;
     }
+
+    useAmmo() {
+        let weapon = this.system.weapon;
+        if (weapon) {
+            if (!isNaN(weapon.range) && parseInt(weapon.range) > 0) {
+                return true;
+            }
+            if (weapon.scale === "spacecraft") {
+                return true;
+            }
+            if (weapon.scale === "vehicle") {
+                return true;
+            }
+        }
+        return false;
+    }
 }
