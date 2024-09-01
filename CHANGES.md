@@ -19,6 +19,7 @@ Damage applied by spacecraft attacks may be inconsistent depending on how it is 
 * Backend reworking of how skills are calculated.
 * Fixed bugs with display of the NPC ID card.
 * Fixed bug with skill icon.
+* Magazine and ammo only displayed for ranged weapons.
 
 
 ## v0.10.0 (Beta)
