@@ -4,7 +4,12 @@
     <ol class="items-list actor-crew-list grid grid-2col">
         {{#each crew as |crewMember|}}
             <li class="actor-crew" data-actor-id="{{crewMember._id}}">
-                <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
+                <h4 title="{{crewMember.name}}">
+                    {{crewMember.name}}
+                    {{#if crewMember.system.sophont.profession}}
+                        ({{crewMember.system.sophont.profession}})
+                    {{/if}}
+                </h4>
                 <img class="embedded-actor-portrait" data-actor-id="{{crewMember._id}}" title="{{crewMember.name}}" src="{{crewMember.img}}"/>
 
                 {{{showCrewInfo ../actor crewMember}}}
@@ -37,6 +42,14 @@
         <li class="actor-crew" data-actor-id="{{crewMember._id}}">
             <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
             <img class="embedded-actor-portrait" data-actor-id="{{crewMember._id}}"  title="{{crewMember.name}}" src="{{crewMember.img}}"/>
+
+            {{#if crewMember.system.sophont.species}}
+                <div>{{crewMember.system.sophont.species}}</div>
+            {{/if}}
+
+            {{#if crewMember.system.sophont.profession}}
+                <div>{{crewMember.system.sophont.profession}}</div>
+            {{/if}}
 
             <div class="item-controls">
                 <a class="item-control passenger-crew" title="Make crew">

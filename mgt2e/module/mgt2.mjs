@@ -956,9 +956,8 @@ Handlebars.registerHelper('number', function(value) {
 });
 
 Handlebars.registerHelper('quantity', function(item, value) {
-   return value * item.system.quantity;
+   return Intl.NumberFormat("en-GB", { maximumFractionDigits: 2}).format(value * item.system.quantity);
 });
-
 
 Handlebars.registerHelper('formula', function(actor, value) {
     if (value === undefined || value === null || value == "") {

@@ -1229,7 +1229,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 this.actor.system.speed.value = actor.system.speed.base;
                 await this.actor.update({"system.speed": this.actor.system.speed });
             }
-            if (!isNaN(actor.system.size)) {
+            if (actor.system.size && !Number.isNaN(actor.system.size)) {
+                console.log(`Size [${actor.system.size}]`);
                 if (actor.system.size !== this.actor.system.size) {
                     html += `<p><b>Size:</b> ${actor.system.size}</p>`;
                 }

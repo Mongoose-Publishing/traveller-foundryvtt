@@ -21,8 +21,6 @@ export class MgT2Actor extends Actor {
     prepareBaseData() {
         // Data modifications in this step occur before processing embedded
         // documents or derived data.
-        console.log(`prepareBaseData: [${this.name}]`);
-
         if (this.system.hits && this.type !== "traveller") {
             let hits = this.system.hits;
             if (hits.value !== (hits.max - hits.damage)) {
@@ -41,7 +39,6 @@ export class MgT2Actor extends Actor {
                 }
             }
         }
-        console.log("prepareBaseData: Complete");
     }
 
     _preUpdate(changes, options, user) {
