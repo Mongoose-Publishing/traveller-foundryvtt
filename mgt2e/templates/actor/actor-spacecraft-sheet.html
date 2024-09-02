@@ -62,17 +62,18 @@
             <div class="side-panel armour-box shadow flex-group-center">
                 <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
 
-                <div class="resource">
-                    <label class="prot-type" title="Protection">Armour</label>
-                    <input class="armour-value writable" type="text" name="system.spacecraft.armour" title="Armour"
-                           value="{{system.spacecraft.armour}}" data-dtype="Number"/>
+                <div class="grid grid-2col">
+                    <div class="resource">
+                        <label class="prot-type" title="Protection">Armour</label>
+                        <input class="armour-value writable" type="text" name="system.spacecraft.armour" title="Armour"
+                               value="{{system.spacecraft.armour}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label class="prot-type" title="Rad Shielding">Radiation</label>
+                        <input class="armour-value writable" type="text" name="system.spacecraft.radShielding" title="Radiation protection"
+                               value="{{system.spacecraft.radShielding}}" data-dtype="Number"/>
+                    </div>
                 </div>
-                <div class="resource">
-                    <label class="prot-type" title="Rad Shielding">Rad Shielding</label>
-                    <input class="armour-value writable" type="text" name="system.spacecraft.radShielding" title="Radiation protection"
-                           value="{{system.spacecraft.radShielding}}" data-dtype="Number"/>
-                </div>
-                <br/>
             </div>
         </div>
 
