@@ -13,6 +13,7 @@
 * Fixed precision bug in display of item costs on character sheets.
 * Added profession and species information to passenger cards.
 * Prevent roles and weapons from being deleted if in use.
+* Fixed bug where creatures weren't being given skills.
 
 ## v0.10.1 (Beta)
 

@@ -330,7 +330,7 @@ Hooks.on("createActor", (actor) => {
     }
 
     // Copy in skills where needed.
-    if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
+    if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package" || actor.type === "creature") {
         // Need to add skills.
         for (let s in MGT2.SKILLS) {
             if (actor.system.skills[s]) {
