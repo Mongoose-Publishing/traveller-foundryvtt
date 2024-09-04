@@ -48,10 +48,12 @@
   "_stats": {
     "systemId": "mgt2e",
     "systemVersion": "0.10.1",
-    "coreVersion": "11.315",
+    "coreVersion": "12.329",
     "createdTime": 1720364288589,
     "modifiedTime": 1725187252997,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "HFzaHWDXr6Nq4MJU",
   "sort": 0,

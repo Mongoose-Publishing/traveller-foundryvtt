@@ -45,10 +45,12 @@
   "_stats": {
     "systemId": "mgt2e",
     "systemVersion": "0.6.4",
-    "coreVersion": "11.315",
+    "coreVersion": "12.329",
     "createdTime": null,
     "modifiedTime": 1720367179236,
-    "lastModifiedBy": "Uzw5MJmM0BRE3sSL"
+    "lastModifiedBy": "Uzw5MJmM0BRE3sSL",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_key": "!items!KjYQNF4VI3GigmEy"
 }

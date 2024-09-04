@@ -39,10 +39,12 @@
   "_stats": {
     "systemId": "mgt2e",
     "systemVersion": "0.10.1",
-    "coreVersion": "11.315",
+    "coreVersion": "12.329",
     "createdTime": 1720364212718,
     "modifiedTime": 1725187340383,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "zBuzVmSFHNixz6K1",
   "sort": 0,

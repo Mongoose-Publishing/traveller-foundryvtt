@@ -6,6 +6,14 @@
   is held down.
 * Some things silently fail on Foundry v12.
 
+
+## v0.10.2 (Beta)
+
+* Better use of space in armour box for spacecraft.
+* Fixed precision bug in display of item costs on character sheets.
+* Added profession and species information to passenger cards.
+* Prevent roles and weapons from being deleted if in use.
+
 ## v0.10.1 (Beta)
 
 Started adding support for spacecraft shooting at things. This is currently in alpha.

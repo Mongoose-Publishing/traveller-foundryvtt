@@ -1010,7 +1010,12 @@
       "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
-      "rotation": 0
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
     },
     "width": 1,
     "height": 1,
@@ -1045,7 +1050,10 @@
       "darkness": {
         "min": 0,
         "max": 1
-      }
+      },
+      "negative": false,
+      "priority": 0,
+      "color": null
     },
     "sight": {
       "enabled": false,
@@ -1055,11 +1063,28 @@
       "attenuation": 0.1,
       "brightness": 0,
       "saturation": 0,
-      "contrast": 0
+      "contrast": 0,
+      "color": null
     },
     "detectionModes": [],
     "flags": {},
-    "randomImg": false
+    "randomImg": false,
+    "hexagonalShape": 0,
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    }
   },
   "items": [
     {
@@ -1070,7 +1095,8 @@
           "number": 1,
           "termLength": 0,
           "assignment": "",
-          "randomTerm": false
+          "randomTerm": false,
+          "randomLength": ""
         },
         "name": "Term",
         "description": "<p>A human.</p>"
@@ -1088,10 +1114,12 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.9.0",
-        "coreVersion": "11.315",
+        "coreVersion": "12.329",
         "createdTime": 1721479631665,
         "modifiedTime": 1721508335146,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!Fq5fsrvRAEXRxurY.9C4weE30XWGOwGG6"
     },
@@ -1151,10 +1179,12 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.9.0",
-        "coreVersion": "11.315",
+        "coreVersion": "12.329",
         "createdTime": 1721479777059,
         "modifiedTime": 1721479777059,
-        "lastModifiedBy": "KjVCQnLdKUJeJDZy"
+        "lastModifiedBy": "KjVCQnLdKUJeJDZy",
+        "compendiumSource": "Compendium.mgt2e.base-items.Item.uTtH5mXI2i0byiXO",
+        "duplicateSource": null
       },
       "_key": "!actors.items!Fq5fsrvRAEXRxurY.EKeeioF23WiBgczK"
     }
@@ -1171,10 +1201,12 @@
   "_stats": {
     "systemId": "mgt2e",
     "systemVersion": "0.9.0",
-    "coreVersion": "11.315",
+    "coreVersion": "12.329",
     "createdTime": 1721479602768,
     "modifiedTime": 1721508335146,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "Fq5fsrvRAEXRxurY",
   "sort": 100000,
