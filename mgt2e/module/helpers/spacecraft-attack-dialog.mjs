@@ -61,7 +61,29 @@ export class MgT2SpacecraftAttackDialog extends Application {
                 break;
             }
         }
+    }
 
+    setRanges(html) {
+        let rangeSelect = html.find(".attackDialogRange");
+
+        let text = "";
+        let haveSelected = false;
+        for (let r in CONFIG.MGT2.SPACE_RANGES) {
+            if (!haveSelected && r === this.weaponItem.system.weapon.spaceRange) {
+                // If previous selection was a greater range, then switch to maximum range.
+                this.range = r;
+            }
+            let selected = (this.range === r)?("selected=''"):"";
+            if (selected) {
+                haveSelected = true;
+            }
+            text += `<option value="${r}" ${selected}>${game.i18n.localize("MGT2.Item.SpaceRange." + r)} (${CONFIG.MGT2.SPACE_RANGES[r].dm})</option>`;
+            if (r === this.weaponItem.system.weapon.spaceRange) {
+                break;
+            }
+        }
+
+        rangeSelect[0].innerHTML = text;
     }
 
     getData() {
@@ -76,7 +98,6 @@ export class MgT2SpacecraftAttackDialog extends Application {
             "ranges": this.ranges,
             "range": this.range,
             "gunnerSkillLabel": this.gunner.getSkillLabel(this.weaponItem.system.weapon.skill, true)
-
         }
     }
 
@@ -84,6 +105,23 @@ export class MgT2SpacecraftAttackDialog extends Application {
         super.activateListeners(html);
         const attack = html.find("button[class='attackRoll']");
         attack.on("click", event => this.onRollClick(event, html));
+
+        html.find(".attackDialogWeapon").click(event => this.onWeaponSelect(event, html));
+        html.find(".attackDialogRange").click(event => {
+            this.range = html.find(".attackDialogRange")[0].value;
+        });
+
+        this.setRanges(html);
+    }
+
+    onWeaponSelect(event, html) {
+        console.log("SELECTED");
+
+        let wpnId = $(event.currentTarget).val();
+
+        this.weaponSelected = wpnId;
+        this.weaponItem = this.starship.items.get(wpnId);
+        this.setRanges(html);
     }
 
     async onRollClick(event, html) {
@@ -105,6 +143,10 @@ export class MgT2SpacecraftAttackDialog extends Application {
             "range": range,
             "rangedm": rangeDM,
             "boon": rollType
+        }
+        let weapons = this.mount.system.hardware.weapons
+        if (weapons[this.weaponItem.id].quantity > 1) {
+            options.quantity = weapons[this.weaponItem.id].quantity;
         }
 
         rollSpaceAttack(this.starship, this.gunner, this.weaponItem, options);

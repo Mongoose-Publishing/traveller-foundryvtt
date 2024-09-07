@@ -387,11 +387,21 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let score = gunner.getAttackSkill(weaponItem, options);
 
     let dice = `${options.results.dice} + ${score}`;
-    console.log(dice);
-    console.log(options);
+    let damageDice = weaponItem.system.weapon.damage;
+    console.log("rollSpaceAttack:");
+
+    if (options && !Number.isNaN(options.quantity) && parseInt(options.quantity) > 1) {
+        let found = damageDice.match(/[0-9][0-9]*[dD]/);
+        if (found) {
+            let quantityBonus = parseInt(found[0]);
+            damageDice += ` + ${quantityBonus * (options.quantity - 1)}`;
+        }
+    }
+    console.log(damageDice);
+
     const attackRoll = await new Roll(dice, gunner?gunner.getRollData():null).evaluate();
     let effect = Math.max(0, attackRoll.total - 8);
-    const damageRoll = await new Roll(weaponItem.system.weapon.damage, null).evaluate();
+    const damageRoll = await new Roll(damageDice, null).evaluate();
 
     let dmgText = `Damage ${damageRoll.total}`;
     if (effect > 0) {
@@ -416,7 +426,6 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         "traits": weaponItem.system.weapon.traits
     };
 
-
     let json = JSON.stringify(dataOptions);
 
     text = `
@@ -434,7 +443,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                 <hr/>
                 <div class="rollResult">
                     <b>Attack Roll: </b>
-                    <span class="skill-roll inline-roll inline-result">
+                    <span class="skill-roll inline-roll inline-result" title="${dice}">
                         <i class="fas fa-dice"> </i> ${attackRoll.total}
                     </span>
                     Effect ${(effect>0)?"+":""}${effect}

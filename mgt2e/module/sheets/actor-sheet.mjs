@@ -1118,10 +1118,17 @@ export class MgT2ActorSheet extends ActorSheet {
         const action = itemRole.system.role.actions[actionId];
 
         if (action.action === "chat") {
+            console.log(ChatMessage.getSpeaker());
             let chatData = {
                 user: game.user.id,
-                speaker: ChatMessage.getSpeaker(),
-                content: `<b>${actorCrew.name} aboard '${shipActor.name}':</b><br/>${action.chat}`
+                speaker: {
+                    actor: actorCrew._id,
+                    alias: game.i18n.format("MGT2.Role.ChatAlias", {
+                        "actorName": actorCrew.name, "shipName": shipActor.name
+                    }),
+                    scene: game.scenes.current.id
+                },
+                content: `${action.chat}`
             }
             ChatMessage.create(chatData, {});
         } else if (action.action === "skill") {

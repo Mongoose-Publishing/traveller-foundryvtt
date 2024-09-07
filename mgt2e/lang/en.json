@@ -513,6 +513,8 @@
   "MGT2.Item.SpaceRange.long": "Long (10,001km+)",
   "MGT2.Item.SpaceRange.verylong": "Very Long (25,001km+)",
   "MGT2.Item.SpaceRange.distant": "Distant (50,000km+)",
+  "MGT2.Item.SpaceRange.verydistant": "Very Distant (300,000km+)",
+  "MGT2.Item.SpaceRange.far": "Far (500,000km+)",
   "MGT2.Item.Mount": "Spacecraft Mount",
   "MGT2.Item.SpaceMount.Fixed": "Fixed Mount",
   "MGT2.Item.SpaceMount.Turret": "Turret",
@@ -640,6 +642,8 @@
   "MGT2.Role.NoRoleAssigned": "No roles assigned",
   "MGT2.Role.NoCrewAssigned": "No passengers are assigned as crew members",
   "MGT2.Role.NoCrewOrPassengers": "Drag Travellers or NPCs to this ship to add crew members",
+
+  "MGT2.Role.ChatAlias": "{actorName} aboard the {shipName}:",
 
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",
