@@ -230,9 +230,9 @@ export class MgT2ActorSheet extends ActorSheet {
             actorData.hits.value = hits - actorData.hits.damage;
         }
 
-        actorData.spacecraft.mdrive = 0;
-        actorData.spacecraft.rdrive = 0;
-        actorData.spacecraft.jdrive = 0;
+        let mdrive = 0;
+        let rdrive = 0;
+        let jdrive = 0;
 
         actorData.spacecraft.cargo = 0;
         for (let i of context.items) {
@@ -297,13 +297,13 @@ export class MgT2ActorSheet extends ActorSheet {
                 dtonsUsed += t * i.system.quantity;
 
                 if (h.system === "j-drive") {
-                    context.system.spacecraft.jdrive = parseInt(h.rating);
+                    jdrive = Math.max(jdrive, parseInt(h.rating));
                 }
                 if (h.system === "m-drive") {
-                    context.system.spacecraft.mdrive = parseInt(h.rating);
+                    mdrive = Math.max(mdrive, parseInt(h.rating));
                 }
                 if (h.system === "r-drive") {
-                    context.system.spacecraft.rdrive = parseInt(h.rating);
+                    rdrive = Math.max(rdrive, parseInt(h.rating));
                 }
             } else if (i.type === "weapon" && i.system.weapon.scale === "spacecraft") {
                 shipWeapons.push(i);
@@ -324,6 +324,20 @@ export class MgT2ActorSheet extends ActorSheet {
 
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;
+
+        if (jdrive !== actorData.spacecraft.jdrive) {
+            actorData.spacecraft.jdrive = jdrive;
+            context.actor.update({"system.spacecraft.jdrive": jdrive });
+        }
+        if (mdrive !== actorData.spacecraft.mdrive) {
+            actorData.spacecraft.mdrive = mdrive;
+            context.actor.update({"system.spacecraft.mdrive": mdrive });
+        }
+        if (rdrive !== actorData.spacecraft.rdrive) {
+            actorData.spacecraft.jdrive = jdrive;
+            context.actor.update({"system.spacecraft.rdrive": rdrive });
+        }
+
     }
 
     _prepareSpacecraftCrew(context) {
@@ -1144,6 +1158,18 @@ export class MgT2ActorSheet extends ActorSheet {
             let dm = parseInt(action.dm);
             console.log(weaponItem);
             new MgT2SpacecraftAttackDialog(shipActor, actorCrew, weaponItem, dm).render(true);
+        } else if (action.action === "special") {
+            if (action.special === "pilot") {
+                let pilotDM = actorCrew.getSkillValue("pilot.spacecraft");
+                shipActor.system.initiative.pilot = pilotDM;
+                shipActor.update({"system.initiative.pilot": pilotDM});
+            } else if (action.special === "tacticsInit") {
+
+            } else if (action.special === "improveInit") {
+
+            } else if (action.special === "evade") {
+
+            }
         }
     }
 

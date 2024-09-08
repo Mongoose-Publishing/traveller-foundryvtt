@@ -1387,6 +1387,8 @@ Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
                     icon = "fa-crosshairs";
                 } else if (action.action === "skill") {
                     icon = "fa-dice";
+                } else if (action.action === "special") {
+                    icon = "fa-wand-magic-sparkles";
                 }
                 html += `<span class="role-action-button" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}">`;
                 html += `<i class="fa-regular ${icon}"></i> ${action.title}`;

@@ -113,6 +113,7 @@ export class MgT2Actor extends Actor {
         this._prepareTravellerData(actorData);
         this._prepareNpcData(actorData);
         this._prepareCreatureData(actorData);
+        this._prepareSpacecraftData(actorData);
     }
 
 
@@ -325,6 +326,42 @@ export class MgT2Actor extends Actor {
             dodge += dodgeSkill;
         }
         actorData.dodge = dodge;
+    }
+
+    _prepareSpacecraftData(actor) {
+        if (actor.type !== "spacecraft") return;
+        console.log(`_prepareSpacecraftData: ${actor.name}`);
+
+        const actorData = actor.system;
+        console.log(actorData);
+
+        if (!actorData.spacecraft.combat) {
+            actorData.spacecraft.combat = {
+                "hitDM": Math.min(6, parseInt(actorData.spacecraft.dtons / 1000)),
+                "evadeThrustUsed": 0,
+                "evadeDM": 0,
+                "gunnerDM": 0
+            }
+        } else {
+            actorData.spacecraft.combat.hitDM = Math.min(6, parseInt(actorData.spacecraft.dtons / 1000));
+        }
+        if (!actorData.initiative) {
+            actorData.initiative = {
+                "base": 0,
+                "value": 0,
+                "pilot": 0,
+                "leadership": 0,
+                "tactics": 0
+            }
+        }
+        let init = actorData.initiative;
+        init.base = parseInt(actorData.spacecraft.mdrive) + parseInt(actorData.spacecraft.jdrive);
+        init.value = parseInt(init.base) +
+                (init.pilot?parseInt(init.pilot):0) +
+                (init.leadership?parseInt(init.leadership):0) +
+                (init.tactics?parseInt(init.tactics):0);
+        console.log(init.base);
+        console.log(init.value);
     }
 
 

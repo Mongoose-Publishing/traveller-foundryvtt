@@ -23,19 +23,20 @@
 
           <div class="resource grid grid-4col flex-group-left">
             <div class="resource">
-              <label for="system.role.actions.{{id}}.action" class="resource-label">Action</label>
+              <label for="system.role.actions.{{id}}.action" class="resource-label">{{localize 'MGT2.Role.ActionTitle'}}</label>
               <br/>
               <select class="expand writable" name="system.role.actions.{{id}}.action">
                 {{#select action.action}}
-                  <option value="chat">Chat</option>
-                  <option value="skill">Skill</option>
-                  <option value="weapon">Weapon</option>
+                  <option value="chat">{{localize 'MGT2.Role.ChatType'}}</option>
+                  <option value="skill">{{localize 'MGT2.Role.SkillType'}}</option>
+                  <option value="weapon">{{localize 'MGT2.Role.WeaponType'}}</option>
+                  <option value="special">{{localize 'MGT2.Role.SpecialType'}}</option>
                 {{/select}}
               </select>
             </div>
             {{#if (ifEquals action.action "chat") }}
               <div class="resource grid-span-3">
-                <label for="system.role.actions.{{id}}.chat" class="resource-label">Chat</label>
+                <label for="system.role.actions.{{id}}.chat" class="resource-label">{{localize 'MGT2.Role.ChatType'}}</label>
                 <input class="writable" name="system.role.actions.{{id}}.chat" type="text" value="{{action.chat}}"/>
               </div>
             {{/if}}
@@ -56,7 +57,7 @@
                 </select>
               </div>
               <div class="resource grid-span-2">
-                <label for="system.role.actions.{{id}}.skill" class="resource-label">Skill</label>
+                <label for="system.role.actions.{{id}}.skill" class="resource-label">{{localize 'MGT2.Role.SkillType'}}</label>
                 <br/>
                 <select class="writable" name="system.role.actions.{{id}}.skill">
                   {{#select action.skill}}
@@ -84,18 +85,30 @@
               </div>
             {{/if}}
             {{#if (ifEquals action.action "weapon") }}
-            <div class="resource grid-span-2">
-              <label for="system.role.actions.{{id}}.weapon" class="resource-label">Weapon</label>
-              <br/>
-              <select class="writable" name="system.role.actions.{{id}}.weapon">
-                {{selectOptions ../weapons selected=(selectedWeaponId ../system.role.actions id) }}
-              </select>
-            </div>
-            <div class="resource">
-              <label for="system.role.actions.{{id}}.dm" class="resource-label">DM</label>
-              <br/>
-              <input class="writable" name="system.role.actions.{{id}}.dm" type="number" value="{{action.dm}}"/>
-            </div>
+              <div class="resource grid-span-2">
+                <label for="system.role.actions.{{id}}.weapon" class="resource-label">{{localize 'MGT2.Role.WeaponType'}}</label>
+                <br/>
+                <select class="writable" name="system.role.actions.{{id}}.weapon">
+                  {{selectOptions ../weapons selected=(selectedWeaponId ../system.role.actions id) }}
+                </select>
+              </div>
+              <div class="resource">
+                <label for="system.role.actions.{{id}}.dm" class="resource-label">DM</label>
+                <br/>
+                <input class="writable" name="system.role.actions.{{id}}.dm" type="number" value="{{action.dm}}"/>
+              </div>
+            {{/if}}
+            {{#if (ifEquals action.action "special") }}
+              <div class="resource grid-span-2">
+                <label for="system.role.actions.{{id}}.special" class="resource-label">{{localize 'MGT2.Role.SpecialType'}}</label>
+                <br/>
+                <select class="writable" name="system.role.actions.{{id}}.special">
+                  <option value="pilot">{{localize 'MGT2.Role.Special.MakePilot'}}</option>
+                  <option value="tacticsInit">{{localize 'MGT2.Role.Special.CombatTactics'}}</option>
+                  <option value="improveInit">{{localize 'MGT2.Role.Special.ImproveInitiative'}}</option>
+                  <option value="evade">{{localize 'MGT2.Role.Special.Evade'}}</option>
+                </select>
+              </div>
             {{/if}}
 
           </div>

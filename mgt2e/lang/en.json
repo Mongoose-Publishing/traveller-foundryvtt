@@ -235,6 +235,11 @@
   "MGT2.TravellerSheet.DamageTaken": "Damage Taken",
   "MGT2.TravellerSheet.HitsRemaining": "Hits Remaining",
 
+  "MGT2.TravellerSheet.InitThrust": "Thrust",
+  "MGT2.TravellerSheet.InitPilot": "Pilot skill",
+  "MGT2.TravellerSheet.InitTactics": "Tactics",
+  "MGT2.TravellerSheet.InitLeader": "Leadership",
+
   "MGT2.TravellerSheet.StatusLabel.fatigued": "Fatigued",
   "MGT2.TravellerSheet.StatusLabel.encumbered": "Encumbered",
   "MGT2.TravellerSheet.StatusLabel.overLoaded": "Over Loaded",
@@ -644,6 +649,16 @@
   "MGT2.Role.NoCrewOrPassengers": "Drag Travellers or NPCs to this ship to add crew members",
 
   "MGT2.Role.ChatAlias": "{actorName} aboard the {shipName}:",
+
+  "MGT2.Role.ActionTitle": "Action",
+  "MGT2.Role.ChatType": "Chat",
+  "MGT2.Role.SkillType": "Skill",
+  "MGT2.Role.WeaponType": "Weapon",
+  "MGT2.Role.SpecialType": "Special",
+  "MGT2.Role.Special.MakePilot": "Make pilot",
+  "MGT2.Role.Special.CombatTactics": "Combat Tactics",
+  "MGT2.Role.Special.ImproveInitiative": "Improve Initiative",
+  "MGT2.Role.Special.Evade": "Evade",
 
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",

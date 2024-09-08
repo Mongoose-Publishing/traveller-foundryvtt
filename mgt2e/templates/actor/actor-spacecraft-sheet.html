@@ -125,6 +125,38 @@
                 </div>
             </div>
 
+            <div class="side-panel init-box shadow flex-group-center">
+                <label class="box-title">{{localize 'MGT2.TravellerSheet.Init'}}</label>
+
+                <div class="grid grid-5col">
+                    <div class="resource" title="Initiative">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
+                        <input class="armour-value" type="text" name="system.initiative.value"
+                               value="{{system.initiative.value}}" readonly data-dtype="Number"/>
+                    </div>
+                    <div class="resource" title="Base Initiative">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.InitThrust'}}</label>
+                        <input class="armour-value" type="text" name="system.initiative.base"
+                               value="{{system.initiative.base}}" readonly data-dtype="Number"/>
+                    </div>
+                    <div class="resource" title="Pilot skill">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.InitPilot'}}</label>
+                        <input class="armour-value" type="text" name="system.initiative.pilot"
+                               value="{{system.initiative.pilot}}" readonly data-dtype="Number"/>
+                    </div>
+                    <div class="resource" title="Tactics">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.InitTactics'}}</label>
+                        <input class="armour-value" type="text" name="system.initiative.tactics"
+                               value="{{system.initiative.tactics}}" readonly data-dtype="Number"/>
+                    </div>
+                    <div class="resource" title="Base Initiative">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.InitLeader'}}</label>
+                        <input class="armour-value" type="text" name="system.initiative.leadership"
+                               value="{{system.initiative.leadership}}" readonly data-dtype="Number"/>
+                    </div>
+                </div>
+            </div>
+
             {{#if system.spacecraft.navy.naval}}
                 <div class="shadow">
                     <div class="grid grid-5col">

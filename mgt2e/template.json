@@ -158,6 +158,10 @@
             "max": 80,
             "damage": 0
         },
+        "initiative": {
+          "base": 0,
+          "value": 0
+        },
         "spacecraft": {
             "dtons": 100,
             "configuration": "standard",
