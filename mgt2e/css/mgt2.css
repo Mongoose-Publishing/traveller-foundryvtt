@@ -1876,3 +1876,37 @@ div.popup-text:hover {
     font-weight: bold;
     font-size: larger;
 }
+
+
+div.mini-value {
+    display: inline-block;
+    _background-color: #f1511b;
+    border: 2px solid #f1511b;
+    width: auto;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    background-image: url(../images/stripes.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 100%;
+}
+
+div.mini-value label {
+    text-align: left;
+    color: white;
+    font-weight: bold;
+    padding-right: 24px;
+    margin-right: 0px;
+    border: none;
+}
+
+div.mini-value span {
+    display: inline-block;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    width: 1.5em;
+    text-align: center;
+    margin-left: 0px;
+    border: none;
+}
