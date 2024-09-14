@@ -1117,7 +1117,7 @@ export class MgT2ActorSheet extends ActorSheet {
         await actor.update({[`system.crewed.passengers.${actorId}`]: { "role": "STANDARD"}});
     }
 
-    _runCrewAction(shipActor, actorCrewId, roleId, actionId) {
+    async _runCrewAction(shipActor, actorCrewId, roleId, actionId) {
         console.log("_runCrewAction: " + actorCrewId);
         const actorCrew = game.actors.get(actorCrewId);
         if (!actorCrew) {
@@ -1162,8 +1162,29 @@ export class MgT2ActorSheet extends ActorSheet {
             if (action.special === "pilot") {
                 let pilotDM = actorCrew.getSkillValue("pilot.spacecraft");
                 shipActor.system.initiative.pilot = pilotDM;
-                shipActor.update({"system.initiative.pilot": pilotDM});
+                shipActor.system.initiative.pilotName = actorCrew.name;
+                shipActor.update({"system.initiative": shipActor.system.initiative});
             } else if (action.special === "tacticsInit") {
+                let tacticsDM = actorCrew.getSkillValue("tactics.naval");
+
+                let roll = await new Roll("2D6 - 8 + " + tacticsDM).evaluate();
+
+                shipActor.system.initiative.tactics = roll.total;
+                shipActor.system.initiative.tacticsName = actorCrew.name;
+                shipActor.update({"system.initiative": shipActor.system.initiative});
+
+                let chatData = {
+                    user: game.user.id,
+                    speaker: {
+                        actor: actorCrew._id,
+                        alias: game.i18n.format("MGT2.Role.ChatAlias", {
+                            "actorName": actorCrew.name, "shipName": shipActor.name
+                        }),
+                        scene: game.scenes.current.id
+                    },
+                    content: `Rolling Tactics (Naval) for ship initiative.`
+                }
+                ChatMessage.create(chatData, {});
 
             } else if (action.special === "improveInit") {
 
@@ -1630,11 +1651,11 @@ export class MgT2ActorSheet extends ActorSheet {
         const options = data.options;
         const vers = data.vers;
 
-        if (actor.type === "traveller") {
-            new MgT2DamageDialog(actor, damage, ap, laser, traits).render(true);
-        } else if (vers && options) {
+        if (options && vers) {
             console.log("Applying v2 damage");
             this.actor.applyDamage(damage, JSON.parse(options));
+        } else if (actor.type === "traveller") {
+            new MgT2DamageDialog(actor, damage, ap, laser, traits).render(true);
         } else {
             // NPC, Creature or something else.
             console.log("Applying v1 damage");

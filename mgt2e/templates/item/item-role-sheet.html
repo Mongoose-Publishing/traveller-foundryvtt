@@ -103,10 +103,12 @@
                 <label for="system.role.actions.{{id}}.special" class="resource-label">{{localize 'MGT2.Role.SpecialType'}}</label>
                 <br/>
                 <select class="writable" name="system.role.actions.{{id}}.special">
+                  {{#select action.special}}
                   <option value="pilot">{{localize 'MGT2.Role.Special.MakePilot'}}</option>
                   <option value="tacticsInit">{{localize 'MGT2.Role.Special.CombatTactics'}}</option>
                   <option value="improveInit">{{localize 'MGT2.Role.Special.ImproveInitiative'}}</option>
                   <option value="evade">{{localize 'MGT2.Role.Special.Evade'}}</option>
+                  {{/select}}
                 </select>
               </div>
             {{/if}}

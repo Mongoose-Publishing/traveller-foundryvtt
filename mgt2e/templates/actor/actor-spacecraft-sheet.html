@@ -136,18 +136,22 @@
                         <label>{{localize 'MGT2.TravellerSheet.InitThrust'}}</label>
                         <span>{{system.initiative.base}}</span>
                     </div>
-                    <div class="mini-value">
+                    <div class="mini-value" title="{{system.initiative.pilotName}}">
                         <label>{{localize 'MGT2.TravellerSheet.InitPilot'}}</label>
                         <span>{{system.initiative.pilot}}</span>
                     </div>
-                    <div class="mini-value">
-                        <label>{{localize 'MGT2.TravellerSheet.InitTactics'}}</label>
-                        <span>{{system.initiative.tactics}}</span>
-                    </div>
-                    <div class="mini-value">
-                        <label>{{localize 'MGT2.TravellerSheet.InitLeader'}}</label>
-                        <span>{{system.initiative.leadership}}</span>
-                    </div>
+                    {{#if system.initiative.tactics}}
+                        <div class="mini-value" title="{{system.initiative.tacticsName}}">
+                            <label>{{localize 'MGT2.TravellerSheet.InitTactics'}}</label>
+                            <span>{{system.initiative.tactics}}</span>
+                        </div>
+                    {{/if}}
+                    {{#if system.initiative.leadership}}
+                        <div class="mini-value">
+                            <label>{{localize 'MGT2.TravellerSheet.InitLeader'}}</label>
+                            <span>{{system.initiative.leadership}}</span>
+                        </div>
+                    {{/if}}
                 </div>
             </div>
 
