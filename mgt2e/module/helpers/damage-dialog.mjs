@@ -232,7 +232,7 @@ export class MgT2DamageDialog extends Application {
 
         console.log(this.data.damage);
 
-        this.actor.update({ "data.damage": this.data.damage });
+        this.actor.update({ "system.damage": this.data.damage });
 
         let atZero = 0;
         if (str >= this.data.characteristics.STR.value) atZero++;
