@@ -14,7 +14,8 @@ export class MgT2DamageDialog extends Application {
         return options;
     }
 
-    constructor(actor, damage, ap, laser, traits) {
+//    constructor(actor, damage, ap, laser, traits) {
+    constructor(actor, damage, damageOptions) {
         super();
         console.log("DamageDialog:");
 
@@ -23,11 +24,10 @@ export class MgT2DamageDialog extends Application {
         this.actor = actor;
         const data = actor.system;
 
-        console.log(traits);
-        this.damage = damage;
-        this.ap = ap;
-        this.laser = laser;
-        this.stun = hasTrait(traits, "stun");
+        this.damage = damageOptions.damage + damageOptions.effect;
+        this.ap = damageOptions.ap;
+        this.laser = damageOptions.damageType;
+        this.stun = hasTrait(damageOptions.traits, "stun");
         this.data = data;
         this.armour = data.armour?.protection ?? 0;
         this.wounds = "";
@@ -39,8 +39,8 @@ export class MgT2DamageDialog extends Application {
         }
 
         this.actualDamage = damage;
-        if (ap < this.armour) {
-            this.actualDamage = damage - (this.armour - ap);
+        if (this.ap < this.armour) {
+            this.actualDamage = damage - (this.armour - this.ap);
         }
         if (this.actualDamage < 0) {
             this.actualDamage = 0;
@@ -232,7 +232,7 @@ export class MgT2DamageDialog extends Application {
 
         console.log(this.data.damage);
 
-        this.actor.update({ "data.damage": this.data.damage });
+        this.actor.update({ "system.damage": this.data.damage });
 
         let atZero = 0;
         if (str >= this.data.characteristics.STR.value) atZero++;

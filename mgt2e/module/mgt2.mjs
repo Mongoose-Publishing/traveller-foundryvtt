@@ -235,12 +235,9 @@ Hooks.on('ready', () => {
     // Need to add click event to all existing chat damage buttons.
    $(document).on('click', '.damage-button', function() {
        let dmg = $(this).data('damage');
-       let ap = $(this).data("ap");
-       let tl = $(this).data("tl");
-       let options = $(this).data("options");
-       let traits = $(this).data("traits");
+       let damageOptions = $(this).data("options");
 
-       Tools.applyDamage(dmg, ap, tl, options, traits);
+       Tools.applyDamageToTokens(dmg, damageOptions);
    });
 });
 

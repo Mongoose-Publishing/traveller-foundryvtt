@@ -1,6 +1,8 @@
 import { MgT2Item } from "../documents/item.mjs";
 import { Tools } from "../helpers/chat/tools.mjs";
 import {MGT2} from "../helpers/config.mjs";
+import {MgT2DamageDialog} from "../helpers/damage-dialog.mjs";
+import {getTraitValue, hasTrait} from "../helpers/dice-rolls.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -355,13 +357,11 @@ export class MgT2Actor extends Actor {
             }
         }
         let init = actorData.initiative;
-        init.base = parseInt(actorData.spacecraft.mdrive) + parseInt(actorData.spacecraft.jdrive);
+        init.base = parseInt(actorData.spacecraft.mdrive) + parseInt(actorData.spacecraft.rdrive);
         init.value = parseInt(init.base) +
                 (init.pilot?parseInt(init.pilot):0) +
                 (init.leadership?parseInt(init.leadership):0) +
                 (init.tactics?parseInt(init.tactics):0);
-        console.log(init.base);
-        console.log(init.value);
     }
 
 
@@ -416,46 +416,134 @@ export class MgT2Actor extends Actor {
       return score;
   }
 
-  applyDamage(damage, options) {
-      console.log(`applyDamage: [${this.name}] [${damage}]`);
-      console.log(options);
-
+  applyDamageToPerson(damage, options) {
       let armour = 0;
-      if (this.type === "spacecraft") {
-          if (options.scale !== "spacecraft") {
-              damage = parseInt(damage / 10);
+      if (this.system.armour && !Number.isNaN(this.system.armour.protection)) {
+          armour = parseInt(this.system.armour.protection);
+          if (Number.isNaN(armour)) {
+              armour = 0;
           }
-          let armour = parseInt(this.system.spacecraft.armour);
-      } else if (this.type === "npc" || this.type === "creature") {
-          if (options.scale === "spacecraft") {
-              damage *= 10;
-          }
-          if (this.system.armour) {
-              armour = parseInt(data.armour.protection);
-              if (options.damageType !== "") {
-                  let armourData = this.system.armour;
-                  if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
-                      armour += armourData.otherProtection?parseInt(armourData.otherProtection):0;
-                  }
+          if (options.damageType !== "") {
+              let armourData = this.system.armour;
+              if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
+                  armour += armourData.otherProtection?parseInt(armourData.otherProtection):0;
               }
-              armour = Math.max(0, armour);
+          }
+          armour = Math.max(0, armour);
+          if (this.system.armour.archaic && options.ranged) {
+              if (options.tl > this.system.tl) {
+                  armour = parseInt((armour + 1) / 2);
+              }
+          }
+          console.log("Modified armour value is " + armour);
+      }
+      if (hasTrait(options.traits, "ap")) {
+          let ap = parseInt(getTraitValue(options.traits, "ap"));
+          armour = Math.max(0, armour - ap);
+      } else if (hasTrait(options.traits, "loPen")) {
+          let loPen = parseInt(getTraitValue(options.traits, "loPen"));
+          if (loPen > 1) {
+              armour *= loPen;
           }
       }
+      damage = Math.max(0, damage - armour);
+      if (options.multiplier && parseInt(options.multiplier) > 1) {
+          damage *= parseInt(options.multiplier);
+      }
+      if (damage < 1) {
+          // No damage to be applied.
+          return;
+      }
+
+      ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
+          { "actor": this.name, "damage": damage}))
+
+      if (this.type === "traveller") {
+          // This is a Traveller, so more complicated.
+          new MgT2DamageDialog(this, damage, options).render(true);
+      } else {
+          let stun = false;
+          if (hasTrait(options.traits, "stun")) {
+              stun = true;
+          }
+          let hits = this.system.hits;
+          console.log(hits);
+
+          if (stun) {
+              console.log("STUNS");
+              if (!hits.tmpDamage) {
+                  hits.tmpDamage = 0;
+              }
+              let limit = parseInt(hits.max / 3 + 2);
+              let stuns = 0;
+              if (this.system.characteristics?.END?.value) {
+                  limit = this.system.characteristics.END.value;
+              }
+              // How many new stuns are over the END limit?
+              if (hits.tmpDamage > limit) {
+                  stuns = damage;
+              } else if (hits.tmpDamage + damage > limit) {
+                  stuns = damage - (limit - hits.tmpDamage);
+              }
+              console.log("Damage: " + damage);
+              console.log("Current damage: " + hits.damage);
+              console.log("Current stuns:  " + hits.tmpDamage);
+              console.log("Limit: " + limit);
+              console.log("Stuns: " + stuns);
+              hits.damage += (damage - stuns);
+              hits.tmpDamage += (damage - stuns);
+              if (stuns > 0) {
+                  this.setFlag("mgt2e", "stunned", true);
+                  this.setFlag("mgt2e", "stunnedRounds",
+                      this.getFlag("mgt2e", "stunnedRounds") ?
+                          parseInt(this.getFlag("mgt2e", "stunnedRounds")) + stuns : stuns
+                  );
+              }
+          } else {
+              hits.damage += damage;
+          }
+          hits.value = hits.max - hits.damage;
+          this.update({"system.hits": this.system.hits});
+      }
+  }
+
+  applyDamageToSpacecraft(damage, options) {
+      let armour = parseInt(this.system.spacecraft.armour);
       if (options.ap) {
           let ap = parseInt(options.ap);
           armour = Math.max(0, armour - ap);
       }
       damage = Math.max(0, damage - armour);
-
       if (options.multiplier && parseInt(options.multiplier) > 1) {
           damage *= parseInt(options.multiplier);
       }
       ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
           { "actor": this.name, "damage": damage}))
 
+      // Apply the damage to the spacecraft.
       this.system.hits.damage += damage;
       this.system.hits.value = this.system.hits.max - this.system.hits.damage;
       this.update({"system.hits": this.system.hits});
+  }
+
+  applyDamage(damage, options, multiSelect) {
+      console.log(`applyDamage: [${this.name}] [${damage}] [${multiSelect?"multi-select":"single"}]`);
+      console.log(options);
+
+      if (this.type === "spacecraft") {
+          if (options.scale !== "spacecraft") {
+              damage = parseInt(damage / 10);
+          }
+          this.applyDamageToSpacecraft(damage, options);
+      } else if (this.type === "traveller" || this.type === "npc" || this.type === "creature") {
+          if (options.scale === "spacecraft") {
+              damage *= 10;
+              // TODO: Possibly also add blast effects.
+          }
+          this.applyDamageToPerson(damage, options);
+      } else {
+          // Don't apply damage to anything else.
+      }
   }
 
   getWeaponSkill(weaponItem, options) {

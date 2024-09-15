@@ -67,7 +67,9 @@ export function getTraitValue(traits, trait) {
 export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry) {
     const   system = actor?actor.system:null;
     let     content = "Attack";
-    let     melee = true;
+
+    console.log("rollAttack:");
+    console.log(weapon);
 
     let baseRange = weapon.system.weapon.range;
     let rangeBand = null;
@@ -309,8 +311,10 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
             if (hasTrait(traits, "ap")) {
                 dmgText += ` /&nbsp;AP&nbsp;${getTraitValue(traits, "ap")}`;
             }
+            let radiationDamage = 0;
             if (hasTrait(traits, "radiation")) {
                 const radRoll = await new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate();
+                radiationDamage = radRoll.total;
                 dmgText += ` /&nbsp;${radRoll.total} Rads`;
                 if (destructive) {
                     dmgText += `&nbsp;(10m)`;
@@ -320,16 +324,28 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
                 dmgText += ` /&nbsp;Blast&nbsp;${getTraitValue(traits, "blast")}m`;
             }
 
+            let damageOptions = {
+                "damage": damageTotal,
+                "effect": effect,
+                "multiplier": 1,
+                "scale": weapon.system.weapon.scale,
+                "traits": weapon.system.weapon.traits,
+                "tl": weapon.system.tl,
+                "damageType": weapon.system.weapon.damageType,
+                "radiation": radiationDamage,
+                "ranged": (baseRange>0)
+            };
+            let json = JSON.stringify(damageOptions);
+            console.log("Stringify: " + json);
+
             if (actor) {
                 content += `<b>Attack Roll:</b> ${dice}<br/>`
                 content += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${attackTotal}</span> <span class="${effectClass}">${effectText}</span><br/>`;
             } else {
                 content += "<br/>";
             }
-            content += `<div class="damage-message" data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" data-options="${options}" data-traits="${traits}">`;
-            content += `<button data-damage="${damageEffect}" data-ap="${ap}" data-tl="${tl}" 
-                            data-options="${options}" 
-                            data-traits="${traits}" 
+            content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
+            content += `<button data-damage="${damageEffect}" data-options='${json}' 
                             class="damage-button">${dmgText}</button>`;
 
             content += `</div>`;
@@ -419,14 +435,18 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         multiplier = parseInt(CONFIG.MGT2.SPACE_MOUNTS[mount].multiplier);
     }
 
-    let dataOptions = {
-        "damage": damageRoll.total + effect,
+    let damageOptions = {
+        "damage": damageRoll.total,
+        "effect": effect,
         "multiplier": multiplier,
         "scale": weaponItem.system.weapon.scale,
-        "traits": weaponItem.system.weapon.traits
+        "traits": weaponItem.system.weapon.traits,
+        "tl": weaponItem.system.tl,
+        "damageType": weaponItem.system.damageType,
+        "radiation": 0,
+        "ranged": true
     };
-
-    let json = JSON.stringify(dataOptions);
+    let json = JSON.stringify(damageOptions);
 
     text = `
         <div class="attack-message">

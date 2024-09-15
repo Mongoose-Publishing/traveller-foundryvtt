@@ -325,8 +325,8 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
 }
 
 // Called from a button press in damage output in the chat.
-Tools.applyDamage = function(damage, ap, tl, options, traits) {
-    console.log("Tools.applyDamage:");
+Tools.applyDamageToTokens = function(damage, damageOptions) {
+    console.log("Tools.applyDamageToTokens:");
 
     let tokens = Tools.getSelected();
     if (tokens.size === 0) {
@@ -337,48 +337,27 @@ Tools.applyDamage = function(damage, ap, tl, options, traits) {
     for (let token of tokens) {
         if (!token.isOwner) {
             // Don't have permission to update token.
+            ui.notifications.warn("Cannot apply damage to " + token.name);
             continue;
         }
         console.log("Apply damage to " + token.name);
         console.log(token);
-        if (token.document.actorLink && token.actor.type === "traveller") {
-            console.log("This is a Traveller");
-            new MgT2DamageDialog(token.actor, damage, ap, options?options:"", traits?traits:"").render(true);
-        } else {
-            Tools.applyDamageTo(damage, ap, tl, options, traits, token.actor, token);
-        }
+        token.actor.applyDamage(damage, damageOptions, (tokens.size > 1));
     }
 }
 
 // Called from a chat command.
 Tools.damage = function(chatData, args) {
-    let text=`<div class="tools">`;
-
-    console.log("Tools.damage():");
-
-    const tokens = Tools.getSelected();
-    if (tokens.size == 0) {
-        ui.notifications.error("No tokens are targeted");
-        return;
-    }
-
     if (args.length < 1) {
         ui.notifications.error("You must at least specify the amount of damage");
         return;
     }
     let damage = parseInt(args.shift());
-    let ap = 0;
-    let tl = 0;
-    let options = "";
-    let traits = "";
-
-    if (!isNaN(args[0])) {
-        ap = parseInt(args.shift());
+    let damageOptions = { "traits": ""};
+    while (args.length > 0) {
+        damageOptions.traits += args.shift();
     }
-
-    for (let token of tokens) {
-        Tools.applyDamageTo(damage, ap, tl, options, traits, token.actor, token);
-    }
+    Tools.applyDamageToTokens(damage, damageOptions);
 };
 
 Tools.showSkills = function(chatData) {

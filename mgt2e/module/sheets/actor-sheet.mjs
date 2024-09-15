@@ -508,7 +508,8 @@ export class MgT2ActorSheet extends ActorSheet {
                     'otherTypes': "",
                     'rad': 0,
                     'archaic': 0,
-                    'name': null
+                    'name': null,
+                    'tl': 0
                 }
                 actorData.armour = armour;
             }
@@ -518,6 +519,7 @@ export class MgT2ActorSheet extends ActorSheet {
             armour.rad = 0;
             armour.archaic = 0;
             armour.name = null;
+            armour.tl = 0;
             for (let i of context.items) {
                 if (i.system.armour) {
                     const armourData = i.system.armour;
@@ -535,6 +537,7 @@ export class MgT2ActorSheet extends ActorSheet {
                             used = true;
                         } else {
                             // Not a number, so might be a formula.
+                            // TODO: What armour needs this?
                             let roll = await new Roll(prot, context.actor.getRollData()).evaluate();
                             prot = roll.total;
                             armour.protection += prot;
@@ -562,6 +565,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         }
                         if (armourData.archaic) {
                             armour.archaic = 1;
+                            armour.tl = i.system.tl;
                         }
 
                         if (used) {
@@ -1644,23 +1648,9 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _onDropDamage(event, data) {
         const damage = data.damage;
-        const laser = data.laser;
-        const ap = data.ap;
-        const actor = this.actor;
-        const traits = data.traits;
-        const options = data.options;
-        const vers = data.vers;
+        const damageOptions = data.options?JSON.parse(data.options):null;
 
-        if (options && vers) {
-            console.log("Applying v2 damage");
-            this.actor.applyDamage(damage, JSON.parse(options));
-        } else if (actor.type === "traveller") {
-            new MgT2DamageDialog(actor, damage, ap, laser, traits).render(true);
-        } else {
-            // NPC, Creature or something else.
-            console.log("Applying v1 damage");
-            Tools.applyDamageTo(damage, ap, data.tl, data.options, data.traits, actor, null);
-        }
+        this.actor.applyDamage(damage, damageOptions);
     }
 
     async _onRollTypeChange(event, actor, type) {
