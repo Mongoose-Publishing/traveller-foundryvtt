@@ -426,7 +426,7 @@ export class MgT2Actor extends Actor {
           if (options.damageType !== "") {
               let armourData = this.system.armour;
               if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
-                  armour += armourData.otherProtection?parseInt(armourData.otherProtection):0;
+                  armour += armourData.otherProtection ? parseInt(armourData.otherProtection) : 0;
               }
           }
           armour = Math.max(0, armour);
@@ -456,55 +456,115 @@ export class MgT2Actor extends Actor {
       }
 
       ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
-          { "actor": this.name, "damage": damage}))
+          {"actor": this.name, "damage": damage}))
 
       if (this.type === "traveller") {
           // This is a Traveller, so more complicated.
-          new MgT2DamageDialog(this, damage, options).render(true);
-      } else {
-          let stun = false;
-          if (hasTrait(options.traits, "stun")) {
-              stun = true;
-          }
-          let hits = this.system.hits;
-          console.log(hits);
-
-          if (stun) {
-              console.log("STUNS");
-              if (!hits.tmpDamage) {
-                  hits.tmpDamage = 0;
-              }
-              let limit = parseInt(hits.max / 3 + 2);
-              let stuns = 0;
-              if (this.system.characteristics?.END?.value) {
-                  limit = this.system.characteristics.END.value;
-              }
-              // How many new stuns are over the END limit?
-              if (hits.tmpDamage > limit) {
-                  stuns = damage;
-              } else if (hits.tmpDamage + damage > limit) {
-                  stuns = damage - (limit - hits.tmpDamage);
-              }
-              console.log("Damage: " + damage);
-              console.log("Current damage: " + hits.damage);
-              console.log("Current stuns:  " + hits.tmpDamage);
-              console.log("Limit: " + limit);
-              console.log("Stuns: " + stuns);
-              hits.damage += (damage - stuns);
-              hits.tmpDamage += (damage - stuns);
-              if (stuns > 0) {
-                  this.setFlag("mgt2e", "stunned", true);
-                  this.setFlag("mgt2e", "stunnedRounds",
-                      this.getFlag("mgt2e", "stunnedRounds") ?
-                          parseInt(this.getFlag("mgt2e", "stunnedRounds")) + stuns : stuns
-                  );
-              }
+          if (options.noUI) {
+              this.applyActualDamageToTraveller(damage, options);
           } else {
-              hits.damage += damage;
+              new MgT2DamageDialog(this, damage, options).render(true);
           }
-          hits.value = hits.max - hits.damage;
-          this.update({"system.hits": this.system.hits});
+      } else {
+          this.applyActualDamageToPerson(damage, options);
       }
+  }
+
+  applyActualDamageToTraveller(damage, options) {
+      let stun = false;
+      let stuns = 0;
+      if (hasTrait(options.traits, "stun")) {
+          stun = true;
+      }
+
+      if (stun) {
+          if (options.characteristics) {
+              this.system.damage.END.value += parseInt(options.characteristics.END);
+          } else {
+              this.system.damage.END.value += parseInt(damage);
+          }
+          if (this.system.damage.END.value > this.system.characteristics.END.value) {
+              stuns = this.system.damage.END.value - this.system.characteristics.END.value;
+              this.system.damage.END.value = this.system.characteristics.END.value;
+          }
+      } else {
+          if (options.characteristics) {
+              // Apply specific damage to each characteristic.
+              this.system.damage.STR.value += parseInt(options.characteristics.STR);
+              this.system.damage.DEX.value += parseInt(options.characteristics.DEX);
+              this.system.damage.END.value += parseInt(options.characteristics.END);
+          } else {
+              // Split damage across characteristics.
+              let dmgData = this.system.damage;
+              let chaData = this.system.characteristics;
+              let remaining = damage;
+
+              if (dmgData.END.value < chaData.END.value) {
+                  remaining = Tools.applyDamageToCha(remaining, this.system, "END");
+              }
+              if (remaining > 0) {
+                  let str = this.system.characteristics.STR.current;
+                  if (str <= this.system.characteristics.DEX.current && str > remaining) {
+                      remaining = Tools.applyDamageToCha(remaining, this.system, "STR");
+                      Tools.applyDamageToCha(remaining, this.system, "DEX");
+                  } else {
+                      remaining = Tools.applyDamageToCha(remaining, this.system, "DEX");
+                      Tools.applyDamageToCha(remaining, this.system, "STR");
+                  }
+              }
+          }
+      }
+
+      for (let c of [ "STR", "DEX", "END"]) {
+          this.system.damage[c].value = Math.min(this.system.damage[c].value, this.system.characteristics[c].value);
+      }
+      this.update({"system.damage": this.system.damage });
+  }
+
+    /**
+     * Damage after armour and multiplication.
+     * @param damage    Actual damage to be applied.
+     * @param options   List of options.
+     */
+  applyActualDamageToPerson(damage, options) {
+      let stun = false;
+      if (hasTrait(options.traits, "stun")) {
+          stun = true;
+      }
+      let hits = this.system.hits;
+      console.log(hits);
+
+      if (stun) {
+          console.log("STUNS");
+          if (!hits.tmpDamage) {
+              hits.tmpDamage = 0;
+          }
+          let limit = parseInt(hits.max / 3 + 2);
+          let stuns = 0;
+          if (this.system.characteristics?.END?.value) {
+              limit = this.system.characteristics.END.value;
+          }
+          // How many new stuns are over the END limit?
+          if (hits.tmpDamage > limit) {
+              stuns = damage;
+          } else if (hits.tmpDamage + damage > limit) {
+              stuns = damage - (limit - hits.tmpDamage);
+          }
+
+          hits.damage += (damage - stuns);
+          hits.tmpDamage += (damage - stuns);
+          if (stuns > 0) {
+              this.setFlag("mgt2e", "stunned", true);
+              this.setFlag("mgt2e", "stunnedRounds",
+                  this.getFlag("mgt2e", "stunnedRounds") ?
+                      parseInt(this.getFlag("mgt2e", "stunnedRounds")) + stuns : stuns
+              );
+          }
+      } else {
+          hits.damage += damage;
+      }
+      hits.value = hits.max - hits.damage;
+      this.update({"system.hits": this.system.hits});
   }
 
   applyDamageToSpacecraft(damage, options) {

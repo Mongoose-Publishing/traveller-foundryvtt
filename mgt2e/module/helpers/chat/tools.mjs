@@ -355,6 +355,11 @@ Tools.damage = function(chatData, args) {
     let damage = parseInt(args.shift());
     let damageOptions = { "traits": ""};
     while (args.length > 0) {
+        if (args[0] === "noui") {
+            damageOptions.noUI = true;
+            args.shift();
+            continue;
+        }
         damageOptions.traits += args.shift();
     }
     Tools.applyDamageToTokens(damage, damageOptions);

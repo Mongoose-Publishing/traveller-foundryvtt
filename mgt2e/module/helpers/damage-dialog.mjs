@@ -22,6 +22,7 @@ export class MgT2DamageDialog extends Application {
         console.log(actor);
 
         this.actor = actor;
+        this.damageOptions = damageOptions;
         const data = actor.system;
 
         this.damage = damageOptions.damage + damageOptions.effect;
@@ -198,6 +199,15 @@ export class MgT2DamageDialog extends Application {
 
         let total = str + dex + end;
         let damage = this.data.damage;
+
+        this.damageOptions.characteristics = {
+            "STR": str,
+            "DEX": dex,
+            "END": end
+        }
+        this.actor.applyActualDamageToTraveller(damage, this.damageOptions);
+        this.close();
+        return;
 
         if (this.stun) {
             // 'tmp' tracks how much of the current damage is temporary.
