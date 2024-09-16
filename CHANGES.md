@@ -4,8 +4,11 @@
 
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
-* Some things silently fail on Foundry v12.
 
+## v0.10.3 (Beta)
+
+* Fixed application of damage in Foundry v12
+* Fixed display of actor and item descriptions in Foundry v12
 
 ## v0.10.2 (Beta)
 

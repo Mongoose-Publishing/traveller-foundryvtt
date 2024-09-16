@@ -50,7 +50,7 @@ export class MgT2ActorSheet extends ActorSheet {
     /* -------------------------------------------- */
 
     /** @override */
-    getData() {
+    async getData() {
         // Retrieve the data structure from the base sheet. You can inspect or log
         // the context variable to see the structure, but some key properties for
         // sheets are the actor object, the data object, whether it's
@@ -63,7 +63,7 @@ export class MgT2ActorSheet extends ActorSheet {
 
         // Add the actor's data to context.data for easier access, as well as flags.
         context.system = actorData;
-        context.enrichedDescription = TextEditor.enrichHTML(actorData.description, {async: false});
+        context.enrichedDescription = await TextEditor.enrichHTML(actorData.description);
         context.flags = actorData.flags;
         context.currentYear = game.settings.get("mgt2e", "currentYear");
 
@@ -484,6 +484,7 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _calculateArmour(context) {
         const actorData = context.system;
+        console.log(context.actor);
 
         if (context.actor && (context.actor.type === 'traveller' || context.actor.type === 'npc' || context.actor.type === 'creature')) {
             let armour = actorData.armour;

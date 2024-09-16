@@ -511,8 +511,6 @@ export class MgT2Actor extends Actor {
           if (spId && skill.specialities && skill.specialities[spId]) {
               spec = skill.specialities[spId];
           }
-          console.log(skill);
-          console.log(spec);
 
           // Set characteristic to use.
           if (options.cha) {
