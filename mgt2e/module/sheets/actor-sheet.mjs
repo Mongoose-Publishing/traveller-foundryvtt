@@ -840,6 +840,14 @@ export class MgT2ActorSheet extends ActorSheet {
         div.addEventListener("dragstart", handler, options);
       }
     });
+        html.find('img.actor-draggable').each((i, img) => {
+            //console.log(div.getAttribute("data-skill"));
+            let options = {};
+            options.actorId = img.getAttribute("data-actor-id");
+            handler = ev => this._onCrewDragStart(ev, options);
+            img.setAttribute("draggable", true);
+            img.addEventListener("dragstart", handler, options);
+        });
     html.find('li.item').each((i, li) => {
         let options = {};
         handler = ev => this._onDragStart(ev);
@@ -1196,6 +1204,15 @@ export class MgT2ActorSheet extends ActorSheet {
 
             }
         }
+    }
+
+    _onCrewDragStart(event, options) {
+        console.log("_onCrewDragStart:");
+        let dragData = {
+            type: "Actor",
+            uuid: "Actor." + options.actorId
+        }
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
     }
 
     _onSkillDragStart(event, options) {
