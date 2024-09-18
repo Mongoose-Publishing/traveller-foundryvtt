@@ -359,7 +359,17 @@ export class MgT2ActorSheet extends ActorSheet {
         }
         context.crew = crew;
         context.passengers = passengers;
+
+        const ships = [];
+        for (let actorId in actorData.docks) {
+            let actor = game.actors.get(actorId);
+            if (actor) {
+                ships.push(actor);
+            }
+        }
+        context.dockedShips = ships;
     }
+
 
     /**
      * Organize and classify Items for Character sheets.
@@ -1270,17 +1280,23 @@ export class MgT2ActorSheet extends ActorSheet {
         if (this.actor.type === "spacecraft" && (actor.type === "traveller" || actor.type === "npc")) {
             console.log(`Adding new crew member ${actor._id}`);
             if (!this.actor.system.crewed) {
-                this.actor.system.crewed = { "crew": {}, "passengers": {}, "roles": [] };
+                this.actor.system.crewed = {"crew": {}, "passengers": {}, "roles": []};
             }
             // this.actor.update(
             //     { key: { roles: ['UNDESIGNATED'] }}
             // );
-            this.actor.update({[`system.crewed.passengers.${actor._id}`]: { roles: [ "NONE" ] }});
+            this.actor.update({[`system.crewed.passengers.${actor._id}`]: {roles: ["NONE"]}});
 
             // this.actor.system.crewed.crew[actor._id] = {
             //    "roles": [ "UNDESIGNATED" ]
             // };
             // await this.actor.update({"system.crewed": this.actor.system.crewed });
+        } else if (this.actor.type === "spacecraft" && (actor.type === "spacecraft" || actor.type === "vehicle")) {
+            console.log(`Docking ${actor.name} with ship`);
+            if (!this.actor.system.docks) {
+                this.actor.system.docks = {};
+            }
+            this.actor.update({[`system.docks.${actor._id}`]: { quantity: 1 }});
         } else if (actor.type === "package" && (this.actor.type === "traveller" || this.actor.type === "npc")) {
             ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackage",
                 { package: actor.name, actor: this.actor.name }));
@@ -1567,6 +1583,9 @@ export class MgT2ActorSheet extends ActorSheet {
             let srcActor = game.actors.get(srcActorId);
             if (srcActor) {
                 let item = srcActor.items.get(itemId);
+                if (item.type === "hardware" || item.type === "role" || item.type === "term" || item.type === "software") {
+                    return true;
+                }
 
                 if (parseInt(item.system.quantity) > 1) {
                     new MgT2QuantityDialog(srcActor, actor, item).render(true);

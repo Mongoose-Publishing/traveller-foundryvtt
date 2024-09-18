@@ -270,6 +270,7 @@
   "MGT2.TravellerSheet.fib": "fib",
   "MGT2.TravellerSheet.ShipsNotes": "Notes",
   "MGT2.TravellerSheet.ShipsCrew": "Crew",
+  "MGT2.TravellerSheet.ShipsDocks": "Docking Bay",
   "MGT2.TravellerSheet.CargoSpace": "Cargo Space",
   "MGT2.TravellerSheet.CargoUsed": "Used",
   "MGT2.TravellerSheet.CargoRemaining": "Remaining",

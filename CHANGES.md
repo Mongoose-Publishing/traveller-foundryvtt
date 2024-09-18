@@ -7,6 +7,12 @@
 * Some things silently fail on Foundry v12.
 
 
+## Reccent
+
+* Allow actors to be dragged out of starships onto the scene.
+* When dragging hardware, crew roles or career terms between actors, always use a copy rather than a move.
+* Spacecraft dragged onto a spacecraft are put into the docking bay.
+
 ## v0.10.2 (Beta)
 
 * Better use of space in armour box for spacecraft.

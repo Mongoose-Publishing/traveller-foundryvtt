@@ -181,6 +181,7 @@
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
                     <a class="item" data-tab="crew">{{localize 'MGT2.TravellerSheet.ShipsCrew'}}</a>
+                    <a class="item" data-tab="docks">{{localize 'MGT2.TravellerSheet.ShipsDocks'}}</a>
                     <a class="item" data-tab="locker">{{localize 'MGT2.TravellerSheet.ShipsLocker'}}</a>
                     <a class="item" data-tab="cargo">{{localize 'MGT2.TravellerSheet.CargoHold'}}</a>
                     <a class="item" data-tab="hardware">{{localize 'MGT2.TravellerSheet.ShipsHardware'}}</a>
@@ -351,6 +352,27 @@
 
                     <div class="tab items" data-tab="crew">
                         {{> "systems/mgt2e/templates/actor/parts/actor-starship-crew.html"}}
+                    </div>
+
+                    <div class="tab items" data-tab="docks">
+                        <ol class="items-list actor-crew-list grid grid-3col">
+                            {{#each dockedShips as |ship|}}
+                            <li class="actor-crew" data-actor-id="{{ship._id}}">
+                                <h4 title="{{ship.name}}">
+                                    {{ship.name}}
+                                </h4>
+                                <img class="embedded-actor-portrait actor-draggable" data-actor-id="{{ship._id}}" title="{{ship.name}}" src="{{ship.img}}"/>
+
+                                <br/>
+                                <div class="item-controls">
+                                    <a class="item-control docked-edit" title="Edit Crew Position">
+                                        <i class="fas fa-edit"></i></a>
+                                    <a class="item-control docked-delete" title="Remove Crew">
+                                        <i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ol>
                     </div>
 
                     <div class="tab items" data-tab="computer">
