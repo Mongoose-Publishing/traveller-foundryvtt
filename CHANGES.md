@@ -7,8 +7,9 @@
 
 ## v0.10.3 (Beta)
 
-* Fixed application of damage in Foundry v12
-* Fixed display of actor and item descriptions in Foundry v12
+* Fixed application of damage in Foundry v12.
+* Fixed display of actor and item descriptions in Foundry v12.
+* Updated system configuration to include v12 as supported.
 
 ## v0.10.2 (Beta)
 
