@@ -660,7 +660,7 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
                 if (speciality.expert) {
                     if (parseInt(speciality.expert) > value) {
                         value = parseInt(speciality.expert) - 1;
-                        specNotes += `Expert/${spec.expert}`;
+                        specNotes += `Expert/${speciality.expert}`;
                     } else {
                         value += 1;
                     }
