@@ -641,11 +641,7 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
         if (skill.trained) {
             value = parseInt(skill.value);
             if (skill.expert && (cha === "INT" || cha === "EDU")) {
-                if (parseInt(skill.expert) > value) {
-                    value = parseInt(skill.expert) - 1;
-                } else {
-                    value += 1;
-                }
+                value += 1;
                 skillNotes += `Expert/${skill.expert}`;
             }
             if (skill.augment) {
@@ -657,13 +653,9 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
                 title += " (" + skillLabel(speciality) + ")";
                 skillText += " (" + skillLabel(speciality) + ")";
                 specialityCheck = true;
-                if (speciality.expert) {
-                    if (parseInt(speciality.expert) > value) {
-                        value = parseInt(speciality.expert) - 1;
-                        specNotes += `Expert/${speciality.expert}`;
-                    } else {
-                        value += 1;
-                    }
+                if (speciality.expert && (cha === "INT" || cha === "EDU")) {
+                    value += 1;
+                    specNotes += `Expert/${speciality.expert}`;
                 }
                 if (speciality.augment && !isNaN(speciality.augment) && parseInt(speciality.augment) !== 0) {
                     value += parseInt(speciality.augment);

@@ -1862,14 +1862,14 @@ export class MgT2ActorSheet extends ActorSheet {
 
         if (skill) {
             skillDefault = data.skills[skill].default;
-            if (data.skills[skill].trained) {
+//            if (data.skills[skill].trained) {
                 if (spec) {
                     speciality = data.skills[skill].specialities[spec];
                     if (speciality.default) {
                         skillDefault = speciality.default;
                     }
                 }
-            }
+  //          }
         }
         let quickRoll = game.settings.get("mgt2e", "quickRolls");
         if (event.shiftKey) {

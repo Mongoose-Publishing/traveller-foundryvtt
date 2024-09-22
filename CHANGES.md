@@ -5,6 +5,11 @@
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
 
+## v0.10.4 (Beta)
+
+* Fix bug with specialities and expert systems
+* Change implementation of rules so expert system always gives +1 if you are trained
+
 ## v0.10.3 (Beta)
 
 * Fixed application of damage in Foundry v12.
