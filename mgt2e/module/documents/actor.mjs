@@ -2,7 +2,7 @@ import { MgT2Item } from "../documents/item.mjs";
 import { Tools } from "../helpers/chat/tools.mjs";
 import {MGT2} from "../helpers/config.mjs";
 import {MgT2DamageDialog} from "../helpers/damage-dialog.mjs";
-import {getTraitValue, hasTrait} from "../helpers/dice-rolls.mjs";
+import {getTraitValue, hasTrait, isNonZero, isNumber} from "../helpers/dice-rolls.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -183,7 +183,7 @@ export class MgT2Actor extends Actor {
         const dex = parseInt(actorData.system.characteristics["DEX"].dm);
         const int = parseInt(actorData.system.characteristics["INT"].dm);
 
-        if (!isNaN(actorData.system.initiative)) {
+        if (typeof actorData.system.initiative === "number") {
             actorData.system.initiative = {
                 base: 0,
                 value: 0
@@ -350,18 +350,19 @@ export class MgT2Actor extends Actor {
         if (!actorData.initiative) {
             actorData.initiative = {
                 "base": 0,
-                "value": 0,
-                "pilot": 0,
-                "leadership": 0,
-                "tactics": 0
+                "value": 0
             }
         }
         let init = actorData.initiative;
         init.base = parseInt(actorData.spacecraft.mdrive) + parseInt(actorData.spacecraft.rdrive);
-        init.value = parseInt(init.base) +
-                (init.pilot?parseInt(init.pilot):0) +
-                (init.leadership?parseInt(init.leadership):0) +
-                (init.tactics?parseInt(init.tactics):0);
+        init.value = parseInt(init.base);
+
+        if (this.getFlag("mgt2e","initPilotDM")) {
+            init.value += parseInt(this.getFlag("mgt2e", "initPilotDM"));
+        }
+        if (this.getFlag("mgt2e","initTacticsDM")) {
+            init.value += parseInt(this.getFlag("mgt2e", "initTacticsDM"));
+        }
     }
 
 
@@ -418,9 +419,9 @@ export class MgT2Actor extends Actor {
 
   applyDamageToPerson(damage, options) {
       let armour = 0;
-      if (this.system.armour && !Number.isNaN(this.system.armour.protection)) {
+      if (this.system.armour && isNonZero(this.system.armour.protection)) {
           armour = parseInt(this.system.armour.protection);
-          if (Number.isNaN(armour)) {
+          if (!isNumber(armour)) {
               armour = 0;
           }
           if (options.damageType !== "") {
@@ -633,7 +634,7 @@ export class MgT2Actor extends Actor {
       if (weaponItem && weaponItem?.system?.weapon) {
           let score = this.getWeaponSkill(weaponItem, options);
 
-          if (!isNaN(weaponItem.system.weapon.attackBonus)) {
+          if (isNonZero(weaponItem.system.weapon.attackBonus)) {
               score += parseInt(weaponItem.system.weapon.attackBonus);
               if (options?.results) {
                   options.results["weapon"] = parseInt(weaponItem.system.weapon.attackBonus);
@@ -647,7 +648,7 @@ export class MgT2Actor extends Actor {
         if (weaponItem && weaponItem?.system?.weapon) {
             let score = this.getWeaponSkill(weaponItem, options);
 
-            if (!isNaN(weaponItem.system.weapon.parryBonus)) {
+            if (isNonZero(weaponItem.system.weapon.parryBonus)) {
                 score += parseInt(weaponItem.system.weapon.parryBonus);
             }
             return score;
@@ -666,7 +667,6 @@ export class MgT2Actor extends Actor {
      */
   getSkillValue(skillId, options) {
       let score = this.getUntrained();
-      console.log(`Untrained: ${skillId} ${score}`);
       if (!options) {
           options = { "results": {} };
       } else {
@@ -679,7 +679,8 @@ export class MgT2Actor extends Actor {
               "augdm": 0,
               "bonus": 0,
               "label": this.getSkillLabel(skillId),
-              "dice": "2D6"
+              "dice": "2D6",
+              "addcha": false
           };
       }
 
@@ -709,70 +710,72 @@ export class MgT2Actor extends Actor {
               }
           }
           options.results.cha = cha;
-
           if (skill.trained) {
               if (spec) {
-                  score = Number.isNaN(spec.value)?0:parseInt(spec.value);
+                  score = isNonZero(spec.value)?parseInt(spec.value):0;
                   options.results.base = score;
-                  if (!Number.isNaN(spec.expert) && (cha === "INT" || cha === "EDU")) {
+
+                  if (isNonZero(spec.expert) && (cha === "INT" || cha === "EDU")) {
                       score = Math.max(score + 1, parseInt(spec.expert) - 1);
-                      options.results.expert = score;
+                      options.results.expert = spec.expert;
                   }
                   // Only adds if skill is trained.
-                  if (!isNaN(spec.augmentation)) {
+                  if (isNonZero(spec.augmentation)) {
                       score += parseInt(spec.augmentation);
                   }
               } else {
-                  score = Number.isNaN(skill.value)?0:parseInt(skill.value);
+                  score = isNonZero(skill.value)?parseInt(skill.value):0;
                   options.results.base = score;
-                  if (!Number.isNaN(skill.expert) && (cha === "INT" || cha === "EDU")) {
+                  if (isNonZero(skill.expert) && (cha === "INT" || cha === "EDU")) {
                       score = Math.max(score + 1, parseInt(skill.expert) - 1);
-                      options.results.expert = score;
+                      options.results.expert = skill.expert;
                   }
                   // Only adds if skill is trained.
-                  if (!isNaN(skill.augmentation)) {
+                  if (isNonZero(skill.augmentation) === "number") {
                       score += parseInt(skill.augmentation);
                   }
               }
           } else {
               if (spec) {
-                  if (!Number.isNaN(spec.expert)) {
+                  if (isNonZero(spec.expert)) {
                       score = parseInt(spec.expert);
                       options.results.expert = score;
                   }
               } else {
-                  if (!Number.isNaN(skill.expert)) {
+                  if (isNonZero(skill.expert) === "number") {
                       score = parseInt(skill.expert);
                       options.results.expert = score;
                   }
               }
           }
           // The following are always applied. Parent and specialities stack.
-          if (!isNaN(skill.bonus)) {
+          if (isNonZero(skill.bonus) === "number") {
               score += parseInt(skill.bonus);
               options.results.bonus += parseInt(skill.bonus);
           }
-          if (!isNaN(skill.augdm)) {
+          if (isNonZero(skill.augdm) === "number") {
               score += parseInt(skill.augdm);
               options.results.augdm += parseInt(skill.augdm);
           }
-          if (spec && !isNaN(spec.bonus)) {
+          if (spec && isNonZero(spec.bonus)) {
               score += parseInt(spec.bonus);
               options.results.bonus += parseInt(spec.bonus);
           }
-          if (spec && !isNaN(spec.augdm)) {
+          if (spec && isNonZero(spec.augdm)) {
               score += parseInt(spec.augdm);
               options.results.augdm += parseInt(spec.augdm);
           }
       }
 
       // Apply global modifiers.
-      if (!isNaN(options.dm)) {
+      if (isNonZero(options.dm)) {
           score += parseInt(options.dm);
           options.results["dm"] = parseInt(options.dm);
       }
       if (cha && this.system[cha]) {
-          score += parseInt(this.system[cha]);
+          if (options.addcha) {
+              score += parseInt(this.system[cha]);
+          }
           options.results["chadm"] = parseInt(this.system[cha]);
       }
 

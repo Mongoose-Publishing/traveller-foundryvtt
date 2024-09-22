@@ -1210,17 +1210,15 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (action.action === "special") {
             if (action.special === "pilot") {
                 let pilotDM = actorCrew.getSkillValue("pilot.spacecraft");
-                shipActor.system.initiative.pilot = pilotDM;
-                shipActor.system.initiative.pilotName = actorCrew.name;
-                shipActor.update({"system.initiative": shipActor.system.initiative});
+                shipActor.setFlag("mgt2e", "initPilotDM", pilotDM);
+                shipActor.setFlag("mgt2e", "initPilotName", actorCrew.name);
             } else if (action.special === "tacticsInit") {
-                let tacticsDM = actorCrew.getSkillValue("tactics.naval");
-
+                let tacticsDM = actorCrew.getSkillValue("tactics.naval", { "addcha": true });
+                console.log(tacticsDM);
                 let roll = await new Roll("2D6 - 8 + " + tacticsDM).evaluate();
 
-                shipActor.system.initiative.tactics = roll.total;
-                shipActor.system.initiative.tacticsName = actorCrew.name;
-                shipActor.update({"system.initiative": shipActor.system.initiative});
+                shipActor.setFlag("mgt2e", "initTacticsDM", roll.total);
+                shipActor.setFlag("mgt2e", "initTacticsName", actorCrew.name);
 
                 let chatData = {
                     user: game.user.id,

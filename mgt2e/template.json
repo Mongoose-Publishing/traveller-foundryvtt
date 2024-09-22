@@ -156,7 +156,8 @@
       "hits": {
         "value": 12,
         "max": 12,
-        "damage": 0
+        "damage": 0,
+        "criticals": {}
       },
       "initiative": {
         "base": 0,
@@ -182,7 +183,8 @@
         "hits": {
             "value": 80,
             "max": 80,
-            "damage": 0
+            "damage": 0,
+            "criticals": {}
         },
         "initiative": {
           "base": 0,
@@ -191,6 +193,7 @@
         "spacecraft": {
             "dtons": 100,
             "configuration": "standard",
+            "skill": "pilot.spacecraft",
             "tl": 12,
             "armour": 0,
             "radShielding": 0,

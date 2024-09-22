@@ -104,7 +104,7 @@
                     <input class="field-value" readonly name="system.hits.max" type="text" value="{{system.hits.max}}"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.CargoHold'}}</label>
+                    <label for="system.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.Cargo'}}</label>
                     <input class="field-value" name="system.spacecraft.cargo" readonly type="text" value="{{system.spacecraft.cargo}}"/>
                 </div>
                 <div class="resource flex-group-center">
@@ -136,20 +136,20 @@
                         <label>{{localize 'MGT2.TravellerSheet.InitThrust'}}</label>
                         <span>{{system.initiative.base}}</span>
                     </div>
-                    <div class="mini-value" title="{{system.initiative.pilotName}}">
+                    <div class="mini-value" title="{{actor.flags.mgt2e.initPilotName}}">
                         <label>{{localize 'MGT2.TravellerSheet.InitPilot'}}</label>
-                        <span>{{system.initiative.pilot}}</span>
+                        <span>{{actor.flags.mgt2e.initPilotDM}}</span>
                     </div>
-                    {{#if system.initiative.tactics}}
-                        <div class="mini-value" title="{{system.initiative.tacticsName}}">
+                    {{#if actor.flags.mgt2e.initTacticsDM}}
+                        <div class="mini-value" title="{{actor.flags.mgt2e.initTacticsName}}">
                             <label>{{localize 'MGT2.TravellerSheet.InitTactics'}}</label>
-                            <span>{{system.initiative.tactics}}</span>
+                            <span>{{actor.flags.mgt2e.initTacticsDM}}</span>
                         </div>
                     {{/if}}
-                    {{#if system.initiative.leadership}}
+                    {{#if actor.flags.mgt2e.initLeadershipDM}}
                         <div class="mini-value">
                             <label>{{localize 'MGT2.TravellerSheet.InitLeader'}}</label>
-                            <span>{{system.initiative.leadership}}</span>
+                            <span>{{actor.flags.mgt2e.initLeadershipDM}}</span>
                         </div>
                     {{/if}}
                 </div>

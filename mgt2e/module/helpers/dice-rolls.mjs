@@ -5,6 +5,21 @@
  * @param skill     Skill to get label for.
  * @returns {string|*}
  */
+
+export function isNonZero(value) {
+    if (!value) {
+        return false;
+    }
+    return value && !Number.isNaN(parseInt(value));
+}
+
+export function isNumber(value) {
+    if (!value) {
+        return false;
+    }
+    return !Number.isNaN(parseInt(value));
+}
+
 export function skillLabel(skill, skillId) {
     if (!skill) {
         return "";
@@ -682,11 +697,11 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
                 title += " (" + skillLabel(speciality) + ")";
                 skillText += " (" + skillLabel(speciality) + ")";
                 specialityCheck = true;
-                if (speciality.expert && (cha === "INT" || cha === "EDU")) {
+                if (isNonZero(speciality.expert) && (cha === "INT" || cha === "EDU")) {
                     value += 1;
                     specNotes += `Expert/${speciality.expert}`;
                 }
-                if (speciality.augment && !isNaN(speciality.augment) && parseInt(speciality.augment) !== 0) {
+                if (isNonZero(speciality.augment)) {
                     value += parseInt(speciality.augment);
                     //specNotes += `Aug&nbsp;${speciality.augment}`
                 }
@@ -777,7 +792,6 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
                     let stotal = parseInt(total) + parseInt(spec.value);
                     let slabel = `${skillLabel(spec)} (${spec.value})`;
 
-                    console.log(spec);
                     specDM = 0;
                     specAug = 0;
                     specBonus = 0;
