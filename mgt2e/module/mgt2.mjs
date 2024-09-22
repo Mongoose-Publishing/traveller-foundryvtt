@@ -361,6 +361,8 @@ Hooks.on("createActor", (actor) => {
             actor.img = `systems/mgt2e/icons/actors/traveller-grey.svg`;
         } else if (actor.type === "spacecraft") {
             actor.img = `systems/mgt2e/images/tokens/spacecraft/white/far_trader.webp`;
+        } else if (actor.type === "vehicle") {
+            actor.img = `systems/mgt2e/images/tokens/vehicles/white/jeep.webp`;
         } else {
             actor.img = "systems/mgt2e/icons/actors/traveller-red.svg";
         }
@@ -907,8 +909,6 @@ Handlebars.registerHelper('isTrained', function(skill) {
 });
 
 Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
-    console.log(arg1);
-    console.log(arg2);
    return arg1 == arg2;
 });
 

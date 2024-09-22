@@ -92,6 +92,9 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (type === 'spacecraft') {
             this._prepareSpacecraftItems(context);
             this._prepareSpacecraftCrew(context);
+        } else if (type === 'vehicle') {
+            this._prepareVehicleItems(context);
+            this._prepareVehicleCrew(context);
         }
 
         // Add roll data for TinyMCE editors.
@@ -171,15 +174,48 @@ export class MgT2ActorSheet extends ActorSheet {
             } else {
                 context.suggestedHits = "";
             }
-        } else if (type === "spacecraft" || type === "vehicle") {
-            context.selectShipTL = { };
-            for (let tl=7 ; tl <= 17; tl++) {
-                context.selectShipTL[`${tl}`] = `${tl} - ${game.i18n.localize("MGT2.Item.Tech."+tl)}`;
+        } else if (type === "spacecraft") {
+            context.selectShipTL = {};
+            for (let tl = 7; tl <= 17; tl++) {
+                context.selectShipTL[`${tl}`] = `${tl} - ${game.i18n.localize("MGT2.Item.Tech." + tl)}`;
             }
-            context.selectShipConfig = { };
+            context.selectShipConfig = {};
             for (let c in CONFIG.MGT2.SHIP_CONFIGURATION) {
                 context.selectShipConfig[c] = game.i18n.localize("MGT2.Spacecraft.Configuration." + c);
             }
+        } else if (type === "vehicle") {
+            context.selectVehicleTL = {};
+            for (let tl = 0; tl <= 17; tl++) {
+                context.selectVehicleTL[`${tl}`] = `${tl} - ${game.i18n.localize("MGT2.Item.Tech." + tl)}`;
+            }
+            context.selectChassis = {};
+            context.selectSubType = {};
+            for (let c in CONFIG.MGT2.VEHICLES.CHASSIS) {
+                if (!actorData.vehicle.chassis) {
+                    actorData.vehicle.chassis = c;
+                }
+                context.selectChassis[c] = game.i18n.localize("MGT2.Vehicle.ChassisLabel." + c);
+                if (actorData.vehicle.chassis === c) {
+                    for (let s in CONFIG.MGT2.VEHICLES.CHASSIS[c].subtypes) {
+                        context.selectSubType[s] = game.i18n.localize("MGT2.Vehicle.SubTypeLabel." + s);
+                    }
+                }
+            }
+            context.selectSpeed = {};
+            let lastSpeed = 0;
+            for (let spd in CONFIG.MGT2.VEHICLES.SPEED) {
+                if (!actorData.vehicle.speed) {
+                    actorData.vehicle.speed = spd;
+                }
+                let label = game.i18n.localize("MGT2.Vehicle.SpeedBand." + spd);
+                let max = CONFIG.MGT2.VEHICLES.SPEED[spd].max;
+                if (lastSpeed || max) {
+                    label = `${label} (${lastSpeed}${max ? (" - " + max) : "+ "}km/h)`;
+                }
+                context.selectSpeed[spd] = label;
+                lastSpeed = max;
+            }
+
         } else if (type === "traveller" || type === "npc" || type === "package") {
             context.selectSize = {
                 "-4": "Small -4",
@@ -197,6 +233,49 @@ export class MgT2ActorSheet extends ActorSheet {
         }
 
         return context;
+    }
+
+    _prepareVehicleItems(context) {
+        const actorData = context.actor.system;
+        const cargo = [];
+        const locker = [];
+
+        let cargoUsed = 0;
+        for (let i of context.items) {
+            if (i.type === 'cargo') {
+                cargo.push(i);
+                let q = 1;//parseInt(i.system.quantity);
+                if (q > 0) {
+                    cargoUsed += q;
+                }
+            } else {
+                locker.push(i);
+            }
+        }
+        context.cargo = cargo;
+        context.locker = locker;
+    }
+
+    _prepareVehicleCrew(context) {
+        const actorData = context.actor.system;
+        const crew = [];
+        const passengers = [];
+
+        for (let actorId in actorData.crewed.crew) {
+            let actor = game.actors.get(actorId);
+            if (actor) {
+                crew.push(actor);
+            }
+        }
+        for (let actorId in actorData.crewed.passengers) {
+            let actor = game.actors.get(actorId);
+            if (actor) {
+                passengers.push(actor);
+            }
+        }
+        context.crew = crew;
+        context.passengers = passengers;
+
     }
 
     /**
@@ -1302,7 +1381,7 @@ export class MgT2ActorSheet extends ActorSheet {
         if (!actor) {
            return;
         }
-        if (this.actor.type === "spacecraft" && (actor.type === "traveller" || actor.type === "npc")) {
+        if ((this.actor.type === "spacecraft" || this.actor.type === "vehicle") && (actor.type === "traveller" || actor.type === "npc")) {
             console.log(`Adding new crew member ${actor._id}`);
             if (!this.actor.system.crewed) {
                 this.actor.system.crewed = {"crew": {}, "passengers": {}, "roles": []};

@@ -45,7 +45,13 @@ export class MgT2Item extends Item {
             if (this.actor.type === "spacecraft") {
                 if (this.type === "term" || this.type === "associate") {
                     ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.OnlyOnCharacter",
-                        { item: this.name, type: this.type }));
+                        {item: this.name, type: this.type}));
+                    return false;
+                }
+            } else if (this.actor.type === "vehicle") {
+                if (this.type === "term" || this.type === "associate") {
+                    ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.OnlyOnCharacter",
+                        {item: this.name, type: this.type}));
                     return false;
                 }
             } else {

@@ -165,7 +165,9 @@
       },
       "vehicle": {
         "spacecs": 4,
-        "chassis": "",
+        "chassis": "lightGround",
+        "subtype": "openFrame",
+        "traits": "",
         "tl": 7,
         "cost": 10000,
         "skill": "drive.wheel",

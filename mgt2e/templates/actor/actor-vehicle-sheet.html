@@ -29,20 +29,46 @@
                 <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
             </h1>
 
-            <div class="shadow grid grid-5col">
+            <div class="shadow grid grid-4col">
                 <div class="resource flex-group-center">
-                    <label for="system.vehicle.spaces" class="field-label">{{localize 'MGT2.TravellerSheet.Spaces'}}</label>
+                    <label for="system.vehicle.spaces" class="field-label">{{localize 'MGT2.Vehicle.Spaces'}}</label>
                     <input class="field-value writable" name="system.vehicle.spaces" type="text" value="{{system.vehicle.spaces}}"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="system.vehicle.tl" class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
                     <select class="configurationType writable" style="width:100%" name="system.vehicle.tl">
-                        {{selectOptions selectShipTL selected=system.vehicle.tl}}
+                        {{selectOptions selectVehicleTL selected=system.vehicle.tl}}
                     </select>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.vehicle.chassis" class="field-label">{{localize 'MGT2.TravellerSheet.Chassis'}}</label>
-                    <input class="field-value writable" name="system.vehicle.chassis" type="text" value="{{system.vehicle.chassis}}"/>
+                    <label for="system.vehicle.chassis" class="field-label">{{localize 'MGT2.Vehicle.Chassis'}}</label>
+                    <select class="configurationType writable" style="width:100%" name="system.vehicle.chassis">
+                        {{selectOptions selectChassis selected=system.vehicle.chassis}}
+                    </select>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.vehicle.subtype" class="field-label">{{localize 'MGT2.Vehicle.SubType'}}</label>
+                    <select class="configurationType writable" style="width:100%" name="system.vehicle.subtype">
+                        {{selectOptions selectSubType selected=system.vehicle.subtype}}
+                    </select>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.vehicle.agility" class="field-label">{{localize 'MGT2.Vehicle.Agility'}}</label>
+                    <input class="field-value writable" name="system.vehicle.agility" type="text" value="{{system.vehicle.agility}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.vehicle.speed" class="field-label">{{localize 'MGT2.Vehicle.Speed'}}</label>
+                    <select class="configurationType writable" style="width:100%" name="system.vehicle.speed">
+                        {{selectOptions selectSpeed selected=system.vehicle.speed}}
+                    </select>
+               </div>
+                <div class="resource flex-group-center">
+                    <label for="system.vehicle.range" class="field-label">{{localize 'MGT2.Vehicle.Range'}}</label>
+                    <input class="field-value writable" name="system.vehicle.range" type="text" value="{{system.vehicle.range}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.Hits'}}</label>
+                    <input class="field-value writable" name="system.hits.max" type="text" value="{{system.hits.max}}"/>
                 </div>
             </div>
 
@@ -51,8 +77,6 @@
                     <a class="item" data-tab="crew">{{localize 'MGT2.TravellerSheet.ShipsCrew'}}</a>
                     <a class="item" data-tab="locker">{{localize 'MGT2.TravellerSheet.ShipsLocker'}}</a>
                     <a class="item" data-tab="bays">{{localize 'MGT2.TravellerSheet.Bays'}}</a>
-                    <a class="item" data-tab="hardware">{{localize 'MGT2.TravellerSheet.ShipsHardware'}}</a>
-                    <a class="item" data-tab="computer">{{localize 'MGT2.TravellerSheet.ShipsComputer'}}</a>
                     <a class="item" data-tab="notes">{{localize 'MGT2.TravellerSheet.ShipsNotes'}}</a>
                 </nav>
 
@@ -78,31 +102,6 @@
                                 </div>
                             </li>
                         {{/each}}
-                        </ol>
-                    </div>
-
-                    <div class="tab items" data-tab="hardware">
-
-                        <ol class="items-list actor-items grid grid-3col">
-                            {{#each hardware as |item id|}}
-                            <li class="item item-gear" data-item-id="{{item._id}}">
-                                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
-                                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                                {{#if item.system.hardware.tons  includeZero=false}}
-                                    <span>{{quantity item item.system.hardware.tons}}dT</span>
-                                {{/if}}
-                                {{#if item.system.tl includeZero=false}}
-                                    <span>TL {{item.system.tl}}</span>
-                                {{/if}}
-                                {{#if item.system.cost includeZero=false}}
-                                    <span>MCr{{quantity item item.system.cost}}</span>
-                                {{/if}}
-                                <div class="item-controls">
-                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                                </div>
-                            </li>
-                            {{/each}}
                         </ol>
                     </div>
 
@@ -135,21 +134,6 @@
                             </ol>
                         {{/if}}
 
-                        {{#if shipWeapons}}
-                            <h2>Available Weapons</h2>
-                            <ol class="items-list actor-items grid grid-3col">
-                                {{#each shipWeapons as |item id|}}
-                                <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
-                                    <h4>{{item.name}}</h4>
-                                    <img src="{{item.img}}" class="small"/>
-                                    <div class="item-controls">
-                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                                    </div>
-                                </li>
-                                {{/each}}
-                            </ol>
-                        {{/if}}
                     </div>
 
                     <div class="tab items" data-tab="crew">

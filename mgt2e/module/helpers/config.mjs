@@ -13,6 +13,58 @@ MGT2.HARDWARE_GENERAL = "general";
 MGT2.HARDWARE_ARMOUR = "armour";
 MGT2.HARDWARE_JUMP = "jump";
 
+MGT2.VEHICLES = {
+  "CHASSIS": {
+      "lightGround": {
+          "tl": 4, "skill": "drive.wheel", "agility": 0, "minSpaces": 1, "maxSpaces": 20,
+          "cost": 750, "hull": 2, "shipping": 0.5,
+          "subtypes": {
+              "openFrame": {
+                  "tl": 0, "agility": 1, "minSpaces": 1, "maxSpaces": 3, "cost": 750,
+                  "speed": 1, "traits": "openVehicle"
+              },
+              "monowheel": {
+                  "tl": 9, "agility": 2, "minSpaces": 1, "maxSpaces": 3, "cost": 2500,
+                  "speed": 1, "traits": "openVehicle"
+              },
+              "railRider": {
+                  "agility": -2, "cost": 400, "speed": -1
+              },
+              "roughTerrain": {
+                  "cost": 100, "traits": "offRoader"
+              },
+              "tracks": {
+                  "tl": 5, "skill": "drive.track", "cost": 750, "speed": -1, "traits": "tracked"
+              }
+          }
+      },
+      "heavyGround": {
+        "tl": 4, "skill": "drive.wheel", "agility": -2, "minSpaces": 20, "cost": 3000,
+        "hull": 3, "shipping": 0.5,
+        "subtypes": {
+            "afv": { "tl": 5, "cost": 3000, "speed": -1, "traits": "afv offRoader" },
+            "railRider": { "agility": -2, "cost": 1000, "speed": 1 },
+            "roughTerrain": { "cost": 500, "traits": "offRoader" },
+            "tracks": { "tl": 5, "skill": "drive.track", "cost": 2000, "speed": -1, "traits": "tracked" },
+            "tunneller": { "tl": 7, "skill": "drive.mole", "cost": 25000, "speed": -1 }
+        }
+      }
+  },
+  "SPEED": {
+      "stopped": { band: 0, max: 0 },
+      "idle": { band: 1, max: 1 },
+      "verySlow": { band: 2, max: 50 },
+      "slow": { band: 3, max: 100 },
+      "medium": { band: 4, max: 200 },
+      "high": { band: 5, max: 300 },
+      "fast": { band: 6, max: 500 },
+      "veryFast": { band: 7, max: 800 },
+      "subsonic": { band: 8, max: 1200 },
+      "supersonic": { band: 9, max: 6000 },
+      "hypersonic": { band: 10 }
+  }
+};
+
 MGT2.SHIP_CONFIGURATION = {
   "standard":    { "armour": 1.0, "cost": 1.0, "hull": 1.0, "volume": 1.0, "streamlined": "partial" },
   "streamlined": { "armour": 1.2, "cost": 1.2, "hull": 1.0, "volume": 1.0, "streamlined": "yes" },
