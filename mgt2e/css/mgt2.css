@@ -1910,3 +1910,31 @@ div.mini-value span {
     margin-left: 0px;
     border: none;
 }
+
+.bay-header {
+    margin: 0;
+    padding: 0;
+    background-color: #f1511b;
+}
+
+.bay-head {
+    width: 100%;
+}
+
+.bay-head label {
+    text-align: left;
+    display: inline-block;
+    color: black;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-bottom: 0.25em;
+}
+.bay-head label.bay-hover-selected {
+    color: white;
+}
+
+.bay-hover:hover {
+    color: white;
+    text-shadow: 0 0 10px red;
+    cursor: pointer;
+}

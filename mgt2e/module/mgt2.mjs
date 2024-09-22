@@ -907,6 +907,8 @@ Handlebars.registerHelper('isTrained', function(skill) {
 });
 
 Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
+    console.log(arg1);
+    console.log(arg2);
    return arg1 == arg2;
 });
 

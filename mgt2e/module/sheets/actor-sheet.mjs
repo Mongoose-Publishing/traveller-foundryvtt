@@ -171,7 +171,7 @@ export class MgT2ActorSheet extends ActorSheet {
             } else {
                 context.suggestedHits = "";
             }
-        } else if (type === "spacecraft") {
+        } else if (type === "spacecraft" || type === "vehicle") {
             context.selectShipTL = { };
             for (let tl=7 ; tl <= 17; tl++) {
                 context.selectShipTL[`${tl}`] = `${tl} - ${game.i18n.localize("MGT2.Item.Tech."+tl)}`;
@@ -361,13 +361,17 @@ export class MgT2ActorSheet extends ActorSheet {
         context.passengers = passengers;
 
         const ships = [];
+        const vehicles = [];
         for (let actorId in actorData.docks) {
             let actor = game.actors.get(actorId);
-            if (actor) {
+            if (actor && actor.type === "spacecraft") {
                 ships.push(actor);
+            } else if (actor && actor.type === "vehicle") {
+                vehicles.push(actor);
             }
         }
         context.dockedShips = ships;
+        context.dockedVehicles = vehicles;
     }
 
 
@@ -605,6 +609,7 @@ export class MgT2ActorSheet extends ActorSheet {
     /** @override */
     activateListeners(html) {
         super.activateListeners(html);
+        console.log(this.actor);
 
         // Render the item sheet for viewing/editing prior to the editable check.
         html.find('.item-edit').click(ev => {
@@ -767,8 +772,29 @@ export class MgT2ActorSheet extends ActorSheet {
                 const t = $(ev.currentTarget).parents(".trait-item");
                 this._creatureTraitModify(t.data("traitId"), 1);
             });
-        }
+        } else if (this.actor.type === "spacecraft") {
+            // Select which bay to display.
+            html.find('.bay-cargo').click(ev => {
+               this.actor.system.spacecraft.baySelected = "cargo";
+               this.actor.update({"system.spacecraft.baySelected": "cargo"});
+            });
+            html.find('.bay-ship').click(ev => {
+                this.actor.system.spacecraft.baySelected = "ship";
+                this.actor.update({"system.spacecraft.baySelected": "ship"});
+            });
+            html.find('.bay-vehicle').click(ev => {
+                this.actor.system.spacecraft.baySelected = "vehicle";
+                this.actor.update({"system.spacecraft.baySelected": "vehicle"});
+            });
 
+            // Remove spacecraft and vehicles.
+            html.find('.docked-delete').click(ev => {
+                const li = $(ev.currentTarget).parents(".actor-crew");
+                const actorId = li.data("actorId");
+                this.actor.update({[`system.docks.-=${actorId}`]: null});
+            });
+
+        }
 
         // Dodge reaction
         html.find('.dodgeRoll').click(ev => {

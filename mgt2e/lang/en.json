@@ -261,7 +261,8 @@
   "MGT2.TravellerSheet.RDrive": "R-Drive",
   "MGT2.TravellerSheet.JDrive": "J-Drive",
   "MGT2.TravellerSheet.ShipsLocker": "Ship's Locker",
-  "MGT2.TravellerSheet.CargoHold": "Cargo Hold",
+  "MGT2.TravellerSheet.Bays": "Bays",
+  "MGT2.TravellerSheet.CargoBay": "Cargo Bay",
   "MGT2.TravellerSheet.ShipsHardware": "Hardware",
   "MGT2.TravellerSheet.ShipsComputer": "Computer",
   "MGT2.TravellerSheet.Processing": "Processing",
@@ -270,7 +271,8 @@
   "MGT2.TravellerSheet.fib": "fib",
   "MGT2.TravellerSheet.ShipsNotes": "Notes",
   "MGT2.TravellerSheet.ShipsCrew": "Crew",
-  "MGT2.TravellerSheet.ShipsDocks": "Docking Bay",
+  "MGT2.TravellerSheet.ShipBay": "Docking Bay",
+  "MGT2.TravellerSheet.VehicleBay": "Vehicle Bay",
   "MGT2.TravellerSheet.CargoSpace": "Cargo Space",
   "MGT2.TravellerSheet.CargoUsed": "Used",
   "MGT2.TravellerSheet.CargoRemaining": "Remaining",
@@ -294,10 +296,17 @@
   "MGT2.TravellerSheet.Bane": "Bane",
   "MGT2.TravellerSheet.UseCustomDice": "Racial package",
 
+  "MGT2.TravellerSheet.Spaces": "Spaces",
+  "MGT2.TravellerSheet.Chassis": "Chassis",
+
   "MGT2.TravellerSheet.SizeClass.small": "Small",
   "MGT2.TravellerSheet.SizeClass.medium": "Medium",
   "MGT2.TravellerSheet.SizeClass.large": "Large",
   "MGT2.TravellerSheet.SizeRecommendedHits": "Typically {min} to {max}",
+
+  "MGT2.TravellerSheet.DragCargo": "Cargo hold is empty. Drag cargo here to fill it.",
+  "MGT2.TravellerSheet.DragShip": "Drag spacecraft here to add them.",
+  "MGT2.TravellerSheet.DragVehicle": "Drag vehicles here to add them.",
 
   "MGT2.Creature.Behaviour.herbivore": "Herbivore",
   "MGT2.Creature.Behaviour.omnivore": "Omnivore",
@@ -666,6 +675,7 @@
   "TYPES.Actor.creature": "Creature",
   "TYPES.Actor.spacecraft": "Spacecraft",
   "TYPES.Actor.package": "Package",
+  "TYPES.Actor.vehicle": "Vehicle",
 
   "TYPES.Item.item": "General Item",
   "TYPES.Item.weapon": "Weapon",
@@ -676,6 +686,7 @@
   "TYPES.Item.term": "Career Term",
   "TYPES.Item.associate": "Background Associate",
   "TYPES.Item.role": "Crew Role",
+  "TYPES.Item.software": "Software",
 
   "TRAVELLER.Add": "Add"
 }

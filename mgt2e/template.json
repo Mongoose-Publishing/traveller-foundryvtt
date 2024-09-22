@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["traveller", "npc", "creature", "spacecraft", "package" ],
+    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle" ],
     "templates": {
       "base": {
         "speed": {
@@ -150,6 +150,32 @@
     "package": {
         "templates": [ "base", "characteristics", "skills", "sophont" ],
         "cash": 0
+    },
+    "vehicle": {
+      "templates": [ "crewed" ],
+      "hits": {
+        "value": 12,
+        "max": 12,
+        "damage": 0
+      },
+      "initiative": {
+        "base": 0,
+        "value": 0
+      },
+      "vehicle": {
+        "spacecs": 4,
+        "chassis": "",
+        "tl": 7,
+        "cost": 10000,
+        "skill": "drive.wheel",
+        "agility": 0,
+        "speed": "medium",
+        "range": 400,
+        "crew": 1,
+        "passengers": 0,
+        "cargo": 0,
+        "shipping": 3
+      }
     },
     "spacecraft": {
         "templates": [ "crewed" ],
