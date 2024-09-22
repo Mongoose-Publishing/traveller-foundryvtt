@@ -712,10 +712,10 @@ export class MgT2Actor extends Actor {
 
           if (skill.trained) {
               if (spec) {
-                  score = isNaN(spec.value)?0:parseInt(spec.value);
+                  score = Number.isNaN(spec.value)?0:parseInt(spec.value);
                   options.results.base = score;
-                  if (!isNaN(spec.expert) && parseInt(spec.expert) > score) {
-                      score = parseInt(spec.expert) - 1;
+                  if (!Number.isNaN(spec.expert) && (cha === "INT" || cha === "EDU")) {
+                      score = Math.max(score + 1, parseInt(spec.expert) - 1);
                       options.results.expert = score;
                   }
                   // Only adds if skill is trained.
@@ -723,14 +723,27 @@ export class MgT2Actor extends Actor {
                       score += parseInt(spec.augmentation);
                   }
               } else {
-                  score = isNaN(skill.value)?0:parseInt(skill.value);
+                  score = Number.isNaN(skill.value)?0:parseInt(skill.value);
                   options.results.base = score;
-                  if (!isNaN(skill.expert) && parseInt(skill.expert) > score) {
-                      score = parseInt(skill.expert) - 1;
+                  if (!Number.isNaN(skill.expert) && (cha === "INT" || cha === "EDU")) {
+                      score = Math.max(score + 1, parseInt(skill.expert) - 1);
+                      options.results.expert = score;
                   }
                   // Only adds if skill is trained.
                   if (!isNaN(skill.augmentation)) {
                       score += parseInt(skill.augmentation);
+                  }
+              }
+          } else {
+              if (spec) {
+                  if (!Number.isNaN(spec.expert)) {
+                      score = parseInt(spec.expert);
+                      options.results.expert = score;
+                  }
+              } else {
+                  if (!Number.isNaN(skill.expert)) {
+                      score = parseInt(skill.expert);
+                      options.results.expert = score;
                   }
               }
           }
