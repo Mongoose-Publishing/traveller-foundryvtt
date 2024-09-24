@@ -18,7 +18,10 @@
         </div>
         <div class="resource flex-group-left">
             <input type="checkbox" name="system.settings.autoAge" {{checked system.settings.autoAge}} data-dtype="Boolean" />
-            <label for="system.settings.autoAge" class="resource-label">Calculate age from date</label>
+            <label for="system.settings.autoAge" class="resource-label">{{localize 'MGT2.TravellerSheet.AutoAge'}}</label>
+            <br/>
+            <input type="checkbox" name="system.settings.locked" {{checked system.settings.locked}} data-dtype="Boolean" />
+            <label for="system.settings.locked" class="resource-label">{{localize 'MGT2.TravellerSheet.LockUPP'}}</label>
         </div>
         <div class="resource flex-group-center">
             <br/>

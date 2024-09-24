@@ -846,6 +846,24 @@ export class MgT2Actor extends Actor {
       return text;
   }
 
+  async rollUPP() {
+      let upp = this.system.characteristics;
 
+      if (upp) {
+          for (let c in upp) {
+              console.log(c);
+              if (upp[c].show) {
+                  let dice = "2D6";
+                  if (upp[c].roll) {
+                      dice = upp[c].roll;
+                  }
+                  let roll = await new Roll(dice, this.getRollData()).evaluate();
+                  upp[c].value = roll.total;
+                  console.log("Set " + c + " to " + upp[c].value);
+              }
+          }
+          this.update({"system.characteristics": upp});
+      }
+  }
 
 }

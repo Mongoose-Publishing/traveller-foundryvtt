@@ -239,6 +239,8 @@ export class MgT2ActorSheet extends ActorSheet {
         const actorData = context.actor.system;
         const cargo = [];
         const locker = [];
+        const hardware = [];
+        const roles = [];
 
         let cargoUsed = 0;
         for (let i of context.items) {
@@ -248,12 +250,15 @@ export class MgT2ActorSheet extends ActorSheet {
                 if (q > 0) {
                     cargoUsed += q;
                 }
+            } else if (i.type === "role") {
+                roles.push(i);
             } else {
                 locker.push(i);
             }
         }
         context.cargo = cargo;
         context.locker = locker;
+        context.roles = roles;
     }
 
     _prepareVehicleCrew(context) {
@@ -872,7 +877,10 @@ export class MgT2ActorSheet extends ActorSheet {
                 const actorId = li.data("actorId");
                 this.actor.update({[`system.docks.-=${actorId}`]: null});
             });
-
+        } else if (this.actor.type === "traveller" || this.actor.type === "npc") {
+            html.find('.roll-upp').click(ev => {
+               this.actor.rollUPP();
+            });
         }
 
         // Dodge reaction

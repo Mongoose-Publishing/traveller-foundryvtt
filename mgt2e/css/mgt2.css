@@ -1938,3 +1938,8 @@ div.mini-value span {
     text-shadow: 0 0 10px red;
     cursor: pointer;
 }
+
+.no-space {
+    padding: 0;
+    margin: 0;
+}

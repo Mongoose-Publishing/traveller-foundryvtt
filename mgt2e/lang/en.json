@@ -296,6 +296,8 @@
   "MGT2.TravellerSheet.Boon": "Boon",
   "MGT2.TravellerSheet.Bane": "Bane",
   "MGT2.TravellerSheet.UseCustomDice": "Racial package",
+  "MGT2.TravellerSheet.AutoAge": "Auto age",
+  "MGT2.TravellerSheet.LockUPP": "Lock UPP",
 
   "MGT2.Vehicle.Spaces": "Spaces",
   "MGT2.Vehicle.Chassis": "Chassis",
