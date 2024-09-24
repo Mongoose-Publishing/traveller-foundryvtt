@@ -850,8 +850,11 @@ export class MgT2Actor extends Actor {
       let upp = this.system.characteristics;
 
       if (upp) {
+          let html=`<div class="chat-package">`;
+          html += `<p><b>${this.name}</b></p>`;
+          html += `<div class="stats grid grid-3col">`;
+
           for (let c in upp) {
-              console.log(c);
               if (upp[c].show) {
                   let dice = "2D6";
                   if (upp[c].roll) {
@@ -859,10 +862,17 @@ export class MgT2Actor extends Actor {
                   }
                   let roll = await new Roll(dice, this.getRollData()).evaluate();
                   upp[c].value = roll.total;
-                  console.log("Set " + c + " to " + upp[c].value);
+                  html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${dice}<br/>${roll.total}</span></div>`;
               }
           }
           this.update({"system.characteristics": upp});
+          html += "</div></div>";
+          let chatData = {
+              user: game.user.id,
+              speaker: ChatMessage.getSpeaker(),
+              content: html
+          }
+          ChatMessage.create(chatData, {});
       }
   }
 
