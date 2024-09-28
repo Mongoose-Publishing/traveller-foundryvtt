@@ -22,6 +22,13 @@
   "MGT2.Settings.CurrentDay.Hint": "The current day of the campaign",
   "MGT2.Settings.AutoResizeSpacecraft.Name": "Resize spacecraft tokens",
   "MGT2.Settings.AutoResizeSpacecraft.Hint": "Size of tokens for spacecraft are automatically set according to their tonnage",
+  "MGT2.Settings.PlayerSheetNotification.Name": "Player sheet update broadcasts",
+  "MGT2.Settings.PlayerSheetNotification.Hint": "Who to send chat messages to when a player rolls their characteristics",
+  "MGT2.Settings.GMSheetNotification.Name": "GM sheet update broadcasts",
+  "MGT2.Settings.GMSheetNotification.Hint": "Who to send chat messages to when a GM rolls an actor's characteristics",
+  "MGT2.Settings.SheetNotification.Values.Private": "Private",
+  "MGT2.Settings.SheetNotification.Values.Public": "Everyone",
+  "MGT2.Settings.SheetNotification.Values.GM": "Self and GM",
 
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",
@@ -298,6 +305,7 @@
   "MGT2.TravellerSheet.UseCustomDice": "Racial package",
   "MGT2.TravellerSheet.AutoAge": "Auto age",
   "MGT2.TravellerSheet.LockUPP": "Lock UPP",
+  "MGT2.TravellerSheet.RandomRoll": "Re-roll characteristics (shift for average, ctrl for vary)",
 
   "MGT2.Vehicle.Spaces": "Spaces",
   "MGT2.Vehicle.Chassis": "Chassis",

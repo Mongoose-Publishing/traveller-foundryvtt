@@ -846,8 +846,12 @@ export class MgT2Actor extends Actor {
       return text;
   }
 
-  async rollUPP() {
+  async rollUPP(options) {
       let upp = this.system.characteristics;
+
+      if (!options) {
+          options = {};
+      }
 
       if (upp) {
           let html=`<div class="chat-package">`;
@@ -857,19 +861,57 @@ export class MgT2Actor extends Actor {
           for (let c in upp) {
               if (upp[c].show) {
                   let dice = "2D6";
-                  if (upp[c].roll) {
-                      dice = upp[c].roll;
+                  if (options.ctrl) {
+                      let roll = await new Roll("2D6", this.getRollData()).evaluate();
+                      let modifier = 0;
+                      switch (roll.total) {
+                          case 2:
+                              modifier = -2;
+                              break;
+                          case 3: case 4:
+                              modifier = -1;
+                              break;
+                          case 10: case 11:
+                              modifier = +1;
+                              break;
+                          case 12:
+                              modifier = +2;
+                              break;
+                      }
+                      upp[c].value += modifier;
+                      html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">+/-<br/>${(modifier>=0)?("+"+modifier):modifier}</span></div>`;
+                  } else {
+                      if (options.shift) {
+                          dice = "2D3+3";
+                      }
+                      if (upp[c].roll) {
+                          dice = upp[c].roll;
+                      }
+                      let roll = await new Roll(dice, this.getRollData()).evaluate();
+                      upp[c].value = roll.total;
+                      html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${dice}<br/>${roll.total}</span></div>`;
                   }
-                  let roll = await new Roll(dice, this.getRollData()).evaluate();
-                  upp[c].value = roll.total;
-                  html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${dice}<br/>${roll.total}</span></div>`;
               }
           }
           this.update({"system.characteristics": upp});
           html += "</div></div>";
+
+          let who = null;
+          if (game.users.current.isGM) {
+              if (game.settings.get("mgt2e", "gmSheetNotification") === "private") {
+                  who = [game.user.id];
+              }
+          } else {
+              if (game.settings.get("mgt2e", "playerSheetNotification") === "private") {
+                  who = [game.user.id];
+              } else if (game.settings.get("mgt2e", "playerSheetNotification") === "gm") {
+                  who = [game.user.id, game.users.activeGM ];
+              }
+          }
           let chatData = {
               user: game.user.id,
               speaker: ChatMessage.getSpeaker(),
+              whisper: who,
               content: html
           }
           ChatMessage.create(chatData, {});

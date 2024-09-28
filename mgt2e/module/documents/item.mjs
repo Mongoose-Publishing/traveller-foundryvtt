@@ -72,6 +72,28 @@ export class MgT2Item extends Item {
         return true;
     }
 
+    async _onCreate(data, options, userId) {
+        await super._onCreate(data, options, userId);
+        const actor = this.parent;
+
+        if (actor && actor.type === "traveller" && data.type === "term" && data.system.term.randomTerm) {
+            // If dragging career term on a Traveller, roll the term length if it is random.
+            let dice = "3D6";
+            if (this.system.term.randomTerm) {
+                dice = this.system.term.randomLength;
+            }
+            if (data.system.term.randomTerm) {
+                dice = data.system.term.randomLength;
+            }
+            let r = await new Roll(dice, null).evaluate();
+            ui.notifications.info(`Length of career '${data.name}' set to ${r.total} years`);
+
+            this.update({"system.term.termLength": r.total });
+            this.update({"system.term.randomTerm": false });
+            return;
+        }
+    }
+
     /**
      * Handle clickable rolls.
      * @param {Event} event   The originating click event

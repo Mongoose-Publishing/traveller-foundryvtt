@@ -596,7 +596,6 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _calculateArmour(context) {
         const actorData = context.system;
-        console.log(context.actor);
 
         if (context.actor && (context.actor.type === 'traveller' || context.actor.type === 'npc' || context.actor.type === 'creature')) {
             let armour = actorData.armour;
@@ -693,7 +692,6 @@ export class MgT2ActorSheet extends ActorSheet {
     /** @override */
     activateListeners(html) {
         super.activateListeners(html);
-        console.log(this.actor);
 
         // Render the item sheet for viewing/editing prior to the editable check.
         html.find('.item-edit').click(ev => {
@@ -879,7 +877,7 @@ export class MgT2ActorSheet extends ActorSheet {
             });
         } else if (this.actor.type === "traveller" || this.actor.type === "npc") {
             html.find('.roll-upp').click(ev => {
-               this.actor.rollUPP();
+               this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });
             });
         }
 
@@ -1394,15 +1392,7 @@ export class MgT2ActorSheet extends ActorSheet {
             if (!this.actor.system.crewed) {
                 this.actor.system.crewed = {"crew": {}, "passengers": {}, "roles": []};
             }
-            // this.actor.update(
-            //     { key: { roles: ['UNDESIGNATED'] }}
-            // );
             this.actor.update({[`system.crewed.passengers.${actor._id}`]: {roles: ["NONE"]}});
-
-            // this.actor.system.crewed.crew[actor._id] = {
-            //    "roles": [ "UNDESIGNATED" ]
-            // };
-            // await this.actor.update({"system.crewed": this.actor.system.crewed });
         } else if (this.actor.type === "spacecraft" && (actor.type === "spacecraft" || actor.type === "vehicle")) {
             console.log(`Docking ${actor.name} with ship`);
             if (!this.actor.system.docks) {
@@ -1606,6 +1596,21 @@ export class MgT2ActorSheet extends ActorSheet {
                 };
                 if (this.actor.type === "npc" && (itemData.type === "term" || itemData.type === "associate")) {
                     // NPCs don't have career terms or associates.
+                    // However, we may need to increment their age.
+                    if (itemData.type === "term" && this.actor.system.settings.autoAge) {
+                        let years = itemData.system.term.termLength;
+                        if (itemData.system.term.randomTerm) {
+                            let dice = "3D6";
+                            if (itemData.system.term.randomLength) {
+                                dice = itemData.system.term.randomLength;
+                            }
+                            let r = await new Roll(dice, null).evaluate();
+                            years = r.total;
+                        }
+                        years = parseInt(this.actor.system.sophont.age) + years;
+                        html += `<p>Age: ${years}</p>`;
+                        await this.actor.update({"system.sophont.age": years });
+                    }
                     continue;
                 }
                 if (itemData.type === "term" && itemData.system.term.randomTerm) {
@@ -1651,9 +1656,22 @@ export class MgT2ActorSheet extends ActorSheet {
 
             html += `</div>`;
 
+            let who = null;
+            if (game.users.current.isGM) {
+                if (game.settings.get("mgt2e", "gmSheetNotification") === "private") {
+                    who = [game.user.id];
+                }
+            } else {
+                if (game.settings.get("mgt2e", "playerSheetNotification") === "private") {
+                    who = [game.user.id];
+                } else if (game.settings.get("mgt2e", "playerSheetNotification") === "gm") {
+                    who = [game.user.id, game.users.activeGM ];
+                }
+            }
             let chatData = {
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker(),
+                whisper: who,
                 content: html
             }
             ChatMessage.create(chatData, {});
@@ -1713,39 +1731,12 @@ export class MgT2ActorSheet extends ActorSheet {
     // Drop a Term onto an Actor. Only applies to Travellers or Packages.
     async _onDropTerm(item) {
         let actor = this.actor;
-
-        // Need to ensure that this item is added to the end of the list of
-        // term items.
-        let lastSort = 1;
-        let countTerms = 0;
-        let updates = [];
-        for (let i of actor.items) {
-            if (i.type === "term") {
-                countTerms ++;
-                if (i.sort > lastSort) {
-                    lastSort = i.sort;
-                }
-            }
-        }
-        /*
-        let update = duplicate(item);
-        update.system.term.number = countTerms +1;
-        update.sort = lastSort + 100;
-        update.name = update.name + " " + update.system.term.number;
-        console.log(`Dragged in a term item ${update.name} at term ${update.system.term.number} / ${countTerms}`);
-        console.log(update);
-        await item.update({ "system.term": item.system.term });
-//        updates.push(update);
-//        actor.updateEmbeddedDocuments("Item", updates);
-  //      item.update({ "sort": item.sort, "name": item.name });
-*/
     }
 
     async _onDropUPP(event, data) {
         const actor = this.actor;
 
         if (actor.type === "traveller" || actor.type === "npc") {
-
             if (actor.system.characteristics) {
                 if (data.STR) {
                     actor.system.characteristics.STR.value = parseInt(data.STR);

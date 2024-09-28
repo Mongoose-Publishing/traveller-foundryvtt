@@ -134,6 +134,29 @@ Hooks.once('init', async function() {
         type: Boolean,
         default: true
     });
+    game.settings.register('mgt2e', 'playerSheetNotification', {
+        name: game.i18n.localize("MGT2.Settings.PlayerSheetNotification.Name"),
+        hint: game.i18n.localize("MGT2.Settings.PlayerSheetNotification.Hint"),
+        scope: 'world',
+        config: true,
+        choices: {
+            "private": game.i18n.localize("MGT2.Settings.SheetNotification.Values.Private"),
+            "public": game.i18n.localize("MGT2.Settings.SheetNotification.Values.Public"),
+            "gm": game.i18n.localize("MGT2.Settings.SheetNotification.Values.GM")
+        },
+        default: "gm"
+    });
+    game.settings.register('mgt2e', 'gmSheetNotification', {
+        name: game.i18n.localize("MGT2.Settings.GMSheetNotification.Name"),
+        hint: game.i18n.localize("MGT2.Settings.GMSheetNotification.Hint"),
+        scope: 'world',
+        config: true,
+        choices: {
+            "private": game.i18n.localize("MGT2.Settings.SheetNotification.Values.Private"),
+            "public": game.i18n.localize("MGT2.Settings.SheetNotification.Values.Public")
+        },
+        default: "private"
+    });
 
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;

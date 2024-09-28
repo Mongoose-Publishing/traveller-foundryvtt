@@ -47,8 +47,6 @@ export class MgT2ItemSheet extends ItemSheet {
             context.rollData = actor.getRollData();
         }
 
-        console.log(item);
-
         // Add the actor's data to context.data for easier access, as well as flags.
         context.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description );
         context.system = item.system;
@@ -126,6 +124,13 @@ export class MgT2ItemSheet extends ItemSheet {
                 if (!hasTrait(item.system.cargo.saleDM, trait)) {
                     context.saleTraits[trait] = game.i18n.localize("MGT2.Trade." + trait);
                 }
+            }
+        } else if (item.type === "term") {
+            context.showRandom = true;
+            if (item.parent && item.parent.type === "traveller") {
+                context.showRandom = false;
+                // We don't save this, but makes the HTML template logic a lot simpler.
+                item.system.term.randomTerm = false;
             }
         } else if (item.type === "role") {
             context.weapons = {};
