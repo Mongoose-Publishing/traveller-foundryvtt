@@ -858,6 +858,7 @@ export class MgT2Actor extends Actor {
           html += `<p><b>${this.name}</b></p>`;
           html += `<div class="stats grid grid-3col">`;
 
+          let prefix = options.shift?"~":"";
           for (let c in upp) {
               if (upp[c].show) {
                   let dice = "2D6";
@@ -881,15 +882,24 @@ export class MgT2Actor extends Actor {
                       upp[c].value += modifier;
                       html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">+/-<br/>${(modifier>=0)?("+"+modifier):modifier}</span></div>`;
                   } else {
-                      if (options.shift) {
-                          dice = "2D3+3";
-                      }
                       if (upp[c].roll) {
                           dice = upp[c].roll;
                       }
-                      let roll = await new Roll(dice, this.getRollData()).evaluate();
-                      upp[c].value = roll.total;
-                      html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${dice}<br/>${roll.total}</span></div>`;
+                      if (options.shift) {
+                          let totals = [];
+                          for (let i=0; i < 5; i++) {
+                              let roll = await new Roll(dice, this.getRollData()).evaluate();
+                              totals.push(roll.total);
+                          }
+                          totals = totals.sort(function(a, b) {
+                              return a - b;
+                          });
+                          upp[c].value = totals[2];
+                      } else {
+                          let roll = await new Roll(dice, this.getRollData()).evaluate();
+                          upp[c].value = roll.total;
+                      }
+                      html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${prefix}${dice}<br/>${upp[c].value}</span></div>`;
                   }
               }
           }

@@ -1738,25 +1738,58 @@ export class MgT2ActorSheet extends ActorSheet {
 
         if (actor.type === "traveller" || actor.type === "npc") {
             if (actor.system.characteristics) {
+                let html=`<div class="chat-package">`;
+                html += `<p>Drop UPP for <b>${actor.name}</b></p>`;
+                html += `<div class="stats grid grid-3col">`;
+
                 if (data.STR) {
                     actor.system.characteristics.STR.value = parseInt(data.STR);
+                    html += `<div class="stat resource"><span class="stat-hdr">STR</span><span class="stat-val">${data.STR}</span></div>`;
                 }
                 if (data.DEX) {
                     actor.system.characteristics.DEX.value = parseInt(data.DEX);
+                    html += `<div class="stat resource"><span class="stat-hdr">DEX</span><span class="stat-val">${data.DEX}</span></div>`;
                 }
                 if (data.END) {
                     actor.system.characteristics.END.value = parseInt(data.END);
+                    html += `<div class="stat resource"><span class="stat-hdr">END</span><span class="stat-val">${data.END}</span></div>`;
                 }
                 if (data.INT) {
                     actor.system.characteristics.INT.value = parseInt(data.INT);
+                    html += `<div class="stat resource"><span class="stat-hdr">INT</span><span class="stat-val">${data.INT}</span></div>`;
                 }
                 if (data.EDU) {
                     actor.system.characteristics.EDU.value = parseInt(data.EDU);
+                    html += `<div class="stat resource"><span class="stat-hdr">EDU</span><span class="stat-val">${data.EDU}</span></div>`;
                 }
                 if (data.SOC) {
                     actor.system.characteristics.SOC.value = parseInt(data.SOC);
+                    html += `<div class="stat resource"><span class="stat-hdr">SOC</span><span class="stat-val">${data.SOC}</span></div>`;
                 }
                 actor.update({ "system.characteristics": actor.system.characteristics});
+
+                html += "</div></div>";
+                let who = null;
+                if (game.users.current.isGM) {
+                    if (game.settings.get("mgt2e", "gmSheetNotification") === "private") {
+                        who = [game.user.id];
+                    }
+                } else {
+                    if (game.settings.get("mgt2e", "playerSheetNotification") === "private") {
+                        who = [game.user.id];
+                    } else if (game.settings.get("mgt2e", "playerSheetNotification") === "gm") {
+                        who = [game.user.id, game.users.activeGM ];
+                    }
+                }
+                let chatData = {
+                    user: game.user.id,
+                    speaker: ChatMessage.getSpeaker(),
+                    whisper: who,
+                    content: html
+                }
+                ChatMessage.create(chatData, {});
+
+
             }
         }
     }
