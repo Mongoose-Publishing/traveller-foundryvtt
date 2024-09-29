@@ -578,7 +578,7 @@ export class MgT2ItemSheet extends ItemSheet {
         item.update({[`system.role.actions.-=${id}`]: null});
     }
 
-    _randomiseRelationship(item) {
+    async _randomiseRelationship(item) {
         let affinity = "", enmity = "";
 
         let associate = item.system.associate;
@@ -597,18 +597,18 @@ export class MgT2ItemSheet extends ItemSheet {
         } else {
             return "";
         }
-        let roll = new Roll(affinity, null).evaluate({async: false});
+        let roll = await new Roll(affinity, null).evaluate();
         associate.affinity = this._getAffinity(roll.total);
-        roll = new Roll(enmity, null).evaluate({async: false});
+        roll = await new Roll(enmity, null).evaluate();
         associate.enmity = 0 - this._getAffinity(roll.total);
-        associate.power = this._getPowerOrInfluence();
-        associate.influence = this._getPowerOrInfluence();
+        associate.power = await this._getPowerOrInfluence();
+        associate.influence = await this._getPowerOrInfluence();
 
         item.update({"system.associate": associate});
     }
 
-    _getPowerOrInfluence() {
-        const roll = new Roll("2D6", null).evaluate({async: false});
+    async _getPowerOrInfluence() {
+        const roll = await new Roll("2D6", null).evaluate();
         switch (roll.total) {
             case 2: case 3: case 4: case 5:
                 return 0;

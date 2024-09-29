@@ -722,7 +722,8 @@ Handlebars.registerHelper('toLowerCase', function(str) {
 });
 
 Handlebars.registerHelper('toPlainText', function(html) {
-    if (html) {
+    console.log(html);
+    if (html && typeof html === 'string') {
         let text = html.replace(/<[^>]*>/g, "");
 
         text = text.replace(/@UUID.*\{(.*)\}/, "$1");
@@ -732,7 +733,7 @@ Handlebars.registerHelper('toPlainText', function(html) {
         }
         return text;
     } else {
-        return "";
+        return "Undefined";
     }
 });
 

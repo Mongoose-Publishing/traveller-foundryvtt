@@ -391,7 +391,7 @@ Tools.showSkills = function(chatData) {
         ui.notifications.error("Unable to find actor " + actorId);
         return;
     }
-    let skills = actor.data.data.skills;
+    let skills = actor.system.skills;
 
     console.log(skills);
 

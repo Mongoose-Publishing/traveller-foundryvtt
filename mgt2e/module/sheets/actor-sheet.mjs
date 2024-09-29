@@ -1566,8 +1566,8 @@ export class MgT2ActorSheet extends ActorSheet {
                         weight += isMale?7:0;
                         weight -= isFemale?7:0;
                         weight += str + parseInt(end/2) - parseInt(dex / 2);
-                        this.actor.system.sophont.weight = weight +
-                            Math.floor(Math.random() * 6) - Math.floor(Math.random() * 6);
+                        weight += Math.floor(Math.random() * 6) - Math.floor(Math.random() * 6);
+                        this.actor.system.sophont.weight = weight;
                         html += `<p>Weight: ${weight}kg</p>`;
                     }
                 }
@@ -1577,8 +1577,8 @@ export class MgT2ActorSheet extends ActorSheet {
                         height += isMale?7:0;
                         height -= isFemale?7:0;
                         height += parseInt(str/2);
-                        this.actor.system.sophont.height = height +
-                            Math.floor(Math.random()*6) - Math.floor(Math.random()*6);
+                        height += Math.floor(Math.random()*6) - Math.floor(Math.random()*6);
+                        this.actor.system.sophont.height = height;
                         html += `<p>Height: ${height}cm</p>`;
                     }
                 }
@@ -1878,10 +1878,12 @@ export class MgT2ActorSheet extends ActorSheet {
             itemData.system.term.number = number;
         }
         if (type === "associate") {
+            console.log("Create associate");
             itemData.name = "Unnamed " + header.dataset.relation;
             itemData.system.associate = {};
             itemData.system.associate.relationship = header.dataset.relation;
-            itemData.system.description = this._setAssociate(itemData.data.associate);
+            itemData.system.description = await this._setAssociate(itemData.system.associate);
+            console.log("Associate description is set to " + itemData.system.description);
         }
         // Remove the type from the dataset since it's in the itemData.type prop.
         delete itemData.system["type"];
@@ -1892,6 +1894,8 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _setAssociate(associate) {
         let affinity = "", enmity = "";
+        console.log("setAssociate");
+        console.log(associate);
 
         if (associate.relationship === "contact") {
             affinity = "1d6+1";
@@ -2017,7 +2021,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 description += "Kingmaker.";
                 break;
         }
-
+        console.log(description);
 
         return "<p>" + description + "</p>";
     }

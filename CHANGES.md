@@ -4,6 +4,19 @@
 
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
+* Career terms aren't always added in the correct order.
+
+## Recent
+
+* Allow characteristics to be rolled from the character sheet.
+* Fix some bugs around how career terms are added to character sheets.
+* System settings for how chat messages about character updates are broadcast.
+* Allow characteristics to be locked to reduce chance of unwanted changes.
+* First draft of character sheet for vehicles.
+* Update to spacecraft to allow vehicles and other spacecraft to dock with them.
+* Track and set initiative for spacecraft.
+* Fix bug where v12 changes broke relationship items.
+* Can now drag crew members from a spacecraft or vehicle to a scene.
 
 ## v0.10.4 (Beta)
 
