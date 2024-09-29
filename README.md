@@ -1,6 +1,6 @@
 # Mongoose Traveller for FoundryVTT
 
-**Version:**  0.10.4
+**Version:**  0.10.5
 
 This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v11.
 it is currently in beta, so suggestions and bug reports are greatly appreciated. The basic game rules
@@ -70,6 +70,7 @@ The main supported object types defined in the system are:
   * NPC - Cut down version of a Traveller
   * Creature - Creatures with even fewer details
   * Spacecraft - A spacecraft, currently partially supported.
+  * Vehicle - Preliminary support for a basic sheet.
   * Package - Contains package of skills, items and attributes for building NPCs or Travellers from.
 
 ### Items

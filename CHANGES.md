@@ -6,7 +6,7 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
-## Recent
+## v0.10.5 (Beta)
 
 * Allow characteristics to be rolled from the character sheet.
 * Fix some bugs around how career terms are added to character sheets.
@@ -15,7 +15,9 @@
 * First draft of character sheet for vehicles.
 * Update to spacecraft to allow vehicles and other spacecraft to dock with them.
 * Track and set initiative for spacecraft.
+* Add special actions for ship roles, including make pilot, tactics and leadership.
 * Fix bug where v12 changes broke relationship items.
+* Packages now correctly set and report species, height and weight fields.
 * Can now drag crew members from a spacecraft or vehicle to a scene.
 
 ## v0.10.4 (Beta)
