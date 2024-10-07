@@ -542,10 +542,10 @@ export class MgT2ItemSheet extends ItemSheet {
     }
 
     // Used by cargo items.
-    _rollQuantity(item) {
+    async _rollQuantity(item) {
         if (item.system.quantity !== undefined && item.system.cargo.tons !== undefined) {
             let tons = item.system.cargo.tons;
-            let roll = new Roll(tons, null).evaluate({async: false});
+            let roll = await new Roll(tons, null).evaluate();
             let quantity = parseInt(roll.total);
             item.system.quantity = quantity;
             item.update({"system.quantity": item.system.quantity });
