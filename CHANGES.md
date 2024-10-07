@@ -6,6 +6,12 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## v0.10.X
+
+* Fix issue with random cargo tonnage roller not working on v12.
+* Prevent an 'empty' modifier from being added to Purchase and Sale modifier list on cargo items.
+
+
 ## v0.10.5 (Beta)
 
 * Allow characteristics to be rolled from the character sheet.
