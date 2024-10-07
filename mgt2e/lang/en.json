@@ -474,6 +474,18 @@
   "MGT2.Damage.Wound.DevastatingEffect": "Location completely destroyed",
   "MGT2.Damage.Wound.StunEffect": "Temporary stun damage",
 
+  "MGT2.Spacecraft.Criticals.sensors": "Sensors ({roll})",
+  "MGT2.Spacecraft.Criticals.powerPlant": "Power Plant ({roll})",
+  "MGT2.Spacecraft.Criticals.fuel": "Fuel ({roll})",
+  "MGT2.Spacecraft.Criticals.weapon": "Weapon ({roll})",
+  "MGT2.Spacecraft.Criticals.armour": "Armour ({roll})",
+  "MGT2.Spacecraft.Criticals.hull": "Hull ({roll})",
+  "MGT2.Spacecraft.Criticals.mDrive": "M-Drive ({roll})",
+  "MGT2.Spacecraft.Criticals.cargo": "Cargo ({roll})",
+  "MGT2.Spacecraft.Criticals.jDrive": "J-Drive ({roll})",
+  "MGT2.Spacecraft.Criticals.crew": "Crew ({roll})",
+  "MGT2.Spacecraft.Criticals.bridge": "Bridge ({roll})",
+
   "MGT2.Trade.Ag": "Agricultural",
   "MGT2.Trade.As": "Asteroid",
   "MGT2.Trade.Ba": "Barren",
@@ -693,6 +705,9 @@
   "MGT2.Warn.Drop.CareerOnNPC": "NPCs and Creatures cannot be given career terms or associates",
   "MGT2.Info.Drop.DropPackage": "Adding package '{package}' to '{actor}'",
   "MGT2.Info.Drop.DropPackageItem": "Adding item '{item}' to '{actor}'",
+
+  "MGT2.Info.DamageMsg.VehicleNoStun": "Vehicles can't be affected by stun damage",
+  "MGT2.Info.DamageMsg.SpacecraftNoStun": "Spacecraft can't be affected by stun damage",
 
   "MGT2.Role.RoleAssignment": "Role Assignment",
   "MGT2.Role.RoleActions": "Actions",

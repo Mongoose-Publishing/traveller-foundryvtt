@@ -96,6 +96,41 @@ MGT2.SPACE_MOUNTS = {
     "spinal": { "multiplier": 1000, "hardpoints": 0.01 }
 }
 
+MGT2.SPACECRAFT_CRITICALS = {
+    "sensors": [
+        { "sensorDM": -2 },
+        { "sensorMax": "medium" },
+        { "sensorMax": "short" },
+        { "sensorMax": "close" },
+        { "sensorMax": "adjacent" },
+        { "sensorsDisabled": true }
+    ],
+    "powerPlant": [
+        { "powerReduction": "10" },
+        { "powerReduction": "20" },
+        { "powerReduction": "70" },
+        { "powerReduction": "100" },
+        { "powerReduction": "100", "hull": "1" },
+        { "powerReduction": "100", "hull": "1D6" }
+    ],
+    "fuel": [
+        { "fuelLeak": "hour" },
+        { "fuelLeak": "round" },
+        { "lose": "1D6 * 10" },
+        { "destroyed": true },
+        { "destroyed": true, "hull": "1" },
+        { "destroyed": true, "hull": "1D6" }
+    ],
+    "weapon": [ ],
+    "armour": [ ],
+    "hull": [ ],
+    "mDrive": [ ],
+    "cargo": [ ],
+    "jDrive": [ ],
+    "crew": [ ],
+    "bridge": [ ]
+}
+
 MGT2.getStatus = function(actor) {
   const data = actor.data.data;
   console.log(data);

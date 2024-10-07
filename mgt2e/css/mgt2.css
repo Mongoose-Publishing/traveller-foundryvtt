@@ -1943,3 +1943,24 @@ div.mini-value span {
     padding: 0;
     margin: 0;
 }
+
+.damageTrack {
+}
+
+.damageTrack .undamaged {
+    background-color: green;
+    width: 100%;
+    height: 15px;
+}
+
+.damageTrack .damaged {
+    background-color: black;
+    width: 100%;
+    height: 15px;
+}
+
+.damageTrack .critical {
+    background-color: red;
+    width: 100%;
+    height: 15px;
+}

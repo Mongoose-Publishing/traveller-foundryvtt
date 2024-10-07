@@ -169,6 +169,12 @@
         "subtype": "openFrame",
         "traits": "",
         "tl": 7,
+        "armour": {
+          "base": 0,
+          "front" : 0,
+          "rear": 0,
+          "sides": 0
+        },
         "cost": 10000,
         "skill": "drive.wheel",
         "agility": 0,

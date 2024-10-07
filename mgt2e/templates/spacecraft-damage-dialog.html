@@ -1,0 +1,73 @@
+
+<script>
+    function applyDamage(cha) {
+        let actual = document.getElement();
+    }
+</script>
+
+<form class="flexcol damage-dialog">
+
+    <h1 class="charname shadow">
+        {{actor.name}}
+    </h1>
+
+    <div class="shadow grid grid-5col">
+        <div class="resource flex-group-center">
+            <label for="damage" class="resource-label">DAMAGE</label>
+            <input type="text" name="damage" value="{{damage}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="ap" class="resource-label">AP</label>
+            <input type="text" name="ap" value="{{ap}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="armour" class="resource-label">ARMOUR</label>
+            <input type="text" name="armour" value="{{armour}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="actualDamage" class="resource-label">ACTUAL</label>
+            <input type="text" name="actualDamage" value="{{actualDamage}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="multiplier" class="resource-label">MULTIPLIER</label>
+            <input type="text" name="multiplier" value="{{multiplier}}" data-dtype="Number"/>
+        </div>
+    </div>
+
+    <div class="grid grid-10col damageTrack">
+        {{#each damageTrack as | style |}}
+            <div class="{{style}}">&nbsp;</div>
+        {{/each}}
+    </div>
+
+    {{#if crits}}
+    <div class="shadow">
+        <h1>Criticals</h1>
+
+        {{#if crits.effectCrit}}
+            <p>Severity {{crits.effectSeverity}} critical from accurate shot./p>
+
+        {{/if}}
+                <select>
+                    {{selectOptions criticalLabels selected=criticalEffectRoll}}
+                </select>
+
+            {{#if crits.criticals}}
+                <h2>Sustained Damage</h2>
+
+                {{#each crits.criticals as | c |}}
+                    {{c.location}}
+                    <select>
+                        {{selectOptions ../criticalLabels selected=c.location}}
+                    </select>
+                {{/each}}
+            {{/if}}
+
+    </div>
+    {{/if}}
+
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="damageDone">Done</button>
+    </footer>
+
+</form>

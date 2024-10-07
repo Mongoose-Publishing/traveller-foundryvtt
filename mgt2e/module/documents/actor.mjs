@@ -3,6 +3,7 @@ import { Tools } from "../helpers/chat/tools.mjs";
 import {MGT2} from "../helpers/config.mjs";
 import {MgT2DamageDialog} from "../helpers/damage-dialog.mjs";
 import {getTraitValue, hasTrait, isNonZero, isNumber} from "../helpers/dice-rolls.mjs";
+import {MgT2SpacecraftDamageDialog} from "../helpers/spacecraft-damage-dialog.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -569,6 +570,10 @@ export class MgT2Actor extends Actor {
   }
 
   applyDamageToSpacecraft(damage, options) {
+      if (hasTrait(options.traits, "stun")) {
+          ui.notifications.info(game.i18n.format("MGT.Info.DamageMsg.SpacecraftNoStun"));
+          return;
+      }
       let armour = parseInt(this.system.spacecraft.armour);
       if (options.ap) {
           let ap = parseInt(options.ap);
@@ -582,6 +587,36 @@ export class MgT2Actor extends Actor {
           { "actor": this.name, "damage": damage}))
 
       // Apply the damage to the spacecraft.
+      options.originalDamage = this.system.hits.damage;
+      this.system.hits.damage += damage;
+      this.system.hits.value = this.system.hits.max - this.system.hits.damage;
+      this.update({"system.hits": this.system.hits});
+
+      new MgT2SpacecraftDamageDialog(this, damage, options).render(true);
+
+  }
+
+  applyDamageToVehicle(damage, options) {
+      if (hasTrait(options.traits, "stun")) {
+          ui.notifications.info(game.i18n.format("MGT.Info.DamageMsg.VehicleNoStun"));
+          return;
+      }
+
+      let armour = 0;
+      if (this.system.vehicle.armour && isNonZero(this.system.vehicle.armour.front)) {
+          armour = parseInt(this.system.vehicle.armour.front);
+      }
+      if (options.ap) {
+          let ap = parseInt(options.ap);
+          armour = Math.max(0, armour - ap);
+      }
+      damage = Math.max(0, damage - armour);
+      if (options.multiplier && parseInt(options.multiplier) > 1) {
+          damage *= parseInt(options.multiplier);
+      }
+      ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
+          { "actor": this.name, "damage": damage}))
+
       this.system.hits.damage += damage;
       this.system.hits.value = this.system.hits.max - this.system.hits.damage;
       this.update({"system.hits": this.system.hits});
@@ -596,6 +631,11 @@ export class MgT2Actor extends Actor {
               damage = parseInt(damage / 10);
           }
           this.applyDamageToSpacecraft(damage, options);
+      } else if (this.type === "vehicle") {
+          if (options.scale === "spacecraft") {
+              damage *= 10;
+          }
+          this.applyDamageToVehicle(damage, options);
       } else if (this.type === "traveller" || this.type === "npc" || this.type === "creature") {
           if (options.scale === "spacecraft") {
               damage *= 10;
