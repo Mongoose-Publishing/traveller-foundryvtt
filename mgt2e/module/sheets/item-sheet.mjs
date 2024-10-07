@@ -376,12 +376,14 @@ export class MgT2ItemSheet extends ItemSheet {
         } else if (this.item.type === "cargo") {
             html.find(".availability-selector").click(ev => {
                 const value = $(ev.currentTarget).val();
-                if (this.item.system.cargo.availability.length > 0) {
-                    this.item.system.cargo.availability += `, ${value}`;
-                } else {
-                    this.item.system.cargo.availability = `${value}`;
+                if (value) {
+                    if (this.item.system.cargo.availability.length > 0) {
+                        this.item.system.cargo.availability += `, ${value}`;
+                    } else {
+                        this.item.system.cargo.availability = `${value}`;
+                    }
+                    this.item.update({"system.cargo": this.item.system.cargo});
                 }
-                this.item.update({ "system.cargo": this.item.system.cargo });
             });
             html.find(".avail-remove").click(ev => {
                 const e = $(ev.currentTarget).parents(".cargo-pill");
@@ -390,22 +392,26 @@ export class MgT2ItemSheet extends ItemSheet {
 
             html.find(".purchase-selector").click(ev => {
                 const value = $(ev.currentTarget).val();
-                if (this.item.system.cargo.purchaseDM.length > 0) {
-                    this.item.system.cargo.purchaseDM += `, ${value} 0`;
-                } else {
-                    this.item.system.cargo.purchaseDM = `${value} 0`;
+                if (value) {
+                    if (this.item.system.cargo.purchaseDM.length > 0) {
+                        this.item.system.cargo.purchaseDM += `, ${value} 0`;
+                    } else {
+                        this.item.system.cargo.purchaseDM = `${value} 0`;
+                    }
+                    this.item.update({"system.cargo": this.item.system.cargo});
                 }
-                this.item.update({ "system.cargo": this.item.system.cargo });
             });
 
             html.find(".sale-selector").click(ev => {
                 const value = $(ev.currentTarget).val();
-                if (this.item.system.cargo.saleDM.length > 0) {
-                    this.item.system.cargo.saleDM += `, ${value} 0`;
-                } else {
-                    this.item.system.cargo.saleDM = `${value} 0`;
+                if (value) {
+                    if (this.item.system.cargo.saleDM.length > 0) {
+                        this.item.system.cargo.saleDM += `, ${value} 0`;
+                    } else {
+                        this.item.system.cargo.saleDM = `${value} 0`;
+                    }
+                    this.item.update({ "system.cargo": this.item.system.cargo });
                 }
-                this.item.update({ "system.cargo": this.item.system.cargo });
             });
 
             html.find(".trait-remove").click(ev => {
@@ -542,10 +548,10 @@ export class MgT2ItemSheet extends ItemSheet {
     }
 
     // Used by cargo items.
-    _rollQuantity(item) {
+    async _rollQuantity(item) {
         if (item.system.quantity !== undefined && item.system.cargo.tons !== undefined) {
             let tons = item.system.cargo.tons;
-            let roll = new Roll(tons, null).evaluate({async: false});
+            let roll = await new Roll(tons, null).evaluate();
             let quantity = parseInt(roll.total);
             item.system.quantity = quantity;
             item.update({"system.quantity": item.system.quantity });
