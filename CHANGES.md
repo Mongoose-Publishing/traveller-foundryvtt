@@ -6,10 +6,10 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
-## v0.10.X
+## v0.10.6 (Beta)
 
 * Fix issue with random cargo tonnage roller not working on v12.
-* Prevent an 'empty' modifier from being added to Purchase and Sale modifier list on cargo items.
+* Prevent an 'empty' modifier from being added to the Purchase and Sale modifier list on cargo items.
 
 
 ## v0.10.5 (Beta)
