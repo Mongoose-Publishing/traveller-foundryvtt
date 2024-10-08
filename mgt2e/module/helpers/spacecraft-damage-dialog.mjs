@@ -40,6 +40,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
         if (this.actualDamage < 0) {
             this.actualDamage = 0;
         }
+
         this.crits = {};
         this.crits.effectCrit = false;
         this.crits.effectSeverity = 0;
@@ -65,12 +66,21 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.tenPercent = parseInt(this.actor.system.hits.max / 10);
         this.crits.numCrits = parseInt(this.actualDamage / this.tenPercent);
 
+        // Current critical state.
+        this.shipCriticals = this.actor.system.spacecraft?.combat?.criticals;
+        if (!shipCriticals) {
+            this.shipCriticals = {};
+        }
+
         if (this.crits.numCrits > 0) {
             this.crits.criticals = {};
             for (let c = 0; c < this.crits.numCrits; c++) {
                 this.crits.criticals[c] = {};
                 this.crits.criticals[c].location = this.getCriticalRoll();
                 this.crits.criticals[c].severity = 1;
+                if (this.shipCriticals[c]) {
+                    this.crits.criticals[c].total = this.shipCriticals[c].severity;
+                }
             }
         }
         console.log(this.crits.criticals);
@@ -79,6 +89,8 @@ export class MgT2SpacecraftDamageDialog extends Application {
             // No criticals, so don't pass any data.
             this.crits = null;
         }
+
+
 
         this.criticalLabels = { };
         let roll = 2;
