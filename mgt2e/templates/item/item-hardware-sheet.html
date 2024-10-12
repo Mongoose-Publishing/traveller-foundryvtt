@@ -98,6 +98,27 @@
                         <input type="text" name="system.hardware.rating" value="{{system.hardware.rating}}" data-dtype="Number"/>
                     {{/if}}
                 </div>
+
+                {{#if ADVANTAGES}}
+                <div class="resource grid-span-4 flex-group-left">
+                    <label for="system.hardware.advancement" class="resource-label">{{localize "MGT2.Spacecraft.AdvantagesTitle"}}</label>
+                    {{#if (isOwner .)}}
+                    <br/>
+                    <select name="system.hardware.advancement">
+                        {{selectOptions ADVANCES_LIST selected=system.hardware.advancement}}
+                    </select>
+                    <span style="display: inline-block; float: right">
+                        <i class="fa fa-add"></i><select class="hardwareSystemType advantage-selector">
+                            {{selectOptions ADVANTAGES_LIST }}
+                        </select>
+                    </span>
+                    {{/if}}
+                    <br/>
+                    <div class="pill-container">
+                        {{{showAdvantages . system.hardware.advantages}}}
+                    </div>
+                </div>
+                {{/if}}
             </div>
         </div>
 

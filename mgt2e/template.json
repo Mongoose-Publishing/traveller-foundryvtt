@@ -336,6 +336,7 @@
               },
               "powerPerTon": 0,
               "mount": "turret",
+              "advantages": "",
               "weapons": {}
           }
       },

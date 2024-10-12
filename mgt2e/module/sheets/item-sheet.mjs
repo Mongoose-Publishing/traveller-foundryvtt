@@ -69,7 +69,60 @@ export class MgT2ItemSheet extends ItemSheet {
         }
 
         if (context.item.type === "hardware" && context.item.parent != null) {
-            this.calculateShipHardware(context, context.item)
+            this.calculateShipHardware(context, context.item);
+            if (MGT2.SPACECRAFT_ADVANTAGES[context.item.system.hardware.system]) {
+                // List of prototype/advanced options.
+                context.ADVANCES = MGT2.SPACECRAFT_ADVANCES;
+                context.ADVANCES_LIST = {};
+                for (let a in context.ADVANCES) {
+                    context.ADVANCES_LIST[a] = game.i18n.format("MGT2.Spacecraft.Advances."+a);
+                }
+                if (!context.item.system.hardware.advancement) {
+                    context.item.system.hardware.advancement = "standard";
+                }
+                // Now work out how many we can afford to 'buy'.
+                // List of advantages/disadvantages available.
+                context.ADVANTAGES = MGT2.SPACECRAFT_ADVANTAGES[context.item.system.hardware.system];
+                context.ADVANTAGES_LIST = {};
+                context.ADVANTAGES_LIST[""] = "";
+
+                let pointsAvailable = context.ADVANCES[this.item.system.hardware.advancement].modifications;
+                let bought = context.item.system.hardware.advantages;
+                if (bought) {
+                    console.log("Already bought: " + bought);
+                    for (let a of bought.split(",")) {
+                        let t = a.trim().split(" ")[0];
+                        let n = a.trim().split(" ")[1];
+                        if (!context.ADVANTAGES[t]) {
+                            continue;
+                        }
+                        let c = context.ADVANTAGES[t].cost;
+                        c = parseInt(c) * parseInt(n);
+                        if (pointsAvailable < 0) {
+                            if (c < 0) {
+                                pointsAvailable = Math.min(0, pointsAvailable - c);
+                            }
+                        } else if (pointsAvailable > 0) {
+                            if (c > 0) {
+                                pointsAvailable = Math.max(0, pointsAvailable - c);
+                            }
+                        }
+                    }
+                }
+                if (pointsAvailable !== 0) {
+                    for (let a in context.ADVANTAGES) {
+                        let advantage = context.ADVANTAGES[a];
+                        if (pointsAvailable < 0 && (advantage.cost > 0 || advantage.cost < pointsAvailable)) {
+                            continue;
+                        }
+                        if (pointsAvailable > 0 && (advantage.cost < 0 || advantage.cost > pointsAvailable)) {
+                            continue;
+                        }
+                        context.ADVANTAGES_LIST[a] =
+                            `${game.i18n.format("MGT2.Spacecraft.Advantages." + a)} (${context.ADVANTAGES[a].cost})`;
+                    }
+                }
+            }
         } else if (context.item.type === "armour") {
             context.energyTypes = {};
             context.energyTypes[""] = "";
@@ -444,7 +497,46 @@ export class MgT2ItemSheet extends ItemSheet {
                 }
                 this._modifyCargoTrait(value.data("traitId"), field, 1);
             })
+        } else if (this.item.type === "hardware") {
+            html.find(".advantage-selector").click(ev => {
+                const value = $(ev.currentTarget).val();
+                if (value) {
+                    let adv = this.item.system.hardware.advantages;
+                    if (adv == null) {
+                        adv = "";
+                    }
+                    console.log(adv);
+                    let count = this.item.getAdvantage(value);
+                    if (count > 0) {
+                        console.log(`${value}: ${count}`);
+                        let reg = new RegExp(`(^|[, ])${value}[^,]*($|[, ])`, "gi");
+                        adv = adv.replace(reg, "").replace(/[ ,]*$/g, "");
+                        count++;
+                    } else {
+                        count = 1;
+                    }
+                    if (adv.trim().length > 2) {
+                        adv = adv + ", " + value + " " + count;
+                    } else {
+                        adv = value + " " + count;
+                    }
+                    this.item.update({"system.hardware.advantages": adv});
+                }
+            });
+            html.find(".advantage-remove").click(ev => {
+                const e = $(ev.currentTarget).parents(".advantage-pill");
+                this._removeAdvantage(e.data("advantageId"));
+            });
         }
+    }
+
+    async _removeAdvantage(selectedAdvantage) {
+        let reg = new RegExp(`(^|[, ])${selectedAdvantage}[^,]*($|[, ])`, "gi");
+        let advantages = this.item.system.hardware.advantages.replace(reg, "").replace(/[ ,]*$/g, "");
+        this.item.system.hardware.advantages = advantages;
+        await this.item.update({
+            'system.hardware.advantages': advantages
+        });
     }
 
     async _modifyCargoTrait(trait, field, modifier) {

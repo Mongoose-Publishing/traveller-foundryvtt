@@ -196,6 +196,7 @@ li.vaccsuit {
     border: 1px solid black;
     padding: 2px;
     background-color: #D8D8D8;
+    text-align: left;
 }
 
 .pill-container .pill {
@@ -228,6 +229,16 @@ li.vaccsuit {
 .error-pill {
     color: red;
     font-style: italic;
+}
+
+.adv-pill {
+    background-color: #36a0de;
+    color: white;
+}
+
+.disad-pill {
+    background-color: #a090ee;
+    color: black;
 }
 
 .cargo-pill {

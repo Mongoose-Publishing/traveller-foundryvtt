@@ -96,6 +96,47 @@ MGT2.SPACE_MOUNTS = {
     "spinal": { "multiplier": 1000, "hardpoints": 0.01 }
 }
 
+MGT2.SPACECRAFT_ADVANCES = {
+    "earlyPrototype": { "tl": -2, "tonnage": 2, "cost": 11, "modifications": -2 },
+    "prototype": { "tl": -1, "tonnage": 1, "cost": 6, "modifications": -1 },
+    "budget": { "tl": 0, "tonnage": 1, "cost": 0.75, "modifications": -1 },
+    "standard": { "tl": 0, "tonnage": 1, "cost": 1, "modifications": 0 },
+    "advanced": { "tl": 2, "tonnage": 1, "cost": 1.1, "modifications": 1 },
+    "veryAdvanced": { "tl": 2, "tonnage": 1, "cost": 1.25, "modifications": 2 },
+    "highTech": { "tl": 3, "tonnage": 1, "cost": 1.5, "modifications": 3 },
+}
+
+MGT2.SPACECRAFT_ADVANTAGES = {
+   "j-drive": {
+       "decreasedFuel": { "cost": 1, "fuel": -10, "multi": true },
+       "earlyJump": { "cost": 1, "multi": true },
+       "energyEfficient": { "cost": 1, "power": -25, "multi": true },
+       "sizeReduction": { "cost": 1, "size": -10, "multi": true },
+       "stealthJump": { "cost": 2 },
+       "energyInefficient": { "cost": -1, "power": +30, "multi": true },
+       "lateJump": { "cost": -1 },
+       "increasedSize": { "cost": -1, "size": +25 }
+   },
+   "m-drive": {
+       "energyEfficient": { "cost": 1, "power": -25, "multi": true },
+       "sizeReduction": { "cost": 1, "size": -10, "multi": true },
+       "energyInefficient": { "cost": -1, "power": +30, "multi": true },
+       "limitedRange": { "cost": -1 },
+       "increasedSize": { "cost": -1, "multi": true },
+       "orbitalRange": { "cost": -2 }
+   },
+   "r-drive": {
+       "fuelEfficient": { "cost": 1, "fuel": -20, "multi": true },
+       "fuelInefficient": { "cost": -1, "fuel": +25, "multi": true }
+   },
+   "power": {
+       "increasedPower": { "cost": 2, "output": +10, "multi": true },
+       "sizeReduction": { "cost": 1, "size": -10, "multi": true },
+       "energyInefficient": { "cost": -1, "output": -25, "multi": true },
+       "increasedSize": { "cost": -1, "size": +25, "multi": true }
+   }
+};
+
 MGT2.SPACECRAFT_CRITICALS = {
     "sensors": [
         { "sensorDM": -2 },

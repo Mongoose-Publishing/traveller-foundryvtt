@@ -970,6 +970,25 @@ Handlebars.registerHelper('concat', function(arg1, arg2, arg3, arg4, arg5) {
 Handlebars.registerHelper('nameQuantity', function(item) {
    let name = item.name;
    let quantity = item.system.quantity;
+   let extra = null;
+
+   if (item.type === "hardware") {
+       let hardware = item.system.hardware;
+       let sys = hardware.system;
+       if (sys === "cargo" || sys === "fuel") {
+           extra = hardware.rating + "dt";
+       } else if (sys === "power" && hardware.rating) {
+           extra = "" + hardware.rating;
+       } else if (sys === "j-drive" && hardware.rating) {
+           extra = "J-" + hardware.rating;
+       } else if (sys === "m-drive" && hardware.rating) {
+           extra = hardware.rating + "G";
+       }
+   }
+
+   if (extra) {
+       name = `${name} [${extra}]`;
+   }
 
    if (quantity && parseInt(quantity) > 1) {
        quantity = parseInt(quantity);
@@ -1642,6 +1661,44 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
     }
 
     return html;
+});
+
+Handlebars.registerHelper('showAdvantages', function(key, traits) {
+   console.log("showAdvantages: [" + traits + "]");
+   let hardware = key.item.system.hardware;
+   let html = "";
+   let list = traits.split(",");
+   let data = CONFIG.MGT2.SPACECRAFT_ADVANTAGES[hardware.system];
+
+   for (let i in list) {
+       if (list[i].length > 0) {
+           let adv = list[i].trim();
+           let value = null;
+           if (adv.indexOf(" ") > -1) {
+               value = adv.split(" ")[1].trim();
+               adv = adv.split(" ")[0].trim();
+           }
+           let t = "adv-pill";
+           let cost = 0;
+           if (!data[adv]) {
+               t = "error-pill"
+           } else if (data[adv].cost < 1) {
+               t = "disad-pill";
+           }
+           html += `<span class='pill advantage-pill ${t}' data-advantage-id='${adv}'>`;
+           html += game.i18n.localize("MGT2.Spacecraft.Advantages." + adv);
+           if (value && parseInt(value) > 1) {
+               html += " x" + value;
+           }
+           if (key.owner) {
+               html += `&nbsp;<i class="fas fa-xmark advantage-remove"> </i>`;
+           } else {
+               html += "&nbsp;";
+           }
+           html += "</span>";
+       }
+   }
+   return html;
 });
 
 Handlebars.registerHelper('selectedWeaponId', function(actions, id) {

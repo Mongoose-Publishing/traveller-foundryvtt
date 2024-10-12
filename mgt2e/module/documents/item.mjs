@@ -201,4 +201,24 @@ export class MgT2Item extends Item {
         }
         return false;
     }
+
+    hasAdvantage(advantage) {
+        if (this.type === "hardware" && this.system.hardware.advantages) {
+            return this.system.hardware.advantages.indexOf(index) > -1;
+        }
+        return false;
+    }
+
+    getAdvantage(advantage) {
+        if (this.type === "hardware" && this.system.hardware.advantages) {
+            const adv = this.system.hardware.advantages;
+            const regex = new RegExp(`(^|[^a-z])${advantage}[^,]*`, "g");
+            const m = adv.match(regex);
+            if (m) {
+                console.log(m[0]);
+                return parseInt(m[0].replaceAll(/[^0-9]/g, ""));
+            }
+        }
+        return 0;
+    }
 }
