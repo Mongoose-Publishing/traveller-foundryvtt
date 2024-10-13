@@ -309,6 +309,14 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (actorData.spacecraft.dtons >= 25000) {
             hits = parseInt(actorData.spacecraft.dtons / 2);
         }
+        let config = null;
+        if (actorData.spacecraft.configuration) {
+            config = MGT2.SHIP_CONFIGURATION[actorData.spacecraft.configuration];
+            if (config) {
+                hits = parseInt(hits * config.hull);
+            }
+        }
+
         if (hits !== actorData.hits.max) {
             actorData.hits.max = hits;
             actorData.hits.value = hits - actorData.hits.damage;
@@ -319,6 +327,7 @@ export class MgT2ActorSheet extends ActorSheet {
         let jdrive = 0;
 
         actorData.spacecraft.cargo = 0;
+        actorData.spacecraft.armour = config?(config.armourBonus):0;
         for (let i of context.items) {
             if (i.type === 'cargo') {
                 cargo.push(i);
@@ -346,17 +355,10 @@ export class MgT2ActorSheet extends ActorSheet {
 
                 if (h.system === "armour") {
                     t = (rating * h.tonnage.percent * parseInt(context.system.spacecraft.dtons)) / 100;
-                    let conf = context.system.spacecraft.configuration;
-                    if (conf === "streamlined") {
-                        t *= 1.2;
-                    } else if (conf === "sphere") {
-                        t *= 0.9;
-                    } else if (conf === "close") {
-                        t *= 1.5;
-                    } else if (conf === "dispersed") {
-                        t *= 2;
+                    if (config) {
+                        t = t * config.armour;
                     }
-                    context.system.spacecraft.armour = rating;
+                    context.system.spacecraft.armour += rating;
                     i.system.hardware.tons = t;
                     //i.update({"system.hardware.tons": t });
                 } else if (h.system === "fuel") {
@@ -404,7 +406,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.dtonsUsed = Math.round(dtonsUsed * 100) / 100;
         context.cargoUsed = Math.round(cargoUsed * 100) / 100;
         context.cargoRemaining = parseFloat(context.system.spacecraft.cargo) - cargoUsed;
-        context.dtonsRemaining = parseInt(context.system.spacecraft.dtons) - dtonsUsed;
+        context.dtonsRemaining = parseInt(context.system.spacecraft.dtons * (config?config.volume:1)) - dtonsUsed;
 
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;

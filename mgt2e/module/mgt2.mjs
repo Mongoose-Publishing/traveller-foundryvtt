@@ -592,8 +592,6 @@ Hooks.on("combatRound", (combat, data, options) => {
 });
 
 Hooks.on("dropCanvasData", (canvas, data) =>{
-   console.log("Dropped something on canvas");
-   console.log(data);
 });
 
 

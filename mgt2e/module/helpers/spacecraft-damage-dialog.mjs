@@ -68,7 +68,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
 
         // Current critical state.
         this.shipCriticals = this.actor.system.spacecraft?.combat?.criticals;
-        if (!shipCriticals) {
+        if (!this.shipCriticals) {
             this.shipCriticals = {};
         }
 
