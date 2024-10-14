@@ -11,6 +11,30 @@
         <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
       </h1>
 
+      <div class="shadow">
+        <input class="trained" type="checkbox" name="system.role.department"
+               {{checked system.role.department}} data-type="Boolean"/>
+        <label for="system.role.department">{{localize "MGT2.Role.isDepartment"}}</label>
+
+        {{#if system.role.department}}
+          <select name="system.role.colour">
+            {{#select system.role.colour}}
+              <option value="">None</option>
+              <option value="#ffc72a">Gold</option>
+              <option value="#00abff">Blue</option>
+              <option value="#ff8080">Red</option>
+              <option value="#aade87">Green</option>
+              <option value="#999999">Grey</option>
+            {{/select}}
+          </select>
+        {{/if}}
+
+        {{editor
+            enrichedDescription target="system.description"
+            button=true editable=editable
+        }}
+      </div>
+
       {{#each system.role.actions as |action id|}}
         <div class="shadow role-action" data-action-id="{{id}}">
           <h2>

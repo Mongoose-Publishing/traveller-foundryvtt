@@ -1964,3 +1964,7 @@ div.mini-value span {
     width: 100%;
     height: 15px;
 }
+
+.departmentList {
+    float: right;
+}

@@ -343,7 +343,10 @@
       "role": {
           "role": {
               "actions": {},
-              "description": ""
+              "description": "",
+              "department":  false,
+              "colour": null,
+              "dei": 0
           }
       }
     },

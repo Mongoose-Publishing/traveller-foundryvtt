@@ -1419,9 +1419,13 @@ Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
     let html = "";
     let roles = actorShip.system.crewed.crew[actorCrew.id];
 
+    let bars = "";
     for (let id in roles) {
         let roleItem = actorShip.items.get(id);
         if (roleItem) {
+            if (roleItem.system.role.department && roleItem.system.role.colour) {
+                bars += `<div style="background-color: ${roleItem.system.role.colour}; width: 100%; font-size: 8px;">&nbsp;</div>`;
+            }
             html += `<div class="role-action-item"><span class="role-title">${roleItem.name}</span>`;
             html += `<div class="role-action-buttons">`;
             for (let id in roleItem.system.role.actions) {
@@ -1440,6 +1444,9 @@ Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
             }
             html += "</div></div>";
         }
+    }
+    if (bars) {
+        html = bars + html;
     }
     if (!html) {
         html =  game.i18n.localize("MGT2.Role.NoRoleAssigned");

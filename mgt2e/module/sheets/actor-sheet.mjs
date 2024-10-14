@@ -298,6 +298,7 @@ export class MgT2ActorSheet extends ActorSheet {
         const hardware = [];
         const roles = [];
         const shipWeapons = [];
+        const departments = [];
         let cargoUsed = 0;
         let dtonsUsed = 0;
         let powerTotal = 0;
@@ -337,6 +338,9 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             } else if (i.type === "role") {
                 roles.push(i);
+                if (i.system.role.department) {
+                    departments.push(i);
+                }
             } else if (i.type === 'hardware') {
                 hardware.push(i);
                 let h = i.system.hardware;
@@ -402,6 +406,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.hardware = hardware;
         context.roles = roles;
         context.shipWeapons = shipWeapons;
+        context.departments = departments;
 
         context.dtonsUsed = Math.round(dtonsUsed * 100) / 100;
         context.cargoUsed = Math.round(cargoUsed * 100) / 100;
@@ -431,10 +436,34 @@ export class MgT2ActorSheet extends ActorSheet {
         const crew = [];
         const passengers = [];
 
+        if (!actorData.crewed.selectedDepartment) {
+            actorData.crewed.selectedDepartment = "all";
+        }
+        context.departmentList = {};
+        context.departmentList["all"] = "All";
+        context.departmentMembers = [];
+
+        for (let r of context.departments) {
+            context.departmentList[r._id] = r.name;
+            //context.departmentMembers[r._id] = [];
+            console.log(`${r.name} with id ${r._id}`);
+        }
+
         for (let actorId in actorData.crewed.crew) {
             let actor = game.actors.get(actorId);
             if (actor) {
                 crew.push(actor);
+                let roles = actorData.crewed.crew[actorId];
+                if (actorData.crewed.selectedDepartment === "all") {
+                    context.departmentMembers.push(actor);
+                } else {
+                    for (let r in roles) {
+                        if (actorData.crewed.selectedDepartment === r) {
+                            context.departmentMembers.push(actor);
+                            break;
+                        }
+                    }
+                }
             }
         }
         for (let actorId in actorData.crewed.passengers) {
@@ -445,6 +474,7 @@ export class MgT2ActorSheet extends ActorSheet {
         }
         context.crew = crew;
         context.passengers = passengers;
+
 
         const ships = [];
         const vehicles = [];

@@ -731,6 +731,7 @@
   "MGT2.Info.DamageMsg.VehicleNoStun": "Vehicles can't be affected by stun damage",
   "MGT2.Info.DamageMsg.SpacecraftNoStun": "Spacecraft can't be affected by stun damage",
 
+  "MGT2.Role.isDepartment": "Role is a department",
   "MGT2.Role.RoleAssignment": "Role Assignment",
   "MGT2.Role.RoleActions": "Actions",
   "MGT2.Role.NoRoleAssigned": "No roles assigned",

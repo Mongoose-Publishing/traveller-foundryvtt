@@ -336,7 +336,6 @@ export class MgT2Actor extends Actor {
         console.log(`_prepareSpacecraftData: ${actor.name}`);
 
         const actorData = actor.system;
-        console.log(actorData);
 
         if (!actorData.spacecraft.combat) {
             actorData.spacecraft.combat = {
