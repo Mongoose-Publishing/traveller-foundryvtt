@@ -1424,7 +1424,7 @@ Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
         let roleItem = actorShip.items.get(id);
         if (roleItem) {
             if (roleItem.system.role.department && roleItem.system.role.colour) {
-                bars += `<div style="background-color: ${roleItem.system.role.colour}; width: 100%; font-size: 8px;">&nbsp;</div>`;
+                bars += `<div class="band band-${roleItem.system.role.colour}">&nbsp;</div>`;
             }
             html += `<div class="role-action-item"><span class="role-title">${roleItem.name}</span>`;
             html += `<div class="role-action-buttons">`;

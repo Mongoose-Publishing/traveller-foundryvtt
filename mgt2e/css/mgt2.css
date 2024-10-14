@@ -1713,6 +1713,33 @@ section.id-card .showIdCard {
     background-color: #E0E0FF;
 }
 
+.actor-crew .band {
+    width: 100%;
+    font-size: 8px;
+}
+
+.actor-crew .band-black {
+    background-color: #000000;
+}
+.actor-crew .band-grey {
+    background-color: #999999;
+}
+.actor-crew .band-gold {
+    background-color: #ffc72a;
+}
+.actor-crew .band-red {
+    background-color: #ff0000;
+}
+.actor-crew .band-blue {
+    background-color: #00abff;
+}
+.actor-crew .band-green {
+    background-color: #aade87;
+}
+
+
+
+
 .actor-crew .role-action-item {
     margin-left: 52px;
 }
