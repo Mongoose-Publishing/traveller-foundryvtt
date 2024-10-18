@@ -1,7 +1,7 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
     <section class="npc-sheet">
         <div class="character-left">
-            <img class="profile-img shadow" src="{{actor.img}}" data-edit="img"
+            <img class="profile-img shadow actor-draggable" src="{{actor.img}}" data-edit="img" data-actor-id="{{actor._id}}"
                  title="{{actor.name}}" height="100" width="100"/>
 
             <div class="shadow side-panel side-values">
