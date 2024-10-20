@@ -32,9 +32,9 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.laser = damageOptions.damageType;
         this.armour = this.data.spacecraft.armour ?? 0;
 
-        this.actualDamage = damage;
+        this.actualDamage = this.damage;
         if (this.ap < this.armour) {
-            this.actualDamage = damage - (this.armour - this.ap);
+            this.actualDamage = this.damage - (this.armour - this.ap);
             this.actualDamage *= this.multiplier;
         }
         if (this.actualDamage < 0) {
@@ -48,39 +48,47 @@ export class MgT2SpacecraftDamageDialog extends Application {
         if (this.actualDamage > 0 && damageOptions.effect >= 6) {
             this.crits.effectCrit = true;
             this.crits.effectSeverity = damageOptions.effect - 5;
+            console.log("Effect Critical: " + damageOptions.effect - 5);
         }
         // Gain a critical every time pass 10% of hull damage.
         this.originalDamage = damageOptions.originalDamage;
         this.damageTrack = [];
         this.maxHits = parseInt(this.actor.system.hits.max);
+        this.crits.numCrits = 0;
         for (let d=0; d < 10; d++) {
             let limit = parseInt(((d + 1) * this.maxHits) / 10);
-            if ( limit > this.originalDamage + this.actualDamage) {
+            console.log(`${d} ${limit} ${this.originalDamage} ${this.actualDamage}`);
+            if ( limit >= this.originalDamage + this.actualDamage) {
                 this.damageTrack[d] = "undamaged";
-            } else if (limit > this.originalDamage) {
+            } else if (limit >= this.originalDamage) {
                 this.damageTrack[d] = "critical";
+                this.crits.numCrits ++;
             } else {
                 this.damageTrack[d] = "damaged";
             }
         }
         this.tenPercent = parseInt(this.actor.system.hits.max / 10);
-        this.crits.numCrits = parseInt(this.actualDamage / this.tenPercent);
 
         // Current critical state.
-        this.shipCriticals = this.actor.system.spacecraft?.combat?.criticals;
-        if (!this.shipCriticals) {
-            this.shipCriticals = {};
+        this.shipCriticals = {};
+        for (let c in MGT2.SPACECRAFT_CRITICALS) {
+            let severity = this.actor.flags.mgt2e["crit_"+c];
+            if (severity) {
+                this.shipCriticals[c] = parseInt(severity);
+            } else {
+                this.shipCriticals[c] = 0;
+            }
         }
+        console.log(this.shipCriticals);
 
         if (this.crits.numCrits > 0) {
             this.crits.criticals = {};
             for (let c = 0; c < this.crits.numCrits; c++) {
                 this.crits.criticals[c] = {};
-                this.crits.criticals[c].location = this.getCriticalRoll();
-                this.crits.criticals[c].severity = 1;
-                if (this.shipCriticals[c]) {
-                    this.crits.criticals[c].total = this.shipCriticals[c].severity;
-                }
+                let location = this.getCriticalRoll();
+                this.crits.criticals[c].location = location;
+                this.crits.criticals[c].severity = this.shipCriticals[location] + 1;
+                this.actor.setCriticalLevel(location, this.crits.criticals[c].severity);
             }
         }
         console.log(this.crits.criticals);
@@ -90,13 +98,10 @@ export class MgT2SpacecraftDamageDialog extends Application {
             this.crits = null;
         }
 
-
-
         this.criticalLabels = { };
         let roll = 2;
         for (let c in MGT2.SPACECRAFT_CRITICALS) {
-            this.criticalLabels[c] = game.i18n.format("MGT2.Spacecraft.Criticals." + c,
-                { "roll": roll });
+            this.criticalLabels[c] = game.i18n.format("MGT2.Spacecraft.Criticals." + c) + ` (${roll})`;
             roll++;
         }
     }

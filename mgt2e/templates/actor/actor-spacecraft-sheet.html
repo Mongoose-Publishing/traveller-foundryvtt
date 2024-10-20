@@ -155,6 +155,12 @@
                 </div>
             </div>
 
+            {{#if actor.flags.mgt2e.hasCrits}}
+                <div class="shadow flex-group-left">
+                    {{{showCriticals actor}}}
+                </div>
+            {{/if}}
+
             {{#if system.spacecraft.navy.naval}}
                 <div class="shadow">
                     <div class="grid grid-5col">

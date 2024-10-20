@@ -9,12 +9,36 @@
 
 {{#if crew}}
     <ol class="items-list actor-crew-list grid grid-2col">
-        {{#each departmentMembers as |crewMember|}}
+        {{#if departments}}
+            {{#each departmentMembers as |crewMember|}}
+                <li class="actor-crew" data-actor-id="{{crewMember._id}}">
+                    <h4 title="{{crewMember.name}}">
+                        {{crewMember.name}}
+                        {{#if crewMember.system.sophont.profession}}
+                            ({{crewMember.system.sophont.profession}})
+                        {{/if}}
+                    </h4>
+                    <img class="embedded-actor-portrait actor-draggable" data-actor-id="{{crewMember._id}}" title="{{crewMember.name}}" src="{{crewMember.img}}"/>
+
+                    {{{showCrewInfo ../actor crewMember}}}
+                    <br/>
+                    <div class="item-controls">
+                        <a class="item-control crew-passenger" title="Make passenger">
+                            <i class="fas fa-suitcase"></i></a>
+                        <a class="item-control crew-edit" title="Edit Crew Position">
+                            <i class="fas fa-edit"></i></a>
+                        <a class="item-control crew-delete" title="Remove Crew">
+                            <i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+            {{/each}}
+        {{else}}
+            {{#each crew as |crewMember|}}
             <li class="actor-crew" data-actor-id="{{crewMember._id}}">
                 <h4 title="{{crewMember.name}}">
                     {{crewMember.name}}
                     {{#if crewMember.system.sophont.profession}}
-                        ({{crewMember.system.sophont.profession}})
+                    ({{crewMember.system.sophont.profession}})
                     {{/if}}
                 </h4>
                 <img class="embedded-actor-portrait actor-draggable" data-actor-id="{{crewMember._id}}" title="{{crewMember.name}}" src="{{crewMember.img}}"/>
@@ -30,7 +54,8 @@
                         <i class="fas fa-trash"></i></a>
                 </div>
             </li>
-        {{/each}}
+            {{/each}}
+        {{/if}}
     </ol>
 {{else}}
     {{#if passengers}}

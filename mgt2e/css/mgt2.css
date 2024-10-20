@@ -1333,6 +1333,31 @@ label.box-title {
     border: 3px solid #E00000;
 }
 
+.critical {
+    display: inline-block;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 3px;
+    border: 1px solid black;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+.criticalLow {
+    background-color: #D0D000;
+    color: black;
+}
+
+.criticalMedium {
+    background-color: #D08000;
+    color: black;
+}
+
+.criticalHigh {
+    background-color: #E00000;
+    color: white;
+}
+
 input.with-roller {
     width: 60%;
     text-align: left;

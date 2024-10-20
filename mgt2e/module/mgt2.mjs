@@ -1321,8 +1321,6 @@ Handlebars.registerHelper('toHex', function(value) {
 
 
 Handlebars.registerHelper('showStatus', function(actor, status) {
-    console.log("showStatus:" + status);
-    console.log(actor);
    let type = "statusWarn";
    let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
 
@@ -1369,6 +1367,27 @@ Handlebars.registerHelper('showStatus', function(actor, status) {
 
    return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
 });
+
+Handlebars.registerHelper('showCriticals', function(actor) {
+  let html = "";
+  for (let c in MGT2.SPACECRAFT_CRITICALS) {
+      let severity = actor.flags.mgt2e["crit_"+c];
+      if (severity) {
+          let type = "criticalLow";
+          if (severity > 4) {
+              type = "criticalHigh";
+          } else if (severity > 2) {
+              type = "criticalMedium";
+          }
+          let label = game.i18n.localize("MGT2.Spacecraft.Criticals."+c);
+          label += ` ${severity}`;
+          label += ` <i class="fas fa-xmark critDel"> </i>`;
+          html += `<div class="resource flex-group-center critical ${type}" data-id="${c}"><label>${label}</label></div>`;
+      }
+  }
+  return html;
+});
+
 
 Handlebars.registerHelper('showSimpleSkills', function(actor) {
    if (actor && actor.system && actor.system.skills) {

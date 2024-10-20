@@ -32,8 +32,9 @@
                             {{ship.name}}
                         </h4>
                         <img class="embedded-actor-portrait actor-draggable" data-actor-id="{{ship._id}}" title="{{ship.name}}" src="{{ship.img}}"/>
-
-                        <br/>
+                        {{ship.system.spacecraft.dtons}}dt
+                        {{#if ship.system.spacecraft.mdrive}} / {{ship.system.spacecraft.mdrive}}G {{/if}}
+                        {{#if ship.system.spacecraft.jdrive}} / J-{{ship.system.spacecraft.jdrive}} {{/if}}
                         <div class="item-controls">
                             <a class="item-control docked-delete" title="Remove Ship">
                                 <i class="fas fa-trash"></i></a>

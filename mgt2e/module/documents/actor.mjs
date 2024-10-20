@@ -967,4 +967,43 @@ export class MgT2Actor extends Actor {
       }
   }
 
+  getCriticalLevel(critical) {
+      if (this.type === "spacecraft") {
+          if (MGT2.SPACECRAFT_CRITICALS[critical]) {
+              let value = this.getFlag("mgt2e", "crit_" + critical);
+              if (value && parseInt(value) > 0) {
+                  return Math.min(6, parseInt(value));
+              }
+          } else {
+              console.log(`WARN: Unknown spacecraft critical [${critical}]`);
+          }
+      }
+      return 0;
+  }
+
+  setCriticalLevel(critical, level) {
+      if (this.type === "spacecraft") {
+          level = Math.min(parseInt(level), 6);
+          if (level < 1) {
+              this.unsetFlag("mgt2e", "crit_" + critical);
+              let hasCrits = false;
+              for (let c in MGT2.SPACECRAFT_CRITICALS) {
+                  if (c != critical && this.flags.mgt2e["crit_"+c]) {
+                      hasCrits = true;
+                      break;
+                  }
+              }
+              this.setFlag("mgt2e", "hasCrits", hasCrits);
+          } else if (MGT2.SPACECRAFT_CRITICALS[critical]) {
+              this.setFlag("mgt2e", "crit_" + critical, level);
+              this.setFlag("mgt2e", "hasCrits", true);
+              console.log(`Set critical ${critical} to ${level}`);
+          } else {
+              console.log(`WARN: Unknown spacecraft critical [${critical}]`);
+          }
+      } else {
+          console.log(`WARN: Setting critical [${critical}] on supported type [${this.type}]`);
+      }
+  }
+
 }
