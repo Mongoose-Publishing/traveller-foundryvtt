@@ -20,6 +20,18 @@ export function isNumber(value) {
     return !Number.isNaN(parseInt(value));
 }
 
+export function toFloat(number) {
+    console.log("toFloat: " + number);
+    number = "" + parseFloat(number).toFixed(3);
+    console.log("toFloat: " + number);
+    number = number.replaceAll(/0+$/g, "");
+    console.log("toFloat: " + number);
+    number = number.replaceAll(/\.$/g, "");
+    console.log("toFloat: " + number);
+
+    return number;
+}
+
 export function skillLabel(skill, skillId) {
     if (!skill) {
         return "";

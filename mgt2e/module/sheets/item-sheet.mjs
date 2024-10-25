@@ -1,5 +1,5 @@
 import {onManageActiveEffect} from "../helpers/effects.mjs";
-import {rollAttack, hasTrait, getTraitValue} from "../helpers/dice-rolls.mjs";
+import {rollAttack, hasTrait, getTraitValue, toFloat} from "../helpers/dice-rolls.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 
@@ -225,7 +225,7 @@ export class MgT2ItemSheet extends ItemSheet {
             var armour = parseInt(item.system.hardware.rating);
 
             item.system.hardware.tons = (armour * shipTons * percent * multiplier) / 100.0;
-            item.system.cost = parseInt(item.system.hardware.tonnage.cost * item.system.hardware.tons);
+            item.system.cost = toFloat(item.system.hardware.tonnage.cost * item.system.hardware.tons);
             if (tons !== item.system.hardware.tons) {
                 item.update({"system.hardware.tons": item.system.hardware.tons})
                 item.update({"system.cost": item.system.cost})
