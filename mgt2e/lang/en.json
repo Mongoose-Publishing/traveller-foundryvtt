@@ -615,6 +615,8 @@
 
   "MGT2.Attack.Dangerous": "Weapon has exploded!",
 
+  "MGT2.SpacecraftDamageDialog.Title": "Damage Spacecraft",
+
   "MGT2.Item.RangeM": "Range (m)",
   "MGT2.Item.RangeKM": "Range (km)",
   "MGT2.Item.RangeSpace": "Range",

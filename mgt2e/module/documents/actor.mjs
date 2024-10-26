@@ -600,12 +600,21 @@ export class MgT2Actor extends Actor {
 
       // Apply the damage to the spacecraft.
       options.originalDamage = this.system.hits.damage;
-      this.system.hits.damage += damage;
-      this.system.hits.value = this.system.hits.max - this.system.hits.damage;
-      this.update({"system.hits": this.system.hits});
 
       new MgT2SpacecraftDamageDialog(this, damage, options).render(true);
+  }
 
+    /**
+     * Damage after armour and other modifiers
+     */
+  applyActualDamageToSpacecraft(damage, options) {
+      console.log(`applyActualDamageToSpacecraft: [${damage}]`);
+        if (damage < 1) {
+            return;
+        }
+        this.system.hits.damage += damage;
+        this.system.hits.value = this.system.hits.max - this.system.hits.damage;
+        this.update({"system.hits": this.system.hits});
   }
 
   applyDamageToVehicle(damage, options) {

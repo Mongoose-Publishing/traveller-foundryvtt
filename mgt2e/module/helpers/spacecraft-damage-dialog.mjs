@@ -141,39 +141,15 @@ export class MgT2SpacecraftDamageDialog extends Application {
         const roll = html.find("button[class='damageDone']");
         roll.on("click", event => this.doneClick(event, html));
 
-        const str = html.find(".DMG_STR");
-        str.on("change", event => this.updateDamage(event, html));
+        const dmg = html.find(".baseDamage");
+        dmg.on("change", event => this.updateDamage(event, html));
+
+        const ap = html.find(".baseAP");
+        ap.on("change", event => this.updateDamage(event, html));
 
         html.find(".apply-button").click(ev => {
            this.applyDamage(ev, html);
         });
-    }
-
-    applyDamage(event, html) {
-        console.log("apply");
-        console.log(event);
-        let cha = event.currentTarget.dataset.cha;
-
-        let currentDmg = this.getIntValue(html, ".DMG_" + cha);
-        let currentScore = this.getIntValue(html, ".VAL_" + cha);
-        let maxScore = this.getIntValue(html, this.data.characteristics[cha].value);
-
-        console.log("Cha " + cha + " max " + maxScore + " currently " + currentScore + " with dmg " + currentDmg);
-
-        if (this.remainingDamage <= currentScore) {
-            currentDmg += this.remainingDamage;
-            currentScore -= this.remainingDamage;
-            this.remainingDamage = 0;
-        } else {
-            let applyDmg = currentScore;
-            currentDmg += applyDmg;
-            currentScore -= applyDmg;
-            this.remainingDamage -= applyDmg;
-        }
-
-        this.setIntValue(html, ".DMG_"+cha, currentDmg);
-        this.setIntValue(html, ".VAL_"+cha, currentScore);
-        this.setIntValue(html, ".remaining", this.remainingDamage);
     }
 
     getIntValue(html, field) {
@@ -196,87 +172,26 @@ export class MgT2SpacecraftDamageDialog extends Application {
     updateDamage(event, html) {
         console.log("Was updated");
 
-        let str = this.getIntValue(html, ".DMG_STR");
-        let dex = this.getIntValue(html, ".DMG_DEX");
-        let end = this.getIntValue(html, ".DMG_END");
+        let dmg = this.getIntValue(html, ".baseDamage");
+        let ap = this.getIntValue(html, ".baseAP");
 
-        console.log(`STR ${str}, DEX ${dex}, END ${end}`);
+        dmg = parseInt(dmg);
+        ap = parseInt(ap);
 
+        let actual = dmg - Math.max(0, this.armour - ap);
+        this.setIntValue(html, ".actualDamage",actual);
     }
 
     async doneClick(event, html) {
         event.preventDefault();
         console.log("doneClick:");
 
-        let str = this.getIntValue(html, ".DMG_STR");
-        let dex = this.getIntValue(html, ".DMG_DEX");
-        let end = this.getIntValue(html, ".DMG_END");
-        let remaining = this.getIntValue(html, ".remaining")
+        let damage = this.damage * this.multiplier;
 
-        console.log(`STR ${str}, DEX ${dex}, END ${end}`);
-
-        let total = str + dex + end;
-        let damage = this.data.damage;
-
-        this.damageOptions.characteristics = {
-            "STR": str,
-            "DEX": dex,
-            "END": end
-        }
-        this.actor.applyActualDamageToTraveller(damage, this.damageOptions);
+        this.actor.applyActualDamageToSpacecraft(damage, this.damageOptions);
         this.close();
         return;
 
-        if (this.stun) {
-            // 'tmp' tracks how much of the current damage is temporary.
-            let added = end - damage.END.value;
-            damage.END.value = parseInt(damage.END.value) + end;
-            damage.END.tmp = Math.min(damage.END.value, parseInt(damage.END.tmp) + added);
-            if (remaining > 0) {
-                this.actor.setFlag("mgt2e", "stunned", true);
-                this.actor.setFlag("mgt2e", "stunnedRounds",
-                    this.actor.getFlag("mgt2e", "stunnedRounds")?
-                        parseInt(this.actor.getFlag("mgt2e", "stunnedRounds"))+remaining:remaining);
-            }
-        } else {
-            damage.STR.value = parseInt(damage.STR.value) + str;
-            damage.DEX.value = parseInt(damage.DEX.value) + dex;
-            damage.END.value = parseInt(damage.END.value) + end;
-        }
-
-        if (damage.STR.value > this.data.characteristics.STR.value) {
-            damage.STR.value = this.data.characteristics.STR.value;
-        }
-        if (damage.DEX.value > this.data.characteristics.DEX.value) {
-            damage.DEX.value = this.data.characteristics.DEX.value;
-        }
-        if (damage.END.value > this.data.characteristics.END.value) {
-            damage.END.value = this.data.characteristics.END.value;
-        }
-
-        this.data.damage.STR.value = str;
-        this.data.damage.DEX.value = dex;
-        this.data.damage.END.value = end;
-
-        console.log(this.data.damage);
-
-        this.actor.update({ "system.damage": this.data.damage });
-
-        let atZero = 0;
-        if (str >= this.data.characteristics.STR.value) atZero++;
-        if (dex >= this.data.characteristics.DEX.value) atZero++;
-        if (end >= this.data.characteristics.END.value) atZero++;
-
-        switch (atZero) {
-            case 2:
-                this.actor.setFlag("mgt2e", "unconscious", true);
-                break;
-            case 3:
-                this.actor.setFlag("mgt2e", "disabled", true);
-                break;
-        }
-
-        this.close();
     }
 
     async _updateObject(event, formData) {
