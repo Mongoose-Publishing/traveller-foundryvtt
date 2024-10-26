@@ -6,6 +6,13 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+
+## Latest
+
+* Add new traits for weapons: Deadly, Dangerous, Shield, Protection, Smasher, Artillery, Silent, Fire
+* Add support for Protection type for weapons, so it counts as armour.
+* Reduce what can be seen on an NPC sheet if permissions are Limited
+
 ## v0.10.6 (Beta)
 
 * Fix issue with random cargo tonnage roller not working on v12.

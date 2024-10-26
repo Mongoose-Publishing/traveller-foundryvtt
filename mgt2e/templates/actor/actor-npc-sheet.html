@@ -5,6 +5,7 @@
             <img class="profile-img shadow" src="{{actor.img}}" data-edit="img"
                  title="{{actor.name}}" height="100" width="100"/>
 
+            {{#if (isObserver .)}}
             <div class="side-panel hits-box shadow">
                 <label for="system.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
 
@@ -22,6 +23,7 @@
                 </div>
             </div>
             {{> "systems/mgt2e/templates/actor/parts/actor-combat.html"}}
+            {{/if}}
         </div>
 
         <div class="character-right">
@@ -48,28 +50,44 @@
             </div>
 
             <div class="shadow">
-                {{#unless system.settings.lockCharacteristics}}
-                    <span class="roll-upp rollable" style="float:right; display: inline-block" title="{{localize 'MGT2.TravellerSheet.RandomRoll'}}"><i class="fas fa-dice"> </i></span>
-                {{/unless}}
+                {{#if (isOwner .) }}
+                    {{#unless system.settings.lockCharacteristics}}
+                        <span class="roll-upp rollable" style="float:right; display: inline-block" title="{{localize 'MGT2.TravellerSheet.RandomRoll'}}"><i class="fas fa-dice"> </i></span>
+                    {{/unless}}
+                {{/if}}
                 <div class="no-space grid grid-{{system.settings.columns}}col">
-                    {{#each system.characteristics as | char key | }}
-                        {{#if char.show}}
-                        <div class="resource flex-group-center {{#unless ../system.settings.lockCharacteristics}}characteristic-draggable{{/unless}}"
-                             data-rolltype="characteristic" data-cha="{{key}}">
-                            <label for="system.characteristics.{{key}}.value"
-                                   class="characteristic-title rollable"
-                                   data-roll="2d6+@{{key}}" data-label="{{key}}"
-                                   data-cha="{{key}}"
-                                   title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
-                            <span class="characteristic-dm {{chaStatus char}}">{{numberFormat char.dm sign=true}}</span>
-                            <br/>
-                            <input class="characteristic-value writable" type="number" min="0" max="20" step="1" name="system.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
-                        </div>
-                        {{/if}}
-                    {{/each}}
+                    {{#if (isObserver .)}}
+                        {{#each system.characteristics as | char key | }}
+                            {{#if char.show}}
+                            <div class="resource flex-group-center {{#unless ../system.settings.lockCharacteristics}}characteristic-draggable{{/unless}}"
+                                 data-rolltype="characteristic" data-cha="{{key}}">
+                                <label for="system.characteristics.{{key}}.value"
+                                       class="characteristic-title rollable"
+                                       data-roll="2d6+@{{key}}" data-label="{{key}}"
+                                       data-cha="{{key}}"
+                                       title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
+                                <span class="characteristic-dm {{chaStatus char}}">{{numberFormat char.dm sign=true}}</span>
+                                <br/>
+                                <input class="characteristic-value writable" type="number" min="0" max="20" step="1" name="system.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                            </div>
+                            {{/if}}
+                        {{/each}}
+                    {{else}}
+                        {{#each system.characteristics as | char key | }}
+                            {{#if char.show}}
+                            <div class="resource flex-group-center">
+                                <label for="system.characteristics.{{key}}.value"
+                                       class="characteristic-title"
+                                       title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
+                                <span class="characteristic-dm {{chaStatus char}}">{{numberFormat char.dm sign=true}}</span>
+                            </div>
+                            {{/if}}
+                        {{/each}}
+                    {{/if}}
                 </div>
             </div>
 
+            {{#if (isObserver .) }}
             <div class="shadow grid grid-5col">
                 <div class="resource flex-group-center">
                     <label for="system.speed.base" class="field-label">SPEED</label>
@@ -117,15 +135,15 @@
                            value="{{system.dodge}}" data-dtype="Number" readonly/>
                 </div>
             </div>
+            {{/if}}
 
             {{> "systems/mgt2e/templates/actor/parts/actor-status.html"}}
 
+            {{#if (isObserver .) }}
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
-                    {{#if (isObserver .)}}
-                        <a class="item" data-tab="skills">Skills</a>
-                        <a class="item" data-tab="items">Equipment</a>
-                    {{/if}}
+                    <a class="item" data-tab="skills">Skills</a>
+                    <a class="item" data-tab="items">Equipment</a>
                     <a class="item" data-tab="biography">Biography</a>
                     {{#if (isOwner .)}}
                         <a class="item" data-tab="settings">Settings</a>
@@ -189,6 +207,7 @@
                     {{/if}}
                 </div>
             </div>
+            {{/if}}
         </div>
 
 

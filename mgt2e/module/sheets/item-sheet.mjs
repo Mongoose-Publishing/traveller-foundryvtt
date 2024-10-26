@@ -81,13 +81,25 @@ export class MgT2ItemSheet extends ItemSheet {
                     context.haveEnergy[e] = game.i18n.localize("MGT2.Item.EnergyType." + e);
                 }
             }
-            console.log(context.energyTypes);
         } else if (context.item.type === "weapon") {
             context.weaponTraits = {};
             context.weaponTraits[""] = "";
             let traits = context.item.system.weapon.traits;
             for (let trait in CONFIG.MGT2.WEAPONS.traits) {
                 if (!hasTrait(traits, trait)) {
+                    let t = CONFIG.MGT2.WEAPONS.traits[trait];
+                    if (t.conflict) {
+                        let hasConflict = false;
+                        for (let c of t.conflict) {
+                            if (hasTrait(traits, c)) {
+                                hasConflict = true;
+                                break;
+                            }
+                        }
+                        if (hasConflict) {
+                            continue;
+                        }
+                    }
                     context.weaponTraits[trait] = game.i18n.localize("MGT2.Item.WeaponTrait.Label."+trait);
                 }
             }
@@ -482,7 +494,7 @@ export class MgT2ItemSheet extends ItemSheet {
         if (traitData) {
             let traitText = selectedTrait;
 
-            if (traitData.value) {
+            if (traitData.value !== undefined) {
                 traitText += ` ${traitData.value}`;
             }
             if (this.item.system.weapon.traits && this.item.system.weapon.traits.length > 0) {
@@ -508,7 +520,7 @@ export class MgT2ItemSheet extends ItemSheet {
         if (traitData) {
             const text = this.item.getWeaponTrait(trait);
             console.log(text);
-            if (traitData.value) {
+            if (traitData.value !== undefined) {
                 let value = parseInt(text.replace(/[^-0-9]/g, ""));
                 value += parseInt(modifier);
                 if (value < traitData.min) {

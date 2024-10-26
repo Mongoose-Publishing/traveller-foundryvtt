@@ -1566,7 +1566,7 @@ Handlebars.registerHelper('showWeaponTraits', function(key, traits) {
             if (data) {
                 html += `<span class='pill weapon-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Item.WeaponTrait.Text."+trait)}'>`;
                 if (key.owner) {
-                    if (data.value) {
+                    if (data.value !== null && data.value !== undefined) {
                         value = parseInt(value);
                         if (value > parseInt(data.min)) {
                             html += `<i class="fas fa-minus trait-minus"> </i>`;

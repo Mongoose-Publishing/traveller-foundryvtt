@@ -229,6 +229,9 @@ Tools.applyDamageToCha= function(damage, actorData, cha) {
 
 // Apply damage to an actor. Needs to calculate armour.
 Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
+    console.log("************************************")
+    console.log("* Tools.applyDamageTo (DEPRECATED) *")
+    console.log("************************************")
     let text = "";
 
     if (!options) {
@@ -340,8 +343,6 @@ Tools.applyDamageToTokens = function(damage, damageOptions) {
             ui.notifications.warn("Cannot apply damage to " + token.name);
             continue;
         }
-        console.log("Apply damage to " + token.name);
-        console.log(token);
         token.actor.applyDamage(damage, damageOptions, (tokens.size > 1));
     }
 }
