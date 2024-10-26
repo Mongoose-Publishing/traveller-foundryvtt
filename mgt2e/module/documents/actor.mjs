@@ -418,7 +418,11 @@ export class MgT2Actor extends Actor {
   }
 
   applyDamageToPerson(damage, options) {
+      console.log(`******** ACTOR [${this.name}] ********`);
+      console.log(`applyDamageToPerson: Damage ${damage}`);
+
       let armour = 0;
+
       if (this.system.armour && isNonZero(this.system.armour.protection)) {
           armour = parseInt(this.system.armour.protection);
           if (!isNumber(armour)) {
@@ -438,6 +442,15 @@ export class MgT2Actor extends Actor {
           }
           console.log("Modified armour value is " + armour);
       }
+      // Look for active weapons which provide protection.
+      for (let i of this.items) {
+          if (i.type === "weapon" && i.system.status === MgT2Item.EQUIPPED) {
+              if (hasTrait(i.system.weapon.traits, "protection")) {
+                  armour += getTraitValue(i.system.weapon.traits, "protection");
+              }
+          }
+      }
+
       if (hasTrait(options.traits, "ap")) {
           let ap = parseInt(getTraitValue(options.traits, "ap"));
           armour = Math.max(0, armour - ap);

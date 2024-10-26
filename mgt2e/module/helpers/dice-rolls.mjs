@@ -293,7 +293,11 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
 
         let effectClass = "rollFailure";
         let effectText = "Miss";
-        if (effect === 0) {
+        if (effect <= -5 && (hasTrait(weapon.system.weapon.traits, "dangerous")||hasTrait(weapon.system.traits, "veryDangerous"))) {
+            effectText = game.i18n.localize("MGT2.Attack.Dangerous");
+        } else if (effect <= -3 && (hasTrait(weapon.system.weapon.traits, "veryDangerous"))) {
+            effectText = game.i18n.localize("MGT2.Attack.Dangerous");
+        } else if (effect === 0) {
             effectClass = "rollMarginal";
             effectText = "Hit";
         } else if (effect > 0 && effect < 6) {

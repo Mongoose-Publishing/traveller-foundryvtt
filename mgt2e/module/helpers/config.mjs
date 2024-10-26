@@ -553,18 +553,27 @@ MGT2.COMPUTERS = {
 MGT2.WEAPONS = {
     "energyTypes": [ "laser", "plasma", "fire", "energy" ],
     "traits": {
-        "ap": { "value": 1, "min": 1, "max": 99, "conflict": "loPen" },
-        "auto": { "value": 2, "min": 2, "max": 99 },
+        "artillery": { },
+        "ap": { "value": 1, "min": 1, "max": 99, "conflict": [ "loPen" ] },
+        "auto": { "value": 2, "min": 2, "max": 99, "conflict": [ "oneUse" ] },
         "blast": { "value": 1, "min": 1, "max": 10000 },
-        "bulky": { "conflict": "veryBulky" },
+        "bulky": { "conflict": [ "veryBulky" ] },
+        "dangerous": { "conflict": [ "veryDangerous" ] },
         "destructive": { },
+        "fire": { },
         "laserSight": { },
-        "loPen": { "value": 2, "min": 2, "max": 99, "conflict": "ap" },
+        "loPen": { "value": 2, "min": 2, "max": 99, "conflict": [ "ap" ] },
+        "oneUse": { "conflict": [ "auto" ] },
+        "protection": { "value": 1, "min": 1, "max": 20 },
         "radiation": { },
         "scope": { },
+        "shield": { "value": 0, "min": 0, "max": 6 },
+        "silent": { },
         "smart": { },
+        "smasher": { },
         "stun": { },
-        "veryBulky": { "conflict": "bulky" },
+        "veryBulky": { "conflict": [ "bulky" ] },
+        "veryDangerous": { "conflict": [ "dangerous" ] },
         "zeroG": { }
     }
 }
