@@ -469,7 +469,6 @@ MGT2.WEAPONS = {
         "blast": { "value": 1, "min": 1, "max": 10000 },
         "bulky": { "conflict": [ "veryBulky" ] },
         "dangerous": { "conflict": [ "veryDangerous" ] },
-        "deadly": { },
         "destructive": { },
         "fire": { },
         "laserSight": { },
