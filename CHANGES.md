@@ -7,7 +7,7 @@
 * Career terms aren't always added in the correct order.
 
 
-## Latest
+## v0.10.7 (Beta)
 
 * Added new traits for weapons: Dangerous, Shield, Protection, Smasher, Artillery, Silent, Fire etc
 * Added new traits for spacecraft weapons: Ion, Chain Reaction, Orbital Strike etc
