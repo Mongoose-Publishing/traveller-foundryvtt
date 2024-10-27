@@ -191,7 +191,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
 
     async doneClick(event, html) {
         event.preventDefault();
-        let damage = this.actualDamage * this.multiplier;
+        let damage = this.actualDamage;
 
         this.actor.applyActualDamageToSpacecraft(damage, this.damageOptions);
         this.close();
