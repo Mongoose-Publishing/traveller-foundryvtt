@@ -16,11 +16,9 @@ Currently, it provides support for:
 * Augments, including Expert Systems, augmented armour and cyberwear.
 * Support for background and alien race packages.
 * Career terms for character generation, including allies, contacts and enemies.
+* Basic support for spacecraft, and combat between spacecraft.
 
 Note that it does not currently include 'content' such as equipment lists.
-
-Support for spacecraft is currently in progress, with rules for cargo, starship hardware, adding crew and passengers
-and specifying actions for crew roles.
 
 ## How to Build
 
