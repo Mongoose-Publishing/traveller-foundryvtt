@@ -192,13 +192,7 @@
                     <div class="resource">
                         <label for="system.weapon.damageType" class="resource-label">Damage Type</label><br/>
                         <select class="writable" name="system.weapon.damageType">
-                            {{#select system.weapon.damageType}}
-                            <option value="standard">Standard</option>
-                            <option value="laser">Laser</option>
-                            <option value="plasma">Plasma</option>
-                            <option value="fire">Fire</option>
-                            <option value="energy">Energy</option>
-                            {{/select}}
+                            {{selectOptions energyTypes selected=system.weapon.damageType}}
                         </select>
                     </div>
                     <div class="resource grid-span-2">

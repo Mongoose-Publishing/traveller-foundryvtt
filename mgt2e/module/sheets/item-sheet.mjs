@@ -134,6 +134,12 @@ export class MgT2ItemSheet extends ItemSheet {
                 }
             }
         } else if (context.item.type === "weapon") {
+            context.energyTypes = {};
+            context.energyTypes["standard"] = game.i18n.localize("MGT2.Item.EnergyType.standard");
+            for (let e of CONFIG.MGT2.WEAPONS.energyTypes) {
+                context.energyTypes[e] = game.i18n.localize("MGT2.Item.EnergyType." + e);
+            }
+
             context.weaponTraits = {};
             context.weaponTraits[""] = "";
             let traits = context.item.system.weapon.traits;
