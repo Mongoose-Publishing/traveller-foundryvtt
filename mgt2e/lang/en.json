@@ -589,6 +589,11 @@
   "MGT2.Item.WeaponTrait.Label.shield": "Shield",
   "MGT2.Item.WeaponTrait.Label.protection": "Protection",
   "MGT2.Item.WeaponTrait.Label.deadly": "Deadly",
+  "MGT2.Item.WeaponTrait.Label.chainReaction": "Chain Reaction",
+  "MGT2.Item.WeaponTrait.Label.reductor": "Reductor",
+  "MGT2.Item.WeaponTrait.Label.ion": "Ion",
+  "MGT2.Item.WeaponTrait.Label.orbitalBombardment": "Orbital Bombardment",
+  "MGT2.Item.WeaponTrait.Label.orbitalStrike": "Orbital Strike",
 
   "MGT2.Item.WeaponTrait.Text.ap": "Armour Piercing",
   "MGT2.Item.WeaponTrait.Text.auto": "Automatic Fire",
@@ -612,6 +617,11 @@
   "MGT2.Item.WeaponTrait.Text.smasher": "Cannot be parried",
   "MGT2.Item.WeaponTrait.Text.shield": "Provides minimum parry skill",
   "MGT2.Item.WeaponTrait.Text.protection": "Provides armour protection to user",
+  "MGT2.Item.WeaponTrait.Text.chainReaction": "Continues to do damage in following rounds",
+  "MGT2.Item.WeaponTrait.Text.reductor": "Reduces armour",
+  "MGT2.Item.WeaponTrait.Text.ion": "Overloads target&apos;s power systems",
+  "MGT2.Item.WeaponTrait.Text.orbitalStrike": "DM-12 to attack ships, Blast 100 v ground targets",
+  "MGT2.Item.WeaponTrait.Text.orbitalBombardment": "DM-8 to attack ships, no Blast trait v ground targets",
 
   "MGT2.Attack.Dangerous": "Weapon has exploded!",
 

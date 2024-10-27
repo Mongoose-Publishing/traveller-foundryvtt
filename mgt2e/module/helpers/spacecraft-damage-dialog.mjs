@@ -28,6 +28,10 @@ export class MgT2SpacecraftDamageDialog extends Application {
 
         this.damage = damageOptions.damage + Math.min(0, damageOptions.effect);
         this.ap = damageOptions.ap?parseInt(damageOptions.ap):0;
+        if (damageOptions.scale !== "spacecraft") {
+            this.damage = parseInt (this.damage / 10);
+            this.ap = parseInt( this.ap / 10);
+        }
         this.multiplier = damageOptions.multiplier?parseInt(damageOptions.multiplier):1;
         this.laser = damageOptions.damageType;
         this.armour = this.data.spacecraft.armour ?? 0;
@@ -53,6 +57,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
         // Gain a critical every time pass 10% of hull damage.
         this.originalDamage = damageOptions.originalDamage;
         this.damageTrack = [];
+        this.hits = parseInt(this.actor.system.hits.value) - this.actualDamage;
         this.maxHits = parseInt(this.actor.system.hits.max);
         this.crits.numCrits = 0;
         for (let d=0; d < 10; d++) {
@@ -129,6 +134,8 @@ export class MgT2SpacecraftDamageDialog extends Application {
             "damageTrack": this.damageTrack,
             "actualDamage": this.actualDamage,
             "remainingDamage": this.remainingDamage,
+            "hits": this.hits,
+            "maxHits": this.maxHits,
             "crits": this.crits,
             "criticalEffectRoll": criticalEffectRoll,
             "criticalLabels": this.criticalLabels,
@@ -184,14 +191,10 @@ export class MgT2SpacecraftDamageDialog extends Application {
 
     async doneClick(event, html) {
         event.preventDefault();
-        console.log("doneClick:");
-
-        let damage = this.damage * this.multiplier;
+        let damage = this.actualDamage * this.multiplier;
 
         this.actor.applyActualDamageToSpacecraft(damage, this.damageOptions);
         this.close();
-        return;
-
     }
 
     async _updateObject(event, formData) {

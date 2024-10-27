@@ -89,7 +89,6 @@ export class MgT2ItemSheet extends ItemSheet {
                 let pointsAvailable = context.ADVANCES[this.item.system.hardware.advancement].modifications;
                 let bought = context.item.system.hardware.advantages;
                 if (bought) {
-                    console.log("Already bought: " + bought);
                     for (let a of bought.split(",")) {
                         let t = a.trim().split(" ")[0];
                         let n = a.trim().split(" ")[1];
@@ -141,6 +140,15 @@ export class MgT2ItemSheet extends ItemSheet {
             for (let trait in CONFIG.MGT2.WEAPONS.traits) {
                 if (!hasTrait(traits, trait)) {
                     let t = CONFIG.MGT2.WEAPONS.traits[trait];
+                    if (t.scale) {
+                        if (t.scale === "spacecraft" && context.item.system.weapon.scale !== "spacecraft") {
+                            continue;
+                        }
+                        if (t.scale === "traveller" && context.item.system.weapon.scale === "spacecraft") {
+                            // Vehicle and Traveller scale considered the same - for now.
+                            continue;
+                        }
+                    }
                     if (t.conflict) {
                         let hasConflict = false;
                         for (let c of t.conflict) {

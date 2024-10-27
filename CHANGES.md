@@ -9,11 +9,17 @@
 
 ## Latest
 
-* Add new traits for weapons: Dangerous, Shield, Protection, Smasher, Artillery, Silent, Fire
+* Added new traits for weapons: Dangerous, Shield, Protection, Smasher, Artillery, Silent, Fire etc
+* Added new traits for spacecraft weapons: Ion, Chain Reaction, Orbital Strike etc
 * Add support for Protection type for weapons, so it counts as armour.
 * Add support for Dangerous and Very Dangerous weapons in attack rolls.
 * Reduce what can be seen on an NPC sheet if permissions are Limited.
-* Fix bug where Macros were not showing icon or name field.
+* Fix CSS bug where Macros were not showing icon or name field.
+* Display and set technology modifiers for some spacecraft equipment. They currently have no effect though.
+* Backend rewrites to how attacks are implemented, to handle different scales and tidy up the code.
+* Added new spacecraft damage dialog, for attacks on spacecraft.
+* Set criticals on a spacecraft when it is damaged. They are displayed on the sheet, but currently have no effect.
+
 
 ## v0.10.6 (Beta)
 

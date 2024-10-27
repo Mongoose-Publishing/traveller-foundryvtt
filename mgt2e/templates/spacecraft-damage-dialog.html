@@ -34,6 +34,9 @@
         </div>
     </div>
 
+    <p>
+        HITS {{hits}} / {{maxHits}}
+    </p>
     <div class="grid grid-10col damageTrack">
         {{#each damageTrack as | style |}}
             <div class="{{style}}">&nbsp;</div>
@@ -45,12 +48,12 @@
         <h1>Criticals</h1>
 
         {{#if crits.effectCrit}}
-            <p>Severity {{crits.effectSeverity}} critical from accurate shot./p>
+            <p>Severity {{crits.effectSeverity}} critical from accurate shot.</p>
 
+            <select>
+                {{selectOptions criticalLabels selected=criticalEffectRoll}}
+            </select>
         {{/if}}
-                <select>
-                    {{selectOptions criticalLabels selected=criticalEffectRoll}}
-                </select>
 
             {{#if crits.criticals}}
                 <h2>Sustained Damage</h2>

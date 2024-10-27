@@ -257,11 +257,11 @@
         "weapon": {
             "scale": "traveller",
             "range": 0,
-            "damage": "1d6",
+            "damage": "1D6",
             "magazine": 0,
             "ammo": 0,
             "magazineCost": 0,
-            "characteristic": "dex",
+            "characteristic": "DEX",
             "skill": "melee.unarmed",
             "parryBonus": 0,
             "damageBonus": "",
