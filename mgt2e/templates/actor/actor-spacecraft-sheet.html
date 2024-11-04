@@ -363,6 +363,19 @@
                             </div>
                         </div>
 
+                        <h2>Installed Software ({{bandwidthUsed}} / {{system.spacecraft.computer.processing}})</h2>
+                        <ol class="items-list actor-items grid grid-3col">
+                            {{#each software as |item id|}}
+                            <li class="item item-gear ship-software" data-item-id="{{item._id}}">
+                                <h4>{{item.name}}</h4>
+                                <img src="{{item.img}}" class="small"/>
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ol>
                     </div>
             </div>
         </div>

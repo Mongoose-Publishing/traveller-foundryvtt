@@ -58,6 +58,11 @@ export class MgT2ItemSheet extends ItemSheet {
             context.system.quantity = 1;
         }
 
+        context.techLevels = {};
+        for (let i=0; i <= 25; i++) {
+            context.techLevels[i] = i + " (" + game.i18n.localize(`MGT2.Item.Tech.${i}`) + ")";
+        }
+
         context.characteristics = MGT2.CHARACTERISTICS;
 
         // If this belongs to an actor, the actor might have custom skills, so
@@ -134,6 +139,38 @@ export class MgT2ItemSheet extends ItemSheet {
                 }
             }
         } else if (context.item.type === "weapon") {
+            context.weaponCha = {
+                "STR": "STR",
+                "DEX": "DEX",
+                "INT": "INT"
+            }
+            context.weaponDamageBonus = {
+                "": "-",
+                "STR": "STR"
+            }
+            context.weaponScale = {
+                "traveller": game.i18n.localize("MGT2.Item.Scale.traveller"),
+                "vehicle": game.i18n.localize("MGT2.Item.Scale.vehicle"),
+                "spacecraft": game.i18n.localize("MGT2.Item.Scale.spacecraft"),
+            }
+            context.weaponSpaceMount = {
+                "fixed": game.i18n.localize("MGT2.Item.SpaceMount.Fixed"),
+                "turret": game.i18n.localize("MGT2.Item.SpaceMount.Turret"),
+                "barbette": game.i18n.localize("MGT2.Item.SpaceMount.Barbette"),
+                "bay.small": game.i18n.localize("MGT2.Item.SpaceMount.BaySmall"),
+                "bay.medium": game.i18n.localize("MGT2.Item.SpaceMount.BayMedium"),
+                "bay.large": game.i18n.localize("MGT2.Item.SpaceMount.BayLarge"),
+                "spinal": game.i18n.localize("MGT2.Item.SpaceMount.Spinal"),
+            }
+            context.weaponSpaceRange = {
+                "adjacent": game.i18n.localize("MGT2.Item.SpaceRange.adjacent"),
+                "close": game.i18n.localize("MGT2.Item.SpaceRange.close"),
+                "short": game.i18n.localize("MGT2.Item.SpaceRange.short"),
+                "medium": game.i18n.localize("MGT2.Item.SpaceRange.medium"),
+                "long": game.i18n.localize("MGT2.Item.SpaceRange.long"),
+                "verylong": game.i18n.localize("MGT2.Item.SpaceRange.verylong"),
+                "distant": game.i18n.localize("MGT2.Item.SpaceRange.distant"),
+            }
             context.energyTypes = {};
             context.energyTypes["standard"] = game.i18n.localize("MGT2.Item.EnergyType.standard");
             for (let e of CONFIG.MGT2.WEAPONS.energyTypes) {
@@ -168,6 +205,28 @@ export class MgT2ItemSheet extends ItemSheet {
                         }
                     }
                     context.weaponTraits[trait] = game.i18n.localize("MGT2.Item.WeaponTrait.Label."+trait);
+                }
+            }
+            let allSkills = MGT2.SKILLS;
+            if (context.item.parent && context.item.parent.system.skills) {
+                allSkills = context.item.parent.system.skills;
+            }
+            context.combatSkills = {
+                "": "None"
+            };
+            for (let skillId in allSkills) {
+                let skill = allSkills[skillId];
+                if (skill.specialities) {
+                    for (let specId in skill.specialities) {
+                        let spec = skill.specialities[specId];
+                        if (spec.combat) {
+                            let label = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
+                            let specLabel = spec.label?spec.label:game.i18n.localize("MGT2.Skills."+specId);
+                            context.combatSkills[skillId+"."+specId] = label + " (" + specLabel + ")";
+                        }
+                    }
+                } else if (skill.combat) {
+                    context.combatSkills[skillId] = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
                 }
             }
         } else if (item.type === "cargo") {

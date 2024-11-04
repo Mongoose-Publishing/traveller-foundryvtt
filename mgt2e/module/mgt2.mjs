@@ -309,6 +309,10 @@ Hooks.on("createItem", (item) => {
             item.img = "systems/mgt2e/icons/cargo/cargo.svg";
         } else if (item.type === "term") {
             item.img = "systems/mgt2e/icons/misc/career.svg";
+        } else if (item.type === "role") {
+            item.img = "systems/mgt2e/icons/items/crew_role.svg";
+        } else if (item.type === "software") {
+            item.img = "systems/mgt2e/icons/items/software.svg";
         } else {
             item.img = "systems/mgt2e/icons/items/item.svg";
         }

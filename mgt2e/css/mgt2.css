@@ -1207,12 +1207,12 @@ textarea.traits {
 }
 
 .description .editor {
-    min-height: 100px;
+    min-height: 200px;
     height: 100%;
 }
 
 .tox-tinymce {
-    min-height: 100px;
+    min-height: 300px;
     height: 100%;
 }
 

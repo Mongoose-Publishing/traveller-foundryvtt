@@ -240,6 +240,7 @@ export class MgT2ActorSheet extends ActorSheet {
         const cargo = [];
         const locker = [];
         const hardware = [];
+        const software = [];
         const roles = [];
 
         let cargoUsed = 0;
@@ -250,6 +251,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 if (q > 0) {
                     cargoUsed += q;
                 }
+            } else if (i.type === "software") {
+                software.push(i);
             } else if (i.type === "role") {
                 roles.push(i);
             } else {
@@ -259,6 +262,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.cargo = cargo;
         context.locker = locker;
         context.roles = roles;
+        context.software = software;
     }
 
     _prepareVehicleCrew(context) {
@@ -297,8 +301,10 @@ export class MgT2ActorSheet extends ActorSheet {
         const locker = [];
         const hardware = [];
         const roles = [];
+        const software = [];
         const shipWeapons = [];
         const departments = [];
+        let bandwidthUsed = 0;
         let cargoUsed = 0;
         let dtonsUsed = 0;
         let powerTotal = 0;
@@ -340,6 +346,11 @@ export class MgT2ActorSheet extends ActorSheet {
                 roles.push(i);
                 if (i.system.role.department) {
                     departments.push(i);
+                }
+            } else if (i.type === "software") {
+                software.push(i);
+                if (parseInt(i.system.software.bandwidth) > 0) {
+                    bandwidthUsed += parseInt(i.system.software.bandwidth);
                 }
             } else if (i.type === 'hardware') {
                 hardware.push(i);
@@ -404,10 +415,12 @@ export class MgT2ActorSheet extends ActorSheet {
         context.cargo = cargo;
         context.locker = locker;
         context.hardware = hardware;
+        context.software = software;
         context.roles = roles;
         context.shipWeapons = shipWeapons;
         context.departments = departments;
 
+        context.bandwidthUsed = bandwidthUsed;
         context.dtonsUsed = Math.round(dtonsUsed * 100) / 100;
         context.cargoUsed = Math.round(cargoUsed * 100) / 100;
         context.cargoRemaining = parseFloat(context.system.spacecraft.cargo) - cargoUsed;

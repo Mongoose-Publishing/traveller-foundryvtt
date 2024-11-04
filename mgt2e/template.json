@@ -242,7 +242,7 @@
     }
   },
   "Item": {
-    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software" ],
     "templates": {
       "base": {
         "tl": 0,
@@ -288,6 +288,12 @@
         }
       },
       "augment": {
+      },
+      "software": {
+        "software": {
+          "bandwidth": 0,
+          "active": false
+        }
       },
       "term": {
           "term": {

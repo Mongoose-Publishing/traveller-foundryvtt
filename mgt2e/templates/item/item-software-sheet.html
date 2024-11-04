@@ -1,0 +1,44 @@
+<form class="{{cssClass}} {{item.type}} flexcol" autocomplete="off">
+    <section class="item-sheet">
+        <div class="sidebar">
+            <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+
+            <div class="shadow item-side-panel">
+                <div class="resource flex-group-center">
+                    <label for="system.quantity" class="resource-label">{{localize "MGT2.Item.Quantity"}}</label>
+                    <div class="incdec">
+                        <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
+                        <input class="writable" type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+                        <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-group-left">
+            <h1 class="charname shadow">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+            </h1>
+            <div class="shadow">
+                <div class="resources grid grid-3col flex-group-center">
+                    <div class="resource">
+                        {{> "systems/mgt2e/templates/item/parts/item-techLevel.html"}}
+                    </div>
+                    <div class="resource">
+                        <label for="system.software.bandwidth" class="resource-label">{{localize "MGT2.Item.Bandwidth"}}</label>
+                        <input class="writable" type="text" name="system.software.bandwidth" value="{{system.software.bandwidth}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource">
+                        <label for="system.cost" class="resource-label">{{localize "MGT2.Item.Cost"}}</label>
+                        <input class="writable" type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow">
+                {{editor enrichedDescription target="system.description"
+                         button=true editable=editable}}
+            </div>
+        </div>
+    </section>
+</form>

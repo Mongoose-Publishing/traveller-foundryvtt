@@ -58,11 +58,7 @@
                         <label for="system.weapon.scale" class="resource-label">Scale</label>
                         <br/>
                         <select class="expand writable" name="system.weapon.scale" title="Weapon Scale">
-                            {{#select system.weapon.scale}}
-                            <option value="traveller">Traveller</option>
-                            <option value="vehicle">Vehicle</option>
-                            <option value="spacecraft">Spacecraft</option>
-                            {{/select}}
+                            {{selectOptions weaponScale selected=system.weapon.scale}}
                         </select>
                     </div>
 
@@ -75,15 +71,7 @@
                     {{#if (ifEquals system.weapon.scale "spacecraft")}}
                         <label for="system.weapon.spaceRange" class="resource-label">{{localize "MGT2.Item.RangeSpace"}}</label>
                         <select class="expand writable" name="system.weapon.spaceRange" title="Range of spacecraft weapon">
-                            {{#select system.weapon.spaceRange}}
-                            <option value="adjacent">{{localize "MGT2.Item.SpaceRange.adjacent"}}</option>
-                            <option value="close">{{localize "MGT2.Item.SpaceRange.close"}}</option>
-                            <option value="short">{{localize "MGT2.Item.SpaceRange.short"}}</option>
-                            <option value="medium">{{localize "MGT2.Item.SpaceRange.medium"}}</option>
-                            <option value="long">{{localize "MGT2.Item.SpaceRange.long"}}</option>
-                            <option value="verylong">{{localize "MGT2.Item.SpaceRange.verylong"}}</option>
-                            <option value="distant">{{localize "MGT2.Item.SpaceRange.distant"}}</option>
-                            {{/select}}
+                            {{selectOptions weaponSpaceRange selected=system.weapon.spaceRange}}
                         </select>
                     {{else if (ifEquals system.weapon.scale "vehicle")}}
                         <label class="resource-label">{{localize "MGT2.Item.RangeKM"}}</label>
@@ -114,15 +102,7 @@
                         <div class="resource">
                             <label for="system.weapon.mount" class="resource-label">{{localize "MGT2.Item.Mount"}}</label>
                             <select class="expand writable" name="system.weapon.mount" title="Mounting">
-                                {{#select system.weapon.mount}}
-                                <option value="fixed">{{localize "MGT2.Item.SpaceMount.Fixed"}}</option>
-                                <option value="turret">{{localize "MGT2.Item.SpaceMount.Turret"}}</option>
-                                <option value="barbette">{{localize "MGT2.Item.SpaceMount.Barbette"}}</option>
-                                <option value="bay.small">{{localize "MGT2.Item.SpaceMount.BaySmall"}}</option>
-                                <option value="bay.medium">{{localize "MGT2.Item.SpaceMount.BayMedium"}}</option>
-                                <option value="bay.large">{{localize "MGT2.Item.SpaceMount.BayLarge"}}</option>
-                                <option value="spinal">{{localize "MGT2.Item.SpaceMount.Spinal"}}</option>
-                                {{/select}}
+                                {{selectOptions weaponSpaceMount selected=system.weapon.mount}}
                             </select>
                         </div>
 
@@ -140,40 +120,19 @@
                     <div class="resource">
                         <label for="system.weapon.characteristic" class="resource-label">Characteristic</label><br/>
                         <select class="writable" name="system.weapon.characteristic">
-                            {{#select system.weapon.characteristic}}
-                            <option value="STR">STR</option>
-                            <option value="DEX">DEX</option>
-                            <option value="INT">INT</option>
-                            {{/select}}
+                            {{selectOptions weaponCha selected=system.weapon.characteristic}}
                         </select>
                     </div>
                     <div class="resource grid-span-2">
                         <label for="system.weapon.skill" class="resource-label">Skill</label><br/>
                         <select class="writable" name="system.weapon.skill">
-                            {{#select system.weapon.skill}}
-                            <option value="-">None</option>
-                            {{#each skills as |skill id|}}
-                                {{#if skill.combat}}
-                                    <option value="{{id}}">{{localize (concat "MGT2.Skills." id)}}</option>
-                                {{/if}}
-                                {{#if skill.specialities}}
-                                    {{#each skill.specialities as |spec sid|}}
-                                        {{#if spec.combat}}
-                                            <option value="{{id}}.{{sid}}">{{localize (concat "MGT2.Skills." id)}} ({{localize (concat "MGT2.Skills." sid)}})</option>
-                                        {{/if}}
-                                    {{/each}}
-                                {{/if}}
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions combatSkills selected=system.weapon.skill}}
                         </select>
                     </div>
                     <div class="resource">
                         <label for="system.weapon.damageBonus" class="resource-label">Damage DM</label><br/>
                         <select class="writable" name="system.weapon.damageBonus">
-                            {{#select system.weapon.damageBonus}}
-                                <option value="">-</option>
-                                <option value="STR">STR</option>
-                            {{/select}}
+                            {{selectOptions weaponDamageBonus selected=system.weapon.damageBonus}}
                         </select>
                     </div>
 
