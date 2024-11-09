@@ -1108,6 +1108,11 @@ div.skill-augment-text {
     width: 160px;
 }
 
+.item-sheet img.item-status {
+    border: none;
+    cursor: pointer;
+}
+
 img.item-img {
     width: 140px;
     height: 140px;

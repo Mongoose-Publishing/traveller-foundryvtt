@@ -340,56 +340,7 @@
                     </div>
 
                     <div class="tab items" data-tab="computer">
-                        <div class="grid grid-6col">
-                            <div class="resource flex-group-center">
-                                <label class="field-label">{{localize 'MGT2.Spacecraft.Computer.Primary'}}</label>
-                                <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.tl">
-                                    {{selectOptions selectShipTL selected=system.spacecraft.computer.tl}}
-                                </select>
-                            </div>
-
-                            <div class="resource flex-group-center">
-                                <label class="field-label">{{localize 'MGT2.Spacecraft.Computer.Nodes'}}</label>
-                                <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.nodes">
-                                    {{selectOptions selectComputerNodes selected=system.spacecraft.computer.nodes}}
-                                </select>
-                            </div>
-
-                            <div class="resource flex-group-center">
-                                <label class="field-label">{{localize 'MGT2.TravellerSheet.Processing'}}</label>
-                                <input class="field-value" type="text" value="{{system.spacecraft.computer.processing}}" readonly/>
-                            </div>
-
-                            <div class="resource flex-group-center">
-                                <label class="field-label">{{localize 'MGT2.TravellerSheet.ComputerCore'}}</label>
-                                <input type="checkbox" name="system.spacecraft.computer.core" {{checked system.spacecraft.computer.core}} data-dtype="Boolean" />
-                                <label for="system.spacecraft.computer.core" class="resource-label"/>
-                            </div>
-                            <div class="resource flex-group-center">
-                                <label class="field-label">{{localize 'MGT2.TravellerSheet.bis'}}</label>
-                                <input type="checkbox" name="system.spacecraft.computer.bis" {{checked system.spacecraft.computer.bis}} data-dtype="Boolean" />
-                                <label for="system.spacecraft.computer.bis" class="resource-label"/>
-                            </div>
-                            <div class="resource flex-group-center">
-                                <label class="field-label">{{localize 'MGT2.TravellerSheet.fib'}}</label>
-                                <input type="checkbox" name="system.spacecraft.computer.fib" {{checked system.spacecraft.computer.fib}} data-dtype="Boolean" />
-                                <label for="system.spacecraft.computer.fib" class="resource-label"/>
-                            </div>
-                            <div class="resource flex-group-center">
-                                <label class="field-label">{{localize 'MGT2.Spacecraft.Computer.Backup'}}</label>
-                                <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.backup">
-                                    {{selectOptions selectShipTL selected=system.spacecraft.computer.backup}}
-                                </select>
-                            </div>
-                            <div class="resource flex-group-center">
-                                <label class="field-label">{{localize 'MGT2.Spacecraft.Computer.Nodes'}}</label>
-                                <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.backupNodes">
-                                    {{selectOptions selectComputerNodes selected=system.spacecraft.computer.backupNodes}}
-                                </select>
-                            </div>
-                        </div>
-
-                        <h2>Installed Software ({{bandwidthUsed}} / {{system.spacecraft.computer.processing}})</h2>
+                        <h2>Installed Software ({{bandwidthUsed}} / {{system.spacecraft.processing}})</h2>
                         <ol class="items-list actor-items grid grid-3col">
                             {{#each software as |item id|}}
                             <li class="item item-gear ship-software" data-item-id="{{item._id}}">

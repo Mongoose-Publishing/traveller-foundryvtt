@@ -2,6 +2,7 @@ import {onManageActiveEffect} from "../helpers/effects.mjs";
 import {rollAttack, hasTrait, getTraitValue, toFloat} from "../helpers/dice-rolls.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 import { MGT2 } from "../helpers/config.mjs";
+import {MgT2Item} from "../documents/item.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -342,6 +343,16 @@ export class MgT2ItemSheet extends ItemSheet {
             return;
         }
 
+        if (!item.system.status) {
+            switch (item.system.hardware.system) {
+                case "power": case "j-drive": case "m-drive":
+                case "r-drive":case "computer": case "weapon":
+                    item.system.status = MgT2Item.ACTIVE;
+                    item.update({"system.status": item.system.status });
+                    break;
+            }
+        }
+
         // We only do this if the item is part of an existing ship.
         let shipTons = ship.system.spacecraft.dtons;
 
@@ -534,6 +545,10 @@ export class MgT2ItemSheet extends ItemSheet {
 
             this.item.update({"system.armour.otherTypes": otherTypes.trim()});
 
+        });
+
+        html.find(".item-status").click(ev => {
+           this.item.statusClick();
         });
 
         if (this.item.type === "weapon") {

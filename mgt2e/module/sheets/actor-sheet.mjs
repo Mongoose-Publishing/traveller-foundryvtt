@@ -322,6 +322,7 @@ export class MgT2ActorSheet extends ActorSheet {
         const software = [];
         const shipWeapons = [];
         const departments = [];
+        let bandwidthTotal = 0;
         let bandwidthUsed = 0;
         let cargoUsed = 0;
         let dtonsUsed = 0;
@@ -376,13 +377,19 @@ export class MgT2ActorSheet extends ActorSheet {
                 let t = parseFloat(h.tons);
                 let rating = parseInt(h.rating);
 
-                if (h.system === "power") {
-                    powerTotal += parseFloat(h.powerPerTon) * t;
-                } else {
-                    if (parseFloat(h.power) > 0) {
-                        powerUsed += parseFloat(h.power);
-                    } else if (parseFloat(h.powerPerTon) > 0) {
-                        powerUsed += parseFloat(h.powerPerTon) * t;
+                // Calculate power if active.
+                if (i.system.status === MgT2Item.ACTIVE) {
+                    if (h.system === "power") {
+                        powerTotal += parseFloat(h.powerPerTon) * t;
+                    } else {
+                        if (parseFloat(h.power) > 0) {
+                            powerUsed += parseFloat(h.power);
+                        } else if (parseFloat(h.powerPerTon) > 0) {
+                            powerUsed += parseFloat(h.powerPerTon) * t;
+                        }
+                    }
+                    if  (h.system === "computer") {
+                        bandwidthTotal += h.rating;
                     }
                 }
 
@@ -415,15 +422,16 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
                 dtonsUsed += t * i.system.quantity;
 
-                if (h.system === "j-drive") {
+                if (h.system === "j-drive" && i.system.status === MgT2Item.ACTIVE) {
                     jdrive = Math.max(jdrive, parseInt(h.rating));
                 }
-                if (h.system === "m-drive") {
+                if (h.system === "m-drive" && i.system.status === MgT2Item.ACTIVE) {
                     mdrive = Math.max(mdrive, parseInt(h.rating));
                 }
-                if (h.system === "r-drive") {
+                if (h.system === "r-drive" && i.system.status === MgT2Item.ACTIVE) {
                     rdrive = Math.max(rdrive, parseInt(h.rating));
                 }
+                console.log(h);
             } else if (i.type === "weapon" && i.system.weapon.scale === "spacecraft") {
                 shipWeapons.push(i);
             } else {
@@ -446,6 +454,11 @@ export class MgT2ActorSheet extends ActorSheet {
 
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;
+
+        if (bandwidthTotal != actorData.spacecraft.processing) {
+            actorData.spacecraft.processing = bandwidthTotal;
+            context.actor.update({"system.spacecraft.processing": bandwidthTotal});
+        }
 
         if (jdrive !== actorData.spacecraft.jdrive) {
             actorData.spacecraft.jdrive = jdrive;
@@ -2025,7 +2038,7 @@ export class MgT2ActorSheet extends ActorSheet {
             system.hardware.tonnage.cost = 0.2;
         } else if (systemType === "fuel") {
             itemName = "Fuel Tanks";
-            img = "systems/mgt2e/icons/hardware/fuel-tank.svg";
+            img = "systems/mgt2e/icons/hardware/fuel_tank.svg";
             system.tl = 9;
             system.hardware.rating = 10;
         } else if (systemType === "cargo") {

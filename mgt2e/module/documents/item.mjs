@@ -11,6 +11,11 @@ export class MgT2Item extends Item {
     static EQUIPPED = "equipped";
     static CARRIED = "carried";
     static OWNED = "owned";
+    static ACTIVE = "ACTIVE";
+    static INACTIVE = "INACTIVE";
+    static DAMAGED = "DAMAGED";
+    static DESTROYED = "DESTROYED";
+    static RUNNING = "RUNNING";
 
     /**
      * Augment the basic Item data model with additional dynamic data.
@@ -220,5 +225,16 @@ export class MgT2Item extends Item {
             }
         }
         return 0;
+    }
+
+    statusClick() {
+        if (this.type === "hardware") {
+            if (this.system.status === MgT2Item.ACTIVE) {
+                this.system.status = MgT2Item.INACTIVE;
+            } else if (this.system.status === MgT2Item.INACTIVE) {
+                this.system.status = MgT2Item.ACTIVE;
+            }
+            this.update({"system.status": this.system.status});
+        }
     }
 }
