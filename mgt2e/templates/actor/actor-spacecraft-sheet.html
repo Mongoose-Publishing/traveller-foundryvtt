@@ -343,8 +343,8 @@
                         <h2>Installed Software ({{bandwidthUsed}} / {{system.spacecraft.processing}})</h2>
                         <ol class="items-list actor-items grid grid-3col">
                             {{#each software as |item id|}}
-                            <li class="item item-gear ship-software" data-item-id="{{item._id}}">
-                                <h4>{{item.name}}</h4>
+                            <li class="item item-gear ship-software sw-status-{{item.system.status}}" data-item-id="{{item._id}}">
+                                <h4>{{item.name}} [{{item.system.software.bandwidth}}]</h4>
                                 <img src="{{item.img}}" class="small"/>
                                 <div class="item-controls">
                                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

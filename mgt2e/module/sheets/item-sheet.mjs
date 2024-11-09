@@ -74,6 +74,16 @@ export class MgT2ItemSheet extends ItemSheet {
             context.skills = MGT2.SKILLS;
         }
 
+        if (context.item.type === "software") {
+            if (context.item.parent && !context.item.system.status) {
+                context.item.system.status = MgT2Item.RUNNING;
+                context.item.update({"system.status": context.item.system.status });
+            } else if (!context.item.parent && context.item.system.status) {
+                context.item.system.status = null;
+                context.item.update({"system.status": context.item.system.status });
+            }
+        }
+
         if (context.item.type === "hardware") {
             context.SHIP_TL = {};
             let maxTL = 25;
