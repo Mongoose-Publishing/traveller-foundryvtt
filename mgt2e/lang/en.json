@@ -428,6 +428,22 @@
   "MGT2.Spacecraft.Configuration.planetoid": "Planetoid",
   "MGT2.Spacecraft.Configuration.buffered": "Buffered Planetoid",
 
+  "MGT2.Spacecraft.Computer.Primary": "Primary",
+  "MGT2.Spacecraft.Computer.Backup": "Backup",
+  "MGT2.Spacecraft.Computer.Nodes": "Nodes",
+
+  "MGT2.Spacecraft.System.general": "General",
+  "MGT2.Spacecraft.System.j-drive": "J-Drive",
+  "MGT2.Spacecraft.System.m-drive": "M-Drive",
+  "MGT2.Spacecraft.System.r-drive": "R-Drive",
+  "MGT2.Spacecraft.System.power": "Power",
+  "MGT2.Spacecraft.System.fuel": "Fuel",
+  "MGT2.Spacecraft.System.weapon": "Weapon",
+  "MGT2.Spacecraft.System.armour": "Armour",
+  "MGT2.Spacecraft.System.computer": "Computer",
+  "MGT2.Spacecraft.System.cargo": "Cargo Hold",
+  "MGT2.Spacecraft.System.dock": "Docking Bay",
+
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",
   "MGT2.Damage.Unconscious": "{name} is unconscious.",

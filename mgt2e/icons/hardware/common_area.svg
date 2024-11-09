@@ -63,17 +63,17 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.3078713"
-     inkscape:cx="44.346871"
+     inkscape:cx="127.3061"
      inkscape:cy="275.25644"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="true"
      units="px"
-     inkscape:window-width="1487"
+     inkscape:window-width="1200"
      inkscape:window-height="842"
-     inkscape:window-x="1157"
-     inkscape:window-y="353"
+     inkscape:window-x="1200"
+     inkscape:window-y="357"
      inkscape:window-maximized="0"
      inkscape:snap-grids="true"
      inkscape:pagecheckerboard="0"
@@ -247,12 +247,14 @@
     </g>
     <g
        id="g161"
-       transform="translate(33.337497,29.104164)">
+       transform="translate(33.337497,29.104164)"
+       style="fill:#ffc02a;fill-opacity:1">
       <g
          inkscape:label="Desk"
-         id="layer1-5">
+         id="layer1-5"
+         style="fill:#ffc02a;fill-opacity:1">
         <rect
-           style="fill:#ff0000;fill-opacity:0.993682;stroke:#000000;stroke-width:2.38125;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999962;stop-color:#000000"
+           style="fill:#ffc02a;fill-opacity:1;stroke:#000000;stroke-width:2.38125;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999962;stop-color:#000000"
            id="rect214"
            width="47.625"
            height="47.625"
@@ -261,7 +263,7 @@
            rx="29.633333"
            ry="29.633333" />
         <rect
-           style="mix-blend-mode:normal;fill:#ff0000;fill-opacity:0.993682;stroke:none;stroke-width:1.2884;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999962;filter:url(#filter828);stop-color:#000000"
+           style="mix-blend-mode:normal;fill:#ffc02a;fill-opacity:1;stroke:none;stroke-width:1.2884;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.999962;filter:url(#filter828);stop-color:#000000"
            id="rect1369"
            width="59.266666"
            height="59.266666"
@@ -273,7 +275,8 @@
       </g>
       <g
          id="layer2-6"
-         inkscape:label="Display" />
+         inkscape:label="Display"
+         style="fill:#ffc02a;fill-opacity:1" />
     </g>
   </g>
   <g

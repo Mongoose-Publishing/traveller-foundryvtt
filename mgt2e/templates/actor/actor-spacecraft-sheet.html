@@ -228,7 +228,7 @@
 
 
                     <div class="tab items" data-tab="hardware">
-                        <div class="grid grid-3col">
+                        <div class="grid grid-4col">
                             <div class="resource flex-group-center">
                                 <label class="field-label">{{localize 'MGT2.TravellerSheet.DTons'}}</label>
                                 <input class="field-value" type="text" value="{{system.spacecraft.dtons}}dt" readonly/>
@@ -241,6 +241,13 @@
                             <div class="resource flex-group-center">
                                 <label class="field-label">{{localize 'MGT2.TravellerSheet.DTonsRemaining'}}</label>
                                 <input class="field-value" type="text" value="{{dtonsRemaining}}dt" readonly/>
+                            </div>
+
+                            <div class="resource flex-group-center">
+                                <label class="field-label">Add Hardware</label>
+                                <select class="addHardwareSelect">
+                                    {{selectOptions selectSystemTypes}}
+                                </select>
                             </div>
                         </div>
 
@@ -333,11 +340,18 @@
                     </div>
 
                     <div class="tab items" data-tab="computer">
-                        <div class="grid grid-5col">
+                        <div class="grid grid-6col">
                             <div class="resource flex-group-center">
-                                <label class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+                                <label class="field-label">{{localize 'MGT2.Spacecraft.Computer.Primary'}}</label>
                                 <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.tl">
                                     {{selectOptions selectShipTL selected=system.spacecraft.computer.tl}}
+                                </select>
+                            </div>
+
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.Spacecraft.Computer.Nodes'}}</label>
+                                <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.nodes">
+                                    {{selectOptions selectComputerNodes selected=system.spacecraft.computer.nodes}}
                                 </select>
                             </div>
 
@@ -360,6 +374,18 @@
                                 <label class="field-label">{{localize 'MGT2.TravellerSheet.fib'}}</label>
                                 <input type="checkbox" name="system.spacecraft.computer.fib" {{checked system.spacecraft.computer.fib}} data-dtype="Boolean" />
                                 <label for="system.spacecraft.computer.fib" class="resource-label"/>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.Spacecraft.Computer.Backup'}}</label>
+                                <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.backup">
+                                    {{selectOptions selectShipTL selected=system.spacecraft.computer.backup}}
+                                </select>
+                            </div>
+                            <div class="resource flex-group-center">
+                                <label class="field-label">{{localize 'MGT2.Spacecraft.Computer.Nodes'}}</label>
+                                <select class="configurationType writable" style="width:100%" name="system.spacecraft.computer.backupNodes">
+                                    {{selectOptions selectComputerNodes selected=system.spacecraft.computer.backupNodes}}
+                                </select>
                             </div>
                         </div>
 

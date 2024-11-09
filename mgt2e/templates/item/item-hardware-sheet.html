@@ -40,23 +40,16 @@
                 </div>
                 <div class="resource">
                     <label for="system.tl" class="resource-label">TL</label>
-                    <input type="text" name="system.tl" value="{{system.tl}}" data-dtype="Number"/>
+                    <br/>
+                    <select class="hardwareTL" name="system.tl">
+                        {{selectOptions SHIP_TL selected=system.tl}}
+                    </select>
+                    <!-- <input type="text" name="system.tl" value="{{system.tl}}" data-dtype="Number"/> -->
                 </div>
                 <div class="resource">
                     <label for="system.hardware.system" class="resource-label">System</label>
                     <select class="hardwareSystemType" name="system.hardware.system">
-                      {{#select system.hardware.system}}
-                      <option value="general">General</option>
-                      <option value="j-drive">Jump</option>
-                      <option value="m-drive">M-Drive</option>
-                      <option value="r-drive">R-Drive</option>
-                      <option value="power">Power</option>
-                      <option value="fuel">Fuel</option>
-                      <option value="weapon">Weapon</option>
-                      <option value="armour">Armour</option>
-                      <option value="cargo">Cargo</option>
-                      <option value="dock">Dock</option>
-                      {{/select}}
+                      {{selectOptions selectSystemTypes selected=system.hardware.system}}
                     </select>
                 </div>
                 <div class="resource">
@@ -76,6 +69,8 @@
                       <label class="resource-label">Cargo (t)</label>
                     {{else if (ifEquals system.hardware.system "weapon")}}
                       <label class="resource-label">Mount</label>
+                    {{else if (ifEquals system.hardware.system "computer")}}
+                        <label class="resource-label">Bandwidth</label>
                     {{else}}
                       <label class="resource-label">Rating</label>
                     {{/if}}
@@ -124,6 +119,24 @@
 
         {{#if (ifEquals system.hardware.system "fuel")}}
         {{else if (ifEquals system.hardware.system "cargo")}}
+        {{else if (ifEquals system.hardware.system "computer")}}
+        <div class="shadow grid grid-4col">
+            <div class="resource flex-group-center">
+                <label class="resource-label">{{localize 'MGT2.TravellerSheet.ComputerCore'}}</label>
+                <input type="checkbox" name="system.hardware.isComputerCore" {{checked system.hardware.isComputerCore}} data-dtype="Boolean" />
+                <label for="system.hardware.isComputerCore" class="resource-label"/>
+            </div>
+            <div class="resource flex-group-center">
+                <label class="resource-label">{{localize 'MGT2.TravellerSheet.bis'}}</label>
+                <input type="checkbox" name="system.hardware.isComputerBis" {{checked system.hardware.isComputerBis}} data-dtype="Boolean" />
+                <label for="system.hardware.isComputerBis" class="resource-label"/>
+            </div>
+            <div class="resource flex-group-center">
+                <label class="resource-label">{{localize 'MGT2.TravellerSheet.fib'}}</label>
+                <input type="checkbox" name="system.hardware.isComputerFib" {{checked system.hardware.isComputerFib}} data-dtype="Boolean" />
+                <label for="system.hardware.isComputerFib" class="resource-label"/>
+            </div>
+        </div>
         {{else if (ifEquals system.hardware.system "weapon")}}
             <div class="shadow">
                 {{#if activeWeapons}}

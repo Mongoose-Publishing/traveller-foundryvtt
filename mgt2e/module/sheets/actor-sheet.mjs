@@ -183,6 +183,24 @@ export class MgT2ActorSheet extends ActorSheet {
             for (let c in CONFIG.MGT2.SHIP_CONFIGURATION) {
                 context.selectShipConfig[c] = game.i18n.localize("MGT2.Spacecraft.Configuration." + c);
             }
+            context.selectComputerNodes = {};
+            for (let i=0; i < 10; i++) {
+                context.selectComputerNodes[i] = "x"+i;
+            }
+            context.selectSystemTypes = {
+                "": "",
+                "general": game.i18n.localize("MGT2.Spacecraft.System.general"),
+                "j-drive": game.i18n.localize("MGT2.Spacecraft.System.j-drive"),
+                "m-drive": game.i18n.localize("MGT2.Spacecraft.System.m-drive"),
+                "r-drive": game.i18n.localize("MGT2.Spacecraft.System.r-drive"),
+                "power": game.i18n.localize("MGT2.Spacecraft.System.power"),
+                "fuel": game.i18n.localize("MGT2.Spacecraft.System.fuel"),
+                "weapon": game.i18n.localize("MGT2.Spacecraft.System.weapon"),
+                "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
+                "computer": game.i18n.localize("MGT2.Spacecraft.System.computer"),
+                "cargo": game.i18n.localize("MGT2.Spacecraft.System.cargo"),
+                "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
+            };
         } else if (type === "vehicle") {
             context.selectVehicleTL = {};
             for (let tl = 0; tl <= 17; tl++) {
@@ -870,6 +888,11 @@ export class MgT2ActorSheet extends ActorSheet {
            const roleId = div.data("roleId");
            const actionId = div.data("actionId");
            this._runCrewAction(this.actor, actorId, roleId, actionId);
+        });
+
+        html.find('.addHardwareSelect').click(ev => {
+            const value = $(ev.currentTarget).val();
+            this._createHardware(value);
         });
 
         // Events that only apply to creatures.
@@ -1940,6 +1963,94 @@ export class MgT2ActorSheet extends ActorSheet {
 
         // Finally, create the item!
         return await Item.create(itemData, {parent: this.actor});
+    }
+
+    _createHardware(systemType) {
+        let system = {
+            "tl": 12, "weight": 0, "cost": 0, "notes": "",
+            "active": true, "quantity": 1, "status": null,
+            "hardware": {
+                "system": systemType,
+                "tons": 0,
+                "power": 0,
+                "rating": 0,
+                "tonnage": {
+                    "tons": 0, "percent": 0, "cost": 0, "minimum": 0
+                },
+                "powerPerTon": 0,
+                "mount": "turret",
+                "advantages": "",
+                "weapons": {}
+            }
+        };
+
+        let itemName = "Hardware";
+        let img = null;
+        if (systemType === "j-drive") {
+            itemName = "J-Drive";
+            img = "systems/mgt2e/icons/hardware/j-drive.svg";
+            system.tl = 9;
+            system.hardware.rating = 1;
+            system.hardware.tonnage.tons = 5;
+            system.hardware.tonnage.percent = 2.5;
+            system.hardware.tonnage.minimum = 10;
+            system.hardware.tonnage.cost = 1.5;
+        } else if (systemType === "m-drive") {
+            itemName = "M-Drive";
+            img = "systems/mgt2e/icons/hardware/m-drive.svg";
+            system.tl = 9;
+            system.hardware.rating = 1;
+            system.hardware.tonnage.percent = 1;
+            system.hardware.tonnage.cost = 2;
+        } else if (systemType === "r-drive") {
+            itemName = "R-Drive";
+            img = "systems/mgt2e/icons/hardware/r-drive.svg";
+            system.tl = 7;
+            system.hardware.rating = 1;
+            system.hardware.tonnage.percent = 2;
+            system.hardware.tonnage.cost = 0.2;
+        } else if (systemType === "power") {
+            itemName = "Fusion Reactor (TL8)";
+            img = "systems/mgt2e/icons/hardware/fusion_reactor.svg";
+            system.tl = 8;
+            system.hardware.rating = 40;
+            system.hardware.tonnage.cost = 0.5;
+            system.hardware.powerPerTon = 10;
+        } else if (systemType === "armour") {
+            itemName = "Crystaliron Armour";
+            img = "systems/mgt2e/icons/hardware/armour_crystaliron.svg";
+            system.tl = 10;
+            system.hardware.rating = 2;
+            system.hardware.tonnage.percent = 1.25;
+            system.hardware.tonnage.cost = 0.2;
+        } else if (systemType === "fuel") {
+            itemName = "Fuel Tanks";
+            img = "systems/mgt2e/icons/hardware/fuel-tank.svg";
+            system.tl = 9;
+            system.hardware.rating = 10;
+        } else if (systemType === "cargo") {
+            itemName = "Cargo Hold";
+            img = "systems/mgt2e/icons/hardware/cargo_hold.svg";
+            system.tl = 9;
+            system.hardware.rating = 10;
+        } else if (systemType === "weapon") {
+            itemName = "Turret";
+            img = "systems/mgt2e/icons/hardware/turret.svg";
+            system.tl = 9;
+            system.hardware.tonnage.tons = 1;
+        } else if (systemType === "computer") {
+            itemName = "Computer";
+            img = "systems/mgt2e/icons/hardware/computer.svg";
+            system.tl = this.actor.system.spacecraft.tl;
+        }
+
+        const itemData = {
+            "name": itemName,
+            "img": img,
+            "type": "hardware",
+            "system": system
+        };
+        Item.create(itemData, { parent: this.actor } );
     }
 
     async _setAssociate(associate) {

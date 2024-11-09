@@ -73,6 +73,31 @@ export class MgT2ItemSheet extends ItemSheet {
             context.skills = MGT2.SKILLS;
         }
 
+        if (context.item.type === "hardware") {
+            context.SHIP_TL = {};
+            let maxTL = 25;
+            if (context.item.parent && context.item.parent.type === "spacecraft") {
+                maxTL = Math.max(context.item.parent.system.spacecraft.tl, 7);
+            }
+            for (let tl = 6; tl <= maxTL; tl++) {
+                context.SHIP_TL[tl] = tl;
+            }
+            context.selectSystemTypes = {
+                "general": game.i18n.localize("MGT2.Spacecraft.System.general"),
+                "j-drive": game.i18n.localize("MGT2.Spacecraft.System.j-drive"),
+                "m-drive": game.i18n.localize("MGT2.Spacecraft.System.m-drive"),
+                "r-drive": game.i18n.localize("MGT2.Spacecraft.System.r-drive"),
+                "power": game.i18n.localize("MGT2.Spacecraft.System.power"),
+                "fuel": game.i18n.localize("MGT2.Spacecraft.System.fuel"),
+                "weapon": game.i18n.localize("MGT2.Spacecraft.System.weapon"),
+                "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
+                "computer": game.i18n.localize("MGT2.Spacecraft.System.computer"),
+                "cargo": game.i18n.localize("MGT2.Spacecraft.System.cargo"),
+                "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
+            };
+            this.calculateHardware(context, context.item);
+        }
+
         if (context.item.type === "hardware" && context.item.parent != null) {
             this.calculateShipHardware(context, context.item);
             if (MGT2.SPACECRAFT_ADVANTAGES[context.item.system.hardware.system]) {
@@ -80,7 +105,7 @@ export class MgT2ItemSheet extends ItemSheet {
                 context.ADVANCES = MGT2.SPACECRAFT_ADVANCES;
                 context.ADVANCES_LIST = {};
                 for (let a in context.ADVANCES) {
-                    context.ADVANCES_LIST[a] = game.i18n.format("MGT2.Spacecraft.Advances."+a);
+                    context.ADVANCES_LIST[a] = game.i18n.format("MGT2.Spacecraft.Advances." + a);
                 }
                 if (!context.item.system.hardware.advancement) {
                     context.item.system.hardware.advancement = "standard";
@@ -290,6 +315,24 @@ export class MgT2ItemSheet extends ItemSheet {
     }
 
     /* -------------------------------------------- */
+    calculateHardware(context, item) {
+        // This is run for all hardware, even if not part of a ship.
+        if (item.system.hardware.system === "computer") {
+            let tl = parseInt(item.system.tl);
+            let bw = 0;
+            if (tl > 6) {
+                tl = "" + Math.min(15, tl);
+                bw = MGT2.COMPUTERS.techLevel[tl].computer;
+                if (item.system.hardware.isComputerCore) {
+                    bw = MGT2.COMPUTERS.techLevel[tl].core;
+                }
+            }
+            if (bw !== parseInt(item.system.hardware.rating)) {
+                item.system.hardware.rating = bw;
+                item.update({"system.hardware.rating": bw});
+            }
+        }
+    }
 
     calculateShipHardware(context, item) {
         console.log("calculateShipHardware: " + item.name);
