@@ -1318,6 +1318,17 @@ Handlebars.registerHelper('hasStatus', function(actor) {
     return false;
 });
 
+Handlebars.registerHelper('itemHasStatus', function(item) {
+   const status = item.flags.mgt2e;
+   if (!status) return false;
+
+   if (status.damaged || status.destroyed) {
+       return true;
+   }
+
+   return false;
+});
+
 Handlebars.registerHelper('toHex', function(value) {
     console.log(value);
     return parseInt(value).toString(16).toUpperCase();
@@ -1371,6 +1382,26 @@ Handlebars.registerHelper('showStatus', function(actor, status) {
 
    return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
 });
+
+Handlebars.registerHelper('showItemStatus', function(item, status) {
+    let type = "statusWarn";
+    let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
+
+    console.log(item);
+
+    if (status === "damaged") {
+        label += ` <i class="fas fa-xmark damaged"> </i>`;
+        if (parseInt(item.getFlag("mgt2e", "damaged")) !== 0) {
+            label += ` (${item.getFlag("mgt2e", "damaged")})`;
+        }
+    } else if (status === "destroyed") {
+        label += ` <i class="fas fa-xmark statusDestroyed"> </i>`;
+        type = "statusBad";
+    }
+
+    return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
+});
+
 
 Handlebars.registerHelper('showCriticals', function(actor) {
   let html = "";

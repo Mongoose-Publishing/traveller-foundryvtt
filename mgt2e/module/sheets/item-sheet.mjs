@@ -104,7 +104,9 @@ export class MgT2ItemSheet extends ItemSheet {
                 "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
                 "computer": game.i18n.localize("MGT2.Spacecraft.System.computer"),
                 "cargo": game.i18n.localize("MGT2.Spacecraft.System.cargo"),
-                "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
+                "bridge": game.i18n.localize("MGT2.Spacecraft.System.bridge"),
+                "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
+                "sensor": game.i18n.localize("MGT2.Spacecraft.System.sensor"),
             };
             this.calculateHardware(context, context.item);
         }

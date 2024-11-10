@@ -75,6 +75,8 @@
                       <label class="resource-label">Mount</label>
                     {{else if (ifEquals system.hardware.system "computer")}}
                         <label class="resource-label">Bandwidth</label>
+                    {{else if (ifEquals system.hardware.system "stateroom")}}
+                        <label class="resource-label">Passengers</label>
                     {{else}}
                       <label class="resource-label">Rating</label>
                     {{/if}}
@@ -121,8 +123,18 @@
             </div>
         </div>
 
+        {{#if (itemHasStatus item)}}
+        <div class="shadow">
+            {{#if item.flags.mgt2e.damaged}}{{{showItemStatus item "damaged"}}}{{/if}}
+            {{#if item.flags.mgt2e.destroyed}}{{{showItemStatus item "destroyed"}}}{{/if}}
+        </div>
+        {{/if}}
+
         {{#if (ifEquals system.hardware.system "fuel")}}
         {{else if (ifEquals system.hardware.system "cargo")}}
+        {{else if (ifEquals system.hardware.system "bridge")}}
+        {{else if (ifEquals system.hardware.system "stateroom")}}
+        {{else if (ifEquals system.hardware.system "sensor")}}
         {{else if (ifEquals system.hardware.system "computer")}}
         <div class="shadow grid grid-4col">
             <div class="resource flex-group-center">

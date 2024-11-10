@@ -1318,6 +1318,14 @@ label.box-title {
     vertical-align: text-bottom;
 }
 
+.field-label-subtle {
+    font-weight: bold;
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    colour: black;
+}
+
 .statusWarn {
     display: inline-block;
     background-color: #D08040;

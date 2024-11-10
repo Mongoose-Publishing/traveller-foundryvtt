@@ -189,7 +189,8 @@ export class MgT2ActorSheet extends ActorSheet {
             }
             context.selectSystemTypes = {
                 "": "",
-                "general": game.i18n.localize("MGT2.Spacecraft.System.general"),
+                "bridge": game.i18n.localize("MGT2.Spacecraft.System.bridge"),
+                "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
                 "j-drive": game.i18n.localize("MGT2.Spacecraft.System.j-drive"),
                 "m-drive": game.i18n.localize("MGT2.Spacecraft.System.m-drive"),
                 "r-drive": game.i18n.localize("MGT2.Spacecraft.System.r-drive"),
@@ -2055,6 +2056,34 @@ export class MgT2ActorSheet extends ActorSheet {
             itemName = "Computer";
             img = "systems/mgt2e/icons/hardware/computer.svg";
             system.tl = this.actor.system.spacecraft.tl;
+        } else if (systemType === "bridge") {
+            itemName = "Bridge";
+            img = "systems/mgt2e/icons/hardware/bridge.svg";
+            system.hardware.system = "general";
+            if (this.actor.system.spacecraft.dtons <= 50) {
+                system.hardware.tonnage.tons = 5;
+            } else if (this.actor.system.spacecraft.dtons < 100) {
+                system.hardware.tonnage.tons = 6;
+            } else if (this.actor.system.spacecraft.dtons <= 200) {
+                system.hardware.tonnage.tons = 10;
+            } else if (this.actor.system.spacecraft.dtons <= 1000) {
+                system.hardware.tonnage.tons = 20;
+            } else if (this.actor.system.spacecraft.dtons <= 2000) {
+                system.hardware.tonnage.tons = 40;
+            } else if (this.actor.system.spacecraft.dtons <= 100000) {
+                system.hardware.tonnage.tons = 60;
+            } else {
+                system.hardware.tonnage.tons = 60 + parseInt(this.actor.system.spacecraft.dtons / 100000) * 20;
+            }
+        } else if (systemType === "stateroom") {
+            itemName = "Stateroom";
+            img = "systems/mgt2e/icons/hardware/stateroom.svg";
+            system.hardware.system = "general";
+            system.hardware.tonnage.tons = 4;
+            system.hardware.rating = 1;
+        } else {
+            // Unrecognised, so don't create anything.
+            return;
         }
 
         const itemData = {

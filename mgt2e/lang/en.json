@@ -261,6 +261,8 @@
   "MGT2.TravellerSheet.StatusLabel.zeroGravity": "Zero Gravity",
   "MGT2.TravellerSheet.StatusLabel.poisoned": "Poisoned",
   "MGT2.TravellerSheet.StatusLabel.diseased": "Diseased",
+  "MGT2.TravellerSheet.StatusLabel.damaged": "Damaged",
+  "MGT2.TravellerSheet.StatusLabel.destroyed": "Destroyed",
 
   "MGT2.TravellerSheet.DTons": "Tonnage",
   "MGT2.TravellerSheet.Power": "Power",
@@ -286,6 +288,7 @@
   "MGT2.TravellerSheet.CargoRemaining": "Remaining",
   "MGT2.TravellerSheet.DTonsUsed": "Used",
   "MGT2.TravellerSheet.DTonsRemaining": "Remaining",
+  "MGT2.TravellerSheet.AddHardware": "Add Hardware",
   "MGT2.TravellerSheet.Configuration": "Configuration",
   "MGT2.TravellerSheet.Fuel": "Fuel",
   "MGT2.TravellerSheet.CurrentFuel": "Current (dT)",
@@ -443,6 +446,9 @@
   "MGT2.Spacecraft.System.computer": "Computer",
   "MGT2.Spacecraft.System.cargo": "Cargo Hold",
   "MGT2.Spacecraft.System.dock": "Docking Bay",
+  "MGT2.Spacecraft.System.bridge": "Bridge",
+  "MGT2.Spacecraft.System.stateroom": "Stateroom",
+  "MGT2.Spacecraft.System.sensor": "Sensor",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",
