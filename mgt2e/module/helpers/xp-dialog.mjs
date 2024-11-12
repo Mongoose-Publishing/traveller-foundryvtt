@@ -1,3 +1,4 @@
+import { skillLabel } from "./dice-rolls.mjs";
 
 export class MgT2XPDialog extends Application {
     static get defaultOptions() {
@@ -27,6 +28,7 @@ export class MgT2XPDialog extends Application {
         this.cha = cha;
         this.bonus = 0;
         this.notes = "";
+        this.study = "";
         this.xp = 0;
         this.trained = false;
 
@@ -44,7 +46,9 @@ export class MgT2XPDialog extends Application {
             this.xp = parseInt(this.skill.xp?this.skill.xp:0);
             this.bonus = parseInt(this.skill.bonus?this.skill.bonus:0);
             this.notes = this.skill.notes?this.skill.notes:"";
+            this.study = this.skill.study?this.skill.study:"";
             this.boon = this.skill.boon;
+            this.options.title = skillLabel(this.skill, skill);
             if (this.skill.trained) {
                 this.value = this.skill.value;
                 this.trained = true;
@@ -57,15 +61,12 @@ export class MgT2XPDialog extends Application {
                     this.bonus = parseInt(this.spec.bonus?this.spec.bonus:0);
                     this.notes = this.spec.notes?this.spec.notes:"";
                     this.boon = this.spec.boon;
+                    this.options.title += " (" + skillLabel(this.spec, spec) + ")";
                 }
             }
-            this.options.title = this.skill.label;
         } else if (cha) {
             this.options.title = this.characteristic.label;
             this.value = this.characteristic.dm;
-        }
-        if (this.spec) {
-            this.options.title += " (" + this.spec.label + ")";
         }
         this.value = parseInt(this.value);
         this.cost = 1;
@@ -128,6 +129,7 @@ export class MgT2XPDialog extends Application {
         let xp = this.getIntValue(html, "skillXPxp");
         let bonus = this.getIntValue(html, "skillXPbonus");
         let notes = html.find("input.skillXPnotes")[0].value;
+        let study = html.find("input.skillXPstudy")[0].value;
         let boon = html.find("select.skillXPboon")[0].value;
         if (boon) {
             console.log("Boon is set to " + boon);
@@ -154,6 +156,9 @@ export class MgT2XPDialog extends Application {
             this.spec.xp = xp;
             this.spec.bonus = bonus;
             this.spec.notes = notes;
+            if (study) {
+                this.spec.study = study;
+            }
             if (boon) {
                 this.spec.boon = boon;
             } else {
@@ -167,6 +172,9 @@ export class MgT2XPDialog extends Application {
             this.skill.xp = xp;
             this.skill.bonus = bonus;
             this.skill.notes = notes;
+            if (study) {
+                this.skill.study = study;
+            }
             if (boon) {
                 this.actor.system.skills[this.skillId].boon = boon;
             } else {
