@@ -64,6 +64,11 @@ export class MgT2ItemSheet extends ItemSheet {
             context.techLevels[i] = i + " (" + game.i18n.localize(`MGT2.Item.Tech.${i}`) + ")";
         }
 
+        context.SELECT_PROCESSING = {};
+        for (let i=0; i < 6; i++) {
+            context.SELECT_PROCESSING[i] = `Computer/${i}`;
+        }
+
         context.characteristics = MGT2.CHARACTERISTICS;
 
         // If this belongs to an actor, the actor might have custom skills, so
@@ -491,6 +496,14 @@ export class MgT2ItemSheet extends ItemSheet {
             const d = $(ev.currentTarget).parents(".role-action");
             const id = d.data("actionId");
             this._deleteRollAction(this.item, id)
+        });
+
+        html.find(".embed-computer").click(ev => {
+           this.item.system.computer = {
+               "processing": 0,
+               "software": {}
+           }
+           this.item.update({"system.computer": this.item.system.computer });
         });
 
         html.find(".item-add-wpn").click(ev => {
