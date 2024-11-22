@@ -164,8 +164,9 @@ export class MgT2SkillDialog extends Application {
 
     async onSkillEdit(event, html) {
         event.preventDefault();
-
+        console.log("onSkillEdit:");
         new MgT2AddSkillDialog(this.actor, this.skillId, this.skill, this.specId, this.spec).render(true);
+        this.close();
     }
 
     async _updateObject(event, formData) {

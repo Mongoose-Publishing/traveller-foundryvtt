@@ -164,12 +164,19 @@ export class MgT2AddSkillDialog extends Application {
         console.log("onDeleteClick:");
 
         if (this.isEdit) {
-            console.log(this.actor.system.skills.explosives);
-            delete this.actor.system.skills.explosives;
-            console.log(this.actor.system.skills.explosives);
-            this.actor.update({ "system.skills": this.actor.system.skills });
-            this.actor.delete( "system.skills.explosives");
+            if (this.parent) {
+                if (Object.getOwnPropertyNames(this.actor.system.skills[this.parent].specialities).length === 1) {
+                    // If the final speciality is removed, then we need to remove the whole
+                    // structure, so that the parent skill is treated as a normal skill.
+                    this.actor.update({[`system.skills.${this.parent}.-=specialities`]: null});
+                } else {
+                    this.actor.update({[`system.skills.${this.parent}.specialities.-=${this.shortName}`]: null});
+                }
+            } else {
+                this.actor.update({[`system.skills.-=${this.shortName}`]: null});
+            }
             this.close();
+            return;
         }
 
     }
