@@ -77,8 +77,6 @@ export class MgT2AddSkillDialog extends Application {
     }
 
     getData() {
-        console.log("getData: Characteristic is " + this.cha);
-        console.log("getData: Type is " + this.actor.type);
         return {
             "actor": this.actor,
             "data": this.data,
@@ -122,7 +120,6 @@ export class MgT2AddSkillDialog extends Application {
 
     async onAddClick(event, html) {
         event.preventDefault();
-        console.log("onAddClick:");
 
         let label = html.find(".skillLabelField")[0].value;
         let shortname = html.find(".skillShortNameField")[0].value;
@@ -136,7 +133,17 @@ export class MgT2AddSkillDialog extends Application {
                 if (!this.data.skills[parent].specialities) {
                     this.data.skills[parent].specialities = {};
                 }
+                // Find a unique id for this speciality.
+                if (this.data.skills[parent].specialities[shortname]) {
+                    let idx = 1;
+                    while (this.data.skills[parent].specialities[shortname+"_"+idx]) {
+                        idx++;
+                    }
+                    shortname = shortname + "_" + idx;
+                }
+
                 let skill = {
+                    'id': shortname,
                     'label': label,
                     'combat': true,
                     'default': defaultCha,
@@ -149,7 +156,16 @@ export class MgT2AddSkillDialog extends Application {
                 console.log("Parent skill [" + parent + "] does not exist");
             }
         } else {
+            // Find a unique id for this skill.
+            if (this.data.skills[shortname]) {
+                let idx = 1;
+                while (this.data.skills[shortname+"_"+idx]) {
+                    idx++;
+                }
+                shortname = shortname + "_" + idx;
+            }
             let skill = {
+                'id': shortname,
                 'label': label,
                 'combat': combat,
                 'default': defaultCha,
