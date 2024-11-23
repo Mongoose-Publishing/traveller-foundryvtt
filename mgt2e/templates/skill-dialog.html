@@ -1,7 +1,9 @@
 <form class="flexcol skilldialog">
 
     <div class="shadow">
-        <span class="edit-skill">Edit</span>
+        {{#if showEdit}}
+            <span class="edit-skill">Edit</span>
+        {{/if}}
 
         <h3 class="skill-dialog-title">
             {{#if chaOnly}}

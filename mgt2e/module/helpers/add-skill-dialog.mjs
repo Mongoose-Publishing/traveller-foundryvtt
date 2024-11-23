@@ -104,6 +104,20 @@ export class MgT2AddSkillDialog extends Application {
         if (del) {
             del.on("click", event => this.onDeleteClick(event, html));
         }
+
+        if (!this.isEdit) {
+            html.find(".skillLabelField").on("keyup", event => this.onLabelChange(event, html));
+        }
+    }
+
+    onLabelChange(event, html) {
+        let label = html.find(".skillLabelField")[0].value;
+        let shortname = label.toLowerCase().trim();
+        shortname = shortname.replaceAll(/ /g, "_");
+        shortname = shortname.replaceAll(/[^a-z_]/g, "");
+
+        html.find(".skillShortNameField")[0].value = shortname;
+
     }
 
     async onAddClick(event, html) {
@@ -116,12 +130,6 @@ export class MgT2AddSkillDialog extends Application {
         let defaultCha = html.find(".skillDefaultSelect")[0].value;
         let combat = html.find(".skillCombatToggle")[0].value;
         let background = html.find(".skillBackgroundToggle")[0].value;
-
-        console.log(label);
-        console.log(parent);
-        console.log(defaultCha);
-        console.log(combat);
-        console.log(background);
 
         if (parent) {
             if (this.data.skills[parent]) {

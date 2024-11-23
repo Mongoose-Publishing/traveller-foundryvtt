@@ -1,4 +1,5 @@
 import { skillLabel } from "./dice-rolls.mjs";
+import {MgT2AddSkillDialog} from "./add-skill-dialog.mjs";
 
 export class MgT2XPDialog extends Application {
     static get defaultOptions() {
@@ -15,9 +16,6 @@ export class MgT2XPDialog extends Application {
         super();
         this.actor = actor;
         const data = actor.system;
-
-        console.log("xp-dialog:");
-        console.log(actor);
 
         this.skillId = skill;
         this.skill = null;
@@ -88,7 +86,8 @@ export class MgT2XPDialog extends Application {
             "xp": this.xp,
             "bonus": this.bonus,
             "notes": this.notes,
-            "boon": this.boon
+            "boon": this.boon,
+            "showEdit": !(this.actor.parent)
         }
     }
 
@@ -109,6 +108,13 @@ export class MgT2XPDialog extends Application {
            }
            // TODO: Need to update the dialog.
         });
+        html.find(".edit-skill").on("click", event => this.onSkillEdit(event, html));
+    }
+
+    async onSkillEdit(event, html) {
+        event.preventDefault();
+        new MgT2AddSkillDialog(this.actor, this.skillId, this.skill, this.specId, this.spec).render(true);
+        this.close();
     }
 
     getIntValue(html, fieldName) {
