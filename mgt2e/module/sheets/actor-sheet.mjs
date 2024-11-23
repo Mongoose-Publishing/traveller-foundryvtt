@@ -189,18 +189,18 @@ export class MgT2ActorSheet extends ActorSheet {
             }
             context.selectSystemTypes = {
                 "": "",
+                "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
                 "bridge": game.i18n.localize("MGT2.Spacecraft.System.bridge"),
-                "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
+                "cargo": game.i18n.localize("MGT2.Spacecraft.System.cargo"),
+                "computer": game.i18n.localize("MGT2.Spacecraft.System.computer"),
+                "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
+                "fuel": game.i18n.localize("MGT2.Spacecraft.System.fuel"),
                 "j-drive": game.i18n.localize("MGT2.Spacecraft.System.j-drive"),
                 "m-drive": game.i18n.localize("MGT2.Spacecraft.System.m-drive"),
                 "r-drive": game.i18n.localize("MGT2.Spacecraft.System.r-drive"),
                 "power": game.i18n.localize("MGT2.Spacecraft.System.power"),
-                "fuel": game.i18n.localize("MGT2.Spacecraft.System.fuel"),
-                "weapon": game.i18n.localize("MGT2.Spacecraft.System.weapon"),
-                "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
-                "computer": game.i18n.localize("MGT2.Spacecraft.System.computer"),
-                "cargo": game.i18n.localize("MGT2.Spacecraft.System.cargo"),
-                "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
+                "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
+                "weapon": game.i18n.localize("MGT2.Spacecraft.System.weapon")
             };
         } else if (type === "vehicle") {
             context.selectVehicleTL = {};
