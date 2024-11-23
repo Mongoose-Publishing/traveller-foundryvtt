@@ -7,6 +7,15 @@
 * Career terms aren't always added in the correct order.
 
 
+## v0.11.0 (Beta)
+
+* Definition of Computers on spacecraft has changed from a simple selectable value to using a Hardware component.
+* A 'study notes' section has been added to the XP dialog for each skill.
+* It is now possible to delete skills from a character sheet (but not a token).
+* Spacecraft hardware can now be activated and deactivated. Backed support for damaged hardware now added as well.
+* Spacecraft now have a drop down menu to add some basic core hardware options.
+* Increased default size of description field for items.
+
 ## v0.10.7 (Beta)
 
 * Added new traits for weapons: Dangerous, Shield, Protection, Smasher, Artillery, Silent, Fire etc
