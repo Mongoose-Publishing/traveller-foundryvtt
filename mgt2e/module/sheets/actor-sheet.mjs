@@ -648,7 +648,6 @@ export class MgT2ActorSheet extends ActorSheet {
         context.armour = armour;
         context.terms = terms;
         context.associates = associates;
-        console.log("END _prepareItems()");
     }
 
     _setItemStatus(actor, item, status) {
@@ -1557,7 +1556,13 @@ export class MgT2ActorSheet extends ActorSheet {
                 let skill = actor.system.skills[s];
                 let target = this.actor.system.skills[s];
                 let text = null;
-                if (skill && !target) {
+                if (skill.deleted) {
+                    // Remove skill from target character
+                    if (target) {
+                        await this.actor.update({[`system.skills.-=${s}`]: null});
+                        text = `-<b><i>${skillLabel(skill)}</i></b>`;
+                    }
+                } else if (skill && !target) {
                     target = this.actor.system.skills[s] = JSON.parse(
                         JSON.stringify(skill)
                     )
@@ -1568,7 +1573,20 @@ export class MgT2ActorSheet extends ActorSheet {
                     if (skill.specialities) {
                         for (let sp in skill.specialities) {
                             let spec = skill.specialities[sp];
-                            if (target.specialities[sp]) {
+                            if (spec.deleted) {
+                                if (target.specialities[sp]) {
+                                    if (Object.getOwnPropertyNames(skill.specialities).length === 1) {
+                                        // If the final speciality is removed, then we need to remove the whole
+                                        // structure, so that the parent skill is treated as a normal skill.
+                                        delete target.specialities;
+                                        await this.actor.update({[`system.skills.${s}.-=specialities`]: null});
+                                    } else {
+                                        delete target.specialities[sp];
+                                        await this.actor.update({[`system.skills.${s}.specialities.-=${sp}`]: null});
+                                    }
+                                }
+                                text = `-<b><i>${skillLabel(skill)} (${skillLabel(spec)})</i></b>`;
+                            } else if (target.specialities[sp]) {
                                 if (spec.trained) {
                                     target.specialities[sp].trained = true;
                                 }
@@ -1581,7 +1599,11 @@ export class MgT2ActorSheet extends ActorSheet {
                                     target.specialities[sp].bonus = spec.bonus;
                                 }
                             } else {
-                                target.specialities[sp] = spec;
+                                if (!target.specialities) {
+                                    this.actor.system.skills[s].specialities = {};
+                                }
+                                this.actor.system.skills[s].specialities[sp] = spec;
+                                await this.actor.update({ "system.skills": this.actor.system.skills});
                             }
                             if (spec.trained || spec.value > 0) {
                                 text = `${skillLabel(skill)} (${skillLabel(spec)}) ${spec.value}`;
@@ -1598,13 +1620,13 @@ export class MgT2ActorSheet extends ActorSheet {
                         text = `${skillLabel(skill)} ${skill.value}`;
                     }
                 }
-                if (skill.bonus !== 0) {
+                if (skill.bonus !== 0 && target) {
                     target.bonus = skill.bonus;
                 }
-                if (skill.notes && skill.notes !== "") {
+                if (skill.notes && skill.notes !== "" && target) {
                     target.notes = skill.notes;
                 }
-                if (skill.boon) {
+                if (skill.boon && target) {
                     target.boon = skill.boon;
                 }
                 if (text) {

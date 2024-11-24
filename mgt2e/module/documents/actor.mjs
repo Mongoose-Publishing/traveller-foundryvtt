@@ -224,7 +224,6 @@ export class MgT2Actor extends Actor {
      */
     _prepareTravellerData(actor) {
         if (actor.type !== 'traveller') return;
-        console.log(`_prepareTravellerData: ${actor.name}`);
 
         const sys = actor.system;
 

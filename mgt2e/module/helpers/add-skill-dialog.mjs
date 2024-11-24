@@ -50,6 +50,7 @@ export class MgT2AddSkillDialog extends Application {
         this.parentLabel = "";
         this.value = 0;
         this.trained = false;
+        this.isDeleted = false;
 
         if (spec) {
             this.label = spec.label;
@@ -60,6 +61,7 @@ export class MgT2AddSkillDialog extends Application {
             this.parentLabel = skill.label;
             console.log(this.parent);
             this.value = spec.value;
+            this.isDeleted = spec.deleted?true:false;
             if (spec.trained) {
                 this.trained = spec.trained;
             }
@@ -73,6 +75,7 @@ export class MgT2AddSkillDialog extends Application {
             this.icon = skill.icon;
             this.value = skill.value;
             this.trained = skill.trained;
+            this.isDeleted = skill.deleted?true:false;
         }
     }
 
@@ -88,6 +91,7 @@ export class MgT2AddSkillDialog extends Application {
             "individual": this.individual,
             "icon": this.icon,
             "isEdit": this.isEdit,
+            "isDeleted": this.isDeleted,
             "parent": this.parent,
             "parentLabel": this.parentLabel
         }
@@ -188,7 +192,24 @@ export class MgT2AddSkillDialog extends Application {
         console.log("onDeleteClick:");
 
         if (this.isEdit) {
-            if (this.parent) {
+            if (this.actor.type === "package") {
+                // Packages need to mark a skill as deleted, rather than deleting it.
+                if (this.parent) {
+                    if (this.actor.system.skills[this.parent].specialities[this.shortName].deleted) {
+                        this.actor.system.skills[this.parent].specialities[this.shortName].deleted = false;
+                    } else {
+                        this.actor.system.skills[this.parent].specialities[this.shortName].deleted = true;
+                    }
+                } else {
+                    if (this.actor.system.skills[this.shortName].deleted) {
+                        this.actor.system.skills[this.shortName].deleted = false;
+                    } else {
+                        this.actor.system.skills[this.shortName].deleted = true;
+                    }
+                }
+                console.log(this.actor.system.skills);
+                this.actor.update({ "system.skills": this.actor.system.skills });
+            } else if (this.parent) {
                 if (Object.getOwnPropertyNames(this.actor.system.skills[this.parent].specialities).length === 1) {
                     // If the final speciality is removed, then we need to remove the whole
                     // structure, so that the parent skill is treated as a normal skill.

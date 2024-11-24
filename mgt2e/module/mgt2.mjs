@@ -401,7 +401,6 @@ Hooks.on("createActor", (actor) => {
 });
 
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
-    console.log("**** Hooks.preUpdateActor:");
     if (data?.system?.damage) {
         // This is a Traveller with full damage by stat
         const damage = data.system.damage;
@@ -1085,6 +1084,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     let backgroundOnly = data.settings.onlyBackground;
     let untrainedLevel = data.skills["jackofalltrades"].value - 3;
     let isCreature = data.characteristics?false:true;
+    let isDeleted = false;
 
     // Don't show a skill if it requires a characteristic that
     // isn't being used by this actor.
@@ -1136,6 +1136,9 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     if (skill.trained) {
         showSpecs = true;
     }
+    if (skill.deleted) {
+        isDeleted = true;
+    }
     skill.value = parseInt(skill.value);
     if (isNaN(skill.value) || skill.value < 0) {
         skill.value = 0;
@@ -1178,7 +1181,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
         let hasXp = (skill.xp && skill.xp > 0);
         let label = skillLabel(skill);
         html += `<label for="system.skills.${skillId}.value" `;
-        html += `class="rollable ${skill.trained?"":"untrained"} ${augmented?"augmented":""}" `;
+        html += `class="rollable ${skill.trained?"":"untrained"} ${augmented?"augmented":""} ${isDeleted?"deleted":""}" `;
         html += `${dataRoll} ${dataSkill} data-label="${title}" title="${title}"`;
         html += `>${label}${hasXp?"<sup>+</sup>":""}</label>`;
 
@@ -1201,6 +1204,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                 }
                 if (showSpec) {
                     let augmented = false;
+                    let isDeleted = spec.deleted?true:false;
                     let title = spec.default?spec.default:skill.default;
                     if (skill.trained) {
                         title += " + " + skill.value;
@@ -1225,7 +1229,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                     }
                     let hasXp = (spec.xp && spec.xp > 0);
                     let label = skillLabel(spec);
-                    html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
+                    html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} ${isDeleted?"deleted":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
                     html += `data-spec="${sid}" title="${title}">${label}${hasXp?"<sup>+</sup>":""}</label>`;
                     if (skill.trained && (!skill.individual || spec.trained)) {
                         html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;

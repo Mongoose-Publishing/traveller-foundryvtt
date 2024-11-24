@@ -65,7 +65,7 @@
     <footer class="sheet-footer flexrow">
         <button type="submit" name="submit" class="addNewSkill">Save</button>
         {{#if isEdit}}
-            <button type="submit" name="submit" class="deleteSkill">Delete</button>
+            <button type="submit" name="submit" class="deleteSkill">{{#if isDeleted}}Undelete{{else}}Delete{{/if}}</button>
         {{/if}}
     </footer>
 
