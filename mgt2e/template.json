@@ -291,8 +291,7 @@
       },
       "software": {
         "software": {
-          "bandwidth": 0,
-          "active": false
+          "bandwidth": 0
         }
       },
       "term": {

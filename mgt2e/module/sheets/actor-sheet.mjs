@@ -369,7 +369,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             } else if (i.type === "software") {
                 software.push(i);
-                if (parseInt(i.system.software.bandwidth) > 0) {
+                if (parseInt(i.system.software.bandwidth) > 0 && i.system.status === MgT2Item.RUNNING) {
                     bandwidthUsed += parseInt(i.system.software.bandwidth);
                 }
             } else if (i.type === 'hardware') {
@@ -390,7 +390,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         }
                     }
                     if  (h.system === "computer") {
-                        bandwidthTotal += h.rating;
+                        bandwidthTotal += h.rating * parseInt(i.system.quantity);
                     }
                 }
 

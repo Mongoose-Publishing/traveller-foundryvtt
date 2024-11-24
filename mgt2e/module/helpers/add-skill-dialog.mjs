@@ -138,7 +138,7 @@ export class MgT2AddSkillDialog extends Application {
                     this.data.skills[parent].specialities = {};
                 }
                 // Find a unique id for this speciality.
-                if (this.data.skills[parent].specialities[shortname]) {
+                if (!this.isEdit && this.data.skills[parent].specialities[shortname]) {
                     let idx = 1;
                     while (this.data.skills[parent].specialities[shortname+"_"+idx]) {
                         idx++;
@@ -161,7 +161,7 @@ export class MgT2AddSkillDialog extends Application {
             }
         } else {
             // Find a unique id for this skill.
-            if (this.data.skills[shortname]) {
+            if (!this.isEdit && (this.data.skills[shortname])) {
                 let idx = 1;
                 while (this.data.skills[shortname+"_"+idx]) {
                     idx++;

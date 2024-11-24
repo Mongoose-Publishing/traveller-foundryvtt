@@ -86,6 +86,7 @@ export class MgT2XPDialog extends Application {
             "xp": this.xp,
             "bonus": this.bonus,
             "notes": this.notes,
+            "study": this.study,
             "boon": this.boon,
             "showEdit": !(this.actor.parent)
         }
