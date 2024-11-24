@@ -7,6 +7,18 @@
 * Career terms aren't always added in the correct order.
 
 
+## v0.11.0 (Beta)
+
+* Definition of Computers on spacecraft has changed from a simple selectable value to using a Hardware component.
+* A 'study notes' section has been added to the XP dialog for each skill.
+* It is now possible to delete skills from a character sheet (but not a token).
+* Skills marked as deleted from an actor package will now be deleted when package is applied to target actor.
+* Spacecraft hardware can now be activated and deactivated. Backend support for damaged hardware now added as well.
+* Spacecraft now have a drop down menu to add some basic core hardware options.
+* Increased default size of description field for items.
+* Added Software item type. This can be added to spacecraft, but currently has no effect.
+* Increased maximum TL of items to 25. Hardware TL limited to TL of spacecraft it is installed on.
+
 ## v0.10.7 (Beta)
 
 * Added new traits for weapons: Dangerous, Shield, Protection, Smasher, Artillery, Silent, Fire etc

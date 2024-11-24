@@ -17,10 +17,6 @@ export class MgT2SkillDialog extends Application {
         this.actor = actor;
         const data = actor.system;
 
-        console.log("skill-dialog:");
-        console.log(actor);
-        console.log(cha);
-
         this.skillId = skill;
         this.skill = null;
         this.specId = null;
@@ -103,8 +99,6 @@ export class MgT2SkillDialog extends Application {
         }
         this.options.title = this.skillText;
         this.penalty = data.physicalDM;
-
-        console.log(`Using characteristic ${this.cha}`);
     }
 
     getData() {
@@ -122,7 +116,8 @@ export class MgT2SkillDialog extends Application {
             "physicalDM": this.penalty,
             "characteristic": this.cha,
             "target": this.target,
-            "boonBane": this.boonBane
+            "boonBane": this.boonBane,
+            "showEdit": !(this.actor.parent)
         }
     }
 
@@ -164,8 +159,8 @@ export class MgT2SkillDialog extends Application {
 
     async onSkillEdit(event, html) {
         event.preventDefault();
-
         new MgT2AddSkillDialog(this.actor, this.skillId, this.skill, this.specId, this.spec).render(true);
+        this.close();
     }
 
     async _updateObject(event, formData) {

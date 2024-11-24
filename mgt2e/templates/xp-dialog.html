@@ -1,8 +1,9 @@
 <form class="flexcol xpdialog">
 
     <div class="shadow">
-        <span class="edit-skill">Edit</span>
-
+        {{#if showEdit}}
+            <span class="edit-skill">Edit</span>
+        {{/if}}
         <h3 class="skill-dialog-title">
                 {{#if spec}}
                     {{skill.label}} ({{spec.label}})

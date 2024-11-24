@@ -137,20 +137,17 @@
         {{else if (ifEquals system.hardware.system "sensor")}}
         {{else if (ifEquals system.hardware.system "computer")}}
         <div class="shadow grid grid-4col">
-            <div class="resource flex-group-center">
-                <label class="resource-label">{{localize 'MGT2.TravellerSheet.ComputerCore'}}</label>
+            <div class="resource flex-group-center checkbox-resource" title="{{localize 'MGT2.TravellerSheet.coreTitle'}}">
                 <input type="checkbox" name="system.hardware.isComputerCore" {{checked system.hardware.isComputerCore}} data-dtype="Boolean" />
-                <label for="system.hardware.isComputerCore" class="resource-label"/>
+                <label class="resource-label checkbox-label">{{localize 'MGT2.TravellerSheet.ComputerCore'}}</label>
             </div>
-            <div class="resource flex-group-center">
-                <label class="resource-label">{{localize 'MGT2.TravellerSheet.bis'}}</label>
+            <div class="resource flex-group-center" title="{{localize 'MGT2.TravellerSheet.bisTitle'}}">
                 <input type="checkbox" name="system.hardware.isComputerBis" {{checked system.hardware.isComputerBis}} data-dtype="Boolean" />
-                <label for="system.hardware.isComputerBis" class="resource-label"/>
+                <label class="resource-label checkbox-label">{{localize 'MGT2.TravellerSheet.bis'}}</label>
             </div>
-            <div class="resource flex-group-center">
-                <label class="resource-label">{{localize 'MGT2.TravellerSheet.fib'}}</label>
+            <div class="resource flex-group-center" title="{{localize 'MGT2.TravellerSheet.fibTitle'}}">
                 <input type="checkbox" name="system.hardware.isComputerFib" {{checked system.hardware.isComputerFib}} data-dtype="Boolean" />
-                <label for="system.hardware.isComputerFib" class="resource-label"/>
+                <label class="resource-label checkbox-label">{{localize 'MGT2.TravellerSheet.fib'}}</label>
             </div>
         </div>
         {{else if (ifEquals system.hardware.system "weapon")}}
