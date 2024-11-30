@@ -14,7 +14,7 @@ export class MgT2ItemSheet extends ItemSheet {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["mgt2", "sheet", "item"],
-            width: 640,
+            width: 680,
             height: 480,
             tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "attributes" }]
         });
@@ -31,7 +31,7 @@ export class MgT2ItemSheet extends ItemSheet {
         return `${path}/item-${this.item.type}-sheet.html`;
     }
 
-  /* -------------------------------------------- */
+    /* -------------------------------------------- */
 
     /** @override */
     async getData() {

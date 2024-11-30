@@ -56,7 +56,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>A skill can be rolled by clicking the skill on the character sheet.</p><p>This will bring up a dialog that allows you to select which characteristic to use, set a difficulty and add a Dice Modifier.</p><p>By default a target difficulty of 8 is assumed.</p><p>If you roll a parent skill with one or more specialities, the final result for the parent and all the non-zero specialities will be given.</p><h2>Quick Rolls</h2><p>Holding shift when clicking a skill will perform a quick roll, which skips the dialog and assumes defaults on everything.</p><p>The configurable <strong>Default to Quick Rolls</strong> can be used to reverse this behaviour. If selected, clicking a skill with perform a roll with default settings, and holding shift will open the dialog.</p><h2>Experience</h2><p>Holding Ctrl when clicking on a skill will open the experience menu for this skill. This allows you to:</p><ul><li><p>Add experience points to the skill. These will automatically increase the skill when the dialog is closed if the experience is enough.</p></li><li><p>Add a permanent DM bonus to the skill. This is useful for racial bonuses.</p></li></ul><h2>Hot bar</h2><p>Skills can be dragged to the hot bar. Clicking (or shift clicking) on the hot bar icon will roll that skill for the currently selected token.</p>"
+        "content": "<p>A skill can be rolled by clicking the skill on the character sheet. This will bring up a dialog that allows you to select which characteristic to use, set a difficulty and add a Dice Modifier.</p><p></p><img src=\"systems/mgt2e/images/docs/skill_roll.webp\" /><p>Each skill has a default characteristics, but you can change this every time that you make a roll. If you tick the \"Remember Characteristic\" box, then your choice will be remembered for next time for this character.</p><p>You can choose a roll type of \"Normal\", \"Boon\" or \"Bane\".</p><p>You can also set the difficulty to be something other than the default of 8. It also allows you to give yourself a bonus or penalty to the roll by setting the DM.</p><h3>Editing Skills</h3><p>If you are rolling a skill from the character itself, rather than from a token, then there will be an \"Edit Skill\" option. This can be used to edit the skill. Either change its name, or set whether it is a combat skill or background skill. You can also delete the skill from here.</p><p>If you are rolling a skill from a token which doesn't have Link Actor option set, then the edit option will not be available.</p><p></p><h2>Quick Rolls</h2><p>Holding shift when clicking a skill will perform a quick roll, which skips the dialog and assumes defaults on everything.</p><p>The configurable <strong>Default to Quick Rolls</strong> can be used to reverse this behaviour. If selected, clicking a skill with perform a roll with default settings, and holding shift will open the dialog.</p><h2>Experience</h2><p>Holding Ctrl when clicking on a skill will open the experience menu for this skill. This allows you to:</p><ul><li><p>Add experience points to the skill. These will automatically increase the skill when the dialog is closed if the experience is enough.</p></li><li><p>Add a permanent DM bonus to the skill. This is useful for racial bonuses.</p></li></ul><p><span style=\"font-family:Roboto, sans-serif\">When you submit the dialog, it will calculate whether you have enough experience to level up, and automatically level up that skill.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(25, 24, 19);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(239, 240, 240);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">A skill with extra experience on it as a + symbol next to it on the character sheet.</span></p><h2>Hot bar</h2><p>Skills can be dragged to the hot bar. Clicking (or shift clicking) on the hot bar icon will roll that skill for the currently selected token.</p>"
       },
       "video": {
         "controls": true,
@@ -72,14 +72,51 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.4.9",
-        "coreVersion": "12.329",
+        "coreVersion": "12.331",
         "createdTime": 1718229795342,
-        "modifiedTime": 1718230082528,
-        "lastModifiedBy": "Uzw5MJmM0BRE3sSL",
+        "modifiedTime": 1732387303015,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null
       },
       "_key": "!journal.pages!I3AuPYIeiMu19Rli.OUm7ywmOo99aQK7v"
+    },
+    {
+      "sort": 200000,
+      "name": "Characteristics",
+      "type": "text",
+      "_id": "rd6x7wJeJa4hpmGk",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Travellers and NPCs start with six basic characteristics, known as their Universal Personality Profile (UPP). These consist of:</p><ul><li><p><strong>STR</strong>ength</p></li><li><p><strong>DEX</strong>terity</p></li><li><p><strong>END</strong>urance</p></li><li><p><strong>INT</strong>ellect</p></li><li><p><strong>EDU</strong>cation</p></li><li><p><strong>SOC</strong>ial Class</p></li></ul><p>They all default to 7, and are rolled on 2D6, giving a normal range between 2 and 12.</p><h2>Adding Characteristics</h2><p>If you go to the Settings tab on the character sheet, you can enable or disable characteristics for your character. Optional ones, such as LUC, STY and CHA are available to choose from.</p><h2>Generating Characteristics</h2><p>There are a couple of quick ways to roll characteristics for a new character.</p><ul><li><p>Type /upp in the chat and drag the results to your character sheet,</p></li><li><p>Click the dice symbol on the top right of the characteristics on the sheet.</p><ul><li><p>Shift-clik the dice symbol to roll a set of average characteristics.</p></li><li><p>Ctrl-click the dice symbol to modify existing characteristics between -2 and +2.</p></li></ul></li></ul><p>Under the settings tab, there is an option to lock your characteristics, This removes the dice symbol and makes it harder to accidentally change your characteristics.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.10.7",
+        "createdTime": 1732386701080,
+        "modifiedTime": 1732387166873,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!I3AuPYIeiMu19Rli.rd6x7wJeJa4hpmGk"
     }
   ],
   "sort": 200000,

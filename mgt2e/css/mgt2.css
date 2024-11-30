@@ -689,6 +689,10 @@ input.useCharacteristic {
     margin-left: 24px;
 }
 
+.skillBlock .deleted {
+    text-decoration: line-through;
+}
+
 .skillBlock label.individual {
     display: inline-block;
     font-style: italic;
@@ -2032,4 +2036,14 @@ div.mini-value span {
 
 .departmentList {
     float: right;
+}
+.checkbox-resource {
+    vertical-align: center;
+}
+
+.checkbox-resource input {
+    display: inline-block;
+}
+.checkbox-label {
+    display: inline-block;
 }

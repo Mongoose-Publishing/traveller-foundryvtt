@@ -77,6 +77,45 @@ async function migrateActorData(actor, fromVersion) {
         return actor.system;
     }
 
+    if (fromVersion < 8) {
+        console.log("Converting to v7 (Spacecraft computers)");
+        if (actor.type === "spacecraft") {
+            if (actor.system.spacecraft.computer) {
+                let c = actor.system.spacecraft.computer;
+
+                let system = {
+                    "tl": c.tl, "weight": 0, "cost": 0, "notes": "",
+                    "active": true, "quantity": 1, "status": null,
+                    "hardware": {
+                        "system": "computer",
+                        "tons": 0,
+                        "power": 0,
+                        "rating": c.processing,
+                        "tonnage": {
+                            "tons": 0, "percent": 0, "cost": 0, "minimum": 0
+                        },
+                        "powerPerTon": 0,
+                        "mount": "turret",
+                        "advantages": "",
+                        "weapons": {},
+                        "isComputerCore": c.core,
+                        "isComputerBis": c.bis,
+                        "isComputerFib": c.fib
+                    }
+                };
+
+                let itemName = "Hardware";
+                const itemData = {
+                    "name": "Computer",
+                    "img": "systems/mgt2e/icons/hardware/computer.svg",
+                    "type": "hardware",
+                    "system": system
+                };
+                Item.create(itemData, { parent: actor } );
+            }
+        }
+    }
+
     return {};
 }
 
@@ -147,7 +186,7 @@ function migrateItemData(item, fromVersion) {
 }
 
 export async function migrateWorld(fromVersion) {
-    console.log("**** MIGRATE SCHEMA TO v7 ****");
+    console.log("**** MIGRATE SCHEMA TO v8 ****");
 
     for (let actor of game.actors.contents) {
         const updateData = migrateActorData(actor, fromVersion);

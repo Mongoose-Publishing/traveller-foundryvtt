@@ -76,6 +76,43 @@
         "duplicateSource": null
       },
       "_key": "!journal.pages!XqtcLHYC383iXuNo.qLZ9BdVEeSIbwc57"
+    },
+    {
+      "sort": 0,
+      "name": "Hardware",
+      "type": "text",
+      "_id": "f7qCCfDWJowPIoUW",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Hardware is core to the design of a spacecraft. Hardware are items which provide reactors, manouevre drives, jump drives, cargo, bridges and computers for a spacecraft.</p><p>In order to configure a spacecraft beyond the basic hull, you need to add hardware.</p><img src=\"systems/mgt2e/images/docs/spacecraft_hardware.webp\" /><p></p><p>In the hardware tab, it is possible to add basic hardware types using the 'Add Hardware' menu. Other types of hardware will need to be defined and dropped in from elsewhere.</p><p>The statistics at the top of the sheet for things such as cargo space, J-Drive and M-Drive rating etc will be automatically set once the hardware items have been added.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.11.0",
+        "createdTime": 1732398979588,
+        "modifiedTime": 1732402331404,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!XqtcLHYC383iXuNo.f7qCCfDWJowPIoUW"
     }
   ],
   "sort": 500000,

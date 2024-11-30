@@ -50,6 +50,7 @@ export class MgT2AddSkillDialog extends Application {
         this.parentLabel = "";
         this.value = 0;
         this.trained = false;
+        this.isDeleted = false;
 
         if (spec) {
             this.label = spec.label;
@@ -60,6 +61,7 @@ export class MgT2AddSkillDialog extends Application {
             this.parentLabel = skill.label;
             console.log(this.parent);
             this.value = spec.value;
+            this.isDeleted = spec.deleted?true:false;
             if (spec.trained) {
                 this.trained = spec.trained;
             }
@@ -73,12 +75,11 @@ export class MgT2AddSkillDialog extends Application {
             this.icon = skill.icon;
             this.value = skill.value;
             this.trained = skill.trained;
+            this.isDeleted = skill.deleted?true:false;
         }
     }
 
     getData() {
-        console.log("getData: Characteristic is " + this.cha);
-        console.log("getData: Type is " + this.actor.type);
         return {
             "actor": this.actor,
             "data": this.data,
@@ -90,6 +91,7 @@ export class MgT2AddSkillDialog extends Application {
             "individual": this.individual,
             "icon": this.icon,
             "isEdit": this.isEdit,
+            "isDeleted": this.isDeleted,
             "parent": this.parent,
             "parentLabel": this.parentLabel
         }
@@ -104,11 +106,24 @@ export class MgT2AddSkillDialog extends Application {
         if (del) {
             del.on("click", event => this.onDeleteClick(event, html));
         }
+
+        if (!this.isEdit) {
+            html.find(".skillLabelField").on("keyup", event => this.onLabelChange(event, html));
+        }
+    }
+
+    onLabelChange(event, html) {
+        let label = html.find(".skillLabelField")[0].value;
+        let shortname = label.toLowerCase().trim();
+        shortname = shortname.replaceAll(/ /g, "_");
+        shortname = shortname.replaceAll(/[^a-z_]/g, "");
+
+        html.find(".skillShortNameField")[0].value = shortname;
+
     }
 
     async onAddClick(event, html) {
         event.preventDefault();
-        console.log("onAddClick:");
 
         let label = html.find(".skillLabelField")[0].value;
         let shortname = html.find(".skillShortNameField")[0].value;
@@ -117,18 +132,22 @@ export class MgT2AddSkillDialog extends Application {
         let combat = html.find(".skillCombatToggle")[0].value;
         let background = html.find(".skillBackgroundToggle")[0].value;
 
-        console.log(label);
-        console.log(parent);
-        console.log(defaultCha);
-        console.log(combat);
-        console.log(background);
-
         if (parent) {
             if (this.data.skills[parent]) {
                 if (!this.data.skills[parent].specialities) {
                     this.data.skills[parent].specialities = {};
                 }
+                // Find a unique id for this speciality.
+                if (!this.isEdit && this.data.skills[parent].specialities[shortname]) {
+                    let idx = 1;
+                    while (this.data.skills[parent].specialities[shortname+"_"+idx]) {
+                        idx++;
+                    }
+                    shortname = shortname + "_" + idx;
+                }
+
                 let skill = {
+                    'id': shortname,
                     'label': label,
                     'combat': true,
                     'default': defaultCha,
@@ -141,7 +160,16 @@ export class MgT2AddSkillDialog extends Application {
                 console.log("Parent skill [" + parent + "] does not exist");
             }
         } else {
+            // Find a unique id for this skill.
+            if (!this.isEdit && (this.data.skills[shortname])) {
+                let idx = 1;
+                while (this.data.skills[shortname+"_"+idx]) {
+                    idx++;
+                }
+                shortname = shortname + "_" + idx;
+            }
             let skill = {
+                'id': shortname,
                 'label': label,
                 'combat': combat,
                 'default': defaultCha,
@@ -164,12 +192,36 @@ export class MgT2AddSkillDialog extends Application {
         console.log("onDeleteClick:");
 
         if (this.isEdit) {
-            console.log(this.actor.system.skills.explosives);
-            delete this.actor.system.skills.explosives;
-            console.log(this.actor.system.skills.explosives);
-            this.actor.update({ "system.skills": this.actor.system.skills });
-            this.actor.delete( "system.skills.explosives");
+            if (this.actor.type === "package") {
+                // Packages need to mark a skill as deleted, rather than deleting it.
+                if (this.parent) {
+                    if (this.actor.system.skills[this.parent].specialities[this.shortName].deleted) {
+                        this.actor.system.skills[this.parent].specialities[this.shortName].deleted = false;
+                    } else {
+                        this.actor.system.skills[this.parent].specialities[this.shortName].deleted = true;
+                    }
+                } else {
+                    if (this.actor.system.skills[this.shortName].deleted) {
+                        this.actor.system.skills[this.shortName].deleted = false;
+                    } else {
+                        this.actor.system.skills[this.shortName].deleted = true;
+                    }
+                }
+                console.log(this.actor.system.skills);
+                this.actor.update({ "system.skills": this.actor.system.skills });
+            } else if (this.parent) {
+                if (Object.getOwnPropertyNames(this.actor.system.skills[this.parent].specialities).length === 1) {
+                    // If the final speciality is removed, then we need to remove the whole
+                    // structure, so that the parent skill is treated as a normal skill.
+                    this.actor.update({[`system.skills.${this.parent}.-=specialities`]: null});
+                } else {
+                    this.actor.update({[`system.skills.${this.parent}.specialities.-=${this.shortName}`]: null});
+                }
+            } else {
+                this.actor.update({[`system.skills.-=${this.shortName}`]: null});
+            }
             this.close();
+            return;
         }
 
     }
