@@ -65,6 +65,8 @@
                       <label class="resource-label">Thrust</label>
                     {{else if (ifEquals system.hardware.system "power")}}
                       <label class="resource-label">Power</label>
+                    {{else if (ifEquals system.hardware.system "sensor")}}
+                    <label class="resource-label">Sensor DM</label>
                     {{else if (ifEquals system.hardware.system "armour")}}
                       <label class="resource-label">Armour</label>
                     {{else if (ifEquals system.hardware.system "fuel")}}
@@ -135,6 +137,44 @@
         {{else if (ifEquals system.hardware.system "bridge")}}
         {{else if (ifEquals system.hardware.system "stateroom")}}
         {{else if (ifEquals system.hardware.system "sensor")}}
+        <div class="shadow grid grid-3col">
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.visual">
+                <input type="checkbox" name="system.hardware.hasVisual" {{checked system.hardware.hasVisual}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.visual'}}</label>
+            </div>
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.thermal">
+                <input type="checkbox" name="system.hardware.hasThermal" {{checked system.hardware.hasThermal}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.thermal'}}</label>
+            </div>
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.em">
+                <input type="checkbox" name="system.hardware.hasEM" {{checked system.hardware.hasEM}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.em'}}</label>
+            </div>
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.lidar">
+                <input type="checkbox" name="system.hardware.hasLidar" {{checked system.hardware.hasLidar}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.lidar'}}</label>
+            </div>
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.radar">
+                <input type="checkbox" name="system.hardware.hasRadar" {{checked system.hardware.hasRadar}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.radar'}}</label>
+            </div>
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.nas">
+                <input type="checkbox" name="system.hardware.hasNAS" {{checked system.hardware.hasNAS}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.nas'}}</label>
+            </div>
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.activeLidar">
+                <input type="checkbox" name="system.hardware.hasActiveLidar" {{checked system.hardware.hasActiveLidar}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.activeLidar'}}</label>
+            </div>
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.activeRadar">
+                <input type="checkbox" name="system.hardware.hasActiveRidar" {{checked system.hardware.hasActiveRadar}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.activeRadar'}}</label>
+            </div>
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.densitometer">
+                <input type="checkbox" name="system.hardware.hasDensitometer" {{checked system.hardware.hasDensitometer}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.densitometer'}}</label>
+            </div>
+        </div>
         {{else if (ifEquals system.hardware.system "computer")}}
         <div class="shadow grid grid-4col">
             <div class="resource flex-group-center checkbox-resource" title="{{localize 'MGT2.TravellerSheet.coreTitle'}}">

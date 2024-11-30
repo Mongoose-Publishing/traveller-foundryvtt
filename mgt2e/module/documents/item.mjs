@@ -17,6 +17,12 @@ export class MgT2Item extends Item {
     static DESTROYED = "DESTROYED";
     static RUNNING = "RUNNING";
 
+    static SOFTWARE_TYPE = {
+        "generic": {},
+        "interface": {},
+        "security": {},
+    }
+
     /**
      * Augment the basic Item data model with additional dynamic data.
      */

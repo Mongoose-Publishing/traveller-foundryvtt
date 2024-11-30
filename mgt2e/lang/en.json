@@ -246,6 +246,7 @@
   "MGT2.TravellerSheet.InitPilot": "Pilot",
   "MGT2.TravellerSheet.InitTactics": "Tactics",
   "MGT2.TravellerSheet.InitLeader": "Leadership",
+  "MGT2.TravellerSheet.SizeDM": "Size DM",
 
   "MGT2.TravellerSheet.StatusLabel.fatigued": "Fatigued",
   "MGT2.TravellerSheet.StatusLabel.encumbered": "Encumbered",
@@ -452,6 +453,16 @@
   "MGT2.Spacecraft.System.bridge": "Bridge",
   "MGT2.Spacecraft.System.stateroom": "Stateroom",
   "MGT2.Spacecraft.System.sensor": "Sensor",
+
+  "MGT2.Spacecraft.SensorSuite.visual": "Visual",
+  "MGT2.Spacecraft.SensorSuite.thermal": "Thermal",
+  "MGT2.Spacecraft.SensorSuite.em": "EM",
+  "MGT2.Spacecraft.SensorSuite.radar": "Radar",
+  "MGT2.Spacecraft.SensorSuite.lidar": "Lidar",
+  "MGT2.Spacecraft.SensorSuite.activeRadar": "Active Radar",
+  "MGT2.Spacecraft.SensorSuite.activeLidar": "Active Lidar",
+  "MGT2.Spacecraft.SensorSuite.nas": "NAS",
+  "MGT2.Spacecraft.SensorSuite.densitometer": "Densitometer",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",

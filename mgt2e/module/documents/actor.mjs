@@ -44,8 +44,35 @@ export class MgT2Actor extends Actor {
         }
     }
 
-    _preUpdate(changes, options, user) {
+    async _preUpdate(changes, options, user) {
         if (this.type === "spacecraft") {
+            console.log("_preUpdate: Spacecraft " + this.name);
+
+            if (changes?.system?.spacecraft?.dtons) {
+                console.log("dtons changed");
+                let dtons = parseInt(changes.system.spacecraft.dtons);
+                if (dtons < 1) {
+                    dtons = changes.system.spacecraft.dtons = 1;
+                }
+                if (!changes.system.modifiers) {
+                    changes.system.spacecraft.modifiers = {
+                        sizeDM: 0,
+                        baseEvadeDM: 0
+                    };
+                }
+                let sizeDM = 0 - (Math.min(6, parseInt(dtons / 1000)));
+                await this.setFlag("mgt2e", "sizeDM", sizeDM);
+
+                if (dtons < 100) {
+                    changes.system.spacecraft.skill = "pilot.smallCraft";
+                } else if (dtons <= 5000) {
+                    changes.system.spacecraft.skill = "pilot.spacecraft";
+                } else {
+                    changes.system.spacecraft.skill = "pilot.capitalShips";
+                }
+            }
+
+            /*
             if (changes?.system?.spacecraft?.computer) {
                 let tl = this.system.spacecraft.computer.tl;
                 let core = this.system.spacecraft.computer.core;
@@ -62,6 +89,7 @@ export class MgT2Actor extends Actor {
                     changes.system.spacecraft.computer.processing = CONFIG.MGT2.COMPUTERS.techLevel[tl].computer;
                 }
             }
+            */
         }
     }
 

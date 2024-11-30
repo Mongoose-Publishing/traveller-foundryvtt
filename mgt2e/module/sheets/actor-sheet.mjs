@@ -199,6 +199,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 "m-drive": game.i18n.localize("MGT2.Spacecraft.System.m-drive"),
                 "r-drive": game.i18n.localize("MGT2.Spacecraft.System.r-drive"),
                 "power": game.i18n.localize("MGT2.Spacecraft.System.power"),
+                "sensor": game.i18n.localize("MGT2.Spacecraft.System.sensor"),
                 "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
                 "weapon": game.i18n.localize("MGT2.Spacecraft.System.weapon")
             };
@@ -432,7 +433,6 @@ export class MgT2ActorSheet extends ActorSheet {
                 if (h.system === "r-drive" && i.system.status === MgT2Item.ACTIVE) {
                     rdrive = Math.max(rdrive, parseInt(h.rating));
                 }
-                console.log(h);
             } else if (i.type === "weapon" && i.system.weapon.scale === "spacecraft") {
                 shipWeapons.push(i);
             } else {
@@ -2062,17 +2062,17 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (systemType === "fuel") {
             itemName = "Fuel Tanks";
             img = "systems/mgt2e/icons/hardware/fuel_tank.svg";
-            system.tl = 9;
+            system.tl = 7;
             system.hardware.rating = 10;
         } else if (systemType === "cargo") {
             itemName = "Cargo Hold";
             img = "systems/mgt2e/icons/hardware/cargo_hold.svg";
-            system.tl = 9;
+            system.tl = 7;
             system.hardware.rating = 10;
         } else if (systemType === "weapon") {
             itemName = "Turret";
             img = "systems/mgt2e/icons/hardware/turret.svg";
-            system.tl = 9;
+            system.tl = 7;
             system.hardware.tonnage.tons = 1;
         } else if (systemType === "computer") {
             itemName = "Computer";
@@ -2103,6 +2103,19 @@ export class MgT2ActorSheet extends ActorSheet {
             system.hardware.system = "general";
             system.hardware.tonnage.tons = 4;
             system.hardware.rating = 1;
+        } else if (systemType === "sensor") {
+            itemName = "Basic Sensors";
+            img = "systems/mgt2e/icons/hardware/sensor.svg";
+            system.tl = 8;
+            system.hardware.system = "sensor";
+            system.hardware.tonnage.tons = 0;
+            system.hardware.rating = -4;
+            system.hardware.hasVisual = true;
+            system.hardware.hasThermal = true;
+            system.hardware.hasLidar = true;
+            system.hardware.hasRadar = true;
+            system.hardware.hasActiveLidar = true;
+            system.hardware.hasActiveRadar = true;
         } else {
             // Unrecognised, so don't create anything.
             return;
@@ -2328,7 +2341,8 @@ export class MgT2ActorSheet extends ActorSheet {
             rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal", 8);
         }
     }
-/*
+
+    /*
     async _onSubmit(event, updateData, preventClose, preventRender) {
         console.log("_onSubmit:");
         console.log(updateData);
