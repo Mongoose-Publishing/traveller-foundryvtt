@@ -536,6 +536,19 @@ MGT2.EFFECTS = {
   "miscDM": { "targets": "misc", "value": true, "property": "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD }
 };
 
+MGT2.SOFTWARE_EFFECTS = {
+    "spacecraft": {
+        "type": [ "generic", "interface", "bonus" ],
+        "bonus": {
+            "evade": "system.spacecraft.modifiers.evadeDM",
+            "init": "system.spacecraft.modifiers.initDM",
+            "fireControl": "system.spacecraft.modifiers.fcDM"
+        }
+    },
+    "personal": {
+
+    }
+}
 MGT2.COMPUTERS = {
   "techLevel": {
     "7": { computer: 5, core: 0 },

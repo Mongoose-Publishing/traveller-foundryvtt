@@ -56,12 +56,14 @@ export class MgT2Actor extends Actor {
                 }
                 if (!changes.system.modifiers) {
                     changes.system.spacecraft.modifiers = {
-                        sizeDM: 0,
-                        baseEvadeDM: 0
+                        baseEvadeDM: 0,
+                        signature: 0,
+                        stealth: 0
                     };
                 }
-                let sizeDM = 0 - (Math.min(6, parseInt(dtons / 1000)));
-                await this.setFlag("mgt2e", "sizeDM", sizeDM);
+                let sizeDM = Math.min(6, parseInt(dtons / 1000));
+                changes.system.spacecraft.combat.sizeDM = sizeDM;
+                //await this.setFlag("mgt2e", "sizeDM", sizeDM);
 
                 if (dtons < 100) {
                     changes.system.spacecraft.skill = "pilot.smallCraft";
@@ -71,25 +73,6 @@ export class MgT2Actor extends Actor {
                     changes.system.spacecraft.skill = "pilot.capitalShips";
                 }
             }
-
-            /*
-            if (changes?.system?.spacecraft?.computer) {
-                let tl = this.system.spacecraft.computer.tl;
-                let core = this.system.spacecraft.computer.core;
-                let fib = this.system.spacecraft.computer.fib;
-                let bis = this.system.spacecraft.computer.bis;
-
-                const c = changes.system.spacecraft.computer;
-                if (c.tl !== undefined) tl = c.tl;
-                if (c.core !== undefined) core = c.core;
-
-                if (core) {
-                    changes.system.spacecraft.computer.processing = CONFIG.MGT2.COMPUTERS.techLevel[tl].core;
-                } else {
-                    changes.system.spacecraft.computer.processing = CONFIG.MGT2.COMPUTERS.techLevel[tl].computer;
-                }
-            }
-            */
         }
     }
 
@@ -366,13 +349,13 @@ export class MgT2Actor extends Actor {
 
         if (!actorData.spacecraft.combat) {
             actorData.spacecraft.combat = {
-                "hitDM": Math.min(6, parseInt(actorData.spacecraft.dtons / 1000)),
+                "sizeDM": Math.min(6, parseInt(actorData.spacecraft.dtons / 1000)),
                 "evadeThrustUsed": 0,
                 "evadeDM": 0,
                 "gunnerDM": 0
             }
         } else {
-            actorData.spacecraft.combat.hitDM = Math.min(6, parseInt(actorData.spacecraft.dtons / 1000));
+            //actorData.spacecraft.combat.sizeDM = Math.min(6, parseInt(actorData.spacecraft.dtons / 1000));
         }
         if (!actorData.initiative) {
             actorData.initiative = {

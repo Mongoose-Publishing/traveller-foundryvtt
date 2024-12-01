@@ -29,3 +29,26 @@ There are tasks for which software is needed, or which it gives a bonus to.
   * Fire Control
   * Auto-Repair
 
+
+### Ship Statistics
+
+What goes where? We can keep base data in flags, or in structure.
+If we keep it in flags, then it's easier to update. Things that can be modified
+by active effects need to be in template structure though.
+
+#### Flags
+
+  * sizeDM - Modifier from 0 to 6. Bonus to enemy attack rolls to hit this craft.
+  * signatureDM - Modifier to enemy sensor checks to detect this craft.
+
+#### Actor template
+
+The following are part of `system.spacecraft.modifiers`:
+
+  * evadeDM
+  * stealthDM
+  * initDM
+  * ewDM
+  * tacticsDM
+  * fcDM
+  * launchDM

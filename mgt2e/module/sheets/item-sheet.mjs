@@ -87,6 +87,21 @@ export class MgT2ItemSheet extends ItemSheet {
                 context.item.system.status = null;
                 context.item.update({"system.status": context.item.system.status });
             }
+            context.SOFTWARE_CLASS = {
+                "personal": game.i18n.localize("MGT2.Effects.Software.Class.personal"),
+                "spacecraft": game.i18n.localize("MGT2.Effects.Software.Class.spacecraft")
+            }
+            context.SOFTWARE_TYPE = {
+                "generic": game.i18n.localize("MGT2.Effects.Software.Type.generic"),
+                "interface": game.i18n.localize("MGT2.Effects.Software.Type.interface"),
+                "bonus": game.i18n.localize("MGT2.Effects.Software.Type.bonus")
+            }
+
+            context.SOFTWARE_EFFECT = { "": "-" };
+            context.SOFTWARE_EFFECT["evade"] = "Evade";
+            context.SOFTWARE_EFFECT["init"] = "Initiative";
+            context.SOFTWARE_EFFECT["fireControl"] = "Fire Control";
+            context.SOFTWARE_EFFECT["tactics"] = "Tactics";
         }
 
         if (context.item.type === "hardware") {
