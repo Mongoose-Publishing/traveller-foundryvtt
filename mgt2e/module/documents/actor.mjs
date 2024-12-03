@@ -434,8 +434,8 @@ export class MgT2Actor extends Actor {
               }
           }
           armour = Math.max(0, armour);
-          if (this.system.armour.archaic && options.ranged) {
-              if (options.tl > this.system.tl) {
+          if (parseInt(this.system.armour.archaic) === 1 && options.ranged) {
+              if (parseInt(options.tl) > parseInt(this.system.tl)) {
                   armour = parseInt((armour + 1) / 2);
               }
           }
