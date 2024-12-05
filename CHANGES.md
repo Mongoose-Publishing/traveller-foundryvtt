@@ -7,6 +7,10 @@
 * Career terms aren't always added in the correct order.
 
 
+## v0.11.1 (Beta)
+
+* Fixed bug where all armour was being considered archaic, so was being halved.
+
 ## v0.11.0 (Beta)
 
 * Definition of Computers on spacecraft has changed from a simple selectable value to using a Hardware component.

@@ -737,7 +737,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         if (armourData.otherTypes !== "") {
                             armour.otherTypes = armourData.otherTypes;
                         }
-                        if (armourData.archaic) {
+                        if (parseInt(armourData.archaic) === 1) {
                             armour.archaic = 1;
                             armour.tl = i.system.tl;
                         }
