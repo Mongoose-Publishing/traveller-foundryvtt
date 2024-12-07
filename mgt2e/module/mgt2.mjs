@@ -157,6 +157,38 @@ Hooks.once('init', async function() {
         },
         default: "private"
     });
+    game.settings.register('mgt2e', 'visionDefaultTraveller', {
+        name: game.i18n.localize("MGT2.Settings.PlayerVision.Traveller.Name"),
+        hint: game.i18n.localize("MGT2.Settings.PlayerVision.Traveller.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false
+    });
+    game.settings.register('mgt2e', 'visionDefaultNPC', {
+        name: game.i18n.localize("MGT2.Settings.PlayerVision.NPC.Name"),
+        hint: game.i18n.localize("MGT2.Settings.PlayerVision.NPC.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false
+    });
+    game.settings.register('mgt2e', 'visionDefaultCreature', {
+        name: game.i18n.localize("MGT2.Settings.PlayerVision.Creature.Name"),
+        hint: game.i18n.localize("MGT2.Settings.PlayerVision.Creature.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false
+    });
+    game.settings.register('mgt2e', 'visionDefaultSpacecraft', {
+        name: game.i18n.localize("MGT2.Settings.PlayerVision.Spacecraft.Name"),
+        hint: game.i18n.localize("MGT2.Settings.PlayerVision.Spacecraft.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false
+    });
 
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;
@@ -328,7 +360,20 @@ Hooks.on("createItem", (item) => {
  * way since V12, since we can't access the template.json in V12.
  */
 Hooks.on("createActor", (actor) => {
+    if (!game.users.current.isGM) {
+        return;
+    }
     console.log("createActor:");
+
+    if (actor.type === "traveller" && game.settings.get("mgt2e", "visionDefaultTraveller")) {
+        actor.update({"prototypeToken.sight.enabled": true});
+    } else if (actor.type === "npc" && game.settings.get("mgt2e", "visionDefaultNPC")) {
+        actor.update({"prototypeToken.sight.enabled": true});
+    } else if (actor.type === "creature" && game.settings.get("mgt2e", "visionDefaultCreature")) {
+        actor.update({"prototypeToken.sight.enabled": true});
+    } else if ((actor.type === "spacecraft" || actor.type === "vehicle") && game.settings.get("mgt2e", "visionDefaultSpacecraft")) {
+        actor.update({"prototypeToken.sight.enabled": true});
+    }
 
     // Copy in characteristics where needed.
     if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
@@ -1597,10 +1642,13 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
                         }
                     } else if (data.value) {
                         value = parseInt(value);
-                        if (value > 1) {
+                        let min = 1, max = 21;
+                        if (data.min !== undefined) min = parseInt(data.min);
+                        if (data.max !== undefined) max = parseInt(data.max);
+                        if (value > min) {
                             html += `<i class="fas fa-minus trait-minus"> </i>`;
                         }
-                        if (value < 21) {
+                        if (value < max) {
                             html += `<i class="fas fa-plus trait-plus"> </i>`;
                         }
                     }

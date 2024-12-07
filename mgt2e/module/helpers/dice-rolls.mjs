@@ -274,6 +274,11 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
         content += "<p>No ammo</p>";
     }
 
+    // Creatures sometimes take reduced (D6 -> D3) or minimum (D6 -> D1) damage.
+    // We try to convert the damage dice, and
+    let minDice = dmg.replaceAll(/D6/g, "D1").replaceAll(/d6/g, "D1");
+    let redDice = dmg.replaceAll(/D6/g, "D3").replaceAll(/d6/g, "D3");
+
     const roll = await new Roll(dice, actor?actor.getRollData():null).evaluate();
     let damageRoll = null;
     for (let attack=1; attack <= attacks; attack++) {
@@ -283,6 +288,8 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
 
         damageRoll = await new Roll(dmg, actor?actor.getRollData():null).evaluate();
         let damageTotal = damageRoll.total;
+        let reducedTotal = (await new Roll(redDice, actor?actor.getRollData():null).evaluate()).total;
+        let minimumTotal = (await new Roll(minDice, actor?actor.getRollData():null).evaluate()).total;
 
         let effect = 0, attackTotal = 0;
         if (actor) {
@@ -316,10 +323,6 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
             ap = getTraitValue(traits, "ap");
         }
         let tl = weapon.system.tl;
-        let options = "";
-        if (type !== "standard") {
-            options = type;
-        }
 
         if (isParry) {
             let parryBonus = parseInt(weapon.system.weapon.parryBonus);
@@ -357,6 +360,11 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
 
             let damageOptions = {
                 "damage": damageTotal,
+                "damageDice": dmg,
+                "reducedDice": redDice,
+                "minimumDice": minDice,
+                "reducedDamage": reducedTotal,
+                "minimumDamage": minimumTotal,
                 "effect": effect,
                 "multiplier": 1,
                 "scale": weapon.system.weapon.scale,
@@ -367,7 +375,6 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
                 "ranged": (baseRange>0)
             };
             let json = JSON.stringify(damageOptions);
-            console.log("Stringify: " + json);
 
             if (actor) {
                 content += `<b>Attack Roll:</b> ${dice}<br/>`
@@ -444,7 +451,6 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
             damageDice += ` + ${quantityBonus * (options.quantity - 1)}`;
         }
     }
-    console.log(damageDice);
 
     const attackRoll = await new Roll(dice, gunner?gunner.getRollData():null).evaluate();
     let effect = Math.max(0, attackRoll.total - 8);

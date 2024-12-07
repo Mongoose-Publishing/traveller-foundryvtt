@@ -19,17 +19,6 @@ import {NpcIdCard} from "../helpers/id-card.mjs";
  * @extends {ActorSheet}
  */
 export class MgT2ActorSheet extends ActorSheet {
-    static BEHAVIOUR = [
-        "carrionEater", "chaser", "eater", "filter", "gatherer", "grazer",
-        "hunter", "hijacker", "intimidator", "killer", "intermittent", "pouncer",
-        "reducer", "siren", "trapper"
-    ];
-    static TRAITS = [
-      "alarm", "amphibious", "armour", "bioelectricity", "camouflaged",
-        "diseased", "echolocation", "fastMetabolism", "flyer", "heightenedSenses",
-        "irVision", "uvVision", "large", "poison", "psionic", "slowMetabolosim",
-        "small"
-    ];
 
     /** @override */
     static get defaultOptions() {
@@ -929,11 +918,11 @@ export class MgT2ActorSheet extends ActorSheet {
             });
             html.find('.trait-minus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureTraitModify(t.data("traitId"), -1);
+                this._creatureTraitModify(t.data("traitId"), ev.shiftKey?-5:-1);
             });
             html.find('.trait-plus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureTraitModify(t.data("traitId"), 1);
+                this._creatureTraitModify(t.data("traitId"), ev.shiftKey?5:1);
             });
         } else if (this.actor.type === "spacecraft") {
             // Select which bay to display.
@@ -1252,10 +1241,25 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             } else if (traitData.value) {
                 let value = parseInt(text.replace(/[^-0-9]/g, ""));
-                value += parseInt(modifier);
-                if (value < 1) {
+                let min = 1;
+                let max = 21;
+                if (traitData.min) min = parseInt(traitData.min);
+                if (traitData.max) max = parseInt(traitData.max);
+                if (Math.abs(modifier) > 1 && Math.abs(value) > 100) {
+                    let m = Math.abs(parseInt(Math.log10(value)));
+                    console.log(m);
+                    modifier = Math.pow(10, m - 1) * Math.sign(modifier);
+                    //modifier = Math.abs(parseInt(value / 100) * 10) * Math.sign(modifier);
+                    value += modifier;
+                    value = parseInt(value / modifier) * modifier;
+                    console.log(modifier);
+                } else {
+                    value += parseInt(modifier);
+                }
+
+                if (value < min) {
                     // Too low, don't change.
-                } else if (value > 21) {
+                } else if (value > max) {
                     // Too high, don't change.
                 } else {
                     // We can change.

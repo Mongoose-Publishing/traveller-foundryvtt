@@ -394,6 +394,16 @@ export class MgT2Actor extends Actor {
 
   }
 
+  hasCreatureTrait(trait) {
+    if (this.type === "creature" && this.system.traits) {
+      const traits = this.system.traits;
+      if (traits.indexOf(trait) > -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   getCreatureTrait(trait) {
       if (this.type === "creature" && this.system.traits) {
           const traits = this.system.traits;
@@ -656,7 +666,26 @@ export class MgT2Actor extends Actor {
               damage *= 10;
           }
           this.applyDamageToVehicle(damage, options);
-      } else if (this.type === "traveller" || this.type === "npc" || this.type === "creature") {
+      } else if (this.type === "creature") {
+          // Creatures can have special traits which modify damage.
+          if (this.hasCreatureTrait("gigantic")) {
+              if (options.scale !== "spacecraft") {
+                  damage = parseInt(damage / 10);
+              }
+          } else if (this.hasCreatureTrait("energy")) {
+              damage = 0;
+          }
+          if (this.hasCreatureType("gossamer") && options.minimumDamage) {
+              damage = options.minimumDamage;
+          } else if (this.hasCreatureTrait("dispersed") && options.reducedDamage) {
+              if (options.damageType === "fire" || options.damageType === "cutting") {
+                  // Normal damage.
+              } else {
+                  damage = options.reducedDamage;
+              }
+          }
+          this.applyDamageToPerson(damage, options);
+      } else if (this.type === "traveller" || this.type === "npc") {
           if (options.scale === "spacecraft") {
               damage *= 10;
               // TODO: Possibly also add blast effects.

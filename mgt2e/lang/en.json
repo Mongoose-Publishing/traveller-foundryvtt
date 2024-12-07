@@ -29,6 +29,14 @@
   "MGT2.Settings.SheetNotification.Values.Private": "Private",
   "MGT2.Settings.SheetNotification.Values.Public": "Everyone",
   "MGT2.Settings.SheetNotification.Values.GM": "Self and GM",
+  "MGT2.Settings.PlayerVision.Traveller.Name": "Vision for Travellers",
+  "MGT2.Settings.PlayerVision.Traveller.Hint": "Whether Traveller actors should have token vision on by default",
+  "MGT2.Settings.PlayerVision.NPC.Name": "Vision for NPCs",
+  "MGT2.Settings.PlayerVision.NPC.Hint": "Whether NPC actors should have token vision on by default",
+  "MGT2.Settings.PlayerVision.Creature.Name": "Vision for Creatures",
+  "MGT2.Settings.PlayerVision.Creature.Hint": "Whether Creature actors should have token vision on by default",
+  "MGT2.Settings.PlayerVision.Spacecraft.Name": "Vision for Spacecraft and Vehicles",
+  "MGT2.Settings.PlayerVision.Spacecraft.Hint": "Whether Spacecraft/Vehicle actors should have token vision on by default",
 
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",
@@ -616,6 +624,7 @@
   "MGT2.Item.EnergyType.plasma": "Plasma",
   "MGT2.Item.EnergyType.fire": "Fire",
   "MGT2.Item.EnergyType.energy": "Energy",
+  "MGT2.Item.EnergyType.cutting": "Cutting",
 
   "MGT2.Item.WeaponTrait.Label.ap": "AP",
   "MGT2.Item.WeaponTrait.Label.auto": "Auto",

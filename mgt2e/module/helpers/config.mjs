@@ -551,7 +551,7 @@ MGT2.COMPUTERS = {
 };
 
 MGT2.WEAPONS = {
-    "energyTypes": [ "laser", "plasma", "fire", "energy" ],
+    "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting" ],
     "traits": {
         "artillery": { "scale": "traveller" },
         "ap": {  "value": 1, "min": 1, "max": 99, "conflict": [ "loPen" ] },
@@ -621,12 +621,12 @@ MGT2.CREATURES = {
     "fastMetabolism": { "set": "initiative.base", "min": 1, "max": 6, "conflict": "slowMetabolism" },
     "floater": {},
     "flyer": { "default": 3, "choices": [ "idle", "verySlow", "slow", "medium", "high", "fast", "veryFast", "subsonic", "supersonic", "hypersonic" ]},
-    "gigantic": { "value": 1, "min": 1, "max": 6 },
+    "gigantic": { },
     "gossamer": {},
     "heightenedSenses": { "skills": [ { "skill": "recon", "bonus": 1 }, { "skill": "survival", "bonus": 1 }] },
     "iuVision": {},
     "ornery": {},
-    "particulate": {},
+    "particulate": {  },
     "psionic": { "value": 7, "characteristic": "PSI" },
     "slowMetabolism": { "set": "initiative.base", "min": -6, "max": -1, "conflict": "fastMetabolism" },
     "strange": {},
