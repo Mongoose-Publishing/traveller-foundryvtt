@@ -675,7 +675,7 @@ export class MgT2Actor extends Actor {
           } else if (this.hasCreatureTrait("energy")) {
               damage = 0;
           }
-          if (this.hasCreatureType("gossamer") && options.minimumDamage) {
+          if (this.hasCreatureTrait("gossamer") && options.minimumDamage) {
               damage = options.minimumDamage;
           } else if (this.hasCreatureTrait("dispersed") && options.reducedDamage) {
               if (options.damageType === "fire" || options.damageType === "cutting") {

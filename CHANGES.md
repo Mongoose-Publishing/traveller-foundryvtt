@@ -6,6 +6,16 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## v0.11.2 (Beta)
+
+* Added some creature traits from the Companion to the list of those available.
+* Added documentation on how to modify what creature traits are available.
+* Added rule support for gigantic, dispersed, energy and gossamer creature traits. This also means support for
+  reduced and minimum damage from attacks.
+* Added 'cutting' damage type for weapons. Needed to support some damage effects of new creature traits.
+* Removed CSS definition that was breaking some modules by forcing text editor background to be white. This doesn't
+  seem to have impacted our own journal entries.
+* Added game settings to specify default vision settings for tokens depending on their actor type.
 
 ## v0.11.1 (Beta)
 
