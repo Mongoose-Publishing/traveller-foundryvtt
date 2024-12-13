@@ -122,7 +122,11 @@ export class MgT2AttackDialog extends Application {
                 autoOption = "noammo";
             } else {
                 let shotsFired = this.auto;
-                this.weapon.system.weapon.ammo -= shotsFired;
+                if (autoOption === "full") {
+                    this.weapon.system.weapon.ammo -= shotsFired * 3;
+                } else {
+                    this.weapon.system.weapon.ammo -= shotsFired;
+                }
                 this.weapon.update({"system.weapon": this.weapon.system.weapon});
             }
         }
