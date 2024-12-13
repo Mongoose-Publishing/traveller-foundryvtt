@@ -23,17 +23,24 @@ export class MgT2AttackDialog extends Application {
         this.skill = this.weapon.system.weapon.skill.split(".")[0];
         this.speciality = this.weapon.system.weapon.skill.split(".")[1];
         this.auto = 1;
+        this.fullAuto = 1; // Full auto uses three times the ammo.
+        this.rangeUnit = "m";
         if (hasTrait(this.weapon.system.weapon.traits, "auto")) {
             this.auto = getTraitValue(this.weapon.system.weapon.traits, "auto");
         }
         this.currentAmmo = weapon.useAmmo()?this.weapon.system.weapon.ammo:0;
         this.outOfAmmo = false;
         if (weapon.useAmmo() && this.weapon.system.weapon.magazine > 0) {
+            this.fullAuto = Math.min(this.auto, parseInt(this.currentAmmo / 3));
             this.auto = Math.min(this.auto, this.currentAmmo);
             if (this.auto === 0) {
                 this.outOfAmmo = true;
             }
         }
+        this.AUTO = {};
+        this.AUTO["single"] = `Single Shot`;
+        this.AUTO["burst"] = `Burst (+${this.auto})`;
+        this.AUTO["full"] = `Full Auto (x${this.fullAuto})`;
 
         // Work out what the skill bonus is.
         this.score = parseInt(getSkillValue(this.actor, this.skill, this.speciality));
@@ -57,6 +64,16 @@ export class MgT2AttackDialog extends Application {
             this.shortRange = parseInt(this.range / 4);
             this.longRange = parseInt(this.range * 2);
             this.extremeRange = parseInt(this.range * 4);
+            if (weapon.system.weapon.scale === "vehicle") {
+                this.rangeUnit = "km";
+            }
+
+            this.RANGES = {};
+            this.RANGES["+1"] = `Short (${this.shortRange}${this.rangeUnit}, +1)`;
+            this.RANGES["+0"] = `Medium (${this.range}${this.rangeUnit}, +0)`;
+            this.RANGES["-2"] = `Long (${this.longRange}${this.rangeUnit}, -2)`;
+            this.RANGES["-4"] = `Extreme (${this.extremeRange}${this.rangeUnit}, -4)`;
+
         } else {
             this.parryBonus = weapon.system.weapon.parryBonus;
             if (!this.parryBonus) {
@@ -80,6 +97,7 @@ export class MgT2AttackDialog extends Application {
             "shortRange": this.shortRange,
             "longRange": this.longRange,
             "extremeRange": this.extremeRange,
+            "rangeUnit": this.rangeUnit,
             "hasAuto": this.auto > 1,
             "auto": this.auto,
             "dm": 0,
@@ -91,7 +109,9 @@ export class MgT2AttackDialog extends Application {
             "parryBonus": this.parryBonus,
             "parryScore": this.parryScore,
             "outOfAmmo": this.outOfAmmo,
-            "currentAmmo": this.currentAmmo
+            "currentAmmo": this.currentAmmo,
+            "AUTO": this.AUTO,
+            "RANGES": this.RANGES
         }
     }
 
@@ -105,7 +125,6 @@ export class MgT2AttackDialog extends Application {
 
     async onRollClick(event, html) {
         event.preventDefault();
-        console.log("onRollClick:");
 
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
         let rollType = html.find(".skillDialogRollType")[0].value;
@@ -117,13 +136,17 @@ export class MgT2AttackDialog extends Application {
         if (html.find(".attackDialogAuto")[0]) {
             autoOption = html.find(".attackDialogAuto")[0].value;
         }
+        let shotsFired = 1;
         if (this.weapon.useAmmo()) {
             if (this.outOfAmmo) {
                 autoOption = "noammo";
             } else {
-                let shotsFired = this.auto;
                 if (autoOption === "full") {
+                    shotsFired = this.fullAuto;
                     this.weapon.system.weapon.ammo -= shotsFired * 3;
+                } else if (autoOption === "burst") {
+                    shotsFired = this.auto;
+                    this.weapon.system.weapon.ammo -= shotsFired;
                 } else {
                     this.weapon.system.weapon.ammo -= shotsFired;
                 }
@@ -131,22 +154,19 @@ export class MgT2AttackDialog extends Application {
             }
         }
 
-        rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM, autoOption);
+        rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM, autoOption, false, shotsFired);
 
         this.close();
     }
 
     async onParryClick(event, html) {
         event.preventDefault();
-        console.log("onParryClick:");
 
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
-        console.log("Parry DM is equal to " + dm);
         if (this.parryBonus) {
             dm += this.parryBonus;
         }
         let rollType = html.find(".skillDialogRollType")[0].value;
-        console.log("Parry DM is equal to " + dm);
 
         rollAttack(this.actor, this.weapon, this.parryScore, dm, rollType, null, null, true);
 

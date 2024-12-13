@@ -31,12 +31,7 @@
             <div class="range">
                 <label for="range" class="skillDialogLabel">Range</label>
                 <select class="attackDialogRange" name="difficulty">
-                    {{#select "0"}}
-                        <option value="+1">Short ({{shortRange}}m, +1)</option>
-                        <option value="0">Medium ({{range}}m)</option>
-                        <option value="-2">Long ({{longRange}}m, -2)</option>
-                        <option value="-4">Extreme ({{extremeRange}}m, -4)</option>
-                    {{/select}}
+                    {{selectOptions RANGES selected="+0"}}
                 </select>
             </div>
         {{/if}}
@@ -45,11 +40,7 @@
             <div class="auto">
                 <label for="auto" class="skillDialogLabel">Auto Fire</label>
                 <select class="attackDialogAuto" name="autoFire">
-                    {{#select "single"}}
-                        <option value="single">Single Shot</option>
-                        <option value="burst">Burst (+{{auto}})</option>
-                        <option value="full">Full Auto (x{{auto}})</option>
-                    {{/select}}
+                    {{selectOptions AUTO}}
                 </select>
             </div>
         {{/if}}

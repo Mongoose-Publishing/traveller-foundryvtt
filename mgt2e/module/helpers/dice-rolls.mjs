@@ -91,7 +91,7 @@ export function getTraitValue(traits, trait) {
     return 0;
 }
 
-export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry) {
+export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry, shotsFired) {
     const   system = actor?actor.system:null;
     let     content = "Attack";
 
@@ -101,6 +101,7 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
     let baseRange = weapon.system.weapon.range;
     let rangeBand = null;
     let rangeDistance = baseRange;
+    let rangeUnit = "m";
     if (range !== undefined && range !== null && !isParry) {
         switch (range) {
             case +1:
@@ -118,6 +119,9 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
                 rangeBand = "Extreme";
                 rangeDistance = parseInt(rangeDistance * 4);
                 break;
+        }
+        if (weapon.system.weapon.scale === "vehicle") {
+            rangeUnit = "km";
         }
     }
 
@@ -178,7 +182,7 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
 
     // Header information
     content = `<div class="attack-message">`;
-    content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div class="message-content">`;
+    content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+rangeUnit):""}</h2><div class="message-content">`;
     content += "<div>";
     if (actor) {
         content += `<img class="skillcheck-thumb" alt="${actor.name}" src="${actor.thumbnail}"/>`;
@@ -217,7 +221,7 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
     if (!isParry) {
         content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type === "standard") ? "" : (" (" + type + ")")}<br/>`;
         if (baseRange > 0) {
-            content += `<b>Range:</b> ${baseRange}m<br/>`;
+            content += `<b>Range:</b> ${baseRange}${rangeUnit}<br/>`;
         } else {
             content += `<b>Melee</b><br/>`;
         }
@@ -264,11 +268,13 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
         }
     }
     let attacks = 1;
+    console.log("Shots Fired: " + shotsFired + " on " + autoOption);
     if (autoOption && autoOption === "burst") {
-        let autoBonus = getTraitValue(traits, "auto");
-        dmg += " + " + parseInt(autoBonus * destructive?10:1);
+        let autoBonus = shotsFired?shotsFired:getTraitValue(traits, "auto");
+        if (destructive) autoBonus = parseInt(autoBonus) * 10;
+        dmg = dmg + " + " + autoBonus;
     } else if (autoOption && autoOption === "full") {
-        attacks = getTraitValue(traits, "auto");
+        attacks = shotsFired?shotsFired:getTraitValue(traits, "auto");
     } else if (autoOption && autoOption === "noammo") {
         attacks = 0;
         content += "<p>No ammo</p>";
