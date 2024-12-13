@@ -180,11 +180,13 @@ export class MgT2ItemSheet extends ItemSheet {
             context.weaponCha = {
                 "STR": "STR",
                 "DEX": "DEX",
-                "INT": "INT"
+                "INT": "INT",
+                "PSI": "PSI"
             }
             context.weaponDamageBonus = {
                 "": "-",
-                "STR": "STR"
+                "STR": "STR",
+                "PSI": "PSI"
             }
             context.weaponScale = {
                 "traveller": game.i18n.localize("MGT2.Item.Scale.traveller"),

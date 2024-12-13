@@ -569,6 +569,8 @@ MGT2.WEAPONS = {
         "orbitalBombardment": { "scale": "spacecraft" },
         "orbitalStrike": { "scale": "spacecraft" },
         "protection": { "scale": "traveller", "value": 1, "min": 1, "max": 20 },
+        "psiDmg": { "value": 1, "min": 1, "max": 10 },
+        "psiAp": { "value": 1, "min": 1, "max": 10 },
         "radiation": { "scale": "any" },
         "reductor": { "scale": "spacecraft" },
         "scope": { "scale": "traveller" },
