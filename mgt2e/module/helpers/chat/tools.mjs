@@ -329,13 +329,29 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
 
 Tools.showBlastRadius = async function(x, y, damageOptions) {
     console.log("showBlastRadius: ");
+    console.log(damageOptions);
+
+    if (game.settings.get("mgt2e", "blastEffectDivergence") > 0) {
+        if (damageOptions.effect < 0) {
+            let scale = canvas.grid.size / canvas.grid.distance;
+            const variance = parseInt(scale * parseFloat(game.settings.get("mgt2e", "blastEffectDivergence")) * Math.abs(damageOptions.effect));
+            const dice = `1D${variance} - 1D${variance}`;
+            const xv = (await new Roll(dice, null).evaluate()).total;
+            const yv = (await new Roll(dice, null).evaluate()).total;
+
+            console.log(`Diverge ${dice} ${xv} ${yv}`);
+            x += xv;
+            y += yv;
+        }
+    }
+
     const templateData = {
         t: "circle",
         user: game.user.id,
         distance: damageOptions.blastRadius,
         direction: 0, x:  x, y: y,
-        fillColor: "#FF0000",
-        borderColor: "#FF0000",
+        fillColor: "#FF8080",
+        borderColor: "#FF8080",
         width: 3, opacity: 0.25
     }
     const template = canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [templateData]);

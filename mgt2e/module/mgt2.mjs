@@ -189,6 +189,20 @@ Hooks.once('init', async function() {
         type: Boolean,
         default: false
     });
+    game.settings.register('mgt2e', 'blastEffectDivergence', {
+        name: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Name"),
+        hint: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Hint"),
+        scope: 'world',
+        config: true,
+        "choices": {
+            "0": "None",
+            "1": "Low",
+            "2": "Medium",
+            "3": "High"
+
+        },
+        default: "0"
+    });
 
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;
