@@ -124,15 +124,15 @@ export class MgT2Item extends Item {
                 if (item.system.weapon.magazine > 0 && item.system.weapon.ammo > 0) {
                     item.system.weapon.ammo --;
                     this.update({"system.weapon": item.system.weapon });
-                    rollAttack(this.actor, item, skillDM);
+                    rollAttack(this.actor, item, { "skillDM": skillDM });
                 } else if (item.system.weapon.magazine === 0) {
                     if (this.hasTrait("oneUse")) {
                         if (item.system.quantity > 0) {
                             this.update({"system.quantity": item.system.quantity - 1});
-                            rollAttack(this.actor, item, skillDM);
+                            rollAttack(this.actor, item, { "skillDM": skillDM });
                         }
                     } else {
-                        rollAttack(this.actor, item, skillDM);
+                        rollAttack(this.actor, item, { "skillDM": skillDM });
                     }
                 } else {
                     // No Ammo.

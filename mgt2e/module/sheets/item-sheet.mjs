@@ -781,7 +781,7 @@ export class MgT2ItemSheet extends ItemSheet {
 
     _rollDamage(item) {
         console.log("_rollDamage:");
-        rollAttack(null, item, 0, 0);
+        rollAttack(null, item, { "skillDM": 0, "dm": 0 });
     }
 
     _incrementQuantity(item) {
