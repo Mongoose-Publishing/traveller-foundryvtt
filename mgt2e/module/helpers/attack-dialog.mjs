@@ -155,7 +155,6 @@ export class MgT2AttackDialog extends Application {
                 this.weapon.update({"system.weapon": this.weapon.system.weapon});
             }
         } else if (hasTrait(this.weapon.system.weapon.traits, "oneUse")) {
-            console.log("ONE USE");
             if (this.weapon.system.quantity > 0) {
                 this.weapon.update({"system.quantity": this.weapon.system.quantity - 1});
             }

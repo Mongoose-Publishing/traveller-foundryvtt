@@ -37,29 +37,31 @@
         {{#each items as |item id|}}
           {{#if item.system.weapon}}
             {{#if (isItemEquipped item)}}
-              <li class="item active-weapon" data-item-id="{{item._id}}" title="{{item.name}} ({{item.system.weapon.damage}})">
-                <label class="weapon-name">{{nameQuantity item "sidebar"}}</label>
-                <a class="rollable" data-roll-type="item">
-                  <img src="{{item.img}}" title="{{item.name}}" width="40" height="40"/>
-                </a>
+              {{#if item.system.quantity}}
+                <li class="item active-weapon" data-item-id="{{item._id}}" title="{{item.name}} ({{item.system.weapon.damage}})">
+                  <label class="weapon-name">{{nameQuantity item "sidebar"}}</label>
+                  <a class="rollable" data-roll-type="item">
+                    <img src="{{item.img}}" title="{{item.name}}" width="40" height="40"/>
+                  </a>
 
-                <span>{{item.system.weapon.damage}}</span>
-                {{#if item.system.weapon.magazine includeZero=false}}
-                  <span>{{item.system.weapon.ammo}}/{{item.system.weapon.magazine}}</span>
-                {{/if}}
-                <br/>
-                {{#if item.system.weapon.magazine includeZero=false}}
-                  {{#if item.system.weapon.ammo includeZero=false}}
-                    <a class="item-attack rollable" data-roll-type="item" title="Attack">Attack</a>
-                  {{else}}
-                    <a class="item-reload" data-roll-type="item" title="Reload">Reload</a>
+                  <span>{{item.system.weapon.damage}}</span>
+                  {{#if item.system.weapon.magazine includeZero=false}}
+                    <span>{{item.system.weapon.ammo}}/{{item.system.weapon.magazine}}</span>
                   {{/if}}
-                {{else}}
-                  <a class="item-attack rollable" data-roll-type="item" title="Attack">Attack</a>
-                {{/if}}
-                <a class="item-edit">Edit</a>
-                <br/>
-              </li>
+                  <br/>
+                  {{#if item.system.weapon.magazine includeZero=false}}
+                    {{#if item.system.weapon.ammo includeZero=false}}
+                      <a class="item-attack rollable" data-roll-type="item" title="Attack">Attack</a>
+                    {{else}}
+                      <a class="item-reload" data-roll-type="item" title="Reload">Reload</a>
+                    {{/if}}
+                  {{else}}
+                    <a class="item-attack rollable" data-roll-type="item" title="Attack">Attack</a>
+                  {{/if}}
+                  <a class="item-edit">Edit</a>
+                  <br/>
+                </li>
+              {{/if}}
             {{/if}}
           {{/if}}
         {{/each}}

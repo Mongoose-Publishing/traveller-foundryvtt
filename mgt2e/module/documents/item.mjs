@@ -126,7 +126,14 @@ export class MgT2Item extends Item {
                     this.update({"system.weapon": item.system.weapon });
                     rollAttack(this.actor, item, skillDM);
                 } else if (item.system.weapon.magazine === 0) {
-                    rollAttack(this.actor, item, skillDM);
+                    if (this.hasTrait("oneUse")) {
+                        if (item.system.quantity > 0) {
+                            this.update({"system.quantity": item.system.quantity - 1});
+                            rollAttack(this.actor, item, skillDM);
+                        }
+                    } else {
+                        rollAttack(this.actor, item, skillDM);
+                    }
                 } else {
                     // No Ammo.
                 }
@@ -194,7 +201,7 @@ export class MgT2Item extends Item {
     hasTrait(trait) {
         if (this.type === "weapon" && this.system.weapon.traits) {
             const regex = new RegExp(`(^|[, ])${trait}[^,]*($|[, ])`, 'gi');
-            return traits.match(regex) != null;
+            return this.system.weapon.traits.match(regex) != null;
         }
         return false;
     }
