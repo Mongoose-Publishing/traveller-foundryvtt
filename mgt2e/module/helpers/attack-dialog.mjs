@@ -36,6 +36,8 @@ export class MgT2AttackDialog extends Application {
             if (this.auto === 0) {
                 this.outOfAmmo = true;
             }
+        } else if (weapon.system.quantity < 1) {
+            this.outOfAmmo = true;
         }
         this.AUTO = {};
         this.AUTO["single"] = `Single Shot`;
@@ -151,6 +153,10 @@ export class MgT2AttackDialog extends Application {
                     this.weapon.system.weapon.ammo -= shotsFired;
                 }
                 this.weapon.update({"system.weapon": this.weapon.system.weapon});
+            }
+        } else if (hasTrait(this.weapon.system.weapon.traits, "oneUse")) {
+            if (this.weapon.system.quantity > 0) {
+                this.weapon.update({"system.quantity": this.weapon.system.quantity - 1});
             }
         }
 

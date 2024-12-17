@@ -37,6 +37,8 @@
   "MGT2.Settings.PlayerVision.Creature.Hint": "Default vision setting for Creature tokens",
   "MGT2.Settings.PlayerVision.Spacecraft.Name": "Vehicle token vision",
   "MGT2.Settings.PlayerVision.Spacecraft.Hint": "Default vision setting for Spacecraft/Vehicle tokens",
+  "MGT2.Settings.BlastEffectDivergence.Name": "Blast effect divergence distance",
+  "MGT2.Settings.BlastEffectDivergence.Hint": "If an attack roll with a blast effect misses, how far to diverge blast template from intended location",
 
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",
@@ -686,6 +688,8 @@
   "MGT2.Item.WeaponTrait.Text.orbitalBombardment": "DM-8 to attack ships, no Blast trait v ground targets",
 
   "MGT2.Attack.Dangerous": "Weapon has exploded!",
+  "MGT2.Attack.DragMe": "Drag to character sheet, or click to apply to selected tokens.",
+  "MGT2.Attack.DragMeBlast": "Drag to canvas to show blast radius",
 
   "MGT2.SpacecraftDamageDialog.Title": "Damage Spacecraft",
 

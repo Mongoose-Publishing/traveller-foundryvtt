@@ -360,10 +360,13 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
                     dmgText += `&nbsp;(10m)`;
                 }
             }
+            let blastRadius = 0;
             if (hasTrait(traits, "blast")) {
                 dmgText += ` /&nbsp;Blast&nbsp;${getTraitValue(traits, "blast")}m`;
+                blastRadius = getTraitValue(traits, "blast");
             }
 
+            let titleText = game.i18n.localize("MGT2.Attack.DragMe");
             let damageOptions = {
                 "damage": damageTotal,
                 "damageDice": dmg,
@@ -380,6 +383,10 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
                 "radiation": radiationDamage,
                 "ranged": (baseRange>0)
             };
+            if (blastRadius) {
+                damageOptions.blastRadius = blastRadius;
+                titleText += " " + game.i18n.localize("MGT2.Attack.DragMeBlast");
+            }
             let json = JSON.stringify(damageOptions);
 
             if (actor) {
@@ -390,6 +397,7 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
             }
             content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
             content += `<button data-damage="${damageEffect}" data-options='${json}' 
+                            title="${titleText}"
                             class="damage-button">${dmgText}</button>`;
 
             content += `</div>`;

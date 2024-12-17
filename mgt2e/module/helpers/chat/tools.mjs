@@ -327,8 +327,38 @@ Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
     actor.update({"system.hits": data.hits});
 }
 
+Tools.showBlastRadius = async function(x, y, damageOptions) {
+    console.log("showBlastRadius: ");
+    console.log(damageOptions);
+
+    if (game.settings.get("mgt2e", "blastEffectDivergence") > 0) {
+        if (damageOptions.effect < 0) {
+            let scale = canvas.grid.size / canvas.grid.distance;
+            const variance = parseInt(scale * parseFloat(game.settings.get("mgt2e", "blastEffectDivergence")) * Math.abs(damageOptions.effect));
+            const dice = `1D${variance} - 1D${variance}`;
+            const xv = (await new Roll(dice, null).evaluate()).total;
+            const yv = (await new Roll(dice, null).evaluate()).total;
+
+            console.log(`Diverge ${dice} ${xv} ${yv}`);
+            x += xv;
+            y += yv;
+        }
+    }
+
+    const templateData = {
+        t: "circle",
+        user: game.user.id,
+        distance: damageOptions.blastRadius,
+        direction: 0, x:  x, y: y,
+        fillColor: "#FF8080",
+        borderColor: "#FF8080",
+        width: 3, opacity: 0.25
+    }
+    const template = canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [templateData]);
+};
+
 // Called from a button press in damage output in the chat.
-Tools.applyDamageToTokens = function(damage, damageOptions) {
+Tools.applyDamageToTokens = async function(damage, damageOptions) {
     console.log("Tools.applyDamageToTokens:");
 
     let tokens = Tools.getSelected();
@@ -343,6 +373,18 @@ Tools.applyDamageToTokens = function(damage, damageOptions) {
             ui.notifications.warn("Cannot apply damage to " + token.name);
             continue;
         }
+        if (damageOptions.blastRadius) {
+            console.log("BLAST RADIUS");
+            console.log(token);
+            let x = token.center.x;
+            let y = token.center.y;
+            console.log(x);
+
+            let pixelRadius = canvas.grid.size * damageOptions.blastRadius / canvas.grid.distance;
+            const opts = {
+            }
+        }
+
         token.actor.applyDamage(damage, damageOptions, (tokens.size > 1));
     }
 }

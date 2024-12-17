@@ -6,6 +6,13 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## Develop
+
+* Weapons with the oneUse trait now decrement their quantity count after being used.
+* Attacks with a blast radius can now be dragged onto a scene to automatically show the blast template.
+* Added a new setting "Blast effect divergence distance" which automatically randomises position of a
+  blast effect template if the attack was a miss. Defaults to none, for no divergence.
+
 ## v0.11.2 (Beta)
 
 * Added some creature traits from the Companion to the list of those available.

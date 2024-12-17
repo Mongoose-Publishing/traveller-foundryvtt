@@ -19,7 +19,7 @@ import { skillLabel } from "./helpers/dice-rolls.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
 import { migrateWorld } from "./migration.mjs";
 import { NpcIdCard } from "./helpers/id-card.mjs";
-
+import {hasTrait} from "./helpers/dice-rolls.mjs";
 
 
 /* -------------------------------------------- */
@@ -188,6 +188,20 @@ Hooks.once('init', async function() {
         config: true,
         type: Boolean,
         default: false
+    });
+    game.settings.register('mgt2e', 'blastEffectDivergence', {
+        name: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Name"),
+        hint: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Hint"),
+        scope: 'world',
+        config: true,
+        "choices": {
+            "0": "None",
+            "1": "Low",
+            "2": "Medium",
+            "3": "High"
+
+        },
+        default: "0"
     });
 
   // Add custom constants for configuration.
@@ -640,6 +654,13 @@ Hooks.on("combatRound", (combat, data, options) => {
 });
 
 Hooks.on("dropCanvasData", (canvas, data) =>{
+    if (data && data.type === "Damage") {
+        // Are we dropping a blast effect on the scene?
+        const options = JSON.parse(data.options);
+        if (options.blastRadius) {
+            Tools.showBlastRadius(data.x, data.y, options);
+        }
+    }
 });
 
 
@@ -1013,7 +1034,7 @@ Handlebars.registerHelper('concat', function(arg1, arg2, arg3, arg4, arg5) {
     return text;
 });
 
-Handlebars.registerHelper('nameQuantity', function(item) {
+Handlebars.registerHelper('nameQuantity', function(item, context) {
    let name = item.name;
    let quantity = item.system.quantity;
    let extra = null;
@@ -1036,9 +1057,18 @@ Handlebars.registerHelper('nameQuantity', function(item) {
        name = `${name} [${extra}]`;
    }
 
+   console.log("Sidebar is " + context + " for " + item.name);
+
    if (quantity && parseInt(quantity) > 1) {
-       quantity = parseInt(quantity);
-       name = `${name} x${quantity}`;
+       if (context === "sidebar") {
+           if (item.type === "weapon" && hasTrait(item.system.weapon.traits, "oneUse")) {
+               quantity = parseInt(quantity);
+               name = `${name} x${quantity}`;
+           }
+       } else {
+           quantity = parseInt(quantity);
+           name = `${name} x${quantity}`;
+       }
    }
    return name;
 });

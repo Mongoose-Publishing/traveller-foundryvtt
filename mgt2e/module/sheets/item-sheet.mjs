@@ -55,8 +55,10 @@ export class MgT2ItemSheet extends ItemSheet {
         context.effects = item.effects;
         context.effectTypes = CONFIG.MGT2.EFFECTS;
 
-        if (!context.system.quantity) {
+        if (context.system.quantity === undefined) {
             context.system.quantity = 1;
+        } else if (context.system.quantity < 0) {
+            context.system.quantity = 0;
         }
 
         context.techLevels = {};
@@ -783,14 +785,14 @@ export class MgT2ItemSheet extends ItemSheet {
     }
 
     _incrementQuantity(item) {
-        if (item.system.quantity) {
+        if (item.system.quantity !== undefined) {
             item.system.quantity++;
             item.update({"system.quantity": item.system.quantity });
         }
     }
 
     _decrementQuantity(item) {
-        if (item.system.quantity && parseInt(item.system.quantity) > 1) {
+        if (item.system.quantity && parseInt(item.system.quantity) > 0) {
             item.system.quantity--;
             item.update({"system.quantity": item.system.quantity });
         }
