@@ -182,6 +182,14 @@ export class MgT2AttackDialog extends Application {
             psiPoints = parseInt(html.find(".attackDialogPsi")[0].value);
         }
 
+        if (psiPoints > 0) {
+            if (!this.actor.system.damage["PSI"]) {
+                this.actor.system.damage["PSI"] = { "value": 0 };
+            }
+            this.actor.system.damage["PSI"].value += psiPoints;
+            this.actor.update({"system.damage": this.actor.system.damage});
+        }
+
 
         let shotsFired = 1;
         if (this.weapon.useAmmo()) {

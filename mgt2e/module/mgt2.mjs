@@ -1057,8 +1057,6 @@ Handlebars.registerHelper('nameQuantity', function(item, context) {
        name = `${name} [${extra}]`;
    }
 
-   console.log("Sidebar is " + context + " for " + item.name);
-
    if (quantity && parseInt(quantity) > 1) {
        if (context === "sidebar") {
            if (item.type === "weapon" && hasTrait(item.system.weapon.traits, "oneUse")) {

@@ -100,6 +100,13 @@ export async function rollAttack(actor, weapon, attackOptions) {
     console.log(weapon);
     console.log(attackOptions);
 
+    if (!attackOptions.dm) {
+        attackOptions.dm = 0;
+    }
+    if (!attackOptions.skillDM) {
+        attackOptions.skillDM = 0;
+    }
+
     let baseRange = weapon.system.weapon.range;
     let rangeBand = null;
     let rangeDistance = baseRange;
@@ -209,6 +216,37 @@ export async function rollAttack(actor, weapon, attackOptions) {
     if (!type) {
         type = "standard";
     }
+
+    let traits = weapon.system.weapon.traits;
+
+    if  (weapon.hasTrait("psiDmg")) {
+        let psi = attackOptions.psiDM;
+        let psiDmg = getTraitValue(traits, "psiDmg");
+        let bonus = 0;
+        if (attackOptions.psiDM) {
+            bonus += psi * psiDmg;
+        }
+        if (attackOptions.psiPoints) {
+            bonus += attackOptions.psiPoints * psiDmg;
+        }
+        if (bonus) {
+            dmg += ` + ${bonus}[PSI]`;
+        }
+    }
+    let bonusPsiAP = 0;
+    if (weapon.hasTrait("psiAp")) {
+        let psi = attackOptions.psiDM;
+        let psiAp = getTraitValue(traits, "psiAp");
+        console.log("PsiAp is " + psiAp);
+        if (attackOptions.psiDM) {
+            bonusPsiAP += psi * psiAp;
+        }
+        if (attackOptions.psiPoints) {
+            bonusPsiAP += attackOptions.psiPoints * psiAp;
+        }
+        console.log("Bonus PSI AP: " + bonusPsiAP);
+    }
+
     let destructive = weapon.hasTrait("destructive");
     let damageBonus = weapon.system.weapon.damageBonus;
     if (damageBonus && actor && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
@@ -228,7 +266,6 @@ export async function rollAttack(actor, weapon, attackOptions) {
             content += `<b>Melee</b><br/>`;
         }
     }
-    let traits = weapon.system.weapon.traits;
     if (traits && traits !== "") {
         content += `<b>Traits:</b> ${weapon.printWeaponTraits()}<br/>`
     } else {
@@ -251,7 +288,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
         }
         if (bulky > 0) {
             content += `<b>Bulky Weapon:</b> -${bulky}`;
-            dm -= bulky;
+            attackOptions.dm -= bulky;
         }
     }
 
@@ -330,9 +367,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
         if (effect > 0) {
             damageEffect = damageTotal + effect * (destructive?10:1);
         }
-        let ap = 0;
+        let ap = bonusPsiAP;
         if (hasTrait(traits, "ap")) {
-            ap = getTraitValue(traits, "ap");
+            ap += getTraitValue(traits, "ap");
         }
         let tl = weapon.system.tl;
 
@@ -354,8 +391,8 @@ export async function rollAttack(actor, weapon, attackOptions) {
             if (effect > 0) {
                 dmgText += `&nbsp;+&nbsp;${effect * (destructive?10:1)}&nbsp;(${damageEffect})`;
             }
-            if (hasTrait(traits, "ap")) {
-                dmgText += ` /&nbsp;AP&nbsp;${getTraitValue(traits, "ap")}`;
+            if (ap > 0) {
+                dmgText += ` /&nbsp;AP&nbsp;${ap}`;
             }
             let radiationDamage = 0;
             if (hasTrait(traits, "radiation")) {
@@ -384,6 +421,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 "multiplier": 1,
                 "scale": weapon.system.weapon.scale,
                 "traits": weapon.system.weapon.traits,
+                "ap": ap,
                 "tl": weapon.system.tl,
                 "damageType": weapon.system.weapon.damageType,
                 "radiation": radiationDamage,
