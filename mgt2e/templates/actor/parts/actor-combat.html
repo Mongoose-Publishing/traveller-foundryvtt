@@ -38,7 +38,7 @@
           {{#if item.system.weapon}}
             {{#if (isItemEquipped item)}}
               <li class="item active-weapon" data-item-id="{{item._id}}" title="{{item.name}} ({{item.system.weapon.damage}})">
-                <label class="weapon-name">{{item.name}}</label>
+                <label class="weapon-name">{{nameQuantity item "sidebar"}}</label>
                 <a class="rollable" data-roll-type="item">
                   <img src="{{item.img}}" title="{{item.name}}" width="40" height="40"/>
                 </a>

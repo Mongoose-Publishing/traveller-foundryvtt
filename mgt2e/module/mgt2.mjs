@@ -19,7 +19,7 @@ import { skillLabel } from "./helpers/dice-rolls.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
 import { migrateWorld } from "./migration.mjs";
 import { NpcIdCard } from "./helpers/id-card.mjs";
-
+import {hasTrait} from "./helpers/dice-rolls.mjs";
 
 
 /* -------------------------------------------- */
@@ -1013,7 +1013,7 @@ Handlebars.registerHelper('concat', function(arg1, arg2, arg3, arg4, arg5) {
     return text;
 });
 
-Handlebars.registerHelper('nameQuantity', function(item) {
+Handlebars.registerHelper('nameQuantity', function(item, context) {
    let name = item.name;
    let quantity = item.system.quantity;
    let extra = null;
@@ -1036,9 +1036,18 @@ Handlebars.registerHelper('nameQuantity', function(item) {
        name = `${name} [${extra}]`;
    }
 
+   console.log("Sidebar is " + context + " for " + item.name);
+
    if (quantity && parseInt(quantity) > 1) {
-       quantity = parseInt(quantity);
-       name = `${name} x${quantity}`;
+       if (context === "sidebar") {
+           if (item.type === "weapon" && hasTrait(item.system.weapon.traits, "oneUse")) {
+               quantity = parseInt(quantity);
+               name = `${name} x${quantity}`;
+           }
+       } else {
+           quantity = parseInt(quantity);
+           name = `${name} x${quantity}`;
+       }
    }
    return name;
 });

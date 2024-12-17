@@ -191,11 +191,21 @@ export class MgT2Item extends Item {
         return false;
     }
 
+    hasTrait(trait) {
+        if (this.type === "weapon" && this.system.weapon.traits) {
+            const regex = new RegExp(`(^|[, ])${trait}[^,]*($|[, ])`, 'gi');
+            return traits.match(regex) != null;
+        }
+        return false;
+    }
+
     useAmmo() {
         let weapon = this.system.weapon;
         if (weapon) {
             if (!isNaN(weapon.range) && parseInt(weapon.range) > 0) {
-                return true;
+                if (weapon.magazine > 0) {
+                    return true;
+                }
             }
             if (weapon.scale === "spacecraft") {
                 return true;
