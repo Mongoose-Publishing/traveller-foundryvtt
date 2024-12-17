@@ -686,6 +686,8 @@
   "MGT2.Item.WeaponTrait.Text.orbitalBombardment": "DM-8 to attack ships, no Blast trait v ground targets",
 
   "MGT2.Attack.Dangerous": "Weapon has exploded!",
+  "MGT2.Attack.DragMe": "Drag to character sheet, or click to apply to selected tokens.",
+  "MGT2.Attack.DragMeBlast": "Drag to canvas to show blast radius",
 
   "MGT2.SpacecraftDamageDialog.Title": "Damage Spacecraft",
 

@@ -640,6 +640,13 @@ Hooks.on("combatRound", (combat, data, options) => {
 });
 
 Hooks.on("dropCanvasData", (canvas, data) =>{
+    if (data && data.type === "Damage") {
+        // Are we dropping a blast effect on the scene?
+        const options = JSON.parse(data.options);
+        if (options.blastRadius) {
+            Tools.showBlastRadius(data.x, data.y, options);
+        }
+    }
 });
 
 
