@@ -14,12 +14,13 @@ export class MgT2DamageDialog extends Application {
         return options;
     }
 
-//    constructor(actor, damage, ap, laser, traits) {
     constructor(actor, damage, damageOptions) {
         super();
         console.log("DamageDialog:");
 
         console.log(actor);
+        console.log(damageOptions);
+        console.log(damage);
 
         this.actor = actor;
         this.damageOptions = damageOptions;
@@ -30,22 +31,22 @@ export class MgT2DamageDialog extends Application {
         this.laser = damageOptions.damageType;
         this.stun = hasTrait(damageOptions.traits, "stun");
         this.data = data;
-        this.armour = data.armour?.protection ?? 0;
+        this.armour = damageOptions.armour;
+        if (damageOptions.finalArmour !== undefined && damageOptions.finalArmour !== this.armour) {
+            this.armour = `${this.armour} (${damageOptions.finalArmour})`;
+        }
         this.wounds = "";
+        this.armourText = damageOptions.armourText;
 
+        /*
         if (data.armour && data.armour.otherTypes && this.laser && this.laser.trim().length > 0) {
             if (data.armour.otherTypes.toLowerCase().indexOf(this.laser.toLowerCase()) > -1) {
                 this.armour += parseInt(data.armour.otherProtection);
             }
         }
+         */
 
         this.actualDamage = damage;
-        if (this.ap < this.armour) {
-            this.actualDamage = damage - (this.armour - this.ap);
-        }
-        if (this.actualDamage < 0) {
-            this.actualDamage = 0;
-        }
         if (!data.damage) {
             // This is a creature or NPC. Shouldn't be called.
             data.hits.damage += this.actualDamage;
@@ -114,6 +115,7 @@ export class MgT2DamageDialog extends Application {
             "DMG_DEX": this.DMG_DEX,
             "DMG_END": this.DMG_END,
             "wounds": this.wounds,
+            "armourText": this.armourText,
             "woundsEffect": this.woundsEffect
         }
     }

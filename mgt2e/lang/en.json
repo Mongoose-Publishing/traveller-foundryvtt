@@ -694,6 +694,7 @@
   "MGT2.Attack.PsionicPower": "Psionic Power ({dm})",
   "MGT2.Attack.PsionicDamage": "+{pp} to damage for each point spent, base +{dmg}",
   "MGT2.Attack.PsionicAP": "+{pp} to AP for each point spent, base {ap}",
+  "MGT2.Attack.DamageBounce": "Damage does not penetrate armour of {target}",
 
   "MGT2.SpacecraftDamageDialog.Title": "Damage Spacecraft",
 
