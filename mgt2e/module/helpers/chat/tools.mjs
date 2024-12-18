@@ -227,106 +227,6 @@ Tools.applyDamageToCha= function(damage, actorData, cha) {
     return 0;
 }
 
-// Apply damage to an actor. Needs to calculate armour.
-Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
-    console.log("************************************")
-    console.log("* Tools.applyDamageTo (DEPRECATED) *")
-    console.log("************************************")
-    let text = "";
-
-    if (!options) {
-        options = "";
-    }
-    if (!damage) {
-        damage = 0;
-    }
-    if (!ap) {
-        ap = 0;
-    }
-    if (!tl) {
-        tl = 0;
-    }
-    if (!actor) {
-        return;
-    }
-
-    console.log(`applyDamageTo: ${damage} AP ${ap} TL ${tl} (${options}) (${traits})`);
-
-    let data = actor.system;
-    let isRanged = true;
-    let armour = 0;
-
-    if (data.armour) {
-        armour = parseInt(data.armour.protection);
-        if (options !== "") {
-            console.log(data.armour);
-            if (data.armour.otherTypes && data.armour.otherTypes.indexOf(options) > -1) {
-                armour += data.armour.otherProtection?parseInt(data.armour.otherProtection):0;
-            }
-        }
-        armour = Math.max(0, armour);
-    }
-    if (hasTrait(traits, "lo-pen")) {
-        let lopen = getTraitValue(traits, "lo-pen");
-        if (lopen > 1) {
-            armour *= lopen;
-        }
-    }
-    if (data.armour && data.armour.archaic && isRanged && tl > data.armour.tl) {
-        // Archaic armour gets halved.
-        armour = parseInt(Math.round(armour / 2));
-    }
-    armour = Math.max(0, armour - ap);
-    let actualDamage = Math.max(0, damage - armour);
-
-    let stun = hasTrait(traits, "stun");
-
-    if (actor.type === "traveller") {
-        // Travellers don't have hits
-        let remaining = actualDamage;
-        // Damage always comes off END first.
-        if (data.damage.END.value < data.characteristics.END.value) {
-            remaining = Tools.applyDamageToCha(remaining, data, "END", stun);
-        }
-        // Now select either STR or DEX. Select the lowest as long as it doesn't take
-        // the characteristic to zero.
-        if (remaining > 0) {
-            let str = data.characteristics.STR.current;
-            if (str <= data.characteristics.DEX.current && str > remaining) {
-                remaining = Tools.applyDamageToCha(remaining, data, "STR");
-                Tools.applyDamageToCha(remaining, data, "DEX");
-            } else {
-                remaining = Tools.applyDamageToCha(remaining, data, "DEX");
-                Tools.applyDamageToCha(remaining, data, "STR");
-            }
-        }
-        actor.update({"data.damage": data.damage});
-        return;
-    } else {
-        if (!data.hits.damage) {
-            data.hits.damage = 0;
-        }
-        data.hits.damage += actualDamage;
-        data.hits.value = parseInt(data.hits.max) - parseInt(data.hits.damage);
-        if (stun) {
-            data.hits.tmpDamage += actualDamage;
-        }
-        if (data.hits.tmpDamage > data.hits.damage) {
-            data.hits.tmpDamage = data.hits.damage;
-        }
-        if (stun && data.characteristics) {
-            if (data.hits.tmpDamage > data.characteristics.END.value) {
-                let remaining = data.hits.tmpDamage - data.characteristics.END.value;
-                actor.setFlag("mgt2e", "stunned", true);
-                actor.setFlag("mgt2e", "stunnedRounds",
-                    actor.getFlag("mgt2e", "stunnedRounds")?
-                        parseInt(actor.getFlag("mgt2e", "stunnedRounds"))+remaining:remaining);
-            }
-        }
-    }
-    actor.update({"system.hits": data.hits});
-}
-
 Tools.showBlastRadius = async function(x, y, damageOptions) {
     console.log("showBlastRadius: ");
     console.log(damageOptions);
@@ -373,18 +273,6 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
             ui.notifications.warn("Cannot apply damage to " + token.name);
             continue;
         }
-        if (damageOptions.blastRadius) {
-            console.log("BLAST RADIUS");
-            console.log(token);
-            let x = token.center.x;
-            let y = token.center.y;
-            console.log(x);
-
-            let pixelRadius = canvas.grid.size * damageOptions.blastRadius / canvas.grid.distance;
-            const opts = {
-            }
-        }
-
         token.actor.applyDamage(damage, damageOptions, (tokens.size > 1));
     }
 }
@@ -396,14 +284,14 @@ Tools.damage = function(chatData, args) {
         return;
     }
     let damage = parseInt(args.shift());
-    let damageOptions = { "traits": ""};
+    let damageOptions = { "traits": "", "damage": damage, "ap": 0, "effect": 0, "scale": "traveller" };
     while (args.length > 0) {
         if (args[0] === "noui") {
             damageOptions.noUI = true;
             args.shift();
             continue;
         }
-        damageOptions.traits += args.shift();
+        damageOptions.traits += args.shift() + " ";
     }
     Tools.applyDamageToTokens(damage, damageOptions);
 };
