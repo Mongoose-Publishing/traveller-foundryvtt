@@ -100,8 +100,13 @@
                     </select>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
-                    <input class="field-value" readonly name="system.hits.max" type="text" value="{{system.hits.max}}"/>
+                    <label for="system.hits.max" class="field-label">
+                        {{localize 'MGT2.TravellerSheet.MaxHits'}}
+                    </label>
+                    <input class="field-value {{#unless system.settings.autoHits}}writable{{/unless}}"
+                           {{#if system.settings.autoHits}}readonly{{/if}}
+                           name="system.hits.max" type="text"
+                           value="{{system.hits.max}}"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="system.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.Cargo'}}</label>
@@ -281,9 +286,10 @@
                                 <label for="system.spacecraft.navy.naval" class="resource-label">Naval vessel</label>
                             </div>
 
-                            {{#if system.spacecraft.navy.naval}}
-                                Divisions
-                            {{/if}}
+                            <div class="resource flex-group-left">
+                                <input type="checkbox" name="system.settings.autoHits" {{checked system.settings.autoHits}} data-dtype="Boolean" />
+                                <label for="system.settings.autoHits" class="resource-label">{{localize 'MGT2.TravellerSheet.AutoHits'}}</label>
+                            </div>
                         </div>
 
 

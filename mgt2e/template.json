@@ -69,7 +69,8 @@
             "columns": 3,
             "lockCharacteristics": false,
             "lockSkills": false,
-            "autoAge":  true
+            "autoAge":  true,
+            "autoHits": true
         }
       },
       "sophont": {
@@ -197,6 +198,9 @@
         "initiative": {
           "base": 0,
           "value": 0
+        },
+        "settings": {
+          "autoHits": true
         },
         "spacecraft": {
             "dtons": 100,

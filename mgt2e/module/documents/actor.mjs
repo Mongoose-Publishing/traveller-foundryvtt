@@ -292,7 +292,7 @@ export class MgT2Actor extends Actor {
             actorData.characteristics[char].dm = this.getModifier(value);
         }
 
-        if (actorData.hits) {
+        if (actorData.hits && actorData.settings.autoHits) {
             let maxHits = actorData.characteristics.STR.value +
                 actorData.characteristics.DEX.value +
                 actorData.characteristics.END.value;

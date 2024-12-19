@@ -104,12 +104,11 @@
                 </div>
                 <div class="resource flex-group-center">
                     <label for="system.hits.value" class="field-label">MAX HITS</label>
-                    <!--
-                    <input type="text" name="system.hits.value" value="{{system.hits.value}}"
-                           data-dtype="Number"/> /
-                           -->
-                    <input class="field-value" type="text" name="system.hits.max" value="{{system.hits.max}}"
-                           readonly data-dtype="Number"/>
+                    <input class="field-value {{#unless system.settings.autoHits}}writable{{/unless}}"
+                           {{#if system.settings.autoHits}}readonly{{/if}}
+                           type="text" name="system.hits.max"
+                           value="{{system.hits.max}}"
+                           data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center dodgeRoll" title="Click to dodge, shift-click to reset">
                     <label for="system.dodge" class="field-label">

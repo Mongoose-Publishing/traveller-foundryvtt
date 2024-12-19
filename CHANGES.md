@@ -18,6 +18,8 @@
 * Damage dialog now displays how armour is calculated, based on type of attack and where
   protection is coming from.
 * When an attack is made, display distance to all current targets.
+* Spacecraft and NPCs now have a configurable to allow HITS to be manually or automatically calculated.
+  Previously, they were always calculated automatically, with no option to override.
 
 ## v0.11.2 (Beta)
 

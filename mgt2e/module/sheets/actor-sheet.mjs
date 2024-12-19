@@ -333,7 +333,7 @@ export class MgT2ActorSheet extends ActorSheet {
             }
         }
 
-        if (hits !== actorData.hits.max) {
+        if (hits !== actorData.hits.max && actorData.settings.autoHits) {
             actorData.hits.max = hits;
             actorData.hits.value = hits - actorData.hits.damage;
         }
