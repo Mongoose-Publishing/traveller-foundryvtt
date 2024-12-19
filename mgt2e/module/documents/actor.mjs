@@ -474,12 +474,20 @@ export class MgT2Actor extends Actor {
                       armourText += `${i.name} +${value} `;
                   }
               }
+          } else if (i.type === "armour" && i.system.status === MgT2Item.EQUIPPED) {
+              if (i.system.armour.psi === "1") {
+                  // Is Psi enhanced armour being worn?
+                  let psi = this.system.characteristics["PSI"].current;
+                  if (psi > 0) {
+                      psi = parseInt((psi + 1) / 2);
+                      armour += psi;
+                      armourText += `PSI +${psi} `;
+                  }
+              }
           }
       }
       options.finalArmour = armour;
-      if (armourText.length > 0) {
-          options.armourText = armourText;
-      }
+      options.armourText = armourText;
 
       if (options.ap) {
           // If AP has already been calculated, use that.

@@ -1,5 +1,9 @@
 {
   "MGT2.Title": "Mongoose Traveller 2e",
+
+  "MGT2.Base.Yes": "Yes",
+  "MGT2.Base.No": "No",
+
   "MGT2.Settings.Verbose.Name": "Verbose Skill Rolls",
   "MGT2.Settings.Verbose.Hint": "Displays effect and chain results of skill rolls.",
   "MGT2.Settings.ChatIcons.Name": "Use Chat Icons",
@@ -739,6 +743,8 @@
   "MGT2.Armour.RequiresSkill": "Requires",
   "MGT2.Armour.Powered": "Powered",
   "MGT2.Armour.Ablative": "Ablative",
+  "MGT2.Armour.Psi": "Psi",
+  "MGT2.Armour.VaccSuit": "Vacc Suit {skill}",
 
   "MGT2.Effects.AugmentEffects": "Augment Effects",
   "MGT2.Effects.Create": "Add",

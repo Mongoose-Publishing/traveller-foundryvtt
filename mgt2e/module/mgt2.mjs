@@ -789,7 +789,6 @@ Handlebars.registerHelper('toLowerCase', function(str) {
 });
 
 Handlebars.registerHelper('toPlainText', function(html) {
-    console.log(html);
     if (html && typeof html === 'string') {
         let text = html.replace(/<[^>]*>/g, "");
 

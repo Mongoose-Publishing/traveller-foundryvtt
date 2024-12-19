@@ -26,7 +26,8 @@ export class MgT2DamageDialog extends Application {
         this.damageOptions = damageOptions;
         const data = actor.system;
 
-        this.damage = damageOptions.damage + damageOptions.effect?damageOptions.effect:0;
+        damageOptions.effect = parseInt(damageOptions.effect);
+        this.damage = parseInt(damageOptions.damage) + ((damageOptions.effect > 0)?damageOptions.effect:0);
         this.ap = damageOptions.ap?damageOptions.ap:0;
         this.laser = damageOptions.damageType;
         this.stun = hasTrait(damageOptions.traits, "stun");

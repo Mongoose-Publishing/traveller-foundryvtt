@@ -14,17 +14,12 @@
                 </div>
             </div>
 
-            <div class="shadow item-side-panel">
-                <div class="resource">
+            <div class="shadow item-side-panel grid grid-2col">
+                <div class="resource grid-span-2">
                     <label for="system.armour.form" class="resource-label">{{localize "MGT2.Armour.FormType"}}</label>
                     <br/>
                     <select name="system.armour.form">
-                        {{#select system.armour.form}}
-                            <option value="standard">{{localize "MGT2.Armour.Form.Standard"}}</option>
-                            <option value="layered">{{localize "MGT2.Armour.Form.Layered"}}</option>
-                            <option value="stackable">{{localize "MGT2.Armour.Form.Stackable"}}</option>
-                            <option value="natural">{{localize "MGT2.Armour.Form.Natural"}}</option>
-                        {{/select}}
+                        {{selectOptions ARMOUR_FORM selected=system.armour.form}}
                     </select>
                 </div>
 
@@ -32,10 +27,7 @@
                     <label for="system.armour.archaic" class="resource-label">{{localize "MGT2.Armour.Archaic"}}</label>
                     <br/>
                     <select name="system.armour.archaic">
-                      {{#select system.armour.archaic}}
-                          <option value="0">No</option>
-                          <option value="1">Yes</option>
-                      {{/select}}
+                        {{selectOptions YESNO selected=system.armour.archaic}}
                     </select>
                 </div>
 
@@ -43,10 +35,7 @@
                     <label for="system.armour.ablat" class="resource-label">{{localize "MGT2.Armour.Ablative"}}</label>
                     <br/>
                     <select name="system.armour.ablat">
-                        {{#select system.armour.ablat}}
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                        {{/select}}
+                        {{selectOptions YESNO selected=system.armour.ablat}}
                     </select>
                 </div>
 
@@ -54,20 +43,25 @@
                     <label for="system.armour.powered" class="resource-label">{{localize "MGT2.Armour.Powered"}}</label>
                     <br/>
                     <select name="system.armour.powered">
-                        {{#select system.armour.powered}}
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                        {{/select}}
+                        {{selectOptions YESNO selected=system.armour.powered}}
                     </select>
                 </div>
 
                 <div class="resource">
+                    <label for="system.armour.psi" class="resource-label">{{localize "MGT2.Armour.Psi"}}</label>
+                    <br/>
+                    <select name="system.armour.psi">
+                        {{selectOptions YESNO selected=system.armour.psi}}
+                    </select>
+                </div>
+
+                <div class="resource grid-span-2">
                     <label class="resource-label">{{localize "MGT2.Armour.Duration"}}</label>
                     <br/>
                     <input type="text" name="system.armour.duration" value="{{system.armour.duration}}" data-dtype="Number"/>
                 </div>
 
-                <div class="resource">
+                <div class="resource grid-span-2">
                     <label class="resource-label">{{localize "MGT2.Armour.Slots"}}</label>
                     <br/>
                     <input class="armour-value" type="text" name="system.armour.slots" title="Slots"
@@ -83,33 +77,7 @@
             <div class="shadow">
                 <div class="resources grid grid-3col flex-group-left">
                     <div class="resource">
-                        <label class="resource-label">{{localize "MGT2.Item.TL"}}</label>
-                        <br/>
-                        <select class="expand writable" name="system.tl" title="Typical TL item is available">
-                            {{#select system.tl}}
-                            <option value="0">0 ({{localize "MGT2.Item.Tech.0"}})</option>
-                            <option value="1">1 ({{localize "MGT2.Item.Tech.1"}})</option>
-                            <option value="2">2 ({{localize "MGT2.Item.Tech.2"}})</option>
-                            <option value="3">3 ({{localize "MGT2.Item.Tech.3"}})</option>
-                            <option value="4">4 ({{localize "MGT2.Item.Tech.4"}})</option>
-                            <option value="5">5 ({{localize "MGT2.Item.Tech.5"}})</option>
-                            <option value="6">6 ({{localize "MGT2.Item.Tech.6"}})</option>
-                            <option value="7">7 ({{localize "MGT2.Item.Tech.7"}})</option>
-                            <option value="8">8 ({{localize "MGT2.Item.Tech.8"}})</option>
-                            <option value="9">9 ({{localize "MGT2.Item.Tech.9"}})</option>
-                            <option value="10">10 ({{localize "MGT2.Item.Tech.10"}})</option>
-                            <option value="11">11 ({{localize "MGT2.Item.Tech.11"}})</option>
-                            <option value="12">12 ({{localize "MGT2.Item.Tech.12"}})</option>
-                            <option value="13">13 ({{localize "MGT2.Item.Tech.13"}})</option>
-                            <option value="14">14 ({{localize "MGT2.Item.Tech.14"}})</option>
-                            <option value="15">15 ({{localize "MGT2.Item.Tech.15"}})</option>
-                            <option value="16">16 ({{localize "MGT2.Item.Tech.16"}})</option>
-                            <option value="17">17 ({{localize "MGT2.Item.Tech.17"}})</option>
-                            <option value="17">17 ({{localize "MGT2.Item.Tech.18"}})</option>
-                            <option value="17">17 ({{localize "MGT2.Item.Tech.19"}})</option>
-                            <option value="17">17 ({{localize "MGT2.Item.Tech.20"}})</option>
-                            {{/select}}
-                        </select>
+                        {{> "systems/mgt2e/templates/item/parts/item-techLevel.html"}}
                     </div>
                     <div class="resource">
                         <label class="resource-label">{{localize "MGT2.Item.Weight"}}</label>
@@ -156,13 +124,7 @@
                         <label class="resource-label">{{localize "MGT2.Armour.RequiresSkill"}}</label>
                         <br/>
                         <select class="expand writable" name="system.armour.skill">
-                            {{#select system.armour.skill}}
-                                <option value="">-</option>
-                                <option value="0">Vacc Suit 0</option>
-                                <option value="1">Vacc Suit 1</option>
-                                <option value="2">Vacc Suit 2</option>
-                                <option value="3">Vacc Suit 3</option>
-                            {{/select}}
+                            {{selectOptions VACC_SUIT selected=system.armour.skill}}
                         </select>
                     </div>
                 </div>
