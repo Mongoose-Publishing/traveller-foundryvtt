@@ -6,7 +6,7 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
-## Develop
+## v0.11.3 (Beta)
 
 * Weapons with the oneUse trait now decrement their quantity count after being used.
 * Attacks with a blast radius can now be dragged onto a scene to automatically show the blast template.
