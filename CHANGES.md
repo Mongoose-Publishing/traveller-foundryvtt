@@ -12,6 +12,11 @@
 * Attacks with a blast radius can now be dragged onto a scene to automatically show the blast template.
 * Added a new setting "Blast effect divergence distance" which automatically randomises position of a
   blast effect template if the attack was a miss. Defaults to none, for no divergence.
+* Psi traits for weapons are now implemented. Can modify both damage and AP of the attack by
+  spending PSI points.
+* Psi trait for armour is now implemented. Adds half PSI value to protection if enabled.
+* Damage dialog now displays how armour is calculated, based on type of attack and where
+  protection is coming from.
 
 ## v0.11.2 (Beta)
 
