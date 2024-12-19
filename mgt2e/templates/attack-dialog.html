@@ -26,6 +26,18 @@
         </div>
     {{/if}}
 
+    {{#if TARGETS}}
+        <div class="shadow">
+            <h4>Targets for {{attackerName}}</h4>
+
+            <ul class="targets">
+                {{#each TARGETS as |target|}}
+                    <li>{{target.distance}}m - {{target.name}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+
     <div class="shadow grid grid-2col">
         <div class="boon-selection">
             <label for="dicetype" class="skillDialogLabel">Roll Type</label>

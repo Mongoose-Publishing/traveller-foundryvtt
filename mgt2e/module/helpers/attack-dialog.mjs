@@ -117,7 +117,66 @@ export class MgT2AttackDialog extends Application {
         this.options.title = this.weapon.name;
         if (this.skill) {
         }
+
+        this.calculateTargets();
     }
+
+    async calculateTargets() {
+        const user = game.users.current;
+        const selected = canvas.tokens.controlled;
+        const targets = user.targets;
+
+        console.log(selected);
+        console.log(targets);
+
+        if (selected.length !== 1) {
+            // We must have exactly one token selected. This is the current user.
+            return;
+        }
+        console.log("We have selected 1 token");
+
+        if (targets.length < 1) {
+            // We must also have some targets selected.
+            return;
+        }
+        this.TARGETS = [];
+
+        this.attackerName = selected[0].name;
+        const X = parseInt(selected[0].center.x);
+        const Y = parseInt(selected[0].center.y);
+        console.log("Me: " + X + ", " + Y);
+
+        for (let token of targets) {
+            let x = parseInt(token.center.x);
+            let y = parseInt(token.center.y);
+            let d = 0;
+            const dx = Math.abs(X - x);
+            const dy = Math.abs(Y - y);
+
+            if (true) {
+                // True euclidean distance.
+                d = Math.sqrt(dx * dx + dy * dy);
+            } else {
+                const diagonal = Math.min( dx, dy);
+                const straight = Math.abs(dx - dy);
+                d = diagonal + straight;
+            }
+            let metres = (d / canvas.grid.size) * canvas.grid.distance;
+            metres = parseFloat(metres.toFixed(1));
+            console.log(token.name + " " + metres + "m");
+
+            this.TARGETS.push({ "name": token.name, "distance": metres});
+            this.TARGETS.sort((a, b) => {
+                if (a.distance !== b.distance) {
+                    return a.distance - b.distance;
+                } else {
+                    return a.name.localeCompare(b.name);
+                }
+            });
+        }
+
+    }
+
 
     getData() {
         return {
@@ -151,7 +210,9 @@ export class MgT2AttackDialog extends Application {
             "psiDmgBonus": this.psiDmgBonus,
             "psiApBonus": this.psiApBonus,
             "RANGES": this.RANGES,
-            "ROLLTYPES": this.ROLLTYPES
+            "ROLLTYPES": this.ROLLTYPES,
+            "attackerName": this.attackerName,
+            "TARGETS": this.TARGETS
         }
     }
 
