@@ -17,6 +17,7 @@
 * Psi trait for armour is now implemented. Adds half PSI value to protection if enabled.
 * Damage dialog now displays how armour is calculated, based on type of attack and where
   protection is coming from.
+* When an attack is made, display distance to all current targets.
 
 ## v0.11.2 (Beta)
 
