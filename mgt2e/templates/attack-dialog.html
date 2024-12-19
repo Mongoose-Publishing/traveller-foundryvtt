@@ -9,15 +9,28 @@
         {{/if}}
     </div>
 
+    {{#if PSI}}
+        <div class="shadow">
+            <b>{{localize "MGT2.Attack.PsionicPower" dm=PSI_DM}}</b>
+            {{#if psiDmgBonus}}
+                <p>{{localize "MGT2.Attack.PsionicDamage" pp=psiDmgBonus dmg=PSI_BONUS_DMG}}</p>
+            {{/if}}
+            {{#if psiApBonus}}
+                <p>{{localize "MGT2.Attack.PsionicAP" pp=psiApBonus ap=PSI_BONUS_AP}}</p>
+            {{/if}}
+            <p>
+                <select class="attackDialogPsi" name="psiPoints">
+                    {{selectOptions PSI selected=0}}
+                </select>
+            </p>
+        </div>
+    {{/if}}
+
     <div class="shadow grid grid-2col">
         <div class="boon-selection">
             <label for="dicetype" class="skillDialogLabel">Roll Type</label>
             <select class="skillDialogRollType" name="dicetype">
-                {{#select "normal"}}
-                    <option value="normal">Normal</option>
-                    <option value="boon">Boon</option>
-                    <option value="bane">Bane</option>
-                {{/select}}
+                {{selectOptions ROLLTYPES selected="normal"}}
             </select>
         </div>
 

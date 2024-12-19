@@ -431,36 +431,68 @@ export class MgT2Actor extends Actor {
       console.log(`applyDamageToPerson: Damage ${damage}`);
 
       let armour = 0;
+      let armourText = ""
+      options.armour = 0;
 
       if (this.system.armour && isNonZero(this.system.armour.protection)) {
           armour = parseInt(this.system.armour.protection);
           if (!isNumber(armour)) {
               armour = 0;
           }
-          if (options.damageType !== "") {
-              let armourData = this.system.armour;
-              if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
-                  armour += armourData.otherProtection ? parseInt(armourData.otherProtection) : 0;
-              }
-          }
+          options.armour = armour;
+          armourText = game.i18n.localize("MGT2.Armour.Protection") + " " + armour + " ";
           armour = Math.max(0, armour);
+          // Halve protection value if armour is archaic and weapon TL is higher.
           if (parseInt(this.system.armour.archaic) === 1 && options.ranged) {
               if (parseInt(options.tl) > parseInt(this.system.tl)) {
                   armour = parseInt((armour + 1) / 2);
+                  armourText += `(${game.i18n.localize("MGT2.Armour.Archaic")}) `;
               }
           }
           console.log("Modified armour value is " + armour);
       }
+      console.log("Damage type is " + options.damageType);
+      if (this.system.armour && options.damageType !== "") {
+          let armourData = this.system.armour;
+          if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
+              let otherProt = armourData.otherProtection ? parseInt(armourData.otherProtection) : 0;
+              if (otherProt > 0) {
+                  armour += otherProt;
+                  armourText += `${options.damageType} + ${otherProt} `;
+              }
+          }
+      }
+      console.log(armour);
+
       // Look for active weapons which provide protection.
       for (let i of this.items) {
           if (i.type === "weapon" && i.system.status === MgT2Item.EQUIPPED) {
               if (hasTrait(i.system.weapon.traits, "protection")) {
-                  armour += getTraitValue(i.system.weapon.traits, "protection");
+                  let value = getTraitValue(i.system.weapon.traits, "protection");
+                  if (value > 0) {
+                      armour += value;
+                      armourText += `${i.name} +${value} `;
+                  }
+              }
+          } else if (i.type === "armour" && i.system.status === MgT2Item.EQUIPPED) {
+              if (i.system.armour.psi === "1") {
+                  // Is Psi enhanced armour being worn?
+                  let psi = this.system.characteristics["PSI"].current;
+                  if (psi > 0) {
+                      psi = parseInt((psi + 1) / 2);
+                      armour += psi;
+                      armourText += `PSI +${psi} `;
+                  }
               }
           }
       }
+      options.finalArmour = armour;
+      options.armourText = armourText;
 
-      if (hasTrait(options.traits, "ap")) {
+      if (options.ap) {
+          // If AP has already been calculated, use that.
+          armour = Math.max(0, armour - options.ap);
+      } else if (hasTrait(options.traits, "ap")) {
           let ap = parseInt(getTraitValue(options.traits, "ap"));
           armour = Math.max(0, armour - ap);
       } else if (hasTrait(options.traits, "loPen")) {
@@ -475,6 +507,11 @@ export class MgT2Actor extends Actor {
       }
       if (damage < 1) {
           // No damage to be applied.
+          ui.notifications.info(
+              game.i18n.format("MGT2.Attack.DamageBounce",
+                  { "target": this.name }
+              )
+          );
           return;
       }
 

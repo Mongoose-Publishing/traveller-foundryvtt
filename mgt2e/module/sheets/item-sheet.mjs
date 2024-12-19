@@ -76,6 +76,28 @@ export class MgT2ItemSheet extends ItemSheet {
             context.skills = MGT2.SKILLS;
         }
 
+        if (context.item.type === "armour") {
+            context.YESNO = {
+                "0": game.i18n.localize("MGT2.Base.No"),
+                "1": game.i18n.localize("MGT2.Base.Yes")
+            }
+
+            context.ARMOUR_FORM = {
+                "standard": game.i18n.localize("MGT2.Armour.Form.Standard"),
+                "layered": game.i18n.localize("MGT2.Armour.Form.Layered"),
+                "stackable": game.i18n.localize("MGT2.Armour.Form.Stackable"),
+                "natural": game.i18n.localize("MGT2.Armour.Form.Natural")
+            }
+
+            context.VACC_SUIT = [
+                { value: "", "label": "-"},
+                { value: "0", "label": game.i18n.format("MGT2.Armour.VaccSuit", { "skill": 0 })},
+                { value: "1", "label": game.i18n.format("MGT2.Armour.VaccSuit", { "skill": 1 })},
+                { value: "2", "label": game.i18n.format("MGT2.Armour.VaccSuit", { "skill": 2 })},
+                { value: "3", "label": game.i18n.format("MGT2.Armour.VaccSuit", { "skill": 3 })},
+            ];
+        }
+
         if (context.item.type === "software") {
             if (context.item.parent && !context.item.system.status) {
                 context.item.system.status = MgT2Item.RUNNING;
@@ -781,7 +803,7 @@ export class MgT2ItemSheet extends ItemSheet {
 
     _rollDamage(item) {
         console.log("_rollDamage:");
-        rollAttack(null, item, 0, 0);
+        rollAttack(null, item, { "skillDM": 0, "dm": 0 });
     }
 
     _incrementQuantity(item) {

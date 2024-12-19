@@ -22,6 +22,7 @@ export class MgT2AttackDialog extends Application {
         this.cha = this.weapon.system.weapon.characteristic;
         this.skill = this.weapon.system.weapon.skill.split(".")[0];
         this.speciality = this.weapon.system.weapon.skill.split(".")[1];
+        this.hasPsi = false;
         this.auto = 1;
         this.fullAuto = 1; // Full auto uses three times the ammo.
         this.rangeUnit = "m";
@@ -75,13 +76,43 @@ export class MgT2AttackDialog extends Application {
             this.RANGES["+0"] = `Medium (${this.range}${this.rangeUnit}, +0)`;
             this.RANGES["-2"] = `Long (${this.longRange}${this.rangeUnit}, -2)`;
             this.RANGES["-4"] = `Extreme (${this.extremeRange}${this.rangeUnit}, -4)`;
-
         } else {
             this.parryBonus = weapon.system.weapon.parryBonus;
             if (!this.parryBonus) {
                 this.parryBonus = 0;
             }
         }
+
+        if (weapon.hasTrait("psiDmg") || weapon.hasTrait("psiAp")) {
+            this.hasPsi = true;
+
+            if (actor.system.characteristics["PSI"] && actor.system.characteristics["PSI"].current > 0) {
+                let psi = actor.system.characteristics["PSI"];
+
+                this.PSI = {};
+                for (let i=0; i <= psi.current; i++) {
+                    this.PSI[i] = `PSI ${i}`;
+                }
+                this.PSI_DM = psi.dm;
+                this.psiDmgBonus = getTraitValue(weapon.system.weapon.traits, "psiDmg");
+                this.psiApBonus = getTraitValue(weapon.system.weapon.traits, "psiAp");
+
+                if (this.PSI_DM > 0) {
+                    this.PSI_BONUS_DMG = this.PSI_DM * this.psiDmgBonus;
+                    this.PSI_BONUS_AP = this.PSI_DM * this.psiApBonus;
+                } else {
+                    this.PSI_BONUS_DMG = 0;
+                    this.PSI_BONUS_AP = 0;
+                }
+            }
+        }
+
+        this.ROLLTYPES = {
+            "normal": game.i18n.localize("MGT2.TravellerSheet.Normal"),
+            "boon": game.i18n.localize("MGT2.TravellerSheet.Boon"),
+            "bane": game.i18n.localize("MGT2.TravellerSheet.Bane")
+        }
+
 
         this.options.title = this.weapon.name;
         if (this.skill) {
@@ -113,7 +144,14 @@ export class MgT2AttackDialog extends Application {
             "outOfAmmo": this.outOfAmmo,
             "currentAmmo": this.currentAmmo,
             "AUTO": this.AUTO,
-            "RANGES": this.RANGES
+            "PSI": this.PSI,
+            "PSI_DM": this.PSI_DM,
+            "PSI_BONUS_DMG": this.PSI_BONUS_DMG,
+            "PSI_BONUS_AP": this.PSI_BONUS_AP,
+            "psiDmgBonus": this.psiDmgBonus,
+            "psiApBonus": this.psiApBonus,
+            "RANGES": this.RANGES,
+            "ROLLTYPES": this.ROLLTYPES
         }
     }
 
@@ -138,6 +176,21 @@ export class MgT2AttackDialog extends Application {
         if (html.find(".attackDialogAuto")[0]) {
             autoOption = html.find(".attackDialogAuto")[0].value;
         }
+
+        let psiPoints = 0;
+        if (html.find(".attackDialogPsi")[0]) {
+            psiPoints = parseInt(html.find(".attackDialogPsi")[0].value);
+        }
+
+        if (psiPoints > 0) {
+            if (!this.actor.system.damage["PSI"]) {
+                this.actor.system.damage["PSI"] = { "value": 0 };
+            }
+            this.actor.system.damage["PSI"].value += psiPoints;
+            this.actor.update({"system.damage": this.actor.system.damage});
+        }
+
+
         let shotsFired = 1;
         if (this.weapon.useAmmo()) {
             if (this.outOfAmmo) {
@@ -160,7 +213,20 @@ export class MgT2AttackDialog extends Application {
             }
         }
 
-        rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM, autoOption, false, shotsFired);
+        let attackOptions = {
+            "skillDM": this.score,
+            "dm": dm,
+            "rollType": rollType,
+            "rangeDM": rangeDM,
+            "autoOption": autoOption,
+            "isParry": false,
+            "shotsFired": shotsFired,
+            "psiDM": this.PSI_DM,
+            "psiPoints": psiPoints
+        };
+
+        rollAttack(this.actor, this.weapon, attackOptions);
+        //rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM, autoOption, false, shotsFired);
 
         this.close();
     }
@@ -174,7 +240,15 @@ export class MgT2AttackDialog extends Application {
         }
         let rollType = html.find(".skillDialogRollType")[0].value;
 
-        rollAttack(this.actor, this.weapon, this.parryScore, dm, rollType, null, null, true);
+        let attackOptions = {
+            "skillDM": this.parryScore,
+            "dm": dm,
+            "rollType": rollType,
+            "isParry": true
+        }
+
+        rollAttack(this.actor, this.weapon, attackOptions);
+        //rollAttack(this.actor, this.weapon, this.parryScore, dm, rollType, null, null, true);
 
         this.close();
     }

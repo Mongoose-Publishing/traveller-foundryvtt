@@ -1,5 +1,9 @@
 {
   "MGT2.Title": "Mongoose Traveller 2e",
+
+  "MGT2.Base.Yes": "Yes",
+  "MGT2.Base.No": "No",
+
   "MGT2.Settings.Verbose.Name": "Verbose Skill Rolls",
   "MGT2.Settings.Verbose.Hint": "Displays effect and chain results of skill rolls.",
   "MGT2.Settings.ChatIcons.Name": "Use Chat Icons",
@@ -316,6 +320,7 @@
   "MGT2.TravellerSheet.PhysicalPenalty": "Physical",
   "MGT2.TravellerSheet.RollUntrained": "Roll untrained",
   "MGT2.TravellerSheet.Untrained": "untrained",
+  "MGT2.TravellerSheet.Normal": "Normal",
   "MGT2.TravellerSheet.Boon": "Boon",
   "MGT2.TravellerSheet.Bane": "Bane",
   "MGT2.TravellerSheet.UseCustomDice": "Racial package",
@@ -690,6 +695,10 @@
   "MGT2.Attack.Dangerous": "Weapon has exploded!",
   "MGT2.Attack.DragMe": "Drag to character sheet, or click to apply to selected tokens.",
   "MGT2.Attack.DragMeBlast": "Drag to canvas to show blast radius",
+  "MGT2.Attack.PsionicPower": "Psionic Power ({dm})",
+  "MGT2.Attack.PsionicDamage": "+{pp} to damage for each point spent, base +{dmg}",
+  "MGT2.Attack.PsionicAP": "+{pp} to AP for each point spent, base {ap}",
+  "MGT2.Attack.DamageBounce": "Damage does not penetrate armour of {target}",
 
   "MGT2.SpacecraftDamageDialog.Title": "Damage Spacecraft",
 
@@ -734,6 +743,8 @@
   "MGT2.Armour.RequiresSkill": "Requires",
   "MGT2.Armour.Powered": "Powered",
   "MGT2.Armour.Ablative": "Ablative",
+  "MGT2.Armour.Psi": "Psi",
+  "MGT2.Armour.VaccSuit": "Vacc Suit {skill}",
 
   "MGT2.Effects.AugmentEffects": "Augment Effects",
   "MGT2.Effects.Create": "Add",

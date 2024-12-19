@@ -789,7 +789,6 @@ Handlebars.registerHelper('toLowerCase', function(str) {
 });
 
 Handlebars.registerHelper('toPlainText', function(html) {
-    console.log(html);
     if (html && typeof html === 'string') {
         let text = html.replace(/<[^>]*>/g, "");
 
@@ -1056,8 +1055,6 @@ Handlebars.registerHelper('nameQuantity', function(item, context) {
    if (extra) {
        name = `${name} [${extra}]`;
    }
-
-   console.log("Sidebar is " + context + " for " + item.name);
 
    if (quantity && parseInt(quantity) > 1) {
        if (context === "sidebar") {

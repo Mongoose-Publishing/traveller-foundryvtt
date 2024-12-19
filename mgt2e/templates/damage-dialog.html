@@ -14,20 +14,26 @@
     <div class="shadow grid grid-4col">
         <div class="resource flex-group-center">
             <label for="damage" class="resource-label">DAMAGE</label>
-            <input type="text" name="damage" value="{{damage}}" data-dtype="Number"/>
+            <input type="text" name="damage" value="{{damage}}" data-dtype="Number" readonly/>
         </div>
         <div class="resource flex-group-center">
             <label for="ap" class="resource-label">AP</label>
-            <input type="text" name="ap" value="{{ap}}" data-dtype="Number"/>
+            <input type="text" name="ap" value="{{ap}}" data-dtype="Number" readonly/>
         </div>
         <div class="resource flex-group-center">
             <label for="armour" class="resource-label">ARMOUR</label>
-            <input type="text" name="armour" value="{{armour}}" data-dtype="Number"/>
+            <input type="text" name="armour" value="{{armour}}" data-dtype="Number" readonly/>
         </div>
         <div class="resource flex-group-center">
             <label for="actualDamage" class="resource-label">ACTUAL</label>
-            <input type="text" name="actualDamage" value="{{actualDamage}}" data-dtype="Number"/>
+            <input type="text" name="actualDamage" value="{{actualDamage}}" data-dtype="Number" readonly/>
         </div>
+
+        {{#if armourText}}
+            <div class="flex-group-center grid-span-4">
+                {{armourText}}
+            </div>
+        {{/if}}
     </div>
 
     <div class="shadow">

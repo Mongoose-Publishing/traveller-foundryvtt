@@ -91,19 +91,28 @@ export function getTraitValue(traits, trait) {
     return 0;
 }
 
-export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry, shotsFired) {
+//export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry, shotsFired) {
+export async function rollAttack(actor, weapon, attackOptions) {
     const   system = actor?actor.system:null;
     let     content = "Attack";
 
     console.log("rollAttack:");
     console.log(weapon);
+    console.log(attackOptions);
+
+    if (!attackOptions.dm) {
+        attackOptions.dm = 0;
+    }
+    if (!attackOptions.skillDM) {
+        attackOptions.skillDM = 0;
+    }
 
     let baseRange = weapon.system.weapon.range;
     let rangeBand = null;
     let rangeDistance = baseRange;
     let rangeUnit = "m";
-    if (range !== undefined && range !== null && !isParry) {
-        switch (range) {
+    if (attackOptions.rangeDM !== undefined && attackOptions.rangeDM !== null && !attackOptions.isParry) {
+        switch (attackOptions.rangeDM) {
             case +1:
                 rangeBand = "Short";
                 rangeDistance = parseInt(rangeDistance / 4);
@@ -127,14 +136,14 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
 
     // Normal, Boon or Bane dice roll.
     let dice = "2D6";
-    if (rollType === "boon") {
+    if (attackOptions.rollType === "boon") {
         dice = "3D6k2";
-    } else if (rollType === "bane") {
+    } else if (attackOptions.rollType === "bane") {
         dice = "3D6kl2";
     }
 
-    if (skillDM !== 0) {
-        dice += ` + ${skillDM}`;
+    if (attackOptions.skillDM !== 0) {
+        dice += ` + ${attackOptions.skillDM}`;
     }
     if (system) {
         if (system.modifiers && system.modifiers.encumbrance.dm !== 0) {
@@ -188,15 +197,15 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
         content += `<img class="skillcheck-thumb" alt="${actor.name}" src="${actor.thumbnail}"/>`;
     }
     content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
-    content += `<b>Skill DM:</b> ${skillDM}`;
-    if (dm && parseInt(dm) < 0) {
-        content += " " + dm;
-    } else if (dm && parseInt(dm) > 0) {
-        content += " +" + dm;
+    content += `<b>Skill DM:</b> ${attackOptions.skillDM}`;
+    if (attackOptions.dm && parseInt(attackOptions.dm) < 0) {
+        content += " " + attackOptions.dm;
+    } else if (attackOptions.dm && parseInt(attackOptions.dm) > 0) {
+        content += " +" + attackOptions.dm;
     }
-    if (rollType && rollType === "boon") {
+    if (attackOptions.rollType && attackOptions.rollType === "boon") {
         content += "<span class='boon'> (boon)</span>";
-    } else if (rollType && rollType === "bane") {
+    } else if (attackOptions.rollType && attackOptions.rollType === "bane") {
         content += "<span class='bane'> (bane)</span>";
     }
     content += "<br/>";
@@ -207,7 +216,38 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
     if (!type) {
         type = "standard";
     }
-    let destructive = dmg.indexOf("*") > -1;
+
+    let traits = weapon.system.weapon.traits;
+
+    if  (weapon.hasTrait("psiDmg")) {
+        let psi = attackOptions.psiDM;
+        let psiDmg = getTraitValue(traits, "psiDmg");
+        let bonus = 0;
+        if (attackOptions.psiDM) {
+            bonus += psi * psiDmg;
+        }
+        if (attackOptions.psiPoints) {
+            bonus += attackOptions.psiPoints * psiDmg;
+        }
+        if (bonus) {
+            dmg += ` + ${bonus}[PSI]`;
+        }
+    }
+    let bonusPsiAP = 0;
+    if (weapon.hasTrait("psiAp")) {
+        let psi = attackOptions.psiDM;
+        let psiAp = getTraitValue(traits, "psiAp");
+        console.log("PsiAp is " + psiAp);
+        if (attackOptions.psiDM) {
+            bonusPsiAP += psi * psiAp;
+        }
+        if (attackOptions.psiPoints) {
+            bonusPsiAP += attackOptions.psiPoints * psiAp;
+        }
+        console.log("Bonus PSI AP: " + bonusPsiAP);
+    }
+
+    let destructive = weapon.hasTrait("destructive");
     let damageBonus = weapon.system.weapon.damageBonus;
     if (damageBonus && actor && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
         damageBonus = actor.system.characteristics[damageBonus].dm;
@@ -218,7 +258,7 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
         }
     }
 
-    if (!isParry) {
+    if (!attackOptions.isParry) {
         content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type === "standard") ? "" : (" (" + type + ")")}<br/>`;
         if (baseRange > 0) {
             content += `<b>Range:</b> ${baseRange}${rangeUnit}<br/>`;
@@ -226,7 +266,6 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
             content += `<b>Melee</b><br/>`;
         }
     }
-    let traits = weapon.system.weapon.traits;
     if (traits && traits !== "") {
         content += `<b>Traits:</b> ${weapon.printWeaponTraits()}<br/>`
     } else {
@@ -249,33 +288,32 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
         }
         if (bulky > 0) {
             content += `<b>Bulky Weapon:</b> -${bulky}`;
-            dm -= bulky;
+            attackOptions.dm -= bulky;
         }
     }
 
-    if (dm && parseInt(dm) !== 0) {
-        if (dm > 0) {
-            dice += ` + ${parseInt(dm)}`;
+    if (attackOptions.dm && parseInt(attackOptions.dm) !== 0) {
+        if (attackOptions.dm > 0) {
+            dice += ` + ${parseInt(attackOptions.dm)}`;
         } else {
-            dice += ` - ${Math.abs(parseInt(dm))}`;
+            dice += ` - ${Math.abs(parseInt(attackOptions.dm))}`;
         }
     }
-    if (range) {
-        if (range > 0) {
-            dice += ` + ${range}[Range]`;
+    if (attackOptions.rangeDM) {
+        if (attackOptions.rangeDM > 0) {
+            dice += ` + ${attackOptions.rangeDM}[Range]`;
         } else {
-            dice += ` - ${Math.abs(range)}[Range]`;
+            dice += ` - ${Math.abs(attackOptions.rangeDM)}[Range]`;
         }
     }
     let attacks = 1;
-    console.log("Shots Fired: " + shotsFired + " on " + autoOption);
-    if (autoOption && autoOption === "burst") {
-        let autoBonus = shotsFired?shotsFired:getTraitValue(traits, "auto");
-        if (destructive) autoBonus = parseInt(autoBonus) * 10;
+    console.log("Shots Fired: " + attackOptions.shotsFired + " on " + attackOptions.autoOption);
+    if (attackOptions.autoOption && attackOptions.autoOption === "burst") {
+        let autoBonus = attackOptions.shotsFired?attackOptions.shotsFired:getTraitValue(traits, "auto");
         dmg = dmg + " + " + autoBonus;
-    } else if (autoOption && autoOption === "full") {
-        attacks = shotsFired?shotsFired:getTraitValue(traits, "auto");
-    } else if (autoOption && autoOption === "noammo") {
+    } else if (attackOptions.autoOption && attackOptions.autoOption === "full") {
+        attacks = attackOptions.shotsFired?attackOptions.shotsFired:getTraitValue(traits, "auto");
+    } else if (attackOptions.autoOption && attackOptions.autoOption === "noammo") {
         attacks = 0;
         content += "<p>No ammo</p>";
     }
@@ -320,17 +358,22 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
             effectClass = "rollCritical";
             effectText = `Critical (+${effect})`;
         }
-        let damageEffect = damageTotal;
-        if (!destructive && effect > 0) {
-            damageEffect = damageTotal + effect;
+
+        if (destructive) {
+            damageTotal *= 10;
         }
-        let ap = 0;
+
+        let damageEffect = damageTotal;
+        if (effect > 0) {
+            damageEffect = damageTotal + effect * (destructive?10:1);
+        }
+        let ap = bonusPsiAP;
         if (hasTrait(traits, "ap")) {
-            ap = getTraitValue(traits, "ap");
+            ap += getTraitValue(traits, "ap");
         }
         let tl = weapon.system.tl;
 
-        if (isParry) {
+        if (attackOptions.isParry) {
             let parryBonus = parseInt(weapon.system.weapon.parryBonus);
             if (actor) {
                 content += `<b>Parry DM:</b> ${skillDM + parryBonus}<br/><br/>`;
@@ -345,11 +388,11 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
             }
         } else {
             let dmgText = `Damage ${damageTotal}`;
-            if (!destructive && effect > 0) {
-                dmgText += `&nbsp;+&nbsp;${effect}&nbsp;(${damageTotal + effect})`;
+            if (effect > 0) {
+                dmgText += `&nbsp;+&nbsp;${effect * (destructive?10:1)}&nbsp;(${damageEffect})`;
             }
-            if (hasTrait(traits, "ap")) {
-                dmgText += ` /&nbsp;AP&nbsp;${getTraitValue(traits, "ap")}`;
+            if (ap > 0) {
+                dmgText += ` /&nbsp;AP&nbsp;${ap}`;
             }
             let radiationDamage = 0;
             if (hasTrait(traits, "radiation")) {
@@ -378,6 +421,7 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
                 "multiplier": 1,
                 "scale": weapon.system.weapon.scale,
                 "traits": weapon.system.weapon.traits,
+                "ap": ap,
                 "tl": weapon.system.tl,
                 "damageType": weapon.system.weapon.damageType,
                 "radiation": radiationDamage,
