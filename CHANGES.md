@@ -8,7 +8,14 @@
 
 ## v0.11.3 (Beta)
 
+NB: The minimum quantity for an item has been changed from one to zero. The default is set
+in the backend template (the default is still one), but enforced on the front end. It is 
+possible that some items revert to showing a quantity count of zero if they were created prior 
+to the quantity field being introduced. However, any such data should predate the public
+release of the system.
+
 * Weapons with the oneUse trait now decrement their quantity count after being used.
+* Minimum quantity for an item has been reduced to 0 (from 1).
 * Attacks with a blast radius can now be dragged onto a scene to automatically show the blast template.
 * Added a new setting "Blast effect divergence distance" which automatically randomises position of a
   blast effect template if the attack was a miss. Defaults to none, for no divergence.
