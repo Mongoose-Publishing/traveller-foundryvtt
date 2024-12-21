@@ -6,6 +6,10 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## v0.11.4 (Beta)
+
+* Always show magazine details on a weapon item.
+
 ## v0.11.3 (Beta)
 
 NB: The minimum quantity for an item has been changed from one to zero. The default is set
