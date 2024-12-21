@@ -210,7 +210,9 @@ export class MgT2Item extends Item {
         let weapon = this.system.weapon;
         if (weapon) {
             if (!isNaN(weapon.range) && parseInt(weapon.range) > 0) {
-                return true;
+                if (weapon.magazine > 0) {
+                    return true;
+                }
             }
             if (weapon.scale === "spacecraft") {
                 return true;
