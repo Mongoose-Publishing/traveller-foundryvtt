@@ -1,5 +1,5 @@
 import {onManageActiveEffect} from "../helpers/effects.mjs";
-import {rollAttack, hasTrait, getTraitValue, toFloat} from "../helpers/dice-rolls.mjs";
+import {rollAttack, hasTrait, getTraitValue, toFloat, rollSpaceAttack} from "../helpers/dice-rolls.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {MgT2Item} from "../documents/item.mjs";
@@ -803,7 +803,11 @@ export class MgT2ItemSheet extends ItemSheet {
 
     _rollDamage(item) {
         console.log("_rollDamage:");
-        rollAttack(null, item, { "skillDM": 0, "dm": 0 });
+        if (item.system.weapon.scale === "spacecraft") {
+            rollSpaceAttack(null, null, item, { "skilLDM": 0, "dm": 0 });
+        } else {
+            rollAttack(null, item, {"skillDM": 0, "dm": 0});
+        }
     }
 
     _incrementQuantity(item) {

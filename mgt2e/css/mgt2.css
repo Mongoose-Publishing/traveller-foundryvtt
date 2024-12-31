@@ -2047,3 +2047,11 @@ div.mini-value span {
 .checkbox-label {
     display: inline-block;
 }
+
+li.item-status-DESTROYED h4 {
+    background-color: red !important;
+}
+
+li.item-status-INACTIVE h4 {
+    color: #808080 !important;
+}

@@ -258,7 +258,7 @@
 
                         <ol class="items-list actor-items grid grid-3col">
                             {{#each hardware as |item id|}}
-                            <li class="item item-gear" data-item-id="{{item._id}}">
+                            <li class="item item-gear item-status-{{item.system.status}}" data-item-id="{{item._id}}">
                                 <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                                 <img title="{{nameQuantity item}}" src="{{item.img}}"/>
                                 {{#if item.system.hardware.tons  includeZero=false}}

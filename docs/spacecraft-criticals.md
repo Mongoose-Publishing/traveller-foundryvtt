@@ -39,3 +39,15 @@ weapons.
 * LifeSupport
 
 This means we need hardware types of Bridge and Sensors.
+
+### Flags
+
+Critical levels and effects are stored as flags on the actor.
+
+crit_XXX will store the level of critical on a location.
+
+damage_XXX will store critical effects.
+damageSev_XXX will store the severity level of the effect.
+
+The latter is needed so that when an Engineering check is made to fix things, we know
+what DM modifiers to apply.

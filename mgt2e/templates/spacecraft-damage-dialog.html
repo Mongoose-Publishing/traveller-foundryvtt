@@ -59,10 +59,11 @@
                 <h2>Sustained Damage</h2>
 
                 {{#each crits.criticals as | c |}}
-                    {{c.location}}
+                    {{localize (concat "MGT2.Spacecraft.Criticals." c.location)}}
                     <select>
                         {{selectOptions ../criticalLabels selected=c.location}}
                     </select>
+                    <br/>
                 {{/each}}
             {{/if}}
 

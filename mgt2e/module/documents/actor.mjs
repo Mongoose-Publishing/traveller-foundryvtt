@@ -4,6 +4,7 @@ import {MGT2} from "../helpers/config.mjs";
 import {MgT2DamageDialog} from "../helpers/damage-dialog.mjs";
 import {getTraitValue, hasTrait, isNonZero, isNumber} from "../helpers/dice-rolls.mjs";
 import {MgT2SpacecraftDamageDialog} from "../helpers/spacecraft-damage-dialog.mjs";
+import {setSpacecraftCriticalLevel} from "../helpers/spacecraft/criticals.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -1069,28 +1070,30 @@ export class MgT2Actor extends Actor {
   }
 
   setCriticalLevel(critical, level) {
-      if (this.type === "spacecraft") {
-          level = Math.min(parseInt(level), 6);
-          if (level < 1) {
-              this.unsetFlag("mgt2e", "crit_" + critical);
-              let hasCrits = false;
-              for (let c in MGT2.SPACECRAFT_CRITICALS) {
-                  if (c != critical && this.flags.mgt2e["crit_"+c]) {
-                      hasCrits = true;
-                      break;
-                  }
-              }
-              this.setFlag("mgt2e", "hasCrits", hasCrits);
-          } else if (MGT2.SPACECRAFT_CRITICALS[critical]) {
-              this.setFlag("mgt2e", "crit_" + critical, level);
-              this.setFlag("mgt2e", "hasCrits", true);
-              console.log(`Set critical ${critical} to ${level}`);
-          } else {
-              console.log(`WARN: Unknown spacecraft critical [${critical}]`);
+      setSpacecraftCriticalLevel(this, critical, level);
+  }
+
+
+  getHardwareList(type) {
+      let list = [];
+      for (let i of this.items.contents) {
+          if (i.type === "hardware" && i.system.hardware.system === type) {
+              list.push(i);
           }
-      } else {
-          console.log(`WARN: Setting critical [${critical}] on supported type [${this.type}]`);
       }
+      return list;
+  }
+
+  getItemsByType(type) {
+      let list = [];
+      for (let i of this.items.contents) {
+          console.log(i.name);
+          if (i.type === type) {
+              list.push(i);
+              console.log("Adding " + i.name);
+          }
+      }
+      return list;
   }
 
 }

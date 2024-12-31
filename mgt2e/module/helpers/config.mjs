@@ -161,12 +161,12 @@ MGT2.SPACECRAFT_CRITICALS = {
         { "sensorsDisabled": true }
     ],
     "powerPlant": [
-        { "powerReduction": "10" },
-        { "powerReduction": "20" },
-        { "powerReduction": "70" },
-        { "powerReduction": "100" },
-        { "powerReduction": "100", "hull": "1" },
-        { "powerReduction": "100", "hull": "1D6" }
+        { "powerReduction": 10 },
+        { "powerReduction": 20 },
+        { "powerReduction": 70 },
+        { "powerReduction": 100 },
+        { "powerReduction": 100, "hull": "1" },
+        { "powerReduction": 100, "hull": "1D6" }
     ],
     "fuel": [
         { "fuelLeak": "hour" },
@@ -177,14 +177,46 @@ MGT2.SPACECRAFT_CRITICALS = {
         { "destroyed": true, "hull": "1D6" }
     ],
     "weapon": [ ],
-    "armour": [ ],
-    "hull": [ ],
+    "armour": [
+        { "armour": "1" },
+        { "armour": "1D3" },
+        { "armour": "1D6" },
+        { "armour": "1D6" },
+        { "armour": "2D6", "hull": "1" },
+        { "armour": "2D6", "hull": "1" }
+    ],
+    "hull": [
+        { "damage": "1D6" },
+        { "damage": "2D6" },
+        { "damage": "3D6" },
+        { "damage": "4D6" },
+        { "damage": "5D6" },
+        { "damage": "6D6" }
+    ],
     "mDrive": [ ],
-    "cargo": [ ],
+    "cargo": [
+        { "cargoLoss": "10" },
+        { "cargoLoss": "1D6 * 10" },
+        { "cargoLoss": "2D6 * 10" },
+        { "cargoLoss": "100" },
+        { "cargoLoss": "100", "hull": "1" },
+        { "cargoLoss": "100", "hull": "1" }
+    ],
     "jDrive": [ ],
     "crew": [ ],
     "bridge": [ ]
 }
+
+MGT2.SPACECRAFT_DAMAGE = {
+  "fuelHour": {},
+  "fuelRound": {},
+  "powerPlant": {},
+  "armour": {},
+  "control": {},
+  "thrust": {},
+  "jump": {},
+  "lifeSupport": {}
+};
 
 MGT2.getStatus = function(actor) {
   const data = actor.data.data;

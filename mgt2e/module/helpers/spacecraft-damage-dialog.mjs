@@ -39,11 +39,11 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.actualDamage = this.damage;
         if (this.ap < this.armour) {
             this.actualDamage = this.damage - (this.armour - this.ap);
-            this.actualDamage *= this.multiplier;
         }
         if (this.actualDamage < 0) {
             this.actualDamage = 0;
         }
+        this.actualDamage *= this.multiplier;
 
         this.crits = {};
         this.crits.effectCrit = false;
@@ -92,7 +92,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
                 this.crits.criticals[c] = {};
                 let location = this.getCriticalRoll();
                 this.crits.criticals[c].location = location;
-                this.crits.criticals[c].severity = this.shipCriticals[location] + 1;
+                this.crits.criticals[c].severity = ++this.shipCriticals[location];
                 this.actor.setCriticalLevel(location, this.crits.criticals[c].severity);
             }
         }

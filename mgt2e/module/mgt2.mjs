@@ -1481,6 +1481,14 @@ Handlebars.registerHelper('showItemStatus', function(item, status) {
 
 Handlebars.registerHelper('showCriticals', function(actor) {
   let html = "";
+
+  for (let d in MGT2.SPACECRAFT_DAMAGE) {
+      if (actor.flags.mgt2e["damage_" + d]) {
+          let label = game.i18n.localize("MGT2.Spacecraft.CriticalLabel."+d);
+          html += `<div class="resource critical criticalHigh"><label>${label}</label></div>`;
+      }
+  }
+
   for (let c in MGT2.SPACECRAFT_CRITICALS) {
       let severity = actor.flags.mgt2e["crit_"+c];
       if (severity) {

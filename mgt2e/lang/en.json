@@ -540,6 +540,21 @@
   "MGT2.Spacecraft.Criticals.crew": "Crew",
   "MGT2.Spacecraft.Criticals.bridge": "Bridge",
 
+  "MGT2.Spacecraft.CriticalEffects.Damage": "{name} takes an extra {hits} hits from critical",
+  "MGT2.Spacecraft.CriticalEffects.Hull": "{name} takes an extra hull critical",
+
+  "MGT2.Spacecraft.CriticalEffects.Power": "Critical on {name} reduces power by {power}%",
+
+  "MGT2.Spacecraft.CriticalEffects.FuelLeakRound": "{name} is leaking fuel every round",
+  "MGT2.Spacecraft.CriticalEffects.FuelLeakHour": "{name} is leaking fuel every hour",
+  "MGT2.Spacecraft.CriticalEffects.FuelLoss": "{name} loses {percentage}% of its fuel",
+  "MGT2.Spacecraft.CriticalEffects.Destroyed": "Critical hit on {name} destroys {item}",
+  "MGT2.Spacecraft.CriticalEffects.CargoLost": "Critical hit on {name} destroyed {dt}dt of {item}",
+
+  "MGT2.Spacecraft.CriticalLabel.fuelHour": "Slow Fuel Leak",
+  "MGT2.Spacecraft.CriticalLabel.fuelRound": "Fast Fuel Leak",
+  "MGT2.Spacecraft.CriticalLabel.powerPlant": "Power Reduced",
+
   "MGT2.Spacecraft.Advances.earlyPrototype": "Early Prototype",
   "MGT2.Spacecraft.Advances.prototype": "Prototype",
   "MGT2.Spacecraft.Advances.budget": "Budget",

@@ -318,6 +318,7 @@ export class MgT2ActorSheet extends ActorSheet {
         let dtonsUsed = 0;
         let powerTotal = 0;
         let powerUsed = parseInt(actorData.spacecraft.dtons) * 0.2;
+        let fuelTotal = 0;
 
         let hits = parseInt(actorData.spacecraft.dtons) / 2.5;
         if (actorData.spacecraft.dtons >= 100000) {
@@ -393,7 +394,9 @@ export class MgT2ActorSheet extends ActorSheet {
                     //i.update({"system.hardware.tons": t });
                 } else if (h.system === "fuel") {
                     t = rating;
-                    context.system.spacecraft.fuel.max = rating;
+                    if (i.system.status !== MgT2Item.DESTROYED) {
+                        fuelTotal += rating;
+                    }
                 } else if (h.system === "cargo") {
                     actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
                     t = parseFloat(i.system.hardware.rating);
@@ -421,7 +424,6 @@ export class MgT2ActorSheet extends ActorSheet {
                 if (h.system === "r-drive" && i.system.status === MgT2Item.ACTIVE) {
                     rdrive = Math.max(rdrive, parseInt(h.rating));
                 }
-                console.log(h);
             } else if (i.type === "weapon" && i.system.weapon.scale === "spacecraft") {
                 shipWeapons.push(i);
             } else {
@@ -444,6 +446,13 @@ export class MgT2ActorSheet extends ActorSheet {
 
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;
+
+        if (fuelTotal != actorData.spacecraft.fuel.max) {
+            actorData.spacecraft.fuel.max = fuelTotal;
+            actorData.spacecraft.fuel.value = Math.min(actorData.spacecraft.fuel.value, fuelTotal);
+            context.actor.update({"system.spacecraft.fuel": actorData.spacecraft.fuel });
+        }
+
 
         if (bandwidthTotal != actorData.spacecraft.processing) {
             actorData.spacecraft.processing = bandwidthTotal;

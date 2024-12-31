@@ -496,7 +496,7 @@ function addTitle(text, options, property) {
 export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let text = "";
 
-    let score = gunner.getAttackSkill(weaponItem, options);
+    let score = gunner?gunner.getAttackSkill(weaponItem, options):0;
 
     let dice = `${options.results.dice} + ${score}`;
     let damageDice = weaponItem.system.weapon.damage;
@@ -514,11 +514,6 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let effect = Math.max(0, attackRoll.total - 8);
     const damageRoll = await new Roll(damageDice, null).evaluate();
 
-    let dmgText = `Damage ${damageRoll.total}`;
-    if (effect > 0) {
-        dmgText += ` (+${effect})`;
-    }
-
     let title = `${options.results["cha"]} ${options.results["chadm"]} Skill ${options.results["base"]}`;
     title = addTitle(title, options, "weapon");
     title = addTitle(title, options, "dm");
@@ -528,6 +523,13 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let multiplier = 1;
     if (CONFIG.MGT2.SPACE_MOUNTS[mount]) {
         multiplier = parseInt(CONFIG.MGT2.SPACE_MOUNTS[mount].multiplier);
+    }
+    console.log(`Space attack for ${mount} has multiplier ${multiplier}`);
+
+    let totalMultipliedDamage = (damageRoll.total + effect) * multiplier;
+    let dmgText = `Damage ${damageRoll.total * multiplier}`;
+    if (effect > 0) {
+        dmgText += ` (+${effect * multiplier})`;
     }
 
     let damageOptions = {
@@ -565,7 +567,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                 </div>
                 <hr/>
                 <div class="damage-message" data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}'>
-                    <button data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}' class="damage-button">
+                    <button data-damage="${(damageRoll.total + effect)}" data-vers="2" data-options='${json}' class="damage-button">
                         ${dmgText}
                     </button>
                 </div>
