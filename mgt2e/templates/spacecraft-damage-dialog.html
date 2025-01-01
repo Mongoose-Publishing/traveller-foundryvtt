@@ -45,7 +45,19 @@
 
     {{#if crits}}
     <div class="shadow">
-        <h1>Criticals</h1>
+        <h2>Criticals</h2>
+
+        {{#if shipCriticals}}
+            <h3>Current Criticals</h3>
+
+            <div class="grid grid-4col">
+                {{#each shipCriticals as | sev loc |}}
+                    {{#if sev includeZero=false}}
+                        <span class="currentCrit">{{localize (concat "MGT2.Spacecraft.Criticals." loc)}} {{sev}}</span>
+                    {{/if}}
+                {{/each}}
+            </div>
+        {{/if}}
 
         {{#if crits.effectCrit}}
             <p>Severity {{crits.effectSeverity}} critical from accurate shot.</p>
@@ -56,7 +68,7 @@
         {{/if}}
 
             {{#if crits.criticals}}
-                <h2>Sustained Damage</h2>
+                <h3>Sustained Damage</h3>
 
                 {{#each crits.criticals as | c i |}}
                     {{localize (concat "MGT2.Spacecraft.Criticals." c.location)}}

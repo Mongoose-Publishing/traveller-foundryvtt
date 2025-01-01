@@ -91,7 +91,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
                 this.crits.criticals[c] = {};
                 let location = this.getCriticalRoll();
                 this.crits.criticals[c].location = location;
-                this.crits.criticals[c].severity = ++this.shipCriticals[location];
+                this.crits.criticals[c].severity = 1;
             }
         }
 
@@ -134,6 +134,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
             "hits": this.hits,
             "maxHits": this.maxHits,
             "crits": this.crits,
+            "shipCriticals": this.shipCriticals,
             "criticalEffectRoll": this.criticalEffectRoll,
             "criticalLabels": this.criticalLabels,
             "multiplier": this.multiplier

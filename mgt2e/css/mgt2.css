@@ -2055,3 +2055,12 @@ li.item-status-DESTROYED h4 {
 li.item-status-INACTIVE h4 {
     color: #808080 !important;
 }
+
+.currentCrit {
+    font-weight: bold;
+    background-color: red;
+    color: white;
+    width: auto;
+    padding: 4px;
+    border-radius: 8px;
+}
