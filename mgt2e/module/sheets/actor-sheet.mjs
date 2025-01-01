@@ -959,6 +959,11 @@ export class MgT2ActorSheet extends ActorSheet {
                 const location = div.data("id");
                 this.actor.setCriticalLevel(location, 0);
             });
+            html.find('.critEffDel').click(ev => {
+                const div = $(ev.currentTarget).parents(".critical");
+                const location = div.data("id");
+                this.actor.fixCriticalEffect(location);
+            });
         } else if (this.actor.type === "traveller" || this.actor.type === "npc") {
             html.find('.roll-upp').click(ev => {
                this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });

@@ -550,10 +550,15 @@
   "MGT2.Spacecraft.CriticalEffects.FuelLoss": "{name} loses {percentage}% of its fuel",
   "MGT2.Spacecraft.CriticalEffects.Destroyed": "Critical hit on {name} destroys {item}",
   "MGT2.Spacecraft.CriticalEffects.CargoLost": "Critical hit on {name} destroyed {dt}dt of {item}",
+  "MGT2.Spacecraft.CriticalEffects.SensorDM": "Critical hit on {name} damages sensors",
+  "MGT2.Spacecraft.CriticalEffects.SensorMax": "Critical hit on {name} limits sensors to {range} range",
+  "MGT2.Spacecraft.CriticalEffects.SensorDisabled": "Critical hit on {name} disables {item}",
 
   "MGT2.Spacecraft.CriticalLabel.fuelHour": "Slow Fuel Leak",
   "MGT2.Spacecraft.CriticalLabel.fuelRound": "Fast Fuel Leak",
   "MGT2.Spacecraft.CriticalLabel.powerPlant": "Power Reduced",
+  "MGT2.Spacecraft.CriticalLabel.sensorDM": "Sensor Damaged",
+  "MGT2.Spacecraft.CriticalLabel.sensorMax": "Sensor Limited",
 
   "MGT2.Spacecraft.Advances.earlyPrototype": "Early Prototype",
   "MGT2.Spacecraft.Advances.prototype": "Prototype",

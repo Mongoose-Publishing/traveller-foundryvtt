@@ -50,7 +50,7 @@
         {{#if crits.effectCrit}}
             <p>Severity {{crits.effectSeverity}} critical from accurate shot.</p>
 
-            <select>
+            <select class="criticalSelect" data-idx="effect">
                 {{selectOptions criticalLabels selected=criticalEffectRoll}}
             </select>
         {{/if}}
@@ -58,9 +58,9 @@
             {{#if crits.criticals}}
                 <h2>Sustained Damage</h2>
 
-                {{#each crits.criticals as | c |}}
+                {{#each crits.criticals as | c i |}}
                     {{localize (concat "MGT2.Spacecraft.Criticals." c.location)}}
-                    <select>
+                    <select class="criticalSelect" data-idx="{{i}}">
                         {{selectOptions ../criticalLabels selected=c.location}}
                     </select>
                     <br/>

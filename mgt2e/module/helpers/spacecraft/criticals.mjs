@@ -39,6 +39,24 @@ export function setSpacecraftCriticalLevel(actor, critical, level) {
                     case "cargo":
                         applyCargoCritical(actor, effects, level);
                         break;
+                    case "sensors":
+                        applySensorCritical(actor, effects, level);
+                        break;
+                    case "weapon":
+                        applyWeaponCritical(actor, effects, level);
+                        break;
+                    case "mDrive":
+                        applyMDriveCritical(actor, effects, level);
+                        break;
+                    case "jDrive":
+                        applyJDriveCritical(actor, effects, level);
+                        break;
+                    case "crew":
+                        applyCrewCritical(actor, effects, level);
+                        break;
+                    case "bridge":
+                        applyBridgeCritical(actor, effects, level);
+                        break;
                 }
             }
 
@@ -95,7 +113,28 @@ async function applyArmourCritical(actor, effects, level) {
 }
 
 async function applySensorCritical(actor, effects, level) {
-
+    if (effects["sensorDM"]) {
+        const dm = parseInt(effects["sensorDM"]);
+        actor.setFlag("mgt2e", "damage_sensorDM", dm);
+        actor.setFlag("mgt2e", "damageSev_sensorDM", level);
+        ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.SensorDM",
+            {"name": actor.name, "dm": dm }));
+    }
+    if (effects["sensorMax"]) {
+        const maxRange = effects["sensorMax"];
+        actor.setFlag("mgt2e", "damage_sensorMax", maxRange);
+        actor.setFlag("mgt2e", "damageSev_sensorMax", level);
+        ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.SensorMax",
+            {"name": actor.name, "range": maxRange }));
+    }
+    if (effects["sensorsDisabled"]) {
+        const sensors = actor.getHardwareList("sensor");
+        for (let sensor of sensors) {
+            sensor.update({"system.status": MgT2Item.DAMAGED});
+            ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.SensorDisabled",
+                {"name": actor.name, "item": item.name }));
+        }
+    }
 }
 
 async function applyPowerPlantCritical(actor, effects, level) {

@@ -1073,6 +1073,11 @@ export class MgT2Actor extends Actor {
       setSpacecraftCriticalLevel(this, critical, level);
   }
 
+  fixCriticalEffect(effect) {
+      this.unsetFlag("mgt2e", "damage_" + effect);
+      this.unsetFlag("mgt2e", "damageSev_" + effect);
+  }
+
 
   getHardwareList(type) {
       let list = [];

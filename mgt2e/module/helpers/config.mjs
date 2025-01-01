@@ -215,7 +215,9 @@ MGT2.SPACECRAFT_DAMAGE = {
   "control": {},
   "thrust": {},
   "jump": {},
-  "lifeSupport": {}
+  "lifeSupport": {},
+  "sensorDM": {},
+  "sensorMax": {}
 };
 
 MGT2.getStatus = function(actor) {
