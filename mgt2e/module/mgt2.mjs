@@ -1508,6 +1508,15 @@ Handlebars.registerHelper('showCriticals', function(actor) {
   return html;
 });
 
+Handlebars.registerHelper('criticalClass', function(sev) {
+   sev = parseInt(sev);
+   if (sev > 4) {
+       return "criticalHigh";
+   } else if (sev > 2) {
+       return "criticalMedium";
+   }
+   return "criticalLow";
+});
 
 Handlebars.registerHelper('showSimpleSkills', function(actor) {
    if (actor && actor.system && actor.system.skills) {

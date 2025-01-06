@@ -18,6 +18,13 @@ export function setSpacecraftCriticalLevel(actor, critical, level) {
             }
             actor.setFlag("mgt2e", "hasCrits", hasCrits);
         } else if (MGT2.SPACECRAFT_CRITICALS[critical]) {
+            let currentLevel = actor.getFlag("mgt2e", "crit_" + critical);
+            if (!currentLevel) {
+                currentLevel = 0;
+            }
+            if (level < currentLevel) {
+                level = currentLevel + 1;
+            }
             actor.setFlag("mgt2e", "crit_" + critical, level);
             actor.setFlag("mgt2e", "hasCrits", true);
             console.log(`Set critical ${critical} to ${level}`);

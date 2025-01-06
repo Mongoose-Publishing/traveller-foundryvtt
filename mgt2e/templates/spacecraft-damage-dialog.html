@@ -53,7 +53,7 @@
             <div class="grid grid-4col">
                 {{#each shipCriticals as | sev loc |}}
                     {{#if sev includeZero=false}}
-                        <span class="currentCrit">{{localize (concat "MGT2.Spacecraft.Criticals." loc)}} {{sev}}</span>
+                        <span class="currentCrit {{criticalClass sev}}">{{localize (concat "MGT2.Spacecraft.Criticals." loc)}} {{sev}}</span>
                     {{/if}}
                 {{/each}}
             </div>

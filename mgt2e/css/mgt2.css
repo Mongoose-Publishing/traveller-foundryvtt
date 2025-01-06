@@ -2058,8 +2058,6 @@ li.item-status-INACTIVE h4 {
 
 .currentCrit {
     font-weight: bold;
-    background-color: red;
-    color: white;
     width: auto;
     padding: 4px;
     border-radius: 8px;
