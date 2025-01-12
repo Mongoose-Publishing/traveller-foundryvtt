@@ -488,8 +488,6 @@ export class MgT2ActorSheet extends ActorSheet {
 
         for (let r of context.departments) {
             context.departmentList[r._id] = r.name;
-            //context.departmentMembers[r._id] = [];
-            console.log(`${r.name} with id ${r._id}`);
         }
 
         for (let actorId in actorData.crewed.crew) {

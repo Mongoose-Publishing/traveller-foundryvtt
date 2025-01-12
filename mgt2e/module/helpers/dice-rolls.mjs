@@ -527,9 +527,18 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     console.log(`Space attack for ${mount} has multiplier ${multiplier}`);
 
     let totalMultipliedDamage = (damageRoll.total + effect) * multiplier;
-    let dmgText = `Damage ${damageRoll.total * multiplier}`;
+    let dmgText = `Damage ${damageRoll.total}`;
     if (effect > 0) {
-        dmgText += ` (+${effect * multiplier})`;
+        dmgText += ` (+${effect})`;
+    }
+    if (multiplier > 1) {
+        dmgText += ` x${multiplier}`;
+    }
+    let radiationDamage = 0;
+    if (weaponItem.hasTrait("radiation")) {
+        const radRoll = await new Roll("2D6 * 60", null).evaluate();
+        radiationDamage = radRoll.total;
+        dmgText += ` /&nbsp;${radRoll.total} Rads`;
     }
 
     let damageOptions = {
@@ -540,7 +549,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         "traits": weaponItem.system.weapon.traits,
         "tl": weaponItem.system.tl,
         "damageType": weaponItem.system.damageType,
-        "radiation": 0,
+        "radiation": radiationDamage,
         "ranged": true
     };
     let json = JSON.stringify(damageOptions);
@@ -567,7 +576,9 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                 </div>
                 <hr/>
                 <div class="damage-message" data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}'>
-                    <button data-damage="${(damageRoll.total + effect)}" data-vers="2" data-options='${json}' class="damage-button">
+                    <button data-damage="${(damageRoll.total + effect)}" data-vers="2" 
+                            data-options='${json}' class="damage-button"
+                            title="${multiplier}">
                         ${dmgText}
                     </button>
                 </div>
