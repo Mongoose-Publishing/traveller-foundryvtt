@@ -108,23 +108,28 @@
                            name="system.hits.max" type="text"
                            value="{{system.hits.max}}"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.CargoText'}}{{#unless system.spacecraft.cargo}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.Cargo'}}</label>
                     <input class="field-value" name="system.spacecraft.cargo" readonly type="text" value="{{system.spacecraft.cargo}}"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.JDriveText'}}{{#unless system.spacecraft.jdrive}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.jdrive" class="field-label">{{localize 'MGT2.TravellerSheet.JDrive'}}</label>
                     <input class="field-value" name="system.spacecraft.jdrive" readonly type="text" value="{{system.spacecraft.jdrive}}"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.MDriveText'}}{{#unless system.spacecraft.mdrive}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.mdrive" class="field-label">{{localize 'MGT2.TravellerSheet.MDrive'}}</label>
-                    <input class="field-value" name="system.spacecraft.mdrive" readonly type="text" value="{{system.spacecraft.mdrive}}"/>
+                    <input class="field-value" name="system.spacecraft.mdrive" readonly type="text" value="{{system.spacecraft.mdrive}}G"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.RDriveText'}}{{#unless system.spacecraft.rdrive}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.rdrive" class="field-label">{{localize 'MGT2.TravellerSheet.RDrive'}}</label>
-                    <input class="field-value" name="system.spacecraft.rdrive" readonly type="text" value="{{system.spacecraft.rdrive}}"/>
+                    <input class="field-value" name="system.spacecraft.rdrive" readonly type="text" value="{{system.spacecraft.rdrive}}G"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.PowerText'}}{{#unless system.spacecraft.power.max}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
                     <input class="field-value" readonly type="text" value="{{system.spacecraft.power.used}} / {{system.spacecraft.power.max}}"/>
                 </div>

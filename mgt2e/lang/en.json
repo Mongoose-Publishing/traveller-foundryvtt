@@ -329,6 +329,13 @@
   "MGT2.TravellerSheet.LockUPP": "Lock UPP",
   "MGT2.TravellerSheet.RandomRoll": "Re-roll characteristics (shift for average, ctrl for vary)",
 
+  "MGT2.TravellerSheet.CargoText": "Total cargo capacity.",
+  "MGT2.TravellerSheet.JDriveText": "Jump distance.",
+  "MGT2.TravellerSheet.MDriveText": "Manouevre Drive thrust.",
+  "MGT2.TravellerSheet.RDriveText": "Reaction Drive thrust.",
+  "MGT2.TravellerSheet.PowerText": "Power consumption /\nPower Available",
+  "MGT2.TravellerSheet.AddHardwareToSet": "\nSet from Hardware tab.",
+
   "MGT2.Vehicle.Spaces": "Spaces",
   "MGT2.Vehicle.Chassis": "Chassis",
   "MGT2.Vehicle.SubType": "SubType",
