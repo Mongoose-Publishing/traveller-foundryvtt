@@ -250,6 +250,10 @@ export class MgT2Item extends Item {
                 this.system.status = MgT2Item.INACTIVE;
             } else if (this.system.status === MgT2Item.INACTIVE) {
                 this.system.status = MgT2Item.ACTIVE;
+            } else if (this.system.status === MgT2Item.DAMAGED) {
+                this.system.status = MgT2Item.INACTIVE;
+            } else if (this.system.status === MgT2Item.DESTROYED) {
+                this.system.status = MgT2Item.INACTIVE;
             }
             this.update({"system.status": this.system.status});
         } else if (this.type === "software") {
