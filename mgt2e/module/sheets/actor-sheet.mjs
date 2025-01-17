@@ -191,6 +191,12 @@ export class MgT2ActorSheet extends ActorSheet {
                 "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
                 "weapon": game.i18n.localize("MGT2.Spacecraft.System.weapon")
             };
+            context.selectRoleTypes = {
+                "": "",
+                "pilot": "Pilot",
+                "gunner": "Gunner",
+                "engineer": "Engineer"
+            };
         } else if (type === "vehicle") {
             context.selectVehicleTL = {};
             for (let tl = 0; tl <= 17; tl++) {
@@ -902,6 +908,10 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.addHardwareSelect').click(ev => {
             const value = $(ev.currentTarget).val();
             this._createHardware(value);
+        });
+        html.find('.addRoleSelect').click(ev => {
+            const value = $(ev.currentTarget).val();
+            this._createCrewRole(value);
         });
 
         // Events that only apply to creatures.
@@ -2015,6 +2025,67 @@ export class MgT2ActorSheet extends ActorSheet {
 
         // Finally, create the item!
         return await Item.create(itemData, {parent: this.actor});
+    }
+
+    _createCrewRole(roleType) {
+        let system = {
+            "description": "",
+            "role": {
+                "actions": {},
+                "department": false,
+                "colour": null,
+                "dei": 0
+            }
+        }
+        let itemName = "Role";
+        let img = null;
+
+        if (roleType === "gunner") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner");
+            img = "systems/mgt2e/icons/items/roles/gunner.svg";
+            system.role.actions["00000000"]= {
+                "title": "Gunner",
+                "action": "weapon",
+                "dm": 0,
+                "weapon": null
+            };
+        } else if (roleType === "pilot") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot");
+            img = "systems/mgt2e/icons/items/roles/pilot.svg";
+            system.role.actions["00000000"] = {
+                "title": "Pilot",
+                "action": "skill",
+                "cha": "DEX",
+                "skill": "pilot.spacecraft",
+                "dm": 0
+            }
+        } else if (roleType === "engineer") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer");
+            img = "systems/mgt2e/icons/items/roles/engineer.svg";
+            system.role.actions["00000000"] = {
+                "title": "Engineering",
+                "action": "skill",
+                "cha": "INT",
+                "skill": "engineer",
+                "dm": 0
+            }
+            system.role.actions["00000001"] = {
+                "title": "Mechanic",
+                "action": "skill",
+                "cha": "INT",
+                "skill": "mechanic",
+                "dm": 0
+            }
+        } else {
+            return;
+        }
+        const itemData = {
+            "name": itemName,
+            "img": img,
+            "type": "role",
+            "system": system
+        };
+        Item.create(itemData, { parent: this.actor } );
     }
 
     _createHardware(systemType) {

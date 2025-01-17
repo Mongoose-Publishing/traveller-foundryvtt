@@ -298,6 +298,7 @@
   "MGT2.TravellerSheet.fibTitle": "Hardened Computer",
   "MGT2.TravellerSheet.ShipsNotes": "Notes",
   "MGT2.TravellerSheet.ShipsCrew": "Crew",
+  "MGT2.TravellerSheet.Combat": "Combat",
   "MGT2.TravellerSheet.ShipBay": "Docking Bay",
   "MGT2.TravellerSheet.VehicleBay": "Vehicle Bay",
   "MGT2.TravellerSheet.CargoSpace": "Cargo Space",
@@ -306,6 +307,7 @@
   "MGT2.TravellerSheet.DTonsUsed": "Used",
   "MGT2.TravellerSheet.DTonsRemaining": "Remaining",
   "MGT2.TravellerSheet.AddHardware": "Add Hardware",
+  "MGT2.TravellerSheet.AddCrewRole": "Add Crew Role",
   "MGT2.TravellerSheet.Configuration": "Configuration",
   "MGT2.TravellerSheet.Fuel": "Fuel",
   "MGT2.TravellerSheet.CurrentFuel": "Current (dT)",
@@ -887,6 +889,11 @@
   "MGT2.Role.Special.CombatTactics": "Combat Tactics",
   "MGT2.Role.Special.ImproveInitiative": "Improve Initiative",
   "MGT2.Role.Special.Evade": "Evade",
+
+  "MGT2.Role.BuiltIn.Name.Gunner":  "Gunner",
+  "MGT2.Role.BuiltIn.Name.Pilot":  "Pilot",
+  "MGT2.Role.BuiltIn.Name.Engineer":  "Engineer",
+  "MGT2.Role.BuiltIn.Name.Broker":  "Broker",
 
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",

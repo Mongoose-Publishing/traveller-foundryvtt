@@ -229,14 +229,6 @@
                         </ol>
                     </div>
 
-                    <div class="tab items" data-group="shipbays" data-tab="shipbay">
-                        Ships
-                    </div>
-                    <div class="tab items" data-group="shipbays" data-tab="vehiclebay">
-                        Vehicles
-                    </div>
-
-
                     <div class="tab items" data-tab="hardware">
                         <div class="grid grid-4col">
                             <div class="resource flex-group-center">
@@ -305,7 +297,15 @@
                         </section>
 
                         {{#if roles}}
-                            <h2>Available Crew Roles</h2>
+                            <h2>
+                                Available Crew Roles
+                                <div class="resource addCrewRole">
+                                    {{localize 'MGT2.TravellerSheet.AddCrewRole'}}
+                                    <select class="addRoleSelect">
+                                        {{selectOptions selectRoleTypes}}
+                                    </select>
+                                </div>
+                            </h2>
                             <ol class="items-list actor-items grid grid-3col">
                                 {{#each roles as |item id|}}
                                 <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">

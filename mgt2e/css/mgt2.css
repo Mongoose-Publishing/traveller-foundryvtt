@@ -2062,3 +2062,9 @@ li.item-status-INACTIVE h4 {
     padding: 4px;
     border-radius: 8px;
 }
+
+.addCrewRole {
+    float: right;
+    font-weight: normal;
+    font-size: 12pt;
+}

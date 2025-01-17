@@ -1865,6 +1865,33 @@ Handlebars.registerHelper('selectedWeaponId', function(actions, id) {
     }
 });
 
+Handlebars.registerHelper('showSpacecraftAttacks', function(roles, item) {
+    let html = "";
+
+    console.log(roles);
+    console.log(item);
+
+    for (let r of roles) {
+        console.log(r);
+        if (r.system.role.actions) {
+            for (let a in r.system.role.actions) {
+                console.log(a);
+                if (r.system.role.actions[a].action === "weapon") {
+                    if (r.system.role.actions[a].weapon === item._id) {
+                        html = "Crewed";
+                        if (item.system.hardware.weapons) {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+   return html;
+});
+
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
