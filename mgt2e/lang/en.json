@@ -894,6 +894,15 @@
   "MGT2.Role.BuiltIn.Name.Pilot":  "Pilot",
   "MGT2.Role.BuiltIn.Name.Engineer":  "Engineer",
   "MGT2.Role.BuiltIn.Name.Broker":  "Broker",
+  "MGT2.Role.BuiltIn.Name.Sensors":  "Sensor Op",
+  "MGT2.Role.BuiltIn.Name.Navigator":  "Navigator",
+  "MGT2.Role.BuiltIn.Name.Captain":  "Captain",
+
+  "MGT2.Role.BuiltIn.Action.Pilot": "Piloting",
+  "MGT2.Role.BuiltIn.Action.PortLanding": "Port Landing",
+  "MGT2.Role.BuiltIn.Action.WildLanding": "Wild Landing",
+  "MGT2.Role.BuiltIn.Action.Evade": "Evade",
+  "MGT2.Role.BuiltIn.Action.MakePilot": "Make Pilot",
 
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",

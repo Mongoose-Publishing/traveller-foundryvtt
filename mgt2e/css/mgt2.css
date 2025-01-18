@@ -2068,3 +2068,15 @@ li.item-status-INACTIVE h4 {
     font-weight: normal;
     font-size: 12pt;
 }
+
+.crew-role-body .addCrewRole {
+    float: right;
+    display: inline-block;
+    font-weight: normal;
+    font-size: 10pt;
+}
+
+.crew-role-body h3 {
+    margin-top: 5px;
+    padding-bottom: 5px;
+}

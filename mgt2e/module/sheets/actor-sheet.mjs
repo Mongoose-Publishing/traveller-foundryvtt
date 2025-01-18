@@ -193,9 +193,12 @@ export class MgT2ActorSheet extends ActorSheet {
             };
             context.selectRoleTypes = {
                 "": "",
-                "pilot": "Pilot",
-                "gunner": "Gunner",
-                "engineer": "Engineer"
+                "pilot": game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot"),
+                "gunner": game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner"),
+                "engineer": game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer"),
+                "sensors": game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors"),
+                "navigator": game.i18n.localize("MGT2.Role.BuiltIn.Name.Navigator"),
+                "broker": game.i18n.localize("MGT2.Role.BuiltIn.Name.Broker")
             };
         } else if (type === "vehicle") {
             context.selectVehicleTL = {};
@@ -2040,10 +2043,11 @@ export class MgT2ActorSheet extends ActorSheet {
         let itemName = "Role";
         let img = null;
 
+        let t = Date.now();
         if (roleType === "gunner") {
             itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner");
             img = "systems/mgt2e/icons/items/roles/gunner.svg";
-            system.role.actions["00000000"]= {
+            system.role.actions[(t++).toString(36)]= {
                 "title": "Gunner",
                 "action": "weapon",
                 "dm": 0,
@@ -2052,29 +2056,75 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (roleType === "pilot") {
             itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot");
             img = "systems/mgt2e/icons/items/roles/pilot.svg";
-            system.role.actions["00000000"] = {
-                "title": "Pilot",
-                "action": "skill",
-                "cha": "DEX",
-                "skill": "pilot.spacecraft",
-                "dm": 0
+            let skill = "pilot.spacecraft";
+            if (this.actor.system.spacecraft.dtons < 100) {
+                skill = "pilot.smallCraft";
+            } else if (this.actor.system.spacecraft.dtons > 5000) {
+                skill = "pilot.capitalShips";
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.Pilot"),
+                "action": "skill", "cha": "DEX", "skill": skill, "target": 8, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.PortLanding"),
+                "action": "skill", "cha": "DEX", "skill": skill, "target": 6, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.WildLanding"),
+                "action": "skill", "cha": "DEX", "skill": skill, "target": 10, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.Evade"),
+                "action": "special", "special": "evade"
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.MakePilot"),
+                "action": "special", "special": "pilot"
             }
         } else if (roleType === "engineer") {
             itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer");
             img = "systems/mgt2e/icons/items/roles/engineer.svg";
-            system.role.actions["00000000"] = {
+            system.role.actions[(t++).toString(36)] = {
                 "title": "Engineering",
-                "action": "skill",
-                "cha": "INT",
-                "skill": "engineer",
-                "dm": 0
+                "action": "skill", "cha": "INT", "skill": "engineer.power", "target": 8, "dm": 0
             }
-            system.role.actions["00000001"] = {
-                "title": "Mechanic",
-                "action": "skill",
-                "cha": "INT",
-                "skill": "mechanic",
-                "dm": 0
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Engineering",
+                "action": "skill", "cha": "INT", "skill": "engineer.jdrive", "target": 8, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Engineering",
+                "action": "skill", "cha": "INT", "skill": "engineer.mdrive", "target": 8, "dm": 0
+            }
+        } else if (roleType === "sensors") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors");
+            img = "systems/mgt2e/icons/items/roles/sensors.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Sensors",
+                "action": "skill", "cha": "INT", "skill": "electronics.sensors", "target": 8, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Comms",
+                "action": "skill", "cha": "INT", "skill": "electronics.comms", "target": 8, "dm": 0
+            }
+        } else if (roleType === "navigator") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Navigator");
+            img = "systems/mgt2e/icons/items/roles/navigator.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Jump-1",
+                "action": "skill", "cha": "EDU", "skill": "astrogation", "target": 4, "dm": -1
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Jump-2",
+                "action": "skill", "cha": "EDU", "skill": "astrogation", "target": 4, "dm": -2
+            }
+        } else if (roleType === "broker") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Broker");
+            img = "systems/mgt2e/icons/items/roles/broker.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Broker",
+                "action": "skill", "cha": "INT", "skill": "broker", "target": 8, "dm": 0
             }
         } else {
             return;

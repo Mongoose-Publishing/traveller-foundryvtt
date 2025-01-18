@@ -17,7 +17,16 @@
     </div>
 
     <div class="crew-role-body">
-        <h4>Assign Roles</h4>
+        <h3>
+            Assign Roles
+            <div class="addCrewRole">
+                {{localize 'MGT2.TravellerSheet.AddCrewRole'}}
+                <select class="addRoleSelect">
+                    {{selectOptions selectRoleTypes}}
+                </select>
+            </div>
+        </h3>
+
         {{#if shipRoles}}
             <ol class="items-list role-list grid grid-2col">
                 {{#each shipRoles as |role|}}

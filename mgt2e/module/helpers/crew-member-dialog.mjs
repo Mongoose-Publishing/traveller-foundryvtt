@@ -24,16 +24,17 @@ export class MgT2CrewMemberDialog extends Application {
         this.shipCrewData = actorShip.system.crewed;
         // Roles that this crew member has
         this.crewRoles = this.shipCrewData.crew[this.actorCrew.id];
-
-        console.log("We are doing this for " + this.actorCrew.id);
-
-        console.log(this.actorCrew);
-        console.log(this.actorShip);
-        console.log(this.shipCrewData);
-        console.log(this.crewRoles);
-        console.log("Finish Dump");
-
         this.options.title = `${this.actorCrew.name} of ${this.actorShip.name}`;
+
+        this.selectRoleTypes = {
+            "": "",
+            "pilot": game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot"),
+            "gunner": game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner"),
+            "engineer": game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer"),
+            "sensors": game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors"),
+            "navigator": game.i18n.localize("MGT2.Role.BuiltIn.Name.Navigator"),
+            "broker": game.i18n.localize("MGT2.Role.BuiltIn.Name.Broker")
+        };
 
         // Setup roles.
         this.shipRoles = [];
@@ -61,7 +62,8 @@ export class MgT2CrewMemberDialog extends Application {
             "shipCrewData": this.shipCrewData,
             "shipRoles": this.shipRoles,
             "crewRoles": this.crewRoles,
-            "actorCrewId": "" + this.actorCrew.id
+            "actorCrewId": "" + this.actorCrew.id,
+            "selectRoleTypes": this.selectRoleTypes
         }
     }
 
@@ -76,15 +78,27 @@ export class MgT2CrewMemberDialog extends Application {
             const actorId = div.data("crewId");
             const roleId = div.data("roleId");
             const actionId = div.data("actionId");
-            console.log(actorId + ", " + roleId + ", " + actionId);
             this.actorSheet._runCrewAction(this.actorShip, actorId, roleId, actionId);
+        });
+
+        html.find('.addRoleSelect').click(ev => {
+            const val = $(ev.currentTarget).val();
+            this.close();
+            this.refresh(val, html);
         });
 
         console.log("Activated listeners");
     }
 
+    async refresh(role, html) {
+        await this.actorSheet._createCrewRole(role);
+        await this.onSaveClick(null, html);
+        await this.actorShip.update({ "system.crewed": this.actorShip.system.crewed });
+        new MgT2CrewMemberDialog(this.actorCrew, game.actors.get(this.actorShip._id), this.actorSheet).render(true);
+    }
+
     async onSaveClick(event, html) {
-        event.preventDefault();
+        if (event) event.preventDefault();
         console.log("onSaveClick:");
 
         let assignments = html.find(".assign-role");
