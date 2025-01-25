@@ -654,7 +654,7 @@ function getSkillBonus(data, skill, speciality) {
     return bonus;
 }
 
-export async function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
+export async function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty, description) {
     const data = actor.system;
     let   title = "";
     let   skillText = "";
@@ -873,11 +873,12 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
         }
         text += "</div><br/>";
 
+        if (description) text += `<div>${description}</div>`;
+
         if (game.settings.get("mgt2e", "verboseSkillRolls")) {
             let effect = total - difficulty;
             text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${total}</span> ` + getEffectLabel(effect);
         }
-
         if (skill && skill.specialities != null && speciality == null) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];

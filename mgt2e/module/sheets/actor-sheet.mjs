@@ -1400,7 +1400,7 @@ export class MgT2ActorSheet extends ActorSheet {
             let cha = action.cha;
             let target = isNaN(action.target)?null:parseInt(action.target);
 
-            new MgT2SkillDialog(actorCrew, skill, spec, cha, parseInt(action.dm?action.dm:0), target).render(true);
+            new MgT2SkillDialog(actorCrew, skill, spec, cha, parseInt(action.dm?action.dm:0), target, action.text).render(true);
         } else if (action.action === "weapon") {
             let weaponId = action.weapon;
             let weaponItem = shipActor.items.get(weaponId);

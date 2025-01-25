@@ -6,6 +6,16 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## v0.11.5 (Beta)
+
+* Crew role skill actions can now include description of action in chat output.
+* Added extra sample crew roles.
+* Added ability to create crew roles from the spacecraft character sheet.
+* Further improvements to handling of criticals on spacecraft.
+* Added 'Missile' trait for spacecraft scale weapons. There is no support for this beyond
+  being able to define a weapon as being a missile launcher.
+* Added Macro compendium. Currently, contains some simple macros for dice rolls.
+
 ## v0.11.4 (Beta)
 
 * Always show magazine details on a weapon item.

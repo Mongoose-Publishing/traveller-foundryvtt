@@ -693,6 +693,7 @@
   "MGT2.Item.WeaponTrait.Label.orbitalStrike": "Orbital Strike",
   "MGT2.Item.WeaponTrait.Label.psiDmg": "PSI Damage",
   "MGT2.Item.WeaponTrait.Label.psiAp": "PSI AP",
+  "MGT2.Item.WeaponTrait.Label.missile": "Missile",
 
   "MGT2.Item.WeaponTrait.Text.ap": "Armour Piercing",
   "MGT2.Item.WeaponTrait.Text.auto": "Automatic Fire",
@@ -721,6 +722,7 @@
   "MGT2.Item.WeaponTrait.Text.ion": "Overloads target&apos;s power systems",
   "MGT2.Item.WeaponTrait.Text.orbitalStrike": "DM-12 to attack ships, Blast 100 v ground targets",
   "MGT2.Item.WeaponTrait.Text.orbitalBombardment": "DM-8 to attack ships, no Blast trait v ground targets",
+  "MGT2.Item.WeaponTrait.Text.missile": "Missile launcher",
 
   "MGT2.Attack.Dangerous": "Weapon has exploded!",
   "MGT2.Attack.DragMe": "Drag to character sheet, or click to apply to selected tokens.",

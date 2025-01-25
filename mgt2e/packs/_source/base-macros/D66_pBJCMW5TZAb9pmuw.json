@@ -1,0 +1,27 @@
+{
+  "name": "D66",
+  "type": "chat",
+  "command": "D66 [[1D6]] [[1D6]]",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "author": "mhUjqDVicnwIUaiq",
+  "scope": "global",
+  "folder": null,
+  "ownership": {
+    "default": 2,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.4",
+    "createdTime": 1737826818292,
+    "modifiedTime": 1737826818298,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_id": "pBJCMW5TZAb9pmuw",
+  "sort": 200000,
+  "_key": "!macros!pBJCMW5TZAb9pmuw"
+}

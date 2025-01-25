@@ -71,7 +71,7 @@
                 <h3>Sustained Damage</h3>
 
                 {{#each crits.criticals as | c i |}}
-                    {{localize (concat "MGT2.Spacecraft.Criticals." c.location)}}
+                    {{c.sustained}}% -
                     <select class="criticalSelect" data-idx="{{i}}">
                         {{selectOptions ../criticalLabels selected=c.location}}
                     </select>

@@ -599,6 +599,7 @@ MGT2.WEAPONS = {
         "ion": { "scale": "spacecraft" },
         "laserSight": { "scale": "traveller" },
         "loPen": { "value": 2, "min": 2, "max": 99, "conflict": [ "ap" ] },
+        "missile": { "scale": "spacecraft", "value": 1, "min": 1, "max": 120 },
         "oneUse": { "conflict": [ "auto" ] },
         "orbitalBombardment": { "scale": "spacecraft" },
         "orbitalStrike": { "scale": "spacecraft" },
