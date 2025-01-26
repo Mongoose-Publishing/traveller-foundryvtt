@@ -2218,7 +2218,7 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (systemType === "bridge") {
             itemName = "Bridge";
             img = "systems/mgt2e/icons/hardware/bridge.svg";
-            system.hardware.system = "general";
+            system.hardware.system = "bridge";
             if (this.actor.system.spacecraft.dtons <= 50) {
                 system.hardware.tonnage.tons = 5;
             } else if (this.actor.system.spacecraft.dtons < 100) {
