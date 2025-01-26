@@ -210,19 +210,31 @@ export class MgT2SpacecraftDamageDialog extends Application {
         let damage = this.actualDamage;
         console.log(this.crits);
 
+        let critEffect = html.find(".criticalEffectSelect");
+        if (critEffect) {
+            this.criticalEffectRoll = critEffect[0].value;
+        }
+
+        let critList = html.find(".criticalSelect");
+        for (let c = 0; c < critList.length; c++) {
+            if (this.crits.criticals[c]) {
+                this.crits.criticals[c].location = critList[c].value;
+            }
+        }
+
         // Apply Criticals
         if (this.crits?.criticals) {
             for (let c = 0; c < this.crits.criticals.length; c++) {
                 let location = this.crits.criticals[c].location;
                 let severity = this.crits.criticals[c].severity;
                 console.log(`Apply crit ${c} to ${location} severity ${severity}`);
-                this.actor.setCriticalLevel(location, severity);
+                await this.actor.setCriticalLevel(location, severity);
             }
         }
 
         // Apply critical effect
         if (this.crits?.effectCrit) {
-            this.actor.setCriticalLevel(this.criticalEffectRoll, this.crits.effectSeverity);
+            await this.actor.setCriticalLevel(this.criticalEffectRoll, this.crits.effectSeverity);
         }
 
         // Apply raw damage

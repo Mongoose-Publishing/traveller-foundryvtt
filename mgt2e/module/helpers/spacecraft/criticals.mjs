@@ -4,7 +4,7 @@
 
 import {MGT2} from "../config.mjs";
 
-export function setSpacecraftCriticalLevel(actor, critical, level) {
+export async function setSpacecraftCriticalLevel(actor, critical, level) {
     if (actor.type === "spacecraft") {
         level = Math.min(parseInt(level), 6);
         if (level < 1) {
@@ -16,17 +16,20 @@ export function setSpacecraftCriticalLevel(actor, critical, level) {
                     break;
                 }
             }
-            actor.setFlag("mgt2e", "hasCrits", hasCrits);
+            await actor.setFlag("mgt2e", "hasCrits", hasCrits);
         } else if (MGT2.SPACECRAFT_CRITICALS[critical]) {
             let currentLevel = actor.getFlag("mgt2e", "crit_" + critical);
             if (!currentLevel) {
                 currentLevel = 0;
             }
-            if (level < currentLevel) {
+            console.log("Applying critical for " + critical +" at level " + level);
+            console.log("Current level is " + currentLevel);
+            if (level <= currentLevel) {
                 level = currentLevel + 1;
             }
-            actor.setFlag("mgt2e", "crit_" + critical, level);
-            actor.setFlag("mgt2e", "hasCrits", true);
+            console.log("New modified level is " + currentLevel);
+            await actor.setFlag("mgt2e", "crit_" + critical, level);
+            await actor.setFlag("mgt2e", "hasCrits", true);
             console.log(`Set critical ${critical} to ${level}`);
 
             if (MGT2.SPACECRAFT_CRITICALS[critical][level]) {

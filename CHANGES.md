@@ -11,10 +11,17 @@
 * Crew role skill actions can now include description of action in chat output.
 * Added extra sample crew roles.
 * Added ability to create crew roles from the spacecraft character sheet.
-* Further improvements to handling of criticals on spacecraft.
+* Further improvements to handling of criticals on spacecraft. Criticals are displayed
+  on the ship sheet, and can be removed. Some critical effects will be applied when they
+  occur. Hardware can be damaged, cargo can be destroyed (turned to scrap).
 * Added 'Missile' trait for spacecraft scale weapons. There is no support for this beyond
   being able to define a weapon as being a missile launcher.
 * Added Macro compendium. Currently, contains some simple macros for dice rolls.
+* Added icons for dice roll types and results.
+* Effect is now added to spacecraft damage.
+* Added new icons for spacecraft weapon types.
+* Added hover text hints to spacecraft sheet, pointing players to the hardware tab
+  for values such as jdrive and mdrive.
 
 ## v0.11.4 (Beta)
 

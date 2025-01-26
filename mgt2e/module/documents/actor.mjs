@@ -333,8 +333,6 @@ export class MgT2Actor extends Actor {
 
     _prepareSpacecraftData(actor) {
         if (actor.type !== "spacecraft") return;
-        console.log(`_prepareSpacecraftData: ${actor.name}`);
-
         const actorData = actor.system;
 
         if (!actorData.spacecraft.combat) {
@@ -1069,8 +1067,8 @@ export class MgT2Actor extends Actor {
       return 0;
   }
 
-  setCriticalLevel(critical, level) {
-      setSpacecraftCriticalLevel(this, critical, level);
+  async setCriticalLevel(critical, level) {
+      await setSpacecraftCriticalLevel(this, critical, level);
   }
 
   fixCriticalEffect(effect) {
