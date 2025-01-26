@@ -26,7 +26,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.damageOptions = damageOptions;
         this.data = actor.system;
 
-        this.damage = damageOptions.damage + Math.min(0, damageOptions.effect);
+        this.damage = damageOptions.damage + Math.max(0, damageOptions.effect);
         this.ap = damageOptions.ap?parseInt(damageOptions.ap):0;
         if (damageOptions.scale !== "spacecraft") {
             this.damage = parseInt (this.damage / 10);
