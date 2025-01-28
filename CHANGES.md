@@ -6,6 +6,12 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## Development
+
+* Add inline macro support for journals.
+* Character sheets now have an "Add Item" option for Travellers and NPCs, to allow
+  items to be generated directly from the character sheet.
+
 ## 0.11.6 (Beta)
 
 * The drop down to add a new role to a spacecraft was only being shown if there were

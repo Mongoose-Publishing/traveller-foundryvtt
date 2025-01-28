@@ -247,6 +247,13 @@ export class MgT2ActorSheet extends ActorSheet {
                 "5": "Large +5",
                 "6": "Large +6"
             };
+            context.CREATE_ITEM_SELECT = {
+                "": "",
+                "armour": game.i18n.localize("TYPES.Item.armour"),
+                "augment": game.i18n.localize("TYPES.Item.augment"),
+                "item": game.i18n.localize("TYPES.Item.item"),
+                "weapon": game.i18n.localize("TYPES.Item.weapon")
+            }
         }
 
         return context;
@@ -980,6 +987,11 @@ export class MgT2ActorSheet extends ActorSheet {
                this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });
             });
         }
+        html.find('.addItemSelect').click(ev => {
+            const value = $(ev.currentTarget).val();
+            this._createEquipmentItem(value);
+        });
+
 
         // Dodge reaction
         html.find('.dodgeRoll').click(ev => {
@@ -2136,6 +2148,22 @@ export class MgT2ActorSheet extends ActorSheet {
             "system": system
         };
         Item.create(itemData, { parent: this.actor } );
+    }
+
+    _createEquipmentItem(itemType) {
+        if (!itemType) {
+            return;
+        }
+
+        let itemName = game.i18n.localize("TYPES.Item." + itemType);
+        let img = "";
+        const itemData = {
+            "name": itemName,
+            "img": img,
+            "type": itemType
+        };
+        Item.create(itemData, { parent: this.actor } );
+
     }
 
     _createHardware(systemType) {

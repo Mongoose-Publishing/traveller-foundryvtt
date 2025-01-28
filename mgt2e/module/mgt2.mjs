@@ -255,7 +255,7 @@ Hooks.on("init", function() {
     // Inline Macro Execution.
     // Based on code written by Mesayah:
     // https://github.com/fpiechowski/inline-macro-execution
-    const rgx = /\[\[(\/macroExec)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
+    const rgx = /\[\[(\/mgMacro)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
     CONFIG.TextEditor.enrichers.push({
         pattern: rgx,
         enricher: Tools.macroExecutionEnricher,

@@ -308,6 +308,7 @@
   "MGT2.TravellerSheet.DTonsRemaining": "Remaining",
   "MGT2.TravellerSheet.AddHardware": "Add Hardware",
   "MGT2.TravellerSheet.AddCrewRole": "Add Crew Role",
+  "MGT2.TravellerSheet.AddItem": "Add Item",
   "MGT2.TravellerSheet.Configuration": "Configuration",
   "MGT2.TravellerSheet.Fuel": "Fuel",
   "MGT2.TravellerSheet.CurrentFuel": "Current (dT)",
