@@ -6,6 +6,13 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## 0.11.6 (Beta)
+
+* The drop down to add a new role to a spacecraft was only being shown if there were
+  already some roles on the ship.
+* Spacecraft damage couldn't be applied due to bug in calculation of effect criticals,
+  if there were no effect criticals.
+
 ## v0.11.5 (Beta)
 
 * Crew role skill actions can now include description of action in chat output.

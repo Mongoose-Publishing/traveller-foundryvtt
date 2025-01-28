@@ -211,7 +211,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
         console.log(this.crits);
 
         let critEffect = html.find(".criticalEffectSelect");
-        if (critEffect) {
+        if (critEffect && critEffect[0]) {
             this.criticalEffectRoll = critEffect[0].value;
         }
 
