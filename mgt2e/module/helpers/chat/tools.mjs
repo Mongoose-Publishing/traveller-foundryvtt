@@ -373,3 +373,59 @@ Tools.currentTime = function(chatData, args) {
     let text = "It is currently " + year + "-" + day;
     this.message(chatData, text);
 }
+
+Tools.macroExecutionEnricher = function(match, options) {
+    try {
+        console.log(match);
+
+        const macroName = match[3];
+        const argsString = match[4];
+        const flavor = match[6];
+
+        console.log(macroName);
+        console.log(argsString);
+        console.log(flavor);
+
+        const macro = game.macros.getName(macroName);
+        const title = `${macro.name}(${argsString})`;
+
+        return Tools.macroExecutionButton(macroName, argsString, title, flavor);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+Tools.macroExecutionButton = function(macroName, argsString, title, flavor) {
+    const a = document.createElement("a");
+    a.classList.add("inline-macro-execution");
+    a.dataset.macroName = macroName;
+    a.dataset.args = argsString;
+    a.innerHTML = `<i class="fas fa-dice-d20"></i> ${flavor ?? title}`;
+    return a;
+}
+
+Tools.macroClick = function(event) {
+    try {
+        event.preventDefault();
+        const a = event.currentTarget;
+
+        const macroName = a.dataset.macroName;
+        const argsString = a.dataset.args;
+        const argsRgx = /(\w+)=\s*(?:"([^"]*)"|(\S+))/g;
+
+        const args = {};
+        let match;
+        while ((match = argsRgx.exec(argsString)) !== null) {
+            match
+            const key = match[1];
+            const value = match[2] ?? match[3];
+            args[key] = value;
+        }
+
+        game.macros.getName(macroName).execute(args);
+    } catch (e) {
+        ui.notifications.error(e.error);
+        throw e;
+    }
+
+};

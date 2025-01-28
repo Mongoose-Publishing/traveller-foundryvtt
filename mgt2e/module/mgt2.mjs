@@ -246,10 +246,23 @@ Hooks.once('init', async function() {
        }
     });
 
+
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
 });
 
+Hooks.on("init", function() {
+    // Inline Macro Execution.
+    // Based on code written by Mesayah:
+    // https://github.com/fpiechowski/inline-macro-execution
+    const rgx = /\[\[(\/macroExec)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
+    CONFIG.TextEditor.enrichers.push({
+        pattern: rgx,
+        enricher: Tools.macroExecutionEnricher,
+    });
+    const body = $("body");
+    body.on("click", "a.inline-macro-execution", Tools.macroClick);
+})
 
 Hooks.on('renderChatMessage', function(app, html) {
     const damageMessage = html.find(".damage-message")[0];
