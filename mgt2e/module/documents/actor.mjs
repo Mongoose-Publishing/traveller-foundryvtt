@@ -4,6 +4,7 @@ import {MGT2} from "../helpers/config.mjs";
 import {MgT2DamageDialog} from "../helpers/damage-dialog.mjs";
 import {getTraitValue, hasTrait, isNonZero, isNumber} from "../helpers/dice-rolls.mjs";
 import {MgT2SpacecraftDamageDialog} from "../helpers/spacecraft-damage-dialog.mjs";
+import {setSpacecraftCriticalLevel} from "../helpers/spacecraft/criticals.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -303,7 +304,7 @@ export class MgT2Actor extends Actor {
             actorData.characteristics[char].dm = this.getModifier(value);
         }
 
-        if (actorData.hits) {
+        if (actorData.hits && actorData.settings.autoHits) {
             let maxHits = actorData.characteristics.STR.value +
                 actorData.characteristics.DEX.value +
                 actorData.characteristics.END.value;
@@ -343,8 +344,6 @@ export class MgT2Actor extends Actor {
 
     _prepareSpacecraftData(actor) {
         if (actor.type !== "spacecraft") return;
-        console.log(`_prepareSpacecraftData: ${actor.name}`);
-
         const actorData = actor.system;
 
         if (!actorData.spacecraft.combat) {
@@ -405,6 +404,16 @@ export class MgT2Actor extends Actor {
 
   }
 
+  hasCreatureTrait(trait) {
+    if (this.type === "creature" && this.system.traits) {
+      const traits = this.system.traits;
+      if (traits.indexOf(trait) > -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   getCreatureTrait(trait) {
       if (this.type === "creature" && this.system.traits) {
           const traits = this.system.traits;
@@ -432,36 +441,68 @@ export class MgT2Actor extends Actor {
       console.log(`applyDamageToPerson: Damage ${damage}`);
 
       let armour = 0;
+      let armourText = ""
+      options.armour = 0;
 
       if (this.system.armour && isNonZero(this.system.armour.protection)) {
           armour = parseInt(this.system.armour.protection);
           if (!isNumber(armour)) {
               armour = 0;
           }
-          if (options.damageType !== "") {
-              let armourData = this.system.armour;
-              if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
-                  armour += armourData.otherProtection ? parseInt(armourData.otherProtection) : 0;
-              }
-          }
+          options.armour = armour;
+          armourText = game.i18n.localize("MGT2.Armour.Protection") + " " + armour + " ";
           armour = Math.max(0, armour);
-          if (this.system.armour.archaic && options.ranged) {
-              if (options.tl > this.system.tl) {
+          // Halve protection value if armour is archaic and weapon TL is higher.
+          if (parseInt(this.system.armour.archaic) === 1 && options.ranged) {
+              if (parseInt(options.tl) > parseInt(this.system.tl)) {
                   armour = parseInt((armour + 1) / 2);
+                  armourText += `(${game.i18n.localize("MGT2.Armour.Archaic")}) `;
               }
           }
           console.log("Modified armour value is " + armour);
       }
+      console.log("Damage type is " + options.damageType);
+      if (this.system.armour && options.damageType !== "") {
+          let armourData = this.system.armour;
+          if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
+              let otherProt = armourData.otherProtection ? parseInt(armourData.otherProtection) : 0;
+              if (otherProt > 0) {
+                  armour += otherProt;
+                  armourText += `${options.damageType} + ${otherProt} `;
+              }
+          }
+      }
+      console.log(armour);
+
       // Look for active weapons which provide protection.
       for (let i of this.items) {
           if (i.type === "weapon" && i.system.status === MgT2Item.EQUIPPED) {
               if (hasTrait(i.system.weapon.traits, "protection")) {
-                  armour += getTraitValue(i.system.weapon.traits, "protection");
+                  let value = getTraitValue(i.system.weapon.traits, "protection");
+                  if (value > 0) {
+                      armour += value;
+                      armourText += `${i.name} +${value} `;
+                  }
+              }
+          } else if (i.type === "armour" && i.system.status === MgT2Item.EQUIPPED) {
+              if (i.system.armour.psi === "1") {
+                  // Is Psi enhanced armour being worn?
+                  let psi = this.system.characteristics["PSI"].current;
+                  if (psi > 0) {
+                      psi = parseInt((psi + 1) / 2);
+                      armour += psi;
+                      armourText += `PSI +${psi} `;
+                  }
               }
           }
       }
+      options.finalArmour = armour;
+      options.armourText = armourText;
 
-      if (hasTrait(options.traits, "ap")) {
+      if (options.ap) {
+          // If AP has already been calculated, use that.
+          armour = Math.max(0, armour - options.ap);
+      } else if (hasTrait(options.traits, "ap")) {
           let ap = parseInt(getTraitValue(options.traits, "ap"));
           armour = Math.max(0, armour - ap);
       } else if (hasTrait(options.traits, "loPen")) {
@@ -476,6 +517,11 @@ export class MgT2Actor extends Actor {
       }
       if (damage < 1) {
           // No damage to be applied.
+          ui.notifications.info(
+              game.i18n.format("MGT2.Attack.DamageBounce",
+                  { "target": this.name }
+              )
+          );
           return;
       }
 
@@ -667,7 +713,26 @@ export class MgT2Actor extends Actor {
               damage *= 10;
           }
           this.applyDamageToVehicle(damage, options);
-      } else if (this.type === "traveller" || this.type === "npc" || this.type === "creature") {
+      } else if (this.type === "creature") {
+          // Creatures can have special traits which modify damage.
+          if (this.hasCreatureTrait("gigantic")) {
+              if (options.scale !== "spacecraft") {
+                  damage = parseInt(damage / 10);
+              }
+          } else if (this.hasCreatureTrait("energy")) {
+              damage = 0;
+          }
+          if (this.hasCreatureTrait("gossamer") && options.minimumDamage) {
+              damage = options.minimumDamage;
+          } else if (this.hasCreatureTrait("dispersed") && options.reducedDamage) {
+              if (options.damageType === "fire" || options.damageType === "cutting") {
+                  // Normal damage.
+              } else {
+                  damage = options.reducedDamage;
+              }
+          }
+          this.applyDamageToPerson(damage, options);
+      } else if (this.type === "traveller" || this.type === "npc") {
           if (options.scale === "spacecraft") {
               damage *= 10;
               // TODO: Possibly also add blast effects.
@@ -1013,29 +1078,36 @@ export class MgT2Actor extends Actor {
       return 0;
   }
 
-  setCriticalLevel(critical, level) {
-      if (this.type === "spacecraft") {
-          level = Math.min(parseInt(level), 6);
-          if (level < 1) {
-              this.unsetFlag("mgt2e", "crit_" + critical);
-              let hasCrits = false;
-              for (let c in MGT2.SPACECRAFT_CRITICALS) {
-                  if (c != critical && this.flags.mgt2e["crit_"+c]) {
-                      hasCrits = true;
-                      break;
-                  }
-              }
-              this.setFlag("mgt2e", "hasCrits", hasCrits);
-          } else if (MGT2.SPACECRAFT_CRITICALS[critical]) {
-              this.setFlag("mgt2e", "crit_" + critical, level);
-              this.setFlag("mgt2e", "hasCrits", true);
-              console.log(`Set critical ${critical} to ${level}`);
-          } else {
-              console.log(`WARN: Unknown spacecraft critical [${critical}]`);
+  async setCriticalLevel(critical, level) {
+      await setSpacecraftCriticalLevel(this, critical, level);
+  }
+
+  fixCriticalEffect(effect) {
+      this.unsetFlag("mgt2e", "damage_" + effect);
+      this.unsetFlag("mgt2e", "damageSev_" + effect);
+  }
+
+
+  getHardwareList(type) {
+      let list = [];
+      for (let i of this.items.contents) {
+          if (i.type === "hardware" && i.system.hardware.system === type) {
+              list.push(i);
           }
-      } else {
-          console.log(`WARN: Setting critical [${critical}] on supported type [${this.type}]`);
       }
+      return list;
+  }
+
+  getItemsByType(type) {
+      let list = [];
+      for (let i of this.items.contents) {
+          console.log(i.name);
+          if (i.type === type) {
+              list.push(i);
+              console.log("Adding " + i.name);
+          }
+      }
+      return list;
   }
 
 }

@@ -1,0 +1,22 @@
+
+<div class="side-panel character-attacks shadow">
+    <label class="box-title">{{localize 'MGT2.TravellerSheet.Attacks'}}</label>
+
+<ol class="items-list">
+    {{#each items as |item id|}}
+        {{#if item.system.hardware}}
+            {{#if (ifEquals item.system.hardware.system "weapon")}}
+                <li class="item active-weapon" data-item-id="{{item._id}}" title="{{item.name}}">
+                    <label title="{{nameQuantity item}}">{{nameQuantity item}}</label>
+                    <a class="rollable" data-roll-type="item">
+                        <img src="{{item.img}}" title="{{item.name}}" width="40" height="40"/>
+
+                        {{showSpacecraftAttacks ../roles item}}
+
+                    </a>
+                </li>
+            {{/if}}
+        {{/if}}
+    {{/each}}
+</ol>
+</div>

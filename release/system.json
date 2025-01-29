@@ -2,7 +2,7 @@
   "name": "mgt2e",
   "title": "Mongoose Traveller 2e",
   "description": "A system for Mongoose Traveller 2e",
-  "version": "0.11.0",
+  "version": "0.11.6",
   "compatibility": {
     "minimum": 11,
     "verified": 12
@@ -43,6 +43,14 @@
       "module": "mgt2e",
       "path": "packs/traveller-docs",
       "type": "JournalEntry"
+    },
+    {
+      "name": "base-macros",
+      "label": "MgT2e Base Macros",
+      "system": "mgt2e",
+      "module": "mgt2e",
+      "path": "packs/base-macros",
+      "type": "Macro"
     }
   ],
   "languages": [
@@ -59,6 +67,6 @@
   "secondaryTokenAttribute": null,
   "url": "",
   "manifest": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/release/system.json",
-  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/v0.11.0/release/mongoose-traveller.zip",
+  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/develop/release/mongoose-traveller.zip",
   "license": "LICENSE.txt"
 }

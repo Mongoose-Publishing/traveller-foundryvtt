@@ -227,108 +227,38 @@ Tools.applyDamageToCha= function(damage, actorData, cha) {
     return 0;
 }
 
-// Apply damage to an actor. Needs to calculate armour.
-Tools.applyDamageTo = function(damage, ap, tl, options, traits, actor, token) {
-    console.log("************************************")
-    console.log("* Tools.applyDamageTo (DEPRECATED) *")
-    console.log("************************************")
-    let text = "";
+Tools.showBlastRadius = async function(x, y, damageOptions) {
+    console.log("showBlastRadius: ");
+    console.log(damageOptions);
 
-    if (!options) {
-        options = "";
-    }
-    if (!damage) {
-        damage = 0;
-    }
-    if (!ap) {
-        ap = 0;
-    }
-    if (!tl) {
-        tl = 0;
-    }
-    if (!actor) {
-        return;
+    if (game.settings.get("mgt2e", "blastEffectDivergence") > 0) {
+        if (damageOptions.effect < 0) {
+            let scale = canvas.grid.size / canvas.grid.distance;
+            const variance = parseInt(scale * parseFloat(game.settings.get("mgt2e", "blastEffectDivergence")) * Math.abs(damageOptions.effect));
+            const dice = `1D${variance} - 1D${variance}`;
+            const xv = (await new Roll(dice, null).evaluate()).total;
+            const yv = (await new Roll(dice, null).evaluate()).total;
+
+            console.log(`Diverge ${dice} ${xv} ${yv}`);
+            x += xv;
+            y += yv;
+        }
     }
 
-    console.log(`applyDamageTo: ${damage} AP ${ap} TL ${tl} (${options}) (${traits})`);
-
-    let data = actor.system;
-    let isRanged = true;
-    let armour = 0;
-
-    if (data.armour) {
-        armour = parseInt(data.armour.protection);
-        if (options !== "") {
-            console.log(data.armour);
-            if (data.armour.otherTypes && data.armour.otherTypes.indexOf(options) > -1) {
-                armour += data.armour.otherProtection?parseInt(data.armour.otherProtection):0;
-            }
-        }
-        armour = Math.max(0, armour);
+    const templateData = {
+        t: "circle",
+        user: game.user.id,
+        distance: damageOptions.blastRadius,
+        direction: 0, x:  x, y: y,
+        fillColor: "#FF8080",
+        borderColor: "#FF8080",
+        width: 3, opacity: 0.25
     }
-    if (hasTrait(traits, "lo-pen")) {
-        let lopen = getTraitValue(traits, "lo-pen");
-        if (lopen > 1) {
-            armour *= lopen;
-        }
-    }
-    if (data.armour && data.armour.archaic && isRanged && tl > data.armour.tl) {
-        // Archaic armour gets halved.
-        armour = parseInt(Math.round(armour / 2));
-    }
-    armour = Math.max(0, armour - ap);
-    let actualDamage = Math.max(0, damage - armour);
-
-    let stun = hasTrait(traits, "stun");
-
-    if (actor.type === "traveller") {
-        // Travellers don't have hits
-        let remaining = actualDamage;
-        // Damage always comes off END first.
-        if (data.damage.END.value < data.characteristics.END.value) {
-            remaining = Tools.applyDamageToCha(remaining, data, "END", stun);
-        }
-        // Now select either STR or DEX. Select the lowest as long as it doesn't take
-        // the characteristic to zero.
-        if (remaining > 0) {
-            let str = data.characteristics.STR.current;
-            if (str <= data.characteristics.DEX.current && str > remaining) {
-                remaining = Tools.applyDamageToCha(remaining, data, "STR");
-                Tools.applyDamageToCha(remaining, data, "DEX");
-            } else {
-                remaining = Tools.applyDamageToCha(remaining, data, "DEX");
-                Tools.applyDamageToCha(remaining, data, "STR");
-            }
-        }
-        actor.update({"data.damage": data.damage});
-        return;
-    } else {
-        if (!data.hits.damage) {
-            data.hits.damage = 0;
-        }
-        data.hits.damage += actualDamage;
-        data.hits.value = parseInt(data.hits.max) - parseInt(data.hits.damage);
-        if (stun) {
-            data.hits.tmpDamage += actualDamage;
-        }
-        if (data.hits.tmpDamage > data.hits.damage) {
-            data.hits.tmpDamage = data.hits.damage;
-        }
-        if (stun && data.characteristics) {
-            if (data.hits.tmpDamage > data.characteristics.END.value) {
-                let remaining = data.hits.tmpDamage - data.characteristics.END.value;
-                actor.setFlag("mgt2e", "stunned", true);
-                actor.setFlag("mgt2e", "stunnedRounds",
-                    actor.getFlag("mgt2e", "stunnedRounds")?
-                        parseInt(actor.getFlag("mgt2e", "stunnedRounds"))+remaining:remaining);
-            }
-        }
-    }
-    actor.update({"system.hits": data.hits});
-}
+    const template = canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [templateData]);
+};
 
 // Called from a button press in damage output in the chat.
-Tools.applyDamageToTokens = function(damage, damageOptions) {
+Tools.applyDamageToTokens = async function(damage, damageOptions) {
     console.log("Tools.applyDamageToTokens:");
 
     let tokens = Tools.getSelected();
@@ -354,14 +284,14 @@ Tools.damage = function(chatData, args) {
         return;
     }
     let damage = parseInt(args.shift());
-    let damageOptions = { "traits": ""};
+    let damageOptions = { "traits": "", "damage": damage, "ap": 0, "effect": 0, "scale": "traveller" };
     while (args.length > 0) {
         if (args[0] === "noui") {
             damageOptions.noUI = true;
             args.shift();
             continue;
         }
-        damageOptions.traits += args.shift();
+        damageOptions.traits += args.shift() + " ";
     }
     Tools.applyDamageToTokens(damage, damageOptions);
 };
@@ -443,3 +373,59 @@ Tools.currentTime = function(chatData, args) {
     let text = "It is currently " + year + "-" + day;
     this.message(chatData, text);
 }
+
+Tools.macroExecutionEnricher = function(match, options) {
+    try {
+        console.log(match);
+
+        const macroName = match[3];
+        const argsString = match[4];
+        const flavor = match[6];
+
+        console.log(macroName);
+        console.log(argsString);
+        console.log(flavor);
+
+        const macro = game.macros.getName(macroName);
+        const title = `${macro.name}(${argsString})`;
+
+        return Tools.macroExecutionButton(macroName, argsString, title, flavor);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+Tools.macroExecutionButton = function(macroName, argsString, title, flavor) {
+    const a = document.createElement("a");
+    a.classList.add("inline-macro-execution");
+    a.dataset.macroName = macroName;
+    a.dataset.args = argsString;
+    a.innerHTML = `<i class="fas fa-dice-d20"></i> ${flavor ?? title}`;
+    return a;
+}
+
+Tools.macroClick = function(event) {
+    try {
+        event.preventDefault();
+        const a = event.currentTarget;
+
+        const macroName = a.dataset.macroName;
+        const argsString = a.dataset.args;
+        const argsRgx = /(\w+)=\s*(?:"([^"]*)"|(\S+))/g;
+
+        const args = {};
+        let match;
+        while ((match = argsRgx.exec(argsString)) !== null) {
+            match
+            const key = match[1];
+            const value = match[2] ?? match[3];
+            args[key] = value;
+        }
+
+        game.macros.getName(macroName).execute(args);
+    } catch (e) {
+        ui.notifications.error(e.error);
+        throw e;
+    }
+
+};

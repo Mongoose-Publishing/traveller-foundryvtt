@@ -19,17 +19,6 @@ import {NpcIdCard} from "../helpers/id-card.mjs";
  * @extends {ActorSheet}
  */
 export class MgT2ActorSheet extends ActorSheet {
-    static BEHAVIOUR = [
-        "carrionEater", "chaser", "eater", "filter", "gatherer", "grazer",
-        "hunter", "hijacker", "intimidator", "killer", "intermittent", "pouncer",
-        "reducer", "siren", "trapper"
-    ];
-    static TRAITS = [
-      "alarm", "amphibious", "armour", "bioelectricity", "camouflaged",
-        "diseased", "echolocation", "fastMetabolism", "flyer", "heightenedSenses",
-        "irVision", "uvVision", "large", "poison", "psionic", "slowMetabolosim",
-        "small"
-    ];
 
     /** @override */
     static get defaultOptions() {
@@ -203,6 +192,15 @@ export class MgT2ActorSheet extends ActorSheet {
                 "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
                 "weapon": game.i18n.localize("MGT2.Spacecraft.System.weapon")
             };
+            context.selectRoleTypes = {
+                "": "",
+                "pilot": game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot"),
+                "gunner": game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner"),
+                "engineer": game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer"),
+                "sensors": game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors"),
+                "navigator": game.i18n.localize("MGT2.Role.BuiltIn.Name.Navigator"),
+                "broker": game.i18n.localize("MGT2.Role.BuiltIn.Name.Broker")
+            };
         } else if (type === "vehicle") {
             context.selectVehicleTL = {};
             for (let tl = 0; tl <= 17; tl++) {
@@ -250,6 +248,13 @@ export class MgT2ActorSheet extends ActorSheet {
                 "5": "Large +5",
                 "6": "Large +6"
             };
+            context.CREATE_ITEM_SELECT = {
+                "": "",
+                "armour": game.i18n.localize("TYPES.Item.armour"),
+                "augment": game.i18n.localize("TYPES.Item.augment"),
+                "item": game.i18n.localize("TYPES.Item.item"),
+                "weapon": game.i18n.localize("TYPES.Item.weapon")
+            }
         }
 
         return context;
@@ -330,6 +335,7 @@ export class MgT2ActorSheet extends ActorSheet {
         let dtonsUsed = 0;
         let powerTotal = 0;
         let powerUsed = parseInt(actorData.spacecraft.dtons) * 0.2;
+        let fuelTotal = 0;
 
         let hits = parseInt(actorData.spacecraft.dtons) / 2.5;
         if (actorData.spacecraft.dtons >= 100000) {
@@ -345,7 +351,7 @@ export class MgT2ActorSheet extends ActorSheet {
             }
         }
 
-        if (hits !== actorData.hits.max) {
+        if (hits !== actorData.hits.max && actorData.settings.autoHits) {
             actorData.hits.max = hits;
             actorData.hits.value = hits - actorData.hits.damage;
         }
@@ -405,7 +411,9 @@ export class MgT2ActorSheet extends ActorSheet {
                     //i.update({"system.hardware.tons": t });
                 } else if (h.system === "fuel") {
                     t = rating;
-                    context.system.spacecraft.fuel.max = rating;
+                    if (i.system.status !== MgT2Item.DESTROYED) {
+                        fuelTotal += rating;
+                    }
                 } else if (h.system === "cargo") {
                     actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
                     t = parseFloat(i.system.hardware.rating);
@@ -456,6 +464,13 @@ export class MgT2ActorSheet extends ActorSheet {
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;
 
+        if (fuelTotal != actorData.spacecraft.fuel.max) {
+            actorData.spacecraft.fuel.max = fuelTotal;
+            actorData.spacecraft.fuel.value = Math.min(actorData.spacecraft.fuel.value, fuelTotal);
+            context.actor.update({"system.spacecraft.fuel": actorData.spacecraft.fuel });
+        }
+
+
         if (bandwidthTotal != actorData.spacecraft.processing) {
             actorData.spacecraft.processing = bandwidthTotal;
             context.actor.update({"system.spacecraft.processing": bandwidthTotal});
@@ -490,8 +505,6 @@ export class MgT2ActorSheet extends ActorSheet {
 
         for (let r of context.departments) {
             context.departmentList[r._id] = r.name;
-            //context.departmentMembers[r._id] = [];
-            console.log(`${r.name} with id ${r._id}`);
         }
 
         for (let actorId in actorData.crewed.crew) {
@@ -737,7 +750,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         if (armourData.otherTypes !== "") {
                             armour.otherTypes = armourData.otherTypes;
                         }
-                        if (armourData.archaic) {
+                        if (parseInt(armourData.archaic) === 1) {
                             armour.archaic = 1;
                             armour.tl = i.system.tl;
                         }
@@ -907,6 +920,10 @@ export class MgT2ActorSheet extends ActorSheet {
             const value = $(ev.currentTarget).val();
             this._createHardware(value);
         });
+        html.find('.addRoleSelect').click(ev => {
+            const value = $(ev.currentTarget).val();
+            this._createCrewRole(value);
+        });
 
         // Events that only apply to creatures.
         if (this.actor.type === "creature") {
@@ -929,11 +946,11 @@ export class MgT2ActorSheet extends ActorSheet {
             });
             html.find('.trait-minus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureTraitModify(t.data("traitId"), -1);
+                this._creatureTraitModify(t.data("traitId"), ev.shiftKey?-5:-1);
             });
             html.find('.trait-plus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureTraitModify(t.data("traitId"), 1);
+                this._creatureTraitModify(t.data("traitId"), ev.shiftKey?5:1);
             });
         } else if (this.actor.type === "spacecraft") {
             // Select which bay to display.
@@ -961,11 +978,21 @@ export class MgT2ActorSheet extends ActorSheet {
                 const location = div.data("id");
                 this.actor.setCriticalLevel(location, 0);
             });
+            html.find('.critEffDel').click(ev => {
+                const div = $(ev.currentTarget).parents(".critical");
+                const location = div.data("id");
+                this.actor.fixCriticalEffect(location);
+            });
         } else if (this.actor.type === "traveller" || this.actor.type === "npc") {
             html.find('.roll-upp').click(ev => {
                this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });
             });
         }
+        html.find('.addItemSelect').click(ev => {
+            const value = $(ev.currentTarget).val();
+            this._createEquipmentItem(value);
+        });
+
 
         // Dodge reaction
         html.find('.dodgeRoll').click(ev => {
@@ -1252,10 +1279,25 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             } else if (traitData.value) {
                 let value = parseInt(text.replace(/[^-0-9]/g, ""));
-                value += parseInt(modifier);
-                if (value < 1) {
+                let min = 1;
+                let max = 21;
+                if (traitData.min) min = parseInt(traitData.min);
+                if (traitData.max) max = parseInt(traitData.max);
+                if (Math.abs(modifier) > 1 && Math.abs(value) > 100) {
+                    let m = Math.abs(parseInt(Math.log10(value)));
+                    console.log(m);
+                    modifier = Math.pow(10, m - 1) * Math.sign(modifier);
+                    //modifier = Math.abs(parseInt(value / 100) * 10) * Math.sign(modifier);
+                    value += modifier;
+                    value = parseInt(value / modifier) * modifier;
+                    console.log(modifier);
+                } else {
+                    value += parseInt(modifier);
+                }
+
+                if (value < min) {
                     // Too low, don't change.
-                } else if (value > 21) {
+                } else if (value > max) {
                     // Too high, don't change.
                 } else {
                     // We can change.
@@ -1371,7 +1413,7 @@ export class MgT2ActorSheet extends ActorSheet {
             let cha = action.cha;
             let target = isNaN(action.target)?null:parseInt(action.target);
 
-            new MgT2SkillDialog(actorCrew, skill, spec, cha, parseInt(action.dm?action.dm:0), target).render(true);
+            new MgT2SkillDialog(actorCrew, skill, spec, cha, parseInt(action.dm?action.dm:0), target, action.text).render(true);
         } else if (action.action === "weapon") {
             let weaponId = action.weapon;
             let weaponItem = shipActor.items.get(weaponId);
@@ -2001,6 +2043,130 @@ export class MgT2ActorSheet extends ActorSheet {
         return await Item.create(itemData, {parent: this.actor});
     }
 
+    _createCrewRole(roleType) {
+        let system = {
+            "description": "",
+            "role": {
+                "actions": {},
+                "department": false,
+                "colour": null,
+                "dei": 0
+            }
+        }
+        let itemName = "Role";
+        let img = null;
+
+        let t = Date.now();
+        if (roleType === "gunner") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner");
+            img = "systems/mgt2e/icons/items/roles/gunner.svg";
+            system.role.actions[(t++).toString(36)]= {
+                "title": "Gunner",
+                "action": "weapon",
+                "dm": 0,
+                "weapon": null
+            };
+        } else if (roleType === "pilot") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot");
+            img = "systems/mgt2e/icons/items/roles/pilot.svg";
+            let skill = "pilot.spacecraft";
+            if (this.actor.system.spacecraft.dtons < 100) {
+                skill = "pilot.smallCraft";
+            } else if (this.actor.system.spacecraft.dtons > 5000) {
+                skill = "pilot.capitalShips";
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.Pilot"),
+                "action": "skill", "cha": "DEX", "skill": skill, "target": 8, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.PortLanding"),
+                "action": "skill", "cha": "DEX", "skill": skill, "target": 6, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.WildLanding"),
+                "action": "skill", "cha": "DEX", "skill": skill, "target": 10, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.Evade"),
+                "action": "special", "special": "evade"
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": game.i18n.localize("MGT2.Role.BuiltIn.Action.MakePilot"),
+                "action": "special", "special": "pilot"
+            }
+        } else if (roleType === "engineer") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer");
+            img = "systems/mgt2e/icons/items/roles/engineer.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Engineering",
+                "action": "skill", "cha": "INT", "skill": "engineer.power", "target": 8, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Engineering",
+                "action": "skill", "cha": "INT", "skill": "engineer.jdrive", "target": 8, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Engineering",
+                "action": "skill", "cha": "INT", "skill": "engineer.mdrive", "target": 8, "dm": 0
+            }
+        } else if (roleType === "sensors") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors");
+            img = "systems/mgt2e/icons/items/roles/sensors.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Sensors",
+                "action": "skill", "cha": "INT", "skill": "electronics.sensors", "target": 8, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Comms",
+                "action": "skill", "cha": "INT", "skill": "electronics.comms", "target": 8, "dm": 0
+            }
+        } else if (roleType === "navigator") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Navigator");
+            img = "systems/mgt2e/icons/items/roles/navigator.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Jump-1",
+                "action": "skill", "cha": "EDU", "skill": "astrogation", "target": 4, "dm": -1
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Jump-2",
+                "action": "skill", "cha": "EDU", "skill": "astrogation", "target": 4, "dm": -2
+            }
+        } else if (roleType === "broker") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Broker");
+            img = "systems/mgt2e/icons/items/roles/broker.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Broker",
+                "action": "skill", "cha": "INT", "skill": "broker", "target": 8, "dm": 0
+            }
+        } else {
+            return;
+        }
+        const itemData = {
+            "name": itemName,
+            "img": img,
+            "type": "role",
+            "system": system
+        };
+        Item.create(itemData, { parent: this.actor } );
+    }
+
+    _createEquipmentItem(itemType) {
+        if (!itemType) {
+            return;
+        }
+
+        let itemName = game.i18n.localize("TYPES.Item." + itemType);
+        let img = "";
+        const itemData = {
+            "name": itemName,
+            "img": img,
+            "type": itemType
+        };
+        Item.create(itemData, { parent: this.actor } );
+
+    }
+
     _createHardware(systemType) {
         let system = {
             "tl": 12, "weight": 0, "cost": 0, "notes": "",
@@ -2081,7 +2247,7 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (systemType === "bridge") {
             itemName = "Bridge";
             img = "systems/mgt2e/icons/hardware/bridge.svg";
-            system.hardware.system = "general";
+            system.hardware.system = "bridge";
             if (this.actor.system.spacecraft.dtons <= 50) {
                 system.hardware.tonnage.tons = 5;
             } else if (this.actor.system.spacecraft.dtons < 100) {

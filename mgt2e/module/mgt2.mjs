@@ -19,7 +19,7 @@ import { skillLabel } from "./helpers/dice-rolls.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
 import { migrateWorld } from "./migration.mjs";
 import { NpcIdCard } from "./helpers/id-card.mjs";
-
+import {hasTrait} from "./helpers/dice-rolls.mjs";
 
 
 /* -------------------------------------------- */
@@ -157,6 +157,52 @@ Hooks.once('init', async function() {
         },
         default: "private"
     });
+    game.settings.register('mgt2e', 'visionDefaultTraveller', {
+        name: game.i18n.localize("MGT2.Settings.PlayerVision.Traveller.Name"),
+        hint: game.i18n.localize("MGT2.Settings.PlayerVision.Traveller.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false
+    });
+    game.settings.register('mgt2e', 'visionDefaultNPC', {
+        name: game.i18n.localize("MGT2.Settings.PlayerVision.NPC.Name"),
+        hint: game.i18n.localize("MGT2.Settings.PlayerVision.NPC.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false
+    });
+    game.settings.register('mgt2e', 'visionDefaultCreature', {
+        name: game.i18n.localize("MGT2.Settings.PlayerVision.Creature.Name"),
+        hint: game.i18n.localize("MGT2.Settings.PlayerVision.Creature.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false
+    });
+    game.settings.register('mgt2e', 'visionDefaultSpacecraft', {
+        name: game.i18n.localize("MGT2.Settings.PlayerVision.Spacecraft.Name"),
+        hint: game.i18n.localize("MGT2.Settings.PlayerVision.Spacecraft.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false
+    });
+    game.settings.register('mgt2e', 'blastEffectDivergence', {
+        name: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Name"),
+        hint: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Hint"),
+        scope: 'world',
+        config: true,
+        "choices": {
+            "0": "None",
+            "1": "Low",
+            "2": "Medium",
+            "3": "High"
+
+        },
+        default: "0"
+    });
 
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;
@@ -200,10 +246,23 @@ Hooks.once('init', async function() {
        }
     });
 
+
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
 });
 
+Hooks.on("init", function() {
+    // Inline Macro Execution.
+    // Based on code written by Mesayah:
+    // https://github.com/fpiechowski/inline-macro-execution
+    const rgx = /\[\[(\/mgMacro)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
+    CONFIG.TextEditor.enrichers.push({
+        pattern: rgx,
+        enricher: Tools.macroExecutionEnricher,
+    });
+    const body = $("body");
+    body.on("click", "a.inline-macro-execution", Tools.macroClick);
+})
 
 Hooks.on('renderChatMessage', function(app, html) {
     const damageMessage = html.find(".damage-message")[0];
@@ -328,7 +387,20 @@ Hooks.on("createItem", (item) => {
  * way since V12, since we can't access the template.json in V12.
  */
 Hooks.on("createActor", (actor) => {
+    if (!game.users.current.isGM) {
+        return;
+    }
     console.log("createActor:");
+
+    if (actor.type === "traveller" && game.settings.get("mgt2e", "visionDefaultTraveller")) {
+        actor.update({"prototypeToken.sight.enabled": true});
+    } else if (actor.type === "npc" && game.settings.get("mgt2e", "visionDefaultNPC")) {
+        actor.update({"prototypeToken.sight.enabled": true});
+    } else if (actor.type === "creature" && game.settings.get("mgt2e", "visionDefaultCreature")) {
+        actor.update({"prototypeToken.sight.enabled": true});
+    } else if ((actor.type === "spacecraft" || actor.type === "vehicle") && game.settings.get("mgt2e", "visionDefaultSpacecraft")) {
+        actor.update({"prototypeToken.sight.enabled": true});
+    }
 
     // Copy in characteristics where needed.
     if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
@@ -595,6 +667,13 @@ Hooks.on("combatRound", (combat, data, options) => {
 });
 
 Hooks.on("dropCanvasData", (canvas, data) =>{
+    if (data && data.type === "Damage") {
+        // Are we dropping a blast effect on the scene?
+        const options = JSON.parse(data.options);
+        if (options.blastRadius) {
+            Tools.showBlastRadius(data.x, data.y, options);
+        }
+    }
 });
 
 
@@ -723,7 +802,6 @@ Handlebars.registerHelper('toLowerCase', function(str) {
 });
 
 Handlebars.registerHelper('toPlainText', function(html) {
-    console.log(html);
     if (html && typeof html === 'string') {
         let text = html.replace(/<[^>]*>/g, "");
 
@@ -968,7 +1046,7 @@ Handlebars.registerHelper('concat', function(arg1, arg2, arg3, arg4, arg5) {
     return text;
 });
 
-Handlebars.registerHelper('nameQuantity', function(item) {
+Handlebars.registerHelper('nameQuantity', function(item, context) {
    let name = item.name;
    let quantity = item.system.quantity;
    let extra = null;
@@ -992,8 +1070,15 @@ Handlebars.registerHelper('nameQuantity', function(item) {
    }
 
    if (quantity && parseInt(quantity) > 1) {
-       quantity = parseInt(quantity);
-       name = `${name} x${quantity}`;
+       if (context === "sidebar") {
+           if (item.type === "weapon" && hasTrait(item.system.weapon.traits, "oneUse")) {
+               quantity = parseInt(quantity);
+               name = `${name} x${quantity}`;
+           }
+       } else {
+           quantity = parseInt(quantity);
+           name = `${name} x${quantity}`;
+       }
    }
    return name;
 });
@@ -1409,6 +1494,15 @@ Handlebars.registerHelper('showItemStatus', function(item, status) {
 
 Handlebars.registerHelper('showCriticals', function(actor) {
   let html = "";
+
+  for (let d in MGT2.SPACECRAFT_DAMAGE) {
+      if (actor.flags.mgt2e["damage_" + d]) {
+          let label = game.i18n.localize("MGT2.Spacecraft.CriticalLabel."+d);
+          label += ` <i class="fas fa-xmark critEffDel"> </i>`;
+          html += `<div class="resource critical criticalHigh" data-id="${d}"><label>${label}</label></div>`;
+      }
+  }
+
   for (let c in MGT2.SPACECRAFT_CRITICALS) {
       let severity = actor.flags.mgt2e["crit_"+c];
       if (severity) {
@@ -1427,6 +1521,15 @@ Handlebars.registerHelper('showCriticals', function(actor) {
   return html;
 });
 
+Handlebars.registerHelper('criticalClass', function(sev) {
+   sev = parseInt(sev);
+   if (sev > 4) {
+       return "criticalHigh";
+   } else if (sev > 2) {
+       return "criticalMedium";
+   }
+   return "criticalLow";
+});
 
 Handlebars.registerHelper('showSimpleSkills', function(actor) {
    if (actor && actor.system && actor.system.skills) {
@@ -1597,10 +1700,13 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
                         }
                     } else if (data.value) {
                         value = parseInt(value);
-                        if (value > 1) {
+                        let min = 1, max = 21;
+                        if (data.min !== undefined) min = parseInt(data.min);
+                        if (data.max !== undefined) max = parseInt(data.max);
+                        if (value > min) {
                             html += `<i class="fas fa-minus trait-minus"> </i>`;
                         }
-                        if (value < 21) {
+                        if (value < max) {
                             html += `<i class="fas fa-plus trait-plus"> </i>`;
                         }
                     }
@@ -1770,6 +1876,33 @@ Handlebars.registerHelper('selectedWeaponId', function(actions, id) {
     } else {
         return "";
     }
+});
+
+Handlebars.registerHelper('showSpacecraftAttacks', function(roles, item) {
+    let html = "";
+
+    console.log(roles);
+    console.log(item);
+
+    for (let r of roles) {
+        console.log(r);
+        if (r.system.role.actions) {
+            for (let a in r.system.role.actions) {
+                console.log(a);
+                if (r.system.role.actions[a].action === "weapon") {
+                    if (r.system.role.actions[a].weapon === item._id) {
+                        html = "Crewed";
+                        if (item.system.hardware.weapons) {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+   return html;
 });
 
 

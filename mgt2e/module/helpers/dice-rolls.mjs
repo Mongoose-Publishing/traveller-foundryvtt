@@ -91,18 +91,28 @@ export function getTraitValue(traits, trait) {
     return 0;
 }
 
-export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry) {
+//export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry, shotsFired) {
+export async function rollAttack(actor, weapon, attackOptions) {
     const   system = actor?actor.system:null;
     let     content = "Attack";
 
     console.log("rollAttack:");
     console.log(weapon);
+    console.log(attackOptions);
+
+    if (!attackOptions.dm) {
+        attackOptions.dm = 0;
+    }
+    if (!attackOptions.skillDM) {
+        attackOptions.skillDM = 0;
+    }
 
     let baseRange = weapon.system.weapon.range;
     let rangeBand = null;
     let rangeDistance = baseRange;
-    if (range !== undefined && range !== null && !isParry) {
-        switch (range) {
+    let rangeUnit = "m";
+    if (attackOptions.rangeDM !== undefined && attackOptions.rangeDM !== null && !attackOptions.isParry) {
+        switch (attackOptions.rangeDM) {
             case +1:
                 rangeBand = "Short";
                 rangeDistance = parseInt(rangeDistance / 4);
@@ -119,18 +129,21 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
                 rangeDistance = parseInt(rangeDistance * 4);
                 break;
         }
+        if (weapon.system.weapon.scale === "vehicle") {
+            rangeUnit = "km";
+        }
     }
 
     // Normal, Boon or Bane dice roll.
     let dice = "2D6";
-    if (rollType === "boon") {
+    if (attackOptions.rollType === "boon") {
         dice = "3D6k2";
-    } else if (rollType === "bane") {
+    } else if (attackOptions.rollType === "bane") {
         dice = "3D6kl2";
     }
 
-    if (skillDM !== 0) {
-        dice += ` + ${skillDM}`;
+    if (attackOptions.skillDM !== 0) {
+        dice += ` + ${attackOptions.skillDM}`;
     }
     if (system) {
         if (system.modifiers && system.modifiers.encumbrance.dm !== 0) {
@@ -178,21 +191,21 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
 
     // Header information
     content = `<div class="attack-message">`;
-    content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+"m"):""}</h2><div class="message-content">`;
+    content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+rangeUnit):""}</h2><div class="message-content">`;
     content += "<div>";
     if (actor) {
         content += `<img class="skillcheck-thumb" alt="${actor.name}" src="${actor.thumbnail}"/>`;
     }
     content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
-    content += `<b>Skill DM:</b> ${skillDM}`;
-    if (dm && parseInt(dm) < 0) {
-        content += " " + dm;
-    } else if (dm && parseInt(dm) > 0) {
-        content += " +" + dm;
+    content += `<b>Skill DM:</b> ${attackOptions.skillDM}`;
+    if (attackOptions.dm && parseInt(attackOptions.dm) < 0) {
+        content += " " + attackOptions.dm;
+    } else if (attackOptions.dm && parseInt(attackOptions.dm) > 0) {
+        content += " +" + attackOptions.dm;
     }
-    if (rollType && rollType === "boon") {
+    if (attackOptions.rollType && attackOptions.rollType === "boon") {
         content += "<span class='boon'> (boon)</span>";
-    } else if (rollType && rollType === "bane") {
+    } else if (attackOptions.rollType && attackOptions.rollType === "bane") {
         content += "<span class='bane'> (bane)</span>";
     }
     content += "<br/>";
@@ -203,7 +216,38 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
     if (!type) {
         type = "standard";
     }
-    let destructive = dmg.indexOf("*") > -1;
+
+    let traits = weapon.system.weapon.traits;
+
+    if  (weapon.hasTrait("psiDmg")) {
+        let psi = attackOptions.psiDM;
+        let psiDmg = getTraitValue(traits, "psiDmg");
+        let bonus = 0;
+        if (attackOptions.psiDM) {
+            bonus += psi * psiDmg;
+        }
+        if (attackOptions.psiPoints) {
+            bonus += attackOptions.psiPoints * psiDmg;
+        }
+        if (bonus) {
+            dmg += ` + ${bonus}[PSI]`;
+        }
+    }
+    let bonusPsiAP = 0;
+    if (weapon.hasTrait("psiAp")) {
+        let psi = attackOptions.psiDM;
+        let psiAp = getTraitValue(traits, "psiAp");
+        console.log("PsiAp is " + psiAp);
+        if (attackOptions.psiDM) {
+            bonusPsiAP += psi * psiAp;
+        }
+        if (attackOptions.psiPoints) {
+            bonusPsiAP += attackOptions.psiPoints * psiAp;
+        }
+        console.log("Bonus PSI AP: " + bonusPsiAP);
+    }
+
+    let destructive = weapon.hasTrait("destructive");
     let damageBonus = weapon.system.weapon.damageBonus;
     if (damageBonus && actor && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
         damageBonus = actor.system.characteristics[damageBonus].dm;
@@ -214,15 +258,14 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
         }
     }
 
-    if (!isParry) {
+    if (!attackOptions.isParry) {
         content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type === "standard") ? "" : (" (" + type + ")")}<br/>`;
         if (baseRange > 0) {
-            content += `<b>Range:</b> ${baseRange}m<br/>`;
+            content += `<b>Range:</b> ${baseRange}${rangeUnit}<br/>`;
         } else {
             content += `<b>Melee</b><br/>`;
         }
     }
-    let traits = weapon.system.weapon.traits;
     if (traits && traits !== "") {
         content += `<b>Traits:</b> ${weapon.printWeaponTraits()}<br/>`
     } else {
@@ -245,34 +288,40 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
         }
         if (bulky > 0) {
             content += `<b>Bulky Weapon:</b> -${bulky}`;
-            dm -= bulky;
+            attackOptions.dm -= bulky;
         }
     }
 
-    if (dm && parseInt(dm) !== 0) {
-        if (dm > 0) {
-            dice += ` + ${parseInt(dm)}`;
+    if (attackOptions.dm && parseInt(attackOptions.dm) !== 0) {
+        if (attackOptions.dm > 0) {
+            dice += ` + ${parseInt(attackOptions.dm)}`;
         } else {
-            dice += ` - ${Math.abs(parseInt(dm))}`;
+            dice += ` - ${Math.abs(parseInt(attackOptions.dm))}`;
         }
     }
-    if (range) {
-        if (range > 0) {
-            dice += ` + ${range}[Range]`;
+    if (attackOptions.rangeDM) {
+        if (attackOptions.rangeDM > 0) {
+            dice += ` + ${attackOptions.rangeDM}[Range]`;
         } else {
-            dice += ` - ${Math.abs(range)}[Range]`;
+            dice += ` - ${Math.abs(attackOptions.rangeDM)}[Range]`;
         }
     }
     let attacks = 1;
-    if (autoOption && autoOption === "burst") {
-        let autoBonus = getTraitValue(traits, "auto");
-        dmg += " + " + parseInt(autoBonus * destructive?10:1);
-    } else if (autoOption && autoOption === "full") {
-        attacks = getTraitValue(traits, "auto");
-    } else if (autoOption && autoOption === "noammo") {
+    console.log("Shots Fired: " + attackOptions.shotsFired + " on " + attackOptions.autoOption);
+    if (attackOptions.autoOption && attackOptions.autoOption === "burst") {
+        let autoBonus = attackOptions.shotsFired?attackOptions.shotsFired:getTraitValue(traits, "auto");
+        dmg = dmg + " + " + autoBonus;
+    } else if (attackOptions.autoOption && attackOptions.autoOption === "full") {
+        attacks = attackOptions.shotsFired?attackOptions.shotsFired:getTraitValue(traits, "auto");
+    } else if (attackOptions.autoOption && attackOptions.autoOption === "noammo") {
         attacks = 0;
         content += "<p>No ammo</p>";
     }
+
+    // Creatures sometimes take reduced (D6 -> D3) or minimum (D6 -> D1) damage.
+    // We try to convert the damage dice, and
+    let minDice = dmg.replaceAll(/D6/g, "D1").replaceAll(/d6/g, "D1");
+    let redDice = dmg.replaceAll(/D6/g, "D3").replaceAll(/d6/g, "D3");
 
     const roll = await new Roll(dice, actor?actor.getRollData():null).evaluate();
     let damageRoll = null;
@@ -283,6 +332,8 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
 
         damageRoll = await new Roll(dmg, actor?actor.getRollData():null).evaluate();
         let damageTotal = damageRoll.total;
+        let reducedTotal = (await new Roll(redDice, actor?actor.getRollData():null).evaluate()).total;
+        let minimumTotal = (await new Roll(minDice, actor?actor.getRollData():null).evaluate()).total;
 
         let effect = 0, attackTotal = 0;
         if (actor) {
@@ -307,21 +358,22 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
             effectClass = "rollCritical";
             effectText = `Critical (+${effect})`;
         }
-        let damageEffect = damageTotal;
-        if (!destructive && effect > 0) {
-            damageEffect = damageTotal + effect;
-        }
-        let ap = 0;
-        if (hasTrait(traits, "ap")) {
-            ap = getTraitValue(traits, "ap");
-        }
-        let tl = weapon.system.tl;
-        let options = "";
-        if (type !== "standard") {
-            options = type;
+
+        if (destructive) {
+            damageTotal *= 10;
         }
 
-        if (isParry) {
+        let damageEffect = damageTotal;
+        if (effect > 0) {
+            damageEffect = damageTotal + effect * (destructive?10:1);
+        }
+        let ap = bonusPsiAP;
+        if (hasTrait(traits, "ap")) {
+            ap += getTraitValue(traits, "ap");
+        }
+        let tl = weapon.system.tl;
+
+        if (attackOptions.isParry) {
             let parryBonus = parseInt(weapon.system.weapon.parryBonus);
             if (actor) {
                 content += `<b>Parry DM:</b> ${skillDM + parryBonus}<br/><br/>`;
@@ -336,11 +388,11 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
             }
         } else {
             let dmgText = `Damage ${damageTotal}`;
-            if (!destructive && effect > 0) {
-                dmgText += `&nbsp;+&nbsp;${effect}&nbsp;(${damageTotal + effect})`;
+            if (effect > 0) {
+                dmgText += `&nbsp;+&nbsp;${effect * (destructive?10:1)}&nbsp;(${damageEffect})`;
             }
-            if (hasTrait(traits, "ap")) {
-                dmgText += ` /&nbsp;AP&nbsp;${getTraitValue(traits, "ap")}`;
+            if (ap > 0) {
+                dmgText += ` /&nbsp;AP&nbsp;${ap}`;
             }
             let radiationDamage = 0;
             if (hasTrait(traits, "radiation")) {
@@ -351,23 +403,35 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
                     dmgText += `&nbsp;(10m)`;
                 }
             }
+            let blastRadius = 0;
             if (hasTrait(traits, "blast")) {
                 dmgText += ` /&nbsp;Blast&nbsp;${getTraitValue(traits, "blast")}m`;
+                blastRadius = getTraitValue(traits, "blast");
             }
 
+            let titleText = game.i18n.localize("MGT2.Attack.DragMe");
             let damageOptions = {
                 "damage": damageTotal,
+                "damageDice": dmg,
+                "reducedDice": redDice,
+                "minimumDice": minDice,
+                "reducedDamage": reducedTotal,
+                "minimumDamage": minimumTotal,
                 "effect": effect,
                 "multiplier": 1,
                 "scale": weapon.system.weapon.scale,
                 "traits": weapon.system.weapon.traits,
+                "ap": ap,
                 "tl": weapon.system.tl,
                 "damageType": weapon.system.weapon.damageType,
                 "radiation": radiationDamage,
                 "ranged": (baseRange>0)
             };
+            if (blastRadius) {
+                damageOptions.blastRadius = blastRadius;
+                titleText += " " + game.i18n.localize("MGT2.Attack.DragMeBlast");
+            }
             let json = JSON.stringify(damageOptions);
-            console.log("Stringify: " + json);
 
             if (actor) {
                 content += `<b>Attack Roll:</b> ${dice}<br/>`
@@ -377,6 +441,7 @@ export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, au
             }
             content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
             content += `<button data-damage="${damageEffect}" data-options='${json}' 
+                            title="${titleText}"
                             class="damage-button">${dmgText}</button>`;
 
             content += `</div>`;
@@ -431,7 +496,7 @@ function addTitle(text, options, property) {
 export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let text = "";
 
-    let score = gunner.getAttackSkill(weaponItem, options);
+    let score = gunner?gunner.getAttackSkill(weaponItem, options):0;
 
     let dice = `${options.results.dice} + ${score}`;
     let damageDice = weaponItem.system.weapon.damage;
@@ -444,16 +509,10 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
             damageDice += ` + ${quantityBonus * (options.quantity - 1)}`;
         }
     }
-    console.log(damageDice);
 
     const attackRoll = await new Roll(dice, gunner?gunner.getRollData():null).evaluate();
     let effect = Math.max(0, attackRoll.total - 8);
     const damageRoll = await new Roll(damageDice, null).evaluate();
-
-    let dmgText = `Damage ${damageRoll.total}`;
-    if (effect > 0) {
-        dmgText += ` (+${effect})`;
-    }
 
     let title = `${options.results["cha"]} ${options.results["chadm"]} Skill ${options.results["base"]}`;
     title = addTitle(title, options, "weapon");
@@ -465,6 +524,22 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     if (CONFIG.MGT2.SPACE_MOUNTS[mount]) {
         multiplier = parseInt(CONFIG.MGT2.SPACE_MOUNTS[mount].multiplier);
     }
+    console.log(`Space attack for ${mount} has multiplier ${multiplier}`);
+
+    let totalMultipliedDamage = (damageRoll.total + effect) * multiplier;
+    let dmgText = `Damage ${damageRoll.total}`;
+    if (effect > 0) {
+        dmgText += ` (+${effect})`;
+    }
+    if (multiplier > 1) {
+        dmgText += ` x${multiplier}`;
+    }
+    let radiationDamage = 0;
+    if (weaponItem.hasTrait("radiation")) {
+        const radRoll = await new Roll("2D6 * 60", null).evaluate();
+        radiationDamage = radRoll.total;
+        dmgText += ` /&nbsp;${radRoll.total} Rads`;
+    }
 
     let damageOptions = {
         "damage": damageRoll.total,
@@ -474,7 +549,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         "traits": weaponItem.system.weapon.traits,
         "tl": weaponItem.system.tl,
         "damageType": weaponItem.system.damageType,
-        "radiation": 0,
+        "radiation": radiationDamage,
         "ranged": true
     };
     let json = JSON.stringify(damageOptions);
@@ -501,7 +576,9 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                 </div>
                 <hr/>
                 <div class="damage-message" data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}'>
-                    <button data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}' class="damage-button">
+                    <button data-damage="${(damageRoll.total + effect)}" data-vers="2" 
+                            data-options='${json}' class="damage-button"
+                            title="${multiplier}">
                         ${dmgText}
                     </button>
                 </div>
@@ -577,7 +654,7 @@ function getSkillBonus(data, skill, speciality) {
     return bonus;
 }
 
-export async function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty) {
+export async function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty, description) {
     const data = actor.system;
     let   title = "";
     let   skillText = "";
@@ -796,11 +873,12 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
         }
         text += "</div><br/>";
 
+        if (description) text += `<div>${description}</div>`;
+
         if (game.settings.get("mgt2e", "verboseSkillRolls")) {
             let effect = total - difficulty;
             text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${total}</span> ` + getEffectLabel(effect);
         }
-
         if (skill && skill.specialities != null && speciality == null) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];

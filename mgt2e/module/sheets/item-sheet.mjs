@@ -1,5 +1,5 @@
 import {onManageActiveEffect} from "../helpers/effects.mjs";
-import {rollAttack, hasTrait, getTraitValue, toFloat} from "../helpers/dice-rolls.mjs";
+import {rollAttack, hasTrait, getTraitValue, toFloat, rollSpaceAttack} from "../helpers/dice-rolls.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {MgT2Item} from "../documents/item.mjs";
@@ -55,8 +55,10 @@ export class MgT2ItemSheet extends ItemSheet {
         context.effects = item.effects;
         context.effectTypes = CONFIG.MGT2.EFFECTS;
 
-        if (!context.system.quantity) {
+        if (context.system.quantity === undefined) {
             context.system.quantity = 1;
+        } else if (context.system.quantity < 0) {
+            context.system.quantity = 0;
         }
 
         context.techLevels = {};
@@ -77,6 +79,28 @@ export class MgT2ItemSheet extends ItemSheet {
             context.skills = context.item.parent.system.skills;
         } else {
             context.skills = MGT2.SKILLS;
+        }
+
+        if (context.item.type === "armour") {
+            context.YESNO = {
+                "0": game.i18n.localize("MGT2.Base.No"),
+                "1": game.i18n.localize("MGT2.Base.Yes")
+            }
+
+            context.ARMOUR_FORM = {
+                "standard": game.i18n.localize("MGT2.Armour.Form.Standard"),
+                "layered": game.i18n.localize("MGT2.Armour.Form.Layered"),
+                "stackable": game.i18n.localize("MGT2.Armour.Form.Stackable"),
+                "natural": game.i18n.localize("MGT2.Armour.Form.Natural")
+            }
+
+            context.VACC_SUIT = [
+                { value: "", "label": "-"},
+                { value: "0", "label": game.i18n.format("MGT2.Armour.VaccSuit", { "skill": 0 })},
+                { value: "1", "label": game.i18n.format("MGT2.Armour.VaccSuit", { "skill": 1 })},
+                { value: "2", "label": game.i18n.format("MGT2.Armour.VaccSuit", { "skill": 2 })},
+                { value: "3", "label": game.i18n.format("MGT2.Armour.VaccSuit", { "skill": 3 })},
+            ];
         }
 
         if (context.item.type === "software") {
@@ -200,11 +224,13 @@ export class MgT2ItemSheet extends ItemSheet {
             context.weaponCha = {
                 "STR": "STR",
                 "DEX": "DEX",
-                "INT": "INT"
+                "INT": "INT",
+                "PSI": "PSI"
             }
             context.weaponDamageBonus = {
                 "": "-",
-                "STR": "STR"
+                "STR": "STR",
+                "PSI": "PSI"
             }
             context.weaponScale = {
                 "traveller": game.i18n.localize("MGT2.Item.Scale.traveller"),
@@ -806,18 +832,22 @@ export class MgT2ItemSheet extends ItemSheet {
 
     _rollDamage(item) {
         console.log("_rollDamage:");
-        rollAttack(null, item, 0, 0);
+        if (item.system.weapon.scale === "spacecraft") {
+            rollSpaceAttack(null, null, item, { "skilLDM": 0, "dm": 0 });
+        } else {
+            rollAttack(null, item, {"skillDM": 0, "dm": 0});
+        }
     }
 
     _incrementQuantity(item) {
-        if (item.system.quantity) {
+        if (item.system.quantity !== undefined) {
             item.system.quantity++;
             item.update({"system.quantity": item.system.quantity });
         }
     }
 
     _decrementQuantity(item) {
-        if (item.system.quantity && parseInt(item.system.quantity) > 1) {
+        if (item.system.quantity && parseInt(item.system.quantity) > 0) {
             item.system.quantity--;
             item.update({"system.quantity": item.system.quantity });
         }

@@ -12,7 +12,7 @@ export class MgT2SkillDialog extends Application {
         return options;
     }
 
-    constructor(actor, skill, spec, cha, defaultDm, target) {
+    constructor(actor, skill, spec, cha, defaultDm, target, text) {
         super();
         this.actor = actor;
         const data = actor.system;
@@ -32,6 +32,7 @@ export class MgT2SkillDialog extends Application {
         this.boonBane = "normal";
         this.target = 8;
         this.skillText = "";
+        this.text = text;
 
         if (target) {
             this.target = parseInt(target);
@@ -152,7 +153,7 @@ export class MgT2SkillDialog extends Application {
         } else if (this.skillId) {
             this.cha = this.actor.system.skills[this.skillId].default;
         }
-        rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType, difficulty);
+        rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType, difficulty, this.text);
 
         this.close();
     }

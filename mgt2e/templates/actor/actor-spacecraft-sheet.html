@@ -100,26 +100,36 @@
                     </select>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
-                    <input class="field-value" readonly name="system.hits.max" type="text" value="{{system.hits.max}}"/>
+                    <label for="system.hits.max" class="field-label">
+                        {{localize 'MGT2.TravellerSheet.MaxHits'}}
+                    </label>
+                    <input class="field-value {{#unless system.settings.autoHits}}writable{{/unless}}"
+                           {{#if system.settings.autoHits}}readonly{{/if}}
+                           name="system.hits.max" type="text"
+                           value="{{system.hits.max}}"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.CargoText'}}{{#unless system.spacecraft.cargo}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.cargo" class="field-label">{{localize 'MGT2.TravellerSheet.Cargo'}}</label>
                     <input class="field-value" name="system.spacecraft.cargo" readonly type="text" value="{{system.spacecraft.cargo}}"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.JDriveText'}}{{#unless system.spacecraft.jdrive}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.jdrive" class="field-label">{{localize 'MGT2.TravellerSheet.JDrive'}}</label>
                     <input class="field-value" name="system.spacecraft.jdrive" readonly type="text" value="{{system.spacecraft.jdrive}}"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.MDriveText'}}{{#unless system.spacecraft.mdrive}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.mdrive" class="field-label">{{localize 'MGT2.TravellerSheet.MDrive'}}</label>
-                    <input class="field-value" name="system.spacecraft.mdrive" readonly type="text" value="{{system.spacecraft.mdrive}}"/>
+                    <input class="field-value" name="system.spacecraft.mdrive" readonly type="text" value="{{system.spacecraft.mdrive}}G"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.RDriveText'}}{{#unless system.spacecraft.rdrive}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.rdrive" class="field-label">{{localize 'MGT2.TravellerSheet.RDrive'}}</label>
-                    <input class="field-value" name="system.spacecraft.rdrive" readonly type="text" value="{{system.spacecraft.rdrive}}"/>
+                    <input class="field-value" name="system.spacecraft.rdrive" readonly type="text" value="{{system.spacecraft.rdrive}}G"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center"
+                     title="{{localize 'MGT2.TravellerSheet.PowerText'}}{{#unless system.spacecraft.power.max}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
                     <input class="field-value" readonly type="text" value="{{system.spacecraft.power.used}} / {{system.spacecraft.power.max}}"/>
                 </div>
@@ -225,14 +235,6 @@
                         </ol>
                     </div>
 
-                    <div class="tab items" data-group="shipbays" data-tab="shipbay">
-                        Ships
-                    </div>
-                    <div class="tab items" data-group="shipbays" data-tab="vehiclebay">
-                        Vehicles
-                    </div>
-
-
                     <div class="tab items" data-tab="hardware">
                         <div class="grid grid-4col">
                             <div class="resource flex-group-center">
@@ -259,7 +261,7 @@
 
                         <ol class="items-list actor-items grid grid-3col">
                             {{#each hardware as |item id|}}
-                            <li class="item item-gear" data-item-id="{{item._id}}">
+                            <li class="item item-gear item-status-{{item.system.status}}" data-item-id="{{item._id}}">
                                 <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                                 <img title="{{nameQuantity item}}" src="{{item.img}}"/>
                                 {{#if item.system.hardware.tons  includeZero=false}}
@@ -287,9 +289,10 @@
                                 <label for="system.spacecraft.navy.naval" class="resource-label">Naval vessel</label>
                             </div>
 
-                            {{#if system.spacecraft.navy.naval}}
-                                Divisions
-                            {{/if}}
+                            <div class="resource flex-group-left">
+                                <input type="checkbox" name="system.settings.autoHits" {{checked system.settings.autoHits}} data-dtype="Boolean" />
+                                <label for="system.settings.autoHits" class="resource-label">{{localize 'MGT2.TravellerSheet.AutoHits'}}</label>
+                            </div>
                         </div>
 
 
@@ -299,26 +302,32 @@
                             button=true editable=editable}}
                         </section>
 
-                        {{#if roles}}
-                            <h2>Available Crew Roles</h2>
-                            <ol class="items-list actor-items grid grid-3col">
-                                {{#each roles as |item id|}}
-                                <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
-                                    <h4>{{item.name}}</h4>
-                                    <img src="{{item.img}}" class="small"/>
-                                    <ol class="comma-list small-text">
-                                        {{#each item.system.role.actions as |action|}}
-                                            <li>{{action.title}}</li>
-                                        {{/each}}
-                                    </ol>
-                                    <div class="item-controls">
-                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                                    </div>
-                                </li>
-                                {{/each}}
-                            </ol>
-                        {{/if}}
+                        <h2>
+                            Available Crew Roles
+                            <div class="resource addCrewRole">
+                                {{localize 'MGT2.TravellerSheet.AddCrewRole'}}
+                                <select class="addRoleSelect">
+                                    {{selectOptions selectRoleTypes}}
+                                </select>
+                            </div>
+                        </h2>
+                        <ol class="items-list actor-items grid grid-3col">
+                            {{#each roles as |item id|}}
+                            <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
+                                <h4>{{item.name}}</h4>
+                                <img src="{{item.img}}" class="small"/>
+                                <ol class="comma-list small-text">
+                                    {{#each item.system.role.actions as |action|}}
+                                        <li>{{action.title}}</li>
+                                    {{/each}}
+                                </ol>
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ol>
 
                         {{#if shipWeapons}}
                             <h2>Available Weapons</h2>

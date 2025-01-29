@@ -161,12 +161,12 @@ MGT2.SPACECRAFT_CRITICALS = {
         { "sensorsDisabled": true }
     ],
     "powerPlant": [
-        { "powerReduction": "10" },
-        { "powerReduction": "20" },
-        { "powerReduction": "70" },
-        { "powerReduction": "100" },
-        { "powerReduction": "100", "hull": "1" },
-        { "powerReduction": "100", "hull": "1D6" }
+        { "powerReduction": 10 },
+        { "powerReduction": 20 },
+        { "powerReduction": 70 },
+        { "powerReduction": 100 },
+        { "powerReduction": 100, "hull": "1" },
+        { "powerReduction": 100, "hull": "1D6" }
     ],
     "fuel": [
         { "fuelLeak": "hour" },
@@ -177,14 +177,48 @@ MGT2.SPACECRAFT_CRITICALS = {
         { "destroyed": true, "hull": "1D6" }
     ],
     "weapon": [ ],
-    "armour": [ ],
-    "hull": [ ],
+    "armour": [
+        { "armour": "1" },
+        { "armour": "1D3" },
+        { "armour": "1D6" },
+        { "armour": "1D6" },
+        { "armour": "2D6", "hull": "1" },
+        { "armour": "2D6", "hull": "1" }
+    ],
+    "hull": [
+        { "damage": "1D6" },
+        { "damage": "2D6" },
+        { "damage": "3D6" },
+        { "damage": "4D6" },
+        { "damage": "5D6" },
+        { "damage": "6D6" }
+    ],
     "mDrive": [ ],
-    "cargo": [ ],
+    "cargo": [
+        { "cargoLoss": "10" },
+        { "cargoLoss": "1D6 * 10" },
+        { "cargoLoss": "2D6 * 10" },
+        { "cargoLoss": "100" },
+        { "cargoLoss": "100", "hull": "1" },
+        { "cargoLoss": "100", "hull": "1" }
+    ],
     "jDrive": [ ],
     "crew": [ ],
     "bridge": [ ]
 }
+
+MGT2.SPACECRAFT_DAMAGE = {
+  "fuelHour": {},
+  "fuelRound": {},
+  "powerPlant": {},
+  "armour": {},
+  "control": {},
+  "thrust": {},
+  "jump": {},
+  "lifeSupport": {},
+  "sensorDM": {},
+  "sensorMax": {}
+};
 
 MGT2.getStatus = function(actor) {
   const data = actor.data.data;
@@ -564,7 +598,7 @@ MGT2.COMPUTERS = {
 };
 
 MGT2.WEAPONS = {
-    "energyTypes": [ "laser", "plasma", "fire", "energy" ],
+    "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting" ],
     "traits": {
         "artillery": { "scale": "traveller" },
         "ap": {  "value": 1, "min": 1, "max": 99, "conflict": [ "loPen" ] },
@@ -578,10 +612,13 @@ MGT2.WEAPONS = {
         "ion": { "scale": "spacecraft" },
         "laserSight": { "scale": "traveller" },
         "loPen": { "value": 2, "min": 2, "max": 99, "conflict": [ "ap" ] },
+        "missile": { "scale": "spacecraft", "value": 1, "min": 1, "max": 120 },
         "oneUse": { "conflict": [ "auto" ] },
         "orbitalBombardment": { "scale": "spacecraft" },
         "orbitalStrike": { "scale": "spacecraft" },
         "protection": { "scale": "traveller", "value": 1, "min": 1, "max": 20 },
+        "psiDmg": { "value": 1, "min": 1, "max": 10 },
+        "psiAp": { "value": 1, "min": 1, "max": 10 },
         "radiation": { "scale": "any" },
         "reductor": { "scale": "spacecraft" },
         "scope": { "scale": "traveller" },
@@ -625,14 +662,27 @@ MGT2.CREATURES = {
     "alarm": { },
     "amphibious": {},
     "camouflaged": { "skills": [ { skill: "stealth", bonus: 2 }] },
+    "clever": { },
     "diseased": {},
+    "dispersed": {},
     "echolocation": {},
+    "energy": {},
+    "explosive": {},
     "fastMetabolism": { "set": "initiative.base", "min": 1, "max": 6, "conflict": "slowMetabolism" },
+    "floater": {},
     "flyer": { "default": 3, "choices": [ "idle", "verySlow", "slow", "medium", "high", "fast", "veryFast", "subsonic", "supersonic", "hypersonic" ]},
+    "gigantic": { },
+    "gossamer": {},
     "heightenedSenses": { "skills": [ { "skill": "recon", "bonus": 1 }, { "skill": "survival", "bonus": 1 }] },
     "iuVision": {},
+    "ornery": {},
+    "particulate": {  },
     "psionic": { "value": 7, "characteristic": "PSI" },
-    "slowMetabolism": { "set": "initiative.base", "min": -6, "max": -1, "conflict": "fastMetabolism" }
+    "slowMetabolism": { "set": "initiative.base", "min": -6, "max": -1, "conflict": "fastMetabolism" },
+    "strange": {},
+    "tough": {},
+    "toxic": {},
+    "vacuum": {}
   },
   "sizes": {
     "-4": { "label": "small", "damage": "1", "minHits": 1, "maxHits": 2, "width": 0.5 },

@@ -26,7 +26,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.damageOptions = damageOptions;
         this.data = actor.system;
 
-        this.damage = damageOptions.damage + Math.min(0, damageOptions.effect);
+        this.damage = damageOptions.damage + Math.max(0, damageOptions.effect);
         this.ap = damageOptions.ap?parseInt(damageOptions.ap):0;
         if (damageOptions.scale !== "spacecraft") {
             this.damage = parseInt (this.damage / 10);
@@ -39,11 +39,11 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.actualDamage = this.damage;
         if (this.ap < this.armour) {
             this.actualDamage = this.damage - (this.armour - this.ap);
-            this.actualDamage *= this.multiplier;
         }
         if (this.actualDamage < 0) {
             this.actualDamage = 0;
         }
+        this.actualDamage *= this.multiplier;
 
         this.crits = {};
         this.crits.effectCrit = false;
@@ -60,6 +60,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.hits = parseInt(this.actor.system.hits.value) - this.actualDamage;
         this.maxHits = parseInt(this.actor.system.hits.max);
         this.crits.numCrits = 0;
+        let firstSustainedLevel = 0;
         for (let d=0; d < 10; d++) {
             let limit = parseInt(((d + 1) * this.maxHits) / 10);
             console.log(`${d} ${limit} ${this.originalDamage} ${this.actualDamage}`);
@@ -68,6 +69,9 @@ export class MgT2SpacecraftDamageDialog extends Application {
             } else if (limit >= this.originalDamage) {
                 this.damageTrack[d] = "critical";
                 this.crits.numCrits ++;
+                if (!firstSustainedLevel) {
+                    firstSustainedLevel = (d+1) * 10;
+                }
             } else {
                 this.damageTrack[d] = "damaged";
             }
@@ -84,19 +88,17 @@ export class MgT2SpacecraftDamageDialog extends Application {
                 this.shipCriticals[c] = 0;
             }
         }
-        console.log(this.shipCriticals);
 
         if (this.crits.numCrits > 0) {
-            this.crits.criticals = {};
+            this.crits.criticals = [];
             for (let c = 0; c < this.crits.numCrits; c++) {
                 this.crits.criticals[c] = {};
                 let location = this.getCriticalRoll();
                 this.crits.criticals[c].location = location;
-                this.crits.criticals[c].severity = this.shipCriticals[location] + 1;
-                this.actor.setCriticalLevel(location, this.crits.criticals[c].severity);
+                this.crits.criticals[c].severity = 1;
+                this.crits.criticals[c].sustained = c * 10 + firstSustainedLevel;
             }
         }
-        console.log(this.crits.criticals);
 
         if (!this.crits.effectCrit && !this.crits.numCrits) {
             // No criticals, so don't pass any data.
@@ -122,7 +124,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
     }
 
     getData() {
-        let criticalEffectRoll = this.getCriticalRoll();
+        this.criticalEffectRoll = this.getCriticalRoll();
         return {
             "actor": this.actor,
             "data": this.data,
@@ -137,7 +139,8 @@ export class MgT2SpacecraftDamageDialog extends Application {
             "hits": this.hits,
             "maxHits": this.maxHits,
             "crits": this.crits,
-            "criticalEffectRoll": criticalEffectRoll,
+            "shipCriticals": this.shipCriticals,
+            "criticalEffectRoll": this.criticalEffectRoll,
             "criticalLabels": this.criticalLabels,
             "multiplier": this.multiplier
         }
@@ -153,6 +156,9 @@ export class MgT2SpacecraftDamageDialog extends Application {
 
         const ap = html.find(".baseAP");
         ap.on("change", event => this.updateDamage(event, html));
+
+        const critList = html.find(".criticalSelect");
+        critList.on("change", event => this.updateCrits(event, html, critList.data("idx")));
 
         html.find(".apply-button").click(ev => {
            this.applyDamage(ev, html);
@@ -189,10 +195,49 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.setIntValue(html, ".actualDamage",actual);
     }
 
+    updateCrits(event, html, idx) {
+        console.log("Update " + idx);
+        if (idx === "effect") {
+            this.criticalEffectRoll = event.currentTarget.value;
+        } else {
+            this.crits.criticals[idx].location = event.currentTarget.value;
+        }
+    }
+
     async doneClick(event, html) {
+        console.log("doneClick:");
         event.preventDefault();
         let damage = this.actualDamage;
+        console.log(this.crits);
 
+        let critEffect = html.find(".criticalEffectSelect");
+        if (critEffect && critEffect[0]) {
+            this.criticalEffectRoll = critEffect[0].value;
+        }
+
+        let critList = html.find(".criticalSelect");
+        for (let c = 0; c < critList.length; c++) {
+            if (this.crits.criticals[c]) {
+                this.crits.criticals[c].location = critList[c].value;
+            }
+        }
+
+        // Apply Criticals
+        if (this.crits?.criticals) {
+            for (let c = 0; c < this.crits.criticals.length; c++) {
+                let location = this.crits.criticals[c].location;
+                let severity = this.crits.criticals[c].severity;
+                console.log(`Apply crit ${c} to ${location} severity ${severity}`);
+                await this.actor.setCriticalLevel(location, severity);
+            }
+        }
+
+        // Apply critical effect
+        if (this.crits?.effectCrit) {
+            await this.actor.setCriticalLevel(this.criticalEffectRoll, this.crits.effectSeverity);
+        }
+
+        // Apply raw damage
         this.actor.applyActualDamageToSpacecraft(damage, this.damageOptions);
         this.close();
     }

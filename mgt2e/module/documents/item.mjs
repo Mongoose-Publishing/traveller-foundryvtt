@@ -130,9 +130,16 @@ export class MgT2Item extends Item {
                 if (item.system.weapon.magazine > 0 && item.system.weapon.ammo > 0) {
                     item.system.weapon.ammo --;
                     this.update({"system.weapon": item.system.weapon });
-                    rollAttack(this.actor, item, skillDM);
+                    rollAttack(this.actor, item, { "skillDM": skillDM });
                 } else if (item.system.weapon.magazine === 0) {
-                    rollAttack(this.actor, item, skillDM);
+                    if (this.hasTrait("oneUse")) {
+                        if (item.system.quantity > 0) {
+                            this.update({"system.quantity": item.system.quantity - 1});
+                            rollAttack(this.actor, item, { "skillDM": skillDM });
+                        }
+                    } else {
+                        rollAttack(this.actor, item, { "skillDM": skillDM });
+                    }
                 } else {
                     // No Ammo.
                 }
@@ -197,11 +204,21 @@ export class MgT2Item extends Item {
         return false;
     }
 
+    hasTrait(trait) {
+        if (this.type === "weapon" && this.system.weapon.traits) {
+            const regex = new RegExp(`(^|[, ])${trait}[^,]*($|[, ])`, 'gi');
+            return this.system.weapon.traits.match(regex) != null;
+        }
+        return false;
+    }
+
     useAmmo() {
         let weapon = this.system.weapon;
         if (weapon) {
             if (!isNaN(weapon.range) && parseInt(weapon.range) > 0) {
-                return true;
+                if (weapon.magazine > 0) {
+                    return true;
+                }
             }
             if (weapon.scale === "spacecraft") {
                 return true;
@@ -239,6 +256,10 @@ export class MgT2Item extends Item {
                 this.system.status = MgT2Item.INACTIVE;
             } else if (this.system.status === MgT2Item.INACTIVE) {
                 this.system.status = MgT2Item.ACTIVE;
+            } else if (this.system.status === MgT2Item.DAMAGED) {
+                this.system.status = MgT2Item.INACTIVE;
+            } else if (this.system.status === MgT2Item.DESTROYED) {
+                this.system.status = MgT2Item.INACTIVE;
             }
             this.update({"system.status": this.system.status});
         } else if (this.type === "software") {

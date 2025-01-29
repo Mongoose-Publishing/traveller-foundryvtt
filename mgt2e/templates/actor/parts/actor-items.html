@@ -80,7 +80,16 @@
     <li></li>
 </ol>
 
-<h2>Items Owned</h2>
+{{#if (isOwner .)}}
+<h2>
+    Items Owned
+    <div class="resource addNewItem">
+        {{localize 'MGT2.TravellerSheet.AddItem'}}
+        <select class="addItemSelect">
+            {{selectOptions CREATE_ITEM_SELECT}}
+        </select>
+    </div>
+</h2>
 
 <ol class="items-list actor-items grid grid-3col">
     {{#each items as |item id|}}
@@ -110,4 +119,4 @@
     {{/each}}
     <li></li>
 </ol>
-
+{{/if}}

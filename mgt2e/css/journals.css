@@ -13,11 +13,10 @@
 .journal-sheet .window-content .editable {
     background-color: #eff0f0;
 }
-.journal-sheet .window-content .editor {
+.journal-entry-content .locked {
     background-color: white;
 }
-
-.journal-entry-content .locked {
+.journal-entry-content {
     background-color: white;
 }
 

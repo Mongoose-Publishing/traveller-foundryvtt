@@ -14,45 +14,38 @@ export class MgT2DamageDialog extends Application {
         return options;
     }
 
-//    constructor(actor, damage, ap, laser, traits) {
     constructor(actor, damage, damageOptions) {
         super();
-        console.log("DamageDialog:");
+        console.log("*** DamageDialog:");
 
         console.log(actor);
+        console.log(damageOptions);
+        console.log(damage);
 
         this.actor = actor;
         this.damageOptions = damageOptions;
         const data = actor.system;
 
-        this.damage = damageOptions.damage + damageOptions.effect;
-        this.ap = damageOptions.ap;
+        damageOptions.effect = parseInt(damageOptions.effect);
+        this.damage = parseInt(damageOptions.damage) + ((damageOptions.effect > 0)?damageOptions.effect:0);
+        this.ap = damageOptions.ap?damageOptions.ap:0;
         this.laser = damageOptions.damageType;
         this.stun = hasTrait(damageOptions.traits, "stun");
         this.data = data;
-        this.armour = data.armour?.protection ?? 0;
-        this.wounds = "";
-
-        if (data.armour && data.armour.otherTypes && this.laser && this.laser.trim().length > 0) {
-            if (data.armour.otherTypes.toLowerCase().indexOf(this.laser.toLowerCase()) > -1) {
-                this.armour += parseInt(data.armour.otherProtection);
-            }
+        this.armour = damageOptions.armour?damageOptions.armour:0;
+        if (damageOptions.finalArmour !== undefined && damageOptions.finalArmour !== this.armour) {
+            this.armour = `${this.armour} (${damageOptions.finalArmour})`;
         }
+        this.wounds = "";
+        this.armourText = damageOptions.armourText;
 
         this.actualDamage = damage;
-        if (this.ap < this.armour) {
-            this.actualDamage = damage - (this.armour - this.ap);
-        }
-        if (this.actualDamage < 0) {
-            this.actualDamage = 0;
-        }
         if (!data.damage) {
             // This is a creature or NPC. Shouldn't be called.
             data.hits.damage += this.actualDamage;
             this.actor.update({ "data.damage": this.data.damage });
             return;
         }
-        console.log(`MgT2DamageDialog: ${this.actualDamage} ${this.stun} ${this.laser}`);
 
         this.DMG_STR = data.damage.STR.value;
         this.DMG_DEX = data.damage.DEX.value;
@@ -114,6 +107,7 @@ export class MgT2DamageDialog extends Application {
             "DMG_DEX": this.DMG_DEX,
             "DMG_END": this.DMG_END,
             "wounds": this.wounds,
+            "armourText": this.armourText,
             "woundsEffect": this.woundsEffect
         }
     }

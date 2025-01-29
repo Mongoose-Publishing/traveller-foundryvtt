@@ -9,15 +9,40 @@
         {{/if}}
     </div>
 
+    {{#if PSI}}
+        <div class="shadow">
+            <b>{{localize "MGT2.Attack.PsionicPower" dm=PSI_DM}}</b>
+            {{#if psiDmgBonus}}
+                <p>{{localize "MGT2.Attack.PsionicDamage" pp=psiDmgBonus dmg=PSI_BONUS_DMG}}</p>
+            {{/if}}
+            {{#if psiApBonus}}
+                <p>{{localize "MGT2.Attack.PsionicAP" pp=psiApBonus ap=PSI_BONUS_AP}}</p>
+            {{/if}}
+            <p>
+                <select class="attackDialogPsi" name="psiPoints">
+                    {{selectOptions PSI selected=0}}
+                </select>
+            </p>
+        </div>
+    {{/if}}
+
+    {{#if TARGETS}}
+        <div class="shadow">
+            <h4>Targets for {{attackerName}}</h4>
+
+            <ul class="targets">
+                {{#each TARGETS as |target|}}
+                    <li>{{target.distance}}m - {{target.name}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+
     <div class="shadow grid grid-2col">
         <div class="boon-selection">
             <label for="dicetype" class="skillDialogLabel">Roll Type</label>
             <select class="skillDialogRollType" name="dicetype">
-                {{#select "normal"}}
-                    <option value="normal">Normal</option>
-                    <option value="boon">Boon</option>
-                    <option value="bane">Bane</option>
-                {{/select}}
+                {{selectOptions ROLLTYPES selected="normal"}}
             </select>
         </div>
 
@@ -31,12 +56,7 @@
             <div class="range">
                 <label for="range" class="skillDialogLabel">Range</label>
                 <select class="attackDialogRange" name="difficulty">
-                    {{#select "0"}}
-                        <option value="+1">Short ({{shortRange}}m, +1)</option>
-                        <option value="0">Medium ({{range}}m)</option>
-                        <option value="-2">Long ({{longRange}}m, -2)</option>
-                        <option value="-4">Extreme ({{extremeRange}}m, -4)</option>
-                    {{/select}}
+                    {{selectOptions RANGES selected="+0"}}
                 </select>
             </div>
         {{/if}}
@@ -45,11 +65,7 @@
             <div class="auto">
                 <label for="auto" class="skillDialogLabel">Auto Fire</label>
                 <select class="attackDialogAuto" name="autoFire">
-                    {{#select "single"}}
-                        <option value="single">Single Shot</option>
-                        <option value="burst">Burst (+{{auto}})</option>
-                        <option value="full">Full Auto (x{{auto}})</option>
-                    {{/select}}
+                    {{selectOptions AUTO}}
                 </select>
             </div>
         {{/if}}

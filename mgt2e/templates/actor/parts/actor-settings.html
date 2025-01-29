@@ -22,6 +22,12 @@
             <br/>
             <input type="checkbox" name="system.settings.lockCharacteristics" {{checked system.settings.lockCharacteristics}} data-dtype="Boolean" />
             <label for="system.settings.lockCharacteristics" class="resource-label">{{localize 'MGT2.TravellerSheet.LockUPP'}}</label>
+            <br/>
+            {{#if (ifEquals actor.type "npc")}}
+            <br/>
+            <input type="checkbox" name="system.settings.autoHits" {{checked system.settings.autoHits}} data-dtype="Boolean" />
+            <label for="system.settings.autoHits" class="resource-label">{{localize 'MGT2.TravellerSheet.AutoHits'}}</label>
+            {{/if}}
         </div>
         <div class="resource flex-group-center">
             <br/>

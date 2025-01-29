@@ -6,6 +6,76 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## Development
+
+* Add inline macro support for journals.
+* Character sheets now have an "Add Item" option for Travellers and NPCs, to allow
+  items to be generated directly from the character sheet.
+
+## 0.11.6 (Beta)
+
+* The drop down to add a new role to a spacecraft was only being shown if there were
+  already some roles on the ship.
+* Spacecraft damage couldn't be applied due to bug in calculation of effect criticals,
+  if there were no effect criticals.
+
+## v0.11.5 (Beta)
+
+* Crew role skill actions can now include description of action in chat output.
+* Added extra sample crew roles.
+* Added ability to create crew roles from the spacecraft character sheet.
+* Further improvements to handling of criticals on spacecraft. Criticals are displayed
+  on the ship sheet, and can be removed. Some critical effects will be applied when they
+  occur. Hardware can be damaged, cargo can be destroyed (turned to scrap).
+* Added 'Missile' trait for spacecraft scale weapons. There is no support for this beyond
+  being able to define a weapon as being a missile launcher.
+* Added Macro compendium. Currently, contains some simple macros for dice rolls.
+* Added icons for dice roll types and results.
+* Effect is now added to spacecraft damage.
+* Added new icons for spacecraft weapon types.
+* Added hover text hints to spacecraft sheet, pointing players to the hardware tab
+  for values such as jdrive and mdrive.
+
+## v0.11.4 (Beta)
+
+* Always show magazine details on a weapon item.
+
+## v0.11.3 (Beta)
+
+NB: The minimum quantity for an item has been changed from one to zero. The default is set
+in the backend template (the default is still one), but enforced on the front end. It is 
+possible that some items revert to showing a quantity count of zero if they were created prior 
+to the quantity field being introduced. However, any such data should predate the public
+release of the system.
+
+* Weapons with the oneUse trait now decrement their quantity count after being used.
+* Minimum quantity for an item has been reduced to 0 (from 1).
+* Attacks with a blast radius can now be dragged onto a scene to automatically show the blast template.
+* Added a new setting "Blast effect divergence distance" which automatically randomises position of a
+  blast effect template if the attack was a miss. Defaults to none, for no divergence.
+* Psi traits for weapons are now implemented. Can modify both damage and AP of the attack by
+  spending PSI points.
+* Psi trait for armour is now implemented. Adds half PSI value to protection if enabled.
+* Damage dialog now displays how armour is calculated, based on type of attack and where
+  protection is coming from.
+* When an attack is made, display distance to all current targets.
+* Spacecraft and NPCs now have a configurable to allow HITS to be manually or automatically calculated.
+  Previously, they were always calculated automatically, with no option to override.
+
+## v0.11.2 (Beta)
+
+* Added some creature traits from the Companion to the list of those available.
+* Added documentation on how to modify what creature traits are available.
+* Added rule support for gigantic, dispersed, energy and gossamer creature traits. This also means support for
+  reduced and minimum damage from attacks.
+* Added 'cutting' damage type for weapons. Needed to support some damage effects of new creature traits.
+* Removed CSS definition that was breaking some modules by forcing text editor background to be white. This doesn't
+  seem to have impacted our own journal entries.
+* Added game settings to specify default vision settings for tokens depending on their actor type.
+
+## v0.11.1 (Beta)
+
+* Fixed bug where all armour was being considered archaic, so was being halved.
 
 ## v0.11.0 (Beta)
 

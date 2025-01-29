@@ -2047,3 +2047,42 @@ div.mini-value span {
 .checkbox-label {
     display: inline-block;
 }
+
+li.item-status-DESTROYED h4 {
+    background-color: red !important;
+}
+
+li.item-status-INACTIVE h4 {
+    color: #808080 !important;
+}
+
+.currentCrit {
+    font-weight: bold;
+    width: auto;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.addCrewRole {
+    float: right;
+    font-weight: normal;
+    font-size: 12pt;
+}
+
+.crew-role-body .addCrewRole {
+    float: right;
+    display: inline-block;
+    font-weight: normal;
+    font-size: 10pt;
+}
+
+.crew-role-body h3 {
+    margin-top: 5px;
+    padding-bottom: 5px;
+}
+
+.addNewItem {
+    float: right;
+    font-weight: normal;
+    font-size: 12pt;
+}
