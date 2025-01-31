@@ -580,7 +580,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 } else if (i.system.status === MgT2Item.EQUIPPED) {
                     if (i.type === "armour") {
                         if (!i.system.armour.powered || parseInt(i.system.armour.powered) === 0) {
-                            weight += parseInt(i.system.weight / 4);
+                            weight += parseFloat(i.system.weight / 4);
                         }
                         if (i.system.armour.skill && parseInt(i.system.armour.skill) > skillNeeded) {
                             skillNeeded = parseInt(i.system.armour.skill);
