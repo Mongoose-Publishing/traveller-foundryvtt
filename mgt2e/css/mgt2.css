@@ -2086,3 +2086,7 @@ li.item-status-INACTIVE h4 {
     font-weight: normal;
     font-size: 12pt;
 }
+
+.always {
+    color: #888888;
+}

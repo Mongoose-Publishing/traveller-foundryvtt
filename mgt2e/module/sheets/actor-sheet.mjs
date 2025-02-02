@@ -3,6 +3,7 @@ import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/ef
 import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
 import {MgT2XPDialog } from "../helpers/xp-dialog.mjs";
 import {MgT2QuantityDialog } from "../helpers/quantity-dialog.mjs";
+import {MgT2ChaDialog } from "../helpers/cha-dialog.mjs";
 import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {MgT2CrewMemberDialog } from "../helpers/crew-member-dialog.mjs";
@@ -993,6 +994,9 @@ export class MgT2ActorSheet extends ActorSheet {
             this._createEquipmentItem(value);
         });
 
+        html.find('.edit-dmg').click(ev => {
+            this._editDamage(ev, this.actor);
+        })
 
         // Dodge reaction
         html.find('.dodgeRoll').click(ev => {
@@ -2506,6 +2510,10 @@ export class MgT2ActorSheet extends ActorSheet {
             // Roll directly with no options.
             rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal", 8);
         }
+    }
+
+    _editDamage(ev, actor) {
+        new MgT2ChaDialog(actor).render(true);
     }
 
     /*
