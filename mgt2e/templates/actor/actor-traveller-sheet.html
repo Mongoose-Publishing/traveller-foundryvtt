@@ -6,7 +6,7 @@
                  title="{{actor.name}}" height="100" width="100"/>
 
             <div class="side-panel hits-box shadow">
-                <label for="system.hits.max" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                <label for="system.hits.max" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}} <i class="fa-solid fa-gear edit-dmg"></i></label>
                 <div class="grid grid-3col inset">
                     {{#each system.damage as |dmg key|}}
                         {{#if (isChaShown ../system key)}}

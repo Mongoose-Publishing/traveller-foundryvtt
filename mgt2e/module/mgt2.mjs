@@ -1401,7 +1401,7 @@ Handlebars.registerHelper('hasStatus', function(actor) {
     if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit ||
         status.lowGravity || status.highGravity || status.zeroGravity ||
         status.diseased || status.poisoned || status.dead || status.unconscious ||
-        status.disabled || status.reaction) {
+        status.disabled || status.reaction || status.needsFirstAid || status.needsSurgery) {
         return true;
     }
     return false;
@@ -1467,6 +1467,11 @@ Handlebars.registerHelper('showStatus', function(actor, status) {
    } else if (status === "dead") {
        type = "statusBad";
        label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
+   } else if (status === "needsFirstAid") {
+       label += ` <i class="fas fa-xmark statusNeedsFirstAid"> </i>`;
+   } else if (status === "needsSurgery") {
+       type = "statusBad";
+       label += ` <i class="fas fa-xmark statusNeedsSurgery"> </i>`;
    }
 
    return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;

@@ -150,6 +150,10 @@ img.career {
     background-color: #72bce8;
 }
 
+h1.item-software {
+    background-image: url("item-software.svg");
+}
+
 h1.career {
     margin-left: 128px;
     padding-left: 8px;

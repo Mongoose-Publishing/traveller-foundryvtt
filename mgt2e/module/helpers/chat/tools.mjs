@@ -153,6 +153,8 @@ Tools.setStatus = function(chatData, args) {
             Tools.setStatusFor(actor, args, "disabled");
             Tools.setStatusFor(actor, args, "dead");
             Tools.setStatusFor(actor, args, "destroyed");
+            Tools.setStatusFor(actor, args, "needsFirstAid");
+            Tools.setStatusFor(actor, args, "needsSurgery");
             actor.update({ "system.status": actor.system.status });
         }
     }

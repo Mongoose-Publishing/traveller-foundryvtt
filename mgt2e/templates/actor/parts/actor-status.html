@@ -16,6 +16,9 @@
     {{#if actor.flags.mgt2e.lowGravity}}{{{showStatus actor "lowGravity"}}}{{/if}}
     {{#if actor.flags.mgt2e.zeroGravity}}{{{showStatus actor "zeroGravity"}}}{{/if}}
 
+    {{#if actor.flags.mgt2e.needsFirstAid}}{{{showStatus actor "needsFirstAid"}}}{{/if}}
+    {{#if actor.flags.mgt2e.needsSurgery}}{{{showStatus actor "needsSurgery"}}}{{/if}}
+
     {{{showStatus actor "reaction"}}}
   </div>
 {{/if}}

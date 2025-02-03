@@ -558,16 +558,24 @@ export class MgT2Actor extends Actor {
               this.system.damage.END.value = this.system.characteristics.END.value;
           }
       } else {
+          let needsFirstAid = false;
           if (options.characteristics) {
               // Apply specific damage to each characteristic.
               this.system.damage.STR.value += parseInt(options.characteristics.STR);
               this.system.damage.DEX.value += parseInt(options.characteristics.DEX);
               this.system.damage.END.value += parseInt(options.characteristics.END);
+
+              if (options.characteristics.STR + options.characteristics.DEX + options.characteristics.END > 0) {
+                  needsFirstAid = true;
+              }
           } else {
               // Split damage across characteristics.
               let dmgData = this.system.damage;
               let chaData = this.system.characteristics;
               let remaining = damage;
+              if (remaining > 0) {
+                  needsFirstAid = true;
+              }
 
               if (dmgData.END.value < chaData.END.value) {
                   remaining = Tools.applyDamageToCha(remaining, this.system, "END");
@@ -582,6 +590,9 @@ export class MgT2Actor extends Actor {
                       Tools.applyDamageToCha(remaining, this.system, "STR");
                   }
               }
+          }
+          if (needsFirstAid) {
+              this.setFlag("mgt2e", "needsFirstAid", true);
           }
       }
 
