@@ -278,6 +278,10 @@
   "MGT2.TravellerSheet.StatusLabel.damaged": "Damaged",
   "MGT2.TravellerSheet.StatusLabel.destroyed": "Destroyed",
 
+  "MGT2.TravellerSheet.AugmentType.augment": "Aug",
+  "MGT2.TravellerSheet.AugmentType.expert": "Ex",
+  "MGT2.TravellerSheet.AugmentType.augdm": "DM",
+
   "MGT2.TravellerSheet.DTons": "Tonnage",
   "MGT2.TravellerSheet.Power": "Power",
   "MGT2.TravellerSheet.MDrive": "M-Drive",

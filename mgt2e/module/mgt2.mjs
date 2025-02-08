@@ -1892,6 +1892,67 @@ Handlebars.registerHelper('showSpacecraftAttacks', function(roles, item) {
    return html;
 });
 
+// Display information about active effects on an actor.
+Handlebars.registerHelper("showEffectPill", function(actor, effect) {
+   let html = "";
+
+   let title = `${effect.sourceName}: ${effect.name}`;
+
+   for (let change of effect.changes) {
+       let text = "";
+       let key = change.key;
+       let value = change.value;
+       if (key.startsWith("system.skills.")) {
+           key = key.replaceAll(/system\.skills\./g, "");
+           let type = key.replaceAll(/.*\./g, "");
+           let skillId = key.replaceAll(/\..*/g, "");
+           let specId = null;
+
+           let typeLabel = game.i18n.localize("MGT2.TravellerSheet.AugmentType." + type);
+           if (key.indexOf(".specialities")> -1) {
+                specId = key.replaceAll(/.*\.specialities\.([^.]*)\..*/g, "$1");
+           }
+           let skill = null;
+           let skillName = null;
+           if (actor.system.skills[skillId]) {
+               skill = actor.system.skills[skillId];
+               skillName = skillLabel(skill, skillId);
+               if (specId && actor.system.skills[skillId].specialities[specId]) {
+                   skill = actor.system.skills[skillId].specialities[specId];
+                   skillName += ` (${skillLabel(skill, specId)})`
+               }
+           }
+           if (text !== "") {
+               text += " / ";
+           }
+           text += ` ${skillName} ${typeLabel} ${value}`;
+       } else if (key.startsWith("system.characteristics.")) {
+           key = key.replaceAll(/system\.characteristics\./g, "");
+           key = key.replaceAll(/\..*/g, "");
+
+           text += ` ${key} ${value}`;
+       } else if (key.startsWith("system.modifiers.")) {
+           key = key.replaceAll(/system\.modifiers\./g, "");
+
+           if (key.startsWith("encumbrance.multiplierBonus")) {
+               text += ` Encumbrance x${value}`;
+           } else if (key.startsWith("encumbrance")) {
+               text += `Encumbrance DM ${value}`;
+           } else if (key.startsWith("guncombat")) {
+               text += `Gun Combat ${value}`;
+           } else if (key.startsWith("melee")) {
+               text += `Melee ${value}`;
+           } else if (key.startsWith("physical")) {
+               text += `Physical ${value}`;
+           }
+
+       }
+
+       html += `<span class="effectPill" title="${title}">${text}</span>`;
+   }
+
+   return html;
+});
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
