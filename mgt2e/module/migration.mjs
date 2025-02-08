@@ -14,7 +14,7 @@ async function migrateActorData(actor, fromVersion) {
                     console.log(`Migrating Item entity ${item.name} from ${fromVersion} for ${actor.name}`);
                     await item.update(updateData);
                 }
-            }Mongoo
+            }
         }
     }
 

@@ -34,6 +34,21 @@
             <span name="addNewSkill" class="addNewSkill item">+Add New Skill</span>
         </div>
     </div>
+
+    {{#if effects}}
+        <div>
+            {{#each effects as |section sid|}}
+                {{#each section.effects as |effect|}}
+                    {{#unless effect.isSuppressed}}
+                        {{{showEffectPill ../../actor effect}}}
+                    {{/unless}}
+                {{/each}}
+            {{/each}}
+        </div>
+        <br/>
+    {{/if}}
+
+
     <h3>Encumbrance DM</h3>
     <div class="resources grid grid-4col">
         <div class="resource flex-group-center">

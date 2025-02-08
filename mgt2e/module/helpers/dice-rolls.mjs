@@ -22,7 +22,7 @@ export function isNumber(value) {
 
 export function toFloat(number) {
     console.log("toFloat: " + number);
-    number = "" + parseFloat(number).toFixed(3);
+    number = "" + parseFloat(number).toFixed(4);
     console.log("toFloat: " + number);
     number = number.replaceAll(/0+$/g, "");
     console.log("toFloat: " + number);
@@ -644,7 +644,7 @@ function getSkillBonus(data, skill, speciality) {
         speciality = skill.specialities[speciality];
     }
 
-    if (skill.augdm != null) {
+    if (isNumber(skill.augdm)) {
         bonus += parseInt(skill.augdm);
     }
     if (skill.bonus) {

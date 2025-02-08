@@ -2090,3 +2090,14 @@ li.item-status-INACTIVE h4 {
 .always {
     color: #888888;
 }
+
+.effectPill {
+    display: inline-block;
+    padding: 3px;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin: 2px;
+    margin-right: 0.3em;
+    background-color: #606060;
+    color: white;
+}

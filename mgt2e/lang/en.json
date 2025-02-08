@@ -281,6 +281,10 @@
   "MGT2.TravellerSheet.StatusLabel.needsFirstAid": "First Aid",
   "MGT2.TravellerSheet.StatusLabel.needsSurgery": "Surgery",
 
+  "MGT2.TravellerSheet.AugmentType.augment": "Aug",
+  "MGT2.TravellerSheet.AugmentType.expert": "Ex",
+  "MGT2.TravellerSheet.AugmentType.augdm": "DM",
+
   "MGT2.TravellerSheet.DTons": "Tonnage",
   "MGT2.TravellerSheet.Power": "Power",
   "MGT2.TravellerSheet.MDrive": "M-Drive",
