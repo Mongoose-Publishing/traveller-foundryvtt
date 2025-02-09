@@ -92,10 +92,7 @@
         "damage": {
             "STR": { "value": 0 },
             "DEX": { "value": 0 },
-            "END": { "value": 0, "tmp": 0 },
-            "PSI": { "value": 0 },
-            "LCK": { "value": 0 },
-            "STY": { "value": 0 }
+            "END": { "value": 0, "tmp": 0 }
         }
       },
       "armour": {

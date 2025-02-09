@@ -148,7 +148,7 @@ export class MgT2Actor extends Actor {
 
 
 
-    applyActiveEffect(ob1, obj2) {
+    _applyActiveEffect(ob1, obj2) {
         console.log("applyActiveEffect:");
         console.log(obj1);
         console.log(obj2);
@@ -459,9 +459,7 @@ export class MgT2Actor extends Actor {
                   armourText += `(${game.i18n.localize("MGT2.Armour.Archaic")}) `;
               }
           }
-          console.log("Modified armour value is " + armour);
       }
-      console.log("Damage type is " + options.damageType);
       if (this.system.armour && options.damageType !== "") {
           let armourData = this.system.armour;
           if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
@@ -472,7 +470,6 @@ export class MgT2Actor extends Actor {
               }
           }
       }
-      console.log(armour);
 
       // Look for active weapons which provide protection.
       for (let i of this.items) {
@@ -525,9 +522,6 @@ export class MgT2Actor extends Actor {
           return;
       }
 
-      ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
-          {"actor": this.name, "damage": damage}))
-
       if (this.type === "traveller") {
           // This is a Traveller, so more complicated.
           if (options.noUI) {
@@ -546,6 +540,8 @@ export class MgT2Actor extends Actor {
       if (hasTrait(options.traits, "stun")) {
           stun = true;
       }
+      console.log(damage);
+      console.log(options);
 
       if (stun) {
           if (options.characteristics) {
@@ -565,7 +561,11 @@ export class MgT2Actor extends Actor {
               this.system.damage.DEX.value += parseInt(options.characteristics.DEX);
               this.system.damage.END.value += parseInt(options.characteristics.END);
 
-              if (options.characteristics.STR + options.characteristics.DEX + options.characteristics.END > 0) {
+              let totalDamage = options.characteristics.STR + options.characteristics.DEX + options.characteristics.END;
+              ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
+                  {"actor": this.name, "damage": totalDamage}))
+
+              if (totalDamage > 0) {
                   needsFirstAid = true;
               }
           } else {
@@ -590,6 +590,9 @@ export class MgT2Actor extends Actor {
                       Tools.applyDamageToCha(remaining, this.system, "STR");
                   }
               }
+              ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
+                  {"actor": this.name, "damage": damage}))
+
           }
           if (needsFirstAid) {
               this.setFlag("mgt2e", "needsFirstAid", true);

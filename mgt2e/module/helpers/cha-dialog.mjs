@@ -51,10 +51,9 @@ export class MgT2ChaDialog extends Application {
     }
 
     _toggle(html, cha) {
-        console.log(cha);
-
         if (this.LIST[cha].hasDamage) {
             this.LIST[cha].hasDamage = false;
+            this.actor.system.damage[cha] = null;
             delete this.actor.system.damage[cha];
             this.actor.update({[`system.damage.-=${cha}`]: null});
             html.find(".cha-" + cha)[0].innerHTML = cha;

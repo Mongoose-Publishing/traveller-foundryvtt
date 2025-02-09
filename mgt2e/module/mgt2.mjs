@@ -489,7 +489,6 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
         if (endDmg >= endMax) atZero++;
         if (dexDmg >= dexMax) atZero++;
         if (strDmg >= strMax) atZero++;
-        console.log("atZero:" + atZero);
         switch (atZero) {
             case 2:
                 actor.setFlag("mgt2e", "unconscious", true);

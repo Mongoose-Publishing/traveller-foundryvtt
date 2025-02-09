@@ -16,6 +16,8 @@
 * Current active effects are now displayed in the actor settings tab.
 * General items have a 'Computer' option added to them, which allows embedding of a computer.
   This is a beta field which not currently used, and is for informational purposes only.
+* Added first aid flag to characters after they are injured.
+* Added build number to version string. Used only to track changes during development cycles.
 
 ## 0.11.6 (Beta)
 

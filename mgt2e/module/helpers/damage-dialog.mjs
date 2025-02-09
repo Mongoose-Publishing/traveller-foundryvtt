@@ -192,7 +192,7 @@ export class MgT2DamageDialog extends Application {
         console.log(`STR ${str}, DEX ${dex}, END ${end}`);
 
         let total = str + dex + end;
-        let damage = this.data.damage;
+        let damage = this.actualDamage;
 
         this.damageOptions.characteristics = {
             "STR": str,

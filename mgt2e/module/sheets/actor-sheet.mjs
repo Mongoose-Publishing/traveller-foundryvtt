@@ -1035,6 +1035,12 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.statusDead').click(ev => {
             this._clearStatus(this.actor, 'dead');
         });
+        html.find('.statusNeedsFirstAid').click(ev => {
+            this._clearStatus(this.actor, 'needsFirstAid');
+        });
+        html.find('.statusNeedsSurgery').click(ev => {
+            this._clearStatus(this.actor, 'needsSurgery');
+        });
         html.find('initRoll').click(ev => {
             this._initRoll(this.actor);
         });
