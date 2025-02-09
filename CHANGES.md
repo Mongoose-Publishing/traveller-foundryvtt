@@ -11,6 +11,11 @@
 * Add inline macro support for journals.
 * Character sheets now have an "Add Item" option for Travellers and NPCs, to allow
   items to be generated directly from the character sheet.
+* Armour weight not forced to integer when weight is reduced when it is worn.
+* There is now a UI for defining which characteristics are can have damage applied to them.
+* Current active effects are now displayed in the actor settings tab.
+* General items have a 'Computer' option added to them, which allows embedding of a computer.
+  This is a beta field which not currently used, and is for informational purposes only.
 
 ## 0.11.6 (Beta)
 

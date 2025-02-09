@@ -12,27 +12,43 @@ then
   exit 2
 fi
 
-version=$(cat mgt2e/system.json | jq -r .version)
-patch=$(echo $version | sed 's/.*\.//')
-minor=$(echo $version | sed 's/[0-9]*\.\([0-9]*\)\.[0-9]*/\1/')
-major=$(echo $version | sed 's/\..*//g')
+if [ -f .env ]
+then
+  . ./.env
+fi
 
-while getopts "Mmpsb" opt
+version=$(cat mgt2e/system.json | jq -r .version)
+build=$(echo $version | cut -d "." -f 4 | sed 's/[^0-9]//g')
+patch=$(echo $version | cut -d "." -f 3)
+minor=$(echo $version | cut -d "." -f 2)
+major=$(echo $version | cut -d "." -f 1)
+
+# Build gets incremented every time this script runs.
+build=$((build + 1))
+
+LOCAL=no
+while getopts "LMmpsb" opt
 do
   case "${opt}" in
+    L)
+      LOCAL=yes
+      ;;
     M)
       major=$((major + 1))
       minor=0
       patch=0
+      build=0
       okay=1
       ;;
     m)
       minor=$((minor + 1))
-      patch="0"
+      patch=0
+      build=0
       okay=1
       ;;
     p)
       patch=$((patch + 1))
+      build=0
       okay=1
       ;;
     s)
@@ -72,15 +88,35 @@ fi
 
 release=$(git branch --show-current)
 
-sed -i "s/\"version\": \".*\",/\"version\": \"${version}\",/" mgt2e/system.json
-sed -i "s#/raw/[vmain0-9.]*/#/raw/${release}/#" mgt2e/system.json
+RELEASE_DOWNLOAD_URL="https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/${release}/release/mongoose-traveller.zip"
+RELEASE_MANIFEST_URL="https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/release/system.json"
 
 # Zip up system archive, minus the source json.
-rm -f release/mongoose-traveller.zip
-zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
-cp mgt2e/system.json release/system.json
+if [ $LOCAL = "yes" ]
+then
+  echo "Publishing locally to $LOCAL_PUBLISH_DIR"
+  sed -i "s/\"version\": \".*\",/\"version\": \"${version}.${build}-DEV\",/" mgt2e/system.json
+  sed -i "s#\"download\": .*#\"download\": \"$LOCAL_DOWNLOAD_URL\",#" mgt2e/system.json
+  sed -i "s#\"manifest\": .*#\"manifest\": \"$LOCAL_MANIFEST_URL\",#" mgt2e/system.json
 
-sed -i "s/\(\*\*Version:\*\* \).*/\1 ${version}/g" README.md
+  rm -f release/mongoose-traveller.zip
+  zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
+  cp mgt2e/system.json release/system.json
 
-echo "Created release ${version} in branch ${release}"
+  cp -p release/* $LOCAL_PUBLISH_DIR
+
+else
+  echo "Creating release files"
+  sed -i "s/\"version\": \".*\",/\"version\": \"${version}.${build}\",/" mgt2e/system.json
+  sed -i "s#\"download\": .*#\"download\": \"$RELEASE_DOWNLOAD_URL\",#" mgt2e/system.json
+  sed -i "s#\"manifest\": .*#\"manifest\": \"$RELEASE_MANIFEST_URL\",#" mgt2e/system.json
+
+  rm -f release/mongoose-traveller.zip
+  zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
+  cp mgt2e/system.json release/system.json
+
+  sed -i "s/\(\*\*Version:\*\* \).*/\1 ${version}/g" README.md
+  echo "Created release ${version} in branch ${release}"
+fi
+
 
