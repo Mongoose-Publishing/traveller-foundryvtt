@@ -1,0 +1,43 @@
+{
+  "name": "Illegal Cybernetics",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/illegal_cybernetics.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "HT",
+      "purchaseDM": "HT +1",
+      "saleDM": "As +4, Ic +4, Ri +8, Amber +6, Red +6",
+      "tons": "1D6",
+      "illegal": false,
+      "price": 250000
+    },
+    "quantity": 1,
+    "description": "<p>Combat cybernetics, illegal enhancements.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.ivEQuBeYPvHhxca1"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.ivEQuBeYPvHhxca1",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "KRGzorliD9AU6K8h",
+  "sort": 0,
+  "_key": "!items!KRGzorliD9AU6K8h"
+}

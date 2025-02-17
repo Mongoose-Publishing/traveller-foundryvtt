@@ -1,0 +1,22 @@
+{
+  "name": "Software",
+  "sorting": "a",
+  "folder": null,
+  "type": "Item",
+  "_id": "ATgdyQN9qYGZb6Pb",
+  "description": "",
+  "sort": 100000,
+  "color": "#f1511b",
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.10.7",
+    "createdTime": 1731176077602,
+    "modifiedTime": 1731176077617,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!ATgdyQN9qYGZb6Pb"
+}

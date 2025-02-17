@@ -1,0 +1,43 @@
+{
+  "name": "Vehicles",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/vehicles.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "In, HT",
+      "purchaseDM": "In +2, HT +1",
+      "saleDM": "Ni +2, Hi +1",
+      "tons": "1D6 * 10",
+      "illegal": false,
+      "price": 15000
+    },
+    "quantity": 1,
+    "description": "<p>Wheeled, tracked and other vehicles from TL10 or lower.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.Of9UNJqfeBsItRuA"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.Of9UNJqfeBsItRuA",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "PKMpr7vOu5VLMQJZ",
+  "sort": 0,
+  "_key": "!items!PKMpr7vOu5VLMQJZ"
+}

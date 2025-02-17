@@ -1,0 +1,43 @@
+{
+  "name": "Uncommon Raw Materials",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/uncommon_raw_materials.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "Ag, De, Wa",
+      "purchaseDM": "Ag +2, Wa +1",
+      "saleDM": "In +2, HT +1",
+      "tons": "1D6 * 10",
+      "illegal": false,
+      "price": 20000
+    },
+    "quantity": 1,
+    "description": "<p>Valuable metals like titanium, rare elements.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.JJKClMCesk2gy3Ca"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.JJKClMCesk2gy3Ca",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "o2EWcf6IkIzmRl9B",
+  "sort": 0,
+  "_key": "!items!o2EWcf6IkIzmRl9B"
+}

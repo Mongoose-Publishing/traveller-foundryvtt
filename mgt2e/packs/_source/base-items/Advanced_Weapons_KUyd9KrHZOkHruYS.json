@@ -1,0 +1,43 @@
+{
+  "name": "Advanced Weapons",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/advanced_weapons.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "In, HT",
+      "purchaseDM": "HT +2",
+      "saleDM": "Po +1, Amber +2, Red +4",
+      "tons": "1D6 * 5",
+      "illegal": false,
+      "price": 150000
+    },
+    "quantity": 1,
+    "description": "<p>Firearms, explosives, ammunition, artillery and other military-grade weaponry.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.tNpPOxLqvZd6rdoo"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.tNpPOxLqvZd6rdoo",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "KUyd9KrHZOkHruYS",
+  "sort": 0,
+  "_key": "!items!KUyd9KrHZOkHruYS"
+}

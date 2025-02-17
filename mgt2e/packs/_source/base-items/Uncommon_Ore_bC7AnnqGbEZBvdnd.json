@@ -1,0 +1,43 @@
+{
+  "name": "Uncommon Ore",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/uncommon_ore.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "As, Ic",
+      "purchaseDM": "As +4",
+      "saleDM": "In +3, Ni +1",
+      "tons": "1D6 * 20",
+      "illegal": false,
+      "price": 5000
+    },
+    "quantity": 1,
+    "description": "<p>Ore containing precious or valuable metals.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.zgZUhhZulPiGXwwU"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.zgZUhhZulPiGXwwU",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "bC7AnnqGbEZBvdnd",
+  "sort": 0,
+  "_key": "!items!bC7AnnqGbEZBvdnd"
+}

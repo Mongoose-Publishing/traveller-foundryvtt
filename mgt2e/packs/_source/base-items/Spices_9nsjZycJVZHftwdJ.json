@@ -1,0 +1,43 @@
+{
+  "name": "Spices",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/spices.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "Ga, De, Wa",
+      "purchaseDM": "De +2",
+      "saleDM": "Hi +2, Ri +3, Po +3",
+      "tons": "1D6 * 10",
+      "illegal": false,
+      "price": 6000
+    },
+    "quantity": 1,
+    "description": "<p>Preservatives, luxury food additives, natural drugs.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.tfkNCOXlP5KKDOsR"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.tfkNCOXlP5KKDOsR",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "9nsjZycJVZHftwdJ",
+  "sort": 0,
+  "_key": "!items!9nsjZycJVZHftwdJ"
+}

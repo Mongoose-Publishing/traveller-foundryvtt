@@ -1,0 +1,43 @@
+{
+  "name": "Exotics",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/exotics.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "All",
+      "purchaseDM": "",
+      "saleDM": "",
+      "tons": "1",
+      "illegal": false,
+      "price": 1000000
+    },
+    "quantity": 1,
+    "description": "<p>Exotic goods are outside the normal trade rules, and covers such things as alien relics, prototype technology, unique plant or animal life, priceless treasures and so forth. Buying and seeling exotic goods is a matter for roleplaying and adventure.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.g9Tl53DfM8PRWrh2"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.g9Tl53DfM8PRWrh2",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "N2lxpv6rUmzFQeO9",
+  "sort": 0,
+  "_key": "!items!N2lxpv6rUmzFQeO9"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Common Electronics",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/common_electronics.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "All ",
+      "purchaseDM": "In +2, HT +3, Ri +1",
+      "saleDM": "Na +2, In +5",
+      "tons": "2D6 * 10",
+      "illegal": false,
+      "price": 20000
+    },
+    "quantity": 1,
+    "description": "<p>Simple electronics including basic computers up to TL10.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.3KkyMdy56vec3vT1"
+    },
+    "cf": {
+      "id": null
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.3KkyMdy56vec3vT1",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "Gj8jPTDP3hkDGcK6",
+  "sort": 0,
+  "_key": "!items!Gj8jPTDP3hkDGcK6"
+}

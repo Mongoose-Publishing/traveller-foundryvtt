@@ -1,0 +1,43 @@
+{
+  "name": "Pharmaceuticals",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/pharmaceuticals.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "As, De, Hi, Wa",
+      "purchaseDM": "As +2, Hi +1",
+      "saleDM": "In +2, Ag +1, LT +2",
+      "tons": "1D6",
+      "illegal": false,
+      "price": 100000
+    },
+    "quantity": 1,
+    "description": "<p>Drugs, medical supplies, anagathics, fast or slow drugs.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.b3mRQuP6CsKKZzNs"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.b3mRQuP6CsKKZzNs",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "wVwiwYrUQSwF63X2",
+  "sort": 0,
+  "_key": "!items!wVwiwYrUQSwF63X2"
+}

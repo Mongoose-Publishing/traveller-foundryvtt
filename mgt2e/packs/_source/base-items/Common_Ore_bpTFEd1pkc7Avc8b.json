@@ -1,0 +1,46 @@
+{
+  "name": "Common Ore",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/common_ore.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "All",
+      "purchaseDM": "As +4",
+      "saleDM": "In +3, Ni +1",
+      "tons": "2D6 * 20",
+      "illegal": false,
+      "price": 1000
+    },
+    "quantity": 1,
+    "description": "<p>Ore bearing common metals.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.n6eJK27zJRZk9Qle"
+    },
+    "cf": {
+      "id": null
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.n6eJK27zJRZk9Qle",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "bpTFEd1pkc7Avc8b",
+  "sort": 0,
+  "_key": "!items!bpTFEd1pkc7Avc8b"
+}

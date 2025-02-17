@@ -1,0 +1,43 @@
+{
+  "name": "Crystals & Gems",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/crystals_and_gems.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "As, De, Ic",
+      "purchaseDM": "As +2, De +1, Ic +1",
+      "saleDM": "In +3, Ri +2",
+      "tons": "1D6 * 5",
+      "illegal": false,
+      "price": 20000
+    },
+    "quantity": 1,
+    "description": "<p>Diamonds, synthetic or natural gemstones.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.OpsK0iHjgEMaYsuS"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.OpsK0iHjgEMaYsuS",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "jZUALmFdtZbFJtE6",
+  "sort": 0,
+  "_key": "!items!jZUALmFdtZbFJtE6"
+}

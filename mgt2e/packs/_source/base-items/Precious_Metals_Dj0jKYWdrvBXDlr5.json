@@ -1,0 +1,43 @@
+{
+  "name": "Precious Metals",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/precious_metals.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "As, De, Ic, Fl",
+      "purchaseDM": "As +3, De +1, Ic +2",
+      "saleDM": "Ri +3, In +2, HT +1",
+      "tons": "1D6",
+      "illegal": false,
+      "price": 50000
+    },
+    "quantity": 1,
+    "description": "<p>Gold, silver, platinum, rare elements.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.UBMQMMGA1U4jNA9Z"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.UBMQMMGA1U4jNA9Z",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "Dj0jKYWdrvBXDlr5",
+  "sort": 0,
+  "_key": "!items!Dj0jKYWdrvBXDlr5"
+}

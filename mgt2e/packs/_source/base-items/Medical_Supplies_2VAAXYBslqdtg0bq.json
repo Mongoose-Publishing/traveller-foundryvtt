@@ -1,0 +1,43 @@
+{
+  "name": "Medical Supplies",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/medical_supplies.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "HT, Hi",
+      "purchaseDM": "Hi +2",
+      "saleDM": "In +2, Po +1, Ri +1",
+      "tons": "1D6 * 5",
+      "illegal": false,
+      "price": 50000
+    },
+    "quantity": 1,
+    "description": "<p>Diagnostic equipment, basic drugs, cloning technology.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.CrXlgyfkgvgZVi2u"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.CrXlgyfkgvgZVi2u",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "2VAAXYBslqdtg0bq",
+  "sort": 0,
+  "_key": "!items!2VAAXYBslqdtg0bq"
+}

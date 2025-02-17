@@ -1,0 +1,43 @@
+{
+  "name": "Luxury Consumables",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/luxury_consumables.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "Ag, Ga, Wa",
+      "purchaseDM": "Ag +2, Wa +1",
+      "saleDM": "Ri +2, Hi +2",
+      "tons": "1D6 * 10",
+      "illegal": false,
+      "price": 20000
+    },
+    "quantity": 1,
+    "description": "<p>Rare foods, fine liquors.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.ZoTVqNZTNQu5iaZt"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.ZoTVqNZTNQu5iaZt",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "vt1ahPlB1zNbfwys",
+  "sort": 0,
+  "_key": "!items!vt1ahPlB1zNbfwys"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Biochemicals",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/biochemicals.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "Ag, Wa",
+      "purchaseDM": "Ag +1, Wa +2",
+      "saleDM": "In +2",
+      "tons": "1D6 * 5",
+      "illegal": false,
+      "price": 50000
+    },
+    "quantity": 1,
+    "description": "<p>Biofuels, organic chemicals, extracts.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.CUkqQLYNF8FYk8hO"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.CUkqQLYNF8FYk8hO",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "kNTI6FLoDiTF1pE2",
+  "sort": 0,
+  "_key": "!items!kNTI6FLoDiTF1pE2"
+}

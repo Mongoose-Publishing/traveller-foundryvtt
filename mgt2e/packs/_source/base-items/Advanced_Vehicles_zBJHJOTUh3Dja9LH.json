@@ -1,0 +1,43 @@
+{
+  "name": "Advanced Vehicles",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/advanced_vehicles.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "In, HT",
+      "purchaseDM": "HT +2",
+      "saleDM": "As +2, Ri +2",
+      "tons": "1D6 * 5",
+      "illegal": false,
+      "price": 180000
+    },
+    "quantity": 1,
+    "description": "<p>Air/rafts, spacecraft, grav tanks and other vehicles up to TL 15.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.uuBf4pgz3R00LtEx"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.uuBf4pgz3R00LtEx",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "zBJHJOTUh3Dja9LH",
+  "sort": 0,
+  "_key": "!items!zBJHJOTUh3Dja9LH"
+}

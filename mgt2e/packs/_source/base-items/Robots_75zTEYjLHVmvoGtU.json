@@ -1,0 +1,43 @@
+{
+  "name": "Robots",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/robots.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "In",
+      "purchaseDM": "In +1",
+      "saleDM": "Ag +2, HT +1",
+      "tons": "1D6 * 5",
+      "illegal": false,
+      "price": 400000
+    },
+    "quantity": 1,
+    "description": "<p>Industrial and personal robots and drones.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.0C2mkn1Zynz4iKR6"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.0C2mkn1Zynz4iKR6",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "75zTEYjLHVmvoGtU",
+  "sort": 0,
+  "_key": "!items!75zTEYjLHVmvoGtU"
+}

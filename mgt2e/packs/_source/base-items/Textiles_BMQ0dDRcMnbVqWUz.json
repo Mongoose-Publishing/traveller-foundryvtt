@@ -1,0 +1,43 @@
+{
+  "name": "Textiles",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/textiles.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "Ag, Ni",
+      "purchaseDM": "Ag +7",
+      "saleDM": "Hi +3, Na +2",
+      "tons": "1D6 * 20",
+      "illegal": false,
+      "price": 3000
+    },
+    "quantity": 1,
+    "description": "<p>Clothing and fabrics.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.ssybiJi4XkYnJxe9"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.ssybiJi4XkYnJxe9",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "BMQ0dDRcMnbVqWUz",
+  "sort": 0,
+  "_key": "!items!BMQ0dDRcMnbVqWUz"
+}

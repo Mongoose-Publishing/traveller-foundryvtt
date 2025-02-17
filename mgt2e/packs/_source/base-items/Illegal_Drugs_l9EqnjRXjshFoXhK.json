@@ -1,0 +1,43 @@
+{
+  "name": "Illegal Drugs",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/illegal_drugs.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "As, De, Hi, Wa",
+      "purchaseDM": "As +1, De +1, Ga +1, Wa +1",
+      "saleDM": "Ri +6, Hi +6",
+      "tons": "1D6",
+      "illegal": false,
+      "price": 100000
+    },
+    "quantity": 1,
+    "description": "<p>Addictive drugs, combat drugs.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.zFAlBE95ujm6ezXS"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.zFAlBE95ujm6ezXS",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "l9EqnjRXjshFoXhK",
+  "sort": 0,
+  "_key": "!items!l9EqnjRXjshFoXhK"
+}

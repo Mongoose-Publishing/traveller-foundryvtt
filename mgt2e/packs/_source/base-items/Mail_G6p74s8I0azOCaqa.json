@@ -1,0 +1,43 @@
+{
+  "name": "Mail",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/mail.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "All",
+      "purchaseDM": "",
+      "saleDM": "",
+      "tons": "5",
+      "illegal": false,
+      "price": 25000
+    },
+    "quantity": 5,
+    "description": "<p>Data storage drums which contain digital communication records.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.Jkx4VHFAmXsps2XS"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.Jkx4VHFAmXsps2XS",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "G6p74s8I0azOCaqa",
+  "sort": 0,
+  "_key": "!items!G6p74s8I0azOCaqa"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Common Consumables",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/common_consumables.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "All",
+      "purchaseDM": "Ag +3, Wa +2, Ga +1, As -4",
+      "saleDM": "As +1, Fl +1, Ic +1, Hi +1",
+      "tons": "2D6 * 20",
+      "illegal": false,
+      "price": 500
+    },
+    "quantity": 1,
+    "description": "<p>Food, drink and other agricultural products.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.1Oa8D1wzX9WxM80T"
+    },
+    "cf": {
+      "id": null
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.1Oa8D1wzX9WxM80T",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "533ebkR8ulswOkUf",
+  "sort": 0,
+  "_key": "!items!533ebkR8ulswOkUf"
+}

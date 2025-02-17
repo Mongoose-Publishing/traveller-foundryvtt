@@ -1,0 +1,43 @@
+{
+  "name": "Freight Major",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/cargo.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "All",
+      "purchaseDM": "",
+      "saleDM": "",
+      "tons": "1D6 * 10",
+      "illegal": false,
+      "price": 1000
+    },
+    "quantity": 1,
+    "description": "<p>Major lot of freight.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.e5GUZ4CaIm12Wn1Y"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.e5GUZ4CaIm12Wn1Y",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "coAH67e7i2teHFhc",
+  "sort": 0,
+  "_key": "!items!coAH67e7i2teHFhc"
+}

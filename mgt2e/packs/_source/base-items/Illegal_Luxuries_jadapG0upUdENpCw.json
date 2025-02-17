@@ -1,0 +1,43 @@
+{
+  "name": "Illegal Luxuries",
+  "type": "cargo",
+  "img": "systems/mgt2e/icons/cargo/illegal_luxuries.svg",
+  "system": {
+    "cargo": {
+      "cost": 100,
+      "availability": "Ag, Ga, Wa",
+      "purchaseDM": "Ag +2, Wa +1",
+      "saleDM": "Ri +6, Hi +3",
+      "tons": "1D6",
+      "illegal": false,
+      "price": 50000
+    },
+    "quantity": 1,
+    "description": "<p>Debauched or addictive luxuries.</p>"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "KjVCQnLdKUJeJDZy": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.yNmTjjo396wZPV5q"
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.yNmTjjo396wZPV5q",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739833676234,
+    "modifiedTime": 1739833676234,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "folder": "nTFQBn7eKDifeKFR",
+  "_id": "jadapG0upUdENpCw",
+  "sort": 0,
+  "_key": "!items!jadapG0upUdENpCw"
+}
