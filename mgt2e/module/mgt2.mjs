@@ -206,7 +206,6 @@ Hooks.once('init', async function() {
 
   // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;
-  console.log(CONFIG);
 
   /**
    * Set an initiative formula for the system

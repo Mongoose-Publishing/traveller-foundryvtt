@@ -288,7 +288,7 @@ Tools.damage = function(chatData, args) {
     let damage = parseInt(args.shift());
     let damageOptions = { "traits": "", "damage": damage, "ap": 0, "effect": 0, "scale": "traveller" };
     while (args.length > 0) {
-        if (args[0] === "noui") {
+        if (args[0] === "--noui") {
             damageOptions.noUI = true;
             args.shift();
             continue;
@@ -384,10 +384,6 @@ Tools.macroExecutionEnricher = function(match, options) {
         const argsString = match[4];
         const flavor = match[6];
 
-        console.log(macroName);
-        console.log(argsString);
-        console.log(flavor);
-
         const macro = game.macros.getName(macroName);
         const title = `${macro.name}(${argsString})`;
 
@@ -402,7 +398,7 @@ Tools.macroExecutionButton = function(macroName, argsString, title, flavor) {
     a.classList.add("inline-macro-execution");
     a.dataset.macroName = macroName;
     a.dataset.args = argsString;
-    a.innerHTML = `<i class="fas fa-dice-d20"></i> ${flavor ?? title}`;
+    a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
     return a;
 }
 
