@@ -1,7 +1,7 @@
 {
   "name": "D66",
   "type": "chat",
-  "command": "D66 [[1D6]] [[1D6]]",
+  "command": "/r 1d6*10 + 1d6 # D66",
   "img": "systems/mgt2e/icons/misc/D66.svg",
   "author": "mhUjqDVicnwIUaiq",
   "scope": "global",
@@ -18,7 +18,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.11.4",
     "createdTime": 1737826818292,
-    "modifiedTime": 1739743534561,
+    "modifiedTime": 1739918412525,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "pBJCMW5TZAb9pmuw",

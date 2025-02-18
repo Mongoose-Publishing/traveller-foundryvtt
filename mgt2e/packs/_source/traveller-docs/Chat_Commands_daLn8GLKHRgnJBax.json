@@ -5,7 +5,7 @@
   "pages": [
     {
       "sort": 100000,
-      "name": "upp",
+      "name": "UPP",
       "type": "text",
       "_id": "shQm9JqCDpnbYIo7",
       "title": {
@@ -31,14 +31,125 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.4.9",
-        "coreVersion": "12.329",
+        "coreVersion": "12.331",
         "createdTime": 1717537853687,
-        "modifiedTime": 1718230162161,
-        "lastModifiedBy": "Uzw5MJmM0BRE3sSL",
+        "modifiedTime": 1739898210158,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null
       },
       "_key": "!journal.pages!daLn8GLKHRgnJBax.shQm9JqCDpnbYIo7"
+    },
+    {
+      "sort": 100000,
+      "name": "Damage",
+      "type": "text",
+      "_id": "mHFFq1B6Uu3nerxP",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>/damage &lt;hits&gt; [--noui] [traits…]</p><p></p><p>Do the specified amount of damage to the token.</p><p>If —noui is specified, then characteristic damage will be applied automatically rather than bringing up a dialog.</p><p>Trailing options can be used to set weapon traits, such as stun or AP.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "JournalEntry.eZ2L0FoGcDGzjNht.JournalEntryPage.mHFFq1B6Uu3nerxP",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.11.6.13-DEV",
+        "createdTime": 1739898197031,
+        "modifiedTime": 1739898197031,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!daLn8GLKHRgnJBax.mHFFq1B6Uu3nerxP"
+    },
+    {
+      "sort": 100000,
+      "name": "Set Status",
+      "type": "text",
+      "_id": "0w60QfzgYiHFsLnX",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>/status &lt;status…&gt;</p><p></p><p>Set a status effect on selected actors.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "JournalEntry.eZ2L0FoGcDGzjNht.JournalEntryPage.0w60QfzgYiHFsLnX",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.11.6.13-DEV",
+        "createdTime": 1739898199505,
+        "modifiedTime": 1739898199505,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!daLn8GLKHRgnJBax.0w60QfzgYiHFsLnX"
+    },
+    {
+      "sort": 100000,
+      "name": "Macros",
+      "type": "text",
+      "_id": "eBUfwBRUB8sJVH8g",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A number of macros are provided by default, to make it easier to perform some actions directly from the hotbar.</p><p>These macros can also be embedded in Journal entries if you want.</p><h2>Embedded Macros</h2><p>Embedding a macro into a journal entry can be done using the following command string in a Journal entry:</p><pre><code>[[/mgMacro &lt;macroName&gt; &lt;arg1=value1&gt; &lt;arg2=value2&gt;]]{Flavour}\n</code></pre><p>sdf A number of macros are provided by default, to make it easier to perform some actions directly from the hotbar. T df</p><p>This a</p><p>It is also possible to embed these macros in a description for an actor or item.</p><p>Some examples:</p><p>To increment a skill by one level:</p><p>[[/mgMacro AddSkill skill=deception]]{Deception}</p><p>To set a skill to a given level:</p><p>[[/mgMacro AddSkill skill=deception value=1]]{Deception 1}</p><p>You can also use macros to make dice rolls, or write your own to do whatever you want. Look at the provided macros to see examples of how to do things.</p><h3></h3><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "JournalEntry.eZ2L0FoGcDGzjNht.JournalEntryPage.eBUfwBRUB8sJVH8g",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.11.6.13-DEV",
+        "createdTime": 1739898202402,
+        "modifiedTime": 1739898202402,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!daLn8GLKHRgnJBax.eBUfwBRUB8sJVH8g"
     }
   ],
   "sort": 300000,

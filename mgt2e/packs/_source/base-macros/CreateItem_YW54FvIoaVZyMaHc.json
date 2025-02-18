@@ -1,0 +1,27 @@
+{
+  "name": "CreateItem",
+  "type": "script",
+  "command": "// Add item to token\nfor (let t of canvas.tokens.controlled) {\n    let actor = t.actor;\n    if (actor) {\n       let itemName = \"New Item\";\n       const itemData = {\n         \"name\": itemName,\n         \"img\": \"\",\n         \"type\": \"item\"\n       }\n       Item.create(itemData, { parent: actor });\n    }\n}",
+  "img": "systems/mgt2e/icons/macros/add-item.svg",
+  "author": "mhUjqDVicnwIUaiq",
+  "scope": "global",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739744114957,
+    "modifiedTime": 1739744114957,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_id": "YW54FvIoaVZyMaHc",
+  "sort": 0,
+  "_key": "!macros!YW54FvIoaVZyMaHc"
+}

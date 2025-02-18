@@ -1,7 +1,7 @@
 {
   "name": "1D6",
   "type": "chat",
-  "command": "/r 1D6",
+  "command": "/r 1D6 # 1D6",
   "img": "systems/mgt2e/icons/misc/1D6.svg",
   "author": "mhUjqDVicnwIUaiq",
   "scope": "global",
@@ -18,7 +18,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.11.4",
     "createdTime": 1737826815631,
-    "modifiedTime": 1739743534561,
+    "modifiedTime": 1739918441448,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "c0VzdYaCOk0lsx9W",

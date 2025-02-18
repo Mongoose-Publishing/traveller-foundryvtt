@@ -1,0 +1,27 @@
+{
+  "name": "Heal",
+  "type": "script",
+  "command": "// Fully heal all selected tokens/actors.\n// If a Traveller, remove damage on characteristics.\n// If an NPC, remove damage on hits.\nfor (let t of canvas.tokens.controlled) {\n    let actor = t.actor;\n    if (actor) {\n        if (actor.system.damage) {\n           \n        } else if (actor.system.hits) {\n           actor.system.hits.damage = 0; \n           actor.system.hits.tmpDamage = 0; \n\n           actor.update({\"system.hits\": actor.system.hits});\n        }\n    }\n}",
+  "img": "systems/mgt2e/icons/macros/heal.svg",
+  "author": "mhUjqDVicnwIUaiq",
+  "scope": "global",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.11",
+    "createdTime": 1739139427155,
+    "modifiedTime": 1739743534561,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_id": "3l0bt2q0ePrPxYgE",
+  "sort": 100000,
+  "_key": "!macros!3l0bt2q0ePrPxYgE"
+}

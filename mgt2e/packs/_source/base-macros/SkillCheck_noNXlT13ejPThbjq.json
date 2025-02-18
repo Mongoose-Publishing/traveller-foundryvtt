@@ -1,0 +1,27 @@
+{
+  "name": "SkillCheck",
+  "type": "script",
+  "command": "// Makes a pure skill check for use during character generation.\n// Characteristics are ignored.\n\nlet skillId = scope.skill;\nlet specId = null;\nlet target = scope.target;\n\nif (!target) {\n  target = 8;\n}\n\nif (skillId.indexOf(\".\") > -1) {\n  skillId = scope.skill.split(\".\")[0];\n  specId = scope.skill.split(\".\")[1];\n}\n\n\nfor (let t of canvas.tokens.controlled) {\n    let actor = t.actor;\n    if (actor) {\n      let skill = actor.system.skills[skillId];\n\n      let value = -3;\n      if (skill.trained) {\n          value = skill.value;\n      }\n      console.log(value);\n      let roll = await new Roll(\"2D6 + \" + value, null).evaluate();\n\n      let text = \"Rolling against target of \" + target;\n\n      \n\n      text = `<div>${text}</div>`;\n\n      \n      roll.toMessage({\n        speaker: ChatMessage.getSpeaker({actor: actor}),\n        flavor: text,\n        rollMode: game.settings.get(\"core\", \"rollMode\")\n      });\n      \n\n    }\n}",
+  "img": "systems/mgt2e/icons/macros/skill-check.svg",
+  "author": "mhUjqDVicnwIUaiq",
+  "scope": "global",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.6.13-DEV",
+    "createdTime": 1739743532426,
+    "modifiedTime": 1739918548411,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_id": "noNXlT13ejPThbjq",
+  "sort": 300000,
+  "_key": "!macros!noNXlT13ejPThbjq"
+}

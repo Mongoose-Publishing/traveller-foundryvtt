@@ -1,5 +1,5 @@
 {
-  "name": "Cargo",
+  "name": "Trade Goods",
   "type": "Item",
   "color": "#f1511b",
   "folder": null,
@@ -14,7 +14,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.11.6.13-DEV",
     "createdTime": 1739833676224,
-    "modifiedTime": 1739833689105,
+    "modifiedTime": 1739917911744,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "description": "",
