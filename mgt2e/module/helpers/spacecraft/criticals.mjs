@@ -3,6 +3,7 @@
  */
 
 import {MGT2} from "../config.mjs";
+import {MgT2Item} from "../../documents/item.mjs";
 
 export async function setSpacecraftCriticalLevel(actor, critical, level) {
     if (actor.type === "spacecraft") {
@@ -37,6 +38,9 @@ export async function setSpacecraftCriticalLevel(actor, critical, level) {
                 console.log(`Critical for ${critical} level ${level} has effects`);
                 console.log(effects);
                 switch (critical) {
+                    case "armour":
+                        applyArmourCritical(actor, effects, level);
+                        break;
                     case "powerPlant":
                         applyPowerPlantCritical(actor, effects, level);
                         break;
@@ -160,8 +164,73 @@ async function applyPowerPlantCritical(actor, effects, level) {
     actor.applyHullCritical(actor, effects, level);
 }
 
-async function applyWeaponCritical(actor, effects, level) {
+function getRandomWeapons(actor, number) {
+    let list = [];
 
+    // Do we get a weapon, or a weapon mount? For now, let's get a weapon
+    // mount.
+    for (let item of actor.items) {
+        if (item.type === "hardware" && item.system.hardware.system === "weapon") {
+            list.push(item);
+        }
+    }
+    if (list.length === 0) {
+        // Return nothing if nothing is available.
+        return null;
+    }
+    if (number >= list.length) {
+        // Return the entire list.
+        return list;
+    }
+
+    let selected = [];
+    for (let i=0; i < number; i++) {
+        let r = parseInt(Math.random() * list.length);
+        selected.push(list[r]);
+        // Shouldn't select it more than once.
+        list.splice(r, 1);
+    }
+
+    return selected;
+}
+
+async function applyWeaponCritical(actor, effects, level) {
+    console.log("applyWeaponCritical");
+    if (effects["weaponDM"]) {
+        let listMounts = getRandomWeapons(actor, 1);
+        if (listMounts) {
+            let item = listMounts[0];
+            if (item.system.hardware.weapon.dm) {
+                item.system.hardware.weapon.dm--;
+            } else {
+                item.system.hardware.weapon.dm = -1;
+            }
+            await item.update({"system.hardware.weapon.dm": item.system.hardware.weapon.dm});
+        }
+    }
+    if (effects["disabled"]) {
+        let listMounts = getRandomWeapons(actor, 1);
+        if (listMounts) {
+            let item = listMounts[0];
+            if (item.system.status != MgT2Item.DESTROYED) {
+                await item.update({"system.status": MgT2Item.DAMAGED});
+            }
+        }
+    }
+    if (effects["destroyed"]) {
+        let roll = await new Roll(effects["destroyed"], null).evaluate();
+        let number = roll.total;
+        let listMounts = getRandomWeapons(actor, number);
+        if (listMounts) {
+            for (let i=0; i < listMounts.length; i++) {
+                let item = listMounts[i];
+                if (item.system.status != MgT2Item.DESTROYED) {
+                    await item.update({"system.status": MgT2Item.DESTROYED});
+                }
+            }
+        }
+    }
+    actor.applyHullCritical(actor, effects, level);
 }
 
 async function applyCargoCritical(actor, effects, level) {
@@ -255,7 +324,6 @@ async function applyFuelCritical(actor, effects, level) {
     }
     if (effects["lose"]) {
         console.log("Losing fuel");
-        console.log(actor);
         const currentFuel = parseInt(actor.system.spacecraft.fuel.value);
         const maxFuel = parseInt(actor.system.spacecraft.fuel.max);
         let roll = await new Roll("1D6 * 10", null).evaluate();
@@ -287,17 +355,78 @@ async function applyFuelCritical(actor, effects, level) {
 }
 
 async function applyMDriveCritical(actor, effects, level) {
+    console.log("applyMDriveCritical:");
+    console.log(effects);
 
+    if (effects["pilotDM"]) {
+        // Penalty to piloting check.
+        actor.setFlag("mgt2e", "damage_pilotDM", parseInt(effects["pilotDM"]));
+        actor.setFlag("mgt2e", "damageSev_pilotDM", level);
+    }
+    if (effects["thrust"]) {
+        // Penalty to maximum thrust.
+        actor.setFlag("mgt2e", "damage_thrust", parseInt(effects["thrust"]));
+        actor.setFlag("mgt2e", "damageSev_thrust", level);
+    }
+    if (effects["disabled"] || true) {
+        // Thrust goes to zero. Disable mdrive.
+        for (let item of actor.items) {
+            if (item.type === "hardware" && item.system.hardware.system === "m-drive") {
+                if (item.system.status !== MgT2Item.DAMAGED && item.system.status !== MgT2Item.DESTROYED) {
+                    item.system.status = MgT2Item.DAMAGED;
+                    await item.update({"system.status": MgT2Item.DAMAGED});
+                    ui.notifications.info("M-Drive on ship is disabled");
+                    break;
+                }
+            }
+        }
+    }
+    await applyHullCritical(actor, effects, level);
 }
 
 async function applyJDriveCritical(actor, effects, level) {
+    console.log("applyJDriveCritical:");
+    console.log(effects);
 
+    if (effects["jumpDM"]) {
+        // Penalty to jump engineering check.
+        actor.setFlag("mgt2e", "damage_jumpDM", parseInt(effects["jumpDM"]));
+        actor.setFlag("mgt2e", "damageSev_jumpDM", level);
+    }
+    if (effects["disabled"]) {
+        // Jump drive disabled.
+        for (let item of actor.items) {
+            if (item.type === "hardware" && item.system.hardware.system === "j-drive") {
+                if (item.system.status !== MgT2Item.DAMAGED && item.system.status !== MgT2Item.DESTROYED) {
+                    item.system.status = MgT2Item.DAMAGED;
+                    await item.update({"system.status": MgT2Item.DAMAGED});
+                    ui.notifications.info("J-Drive on ship is disabled");
+                    break;
+                }
+            }
+        }
+    }
+    if (effects["destroyed"]) {
+        // Jump drive destroyed.
+        for (let item of actor.items) {
+            if (item.type === "hardware" && item.system.hardware.system === "m-drive") {
+                if (item.system.status !== MgT2Item.DESTROYED) {
+                    item.system.status = MgT2Item.DESTROYED;
+                    await item.update({"system.status": MgT2Item.DESTROYED});
+                    ui.notifications.info("M-Drive on ship is destroyed````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````");
+                    break;
+                }
+            }
+        }
+    }
+
+    await applyHullCritical(actor, effects, level);
 }
 
 async function applyCrewCritical(actor, effects, level) {
-
+    await applyHullCritical(actor, effects, level);
 }
 
 async function applyBridgeCritical(actor, effects, level) {
-
+    await applyHullCritical(actor, effects, level);
 }

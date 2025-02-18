@@ -1375,6 +1375,11 @@ label.box-title {
     color: white;
 }
 
+.criticalEffect {
+    background-color: black;
+    color: white;
+}
+
 input.with-roller {
     width: 60%;
     text-align: left;
@@ -2050,6 +2055,10 @@ div.mini-value span {
 
 li.item-status-DESTROYED h4 {
     background-color: red !important;
+}
+
+li.item-status-DAMAGED h4 {
+    background-color: orange !important;
 }
 
 li.item-status-INACTIVE h4 {

@@ -176,7 +176,14 @@ MGT2.SPACECRAFT_CRITICALS = {
         { "destroyed": true, "hull": "1" },
         { "destroyed": true, "hull": "1D6" }
     ],
-    "weapon": [ ],
+    "weapon": [
+        { "weaponDM": -1 },
+        { "disabled": true },
+        { "destroyed": "1" },
+        { "destroyed": "1", "hull": 1 },
+        { "destroyed": "1D3", "hull": 1 },
+        { "destroyed": "1D6", "hull": 1 }
+    ],
     "armour": [
         { "armour": "1" },
         { "armour": "1D3" },
@@ -193,7 +200,14 @@ MGT2.SPACECRAFT_CRITICALS = {
         { "damage": "5D6" },
         { "damage": "6D6" }
     ],
-    "mDrive": [ ],
+    "mDrive": [
+        { "pilotDM": -1 },
+        { "pilotDM": -2, "thrust": -1 },
+        { "pilotDM": -3, "thrust": -2 },
+        { "pilotDM": -4, "thrust": -3 },
+        { "disabled": true },
+        { "disabled": true, "hull": "1" }
+    ],
     "cargo": [
         { "cargoLoss": "10" },
         { "cargoLoss": "1D6 * 10" },
@@ -202,9 +216,25 @@ MGT2.SPACECRAFT_CRITICALS = {
         { "cargoLoss": "100", "hull": "1" },
         { "cargoLoss": "100", "hull": "1" }
     ],
-    "jDrive": [ ],
-    "crew": [ ],
-    "bridge": [ ]
+    "jDrive": [
+        { "jumpDM": -2 },
+        { "disabled": true },
+        { "destroyed": true },
+        { "destroyed": true, "hull": 1 },
+        { "destroyed": true, "hull": 1 },
+        { "destroyed": true, "hull": 1 }
+    ],
+    "crew": [
+        { "crewDamaged": "1,1D6" },
+        { "lifeSupportFails": "hours" },
+        { "crewDamaged": "1D6,2D6" },
+        { "lifeSupportFails": "rounds" },
+        { "crewDamaged": "3D6" },
+        { "lifeSupportFails": "immediate" }
+    ],
+    "bridge": [
+
+    ]
 }
 
 MGT2.SPACECRAFT_DAMAGE = {
@@ -214,7 +244,8 @@ MGT2.SPACECRAFT_DAMAGE = {
   "armour": {},
   "control": {},
   "thrust": {},
-  "jump": {},
+  "pilotDM": {},
+  "jumpDM": {},
   "lifeSupport": {},
   "sensorDM": {},
   "sensorMax": {}

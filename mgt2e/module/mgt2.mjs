@@ -1501,8 +1501,14 @@ Handlebars.registerHelper('showCriticals', function(actor) {
   for (let d in MGT2.SPACECRAFT_DAMAGE) {
       if (actor.flags.mgt2e["damage_" + d]) {
           let label = game.i18n.localize("MGT2.Spacecraft.CriticalLabel."+d);
-          label += ` <i class="fas fa-xmark critEffDel"> </i>`;
-          html += `<div class="resource critical criticalHigh" data-id="${d}"><label>${label}</label></div>`;
+          let value = actor.flags.mgt2e["damage_" + d];
+          if (parseInt(value) !== NaN && parseInt(value) !== 0) {
+              value = " (" + parseInt(value) + ")";
+          } else {
+              value = "";
+          }
+          label += `${value} <i class="fas fa-xmark critEffDel"> </i>`;
+          html += `<div class="resource critical criticalEffect" data-id="${d}"><label>${label}</label></div>`;
       }
   }
 

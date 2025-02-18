@@ -63,7 +63,7 @@ export class MgT2Actor extends Actor {
                     };
                 }
                 let sizeDM = Math.min(6, parseInt(dtons / 1000));
-                changes.system.spacecraft.combat.sizeDM = sizeDM;
+                //changes.system.spacecraft.combat.sizeDM = sizeDM;
                 //await this.setFlag("mgt2e", "sizeDM", sizeDM);
 
                 if (dtons < 100) {
