@@ -51,12 +51,7 @@
               <label for="system.role.actions.{{id}}.action" class="resource-label">{{localize 'MGT2.Role.ActionTitle'}}</label>
               <br/>
               <select class="expand writable" name="system.role.actions.{{id}}.action">
-                {{#select action.action}}
-                  <option value="chat">{{localize 'MGT2.Role.ChatType'}}</option>
-                  <option value="skill">{{localize 'MGT2.Role.SkillType'}}</option>
-                  <option value="weapon">{{localize 'MGT2.Role.WeaponType'}}</option>
-                  <option value="special">{{localize 'MGT2.Role.SpecialType'}}</option>
-                {{/select}}
+                {{selectOptions ../ACTION_TYPE selected=action.action}}
               </select>
             </div>
             {{#if (ifEquals action.action "chat") }}
@@ -70,32 +65,14 @@
                 <label for="system.role.actions.{{id}}.cha" class="resource-label">Cha</label>
                 <br/>
                 <select class="writable" name="system.role.actions.{{id}}.cha">
-                  {{#select action.cha}}
-                    <option value="">-</option>
-                    <option value="STR">STR</option>
-                    <option value="DEX">DEX</option>
-                    <option value="END">END</option>
-                    <option value="INT">INT</option>
-                    <option value="EDU">EDU</option>
-                    <option value="SOC">SOC</option>
-                  {{/select}}
+                  {{selectOptions ../CHARACTERISTIC_SELECT selected=action.cha}}
                 </select>
               </div>
               <div class="resource grid-span-2">
                 <label for="system.role.actions.{{id}}.skill" class="resource-label">{{localize 'MGT2.Role.SkillType'}}</label>
                 <br/>
                 <select class="writable" name="system.role.actions.{{id}}.skill">
-                  {{#select action.skill}}
-                    <option value="-">None</option>
-                    {{#each ../skills as |skill skid|}}
-                      <option value="{{skid}}">{{localize (concat "MGT2.Skills." skid)}}</option>
-                        {{#if skill.specialities}}
-                          {{#each skill.specialities as |spec spid|}}
-                            <option value="{{skid}}.{{spid}}">{{localize (concat "MGT2.Skills." skid)}} ({{localize (concat "MGT2.Skills." spid)}})</option>
-                          {{/each}}
-                        {{/if}}
-                    {{/each}}
-                  {{/select}}
+                  {{selectOptions ../SKILL_SELECT selected=action.skill}}
                 </select>
               </div>
               <div class="resource">
@@ -133,12 +110,7 @@
                 <label for="system.role.actions.{{id}}.special" class="resource-label">{{localize 'MGT2.Role.SpecialType'}}</label>
                 <br/>
                 <select class="writable" name="system.role.actions.{{id}}.special">
-                  {{#select action.special}}
-                  <option value="pilot">{{localize 'MGT2.Role.Special.MakePilot'}}</option>
-                  <option value="tacticsInit">{{localize 'MGT2.Role.Special.CombatTactics'}}</option>
-                  <option value="improveInit">{{localize 'MGT2.Role.Special.ImproveInitiative'}}</option>
-                  <option value="evade">{{localize 'MGT2.Role.Special.Evade'}}</option>
-                  {{/select}}
+                  {{selectOptions ../SPECIAL_ROLES selected=action.special}}
                 </select>
               </div>
             {{/if}}

@@ -355,6 +355,39 @@ export class MgT2ItemSheet extends ItemSheet {
                 item.system.term.randomTerm = false;
             }
         } else if (item.type === "role") {
+            context.CHARACTERISTIC_SELECT = {
+                "": "-",
+                "STR": "STR",
+                "DEX": "DEX",
+                "END": "END",
+                "INT": "INT",
+                "EDU": "EDU",
+                "SOC": "SOC"
+            }
+            context.SKILL_SELECT = {
+                "": "None"
+            };
+            let allSkills = MGT2.SKILLS;
+            for (let skillId in allSkills) {
+                let skill = allSkills[skillId];
+                context.SKILL_SELECT[skillId] = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
+                if (skill.specialities) {
+                    for (let specId in skill.specialities) {
+                        let spec = skill.specialities[specId];
+                        let label = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
+                        let specLabel = spec.label?spec.label:game.i18n.localize("MGT2.Skills."+specId);
+                        context.SKILL_SELECT[skillId+"."+specId] = label + " (" + specLabel + ")";
+                    }
+                }
+            }
+
+            context.ACTION_TYPE = {
+                "chat": game.i18n.localize("MGT2.Role.ChatType"),
+                "skill": game.i18n.localize("MGT2.Role.SkillType"),
+                "weapon": game.i18n.localize("MGT2.Role.WeaponType"),
+                "special": game.i18n.localize("MGT2.Role.SpecialType")
+            }
+
             context.weapons = {};
             context.weapons[""] = "";
             if (context.item.parent && context.item.parent.type === "spacecraft") {
@@ -366,7 +399,14 @@ export class MgT2ItemSheet extends ItemSheet {
                         context.weapons[i._id] = i.name;
                     }
                 }
-                console.log(context.weapons);
+            }
+
+            context.SPECIAL_ROLES = {
+                "pilot": game.i18n.localize("MGT2.Role.Special.MakePilot"),
+                "tacticsInit": game.i18n.localize("MGT2.Role.Special.CombatTactics"),
+                "improveInit": game.i18n.localize("MGT2.Role.Special.ImproveInitiative"),
+                "evade": game.i18n.localize("MGT2.Role.Special.Evade"),
+                "repair": game.i18n.localize("MGT2.Role.Special.Repair"),
             }
         }
 

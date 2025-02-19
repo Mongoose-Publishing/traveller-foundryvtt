@@ -923,6 +923,7 @@
   "MGT2.Role.Special.CombatTactics": "Combat Tactics",
   "MGT2.Role.Special.ImproveInitiative": "Improve Initiative",
   "MGT2.Role.Special.Evade": "Evade",
+  "MGT2.Role.Special.Repair": "Ship Repair",
 
   "MGT2.Role.BuiltIn.Name.Gunner":  "Gunner",
   "MGT2.Role.BuiltIn.Name.Pilot":  "Pilot",

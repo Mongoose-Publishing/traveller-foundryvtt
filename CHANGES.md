@@ -8,6 +8,8 @@
 * Augments not behaving correctly when added to tokens. Seem to work fine when applied
   to a base actor.
 
+## Development
+
 ## 0.11.7 (Beta)
 
 * Add inline macro support for journals.

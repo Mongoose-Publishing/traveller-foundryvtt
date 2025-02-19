@@ -21,13 +21,9 @@ export function isNumber(value) {
 }
 
 export function toFloat(number) {
-    console.log("toFloat: " + number);
     number = "" + parseFloat(number).toFixed(4);
-    console.log("toFloat: " + number);
     number = number.replaceAll(/0+$/g, "");
-    console.log("toFloat: " + number);
     number = number.replaceAll(/\.$/g, "");
-    console.log("toFloat: " + number);
 
     return number;
 }

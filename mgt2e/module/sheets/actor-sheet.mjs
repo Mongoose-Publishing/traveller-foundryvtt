@@ -1460,6 +1460,8 @@ export class MgT2ActorSheet extends ActorSheet {
 
             } else if (action.special === "evade") {
 
+            } else if (action.special === "repair") {
+                // Open ship repair dialog.
             }
         }
     }
