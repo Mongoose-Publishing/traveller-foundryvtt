@@ -1,6 +1,7 @@
 import {hasTrait, getTraitValue} from "../dice-rolls.mjs";
 import {Physics} from "./physics.mjs";
 import {MgT2DamageDialog} from "../damage-dialog.mjs";
+import {MgT2eMacros} from "./macros.mjs";
 
 export const Tools = {};
 
@@ -378,24 +379,35 @@ Tools.currentTime = function(chatData, args) {
 
 Tools.macroExecutionEnricher = function(match, options) {
     try {
-        console.log(match);
-
+        const type = match[1];
         const macroName = match[3];
         const argsString = match[4];
         const flavor = match[6];
 
-        const macro = game.macros.getName(macroName);
-        const title = `${macro.name}(${argsString})`;
+        const title = `${macroName}(${argsString})`;
 
-        return Tools.macroExecutionButton(macroName, argsString, title, flavor);
+        if (type === "mgt2e") {
+            return Tools.internalExecutionButton(macroName, argsString, title, flavor);
+        } else {
+            return Tools.macroExecutionButton(macroName, argsString, title, flavor);
+        }
     } catch (e) {
         console.log(e);
     }
 }
 
+Tools.internalExecutionButton = function(macroName, argsString, title, flavor) {
+    const a = document.createElement("a");
+    a.classList.add("inline-internal-execution");
+    a.dataset.macroName = macroName;
+    a.dataset.args = argsString;
+    a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
+    return a;
+}
+
 Tools.macroExecutionButton = function(macroName, argsString, title, flavor) {
     const a = document.createElement("a");
-    a.classList.add("inline-macro-execution");
+    a.classList.add("inline-mgt2e-execution");
     a.dataset.macroName = macroName;
     a.dataset.args = argsString;
     a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
@@ -425,5 +437,40 @@ Tools.macroClick = function(event) {
         ui.notifications.error(e.error);
         throw e;
     }
+};
 
+// These are designed for internal commands rather than macros.
+Tools.mgt2eClick = function(event) {
+    try {
+        event.preventDefault();
+        const a = event.currentTarget;
+
+        const macroName = a.dataset.macroName;
+        const argsString = a.dataset.args;
+        const argsRgx = /(\w+)=\s*(?:"([^"]*)"|(\S+))/g;
+
+        console.log(a);
+
+        const args = {};
+        let match;
+        while ((match = argsRgx.exec(argsString)) !== null) {
+            match
+            const key = match[1];
+            const value = match[2] ?? match[3];
+            args[key] = value;
+        }
+
+        console.log(macroName);
+        if (macroName === "skillGain") {
+            console.log("Increment skill");
+            MgT2eMacros.skillGain(args);
+        } else if (macroName === "skillCheck") {
+            console.log("Roll skill");
+            MgT2eMacros.skillCheck(args);
+        }
+        console.log(args);
+    } catch (e) {
+        ui.notifications.error(e.error);
+        throw e;
+    }
 };

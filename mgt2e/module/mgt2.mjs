@@ -14,6 +14,7 @@ import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
 import { Tools } from "./helpers/chat/tools.mjs";
+import { MgT2eMacros } from "./helpers/chat/macros.mjs";
 import { rollSkill } from "./helpers/dice-rolls.mjs";
 import { skillLabel } from "./helpers/dice-rolls.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
@@ -259,8 +260,15 @@ Hooks.on("init", function() {
         pattern: rgx,
         enricher: Tools.macroExecutionEnricher,
     });
+    const rgx2 = /\[\[(\/mgt2e)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
+    CONFIG.TextEditor.enrichers.push({
+        pattern: rgx2,
+        enricher: Tools.macroExecutionEnricher,
+    });
+
     const body = $("body");
     body.on("click", "a.inline-macro-execution", Tools.macroClick);
+    body.on("click", "a.inline-mgt2e-execution", Tools.mgt2eClick);
 })
 
 Hooks.on('renderChatMessage', function(app, html) {
@@ -298,6 +306,20 @@ Hooks.on('renderChatMessage', function(app, html) {
         }
         uppMessage.addEventListener("dragstart", ev => {
             return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+        });
+    }
+
+    const skillGainLinks = html.find(".skillGain-spec");
+    for (let i=0; i < skillGainLinks.length; i++) {
+        let link = skillGainLinks[i];
+        link.addEventListener("click", ev => {
+            let actorId = link.getAttribute("data-actorId");
+            let skill = link.getAttribute("data-skill");
+            let level = link.getAttribute("data-level");
+            console.log(actorId);
+            console.log(skill);
+            console.log(level);
+            MgT2eMacros.specialityGain(actorId, skill, level);
         });
     }
 });

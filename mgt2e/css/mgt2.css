@@ -2110,3 +2110,8 @@ li.item-status-INACTIVE h4 {
     background-color: #606060;
     color: white;
 }
+
+.skillGain-spec:hover {
+    background-color: white;
+    color: black;
+}
