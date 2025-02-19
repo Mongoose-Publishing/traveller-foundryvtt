@@ -5,19 +5,24 @@
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
 * Career terms aren't always added in the correct order.
+* Augments not behaving correctly when added to tokens. Seem to work fine when applied
+  to a base actor.
 
-## Development
+## 0.11.7 (Beta)
 
 * Add inline macro support for journals.
 * Character sheets now have an "Add Item" option for Travellers and NPCs, to allow
   items to be generated directly from the character sheet.
 * Armour weight not forced to integer when weight is reduced when it is worn.
 * There is now a UI for defining which characteristics are can have damage applied to them.
+* As a consequence of the above, only the three core physical stats list damage options by default.
 * Current active effects are now displayed in the actor settings tab.
-* General items have a 'Computer' option added to them, which allows embedding of a computer.
-  This is a beta field which not currently used, and is for informational purposes only.
 * Added first aid flag to characters after they are injured.
 * Added build number to version string. Used only to track changes during development cycles.
+* Improvement to some of the provided macros. Beginning to add support for functionality for
+  use in character generation.
+* List of Trade Goods is now provided by default in the Items compendium.
+* Added further support for spacecraft criticals.
 
 ## 0.11.6 (Beta)
 
