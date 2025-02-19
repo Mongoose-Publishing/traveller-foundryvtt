@@ -1,4 +1,4 @@
-import {hasTrait} from "../helpers/dice-rolls.mjs";
+import {rollSkill} from "../helpers/dice-rolls.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 
 export class MgT2SpacecraftRepairDialog extends Application {
@@ -23,6 +23,7 @@ export class MgT2SpacecraftRepairDialog extends Application {
         console.log(actorShip);
 
         this.actorShip = actorShip;
+        this.actorCrew = actorCrew;
         this.data = actorShip.system;
 
         this.crits = {};
@@ -67,35 +68,60 @@ export class MgT2SpacecraftRepairDialog extends Application {
             this.criticalLabels[c] = game.i18n.format("MGT2.Spacecraft.Criticals." + c) + ` (${roll})`;
             roll++;
         }
+
+        this.skillLabel = "";
+        let options = {};
+        options.cha = "INT";
+        if (actorCrew.system.characteristics["INT"].value < actorCrew.system.characteristics["EDU"].value) {
+            options.cha = "EDU";
+        }
+        let value = actorCrew.getSkillValue("engineer", options);
+        this.skillResult = options;
+        this.skillText = `${options.cha} (${options.results.chadm}) + Engineer (${value})`;
     }
 
 
     getData() {
         return {
             "actor": this.actorShip,
+            "crew": this.actorCrew,
             "data": this.data,
             "shipCriticals": this.shipCriticals,
-            "shipDamage": this.shipDamage
+            "shipDamage": this.shipDamage,
+            "skillText": this.skillText
         }
     }
 
     activateListeners(html) {
         super.activateListeners(html);
-        const roll = html.find("button[class='damageDone']");
-        roll.on("click", event => this.doneClick(event, html));
 
-        const dmg = html.find(".baseDamage");
-        dmg.on("change", event => this.updateDamage(event, html));
 
-        const ap = html.find(".baseAP");
-        ap.on("change", event => this.updateDamage(event, html));
 
-        const critList = html.find(".criticalSelect");
-        critList.on("change", event => this.updateCrits(event, html, critList.data("idx")));
-
-        html.find(".apply-button").click(ev => {
-           this.applyDamage(ev, html);
+        html.find('.repair').click(ev => {
+            const div = $(ev.currentTarget);
+            const id = div.data("id");
+            this.repairRoll(event, id, html);
         });
+
+    }
+
+    async repairRoll(event, id, html) {
+        console.log(id);
+
+        // rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty, description)
+
+        let result = await rollSkill(this.actorCrew, "engineer", null,
+            this.skillResult.cha, this.shipDamage[id].dm, null, 8,
+            "Fixing the ship");
+
+        if (result >= 8) {
+            // Fixed it. Technically, this is a temporary fix. But for now, we
+            // just fix is permanently.
+            this.actorShip.unsetFlag("mgt2e", "damage_"+id);
+            this.actorShip.unsetFlag("mgt2e", "damageSev_"+id);
+            this.actorShip.unsetFlag("mgt2e", "damageDM_"+id);
+        }
+        this.close();
     }
 
     getIntValue(html, field) {

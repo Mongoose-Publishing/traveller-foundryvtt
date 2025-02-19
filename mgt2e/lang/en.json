@@ -923,7 +923,7 @@
   "MGT2.Role.Special.CombatTactics": "Combat Tactics",
   "MGT2.Role.Special.ImproveInitiative": "Improve Initiative",
   "MGT2.Role.Special.Evade": "Evade",
-  "MGT2.Role.Special.Repair": "Ship Repair",
+  "MGT2.Role.Special.Repair": "Repair System",
 
   "MGT2.Role.BuiltIn.Name.Gunner":  "Gunner",
   "MGT2.Role.BuiltIn.Name.Pilot":  "Pilot",
@@ -939,7 +939,7 @@
   "MGT2.Role.BuiltIn.Action.Evade": "Evade",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Make Pilot",
 
-  "MGT2.SpacecraftRepairDialog.Title": "Repair Spacecraft",
+  "MGT2.SpacecraftRepairDialog.Title": "Repair System",
 
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",

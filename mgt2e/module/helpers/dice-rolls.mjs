@@ -925,4 +925,5 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
             rollMode: game.settings.get("core", "rollMode")
         });
     }
+    return roll.total;
 }

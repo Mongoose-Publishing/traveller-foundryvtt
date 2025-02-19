@@ -4,6 +4,11 @@
     <h1 class="charname shadow">
         {{actor.name}}
     </h1>
+
+    <div class="shadow">
+        <b>{{crew.name}}:</b> {{skillText}}
+    </div>
+
     <div class="shadow">
         <h3>Current Criticals</h3>
 
@@ -35,7 +40,7 @@
                 <div>{{effect.severity}}</div>
                 <div>{{effect.dm}}</div>
 
-                <div>Repair</div>
+                <div class="repair" data-id="{{id}}"><i class="fas fa-dice"></i> Repair</div>
             {{/each}}
         </div>
     </div>
