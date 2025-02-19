@@ -8,6 +8,7 @@ import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {MgT2CrewMemberDialog } from "../helpers/crew-member-dialog.mjs";
 import {MgT2SpacecraftAttackDialog } from "../helpers/spacecraft-attack-dialog.mjs";
+import {MgT2SpacecraftRepairDialog } from "../helpers/spacecraft-repair-dialog.mjs";
 import {rollSkill} from "../helpers/dice-rolls.mjs";
 import {skillLabel} from "../helpers/dice-rolls.mjs";
 import {MgT2Item} from "../documents/item.mjs";
@@ -1462,6 +1463,7 @@ export class MgT2ActorSheet extends ActorSheet {
 
             } else if (action.special === "repair") {
                 // Open ship repair dialog.
+                new MgT2SpacecraftRepairDialog(shipActor, actorCrew).render(true);
             }
         }
     }

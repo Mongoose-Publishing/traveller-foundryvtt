@@ -939,6 +939,8 @@
   "MGT2.Role.BuiltIn.Action.Evade": "Evade",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Make Pilot",
 
+  "MGT2.SpacecraftRepairDialog.Title": "Repair Spacecraft",
+
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",
   "TYPES.Actor.creature": "Creature",

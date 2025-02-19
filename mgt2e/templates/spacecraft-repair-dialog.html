@@ -1,0 +1,43 @@
+<form class="flexcol chaDialog">
+
+<div class="shadow">
+    <h1 class="charname shadow">
+        {{actor.name}}
+    </h1>
+    <div class="shadow">
+        <h3>Current Criticals</h3>
+
+        <div class="grid grid-3col">
+            {{#each shipCriticals as | sev loc |}}
+                {{#if sev includeZero=false}}
+                    <span class="currentCrit {{criticalClass sev}}">
+                        {{localize (concat "MGT2.Spacecraft.Criticals." loc)}} {{sev}}
+                    </span>
+
+                {{/if}}
+            {{/each}}
+        </div>
+
+        <h3>Ship Damage</h3>
+
+        <div class="grid grid-4col">
+            <div>Damage</div>
+            <div>Severity</div>
+            <div>DM</div>
+            <div>Action</div>
+            {{#each shipDamage as | effect id |}}
+                <div>
+                    <span class="currentCrit {{criticalClass effect.severity}}">
+                        {{effect.label}}
+                    </span>
+                </div>
+
+                <div>{{effect.severity}}</div>
+                <div>{{effect.dm}}</div>
+
+                <div>Repair</div>
+            {{/each}}
+        </div>
+    </div>
+
+</form>
