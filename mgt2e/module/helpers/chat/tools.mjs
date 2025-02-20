@@ -1,4 +1,4 @@
-import {hasTrait, getTraitValue} from "../dice-rolls.mjs";
+import {hasTrait, getTraitValue, skillLabel} from "../dice-rolls.mjs";
 import {Physics} from "./physics.mjs";
 import {MgT2DamageDialog} from "../damage-dialog.mjs";
 import {MgT2eMacros} from "./macros.mjs";
@@ -388,14 +388,90 @@ Tools.macroExecutionEnricher = function(match, options) {
 
         const title = `${macroName}(${argsString})`;
 
-        if (type === "mgt2e") {
+        if (type === "/mgt2e") {
             return Tools.internalExecutionButton(macroName, argsString, title, flavor);
-        } else {
+        } else if (type === "/mgMacro") {
             return Tools.macroExecutionButton(macroName, argsString, title, flavor);
+        } else if (type === "/actor") {
+            return Tools.actorInlineDisplay(macroName);
+        } else {
+            console.log(type);
         }
     } catch (e) {
         console.log(e);
     }
+}
+
+Tools.actorInlineDisplay = function(actorId) {
+    const actor = fromUuidSync(actorId);
+
+    const a = document.createElement("div");
+    let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/><span class="name">${actor.name}</span>`;
+    html += `<span class="profession">${actor.system.sophont.profession}</span>`;
+
+    html += `<div style="clear: left"/>`;
+
+    html += `<div class="grid grid-3col">`;
+    html += `<div class="species-title">Species</div><div class="species-title">Gender</div><div class="species-title">Age</div>`;
+    html += `<div class="species-data">${actor.system.sophont.species}</div>`;
+    html += `<div class="species-data">${actor.system.sophont.gender}</div>`;
+    html += `<div class="species-data">${actor.system.sophont.age}</div>`;
+    html += `</div>`;
+
+    html += `<div class="actor-body-container">`;
+
+    // Characteristics
+    html += `<div class="grid grid-4col actor-cha-list">`;
+    html += `<div class="species-title grid-span-3">Traits</div><div>-</div>`;
+    html += `<div class="species-title">STR</div><div>${actor.system.characteristics.STR.value}</div>`;
+    html += `<div class="species-title">INT</div><div>${actor.system.characteristics.INT.value}</div>`;
+    html += `<div class="species-title">DEX</div><div>${actor.system.characteristics.DEX.value}</div>`;
+    html += `<div class="species-title">EDU</div><div>${actor.system.characteristics.EDU.value}</div>`;
+    html += `<div class="species-title">END</div><div>${actor.system.characteristics.END.value}</div>`;
+    html += `<div class="species-title">SOC</div><div>${actor.system.characteristics.SOC.value}</div>`;
+    html += `</div>`;
+
+    // Skills
+    html += `<div class="actor-skill-list">`;
+    html += `<div class="species-title" style="width: 100%">Skills</div>`;
+    const skills = actor.system.skills;
+
+    let skillHtml = "";
+    for (let key in skills) {
+        let skill = skills[key];
+
+        if (skill.trained) {
+            let showParent = true;
+            if (skill.specialities) {
+                for (let specKey in skill.specialities) {
+                    let spec = skill.specialities[specKey];
+                    if (spec.value > 0) {
+                        showParent = false;
+                        skillHtml += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})/${spec.value}</li>`;
+                    }
+                }
+            }
+            if (showParent) {
+                skillHtml += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}/${skill.value}</li>`;
+            }
+        }
+    }
+    html += `<ul class="skill-list">${skillHtml}</ul>`;
+    html += `</div>`; // Skills
+    html += `</div>`; // Container
+
+    html += `<div class="actor-equipment-list">`;
+    html += `</div>`;
+
+    html += `</div>`;
+
+
+
+    html += `</div></div>`;
+
+    a.innerHTML = html;
+
+    return a;
 }
 
 Tools.internalExecutionButton = function(macroName, argsString, title, flavor) {

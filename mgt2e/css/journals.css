@@ -194,3 +194,69 @@ div.journal-career h3 {
     font-family: Anton;
     text-transform: uppercase;
 }
+
+div.inline-actor {
+    margin: 1em;
+    background-color: #303030;
+    color: white;
+    padding: 0.5em;
+    border-radius: 15px solid #4b4a44;
+    width: 600px;
+}
+
+div.inline-actor img.portrait {
+    float: left;
+    width: 64px;
+}
+
+div.inline-actor .name {
+    display: block;
+    color: #f1511b;
+    font-size: x-large;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0px;
+    padding: 0px;
+    margin-left:72px;
+}
+
+div.inline-actor .profession {
+    display: block;
+    color: #f1511b;
+    font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 72px;
+}
+
+div.inline-actor div.actor-body-container {
+
+}
+
+div.inline-actor .actor-cha-list {
+    width: 295px;
+    float: left;
+}
+
+div.inline-actor .actor-skill-list {
+    margin-left: 300px;
+}
+
+div.inline-actor .actor-equipment-list {
+    clear: left;
+}
+
+div.inline-actor .species-title {
+    display: inline-block;
+    color: black;
+    font-weight: bold;
+    background-color: #f1511b;
+    text-transform: uppercase;
+}
+
+div.inline-actor .species-data {
+    display: inline-block;
+    color: white;
+}

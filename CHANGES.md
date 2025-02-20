@@ -10,6 +10,11 @@
 
 ## Development
 
+* Added prone and in cover status for characters. Cover will add to a character's armour.
+* Created macro which can be used to assign cover to a character, or remove it.
+* Added support for built-in macros, for use by internal features. These can be called with
+  /mgt2e in the journal text.
+
 ## 0.11.7 (Beta)
 
 * Add inline macro support for journals.

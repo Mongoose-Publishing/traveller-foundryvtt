@@ -265,6 +265,11 @@ Hooks.on("init", function() {
         pattern: rgx2,
         enricher: Tools.macroExecutionEnricher,
     });
+    const rgx3 = /\[\[(\/actor)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
+    CONFIG.TextEditor.enrichers.push({
+        pattern: rgx3,
+        enricher: Tools.macroExecutionEnricher,
+    });
 
     const body = $("body");
     body.on("click", "a.inline-macro-execution", Tools.macroClick);

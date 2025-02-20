@@ -109,3 +109,4 @@ MgT2eMacros.specialityGain = function(actorId, skill, level) {
 MgT2eMacros.skillCheck = function(args) {
 
 };
+

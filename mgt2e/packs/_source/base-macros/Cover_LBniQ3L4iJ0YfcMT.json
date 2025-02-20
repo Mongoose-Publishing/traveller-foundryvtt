@@ -1,0 +1,27 @@
+{
+  "name": "Cover",
+  "type": "script",
+  "command": "for (let t of canvas.tokens.controlled) {\n    let actor = t.actor;\n    if (actor) {\n        const bonus = await Dialog.prompt({\n          title: \"Select Cover\",\n          content: `\n            <div class=\"form-group\">\n              <label>What type of cover?</label>\n              <select name=\"coverSelect\">\n                <option value=\"0\">None</option>\n                <option value=\"2\">Vegetation (+2)</option>\n                <option value=\"6\">Tree Trunk (+6)</option>\n                <option value=\"8\">Stone Wall (+8)</option>\n                <option value=\"10\">Civilian Vehicle (+10)</option>\n                <option value=\"15\">Armoured Vehicle (+15)</option>\n                <option value=\"20\">Fortifications (+20)</option>\n                <option value=\"-1\">Prone</option>\n              </select>\n            </div>\n          `,\n          callback: async(html) => {\n             let bonus = html.find('[name=\"coverSelect\"]').val();\n             bonus = parseInt(bonus);\n\n             if (bonus === 0) {\n               actor.unsetFlag(\"mgt2e\", \"inCover\");\n               actor.unsetFlag(\"mgt2e\", \"prone\");\n             } else if (bonus > 0) {\n               actor.unsetFlag(\"mgt2e\", \"prone\");\n               actor.setFlag(\"mgt2e\", \"inCover\", parseInt(bonus));\n             } else {\n               actor.unsetFlag(\"mgt2e\", \"inCover\");\n               actor.setFlag(\"mgt2e\", \"prone\", true);\n             }\n          }\n        })\n\n    }\n\n/*      \n\n      text = `<div>${text}</div>`;\n\n      \n      roll.toMessage({\n        speaker: ChatMessage.getSpeaker({actor: actor}),\n        flavor: text,\n        rollMode: game.settings.get(\"core\", \"rollMode\")\n      });\n  */    \n\n \n}",
+  "img": "systems/mgt2e/icons/macros/cover.svg",
+  "author": "mhUjqDVicnwIUaiq",
+  "scope": "global",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.11.7.2",
+    "createdTime": 1740048284543,
+    "modifiedTime": 1740048284543,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_id": "LBniQ3L4iJ0YfcMT",
+  "sort": 0,
+  "_key": "!macros!LBniQ3L4iJ0YfcMT"
+}
