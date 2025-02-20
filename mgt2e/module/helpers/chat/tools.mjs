@@ -460,7 +460,34 @@ Tools.actorInlineDisplay = function(actorId) {
     html += `</div>`; // Skills
     html += `</div>`; // Container
 
-    html += `<div class="actor-equipment-list">`;
+    html += `<div class="grid grid-3col actor-equipment-list">`;
+    html += `<div class="species-title">Equipment</div>`;
+    html += `<div class="grid-span-2">`;
+    let weapons = "";
+    let armour = "";
+    let equipment = "";
+    for (let i of actor.items) {
+        if (i.type === "weapon") {
+            weapons += `${i.name} `;
+        } else if (i.type === "armour") {
+            armour += `${i.name} `;
+        } else {
+            equipment += `${i.name}`;
+        }
+    }
+    if (weapons !== "") {
+        html += `<b>Weapons:</b> ${weapons}<br/>`;
+    }
+    if (armour !== "") {
+        html += `<b>Armour:</b> ${armour}<br/>`;
+    }
+    if (equipment !== "") {
+        html += `<b>Equipment:</b> ${equipment}<br/>`;
+    }
+
+
+    html += `</div>`;
+
     html += `</div>`;
 
     html += `</div>`;

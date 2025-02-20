@@ -201,7 +201,7 @@ div.inline-actor {
     color: white;
     padding: 0.5em;
     border-radius: 15px solid #4b4a44;
-    width: 600px;
+    width: 500px;
 }
 
 div.inline-actor img.portrait {
@@ -236,7 +236,7 @@ div.inline-actor div.actor-body-container {
 }
 
 div.inline-actor .actor-cha-list {
-    width: 295px;
+    width: 245px;
     float: left;
 }
 
