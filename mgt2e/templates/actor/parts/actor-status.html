@@ -19,6 +19,9 @@
     {{#if actor.flags.mgt2e.needsFirstAid}}{{{showStatus actor "needsFirstAid"}}}{{/if}}
     {{#if actor.flags.mgt2e.needsSurgery}}{{{showStatus actor "needsSurgery"}}}{{/if}}
 
+    {{#if actor.flags.mgt2e.prone}}{{{showStatus actor "prone"}}}{{/if}}
+    {{#if actor.flags.mgt2e.inCover}}{{{showStatus actor "inCover"}}}{{/if}}
+
     {{{showStatus actor "reaction"}}}
   </div>
 {{/if}}

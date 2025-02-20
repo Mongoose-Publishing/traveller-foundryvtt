@@ -631,6 +631,7 @@ Hooks.once("ready", async function() {
     });
 });
 
+/*
 Hooks.on("applyActiveEffect", (actor, effectData) => {
    const actorData = actor.system;
    let key = effectData.KEY;
@@ -643,7 +644,7 @@ Hooks.on("applyActiveEffect", (actor, effectData) => {
 
    }
 });
-
+*/
 Hooks.on("combatTurn", (combat, data, options) => {
     // This is the actor which just finished their turn.
     let combatant = combat.combatant.actor;
@@ -1421,7 +1422,8 @@ Handlebars.registerHelper('hasStatus', function(actor) {
     if (status.fatigued || status.stunned || status.encumbered || status.vaccSuit ||
         status.lowGravity || status.highGravity || status.zeroGravity ||
         status.diseased || status.poisoned || status.dead || status.unconscious ||
-        status.disabled || status.reaction || status.needsFirstAid || status.needsSurgery) {
+        status.disabled || status.reaction || status.needsFirstAid || status.needsSurgery ||
+        status.inCover || status.prone) {
         return true;
     }
     return false;
@@ -1492,6 +1494,15 @@ Handlebars.registerHelper('showStatus', function(actor, status) {
    } else if (status === "needsSurgery") {
        type = "statusBad";
        label += ` <i class="fas fa-xmark statusNeedsSurgery"> </i>`;
+   } else if (status === "prone") {
+       type = "statusGood";
+       label += ` <i class="fas fa-xmark statusProne"> </i>`;
+   } else if (status === "inCover") {
+       type = "statusGood";
+       if (parseInt(actor.getFlag("mgt2e", "inCover")) > 0) {
+           label += ` (${actor.getFlag("mgt2e", "inCover")})`;
+       }
+       label += ` <i class="fas fa-xmark statusInCover"> </i>`;
    }
 
    return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;

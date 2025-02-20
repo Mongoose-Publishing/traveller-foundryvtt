@@ -493,6 +493,14 @@ export class MgT2Actor extends Actor {
               }
           }
       }
+      // Finally, any cover options?
+      if (this.getFlag("mgt2e", "inCover")) {
+          const coverBonus = parseInt(this.getFlag("mgt2e", "inCover"));
+          if (coverBonus > 0) {
+              armourText += `Cover +${coverBonus} `;
+              armour += coverBonus;
+          }
+      }
       options.finalArmour = armour;
       options.armourText = armourText;
 

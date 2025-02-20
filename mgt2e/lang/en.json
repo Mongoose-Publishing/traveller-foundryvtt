@@ -280,6 +280,8 @@
   "MGT2.TravellerSheet.StatusLabel.destroyed": "Destroyed",
   "MGT2.TravellerSheet.StatusLabel.needsFirstAid": "First Aid",
   "MGT2.TravellerSheet.StatusLabel.needsSurgery": "Surgery",
+  "MGT2.TravellerSheet.StatusLabel.inCover": "In Cover",
+  "MGT2.TravellerSheet.StatusLabel.prone": "Prone",
 
   "MGT2.TravellerSheet.AugmentType.augment": "Aug",
   "MGT2.TravellerSheet.AugmentType.expert": "Ex",
