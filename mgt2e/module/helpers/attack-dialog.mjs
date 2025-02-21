@@ -20,6 +20,7 @@ export class MgT2AttackDialog extends Application {
         const data = actor.system;
         this.data = data;
         this.cha = this.weapon.system.weapon.characteristic;
+        console.log(this.weapon.system.weapon.skill);
         this.skill = this.weapon.system.weapon.skill.split(".")[0];
         this.speciality = this.weapon.system.weapon.skill.split(".")[1];
         this.hasPsi = false;
@@ -52,6 +53,12 @@ export class MgT2AttackDialog extends Application {
             this.score += parseInt(data.characteristics[this.cha].dm);
         } else {
             this.cha = null;
+        }
+        this.attackBonus = 0;
+        if (this.skill === "guncombat" && data.modifiers?.guncombat?.dm) {
+            this.attackBonus += parseInt(data.modifiers.guncombat.dm);
+        } else if (this.sill === "melee" && data.modifiers?.melee?.dm) {
+            this.attackBonus += parseInt(data.modifiers.melee.dm);
         }
 
         // Work out the damage.
@@ -176,8 +183,7 @@ export class MgT2AttackDialog extends Application {
         }
 
     }
-
-
+    
     getData() {
         return {
             "actor": this.actor,
@@ -194,9 +200,10 @@ export class MgT2AttackDialog extends Application {
             "auto": this.auto,
             "dm": 0,
             "score": this.score,
+            "attackBonus": this.attackBonus,
             "cha": this.cha,
             "skill": skillLabel(this.data.skills[this.skill]),
-            "speciality": (this.skill && this.skill.specialities)?skillLabel(this.data.skills[this.skill].specialities[this.speciality]):"",
+            "speciality": (this.skill && this.speciality)?skillLabel(this.data.skills[this.skill].specialities[this.speciality]):"",
             "dicetype": "normal",
             "parryBonus": this.parryBonus,
             "parryScore": this.parryScore,

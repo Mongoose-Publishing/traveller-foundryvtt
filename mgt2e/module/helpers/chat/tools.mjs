@@ -406,6 +406,15 @@ Tools.actorInlineDisplay = function(actorId) {
     const actor = fromUuidSync(actorId);
 
     const a = document.createElement("div");
+    if (actor === null) {
+        a.innerHTML = `Unable to find actor ${actorId}`;
+        return a;
+    }
+    if (actor.type !== "npc") {
+        a.innerHTML = `Currently only supports NPCs`;
+        return a;
+    }
+
     let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/><span class="name">${actor.name}</span>`;
     html += `<span class="profession">${actor.system.sophont.profession}</span>`;
 
@@ -484,16 +493,9 @@ Tools.actorInlineDisplay = function(actorId) {
     if (equipment !== "") {
         html += `<b>Equipment:</b> <ul class="skill-list">${equipment}</ul><br/>`;
     }
-
-
     html += `</div>`;
-
     html += `</div>`;
-
     html += `</div>`;
-
-
-
     html += `</div></div>`;
 
     a.innerHTML = html;
