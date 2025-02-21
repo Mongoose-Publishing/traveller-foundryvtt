@@ -236,12 +236,12 @@ div.inline-actor div.actor-body-container {
 }
 
 div.inline-actor .actor-cha-list {
-    width: 245px;
+    width: 200px;
     float: left;
 }
 
 div.inline-actor .actor-skill-list {
-    margin-left: 300px;
+    margin-left: 210px;
 }
 
 div.inline-actor .actor-equipment-list {
@@ -254,9 +254,14 @@ div.inline-actor .species-title {
     font-weight: bold;
     background-color: #f1511b;
     text-transform: uppercase;
+    padding: 3px;
 }
 
 div.inline-actor .species-data {
     display: inline-block;
     color: white;
+}
+
+div.inline-actor .skill-list {
+    display: inline;
 }

@@ -468,21 +468,21 @@ Tools.actorInlineDisplay = function(actorId) {
     let equipment = "";
     for (let i of actor.items) {
         if (i.type === "weapon") {
-            weapons += `${i.name} `;
+            weapons += `<li>${i.name} (${i.system.weapon.damage})</li>`;
         } else if (i.type === "armour") {
-            armour += `${i.name} `;
+            armour += `<li>${i.name} (+${i.system.armour.protection})</li>`;
         } else {
-            equipment += `${i.name}`;
+            equipment += `<li>${i.name}</li>`;
         }
     }
     if (weapons !== "") {
-        html += `<b>Weapons:</b> ${weapons}<br/>`;
+        html += `<b>Weapons:</b> <ul class="skill-list">${weapons}</ul><br/>`;
     }
     if (armour !== "") {
-        html += `<b>Armour:</b> ${armour}<br/>`;
+        html += `<b>Armour:</b> <ul class="skill-list"> ${armour}</ul><br/>`;
     }
     if (equipment !== "") {
-        html += `<b>Equipment:</b> ${equipment}<br/>`;
+        html += `<b>Equipment:</b> <ul class="skill-list">${equipment}</ul><br/>`;
     }
 
 
