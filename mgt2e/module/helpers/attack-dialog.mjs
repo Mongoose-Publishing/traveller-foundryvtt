@@ -183,7 +183,7 @@ export class MgT2AttackDialog extends Application {
         }
 
     }
-    
+
     getData() {
         return {
             "actor": this.actor,

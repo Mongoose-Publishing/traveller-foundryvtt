@@ -8,12 +8,14 @@
 * Augments not behaving correctly when added to tokens. Seem to work fine when applied
   to a base actor.
 
-## Development
+## 0.11.8 (Beta)
 
 * Added prone and in cover status for characters. Cover will add to a character's armour.
 * Created macro which can be used to assign cover to a character, or remove it.
 * Added support for built-in macros, for use by internal features. These can be called with
   /mgt2e in the journal text.
+* Added support for embedded actor sheets in the journal
+* Effect combat bonuses now displayed on attack dialog.
 
 ## 0.11.7 (Beta)
 
