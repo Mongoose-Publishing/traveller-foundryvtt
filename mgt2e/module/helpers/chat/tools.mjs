@@ -505,7 +505,7 @@ Tools.actorInlineDisplay = function(actorId) {
 
 Tools.internalExecutionButton = function(macroName, argsString, title, flavor) {
     const a = document.createElement("a");
-    a.classList.add("inline-internal-execution");
+    a.classList.add("inline-mgt2e-execution");
     a.dataset.macroName = macroName;
     a.dataset.args = argsString;
     a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
@@ -514,7 +514,7 @@ Tools.internalExecutionButton = function(macroName, argsString, title, flavor) {
 
 Tools.macroExecutionButton = function(macroName, argsString, title, flavor) {
     const a = document.createElement("a");
-    a.classList.add("inline-mgt2e-execution");
+    a.classList.add("inline-macro-execution");
     a.dataset.macroName = macroName;
     a.dataset.args = argsString;
     a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
