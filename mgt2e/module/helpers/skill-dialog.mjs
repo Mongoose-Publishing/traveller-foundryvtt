@@ -12,92 +12,109 @@ export class MgT2SkillDialog extends Application {
         return options;
     }
 
-    constructor(actor, skill, spec, cha, defaultDm, target, text) {
+    // skillFqn is "<skillId>" or "<skillId>.<specId>"
+    constructor(actor, skillFqn, skillOptions) {
+    //constructor(actor, skill, spec, cha, defaultDm, target, text) {
         super();
+
+        if (!skillOptions) {
+            skillOptions = {};
+        }
+        console.log("MgT2SkillDialog: ");
+        console.log(skillFqn);
+        console.log(skillOptions);
+
+        this.skillFqn = skillFqn;
+        this.skillId = null;
+        this.specId = null;
+        if (skillFqn) {
+            this.skillId = skillFqn;
+            if (skillFqn.indexOf(".")) {
+                this.skillId = skillFqn.split(".")[0];
+                this.specId = skillFqn.split(".")[1];
+
+                this.skillData = actor.system.skills[this.skillId];
+                console.log(this.skillData);
+                if (this.specId === "") {
+                    this.specId = null;
+                } else if (this.specId && this.skillData.specialities) {
+                    this.specData = this.skillData.specialities[this.specId];
+                }
+            } else {
+                this.skillData = actor.system.skills[this.skillId];
+                this.specData = null;
+            }
+        }
+
+        this.skillOptions = skillOptions;
         this.actor = actor;
         const data = actor.system;
 
-        this.skillId = skill;
-        this.skill = null;
-        this.specId = null;
-        this.spec = null;
         this.value = data.skills["jackofalltrades"].value - 3;
         this.chaOnly = false;
-        this.cha = cha;
+        this.cha = skillOptions.cha;
         this.expert = 0;
         this.augment = 0;
         this.augdm = 0;
         this.penalty = 0;
-        this.defaultDm = defaultDm?defaultDm:0;
-        this.boonBane = "normal";
-        this.target = 8;
+
+        this.defaultDm = skillOptions.dm?skillOptions.dm:0;
+        this.boonBane = skillOptions.rollType?skillOptions.rollType:"normal";
+        this.target = skillOptions.difficulty?skillOptions.difficulty:8;
         this.skillText = "";
-        this.text = text;
+        this.text = skillOptions.text;
 
-        if (target) {
-            this.target = parseInt(target);
-        }
-
-        if (cha && data.characteristics && data.characteristics[cha]) {
-            this.cha = cha;
-            if (!skill) {
+        if (this.cha && data.characteristics && data.characteristics[this.cha]) {
+            if (!this.skillData) {
                 this.chaOnly = true;
                 this.value = 0;
             }
         }
         this.data = data;
-        if (skill) {
-            this.skill = data.skills[skill];
+
+        if (this.skillData) {
             if (!this.cha) {
-                this.cha = this.skill.default;
+                this.cha = this.skillData.default;
             }
-            if (this.skill.expert) {
-                this.expert = parseInt(this.skill.expert);
+            if (this.skillData.expert) {
+                this.expert = parseInt(this.skillData.expert);
             }
-            if (this.skill.augdm && parseInt(this.skill.augdm) > 0) {
-                this.augdm = parseInt(this.skill.augdm);
+            if (this.skillData.augdm && parseInt(this.skillData.augdm) > 0) {
+                this.augdm = parseInt(this.skillData.augdm);
             }
-            if (this.skill.boon === "boon") {
+            if (this.skillData.boon === "boon") {
                 this.boonBane = "boon";
-            } else if (this.skill.bane === "bane") {
+            } else if (this.skillData.bane === "bane") {
                 this.boonBane = "bane";
             }
-            if (this.skill.trained) {
-                this.value = this.skill.value;
+            if (this.skillData.trained) {
+                this.value = this.skillData.value;
 
-                if (this.skill.augment && parseInt(this.skill.augment) > 0) {
-                    this.skill.augment = parseInt(this.skill.augment);
+                if (this.skillData.augment && parseInt(this.skillData.augment) > 0) {
+                    this.skillData.augment = parseInt(this.skillData.augment);
                 }
-                if (spec) {
-                    this.specId = spec;
-                    this.spec = data.skills[skill].specialities[spec];
-                    this.value = this.spec.value;
-                    if (this.spec.default && !this.cha) {
-                        this.cha = this.spec.default;
+                if (this.specData) {
+                    this.value = this.specData.value;
+                    if (this.specData.default && !this.cha) {
+                        this.cha = this.specData.default;
                     }
-                    if (this.spec.expert) {
-                        this.expert = parseInt(this.spec.expert);
+                    if (this.specData.expert) {
+                        this.expert = parseInt(this.specData.expert);
                     }
                 }
             } else {
                 this.value = data.skills["jackofalltrades"].value - 3;
-                if (spec && data.skills[skill].specialities[spec].expert) {
-                    this.specId = spec;
-                    this.spec = data.skills[skill].specialities[spec];
-                    this.expert = parseInt(this.spec.expert);
+                if (this.specData && this.specData.expert) {
+                    this.expert = parseInt(this.specData.expert);
                 }
             }
-            this.options.title = this.skill.label;
+            this.options.title = this.skillData.label;
         } else if (cha) {
             this.characteristic = data.characteristics[cha];
             this.options.title = this.characteristic.label;
             this.value = this.characteristic.dm;
         }
-        if (this.spec) {
-            this.skillText = actor.getSkillLabel(skill + "." + spec, false);
-        } else {
-            this.skillText = actor.getSkillLabel(skill, false);
-        }
+        this.skillText = actor.getSkillLabel(skillFqn, false);
         this.options.title = this.skillText;
         this.penalty = data.physicalDM;
     }
@@ -106,8 +123,8 @@ export class MgT2SkillDialog extends Application {
         return {
             "actor": this.actor,
             "data": this.data,
-            "skill": this.skill,
-            "spec": this.spec,
+            "skill": this.skillData,
+            "spec": this.specData,
             "skillText": this.skillText,
             "value": this.value,
             "showCha": (this.skill && this.actor.type !== "creature"),
@@ -153,14 +170,23 @@ export class MgT2SkillDialog extends Application {
         } else if (this.skillId) {
             this.cha = this.actor.system.skills[this.skillId].default;
         }
-        rollSkill(this.actor, this.skill, this.spec, cha, dm, rollType, difficulty, this.text);
+        rollSkill(this.actor, this.skillFqn, {
+            "cha": cha,
+            "dm": parseInt(dm),
+            "rollType": rollType,
+            "difficulty": difficulty,
+            "description": this.text,
+            "success": this.skillOptions.success,
+            "failure": this.skillOptions.failure
+        });
+        //}, cha, dm, rollType, difficulty, this.text);
 
         this.close();
     }
 
     async onSkillEdit(event, html) {
         event.preventDefault();
-        new MgT2AddSkillDialog(this.actor, this.skillId, this.skill, this.specId, this.spec).render(true);
+        new MgT2AddSkillDialog(this.actor, this.skill, this.skillOptions).render(true);
         this.close();
     }
 

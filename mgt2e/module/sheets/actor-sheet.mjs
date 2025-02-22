@@ -1430,7 +1430,13 @@ export class MgT2ActorSheet extends ActorSheet {
             let cha = action.cha;
             let target = isNaN(action.target)?null:parseInt(action.target);
 
-            new MgT2SkillDialog(actorCrew, skill, spec, cha, parseInt(action.dm?action.dm:0), target, action.text).render(true);
+            new MgT2SkillDialog(actorCrew, skill, {
+                "speciality": spec,
+                "dm": action.dm?action.dm:0,
+                "cha": cha,
+                "difficulty": target,
+                "text": action.text
+            }).render(true);
         } else if (action.action === "weapon") {
             let weaponId = action.weapon;
             let weaponItem = shipActor.items.get(weaponId);
@@ -2496,35 +2502,42 @@ export class MgT2ActorSheet extends ActorSheet {
 
         const data = actor.system;
 
-        const skill = dataset.skill;
-        const spec = dataset.spec;
+        const skillId = dataset.skill;
+        const specId = dataset.spec;
         const cha = dataset.cha;
 
+        let skillFqn = skillId;
         let skillDefault = dataset.cha?dataset.cha:"";
-        let speciality = null;
+        let specData = null;
 
-        if (skill) {
-            skillDefault = data.skills[skill].default;
-//            if (data.skills[skill].trained) {
-                if (spec) {
-                    speciality = data.skills[skill].specialities[spec];
-                    if (speciality.default) {
-                        skillDefault = speciality.default;
-                    }
+        if (skillFqn) {
+            skillDefault = data.skills[skillId].default;
+            if (specId) {
+                specData = data.skills[skillId].specialities[specId];
+                if (specData.default) {
+                    skillDefault = specData.default;
                 }
-  //          }
+                skillFqn = skillFqn + "." + specId;
+            }
         }
         let quickRoll = game.settings.get("mgt2e", "quickRolls");
         if (event.shiftKey) {
             quickRoll = !quickRoll;
         }
         if (event.ctrlKey) {
-            new MgT2XPDialog(actor, skill, spec, cha).render(true);
+            new MgT2XPDialog(actor, skillId, spec, cha).render(true);
         } else if (!quickRoll) {
-            new MgT2SkillDialog(actor, skill, spec, cha).render(true);
+            new MgT2SkillDialog(actor, skillFqn, {
+                "cha": cha
+            }).render(true);
         } else {
             // Roll directly with no options.
-            rollSkill(actor, data.skills[skill], speciality, skillDefault, 0, "normal", 8);
+            rollSkill(actor, data.skills[skill], {
+                "speciality": speciality,
+                "cha": skillDefault,
+                "rollType": "normal",
+                "difficulty": 8
+            });
         }
     }
 

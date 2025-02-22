@@ -839,6 +839,33 @@ span.skill-roll {
     font-size: larger;
 }
 
+div.skill-description {
+    font-style: italic;
+    font-size: 12pt;
+    border: 1px solid #404040;
+    background-color: #e0e0e0;
+    margin-bottom: 4px;
+    padding: 2px;
+}
+
+div.skill-fail {
+    font-style: italic;
+    font-size: 12pt;
+    border: 1px solid #FF4040;
+    background-color: #ffe0e0;
+    margin-bottom: 4px;
+    padding: 2px;
+}
+
+div.skill-success {
+    font-style: italic;
+    font-size: 12pt;
+    border: 1px solid #40FF40;
+    background-color: #e0ffe0;
+    margin-bottom: 4px;
+    padding: 2px;
+}
+
 div.damage-message {
     margin: 3px;
     padding: 2px;

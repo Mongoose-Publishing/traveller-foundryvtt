@@ -107,6 +107,17 @@ MgT2eMacros.specialityGain = function(actorId, skill, level) {
 };
 
 MgT2eMacros.skillCheck = function(args) {
+    let skillFqn = args.skill;
+    let target = args.target?args.target:8;
+
+    console.log("skillCheck");
+
+    game.mgt2e.rollSkillMacro(skillFqn, {
+        "difficulty": target,
+        "text": args.text,
+        "success": args.success,
+        "failure": args.failure
+    });
 
 };
 

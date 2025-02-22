@@ -650,7 +650,8 @@ function getSkillBonus(data, skill, speciality) {
     return bonus;
 }
 
-export async function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty, description) {
+//export async function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty, description) {
+export async function rollSkill(actor, skill, options) {
     const data = actor.system;
     let   title = "";
     let   skillText = "";
@@ -663,6 +664,10 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
     let   defaultCha = true;
     let   chaDm = 0;
 
+    if (!options) {
+        options = {};
+    }
+
     // Keep track of bonuses and penalties.
     let skillDM = 0, skillAug = 0, skillBonus = 0
     let specDM = 0, specAug = 0, specBonus = 0;
@@ -672,22 +677,48 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
     if (actor.type === "traveller" || actor.type === "npc") {
         isPerson = true;
     }
+    let speciality = null;
+    let noSpeciality = false;
     if (skill && (typeof skill === 'string' || skill instanceof String)) {
+        // If a skill has been passed as a string, we need to find the skill object.
+        if (skill.indexOf(".")) {
+            speciality = skill.split(".")[1];
+            skill = skill.split(".")[0];
+            if (speciality === "") {
+                speciality = null;
+                noSpeciality = true;
+            }
+        }
         skill = data.skills[skill];
+        if (speciality) {
+            speciality = skill.specialities[speciality];
+        }
+    } else if (skill) {
+        // We have been passed a skill object (probably).
+        if (options.speciality) {
+            speciality = options.speciality;
+        }
     }
 
     // Normal, Boon or Bane dice roll.
     let dice = "2D6";
-    if (rollType === "boon" || (skill && skill.boon === "boon") || (speciality && speciality.boon === "boon")) {
+    if (options.rollType === "boon" || (skill && skill.boon === "boon") || (speciality && speciality.boon === "boon")) {
         dice = "3D6k2";
-    } else if (rollType === "bane" || (skill && skill.boon === "bane") || (speciality && speciality.boon === "bane")) {
+    } else if (options.rollType === "bane" || (skill && skill.boon === "bane") || (speciality && speciality.boon === "bane")) {
         dice = "3D6kl2";
     }
 
+    let cha = options.cha;
     if (isPerson) {
         if (cha) {
             defaultCha = false;
-            chaDm = data.characteristics[cha].dm;
+            if (data.characteristics[cha]) {
+                chaDm = data.characteristics[cha].dm;
+            } else {
+                // Don't use a characteristic.
+                chaDm = 0;
+                cha = null;
+            }
         } else if (skill) {
             cha = skill.default;
             if (speciality && speciality.default) {
@@ -719,13 +750,17 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
         if (cha === "STR" || cha === "DEX" || cha === "END") {
             if (data.modifiers.encumbrance.dm) {
                 let encDm = parseInt(data.modifiers.encumbrance.dm);
-                dice += ` ${(encDm>=0)?"+":""}${encDm}[Enc]`;
-                skillNotes += ` (${encDm}Enc)`;
+                if (encDm !== 0) {
+                    dice += ` ${(encDm >= 0) ? "+" : ""}${encDm}[Enc]`;
+                    skillNotes += ` (${encDm}Enc)`;
+                }
             }
             if (data.modifiers.physical.dm) {
                 let phyDm = parseInt(data.modifiers.physical.dm);
-                dice += ` ${(phyDm>=0)?"+":""}${phyDm}[Phy]`;
-                skillNotes += ` (${phyDm}Phy)`;
+                if (phyDm !== 0) {
+                    dice += ` ${(phyDm >= 0) ? "+" : ""}${phyDm}[Phy]`;
+                    skillNotes += ` (${phyDm}Phy)`;
+                }
             }
         }
         let reaction = actor.getFlag("mgt2e", "reaction");
@@ -815,17 +850,18 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
     if (skillDM !== 0) {
         dice += " + " + skillDM + "[AugDM]";
     }
-    if (dm > 0) {
-        dice += " +" + dm;
-        skillText += " +" + dm;
-    } else if (dm < 0) {
-        dice += " " + dm;
-        skillText += " " + dm;
+    if (options.dm) {
+        if (options.dm > 0) {
+            dice += " +" + options.dm;
+            skillText += " +" + options.dm;
+        } else if (options.dm < 0) {
+            dice += " " + options.dm;
+            skillText += " " + options.dm;
+        }
     }
-
-    if (rollType === "boon") {
+    if (options.rollType === "boon") {
         skillText += " <span class='boon'>[Boon]</span>";
-    } else if (rollType === "bane") {
+    } else if (options.rollType === "bane") {
         skillText += " <span class='bane'>[Bane]</span>";
     }
 
@@ -842,8 +878,9 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
     if (untrainedCheck) {
         checkText += " (untrained)";
     }
-    if (difficulty === undefined) {
-        difficulty = 8;
+    let difficulty = 8;
+    if (options.difficulty !== undefined) {
+        difficulty = options.difficulty;
     }
     if (game.settings.get("mgt2e", "verboseSkillRolls")) {
         let difficultyLabel = getDifficultyLabel(difficulty);
@@ -869,13 +906,19 @@ export async function rollSkill(actor, skill, speciality, cha, dm, rollType, dif
         }
         text += "</div><br/>";
 
-        if (description) text += `<div>${description}</div>`;
+        if (options.description) text += `<div class="skill-description">${options.description}</div>`;
 
+        let effect = total - difficulty;
         if (game.settings.get("mgt2e", "verboseSkillRolls")) {
-            let effect = total - difficulty;
             text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${total}</span> ` + getEffectLabel(effect);
         }
-        if (skill && skill.specialities != null && speciality == null) {
+        if (options.success || options.fail) {
+            if (effect >= 0 && options.success) {
+                text += `<div class="skill-success">${options.success}</div>`;
+            } else if (options.failure) {
+                text += `<div class="skill-fail">${options.failure}</div>`;
+            }
+        } else if (skill && skill.specialities != null && speciality == null && !noSpeciality) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];
                 if (spec.value > 0) {

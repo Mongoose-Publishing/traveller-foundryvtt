@@ -110,9 +110,14 @@ export class MgT2SpacecraftRepairDialog extends Application {
 
         // rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty, description)
 
-        let result = await rollSkill(this.actorCrew, "engineer", null,
-            this.skillResult.cha, this.shipDamage[id].dm, null, 8,
-            "Fixing the ship");
+        let result = await rollSkill(this.actorCrew, "engineer.", {
+            "cha": this.skillResult.cha,
+            "dm": this.shipDamage[id].dm,
+            "difficulty": 8,
+            "description": "Fixing the ship",
+            "success": "Repair successful",
+            "failure": "Repair failed"
+        });
 
         if (result >= 8) {
             // Fixed it. Technically, this is a temporary fix. But for now, we

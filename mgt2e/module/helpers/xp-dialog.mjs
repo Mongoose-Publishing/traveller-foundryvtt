@@ -114,7 +114,7 @@ export class MgT2XPDialog extends Application {
 
     async onSkillEdit(event, html) {
         event.preventDefault();
-        new MgT2AddSkillDialog(this.actor, this.skillId, this.skill, this.specId, this.spec).render(true);
+        new MgT2AddSkillDialog(this.actor, this.skill, this.options).render(true);
         this.close();
     }
 

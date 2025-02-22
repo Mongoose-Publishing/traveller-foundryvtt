@@ -759,8 +759,12 @@ async function createTravellerMacro(data, slot) {
 
 }
 
-function rollSkillMacro(skillName) {
+function rollSkillMacro(skillName, options) {
   console.log("rollSkillMacro: " + skillName);
+
+  if (!options) {
+      options = {};
+  }
 
   const speaker = ChatMessage.getSpeaker();
   let actor;
@@ -776,9 +780,9 @@ function rollSkillMacro(skillName) {
   }
 
   if (game.settings.get("mgt2e", "quickRolls")) {
-      rollSkill(actor, skillName);
+      rollSkill(actor, skillName, options);
   } else {
-      new MgT2SkillDialog(actor, skillName).render(true);
+      new MgT2SkillDialog(actor, skillName, options).render(true);
   }
 }
 
@@ -1131,6 +1135,7 @@ Handlebars.registerHelper('formula', function(actor, value) {
 });
 
 Handlebars.registerHelper('augmentedSkill', function(skill, spec) {
+    console.log("augmentedSkill:");
     if (!skill) {
         return "";
     }
