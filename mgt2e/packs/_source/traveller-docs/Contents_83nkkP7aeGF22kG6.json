@@ -53,7 +53,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>There are a number of Compendium packs included with the system.</p><p></p><p>Traveller Docs - This pack, contains documentation on how to use the system.</p><p>Base Items - Some basic items.</p><p></p>"
+        "content": "<p>There are a number of Compendium packs included with the system. The content of these may change when the system is updated. They can be recognise by having a \"MgT2e Base\" prefix.</p><p></p><h2>Base Compendiums</h2><p>The base compendiums are as follows. All have the \"MgT2e Base\" prefix. Access them via the Compendium Packs tab on the right sidebar.</p><h3>Actors</h3><p>Currently just contains a package for a @UUID[Compendium.mgt2e.base-actors.Actor.Fq5fsrvRAEXRxurY]{Standard Human Character}.</p><h3>Docs</h3><p>This documentation.</p><h3>Items</h3><p>Contains a list of basic items.</p><ul><li><p><strong>Crew Roles</strong> - some basic crew roles for spacecraft.</p></li><li><p><strong>Software</strong> - basic software items available on every spaceship.</p><ul><li><p>@UUID[Compendium.mgt2e.base-items.Item.pCFl4KSmPoTd5hdn]{Intellect}</p></li><li><p>@UUID[Compendium.mgt2e.base-items.Item.EX9sxKi5tfSUyDUg]{Library}</p></li><li><p>@UUID[Compendium.mgt2e.base-items.Item.sY0q0A4I5hcrxTil]{Manoeuvre}</p></li></ul></li><li><p><strong>Trade Goods</strong> - items representing the full list of trade goods used in Mongoose Traveller. These can be added to a ship when running trade missions.</p></li><li><p><strong>Weapons</strong> - a list of unarmed and natural attack types for adding to a character.</p><ul><li><p>@UUID[Compendium.mgt2e.base-items.Item.KjYQNF4VI3GigmEy]{Bite and Claw}</p></li><li><p>@UUID[Compendium.mgt2e.base-items.Item.uTtH5mXI2i0byiXO]{Unarmed}</p></li></ul></li></ul><h3>Macros</h3><p>This contains some basic macros which can be used for inspiration or as examples. They will be updated whenever the system is updated. You will need to drag them out into the macro folder (or just drag them to the hot bar) in order to use them.</p><p>For example:</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.c0VzdYaCOk0lsx9W]{1D6}</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.pjNaPg3jnqwq0ws7]{2D6}</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.pBJCMW5TZAb9pmuw]{D66}</p>"
       },
       "video": {
         "controls": true,
@@ -69,14 +69,51 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.4.8",
-        "coreVersion": "12.329",
+        "coreVersion": "12.331",
         "createdTime": 1717857565755,
-        "modifiedTime": 1717857611861,
-        "lastModifiedBy": "Uzw5MJmM0BRE3sSL",
+        "modifiedTime": 1740350531411,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null
       },
       "_key": "!journal.pages!83nkkP7aeGF22kG6.oQyLbsHcJKDIUhQM"
+    },
+    {
+      "sort": 200000,
+      "name": "Assets",
+      "type": "text",
+      "_id": "w3pCgGRMfD9DxJH5",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A number of art assets are included with the system.</p><h2>Images</h2><p>Images are mostly for use as tokens on a map.</p><h3>Spacecraft</h3><p>There are tokens available for some of the most common spacecraft found in the Third Imperium. These are each available in eight different colours.</p><p>The tokens are at a scale of 256px per square, and are scaled according to the size of the spacecraft, following a logorithmic scale.</p><p>This token size isn't enforced, but gives a reasonable indication of the size of vessels when using the tokens on a map for spacecombat.</p><table><tbody><tr><td><p><strong>Spacecraft Tonnage</strong></p></td><td><p><strong>Token Size</strong></p></td></tr><tr><td><p>1-29t</p></td><td><p>1x1 square</p></td></tr><tr><td><p>30-99t</p></td><td><p>2x2 squares</p></td></tr><tr><td><p>100-299t</p></td><td><p>3x3 squares</p></td></tr><tr><td><p>300-999t</p></td><td><p>4x4 squares</p></td></tr><tr><td><p>1,000t+</p></td><td><p>5x5 squares</p></td></tr></tbody></table><p>Note that these tokens are scaled down from the original SVG artwork, where they are sized at 256px per 1.5m for character scale.</p><p>The original art is available <a href=\"https://gitlab.com/samuelpenn/spacecraft-dungeondraft/-/tree/main/src/objects?ref_type=heads\">available here</a>.</p><p></p><h3>Vehicles</h3><p>Vehicle tokens are also provided. These are also at 256px per square, but currently only available in white.</p><p>These are sized to fit alongside character tokens on a map, so use 1.5m per 256px.</p><p></p><h2>Icons</h2><p>Icons are designed for items or as graphical icons.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.11.8.5-DEV",
+        "createdTime": 1740349712645,
+        "modifiedTime": 1740350959283,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!83nkkP7aeGF22kG6.w3pCgGRMfD9DxJH5"
     }
   ],
   "sort": 100000,

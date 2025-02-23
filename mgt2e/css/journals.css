@@ -43,6 +43,13 @@
     font-weight: bold;
 }
 
+.journal-sheet h4 {
+    color: black;
+    border: none;
+    font-weight: bold;
+}
+
+
 .journal-sheet .callout {
     background-color: #90D0e8;
     border: 1px solid black;
