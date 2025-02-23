@@ -2,7 +2,7 @@ import { MgT2Item } from "../documents/item.mjs";
 import { Tools } from "../helpers/chat/tools.mjs";
 import {MGT2} from "../helpers/config.mjs";
 import {MgT2DamageDialog} from "../helpers/damage-dialog.mjs";
-import {getTraitValue, hasTrait, isNonZero, isNumber} from "../helpers/dice-rolls.mjs";
+import {getTraitValue, hasTrait, isNonZero, isNumber, skillLabel} from "../helpers/dice-rolls.mjs";
 import {MgT2SpacecraftDamageDialog} from "../helpers/spacecraft-damage-dialog.mjs";
 import {setSpacecraftCriticalLevel} from "../helpers/spacecraft/criticals.mjs";
 
@@ -1131,5 +1131,104 @@ export class MgT2Actor extends Actor {
       }
       return list;
   }
+
+    printCreatureBehaviours() {
+        let text = "";
+        if (this.type === "creature" && this.system.behaviour) {
+            const behaviours = this.system.behaviour.split(" ");
+            for (let b of behaviours) {
+                if (CONFIG.MGT2.CREATURES.behaviours[b]) {
+                    let label = game.i18n.localize("MGT2.Creature.Behaviour." + b);
+                    if (text) {
+                        text += ", ";
+                    }
+                    text += label.replace(/ /g, "&nbsp;");
+                }
+            }
+        }
+        return text;
+    }
+
+    printCreatureTraits(includeDerived) {
+        let text = "";
+        if (this.type === "creature" && this.system.traits) {
+
+            if (includeDerived) {
+                if (this.system.size !== 0) {
+                    text += "Size (" + this.system.size + ")";
+                }
+                if (this.system.armour.protection !== 0) {
+                    if (text) {
+                        text += ", ";
+                    }
+                    text += "Armour (" + this.system.armour.protection + ")";
+                }
+            }
+
+            const traits = this.system.traits.split(",");
+            for (let t of traits) {
+                const trait = t.replaceAll(/[^a-zA-Z]/g, "");
+                const value = t.replaceAll(/[^0-9]/g, "");
+                if (CONFIG.MGT2.CREATURES.traits[trait]) {
+                    let label = game.i18n.localize("MGT2.Creature.Trait." + trait);
+                    if (text) {
+                        text += ", ";
+                    }
+                    text += label.replace(/ /g, "&nbsp;");
+                    if (value) {
+                        text += " " + value;
+                    }
+                }
+            }
+        }
+        return text;
+    }
+
+    printSkills() {
+        const skills = this.system.skills;
+        if (!skills) {
+            return;
+        }
+        let html = "";
+        for (let key in skills) {
+            let skill = skills[key];
+
+            if (skill.trained) {
+                let showParent = true;
+                if (skill.specialities) {
+                    for (let specKey in skill.specialities) {
+                        let spec = skill.specialities[specKey];
+                        if (spec.value > 0) {
+                            showParent = false;
+                            html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})&nbsp;${spec.value}</li>`;
+                        }
+                    }
+                }
+                if (showParent) {
+                    html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;${skill.value}</li>`;
+                }
+            }
+        }
+        return `<ul class="skill-list">${html}</ul>`;
+    }
+
+    printAttacks() {
+      console.log("printAttacks:");
+      if (this.type !== "creature" && this.type !== "npc" && this.type !== "traveller") {
+          return "";
+      }
+      let html = "";
+      for (let i of this.items) {
+          if (i.type === "weapon" && (i.type !== "creature" || i.system.status === MgT2Item.ACTIVE)) {
+              if (html) {
+                  html += ", ";
+              }
+              html += `<span>${i.name} (${i.system.weapon.damage})</span>`;
+          }
+      }
+
+      return html;
+
+    }
 
 }

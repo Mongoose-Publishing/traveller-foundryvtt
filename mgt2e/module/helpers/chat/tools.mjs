@@ -410,11 +410,37 @@ Tools.actorInlineDisplay = function(actorId) {
         a.innerHTML = `Unable to find actor ${actorId}`;
         return a;
     }
-    if (actor.type !== "npc") {
-        a.innerHTML = `Currently only supports NPCs`;
-        return a;
-    }
 
+    if (actor.type === "creature") {
+        Tools.creatureInlineDisplay(a, actor);
+    } else if (actor.type === "npc") {
+        Tools.npcInlineDisplay(a, actor);
+    } else {
+        a.innerHTML = `Currently only supports NPCs`;
+    }
+    return a;
+}
+
+Tools.creatureInlineDisplay = function(a, actor) {
+    let html = `<div class="inline-creature">`;
+
+    html += `<img src="${actor.img}"/>`;
+
+    html += `<table class="creature-stats">`;
+    html += `<tr><th>Animal</th><th>Hits</th><th>Speed</th></tr>`;
+    html += `<tr class="noborder"><td>${actor.name}</td><td>${actor.system.hits.max}</td><td>${actor.system.speed.value}</td></tr>`;
+
+    html += `<tr><th>Skills</th><td colspan="2">${actor.printSkills()}</td></tr>`;
+    html += `<tr><th>Attacks</th><td colspan="2">${actor.printAttacks()}</td></tr>`;
+    html += `<tr><th>Traits</th><td colspan="2">${actor.printCreatureTraits(true)}</td></tr>`;
+    html += `<tr><th>Behaviour</th><td colspan="2">${actor.printCreatureBehaviours()}</td></tr>`;
+
+    html += `</table></div>`;
+    a.innerHTML = html;
+    return a;
+}
+
+Tools.npcInlineDisplay = function(a, actor) {
     let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/><span class="name">${actor.name}</span>`;
     html += `<span class="profession">${actor.system.sophont.profession}</span>`;
 
