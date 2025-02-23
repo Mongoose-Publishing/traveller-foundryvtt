@@ -2152,39 +2152,3 @@ li.item-status-INACTIVE h4 {
     color: black;
 }
 
-.inline-creature {
-    margin-left: 0.25em;
-    width: 400px;
-}
-
-.inline-creature img {
-    width: 100%;
-}
-
-table.creature-stats {
-    text-align: left;
-    width: 400px;
-    border: 1px solid black;
-    padding: 2px;
-    background-color: #F0F0F0;
-}
-
-table.creature-stats th,td {
-    width: 33%;
-    border: 1px solid black;
-    padding: 4px;
-    background-color: #F0F0F0;
-}
-
-table.creature-stats td {
-    padding: 4px;
-}
-
-table.creature-stats tr.noborder td {
-    border: none;
-}
-
-table.creature-stats tr.noborder {
-    border-left: none;
-    border-right: none;
-}

@@ -265,3 +265,45 @@ div.inline-actor .species-data {
 div.inline-actor .skill-list {
     display: inline;
 }
+
+.inline-creature {
+    margin-left: 0.25em;
+    width: 400px;
+}
+
+.inline-creature img {
+    width: 100%;
+}
+
+table.creature-stats {
+    text-align: left;
+    width: 400px;
+    border: 1px solid black;
+    padding: 2px;
+    background-color: #303030;
+}
+
+table.creature-stats th,td {
+    width: 33%;
+    border: 1px solid black;
+    padding: 4px;
+}
+
+table.creature-stats tr {
+    background-color: #f1511b;
+}
+
+table.creature-stats td {
+    padding: 4px;
+    background-color: #303030;
+    color: white;
+}
+
+table.creature-stats tr.noborder td {
+    border: none;
+}
+
+table.creature-stats tr.noborder {
+    border-left: none;
+    border-right: none;
+}
