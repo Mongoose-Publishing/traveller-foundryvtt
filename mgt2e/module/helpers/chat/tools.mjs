@@ -423,12 +423,15 @@ Tools.actorInlineDisplay = function(actorId) {
 
 Tools.creatureInlineDisplay = function(a, actor) {
     let html = `<div class="inline-creature">`;
-
+    html += `<h2>${actor.name}</h2>`;
     html += `<img src="${actor.img}"/>`;
+    html += `${actor.system.description}`;
 
     html += `<table class="creature-stats">`;
     html += `<tr><th>Animal</th><th>Hits</th><th>Speed</th></tr>`;
-    html += `<tr class="noborder"><td>${actor.name}</td><td>${actor.system.hits.max}</td><td>${actor.system.speed.value}</td></tr>`;
+    html += `<tr class="noborder"><td>`;
+    html += `<a class="embedded-actor-link actor-draggable" data-actor-id="${actor._id}">${actor.name}</a></td>`;
+    html += `<td>${actor.system.hits.max}</td><td>${actor.system.speed.value}</td></tr>`;
 
     html += `<tr><th>Skills</th><td colspan="2">${actor.printSkills()}</td></tr>`;
     html += `<tr><th>Attacks</th><td colspan="2">${actor.printAttacks()}</td></tr>`;
@@ -437,6 +440,12 @@ Tools.creatureInlineDisplay = function(a, actor) {
 
     html += `</table></div>`;
     a.innerHTML = html;
+/*
+    a.find('a.actor-draggable').each((i, o) => {
+        o.setAttribute("draggable", true);
+        o.addEventListener("dragstart", {"actorId": actor._id});
+    });
+*/
     return a;
 }
 

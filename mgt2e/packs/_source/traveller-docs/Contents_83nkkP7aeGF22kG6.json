@@ -15,7 +15,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>This is a FoundryVTT system for <strong>Mongoose Traveller 2e</strong>. It provides character sheets and support for game rules.</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.I3AuPYIeiMu19Rli]{Characters and Skills}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.s8DAOTe8r1s1TE7k]{Creating and Using Items}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.daLn8GLKHRgnJBax]{Chat Commands}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.XqtcLHYC383iXuNo]{Spacecraft}</p>",
+        "content": "<img style=\"border:none\" src=\"systems/mgt2e/images/traveller-alpha.png\" width=\"300\" class=\"centered\" /><p>This is a FoundryVTT system for <strong>Mongoose Traveller 2e</strong>. It provides character sheets and support for game rules. The core system does not contain much in the way of 'content', in the form of equipment lists.</p><p>The below documentation covers how to use the Foundry System with Traveller. It doesn't describe the Traveller rules themselves.</p><p></p><h2>Contents</h2><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.I3AuPYIeiMu19Rli]{Characters and Skills}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.s8DAOTe8r1s1TE7k]{Creating and Using Items}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.daLn8GLKHRgnJBax]{Chat Commands}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.XqtcLHYC383iXuNo]{Spacecraft}</p>",
         "markdown": ""
       },
       "video": {
@@ -32,9 +32,9 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.10.1",
-        "coreVersion": "12.329",
+        "coreVersion": "12.331",
         "createdTime": 1717857026252,
-        "modifiedTime": 1725188713060,
+        "modifiedTime": 1740419825026,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null

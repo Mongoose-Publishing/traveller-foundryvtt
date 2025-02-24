@@ -321,12 +321,10 @@ Hooks.on('renderChatMessage', function(app, html) {
             let actorId = link.getAttribute("data-actorId");
             let skill = link.getAttribute("data-skill");
             let level = link.getAttribute("data-level");
-            console.log(actorId);
-            console.log(skill);
-            console.log(level);
             MgT2eMacros.specialityGain(actorId, skill, level);
         });
     }
+
 });
 
 Hooks.on('ready', () => {

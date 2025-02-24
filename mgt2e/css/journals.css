@@ -279,7 +279,11 @@ div.inline-actor .skill-list {
 }
 
 .inline-creature img {
-    width: 100%;
+    width: 40%;
+    float: left;
+    border: none;
+    padding-right: 4px;
+    padding-bottom: 4px;
 }
 
 table.creature-stats {
@@ -288,6 +292,7 @@ table.creature-stats {
     border: 1px solid black;
     padding: 2px;
     background-color: #303030;
+    clear: left;
 }
 
 table.creature-stats th,td {
