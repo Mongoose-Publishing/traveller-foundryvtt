@@ -873,7 +873,11 @@ export class MgT2ItemSheet extends ItemSheet {
     _rollDamage(item) {
         console.log("_rollDamage:");
         if (item.system.weapon.scale === "spacecraft") {
-            rollSpaceAttack(null, null, item, { "skilLDM": 0, "dm": 0 });
+            rollSpaceAttack(null, null, item, {
+                "skillDM": 0,
+                "dm": 0,
+                "range": "medium"
+            });
         } else {
             rollAttack(null, item, {"skillDM": 0, "dm": 0});
         }

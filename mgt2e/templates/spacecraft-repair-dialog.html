@@ -31,16 +31,16 @@
             <div>DM</div>
             <div>Action</div>
             {{#each shipDamage as | effect id |}}
-                <div>
+                <div class="row_{{id}}">
                     <span class="currentCrit {{criticalClass effect.severity}}">
                         {{effect.label}}
                     </span>
                 </div>
 
-                <div>{{effect.severity}}</div>
-                <div>{{effect.dm}}</div>
+                <div class="row_{{id}}">{{effect.severity}}</div>
+                <div class="dm_{{id}} row_{{id}}">{{effect.dm}}</div>
 
-                <div class="repair" data-id="{{id}}"><i class="fas fa-dice"></i> Repair</div>
+                <div class="repair rollable row_{{id}}" data-id="{{id}}"><i class="fas fa-dice"></i> Repair</div>
             {{/each}}
         </div>
     </div>

@@ -295,7 +295,7 @@ table.creature-stats {
     clear: left;
 }
 
-table.creature-stats th,td {
+table.creature-stats th {
     width: 33%;
     border: 1px solid black;
     padding: 4px;

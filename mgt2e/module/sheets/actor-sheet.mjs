@@ -410,7 +410,6 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                     context.system.spacecraft.armour += rating;
                     i.system.hardware.tons = t;
-                    //i.update({"system.hardware.tons": t });
                 } else if (h.system === "fuel") {
                     t = rating;
                     if (i.system.status !== MgT2Item.DESTROYED) {
@@ -466,14 +465,22 @@ export class MgT2ActorSheet extends ActorSheet {
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;
 
-        if (fuelTotal != actorData.spacecraft.fuel.max) {
+        if (context.actor.getFlag("mgt2e", "damage_armour")) {
+            let armourDamage = context.actor.getFlag("mgt2e", "damage_armour");
+            context.system.spacecraft.armour -= armourDamage;
+            context.ARMOUR_STYLE = "damaged";
+        } else {
+            context.ARMOUR_STYLE = "";
+        }
+
+        if (fuelTotal !== actorData.spacecraft.fuel.max) {
             actorData.spacecraft.fuel.max = fuelTotal;
             actorData.spacecraft.fuel.value = Math.min(actorData.spacecraft.fuel.value, fuelTotal);
             context.actor.update({"system.spacecraft.fuel": actorData.spacecraft.fuel });
         }
 
 
-        if (bandwidthTotal != actorData.spacecraft.processing) {
+        if (bandwidthTotal !== actorData.spacecraft.processing) {
             actorData.spacecraft.processing = bandwidthTotal;
             context.actor.update({"system.spacecraft.processing": bandwidthTotal});
         }
@@ -2135,6 +2142,10 @@ export class MgT2ActorSheet extends ActorSheet {
             system.role.actions[(t++).toString(36)] = {
                 "title": "Engineering",
                 "action": "skill", "cha": "INT", "skill": "engineer.mdrive", "target": 8, "dm": 0
+            }
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Repair",
+                "action": "special", "special": "repair"
             }
         } else if (roleType === "sensors") {
             itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors");

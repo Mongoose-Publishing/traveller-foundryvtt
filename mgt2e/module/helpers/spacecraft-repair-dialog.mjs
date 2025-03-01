@@ -95,8 +95,6 @@ export class MgT2SpacecraftRepairDialog extends Application {
     activateListeners(html) {
         super.activateListeners(html);
 
-
-
         html.find('.repair').click(ev => {
             const div = $(ev.currentTarget);
             const id = div.data("id");
@@ -107,8 +105,6 @@ export class MgT2SpacecraftRepairDialog extends Application {
 
     async repairRoll(event, id, html) {
         console.log(id);
-
-        // rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty, description)
 
         let result = await rollSkill(this.actorCrew, "engineer.", {
             "cha": this.skillResult.cha,
@@ -125,8 +121,19 @@ export class MgT2SpacecraftRepairDialog extends Application {
             this.actorShip.unsetFlag("mgt2e", "damage_"+id);
             this.actorShip.unsetFlag("mgt2e", "damageSev_"+id);
             this.actorShip.unsetFlag("mgt2e", "damageDM_"+id);
+            for (let e of html.find(".row_" + id)) {
+                e.remove();
+            }
+        } else {
+            let dm = 0;
+            if (this.actorShip.flags.mgt2e["damageDM_" + id]) {
+                dm = this.actorShip.flags.mgt2e["damageDM_" + id];
+            }
+            dm = parseInt(dm) + 1;
+            this.actorShip.setFlag("mgt2e", "damageDM_" + id, dm);
+            this.setIntValue(html, ".dm_"+id, dm);
+            this.shipDamage[id].dm = dm;
         }
-        this.close();
     }
 
     getIntValue(html, field) {
@@ -141,14 +148,12 @@ export class MgT2SpacecraftRepairDialog extends Application {
     }
 
     setIntValue(html, field, value) {
-        if (html.find(field) && html.find(field)[0] && html.find(field)[0].value) {
-            html.find(field)[0].value = value;
+        if (html.find(field) && html.find(field)[0]) {
+            html.find(field)[0].innerHTML = value;
         }
     }
 
     updateDamage(event, html) {
-        console.log("Was updated");
-
         let dmg = this.getIntValue(html, ".baseDamage");
         let ap = this.getIntValue(html, ".baseAP");
 
@@ -156,7 +161,7 @@ export class MgT2SpacecraftRepairDialog extends Application {
         ap = parseInt(ap);
 
         let actual = dmg - Math.max(0, this.armour - ap);
-        this.setIntValue(html, ".actualDamage",actual);
+        this.setIntValue(html, ".actualDamage", actual);
     }
 
     updateCrits(event, html, idx) {
@@ -166,44 +171,6 @@ export class MgT2SpacecraftRepairDialog extends Application {
         } else {
             this.crits.criticals[idx].location = event.currentTarget.value;
         }
-    }
-
-    async doneClick(event, html) {
-        console.log("doneClick:");
-        event.preventDefault();
-        let damage = this.actualDamage;
-        console.log(this.crits);
-
-        let critEffect = html.find(".criticalEffectSelect");
-        if (critEffect && critEffect[0]) {
-            this.criticalEffectRoll = critEffect[0].value;
-        }
-
-        let critList = html.find(".criticalSelect");
-        for (let c = 0; c < critList.length; c++) {
-            if (this.crits.criticals[c]) {
-                this.crits.criticals[c].location = critList[c].value;
-            }
-        }
-
-        // Apply Criticals
-        if (this.crits?.criticals) {
-            for (let c = 0; c < this.crits.criticals.length; c++) {
-                let location = this.crits.criticals[c].location;
-                let severity = this.crits.criticals[c].severity;
-                console.log(`Apply crit ${c} to ${location} severity ${severity}`);
-                await this.actor.setCriticalLevel(location, severity);
-            }
-        }
-
-        // Apply critical effect
-        if (this.crits?.effectCrit) {
-            await this.actor.setCriticalLevel(this.criticalEffectRoll, this.crits.effectSeverity);
-        }
-
-        // Apply raw damage
-        this.actor.applyActualDamageToSpacecraft(damage, this.damageOptions);
-        this.close();
     }
 
     async _updateObject(event, formData) {

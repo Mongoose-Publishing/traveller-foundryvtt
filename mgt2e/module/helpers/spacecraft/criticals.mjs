@@ -118,12 +118,12 @@ async function applyArmourCritical(actor, effects, level) {
         if (!currentDmg) {
             currentDmg = 0;
         }
-        dmg = Math.max(actor.system.spacecraft.armour, dmg + currentDmg);
+        dmg = Math.min(actor.system.spacecraft.armour, dmg + currentDmg);
         actor.setFlag("mgt2e", "damage_armour", dmg);
         actor.setFlag("mgt2e", "damageSev_armour", level);
     }
 
-    actor.applyHullCritical(actor, effects, level);
+    await applyHullCritical(actor, effects, level);
 }
 
 async function applySensorCritical(actor, effects, level) {
@@ -161,7 +161,7 @@ async function applyPowerPlantCritical(actor, effects, level) {
     ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.Power",
         {"name": actor.name, "power": reduction }));
 
-    actor.applyHullCritical(actor, effects, level);
+    await applyHullCritical(actor, effects, level);
 }
 
 function getRandomWeapons(actor, number) {
@@ -230,7 +230,7 @@ async function applyWeaponCritical(actor, effects, level) {
             }
         }
     }
-    actor.applyHullCritical(actor, effects, level);
+    await applyHullCritical(actor, effects, level);
 }
 
 async function applyCargoCritical(actor, effects, level) {
@@ -301,7 +301,7 @@ async function applyCargoCritical(actor, effects, level) {
         }
     }
 
-    applyHullCritical(actor, effects, level);
+    await applyHullCritical(actor, effects, level);
 }
 
 async function applyFuelCritical(actor, effects, level) {

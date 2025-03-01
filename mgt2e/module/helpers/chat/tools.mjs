@@ -382,7 +382,7 @@ Tools.currentTime = function(chatData, args) {
 Tools.macroExecutionEnricher = function(match, options) {
     try {
         const type = match[1];
-        const macroName = match[3];
+        const macroName = match[3]?match[3]:match[2];
         const argsString = match[4];
         const flavor = match[6];
 
@@ -403,13 +403,20 @@ Tools.macroExecutionEnricher = function(match, options) {
 }
 
 Tools.actorInlineDisplay = function(actorId) {
-    const actor = fromUuidSync(actorId);
+    let actor = fromUuidSync(actorId);
+    if (!actor) {
+        actor = game.actors.get(actorId);
+    }
+    if (!actor) {
+        actor = game.actors.getName(actorId);
+    }
 
     const a = document.createElement("div");
-    if (actor === null) {
+    if (!actor) {
         a.innerHTML = `Unable to find actor ${actorId}`;
         return a;
     }
+    console.log(actor);
 
     if (actor.type === "creature") {
         Tools.creatureInlineDisplay(a, actor);
@@ -440,12 +447,6 @@ Tools.creatureInlineDisplay = function(a, actor) {
 
     html += `</table></div>`;
     a.innerHTML = html;
-/*
-    a.find('a.actor-draggable').each((i, o) => {
-        o.setAttribute("draggable", true);
-        o.addEventListener("dragstart", {"actorId": actor._id});
-    });
-*/
     return a;
 }
 

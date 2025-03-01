@@ -476,7 +476,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
 }
 
 function addTitle(text, options, property) {
-    if (options && options.results) {
+    if (options && options.results && options.results[property]) {
         let value = options.results[property];
         if (!isNaN(value) && parseInt(value) !== 0) {
             value = parseInt(value);
@@ -494,7 +494,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
 
     let score = gunner?gunner.getAttackSkill(weaponItem, options):0;
 
-    let dice = `${options.results.dice} + ${score}`;
+    let dice = `${options.results?options.results.dice:"2D6"} + ${score}`;
     let damageDice = weaponItem.system.weapon.damage;
     console.log("rollSpaceAttack:");
 
@@ -510,10 +510,14 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let effect = Math.max(0, attackRoll.total - 8);
     const damageRoll = await new Roll(damageDice, null).evaluate();
 
-    let title = `${options.results["cha"]} ${options.results["chadm"]} Skill ${options.results["base"]}`;
-    title = addTitle(title, options, "weapon");
-    title = addTitle(title, options, "dm");
-    title = addTitle(title, options, "rangedm");
+    let title = "";
+
+    if (options.results) {
+        title = `${options.results["cha"]} ${options.results["chadm"]} Skill ${options.results["base"]}`;
+        title = addTitle(title, options, "weapon");
+        title = addTitle(title, options, "dm");
+        title = addTitle(title, options, "rangedm");
+    }
 
     let mount = weaponItem.system.weapon.mount;
     let multiplier = 1;
@@ -530,6 +534,11 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     if (multiplier > 1) {
         dmgText += ` x${multiplier}`;
     }
+    let ap = 0;
+    if (weaponItem.hasTrait("ap")) {
+        ap = getTraitValue(weaponItem.system.weapon.traits, "ap");
+        dmgText += ` AP ${ap} `;
+    }
     let radiationDamage = 0;
     if (weaponItem.hasTrait("radiation")) {
         const radRoll = await new Roll("2D6 * 60", null).evaluate();
@@ -541,6 +550,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         "damage": damageRoll.total,
         "effect": effect,
         "multiplier": multiplier,
+        "ap": ap,
         "scale": weaponItem.system.weapon.scale,
         "traits": weaponItem.system.weapon.traits,
         "tl": weaponItem.system.tl,
@@ -553,16 +563,22 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     text = `
         <div class="attack-message">
             <h2>${weaponItem.name}</h2>
+            `;
+    if (options.results) {
+        text += `
             <div class="message-content">
                 <div>
-                    <img class="skillcheck-thumb" src="${starship.thumbnail}" title="${starship.name}"/>
-                    <img class="skillcheck-thumb" src="${gunner.thumbnail}" title="${gunner.name}"/>
+                    <img class="skillcheck-thumb" src="${starship ? starship.thumbnail : ""}" title="${starship ? starship.name : ""}"/>
+                    <img class="skillcheck-thumb" src="${gunner ? gunner.thumbnail : ""}" title="${gunner ? gunner.name : ""}"/>
                     <b title="${title}">${options.results.label} ${score}</b><br/>
                     ${game.i18n.localize("MGT2.Item.SpaceRange." + options.range)}<br/>
                     ${weaponItem.system.weapon.damage}<br/>
                 </div>
-                
                 <hr/>
+            `;
+    };
+
+    text += `
                 <div class="rollResult">
                     <b>Attack Roll: </b>
                     <span class="skill-roll inline-roll inline-result" title="${dice}">

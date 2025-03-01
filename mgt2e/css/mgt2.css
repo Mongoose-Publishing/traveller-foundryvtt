@@ -945,6 +945,11 @@ div.armour-box input.armour-value {
     text-align: center;
 }
 
+div.armour-box input.damaged {
+    background-color: orange;
+    font-weight: bold;
+}
+
 div.armour-box label.prot-type {
     padding-bottom: 5px;
     display: block;
