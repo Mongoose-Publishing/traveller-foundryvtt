@@ -1432,14 +1432,23 @@ export class MgT2ActorSheet extends ActorSheet {
             }
             ChatMessage.create(chatData, {});
         } else if (action.action === "skill") {
-            let skill = action.skill.replaceAll(/\..*/g, "");
-            let spec = (action.skill.indexOf(".") > 0)?(action.skill.replaceAll(/.*\./g, "")):null;
+            let skill = action.skill;
             let cha = action.cha;
             let target = isNaN(action.target)?null:parseInt(action.target);
+            let dm = action.dm?action.dm:0;
+
+            if (skill.startsWith("pilot")) {
+                if (shipActor.getFlag("mgt2e", "damage_pilotDM")) {
+                    dm += parseInt(shipActor.getFlag("mgt2e", "damage_pilotDM"));
+                }
+            } else if (skill === "engineer.jDrive") {
+                if (shipActor.getFlag("mgt2e", "damage_jumpDM")) {
+                    dm += parseInt(shipActor.getFlag("mgt2e", "damage_jumpDM"));
+                }
+            }
 
             new MgT2SkillDialog(actorCrew, skill, {
-                "speciality": spec,
-                "dm": action.dm?action.dm:0,
+                "dm": dm,
                 "cha": cha,
                 "difficulty": target,
                 "text": action.text
@@ -2132,16 +2141,22 @@ export class MgT2ActorSheet extends ActorSheet {
             itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer");
             img = "systems/mgt2e/icons/items/roles/engineer.svg";
             system.role.actions[(t++).toString(36)] = {
-                "title": "Engineering",
-                "action": "skill", "cha": "INT", "skill": "engineer.power", "target": 8, "dm": 0
+                "title": "Activate Jump",
+                "action": "skill", "cha": "EDU", "skill": "engineer.jdrive",
+                "target": 4, "dm": 0,
+                "text": "Active Jump Drive"
             }
             system.role.actions[(t++).toString(36)] = {
-                "title": "Engineering",
-                "action": "skill", "cha": "INT", "skill": "engineer.jdrive", "target": 8, "dm": 0
+                "title": "Offline System",
+                "action": "skill", "cha": "EDU", "skill": "engineer.power",
+                "target": 8, "dm": 0,
+                "text": "Take systems offline"
             }
             system.role.actions[(t++).toString(36)] = {
-                "title": "Engineering",
-                "action": "skill", "cha": "INT", "skill": "engineer.mdrive", "target": 8, "dm": 0
+                "title": "Overload Drive",
+                "action": "skill", "cha": "INT", "skill": "engineer.mdrive",
+                "target": 10, "dm": 0,
+                "text": "Overload drive"
             }
             system.role.actions[(t++).toString(36)] = {
                 "title": "Repair",
