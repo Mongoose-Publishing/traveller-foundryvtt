@@ -319,3 +319,14 @@ table.creature-stats tr.noborder {
     border-left: none;
     border-right: none;
 }
+
+span.internal-macro {
+    font-weight: bold;
+    color: black;
+    text-decoration: underline;
+}
+
+span.internal-macro img {
+    border: none;
+    width: 16px;
+}

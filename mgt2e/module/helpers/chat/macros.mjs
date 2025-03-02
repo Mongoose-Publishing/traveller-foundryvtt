@@ -107,13 +107,13 @@ MgT2eMacros.specialityGain = function(actorId, skill, level) {
 
 };
 
-MgT2eMacros.skillCheck = function(args) {
+MgT2eMacros.skillCheck = function(args, ask) {
     let skillFqn = args.skill;
     let target = args.target?args.target:8;
 
     console.log("skillCheck");
 
-    if (args.ask) {
+    if (ask) {
         let title = "";
         let cha = args.cha?args.cha:null;
         let skillFqn = args.skill;
@@ -125,7 +125,6 @@ MgT2eMacros.skillCheck = function(args) {
             specId = skillFqn.split(".")[1];
         }
         let skill = CONFIG.MGT2.SKILLS[skillId];
-        console.log(skill);
 
         if (!cha) {
             cha = skill.default;

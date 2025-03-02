@@ -218,9 +218,6 @@ Tools.renumber = function() {
 
 }
 
-
-
-
 Tools.applyDamageToCha= function(damage, actorData, cha) {
     if (damage > 0) {
         let dmg = Math.min(damage, actorData.characteristics[cha].current);
@@ -555,6 +552,7 @@ Tools.internalExecutionButton = function(macroName, argsString, title, flavor) {
     a.dataset.macroName = macroName;
     a.dataset.args = argsString;
     a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
+    a.innerHTML = `<span class="internal-macro"><i class="fas fa-dice"></i> ${flavor ?? title}</span>`;
     return a;
 }
 
@@ -602,8 +600,6 @@ Tools.mgt2eClick = function(event) {
         const argsString = a.dataset.args;
         const argsRgx = /(\w+)=\s*(?:"([^"]*)"|(\S+))/g;
 
-        console.log(a);
-
         const args = {};
         let match;
         while ((match = argsRgx.exec(argsString)) !== null) {
@@ -613,15 +609,13 @@ Tools.mgt2eClick = function(event) {
             args[key] = value;
         }
 
-        console.log(macroName);
         if (macroName === "skillGain") {
-            console.log("Increment skill");
             MgT2eMacros.skillGain(args);
         } else if (macroName === "skillCheck") {
-            console.log("Roll skill");
-            MgT2eMacros.skillCheck(args);
+            MgT2eMacros.skillCheck(args, false);
+        } else if (macroName === "skillReq") {
+            MgT2eMacros.skillCheck(args, true);
         }
-        console.log(args);
     } catch (e) {
         ui.notifications.error(e.error);
         throw e;
