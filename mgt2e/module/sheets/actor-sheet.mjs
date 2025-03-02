@@ -1548,8 +1548,19 @@ export class MgT2ActorSheet extends ActorSheet {
             return this._onDropUPP(event, data);
         case "characteristic":
             return this._onDropCharacteristic(event, data);
+        case "Skill":
+            return this._onDropSkillRequest(event, data);
         }
         return true;
+    }
+
+    async _onDropSkillRequest(event, data) {
+        console.log("_onDropSkillRequest:");
+
+        const skillFqn = data.skill;
+        const skillOptions = data.options?JSON.parse(data.options):null;
+
+        new MgT2SkillDialog(this.actor, skillFqn, skillOptions).render(true);
     }
 
     async _onDropActor(event, data) {

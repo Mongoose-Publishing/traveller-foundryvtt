@@ -296,6 +296,22 @@ Hooks.on('renderChatMessage', function(app, html) {
             return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
         });
     }
+    const skillMessage = html.find(".skillcheck-message")[0];
+    if (skillMessage) {
+        skillMessage.setAttribute("draggable", true);
+
+        let dragData = {
+            type: "Skill",
+            skill: skillMessage.getAttribute("data-skillcheck"),
+            options: skillMessage.getAttribute("data-options")
+        };
+
+        console.log(dragData);
+
+        skillMessage.addEventListener("dragstart", ev => {
+           return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+        });
+    }
 
     const uppMessage = html.find(".upp-data")[0];
     if (uppMessage) {
@@ -339,12 +355,18 @@ Hooks.on('ready', () => {
         }
     }
     // Need to add click event to all existing chat damage buttons.
-   $(document).on('click', '.damage-button', function() {
+    $(document).on('click', '.damage-button', function() {
        let dmg = $(this).data('damage');
        let damageOptions = $(this).data("options");
 
        Tools.applyDamageToTokens(dmg, damageOptions);
-   });
+    });
+    $(document).on('click', '.skillcheck-button', function() {
+        let skillFqn = $(this).data('skillcheck');
+        let skillOptions = $(this).data("options");
+
+        Tools.requestedSkillCheck(skillFqn, skillOptions);
+    });
 });
 
 

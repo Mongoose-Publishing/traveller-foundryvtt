@@ -280,7 +280,17 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
         }
         token.actor.applyDamage(damage, damageOptions, (tokens.size > 1));
     }
-}
+};
+
+Tools.requestedSkillCheck = async function(skillFqn, skillOptions) {
+    game.mgt2e.rollSkillMacro(skillFqn, {
+        "difficulty": skillOptions.difficulty,
+        "description": skillOptions.description,
+        "success": skillOptions.success,
+        "failure": skillOptions.failure
+    });
+
+};
 
 // Called from a chat command.
 Tools.damage = function(chatData, args) {

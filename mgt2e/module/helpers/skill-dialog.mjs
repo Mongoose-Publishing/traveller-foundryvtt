@@ -62,7 +62,7 @@ export class MgT2SkillDialog extends Application {
         this.boonBane = skillOptions.rollType?skillOptions.rollType:"normal";
         this.target = skillOptions.difficulty?skillOptions.difficulty:8;
         this.skillText = "";
-        this.text = skillOptions.text;
+        this.description = skillOptions.description;
 
         if (this.cha && data.characteristics && data.characteristics[this.cha]) {
             if (!this.skillData) {
@@ -124,6 +124,7 @@ export class MgT2SkillDialog extends Application {
             "actor": this.actor,
             "data": this.data,
             "skill": this.skillData,
+            "description": this.description,
             "spec": this.specData,
             "skillText": this.skillText,
             "value": this.value,

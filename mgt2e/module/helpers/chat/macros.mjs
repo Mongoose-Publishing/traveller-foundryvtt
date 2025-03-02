@@ -1,6 +1,7 @@
 /**
  * Built in macros
  */
+import {skillLabel} from "../dice-rolls.mjs";
 
 
 export const MgT2eMacros = {};
@@ -112,12 +113,68 @@ MgT2eMacros.skillCheck = function(args) {
 
     console.log("skillCheck");
 
-    game.mgt2e.rollSkillMacro(skillFqn, {
-        "difficulty": target,
-        "text": args.text,
-        "success": args.success,
-        "failure": args.failure
-    });
+    if (args.ask) {
+        let title = "";
+        let cha = args.cha?args.cha:null;
+        let skillFqn = args.skill;
 
+        let skillId = skillFqn;
+        let specId = null;
+        if (skillId.indexOf(".")) {
+            skillId = skillFqn.split(".")[0];
+            specId = skillFqn.split(".")[1];
+        }
+        let skill = CONFIG.MGT2.SKILLS[skillId];
+        console.log(skill);
+
+        if (!cha) {
+            cha = skill.default;
+        }
+        if (CONFIG.MGT2.CHARACTERISTICS[cha]) {
+            title = `${cha} + `;
+        }
+        title += skillLabel(skill, skillId);
+
+        let html = `<div class='skill-message'><h2>${title}</h2><div class="message-content">`;
+        if (args.text) {
+            html += `<div class="skill-description">${args.text}</div>`;
+        }
+        if (args.target) {
+            html += `<div><b>Target:</b> ${args.target}+</div>`;
+        }
+        let jsonData = {
+            "skill": skillFqn,
+            "specId": specId,
+            "cha": cha,
+            "dm": 0,
+            "rollType": "standard",
+            "difficulty": args.target,
+            "description": args.text,
+            "success": args.success,
+            "failure": args.failure
+        }
+        let json = JSON.stringify(jsonData);
+
+        console.log(json);
+        html += `<div class="skillcheck-message" data-skillcheck="${skillFqn}" data-options='${json}'>`;
+        html += `<button data-skillcheck="${skillFqn}" data-options='${json}'
+                    title="${title}"
+                    class="skillcheck-button">Roll ${title}</button>`;
+
+        html += `</div>`;
+
+        let chatData = {
+            content: html
+        };
+        ChatMessage.create(chatData, {});
+
+    } else {
+        game.mgt2e.rollSkillMacro(skillFqn, {
+            "difficulty": target,
+            "text": args.text,
+            "success": args.success,
+            "failure": args.failure
+        });
+    }
 };
 
