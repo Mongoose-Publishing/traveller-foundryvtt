@@ -8,6 +8,24 @@
 * Augments not behaving correctly when added to tokens. Seem to work fine when applied
   to a base actor.
 
+## Development
+
+* Re-written how skill checks are implemented to tidy up technical debt. Should have no functional
+  effect on how they work, but the code is cleaner.
+* Allow creatures to be displayed inline within a journal, similar to NPCs.
+* Improvements to how NPCs are displayed within a journal.
+* The spacecraft repair dialog no longer closes after a skill check. Gain a bonus DM
+  after a failure to fix a system.
+* Spacecraft critical modifiers now negatively effect skill checks made by crew members.
+* Updated Engineering role to add a 'Repair' option.
+* Added internal journal macro to allow the GM to request a skill check by players. Outputs
+  the request to the chat, along with a description. Clicking it will automatically figure out
+  success or failure, and output a message.
+* Added internal journal macro for causing damage. Outputs a damage box to the chat, which
+  can be applied to actors as normal.
+* Athletics checks now automatically default to basic characteristic (STR, DEX or END) if they
+  are untrained. This means you never get a -3 penalty when making such skill checks.
+
 ## 0.11.8 (Beta)
 
 * Added prone and in cover status for characters. Cover will add to a character's armour.

@@ -281,6 +281,7 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
 
 Tools.requestedSkillCheck = async function(skillFqn, skillOptions) {
     game.mgt2e.rollSkillMacro(skillFqn, {
+        "cha": skillOptions.cha,
         "difficulty": skillOptions.difficulty,
         "description": skillOptions.description,
         "success": skillOptions.success,

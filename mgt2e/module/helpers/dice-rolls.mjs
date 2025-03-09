@@ -827,6 +827,10 @@ export async function rollSkill(actor, skill, options) {
         title += ((title === "")?"":" + ") + skillLabel(skill);
         skillCheck = true;
         let value = data.skills["jackofalltrades"].value - 3;
+        // Athletics can always be rolled using basic characteristic.
+        if (skill.id === "athletics" && value < 0) {
+            value = 0;
+        }
         if (skillText.length > 0) {
             skillText += " + ";
         }
