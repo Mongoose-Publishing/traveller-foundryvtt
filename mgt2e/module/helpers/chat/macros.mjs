@@ -1,7 +1,7 @@
 /**
  * Built in macros
  */
-import {skillLabel} from "../dice-rolls.mjs";
+import {rollAttack, skillLabel} from "../dice-rolls.mjs";
 
 
 export const MgT2eMacros = {};
@@ -177,3 +177,13 @@ MgT2eMacros.skillCheck = function(args, ask) {
     }
 };
 
+MgT2eMacros.damage = function(args) {
+    let dice = args.dice;
+    let text = args.text;
+
+    rollAttack(null, null, {
+        "damage": dice,
+        "title": args.title?args.title:null,
+        "description": text
+    });
+};

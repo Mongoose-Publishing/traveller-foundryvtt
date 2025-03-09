@@ -103,7 +103,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
         attackOptions.skillDM = 0;
     }
 
-    let baseRange = weapon.system.weapon.range;
+    let baseRange = weapon?weapon.system.weapon.range:0;
     let rangeBand = null;
     let rangeDistance = baseRange;
     let rangeUnit = "m";
@@ -178,7 +178,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
 
     }
 
-    if (weapon.system.weapon.attackBonus) {
+    if (weapon && weapon.system.weapon.attackBonus) {
         const attackBonus = parseInt(weapon.system.weapon.attackBonus);
         if (attackBonus !== 0) {
             dice += " + " + attackBonus;
@@ -187,85 +187,94 @@ export async function rollAttack(actor, weapon, attackOptions) {
 
     // Header information
     content = `<div class="attack-message">`;
-    content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand)?(" @ " + rangeDistance+rangeUnit):""}</h2><div class="message-content">`;
-    content += "<div>";
+    if (weapon) {
+        content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand) ? (" @ " + rangeDistance + rangeUnit) : ""}</h2>`;
+    } else if (attackOptions.title) {
+        content += `<h2>${attackOptions.title}</h2>`
+    }
+    content += `<div class="message-content"><div>`;
     if (actor) {
         content += `<img class="skillcheck-thumb" alt="${actor.name}" src="${actor.thumbnail}"/>`;
     }
-    content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
-    content += `<b>Skill DM:</b> ${attackOptions.skillDM}`;
-    if (attackOptions.dm && parseInt(attackOptions.dm) < 0) {
-        content += " " + attackOptions.dm;
-    } else if (attackOptions.dm && parseInt(attackOptions.dm) > 0) {
-        content += " +" + attackOptions.dm;
+    if (weapon) {
+        content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
+        content += `<b>Skill DM:</b> ${attackOptions.skillDM}`;
+        if (attackOptions.dm && parseInt(attackOptions.dm) < 0) {
+            content += " " + attackOptions.dm;
+        } else if (attackOptions.dm && parseInt(attackOptions.dm) > 0) {
+            content += " +" + attackOptions.dm;
+        }
+        if (attackOptions.rollType && attackOptions.rollType === "boon") {
+            content += "<span class='boon'> (boon)</span>";
+        } else if (attackOptions.rollType && attackOptions.rollType === "bane") {
+            content += "<span class='bane'> (bane)</span>";
+        }
+        content += "<br/>";
+    } else if (attackOptions.description) {
+        content += `<div class="skill-description">${attackOptions.description}</div>`;
     }
-    if (attackOptions.rollType && attackOptions.rollType === "boon") {
-        content += "<span class='boon'> (boon)</span>";
-    } else if (attackOptions.rollType && attackOptions.rollType === "bane") {
-        content += "<span class='bane'> (bane)</span>";
-    }
-    content += "<br/>";
-
     // Work out damage.
-    let dmg = weapon.system.weapon.damage;
-    let type = weapon.system.weapon.damageType;
+    let dmg = weapon?weapon.system.weapon.damage:attackOptions.damage;
+    let type = weapon?weapon.system.weapon.damageType:"standard";
     if (!type) {
         type = "standard";
     }
 
-    let traits = weapon.system.weapon.traits;
-
-    if  (weapon.hasTrait("psiDmg")) {
-        let psi = attackOptions.psiDM;
-        let psiDmg = getTraitValue(traits, "psiDmg");
-        let bonus = 0;
-        if (attackOptions.psiDM) {
-            bonus += psi * psiDmg;
-        }
-        if (attackOptions.psiPoints) {
-            bonus += attackOptions.psiPoints * psiDmg;
-        }
-        if (bonus) {
-            dmg += ` + ${bonus}[PSI]`;
-        }
-    }
+    let traits = weapon?weapon.system.weapon.traits:"";
+    let destructive = false;
     let bonusPsiAP = 0;
-    if (weapon.hasTrait("psiAp")) {
-        let psi = attackOptions.psiDM;
-        let psiAp = getTraitValue(traits, "psiAp");
-        console.log("PsiAp is " + psiAp);
-        if (attackOptions.psiDM) {
-            bonusPsiAP += psi * psiAp;
+    if (weapon) {
+        if (weapon.hasTrait("psiDmg")) {
+            let psi = attackOptions.psiDM;
+            let psiDmg = getTraitValue(traits, "psiDmg");
+            let bonus = 0;
+            if (attackOptions.psiDM) {
+                bonus += psi * psiDmg;
+            }
+            if (attackOptions.psiPoints) {
+                bonus += attackOptions.psiPoints * psiDmg;
+            }
+            if (bonus) {
+                dmg += ` + ${bonus}[PSI]`;
+            }
         }
-        if (attackOptions.psiPoints) {
-            bonusPsiAP += attackOptions.psiPoints * psiAp;
+        if (weapon.hasTrait("psiAp")) {
+            let psi = attackOptions.psiDM;
+            let psiAp = getTraitValue(traits, "psiAp");
+            console.log("PsiAp is " + psiAp);
+            if (attackOptions.psiDM) {
+                bonusPsiAP += psi * psiAp;
+            }
+            if (attackOptions.psiPoints) {
+                bonusPsiAP += attackOptions.psiPoints * psiAp;
+            }
+            console.log("Bonus PSI AP: " + bonusPsiAP);
         }
-        console.log("Bonus PSI AP: " + bonusPsiAP);
-    }
 
-    let destructive = weapon.hasTrait("destructive");
-    let damageBonus = weapon.system.weapon.damageBonus;
-    if (damageBonus && actor && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
-        damageBonus = actor.system.characteristics[damageBonus].dm;
-        if (damageBonus > 0) {
-            dmg += " +" + damageBonus;
-        } else if (damageBonus < 0) {
-            dmg += " " + damageBonus;
+        destructive = weapon.hasTrait("destructive");
+        let damageBonus = weapon.system.weapon.damageBonus;
+        if (damageBonus && actor && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
+            damageBonus = actor.system.characteristics[damageBonus].dm;
+            if (damageBonus > 0) {
+                dmg += " +" + damageBonus;
+            } else if (damageBonus < 0) {
+                dmg += " " + damageBonus;
+            }
         }
-    }
 
-    if (!attackOptions.isParry) {
-        content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type === "standard") ? "" : (" (" + type + ")")}<br/>`;
-        if (baseRange > 0) {
-            content += `<b>Range:</b> ${baseRange}${rangeUnit}<br/>`;
+        if (!attackOptions.isParry) {
+            content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type === "standard") ? "" : (" (" + type + ")")}<br/>`;
+            if (baseRange > 0) {
+                content += `<b>Range:</b> ${baseRange}${rangeUnit}<br/>`;
+            } else {
+                content += `<b>Melee</b><br/>`;
+            }
+        }
+        if (traits && traits !== "") {
+            content += `<b>Traits:</b> ${weapon.printWeaponTraits()}<br/>`
         } else {
-            content += `<b>Melee</b><br/>`;
+            traits = "";
         }
-    }
-    if (traits && traits !== "") {
-        content += `<b>Traits:</b> ${weapon.printWeaponTraits()}<br/>`
-    } else {
-        traits = "";
     }
     content += '</div>';
     // End of header.
@@ -367,9 +376,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
         if (hasTrait(traits, "ap")) {
             ap += getTraitValue(traits, "ap");
         }
-        let tl = weapon.system.tl;
+        let tl = weapon?weapon.system.tl:0;
 
-        if (attackOptions.isParry) {
+        if (weapon && attackOptions.isParry) {
             let parryBonus = parseInt(weapon.system.weapon.parryBonus);
             if (actor) {
                 content += `<b>Parry DM:</b> ${skillDM + parryBonus}<br/><br/>`;
@@ -415,11 +424,11 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 "minimumDamage": minimumTotal,
                 "effect": effect,
                 "multiplier": 1,
-                "scale": weapon.system.weapon.scale,
-                "traits": weapon.system.weapon.traits,
+                "scale": weapon?weapon.system.weapon.scale:"traveller",
+                "traits": weapon?weapon.system.weapon.traits:"",
                 "ap": ap,
-                "tl": weapon.system.tl,
-                "damageType": weapon.system.weapon.damageType,
+                "tl": tl,
+                "damageType": weapon?weapon.system.weapon.damageType:"standard",
                 "radiation": radiationDamage,
                 "ranged": (baseRange>0)
             };
@@ -454,7 +463,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
         content += "</table>";
     }
 
-    if (weapon.system.notes && weapon.system.notes.length > 0) {
+    if (weapon && weapon.system.notes && weapon.system.notes.length > 0) {
         content += `<span class="weapon-notes">${weapon.system.notes}</span>`;
     }
     content += "</div>";

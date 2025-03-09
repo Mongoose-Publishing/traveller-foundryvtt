@@ -615,6 +615,8 @@ Tools.mgt2eClick = function(event) {
             MgT2eMacros.skillCheck(args, false);
         } else if (macroName === "skillReq") {
             MgT2eMacros.skillCheck(args, true);
+        } else if (macroName === "damage") {
+            MgT2eMacros.damage(args);
         }
     } catch (e) {
         ui.notifications.error(e.error);
