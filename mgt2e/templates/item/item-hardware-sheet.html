@@ -45,9 +45,13 @@
                 <div class="resource">
                     <label for="system.tl" class="resource-label">TL</label>
                     <br/>
-                    <select class="hardwareTL" name="system.tl">
-                        {{selectOptions SHIP_TL selected=system.tl}}
-                    </select>
+                    {{#if HARDWARE_RATING}}
+                        <input type="text" name="system.tl" value="{{system.tl}}" readonly data-dtype="Number"/>
+                    {{else}}
+                        <select class="hardwareTL" name="system.tl">
+                            {{selectOptions SHIP_TL selected=system.tl}}
+                        </select>
+                    {{/if}}
                     <!-- <input type="text" name="system.tl" value="{{system.tl}}" data-dtype="Number"/> -->
                 </div>
                 <div class="resource">
