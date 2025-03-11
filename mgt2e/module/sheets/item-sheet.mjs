@@ -152,6 +152,19 @@ export class MgT2ItemSheet extends ItemSheet {
                 "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
                 "sensor": game.i18n.localize("MGT2.Spacecraft.System.sensor"),
             };
+
+            context.HARDWARE_RATING = null;
+            let sys = context.item.system.hardware.system;
+            if (sys === "j-drive" || sys === "m-drive" || sys === "r-drive") {
+                context.HARDWARE_RATING = {};
+                for (let i in MGT2.SHIP_HARDWARE[sys].rating) {
+                    if (MGT2.SHIP_HARDWARE[sys].rating[i].tl <= maxTL) {
+                        context.HARDWARE_RATING[i] = game.i18n.format("MGT2.Item.Hardware.Rating." + sys,
+                            {"rating": i});
+                    }
+                }
+            }
+
             this.calculateHardware(context, context.item);
         }
 
@@ -519,6 +532,32 @@ export class MgT2ItemSheet extends ItemSheet {
             }
             context.availableWeapons = availableWeapons;
             context.activeWeapons = activeWeapons;
+        } else if (item.system.hardware.system === "j-drive" || item.system.hardware.system === "m-drive" || item.system.hardware.system === "r-drive") {
+            let tonnage = 0;
+            let tl = item.system.tl;
+            let h = item.system.hardware;
+            let pow = h.power;
+            if (MGT2.SHIP_HARDWARE[h.system].rating[h.rating]) {
+                let d = MGT2.SHIP_HARDWARE[h.system].rating[h.rating];
+                tonnage = (d.tonnage * ship.system.spacecraft.dtons) / 100.0;
+                tl = d.tl;
+                pow = (d.power * ship.system.spacecraft.dtons) / 100.0;
+            }
+            if (MGT2.SHIP_HARDWARE[h.system].tonnage) {
+                tonnage += MGT2.SHIP_HARDWARE[h.system].tonnage;
+            }
+            if (MGT2.SHIP_HARDWARE[h.system].minimum) {
+                tonnage = Math.max(tonnage, MGT2.SHIP_HARDWARE[h.system].minimum);
+            }
+            let cost = tonnage *  MGT2.SHIP_HARDWARE[h.system].cost;
+            if (tl !== item.system.tl || cost !== item.system.cost || pow !== h.power || tonnage !== h.tons) {
+                item.system.tl = tl;
+                item.system.cost = cost;
+                h.power = pow;
+                h.tons = tonnage;
+                item.update({"system": item.system });
+            }
+
         } else {
             let tons = parseFloat(item.system.hardware.tons);
             let percent = parseFloat(item.system.hardware.tonnage.percent);

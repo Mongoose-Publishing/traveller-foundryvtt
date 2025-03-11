@@ -787,6 +787,10 @@
   "MGT2.Item.SpaceMount.Spinal": "Spinal Mount",
   "MGT2.Item.Power": "Power",
 
+  "MGT2.Item.Hardware.Rating.j-drive": "Jump-{rating}",
+  "MGT2.Item.Hardware.Rating.m-drive": "{rating} G",
+  "MGT2.Item.Hardware.Rating.r-drive": "{rating} G",
+
   "MGT2.Armour.FormType": "Armour Type",
   "MGT2.Armour.Form.Standard": "Standard",
   "MGT2.Armour.Form.Layered": "Anti-Energy",

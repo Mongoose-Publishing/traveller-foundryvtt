@@ -97,6 +97,11 @@
                                 <option value="spinal">{{localize "MGT2.Item.SpaceMount.Spinal"}}</option>
                             {{/select}}
                         </select>
+                    {{else if HARDWARE_RATING}}
+                        <br/>
+                        <select class="hardwareSystemRating" name="system.hardware.rating">
+                            {{selectOptions HARDWARE_RATING selected=system.hardware.rating}}
+                        </select>
                     {{else}}
                         <input type="text" name="system.hardware.rating" value="{{system.hardware.rating}}" data-dtype="Number"/>
                     {{/if}}
@@ -136,6 +141,9 @@
         {{else if (ifEquals system.hardware.system "cargo")}}
         {{else if (ifEquals system.hardware.system "bridge")}}
         {{else if (ifEquals system.hardware.system "stateroom")}}
+        {{else if (ifEquals system.hardware.system "j-drive")}}
+        {{else if (ifEquals system.hardware.system "m-drive")}}
+        {{else if (ifEquals system.hardware.system "r-drive")}}
         {{else if (ifEquals system.hardware.system "sensor")}}
         <div class="shadow grid grid-3col">
             <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.visual">

@@ -13,6 +13,64 @@ MGT2.HARDWARE_GENERAL = "general";
 MGT2.HARDWARE_ARMOUR = "armour";
 MGT2.HARDWARE_JUMP = "jump";
 
+MGT2.SHIP_HARDWARE = {
+    "j-drive": {
+        "cost": 1.5,
+        "minimum": 10,
+        "tonnage": 5,
+        "rating": {
+            1: { "tonnage": 2.5, "power": 10, "tl": 9 },
+            2: { "tonnage": 5.0, "power": 20, "tl": 11 },
+            3: { "tonnage": 7.5, "power": 30, "tl": 12 },
+            4: { "tonnage": 10, "power": 40, "tl": 13 },
+            5: { "tonnage": 12.5, "power": 50, "tl": 14 },
+            6: { "tonnage": 15, "power": 60, "tl": 15 },
+            7: { "tonnage": 17.5, "power": 70, "tl": 16 },
+            8: { "tonnage": 20, "power": 80, "tl": 17 },
+            9: { "tonnage": 22.5, "power": 90, "tl": 18 }
+        }
+    },
+    "m-drive": {
+        "cost": 2,
+        "rating": {
+            0: { "tonnage": 0.5, "power": 0.25, "tl": 9 },
+            1: { "tonnage": 1, "power": 10, "tl": 9 },
+            2: { "tonnage": 2, "power": 20, "tl": 10 },
+            3: { "tonnage": 3, "power": 30, "tl": 10 },
+            4: { "tonnage": 4, "power": 40, "tl": 11 },
+            5: { "tonnage": 5, "power": 50, "tl": 11 },
+            6: { "tonnage": 6, "power": 60, "tl": 12 },
+            7: { "tonnage": 7, "power": 70, "tl": 13 },
+            8: { "tonnage": 8, "power": 80, "tl": 14 },
+            9: { "tonnage": 9, "power": 90, "tl": 15 },
+            10: { "tonnage": 10, "power": 100, "tl": 16 },
+            11: { "tonnage": 11, "power": 110, "tl": 17 }
+        }
+    },
+    "r-drive": {
+        "cost": 0.2,
+        "rating": {
+            0: { "tonnage": 1, "power": 0, "tl": 7 },
+            1: { "tonnage": 2, "power": 0, "tl": 7 },
+            2: { "tonnage": 4, "power": 0, "tl": 7 },
+            3: { "tonnage": 6, "power": 0, "tl": 7 },
+            4: { "tonnage": 8, "power": 0, "tl": 8 },
+            5: { "tonnage": 10, "power": 0, "tl": 8 },
+            6: { "tonnage": 12, "power": 0, "tl": 8 },
+            7: { "tonnage": 14, "power": 0, "tl": 9 },
+            8: { "tonnage": 16, "power": 0, "tl": 9 },
+            9: { "tonnage": 18, "power": 0, "tl": 9 },
+            10: { "tonnage": 20, "power": 0, "tl": 10 },
+            11: { "tonnage": 22, "power": 0, "tl": 10 },
+            12: { "tonnage": 24, "power": 0, "tl": 10 },
+            13: { "tonnage": 26, "power": 0, "tl": 11 },
+            14: { "tonnage": 28, "power": 0, "tl": 11 },
+            15: { "tonnage": 30, "power": 0, "tl": 11 },
+            16: { "tonnage": 32, "power": 0, "tl": 12 }
+        }
+    }
+}
+
 MGT2.VEHICLES = {
   "CHASSIS": {
       "lightGround": {

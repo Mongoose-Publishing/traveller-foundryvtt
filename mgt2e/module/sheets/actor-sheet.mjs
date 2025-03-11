@@ -339,11 +339,12 @@ export class MgT2ActorSheet extends ActorSheet {
         let powerUsed = parseInt(actorData.spacecraft.dtons) * 0.2;
         let fuelTotal = 0;
 
-        let hits = parseInt(actorData.spacecraft.dtons) / 2.5;
-        if (actorData.spacecraft.dtons >= 100000) {
-            hits = parseInt(actorData.spacecraft.dtons / 1.5);
-        } else if (actorData.spacecraft.dtons >= 25000) {
-            hits = parseInt(actorData.spacecraft.dtons / 2);
+        let dtons = parseInt(actorData.spacecraft.dtons);
+        let hits = dtons / 2.5;
+        if (dtons >= 100000) {
+            hits = parseInt(dtons / 1.5);
+        } else if (dtons >= 25000) {
+            hits = parseInt(dtons / 2);
         }
         let config = null;
         if (actorData.spacecraft.configuration) {
