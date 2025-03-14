@@ -125,10 +125,7 @@ export class MgT2SpacecraftRepairDialog extends Application {
                 e.remove();
             }
         } else {
-            let dm = 0;
-            if (this.actorShip.flags.mgt2e["damageDM_" + id]) {
-                dm = this.actorShip.flags.mgt2e["damageDM_" + id];
-            }
+            let dm = this.shipDamage[id].dm;
             dm = parseInt(dm) + 1;
             this.actorShip.setFlag("mgt2e", "damageDM_" + id, dm);
             this.setIntValue(html, ".dm_"+id, dm);
