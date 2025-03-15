@@ -550,6 +550,12 @@ export class MgT2ItemSheet extends ItemSheet {
                 tonnage = Math.max(tonnage, MGT2.SHIP_HARDWARE[h.system].minimum);
             }
             let cost = tonnage *  MGT2.SHIP_HARDWARE[h.system].cost;
+            if (h.advancement && h.advancement !== "standard" && MGT2.SPACECRAFT_ADVANCES[h.advancement]) {
+                tl += MGT2.SPACECRAFT_ADVANCES[h.advancement].tl;
+                tonnage = tonnage * MGT2.SPACECRAFT_ADVANCES[h.advancement].tonnage;
+                cost = cost * MGT2.SPACECRAFT_ADVANCES[h.advancement].cost;
+            }
+
             if (tl !== item.system.tl || cost !== item.system.cost || pow !== h.power || tonnage !== h.tons) {
                 item.system.tl = tl;
                 item.system.cost = cost;
