@@ -9,7 +9,7 @@
 
         <div class="resource">
             <label for="shortname" class="resource-label">{{localize 'MGT2.EditSkill.ShortName'}}</label>
-            <input class="skillShortNameField" name="shortname" type="text"
+            <input class="skillShortNameField" name="shortName" type="text"
                    data-dtype="String" value="{{shortName}}"
                    title="{{localize 'MGT2.EditSkill.ShortNameDesc'}}" readonly
             />
@@ -19,23 +19,12 @@
             <div class="parent-skill">
                 <label for="parentSkill" class="resource-label">Specialisation of</label><br/>
                 {{#if isEdit}}
-                <input class="skillParentSelect" name="parentSkill" type="text"
-                       data-dtype="String" value="{{parentLabel}}" readonly />
+                    <input class="skillParentSelect" name="parentSkill" type="text"
+                           data-dtype="String" value="{{parentLabel}}" readonly />
                 {{else}}
-                <select class="skillParentSelect" name="parentSkill">
-                    {{#select parent}}
-                    <option value="">None</option>
-                    {{#each data.skills as |skill id|}}
-                        <option value="{{id}}">
-                            {{#if skill.label}}
-                                {{skill.label}}
-                            {{else}}
-                                {{localize (concat 'MGT2.Skills.' skill.id)}}
-                            {{/if}}
-                        </option>
-                    {{/each}}
-                    {{/select}}
-                </select>
+                    <select class="skillParentSelect" name="parentSkill">
+                        {{selectOptions SKILL_LIST selected=parentId}}
+                    </select>
                 {{/if}}
             </div>
         </div>
@@ -44,22 +33,28 @@
     <div class="characteristic-selection">
         <label for="default" class="resource-label">Default Characteristic</label>
         <select class="skillDefaultSelect" name="default">
-            {{#select default}}
-                {{#each data.characteristics as |char id|}}
-                    <option value="{{id}}">{{id}}</option>
-                {{/each}}
-            {{/select}}
+            {{selectOptions CHA_LIST selected=default}}
         </select>
         <br/>
     </div>
 
     <div>
-        <label for="combat" class="skillDialogLabel">Combat</label>
-        <input type="checkbox" name="combat" class="skillCombatToggle" value="{{combat}}"/>
+        <input type="checkbox" name="isCombat" class="skillCombatToggle"
+               {{checked isCombat}} data-type="Boolean"
+        />
+        <label for="isCombat" class="skillDialogLabel">{{localize 'MGT2.EditSkill.Combat'}}</label>
     </div>
     <div>
-        <label for="background" class="skillDialogLabel">Background</label>
-        <input type="checkbox" name="background" class="skillBackgroundToggle" value="{{background}}"/>
+        <input type="checkbox" name="isBackground" class="skillBackgroundToggle"
+               {{checked isBackground}} data-type="Boolean"
+        />
+        <label for="isBackground" class="skillDialogLabel">{{localize 'MGT2.EditSkill.Background'}}</label>
+    </div>
+    <div>
+        <input type="checkbox" name="isIndividual" class="skillIndividualToggle"
+               {{checked isIndividual}} data-type="Boolean"
+        />
+        <label for="isIndividual" class="skillDialogLabel">{{localize 'MGT2.EditSkill.Individual'}}</label>
     </div>
 
     <footer class="sheet-footer flexrow">

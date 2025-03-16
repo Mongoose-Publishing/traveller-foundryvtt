@@ -5,27 +5,14 @@
             <span class="edit-skill">Edit</span>
         {{/if}}
         <h3 class="skill-dialog-title">
-                {{#if spec}}
-                    {{skill.label}} ({{spec.label}})
-                    {{#if spec.augmented}}
-                        [{{spec.augmented}}<sup>*</sup>]
-                    {{else}}
-                        [{{value}}]
-                    {{/if}}
-                {{else}}
-                    {{#if skill}}
-                        {{skill.label}} [{{value}}]
-                    {{else}}
-                        <i>untrained</i> [{{value}}]
-                    {{/if}}
-                {{/if}}
+            {{skillTitle}} [{{value}}]
         </h3>
 
         <div class="grid grid-4col">
             <div class="xpgrid resource">
                 <label for="dicetype" class="skillDialogLabel">Level</label>
                 <br/>
-                <span>{{value}}</span>
+                <span>{{formData.value}}</span>
             </div>
 
             <div class="xpgrid resource">
@@ -37,13 +24,13 @@
             <div class="xpgrid resource">
                 <label for="xp" class="skillDialogLabel">XP</label>
                 <br/>
-                <input class="skillXPxp writable" name="xp" type="text" data-dtype="Number" value="{{xp}}"/>
+                <input class="skillXPxp writable" name="xp" type="text" data-dtype="Number" value="{{formData.xp}}"/>
             </div>
             <div class="resource"></div>
             <div class="resource grid-4col">
                 <label for="study" class="skillDialogLabel">Study Notes</label>
                 <br/>
-                <input class="skillXPstudy writable" name="study" type="text" data-dtype="String" value="{{study}}"/>
+                <input class="skillXPstudy writable" name="study" type="text" data-dtype="String" value="{{formData.study}}"/>
             </div>
         </div>
 
@@ -51,14 +38,14 @@
             <div class="resource">
                 <label for="bonus" class="skillDialogLabel">Bonus DM</label>
                 <br/>
-                <input class="skillXPbonus writable" name="bonus" type="text" data-dtype="Number" value="{{bonus}}"/>
+                <input class="skillXPbonus writable" name="bonus" type="text" data-dtype="Number" value="{{formData.bonus}}"/>
             </div>
 
             <div class="resource">
                 <label for="boon" class="skillDialogLabel">Boon</label>
                 <br/>
                 <select class="skillXPboon" name="boon">
-                    {{#select boon}}
+                    {{#select formData.boon}}
                     <option value="">Standard</option>
                     <option value="boon">Boon</option>
                     <option value="bane">Bane</option>
@@ -72,7 +59,7 @@
             <div class="skill-bonus grid-span-4 resource">
                 <label for="notes" class="skillDialogLabel">Skill notes</label>
                 <br/>
-                <input class="skillXPnotes writable" name="notes" type="text" data-dtype="String" value="{{notes}}"/>
+                <input class="skillXPnotes writable" name="notes" type="text" data-dtype="String" value="{{formData.notes}}"/>
             </div>
         </div>
         <h3>Effects</h3>

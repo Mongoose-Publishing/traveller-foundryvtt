@@ -25,6 +25,11 @@
   can be applied to actors as normal.
 * Athletics checks now automatically default to basic characteristic (STR, DEX or END) if they
   are untrained. This means you never get a -3 penalty when making such skill checks.
+* Some improvements to skill adding and editing dialog. Skills can now be set as independent,
+  which means specialisations function like the Profession skill.
+* Spacecraft tonnage, TL, cost and power use are now hardwired for drive components. This should 
+  be simpler to use, and follow the Mongoose rules better. TL and cost for these components will
+  also modify if TL advancements are applied.
 
 ## 0.11.8 (Beta)
 

@@ -2257,24 +2257,16 @@ export class MgT2ActorSheet extends ActorSheet {
             img = "systems/mgt2e/icons/hardware/j-drive.svg";
             system.tl = 9;
             system.hardware.rating = 1;
-            system.hardware.tonnage.tons = 5;
-            system.hardware.tonnage.percent = 2.5;
-            system.hardware.tonnage.minimum = 10;
-            system.hardware.tonnage.cost = 1.5;
         } else if (systemType === "m-drive") {
             itemName = "M-Drive";
             img = "systems/mgt2e/icons/hardware/m-drive.svg";
             system.tl = 9;
             system.hardware.rating = 1;
-            system.hardware.tonnage.percent = 1;
-            system.hardware.tonnage.cost = 2;
         } else if (systemType === "r-drive") {
             itemName = "R-Drive";
             img = "systems/mgt2e/icons/hardware/r-drive.svg";
             system.tl = 7;
             system.hardware.rating = 1;
-            system.hardware.tonnage.percent = 2;
-            system.hardware.tonnage.cost = 0.2;
         } else if (systemType === "power") {
             itemName = "Fusion Reactor (TL8)";
             img = "systems/mgt2e/icons/hardware/fusion_reactor.svg";

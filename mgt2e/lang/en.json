@@ -878,12 +878,17 @@
   "MGT2.Finance.Mortgage": "Mortgage (Cr/Month)",
   "MGT2.Finance.LivingCosts": "Living Costs (Cr/Month)",
 
+  "MGT2.XPSkill.Title": "Training and Bonuses for {name}",
   "MGT2.EditSkill.Edit": "Edit skill",
   "MGT2.EditSkill.Add": "Add new skill",
   "MGT2.EditSkill.SkillName": "Skill Label",
   "MGT2.EditSkill.SkillNameDesc": "The label shown for the skill on the character sheet",
   "MGT2.EditSkill.ShortName": "Short Name",
   "MGT2.EditSkill.ShortNameDesc": "The internal name used to identify the skill",
+  "MGT2.EditSkill.Combat": "Combat skill, can be used with weapons",
+  "MGT2.EditSkill.Background": "Background skill, can be selected during pre-career",
+  "MGT2.EditSkill.Individual": "Individual skill, each specialisation must be individually trained",
+  "MGT2.EditSkill.Deleted": "Deleted, will be removed from target actor when package is applied",
 
   "MGT2.Info.Damage": "{actor} takes {damage} hits",
 

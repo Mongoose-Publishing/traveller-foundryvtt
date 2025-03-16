@@ -12,14 +12,16 @@ export class MgT2XPDialog extends Application {
         return options;
     }
 
-    constructor(actor, skill, spec, cha) {
+    constructor(actor, skillId, specId, cha) {
         super();
         this.actor = actor;
-        const data = actor.system;
+        const actorData = actor.system;
 
-        this.skillId = skill;
-        this.skill = null;
-        this.specId = null;
+        console.log("MgT2XPDialog: [" + skillId + "] [" + specId + "]");
+
+        this.skillId = skillId;
+        this.skillData = null;
+        this.specId = specId;
         this.spec = null;
         this.value = 0;
         this.chaOnly = false;
@@ -30,6 +32,10 @@ export class MgT2XPDialog extends Application {
         this.xp = 0;
         this.trained = false;
 
+        // skillId / specId  - string ids for the skill.
+        // skillData / specData - objects for the skill
+        // formData - object for either a parent skill or a specialisation.
+
         if (cha && data.characteristics && data.characteristics[cha]) {
             this.characteristic = data.characteristics[cha];
             if (!skill) {
@@ -37,57 +43,53 @@ export class MgT2XPDialog extends Application {
                 this.value = 0;
             }
         }
-        this.data = data;
-        if (skill) {
-            this.skill = data.skills[skill];
-            this.cha = this.skill.default;
-            this.xp = parseInt(this.skill.xp?this.skill.xp:0);
-            this.bonus = parseInt(this.skill.bonus?this.skill.bonus:0);
-            this.notes = this.skill.notes?this.skill.notes:"";
-            this.study = this.skill.study?this.skill.study:"";
-            this.boon = this.skill.boon;
-            this.options.title = skillLabel(this.skill, skill);
-            if (this.skill.trained) {
-                this.value = this.skill.value;
-                this.trained = true;
+        if (this.skillId && actorData.skills[skillId]) {
+            this.skillData = actorData.skills[skillId];
+            this.formData = this.skillData;
+            this.skillTitle = skillLabel(this.skillData, this.skillId);
 
-                if (spec) {
-                    this.specId = spec;
-                    this.spec = data.skills[skill].specialities[spec];
-                    this.value = this.spec.value;
-                    this.xp = parseInt(this.spec.xp?this.spec.xp:0);
-                    this.bonus = parseInt(this.spec.bonus?this.spec.bonus:0);
-                    this.notes = this.spec.notes?this.spec.notes:"";
-                    this.boon = this.spec.boon;
-                    this.options.title += " (" + skillLabel(this.spec, spec) + ")";
+            if (this.specId && this.skillData.trained) {
+                if (!this.skillData.specialities[this.specId]) {
+                    ui.notifications.error("Cannot find speciality " + this.specId);
+                    return;
                 }
+                this.specData = this.skillData.specialities[this.specId];
+                this.formData = this.specData;
+                this.skillTitle += ` (${skillLabel(this.specData, this.specId)})`;
+            } else if (this.specId) {
+                ui.notifications.error("Cannot train a specialisation if parent is untrained");
+                return;
+            } else {
+                // Just the basic top level skill.
             }
-        } else if (cha) {
-            this.options.title = this.characteristic.label;
-            this.value = this.characteristic.dm;
+        } else {
+            ui.notifications.error("Unable to find skill " + skillId);
+            return;
         }
-        this.value = parseInt(this.value);
+        this.formData.xp = parseInt(this.formData.xp?this.formData.xp:0);
+        this.formData.bonus = parseInt(this.formData.bonus?this.formData.bonus:0);
+        this.formData.notes = this.formData.notes?this.formData.notes:"";
+        this.formData.study = this.formData.study?this.formData.study:"";
+
+
+        this.options.title = game.i18n.format("MGT2.XPSkill.Title", { name: this.skillTitle });
         this.cost = 1;
-        if (this.value > 0) {
-            this.cost = Math.pow(2, this.value);
+        if (this.formData.value > 0) {
+            this.cost = Math.pow(2, this.formData.value);
         }
     }
 
     getData() {
         return {
             "actor": this.actor,
-            "data": this.data,
-            "skill": this.skill,
-            "spec": this.spec,
-            "value": this.value,
-            "chaOnly": this.chaOnly,
-            "characteristic": this.cha,
+            "data": this.actorData,
+            "formData": this.formData,
+            "skillData": this.skillData,
+            "specData": this.specData,
+            "skillTitle": this.skillTitle,
+            "value": this.formData.value,
             "cost": this.cost,
             "xp": this.xp,
-            "bonus": this.bonus,
-            "notes": this.notes,
-            "study": this.study,
-            "boon": this.boon,
             "showEdit": !(this.actor.parent)
         }
     }
@@ -98,23 +100,18 @@ export class MgT2XPDialog extends Application {
         save.on("click", event => this.onSaveClick(event, html));
 
         html.find(".clearEffects").click(ev => {
-           if (this.spec) {
-               this.spec.augdm = 0;
-               this.spec.augment = 0;
-               this.spec.expert = 0;
-           } else {
-               this.skill.augdm = 0;
-               this.skill.augment = 0;
-               this.skill.expert = 0;
-           }
+           this.formData.augdm = 0;
+           this.formData.augment = 0;
+           this.formData.expert = 0;
            // TODO: Need to update the dialog.
         });
+
         html.find(".edit-skill").on("click", event => this.onSkillEdit(event, html));
     }
 
     async onSkillEdit(event, html) {
         event.preventDefault();
-        new MgT2AddSkillDialog(this.actor, this.skill, this.options).render(true);
+        new MgT2AddSkillDialog(this.actor, this.skillId, this.specId).render(true);
         this.close();
     }
 
@@ -133,68 +130,20 @@ export class MgT2XPDialog extends Application {
     async onSaveClick(event, html) {
         event.preventDefault();
 
-        let xp = this.getIntValue(html, "skillXPxp");
-        let bonus = this.getIntValue(html, "skillXPbonus");
-        let notes = html.find("input.skillXPnotes")[0].value;
-        let study = html.find("input.skillXPstudy")[0].value;
-        let boon = html.find("select.skillXPboon")[0].value;
-        if (boon) {
-            console.log("Boon is set to " + boon);
-        }
+        this.formData.xp = this.getIntValue(html, "skillXPxp");
+        this.formData.bonus = this.getIntValue(html, "skillXPbonus");
+        this.formData.notes = html.find("input.skillXPnotes")[0].value;
+        this.formData.study = html.find("input.skillXPstudy")[0].value;
+        this.formData.boon = html.find("select.skillXPboon")[0].value;
 
-        // The required cost to go up a level.
-        let cost = 1;
-        let data = this.spec?this.spec:this.skill;
-        if (this.value > 0) {
-            cost = Math.pow(2, this.value);
-        }
-        while (xp >= cost) {
-            if (!this.skill.trained) {
-                this.skill.trained = true;
-                xp -= cost;
+        while (this.formData.xp >= this.cost) {
+            if (!this.formData.trained) {
+                this.formData.trained = true;
+                this.formData.xp -= this.cost;
             } else {
-                data.value += 1;
-                xp -= cost;
+                this.formData.value += 1;
+                this.formData.xp -= this.cost;
             }
-            cost = Math.pow(2, data.value);
-        }
-
-        if (this.spec) {
-            this.spec.xp = xp;
-            this.spec.bonus = bonus;
-            this.spec.notes = notes;
-            if (study) {
-                this.spec.study = study;
-            }
-            if (boon) {
-                this.spec.boon = boon;
-            } else {
-                this.spec.boon = null;
-            }
-
-            //this.spec.augdm = parseInt(html.find("input[class='augdm']")[0].value);
-            //this.spec.augment = parseInt(html.find("input[class='augment']")[0].value);
-            //this.spec.expert = parseInt(html.find("input[class='expert']")[0].value);
-        } else if (this.skill) {
-            this.skill.xp = xp;
-            this.skill.bonus = bonus;
-            this.skill.notes = notes;
-            if (study) {
-                this.skill.study = study;
-            }
-            if (boon) {
-                this.actor.system.skills[this.skillId].boon = boon;
-            } else {
-                this.actor.system.skills[this.skillId].boon = null;
-            }
-
-            // this.skill.augdm = parseInt(html.find("input[class='augdm']")[0].value);
-            // this.skill.augment = parseInt(html.find("input[class='augment']")[0].value);
-            // this.skill.expert = parseInt(html.find("input[class='expert']")[0].value);
-
-            this.actor.system.skills[this.skillId].xp = xp;
-            this.actor.system.skills[this.skillId].bonus = bonus;
-            this.actor.system.skills[this.skillId].notes = notes;
         }
         this.actor.update({ "system.skills": this.actor.system.skills });
 
