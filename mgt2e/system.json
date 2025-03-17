@@ -2,7 +2,7 @@
   "id": "mgt2e",
   "title": "Mongoose Traveller 2e",
   "description": "A system for Mongoose Traveller 2e",
-  "version": "0.11.8.8-DEV",
+  "version": "0.11.8.9-DEV",
   "compatibility": {
     "minimum": 11,
     "verified": 12
