@@ -64,39 +64,21 @@
         </div>
         <h3>Effects</h3>
         <div class="grid grid-4col">
-            {{#if spec}}
-                <div class="xpgrid">
-                    <label class="skillDialogLabel">DM</label>
-                    <br/>
-                    <input class="augdm" readonly name="spec.dm" type="text" data-dtype="Number" value="{{spec.augdm}}"/>
-                </div>
-                <div class="xpgrid">
-                    <label class="skillDialogLabel">Aug</label>
-                    <br/>
-                    <input class="augment" readonly name="spec.augment" type="text" data-dtype="Number" value="{{spec.augment}}"/>
-                </div>
-                <div class="xpgrid">
-                    <label class="skillDialogLabel">Expert</label>
-                    <br/>
-                    <input class="expert" readonly name="spec.expert" type="text" data-dtype="Number" value="{{spec.expert}}"/>
-                </div>
-            {{else}}
-                <div class="xpgrid">
-                    <label class="skillDialogLabel">DM</label>
-                    <br/>
-                    <input class="augdm" readonly name="skill.dm" type="text" data-dtype="Number" value="{{skill.augdm}}"/>
-                </div>
-                <div class="xpgrid">
-                    <label class="skillDialogLabel">Aug</label>
-                    <br/>
-                    <input class="augment" readonly name="skill.augment" type="text" data-dtype="Number" value="{{skill.augment}}"/>
-                </div>
-                <div class="xpgrid">
-                    <label class="skillDialogLabel">Expert</label>
-                    <br/>
-                    <input class="expert" readonly name="skill.expert" type="text" data-dtype="Number" value="{{skill.expert}}"/>
-                </div>
-            {{/if}}
+            <div class="xpgrid">
+                <label class="skillDialogLabel">DM</label>
+                <br/>
+                <input class="augdm" readonly name="formData.dm" type="text" data-dtype="Number" value="{{formData.augdm}}"/>
+            </div>
+            <div class="xpgrid">
+                <label class="skillDialogLabel">Aug</label>
+                <br/>
+                <input class="augment" readonly name="formData.augment" type="text" data-dtype="Number" value="{{formData.augment}}"/>
+            </div>
+            <div class="xpgrid">
+                <label class="skillDialogLabel">Expert</label>
+                <br/>
+                <input class="expert" readonly name="formData.expert" type="text" data-dtype="Number" value="{{formData.expert}}"/>
+            </div>
             <div>
                 <br/><span class="clearEffects rollable">Clear</span>
             </div>

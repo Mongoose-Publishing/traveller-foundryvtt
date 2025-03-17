@@ -75,8 +75,8 @@ version=${major}.${minor}.${patch}
 
 # Build the binary db files. Export to json, clean, then rebuild.
 ./mkpacks unpack || die "Unable to unpack compendiums"
-rm -fr ./mgt2e/packs/[a-z]*
-./mkpacks pack || die "Unable to pack compendiums"
+#rm -fr ./mgt2e/packs/[a-z]*
+#./mkpacks pack || die "Unable to pack compendiums"
 
 # If we want to create a branch, do so.
 mkdir -p release

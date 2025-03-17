@@ -240,6 +240,18 @@
                 "divisions": { }
             }
         }
+    },
+    "world": {
+      "uwp": {
+        "port": "X",
+        "size": 0,
+        "atmosphere": 0,
+        "hydrosphere": 0,
+        "population": 0,
+        "government": 0,
+        "law": 0,
+        "techLevel": 0
+      }
     }
   },
   "Item": {

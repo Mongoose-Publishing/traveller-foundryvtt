@@ -15,7 +15,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>A skill can be rolled by clicking the skill on the character sheet.</p><p>This will bring up a dialog that allows you to select which characteristic to use, set a difficulty and add a Dice Modifier.</p><p>By default a target difficulty of 8 is assumed.</p><h2>Quick Rolls</h2><p>Holding shift when clicking a skill will perform a quick roll, which skips the dialog and assumes defaults on everything.</p><p>The configurable <strong>Default to Quick Rolls</strong> can be used to reverse this behaviour. If selected, clicking a skill with perform a roll with default settings, and holding shift will open the dialog.</p><p></p>",
+        "content": "<p>A skill can be rolled by clicking the skill name on the character sheet. You can also roll a characteristic by clicking on the characteristic name.</p><p>This will bring up a dialog that allows you to select which characteristic to use, set a difficulty and add a Dice Modifier. If the actor is not a token, then an <strong>Edit</strong> option will be shown in the top right corner which allows you to edit a skill.</p><p></p><img src=\"systems/mgt2e/images/docs/skill_roll.webp\" class=\"centered\" /><p></p><p>By default a target difficulty of 8 is assumed. Each skill has a default characteristic, which can be changed when you make the roll.</p><p>If you select <strong>Remember characteristic</strong> then the default for this skill will be changed.</p><h2>Quick Rolls</h2><p>Holding shift when clicking a skill will perform a quick roll, which skips the dialog and assumes defaults on everything.</p><p>The configurable <strong>Default to Quick Rolls</strong> can be used to reverse this behaviour. If selected, clicking a skill with perform a roll with default settings, and holding shift will open the dialog.</p><p></p>",
         "markdown": ""
       },
       "video": {
@@ -32,10 +32,10 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.4.8",
-        "coreVersion": "12.329",
+        "coreVersion": "12.331",
         "createdTime": 1717536354073,
-        "modifiedTime": 1717537793902,
-        "lastModifiedBy": "Uzw5MJmM0BRE3sSL",
+        "modifiedTime": 1742162301246,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null
       },
@@ -53,7 +53,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>If you Ctrl-click on a skill on a character sheet, then it will open the Experience dialog.</p><p>This allows you to add experience points to a skill when training it up.</p><p>This also allows you to add a custom modifier to the skill. This would normally be used for racial bonuses.</p><p>When you submit the dialog, it will calculate whether you have enough experience to level up, and automatically level up that skill.</p><p>A skill with extra experience on it as a + symbol next to it on the character sheet.</p><p></p>"
+        "content": "<p>If you Ctrl-click on a skill on a character sheet, then it will open the Experience dialog.</p><p>This allows you to add experience points to a skill when training it up. If this actor is not a token, then there will also be an <strong>Edit</strong> button on the top right of the dialog. This can be used to edit the skill.</p><img src=\"systems/mgt2e/images/docs/skill-xp.webp\" style=\"float:right\" /><p>When you submit the dialog, it will calculate whether you have enough experience to level up, and automatically level up that skill.</p><p>A skill with extra experience on it as a + symbol next to it on the character sheet.</p><p>The <strong>Study Notes</strong> field allows you to record time spent studying the skill.</p><h3>Bonuses</h3><p>It is also possible to add specific bonuses to a skill from this dialog. This is a simple way to add a species based or similar bonus.</p><p>You can also change the default type of roll for this skill to be a Boon or Bane.</p><p>The <strong>Skill notes</strong> will be displayed when the roll is made.</p><h3>Effects</h3><p>This displays current effect bonuses applied to the skill, and provides a button to set them back to zero. You can't otherwise modify these effects from this dialog.</p>"
       },
       "video": {
         "controls": true,
@@ -69,10 +69,10 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.4.8",
-        "coreVersion": "12.329",
+        "coreVersion": "12.331",
         "createdTime": 1717536727580,
-        "modifiedTime": 1717536890953,
-        "lastModifiedBy": "Uzw5MJmM0BRE3sSL",
+        "modifiedTime": 1742161939379,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null
       },
@@ -114,6 +114,43 @@
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!mqc59sHCYxbI3d4n.qUoNybgvkx1pHjsW"
+    },
+    {
+      "sort": 400000,
+      "name": "Creating and Editing Skills",
+      "type": "text",
+      "_id": "NvCJoXPKHATe66wa",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You can edit a skill on an actor by clicking the <strong>Edit</strong> link on skill roll and skill experience dialogs. This allows you to edit or delete the skill in question.</p><p>This option is only available on character sheets opened directly from the Actor entry in the Actor sidebar, or from character sheets opened from a linked token.</p><p>A skill can be added from the <strong>Add skill</strong> option on the Settings tab of most character sheets.</p><h3>Packages</h3><p>The Package actor type behaves slightly different in a couple of respects. Firstly, the <strong>Add skill</strong> option is directly available on the skill sheet.</p><p>Secondly, when a skill is deleted, it isn't actually deleted but instead marked as deleted.</p><p>When the package is dragged onto another actor (an NPC or Traveller), it will remove that skill from the target actor.</p><p>This can be used to modify what skills are available for characters.</p><p>Any new skills will also be added to the target actor.</p><h2>Adding Skills</h2><p>Adding a skill</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.11.8.6-DEV",
+        "createdTime": 1742162325727,
+        "modifiedTime": 1742162587955,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!mqc59sHCYxbI3d4n.NvCJoXPKHATe66wa"
     }
   ],
   "sort": 400000,

@@ -104,6 +104,9 @@ export class MgT2XPDialog extends Application {
            this.formData.augment = 0;
            this.formData.expert = 0;
            // TODO: Need to update the dialog.
+            html.find(".augdm")[0].value = "";
+            html.find(".augment")[0].value = "";
+            html.find(".expert")[0].value = "";
         });
 
         html.find(".edit-skill").on("click", event => this.onSkillEdit(event, html));
