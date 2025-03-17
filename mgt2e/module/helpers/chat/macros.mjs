@@ -13,7 +13,7 @@ MgT2eMacros.skillGain = function(args) {
     let skillId = args.skill;
     let specId = null;
     let level = args.level;
-    let context = args.context;
+    let context = args.text;
 
     console.log("MgT2eMacros.skillGain: " + skillId);
 
@@ -112,6 +112,7 @@ MgT2eMacros.skillCheck = function(args, ask) {
     let target = args.target?args.target:8;
 
     console.log("skillCheck");
+    console.log(args);
 
     if (ask) {
         let title = "";
@@ -174,7 +175,7 @@ MgT2eMacros.skillCheck = function(args, ask) {
     } else {
         game.mgt2e.rollSkillMacro(skillFqn, {
             "difficulty": target,
-            "text": args.text,
+            "description": args.text,
             "success": args.success,
             "failure": args.failure
         });

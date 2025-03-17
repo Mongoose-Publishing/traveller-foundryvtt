@@ -692,6 +692,7 @@ export async function rollSkill(actor, skill, options) {
     if (!options) {
         options = {};
     }
+    console.log(options);
 
     // Keep track of bonuses and penalties.
     let skillDM = 0, skillAug = 0, skillBonus = 0
@@ -941,7 +942,7 @@ export async function rollSkill(actor, skill, options) {
         if (game.settings.get("mgt2e", "verboseSkillRolls")) {
             text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${total}</span> ` + getEffectLabel(effect);
         }
-        if (options.success || options.fail) {
+        if (options.success || options.failure) {
             if (effect >= 0 && options.success) {
                 text += `<div class="skill-success">${options.success}</div>`;
             } else if (options.failure) {

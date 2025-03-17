@@ -1,7 +1,7 @@
 {
   "name": "CreateItem",
   "type": "script",
-  "command": "// Add item to token\nfor (let t of canvas.tokens.controlled) {\n    let actor = t.actor;\n    if (actor) {\n       let itemName = \"New Item\";\n       const itemData = {\n         \"name\": itemName,\n         \"img\": \"\",\n         \"type\": \"item\"\n       }\n       Item.create(itemData, { parent: actor });\n    }\n}",
+  "command": "/**\n * CreateItem Macro\n *\n * To embed this in a Journal, or an Item or Actor description,\n * use the following:\n * \n * [[/mgMacro CreateItem name=\"Glass of Wine\"]]{Take a drink}\n */\nlet itemName = \"New Item\";\nlet itemType = \"item\";\n\nif (scope.name) {\n  itemName = scope.name;\n}\nif (scope.type) {\n  itemType = scope.type;\n}\n\n// Add item to token\nfor (let t of canvas.tokens.controlled) {\n    let actor = t.actor;\n    if (actor) {\n       const itemData = {\n         \"name\": itemName,\n         \"img\": \"\",\n         \"type\": itemType\n       }\n       Item.create(itemData, { parent: actor });\n    }\n}",
   "img": "systems/mgt2e/icons/macros/add-item.svg",
   "author": "mhUjqDVicnwIUaiq",
   "scope": "global",
@@ -18,7 +18,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.11.6.13-DEV",
     "createdTime": 1739744114957,
-    "modifiedTime": 1739744114957,
+    "modifiedTime": 1742217500819,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "YW54FvIoaVZyMaHc",

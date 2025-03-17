@@ -176,7 +176,7 @@ export class MgT2SkillDialog extends Application {
             "dm": parseInt(dm),
             "rollType": rollType,
             "difficulty": difficulty,
-            "description": this.text,
+            "description": this.skillOptions.description,
             "success": this.skillOptions.success,
             "failure": this.skillOptions.failure
         });

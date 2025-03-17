@@ -583,8 +583,11 @@ Tools.macroClick = function(event) {
             const value = match[2] ?? match[3];
             args[key] = value;
         }
-
-        game.macros.getName(macroName).execute(args);
+        if (game.macros.getName(macroName)) {
+            game.macros.getName(macroName).execute(args);
+        } else {
+            ui.notifications.error(`Macro '${macroName}' does not exist. Ensure it is installed in the Macro Folder.`);
+        }
     } catch (e) {
         ui.notifications.error(e.error);
         throw e;
