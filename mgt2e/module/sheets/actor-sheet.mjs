@@ -420,7 +420,7 @@ export class MgT2ActorSheet extends ActorSheet {
                     actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
                     t = parseFloat(i.system.hardware.rating);
                 } else if (h.system === "dock") {
-                    actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
+                    //actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
                     t = parseFloat(i.system.hardware.rating);
                 } else {
                     if (t === 0) {
