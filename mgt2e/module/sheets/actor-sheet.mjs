@@ -419,6 +419,9 @@ export class MgT2ActorSheet extends ActorSheet {
                 } else if (h.system === "cargo") {
                     actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
                     t = parseFloat(i.system.hardware.rating);
+                } else if (h.system === "dock") {
+                    actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
+                    t = parseFloat(i.system.hardware.rating);
                 } else {
                     if (t === 0) {
                         t = parseFloat(h.tonnage.percent);
@@ -2291,6 +2294,11 @@ export class MgT2ActorSheet extends ActorSheet {
             img = "systems/mgt2e/icons/hardware/cargo_hold.svg";
             system.tl = 7;
             system.hardware.rating = 10;
+        } else if (systemType === "dock") {
+            itemName = "Docking Bay";
+            img = "systems/mgt2e/icons/hardware/cargo_hold.svg";
+            system.tl = 7;
+            system.hardware.rating = 20;
         } else if (systemType === "weapon") {
             itemName = "Turret";
             img = "systems/mgt2e/icons/hardware/turret.svg";

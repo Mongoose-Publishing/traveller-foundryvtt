@@ -30,6 +30,7 @@
 * Spacecraft tonnage, TL, cost and power use are now hardwired for drive components. This should 
   be simpler to use, and follow the Mongoose rules better. TL and cost for these components will
   also modify if TL advancements are applied.
+* Inline actor sheets are now clickable link to open the full character sheet.
 
 ## 0.11.8 (Beta)
 

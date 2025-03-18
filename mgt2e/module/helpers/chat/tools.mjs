@@ -437,7 +437,7 @@ Tools.actorInlineDisplay = function(actorId) {
 }
 
 Tools.creatureInlineDisplay = function(a, actor) {
-    let html = `<div class="inline-creature">`;
+    let html = `<div class="inline-creature actor-link" data-actor-id="${actor._id}">`;
     html += `<h2>${actor.name}</h2>`;
     html += `<img src="${actor.img}"/>`;
     html += `${actor.system.description}`;
@@ -459,19 +459,20 @@ Tools.creatureInlineDisplay = function(a, actor) {
 }
 
 Tools.npcInlineDisplay = function(a, actor) {
-    let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/><span class="name">${actor.name}</span>`;
+    let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/>`;
+    html += `<span class="actor-link rollable name" data-actor-id="${actor._id}">${actor.name}</span>`;
     html += `<span class="profession">${actor.system.sophont.profession}</span>`;
 
     html += `<div style="clear: left"/>`;
 
-    html += `<div class="grid grid-3col">`;
+    html += `<div class="grid grid-3col actor-link" data-actor-id="${actor._id}">`;
     html += `<div class="species-title">Species</div><div class="species-title">Gender</div><div class="species-title">Age</div>`;
     html += `<div class="species-data">${actor.system.sophont.species}</div>`;
     html += `<div class="species-data">${actor.system.sophont.gender}</div>`;
     html += `<div class="species-data">${actor.system.sophont.age}</div>`;
     html += `</div>`;
 
-    html += `<div class="actor-body-container">`;
+    html += `<div class="actor-body-container actor-link" data-actor-id="${actor._id}">`;
 
     // Characteristics
     html += `<div class="grid grid-4col actor-cha-list">`;
@@ -513,7 +514,7 @@ Tools.npcInlineDisplay = function(a, actor) {
     html += `</div>`; // Skills
     html += `</div>`; // Container
 
-    html += `<div class="grid grid-3col actor-equipment-list">`;
+    html += `<div class="grid grid-3col actor-equipment-list actor-link" data-actor-id="${actor._id}">`;
     html += `<div class="species-title">Equipment</div>`;
     html += `<div class="grid-span-2">`;
     let weapons = "";

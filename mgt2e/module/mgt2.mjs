@@ -274,6 +274,12 @@ Hooks.on("init", function() {
     const body = $("body");
     body.on("click", "a.inline-macro-execution", Tools.macroClick);
     body.on("click", "a.inline-mgt2e-execution", Tools.mgt2eClick);
+    body.on("click", ".actor-link", ev=>{
+       console.log("CLICK CLICK CLICK");
+       const actorId = $(ev.currentTarget).data("actorId");
+       console.log(actorId);
+       game.actors.get(actorId).sheet.render(true);
+    });
 })
 
 Hooks.on('renderChatMessage', function(app, html) {
