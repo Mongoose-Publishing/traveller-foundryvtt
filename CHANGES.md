@@ -8,7 +8,7 @@
 * Augments not behaving correctly when added to tokens. Seem to work fine when applied
   to a base actor.
 
-## Development
+## 0.11.9 (Beta)
 
 * Re-written how skill checks are implemented to tidy up technical debt. Should have no functional
   effect on how they work, but the code is cleaner.
