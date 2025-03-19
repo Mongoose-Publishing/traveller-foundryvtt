@@ -7,6 +7,7 @@ import { MgT2Item } from "./documents/item.mjs";
 import { MgT2ActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2NPCActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2CreatureActorSheet } from "./sheets/actor-sheet.mjs";
+import { MgT2WorldActorSheet } from "./sheets/actor-world-sheet.mjs";
 import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 
@@ -230,6 +231,7 @@ Hooks.once('init', async function() {
   Actors.registerSheet("mgt2e", MgT2ActorSheet, { label: "Traveller Sheet", makeDefault: true });
   Actors.registerSheet("mgt2e", MgT2NPCActorSheet, { label: "NPC Sheet", types: [ "npc"], makeDefault: false });
   Actors.registerSheet("mgt2e", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
+  Actors.registerSheet("mgt2e", MgT2WorldActorSheet, { label: "World Sheet", types: [ "world"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
   DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
@@ -518,6 +520,8 @@ Hooks.on("createActor", (actor) => {
             actor.img = `systems/mgt2e/images/tokens/spacecraft/white/far_trader.webp`;
         } else if (actor.type === "vehicle") {
             actor.img = `systems/mgt2e/images/tokens/vehicles/white/jeep.webp`;
+        } else if (actor.type === "world") {
+            actor.img = `systems/mgt2e/icons/actors/world.svg`;
         } else {
             actor.img = "systems/mgt2e/icons/actors/traveller-red.svg";
         }

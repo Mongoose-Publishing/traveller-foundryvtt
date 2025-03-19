@@ -25,7 +25,7 @@ export class MgT2ActorSheet extends ActorSheet {
     /** @override */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            classes: ["mgt2", "sheet", "actor"],
+            classes: ["mgt2e", "sheet", "actor"],
             template: "systems/mgt2e/templates/actor/actor-sheet.html",
             width: 720,
             height: 600,

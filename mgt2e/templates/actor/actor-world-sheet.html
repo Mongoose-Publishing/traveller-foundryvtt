@@ -5,21 +5,9 @@
             <img class="profile-img shadow actor-draggable" src="{{actor.img}}" data-edit="img" data-actor-id="{{actor._id}}"
                  title="{{actor.name}}" height="100" width="100"/>
 
-            <div class="side-panel hits-box shadow">
-                <label for="system.hits.max" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}} <i class="fa-solid fa-gear edit-dmg"></i></label>
-                <div class="grid grid-3col inset">
-                    {{#each system.damage as |dmg key|}}
-                        {{#if (isChaShown ../system key)}}
-                            <div class="resource flex-group-center">
-                                <label for="system.damage.{{key}}" class="resource-label">{{key}}</label>
-                                <input class="writable" type="text" name="system.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
-                            </div>
-                        {{/if}}
-                    {{/each}}
-                </div>
+            <div class="side-panel shadow">
+                ?
             </div>
-
-            {{> "systems/mgt2e/templates/actor/parts/actor-combat.html"}}
 
         </div>
 
@@ -28,97 +16,56 @@
                 <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
             </h1>
 
-            <div class="shadow grid grid-7col">
-                <div class="resource flex-group-left grid-span-2">
-                    <label for="system.player" class="field-label">{{localize 'MGT2.TravellerSheet.Player'}}</label>
-                    <input class="field-value writable" name="system.player" type="text" value="{{system.player}}"/>
+            <div class="shadow">
+                <div class="grid grid-4col">
+                    <div class="resource flex-group-left grid-span-2">
+                        <label for="system.location.sector" class="field-label">Sector</label>
+                        <input class="field-value writable" name="system.location.sector" type="text" value="{{system.location.sector}}"/>
+                    </div>
+                    <div class="resource flex-group-left">
+                        <label for="system.location.x" class="field-label">X</label>
+                        <input class="field-value writable" name="system.location.x" type="text" value="{{system.location.x}}"/>
+                    </div>
+                    <div class="resource flex-group-left">
+                        <label for="system.location.y" class="field-label">Y</label>
+                        <input class="field-value writable" name="system.location.y" type="text" value="{{system.location.y}}"/>
+                    </div>
                 </div>
-                <div class="resource flex-group-left grid-span-2">
-                    <label for="system.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
-                    <input class="field-value writable" name="system.sophont.species" type="text" value="{{system.sophont.species}}"/>
-                </div>
-                <div class="resource flex-group-left grid-span-2">
-                    <label for="system.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
-                    <input class="field-value writable" name="system.sophont.gender" type="text" value="{{system.sophont.gender}}"/>
-                </div>
-                <div class="resource flex-group-left">
-                    <label for="system.sophont.age" class="field-label">{{localize 'MGT2.TravellerSheet.Age'}}</label>
-                    <input class="field-value writable" name="system.sophont.age" type="text" value="{{system.sophont.age}}"/>
+
+                <div class="uwp-digits">
+                    <div class="uwp-digit flex-group-left">
+                        {{system.uwp.port}}
+                    </div>
+                    <div class="uwp-digit flex-group-left">
+                        {{system.uwp.size}}
+                    </div>
+                    <div class="uwp-digit flex-group-left">
+                        {{system.uwp.atmosphere}}
+                    </div>
+                    <div class="uwp-digit flex-group-left">
+                        {{system.uwp.hydrographics}}
+                    </div>
+                    <div class="uwp-digit flex-group-left">
+                        {{system.uwp.population}}
+                    </div>
+                    <div class="uwp-digit flex-group-left">
+                        {{system.uwp.government}}
+                    </div>
+                    <div class="uwp-digit flex-group-left">
+                        {{system.uwp.lawLevel}}
+                    </div>
+                    <div class="uwp-dash flex-group-left">&mdash;</div>
+                    <div class="uwp-digit flex-group-left">
+                        {{system.uwp.techLevel}}
+                    </div>
                 </div>
             </div>
-
-            <div class="shadow ">
-                {{#unless system.settings.lockCharacteristics}}
-                    <span class="roll-upp rollable" style="float:right; display: inline-block" title="{{localize 'MGT2.TravellerSheet.RandomRoll'}}"><i class="fas fa-dice"> </i></span>
-                {{/unless}}
-                <div class="no-space grid grid-{{system.settings.columns}}col">
-                {{#each system.characteristics as | char key | }}
-                {{#if char.show}}
-                <div class="resource flex-group-center {{#unless ../system.settings.lockCharacteristics}}characteristic-draggable{{/unless}}"
-                     data-rolltype="characteristic" data-cha="{{key}}">
-                    <label for="system.characteristics.{{key}}.value"
-                           class="characteristic-title rollable"
-                           data-roll="2D6+@{{key}}"
-                           data-label="{{key}}"
-                           data-cha="{{key}}"
-                           title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
-                    <span class="characteristic-dm {{chaStatus char}}">
-                        {{numberFormat char.dm sign=true}}
-                    </span>
-                    <br/>
-                    <input class="characteristic-readonly"
-                           type="number" min="0" max="20" step="1"
-                           name="system.characteristics.{{key}}.current"
-                           value="{{char.current}}"
-                           data-dtype="Number" readonly/> /
-                    <input class="characteristic-value writable"
-                           type="number" min="0" max="20" step="1"
-                           name="system.characteristics.{{key}}.value"
-                           value="{{char.value}}"
-                           data-dtype="Number"/>
-                </div>
-                {{/if}}
-                {{/each}}
-                 </div>
-            </div>
-
-            <div class="shadow grid grid-5col">
-                <div class="resource flex-group-center">
-                    <label for="system.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
-                    <input class="field-value writable" type="text" name="system.speed.base"
-                           value="{{system.speed.base}}" data-dtype="Number"/>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
-                    <input class="field-value writable" type="text" name="system.size" value="{{system.size}}" data-dtype="Number"/>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.rads" class="field-label">{{localize 'MGT2.TravellerSheet.Rads'}}</label>
-                    <input class="field-value writable" type="text" name="system.rads" value="{{system.rads}}" data-dtype="Number"/>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.initiative.base" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
-                    <input class="field-value" type="text" name="system.initiative.base"
-                           value="{{system.initiative.base}}" data-dtype="Number" readonly/>
-                </div>
-                <div class="resource flex-group-center dodgeRoll" title="Click to dodge">
-                    <label for="system.dodge" class="field-label">
-                        <i class="fas fa-dice"></i>
-                        {{localize 'MGT2.TravellerSheet.Dodge'}}
-
-                    </label>
-                    <input class="field-value" type="text" _name="system.dodge"
-                           value="{{system.dodge}}" data-dtype="Number" readonly/>
-                </div>
-            </div>
-
-            {{> "systems/mgt2e/templates/actor/parts/actor-status.html"}}
 
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
-                    <a class="item" data-tab="skills">{{localize 'MGT2.TravellerSheet.Skills'}}</a>
-                    <a class="item" data-tab="items">{{localize 'MGT2.TravellerSheet.Equipment'}}</a>
-                    <a class="item" data-tab="finance">{{localize 'MGT2.TravellerSheet.Finance'}}</a>
+                    <a class="item" data-tab="data">World Data</a>
+                    <a class="item" data-tab="map">Map</a>
+                    <a class="item" data-tab="trade">Trade</a>
                     <a class="item" data-tab="biography">{{localize 'MGT2.TravellerSheet.Biography'}}</a>
                     {{#if (isObserver .)}}
                         <a class="item" data-tab="history">{{localize 'MGT2.TravellerSheet.History'}}</a>
@@ -130,95 +77,52 @@
 
                 <div class="sheet-body">
                     {{!-- Skills Tab --}}
-                    <div class="tab skills" data-group="primary" data-tab="skills">
-                        {{> "systems/mgt2e/templates/actor/parts/actor-skills.html"}}
+                    <div class="tab skills" data-group="primary" data-tab="data">
+                        <div class="grid grid-2col">
+                            <label for="system.uwp.port" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Port'}}</label>
+                            <select name="system.uwp.port">
+                                {{selectOptions PORT_SELECT selected=system.uwp.port}}
+                            </select>
+
+                            <label for="system.uwp.size" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Size'}}</label>
+                            <select name="system.uwp.size">
+                                {{selectOptions SIZE_SELECT selected=system.uwp.size}}
+                            </select>
+
+                            <label for="system.uwp.atmosphere" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Atmosphere'}}</label>
+                            <select name="system.uwp.atmosphere">
+                                {{selectOptions ATMOSPHERE_SELECT selected=system.uwp.atmosphere}}
+                            </select>
+
+                            <label for="system.uwp.hydrographics" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Hydrosphere'}}</label>
+                            <select name="system.uwp.hydrographics">
+                                {{selectOptions HYDROGRAPHICS_SELECT selected=system.uwp.hydrographics}}
+                            </select>
+
+                            <label for="system.uwp.population" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Population'}}</label>
+                            <select name="system.uwp.population">
+                                {{selectOptions POPULATION_SELECT selected=system.uwp.population}}
+                            </select>
+
+                            <label for="system.uwp.government" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Government'}}</label>
+                            <select name="system.uwp.government">
+                                {{selectOptions GOVERNMENT_SELECT selected=system.uwp.population}}
+                            </select>
+
+                            <label for="system.uwp.lawLevel" class="field-label">{{localize 'MGT2.WorldSheet.UWP.LawLevel'}}</label>
+                            <select name="system.uwp.lawLevel">
+                                {{selectOptions LAW_SELECT selected=system.uwp.lawLevel}}
+                            </select>
+
+                            <label for="system.uwp.techLevel" class="field-label">{{localize 'MGT2.WorldSheet.UWP.TechLevel'}}</label>
+                            <select name="system.uwp.techLevel">
+                                {{selectOptions TECH_SELECT selected=system.uwp.techLevel}}
+                            </select>
+                        </div>
                     </div>
 
                     <div class="tab finance" data-group="primary" data-tab="finance">
-                        <div class="grid grid-3col">
-                            <div class="resource">
-                                <label class="profile-label">{{localize 'MGT2.Finance.Cash'}}</label>
-                                <input class="credits writable" name="system.finance.cash" type="text" value="{{system.finance.cash}}"/>
-                            </div>
-                            <div class="resource">
-                                <label class="profile-label">{{localize 'MGT2.Finance.Pension'}}</label>
-                                <input class="credits writable"  name="system.finance.pension" type="text" value="{{system.finance.pension}}"/>
-                            </div>
-                            <div class="resource">
-                                <label class="profile-label">{{localize 'MGT2.Finance.OtherIncome'}}</label>
-                                <input  class="credits writable" name="system.finance.otherIncome" type="text" value="{{system.finance.otherIncome}}"/>
-                            </div>
-                            <div class="resource">
-                                <label class="profile-label">{{localize 'MGT2.Finance.MedicalDebt'}}</label>
-                                <input  class="credits writable" name="system.finance.medicalDebt" type="text" value="{{system.finance.medicalDebt}}"/>
-                            </div>
-                            <div class="resource">
-                                <label class="profile-label">{{localize 'MGT2.Finance.Mortgage'}}</label>
-                                <input  class="credits writable" name="system.finance.mortgage" type="text" value="{{system.finance.mortgage}}"/>
-                            </div>
-                            <div class="resource">
-                                <label class="profile-label">{{localize 'MGT2.Finance.LivingCosts'}}</label>
-                                <input  class="credits writable" name="system.finance.livingCosts" type="text" value="{{system.finance.livingCosts}}"/>
-                            </div>
-                        </div>
-
                     </div>
-
-                    {{!-- Biography Tab --}}
-                    <div class="tab biography" data-group="primary" data-tab="biography">
-
-                        <div class="resources grid grid-6col">
-                            <div class="resource flex-group-center">
-                                <label for="system.sophont.height" class="resource-label">{{localize 'MGT2.TravellerSheet.Height'}}</label>
-                                <input type="text" name="system.sophont.height" value="{{system.sophont.height}}"
-                                       data-dtype="Number" class="writable"/>
-                            </div>
-                            <div class="resource flex-group-center">
-                                <label for="system.sophont.weight" class="resource-label">{{localize 'MGT2.TravellerSheet.Weight'}}</label>
-                                <input type="text" name="system.sophont.weight" value="{{system.sophont.weight}}"
-                                       data-dtype="Number" class="writable"/>
-                            </div>
-                            <div class="resource flex-group-left grid-span-2">
-                                <label for="system.sophont.homeworld" class="resource-label">{{localize 'MGT2.TravellerSheet.Homeworld'}}</label>
-                                <input type="text" name="system.sophont.homeworld" value="{{system.sophont.homeworld}}"
-                                       data-dtype="String" class="writable"/>
-                            </div>
-                            <div class="resource flex-group-left grid-span-2">
-                                <label for="system.sophont.profession" class="resource-label">{{localize 'MGT2.TravellerSheet.Profession'}}</label>
-                                <input type="text" name="system.sophont.profession" value="{{system.sophont.profession}}"
-                                       data-dtype="String" system="writable"/>
-                            </div>
-                        </div>
-
-                        <section class="bio-box">
-                            {{editor
-                                enrichedDescription target="system.description"
-                                button=true editable=editable}}
-                        </section>
-
-                    </div>
-
-                    {{#if (isObserver .)}}
-                    <div class="tab history" data-group="primary" data-tab="history">
-                        <section>
-                            {{> "systems/mgt2e/templates/actor/parts/actor-terms.html"}}
-                        </section>
-                    </div>
-                    {{/if}}
-
-                    {{#if (isObserver .)}}
-                    {{!-- Owned Items Tab --}}
-                    <div class="tab items" data-group="primary" data-tab="items">
-                        {{> "systems/mgt2e/templates/actor/parts/actor-items.html"}}
-                    </div>
-                    {{/if}}
-
-                    {{!-- Settings Tab --}}
-                    {{#if (isOwner .)}}
-                        <section class="tab settings flexcol" data-group="primary" data-tab="settings">
-                            {{> "systems/mgt2e/templates/actor/parts/actor-settings.html"}}
-                        </section>
-                    {{/if}}
                 </div>
             </div>
         </div>

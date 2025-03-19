@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle" ],
+    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle", "world" ],
     "templates": {
       "base": {
         "speed": {
@@ -242,6 +242,11 @@
         }
     },
     "world": {
+      "location": {
+        "sector": "",
+        "x": 1,
+        "y": 1
+      },
       "uwp": {
         "port": "X",
         "size": 0,
@@ -249,7 +254,7 @@
         "hydrosphere": 0,
         "population": 0,
         "government": 0,
-        "law": 0,
+        "lawLevel": 0,
         "techLevel": 0
       }
     }

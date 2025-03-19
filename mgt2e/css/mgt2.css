@@ -1022,7 +1022,7 @@ span.combatButton {
 
 /* Common styles */
 
-.mgt2 .window-content {
+.mgt2e .window-content {
     background: var(--sheet-bg);
     padding: 0;
 }
@@ -2155,4 +2155,26 @@ li.item-status-INACTIVE h4 {
 .skillGain-spec:hover {
     background-color: white;
     color: black;
+}
+
+.uwp-digit {
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: center;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    margin: 1px;
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+.uwp-dash {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    vertical-align: center;
 }

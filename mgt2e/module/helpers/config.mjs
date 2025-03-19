@@ -787,3 +787,125 @@ MGT2.CREATURES = {
     "6": { "label": "large", "damage": "7D6", "minHits": 125, "maxHits": 250, "width": 4 }
   }
 };
+
+MGT2.WORLD = {
+    "starport": {
+        "A": { "berthCost": "1D6 * 1000", "fuel": true, "refined": true },
+        "B": { "berthCost": "1D6 * 500", "fuel": true, "refined": true },
+        "C": { "berthCost": "1D6 * 100", "fuel": true, "refined": false },
+        "D": { "berthCost": "1D6 * 10", "fuel": true, "refined": false },
+        "E": { "berthCost": "0", "fuel": false, "refined": false },
+        "X": { "berthCost": "0", "fuel": false, "refined": false }
+    },
+    "size": {
+        0: { "diameter": "< 1,000km" },
+        1: { "diameter": "1,600km" },
+        2: { "diameter": "3,200km"  },
+        3: { "diameter": "4,800km"  },
+        4: { "diameter": "6,400km"  },
+        5: { "diameter": "8,000km"  },
+        6: { "diameter": "9,600km"  },
+        7: { "diameter": "11,200km"  },
+        8: { "diameter": "12,800km"  },
+        9: { "diameter": "14,400km"  },
+        10: { "diameter": "16,000km"  }
+    },
+    "atmosphere": {
+        0: {  },
+        1: {  },
+        2: {  },
+        3: {  },
+        4: {  },
+        5: {  },
+        6: {  },
+        7: {  },
+        8: {  },
+        9: {  },
+        10: {  },
+        11: {  },
+        12: {  },
+        13: {  },
+        14: {  },
+        15: {  }
+    },
+    "hydrographics": {
+        0: {  },
+        1: {  },
+        2: {  },
+        3: {  },
+        4: {  },
+        5: {  },
+        6: {  },
+        7: {  },
+        8: {  },
+        9: {  },
+        10: {  }
+    },
+    "population": {
+        0: { "range": 0 },
+        1: { "range": 10  },
+        2: { "range": 100  },
+        3: { "range": 1000  },
+        4: { "range": 10000  },
+        5: { "range": 100000  },
+        6: { "range": 1000000  },
+        7: { "range": 10000000  },
+        8: { "range": 100000000  },
+        9: { "range": 1000000000  },
+        10: { "range": 10000000000  },
+        11: { "range": 100000000000  },
+        12: { "range": 1000000000000  }
+    },
+    "government": {
+        0: {  },
+        1: {  },
+        2: {  },
+        3: {  },
+        4: {  },
+        5: {  },
+        6: {  },
+        7: {  },
+        8: {  },
+        9: {  },
+        10: {  },
+        11: {  },
+        12: {  },
+        13: {  },
+        14: {  },
+        15: {  }
+    },
+    "lawLevel": {
+        0: {  },
+        1: {  },
+        2: {  },
+        3: {  },
+        4: {  },
+        5: {  },
+        6: {  },
+        7: {  },
+        8: {  },
+        9: {  }
+    },
+    "techLevel": {
+        0: {  },
+        1: {  },
+        2: {  },
+        3: {  },
+        4: {  },
+        5: {  },
+        6: {  },
+        7: {  },
+        8: {  },
+        9: {  },
+        10: {  },
+        11: {  },
+        12: {  },
+        13: {  },
+        14: {  },
+        15: {  },
+        16: {  }
+    }
+
+
+
+}
