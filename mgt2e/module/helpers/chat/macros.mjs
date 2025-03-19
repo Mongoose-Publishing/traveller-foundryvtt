@@ -33,7 +33,7 @@ MgT2eMacros.skillGain = function(args) {
                 skill.trained = true;
                 text += `<b>${skillName}</b> is now trained.<br/>`;
             }
-            if (level !== undefined && level == 0) {
+            if (level !== undefined && level === 0) {
                 // Level set to zero, nothing else to do.
             } else {
                 if (skill.specialities) {
@@ -79,12 +79,12 @@ MgT2eMacros.skillGain = function(args) {
 MgT2eMacros.specialityGain = function(actorId, skill, level) {
     console.log("specialityGain: " + skill);
     let actor = game.actors.get(actorId);
+    let text = "";
     if (actor) {
         let skills = actor.system.skills;
         let skillId = skill.split(".")[0];
         let specId = skill.split(".")[1];
-        console.log(skillId);
-        console.log(specId);
+
         if (skills[skillId] && skills[skillId].specialities[specId]) {
             console.log("Update");
             let spec = skills[skillId] && skills[skillId].specialities[specId];
@@ -100,8 +100,20 @@ MgT2eMacros.specialityGain = function(actorId, skill, level) {
                     spec.value = level;
                 }
             }
+            text += `<b>${actor.getSkillLabel(skill)}</b> is set to ${spec.value}`;
             console.log(spec);
             actor.update({"system.skills": actor.system.skills });
+
+            let html = `<div class="chat-package"><h3>${actor.name}</h3>`;
+            html += `<p>${text}</p>`;
+            html += `</div>`;
+
+            let chatData = {
+                speaker: ChatMessage.getSpeaker({actor: actor}),
+                content: html
+            };
+            ChatMessage.create(chatData, {});
+
         }
     }
 

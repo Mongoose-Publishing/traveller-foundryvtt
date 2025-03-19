@@ -445,7 +445,7 @@ Tools.creatureInlineDisplay = function(a, actor) {
     html += `<table class="creature-stats">`;
     html += `<tr><th>Animal</th><th>Hits</th><th>Speed</th></tr>`;
     html += `<tr class="noborder"><td>`;
-    html += `<a class="embedded-actor-link actor-draggable" data-actor-id="${actor._id}">${actor.name}</a></td>`;
+    html += `<a class="embedded-actor-link actor-draggable" data-actor-id="${actor.uuid}">${actor.name}</a></td>`;
     html += `<td>${actor.system.hits.max}</td><td>${actor.system.speed.value}</td></tr>`;
 
     html += `<tr><th>Skills</th><td colspan="2">${actor.printSkills()}</td></tr>`;
@@ -514,7 +514,7 @@ Tools.npcInlineDisplay = function(a, actor) {
     html += `</div>`; // Skills
     html += `</div>`; // Container
 
-    html += `<div class="grid grid-3col actor-equipment-list actor-link" data-actor-id="${actor._id}">`;
+    html += `<div class="grid grid-3col actor-equipment-list actor-link" data-actor-id="${actor.uuid}">`;
     html += `<div class="species-title">Equipment</div>`;
     html += `<div class="grid-span-2">`;
     let weapons = "";

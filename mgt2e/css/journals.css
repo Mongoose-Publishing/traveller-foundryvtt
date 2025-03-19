@@ -330,3 +330,29 @@ span.internal-macro img {
     border: none;
     width: 16px;
 }
+
+
+div.traveller-credits {
+    background-color: #eed4c5;
+    border: 2px solid #f37021;
+    float: left;
+    width: 49%;
+    padding: 1em;
+}
+
+div.traveller-contents {
+    background-color: #eed4c5;
+    border: 2px solid #f37021;
+    float: right;
+    width: 49%;
+    padding: 1em;
+}
+
+div.traveller-copyright {
+    background-color: #eed4c5;
+    border: 2px solid #f37021;
+    clear: both;
+    padding: 1em;
+    margin-top: 1em;
+}
+
