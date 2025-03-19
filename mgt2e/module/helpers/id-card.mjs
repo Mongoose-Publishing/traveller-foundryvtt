@@ -51,7 +51,7 @@ export class NpcIdCard extends Application {
 
     _shareId() {
         console.log("Share!");
-        game.socket.emit("system.mgt2", {
+        game.socket.emit("system.mgt2e", {
             type: "showIdCard",
             actor: this.actor
         });
