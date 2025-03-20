@@ -14,15 +14,11 @@ export class MgT2SkillDialog extends Application {
 
     // skillFqn is "<skillId>" or "<skillId>.<specId>"
     constructor(actor, skillFqn, skillOptions) {
-    //constructor(actor, skill, spec, cha, defaultDm, target, text) {
         super();
 
         if (!skillOptions) {
             skillOptions = {};
         }
-        console.log("MgT2SkillDialog: ");
-        console.log(skillFqn);
-        console.log(skillOptions);
 
         this.skillFqn = skillFqn;
         this.skillId = null;
@@ -34,7 +30,6 @@ export class MgT2SkillDialog extends Application {
                 this.specId = skillFqn.split(".")[1];
 
                 this.skillData = actor.system.skills[this.skillId];
-                console.log(this.skillData);
                 if (this.specId === "") {
                     this.specId = null;
                 } else if (this.specId && this.skillData.specialities) {
@@ -109,8 +104,8 @@ export class MgT2SkillDialog extends Application {
                 }
             }
             this.options.title = this.skillData.label;
-        } else if (cha) {
-            this.characteristic = data.characteristics[cha];
+        } else if (this.cha) {
+            this.characteristic = data.characteristics[this.cha];
             this.options.title = this.characteristic.label;
             this.value = this.characteristic.dm;
         }
@@ -120,6 +115,25 @@ export class MgT2SkillDialog extends Application {
     }
 
     getData() {
+        let CHA_SELECT = {};
+        CHA_SELECT["-"] = "-";
+        for (let c in this.data.characteristics) {
+            if (this.data.characteristics[c].show) {
+                CHA_SELECT[c] = c;
+            }
+        }
+
+        let BOON_SELECT = {};
+        BOON_SELECT["normal"] = game.i18n.localize("MGT2.TravellerSheet.Normal");
+        BOON_SELECT["boon"] = game.i18n.localize("MGT2.TravellerSheet.Boon");
+        BOON_SELECT["bane"] = game.i18n.localize("MGT2.TravellerSheet.Bane");
+
+        let TARGET_SELECT = {};
+        for (let t=2; t <= 16; t += 2) {
+            TARGET_SELECT[t] = game.i18n.localize("MGT2.TaskDifficulty." + t) + ` (${t}+)`;
+        }
+
+
         return {
             "actor": this.actor,
             "data": this.data,
@@ -136,7 +150,10 @@ export class MgT2SkillDialog extends Application {
             "characteristic": this.cha,
             "target": this.target,
             "boonBane": this.boonBane,
-            "showEdit": !(this.actor.parent)
+            "showEdit": !(this.actor.parent),
+            "CHA_SELECT": CHA_SELECT,
+            "BOON_SELECT": BOON_SELECT,
+            "TARGET_SELECT": TARGET_SELECT
         }
     }
 

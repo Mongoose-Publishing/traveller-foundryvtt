@@ -8,6 +8,12 @@
 * Augments not behaving correctly when added to tokens. Seem to work fine when applied
   to a base actor.
 
+## 0.11.10 (Beta)
+
+* Fix regression when rolling just a characteristic.
+* Allow skill checks to be made without a characteristic.
+* Fixed deprecation warnings in the skill dialog.
+
 ## 0.11.9 (Beta)
 
 * Re-written how skill checks are implemented to tidy up technical debt. Should have no functional
