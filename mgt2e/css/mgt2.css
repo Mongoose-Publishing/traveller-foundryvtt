@@ -1314,6 +1314,18 @@ label.box-title {
   border-radius: 3px 3px 0 0;
 }
 
+select.field-value {
+  width: 100%;
+  border-radius: 0 0 3px 3px;
+  border-top: none;
+}
+
+input.field-value {
+  width: 100%;
+  border-radius: 0 0 3px 3px;
+  border-top: none;
+}
+
 .field-value {
   width: 100%;
   display: inline-block;
