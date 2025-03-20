@@ -1,0 +1,5 @@
+mgt2e/packs/**/*.log
+mgt2e/packs/**/CURRENT
+mgt2e/packs/**/LOCK
+mgt2e/packs/**/LOG
+mgt2e/packs/**/MANIFEST-*
