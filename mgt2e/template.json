@@ -242,20 +242,23 @@
         }
     },
     "world": {
-      "location": {
-        "sector": "",
-        "x": 1,
-        "y": 1
-      },
-      "uwp": {
-        "port": "X",
-        "size": 0,
-        "atmosphere": 0,
-        "hydrosphere": 0,
-        "population": 0,
-        "government": 0,
-        "lawLevel": 0,
-        "techLevel": 0
+      "world": {
+        "location": {
+          "sector": "",
+          "x": 1,
+          "y": 1
+        },
+        "uwp": {
+          "port": "X",
+          "size": 0,
+          "atmosphere": 0,
+          "hydrographics": 0,
+          "population": 0,
+          "government": 0,
+          "lawLevel": 0,
+          "techLevel": 0,
+          "zone": null
+        }
       }
     }
   },

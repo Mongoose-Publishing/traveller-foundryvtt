@@ -117,7 +117,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
             guncombat.dm = guncombat.custom + guncombat.auto + guncombat.effect;
-        } else {
+        } else if (type === "traveller" || type === "npc" || type === "creature") {
             actorData.modifiers = {
                 encumbrance: { custom: 0, auto: 0, effect: 0, dm: 0, multiplierBonus: 0 },
                 physical: { custom: 0, auto: 0, effect: 0, dm: 0 },

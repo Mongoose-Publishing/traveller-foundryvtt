@@ -2157,24 +2157,43 @@ li.item-status-INACTIVE h4 {
     color: black;
 }
 
+.uwp-digits {
+    padding: 3px;
+}
 .uwp-digit {
-    border: 1px solid black;
-    border-radius: 5px;
     text-align: center;
     vertical-align: center;
-    width: 32px;
-    height: 32px;
     display: inline-block;
     margin: 1px;
-    margin-right: 5px;
+    margin-left: 2px;
     font-weight: bold;
-    font-size: 16pt;
+    font-size: 14pt;
+}
+
+.uwp-digit:hover {
+    background-color: #A0A0A0;
 }
 
 .uwp-dash {
     display: inline-block;
-    width: 32px;
-    height: 32px;
     text-align: center;
     vertical-align: center;
+}
+
+.uwp-data {
+    width: 50%;
+}
+
+.uwp-data label {
+    text-align: left;
+    width: 6em;
+    text-transform: none;
+    vertical-align: center;
+    padding-left: 0.5em;
+    background-color: inherit;
+    color: black;
+}
+
+.uwp-data select {
+    width: 10em;
 }

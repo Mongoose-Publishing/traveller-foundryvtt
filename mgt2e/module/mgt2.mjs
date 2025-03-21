@@ -1485,7 +1485,6 @@ Handlebars.registerHelper('itemHasStatus', function(item) {
 });
 
 Handlebars.registerHelper('toHex', function(value) {
-    console.log(value);
     return parseInt(value).toString(16).toUpperCase();
 });
 

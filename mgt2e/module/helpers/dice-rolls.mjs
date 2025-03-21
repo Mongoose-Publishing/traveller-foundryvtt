@@ -28,6 +28,16 @@ export function toFloat(number) {
     return number;
 }
 
+// Really basic dice rolling functions
+export async function roll1D6() {
+    const roll = await new Roll("1D6", null).evaluate();
+    return parseInt(roll.total);
+}
+export async function roll2D6() {
+    const roll = await new Roll("2D6", null).evaluate();
+    return parseInt(roll.total);
+}
+
 export function skillLabel(skill, skillId) {
     if (!skill) {
         return "";
