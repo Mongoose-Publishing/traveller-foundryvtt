@@ -257,7 +257,9 @@
           "government": 0,
           "lawLevel": 0,
           "techLevel": 0,
-          "zone": null
+          "zone": null,
+          "bases": "",
+          "codes": ""
         }
       }
     }

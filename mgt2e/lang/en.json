@@ -357,8 +357,8 @@
   "MGT2.WorldSheet.UWP.Hydrographics": "Hydrographics",
   "MGT2.WorldSheet.UWP.Population": "Population",
   "MGT2.WorldSheet.UWP.Government": "Government",
-  "MGT2.WorldSheet.UWP.LawLevel": "Law",
-  "MGT2.WorldSheet.UWP.TechLevel": "TL",
+  "MGT2.WorldSheet.UWP.LawLevel": "Law Level",
+  "MGT2.WorldSheet.UWP.TechLevel": "Tech Level",
 
   "MGT2.WorldSheet.Atmosphere.Composition.0": "None",
   "MGT2.WorldSheet.Atmosphere.Composition.1": "Trace",

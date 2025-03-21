@@ -2181,6 +2181,7 @@ li.item-status-INACTIVE h4 {
 }
 
 .uwp-data {
+    float: left;
     width: 50%;
 }
 
@@ -2196,4 +2197,16 @@ li.item-status-INACTIVE h4 {
 
 .uwp-data select {
     width: 10em;
+}
+
+.zone-Amber {
+    color: orange;
+}
+
+.zone-Red {
+    color: red;
+}
+
+.extra-data {
+    margin-left: 55%;
 }
