@@ -21,7 +21,7 @@
         <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
       </h1>
       <div class="shadow">
-        <div class="resources grid grid-2col flex-group-center">
+        <div class="resources grid grid-3col flex-group-center">
           <div class="resource">
             <label for="system.cargo.price" class="resource-label">Base Price</label>
             <input type="text" name="system.cargo.price" value="{{system.cargo.price}}" data-dtype="Number"/>
@@ -31,6 +31,10 @@
             <input class="item-tons" type="text" name="system.cargo.tons" value="{{system.cargo.tons}}" data-dtype="String"/>
             <span class="quantity-roll rollable"><i class="fas fa-dice"></i></span>
           </div>
+            <div class="resource">
+                <label for="system.cargo.illegal" class="resource-label">Illegal</label><br/>
+                <input class="item-illegal" type="checkbox" name="system.cargo.illegal" {{checked system.cargo.illegal}} data-dtype="boolean"/>
+            </div>
         </div>
         <div class="resource">
           <label for="system.cargo.availability" class="resource-label">Availability</label>

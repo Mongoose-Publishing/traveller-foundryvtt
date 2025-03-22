@@ -112,64 +112,64 @@ function setTradeCodes(worldActor) {
     if (uwp.atmosphere >= 4 && uwp.atmosphere <= 9 &&
         uwp.hydrographics >= 4 && uwp.hydrographics <= 8 &&
         uwp.population >= 5 && uwp.population <= 7) {
-        codes += " Ag";
+        codes += ", Ag";
     }
     // Asteroid
     if (uwp.size === 0 && uwp.atmosphere === 0 && uwp.hydrographics === 0) {
-        codes += " As";
+        codes += ", As";
     }
     // Barren
     if (uwp.population === 0) {
-        codes += " Ba";
+        codes += ", Ba";
     }
     // Desert
     if (uwp.atmosphere >= 2 && uwp.atmosphere <= 9 && uwp.hydrographics === 0) {
-        codes += " De";
+        codes += ", De";
     }
     // Fluid Oceans
     if (uwp.atmosphere >= 10 && uwp.hydrographics >= 1) {
-        codes += " Fl";
+        codes += ", Fl";
     }
     // Garden
     if (uwp.size >= 6 && uwp.size <= 8 && [5, 6, 8].includes(uwp.atmosphere) && [5,6,7].includes(uwp.hydrographics) ) {
-        codes += " Ga";
+        codes += ", Ga";
     }
     if (uwp.population >= 9) {
-        codes += " Hi";
+        codes += ", Hi";
     }
     if (uwp.techLevel >= 12) {
-        codes += " Ht";
+        codes += ", Ht";
     }
     if (uwp.atmosphere < 2 && uwp.hydrographics >= 1) {
-        codes += " Ic";
+        codes += ", Ic";
     }
     if ([0,1,2,4,7,9,10,11,12].includes(uwp.atmosphere) && uwp.population >= 9) {
-        codes += " In";
+        codes += ", In";
     }
     if ([1,2,3].includes(uwp.population)) {
-        codes += " Lo";
+        codes += ", Lo";
     }
     if (uwp.population >= 1 && uwp.techLevel <= 5) {
-        codes += " Lt";
+        codes += ", Lt";
     }
     if (uwp.atmosphere < 4 && uwp.hydrographics < 4 && uwp.population >= 6) {
-        codes += " Na";
+        codes += ", Na";
     }
     if ([4,5,6].includes(uwp.population)) {
-        codes += " Ni";
+        codes += ", Ni";
     }
     if ([2,3,4,5].includes(uwp.atmosphere) && uwp.hydrographics < 4) {
-        codes += " Po";
+        codes += ", Po";
     }
     if ([6, 8].includes(uwp.atmosphere) && [6,7,8].includes(uwp.population) && [4,5,6,7,8,9].includes(uwp.government)) {
-        codes += " Ri";
+        codes += ", Ri";
     }
     if (uwp.atmosphere === 0) {
-        codes += " Va";
+        codes += ", Va";
     }
     if (([3,4,5,6,7,8,9].includes(uwp.atmosphere) || uwp.atmosphere > 13) && uwp.hydrographics >= 10) {
-        codes += " Wa";
+        codes += ", Wa";
     }
 
-    worldActor.system.world.uwp.codes = codes.trim();
+    worldActor.system.world.uwp.codes = codes.replace(/^, /, "");
 }

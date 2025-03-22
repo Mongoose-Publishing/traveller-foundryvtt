@@ -1,6 +1,6 @@
 import {MgT2ActorSheet} from "./actor-sheet.mjs";
 import {MgT2Item} from "../documents/item.mjs";
-import {createFreight} from "../helpers/utils/trade-utils.mjs";
+import {createFreight, createSpeculativeGoods} from "../helpers/utils/trade-utils.mjs";
 import {createWorld} from "../helpers/utils/world-utils.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
@@ -16,8 +16,6 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
     _prepareItems(context) {
         context.cargo = [];
-
-        console.log("Prepare World items");
 
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
@@ -37,8 +35,6 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
         context.system = context.actor.system;
         context.world = context.system.world;
-
-        console.log(context.system);
 
         context.PORT_SELECT = {};
         for (let p in CONFIG.MGT2.WORLD.starport) {
@@ -92,6 +88,9 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         html.find('.generateWorld').click(ev => {
             createWorld(this.actor);
         });
+        html.find('.generateSpeculative').click(ev => {
+            createSpeculativeGoods(this.actor);
+        })
     }
 
     async _onDrop(event) {

@@ -117,7 +117,8 @@ export function createFreight(worldActor, tonnage, price) {
                 "saleDM": "",
                 "tons": "0",
                 "illegal": false,
-                "sourceId": worldActor.uuid
+                "sourceId": worldActor.uuid,
+                "destinationId": null
             },
             "description": "Freight from " + worldActor.name
         }
@@ -125,3 +126,112 @@ export function createFreight(worldActor, tonnage, price) {
     Item.create(itemData, {parent: worldActor});
 }
 
+async function createTradeItem(worldActor, item) {
+    const srcCargo = item.system.cargo;
+
+    // Need to roll for how many tons of this type of good. However,
+    // the rules here are a pain. It will be xD6 * y, and the modifier
+    // for population needs to modify the (xD6) part.
+    let tonnage = srcCargo.tons;
+    let modifier = 0;
+    if (worldActor.system.world.uwp.population <= 3) {
+        modifier = "- 3";
+    } else if (worldActor.system.world.uwp.population >= 9) {
+        modifier = "+ 3";
+    }
+    if (modifier && tonnage.indexOf("D6") > -1) {
+        tonnage = tonnage.replace(/([0-9]+D6)/i, `($1 ${modifier})`);
+    }
+    const roll = await new Roll(tonnage).evaluate();
+    if (roll.total <= 0) {
+        // No cargo here due to population modifier.
+        return;
+    }
+
+    // First, if this trade item already exists as speculative trade, append it.
+    for (let i of worldActor.items) {
+        if (item.name === i.name && i.type === "cargo" && i.system.cargo.speculative) {
+            i.system.quantity += roll.total;
+            i.update({"system.quantity": i.system.quantity });
+            return;
+        }
+    }
+
+    const itemData = {
+        "name": item.name,
+        "img": item.img,
+        "type": "cargo",
+        "system": {
+            "quantity": roll.total,
+            "cargo": {
+                "price": srcCargo.price,
+                "availability": srcCargo.availability,
+                "purchaseDM": srcCargo.purchaseDM,
+                "saleDM": srcCargo.saleDM,
+                "tons": roll.total,
+                "illegal": srcCargo.illegal,
+                "description": srcCargo.description,
+                "sourceId": worldActor.uuid,
+                "destinationId": null,
+                "speculative": true
+            }
+        }
+    }
+    await Item.create(itemData, { parent: worldActor });
+}
+
+export async function createSpeculativeGoods(worldActor, illegal) {
+    if (worldActor.system.world.uwp.population === 0) {
+        ui.notifications.warn("World has no population, so cannot trade");
+        return;
+    }
+
+    // When generating speculative trade, remove any previous speculative trade
+    // goods and regenerate a new list from scratch.
+    let list = [];
+    for (let i of worldActor.items) {
+        if (i.type === "cargo" && i.system.cargo.speculative) {
+            list.push(i._id);
+        }
+    }
+    await worldActor.deleteEmbeddedDocuments("Item", list);
+
+    const tradeFolder = game.items.folders.getName("Trade Goods");
+    // First, look for the standard goods available.
+    for (let item of tradeFolder.contents) {
+        if (item.system.cargo.illegal && !illegal) {
+            continue;
+        }
+        let availability = item.system.cargo.availability;
+        let available = false;
+        if (availability.includes("All")) {
+            available = true;
+        } else {
+            for (let a of availability.split(", ")) {
+                if (worldActor.system.world.uwp.codes.includes(a)) {
+                    available = true;
+                }
+            }
+        }
+        if (available) {
+            await createTradeItem(worldActor, item);
+        }
+    }
+    // Now look for the random extras. Roll once per population code.
+    let number = tradeFolder.contents.length;
+    console.log("Number of options:" + number);
+    for (let r=0; r < worldActor.system.world.uwp.population; r++) {
+        let item = null;
+        while (item === null) {
+            let roll = await new Roll(`1D${number} - 1`).evaluate();
+            let i = roll.total;
+            item = tradeFolder.contents[i];
+            if (!illegal && item.system.cargo.illegal) {
+                // Re-roll. Only legal stuff.
+                item = null;
+            }
+        }
+        await createTradeItem(worldActor, item);
+    }
+
+}
