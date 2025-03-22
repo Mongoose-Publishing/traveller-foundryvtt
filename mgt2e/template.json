@@ -264,6 +264,12 @@
         "extra":  {
           "temperature": 0,
           "berthingCost": 1000
+        },
+        "meta": {
+          "brokerActorId": null,
+          "brokerScore": 0,
+          "streetwiseActorId": null,
+          "streetwiseScore": 0
         }
       }
     }

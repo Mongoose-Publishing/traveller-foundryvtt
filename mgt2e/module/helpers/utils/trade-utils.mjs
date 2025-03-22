@@ -37,6 +37,8 @@ export async function freightTraffic(dm) {
                 die = "10D6";
                 break;
         }
+    } else {
+        return 0;
     }
 
     const lots = await new Roll(die, null).evaluate();
@@ -91,21 +93,52 @@ function freightDm(worldActor) {
     return dm;
 }
 
-export function calculateFreightLots(sourceWorld, destinationWorld, effect) {
+export async function calculateFreightLots(sourceWorld, destinationWorld, effect) {
     let availableFreight = {
         incidentalLots: 0,
         minorLots: 0,
         majorLots: 0
     }
 
-    let worldDM = freightDm(sourceWorld) + freightDm(destinationWorld);
+    // First, we need to clear the world of goods to this destination.
+    let list = [];
+    for (let i of sourceWorld.items) {
+        if (i.type === "cargo" && i.system.cargo.destinationId === destinationWorld.uuid) {
+            list.push(i._id);
+        }
+    }
+    await sourceWorld.deleteEmbeddedDocuments("Item", list);
+
+    let parsecsDm = 0;
+    let price = 1000;
+    let worldDm = freightDm(sourceWorld) + freightDm(destinationWorld) - parsecsDm;
+    let name = "Cargo to " + destinationWorld.name;
+
+    // Major lots
+    let majorLots = await freightTraffic(worldDm - 4);
+    for (let i=0; i < majorLots; i++) {
+        let tonnageRoll = await new Roll("1D6 * 10").evaluate();
+        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price);
+    }
+    // Minor lots
+    let minorLots = await freightTraffic(worldDm);
+    for (let i=0; i < minorLots; i++) {
+        let tonnageRoll = await new Roll("1D6 * 5").evaluate();
+        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price);
+    }
+    // Incidental lots
+    let incidentalLots = await freightTraffic(worldDm);
+    for (let i=0; i < incidentalLots; i++) {
+        let tonnageRoll = await new Roll("1D6").evaluate();
+        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price);
+    }
 
     return availableFreight;
 }
 
-export function createFreight(worldActor, tonnage, price) {
+export function createFreight(name, worldActor, destinationWorld, tonnage, price) {
     const itemData = {
-        "name": "Freight",
+        "name": name,
         "img": "systems/mgt2e/icons/cargo/cargo.svg",
         "type": "cargo",
         "system": {
@@ -118,9 +151,10 @@ export function createFreight(worldActor, tonnage, price) {
                 "tons": "0",
                 "illegal": false,
                 "sourceId": worldActor.uuid,
-                "destinationId": null
+                "destinationId": destinationWorld.uuid,
+                "freight": true
             },
-            "description": "Freight from " + worldActor.name
+            "description": "Freight from " + worldActor.name + " to " + destinationWorld.name
         }
     };
     Item.create(itemData, {parent: worldActor});

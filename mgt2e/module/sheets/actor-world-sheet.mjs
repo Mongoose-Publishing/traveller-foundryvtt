@@ -1,6 +1,6 @@
 import {MgT2ActorSheet} from "./actor-sheet.mjs";
 import {MgT2Item} from "../documents/item.mjs";
-import {createFreight, createSpeculativeGoods} from "../helpers/utils/trade-utils.mjs";
+import {calculateFreightLots, createFreight, createSpeculativeGoods} from "../helpers/utils/trade-utils.mjs";
 import {createWorld} from "../helpers/utils/world-utils.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
@@ -121,6 +121,17 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
     }
 
     async _onDropActor(event, data) {
+        let droppedActor = await fromUuid(data.uuid);
+        if (!droppedActor) {
+            return;
+        }
+
+        if (droppedActor.type === "world") {
+            // Need to calculate trade.
+            calculateFreightLots(this.actor, droppedActor, 0);
+        }
+
+
         // Do nothing.
         return true;
     }

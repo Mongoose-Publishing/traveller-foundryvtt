@@ -33,6 +33,17 @@
                 </div>
             </div>
 
+            <div class="side-panel shadow">
+                <h4>Trade Skills</h4>
+
+                <label class="">Broker</label><br/>
+                <input class="writable" name="system.world.meta.brokerScore"
+                       type="text" value="{{system.world.meta.brokerScore}}"/>
+                <br/>
+                <label class="">Streetwise</label><br/>
+                <input class="writable" name="system.world.meta.streetwiseScore"
+                       type="text" value="{{system.world.meta.streetwiseScore}}"/>
+            </div>
         </div>
 
         <div class="character-right">
@@ -55,7 +66,6 @@
                         <input class="field-value writable" name="system.world.location.y" type="text" value="{{system.world.location.y}}"/>
                     </div>
                 </div>
-
             </div>
 
             <div class="shadow">
@@ -123,8 +133,6 @@
 
                     <div class="tab" data-group="primary" data-tab="freight">
                         <div>
-                            <input class="createFreight" type="button" value="Create Freight"/>
-                            <input class="generateFreight" type="button" value="Freight"/>
                             <input class="generateSpeculative" type="button" value="Speculate"/>
                         </div>
                         {{#if cargo}}
