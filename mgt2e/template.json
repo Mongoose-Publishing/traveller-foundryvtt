@@ -243,6 +243,7 @@
     },
     "world": {
       "world": {
+        "map": "systems/mgt2e/images/world-map.svg",
         "location": {
           "sector": "",
           "x": 1,
