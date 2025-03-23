@@ -24,7 +24,7 @@ export class MgT2ActorSheet extends ActorSheet {
 
     /** @override */
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["mgt2", "sheet", "actor"],
             template: "systems/mgt2e/templates/actor/actor-sheet.html",
             width: 720,
@@ -51,6 +51,9 @@ export class MgT2ActorSheet extends ActorSheet {
         // Use a safe clone of the actor data for further operations.
         const actorData = context.actor.system;
         const type = context.actor.type;
+
+        console.log("getData: " + context.actor.name);
+        console.log(context.actor);
 
         // Add the actor's data to context.data for easier access, as well as flags.
         context.system = actorData;
@@ -95,7 +98,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.effects = prepareActiveEffectCategories(context.actor.effects);
 
         // Work out bonuses and penalties
-        if (actorData.modifiers) {
+        if (["npc", "traveller"].includes(type) && actorData.modifiers) {
             let enc = actorData.modifiers.encumbrance;
             enc.dm = enc.custom + enc.auto + enc.effect;
             let phy = actorData.modifiers.physical;
@@ -117,13 +120,6 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
             guncombat.dm = guncombat.custom + guncombat.auto + guncombat.effect;
-        } else {
-            actorData.modifiers = {
-                encumbrance: { custom: 0, auto: 0, effect: 0, dm: 0, multiplierBonus: 0 },
-                physical: { custom: 0, auto: 0, effect: 0, dm: 0 },
-                melee: { custom: 0, auto: 0, effect: 0, dm: 0 },
-                guncombat: { custom: 0, auto: 0, effect: 0, dm: 0 }
-            };
         }
 
         context.selectColumns = {
@@ -342,15 +338,15 @@ export class MgT2ActorSheet extends ActorSheet {
         let dtons = parseInt(actorData.spacecraft.dtons);
         let hits = dtons / 2.5;
         if (dtons >= 100000) {
-            hits = parseInt(dtons / 1.5);
+            hits = Math.floor(dtons / 1.5);
         } else if (dtons >= 25000) {
-            hits = parseInt(dtons / 2);
+            hits = Math.floor(dtons / 2);
         }
         let config = null;
         if (actorData.spacecraft.configuration) {
             config = MGT2.SHIP_CONFIGURATION[actorData.spacecraft.configuration];
             if (config) {
-                hits = parseInt(hits * config.hull);
+                hits = Math.floor(hits * config.hull);
             }
         }
 
@@ -368,7 +364,7 @@ export class MgT2ActorSheet extends ActorSheet {
         for (let i of context.items) {
             if (i.type === 'cargo') {
                 cargo.push(i);
-                let q = parseInt(i.system.quantity);
+                let q = Number(i.system.quantity);
                 if (q > 0) {
                     cargoUsed += q;
                 }
@@ -400,7 +396,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         }
                     }
                     if  (h.system === "computer") {
-                        bandwidthTotal += h.rating * parseInt(i.system.quantity);
+                        bandwidthTotal += Number(h.rating) * Number(i.system.quantity);
                     }
                 }
 
@@ -432,7 +428,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         t = parseInt(h.tonnage.minimum);
                     }
                     if (t !== i.system.hardware.tons) {
-                        i.system.hardware.tons = t * parseInt(i.system.quantity);
+                        i.system.hardware.tons = t * Number(i.system.quantity);
                     }
                 }
                 dtonsUsed += t * i.system.quantity;
@@ -464,7 +460,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.dtonsUsed = Math.round(dtonsUsed * 100) / 100;
         context.cargoUsed = Math.round(cargoUsed * 100) / 100;
         context.cargoRemaining = parseFloat(context.system.spacecraft.cargo) - cargoUsed;
-        context.dtonsRemaining = parseInt(context.system.spacecraft.dtons * (config?config.volume:1)) - dtonsUsed;
+        context.dtonsRemaining = Math.floor(context.system.spacecraft.dtons * (config?config.volume:1)) - dtonsUsed;
 
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;
@@ -912,13 +908,13 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.crew-passenger').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
-            this._moveCrewToPassenger(this.actor, actorId);
+            void this._moveCrewToPassenger(this.actor, actorId);
         });
 
         html.find('.passenger-crew').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
-            this._movePassengerToCrew(this.actor, actorId);
+            void this._movePassengerToCrew(this.actor, actorId);
         });
 
         html.find('.role-action-button').click(ev => {
@@ -926,7 +922,7 @@ export class MgT2ActorSheet extends ActorSheet {
            const actorId = div.data("crewId");
            const roleId = div.data("roleId");
            const actionId = div.data("actionId");
-           this._runCrewAction(this.actor, actorId, roleId, actionId);
+           void this._runCrewAction(this.actor, actorId, roleId, actionId);
         });
 
         html.find('.addHardwareSelect').click(ev => {
@@ -942,28 +938,28 @@ export class MgT2ActorSheet extends ActorSheet {
         if (this.actor.type === "creature") {
             html.find('.behaviour-selector').click(ev => {
                const value = $(ev.currentTarget).val();
-               this._creatureSelectBehaviour(value);
+               void this._creatureSelectBehaviour(value);
             });
             html.find('.behaviour-remove').click(ev => {
                 const b = $(ev.currentTarget).parents(".behaviour-item");
-                this._creatureRemoveBehaviour(b.data("behaviourId"));
+                void this._creatureRemoveBehaviour(b.data("behaviourId"));
             });
 
             html.find('.traits-selector').click(ev => {
                 const value = $(ev.currentTarget).val();
-                this._creatureSelectTrait(value);
+                void this._creatureSelectTrait(value);
             });
             html.find('.trait-remove').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureRemoveTrait(t.data("traitId"));
+                void this._creatureRemoveTrait(t.data("traitId"));
             });
             html.find('.trait-minus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureTraitModify(t.data("traitId"), ev.shiftKey?-5:-1);
+                void this._creatureTraitModify(t.data("traitId"), ev.shiftKey?-5:-1);
             });
             html.find('.trait-plus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureTraitModify(t.data("traitId"), ev.shiftKey?5:1);
+                void this._creatureTraitModify(t.data("traitId"), ev.shiftKey?5:1);
             });
         } else if (this.actor.type === "spacecraft") {
             // Select which bay to display.

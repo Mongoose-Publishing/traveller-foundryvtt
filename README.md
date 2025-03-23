@@ -91,3 +91,9 @@ Code is BSD licensed, based on boilerplate Foundry code from https://github.com/
 Some icons are taken from svgicons.com and game-icons.net. See the READMEs in those directories for details.
 
 Starship icons are drawn by Samuel Penn, and available under a CC0 license.
+
+### Contributors
+
+Other contributors to the project:
+
+* https://github.com/ryanwalder - CSS fixes.

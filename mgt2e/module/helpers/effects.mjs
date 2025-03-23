@@ -6,7 +6,6 @@
  export function onManageActiveEffect(event, owner) {
     event.preventDefault();
     const a = event.currentTarget;
-
     const action = a?.dataset?.effecttype ? a.dataset.effecttype : null;
 
     if (action) {
@@ -41,7 +40,6 @@
  * @return {object}                   Data for rendering
  */
 export function prepareActiveEffectCategories(effects) {
-
     // Define effect header categories
     const categories = {
       temporary: {

@@ -238,7 +238,6 @@ export class MgT2Actor extends Actor {
         if (actor.type !== 'traveller') return;
 
         const sys = actor.system;
-
         if (sys.characteristics.INT && sys.characteristics.EDU) {
             sys.totalSkills = this._countSkillLevels(sys.skills);
             sys.maxSkills = (parseInt(sys.characteristics.INT.value) +
@@ -247,6 +246,7 @@ export class MgT2Actor extends Actor {
             sys.maxSkills = 0;
         }
 
+        // In case someone has replaced the characteristics.
         if (!sys.characteristics.STR || !sys.characteristics.DEX || !sys.characteristics.END) {
             return;
         }
