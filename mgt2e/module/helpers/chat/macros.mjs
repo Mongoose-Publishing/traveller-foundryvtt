@@ -204,3 +204,44 @@ MgT2eMacros.damage = function(args) {
         "description": text
     });
 };
+
+MgT2eMacros.createItem = async function(args) {
+    let uuid = args.uuid;
+
+    let src = await fromUuidSync(uuid);
+    if (!src) {
+        ui.notifications.error("Unable to find linked item");
+        return;
+    }
+    let item = await src.clone();
+    if (args.name) {
+        item.name = args.name;
+    }
+
+    for (let t of canvas.tokens.controlled) {
+        let actor = t.actor;
+        if (actor) {
+            Item.create(item, { parent: actor});
+        }
+    }
+}
+
+MgT2eMacros.createAssociate = function(args) {
+    let type = args.type;
+    if (!["contact", "enemy", "ally", "rival"].includes(type)) {
+        ui.notifications.error("Unknown associate type");
+        return;
+    }
+    let name = args.name?args.name:type;
+
+    let data = {
+        "name": name,
+        "type": "associate",
+        "system": {
+            "associate": {
+                "relationship": type
+            }
+        }
+    }
+
+};

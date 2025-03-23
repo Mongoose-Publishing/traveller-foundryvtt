@@ -622,6 +622,10 @@ Tools.mgt2eClick = function(event) {
             MgT2eMacros.skillCheck(args, true);
         } else if (macroName === "damage") {
             MgT2eMacros.damage(args);
+        } else if (macroName === "item") {
+            MgT2eMacros.createItem(args);
+        } else if (macroName === "associate") {
+            MgT2eMacros.createAssociate(args);
         }
     } catch (e) {
         ui.notifications.error(e.error);
