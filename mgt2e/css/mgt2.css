@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap");
 
 :root {
-    --title-bg: #f1511b;
-    --title: white;
-    --panel-bg: #c5c3b4E0;
-    --sheet-bg: #404040;
+  --title-bg: #f1511b;
+  --title: white;
+  --panel-bg: #c5c3b4e0;
+  --sheet-bg: #404040;
 }
 
 /* Global styles */
@@ -14,7 +14,8 @@
   font-family: "Roboto", sans-serif;
 }
 
-.rollable:hover, .rollable:focus {
+.rollable:hover,
+.rollable:focus {
   color: #000;
   text-shadow: 0 0 10px red;
   cursor: pointer;
@@ -234,7 +235,6 @@
   text-align: center;
 }
 
-
 /* Styles limited to traveller sheets */
 .system-mgt2 .item-form {
   font-family: "Roboto", sans-serif;
@@ -261,36 +261,36 @@
 }
 
 .sheet-header .header-profile {
-    width: 140px;
-    margin-top: 0;
-    padding-top: 0;
-    max-width: 140px;
-    vertical-align: top;
-    flex-basis: auto;
-    align-self: flex-start;
+  width: 140px;
+  margin-top: 0;
+  padding-top: 0;
+  max-width: 140px;
+  vertical-align: top;
+  flex-basis: auto;
+  align-self: flex-start;
 }
 
 .system-mgt2 header.sheet-header img.profile-img {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 140px;
-    flex: 0 0 140px;
-    width: 140px;
-    height: 100%;
-    min-height: 140px;
-    margin-right: 10px;
-    border-radius: 10px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 140px;
+  flex: 0 0 140px;
+  width: 140px;
+  height: 100%;
+  min-height: 140px;
+  margin-right: 10px;
+  border-radius: 10px;
 }
 
 .sheet-header .header-fields {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    margin: 0;
-    margin-top: 0;
-    padding-top: 0;
-    vertical-align: top;
-    flex-basis: auto;
-    align-self: flex-start;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+  vertical-align: top;
+  flex-basis: auto;
+  align-self: flex-start;
 }
 
 .sheet-header h1.charname {
@@ -302,12 +302,11 @@
 }
 
 h1.charname input {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
-
 
 .system-mgt2 .sheet-tabs {
   -webkit-box-flex: 0;
@@ -322,19 +321,19 @@ h1.charname input {
 }
 
 .editor {
-    height: 100%;
-    min-height: 50px;
+  height: 100%;
+  min-height: 50px;
 }
 
 .system-mgt2 .tox .tox-editor-container {
-    background: #fff;
-    height: 100%;
-    min-height: 50px;
+  background: #fff;
+  height: 100%;
+  min-height: 50px;
 }
 
 .system-mgt2 .tox .tox-edit-area {
   padding: 0 8px;
-    min-height: 50px;
+  min-height: 50px;
 }
 
 .resource-label {
@@ -398,7 +397,8 @@ h1.charname input {
   display: flex;
 }
 
-.items-list .item-name h3, .items-list .item-name h4 {
+.items-list .item-name h3,
+.items-list .item-name h4 {
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
@@ -485,22 +485,20 @@ h1.charname input {
 }
 
 .item-type {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 50px;
-    flex: 0 0 50px;
-    padding: 0 8px;
-    text-transform: capitalize;
-    text-align: left;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 50px;
+  flex: 0 0 50px;
+  padding: 0 8px;
+  text-transform: capitalize;
+  text-align: left;
 }
 
-
-
 .actor .item-prop {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 50px;
-    flex: 0 0 50px;
-    padding: 0 8px;
-    text-align: left;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 50px;
+  flex: 0 0 50px;
+  padding: 0 8px;
+  text-align: left;
 }
 
 .actor .weapon-name {
@@ -508,7 +506,6 @@ h1.charname input {
   -ms-flex: 0 0 200px;
   flex: 0 0 200px;
   padding: 0 8px;
-
 }
 
 .actor .weapon-prop {
@@ -531,1628 +528,1612 @@ h1.charname input {
   border: none;
 }
 
-
 .actor .characteristic-title {
-    font-weight: bold;
-    font-size: 12pt;
-    text-align: left;
+  font-weight: bold;
+  font-size: 12pt;
+  text-align: left;
 }
 
 .actor .characteristic-dm {
-    font-weight: bold;
-    font-size: 10pt;
-    border: 1pt solid black;
-    text-align: center;
-    border-radius: 25%;
-    padding: 2px;
-    padding-bottom: 1px;
-    width: 2em;
-    display: inline-block;
-    margin-bottom: 1px;
+  font-weight: bold;
+  font-size: 10pt;
+  border: 1pt solid black;
+  text-align: center;
+  border-radius: 25%;
+  padding: 2px;
+  padding-bottom: 1px;
+  width: 2em;
+  display: inline-block;
+  margin-bottom: 1px;
 }
 
 .actor .dm {
-    background-color: #A0A0A0;
-    color: #000000;
+  background-color: #a0a0a0;
+  color: #000000;
 }
 
 .actor .dmHigh {
-    background-color: #80F080;
-    color: #000000;
+  background-color: #80f080;
+  color: #000000;
 }
 
 .actor .dmLow {
-    background-color: #F08080;
-    color: #000000;
+  background-color: #f08080;
+  color: #000000;
 }
 
 .actor .input-value {
-    background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .actor .characteristic-value {
-    background-color: #F0F0F0;
-    width: 3em;
+  background-color: #f0f0f0;
+  width: 3em;
 }
 
 .actor .characteristic-readonly {
-    width: 3em;
-    color: #404040;
+  width: 3em;
+  color: #404040;
 }
 
 .actor .skill-label {
-    display: inline-block;
-    width: 110px;
-    font-size: 9pt;
+  display: inline-block;
+  width: 110px;
+  font-size: 9pt;
 }
 
 .augmented {
-    color: #006000;
+  color: #006000;
 }
 
 .augmented::after {
-    content: " *";
+  content: " *";
 }
-
-
 
 .actor .text-title {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-
-
 .actor .rollType {
-    font-weight: bold;
-    color: black;
+  font-weight: bold;
+  color: black;
 }
 
 .actor .rollTypeActive {
-    font-weight: bold;
-    color: white;
-    background: black;
+  font-weight: bold;
+  color: white;
+  background: black;
 }
 
 input.useCharacteristic {
-    width: 12px;
+  width: 12px;
 }
 
 .actor .header-profile .profile-label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .boon {
-    color: green;
+  color: green;
 }
 
 .bane {
-    color: red;
+  color: red;
 }
 
 .skillList {
-
 }
 
 .skillList-Rows {
-
 }
 
 .skillList-Rows-Three {
-    font-size: 10pt;
+  font-size: 10pt;
 }
 
 .skillList-Rows-Two {
-    font-size: 12pt;
+  font-size: 12pt;
 }
 
 .skillList-Columns {
-
 }
 
 .skillList-Columns-Three {
-    columns: 3;
-    column-rule: solid 1px #808080;
-    font-size: 10pt;
+  columns: 3;
+  column-rule: solid 1px #808080;
+  font-size: 10pt;
 }
 
 .skillList-Columns-Two {
-    columns: 2;
-    column-rule: solid 1px #808080;
-    font-size: 12pt;
+  columns: 2;
+  column-rule: solid 1px #808080;
+  font-size: 12pt;
 }
 
 .skillBlock {
-    width: 100%;
-    display: block;
-    margin-top: 1px;
-    break-inside: avoid;
+  width: 100%;
+  display: block;
+  margin-top: 1px;
+  break-inside: avoid;
 }
 
 .specialisationBlock {
-    width: 100%;
-    display:block;
-    margin-top: 1px;
-    margin-bottom: 1px;
+  width: 100%;
+  display: block;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
 
 .skillBlock label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .skillBlock label.untrained {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .skillBlock label.specialisation {
-    font-weight: normal;
-    font-style: italic;
-    margin-left: 24px;
+  font-weight: normal;
+  font-style: italic;
+  margin-left: 24px;
 }
 
 .skillBlock .deleted {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .skillBlock label.individual {
-    display: inline-block;
-    font-style: italic;
-    margin-left: 4px;
-    width: 100px;
+  display: inline-block;
+  font-style: italic;
+  margin-left: 4px;
+  width: 100px;
 }
 
 .skillBlock .skill-level {
-    float: right;
+  float: right;
 }
 
 .skillBlock .skill-fixed {
-    float: right;
+  float: right;
 }
 
-
 .actor .skill-level {
-    width: 24px;
-    height: 16px;
-    text-align: center;
-    background-color: #f0f0f0;
+  width: 24px;
+  height: 16px;
+  text-align: center;
+  background-color: #f0f0f0;
 }
 
 .actor .skill-fixed {
-    width: 24px;
-    height: 16px;
-    text-align: center;
-    background-color: #e0e0e0;
-    border: none;
+  width: 24px;
+  height: 16px;
+  text-align: center;
+  background-color: #e0e0e0;
+  border: none;
 }
 
 input.trained {
-    width: 12px;
-    height: 12px;
+  width: 12px;
+  height: 12px;
 }
 
 input.spectrained {
-    width: 9px;
-    height: 9px;
+  width: 9px;
+  height: 9px;
 }
 
-
-
-
-
-
-
 .skilldialog {
-    padding: 5px;
+  padding: 5px;
 }
 
 .skilldialog h3.skill-dialog-title {
-    font-weight: bold;
-    font-size: 10pt;
+  font-weight: bold;
+  font-size: 10pt;
 }
 
 .skillDialogRemember {
 }
 
 .skillDialogRemember input {
-    vertical-align: center;
-    height: 16px;
+  vertical-align: center;
+  height: 16px;
 }
 
 .skillDialogRemember span {
-    display: inline-block;
+  display: inline-block;
 }
 
 .skillDialogLabel {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 button.skillRoll {
-    background-color: #7080F0;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid #404040;
-    box-shadow: 3px 3px 3px #404040;
+  background-color: #7080f0;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid #404040;
+  box-shadow: 3px 3px 3px #404040;
 }
 
 button.attackRoll {
-    background-color: #F08070;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid #404040;
-    box-shadow: 3px 3px 3px #404040;
+  background-color: #f08070;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid #404040;
+  box-shadow: 3px 3px 3px #404040;
 }
 
 input.skillDialogDM {
-    width: 5em;
+  width: 5em;
 }
 
 span.skillroll {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 span.effectRoll {
-    font-weight: bold;
-    font-size: larger;
+  font-weight: bold;
+  font-size: larger;
 }
 
 span.rollCritical {
-    color: green;
-    font-weight: bold;
+  color: green;
+  font-weight: bold;
 }
 
 span.rollSuccess {
-    color: green;
+  color: green;
 }
 
 span.rollMarginal {
-    color: orangered;
+  color: orangered;
 }
 
 span.rollFailure {
-    color: red;
+  color: red;
 }
 
-
 h3.fullauto {
-    display: block;
-    font-size: larger;
-    font-weight: bold;
-    margin-top: 8px;
-    margin-bottom: 0;
-    padding-bottom: 0;
+  display: block;
+  font-size: larger;
+  font-weight: bold;
+  margin-top: 8px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 h2.subroll {
-    display: block;
-    margin-top: 8px;
-    margin-bottom: 2px;
-    padding-bottom: 0;
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 2px;
+  padding-bottom: 0;
 }
 
-
 span.skill-roll {
-    background: #DDDD;
-    padding: 1px 4px;
-    border: 1px solid #4b4a44;
-    border-radius: 2px;
-    white-space: nowrap;
-    word-break: break-all;
-    font-size: larger;
+  background: #dddd;
+  padding: 1px 4px;
+  border: 1px solid #4b4a44;
+  border-radius: 2px;
+  white-space: nowrap;
+  word-break: break-all;
+  font-size: larger;
 }
 
 div.skill-description {
-    font-style: italic;
-    font-size: 12pt;
-    border: 1px solid #404040;
-    background-color: #e0e0e0;
-    margin-bottom: 4px;
-    padding: 2px;
+  font-style: italic;
+  font-size: 12pt;
+  border: 1px solid #404040;
+  background-color: #e0e0e0;
+  margin-bottom: 4px;
+  padding: 2px;
 }
 
 div.skill-fail {
-    font-style: italic;
-    font-size: 12pt;
-    border: 1px solid #FF4040;
-    background-color: #ffe0e0;
-    margin-bottom: 4px;
-    padding: 2px;
+  font-style: italic;
+  font-size: 12pt;
+  border: 1px solid #ff4040;
+  background-color: #ffe0e0;
+  margin-bottom: 4px;
+  padding: 2px;
 }
 
 div.skill-success {
-    font-style: italic;
-    font-size: 12pt;
-    border: 1px solid #40FF40;
-    background-color: #e0ffe0;
-    margin-bottom: 4px;
-    padding: 2px;
+  font-style: italic;
+  font-size: 12pt;
+  border: 1px solid #40ff40;
+  background-color: #e0ffe0;
+  margin-bottom: 4px;
+  padding: 2px;
 }
 
 div.damage-message {
-    margin: 3px;
-    padding: 2px;
+  margin: 3px;
+  padding: 2px;
 }
 
 div.damage-message:hover {
-    border: 1px solid red;
-    border-radius: 2px;
-    background-color: #ff000010;
+  border: 1px solid red;
+  border-radius: 2px;
+  background-color: #ff000010;
 }
 
 div.upp-data {
-    border: 1px solid black;
-    border-radius: 2px;
-    padding: 2px;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 2px;
 }
 
 div.upp-data:hover {
-    border: 1px solid black;
-    border-radius: 2px;
-    padding: 2px;
-    background-color: #40404010;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 2px;
+  background-color: #40404010;
 }
 
 form.damage-dialog td {
-    width: 50px;
+  width: 50px;
 }
 
 form.damage-dialog label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 form.damage-dialog td.label {
-    text-align: left;
-    font-weight: bold;
+  text-align: left;
+  font-weight: bold;
 }
 
 form.damage-dialog td.value {
-    text-align: center;
+  text-align: center;
 }
 
 form.damage-dialog div.resource {
-    width: 80px;
+  width: 80px;
 }
 
 form.damage-dialog div.damage-header {
-    width: 320px;
+  width: 320px;
 }
 
 button.damage-button {
-    text-align: center;
-    width: 100%;
+  text-align: center;
+  width: 100%;
 }
 
 div.armour-box {
 }
 
 div.armour-box label.armour-name {
-    _font-size: smaller;
-    text-align: left;
-    font-style: italic;
-    padding-left: 0.25em;
-    padding-right: 0.25em;
-    border-bottom: 1px solid #404040;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
+  _font-size: smaller;
+  text-align: left;
+  font-style: italic;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  border-bottom: 1px solid #404040;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 div.armour-box label.prot-type {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 div.armour-box input.armour-value {
-    width: 45px;
-    text-align: center;
+  width: 45px;
+  text-align: center;
 }
 
 div.armour-box input.damaged {
-    background-color: orange;
-    font-weight: bold;
+  background-color: orange;
+  font-weight: bold;
 }
 
 div.armour-box label.prot-type {
-    padding-bottom: 5px;
-    display: block;
+  padding-bottom: 5px;
+  display: block;
 }
 
 div.armour-box input {
-    width: 100%;
+  width: 100%;
 }
 
 li.active-weapon label.weapon-name {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 ol.items-list li.active-weapon {
-    display: block;
-    clear: both;
-    border: 1px solid #404040;
-    height: 64px;
-    margin-bottom: 8px;
+  display: block;
+  clear: both;
+  border: 1px solid #404040;
+  height: 64px;
+  margin-bottom: 8px;
 }
 
 ol.items-list li.active-weapon:last-child {
-    border: 1px solid #404040;
+  border: 1px solid #404040;
 }
 
 li.active-weapon img {
-    border: 1px solid #A0A0A0;
+  border: 1px solid #a0a0a0;
 }
 
 li.active-weapon .item-attack {
-    background: #FF4040;
-    border-shaow: 1px solid black;
-    border-radius: 10px;
-    color: white;
-    padding-left: 5px;
-    padding-right: 5px;
+  background: #ff4040;
+  border-shaow: 1px solid black;
+  border-radius: 10px;
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 li.active-weapon .item-reload {
-    background: #408040;
-    border-shaow: 1px solid black;
-    border-radius: 10px;
-    color: white;
-    padding-left: 5px;
-    padding-right: 5px;
+  background: #408040;
+  border-shaow: 1px solid black;
+  border-radius: 10px;
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 li.active-weapon .item-edit {
-    background: #404040;
-    border-shaow: 1px solid black;
-    border-radius: 10px;
-    color: white;
-    padding-left: 5px;
-    padding-right: 5px;
+  background: #404040;
+  border-shaow: 1px solid black;
+  border-radius: 10px;
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 span.combatButton {
-    border: 2px solid black;
-    border-radius: 5px;
-    width: 5em;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 5em;
 }
 
 .credits::before {
-    content: "Cr";
+  content: "Cr";
 }
-
 
 /* Common styles */
 
 .mgt2 .window-content {
-    background: var(--sheet-bg);
-    padding: 0;
+  background: var(--sheet-bg);
+  padding: 0;
 }
 
 /* Sheet Styles */
 
 .shadow {
-    border: 2px solid var(--title-bg);
-    box-shadow: 3px 3px 3px #202020;
-    border-radius: 5px;
-    background-color: var(--panel-bg);
-    padding: 5px;
-    margin-bottom: 10px;
+  border: 2px solid var(--title-bg);
+  box-shadow: 3px 3px 3px #202020;
+  border-radius: 5px;
+  background-color: var(--panel-bg);
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .item-sheet {
-    display: flex;
-    padding: 5px;
-    background-color: #72bce8;
-    background-image: url(traveller-hexes.png);
+  display: flex;
+  padding: 5px;
+  background-color: #72bce8;
+  background-image: url(traveller-hexes.png);
 }
 
 .item-sheet .shadow {
-    background-color: #c7ded9;
+  background-color: #c7ded9;
 }
 
 .traveller-sheet {
-    padding: 5px;
-    align-items: flex-start;
-    display: flex;
-    background-color: var(--sheet-bg);
-    background-image: url(traveller-hexes.png);
+  padding: 5px;
+  align-items: flex-start;
+  display: flex;
+  background-color: var(--sheet-bg);
+  background-image: url(traveller-hexes.png);
 }
 
 .creature-sheet {
-    padding: 5px;
-    align-items: flex-start;
-    display: flex;
-    background: var(--sheet-bg);
-    background-image: url(traveller-hexes.png);
+  padding: 5px;
+  align-items: flex-start;
+  display: flex;
+  background: var(--sheet-bg);
+  background-image: url(traveller-hexes.png);
 }
 
 .npc-sheet {
-    padding: 5px;
-    align-items: flex-start;
-    display: flex;
-    background: var(--sheet-bg);
-    background-image: url(traveller-hexes.png);
+  padding: 5px;
+  align-items: flex-start;
+  display: flex;
+  background: var(--sheet-bg);
+  background-image: url(traveller-hexes.png);
 }
 
 /* Messages */
 
 div.attack-message {
-    border: 3px solid #ff311b;
-    border-radius: 5px;
-    margin-bottom: 2px;
+  border: 3px solid #ff311b;
+  border-radius: 5px;
+  margin-bottom: 2px;
 }
 
 div.attack-message h2 {
-    color: white;
-    background-color: #ff311b;
-    padding: 2px;
+  color: white;
+  background-color: #ff311b;
+  padding: 2px;
 }
 
 div.skill-message {
-    border: 3px solid #f1511b;
-    border-radius: 5px;
-    margin-bottom: 2px;
+  border: 3px solid #f1511b;
+  border-radius: 5px;
+  margin-bottom: 2px;
 }
 
 div.skill-message h2 {
-    color: white;
-    background-color: #f1511b;
-    padding: 2px;
+  color: white;
+  background-color: #f1511b;
+  padding: 2px;
 }
 
 div.skill-message h3 {
-    font-size: large;
-    font-weight: bold;
-    color: #f1511b;
-    padding: 2px;
-    border-bottom: 2px solid #f1511b;
+  font-size: large;
+  font-weight: bold;
+  color: #f1511b;
+  padding: 2px;
+  border-bottom: 2px solid #f1511b;
 }
 
 div.message-content {
-    padding: 2px;
+  padding: 2px;
 }
 
 div.skill-intro {
-    line-height: 140%;
+  line-height: 140%;
 }
 
 img.skillcheck-thumb {
-    width: 48px;
-    height: 48px;
-    object-fit: cover;
-    object-position: 0% 0%;
-    float: left;
-    margin-right: 4px;
-    margin-bottom: 2px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  object-position: 0% 0%;
+  float: left;
+  margin-right: 4px;
+  margin-bottom: 2px;
 }
 
 div.skill-with-icon {
-    margin-left: 50px;
+  margin-left: 50px;
 }
 
 div.skill-without-icon {
-
 }
 
 div.skill-augment-text {
-    font-style: italic;
+  font-style: italic;
 }
 
 /* Item sheets */
 
 .item-sheet div.sidebar {
-    flex: 0 0 160px;
-    width: 160px;
+  flex: 0 0 160px;
+  width: 160px;
 }
 
 .item-sheet img.item-status {
-    border: none;
-    cursor: pointer;
+  border: none;
+  cursor: pointer;
 }
 
 img.item-img {
-    width: 140px;
-    height: 140px;
-    min-height: 140px;
-    min-width: 140px;
-    margin-right: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 0;
+  width: 140px;
+  height: 140px;
+  min-height: 140px;
+  min-width: 140px;
+  margin-right: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 0;
 }
 
 div.item-side-panel {
-    width: 140px;
-    max-width: 140px;
+  width: 140px;
+  max-width: 140px;
 }
 
 .character-left {
-    flex: 0 0 170px;
-    width: 170px;
+  flex: 0 0 170px;
+  width: 170px;
 }
 
 .character-right {
-    width: 100%;
+  width: 100%;
 }
 
 .augment-types {
-    font-size: smaller;
-    display: block;
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 2px;
+  font-size: smaller;
+  display: block;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 2px;
 }
 
 .augment-types i {
-    padding-right: 3px;
+  padding-right: 3px;
 }
 
 /* Character sheet for creatures */
 
 .creature-sheet .stats {
-    padding: 5px;
+  padding: 5px;
 }
 
 textarea.traits {
-    height: 50px;
-    vertical-align: top;
-    font-family: "Roboto", sans-serif;
-    font-size: 11pt;
+  height: 50px;
+  vertical-align: top;
+  font-family: "Roboto", sans-serif;
+  font-size: 11pt;
 }
 
 .creature-sheet h1.charname {
-    padding: 2px;
-    margin-bottom: 10px;
+  padding: 2px;
+  margin-bottom: 10px;
 }
 
 .creature-sheet h1.charname input {
-    _background-color: white;
-    _border: none;
+  _background-color: white;
+  _border: none;
 }
 
 .character-left img.profile-img {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 160px;
-    flex: 0 0 140px;
-    width: 160px;
-    height: 100%;
-    min-height: 160px;
-    margin-right: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 0;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 160px;
+  flex: 0 0 140px;
+  width: 160px;
+  height: 100%;
+  min-height: 160px;
+  margin-right: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 0;
 }
 
 .creature-sheet .creature-box {
-    width: 160px;
-    padding: 2px;
-    margin-bottom: 10px;
+  width: 160px;
+  padding: 2px;
+  margin-bottom: 10px;
 }
 
 .hits-box {
-    text-align: center;
+  text-align: center;
 }
 
 .creature-sheet .creature-info {
-    padding: 5px;
-    margin-bottom: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .creature-sheet .skills {
-    padding: 5px;
-    margin-bottom: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .creature-sheet .description {
-    padding: 5px;
-    margin-bottom: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .description .editor {
-    min-height: 200px;
-    height: 100%;
+  min-height: 200px;
+  height: 100%;
 }
 
 .tox-tinymce {
-    min-height: 300px;
-    height: 100%;
+  min-height: 300px;
+  height: 100%;
 }
 
-
 .creature-sheet .creature-attacks li {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .creature-sheet .creature-attacks img {
-    text-align: left;
-    float: left;
-    margin: 0;
-    padding: 0;
-    padding-right: 3px;
+  text-align: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 3px;
 }
 
 label.box-title {
-    font-weight: bold;
-    text-align: center;
-    display: block;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    background-color: #f1511b;
-    color: white;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  background-color: #f1511b;
+  color: white;
 }
 
 .creature-sheet .creature-attacks .items-list label {
-    display: inline;
-    font-weight: bold;
-    vertical-align: top;
-    padding-left: 3px;
+  display: inline;
+  font-weight: bold;
+  vertical-align: top;
+  padding-left: 3px;
 }
 
 .creature-sheet .creature-armour img {
-    text-align: left;
-    float: left;
-    margin: 0;
-    padding: 0;
-    padding-right: 3px;
+  text-align: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 3px;
 }
 
 .creature-sheet .creature-armour .items-list label {
-    display: inline;
-    font-weight: bold;
-    vertical-align: top;
-    padding-left: 3px;
+  display: inline;
+  font-weight: bold;
+  vertical-align: top;
+  padding-left: 3px;
 }
-
-
 
 .creature-header .header-fields {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    margin: 0;
-    margin-top: 0;
-    padding-top: 0;
-    vertical-align: top;
-    flex-basis: auto;
-    align-self: flex-start;
-    margin-left: 160px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+  vertical-align: top;
+  flex-basis: auto;
+  align-self: flex-start;
+  margin-left: 160px;
 }
 
-
 .creature-header h1.charname {
-    height: 50px;
-    padding: 0;
-    margin: 0;
-    margin-top: 0;
-    border-bottom: 0;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  margin-top: 0;
+  border-bottom: 0;
 }
 
 /* NPC Character Sheet */
 
 .field-label {
-    background-color: #f1511b;
-    font-weight: bold;
-    color: white;
-    width: 100%;
-    text-align: center;
-    display: inline-block;
-    text-transform: uppercase;
-    border-radius: 3px 3px 0 0;
+  background-color: #f1511b;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 3px 3px 0 0;
+}
+
+select.field-value {
+  width: 100%;
+  border-radius: 0 0 3px 3px;
+  border-top: none;
+}
+
+input.field-value {
+  width: 100%;
+  border-radius: 0 0 3px 3px;
+  border-top: none;
 }
 
 .field-value {
-    width: 100%;
-    display: inline-block;
-    margin: 0;
-    padding: 1px 3px;
-    border-radius: 0 0 3px 3px;
-    border: solid 1px var(--color-border-light-tertiary);
-    height: var(--form-field-height);
-    background-color: rgba(0, 0, 0, 0.05);
-    text-align: inherit;
-    line-height: inherit;
-    vertical-align: text-bottom;
+  width: 100%;
+  display: inline-block;
+  margin: 0;
+  padding: 1px 3px;
+  border-radius: 0 0 3px 3px;
+  border: solid 1px var(--color-border-light-tertiary);
+  height: var(--form-field-height);
+  background-color: rgba(0, 0, 0, 0.05);
+  text-align: inherit;
+  line-height: inherit;
+  vertical-align: text-bottom;
 }
 
 .field-label-subtle {
-    font-weight: bold;
-    display: inline-block;
-    text-align: left;
-    width: 100%;
-    colour: black;
+  font-weight: bold;
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+  color: black;
 }
 
 .statusGood {
-    display: inline-block;
-    background-color: green;
-    color: white;
-    font-weight: bold;
-    padding: 3px;
-    border-radius: 3px;
-    border: 3px solid darkgreen;
+  display: inline-block;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 3px;
+  border: 3px solid darkgreen;
 }
 .statusWarn {
-    display: inline-block;
-    background-color: #D08040;
-    color: white;
-    font-weight: bold;
-    padding: 3px;
-    border-radius: 3px;
-    border: 3px solid #D08040;
+  display: inline-block;
+  background-color: #d08040;
+  color: white;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 3px;
+  border: 3px solid #d08040;
 }
 
 .statusBad {
-    display: inline-block;
-    background-color: #E00000;
-    color: white;
-    font-weight: bold;
-    padding: 3px;
-    border-radius: 3px;
-    border: 3px solid #E00000;
+  display: inline-block;
+  background-color: #e00000;
+  color: white;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 3px;
+  border: 3px solid #e00000;
 }
 
 .critical {
-    display: inline-block;
-    font-weight: bold;
-    padding: 3px;
-    border-radius: 3px;
-    border: 1px solid black;
-    margin-right: 5px;
-    margin-bottom: 3px;
+  display: inline-block;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 3px;
+  border: 1px solid black;
+  margin-right: 5px;
+  margin-bottom: 3px;
 }
 
 .criticalLow {
-    background-color: #D0D000;
-    color: black;
+  background-color: #d0d000;
+  color: black;
 }
 
 .criticalMedium {
-    background-color: #D08000;
-    color: black;
+  background-color: #d08000;
+  color: black;
 }
 
 .criticalHigh {
-    background-color: #E00000;
-    color: white;
+  background-color: #e00000;
+  color: white;
 }
 
 .criticalEffect {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 input.with-roller {
-    width: 60%;
-    text-align: left;
+  width: 60%;
+  text-align: left;
 }
 
 .resource .writable {
-    background-color: #D8D8D8;
+  background-color: #d8d8d8;
 }
 
 h1.charname {
-    padding: 2px;
-    margin-bottom: 10px;
-    color: white;
-    font-weight: bold;
-    background-color: #f1511b;
+  padding: 2px;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: bold;
+  background-color: #f1511b;
 }
 
 h1.charname input {
-    color: white;
-    _background-color: white;
-    border: none;
-    font-weight: bold;
+  color: white;
+  _background-color: white;
+  border: none;
+  font-weight: bold;
 }
 
 .character-left .side-panel {
-    width: 160px;
-    padding: 0;
-    margin-bottom: 10px;
+  width: 160px;
+  padding: 0;
+  margin-bottom: 10px;
 }
 
 .inset {
-    padding: 2px;
+  padding: 2px;
 }
 
 .bio-box {
-    min-height: 200px;
-    border: 2px groove #f0f0f0;
+  min-height: 200px;
+  border: 2px groove #f0f0f0;
 }
 
 .bio-box editor {
-    height: 100%;
+  height: 100%;
 }
 
 .character-right div.npc-info {
-    display: flex;
-    flex: 0 0 auto;
+  display: flex;
+  flex: 0 0 auto;
 }
 
 .character-attacks .items-list label {
-    display: inline;
-    font-weight: bold;
-    vertical-align: top;
-    padding-left: 3px;
+  display: inline;
+  font-weight: bold;
+  vertical-align: top;
+  padding-left: 3px;
 }
 
 .character-attacks li {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .character-attacks img {
-    text-align: left;
-    float: left;
-    margin: 0;
-    padding: 0;
-    padding-right: 3px;
+  text-align: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 3px;
 }
 
 .skill-options {
-    color: #404040;
-    font-size: smaller;
+  color: #404040;
+  font-size: smaller;
 }
 
 label.roll-untrained {
-    padding-top: 5px;
-    float: right;
+  padding-top: 5px;
+  float: right;
 }
 
 ol.effects-list li {
-    display: block;
-    border: 1px solid #404040;
-    padding: 2px;
-    border-radius: 3px;
-    background-color: #40404020;
+  display: block;
+  border: 1px solid #404040;
+  padding: 2px;
+  border-radius: 3px;
+  background-color: #40404020;
 }
 
 ol.effects-list li label {
-    font-weight: bold;
-    display: block;
+  font-weight: bold;
+  display: block;
 }
 
 ol.effects-list li .item-controls {
-    display: block;
-    float: right;
+  display: block;
+  float: right;
 }
 
 /* Journal related styling */
 section.briefing {
-    background-color: #f0f0f0;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 3px;
-    margin-left: 12px;
+  background-color: #f0f0f0;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 3px;
+  margin-left: 12px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap");
 section.briefing h2 {
-    font-family: 'Anton', sans-serif;
-    background-color: black;
-    color: white;
-    padding: 2px;
-    padding-left: 5px;
-    margin: -3px;
-    margin-bottom: 3px;
+  font-family: "Anton", sans-serif;
+  background-color: black;
+  color: white;
+  padding: 2px;
+  padding-left: 5px;
+  margin: -3px;
+  margin-bottom: 3px;
 }
 
 span.edit-skill {
-    float: right;
-    font-size: small;
+  float: right;
+  font-size: small;
 }
 
 .hits-box label.left-label {
-    text-align: left;
-    margin-left: 2px;
-    padding-top: 2px;
-    display: inline-block;
-    width: 96px;
+  text-align: left;
+  margin-left: 2px;
+  padding-top: 2px;
+  display: inline-block;
+  width: 96px;
 }
 
 .supply-box label.left-label {
-    text-align: left;
-    margin-left: 2px;
-    padding-top: 2px;
-    display: inline-block;
-    width: 80px;
+  text-align: left;
+  margin-left: 2px;
+  padding-top: 2px;
+  display: inline-block;
+  width: 80px;
 }
 
 .supply-box .supply {
-    width: 64px;
-    text-align: right;
+  width: 64px;
+  text-align: right;
 }
 
 .hits-box input {
-    height: 24px;
-    margin-bottom: 5px;
+  height: 24px;
+  margin-bottom: 5px;
 }
 
 .xpdialog {
-    width: 25em;
+  width: 25em;
 }
 
 .xpgrid {
-    width: 5em;
+  width: 5em;
 }
 
 .skillBonus {
-    width: 5em;
+  width: 5em;
 }
 
 .skillNotes {
-    width: 5em;
+  width: 5em;
 }
 
 .addNewSkill {
-    font-weight: bold;
+  font-weight: bold;
 }
 .addNewSkill:hover {
-    color: #000;
-    text-shadow: 0 0 10px red;
-    cursor: pointer;
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
 }
 
 section.id-card {
-    background-color: #E0E0E0;
-    margin: 0.25em;
-    padding: 0.5em;
-    border-radius: 15px;
-    min-width: 540px;
-    max-height: 400px;
-    font-family: "Courier";
+  background-color: #e0e0e0;
+  margin: 0.25em;
+  padding: 0.5em;
+  border-radius: 15px;
+  min-width: 540px;
+  max-height: 400px;
+  font-family: "Courier";
 }
 
 section.id-card .id-side {
-    float: left;
-    width: 160px;
+  float: left;
+  width: 160px;
 }
 
 section.id-card h4 {
-    display: block;
-    font-weight:bold;
-    margin-top: 5px;
-    border-bottom: 1px solid #A0A0A0;
-    width: 100%;
+  display: block;
+  font-weight: bold;
+  margin-top: 5px;
+  border-bottom: 1px solid #a0a0a0;
+  width: 100%;
 }
 
 section.id-card .id-data span {
-    display: block;
-    background-color: #E4E4E4;
-    width: 100%;
+  display: block;
+  background-color: #e4e4e4;
+  width: 100%;
 }
 
 section.id-card img {
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
 section.id-card div.id-card {
-    margin-left: 160px;
+  margin-left: 160px;
 }
 
 section.id-card span.upp {
-    border: 2px solid #A0A0A0;
-    border-radius: 5px;
-    margin-right: 5px;
-    padding: 10px;
-    font-size: x-large;
-    width: 2em;
-    display: inline-block;
-    text-align: center;
-    font-family: "Courier";
+  border: 2px solid #a0a0a0;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 10px;
+  font-size: x-large;
+  width: 2em;
+  display: inline-block;
+  text-align: center;
+  font-family: "Courier";
 }
 
 section.id-card div.info {
-    width: 10em;
-    float: left;
+  width: 10em;
+  float: left;
 }
 
 section.id-card div.upp {
-    padding-top: 1em;
+  padding-top: 1em;
 }
 
 section.id-card div.profession {
-    margin-top: 1.5em;
+  margin-top: 1.5em;
 }
 
 section.id-card div.upp {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 section.id-card .showIdCard {
-    font-size: large;
+  font-size: large;
 }
 
 .card-skills {
-    border-bottom: 1px solid #E4E4E4;
-    height: 100px;
-    scrollbar-color: #808080 #D0D0D0;
-    overflow-y: auto;
+  border-bottom: 1px solid #e4e4e4;
+  height: 100px;
+  scrollbar-color: #808080 #d0d0d0;
+  overflow-y: auto;
 }
 
 .card-skills h4 {
-    margin: 0px;
-    margin-bottom: 2px;
-    padding-top: 0px;
+  margin: 0px;
+  margin-bottom: 2px;
+  padding-top: 0px;
 }
 
 .skill-list {
-    xdisplay: inline;
-    list-style: none;
-    margin-block-start: 0px;
-    margin: 0px;
-    padding: 0px;
+  xdisplay: inline;
+  list-style: none;
+  margin-block-start: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .skill-list li {
-    display: inline;
+  display: inline;
 }
 
 .skill-list li:after {
-    content: ", ";
+  content: ", ";
 }
 
 .skill-list li:last-child:after {
-    content: "";
+  content: "";
 }
 
 .id-card div.description {
-    height: 80px;
-    scrollbar-color: #808080 #D0D0D0;
-    overflow-y: auto;
+  height: 80px;
+  scrollbar-color: #808080 #d0d0d0;
+  overflow-y: auto;
 }
 
 .id-share {
-    float: right;
+  float: right;
 }
 
 .side-values input {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .crew-member-dialog .crew-role-header {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .crew-member-dialog .crew-portrait {
-    width: 64px;
-    height: 64px;
-    border: none;
-    float: left;
+  width: 64px;
+  height: 64px;
+  border: none;
+  float: left;
 }
 
 .crew-member-dialog .crew-role-header .crew-info {
-    margin-left: 80px;
+  margin-left: 80px;
 }
 .crew-member-dialog .crew-role-header .crew-info h4 {
-    font-weight: bold;
-    text-transform: uppercase;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .crew-member-dialog .role-name {
-    text-transform: capitalize;
-    margin-bottom: 6px;
+  text-transform: capitalize;
+  margin-bottom: 6px;
 }
 
 .crew-member-dialog .role-list {
-    width: 400px;
+  width: 400px;
 }
 
 .crew-member-dialog div.role-name-header {
-    width: 150px;
+  width: 150px;
 }
 
 .crew-member-dialog span.role-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .crew-member-dialog li.crew-role {
-    border: 1px solid black;
-    border-radius: 10px 10px 3px 3px;
-    background: white;
+  border: 1px solid black;
+  border-radius: 10px 10px 3px 3px;
+  background: white;
 }
 
 .crew-member-dialog .crew-role-body h4 {
-    font-weight: bold;
-    border-bottom: 1px solid #f1511b;
+  font-weight: bold;
+  border-bottom: 1px solid #f1511b;
 }
 
 .crew-member-dialog li.crew-role h4 {
-    margin: -2px -2px 2px -2px;
-    border-radius: 10px 10px 0px 0px;
-    padding-left: 3px;
-    padding-right: 3px;
-    padding-top: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    border-bottom: 1px solid black;
-    background-color: #f1511b;
-    color: white;
-    font-weight: bold;
+  margin: -2px -2px 2px -2px;
+  border-radius: 10px 10px 0px 0px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid black;
+  background-color: #f1511b;
+  color: white;
+  font-weight: bold;
 }
 .inline-role h5 {
-    margin: 0px;
-    font-size: 12pt;
-    font-weight: bold;
+  margin: 0px;
+  font-size: 12pt;
+  font-weight: bold;
 }
 
 .inline-role .action-skill {
-    font-style: italic;
-    margin-left: 0.5em;
+  font-style: italic;
+  margin-left: 0.5em;
 }
 
-
 .crew-member-dialog li.crew-role h4 input {
-    width: 16px;
-    height: 16px;
+  width: 16px;
+  height: 16px;
 }
 
 .crew-member-dialog .crew-role .inline-role {
-    display: block;
-    margin: 3px;
-    padding: 1px;
-    border: 1px solid black;
-    background-color: #E0E0E0;
-    border-radius: 5px;
+  display: block;
+  margin: 3px;
+  padding: 1px;
+  border: 1px solid black;
+  background-color: #e0e0e0;
+  border-radius: 5px;
 }
 
 .crew-member-dialog .crew-role .inline-role:hover {
-    background-color: #E0E0FF;
+  background-color: #e0e0ff;
 }
 
 .actor-crew .band {
-    width: 100%;
-    font-size: 8px;
+  width: 100%;
+  font-size: 8px;
 }
 
 .actor-crew .band-black {
-    background-color: #000000;
+  background-color: #000000;
 }
 .actor-crew .band-grey {
-    background-color: #999999;
+  background-color: #999999;
 }
 .actor-crew .band-gold {
-    background-color: #ffc72a;
+  background-color: #ffc72a;
 }
 .actor-crew .band-red {
-    background-color: #ff0000;
+  background-color: #ff0000;
 }
 .actor-crew .band-blue {
-    background-color: #00abff;
+  background-color: #00abff;
 }
 .actor-crew .band-green {
-    background-color: #aade87;
+  background-color: #aade87;
 }
 
-
-
-
 .actor-crew .role-action-item {
-    margin-left: 52px;
+  margin-left: 52px;
 }
 
 .actor-crew .role-title {
-    margin: 0;
-    padding: 0;
-    font-style: italic;
-    font-weight: bold;
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+  font-weight: bold;
 }
 
 .actor-crew .role-action-buttons {
-    _clear: left;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+  _clear: left;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
 }
 
 .actor-crew .role-action-button {
-    display: inline-block;
-    border: 1px solid black;
-    padding: 2px 5px 2px 5px;
-    background-color: #f1511b;
-    color: white;
-    border-radius: 5px;
-    margin-right: 3px;
-    margin-bottom: 2px;
-    cursor: pointer;
+  display: inline-block;
+  border: 1px solid black;
+  padding: 2px 5px 2px 5px;
+  background-color: #f1511b;
+  color: white;
+  border-radius: 5px;
+  margin-right: 3px;
+  margin-bottom: 2px;
+  cursor: pointer;
 }
 
 .actor-crew .role-action-button:hover {
-    box-shadow: 0 2px 5px #800000;
+  box-shadow: 0 2px 5px #800000;
 }
 
 .actor-crew .role-action-button img.action {
-    margin: 0 4px 0 0;
-    padding: 0 4px 0 0;
-    height: 32px;
-    width: 32px;
+  margin: 0 4px 0 0;
+  padding: 0 4px 0 0;
+  height: 32px;
+  width: 32px;
 }
 
 .behaviour-field {
-    clear: right;
-    width: 100%;
-    min-height: 32px;
-    border: 1px solid black;
-    padding: 2px;
-    background-color: #D8D8D8;
+  clear: right;
+  width: 100%;
+  min-height: 32px;
+  border: 1px solid black;
+  padding: 2px;
+  background-color: #d8d8d8;
 }
 
 .behaviour-field .behaviour-item {
-    display: inline-block;
-    background-color: #f1511b;
-    color: white;
-    padding: 3px;
-    border: 1px solid black;
-    border-radius: 2px;
-    margin: 2px;
-    margin-right: 0.5em;
+  display: inline-block;
+  background-color: #f1511b;
+  color: white;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin: 2px;
+  margin-right: 0.5em;
 }
 
 .behaviour-field .behaviour-style-diet {
-    background-color: #802000;
+  background-color: #802000;
 }
 
 .behaviour-field .trait-item {
-    display: inline-block;
-    background-color: #f1511b;
-    color: white;
-    padding: 3px 0 3px 0;
-    border: 1px solid black;
-    border-radius: 2px;
-    margin: 2px;
-    margin-right: 0.5em;
+  display: inline-block;
+  background-color: #f1511b;
+  color: white;
+  padding: 3px 0 3px 0;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin: 2px;
+  margin-right: 0.5em;
 }
 
 .behaviour-field .trait-item .fas {
-    display: inline-block;
-    height: 100%;
-    padding: 5px;
-    margin: -3px 0 -3px 0;
-    background-color: #b03010;
+  display: inline-block;
+  height: 100%;
+  padding: 5px;
+  margin: -3px 0 -3px 0;
+  background-color: #b03010;
 }
 
 div.chat-package {
-    background-color: #404040;
-    border-radius: 0 30px 0 0;
-    padding: 3px;
+  background-color: #404040;
+  border-radius: 0 30px 0 0;
+  padding: 3px;
 }
 
 div.chat-package {
-    color: white;
+  color: white;
 }
 
 div.chat-package h3 {
-    padding-top: 5px;
-    font-weight: bold;
-    font-size: large;
-    color: #f1511b;
-    text-transform: uppercase;
+  padding-top: 5px;
+  font-weight: bold;
+  font-size: large;
+  color: #f1511b;
+  text-transform: uppercase;
 }
 
 div.chat-package h4 {
-    color: #f1511b;
-    text-transform: uppercase;
-    font-weight: bold;
+  color: #f1511b;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 div.chat-package .stats {
-    width: 100%;
+  width: 100%;
 }
 
 div.chat-package .stats .stat {
-    display: inline-block;
-    border: 1px solid black;
-    padding 2px;
-    margin: 1px;
-    text-align: center;
+  display: inline-block;
+  border: 1px solid black;
+  padding: 2px;
+  margin: 1px;
+  text-align: center;
 }
 
 div.chat-package .stats .stat .stat-hdr {
-    background-color: #f1511b;
-    color: #404040;
-    font-weight: bold;
-    display:block;
-    width: 100%;
+  background-color: #f1511b;
+  color: #404040;
+  font-weight: bold;
+  display: block;
+  width: 100%;
 }
 
 div.chat-package .stats .stat .stat-val {
-    color: white;
-    width: 100%;
-    display: block;
-    font-weight: bold;
+  color: white;
+  width: 100%;
+  display: block;
+  font-weight: bold;
 }
 
 div.chat-package ol.skill-list {
 }
 
 div.chat-package img {
-    width: 16px;
-    height: 16px;
+  width: 16px;
+  height: 16px;
 }
 
 div.popup-text {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 div.popup-text:hover {
-    -webkit-line-clamp: unset;
+  -webkit-line-clamp: unset;
 }
 
 .starshipattack img.attack-actor {
-    float: left;
-    margin-right: 8px;
-    width: 40px;
+  float: left;
+  margin-right: 8px;
+  width: 40px;
 }
 
 .starshipattack h4 {
-    font-weight: bold;
-    font-size: larger;
+  font-weight: bold;
+  font-size: larger;
 }
 
-
 div.mini-value {
-    display: inline-block;
-    _background-color: #f1511b;
-    border: 2px solid #f1511b;
-    width: auto;
-    margin-right: 8px;
-    margin-bottom: 8px;
-    background-image: url(../images/stripes.svg);
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: 100%;
+  display: inline-block;
+  _background-color: #f1511b;
+  border: 2px solid #f1511b;
+  width: auto;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  background-image: url(../images/stripes.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 100%;
 }
 
 div.mini-value label {
-    text-align: left;
-    color: white;
-    font-weight: bold;
-    padding-right: 24px;
-    margin-right: 0px;
-    border: none;
+  text-align: left;
+  color: white;
+  font-weight: bold;
+  padding-right: 24px;
+  margin-right: 0px;
+  border: none;
 }
 
 div.mini-value span {
-    display: inline-block;
-    background-color: white;
-    color: black;
-    font-weight: bold;
-    width: 1.5em;
-    text-align: center;
-    margin-left: 0px;
-    border: none;
+  display: inline-block;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  width: 1.5em;
+  text-align: center;
+  margin-left: 0px;
+  border: none;
 }
 
 .bay-header {
-    margin: 0;
-    padding: 0;
-    background-color: #f1511b;
+  margin: 0;
+  padding: 0;
+  background-color: #f1511b;
 }
 
 .bay-head {
-    width: 100%;
+  width: 100%;
 }
 
 .bay-head label {
-    text-align: left;
-    display: inline-block;
-    color: black;
-    font-weight: bold;
-    padding-left: 0.5em;
-    padding-bottom: 0.25em;
+  text-align: left;
+  display: inline-block;
+  color: black;
+  font-weight: bold;
+  padding-left: 0.5em;
+  padding-bottom: 0.25em;
 }
 .bay-head label.bay-hover-selected {
-    color: white;
+  color: white;
 }
 
 .bay-hover:hover {
-    color: white;
-    text-shadow: 0 0 10px red;
-    cursor: pointer;
+  color: white;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
 }
 
 .no-space {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .damageTrack {
 }
 
 .damageTrack .undamaged {
-    background-color: green;
-    width: 100%;
-    height: 15px;
+  background-color: green;
+  width: 100%;
+  height: 15px;
 }
 
 .damageTrack .damaged {
-    background-color: black;
-    width: 100%;
-    height: 15px;
+  background-color: black;
+  width: 100%;
+  height: 15px;
 }
 
 .damageTrack .critical {
-    background-color: red;
-    width: 100%;
-    height: 15px;
+  background-color: red;
+  width: 100%;
+  height: 15px;
 }
 
 .departmentList {
-    float: right;
+  float: right;
 }
 .checkbox-resource {
-    vertical-align: center;
+  vertical-align: center;
 }
 
 .checkbox-resource input {
-    display: inline-block;
+  display: inline-block;
 }
 .checkbox-label {
-    display: inline-block;
+  display: inline-block;
 }
 
 li.item-status-DESTROYED h4 {
-    background-color: red !important;
+  background-color: red !important;
 }
 
 li.item-status-DAMAGED h4 {
-    background-color: orange !important;
+  background-color: orange !important;
 }
 
 li.item-status-INACTIVE h4 {
-    color: #808080 !important;
+  color: #808080 !important;
 }
 
 .currentCrit {
-    font-weight: bold;
-    width: auto;
-    padding: 4px;
-    border-radius: 8px;
+  font-weight: bold;
+  width: auto;
+  padding: 4px;
+  border-radius: 8px;
 }
 
 .addCrewRole {
-    float: right;
-    font-weight: normal;
-    font-size: 12pt;
+  float: right;
+  font-weight: normal;
+  font-size: 12pt;
 }
 
 .crew-role-body .addCrewRole {
-    float: right;
-    display: inline-block;
-    font-weight: normal;
-    font-size: 10pt;
+  float: right;
+  display: inline-block;
+  font-weight: normal;
+  font-size: 10pt;
 }
 
 .crew-role-body h3 {
-    margin-top: 5px;
-    padding-bottom: 5px;
+  margin-top: 5px;
+  padding-bottom: 5px;
 }
 
 .addNewItem {
-    float: right;
-    font-weight: normal;
-    font-size: 12pt;
+  float: right;
+  font-weight: normal;
+  font-size: 12pt;
 }
 
 .always {
-    color: #888888;
+  color: #888888;
 }
 
 .effectPill {
-    display: inline-block;
-    padding: 3px;
-    border: 1px solid black;
-    border-radius: 4px;
-    margin: 2px;
-    margin-right: 0.3em;
-    background-color: #606060;
-    color: white;
+  display: inline-block;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 2px;
+  margin-right: 0.3em;
+  background-color: #606060;
+  color: white;
 }
 
 .skillGain-spec:hover {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
