@@ -220,10 +220,10 @@ export class MgT2Actor extends Actor {
       let total = 0;
       for (var s in skillData) {
           if (skillData[s].trained) {
-              total += parseInt(skillData[s].value);
+              total += (skillData[s].value>0)?parseInt(skillData[s].value):0;
               if (skillData[s].specialities) {
                   for (var sp in skillData[s].specialities) {
-                      total += parseInt(skillData[s].specialities[sp].value);
+                      total += (skillData[s].specialities[sp].value>0)?parseInt(skillData[s].specialities[sp].value):0;
                   }
               }
           }
