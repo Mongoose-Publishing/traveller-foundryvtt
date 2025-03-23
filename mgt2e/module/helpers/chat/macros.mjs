@@ -206,23 +206,56 @@ MgT2eMacros.damage = function(args) {
 };
 
 MgT2eMacros.createItem = async function(args) {
+    let item = null;
     let uuid = args.uuid;
 
-    let src = await fromUuidSync(uuid);
-    if (!src) {
-        ui.notifications.error("Unable to find linked item");
-        return;
+    if (uuid) {
+        let src = await fromUuidSync(uuid);
+        if (!src) {
+            ui.notifications.error(
+                game.i18n.localize("MGT2.Error.CreateItem.NoItem")
+            );
+            return;
+        }
+        item = await src.clone();
+    } else {
+        item = {
+            "name": "New Item",
+            "type": "item",
+            "quantity": 1,
+            "system": {
+                "description": "New Item"
+            }
+        }
     }
-    let item = await src.clone();
     if (args.name) {
         item.name = args.name;
     }
+    if (args.description) {
+        item.system.description = args.description;
+    }
+    if (args.type) {
+        item.type = type;
+    }
+    if (args.cost) {
+        item.system.cost = args.cost;
+    }
 
+    let added = false;
     for (let t of canvas.tokens.controlled) {
         let actor = t.actor;
         if (actor) {
             Item.create(item, { parent: actor});
+            ui.notifications.info(
+                game.i18n.format("MGT2.Info.CreateItem", { "item": item.name, "actor": actor.name})
+            );
+            added = true;
         }
+    }
+    if (!added) {
+        ui.notifications.error(
+            game.i18n.localize("MGT2.Error.CreateItem.NoToken")
+        );
     }
 }
 

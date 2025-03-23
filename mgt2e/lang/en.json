@@ -891,6 +891,9 @@
   "MGT2.EditSkill.Deleted": "Deleted, will be removed from target actor when package is applied",
 
   "MGT2.Info.Damage": "{actor} takes {damage} hits",
+  "MGT2.Info.CreateItem": "Added {item} to {actor}",
+  "MGT2.Error.CreateItem.NoItem": "Unable to locate linked item",
+  "MGT2.Error.CreateItem.NoToken": "You need to select a token for an item to be added to a character",
 
   "MGT2.Error.NoWeaponMount": "Vehicle has no weapon mounted for this action",
   "MGT2.Error.RoleInUse": "Cannot delete role {roleName} because it is assigned to crew member {actorName}",
