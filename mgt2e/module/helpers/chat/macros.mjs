@@ -2,6 +2,7 @@
  * Built in macros
  */
 import {rollAttack, skillLabel} from "../dice-rolls.mjs";
+import {randomiseAssociate} from "../utils/character-utils.mjs";
 
 
 export const MgT2eMacros = {};
@@ -259,21 +260,35 @@ MgT2eMacros.createItem = async function(args) {
     }
 }
 
-MgT2eMacros.createAssociate = function(args) {
+MgT2eMacros.createAssociate = async function(args) {
     let type = args.type;
     if (!["contact", "enemy", "ally", "rival"].includes(type)) {
         ui.notifications.error("Unknown associate type");
         return;
     }
     let name = args.name?args.name:type;
+    let description = args.description?args.description:"";
 
-    let data = {
+    let item = {
         "name": name,
         "type": "associate",
         "system": {
             "associate": {
                 "relationship": type
-            }
+            },
+            "description": description
+        }
+    }
+    let added = false;
+    for (let t of canvas.tokens.controlled) {
+        let actor = t.actor;
+        if (actor) {
+            await randomiseAssociate(item);
+            await Item.create(item, { parent: actor});
+            ui.notifications.info(
+                game.i18n.format("MGT2.Info.CreateItem", { "item": item.name, "actor": actor.name})
+            );
+            added = true;
         }
     }
 

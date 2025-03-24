@@ -267,6 +267,11 @@ li.vaccsuit {
     font-style: italic;
 }
 
+.associate form {
+  background-color: #404040;
+  background-image: url(traveller-hexes.png);
+}
+
 /* Associate Items */
 .associate-sheet {
   display: flex;
