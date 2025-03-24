@@ -61,10 +61,15 @@ export async function randomiseAssociate(item) {
     } else {
         return "";
     }
+    console.log(associate.relationship);
+    console.log(affinityDice);
+    console.log(enmityDice);
     let roll = await new Roll(affinityDice, null).evaluate();
     associate.affinity = getAffinity(roll.total);
     roll = await new Roll(enmityDice, null).evaluate();
     associate.enmity = 0 - getAffinity(roll.total);
+    console.log(associate.affinity);
+    console.log(associate.enmity);
 
     associate.power = await getPowerOrInfluence();
     associate.influence = await getPowerOrInfluence();

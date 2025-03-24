@@ -266,3 +266,34 @@ li.vaccsuit {
     font-size: smaller;
     font-style: italic;
 }
+
+/* Associate Items */
+.associate-sheet {
+  display: flex;
+  align-items: flex-start;
+}
+
+.associate-sheet h1 {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.associate-sheet h1 select.relationship-type {
+  float: left;
+  display: inline-block;
+  width: 120px;
+  height: 48px;
+  font-size: smaller;
+}
+
+.associate-sheet h1 input.associate-name {
+  display: inline;
+  width: auto;
+  height: 48px;
+  overflow: hidden;
+  margin-left: 16px;
+}
+
+.associate-sheet .randomiseRelationship {
+  text-align: right;
+}

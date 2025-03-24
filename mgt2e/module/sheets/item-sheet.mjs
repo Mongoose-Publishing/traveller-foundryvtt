@@ -616,7 +616,6 @@ export class MgT2ItemSheet extends ItemSheet {
         html.find(".quantity-dec").click(ev => this._decrementQuantity(this.item));
         html.find(".quantity-roll").click(ev => this._rollQuantity(this.item));
 
-        html.find(".randomiseRelationship").click(ev => this._randomiseRelationship(this.item));
 
         // Role Items
         html.find(".role-action-add").click(ev => this._addRollAction(this.item));
@@ -981,8 +980,4 @@ export class MgT2ItemSheet extends ItemSheet {
         item.update({[`system.role.actions.-=${id}`]: null});
     }
 
-    async _randomiseRelationship(item) {
-        await randomiseAssociate(item);
-        item.update({"system": item.system });
-    }
 }
