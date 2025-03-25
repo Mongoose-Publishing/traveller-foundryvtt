@@ -445,7 +445,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 content += "<br/>";
             }
             content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
-            content += `<button data-damage="${damageEffect}" data-options='${json}' 
+            content += `<button data-damage="${damageEffect}" data-options='${json}'
                             title="${titleText}"
                             class="damage-button">${dmgText}</button>`;
 
@@ -597,7 +597,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                 </div>
                 <hr/>
                 <div class="damage-message" data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}'>
-                    <button data-damage="${(damageRoll.total + effect)}" data-vers="2" 
+                    <button data-damage="${(damageRoll.total + effect)}" data-vers="2"
                             data-options='${json}' class="damage-button"
                             title="${multiplier}">
                         ${dmgText}
@@ -705,6 +705,7 @@ export async function rollSkill(actor, skill, options) {
     }
     let speciality = null;
     let noSpeciality = false;
+    console.log(skill);
     if (skill && (typeof skill === 'string' || skill instanceof String)) {
         // If a skill has been passed as a string, we need to find the skill object.
         if (skill.indexOf(".")) {

@@ -18,9 +18,17 @@ MgT2eMacros.skillGain = function(args) {
 
     console.log("MgT2eMacros.skillGain: " + skillId);
 
+    if (!skillId || args.cha) {
+        MgT2eMacros.chaGain(args);
+        return;
+    }
+
     if (skillId.indexOf(".") > -1) {
         skillId = args.skill.split(".")[0];
         specId = args.skill.split(".")[1];
+    }
+    if (level !== undefined) {
+        level = Number(level);
     }
 
     for (let t of canvas.tokens.controlled) {
@@ -38,13 +46,29 @@ MgT2eMacros.skillGain = function(args) {
                 // Level set to zero, nothing else to do.
             } else {
                 if (skill.specialities) {
-                    // Player has to select which speciality to raise.
-                    // Put the choice into the chat.
-                    text += `Select a speciality to train:<br/>`;
-                    for (let s in skill.specialities) {
-                        let spec = skillId + "." + s;
-                        let specName = actor.getSkillLabel(spec, false);
-                        text += `<span class="skillGain-spec" data-actorId="${actor._id}" data-skill="${spec}" data-level="${level}">${specName}</span><br/>`;
+                    if (specId) {
+                        if (skill.specialities[specId]) {
+                            let current = Number(skill.specialities[specId].value);
+                            if (level === undefined && current < 4) {
+                                skill.specialities[specId].value = current + 1;
+                                text += `Incrementing <b>${skillName}</b> to ${current + 1}.`;
+                            } else if (level > current) {
+                                skill.specialities[specId].value = level;
+                                text += `Setting <b>${skillName}</b> to ${level}.`;
+                            } else {
+                                text += `<b>${skillName}</b> is unchanged.`;
+                            }
+                        }
+                    } else {
+                        // Player has to select which speciality to raise.
+                        // Put the choice into the chat.
+                        text += `Select a speciality to train:<br/>`;
+                        for (let s in skill.specialities) {
+                            let spec = skillId + "." + s;
+                            let specName = actor.getSkillLabel(spec, false);
+                            let current = skill.specialities[s].value;
+                            text += `<span class="skillGain-spec" data-actorId="${actor._id}" data-skill="${spec}" data-level="${level}">${specName} ${current}</span><br/>`;
+                        }
                     }
                 } else if (level === undefined && skill.value < 4) {
                     skill.value += 1;
@@ -58,15 +82,12 @@ MgT2eMacros.skillGain = function(args) {
             }
             actor.update({"system.skills": actor.system.skills});
 
-
             let html = `<div class="chat-package"><h3>${actor.name}</h3>`;
             if (context) {
                 html += `<p>${context}</p>`;
             }
             html += `<p>${text}</p>`;
-
             html += `</div>`;
-
 
             let chatData = {
                 speaker: ChatMessage.getSpeaker({actor: actor}),
@@ -77,8 +98,53 @@ MgT2eMacros.skillGain = function(args) {
     }
 };
 
+MgT2eMacros.chaGain = function(args) {
+    let cha = args.cha;
+    let level = args.level;
+    let context = args.text;
+
+    console.log("MgT2eMacros.chaGain: " + cha);
+
+    if (!level) {
+        level = 1;
+    } else {
+        level = Number(level);
+    }
+
+    for (let t of canvas.tokens.controlled) {
+        let actor = t.actor;
+        if (actor) {
+            let text = "";
+
+            if (actor.system.characteristics[cha]) {
+                let current = Number(actor.system.characteristics[cha].value);
+                if (current < 15) {
+                    actor.system.characteristics[cha].value = Math.min(15, current + level);
+                    text += `Setting <b>${cha}</b> to ${actor.system.characteristics[cha].value}.`;
+                } else {
+                    text += `<b>${cha}</b> is unchanged.`;
+                }
+            }
+            actor.update({"system.characteristics": actor.system.characteristics});
+
+            let html = `<div class="chat-package"><h3>${actor.name}</h3>`;
+            if (context) {
+                html += `<p>${context}</p>`;
+            }
+            html += `<p>${text}</p>`;
+            html += `</div>`;
+
+            let chatData = {
+                speaker: ChatMessage.getSpeaker({actor: actor}),
+                content: html
+            };
+            ChatMessage.create(chatData, {});
+        }
+    }
+
+}
+
 MgT2eMacros.specialityGain = function(actorId, skill, level) {
-    console.log("specialityGain: " + skill);
     let actor = game.actors.get(actorId);
     let text = "";
     if (actor) {
@@ -87,22 +153,17 @@ MgT2eMacros.specialityGain = function(actorId, skill, level) {
         let specId = skill.split(".")[1];
 
         if (skills[skillId] && skills[skillId].specialities[specId]) {
-            console.log("Update");
             let spec = skills[skillId] && skills[skillId].specialities[specId];
             if (level === "undefined") {
                 if (spec.value < 4) {
-                    console.log("Increment");
-                    spec.value += 1;
+                    spec.value = Number(spec.value) + 1;
                 }
-                console.log(spec.value);
             } else {
-                console.log("Set to " + level);
                 if (spec.value < level) {
-                    spec.value = level;
+                    spec.value = Number(level);
                 }
             }
             text += `<b>${actor.getSkillLabel(skill)}</b> is set to ${spec.value}`;
-            console.log(spec);
             actor.update({"system.skills": actor.system.skills });
 
             let html = `<div class="chat-package"><h3>${actor.name}</h3>`;
@@ -188,6 +249,7 @@ MgT2eMacros.skillCheck = function(args, ask) {
     } else {
         game.mgt2e.rollSkillMacro(skillFqn, {
             "difficulty": target,
+            "cha": args.cha,
             "description": args.text,
             "success": args.success,
             "failure": args.failure
@@ -283,11 +345,22 @@ MgT2eMacros.createAssociate = async function(args) {
     for (let t of canvas.tokens.controlled) {
         let actor = t.actor;
         if (actor) {
-            await randomiseAssociate(item);
-            await Item.create(item, { parent: actor});
-            ui.notifications.info(
-                game.i18n.format("MGT2.Info.CreateItem", { "item": item.name, "actor": actor.name})
-            );
+            let number = 1;
+            if (args.number) {
+                const roll = await new Roll(args.number).evaluate();
+                number = roll.total;
+            }
+
+            for (let i=0; i < number; i++) {
+                if (number > 1) {
+                    item.name = `${name} ${i+1}`;
+                }
+                await randomiseAssociate(item);
+                await Item.create(item, {parent: actor});
+                ui.notifications.info(
+                    game.i18n.format("MGT2.Info.CreateItem", {"item": item.name, "actor": actor.name})
+                );
+            }
             added = true;
         }
     }

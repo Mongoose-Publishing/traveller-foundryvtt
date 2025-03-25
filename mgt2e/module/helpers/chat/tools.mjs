@@ -614,11 +614,11 @@ Tools.mgt2eClick = function(event) {
             args[key] = value;
         }
 
-        if (macroName === "skillGain") {
+        if (macroName === "skillGain" || macroName === "train") {
             MgT2eMacros.skillGain(args);
-        } else if (macroName === "skillCheck") {
+        } else if (macroName === "skillCheck" || macroName === "skill") {
             MgT2eMacros.skillCheck(args, false);
-        } else if (macroName === "skillReq") {
+        } else if (macroName === "skillReq" || macroName === "req") {
             MgT2eMacros.skillCheck(args, true);
         } else if (macroName === "damage") {
             MgT2eMacros.damage(args);
