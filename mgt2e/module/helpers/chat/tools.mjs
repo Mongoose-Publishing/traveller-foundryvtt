@@ -553,8 +553,18 @@ Tools.internalExecutionButton = function(macroName, argsString, title, flavor) {
     a.classList.add("inline-mgt2e-execution");
     a.dataset.macroName = macroName;
     a.dataset.args = argsString;
-    a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
-    a.innerHTML = `<span class="internal-macro"><i class="fas fa-dice"></i> ${flavor ?? title}</span>`;
+    //a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
+
+    let symbol = `<i class="fas fa-dice"></i>`;
+    if (["item"].includes(macroName)) {
+        symbol = `<i class=\"fas fa-arrow-up-from-bracket\"></i>`;
+    } else if (["req"].includes(macroName)) {
+        symbol = `<i class="fas fa-dice">?</i>`;
+    } else if (["train"].includes(macroName)) {
+        symbol = `<i class="fas fa-book-open"></i>`;
+    }
+
+    a.innerHTML = `<span class="internal-macro">${symbol} ${flavor ?? title}</span>`;
     return a;
 }
 

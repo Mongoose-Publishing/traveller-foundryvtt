@@ -356,3 +356,21 @@ div.traveller-copyright {
     margin-top: 1em;
 }
 
+div.foundry-hint {
+    border: 5px solid #f1511b;
+    border-radius: 15px;
+    background-color: #D0D0D0;
+    margin: 3px;
+}
+
+div.foundry-hint h4 {
+  background-color: #f1511b;
+  margin: 0 0 5px 0;
+  padding: 3px;
+  text-transform: uppercase;
+  color: white;
+}
+
+div.foundry-hint p {
+  margin: 5px;
+}

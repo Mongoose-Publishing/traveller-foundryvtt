@@ -460,6 +460,10 @@ Hooks.on("createActor", (actor) => {
         actor.update({"prototypeToken.sight.enabled": true});
     }
 
+    if (actor.type === "traveller") {
+        actor.update({"prototypeToken.actorLink": true});
+    }
+
     // Copy in characteristics where needed.
     if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
         // Need to add characteristics. We want them in a specific order, otherwise
