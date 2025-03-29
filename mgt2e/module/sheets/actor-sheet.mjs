@@ -2027,6 +2027,9 @@ export class MgT2ActorSheet extends ActorSheet {
         const damage = data.damage;
         const damageOptions = data.options?JSON.parse(data.options):null;
 
+        console.log("onDropDamage:");
+        console.log(data);
+
         this.actor.applyDamage(damage, damageOptions);
     }
 

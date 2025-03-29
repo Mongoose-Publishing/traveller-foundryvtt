@@ -260,11 +260,13 @@ MgT2eMacros.skillCheck = function(args, ask) {
 MgT2eMacros.damage = function(args) {
     let dice = args.dice;
     let text = args.text;
+    let damageType = args.type?args.type:"standard";
 
     rollAttack(null, null, {
         "damage": dice,
         "title": args.title?args.title:null,
-        "description": text
+        "description": text,
+        "damageType": damageType
     });
 };
 

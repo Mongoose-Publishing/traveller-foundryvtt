@@ -630,7 +630,7 @@ Tools.mgt2eClick = function(event) {
             MgT2eMacros.skillCheck(args, false);
         } else if (macroName === "skillReq" || macroName === "req") {
             MgT2eMacros.skillCheck(args, true);
-        } else if (macroName === "damage") {
+        } else if (macroName === "damage" || macroName === "dmg") {
             MgT2eMacros.damage(args);
         } else if (macroName === "item") {
             MgT2eMacros.createItem(args);
@@ -638,6 +638,7 @@ Tools.mgt2eClick = function(event) {
             MgT2eMacros.createAssociate(args);
         }
     } catch (e) {
+        console.log("There was a macro error");
         ui.notifications.error(e.error);
         throw e;
     }

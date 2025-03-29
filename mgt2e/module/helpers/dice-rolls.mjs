@@ -215,9 +215,12 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
     // Work out damage.
     let dmg = weapon?weapon.system.weapon.damage:attackOptions.damage;
-    let type = weapon?weapon.system.weapon.damageType:"standard";
-    if (!type) {
-        type = "standard";
+    let damageType = weapon?weapon.system.weapon.damageType:"standard";
+    if (!damageType) {
+        damageType = "standard";
+    }
+    if (attackOptions.damageType) {
+        damageType = attackOptions.damageType;
     }
 
     let traits = weapon?weapon.system.weapon.traits:"";
@@ -263,7 +266,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
         }
 
         if (!attackOptions.isParry) {
-            content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type === "standard") ? "" : (" (" + type + ")")}<br/>`;
+            content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
             if (baseRange > 0) {
                 content += `<b>Range:</b> ${baseRange}${rangeUnit}<br/>`;
             } else {
@@ -275,6 +278,8 @@ export async function rollAttack(actor, weapon, attackOptions) {
         } else {
             traits = "";
         }
+    } else {
+        content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
     }
     content += '</div>';
     // End of header.
@@ -312,7 +317,6 @@ export async function rollAttack(actor, weapon, attackOptions) {
         }
     }
     let attacks = 1;
-    console.log("Shots Fired: " + attackOptions.shotsFired + " on " + attackOptions.autoOption);
     if (attackOptions.autoOption && attackOptions.autoOption === "burst") {
         let autoBonus = attackOptions.shotsFired?attackOptions.shotsFired:getTraitValue(traits, "auto");
         dmg = dmg + " + " + autoBonus;
@@ -400,7 +404,11 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 dmgText += ` /&nbsp;AP&nbsp;${ap}`;
             }
             let radiationDamage = 0;
-            if (hasTrait(traits, "radiation")) {
+            if (damageType === "radiation") {
+                radiationDamage = damageTotal;
+                damageTotal = 0;
+                damageEffect = 0;
+            } else if (hasTrait(traits, "radiation")) {
                 const radRoll = await new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate();
                 radiationDamage = radRoll.total;
                 dmgText += ` /&nbsp;${radRoll.total} Rads`;
@@ -428,7 +436,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 "traits": weapon?weapon.system.weapon.traits:"",
                 "ap": ap,
                 "tl": tl,
-                "damageType": weapon?weapon.system.weapon.damageType:"standard",
+                "damageType": damageType,
                 "radiation": radiationDamage,
                 "ranged": (baseRange>0)
             };

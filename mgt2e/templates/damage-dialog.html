@@ -34,6 +34,23 @@
                 {{armourText}}
             </div>
         {{/if}}
+
+        {{#if radiation}}
+            <div class="resource flex-group-center">
+                <label for="radiation" class="resource-label">RADIATION</label>
+                <input type="text" name="damage" value="{{radiation}}" data-dtype="Number" readonly/>
+            </div>
+            <div class="resource flex-group-center">
+            </div>
+            <div class="resource flex-group-center">
+                <label for="armourRads" class="resource-label">RADS</label>
+                <input type="text" name="armourRads" value="{{armourRads}}" data-dtype="Number" readonly/>
+            </div>
+            <div class="resource flex-group-center">
+                <label for="actualRadiation" class="resource-label">ACTUAL</label>
+                <input type="text" name="actualRadiation" value="{{actualRadiation}}" data-dtype="Number" readonly/>
+            </div>
+        {{/if}}
     </div>
 
     <div class="shadow">

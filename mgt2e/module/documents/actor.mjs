@@ -442,6 +442,7 @@ export class MgT2Actor extends Actor {
 
       let armour = 0;
       let armourText = ""
+      let radiationDamage = options.radiation?options.radiation:0;
       options.armour = 0;
 
       if (this.system.armour && isNonZero(this.system.armour.protection)) {
@@ -469,6 +470,10 @@ export class MgT2Actor extends Actor {
                   armourText += `${options.damageType} + ${otherProt} `;
               }
           }
+      }
+      if  (radiationDamage > 0 && this.system.armour && isNonZero(this.system.armour.rad)) {
+          options.armourRads = Number(this.system.armour.rad);
+          radiationDamage = Math.max(0, Number(radiationDamage - options.armourRads));
       }
 
       // Look for active weapons which provide protection.
@@ -520,7 +525,7 @@ export class MgT2Actor extends Actor {
       if (options.multiplier && parseInt(options.multiplier) > 1) {
           damage *= parseInt(options.multiplier);
       }
-      if (damage < 1) {
+      if (damage < 1 && radiationDamage < 1) {
           // No damage to be applied.
           ui.notifications.info(
               game.i18n.format("MGT2.Attack.DamageBounce",
@@ -550,6 +555,11 @@ export class MgT2Actor extends Actor {
       }
       console.log(damage);
       console.log(options);
+
+      if (options.actualRadiation > 0) {
+          this.system.rads += options.actualRadiation;
+          this.update({ "system.rads": this.system.rads });
+      }
 
       if (stun) {
           if (options.characteristics) {
