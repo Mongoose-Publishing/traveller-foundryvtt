@@ -17,6 +17,9 @@
 * Given each macro type a different icon, to make them easier to distinguish.
 * Traveller actors are now created with the Link Actor flag automatically ticked on their tokens.
 * Added new CSS styling for Foundry specific sections in the rule books.
+* Radiation damage now applied to a character as part of damage.
+* Damage can be made to a specific characteristic for Travellers using macros.
+* Built-int macros given alternative, shorter, names.
 
 ## 0.11.10 (Beta)
 

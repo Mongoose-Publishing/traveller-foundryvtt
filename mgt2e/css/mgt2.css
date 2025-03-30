@@ -2137,3 +2137,7 @@ li.item-status-INACTIVE h4 {
   background-color: white;
   color: black;
 }
+
+tr.targeted-cha-row td {
+  background-color: #D0D0D0;
+}

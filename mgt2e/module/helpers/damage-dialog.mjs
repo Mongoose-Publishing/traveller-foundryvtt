@@ -16,11 +16,6 @@ export class MgT2DamageDialog extends Application {
 
     constructor(actor, damage, damageOptions) {
         super();
-        console.log("*** DamageDialog:");
-
-        console.log(actor);
-        console.log(damageOptions);
-        console.log(damage);
 
         this.actor = actor;
         this.damageOptions = damageOptions;
@@ -62,6 +57,20 @@ export class MgT2DamageDialog extends Application {
         this.DEX = data.characteristics.DEX.current;
         this.END = data.characteristics.END.current;
 
+        // For historical reasons 'laser' is the damage type.
+        if (data.characteristics[this.laser]) {
+            this.XXX = data.characteristics[this.laser].current;
+            this.XXX_VALUE = this.XXX;
+            if (data.damage[this.laser]) {
+                this.DMG_XXX = data.damage[this.laser].value;
+            } else {
+                this.DMG_XXX = 0;
+                data.damage[this.laser] = {
+                    value: 0
+                };
+            }
+        }
+
         let totalEND = parseInt(data.characteristics.END.value);
         if (this.actualDamage === 0) {
             this.wounds = "-";
@@ -97,7 +106,6 @@ export class MgT2DamageDialog extends Application {
     }
 
     getData() {
-        console.log("Radiation: " + this.radiationDamage);
         return {
             "actor": this.actor,
             "data": this.data,
@@ -111,9 +119,12 @@ export class MgT2DamageDialog extends Application {
             "STR": this.STR,
             "DEX": this.DEX,
             "END": this.END,
+            "XXX": this.XXX,
+            "XXX_VALUE": this.XXX_VALUE,
             "DMG_STR": this.DMG_STR,
             "DMG_DEX": this.DMG_DEX,
             "DMG_END": this.DMG_END,
+            "DMG_XXX": this.DMG_XXX,
             "wounds": this.wounds,
             "armourText": this.armourText,
             "woundsEffect": this.woundsEffect,
@@ -137,15 +148,11 @@ export class MgT2DamageDialog extends Application {
     }
 
     applyDamage(event, html) {
-        console.log("apply");
-        console.log(event);
         let cha = event.currentTarget.dataset.cha;
 
         let currentDmg = this.getIntValue(html, ".DMG_" + cha);
         let currentScore = this.getIntValue(html, ".VAL_" + cha);
         let maxScore = this.getIntValue(html, this.data.characteristics[cha].value);
-
-        console.log("Cha " + cha + " max " + maxScore + " currently " + currentScore + " with dmg " + currentDmg);
 
         if (this.remainingDamage <= currentScore) {
             currentDmg += this.remainingDamage;
@@ -181,36 +188,36 @@ export class MgT2DamageDialog extends Application {
     }
 
     updateDamage(event, html) {
-        console.log("Was updated");
-
         let str = this.getIntValue(html, ".DMG_STR");
         let dex = this.getIntValue(html, ".DMG_DEX");
         let end = this.getIntValue(html, ".DMG_END");
-
-        console.log(`STR ${str}, DEX ${dex}, END ${end}`);
-
     }
 
     async doneClick(event, html) {
         event.preventDefault();
-        console.log("doneClick:");
 
         let str = this.getIntValue(html, ".DMG_STR");
         let dex = this.getIntValue(html, ".DMG_DEX");
         let end = this.getIntValue(html, ".DMG_END");
-        let remaining = this.getIntValue(html, ".remaining")
+        let xxx = null;
+        let damage = 0;
+        if (this.XXX) {
+            xxx = this.getIntValue(html, ".DMG_XXX");
+            this.damageOptions.characteristics = { };
+            this.damageOptions.characteristics[this.laser] = xxx;
+            this.damageOptions.directChaDamage = true;
+        } else {
+            let remaining = this.getIntValue(html, ".remaining")
+            let total = str + dex + end;
+            damage = this.actualDamage;
 
-        console.log(`STR ${str}, DEX ${dex}, END ${end}`);
-
-        let total = str + dex + end;
-        let damage = this.actualDamage;
-
-        this.damageOptions.characteristics = {
-            "STR": str,
-            "DEX": dex,
-            "END": end
+            this.damageOptions.characteristics = {
+                "STR": str,
+                "DEX": dex,
+                "END": end
+            }
+            this.damageOptions.actualRadiation = this.actualRadiation;
         }
-        this.damageOptions.actualRadiation = this.actualRadiation;
         this.actor.applyActualDamageToTraveller(damage, this.damageOptions);
         this.close();
     }
