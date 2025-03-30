@@ -20,6 +20,7 @@
 * Radiation damage now applied to a character as part of damage.
 * Damage can be made to a specific characteristic for Travellers using macros.
 * Built-int macros given alternative, shorter, names.
+* Skill request macro will now use honour the roll mode setting of the user.
 
 ## 0.11.10 (Beta)
 

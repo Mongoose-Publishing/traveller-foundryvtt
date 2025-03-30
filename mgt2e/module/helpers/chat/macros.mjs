@@ -185,8 +185,11 @@ MgT2eMacros.skillCheck = function(args, ask) {
     let skillFqn = args.skill;
     let target = args.target?args.target:8;
 
-    console.log("skillCheck");
-    console.log(args);
+    if (!ask && game.users.current.isGM && !canvas.tokens.controlled.length) {
+        // If current user is the GM, when trying to roll a skill, if no tokens
+        // are selected then turn it into a skill request.
+        ask = true;
+    }
 
     if (ask) {
         let title = "";
@@ -238,11 +241,11 @@ MgT2eMacros.skillCheck = function(args, ask) {
         html += `<button data-skillcheck="${skillFqn}" data-options='${json}'
                     title="${title}"
                     class="skillcheck-button">Roll ${title}</button>`;
-
         html += `</div>`;
 
         let chatData = {
-            content: html
+            content: html,
+            rollMode: game.settings.get("core", "rollMode")
         };
         ChatMessage.create(chatData, {});
 
