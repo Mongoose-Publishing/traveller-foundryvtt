@@ -83,7 +83,6 @@ The main supported object types defined in the system are:
   * Spacecraft Hardware - Items a spacecraft is built from.
   * Crew Roles - Specify roles for crew members of a starship or vehicle.
 
-
 ## Licenses
 
 Code is BSD licensed, based on boilerplate Foundry code from https://github.com/asacolips-projects/boilerplate
@@ -92,8 +91,9 @@ Some icons are taken from svgicons.com and game-icons.net. See the READMEs in th
 
 Starship icons are drawn by Samuel Penn, and available under a CC0 license.
 
-### Contributors
+### Acknowledgments
 
-Other contributors to the project:
+* Some CSS fixes by https://github.com/ryanwalder (Contributed)
+* Inline macro execution based on code from https://github.com/fpiechowski/inline-macro-execution by Mesayah (MIT)
 
-* https://github.com/ryanwalder - CSS fixes.
+
