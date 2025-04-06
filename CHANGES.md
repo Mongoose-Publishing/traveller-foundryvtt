@@ -12,6 +12,8 @@
 
 * Fix bug where some augments were not displayed on the list of skills.
 * Added new augment type to set minimum value for a characteristic.
+* Switched from legacy transfer mode for active effects. This now allows effects to work with tokens,
+  though some old effects may be left dangling. A method added to the UI to remove dangling effects.
 
 ## 0.11.11 (Beta)
 

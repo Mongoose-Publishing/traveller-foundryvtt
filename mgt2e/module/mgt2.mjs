@@ -201,12 +201,13 @@ Hooks.once('init', async function() {
             "1": "Low",
             "2": "Medium",
             "3": "High"
-
         },
         default: "0"
     });
 
-  // Add custom constants for configuration.
+    CONFIG.ActiveEffect.legacyTransferral = false;
+
+    // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;
 
   /**
@@ -224,7 +225,7 @@ Hooks.once('init', async function() {
   CONFIG.ActiveEffect.documentClass = MgT2Effect;
 
   //CONFIG.debug.hooks = true;
-  //console.log(CONFIG);
+  console.log(CONFIG);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -2060,8 +2061,18 @@ Handlebars.registerHelper("showEffectPill", function(actor, effect) {
            }
 
        }
-
-       html += `<span class="effectPill" title="${title}">${text}</span>`;
+       let origin = fromUuidSync(effect.origin);
+       let extraClasses = "";
+       let remove = "";
+       if (!origin) {
+           extraClasses = "unlinked";
+       }
+       if (actor.effects.get(effect._id)) {
+           // If the effect is directly on this actor, then it can be removed.
+           // Otherwise it is from an item, and the item needs to be removed.
+           remove = ` &nbsp;<i class="fas fa-xmark effect-remove"> </i>`;
+       }
+       html += `<span class="effectPill ${extraClasses}" data-effect-id="${effect._id}" title="${title}">${text}${remove}</span>`;
    }
 
    return html;

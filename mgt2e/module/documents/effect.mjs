@@ -1,13 +1,18 @@
 /**
  * Designed to be part of items, provides bonuses to actors.
  */
-export class MgT2Effect extends ActiveEffect {
-    isSuppressed = false;
+import {MgT2Item} from "./item.mjs";
 
+export class MgT2Effect extends ActiveEffect {
     apply(actor, change) {
         if (this.isSuppressed) return null;
 
         return super.apply(actor, change);
+    }
+
+    get isSuppressed() {
+        if (this.parent instanceof Item) return this.parent.system.status !== MgT2Item.EQUIPPED;
+        return false;
     }
 
     static onManageActiveEffect(event, owner) {

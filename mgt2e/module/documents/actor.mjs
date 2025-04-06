@@ -36,8 +36,7 @@ export class MgT2Actor extends Actor {
         for (const effect of this.effects) {
             const source = effect._source._id;
             if (effect.origin) {
-                const origin = effect.origin.replaceAll(/.*Item./g, "");
-                const item = this.items.get(origin);
+                const item = fromUuidSync(effect.origin);
                 if (item) {
                     effect.isSuppressed = item.system.status !== MgT2Item.EQUIPPED;
                 }
@@ -47,10 +46,7 @@ export class MgT2Actor extends Actor {
 
     async _preUpdate(changes, options, user) {
         if (this.type === "spacecraft") {
-            console.log("_preUpdate: Spacecraft " + this.name);
-
             if (changes?.system?.spacecraft?.dtons) {
-                console.log("dtons changed");
                 let dtons = parseInt(changes.system.spacecraft.dtons);
                 if (dtons < 1) {
                     dtons = changes.system.spacecraft.dtons = 1;

@@ -96,7 +96,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.rollData = context.actor.getRollData();
 
         // Prepare active effects
-        context.effects = prepareActiveEffectCategories(context.actor.effects);
+        context.effects = prepareActiveEffectCategories(context.actor, context.actor.effects);
 
         // Work out bonuses and penalties
         if (["npc", "traveller"].includes(type) && actorData.modifiers) {
@@ -998,6 +998,10 @@ export class MgT2ActorSheet extends ActorSheet {
                this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });
             });
         }
+        html.find('.effect-remove').click(ev => {
+            const t = $(ev.currentTarget).parents(".effectPill");
+            void this._removeEffect(t.data("effectId"));
+        });
         html.find('.addItemSelect').click(ev => {
             const value = $(ev.currentTarget).val();
             this._createEquipmentItem(value);
@@ -1115,6 +1119,11 @@ export class MgT2ActorSheet extends ActorSheet {
         li.addEventListener("dragstart", handler, options);
     });
   }
+
+    async _removeEffect(effectId) {
+        console.log("Remove effect " + effectId);
+        this.actor.deleteEmbeddedDocuments("ActiveEffect", [ effectId ]);
+    }
 
     async _creatureSelectBehaviour(selectedBehaviour) {
         // Creatures can have multiple behaviours.
