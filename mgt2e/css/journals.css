@@ -168,6 +168,79 @@ div.journal-career h1:after {
 }
 
 
+div.journal-career .career-hdr {
+  font-weight: bold;
+  font-family: Anton;
+  font-size: 16pt;
+}
+
+div.journal-career p.career-h1 {
+  font-size: 20pt;
+}
+
+div.journal-career p.career-h1 {
+  clear: both;
+  font-family: Anton;
+  font-weight: normal;
+  color: white;
+  background: #67696f;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 1em;
+  margin-left: 0.5em;
+  margin-right: 1em;
+  width: 90%;
+}
+
+div.journal-career p.career-h1:before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  border-top: 16px solid #eff0f0;
+  border-right: 16px solid #67696f;
+  width: 0;
+}
+
+div.journal-career p.career-h1:after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  border-top: 16px solid #eff0f0;
+  border-left: 16px solid #67696f;
+  width: 0;
+}
+
+div.journal-career p.career-h2 {
+  font-family: Anton;
+  color: white;
+  background-color: #67696f;
+  position: relative;
+  padding-left: 1em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  text-transform: uppercase;
+}
+
+div.journal-career p.career-h2:before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  border-top: 12px solid #eff0f0;
+  border-right: 12px solid #67696f;
+  width: 0;
+}
+
+div.journal-career p.career-h2:after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  border-top: 12px solid #eff0f0;
+  border-left: 12px solid #67696f;
+  width: 0;
+}
+
+
+
 div.journal-career h2 {
     font-family: Anton;
     color: white;
