@@ -77,12 +77,6 @@ export class MgT2Actor extends Actor {
         }
     }
 
-    /*
-    _onUpdate(changed, options, userId) {
-        super._onUpdate(changed, options, userId);
-    }
-    */
-
     /**
      * Called when an attribute on a token is directly modified by the user.
      * Used for updating damage on the actor.
@@ -145,14 +139,6 @@ export class MgT2Actor extends Actor {
           return parseInt(value / 3) - 2;
       }
   }
-
-
-
-    _applyActiveEffect(ob1, obj2) {
-        console.log("applyActiveEffect:");
-        console.log(obj1);
-        console.log(obj2);
-    }
 
     _prepareEncumbrance(actorData) {
         if (!actorData.system) {
@@ -241,7 +227,7 @@ export class MgT2Actor extends Actor {
         if (sys.characteristics.INT && sys.characteristics.EDU) {
             sys.totalSkills = this._countSkillLevels(sys.skills);
             sys.maxSkills = (parseInt(sys.characteristics.INT.value) +
-                parseInt(sys.characteristics.EDU.value)) * 3;
+                Number(sys.characteristics.EDU.value)) * 3;
         } else {
             sys.maxSkills = 0;
         }
@@ -254,7 +240,10 @@ export class MgT2Actor extends Actor {
         for (const char in sys.characteristics) {
             let value = sys.characteristics[char].value;
             if (sys.characteristics[char].augment) {
-                value += parseInt(sys.characteristics[char].augment);
+                value += Number(sys.characteristics[char].augment);
+            }
+            if (sys.characteristics[char].min) {
+                value = Math.max(value, Number(sys.characteristics[char].min));
             }
             let dmg = 0;
             if (sys.damage && sys.damage[char]) {
@@ -299,6 +288,9 @@ export class MgT2Actor extends Actor {
             if (actorData.characteristics[char].augment) {
                 value += parseInt(actorData.characteristics[char].augment);
                 console.log("Augmented value is " + value);
+            }
+            if (actorData.characteristics[char].min) {
+                value = Math.max(value, Number(actorData.characteristics[char].min));
             }
             actorData.characteristics[char].current = value;
             actorData.characteristics[char].dm = this.getModifier(value);

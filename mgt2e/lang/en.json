@@ -816,6 +816,7 @@
   "MGT2.Effects.Type.chaDM": "Characteristic DM",
   "MGT2.Effects.Type.chaBoon": "Characteristic Boon",
   "MGT2.Effects.Type.chaBane": "Characteristic Bane",
+  "MGT2.Effects.Type.chaMin": "Characteristic Min",
   "MGT2.Effects.Type.skillAug": "Skill Augment",
   "MGT2.Effects.Type.skillDM": "Skill DM",
   "MGT2.Effects.Type.skillExpert": "Expert Program",

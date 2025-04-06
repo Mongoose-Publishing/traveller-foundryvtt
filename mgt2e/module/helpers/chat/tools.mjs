@@ -163,6 +163,14 @@ Tools.setStatus = function(chatData, args) {
     }
 }
 
+Tools.debugSelected = function(chatData) {
+    const selected = Tools.getSelected();
+
+    for (let token of selected) {
+        console.log(token);
+    }
+}
+
 Tools.renumber = function() {
     const selected = Tools.getSelected();
 

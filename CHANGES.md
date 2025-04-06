@@ -8,6 +8,11 @@
 * Augments not behaving correctly when added to tokens. Seem to work fine when applied
   to a base actor.
 
+## develop
+
+* Fix bug where some augments were not displayed on the list of skills.
+* Added new augment type to set minimum value for a characteristic.
+
 ## 0.11.11 (Beta)
 
 * Cleaned up CSS.

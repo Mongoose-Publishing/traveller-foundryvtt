@@ -396,9 +396,6 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     } else if (message.indexOf("/showskills") === 0) {
         Tools.showSkills(chatData);
         return false;
-    } else if (message.indexOf("/renumber") === 0) {
-        Tools.renumber();
-        return false;
     } else if (message.indexOf("/time") === 0) {
         let args = message.split(" ");
         args.shift();
@@ -408,6 +405,9 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
         let args = message.split(" ");
         args.shift();
         Tools.setStatus(chatData, args);
+        return false;
+    } else if (message.indexOf("/debug") === 0) {
+        Tools.debugSelected(chatData);
         return false;
     }
 
@@ -1315,21 +1315,22 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
         } else {
             title += " - " + Math.abs(untrainedLevel);
         }
-        if (skill.bonus && skill.bonus > 0) {
+        if (skill.bonus && Number(skill.bonus) > 0) {
             augmented = true;
         }
-        if (skill.expert && skill.expert > 0) {
+        if (skill.expert && Number(skill.expert) > 0) {
             augmented = true;
-            title += " /" + (skill.expert -1);
+            title += " /" + (Number(skill.expert) -1);
         }
-        if (skill.augment && skill.augment > 0) {
+        if (skill.augment && Number(skill.augment) > 0) {
             augmented = true;
-            title += " + " + skill.augment;
+            title += " + " + Number(skill.augment);
         }
-        if (skill.dm && skill.dm > 0) {
+        if (skill.augdm && Number(skill.augdm) > 0) {
             augmented = true;
-            title += " + " + skill.dm;
+            title += " + " + Number(skill.augdm);
         }
+
         let hasXp = (skill.xp && skill.xp > 0);
         let label = skillLabel(skill);
         html += `<label for="system.skills.${skillId}.value" `;
@@ -1342,16 +1343,16 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
             html += `<input type="text" value="${skill.trained?0:untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
             for (let sid in skill.specialities) {
                 let spec = skill.specialities[sid];
-                spec.value = parseInt(spec.value);
+                spec.value = Number(spec.value);
                 if (isNaN(spec.value) || spec.value < 0) {
                     spec.value = 0;
                 }
                 let showSpec = false;
                 if (!trainedOnly && skill.trained) {
                     showSpec = true;
-                } else if (parseInt(spec.value) > 0) {
+                } else if (Number(spec.value) > 0) {
                     showSpec = true;
-                } else if (spec.expert && parseInt(spec.expert) > 0) {
+                } else if (spec.expert && Number(spec.expert) > 0) {
                     showSpec = true;
                 }
                 if (showSpec) {
@@ -1371,6 +1372,17 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                             augmented = true;
                             title += " /" + (spec.expert - 1);
                         }
+                    }
+                    if (spec.augdm && Number(spec.augdm) > 0) {
+                        augmented = true;
+                        title += " + " + spec.augdm;
+                    }
+                    if (spec.augment && Number(spec.augment) > 0) {
+                        augmented = true;
+                        title += " + " + spec.augment;
+                    }
+                    if (spec.bonus && Number(spec.bonus) > 0) {
+                        augmented = true;
                     }
 
                     html += "<div class='specialisationBlock'>";
