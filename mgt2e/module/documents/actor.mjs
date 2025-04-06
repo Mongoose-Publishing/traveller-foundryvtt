@@ -38,7 +38,7 @@ export class MgT2Actor extends Actor {
             if (effect.origin) {
                 const item = fromUuidSync(effect.origin);
                 if (item) {
-                    effect.isSuppressed = item.system.status !== MgT2Item.EQUIPPED;
+                    //effect.isSuppressed = (item.system.status !== MgT2Item.EQUIPPED);
                 }
             }
         }

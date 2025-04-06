@@ -5,10 +5,17 @@
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
 * Career terms aren't always added in the correct order.
-* Augments not behaving correctly when added to tokens. Seem to work fine when applied
-  to a base actor.
 
 ## develop
+
+NB: How augments work has been changed, moving from the old legacy implementation in Foundry to a
+newer implementation. This fixes some bugs. However, it's possible that existing items might break.
+They might end up applying the effects twice. To resolve this try the following:
+* Drag the item off the actor (and to the sidebar), then add it back again.
+* Check the Settings tab. If effects are shown in red with a cross, you can manually remove them
+  by clicking the cross.
+These actions should fix everything, and it shouldn't be necessray to recreate items or anything
+like that.
 
 * Fix bug where some augments were not displayed on the list of skills.
 * Added new augment type to set minimum value for a characteristic.

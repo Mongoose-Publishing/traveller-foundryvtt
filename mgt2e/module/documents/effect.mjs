@@ -12,6 +12,17 @@ export class MgT2Effect extends ActiveEffect {
 
     get isSuppressed() {
         if (this.parent instanceof Item) return this.parent.system.status !== MgT2Item.EQUIPPED;
+
+        // Needed for legacy item effects.
+        if (this.origin) {
+            let origin = fromUuidSync(this.origin);
+            if (origin) {
+                if (origin.system.status !== MgT2Item.EQUIPPED) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
