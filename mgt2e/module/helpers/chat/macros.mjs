@@ -286,6 +286,7 @@ MgT2eMacros.createItem = async function(args) {
             return;
         }
         item = await src.clone();
+
     } else {
         item = {
             "name": "New Item",
@@ -307,6 +308,9 @@ MgT2eMacros.createItem = async function(args) {
     }
     if (args.cost) {
         item.system.cost = args.cost;
+    }
+    if (args.quantity) {
+        item.system.quantity = parseInt(args.quantity);
     }
 
     let added = false;
