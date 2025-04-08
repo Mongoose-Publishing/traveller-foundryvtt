@@ -1173,7 +1173,7 @@ export class MgT2Actor extends Actor {
 
     printCreatureTraits(includeDerived) {
         let text = "";
-        if (this.type === "creature" && this.system.traits) {
+        if (this.type === "creature" && (includeDerived || this.system.traits)) {
 
             if (includeDerived) {
                 if (this.system.size !== 0) {
