@@ -20,7 +20,6 @@ export class MgT2AttackDialog extends Application {
         const data = actor.system;
         this.data = data;
         this.cha = this.weapon.system.weapon.characteristic;
-        console.log(this.weapon.system.weapon.skill);
         this.skill = this.weapon.system.weapon.skill.split(".")[0];
         this.speciality = this.weapon.system.weapon.skill.split(".")[1];
         this.hasPsi = false;
@@ -294,7 +293,6 @@ export class MgT2AttackDialog extends Application {
         };
 
         rollAttack(this.actor, this.weapon, attackOptions);
-        //rollAttack(this.actor, this.weapon, this.score, dm, rollType, rangeDM, autoOption, false, shotsFired);
 
         this.close();
     }

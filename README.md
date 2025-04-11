@@ -1,6 +1,6 @@
 # Mongoose Traveller for FoundryVTT
 
-**Version:**  0.11.10
+**Version:**  0.11.11
 
 This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v11.
 it is currently in beta, so suggestions and bug reports are greatly appreciated. The basic game rules
@@ -83,7 +83,6 @@ The main supported object types defined in the system are:
   * Spacecraft Hardware - Items a spacecraft is built from.
   * Crew Roles - Specify roles for crew members of a starship or vehicle.
 
-
 ## Licenses
 
 Code is BSD licensed, based on boilerplate Foundry code from https://github.com/asacolips-projects/boilerplate
@@ -91,3 +90,10 @@ Code is BSD licensed, based on boilerplate Foundry code from https://github.com/
 Some icons are taken from svgicons.com and game-icons.net. See the READMEs in those directories for details.
 
 Starship icons are drawn by Samuel Penn, and available under a CC0 license.
+
+### Acknowledgments
+
+* Some CSS fixes by https://github.com/ryanwalder (Contributed)
+* Inline macro execution based on code from https://github.com/fpiechowski/inline-macro-execution by Mesayah (MIT)
+
+

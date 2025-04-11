@@ -163,6 +163,14 @@ Tools.setStatus = function(chatData, args) {
     }
 }
 
+Tools.debugSelected = function(chatData) {
+    const selected = Tools.getSelected();
+
+    for (let token of selected) {
+        console.log(token);
+    }
+}
+
 Tools.renumber = function() {
     const selected = Tools.getSelected();
 
@@ -285,7 +293,8 @@ Tools.requestedSkillCheck = async function(skillFqn, skillOptions) {
         "difficulty": skillOptions.difficulty,
         "description": skillOptions.description,
         "success": skillOptions.success,
-        "failure": skillOptions.failure
+        "failure": skillOptions.failure,
+        "cost": skillOptions.cost
     });
 
 };
@@ -553,8 +562,18 @@ Tools.internalExecutionButton = function(macroName, argsString, title, flavor) {
     a.classList.add("inline-mgt2e-execution");
     a.dataset.macroName = macroName;
     a.dataset.args = argsString;
-    a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
-    a.innerHTML = `<span class="internal-macro"><i class="fas fa-dice"></i> ${flavor ?? title}</span>`;
+    //a.innerHTML = `<i class="fas fa-dice"></i> ${flavor ?? title}`;
+
+    let symbol = `<i class="fas fa-dice"></i>`;
+    if (["item"].includes(macroName)) {
+        symbol = `<i class=\"fas fa-arrow-up-from-bracket\"></i>`;
+    } else if (["req"].includes(macroName)) {
+        symbol = `<i class="fas fa-dice">?</i>`;
+    } else if (["train"].includes(macroName)) {
+        symbol = `<i class="fas fa-book-open"></i>`;
+    }
+
+    a.innerHTML = `<span class="internal-macro">${symbol} ${flavor ?? title}</span>`;
     return a;
 }
 
@@ -614,16 +633,21 @@ Tools.mgt2eClick = function(event) {
             args[key] = value;
         }
 
-        if (macroName === "skillGain") {
+        if (macroName === "skillGain" || macroName === "train") {
             MgT2eMacros.skillGain(args);
-        } else if (macroName === "skillCheck") {
+        } else if (macroName === "skillCheck" || macroName === "skill") {
             MgT2eMacros.skillCheck(args, false);
-        } else if (macroName === "skillReq") {
+        } else if (macroName === "skillReq" || macroName === "req") {
             MgT2eMacros.skillCheck(args, true);
-        } else if (macroName === "damage") {
+        } else if (macroName === "damage" || macroName === "dmg") {
             MgT2eMacros.damage(args);
+        } else if (macroName === "item") {
+            MgT2eMacros.createItem(args);
+        } else if (macroName === "associate") {
+            MgT2eMacros.createAssociate(args);
         }
     } catch (e) {
+        console.log("There was a macro error");
         ui.notifications.error(e.error);
         throw e;
     }

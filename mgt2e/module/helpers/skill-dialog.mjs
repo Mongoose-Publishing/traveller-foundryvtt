@@ -19,10 +19,13 @@ export class MgT2SkillDialog extends Application {
         if (!skillOptions) {
             skillOptions = {};
         }
+        console.log(skillFqn);
+        console.log(skillOptions);
 
         this.skillFqn = skillFqn;
         this.skillId = null;
         this.specId = null;
+        this.chaOnly = false;
         if (skillFqn) {
             this.skillId = skillFqn;
             if (skillFqn.indexOf(".")) {
@@ -39,6 +42,8 @@ export class MgT2SkillDialog extends Application {
                 this.skillData = actor.system.skills[this.skillId];
                 this.specData = null;
             }
+        } else {
+            this.chaOnly = true;
         }
 
         this.skillOptions = skillOptions;
@@ -46,7 +51,6 @@ export class MgT2SkillDialog extends Application {
         const data = actor.system;
 
         this.value = data.skills["jackofalltrades"].value - 3;
-        this.chaOnly = false;
         this.cha = skillOptions.cha;
         this.expert = 0;
         this.augment = 0;
@@ -132,6 +136,9 @@ export class MgT2SkillDialog extends Application {
         for (let t=2; t <= 16; t += 2) {
             TARGET_SELECT[t] = game.i18n.localize("MGT2.TaskDifficulty." + t) + ` (${t}+)`;
         }
+        if (!TARGET_SELECT[this.target]) {
+            TARGET_SELECT[this.target] = this.target;
+        }
 
 
         return {
@@ -195,7 +202,8 @@ export class MgT2SkillDialog extends Application {
             "difficulty": difficulty,
             "description": this.skillOptions.description,
             "success": this.skillOptions.success,
-            "failure": this.skillOptions.failure
+            "failure": this.skillOptions.failure,
+            "cost": this.skillOptions.cost
         });
         //}, cha, dm, rollType, difficulty, this.text);
 

@@ -225,9 +225,12 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
     // Work out damage.
     let dmg = weapon?weapon.system.weapon.damage:attackOptions.damage;
-    let type = weapon?weapon.system.weapon.damageType:"standard";
-    if (!type) {
-        type = "standard";
+    let damageType = weapon?weapon.system.weapon.damageType:"standard";
+    if (!damageType) {
+        damageType = "standard";
+    }
+    if (attackOptions.damageType) {
+        damageType = attackOptions.damageType;
     }
 
     let traits = weapon?weapon.system.weapon.traits:"";
@@ -273,7 +276,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
         }
 
         if (!attackOptions.isParry) {
-            content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(type === "standard") ? "" : (" (" + type + ")")}<br/>`;
+            content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
             if (baseRange > 0) {
                 content += `<b>Range:</b> ${baseRange}${rangeUnit}<br/>`;
             } else {
@@ -285,6 +288,8 @@ export async function rollAttack(actor, weapon, attackOptions) {
         } else {
             traits = "";
         }
+    } else {
+        content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
     }
     content += '</div>';
     // End of header.
@@ -322,7 +327,6 @@ export async function rollAttack(actor, weapon, attackOptions) {
         }
     }
     let attacks = 1;
-    console.log("Shots Fired: " + attackOptions.shotsFired + " on " + attackOptions.autoOption);
     if (attackOptions.autoOption && attackOptions.autoOption === "burst") {
         let autoBonus = attackOptions.shotsFired?attackOptions.shotsFired:getTraitValue(traits, "auto");
         dmg = dmg + " + " + autoBonus;
@@ -410,7 +414,11 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 dmgText += ` /&nbsp;AP&nbsp;${ap}`;
             }
             let radiationDamage = 0;
-            if (hasTrait(traits, "radiation")) {
+            if (damageType === "radiation") {
+                radiationDamage = damageTotal;
+                damageTotal = 0;
+                damageEffect = 0;
+            } else if (hasTrait(traits, "radiation")) {
                 const radRoll = await new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate();
                 radiationDamage = radRoll.total;
                 dmgText += ` /&nbsp;${radRoll.total} Rads`;
@@ -438,7 +446,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 "traits": weapon?weapon.system.weapon.traits:"",
                 "ap": ap,
                 "tl": tl,
-                "damageType": weapon?weapon.system.weapon.damageType:"standard",
+                "damageType": damageType,
                 "radiation": radiationDamage,
                 "ranged": (baseRange>0)
             };
@@ -455,7 +463,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 content += "<br/>";
             }
             content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
-            content += `<button data-damage="${damageEffect}" data-options='${json}' 
+            content += `<button data-damage="${damageEffect}" data-options='${json}'
                             title="${titleText}"
                             class="damage-button">${dmgText}</button>`;
 
@@ -607,7 +615,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                 </div>
                 <hr/>
                 <div class="damage-message" data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}'>
-                    <button data-damage="${(damageRoll.total + effect)}" data-vers="2" 
+                    <button data-damage="${(damageRoll.total + effect)}" data-vers="2"
                             data-options='${json}' class="damage-button"
                             title="${multiplier}">
                         ${dmgText}
@@ -715,6 +723,7 @@ export async function rollSkill(actor, skill, options) {
     }
     let speciality = null;
     let noSpeciality = false;
+    console.log(skill);
     if (skill && (typeof skill === 'string' || skill instanceof String)) {
         // If a skill has been passed as a string, we need to find the skill object.
         if (skill.indexOf(".")) {
@@ -951,6 +960,29 @@ export async function rollSkill(actor, skill, options) {
         let effect = total - difficulty;
         if (game.settings.get("mgt2e", "verboseSkillRolls")) {
             text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${total}</span> ` + getEffectLabel(effect);
+        }
+        if (cha && options.cost) {
+            let cost = 1;
+            if (effect >= 0) cost = Number(options.cost);
+            if (actor.system.damage) {
+                if (!actor.system.damage[cha]) {
+                    actor.system.damage[cha] = {
+                        value: 0
+                    }
+                }
+                actor.system.damage[cha].value += cost;
+                actor.update({"system.damage": actor.system.damage});
+
+                if (actor.system.characteristics && actor.system.characteristics[cha]) {
+                    if (actor.system.damage[cha].value > actor.system.characteristics[cha].value) {
+                        let dmg = actor.system.damage[cha].value - actor.system.characteristics[cha].value;
+                        actor.applyActualDamageToTraveller(dmg, {
+
+                        });
+                    }
+                }
+            }
+            text += `<p>${cha} cost is ${cost}</p>`;
         }
         if (options.success || options.failure) {
             if (effect >= 0 && options.success) {

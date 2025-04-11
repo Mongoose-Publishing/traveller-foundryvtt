@@ -36,10 +36,9 @@ export class MgT2Actor extends Actor {
         for (const effect of this.effects) {
             const source = effect._source._id;
             if (effect.origin) {
-                const origin = effect.origin.replaceAll(/.*Item./g, "");
-                const item = this.items.get(origin);
+                const item = fromUuidSync(effect.origin);
                 if (item) {
-                    effect.isSuppressed = item.system.status !== MgT2Item.EQUIPPED;
+                    //effect.isSuppressed = (item.system.status !== MgT2Item.EQUIPPED);
                 }
             }
         }
@@ -47,10 +46,7 @@ export class MgT2Actor extends Actor {
 
     async _preUpdate(changes, options, user) {
         if (this.type === "spacecraft") {
-            console.log("_preUpdate: Spacecraft " + this.name);
-
             if (changes?.system?.spacecraft?.dtons) {
-                console.log("dtons changed");
                 let dtons = parseInt(changes.system.spacecraft.dtons);
                 if (dtons < 1) {
                     dtons = changes.system.spacecraft.dtons = 1;
@@ -76,12 +72,6 @@ export class MgT2Actor extends Actor {
             }
         }
     }
-
-    /*
-    _onUpdate(changed, options, userId) {
-        super._onUpdate(changed, options, userId);
-    }
-    */
 
     /**
      * Called when an attribute on a token is directly modified by the user.
@@ -145,14 +135,6 @@ export class MgT2Actor extends Actor {
           return parseInt(value / 3) - 2;
       }
   }
-
-
-
-    _applyActiveEffect(ob1, obj2) {
-        console.log("applyActiveEffect:");
-        console.log(obj1);
-        console.log(obj2);
-    }
 
     _prepareEncumbrance(actorData) {
         if (!actorData.system) {
@@ -220,10 +202,10 @@ export class MgT2Actor extends Actor {
       let total = 0;
       for (var s in skillData) {
           if (skillData[s].trained) {
-              total += parseInt(skillData[s].value);
+              total += (skillData[s].value>0)?parseInt(skillData[s].value):0;
               if (skillData[s].specialities) {
                   for (var sp in skillData[s].specialities) {
-                      total += parseInt(skillData[s].specialities[sp].value);
+                      total += (skillData[s].specialities[sp].value>0)?parseInt(skillData[s].specialities[sp].value):0;
                   }
               }
           }
@@ -238,15 +220,15 @@ export class MgT2Actor extends Actor {
         if (actor.type !== 'traveller') return;
 
         const sys = actor.system;
-
         if (sys.characteristics.INT && sys.characteristics.EDU) {
             sys.totalSkills = this._countSkillLevels(sys.skills);
             sys.maxSkills = (parseInt(sys.characteristics.INT.value) +
-                parseInt(sys.characteristics.EDU.value)) * 3;
+                Number(sys.characteristics.EDU.value)) * 3;
         } else {
             sys.maxSkills = 0;
         }
 
+        // In case someone has replaced the characteristics.
         if (!sys.characteristics.STR || !sys.characteristics.DEX || !sys.characteristics.END) {
             return;
         }
@@ -254,7 +236,10 @@ export class MgT2Actor extends Actor {
         for (const char in sys.characteristics) {
             let value = sys.characteristics[char].value;
             if (sys.characteristics[char].augment) {
-                value += parseInt(sys.characteristics[char].augment);
+                value += Number(sys.characteristics[char].augment);
+            }
+            if (sys.characteristics[char].min) {
+                value = Math.max(value, Number(sys.characteristics[char].min));
             }
             let dmg = 0;
             if (sys.damage && sys.damage[char]) {
@@ -299,6 +284,9 @@ export class MgT2Actor extends Actor {
             if (actorData.characteristics[char].augment) {
                 value += parseInt(actorData.characteristics[char].augment);
                 console.log("Augmented value is " + value);
+            }
+            if (actorData.characteristics[char].min) {
+                value = Math.max(value, Number(actorData.characteristics[char].min));
             }
             actorData.characteristics[char].current = value;
             actorData.characteristics[char].dm = this.getModifier(value);
@@ -442,92 +430,107 @@ export class MgT2Actor extends Actor {
 
       let armour = 0;
       let armourText = ""
+      let radiationDamage = options.radiation ? options.radiation : 0;
       options.armour = 0;
 
-      if (this.system.armour && isNonZero(this.system.armour.protection)) {
-          armour = parseInt(this.system.armour.protection);
-          if (!isNumber(armour)) {
-              armour = 0;
-          }
-          options.armour = armour;
-          armourText = game.i18n.localize("MGT2.Armour.Protection") + " " + armour + " ";
-          armour = Math.max(0, armour);
-          // Halve protection value if armour is archaic and weapon TL is higher.
-          if (parseInt(this.system.armour.archaic) === 1 && options.ranged) {
-              if (parseInt(options.tl) > parseInt(this.system.tl)) {
-                  armour = parseInt((armour + 1) / 2);
-                  armourText += `(${game.i18n.localize("MGT2.Armour.Archaic")}) `;
+      // Check for characteristic damage
+      let damageType = options.damageType ? options.damageType : "standard";
+      if (this.system.characteristics[damageType]) {
+          // Damage is to a characteristic. Skip usual armour stuff.
+          options.ap = 0;
+          options.armour = 0;
+          options.finalArmour = 0;
+      } else {
+          if (this.system.armour && isNonZero(this.system.armour.protection)) {
+              armour = parseInt(this.system.armour.protection);
+              if (!isNumber(armour)) {
+                  armour = 0;
               }
-          }
-      }
-      if (this.system.armour && options.damageType !== "") {
-          let armourData = this.system.armour;
-          if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
-              let otherProt = armourData.otherProtection ? parseInt(armourData.otherProtection) : 0;
-              if (otherProt > 0) {
-                  armour += otherProt;
-                  armourText += `${options.damageType} + ${otherProt} `;
-              }
-          }
-      }
-
-      // Look for active weapons which provide protection.
-      for (let i of this.items) {
-          if (i.type === "weapon" && i.system.status === MgT2Item.EQUIPPED) {
-              if (hasTrait(i.system.weapon.traits, "protection")) {
-                  let value = getTraitValue(i.system.weapon.traits, "protection");
-                  if (value > 0) {
-                      armour += value;
-                      armourText += `${i.name} +${value} `;
-                  }
-              }
-          } else if (i.type === "armour" && i.system.status === MgT2Item.EQUIPPED) {
-              if (i.system.armour.psi === "1") {
-                  // Is Psi enhanced armour being worn?
-                  let psi = this.system.characteristics["PSI"].current;
-                  if (psi > 0) {
-                      psi = parseInt((psi + 1) / 2);
-                      armour += psi;
-                      armourText += `PSI +${psi} `;
+              options.armour = armour;
+              armourText = game.i18n.localize("MGT2.Armour.Protection") + " " + armour + " ";
+              armour = Math.max(0, armour);
+              // Halve protection value if armour is archaic and weapon TL is higher.
+              if (parseInt(this.system.armour.archaic) === 1 && options.ranged) {
+                  if (parseInt(options.tl) > parseInt(this.system.tl)) {
+                      armour = parseInt((armour + 1) / 2);
+                      armourText += `(${game.i18n.localize("MGT2.Armour.Archaic")}) `;
                   }
               }
           }
-      }
-      // Finally, any cover options?
-      if (this.getFlag("mgt2e", "inCover")) {
-          const coverBonus = parseInt(this.getFlag("mgt2e", "inCover"));
-          if (coverBonus > 0) {
-              armourText += `Cover +${coverBonus} `;
-              armour += coverBonus;
+          if (this.system.armour && options.damageType !== "") {
+              let armourData = this.system.armour;
+              if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
+                  let otherProt = armourData.otherProtection ? parseInt(armourData.otherProtection) : 0;
+                  if (otherProt > 0) {
+                      armour += otherProt;
+                      armourText += `${options.damageType} + ${otherProt} `;
+                  }
+              }
           }
-      }
-      options.finalArmour = armour;
-      options.armourText = armourText;
+          // Look for active weapons which provide protection.
+          for (let i of this.items) {
+              if (i.type === "weapon" && i.system.status === MgT2Item.EQUIPPED) {
+                  if (hasTrait(i.system.weapon.traits, "protection")) {
+                      let value = getTraitValue(i.system.weapon.traits, "protection");
+                      if (value > 0) {
+                          armour += value;
+                          armourText += `${i.name} +${value} `;
+                      }
+                  }
+              } else if (i.type === "armour" && i.system.status === MgT2Item.EQUIPPED) {
+                  if (i.system.armour.psi === "1") {
+                      // Is Psi enhanced armour being worn?
+                      let psi = this.system.characteristics["PSI"].current;
+                      if (psi > 0) {
+                          psi = parseInt((psi + 1) / 2);
+                          armour += psi;
+                          armourText += `PSI +${psi} `;
+                      }
+                  }
+              }
+          }
+          // Finally, any cover options?
+          if (this.getFlag("mgt2e", "inCover")) {
+              const coverBonus = parseInt(this.getFlag("mgt2e", "inCover"));
+              if (coverBonus > 0) {
+                  armourText += `Cover +${coverBonus} `;
+                  armour += coverBonus;
+              }
+          }
+          // Check for radiation damage.
+          if (radiationDamage > 0 && this.system.armour && isNonZero(this.system.armour.rad)) {
+              options.armourRads = Number(this.system.armour.rad);
+              radiationDamage = Math.max(0, Number(radiationDamage - options.armourRads));
+          }
 
-      if (options.ap) {
-          // If AP has already been calculated, use that.
-          armour = Math.max(0, armour - options.ap);
-      } else if (hasTrait(options.traits, "ap")) {
-          let ap = parseInt(getTraitValue(options.traits, "ap"));
-          armour = Math.max(0, armour - ap);
-      } else if (hasTrait(options.traits, "loPen")) {
-          let loPen = parseInt(getTraitValue(options.traits, "loPen"));
-          if (loPen > 1) {
-              armour *= loPen;
+          options.finalArmour = armour;
+          options.armourText = armourText;
+
+          if (options.ap) {
+              // If AP has already been calculated, use that.
+              armour = Math.max(0, armour - options.ap);
+          } else if (hasTrait(options.traits, "ap")) {
+              let ap = parseInt(getTraitValue(options.traits, "ap"));
+              armour = Math.max(0, armour - ap);
+          } else if (hasTrait(options.traits, "loPen")) {
+              let loPen = parseInt(getTraitValue(options.traits, "loPen"));
+              if (loPen > 1) {
+                  armour *= loPen;
+              }
           }
-      }
-      damage = Math.max(0, damage - armour);
-      if (options.multiplier && parseInt(options.multiplier) > 1) {
-          damage *= parseInt(options.multiplier);
-      }
-      if (damage < 1) {
-          // No damage to be applied.
-          ui.notifications.info(
-              game.i18n.format("MGT2.Attack.DamageBounce",
-                  { "target": this.name }
-              )
-          );
-          return;
+          damage = Math.max(0, damage - armour);
+          if (options.multiplier && parseInt(options.multiplier) > 1) {
+              damage *= parseInt(options.multiplier);
+          }
+          if (damage < 1 && radiationDamage < 1) {
+              // No damage to be applied.
+              ui.notifications.info(
+                  game.i18n.format("MGT2.Attack.DamageBounce",
+                      {"target": this.name}
+                  )
+              );
+              return;
+          }
       }
 
       if (this.type === "traveller") {
@@ -550,6 +553,25 @@ export class MgT2Actor extends Actor {
       }
       console.log(damage);
       console.log(options);
+
+      if (options.directChaDamage) {
+          // Damage it to be applied to specific characteristics, not
+          // using the usual END/STR/DEX chain.
+          for (let c in options.characteristics) {
+              if (!this.system.damage[c]) {
+                  this.system.damage[c] = { value: 0 };
+              }
+              this.system.damage[c].value += options.characteristics[c];
+              this.system.damage[c].value = Math.min(this.system.damage[c].value, this.system.characteristics[c].value);
+          }
+          this.update({"system.damage": this.system.damage});
+          return;
+      }
+
+      if (options.actualRadiation > 0) {
+          this.system.rads += options.actualRadiation;
+          this.update({ "system.rads": this.system.rads });
+      }
 
       if (stun) {
           if (options.characteristics) {
@@ -1151,7 +1173,7 @@ export class MgT2Actor extends Actor {
 
     printCreatureTraits(includeDerived) {
         let text = "";
-        if (this.type === "creature" && this.system.traits) {
+        if (this.type === "creature" && (includeDerived || this.system.traits)) {
 
             if (includeDerived) {
                 if (this.system.size !== 0) {

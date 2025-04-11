@@ -3,6 +3,7 @@ import {rollAttack, hasTrait, getTraitValue, toFloat, rollSpaceAttack} from "../
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {MgT2Item} from "../documents/item.mjs";
+import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -615,7 +616,6 @@ export class MgT2ItemSheet extends ItemSheet {
         html.find(".quantity-dec").click(ev => this._decrementQuantity(this.item));
         html.find(".quantity-roll").click(ev => this._rollQuantity(this.item));
 
-        html.find(".randomiseRelationship").click(ev => this._randomiseRelationship(this.item));
 
         // Role Items
         html.find(".role-action-add").click(ev => this._addRollAction(this.item));
@@ -980,71 +980,4 @@ export class MgT2ItemSheet extends ItemSheet {
         item.update({[`system.role.actions.-=${id}`]: null});
     }
 
-    async _randomiseRelationship(item) {
-        let affinity = "", enmity = "";
-
-        let associate = item.system.associate;
-        if (associate.relationship === "contact") {
-            affinity = "1d6+1";
-            enmity = "1d6-1";
-        } else if (associate.relationship === "ally") {
-            affinity = "2d6";
-            enmity = "0";
-        } else if (associate.relationship === "rival") {
-            affinity = "1d6-1";
-            enmity = "1d6+1";
-        } else if (associate.relationship === "enemy") {
-            affinity = "0";
-            enmity = "2d6";
-        } else {
-            return "";
-        }
-        let roll = await new Roll(affinity, null).evaluate();
-        associate.affinity = this._getAffinity(roll.total);
-        roll = await new Roll(enmity, null).evaluate();
-        associate.enmity = 0 - this._getAffinity(roll.total);
-        associate.power = await this._getPowerOrInfluence();
-        associate.influence = await this._getPowerOrInfluence();
-
-        item.update({"system.associate": associate});
-    }
-
-    async _getPowerOrInfluence() {
-        const roll = await new Roll("2D6", null).evaluate();
-        switch (roll.total) {
-            case 2: case 3: case 4: case 5:
-                return 0;
-            case 6: case 7:
-                return 1;
-            case 8:
-                return 2;
-            case 9:
-                return 3;
-            case 10:
-                return 4;
-            case 11:
-                return 5;
-            case 12:
-                return 6;
-        }
-        return 0;
-    }
-
-    _getAffinity(affinity) {
-        if (affinity <= 2) {
-            return 0;
-        } else if (affinity <= 4) {
-            return 1;
-        } else if (affinity <= 6) {
-            return 2;
-        } else if (affinity <= 8) {
-            return 3;
-        } else if (affinity <= 10) {
-            return 4;
-        } else if (affinity === 11) {
-            return 5;
-        } else {
-            return 6;
-        }
-    }
 }

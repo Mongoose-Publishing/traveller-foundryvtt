@@ -10,6 +10,7 @@ import { MgT2CreatureActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2WorldActorSheet } from "./sheets/actor-world-sheet.mjs";
 import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
+import { MgT2AssociateItemSheet } from "./sheets/items/associate.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
@@ -201,12 +202,13 @@ Hooks.once('init', async function() {
             "1": "Low",
             "2": "Medium",
             "3": "High"
-
         },
         default: "0"
     });
 
-  // Add custom constants for configuration.
+    CONFIG.ActiveEffect.legacyTransferral = false;
+
+    // Add custom constants for configuration.
   CONFIG.MGT2 = MGT2;
 
   /**
@@ -224,7 +226,7 @@ Hooks.once('init', async function() {
   CONFIG.ActiveEffect.documentClass = MgT2Effect;
 
   //CONFIG.debug.hooks = true;
-  //console.log(CONFIG);
+  console.log(CONFIG);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -234,6 +236,7 @@ Hooks.once('init', async function() {
   Actors.registerSheet("mgt2e", MgT2WorldActorSheet, { label: "World Sheet", types: [ "world"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
+  Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
   DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
   DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
@@ -358,7 +361,7 @@ Hooks.on('renderChatMessage', function(app, html) {
 Hooks.on('ready', () => {
     if (game.user.isGM) {
         // Do we need to run a migration?
-        const LATEST_SCHEMA_VERSION = 8;
+        const LATEST_SCHEMA_VERSION = 9;
         const currentVersion = parseInt(game.settings.get("mgt2e", "systemSchemaVersion"));
         console.log(`Schema version is ${currentVersion}`);
         if (!currentVersion || currentVersion < LATEST_SCHEMA_VERSION) {
@@ -396,9 +399,6 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     } else if (message.indexOf("/showskills") === 0) {
         Tools.showSkills(chatData);
         return false;
-    } else if (message.indexOf("/renumber") === 0) {
-        Tools.renumber();
-        return false;
     } else if (message.indexOf("/time") === 0) {
         let args = message.split(" ");
         args.shift();
@@ -408,6 +408,9 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
         let args = message.split(" ");
         args.shift();
         Tools.setStatus(chatData, args);
+        return false;
+    } else if (message.indexOf("/debug") === 0) {
+        Tools.debugSelected(chatData);
         return false;
     }
 
@@ -458,6 +461,10 @@ Hooks.on("createActor", (actor) => {
         actor.update({"prototypeToken.sight.enabled": true});
     } else if ((actor.type === "spacecraft" || actor.type === "vehicle") && game.settings.get("mgt2e", "visionDefaultSpacecraft")) {
         actor.update({"prototypeToken.sight.enabled": true});
+    }
+
+    if (actor.type === "traveller") {
+        actor.update({"prototypeToken.actorLink": true});
     }
 
     // Copy in characteristics where needed.
@@ -1313,21 +1320,22 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
         } else {
             title += " - " + Math.abs(untrainedLevel);
         }
-        if (skill.bonus && skill.bonus > 0) {
+        if (skill.bonus && Number(skill.bonus) > 0) {
             augmented = true;
         }
-        if (skill.expert && skill.expert > 0) {
+        if (skill.expert && Number(skill.expert) > 0) {
             augmented = true;
-            title += " /" + (skill.expert -1);
+            title += " /" + (Number(skill.expert) -1);
         }
-        if (skill.augment && skill.augment > 0) {
+        if (skill.augment && Number(skill.augment) > 0) {
             augmented = true;
-            title += " + " + skill.augment;
+            title += " + " + Number(skill.augment);
         }
-        if (skill.dm && skill.dm > 0) {
+        if (skill.augdm && Number(skill.augdm) > 0) {
             augmented = true;
-            title += " + " + skill.dm;
+            title += " + " + Number(skill.augdm);
         }
+
         let hasXp = (skill.xp && skill.xp > 0);
         let label = skillLabel(skill);
         html += `<label for="system.skills.${skillId}.value" `;
@@ -1340,16 +1348,16 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
             html += `<input type="text" value="${skill.trained?0:untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
             for (let sid in skill.specialities) {
                 let spec = skill.specialities[sid];
-                spec.value = parseInt(spec.value);
+                spec.value = Number(spec.value);
                 if (isNaN(spec.value) || spec.value < 0) {
                     spec.value = 0;
                 }
                 let showSpec = false;
                 if (!trainedOnly && skill.trained) {
                     showSpec = true;
-                } else if (parseInt(spec.value) > 0) {
+                } else if (Number(spec.value) > 0) {
                     showSpec = true;
-                } else if (spec.expert && parseInt(spec.expert) > 0) {
+                } else if (spec.expert && Number(spec.expert) > 0) {
                     showSpec = true;
                 }
                 if (showSpec) {
@@ -1369,6 +1377,17 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                             augmented = true;
                             title += " /" + (spec.expert - 1);
                         }
+                    }
+                    if (spec.augdm && Number(spec.augdm) > 0) {
+                        augmented = true;
+                        title += " + " + spec.augdm;
+                    }
+                    if (spec.augment && Number(spec.augment) > 0) {
+                        augmented = true;
+                        title += " + " + spec.augment;
+                    }
+                    if (spec.bonus && Number(spec.bonus) > 0) {
+                        augmented = true;
                     }
 
                     html += "<div class='specialisationBlock'>";
@@ -2045,8 +2064,18 @@ Handlebars.registerHelper("showEffectPill", function(actor, effect) {
            }
 
        }
-
-       html += `<span class="effectPill" title="${title}">${text}</span>`;
+       let origin = fromUuidSync(effect.origin);
+       let extraClasses = "";
+       let remove = "";
+       if (!origin) {
+           extraClasses = "unlinked";
+       }
+       if (actor.effects.get(effect._id)) {
+           // If the effect is directly on this actor, then it can be removed.
+           // Otherwise it is from an item, and the item needs to be removed.
+           remove = ` &nbsp;<i class="fas fa-xmark effect-remove"> </i>`;
+       }
+       html += `<span class="effectPill ${extraClasses}" data-effect-id="${effect._id}" title="${title}">${text}${remove}</span>`;
    }
 
    return html;

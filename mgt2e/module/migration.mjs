@@ -18,10 +18,6 @@ async function migrateActorData(actor, fromVersion) {
         }
     }
 
-    if (fromVersion < 1) {
-        console.log("Converting to v2 (Status Effects)");
-        // No longer used, so no point adding them.
-    }
     if (fromVersion < 2) {
         console.log("Converting to v2 (Stun Damage)");
         if (actor.system.damage && actor.type === "traveller") {
@@ -30,9 +26,6 @@ async function migrateActorData(actor, fromVersion) {
         if (actor.system.hits && (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature")) {
             actor.system.hits.tmpDamage = parseInt(0);
         }
-    }
-    if (fromVersion < 3) {
-        // Undone.
     }
     if (fromVersion < 5) {
         console.log("Converting to v5 (Spacecraft Naval data)");
@@ -78,7 +71,7 @@ async function migrateActorData(actor, fromVersion) {
     }
 
     if (fromVersion < 8) {
-        console.log("Converting to v7 (Spacecraft computers)");
+        console.log("Converting to v8 (Spacecraft computers)");
         if (actor.type === "spacecraft") {
             if (actor.system.spacecraft.computer) {
                 let c = actor.system.spacecraft.computer;
@@ -116,6 +109,16 @@ async function migrateActorData(actor, fromVersion) {
         }
     }
 
+    if (fromVersion < 9) {
+        if (["traveller", "npc"].includes(actor.type)) {
+            console.log(`Migrating Actor entity ${actor.name} from ${fromVersion} to v9`);
+            actor.effects.forEach(e => {
+                console.log("Removing legacy active effect from " + actor.name);
+                actor.effects.delete(e._id);
+            });
+        }
+    }
+
     return {};
 }
 
@@ -143,7 +146,6 @@ function migrateItemData(item, fromVersion) {
         if (item.system.weapon && item.system.weapon.traits) {
             let traits = item.system.weapon.traits.toLowerCase();
             let updated = "";
-            console.log(item.system.weapon.traits);
 
             if (traits.match("verybulky") || traits.match("very bulky")) {
                 updated = addWeaponTrait(updated, "veryBulky");
@@ -177,7 +179,6 @@ function migrateItemData(item, fromVersion) {
                     }
                 }
             }
-            console.log(updated);
             item.system.weapon.traits = updated;
             return item.system;
         }
@@ -186,7 +187,7 @@ function migrateItemData(item, fromVersion) {
 }
 
 export async function migrateWorld(fromVersion) {
-    console.log("**** MIGRATE SCHEMA TO v8 ****");
+    console.log("**** MIGRATE SCHEMA TO v9 ****");
 
     for (let actor of game.actors.contents) {
         const updateData = migrateActorData(actor, fromVersion);

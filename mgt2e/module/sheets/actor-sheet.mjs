@@ -15,6 +15,7 @@ import {MgT2Item} from "../documents/item.mjs";
 import {Tools} from "../helpers/chat/tools.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {NpcIdCard} from "../helpers/id-card.mjs";
+import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -24,8 +25,8 @@ export class MgT2ActorSheet extends ActorSheet {
 
     /** @override */
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
-            classes: ["mgt2e", "sheet", "actor"],
+        return foundry.utils.mergeObject(super.defaultOptions, {
+            classes: ["mgt2", "sheet", "actor"],
             template: "systems/mgt2e/templates/actor/actor-sheet.html",
             width: 720,
             height: 600,
@@ -51,6 +52,9 @@ export class MgT2ActorSheet extends ActorSheet {
         // Use a safe clone of the actor data for further operations.
         const actorData = context.actor.system;
         const type = context.actor.type;
+
+        console.log("getData: " + context.actor.name);
+        console.log(context.actor);
 
         // Add the actor's data to context.data for easier access, as well as flags.
         context.system = actorData;
@@ -92,10 +96,10 @@ export class MgT2ActorSheet extends ActorSheet {
         context.rollData = context.actor.getRollData();
 
         // Prepare active effects
-        context.effects = prepareActiveEffectCategories(context.actor.effects);
+        context.effects = prepareActiveEffectCategories(context.actor, context.actor.effects);
 
         // Work out bonuses and penalties
-        if (actorData.modifiers) {
+        if (["npc", "traveller"].includes(type) && actorData.modifiers) {
             let enc = actorData.modifiers.encumbrance;
             enc.dm = enc.custom + enc.auto + enc.effect;
             let phy = actorData.modifiers.physical;
@@ -117,13 +121,6 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
             guncombat.dm = guncombat.custom + guncombat.auto + guncombat.effect;
-        } else if (type === "traveller" || type === "npc" || type === "creature") {
-            actorData.modifiers = {
-                encumbrance: { custom: 0, auto: 0, effect: 0, dm: 0, multiplierBonus: 0 },
-                physical: { custom: 0, auto: 0, effect: 0, dm: 0 },
-                melee: { custom: 0, auto: 0, effect: 0, dm: 0 },
-                guncombat: { custom: 0, auto: 0, effect: 0, dm: 0 }
-            };
         }
 
         context.selectColumns = {
@@ -342,15 +339,15 @@ export class MgT2ActorSheet extends ActorSheet {
         let dtons = parseInt(actorData.spacecraft.dtons);
         let hits = dtons / 2.5;
         if (dtons >= 100000) {
-            hits = parseInt(dtons / 1.5);
+            hits = Math.floor(dtons / 1.5);
         } else if (dtons >= 25000) {
-            hits = parseInt(dtons / 2);
+            hits = Math.floor(dtons / 2);
         }
         let config = null;
         if (actorData.spacecraft.configuration) {
             config = MGT2.SHIP_CONFIGURATION[actorData.spacecraft.configuration];
             if (config) {
-                hits = parseInt(hits * config.hull);
+                hits = Math.floor(hits * config.hull);
             }
         }
 
@@ -368,7 +365,7 @@ export class MgT2ActorSheet extends ActorSheet {
         for (let i of context.items) {
             if (i.type === 'cargo') {
                 cargo.push(i);
-                let q = parseInt(i.system.quantity);
+                let q = Number(i.system.quantity);
                 if (q > 0) {
                     cargoUsed += q;
                 }
@@ -400,7 +397,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         }
                     }
                     if  (h.system === "computer") {
-                        bandwidthTotal += h.rating * parseInt(i.system.quantity);
+                        bandwidthTotal += Number(h.rating) * Number(i.system.quantity);
                     }
                 }
 
@@ -432,7 +429,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         t = parseInt(h.tonnage.minimum);
                     }
                     if (t !== i.system.hardware.tons) {
-                        i.system.hardware.tons = t * parseInt(i.system.quantity);
+                        i.system.hardware.tons = t * Number(i.system.quantity);
                     }
                 }
                 dtonsUsed += t * i.system.quantity;
@@ -464,7 +461,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.dtonsUsed = Math.round(dtonsUsed * 100) / 100;
         context.cargoUsed = Math.round(cargoUsed * 100) / 100;
         context.cargoRemaining = parseFloat(context.system.spacecraft.cargo) - cargoUsed;
-        context.dtonsRemaining = parseInt(context.system.spacecraft.dtons * (config?config.volume:1)) - dtonsUsed;
+        context.dtonsRemaining = Math.floor(context.system.spacecraft.dtons * (config?config.volume:1)) - dtonsUsed;
 
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;
@@ -912,13 +909,13 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('.crew-passenger').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
-            this._moveCrewToPassenger(this.actor, actorId);
+            void this._moveCrewToPassenger(this.actor, actorId);
         });
 
         html.find('.passenger-crew').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
-            this._movePassengerToCrew(this.actor, actorId);
+            void this._movePassengerToCrew(this.actor, actorId);
         });
 
         html.find('.role-action-button').click(ev => {
@@ -926,7 +923,7 @@ export class MgT2ActorSheet extends ActorSheet {
            const actorId = div.data("crewId");
            const roleId = div.data("roleId");
            const actionId = div.data("actionId");
-           this._runCrewAction(this.actor, actorId, roleId, actionId);
+           void this._runCrewAction(this.actor, actorId, roleId, actionId);
         });
 
         html.find('.addHardwareSelect').click(ev => {
@@ -942,28 +939,28 @@ export class MgT2ActorSheet extends ActorSheet {
         if (this.actor.type === "creature") {
             html.find('.behaviour-selector').click(ev => {
                const value = $(ev.currentTarget).val();
-               this._creatureSelectBehaviour(value);
+               void this._creatureSelectBehaviour(value);
             });
             html.find('.behaviour-remove').click(ev => {
                 const b = $(ev.currentTarget).parents(".behaviour-item");
-                this._creatureRemoveBehaviour(b.data("behaviourId"));
+                void this._creatureRemoveBehaviour(b.data("behaviourId"));
             });
 
             html.find('.traits-selector').click(ev => {
                 const value = $(ev.currentTarget).val();
-                this._creatureSelectTrait(value);
+                void this._creatureSelectTrait(value);
             });
             html.find('.trait-remove').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureRemoveTrait(t.data("traitId"));
+                void this._creatureRemoveTrait(t.data("traitId"));
             });
             html.find('.trait-minus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureTraitModify(t.data("traitId"), ev.shiftKey?-5:-1);
+                void this._creatureTraitModify(t.data("traitId"), ev.shiftKey?-5:-1);
             });
             html.find('.trait-plus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                this._creatureTraitModify(t.data("traitId"), ev.shiftKey?5:1);
+                void this._creatureTraitModify(t.data("traitId"), ev.shiftKey?5:1);
             });
         } else if (this.actor.type === "spacecraft") {
             // Select which bay to display.
@@ -1001,6 +998,10 @@ export class MgT2ActorSheet extends ActorSheet {
                this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });
             });
         }
+        html.find('.effect-remove').click(ev => {
+            const t = $(ev.currentTarget).parents(".effectPill");
+            void this._removeEffect(t.data("effectId"));
+        });
         html.find('.addItemSelect').click(ev => {
             const value = $(ev.currentTarget).val();
             this._createEquipmentItem(value);
@@ -1118,6 +1119,11 @@ export class MgT2ActorSheet extends ActorSheet {
         li.addEventListener("dragstart", handler, options);
     });
   }
+
+    async _removeEffect(effectId) {
+        console.log("Remove effect " + effectId);
+        this.actor.deleteEmbeddedDocuments("ActiveEffect", [ effectId ]);
+    }
 
     async _creatureSelectBehaviour(selectedBehaviour) {
         // Creatures can have multiple behaviours.
@@ -2030,6 +2036,9 @@ export class MgT2ActorSheet extends ActorSheet {
         const damage = data.damage;
         const damageOptions = data.options?JSON.parse(data.options):null;
 
+        console.log("onDropDamage:");
+        console.log(data);
+
         this.actor.applyDamage(damage, damageOptions);
     }
 
@@ -2090,8 +2099,7 @@ export class MgT2ActorSheet extends ActorSheet {
             itemData.name = "Unnamed " + header.dataset.relation;
             itemData.system.associate = {};
             itemData.system.associate.relationship = header.dataset.relation;
-            itemData.system.description = await this._setAssociate(itemData.system.associate);
-            console.log("Associate description is set to " + itemData.system.description);
+            await randomiseAssociate(itemData);
         }
         // Remove the type from the dataset since it's in the itemData.type prop.
         delete itemData.system["type"];
@@ -2358,158 +2366,6 @@ export class MgT2ActorSheet extends ActorSheet {
             "system": system
         };
         Item.create(itemData, { parent: this.actor } );
-    }
-
-    async _setAssociate(associate) {
-        let affinity = "", enmity = "";
-        console.log("setAssociate");
-        console.log(associate);
-
-        if (associate.relationship === "contact") {
-            affinity = "1d6+1";
-            enmity = "1d6-1";
-        } else if (associate.relationship === "ally") {
-            affinity = "2d6";
-            enmity = "0";
-        } else if (associate.relationship === "rival") {
-            affinity = "1d6-1";
-            enmity = "1d6+1";
-        } else if (associate.relationship === "enemy") {
-            affinity = "0";
-            enmity = "2d6";
-        } else {
-            return "";
-        }
-        let roll = await new Roll(affinity, this.actor.getRollData()).evaluate();
-        associate.affinity = this._getAffinity(roll.total);
-        roll = await new Roll(enmity, this.actor.getRollData()).evaluate();
-        associate.enmity = 0 - this._getAffinity(roll.total);
-
-        let description = "";
-        switch (associate.affinity) {
-            case 1:
-                description += "Vaguely well inclined. ";
-                break;
-            case 2:
-                description += "Positively inclined. "
-                break;
-            case 3:
-                description += "Very positively inclined. ";
-                break;
-            case 4:
-                description += "Loyal friend. "
-                break;
-            case 5:
-                description += "Love. ";
-                break;
-            case 6:
-                description += "Fanatical. "
-                break;
-        }
-        switch (associate.enmity) {
-            case 1:
-                description += "Mistrustful. ";
-                break;
-            case 2:
-                description += "Negatively inclined. ";
-                break;
-            case 3:
-                description += "Very negatively inclined. ";
-                break;
-            case 4:
-                description += "Hatred. ";
-                break;
-            case 5:
-                description += "Bitter hatred. ";
-                break;
-            case 6:
-                description += "Blinded by hate. ";
-                break;
-        }
-        roll = await new Roll("2D6", this.actor.getRollData()).evaluate();
-        let power = roll.total;
-        roll = await new Roll("2D6", this.actor.getRollData()).evaluate();
-        let influence = roll.total;
-
-        switch (power) {
-            case 2: case 3: case 4: case 5:
-                associate.power = 0;
-                break;
-            case 6: case 7:
-                associate.power = 1;
-                description += "Weak. ";
-                break;
-            case 8:
-                associate.power = 2;
-                description += "Useful. ";
-                break;
-            case 9:
-                associate.power = 3;
-                description += "Moderately powerful. "
-                break;
-            case 10:
-                associate.power = 4;
-                description += "Powerful. ";
-                break;
-            case 11:
-                associate.power = 5;
-                description += "Very Powerful. ";
-                break;
-            case 12:
-                associate.power = 6;
-                description += "Major Player. ";
-                break;
-        }
-        switch (influence) {
-            case 2: case 3: case 4: case 5:
-                associate.influence = 0;
-                break;
-            case 6: case 7:
-                associate.power = 1;
-                description += "Little influence. ";
-                break;
-            case 8:
-                associate.power = 2;
-                description += "Some Influence. ";
-                break;
-            case 9:
-                associate.power = 3;
-                description += "Influential. ";
-                break;
-            case 10:
-                associate.power = 4;
-                description += "Highly Influential. ";
-                break;
-            case 11:
-                associate.power = 5;
-                description += "Extremely Influential. ";
-                break;
-            case 12:
-                associate.power = 6;
-                description += "Kingmaker.";
-                break;
-        }
-        console.log(description);
-
-        return "<p>" + description + "</p>";
-    }
-
-    _getAffinity(affinity) {
-        if (affinity <= 2) {
-            return 0;
-        } else if (affinity <= 4) {
-            return 1;
-        } else if (affinity <= 6) {
-            return 2;
-        } else if (affinity <= 8) {
-            return 3;
-        } else if (affinity <= 10) {
-            return 4;
-        } else if (affinity === 11) {
-            return 5;
-        } else {
-            return 6;
-        }
     }
 
     _onAddNewSkill(event, actor) {

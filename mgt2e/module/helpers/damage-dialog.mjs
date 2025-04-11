@@ -16,11 +16,6 @@ export class MgT2DamageDialog extends Application {
 
     constructor(actor, damage, damageOptions) {
         super();
-        console.log("*** DamageDialog:");
-
-        console.log(actor);
-        console.log(damageOptions);
-        console.log(damage);
 
         this.actor = actor;
         this.damageOptions = damageOptions;
@@ -46,6 +41,13 @@ export class MgT2DamageDialog extends Application {
             this.actor.update({ "data.damage": this.data.damage });
             return;
         }
+        this.radiationDamage = 0;
+        this.armourRads = damageOptions.armourRads?damageOptions.armourRads:0;
+        this.actualRadiation = 0;
+        if (damageOptions.radiation > 0) {
+            this.radiationDamage = damageOptions.radiation;
+            this.actualRadiation = this.radiationDamage - this.armourRads;
+        }
 
         this.DMG_STR = data.damage.STR.value;
         this.DMG_DEX = data.damage.DEX.value;
@@ -54,6 +56,20 @@ export class MgT2DamageDialog extends Application {
         this.STR = data.characteristics.STR.current;
         this.DEX = data.characteristics.DEX.current;
         this.END = data.characteristics.END.current;
+
+        // For historical reasons 'laser' is the damage type.
+        if (data.characteristics[this.laser]) {
+            this.XXX = data.characteristics[this.laser].current;
+            this.XXX_VALUE = this.XXX;
+            if (data.damage[this.laser]) {
+                this.DMG_XXX = data.damage[this.laser].value;
+            } else {
+                this.DMG_XXX = 0;
+                data.damage[this.laser] = {
+                    value: 0
+                };
+            }
+        }
 
         let totalEND = parseInt(data.characteristics.END.value);
         if (this.actualDamage === 0) {
@@ -103,12 +119,18 @@ export class MgT2DamageDialog extends Application {
             "STR": this.STR,
             "DEX": this.DEX,
             "END": this.END,
+            "XXX": this.XXX,
+            "XXX_VALUE": this.XXX_VALUE,
             "DMG_STR": this.DMG_STR,
             "DMG_DEX": this.DMG_DEX,
             "DMG_END": this.DMG_END,
+            "DMG_XXX": this.DMG_XXX,
             "wounds": this.wounds,
             "armourText": this.armourText,
-            "woundsEffect": this.woundsEffect
+            "woundsEffect": this.woundsEffect,
+            "radiation": this.radiationDamage,
+            "actualRadiation": this.actualRadiation,
+            "armourRads": this.armourRads
         }
     }
 
@@ -126,15 +148,11 @@ export class MgT2DamageDialog extends Application {
     }
 
     applyDamage(event, html) {
-        console.log("apply");
-        console.log(event);
         let cha = event.currentTarget.dataset.cha;
 
         let currentDmg = this.getIntValue(html, ".DMG_" + cha);
         let currentScore = this.getIntValue(html, ".VAL_" + cha);
         let maxScore = this.getIntValue(html, this.data.characteristics[cha].value);
-
-        console.log("Cha " + cha + " max " + maxScore + " currently " + currentScore + " with dmg " + currentDmg);
 
         if (this.remainingDamage <= currentScore) {
             currentDmg += this.remainingDamage;
@@ -170,88 +188,37 @@ export class MgT2DamageDialog extends Application {
     }
 
     updateDamage(event, html) {
-        console.log("Was updated");
-
         let str = this.getIntValue(html, ".DMG_STR");
         let dex = this.getIntValue(html, ".DMG_DEX");
         let end = this.getIntValue(html, ".DMG_END");
-
-        console.log(`STR ${str}, DEX ${dex}, END ${end}`);
-
     }
 
     async doneClick(event, html) {
         event.preventDefault();
-        console.log("doneClick:");
 
         let str = this.getIntValue(html, ".DMG_STR");
         let dex = this.getIntValue(html, ".DMG_DEX");
         let end = this.getIntValue(html, ".DMG_END");
-        let remaining = this.getIntValue(html, ".remaining")
+        let xxx = null;
+        let damage = 0;
+        if (this.XXX) {
+            xxx = this.getIntValue(html, ".DMG_XXX");
+            this.damageOptions.characteristics = { };
+            this.damageOptions.characteristics[this.laser] = xxx;
+            this.damageOptions.directChaDamage = true;
+        } else {
+            let remaining = this.getIntValue(html, ".remaining")
+            let total = str + dex + end;
+            damage = this.actualDamage;
 
-        console.log(`STR ${str}, DEX ${dex}, END ${end}`);
-
-        let total = str + dex + end;
-        let damage = this.actualDamage;
-
-        this.damageOptions.characteristics = {
-            "STR": str,
-            "DEX": dex,
-            "END": end
+            this.damageOptions.characteristics = {
+                "STR": str,
+                "DEX": dex,
+                "END": end
+            }
+            this.damageOptions.actualRadiation = this.actualRadiation;
         }
         this.actor.applyActualDamageToTraveller(damage, this.damageOptions);
-        this.close();
-        return;
-
-        if (this.stun) {
-            // 'tmp' tracks how much of the current damage is temporary.
-            let added = end - damage.END.value;
-            damage.END.value = parseInt(damage.END.value) + end;
-            damage.END.tmp = Math.min(damage.END.value, parseInt(damage.END.tmp) + added);
-            if (remaining > 0) {
-                this.actor.setFlag("mgt2e", "stunned", true);
-                this.actor.setFlag("mgt2e", "stunnedRounds",
-                    this.actor.getFlag("mgt2e", "stunnedRounds")?
-                        parseInt(this.actor.getFlag("mgt2e", "stunnedRounds"))+remaining:remaining);
-            }
-        } else {
-            damage.STR.value = parseInt(damage.STR.value) + str;
-            damage.DEX.value = parseInt(damage.DEX.value) + dex;
-            damage.END.value = parseInt(damage.END.value) + end;
-        }
-
-        if (damage.STR.value > this.data.characteristics.STR.value) {
-            damage.STR.value = this.data.characteristics.STR.value;
-        }
-        if (damage.DEX.value > this.data.characteristics.DEX.value) {
-            damage.DEX.value = this.data.characteristics.DEX.value;
-        }
-        if (damage.END.value > this.data.characteristics.END.value) {
-            damage.END.value = this.data.characteristics.END.value;
-        }
-
-        this.data.damage.STR.value = str;
-        this.data.damage.DEX.value = dex;
-        this.data.damage.END.value = end;
-
-        console.log(this.data.damage);
-
-        this.actor.update({ "system.damage": this.data.damage });
-
-        let atZero = 0;
-        if (str >= this.data.characteristics.STR.value) atZero++;
-        if (dex >= this.data.characteristics.DEX.value) atZero++;
-        if (end >= this.data.characteristics.END.value) atZero++;
-
-        switch (atZero) {
-            case 2:
-                this.actor.setFlag("mgt2e", "unconscious", true);
-                break;
-            case 3:
-                this.actor.setFlag("mgt2e", "disabled", true);
-                break;
-        }
-
         this.close();
     }
 

@@ -6,7 +6,6 @@
  export function onManageActiveEffect(event, owner) {
     event.preventDefault();
     const a = event.currentTarget;
-
     const action = a?.dataset?.effecttype ? a.dataset.effecttype : null;
 
     if (action) {
@@ -40,8 +39,7 @@
  * @param {ActiveEffect[]} effects    The array of Active Effect instances to prepare sheet data for
  * @return {object}                   Data for rendering
  */
-export function prepareActiveEffectCategories(effects) {
-
+export function prepareActiveEffectCategories(actor, effects) {
     // Define effect header categories
     const categories = {
       temporary: {
@@ -62,7 +60,7 @@ export function prepareActiveEffectCategories(effects) {
     };
 
     // Iterate over active effects, classifying them into categories
-    for ( let e of effects ) {
+    for ( let e of actor.allApplicableEffects() ) {
       //e._getSourceName(); // Trigger a lookup for the source name
       if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);

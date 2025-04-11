@@ -1,85 +1,51 @@
 {{!-- This template is a fallback for when items don't have more specific templates. --}}
 {{!-- Generally, you'll want to make more specific templates when possible. --}}
 <form class="{{cssClass}} item" autocomplete="off">
-
-    <section class="shadow">
+    <section class="associate-sheet">
         <h1 class="charname">
-            <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+            <select class="relationship-type" name="system.associate.relationship">
+                {{selectOptions RELATIONSHIP_SELECT selected=system.associate.relationship}}
+            </select>
+            <input class="associate-name" name="name" type="text" value="{{item.name}}" placeholder="Name"/>
         </h1>
     </section>
 
     <section class="shadow">
-        <div class="resource">
-            <label for="system.associate.relationship" class="resource-label">{{localize 'MGT2.History.Relationship'}}</label>
-            <br/>
-            <select name="system.associate.relationship">
-                {{#select system.associate.relationship}}
-                <option value="contact">{{localize 'MGT2.History.Relation.contact'}}</option>
-                <option value="ally">{{localize 'MGT2.History.Relation.ally'}}</option>
-                <option value="rival">{{localize 'MGT2.History.Relation.rival'}}</option>
-                <option value="enemy">{{localize 'MGT2.History.Relation.enemy'}}</option>
-                {{/select}}
-            </select>
-            <span class="rollable fa-regular randomiseRelationship" title="Randomise relationship"><i class="fa fa-dice"> </i></span>
-        </div>
         <div class="resources grid grid-2col flex-group-left">
             <div class="resource">
                 <label for="system.associate.affinity" class="resource-label">{{localize 'MGT2.History.Relation.Affinity'}}</label>
+                <br/>
                 <select name="system.associate.affinity">
-                    {{#select system.associate.affinity}}
-                        <option value="0">{{localize 'MGT2.History.Degree.Affinity.0'}}</option>
-                        <option value="1">{{localize 'MGT2.History.Degree.Affinity.1'}}</option>
-                        <option value="2">{{localize 'MGT2.History.Degree.Affinity.2'}}</option>
-                        <option value="3">{{localize 'MGT2.History.Degree.Affinity.3'}}</option>
-                        <option value="4">{{localize 'MGT2.History.Degree.Affinity.4'}}</option>
-                        <option value="5">{{localize 'MGT2.History.Degree.Affinity.5'}}</option>
-                        <option value="6">{{localize 'MGT2.History.Degree.Affinity.6'}}</option>
-                    {{/select}}
+                    {{selectOptions AFFINITY_SELECT selected=system.associate.affinity}}
                 </select>
             </div>
             <div class="resource">
                 <label for="system.associate.enmity" class="resource-label">{{localize 'MGT2.History.Relation.Enmity'}}</label>
+                <br/>
                 <select name="system.associate.enmity">
-                    {{#select system.associate.enmity}}
-                        <option value="0">{{localize 'MGT2.History.Degree.Enmity.0'}}</option>
-                        <option value="-1">{{localize 'MGT2.History.Degree.Enmity.1'}}</option>
-                        <option value="-2">{{localize 'MGT2.History.Degree.Enmity.2'}}</option>
-                        <option value="-3">{{localize 'MGT2.History.Degree.Enmity.3'}}</option>
-                        <option value="-4">{{localize 'MGT2.History.Degree.Enmity.4'}}</option>
-                        <option value="-5">{{localize 'MGT2.History.Degree.Enmity.5'}}</option>
-                        <option value="-6">{{localize 'MGT2.History.Degree.Enmity.6'}}</option>
-                    {{/select}}
+                    {{selectOptions ENMITY_SELECT selected=system.associate.enmity}}
                 </select>
             </div>
-
             <div class="resource">
                 <label for="system.associate.power" class="resource-label">{{localize 'MGT2.History.Relation.Power'}}</label>
+                <br/>
                 <select name="system.associate.power">
-                    {{#select system.associate.power}}
-                    <option value="0">{{localize 'MGT2.History.Degree.Power.0'}}</option>
-                    <option value="1">{{localize 'MGT2.History.Degree.Power.1'}}</option>
-                    <option value="2">{{localize 'MGT2.History.Degree.Power.2'}}</option>
-                    <option value="3">{{localize 'MGT2.History.Degree.Power.3'}}</option>
-                    <option value="4">{{localize 'MGT2.History.Degree.Power.4'}}</option>
-                    <option value="5">{{localize 'MGT2.History.Degree.Power.5'}}</option>
-                    <option value="6">{{localize 'MGT2.History.Degree.Power.6'}}</option>
-                    {{/select}}
+                    {{selectOptions POWER_SELECT selected=system.associate.power}}
                 </select>
             </div>
             <div class="resource">
                 <label for="system.associate.influence" class="resource-label">{{localize 'MGT2.History.Relation.Influence'}}</label>
+                <br/>
                 <select name="system.associate.influence">
-                    {{#select system.associate.influence}}
-                    <option value="0">{{localize 'MGT2.History.Degree.Influence.0'}}</option>
-                    <option value="1">{{localize 'MGT2.History.Degree.Influence.1'}}</option>
-                    <option value="2">{{localize 'MGT2.History.Degree.Influence.2'}}</option>
-                    <option value="3">{{localize 'MGT2.History.Degree.Influence.3'}}</option>
-                    <option value="4">{{localize 'MGT2.History.Degree.Influence.4'}}</option>
-                    <option value="5">{{localize 'MGT2.History.Degree.Influence.5'}}</option>
-                    <option value="6">{{localize 'MGT2.History.Degree.Influence.6'}}</option>
-                    {{/select}}
+                    {{selectOptions INFLUENCE_SELECT selected=system.associate.influence}}
                 </select>
             </div>
+        </div>
+        <div>
+            <span class="rollable randomiseRelationship" title="Randomise relationship">
+                <i class="fa fa-dice"> </i>
+                Randomise relationship
+            </span>
         </div>
 
     </section>
