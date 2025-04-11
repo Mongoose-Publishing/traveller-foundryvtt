@@ -293,7 +293,8 @@ Tools.requestedSkillCheck = async function(skillFqn, skillOptions) {
         "difficulty": skillOptions.difficulty,
         "description": skillOptions.description,
         "success": skillOptions.success,
-        "failure": skillOptions.failure
+        "failure": skillOptions.failure,
+        "cost": skillOptions.cost
     });
 
 };

@@ -951,6 +951,29 @@ export async function rollSkill(actor, skill, options) {
         if (game.settings.get("mgt2e", "verboseSkillRolls")) {
             text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${total}</span> ` + getEffectLabel(effect);
         }
+        if (cha && options.cost) {
+            let cost = 1;
+            if (effect >= 0) cost = Number(options.cost);
+            if (actor.system.damage) {
+                if (!actor.system.damage[cha]) {
+                    actor.system.damage[cha] = {
+                        value: 0
+                    }
+                }
+                actor.system.damage[cha].value += cost;
+                actor.update({"system.damage": actor.system.damage});
+
+                if (actor.system.characteristics && actor.system.characteristics[cha]) {
+                    if (actor.system.damage[cha].value > actor.system.characteristics[cha].value) {
+                        let dmg = actor.system.damage[cha].value - actor.system.characteristics[cha].value;
+                        actor.applyActualDamageToTraveller(dmg, {
+
+                        });
+                    }
+                }
+            }
+            text += `<p>${cha} cost is ${cost}</p>`;
+        }
         if (options.success || options.failure) {
             if (effect >= 0 && options.success) {
                 text += `<div class="skill-success">${options.success}</div>`;

@@ -232,7 +232,8 @@ MgT2eMacros.skillCheck = function(args, ask) {
             "difficulty": args.target,
             "description": args.text,
             "success": args.success,
-            "failure": args.failure
+            "failure": args.failure,
+            "cost": args.cost?args.cost:0
         }
         let json = JSON.stringify(jsonData);
 
@@ -255,7 +256,8 @@ MgT2eMacros.skillCheck = function(args, ask) {
             "cha": args.cha,
             "description": args.text,
             "success": args.success,
-            "failure": args.failure
+            "failure": args.failure,
+            "cost": args.cost?args.cost:0
         });
     }
 };

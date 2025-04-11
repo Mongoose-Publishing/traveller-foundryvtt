@@ -202,7 +202,8 @@ export class MgT2SkillDialog extends Application {
             "difficulty": difficulty,
             "description": this.skillOptions.description,
             "success": this.skillOptions.success,
-            "failure": this.skillOptions.failure
+            "failure": this.skillOptions.failure,
+            "cost": this.skillOptions.cost
         });
         //}, cha, dm, rollType, difficulty, this.text);
 

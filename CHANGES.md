@@ -20,6 +20,10 @@ delete any effects (via the settings tab), then move the item back on the actor.
   move from legacy effects leaves some effects dangling. It may also be useful in future.
 * Fix bug where some augments were not displayed on the list of skills.
 * Added new augment type to set minimum value for a characteristic.
+* Added support for Travellers to the included Heal macro.
+* Added a 'Recover PSI' macro to the list of included macros.
+* Added a 'cost' attribute to inline skill macros. If set, characteristic will take damage when
+  the skill is rolled. This is initial basic implementation for PSI powers.
 
 ## 0.11.11 (Beta)
 
