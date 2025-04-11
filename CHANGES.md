@@ -8,19 +8,18 @@
 
 ## develop
 
-NB: How augments work has been changed, moving from the old legacy implementation in Foundry to a
-newer implementation. This fixes some bugs. However, it's possible that existing items might break.
-They might end up applying the effects twice. To resolve this try the following:
-* Drag the item off the actor (and to the sidebar), then add it back again.
-* Check the Settings tab. If effects are shown in red with a cross, you can manually remove them
-  by clicking the cross.
-These actions should fix everything, and it shouldn't be necessray to recreate items or anything
-like that.
+Migration Notes: How augments work has been changed. Support for old legacy active effects
+has been disabled, which should fix some bugs. This requires a migration step to be run to
+remove active effects that are applied directly on an actor.
 
+If effects are behaving strangely on an actor, remove items which apply effects off the actor,
+delete any effects (via the settings tab), then move the item back on the actor.
+
+* Legacy active effects have been disabled. This now allows effects to work with tokens.
+* Settings tab on Travellers and NPCs now allow effects to be removed. This is needed if the
+  move from legacy effects leaves some effects dangling. It may also be useful in future.
 * Fix bug where some augments were not displayed on the list of skills.
 * Added new augment type to set minimum value for a characteristic.
-* Switched from legacy transfer mode for active effects. This now allows effects to work with tokens,
-  though some old effects may be left dangling. A method added to the UI to remove dangling effects.
 
 ## 0.11.11 (Beta)
 
