@@ -24,6 +24,7 @@ delete any effects (via the settings tab), then move the item back on the actor.
 * Added a 'Recover PSI' macro to the list of included macros.
 * Added a 'cost' attribute to inline skill macros. If set, characteristic will take damage when
   the skill is rolled. This is initial basic implementation for PSI powers.
+* Fix for fonts in the status display of some item types.
 
 ## 0.11.11 (Beta)
 
