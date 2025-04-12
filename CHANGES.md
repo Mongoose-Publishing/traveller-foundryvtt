@@ -6,7 +6,7 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
-## develop
+## 0.12.0 (Beta)
 
 Migration Notes: How augments work has been changed. Support for old legacy active effects
 has been disabled, which should fix some bugs. This requires a migration step to be run to
