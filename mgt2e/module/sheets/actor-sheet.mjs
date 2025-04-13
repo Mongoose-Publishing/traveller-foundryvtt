@@ -53,9 +53,6 @@ export class MgT2ActorSheet extends ActorSheet {
         const actorData = context.actor.system;
         const type = context.actor.type;
 
-        console.log("getData: " + context.actor.name);
-        console.log(context.actor);
-
         // Add the actor's data to context.data for easier access, as well as flags.
         context.system = actorData;
         context.enrichedDescription = await TextEditor.enrichHTML(actorData.description);

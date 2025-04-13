@@ -247,7 +247,8 @@
         "location": {
           "sector": "",
           "x": 1,
-          "y": 1
+          "y": 1,
+          "systemUuid": null
         },
         "uwp": {
           "port": "X",
@@ -267,10 +268,11 @@
           "berthingCost": 1000
         },
         "meta": {
+          "localBrokerScore": 2,
           "brokerActorId": null,
-          "brokerScore": 0,
+          "brokerScore": -3,
           "streetwiseActorId": null,
-          "streetwiseScore": 0
+          "streetwiseScore": -3
         }
       }
     }
@@ -351,7 +353,7 @@
       },
       "cargo": {
           "cargo": {
-              "cost": 100,
+              "price": 100,
               "availability": "All",
               "purchaseDM": "",
               "saleDM": "",
@@ -413,7 +415,9 @@
     },
     "cargo": {
       "templates": [ "cargo"],
-      "quantity": 1
+      "description": "Trade goods",
+      "quantity": 1,
+      "cost": 1000
     },
     "hardware": {
       "templates": [ "base","hardware" ]

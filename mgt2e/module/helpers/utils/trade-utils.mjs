@@ -160,6 +160,97 @@ export function createFreight(name, worldActor, destinationWorld, tonnage, price
     Item.create(itemData, {parent: worldActor});
 }
 
+function getModifiedPrice(basePrice, percentage) {
+    return Math.round((Number(basePrice) * Number(percentage)) / 100);
+}
+
+async function getPurchasePrice(basePrice, dm) {
+    let roll = await new Roll(`3D6 + ${dm}`, null).evaluate();
+    let total = roll.total;
+
+    if (total < -3) {
+        return getModifiedPrice(basePrice, 300);
+    } else if (total > 25) {
+        return getModifiedPrice(basePrice, 15);
+    }
+
+    switch (total) {
+        case -3: return getModifiedPrice(basePrice, 300);
+        case -2: return getModifiedPrice(basePrice, 250);
+        case -1: return getModifiedPrice(basePrice, 200);
+        case 0: return getModifiedPrice(basePrice, 175);
+        case 1: return getModifiedPrice(basePrice, 150);
+        case 2: return getModifiedPrice(basePrice, 135);
+        case 3: return getModifiedPrice(basePrice, 125);
+        case 4: return getModifiedPrice(basePrice, 120);
+        case 5: return getModifiedPrice(basePrice, 115);
+        case 6: return getModifiedPrice(basePrice, 110);
+        case 7: return getModifiedPrice(basePrice, 105);
+        case 8: return getModifiedPrice(basePrice, 100);
+        case 9: return getModifiedPrice(basePrice, 95);
+        case 10: return getModifiedPrice(basePrice, 90);
+        case 11: return getModifiedPrice(basePrice, 85);
+        case 12: return getModifiedPrice(basePrice, 80);
+        case 13: return getModifiedPrice(basePrice, 75);
+        case 14: return getModifiedPrice(basePrice, 70);
+        case 15: return getModifiedPrice(basePrice, 65);
+        case 16: return getModifiedPrice(basePrice, 60);
+        case 17: return getModifiedPrice(basePrice, 55);
+        case 18: return getModifiedPrice(basePrice, 50);
+        case 19: return getModifiedPrice(basePrice, 45);
+        case 20: return getModifiedPrice(basePrice, 40);
+        case 21: return getModifiedPrice(basePrice, 35);
+        case 22: return getModifiedPrice(basePrice, 30);
+        case 23: return getModifiedPrice(basePrice, 25);
+        case 24: return getModifiedPrice(basePrice, 20);
+        case 25: return getModifiedPrice(basePrice, 15);
+    }
+}
+
+async function getSalePrice(basePrice, dm) {
+    let roll = await new Roll(`3D6 + ${dm}`, null).evaluate();
+    let total = roll.total;
+
+    if (total < -3) {
+        return getModifiedPrice(basePrice, 10);
+    } else if (total > 25) {
+        return getModifiedPrice(basePrice, 400);
+    }
+
+    switch (total) {
+        case -3: return getModifiedPrice(basePrice, 10);
+        case -2: return getModifiedPrice(basePrice, 20);
+        case -1: return getModifiedPrice(basePrice, 30);
+        case 0: return getModifiedPrice(basePrice, 40);
+        case 1: return getModifiedPrice(basePrice, 45);
+        case 2: return getModifiedPrice(basePrice, 50);
+        case 3: return getModifiedPrice(basePrice, 55);
+        case 4: return getModifiedPrice(basePrice, 60);
+        case 5: return getModifiedPrice(basePrice, 65);
+        case 6: return getModifiedPrice(basePrice, 70);
+        case 7: return getModifiedPrice(basePrice, 75);
+        case 8: return getModifiedPrice(basePrice, 80);
+        case 9: return getModifiedPrice(basePrice, 85);
+        case 10: return getModifiedPrice(basePrice, 90);
+        case 11: return getModifiedPrice(basePrice, 100);
+        case 12: return getModifiedPrice(basePrice, 105);
+        case 13: return getModifiedPrice(basePrice, 110);
+        case 14: return getModifiedPrice(basePrice, 115);
+        case 15: return getModifiedPrice(basePrice, 120);
+        case 16: return getModifiedPrice(basePrice, 125);
+        case 17: return getModifiedPrice(basePrice, 130);
+        case 18: return getModifiedPrice(basePrice, 140);
+        case 19: return getModifiedPrice(basePrice, 150);
+        case 20: return getModifiedPrice(basePrice, 160);
+        case 21: return getModifiedPrice(basePrice, 175);
+        case 22: return getModifiedPrice(basePrice, 200);
+        case 23: return getModifiedPrice(basePrice, 250);
+        case 24: return getModifiedPrice(basePrice, 300);
+        case 25: return getModifiedPrice(basePrice, 400);
+    }
+}
+
+
 async function createTradeItem(worldActor, item) {
     const srcCargo = item.system.cargo;
 
@@ -190,6 +281,14 @@ async function createTradeItem(worldActor, item) {
             return;
         }
     }
+    // Calculate cost.
+    let dm = 0 - Number(worldActor.system.world.meta.localBrokerScore);
+    if (srcCargo.illegal) {
+        dm += Number(worldActor.system.world.meta.streetwiseScore);
+    } else {
+        dm += Number(worldActor.system.world.meta.brokerScore);
+    }
+    let cost = await getPurchasePrice(srcCargo.price, dm);
 
     const itemData = {
         "name": item.name,
@@ -197,6 +296,8 @@ async function createTradeItem(worldActor, item) {
         "type": "cargo",
         "system": {
             "quantity": roll.total,
+            "description": item.system.description,
+            "cost": cost,
             "cargo": {
                 "price": srcCargo.price,
                 "availability": srcCargo.availability,
@@ -204,7 +305,6 @@ async function createTradeItem(worldActor, item) {
                 "saleDM": srcCargo.saleDM,
                 "tons": roll.total,
                 "illegal": srcCargo.illegal,
-                "description": srcCargo.description,
                 "sourceId": worldActor.uuid,
                 "destinationId": null,
                 "speculative": true

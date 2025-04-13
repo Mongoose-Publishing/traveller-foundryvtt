@@ -7,7 +7,7 @@ import { MgT2Item } from "./documents/item.mjs";
 import { MgT2ActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2NPCActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2CreatureActorSheet } from "./sheets/actor-sheet.mjs";
-import { MgT2WorldActorSheet } from "./sheets/actor-world-sheet.mjs";
+import { MgT2WorldActorSheet } from "./sheets/actors/world.mjs";
 import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 import { MgT2AssociateItemSheet } from "./sheets/items/associate.mjs";

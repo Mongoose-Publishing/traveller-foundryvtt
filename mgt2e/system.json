@@ -16,7 +16,7 @@
     }
   ],
   "esmodules": ["module/mgt2.mjs" ],
-  "styles": ["css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css" ],
+  "styles": ["css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css", "css/world.css" ],
   "background": "systems/mgt2e/images/traveller.png",
   "scripts": [ ],
   "packs": [

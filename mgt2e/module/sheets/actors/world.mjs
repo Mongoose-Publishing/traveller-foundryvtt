@@ -1,12 +1,12 @@
-import {MgT2ActorSheet} from "./actor-sheet.mjs";
-import {MgT2Item} from "../documents/item.mjs";
-import {calculateFreightLots, createFreight, createSpeculativeGoods} from "../helpers/utils/trade-utils.mjs";
-import {createWorld} from "../helpers/utils/world-utils.mjs";
+import {MgT2ActorSheet} from "../actor-sheet.mjs";
+import {MgT2Item} from "../../documents/item.mjs";
+import {calculateFreightLots, createFreight, createSpeculativeGoods} from "../../helpers/utils/trade-utils.mjs";
+import {createWorld} from "../../helpers/utils/world-utils.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            classes: [ "mgt2e", "sheet", "actor"],
+            classes: [ "mgt2", "sheet", "actor"],
             template: "systems/mgt2e/templates/actor/actor-world-sheet.html",
             width: 720,
             height: 600,
@@ -76,6 +76,31 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             context.TECH_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
         }
 
+        context.BROKER_SELECT = {}
+        for (let i=0; i < 5; i++) {
+            context.BROKER_SELECT[i] = i;
+        }
+
+        context.brokerActorImg = "systems/mgt2e/icons/misc/drop-target.svg";
+        context.brokerActorName = "";
+        context.streetwiseActorImg = "systems/mgt2e/icons/misc/drop-target.svg";
+        context.streetwiseActorName = "";
+
+        if (context.world.meta.brokerActorId) {
+            let brokerActor = fromUuidSync(context.world.meta.brokerActorId);
+            if (brokerActor && ["traveller", "npc"].includes(brokerActor.type)) {
+                context.brokerActorImg = brokerActor.img;
+                context.brokerActorName = brokerActor.name;
+            }
+        }
+        if (context.world.meta.streetwiseActorId) {
+            let streetwiseActor = fromUuidSync(context.world.meta.streetwiseActorId);
+            if (streetwiseActor && ["traveller", "npc"].includes(streetwiseActor.type)) {
+                context.streetwiseActorImg = streetwiseActor.img;
+                context.streetwiseActorName = streetwiseActor.name;
+            }
+        }
+
         return context;
     }
 
@@ -95,6 +120,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
     async _onDrop(event) {
         console.log("Drop on World Sheet");
+        console.log(event);
 
         let data;
         try {
@@ -107,7 +133,6 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             case "Item":
                 return this._onDropItem(event, data);
             case "Actor":
-                // nothing
                 return this._onDropActor(event, data);
         }
         return true;
@@ -125,10 +150,25 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         if (!droppedActor) {
             return;
         }
+        console.log("_onDropActor:");
+        if (["npc", "traveller"].includes(droppedActor.type)) {
+            console.log("Trader");
+            if (event.target.closest(".brokerDropZone")) {
+                this.actor.system.world.meta.brokerActorId = droppedActor.uuid;
+                this.actor.system.world.meta.brokerScore = droppedActor.system.skills["broker"].value;
+            } else if (event.target.closest(".streetwiseDropZone")) {
+                this.actor.system.world.meta.streetwiseActorId = droppedActor.uuid;
+                this.actor.system.world.meta.brokerScore = droppedActor.system.skills["streetwise"].value;
+            }
+            this.actor.update({"system.world.meta": this.actor.system.world.meta});
+            return;
+        }
 
         if (droppedActor.type === "world") {
             // Need to calculate trade.
+            console.log("Freight");
             calculateFreightLots(this.actor, droppedActor, 0);
+            return;
         }
 
 

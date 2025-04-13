@@ -1,0 +1,47 @@
+
+
+.broker-label {
+  font-weight: bold;
+}
+
+.dropZone {
+}
+
+.trade-configuration .trade {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #C0C0C0;
+  margin-top: 5px;
+  padding: 3px;
+}
+
+.dropZone img {
+  width: 48px;
+  height: 48px;
+  border: none;
+  float: left;
+  margin-right: 4px;
+}
+
+.dropZone .trade-drop {
+  font-style: italic;
+  font-size: larger;
+  color: #444444;
+}
+
+.trader-name {
+  font-size: large;
+  font-weight: bold;
+}
+
+.dropZone label.trader-skill {
+  font-weight: bold;
+  text-align: center;
+  margin-left: 24px;
+}
+
+.dropZone .trader-score {
+  display: block;
+  text-align: center;
+  font-size: x-large;
+}
