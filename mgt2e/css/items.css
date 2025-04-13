@@ -302,3 +302,37 @@ li.vaccsuit {
 .associate-sheet .randomiseRelationship {
   text-align: right;
 }
+
+div.item-status {
+  color: #00D000;
+  font: Anton;
+  font-family: Anton;
+  font-weight: bold;
+  font-size: 16pt;
+  text-align: center;
+  width: 140px;
+  display: block;
+  background-color: black;
+  border: 3px solid blue;
+  margin-bottom: 8px;
+}
+
+div.item-status-ACTIVE {
+  color: #00D000;
+}
+
+div.item-status-INACTIVE {
+  color: #606060;
+}
+
+div.item-status-DAMAGED {
+
+}
+
+div.item-status-DESTROYED {
+
+}
+
+div.span.item-status-RUNNING {
+  color: #00D000;
+}

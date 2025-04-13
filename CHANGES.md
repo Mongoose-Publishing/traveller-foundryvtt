@@ -6,7 +6,7 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
-## develop
+## 0.12.0 (Beta)
 
 Migration Notes: How augments work has been changed. Support for old legacy active effects
 has been disabled, which should fix some bugs. This requires a migration step to be run to
@@ -24,6 +24,7 @@ delete any effects (via the settings tab), then move the item back on the actor.
 * Added a 'Recover PSI' macro to the list of included macros.
 * Added a 'cost' attribute to inline skill macros. If set, characteristic will take damage when
   the skill is rolled. This is initial basic implementation for PSI powers.
+* Fix for fonts in the status display of some item types.
 
 ## 0.11.11 (Beta)
 
