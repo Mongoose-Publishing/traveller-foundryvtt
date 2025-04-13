@@ -11,6 +11,7 @@ import { MgT2WorldActorSheet } from "./sheets/actors/world.mjs";
 import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 import { MgT2AssociateItemSheet } from "./sheets/items/associate.mjs";
+import { MgT2WorldDataItemSheet } from "./sheets/items/world-data.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
@@ -237,6 +238,7 @@ Hooks.once('init', async function() {
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
   Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
+  Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "world"], makeDefault: true });
   DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
   DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);

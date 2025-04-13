@@ -278,7 +278,7 @@
     }
   },
   "Item": {
-    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software", "world" ],
     "templates": {
       "base": {
         "tl": 0,
@@ -392,6 +392,11 @@
               "colour": null,
               "dei": 0
           }
+      },
+      "world": {
+        "world": {
+          "datatype": "faction"
+        }
       }
     },
     "item": {

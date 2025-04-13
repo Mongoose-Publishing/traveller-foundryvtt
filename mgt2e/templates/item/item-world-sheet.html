@@ -1,0 +1,44 @@
+<form class="{{cssClass}} world-data" autocomplete="off">
+    <div class="item=sheet">
+        <section class="world-data-sheet">
+            <h1 class="charname">
+                <select name="system.world.datatype" class="world-data-type">
+                    {{selectOptions TYPE_SELECT selected=system.world.datatype}}
+                </select>
+                <input class="world-data-name" name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+            </h1>
+        </section>
+
+        <section class="shadow">
+            <div class="flex-group-left">
+                {{#if (ifEquals item.system.world.datatype "faction")}}
+                    <div class="shadow grid grid-4col">
+                        <div>
+                            {{governmentLabel}}
+                        </div>
+                        <div>
+                            {{factionStrength}}
+                        </div>
+                    </div>
+                {{else if (ifEquals item.system.world.datatype "passenger")}}
+                    <div class="shadow">
+                        {{passage}}
+                    </div>
+                {{else if (ifEquals item.system.world.datatype "star")}}
+                    <div class="shadow">
+                        Star
+                    </div>
+                {{else if (ifEquals item.system.world.datatype "planet")}}
+                    <div class="shadow">
+                        Planet
+                    </div>
+                {{/if}}
+
+                <div class="shadow">
+                    {{editor enrichedDescription target="system.description"
+                    button=true editable=editable}}
+                </div>
+            </div>
+        </section>
+    </div>
+</form>

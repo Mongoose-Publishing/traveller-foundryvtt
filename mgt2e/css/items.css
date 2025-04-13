@@ -267,12 +267,14 @@ li.vaccsuit {
     font-style: italic;
 }
 
+
+
+/* Associate Items */
 .associate form {
   background-color: #404040;
   background-image: url(traveller-hexes.png);
 }
 
-/* Associate Items */
 .associate-sheet {
   display: flex;
   align-items: flex-start;
@@ -335,4 +337,36 @@ div.item-status-DESTROYED {
 
 div.span.item-status-RUNNING {
   color: #00D000;
+}
+
+/* World Data Items */
+.world-data form {
+  background-color: #404040;
+  background-image: url(traveller-hexes.png);
+}
+
+.world-data-sheet {
+  display: flex;
+  align-items: flex-start;
+}
+
+.world-data-sheet h1 {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.world-data-sheet h1 select.world-data-type {
+  float: left;
+  display: inline-block;
+  width: 150px;
+  height: 48px;
+  font-size: smaller;
+}
+
+.world-data-sheet h1 input.world-data-name {
+  display: inline;
+  width: auto;
+  height: 48px;
+  overflow: hidden;
+  margin-left: 16px;
 }

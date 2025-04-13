@@ -424,6 +424,17 @@
   "MGT2.WorldSheet.Starport.Quality.E": "Frontier",
   "MGT2.WorldSheet.Starport.Quality.X": "No Starport",
 
+  "MGT2.WorldSheet.Faction.Strength.obscure": "Obscure group",
+  "MGT2.WorldSheet.Faction.Strength.fringe": "Fringe group",
+  "MGT2.WorldSheet.Faction.Strength.minor": "Minor group",
+  "MGT2.WorldSheet.Faction.Strength.notable": "Notable group",
+  "MGT2.WorldSheet.Faction.Strength.significant": "Significant",
+  "MGT2.WorldSheet.Faction.Strength.overwhelming": "Overwhelming support",
+
+  "MGT2.WorldSheet.Passage.basic": "Basic Passage",
+  "MGT2.WorldSheet.Passage.middle": "Middle Passage",
+  "MGT2.WorldSheet.Passage.high": "High Passage",
+
   "MGT2.Vehicle.Spaces": "Spaces",
   "MGT2.Vehicle.Chassis": "Chassis",
   "MGT2.Vehicle.SubType": "SubType",
@@ -1050,6 +1061,7 @@
   "TYPES.Item.associate": "Background Associate",
   "TYPES.Item.role": "Crew Role",
   "TYPES.Item.software": "Software",
+  "TYPES.Item.world": "World Data",
 
   "TRAVELLER.Add": "Add"
 }

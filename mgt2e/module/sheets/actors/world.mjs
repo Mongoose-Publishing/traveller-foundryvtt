@@ -5,7 +5,7 @@ import {createWorld} from "../../helpers/utils/world-utils.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [ "mgt2", "sheet", "actor"],
             template: "systems/mgt2e/templates/actor/actor-world-sheet.html",
             width: 720,
@@ -176,5 +176,16 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         return true;
     }
 
+    // Make this world a star system. A star system is only defined on the main world.
+    async _createStarSystem() {
+        if (this.actor.system.starSystem) {
+            // Already exists, nothing to do.
+            return;
+        }
 
+        let starSystem = {
+            "name": this.actor.name
+        }
+    }
 }
+

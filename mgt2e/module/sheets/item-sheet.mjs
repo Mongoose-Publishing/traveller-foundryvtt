@@ -13,7 +13,7 @@ export class MgT2ItemSheet extends ItemSheet {
 
     /** @override */
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["mgt2", "sheet", "item"],
             width: 680,
             height: 480,
