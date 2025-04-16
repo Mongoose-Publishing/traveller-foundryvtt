@@ -645,6 +645,8 @@ Tools.mgt2eClick = function(event) {
             MgT2eMacros.createItem(args);
         } else if (macroName === "associate") {
             MgT2eMacros.createAssociate(args);
+        } else if (macroName === "cash") {
+            MgT2eMacros.cash(args);
         }
     } catch (e) {
         console.log("There was a macro error");

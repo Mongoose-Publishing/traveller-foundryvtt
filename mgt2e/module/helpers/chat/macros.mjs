@@ -98,6 +98,56 @@ MgT2eMacros.skillGain = function(args) {
     }
 };
 
+MgT2eMacros.cash = function(args) {
+    let cash = args.cash;
+    let pension = args.pension;
+    let medical = args.medical;
+    let context = args.text;
+
+    for (let t of canvas.tokens.controlled) {
+        let actor = t.actor;
+        if (actor) {
+            let text = "";
+
+            if (actor.system.finance) {
+                let finance = actor.system.finance;
+
+                if (cash) {
+                    finance.cash = Number(finance.cash) + Number(cash);
+                    finance.cash = Math.max(0, finance.cash);
+                    text += `Gain Cr${cash} to a total of Cr${finance.cash}.`;
+                }
+                if (pension) {
+                    finance.pension = Number(finance.pension) + Number(pension);
+                    finance.pension = Math.max(0, finance.pension);
+                    text += `Pension increases by Cr${pension} to a total of Cr${finance.pension}/year.`;
+                }
+                if (medical) {
+                    finance.medicalDebt = Number(finance.medicalDebt) + Number(medical);
+                    finance.medicalDebt = Math.max(0, finance.medicalDebt);
+                    text += `Medical debt increases by Cr${medical} to a total of Cr${finance.medicalDebt}.`;
+                }
+
+                actor.update({"system.finance": finance});
+
+                let html = `<div class="chat-package"><h3>${actor.name}</h3>`;
+                if (context) {
+                    html += `<p>${context}</p>`;
+                }
+                html += `<p>${text}</p>`;
+                html += `</div>`;
+
+                let chatData = {
+                    speaker: ChatMessage.getSpeaker({actor: actor}),
+                    content: html
+                };
+                ChatMessage.create(chatData, {});
+            }
+        }
+    }
+
+}
+
 MgT2eMacros.chaGain = function(args) {
     let cha = args.cha;
     let level = args.level;
