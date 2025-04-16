@@ -238,7 +238,7 @@ Hooks.once('init', async function() {
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
   Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
-  Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "world"], makeDefault: true });
+  Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "worlddata"], makeDefault: true });
   DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
   DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);

@@ -1061,7 +1061,7 @@
   "TYPES.Item.associate": "Background Associate",
   "TYPES.Item.role": "Crew Role",
   "TYPES.Item.software": "Software",
-  "TYPES.Item.world": "World Data",
+  "TYPES.Item.worlddata": "World Data",
 
   "TRAVELLER.Add": "Add"
 }
