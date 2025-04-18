@@ -234,6 +234,7 @@ MgT2eMacros.specialityGain = function(actorId, skill, level) {
 MgT2eMacros.skillCheck = function(args, ask) {
     let skillFqn = args.skill;
     let target = args.target?args.target:8;
+    let dm = args.dm?Number(args.dm):0;
 
     if (!ask && game.users.current.isGM && !canvas.tokens.controlled.length) {
         // If current user is the GM, when trying to roll a skill, if no tokens
@@ -248,13 +249,13 @@ MgT2eMacros.skillCheck = function(args, ask) {
 
         let skillId = skillFqn;
         let specId = null;
-        if (skillId.indexOf(".")) {
+        if (skillId && skillId.indexOf(".")) {
             skillId = skillFqn.split(".")[0];
             specId = skillFqn.split(".")[1];
         }
         let skill = CONFIG.MGT2.SKILLS[skillId];
 
-        if (!skill) {
+        if (skillFqn && !skill) {
             ui.notifications.error(`Skill [${skillId}] is unrecognised.`);
         }
 
@@ -274,16 +275,22 @@ MgT2eMacros.skillCheck = function(args, ask) {
             html += `<div><b>Target:</b> ${args.target}+</div>`;
         }
         let jsonData = {
-            "skill": skillFqn,
-            "specId": specId,
-            "cha": cha,
-            "dm": 0,
+            "dm": dm,
             "rollType": "standard",
             "difficulty": args.target,
             "description": args.text,
             "success": args.success,
             "failure": args.failure,
             "cost": args.cost?args.cost:0
+        }
+        if (skillFqn) {
+            jsonData["skill"] = skillFqn;
+        }
+        if (specId) {
+            jsonData["specId"] = spedId;
+        }
+        if (cha) {
+            jsonData["cha"] = cha;
         }
         let json = JSON.stringify(jsonData);
 
@@ -304,6 +311,7 @@ MgT2eMacros.skillCheck = function(args, ask) {
         game.mgt2e.rollSkillMacro(skillFqn, {
             "difficulty": target,
             "cha": args.cha,
+            "dm": dm,
             "description": args.text,
             "success": args.success,
             "failure": args.failure,
@@ -325,10 +333,11 @@ MgT2eMacros.damage = function(args) {
     });
 };
 
-MgT2eMacros.createItem = async function(args) {
+MgT2eMacros.createItem = async function(args, buy) {
     let item = null;
     let uuid = args.uuid;
 
+    console.log("createItem:" + buy);
     if (uuid) {
         let src = await fromUuidSync(uuid);
         if (!src) {
@@ -348,27 +357,50 @@ MgT2eMacros.createItem = async function(args) {
                 "description": "New Item"
             }
         }
+        if (args.name) {
+            item.name = args.name;
+        }
+        if (args.description) {
+            item.system.description = args.description;
+        }
+        if (args.type) {
+            item.type = type;
+        }
+        if (args.cost) {
+            item.system.cost = args.cost;
+        }
+        if (args.quantity) {
+            item.system.quantity = parseInt(args.quantity);
+        }
     }
-    if (args.name) {
-        item.name = args.name;
+
+    let cost = 0;
+    if (buy && item.system.cost) {
+        cost = Number(item.system.cost);
     }
-    if (args.description) {
-        item.system.description = args.description;
-    }
-    if (args.type) {
-        item.type = type;
-    }
-    if (args.cost) {
-        item.system.cost = args.cost;
-    }
-    if (args.quantity) {
-        item.system.quantity = parseInt(args.quantity);
-    }
+
 
     let added = false;
     for (let t of canvas.tokens.controlled) {
         let actor = t.actor;
         if (actor) {
+            if (cost > 0 && actor.system.finance) {
+                let cash = Number(actor.system.finance.cash);
+                if (cost > cash) {
+                    ui.notifications.error(
+                        game.i18n.format("MGT2.Error.NotEnoughCash",
+                            { "actor": actor.name, "cost": cost})
+                    )
+                    added = true; // Not really, but we don't want a "no tokens" error
+                    continue;
+                }
+                await actor.update({"system.finance.cash": cash - cost});
+                ui.notifications.info(
+                    game.i18n.format("MGT2.Info.BuyItem",
+                        {"actor": actor.name, "cost": cost, "item": item.name }
+                    )
+                );
+            }
             Item.create(item, { parent: actor});
             ui.notifications.info(
                 game.i18n.format("MGT2.Info.CreateItem", { "item": item.name, "actor": actor.name})

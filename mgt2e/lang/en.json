@@ -1007,6 +1007,9 @@
   "MGT2.Info.DamageMsg.VehicleNoStun": "Vehicles can't be affected by stun damage",
   "MGT2.Info.DamageMsg.SpacecraftNoStun": "Spacecraft can't be affected by stun damage",
 
+  "MGT2.Error.NotEnoughCash": "{actor} does not have enough Credits to spend Cr{cost}",
+  "MGT2.Info.BuyItem": "{actor} spends Cr{cost} on buying {item}",
+
   "MGT2.Role.isDepartment": "Role is a department",
   "MGT2.Role.RoleAssignment": "Role Assignment",
   "MGT2.Role.RoleActions": "Actions",

@@ -571,6 +571,8 @@ Tools.internalExecutionButton = function(macroName, argsString, title, flavor) {
         symbol = `<i class="fas fa-dice">?</i>`;
     } else if (["train"].includes(macroName)) {
         symbol = `<i class="fas fa-book-open"></i>`;
+    } else if (["buy"].includes(macroName)) {
+        symbol = ``;
     }
 
     a.innerHTML = `<span class="internal-macro">${symbol} ${flavor ?? title}</span>`;
@@ -642,7 +644,9 @@ Tools.mgt2eClick = function(event) {
         } else if (macroName === "damage" || macroName === "dmg") {
             MgT2eMacros.damage(args);
         } else if (macroName === "item") {
-            MgT2eMacros.createItem(args);
+            MgT2eMacros.createItem(args, false);
+        } else if (macroName === "buy") {
+            MgT2eMacros.createItem(args, true);
         } else if (macroName === "associate") {
             MgT2eMacros.createAssociate(args);
         } else if (macroName === "cash") {

@@ -1,4 +1,4 @@
-import {rollSkill} from "../helpers/dice-rolls.mjs";
+import {rollSkill} from "./dice-rolls.mjs";
 import {MgT2AddSkillDialog} from "./add-skill-dialog.mjs";
 
 export class MgT2SkillDialog extends Application {
@@ -23,14 +23,18 @@ export class MgT2SkillDialog extends Application {
         console.log(skillOptions);
 
         this.skillFqn = skillFqn;
+        if (skillFqn === "undefined") {
+            this.skillFqn = null;
+        }
         this.skillId = null;
         this.specId = null;
         this.chaOnly = false;
-        if (skillFqn) {
-            this.skillId = skillFqn;
-            if (skillFqn.indexOf(".")) {
-                this.skillId = skillFqn.split(".")[0];
-                this.specId = skillFqn.split(".")[1];
+
+        if (this.skillFqn) {
+            this.skillId = this.skillFqn;
+            if (this.skillFqn.indexOf(".")) {
+                this.skillId = this.skillFqn.split(".")[0];
+                this.specId = this.skillFqn.split(".")[1];
 
                 this.skillData = actor.system.skills[this.skillId];
                 if (this.specId === "") {
@@ -140,7 +144,6 @@ export class MgT2SkillDialog extends Application {
             TARGET_SELECT[this.target] = this.target;
         }
 
-
         return {
             "actor": this.actor,
             "data": this.data,
@@ -193,6 +196,7 @@ export class MgT2SkillDialog extends Application {
             }
             this.actor.update({ "system.skills": this.actor.system.skills });
         } else if (this.skillId) {
+            console.log(this.skillId);
             this.cha = this.actor.system.skills[this.skillId].default;
         }
         rollSkill(this.actor, this.skillFqn, {
@@ -205,7 +209,6 @@ export class MgT2SkillDialog extends Application {
             "failure": this.skillOptions.failure,
             "cost": this.skillOptions.cost
         });
-        //}, cha, dm, rollType, difficulty, this.text);
 
         this.close();
     }

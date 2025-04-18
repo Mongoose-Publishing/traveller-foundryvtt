@@ -447,3 +447,17 @@ div.foundry-hint h4 {
 div.foundry-hint p {
   margin: 5px;
 }
+
+table.mongoose-equipment td {
+  vertical-align: top;
+}
+
+.equipment-header td {
+  background-color: #606060;
+  color: white;
+  border: 2px groove #eeede0;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: larger;
+  padding: 0;
+}
