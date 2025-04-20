@@ -155,7 +155,7 @@ MgT2eMacros.chaGain = function(args) {
         level = Number(level);
     }
 
-    for (let t of Tools.getSelectedOwned()) {
+    for (let actor of Tools.getSelectedOwned()) {
         let text = "";
 
         if (actor.system.characteristics[cha]) {
@@ -341,7 +341,7 @@ MgT2eMacros.createItem = async function(args, buy) {
 
     console.log("createItem:" + buy);
     if (uuid) {
-        let src = await fromUuidSync(uuid);
+        let src = await fromUuid(uuid);
         if (!src) {
             ui.notifications.error(
                 game.i18n.localize("MGT2.Error.CreateItem.NoItem")
