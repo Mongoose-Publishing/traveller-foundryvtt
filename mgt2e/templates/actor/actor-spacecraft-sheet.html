@@ -296,6 +296,11 @@
                                 <input type="checkbox" name="system.settings.autoHits" {{checked system.settings.autoHits}} data-dtype="Boolean" />
                                 <label for="system.settings.autoHits" class="resource-label">{{localize 'MGT2.TravellerSheet.AutoHits'}}</label>
                             </div>
+
+                            <div class="resource flex-group-left">
+                                <input name="system.spacecraft.type" type="text" value="{{system.spacecraft.type}}" placeholder="Type"/>
+
+                            </div>
                         </div>
 
 
@@ -372,11 +377,9 @@
                             {{/each}}
                         </ol>
                     </div>
+                </div>
             </div>
         </div>
-
-
     </section>
-
 </form>
 

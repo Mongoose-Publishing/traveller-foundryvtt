@@ -2,6 +2,8 @@ import {hasTrait, getTraitValue, skillLabel} from "../dice-rolls.mjs";
 import {Physics} from "./physics.mjs";
 import {MgT2DamageDialog} from "../damage-dialog.mjs";
 import {MgT2eMacros} from "./macros.mjs";
+import {calculateCost} from "../utils/character-utils.mjs";
+import {getShipData} from "../spacecraft/spacecraft-utils.mjs";
 
 export const Tools = {};
 
@@ -399,7 +401,7 @@ Tools.macroExecutionEnricher = function(match, options) {
     }
 }
 
-Tools.actorInlineDisplay = function(actorId) {
+Tools.actorInlineDisplay = async function(actorId) {
     let actor = fromUuidSync(actorId);
     if (!actor) {
         actor = game.actors.get(actorId);
@@ -419,8 +421,10 @@ Tools.actorInlineDisplay = function(actorId) {
         Tools.creatureInlineDisplay(a, actor);
     } else if (actor.type === "npc") {
         Tools.npcInlineDisplay(a, actor);
+    } else if (actor.type === "spacecraft") {
+        await Tools.spacecraftInlineDisplay(a, actor);
     } else {
-        a.innerHTML = `Currently only supports NPCs`;
+        a.innerHTML = `Currently only supports Travellers, NPCs and Spacecraft`;
     }
     return a;
 }
@@ -531,6 +535,143 @@ Tools.npcInlineDisplay = function(a, actor) {
     html += `</div>`;
     html += `</div>`;
     html += `</div></div>`;
+
+    a.innerHTML = html;
+
+    return a;
+}
+
+Tools.inlineSpacecraftData = function(heading, items) {
+    let html = `<tr><th>${heading}</th>`;
+
+    html += "<td>";
+    for (let i in items) {
+        if (i>0) html += "<br/>";
+        html += items[i].name;
+    }
+    html += "</td>";
+    html += "<td>";
+    for (let i in items) {
+        if (i>0) html += "<br/>";
+        if (items[i].tons > 0) {
+            html += items[i].tons;
+        } else {
+            html += "&mdash;";
+        }
+    }
+    html += "</td>";
+    html += "<td>";
+    for (let i in items) {
+        if (i>0) html += "<br/>";
+        if (items[i].cost > 0) {
+            html += items[i].cost;
+        } else {
+            html += "&mdash;";
+        }
+    }
+    html += "</td>";
+
+    html += `</tr>`;
+
+    return html;
+}
+
+Tools.spacecraftInlineDisplay = async function(a, actor) {
+    let html = `<div class="inline-spacecraft">`;
+
+    // Let's make sure everything is calculated correctly.
+    await calculateCost(actor);
+
+    html += `<div class="spacecraft-header actor-link rollable name" data-actor-id="${actor.uuid}">`;
+    html += `<h4>${actor.name}</h4>`;
+    html += `<span class="type">TYPE: ${actor.system.spacecraft.type}</span>`;
+    html += `<br style="clear:both"/>`;
+    html += `</div>`;
+
+
+    html += `<div class="spacecraft-description">${actor.system.description}</div>`
+
+    // Data stats to the right.
+    html += `<div class="spacecraft-right">`;
+    html += `<div><div class="title">Crew</div>`;
+
+    let crewText = "";
+    for (let role of actor.items) {
+        if (role.type === "role" && role.system.role.show) {
+            if (crewText) crewText +=", ";
+            crewText += role.name;
+            if (role.system.role.positions > 1) {
+                crewText += " x" + role.system.role.positions;
+            }
+        }
+    }
+    html += `<p>${crewText}</p>`
+    html += `</div>`;
+
+    html += `<div><div class="title">Hull: ${actor.system.hits.max}</div><p></p></div>`;
+    html += `<div><div class="title">Running Costs</div>`;
+    html += `<div class="sub-title">Maintenance Cost</div>`
+
+    html += `<div class="sub-title">Purchase Cost</div>`
+    html += `<p></p>`;
+    html += `</div>`;
+    html += `<div><div class="title">Power Requirements</div></div>`;
+    html += `<p></p>`;
+    html += `</div>`;
+
+    // Table to the left.
+    html += `<table><tr class="header"><th>TL${actor.system.spacecraft.tl}</th><th></th><th>TONS</th><th>COST (MCr)</th></tr>`;
+
+    let spacecraft = actor.system.spacecraft;
+    let data = getShipData(actor);
+
+    html += Tools.inlineSpacecraftData("Hull", data["hull"] );
+    if (data["armour"]) {
+        html += Tools.inlineSpacecraftData("Armour", data["armour"]);
+    }
+    if (data["mDrive"]) {
+        html += Tools.inlineSpacecraftData("M-Drive", data["mDrive"]);
+    }
+    if (data["jDrive"]) {
+        html += Tools.inlineSpacecraftData("J-Drive", data["jDrive"]);
+    }
+    if (data["power"]) {
+        html += Tools.inlineSpacecraftData("Power Plant", data["power"]);
+    }
+    if (data["fuel"]) {
+        html += Tools.inlineSpacecraftData("Fuel Tanks", data["fuel"]);
+    }
+    if (data["bridge"]) {
+        html += Tools.inlineSpacecraftData("Bridge", data["bridge"]);
+    }
+    if (data["computer"]) {
+        html += Tools.inlineSpacecraftData("Computer", data["computer"]);
+    }
+    if (data["sensor"]) {
+        html += Tools.inlineSpacecraftData("Sensors", data["sensor"]);
+    }
+    if (data["weapon"]) {
+        html += Tools.inlineSpacecraftData("Weapons", data["weapon"]);
+    }
+    if (data["systems"]) {
+        html += Tools.inlineSpacecraftData("Systems", data["systems"]);
+    }
+    if (data["software"]) {
+        html += Tools.inlineSpacecraftData("Software", data["software"]);
+    }
+    if (data["stateroom"]) {
+        html += Tools.inlineSpacecraftData("Staterooms", data["stateroom"]);
+    }
+    if (data["cargo"]) {
+        html += Tools.inlineSpacecraftData("Cargo", data["cargo"]);
+    }
+
+
+    html += `</table>`;
+    html += `<p></p>`;
+
+
+    html += `</div>`;
 
     a.innerHTML = html;
 

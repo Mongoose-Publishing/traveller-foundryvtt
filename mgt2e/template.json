@@ -201,10 +201,13 @@
         },
         "spacecraft": {
             "dtons": 100,
+            "type": "",
             "configuration": "standard",
             "skill": "pilot.spacecraft",
             "tl": 12,
             "armour": 0,
+            "cost": 0,
+            "baseCost": 0,
             "radShielding": 0,
             "computer": {
                 "processing": 0,
@@ -390,7 +393,9 @@
               "description": "",
               "department":  false,
               "colour": null,
-              "dei": 0
+              "dei": 0,
+              "positions": 1,
+              "show": true
           }
       }
     },
@@ -420,7 +425,7 @@
       "cost": 1000
     },
     "hardware": {
-      "templates": [ "base","hardware" ]
+      "templates": [ "base", "hardware" ]
     },
     "role": {
         "templates": [ "role" ]

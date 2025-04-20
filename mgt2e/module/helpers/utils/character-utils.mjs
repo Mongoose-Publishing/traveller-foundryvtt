@@ -1,3 +1,4 @@
+import {calculateSpacecraftCost} from "../spacecraft/spacecraft-utils.mjs";
 
 async function getPowerOrInfluence() {
     const roll = await new Roll("2D6", null).evaluate();
@@ -94,5 +95,12 @@ export async function randomiseAssociate(item) {
     if (!item.system.description) {
         // Only set this the first time.
         item.system.description = description;
+    }
+}
+
+export async function calculateCost(actor) {
+    console.log("calculateCost:");
+    if (actor.type === "spacecraft") {
+        await calculateSpacecraftCost(actor);
     }
 }

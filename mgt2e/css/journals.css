@@ -461,3 +461,82 @@ table.mongoose-equipment td {
   font-size: larger;
   padding: 0;
 }
+
+.inline-spacecraft {
+  background-color: #a9bbc8;
+}
+
+.inline-spacecraft .spacecraft-header {
+  background-color: #f1511b;
+  padding-left: 1em;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.inline-spacecraft h4 {
+  color: black;
+  font-size: 18pt;
+  text-transform: uppercase;
+  float: left;
+}
+
+.inline-spacecraft .type {
+  text-transform: uppercase;
+  background-color: #00000040;
+  color: white;
+  float: right;
+  font-size: 14pt;
+  margin-right: 1em;
+  padding: 4px;
+}
+
+.inline-spacecraft .spacecraft-description {
+  column-count: 2;
+  column-gap: 2em;
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.inline-spacecraft table {
+  background-color: #cdd7df;
+  width: 70%;
+  border-collapse: collapse;
+  margin-left: 1em;
+}
+
+.inline-spacecraft table td {
+  text-align: left;
+  border: 1px solid black;
+  padding-left: 3px;
+}
+
+.inline-spacecraft table th {
+  text-align: left;
+  border: 1px solid black;
+  padding-right: 5px;
+}
+
+.inline-spacecraft table tr.header th {
+  font-size: larger;
+  border: none;
+}
+
+.inline-spacecraft .spacecraft-right {
+  float: right;
+  width: 25%;
+}
+
+.spacecraft-right {
+  text-align: center;
+}
+
+.spacecraft-right .title {
+  background-color: #f1511b;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 14pt;
+}
