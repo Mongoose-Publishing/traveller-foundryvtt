@@ -669,6 +669,9 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
 
     html += `</table>`;
     html += `<p></p>`;
+    html += `<div class="starship-image">`;
+    html += `<img src="${actor.img}"/>`
+    html += `</div>`;
 
 
     html += `</div>`;

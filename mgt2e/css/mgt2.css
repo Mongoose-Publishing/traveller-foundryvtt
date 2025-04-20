@@ -1193,7 +1193,7 @@ textarea.traits {
   flex: 0 0 140px;
   width: 160px;
   height: 100%;
-  min-height: 160px;
+  _min-height: 160px;
   margin-right: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
