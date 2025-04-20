@@ -782,11 +782,10 @@ async function createTravellerMacro(data, slot) {
             ui.notifications.warn(game.i18n.localize("MGT2.Warn.HotBar.NewActor"));
             return false;
         }
-        let skill = actor.system.skills[dragData.skillName];
         let label = actor.getSkillLabel(dragData.skillName);
 
         const command = `game.mgt2e.rollSkillMacro('${dragData.skillName}')`;
-        let macro = null; //game.macros.entries.find(m => (m.name === dragData.skillName));
+        let macro = null;
         if (!macro) {
             macro = await Macro.create({
                 name: label,
@@ -813,6 +812,8 @@ function rollSkillMacro(skillName, options) {
   let actor;
   if (speaker.token) {
       actor = game.actors.tokens[speaker.token];
+  } else if (game.user.character) {
+      actor = game.user.character;
   }
   if (!actor) {
       actor = game.actors.get(speaker.actor);

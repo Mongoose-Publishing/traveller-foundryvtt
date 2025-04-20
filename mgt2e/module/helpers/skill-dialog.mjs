@@ -111,14 +111,14 @@ export class MgT2SkillDialog extends Application {
                     this.expert = parseInt(this.specData.expert);
                 }
             }
-            this.options.title = this.skillData.label;
+            this.options.title = `${actor.name} (${this.skillData.label})`;
         } else if (this.cha) {
             this.characteristic = data.characteristics[this.cha];
-            this.options.title = this.characteristic.label;
+            this.options.title = `${actor.name} (${this.characteristic.label})`;
             this.value = this.characteristic.dm;
         }
         this.skillText = actor.getSkillLabel(skillFqn, false);
-        this.options.title = this.skillText;
+        this.options.title = `${actor.name} (${this.skillText})`;
         this.penalty = data.physicalDM;
     }
 
