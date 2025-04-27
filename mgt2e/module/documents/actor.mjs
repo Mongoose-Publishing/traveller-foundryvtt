@@ -186,6 +186,12 @@ export class MgT2Actor extends Actor {
         }
         actorData.system.initiative.base = Math.max(int, dex);
         actorData.system.initiative.value = actorData.system.initiative.base;
+        if (actorData.system.modifiers.initiative?.custom) {
+            actorData.system.initiative.value += Number(actorData.system.modifiers.initiative.custom);
+        }
+        if (actorData.system.modifiers.initiative?.effect) {
+            actorData.system.initiative.value += Number(actorData.system.modifiers.initiative.effect);
+        }
 
         // Also calculate Dodge ability.
         let dodge = Math.max(dex, 0);
