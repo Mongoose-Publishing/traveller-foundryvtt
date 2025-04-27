@@ -158,7 +158,7 @@ MgT2eMacros.chaGain = function(args) {
     for (let actor of Tools.getSelectedOwned()) {
         let text = "";
 
-        if (actor.system.characteristics[cha]) {
+        if (actor && actor.system.characteristics[cha]) {
             let current = Number(actor.system.characteristics[cha].value);
             if (level > 0) {
                 if (current < 15) {
@@ -289,7 +289,7 @@ MgT2eMacros.skillCheck = function(args, ask) {
             jsonData["skill"] = skillFqn;
         }
         if (specId) {
-            jsonData["specId"] = spedId;
+            jsonData["specId"] = specId;
         }
         if (cha) {
             jsonData["cha"] = cha;
@@ -349,13 +349,12 @@ MgT2eMacros.createItem = async function(args, buy) {
             return;
         }
         item = await src.clone();
-
     } else {
         item = {
             "name": "New Item",
             "type": "item",
-            "quantity": 1,
             "system": {
+                "quantity": 1,
                 "description": "New Item"
             }
         }
@@ -371,9 +370,12 @@ MgT2eMacros.createItem = async function(args, buy) {
         if (args.cost) {
             item.system.cost = args.cost;
         }
-        if (args.quantity) {
-            item.system.quantity = parseInt(args.quantity);
-        }
+    }
+    let quantity = 1;
+    if (args.quantity) {
+        let roll = await new Roll(args.quantity, null).evaluate();
+        // Setting quantity on a cloned object doesn't seem to take.
+        quantity = roll.total;
     }
 
     let cost = 0;
@@ -383,28 +385,31 @@ MgT2eMacros.createItem = async function(args, buy) {
 
     let added = false;
     for (let actor of Tools.getSelectedOwned()) {
-        if (cost > 0 && actor.system.finance) {
-            let cash = Number(actor.system.finance.cash);
-            if (cost > cash) {
-                ui.notifications.error(
-                    game.i18n.format("MGT2.Error.NotEnoughCash",
-                        { "actor": actor.name, "cost": cost})
-                )
-                added = true; // Not really, but we don't want a "no tokens" error
-                continue;
+        if (actor) {
+            if (cost > 0 && actor.system.finance) {
+                let cash = Number(actor.system.finance.cash);
+                if (cost > cash) {
+                    ui.notifications.error(
+                        game.i18n.format("MGT2.Error.NotEnoughCash",
+                            {"actor": actor.name, "cost": cost})
+                    )
+                    added = true; // Not really, but we don't want a "no tokens" error
+                    continue;
+                }
+                await actor.update({"system.finance.cash": cash - cost});
+                ui.notifications.info(
+                    game.i18n.format("MGT2.Info.BuyItem",
+                        {"actor": actor.name, "cost": cost, "item": item.name}
+                    )
+                );
             }
-            await actor.update({"system.finance.cash": cash - cost});
+            let d = await Item.create(item, {parent: actor});
+            d.update({"system.quantity": quantity});
             ui.notifications.info(
-                game.i18n.format("MGT2.Info.BuyItem",
-                    {"actor": actor.name, "cost": cost, "item": item.name }
-                )
+                game.i18n.format("MGT2.Info.CreateItem", {"item": item.name, "actor": actor.name})
             );
+            added = true;
         }
-        Item.create(item, { parent: actor});
-        ui.notifications.info(
-            game.i18n.format("MGT2.Info.CreateItem", { "item": item.name, "actor": actor.name})
-        );
-        added = true;
     }
     if (!added) {
         ui.notifications.error(
@@ -434,22 +439,24 @@ MgT2eMacros.createAssociate = async function(args) {
     }
     let added = false;
     for (let actor of Tools.getSelectedOwned()) {
-        let number = 1;
-        if (args.number) {
-            const roll = await new Roll(args.number).evaluate();
-            number = roll.total;
-        }
-
-        for (let i=0; i < number; i++) {
-            if (number > 1) {
-                item.name = `${name} ${i+1}`;
+        if (actor) {
+            let number = 1;
+            if (args.number) {
+                const roll = await new Roll(args.number).evaluate();
+                number = roll.total;
             }
-            await randomiseAssociate(item);
-            await Item.create(item, {parent: actor});
-            ui.notifications.info(
-                game.i18n.format("MGT2.Info.CreateItem", {"item": item.name, "actor": actor.name})
-            );
+
+            for (let i = 0; i < number; i++) {
+                if (number > 1) {
+                    item.name = `${name} ${i + 1}`;
+                }
+                await randomiseAssociate(item);
+                await Item.create(item, {parent: actor});
+                ui.notifications.info(
+                    game.i18n.format("MGT2.Info.CreateItem", {"item": item.name, "actor": actor.name})
+                );
+            }
+            added = true;
         }
-        added = true;
     }
 };
