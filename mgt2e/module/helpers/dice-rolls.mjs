@@ -984,13 +984,8 @@ export async function rollSkill(actor, skill, options) {
             }
             text += `<p>${cha} cost is ${cost}</p>`;
         }
-        if (options.success || options.failure) {
-            if (effect >= 0 && options.success) {
-                text += `<div class="skill-success">${options.success}</div>`;
-            } else if (options.failure) {
-                text += `<div class="skill-fail">${options.failure}</div>`;
-            }
-        } else if (skill && skill.specialities != null && speciality == null && !noSpeciality) {
+        let bestEffect = effect;
+        if (skill && skill.specialities != null && speciality == null && !noSpeciality) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];
                 if (spec.value > 0) {
@@ -1019,6 +1014,9 @@ export async function rollSkill(actor, skill, options) {
                         stotal += parseInt(data.characteristics[spec.default].dm);
                         slabel += ` (${spec.default})`;
                     }
+                    if (stotal - difficulty > bestEffect) {
+                        bestEffect = (stotal - difficulty);
+                    }
 
                     if (game.settings.get("mgt2e", "verboseSkillRolls")) {
                         text += `<h3 class="subroll">${slabel}</h3>`;
@@ -1030,6 +1028,13 @@ export async function rollSkill(actor, skill, options) {
                         text += `<h3 class="subroll">${slabel} <span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${stotal}</span></h3>`;
                     }
                 }
+            }
+        }
+        if (options.success || options.failure) {
+            if (bestEffect >= 0 && options.success) {
+                text += `<div class="skill-success">${options.success}</div>`;
+            } else if (options.failure) {
+                text += `<div class="skill-fail">${options.failure}</div>`;
             }
         }
         text += "</div></div>";
