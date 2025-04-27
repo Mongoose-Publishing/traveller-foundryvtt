@@ -53,6 +53,10 @@
                 "auto": 0,
                 "effect": 0,
                 "dm": 0
+            },
+            "armour": {
+              "custom": 0,
+              "effect": 0
             }
         },
         "hits": {

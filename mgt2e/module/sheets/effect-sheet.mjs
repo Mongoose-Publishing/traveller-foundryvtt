@@ -43,7 +43,7 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         context.effectTypes = MGT2.EFFECTS;
         context.effectType = MGT2.EFFECTS[context.data.flags.augmentType];
 
-        let prop =context.effectType.property;
+        let prop = context.effectType.property;
         if (context.effectType.targets === "char") {
             context.targets = {};
             for (const k of ['STR', 'DEX', 'END', 'INT', 'PSI']) {
@@ -69,6 +69,8 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
             context.targets["system.modifiers.physical." + prop] = { "label": "Physical DM" };
             context.targets["system.modifiers.melee." + prop] = { "label": "Melee DM" };
             context.targets["system.modifiers.guncombat." + prop] = { "label": "Gun Combat DM" };
+            context.targets["system.modifiers.armour." + prop] = { "label": "Armour" };
+            context.targets["system.modifiers.initiative." + prop] = { "label": "Initiative" };
         }
 
         return context;

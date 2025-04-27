@@ -55,7 +55,9 @@
                     {{#each effects as |e id|}}
                         <li class="items effect flexrow" data-effect-id="{{e.id}}">
                             <label>{{e.label}}</label>
-                            <div class="effect-target">{{effect e.changes.0.key}} {{e.changes.0.value}}</div>
+                            {{#each e.changes as | p i|}}
+                                <div class="effect-target">{{effect p.key}} {{p.value}}</div>
+                            {{/each}}
                             <div class="item-controls effect-controls flexrow">
                                 <a class="effect-control" data-action="edit" title="Edit">
                                     <i class="fas fa-edit"></i>

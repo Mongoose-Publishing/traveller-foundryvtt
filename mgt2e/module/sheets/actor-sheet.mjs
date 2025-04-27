@@ -772,6 +772,15 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                 }
             }
+            if (context.actor.system.modifiers.armour?.custom) {
+                armour.protection += context.actor.system.modifiers.armour?.custom;
+            }
+            if (context.actor.system.modifiers.armour?.effect) {
+                armour.protection += context.actor.system.modifiers.armour?.effect;
+            }
+            if (armour.protection > 0 && !armour.name) {
+                armour.name = "Protection";
+            }
             if (context.actor) {
                 context.actor.update({"system.armour": armour});
             }

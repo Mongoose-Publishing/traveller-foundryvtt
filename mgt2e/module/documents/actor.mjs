@@ -489,6 +489,15 @@ export class MgT2Actor extends Actor {
                   }
               }
           }
+          // Any special modifiers?
+          if (this.system.modifiers.armour?.custom) {
+              armour += Number(this.system.modifiers.armour.custom);
+              armourText += `Custom +${this.system.modifiers.armour.custom} `;
+          }
+          if (this.system.modifiers.armour?.effect) {
+              armour += Number(this.system.modifiers.armour.effect);
+              armourText += `Other +${this.system.modifiers.armour.effect} `;
+          }
           // Finally, any cover options?
           if (this.getFlag("mgt2e", "inCover")) {
               const coverBonus = parseInt(this.getFlag("mgt2e", "inCover"));
