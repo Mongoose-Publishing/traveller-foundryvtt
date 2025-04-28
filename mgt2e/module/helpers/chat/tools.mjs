@@ -621,7 +621,11 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
             totalCost += i.cost;
         }
     }
-    let maintenanceCost = (totalCost * 1000) / 12;
+    let purchaseCost = totalCost;
+    if (spacecraft.isStandardDesign) {
+        purchaseCost *= 0.9;
+    }
+    let maintenanceCost = (purchaseCost * 1000) / 12;
 
     html += `<div><div class="title">Hull: ${actor.system.hits.max}</div><p></p></div>`;
     html += `<div><div class="title">Running Costs</div>`;
@@ -629,7 +633,7 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     html += `<p>Cr${new Intl.NumberFormat(undefined, {maximumFractionDigits: 0}).format(maintenanceCost)}/month</p>`;
 
     html += `<div class="sub-title">Purchase Cost</div>`
-    html += `<p>MCr${new Intl.NumberFormat(undefined, {maximumFractionDigits: 6}).format(totalCost)}</p>`;
+    html += `<p>MCr${new Intl.NumberFormat(undefined, {maximumFractionDigits: 6}).format(purchaseCost)}</p>`;
     html += `</div>`;
     html += `<div><div class="title">Power Requirements</div></div>`;
     html += `<p></p>`;
@@ -678,6 +682,8 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     if (data["cargo"]) {
         html += Tools.inlineSpacecraftData("Cargo", data["cargo"]);
     }
+
+    html += `<tr><td colspan="4" style="text-align: center"><b>Total:</b> MCr${new Intl.NumberFormat(undefined, {maximumFractionDigits: 6}).format(totalCost)}</td></tr>`;
 
 
     html += `</table>`;

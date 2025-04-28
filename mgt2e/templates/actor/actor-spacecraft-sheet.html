@@ -287,20 +287,22 @@
 
                     <div class="tab items" data-tab="notes">
                         <div class="resources grid grid-3col">
+                            <div class="resource flex-group-left" title="Spacecraft type code">
+                                <input name="system.spacecraft.type" type="text" value="{{system.spacecraft.type}}" placeholder="Type"/>
+                            </div>
+                            <div class="resource flex-group-left" title="Auto calculate hits from Hull tonnage">
+                                <input type="checkbox" name="system.settings.autoHits" {{checked system.settings.autoHits}} data-dtype="Boolean" />
+                                <label for="system.settings.autoHits" class="resource-label">{{localize 'MGT2.TravellerSheet.AutoHits'}}</label>
+                            </div>
+                            <div class="resource flex-group-left" title="10% discount on ship cost">
+                                <input type="checkbox" name="system.spacecraft.isStandardDesign" {{checked system.spacecraft.isStandardDesign}} data-dtype="Boolean" />
+                                <label for="system.spacecraft.isStandardDesign" class="resource-label">Standard Design</label>
+                            </div>
                             <div class="resource flex-group-left">
                                 <input type="checkbox" name="system.spacecraft.navy.naval" {{checked system.spacecraft.navy.naval}} data-dtype="Boolean" />
                                 <label for="system.spacecraft.navy.naval" class="resource-label">Naval vessel</label>
                             </div>
 
-                            <div class="resource flex-group-left">
-                                <input type="checkbox" name="system.settings.autoHits" {{checked system.settings.autoHits}} data-dtype="Boolean" />
-                                <label for="system.settings.autoHits" class="resource-label">{{localize 'MGT2.TravellerSheet.AutoHits'}}</label>
-                            </div>
-
-                            <div class="resource flex-group-left">
-                                <input name="system.spacecraft.type" type="text" value="{{system.spacecraft.type}}" placeholder="Type"/>
-
-                            </div>
                         </div>
 
 

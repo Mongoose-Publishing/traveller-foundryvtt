@@ -207,6 +207,7 @@
             "dtons": 100,
             "type": "",
             "configuration": "standard",
+            "isStandardDesign": false,
             "skill": "pilot.spacecraft",
             "tl": 12,
             "armour": 0,
