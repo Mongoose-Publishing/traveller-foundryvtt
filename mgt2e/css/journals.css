@@ -56,7 +56,8 @@
     border-radius: 8px;
     padding: 0;
     float: right;
-    width: 30%;
+    width: 45%;
+    margin-left: 0.5em;
 }
 
 .journal-sheet .callout h4 {
@@ -70,6 +71,15 @@
 .journal-sheet .callout p {
     margin: 0.5em;
 }
+
+.journal-sheet .callout-wide {
+  background-color: #90D0e8;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 0.5em;
+}
+
+
 
 /* Career Definitions */
 

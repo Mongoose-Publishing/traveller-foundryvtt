@@ -2341,12 +2341,14 @@ export class MgT2ActorSheet extends ActorSheet {
             } else {
                 system.hardware.tonnage.tons = 60 + parseInt(this.actor.system.spacecraft.dtons / 100000) * 20;
             }
+            system.hardware.tonnage.cost = this.actor.system.spacecraft.dtons * 0.005;
         } else if (systemType === "stateroom") {
             itemName = "Stateroom";
             img = "systems/mgt2e/icons/hardware/stateroom.svg";
             system.hardware.system = "general";
             system.hardware.tonnage.tons = 4;
             system.hardware.rating = 1;
+            system.cost = 0.5;
         } else if (systemType === "sensor") {
             itemName = "Basic Sensors";
             img = "systems/mgt2e/icons/hardware/sensor.svg";

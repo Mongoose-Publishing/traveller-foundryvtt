@@ -548,6 +548,9 @@ Tools.inlineSpacecraftData = function(heading, items) {
     for (let i in items) {
         if (i>0) html += "<br/>";
         html += items[i].name;
+        if (items[i].quantity && items[i].quantity > 1) {
+            html += " x" + items[i].quantity;
+        }
     }
     html += "</td>";
     html += "<td>";
@@ -608,12 +611,25 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     html += `<p>${crewText}</p>`
     html += `</div>`;
 
+    let spacecraft = actor.system.spacecraft;
+    let data = getShipData(actor);
+
+    let totalCost = 0; // Base cost is already included in data list
+    for (let t in data) {
+        for (let i of data[t]) {
+            console.log(i.name + ": " + i.cost);
+            totalCost += i.cost;
+        }
+    }
+    let maintenanceCost = (totalCost * 1000) / 12;
+
     html += `<div><div class="title">Hull: ${actor.system.hits.max}</div><p></p></div>`;
     html += `<div><div class="title">Running Costs</div>`;
     html += `<div class="sub-title">Maintenance Cost</div>`
+    html += `<p>Cr${new Intl.NumberFormat(undefined, {maximumFractionDigits: 0}).format(maintenanceCost)}/month</p>`;
 
     html += `<div class="sub-title">Purchase Cost</div>`
-    html += `<p></p>`;
+    html += `<p>MCr${new Intl.NumberFormat(undefined, {maximumFractionDigits: 6}).format(totalCost)}</p>`;
     html += `</div>`;
     html += `<div><div class="title">Power Requirements</div></div>`;
     html += `<p></p>`;
@@ -621,9 +637,6 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
 
     // Table to the left.
     html += `<table><tr class="header"><th>TL${actor.system.spacecraft.tl}</th><th></th><th>TONS</th><th>COST (MCr)</th></tr>`;
-
-    let spacecraft = actor.system.spacecraft;
-    let data = getShipData(actor);
 
     html += Tools.inlineSpacecraftData("Hull", data["hull"] );
     if (data["armour"]) {

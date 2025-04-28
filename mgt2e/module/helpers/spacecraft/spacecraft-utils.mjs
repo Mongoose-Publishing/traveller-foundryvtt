@@ -9,10 +9,9 @@ export async function calculateSpacecraftCost(actor) {
 
     let totalCost = 0;
 
-    spacecraft.baseCost = Number(spacecraft.dtons) * 50000;
-    spacecraft.baseCost * MGT2.SHIP_CONFIGURATION[spacecraft.configuration].cost;
+    spacecraft.baseCost = Number(spacecraft.dtons) * 0.05;
+    spacecraft.baseCost *= MGT2.SHIP_CONFIGURATION[spacecraft.configuration].cost;
     totalCost = spacecraft.baseCost;
-
     spacecraft.cost = totalCost;
 
     for (let item of actor.items) {
@@ -103,8 +102,9 @@ export function getShipData(actor) {
         for (let item of mDrive) {
             data["mDrive"].push({
                 "name": "Thrust-" + item.system.hardware.rating,
-                "tons": item.system.hardware.tons,
-                "cost": item.system.cost
+                "tons": item.system.hardware.tons * item.system.quantity,
+                "cost": item.system.cost * item.system.quantity,
+                "quantity": item.system.quantity
             })
         }
     }
@@ -113,8 +113,9 @@ export function getShipData(actor) {
         for (let item of jDrive) {
             data["jDrive"].push({
                 "name": "Jump-" + item.system.hardware.rating,
-                "tons": item.system.hardware.tons,
-                "cost": item.system.cost
+                "tons": item.system.hardware.tons * item.system.quantity,
+                "cost": item.system.cost * item.system.quantity,
+                "quantity": item.system.quantity
             })
         }
     }
@@ -123,8 +124,9 @@ export function getShipData(actor) {
         for (let item of powerPlant) {
             data["power"].push({
                 "name": `${item.name}, Power ${item.system.hardware.rating}`,
-                "tons": item.system.hardware.tons,
-                "cost": item.system.cost
+                "tons": item.system.hardware.tons * item.system.quantity,
+                "cost": item.system.cost * item.system.quantity,
+                "quantity": item.system.quantity
             })
         }
     }
@@ -138,7 +140,7 @@ export function getShipData(actor) {
             } else {
                 name = item.name;
             }
-            totalFuel += item.system.hardware.rating;
+            totalFuel += item.system.hardware.rating * item.system.quantity;
         }
         data["fuel"].push({
             "name": name,
@@ -151,8 +153,9 @@ export function getShipData(actor) {
         for (let item of bridge) {
             data["bridge"].push({
                 "name": item.name,
-                "tons": item.system.hardware.tons,
-                "cost": item.system.cost
+                "tons": item.system.hardware.tons * item.system.quantity,
+                "cost": item.system.cost * item.system.quantity,
+                "quantity": item.system.quantity
             });
         }
     }
@@ -174,7 +177,8 @@ export function getShipData(actor) {
             data["computer"].push({
                 "name": name,
                 "tons": 0,
-                "cost": item.system.cost
+                "cost": item.system.cost * item.system.quantity,
+                "quantity": item.system.quantity
             });
         }
     }
@@ -183,8 +187,9 @@ export function getShipData(actor) {
         for (let item of sensor) {
             data["sensor"].push({
                 "name": item.name,
-                "tons": item.system.hardware.tons,
-                "cost": item.system.cost
+                "tons": item.system.hardware.tons * item.system.quantity,
+                "cost": item.system.cost * item.system.quantity,
+                "quantity": item.system.quantity
             })
         }
     }
@@ -194,13 +199,6 @@ export function getShipData(actor) {
 
     if (systems) {
         data["systems"] = [];
-        for (let item of stateroom) {
-            data["systems"].push({
-                "name": item.name,
-                "tons": item.system.hardware.tons,
-                "cost": item.system.cost
-            });
-        }
     }
 
     if (software) {
@@ -209,7 +207,8 @@ export function getShipData(actor) {
             data["software"].push({
                 "name": item.name,
                 "tons": 0,
-                "cost": item.system.cost
+                "cost": item.system.cost,
+                "quantity": 1
             });
         }
     }
@@ -218,8 +217,9 @@ export function getShipData(actor) {
         for (let item of stateroom) {
             data["stateroom"].push({
                "name": item.name,
-               "tons": item.system.hardware.tons,
-               "cost": item.system.cost
+               "tons": item.system.hardware.tons * item.system.quantity,
+               "cost": item.system.cost * item.system.quantity,
+               "quantity": item.system.quantity
             });
         }
     }
@@ -227,12 +227,13 @@ export function getShipData(actor) {
     if (cargo) {
         let totalCargo = 0;
         for (let item of cargo) {
-            totalCargo += item.system.hardware.rating;
+            totalCargo += item.system.hardware.rating * item.system.quantity;
         }
         data["cargo"] = [{
             "name": "",
             "cost": 0,
-            "tons": totalCargo
+            "tons": totalCargo,
+            "quantity": 1
         }];
     }
 

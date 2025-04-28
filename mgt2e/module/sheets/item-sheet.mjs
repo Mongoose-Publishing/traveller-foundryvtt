@@ -469,6 +469,7 @@ export class MgT2ItemSheet extends ItemSheet {
 
         // We only do this if the item is part of an existing ship.
         let shipTons = ship.system.spacecraft.dtons;
+        let cost = item.system.cost;
 
         // Calculate armour tonnage.
         if (item.system.hardware.system === "armour") {
@@ -482,6 +483,77 @@ export class MgT2ItemSheet extends ItemSheet {
             if (tons !== item.system.hardware.tons) {
                 item.update({"system.hardware.tons": item.system.hardware.tons})
                 item.update({"system.cost": item.system.cost})
+            }
+        } else if (item.system.hardware.system === "bridge") {
+            cost = shipTons * 0.005;
+            if (cost !== item.system.cost) {
+                item.system.cost = cost;
+                item.update({"system.cost": cost});
+            }
+        } else if (item.system.hardware.system === "computer") {
+            console.log("COMPUTER COST");
+            console.log(item);
+            if (item.system.hardware.isComputerCore) {
+                switch (Number(item.system.tl)) {
+                    case 9:
+                        cost = 45;
+                        break;
+                    case 10:
+                        cost - 60;
+                        break;
+                    case 11:
+                        cost = 75;
+                        break;
+                    case 12:
+                        cost = 80;
+                        break;
+                    case 13:
+                        cost = 95;
+                        break;
+                    case 14:
+                        cost = 120;
+                        break;
+                    case 15:
+                        cost = 130;
+                        break;
+                    default:
+                        cost = 0;
+                }
+            } else {
+                switch (Number(item.system.tl)) {
+                    case 7: case 8:
+                        cost = 0.03;
+                        break;
+                    case 9: case 10:
+                        cost = 0.16;
+                        break;
+                    case 11:
+                        cost = 2;
+                        break;
+                    case 12:
+                        cost = 5;
+                        break;
+                    case 13:
+                        cost = 10;
+                        break;
+                    case 14:
+                        cost = 20;
+                        break;
+                    case 15:
+                        cost = 30;
+                        break;
+                    default:
+                        cost = 0;
+                }
+            }
+            if (item.system.hardware.isComputerBis && item.system.hardware.isComputerFib) {
+                cost *= 2
+            } else if (item.system.hardware.isComputerBis || item.system.hardware.isComputerFib) {
+                cost *= 1.5;
+            }
+            if (cost !== item.system.cost) {
+                item.system.cost = cost;
+                item.update({"system.cost": cost})
             }
         } else if (item.system.hardware.system === "fuel") {
             let tons = parseFloat(item.system.hardware.tons);
