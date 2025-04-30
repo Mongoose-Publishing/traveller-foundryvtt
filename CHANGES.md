@@ -5,6 +5,8 @@
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
 * Career terms aren't always added in the correct order.
+* This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
+  to help track down compatibility bugs.
 
 ## Development
 
@@ -28,6 +30,7 @@
 * WorldData item type added, but currently disabled. This will be used for tracking other data
   about a world.
 * Added new creature token graphic for insects, specifically for the example in the core rules.
+* Fixed bug when applying damage to Creatures in Foundry 13.
 
 ## 0.12.0 (Beta)
 

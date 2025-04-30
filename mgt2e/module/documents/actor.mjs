@@ -441,7 +441,7 @@ export class MgT2Actor extends Actor {
 
       // Check for characteristic damage
       let damageType = options.damageType ? options.damageType : "standard";
-      if (this.system.characteristics[damageType]) {
+      if (this.system.characteristics && this.system.characteristics[damageType]) {
           // Damage is to a characteristic. Skip usual armour stuff.
           options.ap = 0;
           options.armour = 0;
