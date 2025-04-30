@@ -19,6 +19,9 @@
                     <select class="" name="system.computer.processing" title="Computer Power">
                         {{selectOptions SELECT_PROCESSING selected=system.computer.processing}}
                     </select>
+                    <div class="item-controls" style="float: right">
+                        <a class="item-control remove-computer" title="Remove computer"><i class="fas fa-trash"></i></a>
+                    </div>
                 {{else}}
                     <button class="embed-computer">Embed Computer</button>
                 {{/if}}

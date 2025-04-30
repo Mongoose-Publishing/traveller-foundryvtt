@@ -688,7 +688,6 @@ export class MgT2ItemSheet extends ItemSheet {
         html.find(".quantity-dec").click(ev => this._decrementQuantity(this.item));
         html.find(".quantity-roll").click(ev => this._rollQuantity(this.item));
 
-
         // Role Items
         html.find(".role-action-add").click(ev => this._addRollAction(this.item));
 
@@ -704,6 +703,10 @@ export class MgT2ItemSheet extends ItemSheet {
                "software": {}
            }
            this.item.update({"system.computer": this.item.system.computer });
+        });
+        html.find(".remove-computer").click(ev => {
+           this.item.system.comuter = null;
+           this.item.update({[`system.-=computer`]: null});
         });
 
         html.find(".item-add-wpn").click(ev => {

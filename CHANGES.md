@@ -6,6 +6,29 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## Development
+
+* Computers can be embedded in standard item type. This will later be expanded to other item types,
+  and is first step towards attaching software to computers.
+* Add flag to a spacecraft to mark it as a 'standard' design, which gets 10% discount on price.
+* Allow active effects to add initiative and armour modifiers. Needed for Combat drugs.
+* When adding items from a macro, allow a dice value to be used for the quantity. This also fixes
+  a bug where an item defined by uuid seemed to ignore the quantity argument.
+* Add inline display of spacecraft journal entries. This displays them in table format, and goes
+  some way to calculating their total cost.
+* Removed minimum height from actor portrait on character sheet.
+* If a user has a default player character set, then when macro are executed, this character
+  will be used if no tokens are selected. This simplifies character generation macros, so the
+  player doesn't need to create and select a token.
+* Added new icon for comms equipment.
+* Added World actor type. This is very Alpha at this stage. World UWP can be randomly rolled,
+  and this will use the generation tables from the Mongoose rules. Cargo for speculative trade
+  can also be automatically generated, and to a limited extent freight. Broker skills can be
+  set for a world by dragging an actor to them.
+* WorldData item type added, but currently disabled. This will be used for tracking other data
+  about a world.
+* Added new creature token graphic for insects, specifically for the example in the core rules.
+
 ## 0.12.0 (Beta)
 
 Migration Notes: How augments work has been changed. Support for old legacy active effects

@@ -286,7 +286,7 @@
     }
   },
   "Item": {
-    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software", "worlddata" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software" ],
     "templates": {
       "base": {
         "tl": 0,
