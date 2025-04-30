@@ -102,10 +102,6 @@ export async function rollAttack(actor, weapon, attackOptions) {
     const   system = actor?actor.system:null;
     let     content = "Attack";
 
-    console.log("rollAttack:");
-    console.log(weapon);
-    console.log(attackOptions);
-
     if (!attackOptions.dm) {
         attackOptions.dm = 0;
     }
@@ -276,7 +272,11 @@ export async function rollAttack(actor, weapon, attackOptions) {
         }
 
         if (!attackOptions.isParry) {
-            content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
+            let scale = "";
+            if (weapon.system.weapon.scale === "spacecraft") {
+                scale = " [Spacecraft]";
+            }
+            content += `<b>Damage:</b> ${dmg.toUpperCase()}${scale} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
             if (baseRange > 0) {
                 content += `<b>Range:</b> ${baseRange}${rangeUnit}<br/>`;
             } else {
@@ -289,7 +289,11 @@ export async function rollAttack(actor, weapon, attackOptions) {
             traits = "";
         }
     } else {
-        content += `<b>Damage:</b> ${dmg.toUpperCase()} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
+        let scale = "";
+        if (attackOptions.scale === "spacecraft") {
+            scale = " [Spacecraft]";
+        }
+        content += `<b>Damage:</b> ${dmg.toUpperCase()}${scale} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
     }
     content += '</div>';
     // End of header.
@@ -390,6 +394,10 @@ export async function rollAttack(actor, weapon, attackOptions) {
         if (hasTrait(traits, "ap")) {
             ap += getTraitValue(traits, "ap");
         }
+        console.log(attackOptions);
+        if (attackOptions.traits && hasTrait(attackOptions.traits, "ap")) {
+            ap += getTraitValue(attackOptions.traits, "ap");
+        }
         let tl = weapon?weapon.system.tl:0;
 
         if (weapon && attackOptions.isParry) {
@@ -450,6 +458,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 "radiation": radiationDamage,
                 "ranged": (baseRange>0)
             };
+            if (attackOptions.scale) {
+                damageOptions.scale = attackOptions.scale;
+            }
             if (blastRadius) {
                 damageOptions.blastRadius = blastRadius;
                 titleText += " " + game.i18n.localize("MGT2.Attack.DragMeBlast");
@@ -585,6 +596,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         "radiation": radiationDamage,
         "ranged": true
     };
+    console.log(damageOptions);
     let json = JSON.stringify(damageOptions);
 
     text = `

@@ -326,11 +326,15 @@ MgT2eMacros.damage = function(args) {
     let dice = args.dice;
     let text = args.text;
     let damageType = args.type?args.type:"standard";
+    let scale = args.scale?args.scale:null;
+    let traits = args.traits;
 
     rollAttack(null, null, {
         "damage": dice,
         "title": args.title?args.title:null,
         "description": text,
+        "scale": scale,
+        "traits": args.traits,
         "damageType": damageType
     });
 };

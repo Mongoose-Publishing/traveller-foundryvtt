@@ -31,6 +31,7 @@
   about a world.
 * Added new creature token graphic for insects, specifically for the example in the core rules.
 * Fixed bug when applying damage to Creatures in Foundry 13.
+* Allow scale and some traits to be specified in journal damage macros.
 
 ## 0.12.0 (Beta)
 

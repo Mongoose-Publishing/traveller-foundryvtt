@@ -431,9 +431,6 @@ export class MgT2Actor extends Actor {
   }
 
   applyDamageToPerson(damage, options) {
-      console.log(`******** ACTOR [${this.name}] ********`);
-      console.log(`applyDamageToPerson: Damage ${damage}`);
-
       let armour = 0;
       let armourText = ""
       let radiationDamage = options.radiation ? options.radiation : 0;
@@ -778,7 +775,11 @@ export class MgT2Actor extends Actor {
               if (options.scale !== "spacecraft") {
                   damage = parseInt(damage / 10);
               }
-          } else if (this.hasCreatureTrait("energy")) {
+          } else if (options.scale === "spacecraft") {
+              damage = Number(damage) * 10;
+              // TODO: Possible also add blast effects.
+          }
+          if (this.hasCreatureTrait("energy")) {
               damage = 0;
           }
           if (this.hasCreatureTrait("gossamer") && options.minimumDamage) {

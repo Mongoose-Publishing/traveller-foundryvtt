@@ -2,9 +2,9 @@
   "id": "mgt2e",
   "title": "Mongoose Traveller 2e",
   "description": "A system for Mongoose Traveller 2e",
-  "version": "0.12.0.0",
+  "version": "0.12.0.5-DEV",
   "compatibility": {
-    "minimum": 11,
+    "minimum": 12,
     "verified": 12
   },
   "authors": [
@@ -16,7 +16,7 @@
     }
   ],
   "esmodules": ["module/mgt2.mjs" ],
-  "styles": ["css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css" ],
+  "styles": ["css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css", "css/world.css" ],
   "background": "systems/mgt2e/images/traveller.png",
   "scripts": [ ],
   "packs": [
@@ -61,12 +61,12 @@
     }
   ],
   "socket": true,
-  "gridDistance": 1.5,
-  "gridUnits": "m",
+  "grid.distance": 1.5,
+  "grid.units": "m",
   "primaryTokenAttribute": "hits",
   "secondaryTokenAttribute": null,
-  "url": "",
-  "manifest": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/release/system.json",
-  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/v0.12.0/release/mongoose-traveller.zip",
+  "url": "https://filehost.notasnark.net/foundry/mgt2e/README.html",
+  "manifest": "https://filehost.notasnark.net/foundry/mgt2e/system.json",
+  "download": "https://filehost.notasnark.net/foundry/mgt2e/mongoose-traveller.zip",
   "license": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/LICENSE.txt"
 }
