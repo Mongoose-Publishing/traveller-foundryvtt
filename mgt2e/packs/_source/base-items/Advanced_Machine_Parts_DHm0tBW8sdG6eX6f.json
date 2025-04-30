@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/advanced_machine_parts.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 75000,
       "availability": "In, HT",
-      "purchaseDM": "In +2, HT +1",
+      "purchaseDM": "In +2, Ht 1",
       "saleDM": "As +2, Ni +1",
       "tons": "1D6 * 5",
       "illegal": false,
-      "price": 75000
+      "cost": 100
     },
+    "description": "<p>Machine components and spare sparts, including gravitic components.</p>",
     "quantity": 1,
-    "description": "<p>Machine components and spare sparts, including gravitic components.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -31,9 +32,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.12.0.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1744545880455,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",
