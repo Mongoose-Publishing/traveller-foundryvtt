@@ -61,8 +61,8 @@
     }
   ],
   "socket": true,
-  "gridDistance": 1.5,
-  "gridUnits": "m",
+  "grid.distance": 1.5,
+  "grid.units": "m",
   "primaryTokenAttribute": "hits",
   "secondaryTokenAttribute": null,
   "url": "https://filehost.notasnark.net/foundry/mgt2e/README.html",
