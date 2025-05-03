@@ -166,7 +166,8 @@
         "value": 0
       },
       "vehicle": {
-        "spacecs": 4,
+        "templates": [ "crewed" ],
+        "spaces": 4,
         "chassis": "lightGround",
         "subtype": "openFrame",
         "traits": "",
@@ -175,7 +176,9 @@
           "base": 0,
           "front" : 0,
           "rear": 0,
-          "sides": 0
+          "sides": 0,
+          "top": 0,
+          "bottom": 0
         },
         "cost": 10000,
         "skill": "drive.wheel",
@@ -286,7 +289,7 @@
     }
   },
   "Item": {
-    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software", "worlddata" ],
     "templates": {
       "base": {
         "tl": 0,

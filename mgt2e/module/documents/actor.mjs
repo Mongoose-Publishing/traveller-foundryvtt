@@ -1001,7 +1001,11 @@ export class MgT2Actor extends Actor {
       }
       let text = "";
       let spec = null;
-      skill = this.system.skills[skillId];
+      let SKILLS = MGT2.SKILLS;
+      if (this.system.skills) {
+          SKILLS = this.system.skills;
+      }
+      skill = SKILLS[skillId];
       if (!skill) {
           return "";
       }

@@ -4,6 +4,7 @@ import {MgT2DamageDialog} from "../damage-dialog.mjs";
 import {MgT2eMacros} from "./macros.mjs";
 import {calculateCost} from "../utils/character-utils.mjs";
 import {getShipData} from "../spacecraft/spacecraft-utils.mjs";
+import {MGT2} from "../config.mjs";
 
 export const Tools = {};
 
@@ -423,6 +424,8 @@ Tools.actorInlineDisplay = async function(actorId) {
         Tools.npcInlineDisplay(a, actor);
     } else if (actor.type === "spacecraft") {
         await Tools.spacecraftInlineDisplay(a, actor);
+    } else if (actor.type === "vehicle") {
+        await Tools.vehicleInlineDisplay(a, actor);
     } else {
         a.innerHTML = `Currently only supports Travellers, NPCs and Spacecraft`;
     }
@@ -692,9 +695,57 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     html += `<img src="${actor.img}"/>`
     html += `</div>`;
 
+    html += `</div>`;
+    a.innerHTML = html;
 
+    return a;
+}
+
+
+Tools.vehicleInlineDisplay = async function(a, actor) {
+    let html = `<div class="inline-vehicle">`;
+
+    html += `<div class="vehicle-header actor-link rollable name" data-actor-id="${actor.uuid}">`;
+    html += `<h4>${actor.name}</h4>`;
     html += `</div>`;
 
+    let vehicle = actor.system.vehicle;
+
+    console.log(actor.system);
+    html += `<div>${actor.system.description}</div>`;
+
+    let skill = actor.getSkillLabel(vehicle.skill, false);
+    let speed = vehicle.speed;
+    let cruiseSpeed = vehicle.speed;
+    if (MGT2.VEHICLES.SPEED[speed] && MGT2.VEHICLES.SPEED[speed].band) {
+        let cruiseBand = MGT2.VEHICLES.SPEED[speed].band - 1;
+        for (let s in MGT2.VEHICLES.SPEED) {
+            console.log(s);
+            if (MGT2.VEHICLES.SPEED[s].band === cruiseBand) {
+                cruiseSpeed = s;
+                break;
+            }
+        }
+    }
+    let cruiseRange = parseInt(vehicle.range * 1.5);
+    speed = game.i18n.localize("MGT2.Vehicle.SpeedBand." + speed);
+    cruiseSpeed = game.i18n.localize("MGT2.Vehicle.SpeedBand." + cruiseSpeed);
+
+    html += `<table>`;
+    html += `<tr><th>TL</th><td>${vehicle.tl}</td>`;
+    html += `<tr><th>SKILL</th><td>${skill}</td>`;
+    html += `<tr><th>AGILITY</th><td>${vehicle.agility}</td>`;
+    html += `<tr><th>SPEED (CRUISE)</th><td>${speed} (${cruiseSpeed})</td>`;
+    html += `<tr><th>RANGE (CRUISE)</th><td>${vehicle.range} (${cruiseRange})</td>`;
+    html += `<tr><th>CREW</th><td>${vehicle.crew}</td>`;
+    html += `<tr><th>PASSENGERS</th><td>${vehicle.passengers}</td>`;
+    html += `<tr><th>CARGO</th><td>${vehicle.tl}</td>`;
+    html += `<tr><th>HULL</th><td>${actor.system.hits.max}</td>`;
+    html += `<tr><th>SHIPPING</th><td>${vehicle.shipping}</td>`;
+    html += `<tr><th>COST</th><td>Cr${vehicle.cost}</td>`;
+    html += `</table>`;
+    
+    html += `</div>`;
     a.innerHTML = html;
 
     return a;

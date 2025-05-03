@@ -62,8 +62,8 @@ export class MgT2Item extends Item {
             } else if (this.actor.type === "world") {
                 // Nothing to do here.
             } else if (this.actor.type === "vehicle") {
-                if (this.type === "term" || this.type === "associate") {
-                    ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.OnlyOnCharacter",
+                if (["term", "associate", "worlddata"].includes(this.type)) {
+                    ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.NotOnVehicle",
                         {item: this.name, type: this.type}));
                     return false;
                 }

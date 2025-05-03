@@ -1318,6 +1318,7 @@ select.field-value {
   width: 100%;
   border-radius: 0 0 3px 3px;
   border-top: none;
+  text-align: left;
 }
 
 input.field-value {

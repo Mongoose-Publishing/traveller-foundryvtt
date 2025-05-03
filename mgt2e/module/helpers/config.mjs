@@ -77,6 +77,7 @@ MGT2.VEHICLES = {
           "tl": 4, "skill": "drive.wheel", "agility": 0, "minSpaces": 1, "maxSpaces": 20,
           "cost": 750, "hull": 2, "shipping": 0.5,
           "subtypes": {
+              "standard": { },
               "openFrame": {
                   "tl": 0, "agility": 1, "minSpaces": 1, "maxSpaces": 3, "cost": 750,
                   "speed": 1, "traits": "openVehicle"
@@ -100,12 +101,50 @@ MGT2.VEHICLES = {
         "tl": 4, "skill": "drive.wheel", "agility": -2, "minSpaces": 20, "cost": 3000,
         "hull": 3, "shipping": 0.5,
         "subtypes": {
+            "standard": { },
             "afv": { "tl": 5, "cost": 3000, "speed": -1, "traits": "afv offRoader" },
             "railRider": { "agility": -2, "cost": 1000, "speed": 1 },
             "roughTerrain": { "cost": 500, "traits": "offRoader" },
             "tracks": { "tl": 5, "skill": "drive.track", "cost": 2000, "speed": -1, "traits": "tracked" },
             "tunneller": { "tl": 7, "skill": "drive.mole", "cost": 25000, "speed": -1 }
         }
+      },
+      "lightGrav": {
+          "tl": 8, "skill": "flyer.grav", "agility": 1, "minSpaces": 1, "maxSpaces": 20,
+          "cost": 30000, "hull": 2, "shipping": 0.5,
+          "subtypes": {
+              "standard": { },
+              "openFrame": {
+                  "tl": 0, "agility": 1, "minSpaces": 1, "maxSpaces": 3, "cost": 10000,
+                  "speed": 1, "traits": "openVehicle"
+              },
+              "streamlined": {
+                  "tl": 0, "agility": 1, "cost": 30000, "speed": 1
+              }
+          }
+      },
+      "heavyGrav": {
+          "tl": "8", "skill": "flyer.grav", "agility": -1, "minSpaces": 20,
+          "cost": 80000, "hull": 2, "shipping": 0.5,
+          "subtypes": {
+              "standard": { },
+              "afv": {
+                  "cost": 100000, "speed": -1, "traits": "afv"
+              },
+              "streamlined": {
+                  "cost": 50000, "speed": 1
+              }
+          }
+      },
+      "unpoweredVehicle": {
+          "tl": 1, "skill": "drive.wheel", "agility": -1, "minSpaces": 1, "maxSpaces": 10,
+          "cost": 100, "hull": 1, "shipping": 0.5,
+          "subtypes": {
+              "standard": { },
+              "windPowered": {
+                  "cost": 200
+              }
+          }
       }
   },
   "SPEED": {

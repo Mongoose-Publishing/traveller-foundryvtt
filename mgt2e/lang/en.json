@@ -439,14 +439,21 @@
   "MGT2.Vehicle.Chassis": "Chassis",
   "MGT2.Vehicle.SubType": "SubType",
   "MGT2.Vehicle.Agility": "Agility",
+  "MGT2.Vehicle.Skill": "Skill",
   "MGT2.Vehicle.Speed": "Speed",
   "MGT2.Vehicle.Range": "Range",
   "MGT2.Vehicle.Cruise": "Cruise",
+  "MGT2.Vehicle.Hull": "Hull",
+  "MGT2.Vehicle.Cost": "Cost",
 
   "MGT2.Vehicle.ChassisLabel.lightGround": "Light Ground Vehicle",
   "MGT2.Vehicle.ChassisLabel.heavyGround": "Heavy Ground Vehicle",
   "MGT2.Vehicle.ChassisLabel.lightGrav": "Light Grav Vehicle",
   "MGT2.Vehicle.ChassisLabel.heavyGrav": "Heavy Grav Vehicle",
+  "MGT2.Vehicle.ChassisLabel.unpoweredVehicle": "Unpowered Vehicle",
+  "MGT2.Vehicle.ChassisLabel.unpoweredBoat": "Unpowered Boat",
+  "MGT2.Vehicle.ChassisLabel.poweredBoat": "Powered Boat",
+  "MGT2.Vehicle.ChassisLabel.ship": "Ship",
 
   "MGT2.Vehicle.SubTypeLabel.openFrame": "Open Frame",
   "MGT2.Vehicle.SubTypeLabel.monowheel": "Monowheel",
@@ -455,6 +462,9 @@
   "MGT2.Vehicle.SubTypeLabel.tracks": "Tracks",
   "MGT2.Vehicle.SubTypeLabel.afv": "Armoured Fighting Vehicle",
   "MGT2.Vehicle.SubTypeLabel.tunneller": "Tunneller",
+  "MGT2.Vehicle.SubTypeLabel.windPowered": "Wind Powered",
+  "MGT2.Vehicle.SubTypeLabel.streamlined": "Streamlined",
+  "MGT2.Vehicle.SubTypeLabel.standard": "Standard",
 
   "MGT2.Vehicle.SpeedBand.stopped": "Stopped",
   "MGT2.Vehicle.SpeedBand.idle": "Idle",
@@ -468,6 +478,10 @@
   "MGT2.Vehicle.SpeedBand.supersonic": "Supersonic",
   "MGT2.Vehicle.SpeedBand.hypersonic": "Hypersonic",
 
+  "MGT2.Vehicle.Sheet.Crew": "Crew",
+  "MGT2.Vehicle.Sheet.Passengers": "Passengers",
+  "MGT2.Vehicle.Sheet.Cargo": "Cargo",
+  "MGT2.Vehicle.Sheet.Shipping": "Shipping",
 
   "MGT2.TravellerSheet.SizeClass.small": "Small",
   "MGT2.TravellerSheet.SizeClass.medium": "Medium",
@@ -1000,6 +1014,7 @@
 
   "MGT2.Warn.Drop.OnlyOnCharacter": "Items of type '{type}' can only be added to characters",
   "MGT2.Warn.Drop.NotOnCharacter": "Cannot drop items of type '{type}' on a character",
+  "MGT2.Warn.Drop.NotOnVehicle": "Cannot drop items of type '{type}' on a vehicle",
   "MGT2.Warn.Drop.CareerOnNPC": "NPCs and Creatures cannot be given career terms or associates",
   "MGT2.Info.Drop.DropPackage": "Adding package '{package}' to '{actor}'",
   "MGT2.Info.Drop.DropPackageItem": "Adding item '{item}' to '{actor}'",
