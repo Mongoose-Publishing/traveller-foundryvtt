@@ -753,6 +753,8 @@ Tools.vehicleInlineDisplay = async function(a, actor) {
     html += `<dt>Sides</dt><dd>${vehicle.armour.sides}</dd>`;
     html += `</dl>`;
 
+    html += `<img src="${actor.img}"/>`;
+
     html += `</div>`;
     a.innerHTML = html;
 

@@ -582,5 +582,9 @@ table.mongoose-equipment td {
 
 .inline-vehicle dd {
   display: inline-block;
-  padding-right: 2em;
+  padding-right: 1em;
+}
+
+.inline-vehicle img {
+  border: none;
 }
