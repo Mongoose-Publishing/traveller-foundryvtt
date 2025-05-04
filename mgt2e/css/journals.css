@@ -558,3 +558,29 @@ table.mongoose-equipment td {
 .inline-vehicle table {
   text-align: left;
 }
+
+.inline-vehicle h4 {
+  text-transform: uppercase;
+  font-size: large;
+}
+
+.inline-vehicle span.armour-header {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.inline-vehicle dl {
+  border-top: 1px solid black;
+}
+
+.inline-vehicle dt {
+  display: inline-block;
+  border-right: 1px solid black;
+  padding-right: 0.5em;
+  text-transform: uppercase;
+}
+
+.inline-vehicle dd {
+  display: inline-block;
+  padding-right: 2em;
+}

@@ -744,7 +744,15 @@ Tools.vehicleInlineDisplay = async function(a, actor) {
     html += `<tr><th>SHIPPING</th><td>${vehicle.shipping}</td>`;
     html += `<tr><th>COST</th><td>Cr${vehicle.cost}</td>`;
     html += `</table>`;
-    
+
+    // Armour
+    html += `<span class="armour-header">Armour</span>`;
+    html += `<dl>`;
+    html += `<dt>Front</dt><dd>${vehicle.armour.front}</dd>`;
+    html += `<dt>Rear</dt><dd>${vehicle.armour.rear}</dd>`;
+    html += `<dt>Sides</dt><dd>${vehicle.armour.sides}</dd>`;
+    html += `</dl>`;
+
     html += `</div>`;
     a.innerHTML = html;
 
