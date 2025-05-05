@@ -145,6 +145,118 @@ MGT2.VEHICLES = {
                   "cost": 200
               }
           }
+      },
+      "unpoweredBoat": {
+          "tl": 1, "skill": "seafarer.personal", "agility": -1, "minSpaces": 1,
+          "cost": 150, "hull": 1, "shipping": 1,
+          "subtypes": {
+              "standard": {},
+              "outboardMotorSlow": {
+                  "tl": 3, "cost": 100, "speed": 0
+              },
+              "outboardMotorFast": {
+                  "tl": 3, "cost": 250, "speed": 1
+              }
+          }
+      },
+      "poweredBoat": {
+          "tl": 3, "skill": "seafarer.personal", "agility": -2, "minSpaces": 5, "maxSpaces": 50,
+          "cost": 2000, "hull": 2, "shipping": 0.5,
+          "subtypes": {
+              "standard": {},
+              "hydrofoil": {
+                  "cost": 4000, "speed": 1
+              }
+          }
+      },
+      "ship": {
+          "tl": 4, "skill": "seafarer.oceanShips", "agility": -6, "minSpaces": 50,
+          "cost": 5000, "hull": 4, "shipping": 0.5,
+          "subtypes": {
+              "standard": {},
+              "hydrofoil": {
+                  "cost": 8000, "speed": 1
+              }
+          }
+      },
+      "lightSubmersible": {
+          "tl": 4, "skill": "seafarer.submarine", "agility": -2, "minSpaces": 1, "maxSpaces": 20,
+          "cost": 50000, "hull": 3, "shipping": 0.5,
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "heavySubmersible": {
+          "tl": 4, "skill": "seafarer.submarine", "agility": -4, "minSpaces": 20,
+          "cost": 100000, "hull": 3, "shipping": 0.5,
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "airship": {
+          "tl": 3, "skill": "flyer.airship", "agility": -3, "minSpaces": 10,
+          "cost": 300,
+          "subtypes": {
+              "standard": {},
+              "liftingBody": {}
+          }
+      },
+      "lightAeroplane": {
+          "tl": 4, "skill": "flyer.wing", "agility": 1, "minSpaces": 1, "maxSpaces": 10,
+          "cost": 15000, "hull": 0.5,
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "heavyAeroplane": {
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "lightJet": {
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "heavyJet": {
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "helicopter": {
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "aerodyne": {
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "ornithopter": {
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "lightWalker": {
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "heavyWalker": {
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "lightHovercraft": {
+          "subtypes": {
+              "standard": {}
+          }
+      },
+      "heavyHovercraft": {
+          "subtypes": {
+              "standard": {}
+          }
       }
   },
   "SPEED": {

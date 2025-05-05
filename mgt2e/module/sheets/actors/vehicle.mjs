@@ -93,7 +93,7 @@ export class MgT2VehicleActorSheet extends MgT2ActorSheet {
             }
         }
         context.selectSkill = {};
-        for (let skill of [ "drive", "flyer"]) {
+        for (let skill of [ "drive", "flyer", "seafarer"]) {
             let skillData = CONFIG.MGT2.SKILLS[skill];
             for (let spec in skillData.specialities) {
                 context.selectSkill[`${skill}.${spec}`] =

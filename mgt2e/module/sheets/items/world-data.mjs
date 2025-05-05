@@ -26,6 +26,12 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
         let worldData = this.item.system.world;
         switch (worldData.datatype) {
             case "faction":
+                if (!worldData.government) {
+                    worldData.government = 0;
+                }
+                if (!worldData.strength) {
+                    worldData.strength = "obscure";
+                }
                 context.governmentLabel = game.i18n.localize("MGT2.WorldSheet.Government.Type." + worldData.government);
                 context.factionStrength = game.i18n.localize("MGT2.WorldSheet.Faction.Strength." + worldData.strength);
                 break;

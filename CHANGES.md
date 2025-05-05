@@ -8,7 +8,7 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
-## Development
+## 0.12.1 (Beta)
 
 * Computers can be embedded in standard item type. This will later be expanded to other item types,
   and is first step towards attaching software to computers.
@@ -32,6 +32,8 @@
 * Added new creature token graphic for insects, specifically for the example in the core rules.
 * Fixed bug when applying damage to Creatures in Foundry 13.
 * Allow scale and some traits to be specified in journal damage macros.
+* Added some attributes to vehicles, and expanded the list of vehicle chassis supported.
+* Vehicles can now be embedded in a journal page.
 
 ## 0.12.0 (Beta)
 

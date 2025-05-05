@@ -158,7 +158,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                 this.actor.system.world.meta.brokerScore = droppedActor.system.skills["broker"].value;
             } else if (event.target.closest(".streetwiseDropZone")) {
                 this.actor.system.world.meta.streetwiseActorId = droppedActor.uuid;
-                this.actor.system.world.meta.brokerScore = droppedActor.system.skills["streetwise"].value;
+                this.actor.system.world.meta.streetwiseScore = droppedActor.system.skills["streetwise"].value;
             }
             this.actor.update({"system.world.meta": this.actor.system.world.meta});
             return;
