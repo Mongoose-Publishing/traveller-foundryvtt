@@ -1,0 +1,38 @@
+{
+  "folder": "nTFQBn7eKDifeKFR",
+  "name": "Spare Parts",
+  "type": "cargo",
+  "_id": "xeK8FQNfbi6Qpapz",
+  "img": "systems/mgt2e/icons/cargo/spare_parts.svg",
+  "system": {
+    "cargo": {
+      "price": 100000,
+      "availability": "All",
+      "purchaseDM": "",
+      "saleDM": "",
+      "tons": "2D6 * 10",
+      "illegal": false
+    },
+    "description": "<p>Spare parts for use when repairing space craft.</p>",
+    "quantity": 1,
+    "cost": 1000
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.12.0.0",
+    "createdTime": 1745143681314,
+    "modifiedTime": 1745144385329,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!items!xeK8FQNfbi6Qpapz"
+}

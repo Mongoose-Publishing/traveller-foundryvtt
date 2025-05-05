@@ -330,9 +330,27 @@ export async function createSpeculativeGoods(worldActor, illegal) {
     }
     await worldActor.deleteEmbeddedDocuments("Item", list);
 
-    const tradeFolder = game.items.folders.getName("Trade Goods");
+    let tradeFolder = game.items.folders.getName("Trade Goods");
+    if (!tradeFolder) {
+        // Need to look for a compendium entry instead.
+        tradeFolder = game.packs.get("mgt2e.base-items")?.folders?.getName("Trade Goods");
+        if (!tradeFolder) {
+            ui.notifications.error("Unable to find Trade Goods item folder");
+            return;
+        }
+    }
     // First, look for the standard goods available.
     for (let item of tradeFolder.contents) {
+        if (item.name === "Spare Parts") {
+            // Hack to avoid including spare parts. Need a better way
+            // of doing this.
+            continue;
+        }
+        if (!item.system) {
+            // If item is from a compendium, we only have a reference at this point so
+            // need to fetch the full item.
+            item = await fromUuid(item.uuid);
+        }
         if (item.system.cargo.illegal && !illegal) {
             continue;
         }
@@ -360,6 +378,10 @@ export async function createSpeculativeGoods(worldActor, illegal) {
             let roll = await new Roll(`1D${number} - 1`).evaluate();
             let i = roll.total;
             item = tradeFolder.contents[i];
+            if (!item.system) {
+                // Fetch from compendium.
+                item = await fromUuid(item.uuid);
+            }
             if (!illegal && item.system.cargo.illegal) {
                 // Re-roll. Only legal stuff.
                 item = null;
