@@ -8,6 +8,11 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
+## 0.12.2 (Beta)
+
+* Fixed bug where lack of width/height attributes on SVG icons that were on a scene could cause
+  Firefox to fail to load the page.
+
 ## 0.12.1 (Beta)
 
 * Computers can be embedded in standard item type. This will later be expanded to other item types,
