@@ -17,8 +17,6 @@ MgT2eMacros.skillGain = function(args) {
     let level = args.level;
     let context = args.text;
 
-    console.log("MgT2eMacros.skillGain: " + skillId);
-
     if (!skillId || args.cha) {
         MgT2eMacros.chaGain(args);
         return;
@@ -65,8 +63,11 @@ MgT2eMacros.skillGain = function(args) {
                     for (let s in skill.specialities) {
                         let spec = skillId + "." + s;
                         let specName = actor.getSkillLabel(spec, false);
-                        let current = skill.specialities[s].value;
-                        text += `<span class="skillGain-spec" data-actorId="${actor._id}" data-skill="${spec}" data-level="${level}">${specName} ${current}</span><br/>`;
+                        let current = Number(skill.specialities[s].value);
+
+                        if ((level === undefined || level > current) && current < 4) {
+                            text += `<span class="skillGain-spec" data-actorId="${actor._id}" data-skill="${spec}" data-level="${level}">${specName} ${current}</span><br/>`;
+                        }
                     }
                 }
             } else if (level === undefined && skill.value < 4) {
@@ -147,8 +148,6 @@ MgT2eMacros.chaGain = function(args) {
     let level = args.level;
     let context = args.text;
 
-    console.log("MgT2eMacros.chaGain: " + cha);
-
     if (!level) {
         level = 1;
     } else {
@@ -207,7 +206,7 @@ MgT2eMacros.specialityGain = function(actorId, skill, level) {
         let specId = skill.split(".")[1];
 
         if (skills[skillId] && skills[skillId].specialities[specId]) {
-            let spec = skills[skillId] && skills[skillId].specialities[specId];
+            let spec = skills[skillId].specialities[specId];
             if (level === "undefined") {
                 if (spec.value < 4) {
                     spec.value = Number(spec.value) + 1;
@@ -296,7 +295,6 @@ MgT2eMacros.skillCheck = function(args, ask) {
         }
         let json = JSON.stringify(jsonData);
 
-        console.log(json);
         html += `<div class="skillcheck-message" data-skillcheck="${skillFqn}" data-options='${json}'>`;
         html += `<button data-skillcheck="${skillFqn}" data-options='${json}'
                     title="${title}"
@@ -343,7 +341,6 @@ MgT2eMacros.createItem = async function(args, buy) {
     let item = null;
     let uuid = args.uuid;
 
-    console.log("createItem:" + buy);
     if (uuid) {
         let src = await fromUuid(uuid);
         if (!src) {
