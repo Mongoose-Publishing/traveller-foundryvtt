@@ -593,8 +593,6 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     html += `<span class="type">TYPE: ${actor.system.spacecraft.type}</span>`;
     html += `<br style="clear:both"/>`;
     html += `</div>`;
-
-
     html += `<div class="spacecraft-description">${actor.system.description}</div>`
 
     // Data stats to the right.
@@ -620,7 +618,6 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     let totalCost = 0; // Base cost is already included in data list
     for (let t in data) {
         for (let i of data[t]) {
-            console.log(i.name + ": " + i.cost);
             totalCost += i.cost;
         }
     }
@@ -639,6 +636,18 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     html += `<p>MCr${new Intl.NumberFormat(undefined, {maximumFractionDigits: 6}).format(purchaseCost)}</p>`;
     html += `</div>`;
     html += `<div><div class="title">Power Requirements</div></div>`;
+
+    let basicShipPower = data["hull"][0].power;
+    let mDrivePower = data["mDrive"].reduce((n, {power}) => n + power, 0);
+    let jDrivePower = data["jDrive"].reduce((n, {power}) => n + power, 0);
+
+    html += `<p>Basic Ship Systems</p>`;
+    html += `<p>${basicShipPower}</p>`;
+    html += `<p>Manoeuvre Drive</p>`;
+    html += `<p>${mDrivePower}</p>`;
+    html += `<p>Jump Drive</p>`;
+    html += `<p>${jDrivePower}</p>`;
+
     html += `<p></p>`;
     html += `</div>`;
 

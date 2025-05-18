@@ -83,6 +83,8 @@
                         <label class="resource-label">Processing</label>
                     {{else if (ifEquals system.hardware.system "stateroom")}}
                         <label class="resource-label">Passengers</label>
+                    {{else if (ifEquals system.hardware.system "common")}}
+                        <label class="resource-label">Tonnage</label>
                     {{else}}
                       <label class="resource-label">Rating</label>
                     {{/if}}
@@ -145,6 +147,7 @@
         {{else if (ifEquals system.hardware.system "cargo")}}
         {{else if (ifEquals system.hardware.system "bridge")}}
         {{else if (ifEquals system.hardware.system "stateroom")}}
+        {{else if (ifEquals system.hardware.system "common")}}
         {{else if (ifEquals system.hardware.system "j-drive")}}
         {{else if (ifEquals system.hardware.system "m-drive")}}
         {{else if (ifEquals system.hardware.system "r-drive")}}

@@ -37,7 +37,8 @@ export function getShipData(actor) {
     data["hull"] = [{
         "name": `${spacecraft.dtons} tons, ${game.i18n.localize("MGT2.Spacecraft.Configuration." + spacecraft.configuration)}`,
         "tons": 0,
-        "cost": spacecraft.baseCost
+        "cost": spacecraft.baseCost,
+        "power": spacecraft.dtons / 5
     }];
 
     // Break everything down into smaller piles.
@@ -104,7 +105,8 @@ export function getShipData(actor) {
                 "name": "Thrust-" + item.system.hardware.rating,
                 "tons": item.system.hardware.tons * item.system.quantity,
                 "cost": item.system.cost * item.system.quantity,
-                "quantity": item.system.quantity
+                "quantity": item.system.quantity,
+                "power": item.system.hardware.power * item.system.quantity
             })
         }
     }
@@ -115,7 +117,8 @@ export function getShipData(actor) {
                 "name": "Jump-" + item.system.hardware.rating,
                 "tons": item.system.hardware.tons * item.system.quantity,
                 "cost": item.system.cost * item.system.quantity,
-                "quantity": item.system.quantity
+                "quantity": item.system.quantity,
+                "power": item.system.hardware.power * item.system.quantity
             })
         }
     }
@@ -199,6 +202,14 @@ export function getShipData(actor) {
 
     if (systems) {
         data["systems"] = [];
+        for (let item of systems) {
+            data["systems"].push({
+                "name": item.name,
+                "tons": item.system.hardware.tons * item.system.quantity,
+                "cost": item.system.cost * item.system.quantity,
+                "quantity": item.system.quantity
+            })
+        }
     }
 
     if (software) {

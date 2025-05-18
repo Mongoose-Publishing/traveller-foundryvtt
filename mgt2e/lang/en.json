@@ -618,6 +618,7 @@
   "MGT2.Spacecraft.System.dock": "Docking Bay",
   "MGT2.Spacecraft.System.bridge": "Bridge",
   "MGT2.Spacecraft.System.stateroom": "Stateroom",
+  "MGT2.Spacecraft.System.common": "Common Area",
   "MGT2.Spacecraft.System.sensor": "Sensor",
 
   "MGT2.Spacecraft.SensorSuite.visual": "Visual",

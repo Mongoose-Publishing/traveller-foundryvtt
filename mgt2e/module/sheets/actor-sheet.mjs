@@ -174,9 +174,11 @@ export class MgT2ActorSheet extends ActorSheet {
                 "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
                 "bridge": game.i18n.localize("MGT2.Spacecraft.System.bridge"),
                 "cargo": game.i18n.localize("MGT2.Spacecraft.System.cargo"),
+                "common": game.i18n.localize("MGT2.Spacecraft.System.common"),
                 "computer": game.i18n.localize("MGT2.Spacecraft.System.computer"),
                 "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
                 "fuel": game.i18n.localize("MGT2.Spacecraft.System.fuel"),
+                "general": game.i18n.localize("MGT2.Spacecraft.System.general"),
                 "j-drive": game.i18n.localize("MGT2.Spacecraft.System.j-drive"),
                 "m-drive": game.i18n.localize("MGT2.Spacecraft.System.m-drive"),
                 "r-drive": game.i18n.localize("MGT2.Spacecraft.System.r-drive"),
@@ -328,6 +330,9 @@ export class MgT2ActorSheet extends ActorSheet {
                 } else if (h.system === "dock") {
                     //actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
                     t = parseFloat(i.system.hardware.rating);
+                } else if (["stateroom", "bridge", "sensor"].includes(h.system)) {
+                    // Don't override.
+                    console.log(i);
                 } else {
                     if (t === 0) {
                         t = parseFloat(h.tonnage.percent);
@@ -2185,7 +2190,11 @@ export class MgT2ActorSheet extends ActorSheet {
 
         let itemName = "Hardware";
         let img = null;
-        if (systemType === "j-drive") {
+        if (systemType === "general") {
+            itemName = "Hardware";
+            img = "systems/mgt2e/icons/hardware/hardware.svg";
+            system.tl = 9;
+        } else if (systemType === "j-drive") {
             itemName = "J-Drive";
             img = "systems/mgt2e/icons/hardware/j-drive.svg";
             system.tl = 9;
@@ -2261,10 +2270,17 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (systemType === "stateroom") {
             itemName = "Stateroom";
             img = "systems/mgt2e/icons/hardware/stateroom.svg";
-            system.hardware.system = "general";
+            system.hardware.system = "stateroom";
             system.hardware.tonnage.tons = 4;
             system.hardware.rating = 1;
             system.cost = 0.5;
+        } else if (systemType === "common") {
+            itemName = "Common Area";
+            img = "systems/mgt2e/icons/hardware/common_area.svg";
+            system.hardware.system = "common";
+            system.hardware.tonnage.tons = 1;
+            system.hardware.rating = 1;
+            system.cost = 0.1;
         } else if (systemType === "sensor") {
             itemName = "Basic Sensors";
             img = "systems/mgt2e/icons/hardware/sensor.svg";

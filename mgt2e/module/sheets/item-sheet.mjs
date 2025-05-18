@@ -152,6 +152,7 @@ export class MgT2ItemSheet extends ItemSheet {
                 "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
                 "bridge": game.i18n.localize("MGT2.Spacecraft.System.bridge"),
                 "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
+                "common": game.i18n.localize("MGT2.Spacecraft.System.common"),
                 "sensor": game.i18n.localize("MGT2.Spacecraft.System.sensor"),
             };
 
@@ -623,7 +624,7 @@ export class MgT2ItemSheet extends ItemSheet {
             if (MGT2.SHIP_HARDWARE[h.system].minimum) {
                 tonnage = Math.max(tonnage, MGT2.SHIP_HARDWARE[h.system].minimum);
             }
-            let cost = tonnage *  MGT2.SHIP_HARDWARE[h.system].cost;
+            let cost = tonnage * MGT2.SHIP_HARDWARE[h.system].cost;
             if (h.advancement && h.advancement !== "standard" && MGT2.SPACECRAFT_ADVANCES[h.advancement]) {
                 tl += MGT2.SPACECRAFT_ADVANCES[h.advancement].tl;
                 tonnage = tonnage * MGT2.SPACECRAFT_ADVANCES[h.advancement].tonnage;
@@ -635,9 +636,25 @@ export class MgT2ItemSheet extends ItemSheet {
                 item.system.cost = cost;
                 h.power = pow;
                 h.tons = tonnage;
-                item.update({"system": item.system });
+                item.update({"system": item.system});
+            }
+        } else if (item.system.hardware.system === "common") {
+            let h = item.system.hardware;
+            let rating = h.rating;
+            if (rating < 0) {
+                rating = 0;
+            }
+            let tonnage = rating;
+            let cost = rating * 0.1;
+            if (rating !== h.rating || tonnage !== h.tons || cost != item.system.cost) {
+                h.tons = tonnage;
+                h.rating = rating;
+                item.system.cost = cost;
+                item.update({"system": item.system});
             }
 
+        } else if (["sensor", "stateroom", "weapon"].includes(item.system.hardware.system)) {
+            // Use manual values.
         } else {
             let tons = parseFloat(item.system.hardware.tons);
             let percent = parseFloat(item.system.hardware.tonnage.percent);

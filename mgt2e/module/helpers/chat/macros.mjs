@@ -147,11 +147,15 @@ MgT2eMacros.chaGain = function(args) {
     let cha = args.cha;
     let level = args.level;
     let context = args.text;
+    let min = args.min;
 
     if (!level) {
         level = 1;
     } else {
         level = Number(level);
+    }
+    if (min) {
+        min = Number(min);
     }
 
     for (let actor of Tools.getSelectedOwned()) {
@@ -159,7 +163,10 @@ MgT2eMacros.chaGain = function(args) {
 
         if (actor && actor.system.characteristics[cha]) {
             let current = Number(actor.system.characteristics[cha].value);
-            if (level > 0) {
+            if (min && min > current) {
+                actor.system.characteristics[cha].value = min;
+                text += `Setting <b>${cha}</b> to ${actor.system.characteristics[cha].value}.`;
+            } else if (level > 0) {
                 if (current < 15) {
                     actor.system.characteristics[cha].value = Math.min(15, current + level);
                     text += `Raising <b>${cha}</b> to ${actor.system.characteristics[cha].value}.`;
