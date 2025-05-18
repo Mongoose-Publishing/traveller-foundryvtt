@@ -547,6 +547,10 @@ Tools.npcInlineDisplay = function(a, actor) {
 Tools.inlineSpacecraftData = function(heading, items) {
     let html = `<tr><th>${heading}</th>`;
 
+    if (!items || items.length === 0) {
+        return "";
+    }
+
     html += "<td>";
     for (let i in items) {
         if (i>0) html += "<br/>";
@@ -640,13 +644,27 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     let basicShipPower = data["hull"][0].power;
     let mDrivePower = data["mDrive"].reduce((n, {power}) => n + power, 0);
     let jDrivePower = data["jDrive"].reduce((n, {power}) => n + power, 0);
+    let sensorPower = data["sensor"].reduce((n, {power}) => n + power, 0);
+    let weaponPower = data["weapon"].reduce((n, {power}) => n + power, 0);
 
     html += `<p>Basic Ship Systems</p>`;
     html += `<p>${basicShipPower}</p>`;
-    html += `<p>Manoeuvre Drive</p>`;
-    html += `<p>${mDrivePower}</p>`;
-    html += `<p>Jump Drive</p>`;
-    html += `<p>${jDrivePower}</p>`;
+    if (mDrivePower > 0) {
+        html += `<hr/><p>Manoeuvre Drive</p>`;
+        html += `<p>${mDrivePower}</p>`;
+    }
+    if (jDrivePower > 0) {
+        html += `<hr/><p>Jump Drive</p>`;
+        html += `<p>${jDrivePower}</p>`;
+    }
+    if (sensorPower > 0) {
+        html += `<hr/><p>Sensors</p>`;
+        html += `<p>${sensorPower}</p>`;
+    }
+    if (weaponPower > 0) {
+        html += `<hr/><p>Weapons</p>`;
+        html += `<p>${weaponPower}</p>`;
+    }
 
     html += `<p></p>`;
     html += `</div>`;
@@ -701,7 +719,7 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     html += `</table>`;
     html += `<p></p>`;
     html += `<div class="starship-image">`;
-    html += `<img src="${actor.img}"/>`
+    html += `<img style="border: none" src="${actor.img}"/>`
     html += `</div>`;
 
     html += `</div>`;

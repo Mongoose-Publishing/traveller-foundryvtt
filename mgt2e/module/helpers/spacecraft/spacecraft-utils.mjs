@@ -90,13 +90,15 @@ export function getShipData(actor) {
         }
     }
 
-    data["armour"] = [
-        {
-            "name": armour[0].name + ": " + armour[0].system.hardware.rating,
-            "tons": armour[0].system.hardware.tons,
-            "cost": armour[0].system.cost
-        }
-    ];
+    if (armour && armour.length > 0) {
+        data["armour"] = [
+            {
+                "name": armour[0].name + ": " + armour[0].system.hardware.rating,
+                "tons": armour[0].system.hardware.tons,
+                "cost": armour[0].system.cost
+            }
+        ];
+    }
 
     if (mDrive) {
         data["mDrive"] = [];
@@ -192,12 +194,40 @@ export function getShipData(actor) {
                 "name": item.name,
                 "tons": item.system.hardware.tons * item.system.quantity,
                 "cost": item.system.cost * item.system.quantity,
+                "power": item.system.hardware.power * item.system.quantity,
                 "quantity": item.system.quantity
             })
         }
     }
     if (weapon) {
         data["weapon"] = [];
+        for (let item of weapon) {
+            let name = item.name;
+            let cost = item.system.cost;
+            let power = item.system.hardware.power;
+
+            console.log(item);
+            if (item.system.hardware.weapons) {
+                for (let wpnId in item.system.hardware.weapons) {
+                    let wpn = actor.items.get(wpnId);
+                    let n = item.system.hardware.weapons[wpnId].quantity;
+                    if (wpn) {
+                        power += wpn.system.weapon.power * n;
+                        // Weapon costs are in Cr, rather than MCr
+                        cost += (wpn.system.cost * n) / 1000000;
+                        name += ` (${wpn.name} x${n})`;
+                    }
+                }
+            }
+
+            data["weapon"].push({
+                "name": name,
+                "tons": item.system.hardware.tons * item.system.quantity,
+                "cost": cost * item.system.quantity,
+                "power": power * item.system.quantity,
+                "quantity": item.system.quantity
+            })
+        }
     }
 
     if (systems) {
