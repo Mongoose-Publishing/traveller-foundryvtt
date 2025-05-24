@@ -182,12 +182,16 @@
                 <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.activeLidar'}}</label>
             </div>
             <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.activeRadar">
-                <input type="checkbox" name="system.hardware.hasActiveRidar" {{checked system.hardware.hasActiveRadar}} data-dtype="Boolean" />
+                <input type="checkbox" name="system.hardware.hasActiveRadar" {{checked system.hardware.hasActiveRadar}} data-dtype="Boolean" />
                 <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.activeRadar'}}</label>
             </div>
             <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.densitometer">
                 <input type="checkbox" name="system.hardware.hasDensitometer" {{checked system.hardware.hasDensitometer}} data-dtype="Boolean" />
                 <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.densitometer'}}</label>
+            </div>
+            <div class="resource flex-group-left checkbox-resource" title="{localize 'MGT2.Spacecraft.SensorSuite.jammers">
+                <input type="checkbox" name="system.hardware.hasJammers" {{checked system.hardware.hasJammers}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.SensorSuite.jammers'}}</label>
             </div>
         </div>
         {{else if (ifEquals system.hardware.system "computer")}}

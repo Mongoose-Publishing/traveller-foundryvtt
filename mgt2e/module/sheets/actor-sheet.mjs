@@ -16,6 +16,7 @@ import {Tools} from "../helpers/chat/tools.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {NpcIdCard} from "../helpers/id-card.mjs";
 import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
+import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -271,6 +272,14 @@ export class MgT2ActorSheet extends ActorSheet {
         let rdrive = 0;
         let jdrive = 0;
 
+        context.coreItems = [];
+        context.weaponItems = [];
+        context.bridgeItems = [];
+        context.stateroomItems = [];
+        context.commonAreaItems = [];
+        context.generalItems = [];
+        context.cargoItems = [];
+
         actorData.spacecraft.cargo = 0;
         actorData.spacecraft.armour = config?(config.armourBonus):0;
         for (let i of context.items) {
@@ -293,6 +302,25 @@ export class MgT2ActorSheet extends ActorSheet {
             } else if (i.type === 'hardware') {
                 hardware.push(i);
                 let h = i.system.hardware;
+
+                if (["computer", "sensor", "bridge"].includes(h.system)) {
+                    context.bridgeItems.push(i);
+                } else if (["power", "m-drive", "j-drive", "r-drive", "armour", "fuel"].includes(h.system)) {
+                    context.coreItems.push(i);
+                } else if (["weapon"].includes(h.system)) {
+                    context.weaponItems.push(i);
+                } else if (["weapon"].includes(h.system)) {
+                    context.weaponItems.push(i);
+                } else if (["stateroom"].includes(h.system)) {
+                    context.stateroomItems.push(i);
+                } else if (["common"].includes(h.system)) {
+                    context.commAreaItems.push(i);
+                } else if (["cargo"].includes(h.system)) {
+                    context.cargoItems.push(i);
+                } else {
+                    context.generalItems.push(i);
+                }
+
                 let t = parseFloat(h.tons);
                 let rating = parseInt(h.rating);
 
@@ -317,6 +345,7 @@ export class MgT2ActorSheet extends ActorSheet {
                     if (config) {
                         t = t * config.armour;
                     }
+                    t = t * getArmourMultiplier(actorData);
                     context.system.spacecraft.armour += rating;
                     i.system.hardware.tons = t;
                 } else if (h.system === "fuel") {
@@ -2294,6 +2323,7 @@ export class MgT2ActorSheet extends ActorSheet {
             system.hardware.hasRadar = true;
             system.hardware.hasActiveLidar = true;
             system.hardware.hasActiveRadar = true;
+            system.hardware.hasJammers = true;
         } else {
             // Unrecognised, so don't create anything.
             return;

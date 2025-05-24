@@ -17,6 +17,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/mgt2e/templates/actor/parts/actor-starship-bays.html",
         "systems/mgt2e/templates/actor/parts/actor-starship-crew.html",
         "systems/mgt2e/templates/actor/parts/actor-starship-combat.html",
+        "systems/mgt2e/templates/actor/parts/actor-starship-hardware.html",
         "systems/mgt2e/templates/item/parts/item-general.html",
         "systems/mgt2e/templates/item/parts/item-techLevel.html"
     ]);

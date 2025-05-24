@@ -594,7 +594,18 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
 
     html += `<div class="spacecraft-header actor-link rollable name" data-actor-id="${actor.uuid}">`;
     html += `<h4>${actor.name}</h4>`;
-    html += `<span class="type">TYPE: ${actor.system.spacecraft.type}</span>`;
+    let tc = actor.system.spacecraft.type;
+    if (tc) {
+        if (tc.match(/^[A-Z]*$/)) {
+            html += `<span class="type">TYPE: ${tc}</span>`;
+        } else {
+            html += `<span class="type">CLASS: ${tc}</span>`;
+        }
+    } else if (actor.system.spacecraft.dtons < 100) {
+        html += `<span class="type">SMALL CRAFT</span>`;
+    } else {
+        html += `<span class="type">CLASS/TYPE: N/A</span>`;
+    }
     html += `<br style="clear:both"/>`;
     html += `</div>`;
     html += `<div class="spacecraft-description">${actor.system.description}</div>`

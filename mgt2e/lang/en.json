@@ -630,6 +630,7 @@
   "MGT2.Spacecraft.SensorSuite.activeLidar": "Active Lidar",
   "MGT2.Spacecraft.SensorSuite.nas": "NAS",
   "MGT2.Spacecraft.SensorSuite.densitometer": "Densitometer",
+  "MGT2.Spacecraft.SensorSuite.jammers": "Jammers",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",
