@@ -24,7 +24,7 @@
     </ol>
 {{/if}}
 
-{{#if coreItems}}
+{{#if bridgeItems}}
 <h3>Bridge and Electronics</h3>
 <ol class="items-list actor-items grid grid-3col">
     {{#each bridgeItems as |item id|}}
@@ -48,6 +48,32 @@
     {{/each}}
 </ol>
 {{/if}}
+
+{{#if weaponItems}}
+<h3>Weapons</h3>
+<ol class="items-list actor-items grid grid-3col">
+    {{#each weaponItems as |item id|}}
+    <li class="item item-gear item-status-{{item.system.status}}" data-item-id="{{item._id}}">
+        <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+        <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+        {{#if item.system.hardware.tons  includeZero=false}}
+        <span>{{quantity item item.system.hardware.tons}}dT</span>
+        {{/if}}
+        {{#if item.system.tl includeZero=false}}
+        <span>TL {{item.system.tl}}</span>
+        {{/if}}
+        {{#if item.system.cost includeZero=false}}
+        <span>MCr{{quantity item item.system.cost}}</span>
+        {{/if}}
+        <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+        </div>
+    </li>
+    {{/each}}
+</ol>
+{{/if}}
+
 
 {{#if generalItems}}
 <h3>Systems</h3>
@@ -74,10 +100,10 @@
 </ol>
 {{/if}}
 
-{{#if stateroomItems}}
-<h3>Staterooms</h3>
+{{#if livingItems}}
+<h3>Living Quarters</h3>
 <ol class="items-list actor-items grid grid-3col">
-    {{#each stateroomItems as |item id|}}
+    {{#each livingItems as |item id|}}
     <li class="item item-gear item-status-{{item.system.status}}" data-item-id="{{item._id}}">
         <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
         <img title="{{nameQuantity item}}" src="{{item.img}}"/>
@@ -98,32 +124,6 @@
     {{/each}}
 </ol>
 {{/if}}
-
-{{#if commonAreaItems}}
-<h3>Common Areas</h3>
-<ol class="items-list actor-items grid grid-3col">
-    {{#each commonAreaItems as |item id|}}
-    <li class="item item-gear item-status-{{item.system.status}}" data-item-id="{{item._id}}">
-        <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
-        <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-        {{#if item.system.hardware.tons  includeZero=false}}
-        <span>{{quantity item item.system.hardware.tons}}dT</span>
-        {{/if}}
-        {{#if item.system.tl includeZero=false}}
-        <span>TL {{item.system.tl}}</span>
-        {{/if}}
-        {{#if item.system.cost includeZero=false}}
-        <span>MCr{{quantity item item.system.cost}}</span>
-        {{/if}}
-        <div class="item-controls">
-            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-        </div>
-    </li>
-    {{/each}}
-</ol>
-{{/if}}
-
 
 {{#if cargoItems}}
 <h3>Cargo</h3>

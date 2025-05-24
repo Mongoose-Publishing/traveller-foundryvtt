@@ -275,8 +275,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.coreItems = [];
         context.weaponItems = [];
         context.bridgeItems = [];
-        context.stateroomItems = [];
-        context.commonAreaItems = [];
+        context.livingItems = [];
         context.generalItems = [];
         context.cargoItems = [];
 
@@ -309,12 +308,8 @@ export class MgT2ActorSheet extends ActorSheet {
                     context.coreItems.push(i);
                 } else if (["weapon"].includes(h.system)) {
                     context.weaponItems.push(i);
-                } else if (["weapon"].includes(h.system)) {
-                    context.weaponItems.push(i);
-                } else if (["stateroom"].includes(h.system)) {
-                    context.stateroomItems.push(i);
-                } else if (["common"].includes(h.system)) {
-                    context.commAreaItems.push(i);
+                } else if (["stateroom", "common"].includes(h.system)) {
+                    context.livingItems.push(i);
                 } else if (["cargo"].includes(h.system)) {
                     context.cargoItems.push(i);
                 } else {
