@@ -2,6 +2,7 @@ import {MgT2ActorSheet} from "../actor-sheet.mjs";
 import {MgT2Item} from "../../documents/item.mjs";
 import {calculateFreightLots, createFreight, createSpeculativeGoods} from "../../helpers/utils/trade-utils.mjs";
 import {createWorld} from "../../helpers/utils/world-utils.mjs";
+import {MGT2} from "../../helpers/config.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
     static get defaultOptions() {
@@ -18,7 +19,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         context.cargo = [];
 
         for (let i of context.items) {
-            i.img = i.img || DEFAULT_TOKEN;
+            i.img = i.img || CONFIG.MGT2.DEFAULT_ITEM_ICON;
             i.cssStyle = "";
 
             // Append to gear.

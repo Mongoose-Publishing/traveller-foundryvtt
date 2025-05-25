@@ -519,7 +519,7 @@ export class MgT2ActorSheet extends ActorSheet {
 
         // Iterate through items, allocating to containers
         for (let i of context.items) {
-            i.img = i.img || DEFAULT_TOKEN;
+            i.img = i.img || MGT2.DEFAULT_ITEM_ICON;
             i.cssStyle = "";
 
             if (i.system.weight !== undefined) {

@@ -13,6 +13,8 @@ MGT2.HARDWARE_GENERAL = "general";
 MGT2.HARDWARE_ARMOUR = "armour";
 MGT2.HARDWARE_JUMP = "jump";
 
+MGT2.DEFAULT_ITEM_ICON = "systems/mgt2e/icons/items/item.svg";
+
 MGT2.SHIP_HARDWARE = {
     "j-drive": {
         "cost": 1.5,
