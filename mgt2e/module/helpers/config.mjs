@@ -327,6 +327,7 @@ MGT2.SPACECRAFT_ADVANCES = {
     "advanced": { "tl": 2, "tonnage": 1, "cost": 1.1, "modifications": 1 },
     "veryAdvanced": { "tl": 2, "tonnage": 1, "cost": 1.25, "modifications": 2 },
     "highTech": { "tl": 3, "tonnage": 1, "cost": 1.5, "modifications": 3 },
+    "ultraTech": { "tl": 4, "tonnage": 1, "cost": 1.5, "modifications": 4 },
 }
 
 MGT2.SPACECRAFT_ADVANTAGES = {

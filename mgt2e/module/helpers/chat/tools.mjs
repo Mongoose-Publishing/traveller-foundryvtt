@@ -394,12 +394,52 @@ Tools.macroExecutionEnricher = function(match, options) {
             return Tools.macroExecutionButton(macroName, argsString, title, flavor);
         } else if (type === "/actor") {
             return Tools.actorInlineDisplay(macroName);
+        } else if (type === "/item") {
+            return Tools.itemInlineDisplay(macroName, argsString, title, flavor);
         } else {
             console.log(type);
         }
     } catch (e) {
         console.log(e);
     }
+}
+
+Tools.blockInline = async function(argsString) {
+    const a = document.createElement("div");
+    const argsRgx = /(\w+)=\s*(?:"([^"]*)"|(\S+))/g;
+
+    const args = {};
+    let match;
+    while ((match = argsRgx.exec(argsString)) !== null) {
+        match
+        const key = match[1];
+        const value = match[2] ?? match[3];
+        args[key] = value;
+    }
+
+
+}
+
+Tools.itemInlineDisplay = async function(itemId) {
+    let item = await fromUuid(itemId);
+    if (!item) {
+        item = game.items.get(itemId);
+    }
+    if (!item) {
+        item = game.item.getName(itemId);
+    }
+    const a = document.createElement("div");
+    if (!item) {
+        a.innerHTML = `Unable to find item ${itemId}`;
+        return a;
+    }
+    let html = "";
+
+    html = `<div class="inline-item"><span class="item-name">${item.name}</span>: ${item.system.description}</div>`;
+
+    a.innerHTML = html;
+    return a;
+
 }
 
 Tools.actorInlineDisplay = async function(actorId) {
