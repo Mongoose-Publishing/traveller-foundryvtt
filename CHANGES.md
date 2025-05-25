@@ -8,6 +8,21 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
+
+## Development
+
+* When training a skill through a macro, only display speciality skills that can be
+  trained (less than level 4, lower than the level being trained to).
+* Added a new ship hardware type of common areas.
+* Added weapons to ship data sheets in the journal.
+* Added new tokens for missing spacecraft and smallcraft from the Core rules.
+* Improve display of the ship type/class in the journal sheet.
+* Added jammer option for starship sensors.
+* Added a fourth tech advantage level for ships, to allow for the Harrier.
+* Fix for missing DEFAULT_TOKEN definition that was causing problems on Foundry v11 (though we
+  don't technically support v11 any more).
+* Added very basic inline display of items with a {{/item uuid}} macro.
+
 ## 0.12.2 (Beta)
 
 * Fixed bug where lack of width/height attributes on SVG icons that were on a scene could cause
