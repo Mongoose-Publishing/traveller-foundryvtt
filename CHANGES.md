@@ -9,7 +9,7 @@
   to help track down compatibility bugs.
 
 
-## Development
+## 0.12.3 (Beta)
 
 * When training a skill through a macro, only display speciality skills that can be
   trained (less than level 4, lower than the level being trained to).

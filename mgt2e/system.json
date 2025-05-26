@@ -2,7 +2,7 @@
   "id": "mgt2e",
   "title": "Mongoose Traveller 2e",
   "description": "A system for Mongoose Traveller 2e",
-  "version": "0.12.2.6-DEV",
+  "version": "0.12.3.1",
   "compatibility": {
     "minimum": 12,
     "verified": 12
@@ -68,7 +68,7 @@
   "primaryTokenAttribute": "hits",
   "secondaryTokenAttribute": null,
   "url": "https://filehost.notasnark.net/foundry/mgt2e/README.html",
-  "manifest": "https://filehost.notasnark.net/foundry/mgt2e/system.json",
-  "download": "https://filehost.notasnark.net/foundry/mgt2e/mongoose-traveller.zip",
+  "manifest": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/release/system.json",
+  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/v0.12.3/release/mongoose-traveller.zip",
   "license": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/LICENSE.txt"
 }
