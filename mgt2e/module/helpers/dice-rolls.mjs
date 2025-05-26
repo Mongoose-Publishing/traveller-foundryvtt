@@ -391,7 +391,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
         if (effect > 0) {
             if (weapon && weapon.system.weapon.skill === "explosives") {
                 if (effect > 0) isExplosive = true;
-                damageEffect = damageTotal * ((effect>0)?effect:1) * (destructive ? 10:1);
+                damageEffect = damageTotal * ((effect>0)?effect:1);
             } else {
                 damageEffect = damageTotal + effect * (destructive ? 10 : 1);
             }
@@ -423,7 +423,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
             let dmgText = `Damage ${damageTotal}`;
             if (effect > 0) {
                 if (isExplosive) {
-                    dmgText += `&nbsp;x&nbsp;${effect * (destructive ? 10 : 1)}&nbsp;(${damageEffect})`;
+                    dmgText += `&nbsp;x&nbsp;${effect}&nbsp;(${damageEffect})`;
                 } else {
                     dmgText += `&nbsp;+&nbsp;${effect * (destructive ? 10 : 1)}&nbsp;(${damageEffect})`;
                 }
