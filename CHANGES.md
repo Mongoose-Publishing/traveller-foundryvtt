@@ -8,6 +8,12 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
+## Develop
+
+* Use tons value for docking spaces if it is set, rather than the rating.
+* Remove black border around images in the journal. Add CSS for two column equipment
+  layout with shadow effects on images.
+* Multiply explosive damage by the effect of the attack when using explosives skill.
 
 ## 0.12.3 (Beta)
 

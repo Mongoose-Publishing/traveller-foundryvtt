@@ -64,7 +64,7 @@ export function getSkillValue(actor, skill, speciality) {
         }
         let value = parseInt(data.skills["jackofalltrades"].value) - 3;
         if (data.skills[skill] && data.skills[skill].trained) {
-            value = skill.value;
+            value = data.skills[skill].value;
             if (speciality) {
                 value = data.skills[skill].specialities[speciality].value;
             }
@@ -387,8 +387,14 @@ export async function rollAttack(actor, weapon, attackOptions) {
         }
 
         let damageEffect = damageTotal;
+        let isExplosive = false;
         if (effect > 0) {
-            damageEffect = damageTotal + effect * (destructive?10:1);
+            if (weapon && weapon.system.weapon.skill === "explosives") {
+                if (effect > 0) isExplosive = true;
+                damageEffect = damageTotal * ((effect>0)?effect:1) * (destructive ? 10:1);
+            } else {
+                damageEffect = damageTotal + effect * (destructive ? 10 : 1);
+            }
         }
         let ap = bonusPsiAP;
         if (hasTrait(traits, "ap")) {
@@ -416,7 +422,11 @@ export async function rollAttack(actor, weapon, attackOptions) {
         } else {
             let dmgText = `Damage ${damageTotal}`;
             if (effect > 0) {
-                dmgText += `&nbsp;+&nbsp;${effect * (destructive?10:1)}&nbsp;(${damageEffect})`;
+                if (isExplosive) {
+                    dmgText += `&nbsp;x&nbsp;${effect * (destructive ? 10 : 1)}&nbsp;(${damageEffect})`;
+                } else {
+                    dmgText += `&nbsp;+&nbsp;${effect * (destructive ? 10 : 1)}&nbsp;(${damageEffect})`;
+                }
             }
             if (ap > 0) {
                 dmgText += ` /&nbsp;AP&nbsp;${ap}`;

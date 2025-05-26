@@ -20,6 +20,24 @@
     background-color: white;
 }
 
+img {
+  border: none;
+}
+
+img.drop-shadow {
+  border: none;
+  filter: drop-shadow(10px 10px 4px #404040);
+}
+
+div.two-columns {
+  columns: 2;
+}
+
+div.two-columns img {
+  border: none;
+  filter: drop-shadow(10px 10px 4px #404040);
+}
+
 /* Documentation */
 
 .journal-sheet h1 {

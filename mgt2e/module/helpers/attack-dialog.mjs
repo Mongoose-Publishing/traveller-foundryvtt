@@ -26,6 +26,11 @@ export class MgT2AttackDialog extends Application {
         this.auto = 1;
         this.fullAuto = 1; // Full auto uses three times the ammo.
         this.rangeUnit = "m";
+
+        console.log("ATTACK DIALOG");
+        console.log(this.skill);
+        console.log(this.speciality);
+
         if (hasTrait(this.weapon.system.weapon.traits, "auto")) {
             this.auto = getTraitValue(this.weapon.system.weapon.traits, "auto");
         }
@@ -47,6 +52,7 @@ export class MgT2AttackDialog extends Application {
 
         // Work out what the skill bonus is.
         this.score = parseInt(getSkillValue(this.actor, this.skill, this.speciality));
+        console.log(this.score);
         this.parryScore = this.score;
         if (data.characteristics && data.characteristics[this.cha]) {
             this.score += parseInt(data.characteristics[this.cha].dm);

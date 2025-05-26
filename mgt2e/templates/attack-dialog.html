@@ -3,9 +3,9 @@
     <div class="shadow">
         <b>{{weapon.name}}</b> {{damage}}<br/>
         {{#if cha}}
-            <i>{{cha}} + {{skill}} ({{speciality}}) at {{score}}</i>
+            <i>{{cha}} + {{skill}}{{#if speciality}} ({{speciality}}){{/if}} at {{score}}</i>
         {{else}}
-            <i>{{skill}} ({{speciality}}) at {{score}}</i>
+            <i>{{skill}}{{#if speciality}} ({{speciality}}){{/if}} at {{score}}</i>
         {{/if}}
         {{#if attackBonus}} + {{attackBonus}}{{/if}}
     </div>
