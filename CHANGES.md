@@ -24,6 +24,7 @@
 * Added 'enforceLimits' flag for spacecrafton the Notes tab. Defaults to true. If disabled,
   limits on tech levels and number of advantages for ship hardware is removed. Allows
   non-standard ships which break the rules to be created.
+* Fixed bug with quick rolls, where specialities couldn't be quick rolled.
 
 ## 0.12.2 (Beta)
 

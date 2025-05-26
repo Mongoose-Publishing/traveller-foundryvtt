@@ -705,7 +705,9 @@ function getSkillBonus(data, skill, speciality) {
     return bonus;
 }
 
-//export async function rollSkill(actor, skill, speciality, cha, dm, rollType, difficulty, description) {
+// actor - actor object making the roll.
+// skill - skillFqn
+// options - data object holding options for this roll
 export async function rollSkill(actor, skill, options) {
     const data = actor.system;
     let   title = "";
@@ -722,8 +724,6 @@ export async function rollSkill(actor, skill, options) {
     if (!options) {
         options = {};
     }
-    console.log(options);
-
     // Keep track of bonuses and penalties.
     let skillDM = 0, skillAug = 0, skillBonus = 0
     let specDM = 0, specAug = 0, specBonus = 0;
@@ -735,7 +735,6 @@ export async function rollSkill(actor, skill, options) {
     }
     let speciality = null;
     let noSpeciality = false;
-    console.log(skill);
     if (skill && (typeof skill === 'string' || skill instanceof String)) {
         // If a skill has been passed as a string, we need to find the skill object.
         if (skill.indexOf(".")) {
@@ -745,6 +744,8 @@ export async function rollSkill(actor, skill, options) {
                 speciality = null;
                 noSpeciality = true;
             }
+        } else if (options.speciality) {
+            speciality = options.speciality;
         }
         skill = data.skills[skill];
         if (speciality) {
@@ -949,7 +950,6 @@ export async function rollSkill(actor, skill, options) {
             checkText = `<b>${difficultyLabel}</b> ${checkText}`;
         }
     }
-
     let roll = await new Roll(dice, actor.getRollData()).evaluate();
     if (roll) {
         text = `<div class='skill-message'><h2>${title}</h2><div class="message-content">`;
