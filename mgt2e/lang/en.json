@@ -338,6 +338,7 @@
   "MGT2.TravellerSheet.UseCustomDice": "Racial package",
   "MGT2.TravellerSheet.AutoAge": "Auto age",
   "MGT2.TravellerSheet.AutoHits": "Auto HITS",
+  "MGT2.TravellerSheet.EnforceLimits": "Enforce Limits",
   "MGT2.TravellerSheet.LockUPP": "Lock UPP",
   "MGT2.TravellerSheet.RandomRoll": "Re-roll characteristics (shift for average, ctrl for vary)",
 

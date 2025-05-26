@@ -133,7 +133,9 @@ export class MgT2ItemSheet extends ItemSheet {
             context.SHIP_TL = {};
             let maxTL = 25;
             if (context.item.parent && context.item.parent.type === "spacecraft") {
-                maxTL = Math.max(context.item.parent.system.spacecraft.tl, 7);
+                if (context.item.parent.system.settings.enforceLimits) {
+                    maxTL = Math.max(context.item.parent.system.spacecraft.tl, 7);
+                }
             }
             for (let tl = 6; tl <= maxTL; tl++) {
                 context.SHIP_TL[tl] = tl;
@@ -171,8 +173,12 @@ export class MgT2ItemSheet extends ItemSheet {
             this.calculateHardware(context, context.item);
         }
 
-        if (context.item.type === "hardware" && context.item.parent != null) {
+        if (context.item.type === "hardware" && context.item.parent != null && context.item.parent.type === "spacecraft") {
             this.calculateShipHardware(context, context.item);
+            let enforceLimits = true;
+            if (item.parent) {
+                enforceLimits = item.parent.system.settings.enforceLimits;
+            }
             if (MGT2.SPACECRAFT_ADVANTAGES[context.item.system.hardware.system]) {
                 // List of prototype/advanced options.
                 context.ADVANCES = MGT2.SPACECRAFT_ADVANCES;
@@ -191,7 +197,7 @@ export class MgT2ItemSheet extends ItemSheet {
 
                 let pointsAvailable = context.ADVANCES[this.item.system.hardware.advancement].modifications;
                 let bought = context.item.system.hardware.advantages;
-                if (bought) {
+                if (bought && enforceLimits) {
                     for (let a of bought.split(",")) {
                         let t = a.trim().split(" ")[0];
                         let n = a.trim().split(" ")[1];

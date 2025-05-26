@@ -18,10 +18,12 @@
 * Added new tokens for missing spacecraft and smallcraft from the Core rules.
 * Improve display of the ship type/class in the journal sheet.
 * Added jammer option for starship sensors.
-* Added a fourth tech advantage level for ships, to allow for the Harrier.
 * Fix for missing DEFAULT_TOKEN definition that was causing problems on Foundry v11 (though we
-  don't technically support v11 any more).
+  don't technically support v11 anymore).
 * Added very basic inline display of items with a {{/item uuid}} macro.
+* Added 'enforceLimits' flag for spacecrafton the Notes tab. Defaults to true. If disabled,
+  limits on tech levels and number of advantages for ship hardware is removed. Allows
+  non-standard ships which break the rules to be created.
 
 ## 0.12.2 (Beta)
 

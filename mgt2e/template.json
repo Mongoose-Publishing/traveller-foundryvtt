@@ -204,7 +204,8 @@
           "value": 0
         },
         "settings": {
-          "autoHits": true
+          "autoHits": true,
+          "enforceLimits":  true
         },
         "spacecraft": {
             "dtons": 100,
