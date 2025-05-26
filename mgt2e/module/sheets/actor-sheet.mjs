@@ -352,8 +352,9 @@ export class MgT2ActorSheet extends ActorSheet {
                     actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
                     t = parseFloat(i.system.hardware.rating);
                 } else if (h.system === "dock") {
-                    //actorData.spacecraft.cargo += parseFloat(i.system.hardware.rating);
-                    t = parseFloat(i.system.hardware.rating);
+                    if (i.system.hardware.tons === 0) {
+                        t = parseFloat(i.system.hardware.rating);
+                    }
                 } else if (["stateroom", "bridge", "sensor"].includes(h.system)) {
                     // Don't override.
                     console.log(i);
@@ -370,6 +371,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         i.system.hardware.tons = t * Number(i.system.quantity);
                     }
                 }
+                console.log("Tonnage [" + i.name + "]: " + (t * i.system.quantity));
                 dtonsUsed += t * i.system.quantity;
 
                 if (h.system === "j-drive" && i.system.status === MgT2Item.ACTIVE) {
