@@ -16,9 +16,16 @@
 
             <div class="shadow item-side-panel grid grid-2col">
                 <div class="resource grid-span-2">
+                    <label class="resource-label">Legality</label>
+                    <br/>
+                    <select class="writable" name="system.legality">
+                        {{selectOptions ARMOUR_LEGALITY selected=system.legality}}
+                    </select>
+                </div>
+                <div class="resource grid-span-2">
                     <label for="system.armour.form" class="resource-label">{{localize "MGT2.Armour.FormType"}}</label>
                     <br/>
-                    <select name="system.armour.form">
+                    <select class="writable" name="system.armour.form">
                         {{selectOptions ARMOUR_FORM selected=system.armour.form}}
                     </select>
                 </div>
@@ -26,7 +33,7 @@
                 <div class="resource">
                     <label for="system.armour.archaic" class="resource-label">{{localize "MGT2.Armour.Archaic"}}</label>
                     <br/>
-                    <select name="system.armour.archaic">
+                    <select class="writable" name="system.armour.archaic">
                         {{selectOptions YESNO selected=system.armour.archaic}}
                     </select>
                 </div>
@@ -34,7 +41,7 @@
                 <div class="resource">
                     <label for="system.armour.ablat" class="resource-label">{{localize "MGT2.Armour.Ablative"}}</label>
                     <br/>
-                    <select name="system.armour.ablat">
+                    <select class="writable" name="system.armour.ablat">
                         {{selectOptions YESNO selected=system.armour.ablat}}
                     </select>
                 </div>
@@ -42,7 +49,7 @@
                 <div class="resource">
                     <label for="system.armour.powered" class="resource-label">{{localize "MGT2.Armour.Powered"}}</label>
                     <br/>
-                    <select name="system.armour.powered">
+                    <select class="writable" name="system.armour.powered">
                         {{selectOptions YESNO selected=system.armour.powered}}
                     </select>
                 </div>
@@ -50,7 +57,7 @@
                 <div class="resource">
                     <label for="system.armour.psi" class="resource-label">{{localize "MGT2.Armour.Psi"}}</label>
                     <br/>
-                    <select name="system.armour.psi">
+                    <select class="writable" name="system.armour.psi">
                         {{selectOptions YESNO selected=system.armour.psi}}
                     </select>
                 </div>
@@ -58,13 +65,13 @@
                 <div class="resource grid-span-2">
                     <label class="resource-label">{{localize "MGT2.Armour.Duration"}}</label>
                     <br/>
-                    <input type="text" name="system.armour.duration" value="{{system.armour.duration}}" data-dtype="Number"/>
+                    <input class="writable" type="text" name="system.armour.duration" value="{{system.armour.duration}}" data-dtype="Number"/>
                 </div>
 
                 <div class="resource grid-span-2">
                     <label class="resource-label">{{localize "MGT2.Armour.Slots"}}</label>
                     <br/>
-                    <input class="armour-value" type="text" name="system.armour.slots" title="Slots"
+                    <input class="armour-value writable" type="text" name="system.armour.slots" title="Slots"
                            value="{{system.armour.slots}}" data-dtype="Number"/><br/>
                 </div>
             </div>

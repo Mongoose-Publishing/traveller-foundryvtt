@@ -67,6 +67,30 @@ export class MgT2ItemSheet extends ItemSheet {
             context.techLevels[i] = i + " (" + game.i18n.localize(`MGT2.Item.Tech.${i}`) + ")";
         }
 
+        context.ARMOUR_LEGALITY = {};
+        context.ARMOUR_LEGALITY[0] = "(0) Battledress";
+        context.ARMOUR_LEGALITY[1] = "(1) Combat";
+        context.ARMOUR_LEGALITY[2] = "(2) Flak";
+        context.ARMOUR_LEGALITY[3] = "(3) Cloth";
+        context.ARMOUR_LEGALITY[4] = "(4) Mesh";
+        context.ARMOUR_LEGALITY[5] = "(5)";
+        context.ARMOUR_LEGALITY[6] = "(6)";
+        context.ARMOUR_LEGALITY[7] = "(7) Visible";
+        context.ARMOUR_LEGALITY[8] = "(8) Hidden";
+        context.ARMOUR_LEGALITY[9] = "(9) Clothing";
+
+        context.WEAPON_LEGALITY = {};
+        context.WEAPON_LEGALITY[0] = "(0) Explosives";
+        context.WEAPON_LEGALITY[1] = "(1) Energy";
+        context.WEAPON_LEGALITY[2] = "(2) Military";
+        context.WEAPON_LEGALITY[3] = "(3) Assault";
+        context.WEAPON_LEGALITY[4] = "(4) Concealed";
+        context.WEAPON_LEGALITY[5] = "(5) Firearms";
+        context.WEAPON_LEGALITY[6] = "(6) Shotguns";
+        context.WEAPON_LEGALITY[7] = "(7) Blades";
+        context.WEAPON_LEGALITY[8] = "(8) Weapons";
+        context.WEAPON_LEGALITY[9] = "(9) Harmless";
+
         context.SELECT_PROCESSING = {};
         for (let i=0; i < 6; i++) {
             context.SELECT_PROCESSING[i] = `Computer/${i}`;

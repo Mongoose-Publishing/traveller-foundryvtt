@@ -1,0 +1,48 @@
+
+
+<form class="flexcol damage-dialog">
+
+    <h1 class="charname shadow">
+        {{actor.name}}
+    </h1>
+
+    <div class="shadow grid grid-4col">
+        <div class="resource flex-group-center">
+            <label for="facing" class="resource-label">FACING</label>
+            <select class="face-selector">
+                {{selectOptions FACES selected=facing}}
+            </select>
+            <input class="baseDamage" type="text" name="damage" value="{{damage}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="armour" class="resource-label">ARMOUR</label>
+            <input type="text" class="armour" name="armour" value="{{armour}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="damage" class="resource-label">DAMAGE</label>
+            <input class="baseDamage" type="text" name="damage" value="{{damage}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="ap" class="resource-label">AP</label>
+            <input class="baseAP" type="text" name="ap" value="{{ap}}" data-dtype="Number"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="actualDamage" class="resource-label">ACTUAL</label>
+            <input class="actualDamage" type="text" name="actualDamage" value="{{actualDamage}}" data-dtype="Number"/>
+        </div>
+    </div>
+
+    <p>
+        HITS {{hits}} / {{maxHits}}
+    </p>
+    <div class="grid grid-10col damageTrack">
+        {{#each damageTrack as | style |}}
+            <div class="{{style}}">&nbsp;</div>
+        {{/each}}
+    </div>
+
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="damageDone">Done</button>
+    </footer>
+
+</form>

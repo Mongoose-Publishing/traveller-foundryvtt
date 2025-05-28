@@ -16,6 +16,13 @@
 
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
+                    <label class="resource-label">Legality</label>
+                    <br/>
+                    <select class="writable" name="system.legality">
+                        {{selectOptions WEAPON_LEGALITY selected=system.legality}}
+                    </select>
+                </div>
+                <div class="resource flex-group-center">
                     <label for="system.weapon.magazine" class="resource-label">Magazine Size</label>
                     <input class="writable" type="text" name="system.weapon.magazine" value="{{system.weapon.magazine}}" data-dtype="Number"/>
                 </div>

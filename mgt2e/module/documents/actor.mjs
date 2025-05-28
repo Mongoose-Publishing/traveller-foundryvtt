@@ -5,6 +5,7 @@ import {MgT2DamageDialog} from "../helpers/damage-dialog.mjs";
 import {getTraitValue, hasTrait, isNonZero, isNumber, skillLabel} from "../helpers/dice-rolls.mjs";
 import {MgT2SpacecraftDamageDialog} from "../helpers/spacecraft-damage-dialog.mjs";
 import {setSpacecraftCriticalLevel} from "../helpers/spacecraft/criticals.mjs";
+import {MgT2VehicleDamageDialog} from "../helpers/vehicle-damage-dialog.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -734,6 +735,8 @@ export class MgT2Actor extends Actor {
           ui.notifications.info(game.i18n.format("MGT.Info.DamageMsg.VehicleNoStun"));
           return;
       }
+
+      //new MgT2VehicleDamageDialog(this, damage, options).render(true);
 
       let armour = 0;
       if (this.system.vehicle.armour && isNonZero(this.system.vehicle.armour.front)) {

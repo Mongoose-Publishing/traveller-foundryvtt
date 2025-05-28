@@ -299,7 +299,8 @@
         "notes": "",
         "active": false,
         "quantity": 1,
-        "status": null
+        "status": null,
+        "legality": 9
       },
       "weapon": {
         "weapon": {

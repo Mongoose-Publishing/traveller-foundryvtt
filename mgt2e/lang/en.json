@@ -502,6 +502,12 @@
   "MGT2.Vehicle.Sheet.Cargo": "Cargo",
   "MGT2.Vehicle.Sheet.Shipping": "Shipping",
 
+  "MGT2.Vehicle.Face.front": "Front",
+  "MGT2.Vehicle.Face.rear": "Rear",
+  "MGT2.Vehicle.Face.sides": "Side",
+  "MGT2.Vehicle.Face.top": "Top",
+  "MGT2.Vehicle.Face.bottom": "Bottom",
+
   "MGT2.TravellerSheet.SizeClass.small": "Small",
   "MGT2.TravellerSheet.SizeClass.medium": "Medium",
   "MGT2.TravellerSheet.SizeClass.large": "Large",
