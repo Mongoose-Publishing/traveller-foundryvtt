@@ -165,22 +165,32 @@ export class MgT2ItemSheet extends ItemSheet {
                 context.SHIP_TL[tl] = tl;
             }
             context.selectSystemTypes = {
+                "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
+                "bridge": game.i18n.localize("MGT2.Spacecraft.System.bridge"),
+                "cargo": game.i18n.localize("MGT2.Spacecraft.System.cargo"),
+                "common": game.i18n.localize("MGT2.Spacecraft.System.common"),
+                "computer": game.i18n.localize("MGT2.Spacecraft.System.computer"),
+                "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
+                "fuel": game.i18n.localize("MGT2.Spacecraft.System.fuel"),
                 "general": game.i18n.localize("MGT2.Spacecraft.System.general"),
                 "j-drive": game.i18n.localize("MGT2.Spacecraft.System.j-drive"),
                 "m-drive": game.i18n.localize("MGT2.Spacecraft.System.m-drive"),
-                "r-drive": game.i18n.localize("MGT2.Spacecraft.System.r-drive"),
                 "power": game.i18n.localize("MGT2.Spacecraft.System.power"),
-                "fuel": game.i18n.localize("MGT2.Spacecraft.System.fuel"),
-                "weapon": game.i18n.localize("MGT2.Spacecraft.System.weapon"),
-                "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
-                "computer": game.i18n.localize("MGT2.Spacecraft.System.computer"),
-                "cargo": game.i18n.localize("MGT2.Spacecraft.System.cargo"),
-                "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
-                "bridge": game.i18n.localize("MGT2.Spacecraft.System.bridge"),
-                "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
-                "common": game.i18n.localize("MGT2.Spacecraft.System.common"),
+                "r-drive": game.i18n.localize("MGT2.Spacecraft.System.r-drive"),
                 "sensor": game.i18n.localize("MGT2.Spacecraft.System.sensor"),
+                "stateroom": game.i18n.localize("MGT2.Spacecraft.System.stateroom"),
+                "weapon": game.i18n.localize("MGT2.Spacecraft.System.weapon"),
             };
+
+            context.BRIDGE_LIST = {
+                "standard": "Bridge",
+                "cockpit": "Cockpit",
+                "dualCockpit": "Dual Cockpit",
+                /*
+                "small": "Small Bridge",
+                "command": "Command Bridge"
+                 */
+            }
 
             context.HARDWARE_RATING = null;
             let sys = context.item.system.hardware.system;
@@ -517,13 +527,45 @@ export class MgT2ItemSheet extends ItemSheet {
             }
         } else if (item.system.hardware.system === "bridge") {
             cost = shipTons * 0.005;
+            let tons = 3;
+            if (shipTons <= 50) {
+                if (item.system.hardware.bridgeType === "cockpit") {
+                    tons = 1.5
+                    cost = 0.01;
+                } else if (item.system.hardware.bridgeType === "dualCockpit") {
+                    tons = 2.6;
+                    cost = 0.015;
+                } else {
+                    tons = 3;
+                }
+            } else if (shipTons < 100) {
+                tons = 6;
+            } else if (shipTons < 201) {
+                tons = 10;
+            } else if (shipTons < 1001) {
+                tons = 20;
+            } else if (shipTons < 2001) {
+                tons = 40;
+            } else if (shipTons < 100001) {
+                tons = 60;
+            } else {
+                tons = 60 + 20 * Math.ceil(shipTons / 100000)
+            }
+            if (item.system.hardware.bridgeType === "command") {
+                tons += 40;
+                cost += 30;
+            }
+
+
             if (cost !== item.system.cost) {
                 item.system.cost = cost;
                 item.update({"system.cost": cost});
             }
+            if (tons !== item.system.hardware.tons) {
+                item.system.hardware.tons = tons;
+                item.update({"system.hardware.tons": item.system.hardware.tons})
+            }
         } else if (item.system.hardware.system === "computer") {
-            console.log("COMPUTER COST");
-            console.log(item);
             if (item.system.hardware.isComputerCore) {
                 switch (Number(item.system.tl)) {
                     case 9:

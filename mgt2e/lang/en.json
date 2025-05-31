@@ -261,6 +261,7 @@
   "MGT2.TravellerSheet.InitTactics": "Tactics",
   "MGT2.TravellerSheet.InitLeader": "Leadership",
   "MGT2.TravellerSheet.SizeDM": "Size DM",
+  "MGT2.TravellerSheet.BridgeTypeLabel": "Bridge Type",
 
   "MGT2.TravellerSheet.StatusLabel.fatigued": "Fatigued",
   "MGT2.TravellerSheet.StatusLabel.encumbered": "Encumbered",
