@@ -186,10 +186,8 @@ export class MgT2ItemSheet extends ItemSheet {
                 "standard": "Bridge",
                 "cockpit": "Cockpit",
                 "dualCockpit": "Dual Cockpit",
-                /*
                 "small": "Small Bridge",
                 "command": "Command Bridge"
-                 */
             }
 
             context.HARDWARE_RATING = null;
@@ -528,34 +526,39 @@ export class MgT2ItemSheet extends ItemSheet {
         } else if (item.system.hardware.system === "bridge") {
             cost = shipTons * 0.005;
             let tons = 3;
+            let bridgeType = item.system.hardware.bridgeType;
+
             if (shipTons <= 50) {
-                if (item.system.hardware.bridgeType === "cockpit") {
+                if (bridgeType === "cockpit") {
                     tons = 1.5
                     cost = 0.01;
-                } else if (item.system.hardware.bridgeType === "dualCockpit") {
+                } else if (bridgeType === "dualCockpit") {
                     tons = 2.6;
                     cost = 0.015;
                 } else {
                     tons = 3;
                 }
-            } else if (shipTons < 100) {
-                tons = 6;
-            } else if (shipTons < 201) {
-                tons = 10;
-            } else if (shipTons < 1001) {
-                tons = 20;
-            } else if (shipTons < 2001) {
-                tons = 40;
-            } else if (shipTons < 100001) {
-                tons = 60;
+            } else if (shipTons > 5000) {
+                tons = 40 + 20 * Math.ceil(shipTons / 100000);
+                if (bridgeType === "small") {
+                    tons -= 20;
+                }
+                if (bridgeType === "command") {
+                    tons += 40;
+                    cost += 30;
+                }
             } else {
-                tons = 60 + 20 * Math.ceil(shipTons / 100000)
-            }
-            if (item.system.hardware.bridgeType === "command") {
-                tons += 40;
-                cost += 30;
-            }
+                let breakPoints = [ 50, 99, 200, 1000, 2000, 100000, 200000, 300000 ];
+                let bridgeTons = [ 3, 6, 10, 20, 40, 60, 80, 100 ];
 
+                let i = 0;
+                for (i=0; i < breakPoints.length; i++) {
+                    if (shipTons <= breakPoints[i + ((bridgeType === "small")?1:0)]) {
+                        break;
+                    }
+                }
+                tons = bridgeTons[i];
+            }
 
             if (cost !== item.system.cost) {
                 item.system.cost = cost;
