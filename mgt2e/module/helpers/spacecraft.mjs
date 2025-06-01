@@ -3,6 +3,7 @@ import { MGT2 } from "./config.mjs";
 // Gets the tonnage multiplier for each point of armour.
 export function getArmourMultiplier(ship) {
     console.log("getArmourMultiplier:");
+    console.log(ship);
     if (ship === null || ship.type !== "spacecraft") {
         return 0;
     }

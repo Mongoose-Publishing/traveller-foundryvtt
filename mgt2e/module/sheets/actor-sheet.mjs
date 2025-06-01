@@ -340,7 +340,7 @@ export class MgT2ActorSheet extends ActorSheet {
                     if (config) {
                         t = t * config.armour;
                     }
-                    t = t * getArmourMultiplier(actorData);
+                    t = t * getArmourMultiplier(context.actor);
                     context.system.spacecraft.armour += rating;
                     i.system.hardware.tons = t;
                 } else if (h.system === "fuel") {
