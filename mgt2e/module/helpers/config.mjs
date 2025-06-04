@@ -331,6 +331,11 @@ MGT2.SPACECRAFT_ADVANCES = {
     "highTech": { "tl": 3, "tonnage": 1, "cost": 1.5, "modifications": 3 }
 }
 
+MGT2.SPACECRAFT_HULLS = {
+    "reinforced": { "conflict": [ "light"], "cost": 1.5, "hits": 1.1 },
+    "light": { "conflict": [ "reinforced"], "cost": 0.75, "hits": 0.9 }
+}
+
 MGT2.SPACECRAFT_ADVANTAGES = {
    "j-drive": {
        "decreasedFuel": { "cost": 1, "fuel": -10, "multi": true },

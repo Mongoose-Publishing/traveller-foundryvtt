@@ -170,6 +170,12 @@ export class MgT2ActorSheet extends ActorSheet {
             for (let i=0; i < 10; i++) {
                 context.selectComputerNodes[i] = "x"+i;
             }
+            context.selectHullOptions = {};
+            let currentHullOptions = actorData.spacecraft.hullOptions;
+            for (let c in CONFIG.MGT2.SPACECRAFT_HULLS) {
+                context.selectHullOptions[c] = c;
+            }
+
             context.selectSystemTypes = {
                 "": "",
                 "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
@@ -402,6 +408,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.cargoUsed = Math.round(cargoUsed * 100) / 100;
         context.cargoRemaining = parseFloat(context.system.spacecraft.cargo) - cargoUsed;
         context.dtonsRemaining = Math.floor(context.system.spacecraft.dtons * (config?config.volume:1)) - dtonsUsed;
+        context.dtonsRemaining = Number(context.dtonsRemaining.toFixed(3));
 
         actorData.spacecraft.power.max = powerTotal;
         actorData.spacecraft.power.used = powerUsed;
