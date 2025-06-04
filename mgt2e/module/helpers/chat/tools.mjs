@@ -855,6 +855,8 @@ Tools.internalExecutionButton = function(macroName, argsString, title, flavor) {
         symbol = `<i class="fas fa-book-open"></i>`;
     } else if (["buy"].includes(macroName)) {
         symbol = ``;
+    } else if (["roll"].includes(macroName)) {
+        symbol = `<i class="fas fa-solid fa-table-list"></i>`;
     }
 
     a.innerHTML = `<span class="internal-macro">${symbol} ${flavor ?? title}</span>`;
@@ -933,6 +935,8 @@ Tools.mgt2eClick = function(event) {
             MgT2eMacros.createAssociate(args);
         } else if (macroName === "cash") {
             MgT2eMacros.cash(args);
+        } else if (macroName === "roll") {
+            MgT2eMacros.roll(args);
         }
     } catch (e) {
         console.log("There was a macro error");

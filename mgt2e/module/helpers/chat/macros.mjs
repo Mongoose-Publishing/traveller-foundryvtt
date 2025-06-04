@@ -468,3 +468,19 @@ MgT2eMacros.createAssociate = async function(args) {
         }
     }
 };
+
+MgT2eMacros.roll = async function(args) {
+    let uuid = args.uuid;
+    let dice = args.dice;
+
+    let table = null;
+
+    if (uuid) {
+        table = await fromUuid(uuid);
+    }
+
+    if (table) {
+        let roll = new Roll(dice);
+        table.draw({roll});
+    }
+}
