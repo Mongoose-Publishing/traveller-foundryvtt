@@ -734,13 +734,14 @@ export class MgT2ItemSheet extends ItemSheet {
             let tons = parseFloat(item.system.hardware.tons);
             let percent = parseFloat(item.system.hardware.tonnage.percent);
             let rating = parseInt(item.system.hardware.rating);
-            let base = parseInt(item.system.hardware.tonnage.tons);
+            let base = parseFloat(item.system.hardware.tonnage.tons);
             let power = parseFloat(item.system.hardware.power);
 
             item.system.hardware.tons = base + (shipTons * percent * rating) / 100.0;
 
             if (parseFloat(item.system.hardware.tonnage.cost) > 0) {
-                item.system.cost = parseInt(item.system.hardware.tonnage.cost * item.system.hardware.tons);
+                item.system.cost = parseFloat(item.system.hardware.tonnage.cost * item.system.hardware.tons);
+                item.system.cost = Number(item.system.cost.toFixed(3));
             }
             if (tons !== item.system.hardware.tons) {
                 item.update({"system.hardware.tons": item.system.hardware.tons})
