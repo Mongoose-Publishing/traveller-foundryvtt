@@ -678,8 +678,6 @@ export class MgT2ItemSheet extends ItemSheet {
                 tonnage = (d.tonnage * ship.system.spacecraft.dtons) / 100.0;
                 tl = d.tl;
                 pow = (d.power * ship.system.spacecraft.dtons) / 100.0;
-                console.log(item.name + ": power from calculation is " + pow);
-                console.log(d);
             }
             if (MGT2.SHIP_HARDWARE[h.system].tonnage) {
                 tonnage += MGT2.SHIP_HARDWARE[h.system].tonnage;
@@ -729,7 +727,15 @@ export class MgT2ItemSheet extends ItemSheet {
         }
         calculateHardwareAdvantages(item);
 
+        item.system.cost = Number(item.system.cost);
+        if (isNaN(item.system.cost)) {
+            item.system.cost = 0;
+        }
         item.system.cost = Number(item.system.cost.toFixed(3));
+        item.system.hardware.tons = Number(item.system.hardware.tons);
+        if (isNaN(item.system.hardware.tons)) {
+            item.system.hardware.tons = 0;
+        }
         item.system.hardware.tons = Number(item.system.hardware.tons.toFixed(3));
 
         if (itemCost !== item.system.cost || itemTons != item.system.hardware.tons || itemPower != item.system.hardware.power) {

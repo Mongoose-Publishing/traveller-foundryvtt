@@ -17,6 +17,13 @@
 * Fix bug in armour calculation for spacecraft.
 * Implement bridge options - small, command, cockpit and dual cockpit.
 * Some fixes to how floating point numbers are displayed in ship tons and cost.
+* Support for some ship tech advances, such as reduced size and power efficiency.
+* Added new icons for ship hardware items.
+* Fixed bug in how ship armour is calculated.
+* Added macro to allow a roll table to be rolled directly from journal, with a modifier
+  for the roll result. Needed for some of the encounter tables in the Core Rules.
+* Ship software price is now assumed to be in Credits (not MCr), same as for other software.
+
 
 ## 0.12.3 (Beta)
 
