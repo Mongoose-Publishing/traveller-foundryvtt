@@ -248,7 +248,7 @@ export function getShipData(actor) {
             data["software"].push({
                 "name": item.name,
                 "tons": 0,
-                "cost": item.system.cost,
+                "cost": item.system.cost / 1000000,
                 "quantity": 1
             });
         }
@@ -279,4 +279,46 @@ export function getShipData(actor) {
     }
 
     return data;
+}
+
+export function calculateHardwareAdvantages(item) {
+    console.log("calculateHardwareAdvantages:");
+    if (!item || item.type !== "hardware") {
+        return;
+    }
+    let list = item.system.hardware.advantages.split(",");
+    let system = item.system.hardware.system;
+    if (!MGT2.SPACECRAFT_ADVANTAGES[system]) {
+        return;
+    }
+    let size = 100;
+    let power = 100;
+    let output = 100;
+    for (let a of list) {
+        console.log(a);
+        let t = a.trim().split(" ")[0];
+        let n = a.trim().split(" ")[1];
+        console.log(t);
+        console.log(n);
+
+        let adv = MGT2.SPACECRAFT_ADVANTAGES[system][t];
+        if (adv) {
+            for (let i=0; i < parseInt(n); i++) {
+                if (adv.size) {
+                    size += adv.size;
+                }
+                if (adv.power) {
+                    power += adv.power;
+                }
+                if (adv.output) {
+                    output += adv.output;
+                }
+            }
+        }
+    }
+    item.system.hardware.tons = (item.system.hardware.tons * size) / 100;
+    item.system.hardware.power = (item.system.hardware.power * power) / 100;
+    if (system === "power") {
+        item.system.hardware.power = (item.system.hardware.rating * output) / 100;
+    }
 }

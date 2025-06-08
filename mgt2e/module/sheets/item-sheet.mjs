@@ -4,6 +4,7 @@ import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {MgT2Item} from "../documents/item.mjs";
 import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
+import {calculateHardwareAdvantages} from "../helpers/spacecraft/spacecraft-utils.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -508,7 +509,11 @@ export class MgT2ItemSheet extends ItemSheet {
 
         // We only do this if the item is part of an existing ship.
         let shipTons = ship.system.spacecraft.dtons;
-        let cost = item.system.cost;
+        // Take a record of the starting values for the item.
+        let itemCost = item.system.cost;
+        let itemTons = parseFloat(item.system.hardware.tons);
+        let itemPower = item.system.hardware.power;
+        let itemRating = item.system.hardware.rating;
 
         // Calculate armour tonnage.
         if (item.system.hardware.system === "armour") {
@@ -519,12 +524,8 @@ export class MgT2ItemSheet extends ItemSheet {
 
             item.system.hardware.tons = (armour * shipTons * percent * multiplier) / 100.0;
             item.system.cost = toFloat(item.system.hardware.tonnage.cost * item.system.hardware.tons);
-            if (tons !== item.system.hardware.tons) {
-                item.update({"system.hardware.tons": item.system.hardware.tons})
-                item.update({"system.cost": item.system.cost})
-            }
         } else if (item.system.hardware.system === "bridge") {
-            cost = shipTons * 0.005;
+            let cost = shipTons * 0.005;
             let tons = 3;
             let bridgeType = item.system.hardware.bridgeType;
 
@@ -559,16 +560,10 @@ export class MgT2ItemSheet extends ItemSheet {
                 }
                 tons = bridgeTons[i];
             }
-
-            if (cost !== item.system.cost) {
-                item.system.cost = cost;
-                item.update({"system.cost": cost});
-            }
-            if (tons !== item.system.hardware.tons) {
-                item.system.hardware.tons = tons;
-                item.update({"system.hardware.tons": item.system.hardware.tons})
-            }
+            item.system.cost = cost;
+            item.system.hardware.tons = tons;
         } else if (item.system.hardware.system === "computer") {
+            let cost = itemCost;
             if (item.system.hardware.isComputerCore) {
                 switch (Number(item.system.tl)) {
                     case 9:
@@ -627,18 +622,12 @@ export class MgT2ItemSheet extends ItemSheet {
             } else if (item.system.hardware.isComputerBis || item.system.hardware.isComputerFib) {
                 cost *= 1.5;
             }
-            if (cost !== item.system.cost) {
-                item.system.cost = cost;
-                item.update({"system.cost": cost})
-            }
+            item.system.cost = cost;
         } else if (item.system.hardware.system === "fuel") {
             let tons = parseFloat(item.system.hardware.tons);
             let rating = parseFloat(item.system.hardware.rating);
-            if (tons !== rating) {
-                item.system.hardware.tons = rating;
-                item.update({"system.hardware.tons": item.system.hardware.tons})
-                item.update({"system.cost": 0})
-            }
+            item.system.hardware.cost = 0;
+            item.system.hardware.tons = rating;
         } else if (item.system.hardware.system === "power") {
             let powerPerTon = parseInt(item.system.hardware.powerPerTon);
             let tons = parseInt(item.system.hardware.tons);
@@ -652,13 +641,10 @@ export class MgT2ItemSheet extends ItemSheet {
                     tons = parseInt(rating / powerPerTon);
                     if (tons < 1) tons = 1;
                 }
-                if (tons !== parseInt(item.system.hardware.tons)) {
-                    item.system.hardware.tons = tons;
-                    item.system.cost = item.system.hardware.tonnage.cost * tons;
-                    item.update({"system.hardware.tons": item.system.hardware.tons})
-                    item.update({"system.cost": item.system.cost})
-                }
             }
+            item.system.hardware.tons = tons;
+            item.system.cost = item.system.hardware.tonnage.cost * tons;
+            item.system.hardware.power = rating;
         } else if (item.system.hardware.system === "weapon") {
             let availableWeapons = [];
             let activeWeapons = [];
@@ -692,6 +678,8 @@ export class MgT2ItemSheet extends ItemSheet {
                 tonnage = (d.tonnage * ship.system.spacecraft.dtons) / 100.0;
                 tl = d.tl;
                 pow = (d.power * ship.system.spacecraft.dtons) / 100.0;
+                console.log(item.name + ": power from calculation is " + pow);
+                console.log(d);
             }
             if (MGT2.SHIP_HARDWARE[h.system].tonnage) {
                 tonnage += MGT2.SHIP_HARDWARE[h.system].tonnage;
@@ -705,12 +693,12 @@ export class MgT2ItemSheet extends ItemSheet {
                 tonnage = tonnage * MGT2.SPACECRAFT_ADVANCES[h.advancement].tonnage;
                 cost = cost * MGT2.SPACECRAFT_ADVANCES[h.advancement].cost;
             }
+            item.system.cost = cost;
+            item.system.hardware.power = pow;
+            item.system.hardware.tons = tonnage;
 
-            if (tl !== item.system.tl || cost !== item.system.cost || pow !== h.power || tonnage !== h.tons) {
+            if (tl !== item.system.tl) {
                 item.system.tl = tl;
-                item.system.cost = cost;
-                h.power = pow;
-                h.tons = tonnage;
                 item.update({"system": item.system});
             }
         } else if (item.system.hardware.system === "common") {
@@ -719,40 +707,33 @@ export class MgT2ItemSheet extends ItemSheet {
             if (rating < 0) {
                 rating = 0;
             }
-            let tonnage = rating;
-            let cost = rating * 0.1;
-            if (rating !== h.rating || tonnage !== h.tons || cost != item.system.cost) {
-                h.tons = tonnage;
-                h.rating = rating;
-                item.system.cost = cost;
-                item.update({"system": item.system});
-            }
-
+            item.system.hardware.tons = rating;
+            item.system.cost = rating * 0.1;
         } else if (["sensor", "stateroom", "weapon"].includes(item.system.hardware.system)) {
             // Use manual values.
         } else {
-            let tons = parseFloat(item.system.hardware.tons);
+            let cost = itemCost;
+            let power = itemPower;
             let percent = parseFloat(item.system.hardware.tonnage.percent);
             let rating = parseInt(item.system.hardware.rating);
             let base = parseFloat(item.system.hardware.tonnage.tons);
-            let power = parseFloat(item.system.hardware.power);
 
             item.system.hardware.tons = base + (shipTons * percent * rating) / 100.0;
 
             if (parseFloat(item.system.hardware.tonnage.cost) > 0) {
                 item.system.cost = parseFloat(item.system.hardware.tonnage.cost * item.system.hardware.tons);
-                item.system.cost = Number(item.system.cost.toFixed(3));
-            }
-            if (tons !== item.system.hardware.tons) {
-                item.update({"system.hardware.tons": item.system.hardware.tons})
-                item.update({"system.cost": item.system.cost})
             }
             if (parseFloat(item.system.hardware.powerPerTon) > 0) {
                 item.system.hardware.power = parseFloat(item.system.hardware.powerPerTon) * item.system.hardware.tons;
             }
-            if (power !== item.system.hardware.power) {
-                item.update({"system.hardware.power": item.system.hardware.power});
-            }
+        }
+        calculateHardwareAdvantages(item);
+
+        item.system.cost = Number(item.system.cost.toFixed(3));
+        item.system.hardware.tons = Number(item.system.hardware.tons.toFixed(3));
+
+        if (itemCost !== item.system.cost || itemTons != item.system.hardware.tons || itemPower != item.system.hardware.power) {
+            item.update({"system": item.system});
         }
     }
 
