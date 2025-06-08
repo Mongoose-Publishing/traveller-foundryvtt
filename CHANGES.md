@@ -8,7 +8,7 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
-## Develop
+## 0.12.4 (Beta)
 
 * Use tons value for docking spaces if it is set, rather than the rating.
 * Remove black border around images in the journal. Add CSS for two column equipment
