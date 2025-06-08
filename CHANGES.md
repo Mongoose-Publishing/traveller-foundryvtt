@@ -14,6 +14,9 @@
 * Remove black border around images in the journal. Add CSS for two column equipment
   layout with shadow effects on images.
 * Multiply explosive damage by the effect of the attack when using explosives skill.
+* Fix bug in armour calculation for spacecraft.
+* Implement bridge options - small, command, cockpit and dual cockpit.
+* Some fixes to how floating point numbers are displayed in ship tons and cost.
 
 ## 0.12.3 (Beta)
 

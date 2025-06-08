@@ -342,13 +342,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
 
                 if (h.system === "armour") {
-                    t = (rating * h.tonnage.percent * parseInt(context.system.spacecraft.dtons)) / 100;
-                    if (config) {
-                        t = t * config.armour;
-                    }
-                    t = t * getArmourMultiplier(context.actor);
+                    t = i.system.hardware.tons;
                     context.system.spacecraft.armour += rating;
-                    i.system.hardware.tons = t;
                 } else if (h.system === "fuel") {
                     t = rating;
                     if (i.system.status !== MgT2Item.DESTROYED) {
