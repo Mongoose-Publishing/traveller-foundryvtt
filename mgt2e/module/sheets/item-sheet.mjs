@@ -1085,14 +1085,22 @@ export class MgT2ItemSheet extends ItemSheet {
     }
 
     _incrementQuantity(item) {
-        if (item.system.quantity !== undefined) {
+        if (item.type === "role") {
+            item.system.role.positions++;
+            item.update({"system.role.positions": item.system.role.positions });
+        } else if (item.system.quantity !== undefined) {
             item.system.quantity++;
             item.update({"system.quantity": item.system.quantity });
         }
     }
 
     _decrementQuantity(item) {
-        if (item.system.quantity && parseInt(item.system.quantity) > 0) {
+        if (item.type === "role") {
+            if (item.system.role.positions > 1) {
+                item.system.role.positions--;
+                item.update({"system.role.positions": item.system.role.positions});
+            }
+        } else if (item.system.quantity && parseInt(item.system.quantity) > 0) {
             item.system.quantity--;
             item.update({"system.quantity": item.system.quantity });
         }

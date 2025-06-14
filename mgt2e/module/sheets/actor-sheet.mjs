@@ -196,12 +196,15 @@ export class MgT2ActorSheet extends ActorSheet {
             };
             context.selectRoleTypes = {
                 "": "",
-                "pilot": game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot"),
-                "gunner": game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner"),
-                "engineer": game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer"),
-                "sensors": game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors"),
                 "navigator": game.i18n.localize("MGT2.Role.BuiltIn.Name.Navigator"),
-                "broker": game.i18n.localize("MGT2.Role.BuiltIn.Name.Broker")
+                "broker": game.i18n.localize("MGT2.Role.BuiltIn.Name.Broker"),
+                "engineer": game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer"),
+                "gunner": game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner"),
+                "mechanic": game.i18n.localize("MGT2.Role.BuiltIn.Name.Mechanic"),
+                "medic": game.i18n.localize("MGT2.Role.BuiltIn.Name.Medic"),
+                "pilot": game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot"),
+                "sensors": game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors"),
+                "steward": game.i18n.localize("MGT2.Role.BuiltIn.Name.Steward")
             };
         } else if (type === "traveller" || type === "npc" || type === "package") {
             context.selectSize = {
@@ -2120,7 +2123,7 @@ export class MgT2ActorSheet extends ActorSheet {
             img = "systems/mgt2e/icons/items/roles/engineer.svg";
             system.role.actions[(t++).toString(36)] = {
                 "title": "Activate Jump",
-                "action": "skill", "cha": "EDU", "skill": "engineer.jdrive",
+                "action": "skill", "cha": "EDU", "skill": "engineer.jDrive",
                 "target": 4, "dm": 0,
                 "text": "Active Jump Drive"
             }
@@ -2132,7 +2135,7 @@ export class MgT2ActorSheet extends ActorSheet {
             }
             system.role.actions[(t++).toString(36)] = {
                 "title": "Overload Drive",
-                "action": "skill", "cha": "INT", "skill": "engineer.mdrive",
+                "action": "skill", "cha": "INT", "skill": "engineer.mDrive",
                 "target": 10, "dm": 0,
                 "text": "Overload drive"
             }
@@ -2168,6 +2171,27 @@ export class MgT2ActorSheet extends ActorSheet {
             system.role.actions[(t++).toString(36)] = {
                 "title": "Broker",
                 "action": "skill", "cha": "INT", "skill": "broker", "target": 8, "dm": 0
+            }
+        } else if (roleType === "medic") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Medic");
+            img = "systems/mgt2e/icons/items/roles/medic.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Medic",
+                "action": "skill", "cha": "INT", "skill": "medic", "target": 8, "dm": 0
+            }
+        } else if (roleType === "steward") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Steward");
+            img = "systems/mgt2e/icons/items/roles/steward.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Steward",
+                "action": "skill", "cha": "INT", "skill": "steward", "target": 8, "dm": 0
+            }
+        } else if (roleType === "mechanic") {
+            itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Mechanic");
+            img = "systems/mgt2e/icons/items/roles/maintenance.svg";
+            system.role.actions[(t++).toString(36)] = {
+                "title": "Steward",
+                "action": "skill", "cha": "INT", "skill": "mechanic", "target": 8, "dm": 0
             }
         } else {
             return;

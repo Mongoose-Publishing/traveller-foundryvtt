@@ -4,6 +4,18 @@
   <div class="item-sheet">
     <div class="sidebar">
       <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+
+        <div class="shadow item-side-panel">
+            <div class="resource flex-group-center">
+                <label for="system.role.positions" class="resource-label">{{localize "MGT2.Item.Positions"}}</label>
+                <div class="incdec">
+                    <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
+                    <input class="writable" type="text" name="system.role.positions" value="{{system.role.positions}}" data-dtype="Number"/>
+                    <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="flex-group-left">
