@@ -560,6 +560,9 @@ export class MgT2ItemSheet extends ItemSheet {
                 }
                 tons = bridgeTons[i];
             }
+            if (bridgeType === "small") {
+                cost *= 0.5;
+            }
             item.system.cost = cost;
             item.system.hardware.tons = tons;
         } else if (item.system.hardware.system === "computer") {
