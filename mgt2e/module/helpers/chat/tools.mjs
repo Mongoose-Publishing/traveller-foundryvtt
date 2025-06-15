@@ -584,6 +584,13 @@ Tools.npcInlineDisplay = function(a, actor) {
     return a;
 }
 
+Tools.prettyNumber = function(value, digits) {
+    let num = parseFloat(value).toFixed(digits);
+    let str = `${num}`.replaceAll(/\.?0*$/g, "");
+
+    return str;
+}
+
 Tools.inlineSpacecraftData = function(heading, items) {
     let html = `<tr><th>${heading}</th>`;
 
@@ -604,7 +611,7 @@ Tools.inlineSpacecraftData = function(heading, items) {
     for (let i in items) {
         if (i>0) html += "<br/>";
         if (items[i].tons > 0) {
-            html += items[i].tons;
+            html += Tools.prettyNumber(items[i].tons, 2);
         } else {
             html += "&mdash;";
         }
@@ -614,7 +621,7 @@ Tools.inlineSpacecraftData = function(heading, items) {
     for (let i in items) {
         if (i>0) html += "<br/>";
         if (items[i].cost > 0) {
-            html += items[i].cost;
+            html += Tools.prettyNumber(items[i].cost, 3);
         } else {
             html += "&mdash;";
         }
@@ -633,7 +640,7 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     await calculateCost(actor);
 
     html += `<div class="spacecraft-header actor-link rollable name" data-actor-id="${actor.uuid}">`;
-    html += `<h4>${actor.name}</h4>`;
+    html += `<h3>${actor.name}</h3>`;
     let tc = actor.system.spacecraft.type;
     if (tc) {
         if (tc.match(/^[A-Z]*$/)) {
@@ -760,11 +767,14 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     if (data["stateroom"]) {
         html += Tools.inlineSpacecraftData("Staterooms", data["stateroom"]);
     }
+    if (data["common"]) {
+        html += Tools.inlineSpacecraftData("Common Areas", data["common"]);
+    }
     if (data["cargo"]) {
         html += Tools.inlineSpacecraftData("Cargo", data["cargo"]);
     }
 
-    html += `<tr><td colspan="4" style="text-align: center"><b>Total:</b> MCr${new Intl.NumberFormat(undefined, {maximumFractionDigits: 6}).format(totalCost)}</td></tr>`;
+    html += `<tr><td colspan="4" style="text-align: center"><b>Total:</b> MCr${new Intl.NumberFormat(undefined, {maximumFractionDigits: 3}).format(totalCost)}</td></tr>`;
 
 
     html += `</table>`;

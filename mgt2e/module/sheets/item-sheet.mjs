@@ -525,7 +525,7 @@ export class MgT2ItemSheet extends ItemSheet {
             item.system.hardware.tons = (armour * shipTons * percent * multiplier) / 100.0;
             item.system.cost = toFloat(item.system.hardware.tonnage.cost * item.system.hardware.tons);
         } else if (item.system.hardware.system === "bridge") {
-            let cost = shipTons * 0.005;
+            let cost = Math.ceil(shipTons / 100) * 0.5;
             let tons = 3;
             let bridgeType = item.system.hardware.bridgeType;
 

@@ -25,7 +25,6 @@ export async function calculateSpacecraftCost(actor) {
         }
     }
 
-
     await actor.update({"system.spacecraft.baseCost": spacecraft.baseCost });
     await actor.update({"system.spacecraft.cost": spacecraft.cost });
 }
@@ -53,6 +52,7 @@ export function getShipData(actor) {
     let sensor = [];
     let weapon = [];
     let stateroom = [];
+    let common = [];
     let systems = [];
     let software = [];
 
@@ -81,6 +81,8 @@ export function getShipData(actor) {
                 weapon.push(item);
             } else if (hw.system === "stateroom") {
                 stateroom.push(item);
+            } else if (hw.system === "common") {
+                common.push(item);
             } else {
                 systems.push(item);
                 console.log(`${item.name} : ${hw.system}`);
@@ -262,6 +264,17 @@ export function getShipData(actor) {
                "cost": item.system.cost * item.system.quantity,
                "quantity": item.system.quantity
             });
+        }
+    }
+    if (common) {
+        data["common"] = [];
+        for (let item of common) {
+            data["common"].push({
+                "name": item.name,
+                "tons": item.system.hardware.tons * item.system.quantity,
+                "cost": item.system.cost * item.system.quantity,
+                "quantity": item.system.quantity
+            })
         }
     }
 
