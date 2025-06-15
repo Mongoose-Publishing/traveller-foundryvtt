@@ -332,9 +332,9 @@ MGT2.SPACECRAFT_ADVANCES = {
 }
 
 MGT2.SPACECRAFT_HULLS = {
-    "reinforced": { "conflict": [ "light"], "cost": 1.5, "hits": 1.1 },
-    "light": { "conflict": [ "reinforced"], "cost": 0.75, "hits": 0.9 },
-    "military": { "cost": 1.25, "min": 5000 },
+    "reinforced": { "conflict": [ "light"], "cost": +50, "hits": 1.1 },
+    "light": { "conflict": [ "reinforced"], "cost": -25, "hits": 0.9 },
+    "military": { "cost": +25, "min": 5000 },
     /*
     "nonGravity": { "cost": 0.5, "max": 500000 },
     "basicStealth": { "conflict": [ "improvedStealth", "enhancedStealth", "advancedStealth"]},

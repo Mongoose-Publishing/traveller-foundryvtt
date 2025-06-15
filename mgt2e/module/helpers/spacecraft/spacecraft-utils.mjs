@@ -39,6 +39,25 @@ export function getShipData(actor) {
         "cost": spacecraft.baseCost,
         "power": spacecraft.dtons / 5
     }];
+    let options = spacecraft.hullOptions;
+    let extraCost = 0;
+    let hullCostModifier = 100;
+    for (let o of options.split(" ")) {
+        if (MGT2.SPACECRAFT_HULLS[o]) {
+            let option = MGT2.SPACECRAFT_HULLS[o];
+            if (option.cost) {
+                extraCost = (spacecraft.baseCost * option.cost) / 100;
+                hullCostModifier += option.cost;
+                data["hull"].push({
+                    "name": game.i18n.localize("MGT2.Spacecraft.Hull." + o),
+                    "tons": 0,
+                    "cost": extraCost,
+                    "power": 0
+                })
+            }
+        }
+    }
+    //data["hull"][0].cost += extraCost;
 
     // Break everything down into smaller piles.
     let armour = [];
@@ -97,7 +116,7 @@ export function getShipData(actor) {
             {
                 "name": armour[0].name + ": " + armour[0].system.hardware.rating,
                 "tons": armour[0].system.hardware.tons,
-                "cost": armour[0].system.cost
+                "cost": (armour[0].system.cost * hullCostModifier) / 100
             }
         ];
     }

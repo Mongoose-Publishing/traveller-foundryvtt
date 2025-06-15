@@ -1894,6 +1894,17 @@ section.id-card .showIdCard {
   background-color: #b03010;
 }
 
+.pill-container .hull-pill {
+  background-color: #f1511b;
+  color: white;
+}
+
+.pill-container .hull-pill .fas {
+  background-color: #f1511b !important;
+  color: black;
+}
+
+
 div.chat-package {
   background-color: #404040;
   border-radius: 0 30px 0 0;

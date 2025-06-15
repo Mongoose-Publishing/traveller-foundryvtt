@@ -281,6 +281,15 @@ export class MgT2ActorSheet extends ActorSheet {
         } else if (dtons >= 25000) {
             hits = Math.floor(dtons / 2);
         }
+        let options = actorData.spacecraft.hullOptions;
+        for (let o of options.split(" ")) {
+            if (MGT2.SPACECRAFT_HULLS[o]) {
+                let option = MGT2.SPACECRAFT_HULLS[o];
+                if (option.hits) {
+                    hits *= option.hits;
+                }
+            }
+        }
         let config = null;
         if (actorData.spacecraft.configuration) {
             config = MGT2.SHIP_CONFIGURATION[actorData.spacecraft.configuration];
@@ -378,7 +387,7 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                 } else if (["stateroom", "bridge", "sensor"].includes(h.system)) {
                     // Don't override.
-                    console.log(i);
+                    //console.log(i);
                 } else {
                     if (t === 0) {
                         t = parseFloat(h.tonnage.percent);

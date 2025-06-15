@@ -8,6 +8,16 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
+## Develop
+
+* Added new icons for extra ship roles and several ship hardware item types.
+* Engineering skills in some ship roles were wrong, this has been fixed.
+* Added more common ship roles to the list in the 'add role' drop down.
+* Fixed some cost calculations for spacecraft.
+* Spacecraft listed in a journal now show up in the table of contents.
+* Fixed bug where cost of small bridge wasn't halved.
+* Added support for reinforced and light hulls.
+
 ## 0.12.4 (Beta)
 
 * Use tons value for docking spaces if it is set, rather than the rating.
