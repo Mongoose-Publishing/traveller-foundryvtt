@@ -136,6 +136,18 @@
                     <label for="system.spacecraft.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
                     <input class="field-value" readonly type="text" value="{{system.spacecraft.power.used}} / {{system.spacecraft.power.max}}"/>
                 </div>
+
+                <div class="resource flex-group-left">
+                    <select class="field-value hull-selector">
+                        {{selectOptions selectHullConfig }}
+                    </select>
+                </div>
+
+                <div class="resource flex-groupp-left grid-span-4">
+                    <div class="pill-container">
+                        {{{showSpacecraftHullTraits . system.spacecraft.hullOptions}}}
+                    </div>
+                </div>
             </div>
 
             <div class="shadow flex-group-left">

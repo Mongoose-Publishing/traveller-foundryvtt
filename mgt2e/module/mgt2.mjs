@@ -1946,6 +1946,26 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
     return html;
 });
 
+Handlebars.registerHelper('showSpacecraftHullTraits', function(key, traits) {
+    let html = "";
+    let list = traits.split(" ");
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let trait = list[i].trim();
+            html += `<span class='pill hull-pill' data-option-id='${trait}' title='${game.i18n.localize("MGT2.Trade."+trait)}'>`;
+            html += `&nbsp;${game.i18n.localize("MGT2.Spacecraft.Hull." + trait)} `;
+            if (key.owner) {
+                html += `&nbsp;<i class="fas fa-xmark option-remove"> </i>`;
+            } else {
+                html += "&nbsp;";
+            }
+            html += "</span>";
+        }
+    }
+
+    return html;
+});
+
 Handlebars.registerHelper('showAdvantages', function(key, traits) {
    console.log("showAdvantages: [" + traits + "]");
    let hardware = key.item.system.hardware;

@@ -170,12 +170,6 @@ export class MgT2ActorSheet extends ActorSheet {
             for (let i=0; i < 10; i++) {
                 context.selectComputerNodes[i] = "x"+i;
             }
-            context.selectHullOptions = {};
-            let currentHullOptions = actorData.spacecraft.hullOptions;
-            for (let c in CONFIG.MGT2.SPACECRAFT_HULLS) {
-                context.selectHullOptions[c] = c;
-            }
-
             context.selectSystemTypes = {
                 "": "",
                 "armour": game.i18n.localize("MGT2.Spacecraft.System.armour"),
@@ -206,6 +200,29 @@ export class MgT2ActorSheet extends ActorSheet {
                 "sensors": game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors"),
                 "steward": game.i18n.localize("MGT2.Role.BuiltIn.Name.Steward")
             };
+
+            // Hull Options
+            context.selectHullConfig = {
+                "": ""
+            }
+            let hullOptions = actorData.spacecraft.hullOptions;
+            for (let o in MGT2.SPACECRAFT_HULLS) {
+                if (hullOptions.indexOf(o) >= 0) {
+                    continue;
+                }
+                let option = MGT2.SPACECRAFT_HULLS[o];
+                if (option.conflict) {
+                    let conflict = false;
+                    for (let c of option.conflict) {
+                        if (hullOptions.indexOf(c) >= 0) {
+                            conflict = true;
+                            continue;
+                        }
+                    }
+                    if (conflict) continue;
+                }
+                context.selectHullConfig[o] = game.i18n.localize("MGT2.Spacecraft.Hull." + o);
+            }
         } else if (type === "traveller" || type === "npc" || type === "package") {
             context.selectSize = {
                 "-4": "Small -4",
@@ -375,7 +392,7 @@ export class MgT2ActorSheet extends ActorSheet {
                         i.system.hardware.tons = t * Number(i.system.quantity);
                     }
                 }
-                console.log("Tonnage [" + i.name + "]: " + (t * i.system.quantity));
+                //console.log("Tonnage [" + i.name + "]: " + (t * i.system.quantity));
                 dtonsUsed += t * i.system.quantity;
 
                 if (h.system === "j-drive" && i.system.status === MgT2Item.ACTIVE) {
@@ -947,6 +964,17 @@ export class MgT2ActorSheet extends ActorSheet {
                 const location = div.data("id");
                 this.actor.fixCriticalEffect(location);
             });
+
+            html.find('.hull-selector').click(ev => {
+                const value = $(ev.currentTarget).val();
+                void this._spacecraftSelectHullOption(value);
+            });
+
+            html.find('.option-remove').click(ev => {
+                const o = $(ev.currentTarget).parents(".hull-pill");
+                void this._spacecraftRemoveHullOption(o.data("optionId"));
+            });
+
         } else if (this.actor.type === "traveller" || this.actor.type === "npc") {
             html.find('.roll-upp').click(ev => {
                this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });
@@ -1077,6 +1105,26 @@ export class MgT2ActorSheet extends ActorSheet {
     async _removeEffect(effectId) {
         console.log("Remove effect " + effectId);
         this.actor.deleteEmbeddedDocuments("ActiveEffect", [ effectId ]);
+    }
+
+    async _spacecraftSelectHullOption(selectedOption) {
+        console.log(selectedOption);
+        if (this.actor.system.spacecraft.hullOptions) {
+            this.actor.system.spacecraft.hullOptions += " " + selectedOption;
+        } else {
+            this.actor.system.spacecraft.hullOptions = selectedOption;
+        }
+        await this.actor.update({'system.spacecraft.hullOptions': this.actor.system.spacecraft.hullOptions});
+    }
+
+    async _spacecraftRemoveHullOption(selectedOption) {
+        if (this.actor.system.spacecraft.hullOptions) {
+            let o = this.actor.system.spacecraft.hullOptions;
+            o = o.replace(selectedOption, "");
+            o = o.replace("  ", " ").trim();
+            this.actor.system.spacecraft.hullOptions = o;
+            await this.actor.update({'system.spacecraft.hullOptions': this.actor.system.spacecraft.hullOptions});
+        }
     }
 
     async _creatureSelectBehaviour(selectedBehaviour) {
