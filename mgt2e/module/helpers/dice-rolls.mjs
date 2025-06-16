@@ -409,7 +409,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
         if (weapon && attackOptions.isParry) {
             let parryBonus = parseInt(weapon.system.weapon.parryBonus);
             if (actor) {
-                content += `<b>Parry DM:</b> ${skillDM + parryBonus}<br/><br/>`;
+                content += `<b>Parry DM:</b> ${attackOptions.skillDM + parryBonus}<br/><br/>`;
             } else {
                 content += `<b>Parry DM:</b> ${parryBonus}<br/><br/>`;
             }

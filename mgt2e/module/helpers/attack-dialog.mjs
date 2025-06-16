@@ -312,15 +312,23 @@ export class MgT2AttackDialog extends Application {
         }
         let rollType = html.find(".skillDialogRollType")[0].value;
 
+        if (this.weapon.hasTrait("shield")) {
+            let shield =  getTraitValue(this.weapon.system.weapon.traits, "shield");
+            console.log("Shield trait is " + shield);
+            if (this.parryScore < 0) {
+                this.parryScore = parseInt(shield) - 1;
+            } else {
+                this.parryScore += parseInt(shield);
+            }
+        }
+
         let attackOptions = {
             "skillDM": this.parryScore,
             "dm": dm,
             "rollType": rollType,
             "isParry": true
         }
-
         rollAttack(this.actor, this.weapon, attackOptions);
-        //rollAttack(this.actor, this.weapon, this.parryScore, dm, rollType, null, null, true);
 
         this.close();
     }

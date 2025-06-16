@@ -17,6 +17,8 @@
 * Spacecraft listed in a journal now show up in the table of contents.
 * Fixed bug where cost of small bridge wasn't halved.
 * Added support for reinforced and light hulls.
+* Fixed bug when parrying with a weapon.
+* Fixed implementation of Shield trait for weapons.
 
 ## 0.12.4 (Beta)
 

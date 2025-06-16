@@ -39,6 +39,43 @@
         "duplicateSource": null
       },
       "_key": "!journal.pages!s8DAOTe8r1s1TE7k.3cfgP1fZ6XPrvCmF"
+    },
+    {
+      "sort": 200000,
+      "name": "Weapons",
+      "type": "text",
+      "_id": "atkiDLVflVo0A6qx",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Weapons are a special type of item, and each weapon can have one or more traits applied to them. The following weapon traits have rules implemented to handle them automatically.</p><h2>Traits</h2><h3>AP (X)</h3><p>Reduces the protective value of the target's armour.</p><h3>Auto (X)</h3><p>Automatic weapon. Allows weapons to be fired in burst or full auto mode when an attack is made, either making multiple attacks or giving a bonus to damage. Ammunition is reduced by the auto value.</p><h3>Blast (X)</h3><p>Causes blast damage. If the damage value is dragged to a map, then the blast area of effect will be displayed on the map. There are system options to apply a 'jitter' to the location if the attack misses.</p><h3>Bulky</h3><p>Gives a penalty to attack rolls if Traveller's strength is &lt; 9.</p><h3>Dangerous</h3><p>A message will be output if the weapon explodes.</p><h3>Destructive</h3><p>Multiplies the damage (and effect) done by 10.</p><h3>Lo-Pen (X)</h3><p>Multiplies target's protection by the lo-pen value.</p><h3>One Use</h3><p>After an attack is made, the quantity of this weapon is reduced by one. Useful for grenades or other weapons which have a single use.</p><h3>Protection (X)</h3><p>Provides armour to the Traveller whilst the weapon is active. This stacks with all other types of armour. Provided by some types of shields.</p><h3>Radiation</h3><p>Does radiation damage. This will be listed in the damage output, and applied to Travellers when the damage is dragged to their sheet.</p><h3>PSI AP (X)</h3><p>The AP of the weapon is equal to the PSI DM of the wielder times X. Extra PSI points can be spent to increase the AP by X.</p><h3>Psi Damage (X)</h3><p>If PSI DM is greater than zero, then this multiplied by X is added as a damage bonus. This is in addition to any damage bonus from STR.</p><p>Psi Points can be spent to increase damage, each point does a further X damage.</p><p>Note that the behaviour of Psi Damage &gt; 1 has been extrapolated from the rules for Psi AP.</p><h3>Shield (X)</h3><p>Uses the shield rules. Melee is minimum of the user's weapon skill and the shield skill when making a parry. You should also set the parry score for the weapon. The Shield (X) does not add a parry bonus, it just sets a minimum for the melee skill.</p><p>Most shields have Shield (0) and Parry +1</p><h3>Stun</h3><p>Does stun damage.</p><h3>Very Bulky</h3><p>Gives a penalty to using a weapon is STR is less than 12.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "XsiBG1ohlPVbUVQC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.12.4.2-DEV",
+        "createdTime": 1750105153543,
+        "modifiedTime": 1750109997998,
+        "lastModifiedBy": "XsiBG1ohlPVbUVQC"
+      },
+      "_key": "!journal.pages!s8DAOTe8r1s1TE7k.atkiDLVflVo0A6qx"
     }
   ],
   "sort": 250000,
