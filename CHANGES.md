@@ -21,9 +21,10 @@
 * Fixed implementation of Shield trait for weapons.
 * Reinforced and Light hulls for spacecraft now selectable and implemented.
 * Added documentation for the implemented weapon traits.
-* Fixed cost calculation of smallc bridges.
+* Fixed cost calculation of small bridges.
 * Fixed display of some dynamic variables on spacecraft sheet which were forcing
   an actor update every time sheet was opened.
+* Updated and resized vehicle tokens.
 
 ## 0.12.4 (Beta)
 
