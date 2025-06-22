@@ -119,22 +119,34 @@
                 <div class="resource flex-group-center"
                      title="{{localize 'MGT2.TravellerSheet.JDriveText'}}{{#unless system.spacecraft.jdrive}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.jdrive" class="field-label">{{localize 'MGT2.TravellerSheet.JDrive'}}</label>
-                    <input class="field-value" name="system.spacecraft.jdrive" readonly type="text" value="{{system.spacecraft.jdrive}}"/>
+                    {{#if system.spacecraft.jdrive includeZero=false}}
+                        <span class="field-value">J-{{system.spacecraft.jdrive}}</span>
+                    {{else}}
+                        <span class="field-value">-</span>
+                    {{/if}}
                 </div>
                 <div class="resource flex-group-center"
                      title="{{localize 'MGT2.TravellerSheet.MDriveText'}}{{#unless system.spacecraft.mdrive}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.mdrive" class="field-label">{{localize 'MGT2.TravellerSheet.MDrive'}}</label>
-                    <input class="field-value" name="system.spacecraft.mdrive" readonly type="text" value="{{system.spacecraft.mdrive}}G"/>
+                    {{#if system.spacecraft.mdrive includeZero=false}}
+                        <span class="field-value">{{system.spacecraft.mdrive}}G</span>
+                    {{else}}
+                        <span class="field-value">-</span>
+                    {{/if}}
                 </div>
                 <div class="resource flex-group-center"
                      title="{{localize 'MGT2.TravellerSheet.RDriveText'}}{{#unless system.spacecraft.rdrive}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.rdrive" class="field-label">{{localize 'MGT2.TravellerSheet.RDrive'}}</label>
-                    <input class="field-value" name="system.spacecraft.rdrive" readonly type="text" value="{{system.spacecraft.rdrive}}G"/>
+                    {{#if system.spacecraft.rdrive includeZero=false}}
+                        <span class="field-value">{{system.spacecraft.rdrive}}G</span>
+                    {{else}}
+                        <span class="field-value">-</span>
+                    {{/if}}
                 </div>
                 <div class="resource flex-group-center"
                      title="{{localize 'MGT2.TravellerSheet.PowerText'}}{{#unless system.spacecraft.power.max}}{{localize 'MGT2.TravellerSheet.AddHardwareToSet'}}{{/unless}}">
                     <label for="system.spacecraft.power.max" class="field-label">{{localize 'MGT2.TravellerSheet.Power'}}</label>
-                    <input class="field-value" readonly type="text" value="{{system.spacecraft.power.used}} / {{system.spacecraft.power.max}}"/>
+                    <span class="field-value">{{system.spacecraft.power.used}} / {{system.spacecraft.power.max}}</span>
                 </div>
 
                 <div class="resource flex-group-left">
@@ -143,7 +155,7 @@
                     </select>
                 </div>
 
-                <div class="resource flex-groupp-left grid-span-4">
+                <div class="resource flex-group-left grid-span-4">
                     <div class="pill-container">
                         {{{showSpacecraftHullTraits . system.spacecraft.hullOptions}}}
                     </div>

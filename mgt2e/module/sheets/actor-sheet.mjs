@@ -450,8 +450,6 @@ export class MgT2ActorSheet extends ActorSheet {
             actorData.spacecraft.fuel.value = Math.min(actorData.spacecraft.fuel.value, fuelTotal);
             context.actor.update({"system.spacecraft.fuel": actorData.spacecraft.fuel });
         }
-
-
         if (bandwidthTotal !== actorData.spacecraft.processing) {
             actorData.spacecraft.processing = bandwidthTotal;
             context.actor.update({"system.spacecraft.processing": bandwidthTotal});

@@ -1341,6 +1341,10 @@ input.field-value {
   vertical-align: text-bottom;
 }
 
+span.field-value {
+  padding-top: 3px;
+}
+
 .field-label-subtle {
   font-weight: bold;
   display: inline-block;
