@@ -8,7 +8,7 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
-## Develop
+## 0.12.5 (Beta)
 
 * Added new icons for extra ship roles and several ship hardware item types.
 * Engineering skills in some ship roles were wrong, this has been fixed.
@@ -19,6 +19,9 @@
 * Added support for reinforced and light hulls.
 * Fixed bug when parrying with a weapon.
 * Fixed implementation of Shield trait for weapons.
+* Reinforced and Light hulls for spacecraft now selectable and implemented.
+* Added documentation for the implemented weapon traits.
+* Fixed cost calculation of smallc bridges.
 
 ## 0.12.4 (Beta)
 
