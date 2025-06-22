@@ -78,6 +78,7 @@ caption {
     text-transform: uppercase;
     border-bottom: 3px solid #f1511b;
     font-weight: bold;
+    font-size: 24pt;
 }
 
 .journal-sheet h2 {
@@ -85,6 +86,7 @@ caption {
     text-transform: uppercase;
     border: none;
     font-weight: bold;
+    font-size: 20pt;
 }
 
 .journal-sheet h3 {
@@ -92,12 +94,30 @@ caption {
     text-transform: uppercase;
     border: none;
     font-weight: bold;
+    font-size: 18pt;
 }
 
 .journal-sheet h4 {
     color: black;
     border: none;
     font-weight: bold;
+    font-size: 16pt
+}
+
+.journal-sheet h5 {
+  color: black;
+  border: none;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 14pt
+}
+
+.journal-sheet h6 {
+  color: black;
+  border: none;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 12pt
 }
 
 
