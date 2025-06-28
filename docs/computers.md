@@ -7,7 +7,15 @@ They have processing power.
 They need to have a list of software.
 They need an interface.
 
-The interface is just a software type. We could either hardcode in the interface, or just
+## Software Fields
+
+  * Interface - the type of interface that it provides:
+    * None
+    * Agent
+    * Intellect
+    * Intelligent
+
+The interface is just a software type. We could either hardcode in the hardware, or just
 treat it as a type of software.
 
 What are the software types?

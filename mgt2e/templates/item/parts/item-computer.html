@@ -1,0 +1,37 @@
+
+{{#if system.computer}}
+<div class="shadow">
+    <h3>Installed Software</h3>
+    <ol class="item software-list">
+        <li class="item flexrow software-header">
+            <div class="software-header sw-pkg">Package</div>
+            <div class="software-header sw-bw">B/width</div>
+            <div class="software-header sw-skill">Skill</div>
+            <div class="software-header sw-action">Action</div>
+        </li>
+
+        {{#each SOFTWARE as |sw id|}}
+            <li class="item flexrow" data-id="{{sw._id}}">
+                <div class="sw-pkg">{{sw.name}}</div>
+                <div class="sw-bw">{{sw.system.software.bandwidth}}</div>
+                <div class="sw-skill">
+                    {{#if sw.system.software.skill}}
+                        {{skillToLabel sw.system.software.skill}}
+                        {{#if (ifEquals sw.system.software.type "expert")}}/{{sw.system.software.skillLevel}}{{/if}}
+                        {{#if (ifEquals sw.system.software.type "task")}}+{{sw.system.software.skillLevel}}{{/if}}
+                    {{/if}}
+                </div>
+                <div class="sw-action">
+                    {{#if (ifEquals sw.system.software.type "expert")}}
+                        <i class="fa fa-dice exec-software"> </i>
+                    {{else if (ifEquals sw.system.software.type "task")}}
+                        <i class="fa fa-dice exec-software"> </i>
+                    {{else}}
+                        -
+                    {{/if}}
+                </div>
+            </li>
+        {{/each}}
+    </ol>
+</div>
+{{/if}}

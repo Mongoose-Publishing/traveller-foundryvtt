@@ -8,6 +8,15 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
+## Develop
+
+* Added agent option to skill macros, so a skill can be rolled without reference to an actor.
+* Added `installedOn` field to software, to specify which device it is installed on.
+* Updated software item sheet, to allow skills and interface to be set.
+* Software items can now be added to an item with an embedded computer. Computers display a list
+  of software they are running, and it can be executed from the item sheet.
+* Skills can now be rolled from computer items, making use of software installed.
+
 ## 0.12.5 (Beta)
 
 * Added new icons for extra ship roles and several ship hardware item types.

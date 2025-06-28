@@ -344,8 +344,10 @@
         "software": {
           "class": "personal",
           "type": "generic",
+          "interface": "none",
           "bandwidth": 0
-        }
+        },
+        "installedOn": null
       },
       "term": {
           "term": {

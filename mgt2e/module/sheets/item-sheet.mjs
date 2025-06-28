@@ -129,31 +129,6 @@ export class MgT2ItemSheet extends ItemSheet {
             ];
         }
 
-        if (context.item.type === "software") {
-            if (context.item.parent && !context.item.system.status) {
-                context.item.system.status = MgT2Item.RUNNING;
-                context.item.update({"system.status": context.item.system.status });
-            } else if (!context.item.parent && context.item.system.status) {
-                context.item.system.status = null;
-                context.item.update({"system.status": context.item.system.status });
-            }
-            context.SOFTWARE_CLASS = {
-                "personal": game.i18n.localize("MGT2.Effects.Software.Class.personal"),
-                "spacecraft": game.i18n.localize("MGT2.Effects.Software.Class.spacecraft")
-            }
-            context.SOFTWARE_TYPE = {
-                "generic": game.i18n.localize("MGT2.Effects.Software.Type.generic"),
-                "interface": game.i18n.localize("MGT2.Effects.Software.Type.interface"),
-                "bonus": game.i18n.localize("MGT2.Effects.Software.Type.bonus")
-            }
-
-            context.SOFTWARE_EFFECT = { "": "-" };
-            context.SOFTWARE_EFFECT["evade"] = "Evade";
-            context.SOFTWARE_EFFECT["init"] = "Initiative";
-            context.SOFTWARE_EFFECT["fireControl"] = "Fire Control";
-            context.SOFTWARE_EFFECT["tactics"] = "Tactics";
-        }
-
         if (context.item.type === "hardware") {
             context.SHIP_TL = {};
             let maxTL = 25;
@@ -462,6 +437,15 @@ export class MgT2ItemSheet extends ItemSheet {
                 "improveInit": game.i18n.localize("MGT2.Role.Special.ImproveInitiative"),
                 "evade": game.i18n.localize("MGT2.Role.Special.Evade"),
                 "repair": game.i18n.localize("MGT2.Role.Special.Repair"),
+            }
+        }
+        if (context.item.system.computer && context.item.parent) {
+            console.log("LOOKING FOR SOFTWARE");
+            // This item has an embedded computer.
+            context.SOFTWARE = [];
+            for (let s of context.item.system.computer.software) {
+                let software = context.item.parent.items.get(s);
+                context.SOFTWARE.push(software);
             }
         }
 
@@ -783,13 +767,23 @@ export class MgT2ItemSheet extends ItemSheet {
         html.find(".embed-computer").click(ev => {
            this.item.system.computer = {
                "processing": 0,
-               "software": {}
+               "software": []
            }
            this.item.update({"system.computer": this.item.system.computer });
         });
         html.find(".remove-computer").click(ev => {
            this.item.system.comuter = null;
            this.item.update({[`system.-=computer`]: null});
+        });
+        html.find(".exec-software").click(ev => {
+           console.log("SOFTWARE EXEC");
+           const p = $(ev.currentTarget).parents(".item");
+           const id = p.data("id");
+           console.log(id);
+
+           const software = this.item.parent.items.get(id);
+           this.item.execSoftware(software);
+
         });
 
         html.find(".item-add-wpn").click(ev => {

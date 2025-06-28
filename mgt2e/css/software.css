@@ -1,0 +1,68 @@
+.software-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  color: #444;
+  margin-bottom: 24px;
+}
+
+.software-list .software-header item {
+  font-weight: bold;
+  vertical-align: center;
+}
+
+.software-list .software-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  color: black;
+  font-weight: bold;
+}
+
+li.software-header {
+  font-weight: bold;
+  -webkit-box-align: start;
+  text-align: left;
+  align-content: space-evenly;
+}
+
+li.software-header div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+
+
+ol.software-list div.item-controls {
+  flex: none;
+  width: 4em;
+  text-align: right;
+}
+
+ol.software-list div.sw-pkg {
+  flex: 1;
+  width: 7em;
+}
+
+ol.software-list div.sw-bw {
+  flex: none;
+  width: 5em;
+}
+
+ol.software-list div.sw-skill {
+  width: 7em;
+  flex: 1;
+}
+
+ol.software-list div.sw-action {
+  flex: none;
+  width: 3em;
+}

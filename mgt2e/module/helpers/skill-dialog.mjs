@@ -1,5 +1,6 @@
-import {rollSkill} from "./dice-rolls.mjs";
+import {rollSkill, skillLabel} from "./dice-rolls.mjs";
 import {MgT2AddSkillDialog} from "./add-skill-dialog.mjs";
+import {MGT2} from "./config.mjs";
 
 export class MgT2SkillDialog extends Application {
     static get defaultOptions() {
@@ -36,11 +37,18 @@ export class MgT2SkillDialog extends Application {
                 this.skillId = this.skillFqn.split(".")[0];
                 this.specId = this.skillFqn.split(".")[1];
 
-                this.skillData = actor.system.skills[this.skillId];
-                if (this.specId === "") {
-                    this.specId = null;
-                } else if (this.specId && this.skillData.specialities) {
-                    this.specData = this.skillData.specialities[this.specId];
+                if (actor) {
+                    this.skillData = actor.system.skills[this.skillId];
+                    if (this.specId === "") {
+                        this.specId = null;
+                    } else if (this.specId && this.skillData.specialities) {
+                        this.specData = this.skillData.specialities[this.specId];
+                    }
+                } else {
+                    this.skillData = MGT2.SKILLS[this.skillId];
+                    if (this.specId) {
+                        this.specData = this.skillData.specialities[this.specId];
+                    }
                 }
             } else {
                 this.skillData = actor.system.skills[this.skillId];
@@ -52,9 +60,9 @@ export class MgT2SkillDialog extends Application {
 
         this.skillOptions = skillOptions;
         this.actor = actor;
-        const data = actor.system;
+        const data = actor?actor.system:null;
 
-        this.value = data.skills["jackofalltrades"].value - 3;
+        this.value = data?data.skills["jackofalltrades"].value - 3:-3;
         this.cha = skillOptions.cha;
         this.expert = 0;
         this.augment = 0;
@@ -66,6 +74,23 @@ export class MgT2SkillDialog extends Application {
         this.target = skillOptions.difficulty?skillOptions.difficulty:8;
         this.skillText = "";
         this.description = skillOptions.description;
+
+        if (skillOptions.agent) {
+            // This is a direct skill roll without a character.
+            this.actor = null;
+            this.data = null;
+            this.cha = null;
+            this.value = skillOptions.level;
+
+            this.options.title = skillOptions.agent;
+            console.log("THIS IS AN AGENT");
+            this.skillText = skillLabel(this.skillData, this.skillId);
+            if (this.specId) {
+                this.skillText += " (" + skillLabel(this.specData, this.specId) + ")";
+            }
+
+            return;
+        }
 
         if (this.cha && data.characteristics && data.characteristics[this.cha]) {
             if (!this.skillData) {
@@ -125,9 +150,11 @@ export class MgT2SkillDialog extends Application {
     getData() {
         let CHA_SELECT = {};
         CHA_SELECT["-"] = "-";
-        for (let c in this.data.characteristics) {
-            if (this.data.characteristics[c].show) {
-                CHA_SELECT[c] = c;
+        if (this.data) {
+            for (let c in this.data.characteristics) {
+                if (this.data.characteristics[c].show) {
+                    CHA_SELECT[c] = c;
+                }
             }
         }
 
@@ -152,7 +179,7 @@ export class MgT2SkillDialog extends Application {
             "spec": this.specData,
             "skillText": this.skillText,
             "value": this.value,
-            "showCha": (this.skillData && this.actor.type !== "creature"),
+            "showCha": (this.actor && this.skillData && this.actor.type !== "creature"),
             "chaOnly": this.chaOnly,
             "dm": this.defaultDm,
             "dicetype": "normal",
@@ -160,7 +187,7 @@ export class MgT2SkillDialog extends Application {
             "characteristic": this.cha,
             "target": this.target,
             "boonBane": this.boonBane,
-            "showEdit": !(this.actor.parent),
+            "showEdit": !(this.actor && this.actor.parent),
             "CHA_SELECT": CHA_SELECT,
             "BOON_SELECT": BOON_SELECT,
             "TARGET_SELECT": TARGET_SELECT
@@ -188,18 +215,20 @@ export class MgT2SkillDialog extends Application {
         let rollType = html.find(".skillDialogRollType")[0].value;
         let difficulty = parseInt(html.find(".skillDialogDifficulty")[0].value);
 
-        if (remember && this.skillId) {
-            if (this.spec) {
-                this.actor.system.skills[this.skillId].specialities[this.specId].default = cha;
-            } else {
-                this.actor.system.skills[this.skillId].default = cha;
+        if (this.actor) {
+            if (remember && this.skillId) {
+                if (this.spec) {
+                    this.actor.system.skills[this.skillId].specialities[this.specId].default = cha;
+                } else {
+                    this.actor.system.skills[this.skillId].default = cha;
+                }
+                this.actor.update({"system.skills": this.actor.system.skills});
+            } else if (this.skillId) {
+                console.log(this.skillId);
+                this.cha = this.actor.system.skills[this.skillId].default;
             }
-            this.actor.update({ "system.skills": this.actor.system.skills });
-        } else if (this.skillId) {
-            console.log(this.skillId);
-            this.cha = this.actor.system.skills[this.skillId].default;
         }
-        rollSkill(this.actor, this.skillFqn, {
+        let options = {
             "cha": cha,
             "dm": parseInt(dm),
             "rollType": rollType,
@@ -208,7 +237,15 @@ export class MgT2SkillDialog extends Application {
             "success": this.skillOptions.success,
             "failure": this.skillOptions.failure,
             "cost": this.skillOptions.cost
-        });
+        };
+        if (this.skillOptions.agent) {
+            options.agent = this.skillOptions.agent;
+            options.level = this.skillOptions.level;
+        }
+        if (this.skillOptions.expert) {
+            options.expert = this.skillOptions.expert;
+        }
+        await rollSkill(this.actor, this.skillFqn, options);
 
         this.close();
     }

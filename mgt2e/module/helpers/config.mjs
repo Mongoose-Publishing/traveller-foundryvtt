@@ -836,7 +836,13 @@ MGT2.SOFTWARE_EFFECTS = {
         }
     },
     "personal": {
-
+        "type": [ "generic", "interface", "bonus" ],
+        "bonus": {
+            "chaDM": { "targets": "char", "value": true, "property": "augdm", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
+            "skillAug":  { "targets": "skills", "value": true, "property": "augment", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
+            "skillDM": { "targets": "skills", "value": true, "property": "augdm", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
+            "skillExpert": { "targets": "skills", "value": true, "property": "expert", mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE }
+        }
     }
 }
 MGT2.COMPUTERS = {

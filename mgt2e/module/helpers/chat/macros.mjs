@@ -244,7 +244,7 @@ MgT2eMacros.skillCheck = function(args, ask) {
     let target = args.target?args.target:8;
     let dm = args.dm?Number(args.dm):0;
 
-    if (!ask && game.users.current.isGM && !canvas.tokens.controlled.length) {
+    if (!args.agent && !ask && game.users.current.isGM && !canvas.tokens.controlled.length) {
         // If current user is the GM, when trying to roll a skill, if no tokens
         // are selected then turn it into a skill request.
         ask = true;
@@ -315,7 +315,7 @@ MgT2eMacros.skillCheck = function(args, ask) {
         ChatMessage.create(chatData, {});
 
     } else {
-        game.mgt2e.rollSkillMacro(skillFqn, {
+        let options = {
             "difficulty": target,
             "cha": args.cha,
             "dm": dm,
@@ -323,7 +323,19 @@ MgT2eMacros.skillCheck = function(args, ask) {
             "success": args.success,
             "failure": args.failure,
             "cost": args.cost?args.cost:0
-        });
+        }
+        if (args.agent) {
+            // This is a direct skill roll with a specified skill level.
+            // It does not use a character's skill.
+            options.cha = "-";
+            options.agent = args.agent;
+            if (args.level !== undefined) {
+                options.level = args.level;
+            } else {
+                options.level = -3;
+            }
+        }
+        game.mgt2e.rollSkillMacro(skillFqn, options);
     }
 };
 

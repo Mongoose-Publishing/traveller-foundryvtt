@@ -23,6 +23,13 @@ export class MgT2Item extends Item {
         "security": {},
     }
 
+    static SOFTWARE_INTERFACE = {
+        "none": { "id": "none", "rank": 0 },
+        "agent": { "id": "agent", "rank": 1, "skills": true },
+        "intelligent": { "id": "intelligent", "rank": 2, "skills": true },
+        "intellect": { "id": "intellect", "rank": 3, "skills": true, "untrained": false }
+    }
+
     /**
      * Augment the basic Item data model with additional dynamic data.
      */
@@ -272,5 +279,63 @@ export class MgT2Item extends Item {
             }
             this.update({"system.status": this.system.status});
         }
+    }
+
+    getSoftwareInterface() {
+        let iface = MgT2Item.SOFTWARE_INTERFACE["none"];
+        if (this.parent && this.system?.computer?.software) {
+            for (let s of this.system.computer.software) {
+                let software = this.parent.items.get(s);
+                let itype = software.system.software.interface;
+                if (MgT2Item.SOFTWARE_INTERFACE[itype]?.rank > iface.rank) {
+                    iface = MgT2Item.SOFTWARE_INTERFACE[itype];
+                }
+            }
+        }
+        return iface;
+    }
+
+    execSoftware(software) {
+        console.log("Executing software");
+
+        let skillFqn = software.system.software.skill;
+        let skillLevel = software.system.software.skillLevel;
+
+        let iface = this.getSoftwareInterface();
+
+        if (software.system.software.type === "task") {
+            // Computer does it by itself.
+            let options = {
+                "difficulty": 8,
+                "agent": software.name,
+                "level": skillLevel
+            }
+            game.mgt2e.rollSkillMacro(skillFqn, options);
+        } else if (software.system.software.type === "expert") {
+            // Expert system.
+            if (!iface.skills) {
+                ui.notifications.warn("Computer must have at least an Agent interface");
+                return;
+            }
+            let skillId = skillFqn;
+            let specId = null;
+            if (skillId && skillId.indexOf(".")) {
+                skillId = skillFqn.split(".")[0];
+                specId = skillFqn.split(".")[1];
+            }
+            let skill = this.parent.system.skills[skillId];
+            let spec = null;
+            if (specId) {
+                spec = skill.specialities[specId];
+            }
+            let options = {
+                "difficulty": 8,
+                "actor": this.parent,
+                "expert": skillLevel
+            }
+            game.mgt2e.rollSkillMacro(skillFqn, options);
+
+        }
+
     }
 }

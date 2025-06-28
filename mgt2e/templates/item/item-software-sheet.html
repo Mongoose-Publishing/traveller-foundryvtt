@@ -36,53 +36,28 @@
                         <label for="system.cost" class="resource-label">{{localize "MGT2.Item.Cost"}}</label>
                         <input class="writable" type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
                     </div>
+                    <div class="resource flex-group-left">
+                        <label for="system.software.class" class="resource-label">Software Class</label>
+                        <select class="writable" name="system.software.class">
+                            {{selectOptions SOFTWARE_CLASS selected=system.software.class}}
+                        </select>
+                    </div>
+                    <div class="resource flex-group-left">
+                        <label for="system.software.interface" class="resource-label">Interface Type</label>
+                        <select class="writable" name="system.software.interface">
+                            {{selectOptions SOFTWARE_INTERFACE selected=system.software.interface}}
+                        </select>
+                    </div>
+                    <div class="resource flex-group-left">
+                        <label for="system.installedOn" class="resource-label">{{localize "MGT2.Item.InstalledOn"}}</label>
+                        <select class="writable installedOn" name="system.installedOn">
+                            {{selectOptions INSTALL_OPTIONS selected=system.installedOn}}
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <!--
-            <div class="shadow">
-                <h2>{{localize "MGT2.Effects.SoftwareEffects"}}</h2>
-
-                <select name="system.software.class">
-                    {{selectOptions SOFTWARE_CLASS selected=system.software.class}}
-                </select>
-
-                <select name="system.software.type">
-                    {{selectOptions SOFTWARE_TYPE selected=system.software.type}}
-                </select>
-
-                <select>
-                    {{selectOptions SOFTWARE_EFFECT}}
-                </select>
-
-                <div class="grid grid-3col">
-                    {{#each effectTypes as |eType e|}}
-                    <a class="effect-control augment-types flexrow" data-effectType="{{e}}">
-                        <span class="augment-name">{{localize (concat 'MGT2.Effects.Type.' e)}}</span>
-                        <i class="fas fa-plus"></i>
-                    </a>
-                    {{/each}}
-                </div>
-                <hr/>
-
-                <ol class="items-list effects-list grid grid-2col">
-                    {{#each effects as |e id|}}
-                    <li class="items effect flexrow" data-effect-id="{{e.id}}">
-                        <label>{{e.name}}</label>
-                        <div class="effect-target">{{effect e.changes.0.key}} {{e.changes.0.value}}</div>
-                        <div class="item-controls effect-controls flexrow">
-                            <a class="effect-control" data-action="edit" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a class="effect-control" data-action="delete" title="Delete">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>
-                    </li>
-                    {{/each}}
-                </ol>
-            </div>
--->
+            {{> "systems/mgt2e/templates/item/parts/item-software.html"}}
 
             <div class="shadow">
                 {{editor enrichedDescription target="system.description"

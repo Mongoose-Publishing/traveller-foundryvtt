@@ -6,6 +6,8 @@
  * @returns {string|*}
  */
 
+import {MGT2} from "./config.mjs";
+
 export function isNonZero(value) {
     if (!value) {
         return false;
@@ -719,7 +721,7 @@ function getSkillBonus(data, skill, speciality) {
 // skill - skillFqn
 // options - data object holding options for this roll
 export async function rollSkill(actor, skill, options) {
-    const data = actor.system;
+    const data = actor?actor.system:null;
     let   title = "";
     let   skillText = "";
     let   text = "";
@@ -730,6 +732,7 @@ export async function rollSkill(actor, skill, options) {
     let   skillCheck = false;
     let   defaultCha = true;
     let   chaDm = 0;
+    let   dice = "2D6";
 
     if (!options) {
         options = {};
@@ -740,12 +743,30 @@ export async function rollSkill(actor, skill, options) {
     let skillNotes = "";
     let specNotes = "";
 
-    if (actor.type === "traveller" || actor.type === "npc") {
+    if (actor && (actor.type === "traveller" || actor.type === "npc")) {
         isPerson = true;
     }
     let speciality = null;
     let noSpeciality = false;
-    if (skill && (typeof skill === 'string' || skill instanceof String)) {
+    if (options.agent) {
+        // This is an agent roll, which doesn't have an associated actor.
+        let skillId, specId;
+        if (skill.indexOf(".")) {
+            specId = skill.split(".")[1];
+            skillId = skill.split(".")[0];
+            if (specId === "") {
+                speciality = null;
+                noSpeciality = true;
+            }
+        }
+        skill = MGT2.SKILLS[skillId];
+        title = skillLabel(skill, skillId);
+        if (specId) {
+            speciality = skill.specialities[specId];
+            title += ` (${skillLabel(speciality, specId)})`;
+        }
+        skillText = `${title} ${options.level}`;
+    } else if (skill && (typeof skill === 'string' || skill instanceof String)) {
         // If a skill has been passed as a string, we need to find the skill object.
         if (skill.indexOf(".")) {
             speciality = skill.split(".")[1];
@@ -769,7 +790,6 @@ export async function rollSkill(actor, skill, options) {
     }
 
     // Normal, Boon or Bane dice roll.
-    let dice = "2D6";
     if (options.rollType === "boon" || (skill && skill.boon === "boon") || (speciality && speciality.boon === "boon")) {
         dice = "3D6k2";
     } else if (options.rollType === "bane" || (skill && skill.boon === "bane") || (speciality && speciality.boon === "bane")) {
@@ -847,7 +867,7 @@ export async function rollSkill(actor, skill, options) {
     // .expert - Expert software, which sets or gives bonus to a skill.
     let notes = "";
 
-    if (skill) {
+    if (actor && skill) {
         // AugmentDMs are applied to the roll, regardless of the actor's skill level.
         if (skill.augdm && parseInt(skill.augdm) !== 0) {
             skillDM += parseInt(skill.augdm);
@@ -880,9 +900,18 @@ export async function rollSkill(actor, skill, options) {
         skillText += skillLabel(skill);
         if (skill.trained) {
             value = parseInt(skill.value);
-            if (skill.expert && (cha === "INT" || cha === "EDU")) {
+            // For expert, it could be set by an active effect (skill.expert) or by
+            // externally run software (options.expert).
+            if (!speciality && (options.expert || skill.expert) && (cha === "INT" || cha === "EDU")) {
                 value += 1;
-                skillNotes += `Expert/${skill.expert}`;
+                let expert = 0;
+                if (!speciality && (Number(options.expert) > expert)) {
+                    expert = Number(options.expert);
+                }
+                if (Number(skill.expert) > expert) {
+                    expert = Number(skill.expert);
+                }
+                skillNotes += `Expert/${expert}`;
             }
             if (skill.augment) {
                 value += parseInt(skill.augment);
@@ -893,21 +922,42 @@ export async function rollSkill(actor, skill, options) {
                 title += " (" + skillLabel(speciality) + ")";
                 skillText += " (" + skillLabel(speciality) + ")";
                 specialityCheck = true;
-                if (isNonZero(speciality.expert) && (cha === "INT" || cha === "EDU")) {
+                if ((options.expert || isNonZero(speciality.expert)) && (cha === "INT" || cha === "EDU")) {
                     value += 1;
-                    specNotes += `Expert/${speciality.expert}`;
+                    let expert = 0;
+                    if (Number(options.expert) > expert) {
+                        expert = Number(options.expert);
+                    }
+                    if (Number(speciality.expert) > expert) {
+                        expert = Number(speciality.expert);
+                    }
+                    specNotes += `Expert/${expert}`;
                 }
                 if (isNonZero(speciality.augment)) {
                     value += parseInt(speciality.augment);
                     //specNotes += `Aug&nbsp;${speciality.augment}`
                 }
             }
-        } else if (skill.expert && parseInt(skill.expert) > 0 && (cha === "INT" || cha === "EDU")) {
-            value = parseInt(skill.expert) - 1;
-            notes = "Expert Software/" + value;
+        } else if (!speciality && (options.expert || (skill.expert && parseInt(skill.expert) > 0)) && (cha === "INT" || cha === "EDU")) {
+            let expert = 0;
+            if (Number(options.expert) > expert) {
+                expert = Number(options.expert);
+            }
+            if (Number(skill.expert) > expert) {
+                expert = Number(skill.expert);
+            }
+            value = parseInt(expert) - 1;
+            skillNotes = "Expert Software/" + value;
         } else if (speciality && speciality.expert && (cha === "INT" || cha === "EDU")) {
-            value = parseInt(speciality.expert) - 1;
-            notes = "Expert Software";
+            let expert = 0;
+            if (Number(options.expert) > expert) {
+                expert = Number(options.expert);
+            }
+            if (Number(speciality.expert) > expert) {
+                expert = Number(speciality.expert);
+            }
+            value = parseInt(expert) - 1;
+            skillNotes = "Expert Software";
         } else {
             untrainedCheck = true;
         }
@@ -918,6 +968,9 @@ export async function rollSkill(actor, skill, options) {
             dice += " + " + value;
             skillText += " (+" + value + ")";
         }
+    }
+    if (options.agent) {
+        dice += ` + ${options.level}`;
     }
     if (skillDM !== 0) {
         dice += " + " + skillDM + "[AugDM]";
@@ -938,7 +991,9 @@ export async function rollSkill(actor, skill, options) {
     }
 
     let checkText;
-    if (creatureCheck) {
+    if (options.agent) {
+        checkText = `Agent check by <b>${options.agent}</b>`;
+    } else if (creatureCheck) {
         checkText = "Creature skill check";
     } else if (specialityCheck) {
         checkText = "Specialisation check";
@@ -960,11 +1015,11 @@ export async function rollSkill(actor, skill, options) {
             checkText = `<b>${difficultyLabel}</b> ${checkText}`;
         }
     }
-    let roll = await new Roll(dice, actor.getRollData()).evaluate();
+    let roll = await new Roll(dice, actor?.getRollData()).evaluate();
     if (roll) {
         text = `<div class='skill-message'><h2>${title}</h2><div class="message-content">`;
         let total = roll.total;
-        if (game.settings.get("mgt2e", "useChatIcons")) {
+        if (actor && game.settings.get("mgt2e", "useChatIcons")) {
             text += `<img class='skillcheck-thumb' src='${actor.thumbnail}' alt='${actor.name}'/>`;
             text += `<div class="skill-with-icon">`;
         } else {
@@ -983,7 +1038,7 @@ export async function rollSkill(actor, skill, options) {
         if (game.settings.get("mgt2e", "verboseSkillRolls")) {
             text += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${total}</span> ` + getEffectLabel(effect);
         }
-        if (cha && options.cost) {
+        if (actor && cha && options.cost) {
             let cost = 1;
             if (effect >= 0) cost = Number(options.cost);
             if (actor.system.damage) {

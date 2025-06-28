@@ -13,6 +13,7 @@ import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 import { MgT2AssociateItemSheet } from "./sheets/items/associate.mjs";
 import { MgT2WorldDataItemSheet } from "./sheets/items/world-data.mjs";
+import { MgT2SoftwareItemSheet } from "./sheets/items/software.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
@@ -241,6 +242,7 @@ Hooks.once('init', async function() {
   Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
   Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
   Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "worlddata"], makeDefault: true });
+  Items.registerSheet("mgt2e", MgT2SoftwareItemSheet, { label: "Software", types: [ "software"], makeDefault: true });
   DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
   DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
@@ -815,19 +817,30 @@ function rollSkillMacro(skillName, options) {
       options = {};
   }
 
+  if (options.agent) {
+      new MgT2SkillDialog(null, skillName, options).render(true);
+      return;
+  }
+
   const speaker = ChatMessage.getSpeaker();
   let actor;
-  if (speaker.token) {
-      actor = game.actors.tokens[speaker.token];
-  } else if (game.user.character) {
-      actor = game.user.character;
-  }
-  if (!actor) {
-      actor = game.actors.get(speaker.actor);
-  }
-  if (!actor) {
-      ui.notifications.warn(game.i18n.localize("MGT2.Warn.HotBar.SelectActorSkill"));
-      return;
+  if (options.actor ) {
+      actor = options.actor;
+      // Don't want to pass actor object around everywhere
+      options.actor = undefined;
+  } else {
+      if (speaker.token) {
+          actor = game.actors.tokens[speaker.token];
+      } else if (game.user.character) {
+          actor = game.user.character;
+      }
+      if (!actor) {
+          actor = game.actors.get(speaker.actor);
+      }
+      if (!actor) {
+          ui.notifications.warn(game.i18n.localize("MGT2.Warn.HotBar.SelectActorSkill"));
+          return;
+      }
   }
 
   if (game.settings.get("mgt2e", "quickRolls")) {
