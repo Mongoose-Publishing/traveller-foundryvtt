@@ -14,6 +14,19 @@
                 </div>
             </div>
 
+            <div class="shadow item-side-panel">
+                {{#if system.computer}}
+                    <select class="" name="system.computer.processing" title="Computer Power">
+                        {{selectOptions SELECT_PROCESSING selected=system.computer.processing}}
+                    </select>
+                    <div class="item-controls" style="float: right">
+                        <a class="item-control remove-computer" title="Remove computer"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{else}}
+                    <button class="embed-computer">Embed Computer</button>
+                {{/if}}
+            </div>
+
             <div class="shadow item-side-panel grid grid-2col">
                 <div class="resource grid-span-2">
                     <label class="resource-label">Legality</label>
@@ -135,7 +148,14 @@
                         </select>
                     </div>
                 </div>
+                {{#unless system.links}}
+                    <span class="allow-links">Allow components</span>
+                {{/unless}}
           </div>
+         {{#if system.links}}
+            {{> "systems/mgt2e/templates/item/parts/item-links.html"}}
+         {{/if}}
+
           <div class="shadow">
               {{editor
                   enrichedDescription target="system.description"

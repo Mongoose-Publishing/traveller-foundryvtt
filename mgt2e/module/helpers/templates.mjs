@@ -20,6 +20,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/mgt2e/templates/actor/parts/actor-starship-hardware.html",
         "systems/mgt2e/templates/item/parts/item-general.html",
         "systems/mgt2e/templates/item/parts/item-computer.html",
+        "systems/mgt2e/templates/item/parts/item-links.html",
         "systems/mgt2e/templates/item/parts/item-software.html",
         "systems/mgt2e/templates/item/parts/item-techLevel.html"
     ]);

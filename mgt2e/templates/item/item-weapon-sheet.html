@@ -118,7 +118,14 @@
                         </div>
                     {{/if}}
                 </div>
+                {{#unless system.links}}
+                    <span class="allow-links">Allow components</span>
+                {{/unless}}
             </div>
+
+            {{#if system.links}}
+                {{> "systems/mgt2e/templates/item/parts/item-links.html"}}
+            {{/if}}
 
             <div class="shadow">
                 <div class="resources grid grid-3col flex-group-left">

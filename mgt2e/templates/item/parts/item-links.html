@@ -1,0 +1,20 @@
+
+{{#if system.links}}
+<div class="shadow">
+    <div class="item-controls" style="float: right">
+        <a class="item-control disallow-links" title="Remove linked components"><i class="fas fa-trash"></i></a>
+    </div>
+    <h3>Linked Components</h3>
+    <ol class="item software-list">
+        <li class="item flexrow software-header">
+            <div class="software-header sw-pkg">Package</div>
+        </li>
+
+        {{#each LINKED_COMPONENTS as |sw id|}}
+            <li class="item flexrow" data-id="{{sw._id}}">
+                <div class="sw-pkg">{{sw.name}}</div>
+            </li>
+        {{/each}}
+    </ol>
+</div>
+{{/if}}

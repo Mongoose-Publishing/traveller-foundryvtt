@@ -296,8 +296,6 @@ export class MgT2Item extends Item {
     }
 
     execSoftware(software) {
-        console.log("Executing software");
-
         let skillFqn = software.system.software.skill;
         let skillLevel = software.system.software.skillLevel;
 
@@ -336,6 +334,13 @@ export class MgT2Item extends Item {
             game.mgt2e.rollSkillMacro(skillFqn, options);
 
         }
+
+    }
+
+    /**
+     * When an item is moved to another actor, need to handle the linked software.
+     */
+    moveSoftware(srcActor, destActor) {
 
     }
 }

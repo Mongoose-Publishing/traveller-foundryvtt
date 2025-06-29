@@ -440,13 +440,69 @@ export class MgT2ItemSheet extends ItemSheet {
             }
         }
         if (context.item.system.computer && context.item.parent) {
-            console.log("LOOKING FOR SOFTWARE");
             // This item has an embedded computer.
             context.SOFTWARE = [];
+            let found = [];
             for (let s of context.item.system.computer.software) {
                 let software = context.item.parent.items.get(s);
-                context.SOFTWARE.push(software);
+                if (software) {
+                    context.SOFTWARE.push(software);
+                    found.push(s);
+                }
             }
+            // It's easier to track what we found, than it is to track what wasn't
+            // found and then remove them from the list.
+            if (found.length !== context.item.system.computer.software.length) {
+                context.item.update({"system.computer.software": found });
+            }
+        }
+
+        if (context.item.system.component) {
+            // A component is an item that can be attached (linked) to a parent component.
+            context.LINK_OPTIONS = {};
+            context.LINK_TYPES = {
+                "": "Any",
+                "armour": "Armour",
+                "weapon": "Weapons"
+            }
+            if (context.item.parent && ["npc", "traveller"].includes(context.item.parent.type)) {
+                // Only look for linkable items if on an actor.
+                let component = context.item.system.component;
+                context.LINK_OPTIONS[""] = "-";
+                let foundHardware = false;
+                for (let i of context.item.parent.items) {
+                    if (component.type) {
+                        if (component.type !== i.type) {
+                            //continue;
+                        }
+                    }
+                    if (i.system.links) {
+                        console.log("Linkable " + i.name);
+                        context.LINK_OPTIONS[i._id] = i.name;
+                        if (i._id === component.linkedTo) {
+                            foundHardware = true;
+                        }
+                    }
+                }
+            }
+            console.log(context.LINK_TYPES);
+        }
+        if (context.item.system.links) {
+            context.LINKED_COMPONENTS = [];
+            let found = [];
+            for (let s of context.item.system.links.components) {
+                let c = context.item.parent.items.get(s);
+                if (c) {
+                    context.LINKED_COMPONENTS.push(c);
+                    found.push(s);
+                }
+            }
+            // It's easier to track what we found, than it is to track what wasn't
+            // found and then remove them from the list.
+            if (found.length !== context.item.system.links.components.length) {
+                context.item.update({"system.links.components": found });
+            }
+
         }
 
         return context;
@@ -762,6 +818,51 @@ export class MgT2ItemSheet extends ItemSheet {
             const d = $(ev.currentTarget).parents(".role-action");
             const id = d.data("actionId");
             this._deleteRollAction(this.item, id)
+        });
+
+        html.find(".allow-links").click(ev => {
+           this.item.system.links = {
+               "components": []
+           }
+           this.item.update({"system.links": this.item.system.links });
+        });
+        html.find(".disallow-links").click(ev => {
+            this.item.system.links = null;
+            this.item.update({"system.-=links": null });
+        });
+
+        html.find(".link-component").click(ev => {
+           this.item.system.component = {
+               "linkedTo": null,
+               "type": "",
+               "slots": 0
+           }
+           this.item.update({"system.component": this.item.system.component });
+        });
+        html.find(".unlink-component").click(ev => {
+            this.item.system.component = null;
+            this.item.update({[`system.-=component`]: null});
+        });
+        html.find(".linkedTo").click(ev => {
+            let selected = $(ev.currentTarget).val();
+
+            // Remove from previous parent
+            let previousId = this.item.system.component.linkedTo;
+            let previousItem = this.item.parent.items.get(previousId);
+            if (previousItem?.system?.links?.components) {
+                let list = previousItem.system.links.components;
+                previousItem.system.links.components = list.filter(i => i !== this.item._id);
+                previousItem.update({"system.links.components": previousItem.system.links.components });
+            }
+            // Now attach to new parent
+            let attachItem = this.item.parent.items.get(selected);
+            if (attachItem && attachItem.system.links.components) {
+                let components = attachItem.system.links.components;
+                if (!components.includes(this.item._id)) {
+                    components.push(this.item._id);
+                }
+                attachItem.update({"system.links.components": components });
+            }
         });
 
         html.find(".embed-computer").click(ev => {

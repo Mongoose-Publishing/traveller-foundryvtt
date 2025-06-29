@@ -14,6 +14,12 @@
                 </div>
             </div>
 
+            {{#unless system.component}}
+                <div class="shadow item-side-panel">
+                    <button class="link-component">Make component</button>
+                </div>
+            {{/unless}}
+
             <div class="shadow item-side-panel">
                 {{#if system.computer}}
                     <select class="" name="system.computer.processing" title="Computer Power">
@@ -46,7 +52,41 @@
                         <input class="writable" type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
                     </div>
                 </div>
+                {{#if system.component}}
+                    <div class="item-controls" style="float: right">
+                        <a class="item-control unlink-component" title="Unlink"><i class="fas fa-trash"></i></a>
+                    </div>
+                    <h3>Component</h3>
+                    <div class="resources grid grid-5col flex-group-left">
+                        <div class="resource">
+                            <label for="system.component.type" class="resource-label">Type</label>
+                            <br/>
+                            <select class="writable" name="system.component.type">
+                                {{selectOptions LINK_TYPES selected=system.component.type}}
+                            </select>
+                        </div>
+                        {{#if (ifEquals system.component.type "armour")}}
+                            <div title="Battledress Slots">
+                                <label class="resource-label">Slots</label><br/>
+                                <input class="writable" type="text" name="system.component.slots" value="{{system.component.slots}}" dta-dtype="Number"/>
+                            </div>
+                        {{/if}}
+                        <div class="resource grid-span-3">
+                            <label class="resource-label">Attached To</label><br/>
+                            <select class="writable linkedTo" name="system.component.linkedTo">
+                                {{selectOptions LINK_OPTIONS selected=system.component.linkedTo}}
+                            </select>
+                        </div>
+                    </div>
+                {{/if}}
+                {{#unless system.links}}
+                    <span class="allow-links">Allow components</span>
+                {{/unless}}
             </div>
+
+            {{#if system.links}}
+                {{> "systems/mgt2e/templates/item/parts/item-links.html"}}
+            {{/if}}
 
             {{#if system.computer}}
                 {{> "systems/mgt2e/templates/item/parts/item-computer.html"}}

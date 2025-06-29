@@ -1186,7 +1186,7 @@ Handlebars.registerHelper('quantity', function(item, value) {
 });
 
 Handlebars.registerHelper('formula', function(actor, value) {
-    if (value === undefined || value === null || value == "") {
+    if (value === undefined || value === null || value === "") {
         return "";
     } else if (!isNaN(value)) {
         return value;
@@ -1204,7 +1204,6 @@ Handlebars.registerHelper('augmentedSkill', function(skill, spec) {
         return "";
     }
     let trained = skill.trained;
-    let value = skill.value;
     if (skill.individual && spec) {
         trained = spec.trained;
     }
