@@ -494,6 +494,8 @@ export class MgT2Actor extends Actor {
               }
           }
           // Any special modifiers?
+          /*
+           * These should already be accounted for.
           if (this.system.modifiers.armour?.custom) {
               armour += Number(this.system.modifiers.armour.custom);
               armourText += `Custom +${this.system.modifiers.armour.custom} `;
@@ -502,6 +504,7 @@ export class MgT2Actor extends Actor {
               armour += Number(this.system.modifiers.armour.effect);
               armourText += `Other +${this.system.modifiers.armour.effect} `;
           }
+          */
           // Finally, any cover options?
           if (this.getFlag("mgt2e", "inCover")) {
               const coverBonus = parseInt(this.getFlag("mgt2e", "inCover"));
