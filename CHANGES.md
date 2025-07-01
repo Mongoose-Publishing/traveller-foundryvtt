@@ -16,6 +16,8 @@
 * Software items can now be added to an item with an embedded computer. Computers display a list
   of software they are running, and it can be executed from the item sheet.
 * Skills can now be rolled from computer items, making use of software installed.
+* Item icons can now be any height on the item sheet.
+* Compendium packs now collected together into a folder by default.
 
 ## 0.12.5 (Beta)
 
