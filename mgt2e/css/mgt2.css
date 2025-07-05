@@ -2215,3 +2215,11 @@ tr.targeted-cha-row td {
     margin-left: 55%;
 }
 
+span.button {
+  border: 1px solid black;
+  border-radius: 3px;
+  text-decoration: underline;
+  padding: 3px;
+  cursor: pointer;
+  background-color: #00000020;
+}

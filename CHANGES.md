@@ -18,6 +18,7 @@
 * Skills can now be rolled from computer items, making use of software installed.
 * Item icons can now be any height on the item sheet.
 * Compendium packs now collected together into a folder by default.
+* General items now include options for active effects.
 
 ## 0.12.5 (Beta)
 

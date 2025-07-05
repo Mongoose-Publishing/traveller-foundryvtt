@@ -820,6 +820,14 @@ export class MgT2ItemSheet extends ItemSheet {
             this._deleteRollAction(this.item, id)
         });
 
+        html.find(".show-effects").click(ev => {
+            this.item.update({"system.showEffects": true });
+        });
+
+        html.find(".hide-effects").click(ev => {
+            this.item.update({"system.showEffects": false });
+        });
+
         html.find(".allow-links").click(ev => {
            this.item.system.links = {
                "components": []

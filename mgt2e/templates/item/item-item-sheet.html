@@ -16,7 +16,7 @@
 
             {{#unless system.component}}
                 <div class="shadow item-side-panel">
-                    <button class="link-component">Make component</button>
+                    <span class="button link-component">Make component</span>
                 </div>
             {{/unless}}
 
@@ -29,7 +29,7 @@
                         <a class="item-control remove-computer" title="Remove computer"><i class="fas fa-trash"></i></a>
                     </div>
                 {{else}}
-                    <button class="embed-computer">Embed Computer</button>
+                    <span class="button embed-computer">Embed Computer</span>
                 {{/if}}
             </div>
         </div>
@@ -80,9 +80,16 @@
                     </div>
                 {{/if}}
                 {{#unless system.links}}
-                    <span class="allow-links">Allow components</span>
+                    <span class="button allow-links">Components</span>
+                {{/unless}}
+                {{#unless system.showEffects}}
+                    <span class="button show-effects">Effects</span>
                 {{/unless}}
             </div>
+
+            {{#if system.showEffects}}
+                {{> "systems/mgt2e/templates/item/parts/item-effects.html"}}
+            {{/if}}
 
             {{#if system.links}}
                 {{> "systems/mgt2e/templates/item/parts/item-links.html"}}
