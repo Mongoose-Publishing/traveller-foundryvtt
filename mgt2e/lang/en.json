@@ -909,6 +909,7 @@
   "MGT2.Item.RangeM": "Range (m)",
   "MGT2.Item.RangeKM": "Range (km)",
   "MGT2.Item.RangeSpace": "Range",
+  "MGT2.Item.MinRange": "Min Range (km)",
   "MGT2.Item.SpaceRange.adjacent": "Adjacent (<1km)",
   "MGT2.Item.SpaceRange.close": "Close (1km+)",
   "MGT2.Item.SpaceRange.short": "Short (11km+)",

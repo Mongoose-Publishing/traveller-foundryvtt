@@ -88,6 +88,12 @@
                         <input class="writable" type="text" name="system.weapon.range" value="{{system.weapon.range}}" data-dtype="Number"/>
                     {{/if}}
                     </div>
+                    {{#if (ifEquals system.weapon.scale "vehicle")}}
+                        <div class="resource">
+                            <label for="system.weapon.minRange" class="resource-label">{{localize "MGT2.Item.MinRange"}}</label>
+                            <input class="writable" type="text" name="system.weapon.minRange" value="{{system.weapon.minRange}}" data-dtype="Number"/>
+                        </div>
+                    {{/if}}
 
                     <div class="resource grid-span-3 flex-group-left">
                         <label for="system.weapon.traits" class="resource-label">Traits</label>

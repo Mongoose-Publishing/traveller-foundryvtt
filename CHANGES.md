@@ -19,6 +19,9 @@
 * Item icons can now be any height on the item sheet.
 * Compendium packs now collected together into a folder by default.
 * General items now include options for active effects.
+* Increased maximum weapon AP to 999.
+* Weapon traits now accelerate +/- rate when shift is held for large values.
+* Pass attack traits down from a damage macro to the damage calculation.
 
 ## 0.12.5 (Beta)
 

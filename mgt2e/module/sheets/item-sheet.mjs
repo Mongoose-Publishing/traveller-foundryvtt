@@ -1159,6 +1159,11 @@ export class MgT2ItemSheet extends ItemSheet {
             console.log(text);
             if (traitData.value !== undefined) {
                 let value = parseInt(text.replace(/[^-0-9]/g, ""));
+                if (Math.abs(modifier) > 1 && Math.abs(value) > 100) {
+                    let m = Math.abs(parseInt(Math.log10(value)));
+                    modifier *= Math.pow(10, m - 1);
+                }
+
                 value += parseInt(modifier);
                 if (value < traitData.min) {
                     // Too low, don't change.

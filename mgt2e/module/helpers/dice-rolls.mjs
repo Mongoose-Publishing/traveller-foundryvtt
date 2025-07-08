@@ -438,7 +438,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 radiationDamage = damageTotal;
                 damageTotal = 0;
                 damageEffect = 0;
-            } else if (hasTrait(traits, "radiation")) {
+            } else if (hasTrait(traits, "radiation") || hasTrait(attackOptions.traits, "radiation")) {
                 const radRoll = await new Roll("2D6 * 20", actor ? actor.getRollData() : null).evaluate();
                 radiationDamage = radRoll.total;
                 dmgText += ` /&nbsp;${radRoll.total} Rads`;
@@ -446,10 +446,14 @@ export async function rollAttack(actor, weapon, attackOptions) {
                     dmgText += `&nbsp;(10m)`;
                 }
             }
+
             let blastRadius = 0;
             if (hasTrait(traits, "blast")) {
                 dmgText += ` /&nbsp;Blast&nbsp;${getTraitValue(traits, "blast")}m`;
                 blastRadius = getTraitValue(traits, "blast");
+            } else if (hasTrait(attackOptions.traits, "blast")) {
+                dmgText += ` /&nbsp;Blast&nbsp;${getTraitValue(attackOptions.traits, "blast")}m`;
+                blastRadius = getTraitValue(attackOptions.traits, "blast");
             }
 
             let titleText = game.i18n.localize("MGT2.Attack.DragMe");
@@ -470,6 +474,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 "radiation": radiationDamage,
                 "ranged": (baseRange>0)
             };
+            if (attackOptions.traits) {
+                damageOptions.traits = attackOptions.traits;
+            }
             if (attackOptions.scale) {
                 damageOptions.scale = attackOptions.scale;
             }

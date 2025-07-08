@@ -307,6 +307,7 @@
         "weapon": {
             "scale": "traveller",
             "range": 0,
+            "minRange": 0,
             "damage": "1D6",
             "magazine": 0,
             "ammo": 0,
