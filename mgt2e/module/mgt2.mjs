@@ -292,7 +292,6 @@ Hooks.on("init", function() {
     body.on("click", "a.inline-mgt2e-execution", Tools.mgt2eClick);
     body.on("click", ".actor-link", ev=>{
        const actorId = $(ev.currentTarget).data("actorId");
-       console.log(actorId);
        let actor = fromUuidSync(actorId);
         if (actor) {
             actor.sheet.render(true);

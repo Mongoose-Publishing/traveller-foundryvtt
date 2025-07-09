@@ -313,6 +313,7 @@ MGT2.SPACE_RANGES = {
 }
 
 MGT2.SPACE_MOUNTS = {
+    "fixed": { "multiplier": 1, "hardpoints": 1 },
     "turret": { "multiplier": 1, "hardpoints": 1 },
     "barbette": { "multiplier": 3, "hardpoints": 1 },
     "bay.small": { "multiplier": 10, "hardpoints": 1 },
