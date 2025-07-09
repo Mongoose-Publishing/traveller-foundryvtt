@@ -25,9 +25,10 @@ export class MgT2Item extends Item {
 
     static SOFTWARE_INTERFACE = {
         "none": { "id": "none", "rank": 0 },
-        "agent": { "id": "agent", "rank": 1, "skills": true },
-        "intelligent": { "id": "intelligent", "rank": 2, "skills": true },
-        "intellect": { "id": "intellect", "rank": 3, "skills": true, "untrained": false }
+        "interface": { "id": "interface", "rank": 1, "skills": false },
+        "agent": { "id": "agent", "rank": 2, "skills": true },
+        "intelligent": { "id": "intelligent", "rank": 3, "skills": true },
+        "intellect": { "id": "intellect", "rank": 4, "skills": true, "untrained": false }
     }
 
     /**
@@ -309,6 +310,18 @@ export class MgT2Item extends Item {
                 "level": skillLevel
             }
             game.mgt2e.rollSkillMacro(skillFqn, options);
+        } else if (software.system.software.type === "augment") {
+            // Gives a straight DM bonus to a skill check
+            if (!iface.skills) {
+                ui.notifications.warn("Computer must have at least an Agent interface");
+                return;
+            }
+            let options = {
+                "difficulty": 8,
+                "dm": skillLevel,
+                "actor": this.parent
+            }
+            game.mgt2e.rollSkillMacro(skillFqn, options);
         } else if (software.system.software.type === "expert") {
             // Expert system.
             if (!iface.skills) {
@@ -334,7 +347,6 @@ export class MgT2Item extends Item {
             game.mgt2e.rollSkillMacro(skillFqn, options);
 
         }
-
     }
 
     /**

@@ -19,10 +19,13 @@
                         {{skillToLabel sw.system.software.skill}}
                         {{#if (ifEquals sw.system.software.type "expert")}}/{{sw.system.software.skillLevel}}{{/if}}
                         {{#if (ifEquals sw.system.software.type "task")}}+{{sw.system.software.skillLevel}}{{/if}}
+                       {{#if (ifEquals sw.system.software.type "augment")}}+{{sw.system.software.skillLevel}}{{/if}}
                     {{/if}}
                 </div>
                 <div class="sw-action">
                     {{#if (ifEquals sw.system.software.type "expert")}}
+                        <i class="fa fa-dice exec-software"> </i>
+                    {{else if (ifEquals sw.system.software.type "augment")}}
                         <i class="fa fa-dice exec-software"> </i>
                     {{else if (ifEquals sw.system.software.type "task")}}
                         <i class="fa fa-dice exec-software"> </i>

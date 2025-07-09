@@ -30,6 +30,7 @@ export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
         }
         context.SOFTWARE_INTERFACE = {
             "none": game.i18n.localize("MGT2.Effects.Software.InterfaceType.none"),
+            "interface": game.i18n.localize("MGT2.Effects.Software.InterfaceType.interface"),
             "agent": game.i18n.localize("MGT2.Effects.Software.InterfaceType.agent"),
             "intelligent": game.i18n.localize("MGT2.Effects.Software.InterfaceType.intelligent"),
             "intellect": game.i18n.localize("MGT2.Effects.Software.InterfaceType.intellect"),
@@ -42,6 +43,7 @@ export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
         context.SOFTWARE_TYPE = {
             "generic": game.i18n.localize("MGT2.Effects.Software.Type.generic"),
             "expert": game.i18n.localize("MGT2.Effects.Software.Type.expert"),
+            "augment": game.i18n.localize("MGT2.Effects.Software.Type.augment"),
             "task": game.i18n.localize("MGT2.Effects.Software.Type.task")
         }
 

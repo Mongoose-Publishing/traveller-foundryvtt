@@ -13,6 +13,18 @@
                     </div>
                 </div>
             </div>
+            <div class="shadow item-side-panel">
+                {{#if system.computer}}
+                <select class="" name="system.computer.processing" title="Computer Power">
+                    {{selectOptions SELECT_PROCESSING selected=system.computer.processing}}
+                </select>
+                <div class="item-controls" style="float: right">
+                    <a class="item-control remove-computer" title="Remove computer"><i class="fas fa-trash"></i></a>
+                </div>
+                {{else}}
+                    <span class="button embed-computer">Embed Computer</span>
+                {{/if}}
+            </div>
         </div>
 
 
@@ -70,6 +82,9 @@
                     {{/each}}
                 </ol>
             </div>
+            {{#if system.computer}}
+                {{> "systems/mgt2e/templates/item/parts/item-computer.html"}}
+            {{/if}}
             <div class="shadow">
                 {{editor
                     enrichedDescription target="system.description"

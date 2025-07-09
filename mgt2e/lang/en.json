@@ -974,11 +974,12 @@
 
   "MGT2.Effects.Software.Type.generic": "Generic",
   "MGT2.Effects.Software.Type.interface": "Interface",
-  "MGT2.Effects.Software.Type.augment": "Augment",
+  "MGT2.Effects.Software.Type.augment": "Skill Augment",
   "MGT2.Effects.Software.Type.expert": "Expert Package",
   "MGT2.Effects.Software.Type.task": "Task Skill",
 
   "MGT2.Effects.Software.InterfaceType.none": "None",
+  "MGT2.Effects.Software.InterfaceType.interface": "Interface",
   "MGT2.Effects.Software.InterfaceType.agent": "Agent",
   "MGT2.Effects.Software.InterfaceType.intelligent": "Intelligent",
   "MGT2.Effects.Software.InterfaceType.intellect": "Intellect",
