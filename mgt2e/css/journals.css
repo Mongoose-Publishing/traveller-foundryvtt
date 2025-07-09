@@ -36,6 +36,8 @@ div.two-columns {
 div.two-columns img {
   border: none;
   filter: drop-shadow(10px 10px 4px #404040);
+  width: 50%;
+  break-before: avoid;
 }
 
 caption {
