@@ -7,18 +7,20 @@
         {{selectOptions SOFTWARE_TYPE selected=system.software.type}}
     </select>
 
-    <select name="system.software.skill">
-        {{selectOptions AGENT_SKILLS selected=system.software.skill}}
-    </select>
-    {{#if (ifEquals system.software.type "expert")}}
-        <select name="system.software.skillLevel">
-            {{selectOptions EXPERT_LEVELS selected=system.software.skillLevel}}
+    {{#unless (ifEquals system.software.type "generic")}}
+        <select name="system.software.skill">
+            {{selectOptions AGENT_SKILLS selected=system.software.skill}}
         </select>
-    {{else}}
-        <select name="system.software.skillLevel">
-            {{selectOptions TASK_LEVELS selected=system.software.skillLevel}}
-        </select>
-    {{/if}}
+        {{#if (ifEquals system.software.type "expert")}}
+            <select name="system.software.skillLevel">
+                {{selectOptions EXPERT_LEVELS selected=system.software.skillLevel}}
+            </select>
+        {{else}}
+            <select name="system.software.skillLevel">
+                {{selectOptions TASK_LEVELS selected=system.software.skillLevel}}
+            </select>
+        {{/if}}
+    {{/unless}}
 </div>
 
 <!--

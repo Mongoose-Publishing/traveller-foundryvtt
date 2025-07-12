@@ -22,6 +22,7 @@
 * Increased maximum weapon AP to 999.
 * Weapon traits now accelerate +/- rate when shift is held for large values.
 * Pass attack traits down from a damage macro to the damage calculation.
+* Active effect names can now be changed. Removed deprecated use of 'label' ready for Foundry 13.
 
 ## 0.12.5 (Beta)
 

@@ -19,8 +19,6 @@ export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
 
         context.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description );
 
-        console.log("MgT2SoftwareItemSheet.getData:");
-
         if (context.item.parent && !context.item.system.status) {
             context.item.system.status = MgT2Item.RUNNING;
             context.item.update({"system.status": context.item.system.status });
@@ -97,7 +95,6 @@ export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
             context.item.system.installedOn = null;
             context.item.update({ "system.installedOn": null });
         }
-        console.log(context.INSTALL_OPTIONS);
 
         return context;
     }
