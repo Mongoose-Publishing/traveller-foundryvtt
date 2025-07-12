@@ -2466,7 +2466,7 @@ export class MgT2ActorSheet extends ActorSheet {
         if (event.shiftKey) {
             quickRoll = !quickRoll;
         }
-        if (event.ctrlKey) {
+        if (event.ctrlKey || event.metaKey) {
             new MgT2XPDialog(actor, skillId, specId, cha).render(true);
         } else if (!quickRoll) {
             new MgT2SkillDialog(actor, skillFqn, {
