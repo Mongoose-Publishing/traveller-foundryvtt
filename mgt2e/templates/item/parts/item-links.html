@@ -12,7 +12,7 @@
 
         {{#each LINKED_COMPONENTS as |sw id|}}
             <li class="item flexrow" data-id="{{sw._id}}">
-                <div class="sw-pkg">{{sw.name}}</div>
+                <a class="sw-pkg linked-component">{{sw.name}}</a>
             </li>
         {{/each}}
     </ol>

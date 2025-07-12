@@ -28,13 +28,13 @@
                     </div>
                     <div class="sw-action">
                         {{#if (ifEquals sw.system.software.type "expert")}}
-                            <i class="fa fa-dice exec-software"> </i>
+                            <a><i class="fas fa-dice exec-software"> </i></a>
                         {{else if (ifEquals sw.system.software.type "agent")}}
-                            <i class="fa fa-dice exec-software" title="Agent"> </i>
+                            <a><i class="fas fa-dice exec-software" title="Agent"> </i></a>
                         {{else if (ifEquals sw.system.software.type "augment")}}
-                            <i class="fa fa-dice exec-software"> </i>
+                            <a><i class="fas fa-dice exec-software"> </i></a>
                         {{else if (ifEquals sw.system.software.type "task")}}
-                            <i class="fa fa-dice exec-software"> </i>
+                            <a><i class="fas fa-dice exec-software"> </i></a>
                         {{else}}
                             -
                         {{/if}}

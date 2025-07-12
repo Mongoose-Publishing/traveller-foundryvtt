@@ -899,15 +899,19 @@ export class MgT2ItemSheet extends ItemSheet {
            this.item.update({[`system.-=computer`]: null});
         });
         html.find(".exec-software").click(ev => {
-           console.log("SOFTWARE EXEC");
            const p = $(ev.currentTarget).parents(".item");
            const id = p.data("id");
-           console.log(id);
-
            const software = this.item.parent.items.get(id);
            this.item.execSoftware(software);
-
         });
+        html.find(".linked-component").click(ev => {
+            const p = $(ev.currentTarget).parents(".item");
+            const id = p.data("id");
+            let i = this.item?.parent?.items.get(id);
+            if (i) {
+                i.sheet.render(true);
+            }
+        })
 
         html.find(".item-add-wpn").click(ev => {
            const w = $(ev.currentTarget).parents(".ship-weapon");
