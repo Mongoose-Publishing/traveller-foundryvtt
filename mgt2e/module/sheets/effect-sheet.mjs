@@ -48,29 +48,29 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
             context.targets = {};
             for (const k of ['STR', 'DEX', 'END', 'INT', 'PSI']) {
                 let key = "system.characteristics." + k + "." + prop;
-                context.targets[key] = {"label": k};
+                context.targets[key] = k;
             }
         } else if (context.effectType.targets === "skills") {
             context.targets = {};
             let skills = MGT2.SKILLS;
             for (let id in skills) {
                 let baseKey = "system.skills."+id
-                context.targets[baseKey + "." + prop] = { "label": skillLabel(skills[id], id) };
+                context.targets[baseKey + "." + prop] = skillLabel(skills[id], id);
                 if (skills[id].specialities) {
                     for (let sid in skills[id].specialities) {
-                        context.targets[baseKey + ".specialities." + sid + "." + prop] = { "label": skillLabel(skills[id], id) + " (" + skillLabel(skills[id].specialities[sid], sid) + ")"};
+                        context.targets[baseKey + ".specialities." + sid + "." + prop] = skillLabel(skills[id], id) + " (" + skillLabel(skills[id].specialities[sid], sid) + ")";
                     }
                 }
             }
         } else {
             context.targets = {};
-            context.targets["system.modifiers.encumbrance.multiplierBonus" ] = { "label": "Carry Multiplier" };
-            context.targets["system.modifiers.encumbrance." + prop] = { "label": "Encumbrance DM" };
-            context.targets["system.modifiers.physical." + prop] = { "label": "Physical DM" };
-            context.targets["system.modifiers.melee." + prop] = { "label": "Melee DM" };
-            context.targets["system.modifiers.guncombat." + prop] = { "label": "Gun Combat DM" };
-            context.targets["system.modifiers.armour." + prop] = { "label": "Armour" };
-            context.targets["system.modifiers.initiative." + prop] = { "label": "Initiative" };
+            context.targets["system.modifiers.encumbrance.multiplierBonus" ] = "Carry Multiplier";
+            context.targets["system.modifiers.encumbrance." + prop] = "Encumbrance DM";
+            context.targets["system.modifiers.physical." + prop] = "Physical DM";
+            context.targets["system.modifiers.melee." + prop] = "Melee DM";
+            context.targets["system.modifiers.guncombat." + prop] = "Gun Combat DM";
+            context.targets["system.modifiers.armour." + prop] = "Armour";
+            context.targets["system.modifiers.initiative." + prop] = "Initiative";
         }
 
         return context;
@@ -84,18 +84,11 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         console.log("_updateObject:");
 
         let ae = foundry.utils.duplicate(this.object);
-        ae.label = formData.label;
-
-        console.log("formData:");
-        console.log(formData);
-        console.log(CONST.ACTIVE_EFFECT_MODES);
+        ae.name = formData.data.name;
 
         ae.disabled = formData.disabled;
         ae.transfer = formData.transfer;
         ae.changes = formData.changes;
-
-        console.log("updated object:");
-        console.log(ae);
 
         return this.object.update(ae);
     }

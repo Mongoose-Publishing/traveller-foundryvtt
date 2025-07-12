@@ -3,7 +3,7 @@
     <!-- Effect Header -->
     <header class="sheet-header shadow">
         <h1 class="effect-title">
-            <input type="text" name="label" value="{{ data.name }}"/>
+            <input type="text" name="data.name" value="{{ data.name }}"/>
         </h1>
     </header>
 
@@ -53,11 +53,7 @@
                 <li class="effect-change flexrow" data-index="{{i}}">
                     <div class="key">
                         <select name="changes.{{i}}.key">
-                            {{#select change.key}}
-                                {{#each ../targets as |t id|}}
-                                <option value="{{id}}">{{t.label}}</option>
-                                {{/each}}
-                            {{/select}}
+                            {{selectOptions ../targets selected=change.key}}
                         </select>
                     </div>
 
