@@ -33,7 +33,7 @@
             {{/each}}
         </ol>
     </div>
-{{else if effects}}
+{{else if effects.size includeZero=false}}
     <div class="shadow">
         <ol class="items-list effects-list effects-list-simple grid grid-4col">
             {{#each effects as |e id|}}
