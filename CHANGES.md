@@ -23,6 +23,8 @@
 * Weapon traits now accelerate +/- rate when shift is held for large values.
 * Pass attack traits down from a damage macro to the damage calculation.
 * Active effect names can now be changed. Removed deprecated use of 'label' ready for Foundry 13.
+* Possible fix for ctrl-key issue on Macs on Firefox where the XP Dialog for skills couldn't be accessed.
+  I don't have a Mac so can't replicate or test.
 
 ## 0.12.5 (Beta)
 

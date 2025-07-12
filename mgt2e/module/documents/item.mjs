@@ -310,6 +310,26 @@ export class MgT2Item extends Item {
                 "level": skillLevel
             }
             game.mgt2e.rollSkillMacro(skillFqn, options);
+        } else if (software.system.software.type === "agent") {
+            // A limited expert system.
+            if (!iface.skills) {
+                ui.notifications.warn("Computer must have at least an Agent interface");
+                return;
+            }
+            let userSkill = this.parent.getSkillValue(skillFqn);
+            let options = {
+                "difficulty": 8
+            }
+            if (userSkill < skillLevel) {
+                // Let the agent do all the work
+                options.agent = software.name;
+                options.level = skillLevel;
+            } else {
+                // Get +1 to the skill check
+                options.dm = 1;
+                options.actor = this.parent
+            }
+            game.mgt2e.rollSkillMacro(skillFqn, options);
         } else if (software.system.software.type === "augment") {
             // Gives a straight DM bonus to a skill check
             if (!iface.skills) {
@@ -345,7 +365,6 @@ export class MgT2Item extends Item {
                 "expert": skillLevel
             }
             game.mgt2e.rollSkillMacro(skillFqn, options);
-
         }
     }
 

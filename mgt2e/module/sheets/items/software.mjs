@@ -40,22 +40,29 @@ export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
         }
         context.SOFTWARE_TYPE = {
             "generic": game.i18n.localize("MGT2.Effects.Software.Type.generic"),
+            "agent": game.i18n.localize("MGT2.Effects.Software.Type.agent"),
             "expert": game.i18n.localize("MGT2.Effects.Software.Type.expert"),
             "augment": game.i18n.localize("MGT2.Effects.Software.Type.augment"),
             "task": game.i18n.localize("MGT2.Effects.Software.Type.task")
         }
 
-        context.AGENT_SKILLS = { "": "-"};
+        context.AGENT_SKILLS = { };
         let skills = MGT2.SKILLS;
-        for (let id in skills) {
-            let label = skillLabel(skills[id], id);
-            if (skills[id].specialities) {
-                for (let sid in skills[id].specialities) {
-                    context.AGENT_SKILLS[`${id}.${sid}`] =
-                        `${label} (${skillLabel(skills[id].specialities[sid], sid)})`;
+        if (context.item.system.software.type === "agent") {
+            // An Agent can only be used with Electronics (Computers).
+            context.AGENT_SKILLS["electronics.computers"] = "Electronics (Computers)";
+        } else {
+            context.AGENT_SKILLS = { "": "-"};
+            for (let id in skills) {
+                let label = skillLabel(skills[id], id);
+                if (skills[id].specialities) {
+                    for (let sid in skills[id].specialities) {
+                        context.AGENT_SKILLS[`${id}.${sid}`] =
+                            `${label} (${skillLabel(skills[id].specialities[sid], sid)})`;
+                    }
+                } else {
+                    context.AGENT_SKILLS[id] = label;
                 }
-            } else {
-                context.AGENT_SKILLS[id] = label;
             }
         }
         context.AGENT_LEVELS = {
