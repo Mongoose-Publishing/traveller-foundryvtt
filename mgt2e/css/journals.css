@@ -152,6 +152,11 @@ caption {
   padding: 0.5em;
 }
 
+.journal-sheet .two-columns .callout {
+  float: none;
+  width: auto;
+  margin-left: 0;
+}
 
 
 /* Career Definitions */
