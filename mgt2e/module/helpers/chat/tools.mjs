@@ -460,7 +460,7 @@ Tools.actorInlineDisplay = async function(actorId) {
 
     if (actor.type === "creature") {
         Tools.creatureInlineDisplay(a, actor);
-    } else if (actor.type === "npc") {
+    } else if (actor.type === "npc" || actor.type==="traveller") {
         Tools.npcInlineDisplay(a, actor);
     } else if (actor.type === "spacecraft") {
         await Tools.spacecraftInlineDisplay(a, actor);
