@@ -98,7 +98,7 @@ export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
                 }
             }
         }
-        if (!foundHardware) {
+        if (!foundHardware && context.item.system.installedOn) {
             context.item.system.installedOn = null;
             context.item.update({ "system.installedOn": null });
         }
