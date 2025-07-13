@@ -8,7 +8,7 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
-## Develop
+## 0.13.0 (Beta)
 
 * Added agent option to skill macros, so a skill can be rolled without reference to an actor.
 * Added `installedOn` field to software, to specify which device it is installed on.
