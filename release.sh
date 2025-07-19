@@ -90,7 +90,7 @@ release=$(git branch --show-current)
 
 RELEASE_DOWNLOAD_URL="https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/${release}/release/mongoose-traveller.zip"
 RELEASE_MANIFEST_URL="https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/release/system.json"
-RELEASE_URL= "https://github.com/Mongoose-Publishing/traveller-foundryvtt"
+RELEASE_URL="https://github.com/Mongoose-Publishing/traveller-foundryvtt/"
 
 # Zip up system archive, minus the source json.
 if [ $LOCAL = "yes" ]
@@ -99,7 +99,7 @@ then
   sed -i "s/\"version\": \".*\",/\"version\": \"${version}.${build}-DEV\",/" mgt2e/system.json
   sed -i "s#\"download\": .*#\"download\": \"$LOCAL_DOWNLOAD_URL\",#" mgt2e/system.json
   sed -i "s#\"manifest\": .*#\"manifest\": \"$LOCAL_MANIFEST_URL\",#" mgt2e/system.json
-  sed -i "s#\"url\": .*mgt2e.*#\"url\": \"$LOCAL_URL\",#" mgt2e/system.json
+  sed -i "s#\"url\": .*foundry.*#\"url\": \"$LOCAL_URL\",#" mgt2e/system.json
 
   rm -f release/mongoose-traveller.zip
   zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
@@ -112,8 +112,12 @@ else
   sed -i "s/\"version\": \".*\",/\"version\": \"${version}.${build}\",/" mgt2e/system.json
   sed -i "s#\"download\": .*#\"download\": \"$RELEASE_DOWNLOAD_URL\",#" mgt2e/system.json
   sed -i "s#\"manifest\": .*#\"manifest\": \"$RELEASE_MANIFEST_URL\",#" mgt2e/system.json
+  sed -i "s#\"url\": .*foundry.*#\"url\": \"$RELEASE_URL\",#" mgt2e/system.json
+
+  cat mgt2e/system.json jq empty || die "There is an error with the system.json"
 
   rm -f release/mongoose-traveller.zip
+  sleep 1
   zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
   cp mgt2e/system.json release/system.json
 
