@@ -104,9 +104,17 @@ function modifyTechLevel(data, value) {
     return 0;
 }
 
-function setTradeCodes(worldActor) {
+export function setTradeCodes(worldActor) {
     let codes = "";
     let uwp = worldActor.system.world.uwp;
+
+    // Force values to numbers. The HTML selects tend to set everything to strings.
+    uwp.atmosphere = Number(uwp.atmosphere);
+    uwp.size = Number(uwp.size);
+    uwp.population = Number(uwp.population);
+    uwp.lawLevel = Number(uwp.lawLevel);
+    uwp.goverment = Number(uwp.goverment);
+    uwp.hydrographics = Number(uwp.hydrographics);
 
     // Agricultural
     if (uwp.atmosphere >= 4 && uwp.atmosphere <= 9 &&

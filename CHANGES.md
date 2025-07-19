@@ -8,6 +8,10 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
+## Develop
+
+* World trade codes are now recalculated when a UWP value is changed.
+
 ## 0.13.0 (Beta)
 
 * Added agent option to skill macros, so a skill can be rolled without reference to an actor.

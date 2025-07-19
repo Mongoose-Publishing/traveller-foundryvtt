@@ -1,7 +1,7 @@
 import {MgT2ActorSheet} from "../actor-sheet.mjs";
 import {MgT2Item} from "../../documents/item.mjs";
-import {calculateFreightLots, createFreight, createSpeculativeGoods} from "../../helpers/utils/trade-utils.mjs";
-import {createWorld} from "../../helpers/utils/world-utils.mjs";
+import {calculateFreightLots, createFreight, createSpeculativeGoods } from "../../helpers/utils/trade-utils.mjs";
+import {createWorld, setTradeCodes } from "../../helpers/utils/world-utils.mjs";
 import {MGT2} from "../../helpers/config.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
@@ -36,6 +36,12 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
         context.system = context.actor.system;
         context.world = context.system.world;
+
+        let tradeCodes = context.world.uwp.codes;
+        setTradeCodes(context.actor);
+        if (tradeCodes !== context.world.uwp.codes) {
+            await context.actor.update({"system.world.uwp.codes": context.world.uwp.codes});
+        }
 
         context.PORT_SELECT = {};
         for (let p in CONFIG.MGT2.WORLD.starport) {
@@ -116,7 +122,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         });
         html.find('.generateSpeculative').click(ev => {
             createSpeculativeGoods(this.actor);
-        })
+        });
     }
 
     async _onDrop(event) {
