@@ -1,0 +1,24 @@
+<form class="flexcol chaDialog">
+
+<div class="shadow">
+        <div>
+            <img src="{{ITEM.img}}" width="96px" style="float: right"/>
+            <h3>{{ITEM.name}}</h3>
+            <p style="font-size: larger">
+                <b>Cost:</b> {{COST}}
+            </p>
+            <p style="">Select actor who is to purchase it</p>
+
+            <select name="buyer" class="buyerSelect">
+                {{selectOptions LIST}}
+            </select>
+            <p>
+                Cash after purchase: <span class="after">{{AFTER}}</span>
+            </p>
+        </div>
+    </div>
+
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="buyButton">Buy</button>
+    </footer>
+</form>

@@ -4,7 +4,7 @@
 import {rollAttack, skillLabel} from "../dice-rolls.mjs";
 import {randomiseAssociate} from "../utils/character-utils.mjs";
 import {Tools} from "./tools.mjs";
-
+import {MgT2BuyDialog} from "../buy-dialog.mjs";
 
 export const MgT2eMacros = {};
 
@@ -476,6 +476,11 @@ MgT2eMacros.createItem = async function(args, buy) {
     for (let actor of Tools.getSelectedOwned()) {
         if (actor) {
             if (cost > 0 && actor.system.finance) {
+                new MgT2BuyDialog(actor, item, Number(quantity)).render(true);
+                added=true;
+                continue;
+            }
+            if (false) {
                 let cash = Number(actor.system.finance.cash);
                 if (cost > cash) {
                     ui.notifications.error(
@@ -486,24 +491,21 @@ MgT2eMacros.createItem = async function(args, buy) {
                     continue;
                 }
                 await actor.update({"system.finance.cash": cash - cost});
-                ui.notifications.info(
-                    game.i18n.format("MGT2.Info.BuyItem",
-                        {"actor": actor.name, "cost": cost, "item": item.name}
-                    )
-                );
+                let d = await Item.create(item, {parent: actor});
+                d.update({"system.quantity": quantity});
             }
-            let d = await Item.create(item, {parent: actor});
-            d.update({"system.quantity": quantity});
-            ui.notifications.info(
-                game.i18n.format("MGT2.Info.CreateItem", {"item": item.name, "actor": actor.name})
-            );
-            added = true;
+            if (cost === 0 && actor.permission >= 3) {
+                let d = await Item.create(item, {parent: actor});
+                d.update({"system.quantity": quantity});
+                ui.notifications.info(
+                    game.i18n.format("MGT2.Info.CreateItem", {"item": item.name, "actor": actor.name})
+                );
+                added = true;
+            }
         }
     }
     if (!added) {
-        ui.notifications.error(
-            game.i18n.localize("MGT2.Error.CreateItem.NoToken")
-        );
+        new MgT2BuyDialog(null, item, Number(quantity)).render(true);
     }
 }
 

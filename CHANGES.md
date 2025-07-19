@@ -15,7 +15,7 @@
 * Skill training macro now supports adding new skills and specialisations.
 * CSS for journal headings now focused on the page content, rather than the entire journal window
   (it was overriding the window title bar as well, which was undesirable).
-
+* When buying an item, a dialog is now presented to confirm who is buying it.
 
 ## 0.13.0 (Beta)
 
