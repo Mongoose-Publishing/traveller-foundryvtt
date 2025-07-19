@@ -1295,6 +1295,10 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
         } else if (skill.specialities) {
             for (let sid in skill.specialities) {
                 let spec = skill.specialities[sid];
+                if (spec.trained) {
+                    showSkill = true;
+                    break;
+                }
                 if ((spec.expert && parseInt(spec.expert) > 0) || (spec.dm && parseInt(spec.dm) > 0)) {
                     showSkill = true;
                     break;
@@ -1305,7 +1309,11 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     if (showSkill && skill.specialities) {
         for (let sid in skill.specialities) {
             let spec = skill.specialities[sid];
-            if ((spec.expert && parseInt(spec.expert) > 0) || (spec.dm && parseInt(spec.dm) > 0)) {
+            if ((Number(spec.value) > 0) || (spec.expert && Number(spec.expert) > 0) || (spec.dm && Number(spec.dm) > 0)) {
+                showSpecs = true;
+                break;
+            }
+            if (spec.trained) {
                 showSpecs = true;
                 break;
             }
@@ -1379,6 +1387,8 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                 } else if (Number(spec.value) > 0) {
                     showSpec = true;
                 } else if (spec.expert && Number(spec.expert) > 0) {
+                    showSpec = true;
+                } else if (spec.trained) {
                     showSpec = true;
                 }
                 if (showSpec) {

@@ -17,7 +17,7 @@ MgT2eMacros.skillGain = function(args) {
     let level = args.level;
     let context = args.text;
 
-    if (!skillId || args.cha) {
+    if (!skillId && args.cha) {
         MgT2eMacros.chaGain(args);
         return;
     }
@@ -34,27 +34,96 @@ MgT2eMacros.skillGain = function(args) {
         let skill = actor.system.skills[skillId];
         let text = "";
         let skillName = actor.getSkillLabel(args.skill, false);
+        let added = false;
+
+        if (!skill) {
+            if (args.name) {
+                skill = {
+                    "id": skillId,
+                    "label": args.name,
+                    "level": 0,
+                    "trained": false
+                }
+                if (args.cha) {
+                    skill.default = args.cha;
+                }
+                actor.system.skills[skillId] = skill;
+                skillName = args.name;
+                ui.notifications.info(`Add skill ${args.name} to character ${actor.name}`);
+                added = true;
+            } else {
+                ui.notifications.error(`Character ${actor.name} does not have skill ${skillId}`);
+                continue;
+            }
+        }
 
         if (!skill.trained) {
             skill.trained = true;
             text += `<b>${skillName}</b> is now trained.<br/>`;
+            added = true;
         }
+
+        if (specId && args.sname && !skill.specialities) {
+            ui.notifications.info(`Add speciality ${skillName} (${args.sname}) to character ${actor.name}`);
+            skill.specialities = {};
+            skill.specialities[specId] = {
+                id: specId,
+                label: args.sname,
+                value: 0
+            }
+            skillName += ` (${args.sname})`;
+            text += `<b>${skillName} added as a new speciality.<br/>`;
+            added = true;
+        }
+
         if (level !== undefined && level === 0) {
             // Level set to zero, nothing else to do.
+            if (specId && skill.specialities && !skill.specialities[specId] && args.sname) {
+                skill.specialities[specId] = {
+                    "id": specId,
+                    label: args.sname,
+                    value: 0
+                }
+                skillName += ` (${args.sname})`;
+                text += `<b>${skillName} added as a new speciality.<br/>`;
+                added = true;
+            }
+            if (specId && skill.specialities && skill.specialities[specId] && skill.individual) {
+                skill.specialities[specId].trained = true;
+            } else if (!added) {
+                text += `${skillName} is unchanged`;
+            }
         } else {
             if (skill.specialities) {
                 if (specId) {
+                    if (!skill.specialities[specId] && args.sname) {
+                        // Create a new speciality.
+                        ui.notifications.info(`Add speciality ${skillName} (${args.sname}) to character ${actor.name}`);
+                        skill.specialities[specId] = {
+                            "id": specId,
+                            "label": args.sname,
+                            "value": level?level:0
+                        }
+                        skillName += ` (${args.sname})`;
+                        text += `${skillName} added as a new specialisation.<br/>`;
+                        added = true;
+                    }
                     if (skill.specialities[specId]) {
                         let current = Number(skill.specialities[specId].value);
+                        if (skill.individual) {
+                            skill.specialities[specId].trained = true;
+                        }
                         if (level === undefined && current < 4) {
                             skill.specialities[specId].value = current + 1;
                             text += `Incrementing <b>${skillName}</b> to ${current + 1}.`;
                         } else if (level > current) {
                             skill.specialities[specId].value = level;
-                            text += `Setting <b>${skillName}</b> to ${level}.`;
-                        } else {
+                            text += `Setting <b>${skillName} (${specName})</b> to ${level}.`;
+                        } else if (!added) {
                             text += `<b>${skillName}</b> is unchanged.`;
                         }
+                    } else {
+                        ui.notifications.error(`Character ${actor.name} does not have speciality ${skillName} (${specId})`);
                     }
                 } else {
                     // Player has to select which speciality to raise.
@@ -76,7 +145,7 @@ MgT2eMacros.skillGain = function(args) {
             } else if (level > skill.value) {
                 skill.value = level;
                 text += `Setting <b>${skillName}</b> to ${level}.`;
-            } else {
+            } else if (!added) {
                 text += `<b>${skillName}</b> is unchanged.`;
             }
         }
