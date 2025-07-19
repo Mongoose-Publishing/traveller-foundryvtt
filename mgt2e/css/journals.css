@@ -75,7 +75,7 @@ caption {
 
 /* Documentation */
 
-.journal-sheet h1 {
+.journal-entry-pages h1 {
     color: #f1511b;
     text-transform: uppercase;
     border-bottom: 3px solid #f1511b;
@@ -83,7 +83,7 @@ caption {
     font-size: 24pt;
 }
 
-.journal-sheet h2 {
+.journal-entry-pages h2 {
     color: black;
     text-transform: uppercase;
     border: none;
@@ -91,7 +91,7 @@ caption {
     font-size: 20pt;
 }
 
-.journal-sheet h3 {
+.journal-entry-pages h3 {
     color: black;
     text-transform: uppercase;
     border: none;
@@ -99,14 +99,13 @@ caption {
     font-size: 18pt;
 }
 
-.journal-sheet h4 {
-    color: black;
+.journal-entry-pages h4 {
     border: none;
     font-weight: bold;
     font-size: 16pt
 }
 
-.journal-sheet h5 {
+.journal-entry-pages h5 {
   color: black;
   border: none;
   font-weight: bold;
@@ -114,7 +113,7 @@ caption {
   font-size: 14pt
 }
 
-.journal-sheet h6 {
+.journal-entry-pages h6 {
   color: black;
   border: none;
   font-weight: bold;
