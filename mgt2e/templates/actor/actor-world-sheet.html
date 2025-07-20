@@ -140,7 +140,7 @@
                                         <br/>
                                         {{/if}}
                                         {{#if item.system.cargo.price includeZero=false}}
-                                        <span>Cr{{number item.system.cargo.price}}</span>
+                                        <span>Cr{{niceNumber item.system.cargo.price}}</span>
                                         {{/if}}
                                         <div class="item-controls">
                                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -206,7 +206,7 @@
                                             <br/>
                                             {{/if}}
                                             {{#if item.system.cost includeZero=false}}
-                                            <span>Cr{{number item.system.cost}}</span>
+                                            <span>Cr{{niceNumber item.system.cost}}</span>
                                             {{/if}}
                                             <div class="item-controls">
                                                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

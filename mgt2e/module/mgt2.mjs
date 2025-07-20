@@ -881,13 +881,13 @@ function updateData(dmg, ap) {
 
 // If you need to add Handlebars helpers, here are a few useful examples:
 Handlebars.registerHelper('concat', function() {
-  var outStr = '';
-  for (var arg in arguments) {
-    if (typeof arguments[arg] != 'object') {
-      outStr += arguments[arg];
+    var outStr = '';
+    for (var arg in arguments) {
+        if (typeof arguments[arg] != 'object') {
+            outStr += arguments[arg];
+        }
     }
-  }
-  return outStr;
+    return outStr;
 });
 
 Handlebars.registerHelper('toLowerCase', function(str) {
@@ -1105,7 +1105,7 @@ Handlebars.registerHelper('isTrained', function(skill) {
 });
 
 Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
-   return arg1 == arg2;
+    return arg1 === arg2;
 });
 
 Handlebars.registerHelper('ifStartsWith', function(arg1, arg2) {
@@ -1140,48 +1140,48 @@ Handlebars.registerHelper('concat', function(arg1, arg2, arg3, arg4, arg5) {
 });
 
 Handlebars.registerHelper('nameQuantity', function(item, context) {
-   let name = item.name;
-   let quantity = item.system.quantity;
-   let extra = null;
+    let name = item.name;
+    let quantity = item.system.quantity;
+    let extra = null;
 
-   if (item.type === "hardware") {
-       let hardware = item.system.hardware;
-       let sys = hardware.system;
-       if (sys === "cargo" || sys === "fuel") {
-           extra = hardware.rating + "dt";
-       } else if (sys === "power" && hardware.rating) {
-           extra = "" + hardware.rating;
-       } else if (sys === "j-drive" && hardware.rating) {
-           extra = "J-" + hardware.rating;
-       } else if (sys === "m-drive" && hardware.rating) {
-           extra = hardware.rating + "G";
-       }
-   }
+    if (item.type === "hardware") {
+        let hardware = item.system.hardware;
+        let sys = hardware.system;
+        if (sys === "cargo" || sys === "fuel") {
+            extra = hardware.rating + "dt";
+        } else if (sys === "power" && hardware.rating) {
+            extra = "" + hardware.rating;
+        } else if (sys === "j-drive" && hardware.rating) {
+            extra = "J-" + hardware.rating;
+        } else if (sys === "m-drive" && hardware.rating) {
+            extra = hardware.rating + "G";
+        }
+    }
 
-   if (extra) {
-       name = `${name} [${extra}]`;
-   }
+    if (extra) {
+        name = `${name} [${extra}]`;
+    }
 
-   if (quantity && parseInt(quantity) > 1) {
-       if (context === "sidebar") {
-           if (item.type === "weapon" && hasTrait(item.system.weapon.traits, "oneUse")) {
-               quantity = parseInt(quantity);
-               name = `${name} x${quantity}`;
-           }
-       } else {
-           quantity = parseInt(quantity);
-           name = `${name} x${quantity}`;
-       }
-   }
-   return name;
+    if (quantity && parseInt(quantity) > 1) {
+        if (context === "sidebar") {
+            if (item.type === "weapon" && hasTrait(item.system.weapon.traits, "oneUse")) {
+                quantity = parseInt(quantity);
+                name = `${name} x${quantity}`;
+            }
+        } else {
+            quantity = parseInt(quantity);
+            name = `${name} x${quantity}`;
+        }
+    }
+    return name;
 });
 
-Handlebars.registerHelper('number', function(value) {
+Handlebars.registerHelper('niceNumber', function(value) {
     return value.toLocaleString("en-GB");
 });
 
 Handlebars.registerHelper('quantity', function(item, value) {
-   return Intl.NumberFormat("en-GB", { maximumFractionDigits: 2}).format(value * item.system.quantity);
+    return Intl.NumberFormat("en-GB", { maximumFractionDigits: 2}).format(value * item.system.quantity);
 });
 
 Handlebars.registerHelper('formula', function(actor, value) {
@@ -1524,14 +1524,14 @@ Handlebars.registerHelper('hasStatus', function(actor) {
 });
 
 Handlebars.registerHelper('itemHasStatus', function(item) {
-   const status = item.flags.mgt2e;
-   if (!status) return false;
+    const status = item.flags.mgt2e;
+    if (!status) return false;
 
-   if (status.damaged || status.destroyed) {
-       return true;
-   }
+    if (status.damaged || status.destroyed) {
+        return true;
+    }
 
-   return false;
+    return false;
 });
 
 Handlebars.registerHelper('toHex', function(value) {
@@ -1540,65 +1540,65 @@ Handlebars.registerHelper('toHex', function(value) {
 
 
 Handlebars.registerHelper('showStatus', function(actor, status) {
-   let type = "statusWarn";
-   let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
+    let type = "statusWarn";
+    let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
 
-   if (status === "fatigued") {
-       label += ` <i class="fas fa-xmark statusFatigued"> </i>`;
-   } else if (status === "stunned") {
-       if (parseInt(actor.getFlag("mgt2e", "stunnedRounds")) > 0) {
-           label += ` (${actor.getFlag("mgt2e", "stunnedRounds")})`;
-       }
-       label += ` <i class="fas fa-xmark statusStunned"> </i>`;
-       type = "statusBad";
-   } else if (status === "dead") {
-       label += ` <i class="fas fa-xmark statusDead"> </i>`;
-       type = "statusBad";
-   } else if (status === "unconscious") {
-       type = "statusBad";
-       label += ` <i class="fas fa-xmark statusUnconscious"> </i>`;
-   } else if (status === "disabled") {
-       label += ` <i class="fas fa-xmark statusDisabled"> </i>`;
-       type = "statusBad";
-   } else if (status === "reaction") {
-       if (!(parseInt(actor.getFlag("mgt2e", "reaction")) < 0)) {
-           return "";
-       }
-       label += ` (${actor.getFlag("mgt2e", "reaction")})`;
-       label += ` <i class="fas fa-xmark statusReaction"> </i>`;
-   } else if (status === "highGravity") {
-       label += ` <i class="fas fa-xmark statusHighGravity"> </i>`;
-   } else if (status === "lowGravity") {
-       label += ` <i class="fas fa-xmark statusLowGravity"> </i>`;
-   } else if (status === "zeroGravity") {
-       label += ` <i class="fas fa-xmark statuszeroGravity"> </i>`;
-   } else if (status === "diseased") {
-       label += ` <i class="fas fa-xmark statusDiseased"> </i>`;
-   } else if (status === "poisoned") {
-       label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
-   } else if (status === "disabled") {
-       type = "statusBad";
-       label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
-   } else if (status === "dead") {
-       type = "statusBad";
-       label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
-   } else if (status === "needsFirstAid") {
-       label += ` <i class="fas fa-xmark statusNeedsFirstAid"> </i>`;
-   } else if (status === "needsSurgery") {
-       type = "statusBad";
-       label += ` <i class="fas fa-xmark statusNeedsSurgery"> </i>`;
-   } else if (status === "prone") {
-       type = "statusGood";
-       label += ` <i class="fas fa-xmark statusProne"> </i>`;
-   } else if (status === "inCover") {
-       type = "statusGood";
-       if (parseInt(actor.getFlag("mgt2e", "inCover")) > 0) {
-           label += ` (${actor.getFlag("mgt2e", "inCover")})`;
-       }
-       label += ` <i class="fas fa-xmark statusInCover"> </i>`;
-   }
+    if (status === "fatigued") {
+        label += ` <i class="fas fa-xmark statusFatigued"> </i>`;
+    } else if (status === "stunned") {
+        if (parseInt(actor.getFlag("mgt2e", "stunnedRounds")) > 0) {
+            label += ` (${actor.getFlag("mgt2e", "stunnedRounds")})`;
+        }
+        label += ` <i class="fas fa-xmark statusStunned"> </i>`;
+        type = "statusBad";
+    } else if (status === "dead") {
+        label += ` <i class="fas fa-xmark statusDead"> </i>`;
+        type = "statusBad";
+    } else if (status === "unconscious") {
+        type = "statusBad";
+        label += ` <i class="fas fa-xmark statusUnconscious"> </i>`;
+    } else if (status === "disabled") {
+        label += ` <i class="fas fa-xmark statusDisabled"> </i>`;
+        type = "statusBad";
+    } else if (status === "reaction") {
+        if (!(parseInt(actor.getFlag("mgt2e", "reaction")) < 0)) {
+            return "";
+        }
+        label += ` (${actor.getFlag("mgt2e", "reaction")})`;
+        label += ` <i class="fas fa-xmark statusReaction"> </i>`;
+    } else if (status === "highGravity") {
+        label += ` <i class="fas fa-xmark statusHighGravity"> </i>`;
+    } else if (status === "lowGravity") {
+        label += ` <i class="fas fa-xmark statusLowGravity"> </i>`;
+    } else if (status === "zeroGravity") {
+        label += ` <i class="fas fa-xmark statuszeroGravity"> </i>`;
+    } else if (status === "diseased") {
+        label += ` <i class="fas fa-xmark statusDiseased"> </i>`;
+    } else if (status === "poisoned") {
+        label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
+    } else if (status === "disabled") {
+        type = "statusBad";
+        label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
+    } else if (status === "dead") {
+        type = "statusBad";
+        label += ` <i class="fas fa-xmark statusPoisoned"> </i>`;
+    } else if (status === "needsFirstAid") {
+        label += ` <i class="fas fa-xmark statusNeedsFirstAid"> </i>`;
+    } else if (status === "needsSurgery") {
+        type = "statusBad";
+        label += ` <i class="fas fa-xmark statusNeedsSurgery"> </i>`;
+    } else if (status === "prone") {
+        type = "statusGood";
+        label += ` <i class="fas fa-xmark statusProne"> </i>`;
+    } else if (status === "inCover") {
+        type = "statusGood";
+        if (parseInt(actor.getFlag("mgt2e", "inCover")) > 0) {
+            label += ` (${actor.getFlag("mgt2e", "inCover")})`;
+        }
+        label += ` <i class="fas fa-xmark statusInCover"> </i>`;
+    }
 
-   return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
+    return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
 });
 
 Handlebars.registerHelper('showItemStatus', function(item, status) {
@@ -1622,61 +1622,61 @@ Handlebars.registerHelper('showItemStatus', function(item, status) {
 
 
 Handlebars.registerHelper('showCriticals', function(actor) {
-  let html = "";
+    let html = "";
 
-  for (let d in MGT2.SPACECRAFT_DAMAGE) {
-      if (actor.flags.mgt2e["damage_" + d]) {
-          let label = game.i18n.localize("MGT2.Spacecraft.CriticalLabel."+d);
-          let value = actor.flags.mgt2e["damage_" + d];
-          if (parseInt(value) !== NaN && parseInt(value) !== 0) {
-              value = " (" + parseInt(value) + ")";
-          } else {
-              value = "";
-          }
-          label += `${value} <i class="fas fa-xmark critEffDel"> </i>`;
-          html += `<div class="resource critical criticalEffect" data-id="${d}"><label>${label}</label></div>`;
-      }
-  }
+    for (let d in MGT2.SPACECRAFT_DAMAGE) {
+        if (actor.flags.mgt2e["damage_" + d]) {
+            let label = game.i18n.localize("MGT2.Spacecraft.CriticalLabel."+d);
+            let value = actor.flags.mgt2e["damage_" + d];
+            if (parseInt(value) !== NaN && parseInt(value) !== 0) {
+                value = " (" + parseInt(value) + ")";
+            } else {
+                value = "";
+            }
+            label += `${value} <i class="fas fa-xmark critEffDel"> </i>`;
+            html += `<div class="resource critical criticalEffect" data-id="${d}"><label>${label}</label></div>`;
+        }
+    }
 
-  for (let c in MGT2.SPACECRAFT_CRITICALS) {
-      let severity = actor.flags.mgt2e["crit_"+c];
-      if (severity) {
-          let type = "criticalLow";
-          if (severity > 4) {
-              type = "criticalHigh";
-          } else if (severity > 2) {
-              type = "criticalMedium";
-          }
-          let label = game.i18n.localize("MGT2.Spacecraft.Criticals."+c);
-          label += ` ${severity}`;
-          label += ` <i class="fas fa-xmark critDel"> </i>`;
-          html += `<div class="resource flex-group-center critical ${type}" data-id="${c}"><label>${label}</label></div>`;
-      }
-  }
-  return html;
+    for (let c in MGT2.SPACECRAFT_CRITICALS) {
+        let severity = actor.flags.mgt2e["crit_"+c];
+        if (severity) {
+            let type = "criticalLow";
+            if (severity > 4) {
+                type = "criticalHigh";
+            } else if (severity > 2) {
+                type = "criticalMedium";
+            }
+            let label = game.i18n.localize("MGT2.Spacecraft.Criticals."+c);
+            label += ` ${severity}`;
+            label += ` <i class="fas fa-xmark critDel"> </i>`;
+            html += `<div class="resource flex-group-center critical ${type}" data-id="${c}"><label>${label}</label></div>`;
+        }
+    }
+    return html;
 });
 
 Handlebars.registerHelper('criticalClass', function(sev) {
-   sev = parseInt(sev);
-   if (sev > 4) {
-       return "criticalHigh";
-   } else if (sev > 2) {
-       return "criticalMedium";
-   }
-   return "criticalLow";
+    sev = parseInt(sev);
+    if (sev > 4) {
+        return "criticalHigh";
+    } else if (sev > 2) {
+        return "criticalMedium";
+    }
+    return "criticalLow";
 });
 
 Handlebars.registerHelper('showSimpleSkills', function(actor) {
-   if (actor && actor.system && actor.system.skills) {
-       let skills = actor.system.skills;
-       let html = "";
+    if (actor && actor.system && actor.system.skills) {
+        let skills = actor.system.skills;
+        let html = "";
 
-       for (let key in skills) {
-           let skill = skills[key];
+        for (let key in skills) {
+            let skill = skills[key];
 
-           if (skill.trained) {
-               let showParent = true;
-               if (skill.specialities) {
+            if (skill.trained) {
+                let showParent = true;
+                if (skill.specialities) {
                     for (let specKey in skill.specialities) {
                         let spec = skill.specialities[specKey];
                         if (spec.value > 0) {
@@ -1684,16 +1684,16 @@ Handlebars.registerHelper('showSimpleSkills', function(actor) {
                             html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})/${spec.value}</li>`;
                         }
                     }
-               }
-               if (showParent) {
-                   html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}/${skill.value}</li>`;
-               }
-           }
-       }
-       return "<ul class='skill-list'>" + html + "</ul>";
-   } else {
-       return "";
-   }
+                }
+                if (showParent) {
+                    html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}/${skill.value}</li>`;
+                }
+            }
+        }
+        return "<ul class='skill-list'>" + html + "</ul>";
+    } else {
+        return "";
+    }
 
 });
 
@@ -1778,26 +1778,26 @@ Handlebars.registerHelper('skillToLabel', function(skillName) {
 });
 
 Handlebars.registerHelper('showBehaviours', function(key, behaviours) {
-   // 'behaviours' is a string of space separated behaviour values.
-   // Want to return <span> elements with localised names.
-   let html = "";
-   let list = behaviours.split(" ");
-   for (let b in list) {
-       if (list[b].length > 0) {
-           let style = "";
-           if (CONFIG.MGT2.CREATURES.behaviours[list[b]]?.group) {
-               style = CONFIG.MGT2.CREATURES.behaviours[list[b]].group;
-           }
-           html += `<span class='behaviour-item ${style?"behaviour-style-"+style:""}' title='${game.i18n.localize("MGT2.Creature.BehaviourText." + list[b])}' data-behaviour-id='${list[b]}'>`;
-           html += `${game.i18n.localize("MGT2.Creature.Behaviour." + list[b])} `;
-           if (key.owner) {
-               html += `<i class="fas fa-xmark behaviour-remove"> </i>`;
-           }
-           html += `</span>`;
-       }
-   }
+    // 'behaviours' is a string of space separated behaviour values.
+    // Want to return <span> elements with localised names.
+    let html = "";
+    let list = behaviours.split(" ");
+    for (let b in list) {
+        if (list[b].length > 0) {
+            let style = "";
+            if (CONFIG.MGT2.CREATURES.behaviours[list[b]]?.group) {
+                style = CONFIG.MGT2.CREATURES.behaviours[list[b]].group;
+            }
+            html += `<span class='behaviour-item ${style?"behaviour-style-"+style:""}' title='${game.i18n.localize("MGT2.Creature.BehaviourText." + list[b])}' data-behaviour-id='${list[b]}'>`;
+            html += `${game.i18n.localize("MGT2.Creature.Behaviour." + list[b])} `;
+            if (key.owner) {
+                html += `<i class="fas fa-xmark behaviour-remove"> </i>`;
+            }
+            html += `</span>`;
+        }
+    }
 
-   return html;
+    return html;
 });
 
 Handlebars.registerHelper('showTraits', function(key, traits) {
@@ -1988,41 +1988,41 @@ Handlebars.registerHelper('showSpacecraftHullTraits', function(key, traits) {
 });
 
 Handlebars.registerHelper('showAdvantages', function(key, traits) {
-   console.log("showAdvantages: [" + traits + "]");
-   let hardware = key.item.system.hardware;
-   let html = "";
-   let list = traits.split(",");
-   let data = CONFIG.MGT2.SPACECRAFT_ADVANTAGES[hardware.system];
+    console.log("showAdvantages: [" + traits + "]");
+    let hardware = key.item.system.hardware;
+    let html = "";
+    let list = traits.split(",");
+    let data = CONFIG.MGT2.SPACECRAFT_ADVANTAGES[hardware.system];
 
-   for (let i in list) {
-       if (list[i].length > 0) {
-           let adv = list[i].trim();
-           let value = null;
-           if (adv.indexOf(" ") > -1) {
-               value = adv.split(" ")[1].trim();
-               adv = adv.split(" ")[0].trim();
-           }
-           let t = "adv-pill";
-           let cost = 0;
-           if (!data[adv]) {
-               t = "error-pill"
-           } else if (data[adv].cost < 1) {
-               t = "disad-pill";
-           }
-           html += `<span class='pill advantage-pill ${t}' data-advantage-id='${adv}'>`;
-           html += game.i18n.localize("MGT2.Spacecraft.Advantages." + adv);
-           if (value && parseInt(value) > 1) {
-               html += " x" + value;
-           }
-           if (key.owner) {
-               html += `&nbsp;<i class="fas fa-xmark advantage-remove"> </i>`;
-           } else {
-               html += "&nbsp;";
-           }
-           html += "</span>";
-       }
-   }
-   return html;
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let adv = list[i].trim();
+            let value = null;
+            if (adv.indexOf(" ") > -1) {
+                value = adv.split(" ")[1].trim();
+                adv = adv.split(" ")[0].trim();
+            }
+            let t = "adv-pill";
+            let cost = 0;
+            if (!data[adv]) {
+                t = "error-pill"
+            } else if (data[adv].cost < 1) {
+                t = "disad-pill";
+            }
+            html += `<span class='pill advantage-pill ${t}' data-advantage-id='${adv}'>`;
+            html += game.i18n.localize("MGT2.Spacecraft.Advantages." + adv);
+            if (value && parseInt(value) > 1) {
+                html += " x" + value;
+            }
+            if (key.owner) {
+                html += `&nbsp;<i class="fas fa-xmark advantage-remove"> </i>`;
+            } else {
+                html += "&nbsp;";
+            }
+            html += "</span>";
+        }
+    }
+    return html;
 });
 
 Handlebars.registerHelper('selectedWeaponId', function(actions, id) {
@@ -2057,79 +2057,79 @@ Handlebars.registerHelper('showSpacecraftAttacks', function(roles, item) {
     }
 
 
-   return html;
+    return html;
 });
 
 // Display information about active effects on an actor.
 Handlebars.registerHelper("showEffectPill", function(actor, effect) {
-   let html = "";
+    let html = "";
 
-   let title = `${effect.sourceName}: ${effect.name}`;
+    let title = `${effect.sourceName}: ${effect.name}`;
 
-   for (let change of effect.changes) {
-       let text = "";
-       let key = change.key;
-       let value = change.value;
-       if (key.startsWith("system.skills.")) {
-           key = key.replaceAll(/system\.skills\./g, "");
-           let type = key.replaceAll(/.*\./g, "");
-           let skillId = key.replaceAll(/\..*/g, "");
-           let specId = null;
+    for (let change of effect.changes) {
+        let text = "";
+        let key = change.key;
+        let value = change.value;
+        if (key.startsWith("system.skills.")) {
+            key = key.replaceAll(/system\.skills\./g, "");
+            let type = key.replaceAll(/.*\./g, "");
+            let skillId = key.replaceAll(/\..*/g, "");
+            let specId = null;
 
-           let typeLabel = game.i18n.localize("MGT2.TravellerSheet.AugmentType." + type);
-           if (key.indexOf(".specialities")> -1) {
+            let typeLabel = game.i18n.localize("MGT2.TravellerSheet.AugmentType." + type);
+            if (key.indexOf(".specialities")> -1) {
                 specId = key.replaceAll(/.*\.specialities\.([^.]*)\..*/g, "$1");
-           }
-           let skill = null;
-           let skillName = null;
-           if (actor.system.skills[skillId]) {
-               skill = actor.system.skills[skillId];
-               skillName = skillLabel(skill, skillId);
-               if (specId && actor.system.skills[skillId].specialities[specId]) {
-                   skill = actor.system.skills[skillId].specialities[specId];
-                   skillName += ` (${skillLabel(skill, specId)})`
-               }
-           }
-           if (text !== "") {
-               text += " / ";
-           }
-           text += ` ${skillName} ${typeLabel} ${value}`;
-       } else if (key.startsWith("system.characteristics.")) {
-           key = key.replaceAll(/system\.characteristics\./g, "");
-           key = key.replaceAll(/\..*/g, "");
+            }
+            let skill = null;
+            let skillName = null;
+            if (actor.system.skills[skillId]) {
+                skill = actor.system.skills[skillId];
+                skillName = skillLabel(skill, skillId);
+                if (specId && actor.system.skills[skillId].specialities[specId]) {
+                    skill = actor.system.skills[skillId].specialities[specId];
+                    skillName += ` (${skillLabel(skill, specId)})`
+                }
+            }
+            if (text !== "") {
+                text += " / ";
+            }
+            text += ` ${skillName} ${typeLabel} ${value}`;
+        } else if (key.startsWith("system.characteristics.")) {
+            key = key.replaceAll(/system\.characteristics\./g, "");
+            key = key.replaceAll(/\..*/g, "");
 
-           text += ` ${key} ${value}`;
-       } else if (key.startsWith("system.modifiers.")) {
-           key = key.replaceAll(/system\.modifiers\./g, "");
+            text += ` ${key} ${value}`;
+        } else if (key.startsWith("system.modifiers.")) {
+            key = key.replaceAll(/system\.modifiers\./g, "");
 
-           if (key.startsWith("encumbrance.multiplierBonus")) {
-               text += ` Encumbrance x${value}`;
-           } else if (key.startsWith("encumbrance")) {
-               text += `Encumbrance DM ${value}`;
-           } else if (key.startsWith("guncombat")) {
-               text += `Gun Combat ${value}`;
-           } else if (key.startsWith("melee")) {
-               text += `Melee ${value}`;
-           } else if (key.startsWith("physical")) {
-               text += `Physical ${value}`;
-           }
+            if (key.startsWith("encumbrance.multiplierBonus")) {
+                text += ` Encumbrance x${value}`;
+            } else if (key.startsWith("encumbrance")) {
+                text += `Encumbrance DM ${value}`;
+            } else if (key.startsWith("guncombat")) {
+                text += `Gun Combat ${value}`;
+            } else if (key.startsWith("melee")) {
+                text += `Melee ${value}`;
+            } else if (key.startsWith("physical")) {
+                text += `Physical ${value}`;
+            }
 
-       }
-       let origin = fromUuidSync(effect.origin);
-       let extraClasses = "";
-       let remove = "";
-       if (!origin) {
-           extraClasses = "unlinked";
-       }
-       if (actor.effects.get(effect._id)) {
-           // If the effect is directly on this actor, then it can be removed.
-           // Otherwise it is from an item, and the item needs to be removed.
-           remove = ` &nbsp;<i class="fas fa-xmark effect-remove"> </i>`;
-       }
-       html += `<span class="effectPill ${extraClasses}" data-effect-id="${effect._id}" title="${title}">${text}${remove}</span>`;
-   }
+        }
+        let origin = fromUuidSync(effect.origin);
+        let extraClasses = "";
+        let remove = "";
+        if (!origin) {
+            extraClasses = "unlinked";
+        }
+        if (actor.effects.get(effect._id)) {
+            // If the effect is directly on this actor, then it can be removed.
+            // Otherwise it is from an item, and the item needs to be removed.
+            remove = ` &nbsp;<i class="fas fa-xmark effect-remove"> </i>`;
+        }
+        html += `<span class="effectPill ${extraClasses}" data-effect-id="${effect._id}" title="${title}">${text}${remove}</span>`;
+    }
 
-   return html;
+    return html;
 });
 
 /* -------------------------------------------- */
