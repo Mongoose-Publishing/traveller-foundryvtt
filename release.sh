@@ -114,7 +114,7 @@ else
   sed -i "s#\"manifest\": .*#\"manifest\": \"$RELEASE_MANIFEST_URL\",#" mgt2e/system.json
   sed -i "s#\"url\": .*foundry.*#\"url\": \"$RELEASE_URL\",#" mgt2e/system.json
 
-  cat mgt2e/system.json jq empty || die "There is an error with the system.json"
+  cat mgt2e/system.json | jq empty || die "There is an error with the system.json"
 
   rm -f release/mongoose-traveller.zip
   sleep 1

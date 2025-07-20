@@ -8,10 +8,10 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
-## Develop
+## 0.13.1 (Beta)
 
 * Fixed version numbering in the system.json file
-* * World trade codes are now recalculated when a UWP value is changed.
+* World trade codes are now recalculated when a UWP value is changed.
 * Profession specialisation skills are now displayed if they are at level zero but trained.
 * Skill training macro now supports adding new skills and specialisations.
 * CSS for journal headings now focused on the page content, rather than the entire journal window
