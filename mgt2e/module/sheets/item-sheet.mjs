@@ -177,9 +177,22 @@ export class MgT2ItemSheet extends ItemSheet {
                     }
                 }
             }
+            context.WEAPON_MOUNT = {
+                "fixed": game.i18n.localize("MGT2.Item.SpaceMount.Fixed"),
+                "turret1": game.i18n.localize("MGT2.Item.SpaceMount.Turret1"),
+                "turret2": game.i18n.localize("MGT2.Item.SpaceMount.Turret2"),
+                "turret3": game.i18n.localize("MGT2.Item.SpaceMount.Turret3"),
+                "turret4": game.i18n.localize("MGT2.Item.SpaceMount.Turret4"),
+                "barbette": game.i18n.localize("MGT2.Item.SpaceMount.Barbette"),
+                "bay.small": game.i18n.localize("MGT2.Item.SpaceMount.BaySmall"),
+                "bay.medium": game.i18n.localize("MGT2.Item.SpaceMount.BayMedium"),
+                "bay.large": game.i18n.localize("MGT2.Item.SpaceMount.BayLarge"),
+                "spinal": game.i18n.localize("MGT2.Item.SpaceMount.Spinal")
+            }
 
             this.calculateHardware(context, context.item);
         }
+
 
         if (context.item.type === "hardware" && context.item.parent != null && context.item.parent.type === "spacecraft") {
             this.calculateShipHardware(context, context.item);
@@ -689,19 +702,6 @@ export class MgT2ItemSheet extends ItemSheet {
             item.system.cost = item.system.hardware.tonnage.cost * tons;
             item.system.hardware.power = rating;
         } else if (item.system.hardware.system === "weapon") {
-            context.WEAPON_MOUNT = {
-                "fixed": game.i18n.localize("MGT2.Item.SpaceMount.Fixed"),
-                "turret1": game.i18n.localize("MGT2.Item.SpaceMount.Turret1"),
-                "turret2": game.i18n.localize("MGT2.Item.SpaceMount.Turret2"),
-                "turret3": game.i18n.localize("MGT2.Item.SpaceMount.Turret3"),
-                "turret4": game.i18n.localize("MGT2.Item.SpaceMount.Turret4"),
-                "barbette": game.i18n.localize("MGT2.Item.SpaceMount.Barbette"),
-                "bay.small": game.i18n.localize("MGT2.Item.SpaceMount.BaySmall"),
-                "bay.medium": game.i18n.localize("MGT2.Item.SpaceMount.BayMedium"),
-                "bay.large": game.i18n.localize("MGT2.Item.SpaceMount.BayLarge"),
-                "spinal": game.i18n.localize("MGT2.Item.SpaceMount.Spinal"),
-            }
-
             let availableWeapons = [];
             let activeWeapons = [];
             if (item.system.hardware.weapons) {

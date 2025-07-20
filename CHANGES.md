@@ -10,12 +10,14 @@
 
 ## Develop
 
-* World trade codes are now recalculated when a UWP value is changed.
+* Fixed version numbering in the system.json file
+* * World trade codes are now recalculated when a UWP value is changed.
 * Profession specialisation skills are now displayed if they are at level zero but trained.
 * Skill training macro now supports adding new skills and specialisations.
 * CSS for journal headings now focused on the page content, rather than the entire journal window
   (it was overriding the window title bar as well, which was undesirable).
 * When buying an item, a dialog is now presented to confirm who is buying it.
+* Weapon mount sheet was giving an error that prevented it from being opened if it wasn't a child of a spacecraft.
 
 ## 0.13.0 (Beta)
 
