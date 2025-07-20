@@ -3,6 +3,7 @@
 
 /* Journal Entries */
 
+/*
 .journal-sheet {
 }
 
@@ -14,12 +15,10 @@
     background-color: #eff0f0;
 }
 .journal-entry-content .locked {
-    background-color: white;
 }
 .journal-entry-content {
-    background-color: white;
 }
-
+*/
 img {
   border: none;
 }
@@ -38,6 +37,9 @@ div.two-columns img {
   filter: drop-shadow(10px 10px 4px #404040);
   width: 50%;
   break-before: avoid;
+}
+
+a.inline-mgt2e-execution {
 }
 
 caption {
@@ -84,7 +86,6 @@ caption {
 }
 
 .journal-entry-pages h2 {
-    color: black;
     text-transform: uppercase;
     border: none;
     font-weight: bold;
@@ -92,7 +93,6 @@ caption {
 }
 
 .journal-entry-pages h3 {
-    color: black;
     text-transform: uppercase;
     border: none;
     font-weight: bold;
@@ -106,7 +106,6 @@ caption {
 }
 
 .journal-entry-pages h5 {
-  color: black;
   border: none;
   font-weight: bold;
   font-style: italic;
@@ -114,7 +113,6 @@ caption {
 }
 
 .journal-entry-pages h6 {
-  color: black;
   border: none;
   font-weight: bold;
   font-style: italic;
@@ -138,10 +136,12 @@ caption {
     font-style: italic;
     text-transform: uppercase;
     padding-bottom: 2px;
+    color: black;
 }
 
 .journal-sheet .callout p {
     margin: 0.5em;
+    color: black;
 }
 
 .journal-sheet .callout-wide {
@@ -149,6 +149,7 @@ caption {
   border: 1px solid black;
   border-radius: 8px;
   padding: 0.5em;
+  color: black;
 }
 
 .journal-sheet .two-columns .callout {
@@ -163,6 +164,7 @@ caption {
 div.journal-career {
     background-color: #eff0f0;
     padding: 0.25em;
+    color: black;
 }
 
 .journal-sheet form.journal-header input.title {
@@ -482,7 +484,6 @@ table.creature-stats tr.noborder {
 
 span.internal-macro {
     font-weight: bold;
-    color: black;
     text-decoration: underline;
 }
 
@@ -680,7 +681,7 @@ table.mongoose-equipment td {
 }
 
 .simple-table {
-  background-color: white;
+  _background-color: transparent;
   border: none;
 }
 

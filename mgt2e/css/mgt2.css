@@ -964,7 +964,7 @@ li.active-weapon img {
 
 li.active-weapon .item-attack {
   background: #ff4040;
-  border-shaow: 1px solid black;
+  border-shadow: 1px solid black;
   border-radius: 10px;
   color: white;
   padding-left: 5px;
@@ -973,7 +973,7 @@ li.active-weapon .item-attack {
 
 li.active-weapon .item-reload {
   background: #408040;
-  border-shaow: 1px solid black;
+  border-shadow: 1px solid black;
   border-radius: 10px;
   color: white;
   padding-left: 5px;
@@ -982,7 +982,7 @@ li.active-weapon .item-reload {
 
 li.active-weapon .item-edit {
   background: #404040;
-  border-shaow: 1px solid black;
+  border-shadow: 1px solid black;
   border-radius: 10px;
   color: white;
   padding-left: 5px;
