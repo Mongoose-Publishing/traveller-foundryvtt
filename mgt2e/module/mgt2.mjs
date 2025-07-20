@@ -290,16 +290,20 @@ Hooks.on("init", function() {
     const body = $("body");
     body.on("click", "a.inline-macro-execution", Tools.macroClick);
     body.on("click", "a.inline-mgt2e-execution", Tools.mgt2eClick);
-    body.on("click", ".actor-link", ev=>{
+    body.on("click", ".actor-link", ev =>  {
        const actorId = $(ev.currentTarget).data("actorId");
-       let actor = fromUuidSync(actorId);
-        if (actor) {
-            actor.sheet.render(true);
-        } else {
-            ui.notifications.error(`Actor [${actorId}] cannot be found`);
-        }
+       openActorSheet(actorId);
     });
 })
+
+async function openActorSheet(actorId) {
+    let actor = await fromUuid(actorId);
+    if (actor) {
+        actor.sheet.render(true);
+    } else {
+        ui.notifications.error(`Actor [${actorId}] cannot be found`);
+    }
+}
 
 Hooks.on('renderChatMessage', function(app, html) {
     const damageMessage = html.find(".damage-message")[0];

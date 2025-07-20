@@ -496,12 +496,12 @@ Tools.creatureInlineDisplay = function(a, actor) {
 
 Tools.npcInlineDisplay = function(a, actor) {
     let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/>`;
-    html += `<span class="actor-link rollable name" data-actor-id="${actor._uuid}">${actor.name}</span>`;
+    html += `<span class="actor-link rollable name" data-actor-id="${actor.uuid}">${actor.name}</span>`;
     html += `<span class="profession">${actor.system.sophont.profession}</span>`;
 
     html += `<div style="clear: left"/>`;
 
-    html += `<div class="grid grid-3col actor-link" data-actor-id="${actor._uuid}">`;
+    html += `<div class="grid grid-3col actor-link" data-actor-id="${actor.uuid}">`;
     html += `<div class="species-title">Species</div><div class="species-title">Gender</div><div class="species-title">Age</div>`;
     html += `<div class="species-data">${actor.system.sophont.species}</div>`;
     html += `<div class="species-data">${actor.system.sophont.gender}</div>`;
