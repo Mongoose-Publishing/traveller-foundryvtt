@@ -48,7 +48,7 @@ export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
 
         context.AGENT_SKILLS = { };
         let skills = MGT2.SKILLS;
-        if (context.item.system.software.type === "agent") {
+        if (context.item.system.software?.type === "agent") {
             // An Agent can only be used with Electronics (Computers).
             context.AGENT_SKILLS["electronics.computers"] = "Electronics (Computers)";
         } else {
