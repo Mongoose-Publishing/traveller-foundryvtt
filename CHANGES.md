@@ -8,7 +8,7 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
-## Develop
+## 0.13.2 (Beta)
 
 * Fix bug in actor link within inline journal character sheets.
 * Remove some CSS styling which breaks with Foundry 13. This removes the white background on journals.
