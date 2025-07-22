@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/uncommon_raw_materials.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 20000,
       "availability": "Ag, De, Wa",
       "purchaseDM": "Ag +2, Wa +1",
-      "saleDM": "In +2, HT +1",
+      "saleDM": "In +2, Ht 1",
       "tons": "1D6 * 10",
       "illegal": false,
-      "price": 20000
+      "cost": 100
     },
+    "description": "<p>Valuable metals like titanium, rare elements.</p>",
     "quantity": 1,
-    "description": "<p>Valuable metals like titanium, rare elements.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -31,9 +32,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1753212663221,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",

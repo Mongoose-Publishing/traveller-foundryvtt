@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/vehicles.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 15000,
       "availability": "In, HT",
-      "purchaseDM": "In +2, HT +1",
+      "purchaseDM": "In +2, Ht 1",
       "saleDM": "Ni +2, Hi +1",
       "tons": "1D6 * 10",
       "illegal": false,
-      "price": 15000
+      "cost": 100
     },
+    "description": "<p>Wheeled, tracked and other vehicles from TL10 or lower.</p>",
     "quantity": 1,
-    "description": "<p>Wheeled, tracked and other vehicles from TL10 or lower.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -31,9 +32,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1753212672555,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",

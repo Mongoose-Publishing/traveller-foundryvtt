@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/radioactives.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 1000000,
       "availability": "As, De, Lo",
       "purchaseDM": "As +2, Lo +2",
-      "saleDM": "In +3, HT +1, Ni -2, Ag -3",
+      "saleDM": "In +3, Ni -2, Ag -3, Ht 1",
       "tons": "1D6",
       "illegal": false,
-      "price": 1000000
+      "cost": 100
     },
+    "description": "<p>Uranium, plutonium, unobtanium, rare elements.</p>",
     "quantity": 1,
-    "description": "<p>Uranium, plutonium, unobtanium, rare elements.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -31,9 +32,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1753212594001,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",

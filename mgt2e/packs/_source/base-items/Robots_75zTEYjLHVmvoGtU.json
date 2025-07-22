@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/robots.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 400000,
       "availability": "In",
       "purchaseDM": "In +1",
-      "saleDM": "Ag +2, HT +1",
+      "saleDM": "Ag +2, Ht 1",
       "tons": "1D6 * 5",
       "illegal": false,
-      "price": 400000
+      "cost": 100
     },
+    "description": "<p>Industrial and personal robots and drones.</p>",
     "quantity": 1,
-    "description": "<p>Industrial and personal robots and drones.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -31,9 +32,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1753212647475,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",

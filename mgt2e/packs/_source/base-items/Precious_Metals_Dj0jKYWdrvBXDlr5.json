@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/precious_metals.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 50000,
       "availability": "As, De, Ic, Fl",
       "purchaseDM": "As +3, De +1, Ic +2",
-      "saleDM": "Ri +3, In +2, HT +1",
+      "saleDM": "Ri +3, In +2, Ht 1",
       "tons": "1D6",
       "illegal": false,
-      "price": 50000
+      "cost": 100
     },
+    "description": "<p>Gold, silver, platinum, rare elements.</p>",
     "quantity": 1,
-    "description": "<p>Gold, silver, platinum, rare elements.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -31,9 +32,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1753212578003,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",

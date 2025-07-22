@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/cybernetics.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 250000,
       "availability": "HT",
-      "purchaseDM": "HT +1",
+      "purchaseDM": "Ht 1",
       "saleDM": "As +1, Ic +1, Ri +2",
       "tons": "1D6",
       "illegal": false,
-      "price": 250000
+      "cost": 100
     },
+    "description": "<p>Cybernetic components, replacement limbs.</p>",
     "quantity": 1,
-    "description": "<p>Cybernetic components, replacement limbs.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -31,9 +32,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1753212494484,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",

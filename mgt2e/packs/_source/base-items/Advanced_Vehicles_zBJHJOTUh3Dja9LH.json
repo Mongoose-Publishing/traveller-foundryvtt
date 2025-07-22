@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/advanced_vehicles.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 180000,
       "availability": "In, HT",
-      "purchaseDM": "HT +2",
+      "purchaseDM": "Ht 2",
       "saleDM": "As +2, Ri +2",
       "tons": "1D6 * 5",
       "illegal": false,
-      "price": 180000
+      "cost": 100
     },
+    "description": "<p>Air/rafts, spacecraft, grav tanks and other vehicles up to TL 15.</p>",
     "quantity": 1,
-    "description": "<p>Air/rafts, spacecraft, grav tanks and other vehicles up to TL 15.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -31,9 +32,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1753212403427,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",

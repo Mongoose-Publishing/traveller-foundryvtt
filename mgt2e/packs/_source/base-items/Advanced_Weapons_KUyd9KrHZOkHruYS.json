@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/advanced_weapons.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 150000,
       "availability": "In, HT",
-      "purchaseDM": "HT +2",
+      "purchaseDM": "Ht 2",
       "saleDM": "Po +1, Amber +2, Red +4",
       "tons": "1D6 * 5",
       "illegal": false,
-      "price": 150000
+      "cost": 100
     },
+    "description": "<p>Firearms, explosives, ammunition, artillery and other military-grade weaponry.</p>",
     "quantity": 1,
-    "description": "<p>Firearms, explosives, ammunition, artillery and other military-grade weaponry.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -31,9 +32,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1753212429197,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",

@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/common_electronics.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 20000,
       "availability": "All ",
-      "purchaseDM": "In +2, HT +3, Ri +1",
+      "purchaseDM": "In +2, Ri +1, Ht 3",
       "saleDM": "Na +2, In +5",
       "tons": "2D6 * 10",
       "illegal": false,
-      "price": 20000
+      "cost": 100
     },
+    "description": "<p>Simple electronics including basic computers up to TL10.</p>",
     "quantity": 1,
-    "description": "<p>Simple electronics including basic computers up to TL10.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -34,9 +35,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1753212465713,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "folder": "nTFQBn7eKDifeKFR",
