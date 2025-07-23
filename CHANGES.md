@@ -9,6 +9,10 @@
   to help track down compatibility bugs.
 * Fixed case on trade good codes.
 
+## Develop
+
+* On world sheet, the government type was actually displaying the population code.
+
 ## 0.13.2 (Beta)
 
 * Fix bug in actor link within inline journal character sheets.
