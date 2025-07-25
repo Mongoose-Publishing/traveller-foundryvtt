@@ -31,6 +31,10 @@ export function toFloat(number) {
 }
 
 // Really basic dice rolling functions
+export async function roll(dice) {
+    const roll = await new Roll(dice, null).evaluate();
+    return parseInt(roll.total);
+}
 export async function roll1D6() {
     const roll = await new Roll("1D6", null).evaluate();
     return parseInt(roll.total);

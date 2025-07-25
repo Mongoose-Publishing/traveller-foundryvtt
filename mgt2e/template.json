@@ -278,8 +278,11 @@
         },
         "extra":  {
           "temperature": 0,
-          "berthingCost": 1000
+          "berthingCost": 1000,
+          "culturalDifferences": ""
         },
+        "description": "",
+        "gmnotes": "",
         "meta": {
           "localBrokerScore": 2,
           "brokerActorId": null,

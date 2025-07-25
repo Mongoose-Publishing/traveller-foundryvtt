@@ -370,3 +370,8 @@ div.span.item-status-RUNNING {
   overflow: hidden;
   margin-left: 16px;
 }
+
+textarea.culture {
+  height: 10em;
+  overflow: auto;
+}

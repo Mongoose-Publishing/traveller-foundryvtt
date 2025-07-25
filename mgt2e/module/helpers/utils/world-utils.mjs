@@ -1,7 +1,7 @@
 /**
  * Utilities to create a world from scratch.
  */
-import {roll2D6} from "../dice-rolls.mjs";
+import {roll, roll2D6} from "../dice-rolls.mjs";
 import {roll1D6} from "../dice-rolls.mjs";
 import {MGT2} from "../config.mjs";
 
@@ -95,6 +95,9 @@ export async function createWorld(worldActor) {
     setTradeCodes(worldActor);
 
     worldActor.update({"system.world.uwp": worldActor.system.world.uwp});
+
+    await setCulturalDifferences(worldActor);
+    await setFactions(worldActor);
 }
 
 function modifyTechLevel(data, value) {
@@ -180,4 +183,84 @@ export function setTradeCodes(worldActor) {
     }
 
     worldActor.system.world.uwp.codes = codes.replace(/^, /, "");
+}
+
+export async function setCulturalDifferences(worldActor) {
+    // Look for the "Cultural Differences" roll table.
+    let rollTable = game.tables.getName("Cultural Differences");
+
+    if (!rollTable) {
+        // If one is not found, go look for an official one in the Mongoose content.
+        let pack = await game.packs.get("mgt2e-core.mgt2e-core-tables");
+        if (!pack) {
+            // Traveller Core Rules not installed.
+            return;
+        }
+        // Now try to find the roll table.
+        const index = await pack.getIndex();
+        const entry = index.find(e => e.name === "Cultural Differences");
+        if (entry) {
+            rollTable = await pack.getDocument(entry._id);
+        }
+    }
+
+    if (rollTable) {
+        if (rollTable) {
+            const roll = await rollTable.roll();
+            let text = roll.results[0].text;
+            worldActor.update({ "system.world.extra.culturalDifferences": text });
+        }
+    } else {
+        worldActor.update({ "system.world.extra.culturalDifferences": "Create a 'Cultural Differences' roll table" });
+    }
+}
+
+export async function setFactions(worldActor) {
+    let dice = "1D3";
+    if ([0, 7].includes(worldActor.system.world.uwp.government)) {
+        dice = "1D3 + 1";
+    } else if (worldActor.system.world.uwp.government > 9) {
+        dice = "1D3 - 1";
+    }
+    let numFactions = await roll(dice);
+    console.log(numFactions);
+    for (let f=0; f < numFactions; f++) {
+        let strength = "";
+        switch (await roll("2D6")) {
+            case 2: case 3:
+                strength = "obscure";
+                break;
+            case 4: case 5:
+                strength = "fringe";
+                break;
+            case 6: case 7:
+                strength = "minor";
+                break;
+            case 8: case 9:
+                strength = "notable";
+                break;
+            case 10: case 11:
+                strength = "significant";
+                break;
+            case 12:
+                strength = "overwhelming";
+                break;
+        }
+
+        const itemData = {
+            "name": "World Faction",
+            "img": "",
+            "type": "worlddata",
+            "system": {
+                "description": "World Faction",
+                "world": {
+                    "datatype": "faction",
+                    "government": await roll("2D6"),
+                    "strength": strength
+                }
+            }
+        }
+        console.log(itemData);
+        await Item.create(itemData, { parent: worldActor });
+    }
 }

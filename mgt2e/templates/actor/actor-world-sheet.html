@@ -60,6 +60,7 @@
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
                     <a class="item" data-tab="data">World Data</a>
+                    <a class="item" data-tab="factions">Factions</a>
                     <a class="item" data-tab="map">Map</a>
                     <a class="item" data-tab="freight">Freight</a>
                     <a class="item" data-tab="trade">Trade</a>
@@ -115,15 +116,42 @@
                             {{system.world.uwp.bases}}
                             <h3>Trade Codes</h3>
                             {{system.world.uwp.codes}}
+                            {{#if system.world.extra.culturalDifferences}}
+                                <h3>Culture</h3>
+                                <textarea class="culture" name="system.world.extra.culturalDifferences">{{system.world.extra.culturalDifferences}}</textarea>
+                            {{/if}}
                         </div>
 
                         <div style="clear:both"></div>
                         <input class="generateWorld" type="button" value="Generate"/>
                     </div>
 
+                    <div class="tab" data-group="primary" data-tab="factions">
+                        {{#if factions}}
+                        <ol class="items-list actor-items">
+                            {{#each factions as |faction id|}}
+                                <li class="item item-gear world-faction" data-item-id="{{faction._id}}">
+                                    <h4>{{faction.name}}</h4>
+                                    <div>
+                                        {{localize (concat 'MGT2.WorldSheet.Government.Type.' faction.system.world.government)}} /
+                                        {{localize (concat 'MGT2.WorldSheet.Faction.Strength.' faction.system.world.strength)}}
+                                    </div>
+                                    {{#if faction.system.description}}
+                                        <span>{{{faction.system.description}}}</span>
+                                    {{/if}}
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ol>
+                        {{/if}}
+                    </div>
+
                     <div class="tab" data-group="primary" data-tab="map">
                         <img class="profile-img shadow actor-draggable" src="{{actor.system.world.map}}"
-                             data-edit="actor.system.world.map"
+                             data-edit="system.world.map"
                              title="{{actor.name}}" width="800"/>
                     </div>
 
