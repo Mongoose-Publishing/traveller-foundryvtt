@@ -1923,7 +1923,6 @@ Handlebars.registerHelper('showWeaponTraits', function(key, traits) {
 
 Handlebars.registerHelper('showCargoTraits', function(key, traits) {
     // 'traits' are comma separated list of cargo traits. Each has a bonus attached to it.
-    console.log("showCargoTraits: [" + traits + "]");
     let html = "";
     let list = traits.split(",");
     for (let i in list) {
@@ -2015,6 +2014,50 @@ Handlebars.registerHelper('showAdvantages', function(key, traits) {
             html += "</span>";
         }
     }
+    return html;
+});
+
+Handlebars.registerHelper('showBases', function(key, bases) {
+    let html = "";
+    let list = bases.split(",");
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let base = list[i].trim();
+            html += `<span class='pill world-pill' data-option-id='${base}' title='${game.i18n.localize("MGT2.WorldSheet.Bases."+base)}'>`;
+            html += `&nbsp;${game.i18n.localize("MGT2.WorldSheet.Bases." + base)} `;
+            if (key.owner) {
+                html += `&nbsp;<i class="fas fa-xmark option-remove"> </i>`;
+            } else {
+                html += "&nbsp;";
+            }
+            html += "</span>";
+        }
+    }
+
+    return html;
+});
+
+Handlebars.registerHelper('showWorldTraits', function(key, traits) {
+    // 'traits' are comma separated list of cargo traits. Each has a bonus attached to it.
+    let html = "";
+    let list = traits.split(",");
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let trait = list[i].trim();
+            if (trait.indexOf(" ") > -1) {
+                trait = trait.split(" ")[0].trim();
+            }
+            html += `<span class='pill world-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Trade."+trait)}'>`;
+            html += `&nbsp;${game.i18n.localize("MGT2.Trade." + trait)} `;
+            if (false) {
+                html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i>`;
+            } else {
+                html += "&nbsp;";
+            }
+            html += "</span>";
+        }
+    }
+
     return html;
 });
 

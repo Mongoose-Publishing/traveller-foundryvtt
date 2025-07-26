@@ -437,6 +437,11 @@
   "MGT2.WorldSheet.Passage.middle": "Middle Passage",
   "MGT2.WorldSheet.Passage.high": "High Passage",
 
+  "MGT2.WorldSheet.Bases.S": "Scout",
+  "MGT2.WorldSheet.Bases.N": "Navy",
+  "MGT2.WorldSheet.Bases.M": "Military",
+  "MGT2.WorldSheet.Bases.C": "Corsair",
+
   "MGT2.Vehicle.Spaces": "Spaces",
   "MGT2.Vehicle.Chassis": "Chassis",
   "MGT2.Vehicle.SubType": "SubType",

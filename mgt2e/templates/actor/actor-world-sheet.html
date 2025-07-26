@@ -144,9 +144,15 @@
 
                         <div class="extra-data">
                             <h3>Bases</h3>
-                            {{system.world.uwp.bases}}
+                            <div class="pill-container">
+                                {{{showBases . system.world.uwp.bases}}}
+                            </div>
+
                             <h3>Trade Codes</h3>
-                            {{system.world.uwp.codes}}
+                            <div class="pill-container">
+                                {{{showWorldTraits . system.world.uwp.codes}}}
+                            </div>
+
                             {{#if system.world.extra.culturalDifferences}}
                                 <h3>Culture</h3>
                                 <textarea class="culture" name="system.world.extra.culturalDifferences">{{system.world.extra.culturalDifferences}}</textarea>

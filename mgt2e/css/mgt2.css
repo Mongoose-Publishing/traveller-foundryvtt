@@ -1907,6 +1907,15 @@ section.id-card .showIdCard {
   color: black;
 }
 
+.pill-container .world-pill {
+  background-color: #505050;
+  color: white;
+}
+
+.pill-container .world-pill .fas {
+  background-color: #202020 !important;
+  color: white;
+}
 
 div.chat-package {
   background-color: #404040;
