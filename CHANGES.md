@@ -15,6 +15,7 @@
 * Factions are now generated when a world is randomly generated.
 * Factions are displayed on a world sheet, and can be edited.
 * Generate information about bases and port facilities when randomly generating a world.
+* Allow use of G and H in UWP hex codes.
 
 ## 0.13.2 (Beta)
 
