@@ -3,3 +3,13 @@ mgt2e/packs/**/CURRENT
 mgt2e/packs/**/LOCK
 mgt2e/packs/**/LOG
 mgt2e/packs/**/MANIFEST-*
+.idea
+.traveller-foundryvtt.iml
+./misc
+.BUILD
+.directory
+.env
+mgt2e/packs/base-actors/
+mgt2e/packs/base-items/
+mgt2e/packs/base-macros/
+mgt2e/packs/traveller-docs/

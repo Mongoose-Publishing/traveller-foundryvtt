@@ -12,6 +12,10 @@
 ## Develop
 
 * On world sheet, the government type was actually displaying the population code.
+* Fixed bug where world map was not correctly displayed/set on a world sheet.
+* Factions are now generated when a world is randomly generated.
+* Factions are displayed on a world sheet, and can be edited.
+* Generate information about bases and port facilities when randomly generating a world.
 
 ## 0.13.2 (Beta)
 
