@@ -95,9 +95,15 @@ export async function createWorld(worldActor) {
     setTradeCodes(worldActor);
 
     worldActor.update({"system.world.uwp": worldActor.system.world.uwp});
+    setPortFacilities(worldActor);
+    await setBases(worldActor);
 
-    await setCulturalDifferences(worldActor);
-    await setFactions(worldActor);
+    if (worldActor.system.world.uwp.population > 0) {
+        await setCulturalDifferences(worldActor);
+        await setFactions(worldActor);
+    } else {
+        worldActor.update({"system.world.extra.culturalDifferences": ""});
+    }
 }
 
 function modifyTechLevel(data, value) {
@@ -105,6 +111,117 @@ function modifyTechLevel(data, value) {
         return data[value].techBonus;
     }
     return 0;
+}
+
+async function getHighPort(worldActor, target) {
+    let dm = 0;
+    let uwp = worldActor.system.world.uwp;
+    if (uwp.techLevel >= 9) {
+        dm++;
+    }
+    if (uwp.techLevel >= 12) {
+        dm++;
+    }
+    if (uwp.population >= 9) {
+        dm++;
+    } else if (uwp.population <= 6) {
+        dm--;
+    }
+
+    const r = await roll(`2D6+${dm}`);
+    return (r >= target);
+}
+
+async function setBase(worldActor, base, target) {
+    let uwp = worldActor.system.world.uwp;
+
+    const r = await roll(`2D6`);
+    if (r >= target) {
+        console.log("Adding base " + base);
+        if (uwp.bases === "") {
+            uwp.bases = base;
+        } else {
+            uwp.bases = `${uwp.bases}, ${base}`;
+        }
+    }
+}
+
+async function setBases(worldActor) {
+    let uwp = worldActor.system.world.uwp;
+    uwp.bases = "";
+
+    console.log("setBases:");
+
+    switch (worldActor.system.world.uwp.port) {
+        case 'A':
+            await setBase(worldActor, "M", 8);
+            await setBase(worldActor, "N", 8);
+            await setBase(worldActor, "S", 10);
+            break;
+        case 'B':
+            await setBase(worldActor, "M", 8);
+            await setBase(worldActor, "N", 8);
+            await setBase(worldActor, "S", 9);
+            break;
+        case 'C':
+            await setBase(worldActor, "M", 10);
+            await setBase(worldActor, "S", 9);
+            break;
+        case 'D':
+            await setBase(worldActor, "S", 8);
+            await setBase(worldActor, "C", 12);
+            break;
+        case 'E':
+            await setBase(worldActor, "C", 10);
+            break;
+        default:
+            await setBase(worldActor, "C", 10);
+            break;
+    }
+    console.log(uwp.bases);
+    await worldActor.update({"system.world.uwp.bases": uwp.bases});
+}
+
+export async function setPortFacilities(worldActor) {
+    let extra = worldActor.system.world.extra;
+
+    delete extra.repair;
+    delete extra.shipyard;
+    delete extra.shipyardJump;
+    delete extra.highport;
+
+    switch (worldActor.system.world.uwp.port) {
+        case 'A':
+            extra.shipyard = "capital";
+            extra.shipyardJump = true;
+            extra.repair = "full";
+            extra.highport = await getHighPort(worldActor, 6);
+            extra.berthingCost = await roll("1D6 * 1000");
+            break;
+        case 'B':
+            extra.shipyard = "spacecraft";
+            extra.repair = "full";
+            extra.highport = await getHighPort(worldActor, 8);
+            extra.berthingCost = await roll("1D6 * 500");
+            break;
+        case 'C':
+            extra.shipyard = "smallcraft";
+            extra.repair = "full";
+            extra.highport = await getHighPort(worldActor, 10);
+            extra.berthingCost = await roll("1D6 * 100");
+            break;
+        case 'D':
+            extra.repair = "limited";
+            extra.highport = await getHighPort(worldActor, 12);
+            extra.berthingCost = await roll("1D6 * 10");
+            break;
+        case 'E':
+            extra.berthingCost = 0;
+            break;
+        default:
+            extra.berthingCost = 0;
+            break;
+    }
 }
 
 export function setTradeCodes(worldActor) {
@@ -222,8 +339,15 @@ export async function setFactions(worldActor) {
     } else if (worldActor.system.world.uwp.government > 9) {
         dice = "1D3 - 1";
     }
+
+    for (let i of worldActor.items) {
+        if (i.type === "worlddata" && i.system?.world?.datatype === "faction") {
+            // If we already have factions, don't add anymore.
+            return;
+        }
+    }
+
     let numFactions = await roll(dice);
-    console.log(numFactions);
     for (let f=0; f < numFactions; f++) {
         let strength = "";
         switch (await roll("2D6")) {
@@ -260,7 +384,6 @@ export async function setFactions(worldActor) {
                 }
             }
         }
-        console.log(itemData);
         await Item.create(itemData, { parent: worldActor });
     }
 }

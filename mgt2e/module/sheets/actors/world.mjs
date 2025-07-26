@@ -27,15 +27,11 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             if (i.type === 'cargo') {
                 context.cargo.push(i);
             } else if (i.type === "worlddata") {
-                console.log(i);
                 if (i.system?.world?.datatype === "faction") {
                     context.factions.push(i);
                 }
-            } else {
-                console.log(i.type);
             }
         }
-        console.log(context.factions);
     }
 
     async getData() {
