@@ -8,7 +8,7 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
-## Develop
+## 0.13.3 (Beta)
 
 * On world sheet, the government type was actually displaying the population code.
 * Fixed bug where world map was not correctly displayed/set on a world sheet.
