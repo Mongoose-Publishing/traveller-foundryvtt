@@ -1,0 +1,67 @@
+#!/bin/bash
+
+BASEDIR=~/rpg/Dungeondraft
+SMALLCRAFT=${BASEDIR}/smallcraft-dungeondraft/NotASnark-Smallcraft-Tokens/256px
+SPACECRAFT=${BASEDIR}/spacecraft-dungeondraft/Tokens/256px
+DESTDIR=mgt2e/images/tokens/spacecraft
+num=40
+
+declare -A colours=( ["black"]="10" ["white"]="40" ["red"]="41" ["green"]="29" ["blue"]="43" ["dark"]="20" ["brown"]="27" ["orange"]="47" )
+
+function small {
+    sq=$1
+    ship=$2
+    num=$3
+    colour=$4
+
+    w=$(($sq * 256))
+
+    mkdir -p $DESTDIR/$colour
+    convert -scale ${w}x${w} -gravity center -extent ${w}x${w} -background none ${SMALLCRAFT}/${ship}/${ship}_${num}.webp ${DESTDIR}/${colour}/${ship}.webp &
+}
+
+function large {
+    sq=$1
+    ship=$2
+    num=$3
+    colour=$4
+
+    w=$(($sq * 256))
+
+    mkdir -p $DESTDIR/$colour
+    convert -scale ${w}x${w} -gravity center -extent ${w}x${w} -background none ${SPACECRAFT}/${ship}/${ship}_${num}.webp ${DESTDIR}/${colour}/${ship}.webp &
+}
+
+
+for colour in white red green blue black dark orange brown
+do
+    echo $colour
+    num=${colours[$colour]}
+    small 1 light_fighter $num $colour
+    small 1 gig $num $colour
+    small 1 launch $num $colour
+    small 1 military_gig $num $colour
+    small 2 ships_boat $num $colour
+    small 2 pinnace $num $colour
+    small 2 slow_boat $num $colour
+    small 2 slow_pinnace $num $colour
+    small 2 shuttle $num $colour
+    small 2 passenger_shuttle $num $colour
+    large 3 far_trader $num $colour
+    large 3 free_trader $num $colour
+    large 3 scout $num $colour
+    large 3 seeker $num $colour
+    large 3 yacht $num $colour
+    large 3 lab_ship $num $colour
+    large 3 empress_marava $num $colour
+    large 3 safari_ship $num $colour
+    large 3 system_defence_boat $num $colour
+    large 4 subsidised_merchant $num $colour
+    large 4 planetoid $num $colour
+    large 4 survey_scout $num $colour
+    large 4 close_escort $num $colour
+    large 4 patrol_corvette $num $colour
+    large 4 subsidised_liner $num $colour
+    large 4 mercenary_cruiser $num $colour
+    wait
+done

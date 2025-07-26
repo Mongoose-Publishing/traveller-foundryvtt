@@ -1,0 +1,37 @@
+#!/bin/bash
+
+BASEDIR=~/rpg/Dungeondraft
+VEHICLE=${BASEDIR}/vehicles-dungeondraft/NotASnark-Vehicles-Tokens/256px
+DESTDIR=mgt2e/images/tokens/vehicles
+num=40
+
+declare -A colours=( ["black"]="10" ["white"]="40" ["red"]="41" ["green"]="29" ["blue"]="43" ["dark"]="20" ["brown"]="27" ["orange"]="47" ["olive"]="24" ["yellow"]="44" ["purple"]="45")
+
+function vehicle {
+    v=$1
+    num=$2
+    colour=$3
+
+    mkdir -p $DESTDIR/$colour
+    cp ${VEHICLE}/${v}/${v}_${num}.webp ${DESTDIR}/${colour}/${v}.webp
+}
+
+
+for colour in white red green blue black dark orange brown yellow olive purple
+do
+    echo $colour
+    num=${colours[$colour]}
+
+    vehicle 8_wheeled_atv $num $colour
+    vehicle atv_assault $num $colour
+    vehicle cargo_lifter $num $colour
+    vehicle cargo_truck $num $colour
+    vehicle g-bike $num $colour
+    vehicle g-carrier $num $colour
+    vehicle g-racer $num $colour
+    vehicle gunskiff $num $colour
+    vehicle wheeled_sports_car $num $colour
+    vehicle airraft $num $colour
+    vehicle land-yacht $num $colour
+    vehicle ground-car $num $colour
+done
