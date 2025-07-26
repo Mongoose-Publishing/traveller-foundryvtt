@@ -32,6 +32,37 @@
                     {{toHex system.world.uwp.techLevel}}
                 </div>
             </div>
+
+            <div class="side-panel shadow facilities">
+                <h3>Facilities</h3>
+
+                <div class="resource">
+                    <label class="resource-label">Berth Cost (Cr/Wk)</label>
+                    <input class="field-value"
+                           name="system.world.extra.berthingCost"
+                           value="{{system.world.extra.berthingCost}}"
+                           data-dtype="Number"/>
+                </div>
+
+                <div class="resource">
+                    <label class="resource-label">Shipyard</label>
+                    <select class="field-value" name="system.world.extra.shipyard">
+                        {{selectOptions SHIPYARD_SELECT selected=system.world.extra.shipyard}}
+                    </select>
+                </div>
+
+                <div class="resource">
+                    <label class="resource-label">Repair</label>
+                    <select class="field-value" name="system.world.extra.repair">
+                        {{selectOptions REPAIR_SELECT selected=system.world.extra.repair}}
+                    </select>
+                </div>
+
+                <div class="resource">
+                    <input type="checkbox" name="system.world.extra.highport" {{checked system.world.extra.highport}} data-dtype="Boolean" />
+                    <label for="system.world.extra.highport" class="resource-label">Highport</label>
+                </div>
+            </div>
         </div>
 
         <div class="character-right">

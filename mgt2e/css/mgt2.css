@@ -2223,3 +2223,7 @@ span.button {
   cursor: pointer;
   background-color: #00000020;
 }
+
+.facilities div {
+  margin-bottom: 1em;
+}

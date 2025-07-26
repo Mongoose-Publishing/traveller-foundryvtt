@@ -113,6 +113,23 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             }
         }
 
+        context.SHIPYARD_SELECT = {
+            "": "None",
+            "smallcraft": "Smallcraft",
+            "spacecraft": "Spacecraft",
+            "capital": "Capital Ships"
+        }
+        context.REPAIR_SELECT = {
+            "": "None",
+            "limited": "Limited",
+            "repair": "Full"
+        }
+        context.FUEL_SELECT = {
+            "": "None",
+            "unrefinedd": "Unrefined",
+            "refined": "Refined"
+        }
+
         return context;
     }
 

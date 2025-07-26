@@ -94,8 +94,8 @@ export async function createWorld(worldActor) {
     // Finally, set the trade codes (if any).
     setTradeCodes(worldActor);
 
-    worldActor.update({"system.world.uwp": worldActor.system.world.uwp});
-    setPortFacilities(worldActor);
+    await worldActor.update({"system.world.uwp": worldActor.system.world.uwp});
+    await setPortFacilities(worldActor);
     await setBases(worldActor);
 
     if (worldActor.system.world.uwp.population > 0) {
@@ -189,6 +189,7 @@ export async function setPortFacilities(worldActor) {
     delete extra.shipyard;
     delete extra.shipyardJump;
     delete extra.highport;
+    delete extra.fuel;
 
     switch (worldActor.system.world.uwp.port) {
         case 'A':
@@ -197,23 +198,27 @@ export async function setPortFacilities(worldActor) {
             extra.repair = "full";
             extra.highport = await getHighPort(worldActor, 6);
             extra.berthingCost = await roll("1D6 * 1000");
+            extra.fuel = "refined";
             break;
         case 'B':
             extra.shipyard = "spacecraft";
             extra.repair = "full";
             extra.highport = await getHighPort(worldActor, 8);
             extra.berthingCost = await roll("1D6 * 500");
+            extra.fuel = "refined";
             break;
         case 'C':
             extra.shipyard = "smallcraft";
             extra.repair = "full";
             extra.highport = await getHighPort(worldActor, 10);
             extra.berthingCost = await roll("1D6 * 100");
+            extra.fuel = "unrefined";
             break;
         case 'D':
             extra.repair = "limited";
             extra.highport = await getHighPort(worldActor, 12);
             extra.berthingCost = await roll("1D6 * 10");
+            extra.fuel = "unrefined";
             break;
         case 'E':
             extra.berthingCost = 0;
@@ -222,6 +227,8 @@ export async function setPortFacilities(worldActor) {
             extra.berthingCost = 0;
             break;
     }
+
+    await worldActor.update({"system.world.extra": extra});
 }
 
 export function setTradeCodes(worldActor) {
