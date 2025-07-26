@@ -14,6 +14,7 @@
 * Fixed bug where world map was not correctly displayed/set on a world sheet.
 * Factions are now generated when a world is randomly generated.
 * Factions are displayed on a world sheet, and can be edited.
+* Use a roll table if available to generate world culture details.
 * Generate information about bases and port facilities when randomly generating a world.
 * Allow use of G and H in UWP hex codes.
 
