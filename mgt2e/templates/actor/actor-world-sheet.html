@@ -143,7 +143,15 @@
                         </div>
 
                         <div class="extra-data">
-                            <h3>Bases</h3>
+                            <h3>Bases
+                            {{#if BASES_SELECT }}
+                            <span style="display: inline-block; text-align: right; font-size: smaller">
+                                <i class="fas fa-plus"></i> <select class="base-add">
+                                    {{selectOptions BASES_SELECT }}
+                                </select>
+                            </span>
+                            {{/if}}
+                            </h3>
                             <div class="pill-container">
                                 {{{showBases . system.world.uwp.bases}}}
                             </div>

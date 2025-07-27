@@ -129,6 +129,17 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             "unrefinedd": "Unrefined",
             "refined": "Refined"
         }
+        context.BASES_SELECT = {
+            "": ""
+        }
+        for (let b of [ "N", "S", "M", "C"]) {
+            if (context.world.uwp.bases.indexOf(b) === -1) {
+                context.BASES_SELECT[b] = game.i18n.localize("MGT2.WorldSheet.Bases." + b);
+            }
+        }
+        if (Object.keys(context.BASES_SELECT).length === 1) {
+            context.BASES_SELECT = null;
+        }
 
         return context;
     }
@@ -144,6 +155,24 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         });
         html.find('.generateSpeculative').click(ev => {
             createSpeculativeGoods(this.actor);
+        });
+        html.find('.base-remove').click(ev => {
+            // Remove base
+            const e = $(ev.currentTarget).parents(".world-pill");
+            const id = e.data("baseId");
+            let re = new RegExp(` ?${id},?`, "g");
+            let b = this.actor.system.world.uwp.bases.replaceAll(re, "").replaceAll(/,$/g, "").trim();
+            this.actor.update({"system.world.uwp.bases": b});
+        });
+        html.find('.base-add').click(ev => {
+            // Add base
+            const value = $(ev.currentTarget).val();
+            if (this.actor.system.world.uwp.bases) {
+                this.actor.system.world.uwp.bases += ", " + value;
+            } else {
+                this.actor.system.world.uwp.bases = value;
+            }
+            this.actor.update({"system.world.uwp.bases": this.actor.system.world.uwp.bases});
         });
     }
 

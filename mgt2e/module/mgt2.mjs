@@ -2023,10 +2023,10 @@ Handlebars.registerHelper('showBases', function(key, bases) {
     for (let i in list) {
         if (list[i].length > 0) {
             let base = list[i].trim();
-            html += `<span class='pill world-pill' data-option-id='${base}' title='${game.i18n.localize("MGT2.WorldSheet.Bases."+base)}'>`;
+            html += `<span class='pill world-pill' data-base-id='${base}' title='${game.i18n.localize("MGT2.WorldSheet.Bases."+base)}'>`;
             html += `&nbsp;${game.i18n.localize("MGT2.WorldSheet.Bases." + base)} `;
             if (key.owner) {
-                html += `&nbsp;<i class="fas fa-xmark option-remove"> </i>`;
+                html += `&nbsp;<i class="fas fa-xmark base-remove"> </i>`;
             } else {
                 html += "&nbsp;";
             }

@@ -442,6 +442,17 @@
   "MGT2.WorldSheet.Bases.M": "Military",
   "MGT2.WorldSheet.Bases.C": "Corsair",
 
+  "MGT2.WorldSheet.Facility.berthingCost": "Berth Cost (Cr/Wk)",
+  "MGT2.WorldSheet.Facility.shipyard": "Shipyard",
+  "MGT2.WorldSheet.Facility.repair": "Repair",
+  "MGT2.WorldSheet.Facility.highport": "Highport",
+  "MGT2.WorldSheet.Facility.none": "None",
+  "MGT2.WorldSheet.Facility.smallcraft": "Smallcraft",
+  "MGT2.WorldSheet.Facility.spacecraft": "Spacecraft",
+  "MGT2.WorldSheet.Facility.capital": "Capital Ships",
+  "MGT2.WorldSheet.Facility.limited": "Limited",
+  "MGT2.WorldSheet.Facility.full": "Full",
+
   "MGT2.Vehicle.Spaces": "Spaces",
   "MGT2.Vehicle.Chassis": "Chassis",
   "MGT2.Vehicle.SubType": "SubType",
@@ -765,6 +776,10 @@
   "MGT2.Spacecraft.Hull.improvedStealth": "Improved Stealth",
   "MGT2.Spacecraft.Hull.enhancedStealth": "Enhanced Stealth",
   "MGT2.Spacecraft.Hull.advancedStealth": "Advanced Stealth",
+  "MGT2.Spacecraft.Hull.doubleHull": "Double Hull",
+  "MGT2.Spacecraft.Hull.hamsterCage": "Hamster Cage",
+  "MGT2.Spacecraft.Hull.breakawayHulls": "Breakaway Hulls",
+  "MGT2.Spacecraft.Hull.solarCoating": "Solar Coating",
 
   "MGT2.Trade.Ag": "Agricultural",
   "MGT2.Trade.As": "Asteroid",

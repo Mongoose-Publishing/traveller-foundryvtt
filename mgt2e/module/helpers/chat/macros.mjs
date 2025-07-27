@@ -118,7 +118,7 @@ MgT2eMacros.skillGain = function(args) {
                             text += `Incrementing <b>${skillName}</b> to ${current + 1}.`;
                         } else if (level > current) {
                             skill.specialities[specId].value = level;
-                            text += `Setting <b>${skillName} (${specName})</b> to ${level}.`;
+                            text += `Setting <b>${skillName}</b> to ${level}.`;
                         } else if (!added) {
                             text += `<b>${skillName}</b> is unchanged.`;
                         }

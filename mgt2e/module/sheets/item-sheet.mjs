@@ -960,8 +960,6 @@ export class MgT2ItemSheet extends ItemSheet {
         html.find(".energy-remove").click(ev => {
             const e = $(ev.currentTarget).parents(".energy-pill");
             const id = e.data("energyId");
-            console.log(id);
-            console.log(`[${this.item.system.armour.otherTypes}]`);
 
             let otherTypes = this.item.system.armour.otherTypes.toLowerCase();
             otherTypes = otherTypes.replace(id, "");
