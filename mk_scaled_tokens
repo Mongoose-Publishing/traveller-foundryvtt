@@ -2,7 +2,7 @@
 
 BASEDIR=~/rpg/Dungeondraft
 SMALLCRAFT=${BASEDIR}/smallcraft-dungeondraft/NotASnark-Smallcraft-Tokens/256px
-SPACECRAFT=${BASEDIR}/spacecraft-dungeondraft/Tokens/256px
+SPACECRAFT=${BASEDIR}/spacecraft-dungeondraft/NotASnark-Spacecraft-Tokens/256px
 DESTDIR=mgt2e/images/tokens/spacecraft
 num=40
 
