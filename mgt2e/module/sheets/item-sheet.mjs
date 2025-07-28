@@ -51,7 +51,10 @@ export class MgT2ItemSheet extends ItemSheet {
         }
 
         // Add the actor's data to context.data for easier access, as well as flags.
-        context.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description );
+        context.enrichedDescription = await TextEditor.enrichHTML(
+            this.object.system.description,
+            { secrets: ((context.item.permission > 2)?true:false) }
+        );
         context.system = item.system;
         context.flags = item.flags;
         context.effects = item.effects;

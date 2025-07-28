@@ -37,6 +37,11 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
     async getData() {
         const context = await super.getData();
 
+        context.enrichedDescription = await TextEditor.enrichHTML(
+            this.object.system.description,
+            { secrets: ((context.actor.permission > 2)?true:false) }
+        );
+
         this._prepareItems(context);
 
         context.system = context.actor.system;

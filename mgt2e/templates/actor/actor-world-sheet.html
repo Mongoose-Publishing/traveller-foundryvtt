@@ -91,6 +91,7 @@
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
                     <a class="item" data-tab="data">World Data</a>
+                    <a class="item" data-tab="description">Description</a>
                     <a class="item" data-tab="factions">Factions</a>
                     <a class="item" data-tab="map">Map</a>
                     <a class="item" data-tab="freight">Freight</a>
@@ -192,6 +193,13 @@
                             {{/each}}
                         </ol>
                         {{/if}}
+                    </div>
+
+                    <div class="tab" data-group="primary" data-tab="description">
+                        <div class="shadow">
+                            {{editor enrichedDescription target="system.description"
+                                     button=true editable=editable}}
+                        </div>
                     </div>
 
                     <div class="tab" data-group="primary" data-tab="map">

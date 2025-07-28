@@ -14,7 +14,10 @@ export class MgT2AssociateItemSheet extends MgT2ItemSheet {
     async getData() {
         let context = await super.getData();
 
-        context.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description );
+        context.enrichedDescription = await TextEditor.enrichHTML(
+            this.object.system.description,
+            { secrets: ((context.item.permission > 2)?true:false) }
+        );
 
         console.log("MgT2AssociateItemSheet.getData:");
 

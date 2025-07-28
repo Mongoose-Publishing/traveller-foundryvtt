@@ -17,7 +17,11 @@ export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
     async getData() {
         let context = await super.getData();
 
-        context.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description );
+        context.enrichedDescription = await TextEditor.enrichHTML(
+            this.object.system.description,
+            { secrets: ((context.item.permission > 2)?true:false) }
+        );
+
 
         if (context.item.parent && !context.item.system.status) {
             context.item.system.status = MgT2Item.RUNNING;
