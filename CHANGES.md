@@ -8,7 +8,7 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
-## Develop
+## 0.13.4 (Beta)
 
 * Bases can be edited and added on the world sheet.
 * World sheet now includes description field.

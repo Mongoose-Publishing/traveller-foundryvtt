@@ -255,6 +255,7 @@
         }
     },
     "world": {
+      "description": "",
       "world": {
         "map": "systems/mgt2e/images/world-map.svg",
         "location": {
@@ -281,8 +282,6 @@
           "berthingCost": 1000,
           "culturalDifferences": ""
         },
-        "description": "",
-        "gmnotes": "",
         "meta": {
           "localBrokerScore": 2,
           "brokerActorId": null,
