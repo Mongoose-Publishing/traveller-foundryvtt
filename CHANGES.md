@@ -8,6 +8,14 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
+## Develop
+
+* Bases can be edited and added on the world sheet.
+* World sheet now includes description field.
+* Starport facilities are now generated and displayed on the world sheet.
+* Secret blocks are now supported in actor and item descriptions.
+* Updated token for the Mercenary Cruiser.
+
 ## 0.13.3 (Beta)
 
 * On world sheet, the government type was actually displaying the population code.
