@@ -1,0 +1,52 @@
+{
+  "folder": "bXGbV4AjDY6AJGxk",
+  "name": "Club",
+  "type": "weapon",
+  "_id": "k9jB0P60IGcEmeyw",
+  "img": "systems/mgt2e/icons/items/melee-bludgeon.svg",
+  "system": {
+    "tl": "0",
+    "weight": 1,
+    "cost": 5,
+    "notes": "",
+    "active": false,
+    "quantity": 1,
+    "status": null,
+    "legality": "8",
+    "weapon": {
+      "scale": "traveller",
+      "range": 0,
+      "minRange": 0,
+      "damage": "1D6",
+      "magazine": 0,
+      "ammo": 0,
+      "magazineCost": 0,
+      "characteristic": "DEX",
+      "skill": "melee.bludgeon",
+      "parryBonus": 0,
+      "damageBonus": "STR",
+      "damageType": "standard",
+      "attackBonus": 0,
+      "traits": ""
+    },
+    "description": "<p>A heavy stick.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.13.3.1-DEV",
+    "createdTime": 1753564696224,
+    "modifiedTime": 1753564742738,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!items!k9jB0P60IGcEmeyw"
+}
