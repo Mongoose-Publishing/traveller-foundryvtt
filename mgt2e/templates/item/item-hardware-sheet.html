@@ -124,6 +124,10 @@
                 </div>
                 {{/if}}
             </div>
+            <div>
+                <input type="checkbox" name="system.hardware.armouredBulkhead" {{checked system.hardware.armouredBulkhead}} data-dtype="Boolean" />
+                <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.ArmouredBulkhead'}}</label>
+            </div>
         </div>
 
         {{#if (itemHasStatus item)}}
@@ -272,6 +276,10 @@
                         <label class="resource-label">MCr/TON</label>
                         <input type="text" name="system.hardware.tonnage.cost"
                                value="{{system.hardware.tonnage.cost}}" data-type="Number"/>
+                    </div>
+                    <div class="resource">
+                        <input type="checkbox" name="system.hardware.battery" {{checked system.hardware.battery}} data-dtype="Boolean" />
+                        <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.Battery'}}</label>
                     </div>
                 {{else}}
                     <div class="resource">

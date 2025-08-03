@@ -2236,3 +2236,16 @@ span.button {
 .facilities div {
   margin-bottom: 1em;
 }
+
+.armoured-bulkhead {
+  clear: both;
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: smaller;
+  padding: 0px 2px 0px 2px;
+}
+
+table.ship-data th {
+  vertical-align: top;
+}

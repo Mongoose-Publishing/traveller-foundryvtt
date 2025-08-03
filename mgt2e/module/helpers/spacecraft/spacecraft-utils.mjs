@@ -74,6 +74,7 @@ export function getShipData(actor) {
     let common = [];
     let systems = [];
     let software = [];
+    let bulkheads = [];
 
     for (let item of actor.items) {
         if (item.type === "hardware") {
@@ -104,7 +105,9 @@ export function getShipData(actor) {
                 common.push(item);
             } else {
                 systems.push(item);
-                console.log(`${item.name} : ${hw.system}`);
+            }
+            if (hw.armouredBulkhead) {
+                bulkheads.push(item);
             }
         } else if (item.type === "software") {
             software.push(item);
@@ -251,8 +254,18 @@ export function getShipData(actor) {
         }
     }
 
-    if (systems) {
+    if (systems || bulkheads) {
         data["systems"] = [];
+        console.log(bulkheads);
+
+        for (let item of bulkheads) {
+            data["systems"].push({
+                "name": `Armoured Bulkheads (${item.name})`,
+                "tons": item.system.hardware.tons * item.system.quantity * 0.1,
+                "cost": item.system.cost * item.system.quantity * 0.1,
+                "quantity": item.system.quantity
+            });
+        }
         for (let item of systems) {
             data["systems"].push({
                 "name": item.name,
@@ -261,6 +274,7 @@ export function getShipData(actor) {
                 "quantity": item.system.quantity
             })
         }
+        console.log(data["systems"]);
     }
 
     if (software) {

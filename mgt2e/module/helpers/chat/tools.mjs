@@ -795,7 +795,7 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     html += `</div>`;
 
     // Table to the left.
-    html += `<table><tr class="header"><th>TL${actor.system.spacecraft.tl}</th><th></th><th>TONS</th><th>COST (MCr)</th></tr>`;
+    html += `<table class="ship-data"><tr class="header"><th>TL${actor.system.spacecraft.tl}</th><th></th><th>TONS</th><th>COST (MCr)</th></tr>`;
 
     html += Tools.inlineSpacecraftData("Hull", data["hull"] );
     if (data["armour"]) {

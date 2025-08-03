@@ -43,6 +43,8 @@
   "MGT2.Settings.PlayerVision.Spacecraft.Hint": "Default vision setting for Spacecraft/Vehicle tokens",
   "MGT2.Settings.BlastEffectDivergence.Name": "Blast effect divergence distance",
   "MGT2.Settings.BlastEffectDivergence.Hint": "If an attack roll with a blast effect misses, how far to diverge blast template from intended location",
+  "MGT2.Settings.SplitAttackDamage.Name": "Split attack and damage rolls",
+  "MGT2.Settings.SplitAttackDamage.Hint": "Rather than rolling damage with an attack, require a second button click to roll damage",
 
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",
@@ -655,6 +657,10 @@
   "MGT2.Spacecraft.SensorSuite.nas": "NAS",
   "MGT2.Spacecraft.SensorSuite.densitometer": "Densitometer",
   "MGT2.Spacecraft.SensorSuite.jammers": "Jammers",
+
+  "MGT2.Spacecraft.ArmouredBulkhead": "Armoured Bulkhead",
+  "MGT2.Spacecraft.Battery": "Battery",
+  "MGT2.Spacecraft.BatteryCharge": "Charge",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",

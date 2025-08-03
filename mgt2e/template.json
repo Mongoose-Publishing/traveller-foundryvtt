@@ -400,6 +400,7 @@
               "powerPerTon": 0,
               "mount": "turret",
               "advantages": "",
+              "armouredBulkhead": false,
               "weapons": {}
           }
       },
