@@ -263,7 +263,6 @@ export class MgT2AttackDialog extends Application {
             this.actor.update({"system.damage": this.actor.system.damage});
         }
 
-
         let shotsFired = 1;
         if (this.weapon.useAmmo()) {
             if (this.outOfAmmo) {

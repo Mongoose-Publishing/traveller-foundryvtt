@@ -208,6 +208,14 @@ Hooks.once('init', async function() {
         },
         default: "0"
     });
+    game.settings.register('mgt2e', "splitAttackDamage", {
+       name: game.i18n.localize("MGT2.Settings.SplitAttackDamage.Name"),
+       hint: game.i18n.localize("MGT2.Settings.SplitAttackDamage.Hint"),
+       scope: "client",
+       config: true,
+       type: Boolean,
+       default: false
+    });
 
     CONFIG.ActiveEffect.legacyTransferral = false;
 
@@ -389,6 +397,11 @@ Hooks.on('ready', () => {
        let damageOptions = $(this).data("options");
 
        Tools.applyDamageToTokens(dmg, damageOptions);
+    });
+    $(document).on('click', '.damage-roll-button', function() {
+        let damageOptions = $(this).data("options");
+
+        Tools.rollSplitDamage(damageOptions);
     });
     $(document).on('click', '.skillcheck-button', function() {
         let skillFqn = $(this).data('skillcheck');

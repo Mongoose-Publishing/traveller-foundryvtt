@@ -270,6 +270,73 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
     }
 };
 
+Tools.rollSplitDamage = async function(damageOptions) {
+    let dice = damageOptions.damageDice;
+    let actor = null;
+    console.log(damageOptions);
+    if (damageOptions.actorId) {
+        actor = await fromUuid(damageOptions.actorId);
+    }
+    let weapon = null;
+    if (damageOptions.weaponId) {
+        weapon = await fromUuid(damageOptions.weaponId);
+    }
+
+    const roll = await new Roll(dice, actor?actor.getRollData():null).evaluate();
+    let baseDamage = Number(roll.total);
+    let effect = Number((damageOptions.effect>0)?damageOptions.effect:0);
+    damageOptions.damage = baseDamage;
+    let damageEffect = baseDamage + effect;
+    let titleText = "Now the damage has been rolled";
+
+    let json = JSON.stringify(damageOptions);
+    let content = `<div class="attack-message">`;
+    content += `<h2>Roll ${dice} Damage</h2>`;
+
+    content += `<div class="message-content"><div>`;
+    if (actor) {
+        content += `<img class="skillcheck-thumb" alt="${actor.name}" src="${actor.thumbnail}"/>`;
+    }
+    if (weapon) {
+        content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
+        content += `<span><b>${weapon.name}</b></span><br/>`;
+        content += `<span><b>Damage:</b> ${weapon.system.weapon.damage}</span><br/>`;
+        content += `<span><b>Effect:</b> ${effect}</span><br/>`;
+        content += `<span>${weapon.printWeaponTraits()}</span><br/>`
+
+        if (weapon.hasTrait("destructive")) {
+            baseDamage *= 10;
+            effect *= 10;
+            damageEffect *= 10;
+        }
+    }
+    let dmgText = `Damage ${baseDamage}`;
+    if (damageOptions.effect > 0) {
+        dmgText += ` + ${effect} (${damageEffect})`
+    }
+
+    if (damageOptions.ap > 0) {
+        dmgText += ` / AP ${damageOptions.ap}`;
+    }
+    if (damageOptions.radiationDamage > 0) {
+        dmgText += ` / ${damageOptions.radiationDamage} Rads`;
+    }
+
+    content += `</div>`; // Message Content
+
+    content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
+    content += `<button data-damage="${damageEffect}" data-options='${json}'
+                                title="${titleText}"
+                                class="damage-button">${dmgText}</button>`;
+    content += `</div>`; // Damage Message
+    content += `</div>`; // Attack Message
+    roll.toMessage({
+        speaker: ChatMessage.getSpeaker({actor: actor}),
+        flavor: content,
+        rollMode: game.settings.get("core", "rollMode")
+    });
+}
+
 Tools.requestedSkillCheck = async function(skillFqn, skillOptions) {
     game.mgt2e.rollSkillMacro(skillFqn, {
         "cha": skillOptions.cha,

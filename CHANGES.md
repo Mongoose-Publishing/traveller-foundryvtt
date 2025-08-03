@@ -8,6 +8,12 @@
 * This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
   to help track down compatibility bugs.
 
+## Develop
+
+* Added option for adding Armoured Bulkheads to ship hardware.
+* Client configurable added to split attack rolls into separate attack and damage rolls
+  for those players who want to roll them separately. Not implemented for spacecraft yet.
+
 ## 0.13.4 (Beta)
 
 * Bases can be edited and added on the world sheet.

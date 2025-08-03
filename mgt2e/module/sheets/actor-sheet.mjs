@@ -406,6 +406,9 @@ export class MgT2ActorSheet extends ActorSheet {
                     }
                 }
                 //console.log("Tonnage [" + i.name + "]: " + (t * i.system.quantity));
+                if (i.system.hardware.armouredBulkhead) {
+                    t *= 1.1;
+                }
                 dtonsUsed += t * i.system.quantity;
 
                 if (h.system === "j-drive" && i.system.status === MgT2Item.ACTIVE) {

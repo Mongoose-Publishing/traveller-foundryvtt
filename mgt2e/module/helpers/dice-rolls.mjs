@@ -256,14 +256,12 @@ export async function rollAttack(actor, weapon, attackOptions) {
         if (weapon.hasTrait("psiAp")) {
             let psi = attackOptions.psiDM;
             let psiAp = getTraitValue(traits, "psiAp");
-            console.log("PsiAp is " + psiAp);
             if (attackOptions.psiDM) {
                 bonusPsiAP += psi * psiAp;
             }
             if (attackOptions.psiPoints) {
                 bonusPsiAP += attackOptions.psiPoints * psiAp;
             }
-            console.log("Bonus PSI AP: " + bonusPsiAP);
         }
 
         destructive = weapon.hasTrait("destructive");
@@ -488,6 +486,12 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 damageOptions.blastRadius = blastRadius;
                 titleText += " " + game.i18n.localize("MGT2.Attack.DragMeBlast");
             }
+            if (actor) {
+                damageOptions.actorId = actor.uuid;
+            }
+            if (weapon) {
+                damageOptions.weaponId = weapon.uuid;
+            }
             let json = JSON.stringify(damageOptions);
 
             if (actor) {
@@ -496,12 +500,18 @@ export async function rollAttack(actor, weapon, attackOptions) {
             } else {
                 content += "<br/>";
             }
-            content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
-            content += `<button data-damage="${damageEffect}" data-options='${json}'
-                            title="${titleText}"
-                            class="damage-button">${dmgText}</button>`;
 
-            content += `</div>`;
+            if (game.settings.get("mgt2e", "splitAttackDamage")) {
+                content += `<button data-options='${json}'
+                                title="Roll Damage"
+                                class="damage-roll-button">Roll Damage ${dmg}</button>`;
+            } else {
+                content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
+                content += `<button data-damage="${damageEffect}" data-options='${json}'
+                                title="${titleText}"
+                                class="damage-button">${dmgText}</button>`;
+                content += `</div>`;
+            }
         }
     }
 
@@ -520,10 +530,16 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
     content += "</div>";
 
-    if (actor) {
+    if (actor && !game.settings.get("mgt2e", "splitAttackDamage")) {
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             content: content,
+            rollMode: game.settings.get("core", "rollMode")
+        });
+    } else if (actor) {
+        roll.toMessage({
+            speaker: ChatMessage.getSpeaker({actor: actor}),
+            flavor: content,
             rollMode: game.settings.get("core", "rollMode")
         });
     } else {
@@ -533,6 +549,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
             rollMode: game.settings.get("core", "rollMode")
         });
     }
+}
+
+export async function rollDamage(actor, weapon, options) {
 
 }
 
@@ -619,9 +638,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         "radiation": radiationDamage,
         "ranged": true
     };
-    console.log(damageOptions);
     let json = JSON.stringify(damageOptions);
-
     text = `
         <div class="attack-message">
             <h2>${weaponItem.name}</h2>
