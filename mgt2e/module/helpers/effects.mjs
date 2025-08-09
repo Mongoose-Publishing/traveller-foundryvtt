@@ -13,6 +13,7 @@
         if (eff) {
             return owner.createEmbeddedDocuments("ActiveEffect", [{
                 label: game.i18n.localize("MGT2.Effects.Type." + action),
+                name: game.i18n.localize("MGT2.Effects.Type." + action),
                 icon: "icons/svg/aura.svg",
                 origin: owner.uuid,
                 disabled: false,
@@ -45,16 +46,19 @@ export function prepareActiveEffectCategories(actor, effects) {
       temporary: {
         type: "temporary",
         label: "Temporary Effects",
+        name: "Temporary Effects",
         effects: []
       },
       passive: {
         type: "passive",
         label: "Passive Effects",
+        name: "Passive Effects",
         effects: []
       },
       inactive: {
         type: "inactive",
         label: "Inactive Effects",
+        name: "Inactive Effects",
         effects: []
       }
     };

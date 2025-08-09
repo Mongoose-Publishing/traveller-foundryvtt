@@ -36,6 +36,7 @@ export class MgT2Effect extends ActiveEffect {
             case "create":
                 return owner.createEmbeddedDocuments("ActiveEffect", [{
                     label: game.i18n.localize("MGT2.Effects.Create"),
+                    name: game.i18n.localize("MGT2.Effects.Create"),
                     icon: "icons/svg/aura.svg",
                     origin: owner.uuid,
                     isSuppressed: false,

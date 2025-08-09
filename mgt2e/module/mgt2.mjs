@@ -237,7 +237,6 @@ Hooks.once('init', async function() {
   CONFIG.ActiveEffect.documentClass = MgT2Effect;
 
   //CONFIG.debug.hooks = true;
-  console.log(CONFIG);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
