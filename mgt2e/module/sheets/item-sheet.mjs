@@ -169,6 +169,57 @@ export class MgT2ItemSheet extends ItemSheet {
                 "command": "Command Bridge"
             }
 
+            context.selectTonOptions = {
+                "pcByRating": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.pcByRating"),
+                "pcByHull": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.pcByHull"),
+                "tonByRating": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.tonByRating"),
+                "fixedTons": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.fixedTons"),
+            }
+            context.TON_LABEL = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Label.pcByRating");
+            if (context.item.system.hardware.tonnage.tonCalc) {
+                context.TON_LABEL = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Label."+
+                    context.item.system.hardware.tonnage.tonCalc);
+            }
+            context.TON_TITLE = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Title.pcByRating");
+            if (context.item.system.hardware.tonnage.tonCalc) {
+                context.TON_TITLE = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Title."+
+                    context.item.system.hardware.tonnage.tonCalc);
+            }
+
+            context.selectCostOptions = {
+                "costByItem": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.costByItem"),
+                "costByHull": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.costByHull"),
+                "costByRating": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.costByRating"),
+                "fixedCost": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.fixedCost")
+            }
+            context.COST_LABEL = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Label.costByItem");
+            if (context.item.system.hardware.tonnage.costCalc) {
+                context.COST_LABEL = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Label."+
+                    context.item.system.hardware.tonnage.costCalc);
+            }
+            context.COST_TITLE = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Title.costByItem");
+            if (context.item.system.hardware.tonnage.costCalc) {
+                context.COST_TITLE = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Title."+
+                    context.item.system.hardware.tonnage.costCalc);
+            }
+
+            context.selectPowerOptions = {
+                "powerByItem": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.powerByItem"),
+                "powerByHull": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.powerByHull"),
+                "powerByRating": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.powerByRating"),
+                "fixedPower": game.i18n.localize("MGT2.Item.Hardware.Tonnage.Option.fixedPower")
+            }
+            context.POWER_LABEL = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Label.powerByItem");
+            if (context.item.system.hardware.tonnage.powerCalc) {
+                context.POWER_LABEL = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Label."+
+                    context.item.system.hardware.tonnage.powerCalc);
+            }
+            context.POWER_TITLE = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Title.powerByItem");
+            if (context.item.system.hardware.tonnage.powerCalc) {
+                context.POWER_TITLE = game.i18n.localize("MGT2.Item.Hardware.Tonnage.Title."+
+                    context.item.system.hardware.tonnage.powerCalc);
+            }
+
             context.HARDWARE_RATING = null;
             let sys = context.item.system.hardware.system;
             if (sys === "j-drive" || sys === "m-drive" || sys === "r-drive") {
@@ -770,20 +821,73 @@ export class MgT2ItemSheet extends ItemSheet {
         } else if (["sensor", "stateroom", "weapon"].includes(item.system.hardware.system)) {
             // Use manual values.
         } else {
-            let cost = itemCost;
-            let power = itemPower;
+            let cost = parseFloat(item.system.hardware.tonnage.cost);
+            let power = parseFloat(item.system.hardware.powerPerTon);;
             let percent = parseFloat(item.system.hardware.tonnage.percent);
             let rating = parseInt(item.system.hardware.rating);
             let base = parseFloat(item.system.hardware.tonnage.tons);
+            let minimum = parseFloat(item.system.hardware.tonnage.minimum);
+            let totalTons = 0;
 
-            item.system.hardware.tons = base + (shipTons * percent * rating) / 100.0;
+            // What is the tonnage of this item?
+            console.log(item.system.hardware.tonnage.tonCalc);
+            console.log("ship:" + shipTons);
+            console.log("%:" + percent);
+            console.log("Rating:" + rating);
+            switch (item.system.hardware.tonnage.tonCalc) {
+                case "pcByHull":
+                    console.log("PC by Ship Hull");
+                    // Percentage of hull mass, with no rating modifier.
+                    totalTons = base + (shipTons * percent) / 100.0;
+                    break;
+                case "tonByRating":
+                    // Percent isn't a percentage, but an absolute value in this case.
+                    totalTons = base + (percent * rating);
+                    break;
+                case "fixedTons":
+                    totalTons = base;
+                    break;
+                default:
+                    // Default, also "pcByRating"
+                    console.log("DEFAULT");
+                    totalTons = base + (shipTons * percent * rating) / 100.0;
+                    break;
+            }
+            totalTons = Math.max(minimum, totalTons);
+            item.system.hardware.tons = totalTons;
 
-            if (parseFloat(item.system.hardware.tonnage.cost) > 0) {
-                item.system.cost = parseFloat(item.system.hardware.tonnage.cost * item.system.hardware.tons);
+            let totalCost = 0;
+            switch (item.system.hardware.tonnage.costCalc) {
+                case "costByHull":
+                    totalCost =  shipTons * cost;
+                    break;
+                case "costByRating":
+                    totalCost = cost * rating;
+                    break;
+                case "fixedCost":
+                    totalCost = cost;
+                    break;
+                default:
+                    // Default, also "costByItem"
+                    totalCost = totalTons * cost;
             }
-            if (parseFloat(item.system.hardware.powerPerTon) > 0) {
-                item.system.hardware.power = parseFloat(item.system.hardware.powerPerTon) * item.system.hardware.tons;
-            }
+            item.system.cost = totalCost;
+
+            let totalPower = 0;
+            switch (item.system.hardware.tonnage.powerCalc) {
+                case "powerByHull":
+                    totalPower = power * shipTons;
+                    break;
+                case "powerByRating":
+                    totalPower = power * rating;
+                    break;
+                case "fixedPower":
+                    totalPower = power;
+                    break;
+                default:
+                    totalPower = totalTons * power;
+            };
+            item.system.hardware.power = totalPower;
         }
         calculateHardwareAdvantages(item);
 

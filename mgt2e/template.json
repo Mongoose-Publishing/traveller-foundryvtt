@@ -401,6 +401,7 @@
               "mount": "turret",
               "advantages": "",
               "armouredBulkhead": false,
+              "hardened": false,
               "weapons": {}
           }
       },

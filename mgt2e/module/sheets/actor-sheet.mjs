@@ -2293,6 +2293,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 "power": 0,
                 "rating": 0,
                 "tonnage": {
+                    "tonCalc": "pcByRating",
+                    "costCalc": "costByTon",
                     "tons": 0, "percent": 0, "cost": 0, "minimum": 0
                 },
                 "powerPerTon": 0,

@@ -283,27 +283,48 @@
                     </div>
                 {{else}}
                     <div class="resource">
-                        <label class="resource-label">TONS</label>
+                        <label class="resource-label">Base TONS</label>
                         <input type="text" name="system.hardware.tonnage.tons"
                                value="{{system.hardware.tonnage.tons}}" data-type="Number"/>
                     </div>
                     <div class="resource">
-                        <label class="resource-label">%</label>
-                        <input type="text" name="system.hardware.tonnage.percent"
-                               value="{{system.hardware.tonnage.percent}}" data-type="Number"/>
-                    </div>
-                    <div class="resource">
-                        <label class="resource-label">Minimum</label>
+                        <label class="resource-label">Minimum TONS</label>
                         <input type="text" name="system.hardware.tonnage.minimum"
                                value="{{system.hardware.tonnage.minimum}}" data-type="Number"/>
                     </div>
-                    <div class="resource">
-                        <label class="resource-label">MCr/TON</label>
+                    <div class="resource" title="{{TON_TITLE}}">
+                        <label class="resource-label">Ton Method</label>
+                        <select name="system.hardware.tonnage.tonCalc">
+                            {{selectOptions selectTonOptions selected=system.hardware.tonnage.tonCalc}}
+                        </select>
+                    </div>
+                    <div class="resource" title="{{TON_TITLE}}">
+                        {{#unless (ifEquals TON_LABEL "-")}}
+                        <label class="resource-label">{{TON_LABEL}}</label>
+                        <input type="text" name="system.hardware.tonnage.percent"
+                               value="{{system.hardware.tonnage.percent}}" data-type="Number"/>
+                        {{/unless}}
+                    </div>
+                    <div class="resource" title="{{COST_TITLE}}">
+                        <label class="resource-label">Cost Method</label>
+                        <select name="system.hardware.tonnage.costCalc">
+                            {{selectOptions selectCostOptions selected=system.hardware.tonnage.costCalc}}
+                        </select>
+                    </div>
+                    <div class="resource" title="{{COST_TITLE}}">
+                        <label class="resource-label">{{COST_LABEL}}</label>
                         <input type="text" name="system.hardware.tonnage.cost"
                                value="{{system.hardware.tonnage.cost}}" data-type="Number"/>
                     </div>
-                    <div class="resource">
-                        <label class="resource-label">Power/TON</label>
+
+                    <div class="resource" title="{{POWER_TITLE}}">
+                        <label class="resource-label">Power Method</label>
+                        <select name="system.hardware.tonnage.powerCalc">
+                            {{selectOptions selectPowerOptions selected=system.hardware.tonnage.powerCalc}}
+                        </select>
+                    </div>
+                    <div class="resource" title="{{POWER_TITLE}}">
+                        <label class="resource-label">{{POWER_LABEL}}</label>
                         <input type="text" name="system.hardware.powerPerTon"
                                value="{{system.hardware.powerPerTon}}" data-type="Number"/>
                     </div>
