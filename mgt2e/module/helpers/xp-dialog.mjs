@@ -71,7 +71,6 @@ export class MgT2XPDialog extends Application {
         this.formData.notes = this.formData.notes?this.formData.notes:"";
         this.formData.study = this.formData.study?this.formData.study:"";
 
-
         this.options.title = game.i18n.format("MGT2.XPSkill.Title", { name: this.skillTitle });
         this.cost = 1;
         if (this.formData.value > 0) {
@@ -135,17 +134,19 @@ export class MgT2XPDialog extends Application {
 
         this.formData.xp = this.getIntValue(html, "skillXPxp");
         this.formData.bonus = this.getIntValue(html, "skillXPbonus");
-        this.formData.notes = html.find("input.skillXPnotes")[0].value;
-        this.formData.study = html.find("input.skillXPstudy")[0].value;
-        this.formData.boon = html.find("select.skillXPboon")[0].value;
+        this.formData.notes = html.find("input.skillXPnotes")[0]?.value;
+        this.formData.study = html.find("input.skillXPstudy")[0]?.value;
+        this.formData.boon = html.find("select.skillXPboon")[0]?.value;
 
-        while (this.formData.xp >= this.cost) {
-            if (!this.formData.trained) {
-                this.formData.trained = true;
-                this.formData.xp -= this.cost;
-            } else {
-                this.formData.value += 1;
-                this.formData.xp -= this.cost;
+        if (!this.formData.specialities) {
+            while (this.formData.xp >= this.cost) {
+                if (!this.formData.trained) {
+                    this.formData.trained = true;
+                    this.formData.xp -= this.cost;
+                } else {
+                    this.formData.value += 1;
+                    this.formData.xp -= this.cost;
+                }
             }
         }
         this.actor.update({ "system.skills": this.actor.system.skills });
