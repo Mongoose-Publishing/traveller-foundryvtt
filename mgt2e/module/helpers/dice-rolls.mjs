@@ -849,6 +849,10 @@ export async function rollSkill(actor, skill, options) {
     }
     if (cha) {
         chaDm = data.characteristics[cha].dm;
+        // Bonus is a manually added bonus throught he XPDialog.
+        if (data.characteristics[cha].bonus && parseInt(data.characteristics[cha].bonus) !== 0) {
+            chaDm += parseInt(data.characteristics[cha].bonus);
+        }
         dice += ` ${chaDm>=0?"+":""}${chaDm}[${cha}]`;
         title = cha;
         skillText += cha;

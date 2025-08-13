@@ -255,7 +255,6 @@ Hooks.once('init', async function() {
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
 //  ActiveEffects.registerSheet("mgt2e", MgT2EffectSheet, { makeDefault: true });
 
-
     // Sockets
     game.socket.on("system.mgt2e", (data) => {
        if (data.type === "showIdCard") {

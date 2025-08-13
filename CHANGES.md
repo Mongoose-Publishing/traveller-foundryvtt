@@ -11,6 +11,11 @@
 ## Develop
 
 * Armoured status is now shown for all ship hardware types.
+* Characteristics can now be trained according to Companion rules.
+* Parent skills (those with specialities) no longer show option for training.
+* Added name field to active effects, which is required by Foundry 13.
+* General ship hardware items now provide more options for how tonnage, cost and power is
+  calculated. This should cover a lot more of the options from High Guard.
 
 ## 0.13.5 (Beta)
 

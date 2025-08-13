@@ -36,12 +36,15 @@ export class MgT2XPDialog extends Application {
         // skillData / specData - objects for the skill
         // formData - object for either a parent skill or a specialisation.
 
-        if (cha && data.characteristics && data.characteristics[cha]) {
-            this.characteristic = data.characteristics[cha];
-            if (!skill) {
+        if (cha && actorData.characteristics && actorData.characteristics[cha]) {
+            this.characteristic = actorData.characteristics[cha];
+            if (!skillId) {
                 this.chaOnly = true;
                 this.value = 0;
             }
+            this.formData = this.characteristic;
+            this.formData.xp = parseInt(this.formData.xp?this.formData.xp:0);
+            this.skillTitle = cha;
         }
         if (this.skillId && actorData.skills[skillId]) {
             this.skillData = actorData.skills[skillId];
@@ -62,7 +65,7 @@ export class MgT2XPDialog extends Application {
             } else {
                 // Just the basic top level skill.
             }
-        } else {
+        } else if (!this.chaOnly) {
             ui.notifications.error("Unable to find skill " + skillId);
             return;
         }
@@ -72,9 +75,21 @@ export class MgT2XPDialog extends Application {
         this.formData.study = this.formData.study?this.formData.study:"";
 
         this.options.title = game.i18n.format("MGT2.XPSkill.Title", { name: this.skillTitle });
-        this.cost = 1;
-        if (this.formData.value > 0) {
-            this.cost = Math.pow(2, this.formData.value);
+        if (this.chaOnly) {
+            if (["EDU", "INT", "PSI"].includes(cha)) {
+                this.cost = (parseInt(this.characteristic.value) + 1) * 2;
+            } else if (["STR", "DEX", "END"].includes(cha)) {
+                this.cost = parseInt(this.characteristic.value) + 1;
+            } else {
+                this.cost = 0;
+            }
+        } else if (this.formData.specialities) {
+            this.cost = 0;
+        } else {
+            this.cost = 1;
+            if (this.formData.value > 0) {
+                this.cost = Math.pow(2, this.formData.value);
+            }
         }
     }
 
@@ -138,7 +153,15 @@ export class MgT2XPDialog extends Application {
         this.formData.study = html.find("input.skillXPstudy")[0]?.value;
         this.formData.boon = html.find("select.skillXPboon")[0]?.value;
 
-        if (!this.formData.specialities) {
+        if (this.chaOnly && this.cost > 0) {
+            while (this.formData.xp >= this.cost) {
+                this.formData.value += 1;
+                this.formData.xp -= this.cost;
+            }
+            console.log(this.formData);
+            this.actor.update({"system.characteristics": this.actor.system.characteristics});
+            this.close();
+        } else if (this.cost > 0) {
             while (this.formData.xp >= this.cost) {
                 if (!this.formData.trained) {
                     this.formData.trained = true;

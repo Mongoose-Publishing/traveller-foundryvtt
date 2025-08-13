@@ -8,7 +8,7 @@
             {{skillTitle}} [{{value}}]
         </h3>
 
-        {{#unless formData.specialities}}
+        {{#unless (ifEquals cost 0)}}
         <div class="grid grid-4col">
             <div class="xpgrid resource">
                 <label for="dicetype" class="skillDialogLabel">Level</label>
