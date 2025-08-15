@@ -1,15 +1,16 @@
 # Mongoose Traveller for FoundryVTT
 
-**Version:**  0.13.5
+**Version:**  0.14.0
 
-This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v11.
-it is currently in beta, so suggestions and bug reports are greatly appreciated. The basic game rules
-are currently supported, but new features are being added all the time.
+This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v12
+or v13, though v12 has had more testing. It is currently in beta, so suggestions and bug reports are
+greatly appreciated. The basic game rules are currently supported, but new features are being added
+all the time.
 
 ![Mongoose Traveller on Foundry](docs/traveller-foundry.png)
 
 Currently, it provides support for:
-* Character sheets for Travellers (PCs), NPCs and Creatures are provided.
+* Character sheets for Travellers (PCs), NPCs, Spacecraft, Worlds and Creatures are provided.
 * A full built-in list of skills for characters, along with Mongoose 2e rules for specialities and professions.
 * Skills can be dragged to the hot bar for quick access.
 * Attack rolls, with damage and effect, stun damage, AP and other weapon attributes.
@@ -67,8 +68,9 @@ The main supported object types defined in the system are:
   * Traveller - A player character
   * NPC - Cut down version of a Traveller
   * Creature - Creatures with even fewer details
-  * Spacecraft - A spacecraft, currently partially supported.
+  * Spacecraft - A spacecraft.
   * Vehicle - Preliminary support for a basic sheet.
+  * Worlds - Defines worlds, and implements some of the trade rules.
   * Package - Contains package of skills, items and attributes for building NPCs or Travellers from.
 
 ### Items
@@ -82,6 +84,7 @@ The main supported object types defined in the system are:
   * Cargo - Goods to be bought and sold, carried on spacecraft.
   * Spacecraft Hardware - Items a spacecraft is built from.
   * Crew Roles - Specify roles for crew members of a starship or vehicle.
+  * Software - Designed to run on computers.
 
 ## Licenses
 

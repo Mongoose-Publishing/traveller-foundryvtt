@@ -5,10 +5,15 @@
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
 * Career terms aren't always added in the correct order.
-* This has not been fully tested against Foundry 13. Please stick with Foundry 12 unless you plan
-  to help track down compatibility bugs.
 
-## Develop
+## 0.14.0 (Beta)
+
+Migration Notes: Ship Hardware of the 'General' type has a number of options on how
+to automatically calculate tonnage, cost and power. Items will be migrated when the
+item sheet is opened, but it's possible behaviour may change.
+
+Foundry 13: The system is now marked as works with Foundry 13, but there may be
+teething issues.
 
 * Armoured status is now shown for all ship hardware types.
 * Characteristics can now be trained according to Companion rules.
