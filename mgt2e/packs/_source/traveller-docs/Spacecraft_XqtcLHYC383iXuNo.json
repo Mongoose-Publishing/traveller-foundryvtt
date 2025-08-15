@@ -113,6 +113,43 @@
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!XqtcLHYC383iXuNo.f7qCCfDWJowPIoUW"
+    },
+    {
+      "sort": 300000,
+      "name": "Hardware Tonnage",
+      "type": "text",
+      "_id": "QSbX50dfCitPnl0G",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Tonnage for general system items can be calculated in a variety of ways.</p><p>Legacy versions (up to 0.13.5) only supported `pcByRating`. Since 0.13.6, there are a number of different options.</p><h2>Common Values</h2><p>Tons: A fixed value. The item takes up this amount of tonnage, plus anything that is calculated.</p><p>MCr/TON: The Cost of the item in MCr per ton it consumes.</p><p></p><h2>Calculation</h2><p></p><p></p><h3>Percentage By Rating (pcByRating)</h3><p>The item takes up tonnage equal to the rating of the item multiplied by the percentage of the hull.</p><p>Percentage: 10</p><p>The item will consume 10% of the hull tonnage for each point of rating.</p><h3>Percentage by Hull (pcByHull)</h3><p>The item takes up a fixed percentage of the hull tonnage. The rating is ignored.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "XsiBG1ohlPVbUVQC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.13.5.2-DEV",
+        "createdTime": 1754927321718,
+        "modifiedTime": 1754927321718,
+        "lastModifiedBy": "XsiBG1ohlPVbUVQC"
+      },
+      "_key": "!journal.pages!XqtcLHYC383iXuNo.QSbX50dfCitPnl0G"
     }
   ],
   "sort": 500000,

@@ -5,8 +5,6 @@ export async function calculateSpacecraftCost(actor) {
     let data = actor.system;
     let spacecraft = actor.system.spacecraft;
 
-    console.log("Calculating cost of " + actor.name);
-
     let totalCost = 0;
 
     spacecraft.baseCost = Number(spacecraft.dtons) * 0.05;
@@ -230,7 +228,6 @@ export function getShipData(actor) {
             let cost = item.system.cost;
             let power = item.system.hardware.power;
 
-            console.log(item);
             if (item.system.hardware.weapons) {
                 for (let wpnId in item.system.hardware.weapons) {
                     let wpn = actor.items.get(wpnId);
@@ -256,7 +253,6 @@ export function getShipData(actor) {
 
     if (systems || bulkheads) {
         data["systems"] = [];
-        console.log(bulkheads);
 
         for (let item of bulkheads) {
             data["systems"].push({
@@ -274,7 +270,6 @@ export function getShipData(actor) {
                 "quantity": item.system.quantity
             })
         }
-        console.log(data["systems"]);
     }
 
     if (software) {
@@ -328,7 +323,6 @@ export function getShipData(actor) {
 }
 
 export function calculateHardwareAdvantages(item) {
-    console.log("calculateHardwareAdvantages:");
     if (!item || item.type !== "hardware") {
         return;
     }
@@ -341,11 +335,8 @@ export function calculateHardwareAdvantages(item) {
     let power = 100;
     let output = 100;
     for (let a of list) {
-        console.log(a);
         let t = a.trim().split(" ")[0];
         let n = a.trim().split(" ")[1];
-        console.log(t);
-        console.log(n);
 
         let adv = MGT2.SPACECRAFT_ADVANTAGES[system][t];
         if (adv) {

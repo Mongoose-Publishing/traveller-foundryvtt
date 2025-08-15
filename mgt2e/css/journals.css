@@ -19,6 +19,12 @@
 .journal-entry-content {
 }
 */
+
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) {
+  background: var(--mongoose-page);
+  color: var(--mongoose-text);
+}
+
 img {
   border: none;
 }
@@ -60,7 +66,7 @@ caption {
 }
 
 .mgorange {
-  color: #f1511b;
+  color: var(--mongoose-orange);
 }
 
 .journal-sheet .skill-package {
@@ -78,9 +84,9 @@ caption {
 /* Documentation */
 
 .journal-entry-pages h1 {
-    color: #f1511b;
+    color: var(--mongoose-orange);
     text-transform: uppercase;
-    border-bottom: 3px solid #f1511b;
+    border-bottom: 3px solid var(--mongoose-orange);
     font-weight: bold;
     font-size: 24pt;
 }
@@ -121,7 +127,7 @@ caption {
 
 
 .journal-sheet .callout {
-    background-color: #90D0e8;
+    background-color: var(--mongoose-blue);
     border: 1px solid black;
     border-radius: 8px;
     padding: 0;
@@ -145,7 +151,7 @@ caption {
 }
 
 .journal-sheet .callout-wide {
-  background-color: #90D0e8;
+  background-color: var(--mongoose-blue);
   border: 1px solid black;
   border-radius: 8px;
   padding: 0.5em;
@@ -170,7 +176,7 @@ div.journal-career {
 .journal-sheet form.journal-header input.title {
     font-family: Anton;
     text-transform: uppercase;
-    background-color: #f1511b;
+    background-color: var(--mongoose-orange);
     color: white;
 }
 
@@ -205,7 +211,7 @@ div.journal-career div.career-right table td {
 
 div.journal-career th {
     text-align: left;
-    color: #f1511b;
+    color: var(--mongoose-orange);
     padding-left: 0.5em;
     padding-right: 0.5em;
     vertical-align: bottom;
@@ -217,7 +223,7 @@ div.journal-career td {
 }
 
 div.journal-career table {
-    border: 1px solid #f1511b;
+    border: 1px solid var(--mongoose-orange);
     margin-left: 1em;
     margin-right: 1em;
     box-shadow: 5px 5px 5px #a0bfbf;
@@ -380,7 +386,7 @@ div.inline-actor img.portrait {
 
 div.inline-actor .name {
     display: block;
-    color: #f1511b;
+    color: var(--mongoose-orange);
     font-size: x-large;
     font-weight: bold;
     text-transform: uppercase;
@@ -391,7 +397,7 @@ div.inline-actor .name {
 
 div.inline-actor .profession {
     display: block;
-    color: #f1511b;
+    color: var(--mongoose-orange);
     font-size: large;
     font-weight: bold;
     text-transform: uppercase;
@@ -421,7 +427,7 @@ div.inline-actor .species-title {
     display: inline-block;
     color: black;
     font-weight: bold;
-    background-color: #f1511b;
+    background-color: var(--mongoose-orange);
     text-transform: uppercase;
     padding: 3px;
 }
@@ -464,12 +470,12 @@ table.creature-stats th {
 }
 
 table.creature-stats tr {
-    background-color: #f1511b;
+    background-color: var(--mongoose-orange);
 }
 
 table.creature-stats td {
     padding: 4px;
-    background-color: #303030;
+    background-color: var(--mongoose-dark);
     color: white;
 }
 
@@ -518,14 +524,14 @@ div.traveller-copyright {
 }
 
 div.foundry-hint {
-    border: 5px solid #f1511b;
+    border: 5px solid var(--mongoose-orange);
     border-radius: 15px;
     background-color: #D0D0D0;
     margin: 3px;
 }
 
 div.foundry-hint h4 {
-  background-color: #f1511b;
+  background-color: var(--mongoose-orange);
   margin: 0 0 5px 0;
   padding: 3px;
   text-transform: uppercase;
@@ -555,7 +561,7 @@ table.mongoose-equipment td {
 }
 
 .inline-spacecraft .spacecraft-header {
-  background-color: #f1511b;
+  background-color: var(--mongoose-orange);
   padding-left: 1em;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -620,7 +626,7 @@ table.mongoose-equipment td {
 }
 
 .spacecraft-right .title {
-  background-color: #f1511b;
+  background-color: var(--mongoose-orange);
   color: white;
   font-weight: bold;
   display: inline-block;

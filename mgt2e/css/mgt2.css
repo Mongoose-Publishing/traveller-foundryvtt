@@ -7,6 +7,11 @@
   --title: white;
   --panel-bg: #c5c3b4e0;
   --sheet-bg: #404040;
+  --mongoose-orange: #f1511b;
+  --mongoose-blue: #90D0e8;
+  --mongoose-dark: #303030;
+  --mongoose-page: #f0efef;
+  --mongoose-text: black;
 }
 
 /* Global styles */

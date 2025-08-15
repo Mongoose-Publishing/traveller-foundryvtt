@@ -15,7 +15,13 @@
 * Parent skills (those with specialities) no longer show option for training.
 * Added name field to active effects, which is required by Foundry 13.
 * General ship hardware items now provide more options for how tonnage, cost and power is
-  calculated. This should cover a lot more of the options from High Guard.
+  calculated. This should cover a lot more of the options from High Guard. This changes
+  how General ship hardware works.
+* Journal CSS styles have been put back (white background, black text), with some better
+  handling for v13. This style is used even in dark mode, and is designed to match the
+  Mongoose style.
+* Checking added to ensure items are writable before updating automatically
+  generated values.
 
 ## 0.13.5 (Beta)
 

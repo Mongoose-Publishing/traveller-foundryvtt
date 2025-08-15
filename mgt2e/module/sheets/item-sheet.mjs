@@ -808,7 +808,9 @@ export class MgT2ItemSheet extends ItemSheet {
 
             if (tl !== item.system.tl) {
                 item.system.tl = tl;
-                item.update({"system": item.system});
+                if (this.isEditable) {
+                    item.update({"system": item.system});
+                }
             }
         } else if (item.system.hardware.system === "common") {
             let h = item.system.hardware;
@@ -822,21 +824,38 @@ export class MgT2ItemSheet extends ItemSheet {
             // Use manual values.
         } else {
             let cost = parseFloat(item.system.hardware.tonnage.cost);
-            let power = parseFloat(item.system.hardware.powerPerTon);;
+            let power = parseFloat(item.system.hardware.powerPerTon);
             let percent = parseFloat(item.system.hardware.tonnage.percent);
             let rating = parseInt(item.system.hardware.rating);
             let base = parseFloat(item.system.hardware.tonnage.tons);
             let minimum = parseFloat(item.system.hardware.tonnage.minimum);
             let totalTons = 0;
 
+            console.log(item.system);
+            // Handle conversion from the pre-0.14 way of doing things.
+            if (item.system.hardware.tonnage.costCalc === undefined) {
+                if (cost === 0 && parseFloat(item.system.cost) > 0) {
+                    cost == parseFloat(item.system.cost);
+                    item.system.hardware.tonnage.costCalc = "fixedCost";
+                }
+            }
+            item.system.hardware.tonnage.costCalc = "fixedCost";
+            if (item.system.hardware.tonnage.tonCalc === undefined) {
+                if (base === 0 && parseFloat(item.system.hardware.tons > 0)) {
+                    base = parseFloat(item.system.hardware.tons > 0);
+                    item.system.hardware.tonnage.tonCalc = "fixedTons";
+                }
+            }
+            if (item.system.hardware.tonnage.powerCalc === undefined) {
+                if (power === 0 && parseFloat(item.system.hardware.power) > 0) {
+                    power = parseFloat(item.system.hardware.power);
+                    item.system.hardware.tonnage.powerCalc = "fixedPower";
+                }
+            }
+
             // What is the tonnage of this item?
-            console.log(item.system.hardware.tonnage.tonCalc);
-            console.log("ship:" + shipTons);
-            console.log("%:" + percent);
-            console.log("Rating:" + rating);
             switch (item.system.hardware.tonnage.tonCalc) {
                 case "pcByHull":
-                    console.log("PC by Ship Hull");
                     // Percentage of hull mass, with no rating modifier.
                     totalTons = base + (shipTons * percent) / 100.0;
                     break;
@@ -849,7 +868,6 @@ export class MgT2ItemSheet extends ItemSheet {
                     break;
                 default:
                     // Default, also "pcByRating"
-                    console.log("DEFAULT");
                     totalTons = base + (shipTons * percent * rating) / 100.0;
                     break;
             }
@@ -886,7 +904,7 @@ export class MgT2ItemSheet extends ItemSheet {
                     break;
                 default:
                     totalPower = totalTons * power;
-            };
+            }
             item.system.hardware.power = totalPower;
         }
         calculateHardwareAdvantages(item);
@@ -902,8 +920,10 @@ export class MgT2ItemSheet extends ItemSheet {
         }
         item.system.hardware.tons = Number(item.system.hardware.tons.toFixed(3));
 
-        if (itemCost !== item.system.cost || itemTons != item.system.hardware.tons || itemPower != item.system.hardware.power) {
-            item.update({"system": item.system});
+        if (this.isEditable) {
+            if (itemCost !== item.system.cost || itemTons != item.system.hardware.tons || itemPower != item.system.hardware.power) {
+                item.update({"system": item.system});
+            }
         }
     }
 
