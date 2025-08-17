@@ -2,8 +2,9 @@
 
 **Version:**  0.14.0
 
-This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v12
-or v13, though v12 has had more testing. It is currently in beta, so suggestions and bug reports are
+This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v12.
+Support for v13 is coming, but there are known issues that need resolving.
+It is currently in beta, so suggestions and bug reports are
 greatly appreciated. The basic game rules are currently supported, but new features are being added
 all the time.
 
