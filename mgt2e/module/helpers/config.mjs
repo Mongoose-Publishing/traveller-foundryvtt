@@ -808,6 +808,17 @@ MGT2.SKILLS = {
     "untrained": { "default": "INT", "requires": "XXX" }
 };
 
+MGT2.getDefaultSkills = function() {
+    let skills = MGT2.SKILLS;
+
+    let actorName = game.settings.get("mgt2e", "defaultTraveller");
+    if (actorName && game.actors.getName(actorName)?.type === "traveller") {
+        skills = game.actors.getName(actorName).system.skills;
+    }
+
+    return skills;
+}
+
 MGT2.EFFECT_TYPES = {
   "CHA_AUG": "chaAug",
   "CHA_DM": "chaDM",

@@ -45,6 +45,8 @@
   "MGT2.Settings.BlastEffectDivergence.Hint": "If an attack roll with a blast effect misses, how far to diverge blast template from intended location",
   "MGT2.Settings.SplitAttackDamage.Name": "Split attack and damage rolls",
   "MGT2.Settings.SplitAttackDamage.Hint": "Rather than rolling damage with an attack, require a second button click to roll damage",
+  "MGT2.Settings.DefaultTraveller.Name": "Default Traveller",
+  "MGT2.Settings.DefaultTraveller.Hint": "Name of Traveller actor to use for default skills and settings",
 
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",

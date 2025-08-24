@@ -195,6 +195,14 @@ Hooks.once('init', async function() {
         type: Boolean,
         default: false
     });
+    game.settings.register('mgt2e', 'defaultTraveller', {
+        name: game.i18n.localize("MGT2.Settings.DefaultTraveller.Name"),
+        hint: game.i18n.localize("MGT2.Settings.DefaultTraveller.Hint"),
+        scope: 'world',
+        config: true,
+        type: String,
+        default: ""
+    });
     game.settings.register('mgt2e', 'blastEffectDivergence', {
         name: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Name"),
         hint: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Hint"),
@@ -516,14 +524,15 @@ Hooks.on("createActor", (actor) => {
     }
 
     // Copy in skills where needed.
+    const BASE_SKILLS = MGT2.getDefaultSkills();
     if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package" || actor.type === "creature") {
         // Need to add skills.
-        for (let s in MGT2.SKILLS) {
+        for (let s in BASE_SKILLS) {
             if (actor.system.skills[s]) {
                 continue;
             }
             actor.system.skills[s] = JSON.parse(
-                JSON.stringify(MGT2.SKILLS[s])
+                JSON.stringify(BASE_SKILLS[s])
             )
             actor.system.skills[s].id = s;
             actor.system.skills[s].value = 0;
@@ -1487,7 +1496,7 @@ Handlebars.registerHelper('effect', function(key) {
         key = key.replaceAll(/[a-z.]/g, "");
         return key;
     } else if (key && key.startsWith("system.skills")) {
-        let skills = MGT2.SKILLS;
+        let skills = MGT2.getDefaultSkills();
         key = key.replaceAll(/\.[a-z]*$/g, "");
         key = key.replaceAll(/system.skills./g, "");
         let skill = key.replaceAll(/\..*/g, "");
@@ -1758,7 +1767,7 @@ Handlebars.registerHelper('skillToLabel', function(skillName) {
     let skillId = skillName.replaceAll(/\..*/g, "");
     let specId = (skillName.indexOf(".") < 0)?null:skillName.replaceAll(/.*\./g, "");
 
-    let skills = MGT2.SKILLS;
+    let skills = MGT2.getDefaultSkills();
     let label = "";
     if (skills[skillId]) {
         label = skills[skillId].label;

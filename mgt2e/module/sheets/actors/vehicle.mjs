@@ -94,7 +94,7 @@ export class MgT2VehicleActorSheet extends MgT2ActorSheet {
         }
         context.selectSkill = {};
         for (let skill of [ "drive", "flyer", "seafarer"]) {
-            let skillData = CONFIG.MGT2.SKILLS[skill];
+            let skillData = CONFIG.MGT2.getDefaultSkills()[skill];
             for (let spec in skillData.specialities) {
                 context.selectSkill[`${skill}.${spec}`] =
                     `${game.i18n.localize("MGT2.Skills." + skill)} (${game.i18n.localize("MGT2.Skills."+spec)})`;

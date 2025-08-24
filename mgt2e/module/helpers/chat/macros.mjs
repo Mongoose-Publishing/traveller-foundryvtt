@@ -330,7 +330,7 @@ MgT2eMacros.skillCheck = function(args, ask) {
             skillId = skillFqn.split(".")[0];
             specId = skillFqn.split(".")[1];
         }
-        let skill = CONFIG.MGT2.SKILLS[skillId];
+        let skill = CONFIG.MGT2.getDefaultSkills()[skillId];
 
         if (skillFqn && !skill) {
             ui.notifications.error(`Skill [${skillId}] is unrecognised.`);

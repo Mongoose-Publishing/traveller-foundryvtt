@@ -45,7 +45,7 @@ export class MgT2SkillDialog extends Application {
                         this.specData = this.skillData.specialities[this.specId];
                     }
                 } else {
-                    this.skillData = MGT2.SKILLS[this.skillId];
+                    this.skillData = MGT2.getDefaultSkills()[this.skillId];
                     if (this.specId) {
                         this.specData = this.skillData.specialities[this.specId];
                     }

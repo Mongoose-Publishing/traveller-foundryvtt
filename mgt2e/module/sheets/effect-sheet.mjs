@@ -52,7 +52,7 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
             }
         } else if (context.effectType.targets === "skills") {
             context.targets = {};
-            let skills = MGT2.SKILLS;
+            let skills = MGT2.getDefaultSkills();
             for (let id in skills) {
                 let baseKey = "system.skills."+id
                 context.targets[baseKey + "." + prop] = skillLabel(skills[id], id);

@@ -107,7 +107,7 @@ export class MgT2ItemSheet extends ItemSheet {
         if (context.item.parent && context.item.parent.system.skills) {
             context.skills = context.item.parent.system.skills;
         } else {
-            context.skills = MGT2.SKILLS;
+            context.skills = MGT2.getDefaultSkills();
         }
 
         if (context.item.type === "armour") {
@@ -388,7 +388,7 @@ export class MgT2ItemSheet extends ItemSheet {
                     context.weaponTraits[trait] = game.i18n.localize("MGT2.Item.WeaponTrait.Label."+trait);
                 }
             }
-            let allSkills = MGT2.SKILLS;
+            let allSkills = MGT2.getDefaultSkills();
             if (context.item.parent && context.item.parent.system.skills) {
                 allSkills = context.item.parent.system.skills;
             }
@@ -464,7 +464,7 @@ export class MgT2ItemSheet extends ItemSheet {
             context.SKILL_SELECT = {
                 "": "None"
             };
-            let allSkills = MGT2.SKILLS;
+            let allSkills = MGT2.getDefaultSkills();
             for (let skillId in allSkills) {
                 let skill = allSkills[skillId];
                 context.SKILL_SELECT[skillId] = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);

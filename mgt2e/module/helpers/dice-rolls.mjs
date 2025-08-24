@@ -787,7 +787,7 @@ export async function rollSkill(actor, skill, options) {
                 noSpeciality = true;
             }
         }
-        skill = MGT2.SKILLS[skillId];
+        skill = MGT2.getDefaultSkills()[skillId];
         title = skillLabel(skill, skillId);
         if (specId) {
             speciality = skill.specialities[specId];
