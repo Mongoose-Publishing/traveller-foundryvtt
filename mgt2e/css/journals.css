@@ -83,7 +83,7 @@ caption {
 
 /* Documentation */
 
-.journal-entry-pages h1 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h1 {
     color: var(--mongoose-orange);
     text-transform: uppercase;
     border-bottom: 3px solid var(--mongoose-orange);
@@ -91,34 +91,34 @@ caption {
     font-size: 24pt;
 }
 
-.journal-entry-pages h2 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h2 {
     text-transform: uppercase;
     border: none;
     font-weight: bold;
     font-size: 20pt;
 }
 
-.journal-entry-pages h3 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h3 {
     text-transform: uppercase;
     border: none;
     font-weight: bold;
     font-size: 18pt;
 }
 
-.journal-entry-pages h4 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h4 {
     border: none;
     font-weight: bold;
     font-size: 16pt
 }
 
-.journal-entry-pages h5 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h5 {
   border: none;
   font-weight: bold;
   font-style: italic;
   font-size: 14pt
 }
 
-.journal-entry-pages h6 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h6 {
   border: none;
   font-weight: bold;
   font-style: italic;
@@ -687,7 +687,7 @@ table.mongoose-equipment td {
 }
 
 .simple-table {
-  _background-color: transparent;
+  background-color: transparent;
   border: none;
 }
 
