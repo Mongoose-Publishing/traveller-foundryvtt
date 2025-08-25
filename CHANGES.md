@@ -6,6 +6,14 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## Develop
+
+* Journal styles now apply when editing journal pages.
+* Added a world setting to define a default Traveller actor, from which the list of
+  skills is taken for new actors and item skill lists.
+* Added support for concealed M-Drives.
+
+
 ## 0.14.0 (Beta)
 
 Migration Notes: Ship Hardware of the 'General' type has a number of options on how

@@ -663,6 +663,7 @@
   "MGT2.Spacecraft.ArmouredBulkhead": "Armoured Bulkhead",
   "MGT2.Spacecraft.Battery": "Battery",
   "MGT2.Spacecraft.BatteryCharge": "Charge",
+  "MGT2.Spacecraft.ConcealedDrive": "Concealed Drive",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",

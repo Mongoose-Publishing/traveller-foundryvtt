@@ -226,8 +226,17 @@ export class MgT2ItemSheet extends ItemSheet {
                 context.HARDWARE_RATING = {};
                 for (let i in MGT2.SHIP_HARDWARE[sys].rating) {
                     if (MGT2.SHIP_HARDWARE[sys].rating[i].tl <= maxTL) {
-                        context.HARDWARE_RATING[i] = game.i18n.format("MGT2.Item.Hardware.Rating." + sys,
-                            {"rating": i});
+                        if (context.item.system.hardware.concealedDrive) {
+                            let t = parseInt(i / 2);
+                            if (t === i / 2) {
+                                // We only want to display whole number thrust numbers.
+                                context.HARDWARE_RATING[i] = game.i18n.format("MGT2.Item.Hardware.Rating." + sys,
+                                    {"rating": t});
+                            }
+                        } else {
+                            context.HARDWARE_RATING[i] = game.i18n.format("MGT2.Item.Hardware.Rating." + sys,
+                                {"rating": i});
+                        }
                     }
                 }
             }
@@ -801,6 +810,10 @@ export class MgT2ItemSheet extends ItemSheet {
                 tl += MGT2.SPACECRAFT_ADVANCES[h.advancement].tl;
                 tonnage = tonnage * MGT2.SPACECRAFT_ADVANCES[h.advancement].tonnage;
                 cost = cost * MGT2.SPACECRAFT_ADVANCES[h.advancement].cost;
+            }
+            if (item.system.hardware.system === "m-drive" && item.system.hardware.concealedDrive) {
+                cost *= 1.25;
+                tonnage *= 1.25;
             }
             item.system.cost = cost;
             item.system.hardware.power = pow;

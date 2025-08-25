@@ -415,7 +415,11 @@ export class MgT2ActorSheet extends ActorSheet {
                     jdrive = Math.max(jdrive, parseInt(h.rating));
                 }
                 if (h.system === "m-drive" && i.system.status === MgT2Item.ACTIVE) {
-                    mdrive = Math.max(mdrive, parseInt(h.rating));
+                    if (h.concealedDrive) {
+                        mdrive = Math.max(mdrive, parseInt(h.rating / 2));
+                    } else {
+                        mdrive = Math.max(mdrive, parseInt(h.rating));
+                    }
                 }
                 if (h.system === "r-drive" && i.system.status === MgT2Item.ACTIVE) {
                     rdrive = Math.max(rdrive, parseInt(h.rating));
