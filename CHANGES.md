@@ -12,6 +12,7 @@
 * Added a world setting to define a default Traveller actor, from which the list of
   skills is taken for new actors and item skill lists.
 * Added support for concealed M-Drives.
+* Cost of armoured bulkheads corrected. Bulkheads have their own section on the journal sheet.
 
 
 ## 0.14.0 (Beta)

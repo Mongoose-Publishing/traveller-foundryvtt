@@ -825,6 +825,9 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     if (data["weapon"]) {
         html += Tools.inlineSpacecraftData("Weapons", data["weapon"]);
     }
+    if (data["bulkheads"]) {
+        html += Tools.inlineSpacecraftData("Bulkheads", data["bulkheads"]);
+    }
     if (data["systems"]) {
         html += Tools.inlineSpacecraftData("Systems", data["systems"]);
     }

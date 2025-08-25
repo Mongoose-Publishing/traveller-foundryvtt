@@ -251,17 +251,21 @@ export function getShipData(actor) {
         }
     }
 
-    if (systems || bulkheads) {
-        data["systems"] = [];
-
+    if (bulkheads) {
+        data["bulkheads"] = [];
         for (let item of bulkheads) {
-            data["systems"].push({
-                "name": `Armoured Bulkheads (${item.name})`,
+            data["bulkheads"].push({
+                "name": `${item.name}`,
                 "tons": item.system.hardware.tons * item.system.quantity * 0.1,
-                "cost": item.system.cost * item.system.quantity * 0.1,
+                "cost": item.system.hardware.tons * item.system.quantity * 0.2,
                 "quantity": item.system.quantity
             });
         }
+    }
+
+    if (systems) {
+        data["systems"] = [];
+
         for (let item of systems) {
             data["systems"].push({
                 "name": item.name,
