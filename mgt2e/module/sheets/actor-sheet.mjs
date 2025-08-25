@@ -446,7 +446,7 @@ export class MgT2ActorSheet extends ActorSheet {
         context.dtonsRemaining = Number(context.dtonsRemaining.toFixed(3));
 
         actorData.spacecraft.power.max = powerTotal;
-        actorData.spacecraft.power.used = powerUsed;
+        actorData.spacecraft.power.used = parseFloat(parseFloat(powerUsed).toFixed(2));
 
         if (context.actor.getFlag("mgt2e", "damage_armour")) {
             let armourDamage = context.actor.getFlag("mgt2e", "damage_armour");

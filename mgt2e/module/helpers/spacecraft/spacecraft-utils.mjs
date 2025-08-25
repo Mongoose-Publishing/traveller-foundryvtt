@@ -52,6 +52,14 @@ export function getShipData(actor) {
                     "cost": extraCost,
                     "power": 0
                 })
+            } else if (option.tonCost) {
+                extraCost = (spacecraft.dtons * option.tonCost);
+                data["hull"].push({
+                    "name": game.i18n.localize("MGT2.Spacecraft.Hull." + o),
+                    "tons": 0,
+                    "cost": extraCost,
+                    "power": 0
+                })
             }
         }
     }
@@ -162,10 +170,14 @@ export function getShipData(actor) {
         let totalFuel = 0;
         let name = "";
         for (let item of fuel) {
+            let d = item.name;
+            if (item.system.description) {
+                d = item.system.description.replace(/<[^>]*>?/gm, '');
+            }
             if (name) {
-                name += ", " + item.name;
+                name += ", " + d;
             } else {
-                name = item.name;
+                name = d;
             }
             totalFuel += item.system.hardware.rating * item.system.quantity;
         }
@@ -178,8 +190,20 @@ export function getShipData(actor) {
     if (bridge) {
         data["bridge"] = [];
         for (let item of bridge) {
+            let bridgeName = "";
+            if (item.system.hardware.bridgeType === "standard") {
+                if (item.system.hardware.holographicControls) {
+                    bridgeName = game.i18n.localize("MGT2.Spacecraft.HolographicControls");
+                }
+            } else {
+                bridgeName = game.i18n.localize("MGT2.Spacecraft.BridgeType." + item.system.hardware.bridgeType);
+                if (item.system.hardware.holographicControls) {
+                    bridgeName += "; " + game.i18n.localize("MGT2.Spacecraft.HolographicControls");
+                }
+            }
+
             data["bridge"].push({
-                "name": item.name,
+                "name": bridgeName,
                 "tons": item.system.hardware.tons * item.system.quantity,
                 "cost": item.system.cost * item.system.quantity,
                 "quantity": item.system.quantity

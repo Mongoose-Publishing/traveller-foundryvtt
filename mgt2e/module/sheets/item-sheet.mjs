@@ -162,11 +162,11 @@ export class MgT2ItemSheet extends ItemSheet {
             };
 
             context.BRIDGE_LIST = {
-                "standard": "Bridge",
-                "cockpit": "Cockpit",
-                "dualCockpit": "Dual Cockpit",
-                "small": "Small Bridge",
-                "command": "Command Bridge"
+                "standard": game.i18n.localize("MGT2.Spacecraft.BridgeType.standard"),
+                "cockpit": game.i18n.localize("MGT2.Spacecraft.BridgeType.cockpit"),
+                "dualCockpit": game.i18n.localize("MGT2.Spacecraft.BridgeType.dualCockpit"),
+                "small": game.i18n.localize("MGT2.Spacecraft.BridgeType.small"),
+                "command": game.i18n.localize("MGT2.Spacecraft.BridgeType.command")
             }
 
             context.selectTonOptions = {
@@ -679,6 +679,9 @@ export class MgT2ItemSheet extends ItemSheet {
             if (bridgeType === "small") {
                 cost *= 0.5;
             }
+            if (item.system.hardware.holographicControls) {
+                cost *= 1.25;
+            }
             item.system.cost = cost;
             item.system.hardware.tons = tons;
         } else if (item.system.hardware.system === "computer") {
@@ -748,16 +751,16 @@ export class MgT2ItemSheet extends ItemSheet {
             item.system.hardware.cost = 0;
             item.system.hardware.tons = rating;
         } else if (item.system.hardware.system === "power") {
-            let powerPerTon = parseInt(item.system.hardware.powerPerTon);
-            let tons = parseInt(item.system.hardware.tons);
-            let rating = parseInt(item.system.hardware.rating);
+            let powerPerTon = parseFloat(item.system.hardware.powerPerTon);
+            let tons = parseFloat(item.system.hardware.tons);
+            let rating = parseFloat(item.system.hardware.rating);
 
             if (powerPerTon < 1) {
                 item.system.hardware.powerPerTon = 1
                 item.update({"system.hardware.powerPerTon": 1});
             } else {
-                if (parseInt(rating / powerPerTon) !== tons) {
-                    tons = parseInt(rating / powerPerTon);
+                if (parseFloat(rating / powerPerTon) !== tons) {
+                    tons = parseFloat(rating / powerPerTon);
                     if (tons < 1) tons = 1;
                 }
             }
@@ -844,7 +847,6 @@ export class MgT2ItemSheet extends ItemSheet {
             let minimum = parseFloat(item.system.hardware.tonnage.minimum);
             let totalTons = 0;
 
-            console.log(item.system);
             // Handle conversion from the pre-0.14 way of doing things.
             if (item.system.hardware.tonnage.costCalc === undefined) {
                 if (cost === 0 && parseFloat(item.system.cost) > 0) {
@@ -852,7 +854,6 @@ export class MgT2ItemSheet extends ItemSheet {
                     item.system.hardware.tonnage.costCalc = "fixedCost";
                 }
             }
-            item.system.hardware.tonnage.costCalc = "fixedCost";
             if (item.system.hardware.tonnage.tonCalc === undefined) {
                 if (base === 0 && parseFloat(item.system.hardware.tons > 0)) {
                     base = parseFloat(item.system.hardware.tons > 0);

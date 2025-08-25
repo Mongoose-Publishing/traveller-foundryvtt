@@ -337,15 +337,15 @@ MGT2.SPACECRAFT_HULLS = {
     "light": { "conflict": [ "reinforced"], "cost": -25, "hits": 0.9 },
     "military": { "cost": +25, "min": 5000 },
     "nonGravity": { "cost": -50, "max": 500000 },
-    "basicStealth": { "conflict": [ "improvedStealth", "enhancedStealth", "advancedStealth", "reflec" ]},
-    "improvedStealth": { "conflict": [ "basicStealth", "enhancedStealth", "advancedStealth", "reflec" ]},
-    "enhancedStealth": { "conflict": [ "basicStealth", "improvedStealth", "advancedStealth", "reflec" ]},
-    "advancedStealth": { "conflict": [ "basicStealth", "improvedStealth", "enhancedStealth", "reflec" ]},
+    "basicStealth": { "tl": 8, "tonPc": 2, "tonCost": 0.04, "conflict": [ "improvedStealth", "enhancedStealth", "advancedStealth", "reflec" ]},
+    "improvedStealth": { "tl": 10, "tonCost": 0.1, "conflict": [ "basicStealth", "enhancedStealth", "advancedStealth", "reflec" ]},
+    "enhancedStealth": { "tl": 12, "tonCost": 0.5, "conflict": [ "basicStealth", "improvedStealth", "advancedStealth", "reflec" ]},
+    "advancedStealth": { "tl": 14, "tonCost": 1, "conflict": [ "basicStealth", "improvedStealth", "enhancedStealth", "reflec" ]},
     "doubleHull": { },
     "hamsterCage": { },
     "heatShielding": { "tonCost": 100000 },
-    "radiationShielding": { "tonCost": 25000, "radiation": 500 },
-    "reflec": { "lastProt": 3, "tonCost": 100000, "conflict": [ "basicStealth", "improvedStealth", "enhancedStealth", "advancedStealth" ] },
+    "radiationShielding": { "tonCost": 0.025, "radiation": 500 },
+    "reflec": { "laserProt": 3, "tonCost": 0.1, "conflict": [ "basicStealth", "improvedStealth", "enhancedStealth", "advancedStealth" ] },
     "solarCoating": {}
 }
 

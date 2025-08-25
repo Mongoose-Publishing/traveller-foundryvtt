@@ -664,6 +664,12 @@
   "MGT2.Spacecraft.Battery": "Battery",
   "MGT2.Spacecraft.BatteryCharge": "Charge",
   "MGT2.Spacecraft.ConcealedDrive": "Concealed Drive",
+  "MGT2.Spacecraft.HolographicControls": "Holographic Controls",
+  "MGT2.Spacecraft.BridgeType.standard": "Bridge",
+  "MGT2.Spacecraft.BridgeType.cockpit": "Cockpit",
+  "MGT2.Spacecraft.BridgeType.dualCockpit": "Dual Cockpit",
+  "MGT2.Spacecraft.BridgeType.small": "Small Bridge",
+  "MGT2.Spacecraft.BridgeType.command": "Command Bridge",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",
