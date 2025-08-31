@@ -483,8 +483,6 @@ Tools.blockInline = async function(argsString) {
         const value = match[2] ?? match[3];
         args[key] = value;
     }
-
-
 }
 
 Tools.itemInlineDisplay = async function(itemId) {
@@ -506,7 +504,6 @@ Tools.itemInlineDisplay = async function(itemId) {
 
     a.innerHTML = html;
     return a;
-
 }
 
 Tools.actorInlineDisplay = async function(actorId) {
@@ -523,7 +520,6 @@ Tools.actorInlineDisplay = async function(actorId) {
         a.innerHTML = `Unable to find actor ${actorId}`;
         return a;
     }
-    console.log(actor);
 
     if (actor.type === "creature") {
         Tools.creatureInlineDisplay(a, actor);
@@ -710,10 +706,21 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     html += `<h3>${actor.name}</h3>`;
     let tc = actor.system.spacecraft.type;
     if (tc) {
-        if (tc.match(/^[A-Z]*$/)) {
-            html += `<span class="type">TYPE: ${tc}</span>`;
+        // This is messy. We have a single variable (type) which is two things - a type and a class.
+        // A type is all uppercase and digits (e.g. Y, A2 etc)
+        // A class is mixed case and only letters.
+        // Some ships have both. We split them with a slash (/) if there are two.
+        let a = tc.split("/");
+        if (a.length > 1) {
+            let shipType = a[0].trim();
+            let shipClass = a[1].trim();
+            html += `<span class="type">TYPE: ${shipType} (${shipClass.toUpperCase()} CLASS)</span>`;
         } else {
-            html += `<span class="type">CLASS: ${tc}</span>`;
+            if (tc.match(/^[A-Z0-9]*$/)) {
+                html += `<span class="type">TYPE: ${tc}</span>`;
+            } else {
+                html += `<span class="type">CLASS: ${tc.toUpperCase()}</span>`;
+            }
         }
     } else if (actor.system.spacecraft.dtons < 100) {
         html += `<span class="type">SMALL CRAFT</span>`;
@@ -789,6 +796,15 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     if (weaponPower > 0) {
         html += `<hr/><p>Weapons</p>`;
         html += `<p>${weaponPower}</p>`;
+    }
+    // Power from other items
+    for (let s of ["bridge", "systems", "stateroom", "common"]) {
+        for (let i of data[s]) {
+            if (i.power && parseFloat(i.power) > 0) {
+                html += `<hr/><p>${i.name}</p>`;
+                html += `<p>${parseFloat(i.power)}</p>`;
+            }
+        }
     }
 
     html += `<p></p>`;

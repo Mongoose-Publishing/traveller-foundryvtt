@@ -13,6 +13,9 @@
   skills is taken for new actors and item skill lists.
 * Added support for concealed M-Drives.
 * Cost of armoured bulkheads corrected. Bulkheads have their own section on the journal sheet.
+* Added option for Holographic controls to Bridges.
+* Implemented costs for more hull options.
+* Display power requirements for general hardware types in ship journal sheet.
 
 
 ## 0.14.0 (Beta)

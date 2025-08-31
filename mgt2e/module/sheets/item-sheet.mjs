@@ -605,8 +605,6 @@ export class MgT2ItemSheet extends ItemSheet {
     }
 
     calculateShipHardware(context, item) {
-        console.log("calculateShipHardware: " + item.name);
-
         let ship = item.parent;
         if (ship === null || ship.type !== "spacecraft") {
             return;

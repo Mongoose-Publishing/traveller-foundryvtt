@@ -114,6 +114,43 @@
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!83nkkP7aeGF22kG6.w3pCgGRMfD9DxJH5"
+    },
+    {
+      "sort": 300000,
+      "name": "Changelog",
+      "type": "text",
+      "_id": "mXeFfBZITS7IkfPU",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The Changelog documentation begins from 0.14.0. For the full list of changes, see the GitHub repository. This will be a more detailed list of changes.</p><p>Versioning uses &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;. If &lt;minor&gt; changes, then it normally means that some data structure changes have been made. If &lt;patch&gt; changes, then it just means additions or minor tweaks and bug fixes.</p><p></p><p></p><h2>0.14.0</h2><p><strong>Migration Notes:</strong> Ship Hardware of the 'General' type has a number of options on how to automatically calculate tonnage, cost and power. Items will be migrated when the item sheet is opened, but it's possible behaviour may change.</p><ul><li><p>Armoured status is now shown for all ship hardware types. This displays hardware which has armoured bulkheads set.</p></li><li><p>Characteristics can now be trained according to Companion rules. Ctrl+Click on a characteristic on a Traveller or NPC sheet will open the standard training dialog. You can add DMs and XP details to the characteristic.</p></li><li><p>Parent skills (those with specialities) no longer show option for training.</p></li><li><p>Added name field to active effects, which is required by Foundry 13.</p></li><li><p>General ship hardware items now provide more options for how tonnage, cost and power is calculated. This should cover a lot more of the options from High Guard. This changes how General ship hardware works.</p></li><li><p>Journal CSS styles have been put back (white background, black text), with some better handling for v13. This style is used even in dark mode, and is designed to match the Mongoose style.</p></li><li><p>Checking added to ensure items are writable before updating automatically generated values.</p></li></ul><p></p><h3>0.14.1</h3><ul><li><p>Journal CSS has been updated so that the styles in the editor window match the styles in the display window. This mostly affects headings, which used to use the old default Foundry styles.</p></li><li><p>A new world level system configurable has been added, which allows a default Traveller actor to be defined. This is the name of an actor that is used for default settings. Currently, this is just used for skill lists. If you want to change the default skills which are added to new actors, or displayed in drop down lists on items, then set this to the name of a Traveller type actor, and modify the skills on that actor.</p></li></ul><h2></h2>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "XsiBG1ohlPVbUVQC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.14.0.7-DEV",
+        "createdTime": 1756112217015,
+        "modifiedTime": 1756112859225,
+        "lastModifiedBy": "XsiBG1ohlPVbUVQC"
+      },
+      "_key": "!journal.pages!83nkkP7aeGF22kG6.mXeFfBZITS7IkfPU"
     }
   ],
   "sort": 100000,

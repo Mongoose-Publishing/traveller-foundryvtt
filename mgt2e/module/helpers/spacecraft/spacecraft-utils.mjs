@@ -125,7 +125,7 @@ export function getShipData(actor) {
             {
                 "name": armour[0].name + ": " + armour[0].system.hardware.rating,
                 "tons": armour[0].system.hardware.tons,
-                "cost": (armour[0].system.cost * hullCostModifier) / 100
+                "cost": (armour[0].system.cost)
             }
         ];
     }
@@ -281,7 +281,7 @@ export function getShipData(actor) {
             data["bulkheads"].push({
                 "name": `${item.name}`,
                 "tons": item.system.hardware.tons * item.system.quantity * 0.1,
-                "cost": item.system.hardware.tons * item.system.quantity * 0.2,
+                "cost": item.system.hardware.tons * item.system.quantity * 0.02,
                 "quantity": item.system.quantity
             });
         }
@@ -295,7 +295,8 @@ export function getShipData(actor) {
                 "name": item.name,
                 "tons": item.system.hardware.tons * item.system.quantity,
                 "cost": item.system.cost * item.system.quantity,
-                "quantity": item.system.quantity
+                "quantity": item.system.quantity,
+                "power": item.system.hardware.power * item.system.quantity
             })
         }
     }
@@ -318,7 +319,8 @@ export function getShipData(actor) {
                "name": item.name,
                "tons": item.system.hardware.tons * item.system.quantity,
                "cost": item.system.cost * item.system.quantity,
-               "quantity": item.system.quantity
+               "quantity": item.system.quantity,
+               "power": item.system.hardware.power * item.system.quantity
             });
         }
     }
@@ -329,7 +331,8 @@ export function getShipData(actor) {
                 "name": item.name,
                 "tons": item.system.hardware.tons * item.system.quantity,
                 "cost": item.system.cost * item.system.quantity,
-                "quantity": item.system.quantity
+                "quantity": item.system.quantity,
+                "power": item.system.hardware.power * item.system.quantity
             })
         }
     }
