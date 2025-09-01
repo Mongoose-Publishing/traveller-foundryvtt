@@ -1128,8 +1128,15 @@ Handlebars.registerHelper('isTrained', function(skill) {
     return false;
 });
 
-Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
-    return arg1 === arg2;
+Handlebars.registerHelper('ifEquals', function() {
+    let value = arguments[0];
+
+    for (let i=1; i < arguments.length; i++) {
+        if (value === arguments[i]) {
+            return true;
+        }
+    }
+    return false;
 });
 
 Handlebars.registerHelper('ifStartsWith', function(arg1, arg2) {
