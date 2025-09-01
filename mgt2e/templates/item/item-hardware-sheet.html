@@ -134,6 +134,19 @@
                     <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.ConcealedDrive'}}</label>
                 </div>
             {{/if}}
+            {{#if (ifEquals system.hardware.system "m-drive" "j-drive" "r-drive")}}
+                <div class="grid grid-3col" title="{{localize 'MGT2.Spacecraft.ExtendedDriveTitle'}}">
+                    <div>
+                        <input type="checkbox" name="system.hardware.extendedDrive" {{checked system.hardware.extendedDrive}} data-dtype="Boolean" />
+                        <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.ExtendedDrive'}}</label>
+                    </div>
+                    {{#if system.hardware.extendedDrive}}
+                        <div>
+                            {{localize 'MGT2.Spacecraft.ExtendedDriveTons'}}<input type="text" name="system.hardware.extendedDriveTons" value="{{system.hardware.extendedDriveTons}}" data-dtype="Number"/>
+                        </div>
+                    {{/if}}
+                </div>
+            {{/if}}
         </div>
 
         {{#if (itemHasStatus item)}}

@@ -762,9 +762,17 @@ export class MgT2ItemSheet extends ItemSheet {
                     if (tons < 1) tons = 1;
                 }
             }
+            let cost = item.system.hardware.tonnage.cost * tons;
+            let advancement = item.system.hardware.advancement
+            if (advancement && advancement !== "standard" && MGT2.SPACECRAFT_ADVANCES[advancement]) {
+                tons = tons * MGT2.SPACECRAFT_ADVANCES[advancement].tonnage;
+                cost = cost * MGT2.SPACECRAFT_ADVANCES[advancement].cost;
+            }
+
             item.system.hardware.tons = tons;
-            item.system.cost = item.system.hardware.tonnage.cost * tons;
+            item.system.cost = cost;
             item.system.hardware.power = rating;
+
         } else if (item.system.hardware.system === "weapon") {
             let availableWeapons = [];
             let activeWeapons = [];
@@ -789,16 +797,23 @@ export class MgT2ItemSheet extends ItemSheet {
             }
             context.availableWeapons = availableWeapons;
             context.activeWeapons = activeWeapons;
-        } else if (item.system.hardware.system === "j-drive" || item.system.hardware.system === "m-drive" || item.system.hardware.system === "r-drive") {
+        } else if (["j-drive", "m-drive", "r-drive"].includes(item.system.hardware.system)) {
             let tonnage = 0;
             let tl = item.system.tl;
             let h = item.system.hardware;
+
+            let effectiveShipTons = parseInt(ship.system.spacecraft.dtons);
+            if (item.system.hardware.extendedDrive && item.system.hardware.extendedDriveTons) {
+                effectiveShipTons += Math.max(0, parseInt(item.system.hardware.extendedDriveTons));
+            }
+            console.log("Effective Ship Tons: " + effectiveShipTons);
+
             let pow = h.power;
             if (MGT2.SHIP_HARDWARE[h.system].rating[h.rating]) {
                 let d = MGT2.SHIP_HARDWARE[h.system].rating[h.rating];
-                tonnage = (d.tonnage * ship.system.spacecraft.dtons) / 100.0;
+                tonnage = (d.tonnage * effectiveShipTons) / 100.0;
                 tl = d.tl;
-                pow = (d.power * ship.system.spacecraft.dtons) / 100.0;
+                pow = (d.power * effectiveShipTons) / 100.0;
             }
             if (MGT2.SHIP_HARDWARE[h.system].tonnage) {
                 tonnage += MGT2.SHIP_HARDWARE[h.system].tonnage;

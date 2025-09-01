@@ -670,6 +670,9 @@
   "MGT2.Spacecraft.BridgeType.dualCockpit": "Dual Cockpit",
   "MGT2.Spacecraft.BridgeType.small": "Small Bridge",
   "MGT2.Spacecraft.BridgeType.command": "Command Bridge",
+  "MGT2.Spacecraft.ExtendedDrive": "Extend Drive Size",
+  "MGT2.Spacecraft.ExtendedDriveTitle": "Select this if the drive needs to move\nmore than just the ship.\nDrop tanks, external cargo or craft",
+  "MGT2.Spacecraft.ExtendedDriveTons": "Extended by (Tons)",
 
   "MGT2.Damage.Okay": "{name} is okay.",
   "MGT2.Damage.Injured": "{name} is injured.",

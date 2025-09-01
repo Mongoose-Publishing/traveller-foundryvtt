@@ -365,7 +365,7 @@ MGT2.SPACECRAFT_ADVANTAGES = {
        "sizeReduction": { "cost": 1, "size": -10, "multi": true },
        "energyInefficient": { "cost": -1, "power": +30, "multi": true },
        "limitedRange": { "cost": -1 },
-       "increasedSize": { "cost": -1, "multi": true },
+       "increasedSize": { "cost": -1, "size": +25, "multi": true },
        "orbitalRange": { "cost": -2 }
    },
    "r-drive": {
