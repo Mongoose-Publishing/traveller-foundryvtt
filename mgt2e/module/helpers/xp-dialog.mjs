@@ -158,9 +158,7 @@ export class MgT2XPDialog extends Application {
                 this.formData.value += 1;
                 this.formData.xp -= this.cost;
             }
-            console.log(this.formData);
             this.actor.update({"system.characteristics": this.actor.system.characteristics});
-            this.close();
         } else if (this.cost > 0) {
             while (this.formData.xp >= this.cost) {
                 if (!this.formData.trained) {
@@ -171,9 +169,8 @@ export class MgT2XPDialog extends Application {
                     this.formData.xp -= this.cost;
                 }
             }
+            this.actor.update({ "system.skills": this.actor.system.skills });
         }
-        this.actor.update({ "system.skills": this.actor.system.skills });
-
         this.close();
     }
 
