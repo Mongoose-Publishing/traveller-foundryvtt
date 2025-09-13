@@ -332,7 +332,7 @@
                         <ol class="items-list actor-items grid grid-3col">
                             {{#each roles as |item id|}}
                             <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
-                                <h4>{{item.name}}</h4>
+                                <h4>{{nameQuantity item}}</h4>
                                 <img src="{{item.img}}" class="small"/>
                                 <ol class="comma-list small-text">
                                     {{#each item.system.role.actions as |action|}}

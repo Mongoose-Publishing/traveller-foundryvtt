@@ -1163,6 +1163,10 @@ Handlebars.registerHelper('nameQuantity', function(item, context) {
     let quantity = item.system.quantity;
     let extra = null;
 
+    if (item.type === "role") {
+        quantity = item.system.role.positions;
+    }
+
     if (item.type === "hardware") {
         let hardware = item.system.hardware;
         let sys = hardware.system;
