@@ -43,22 +43,29 @@ export function getShipData(actor) {
     for (let o of options.split(" ")) {
         if (MGT2.SPACECRAFT_HULLS[o]) {
             let option = MGT2.SPACECRAFT_HULLS[o];
+            let t = 0, p = 0;
+            if (option.tonPc) {
+                t = (option.tonPc * spacecraft.dtons) / 100;
+            }
+            if (option.power) {
+                p = option.power * spacecraft.dtons;
+            }
             if (option.cost) {
                 extraCost = (spacecraft.baseCost * option.cost) / 100;
                 hullCostModifier += option.cost;
                 data["hull"].push({
                     "name": game.i18n.localize("MGT2.Spacecraft.Hull." + o),
-                    "tons": 0,
+                    "tons": t,
                     "cost": extraCost,
-                    "power": 0
+                    "power": p
                 })
             } else if (option.tonCost) {
                 extraCost = (spacecraft.dtons * option.tonCost);
                 data["hull"].push({
                     "name": game.i18n.localize("MGT2.Spacecraft.Hull." + o),
-                    "tons": 0,
+                    "tons": t,
                     "cost": extraCost,
-                    "power": 0
+                    "power": p
                 })
             }
         }
@@ -103,7 +110,7 @@ export function getShipData(actor) {
                 computer.push(item);
             } else if (hw.system === "sensor") {
                 sensor.push(item);
-            } else if (hw.system === "weapon") {
+            } else if (hw.system === "weapon" || hw.system === "defence") {
                 weapon.push(item);
             } else if (hw.system === "stateroom") {
                 stateroom.push(item);

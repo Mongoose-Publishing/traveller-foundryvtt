@@ -149,6 +149,7 @@ export class MgT2ItemSheet extends ItemSheet {
                 "cargo": game.i18n.localize("MGT2.Spacecraft.System.cargo"),
                 "common": game.i18n.localize("MGT2.Spacecraft.System.common"),
                 "computer": game.i18n.localize("MGT2.Spacecraft.System.computer"),
+                "defence": game.i18n.localize("MGT2.Spacecraft.System.defence"),
                 "dock": game.i18n.localize("MGT2.Spacecraft.System.dock"),
                 "fuel": game.i18n.localize("MGT2.Spacecraft.System.fuel"),
                 "general": game.i18n.localize("MGT2.Spacecraft.System.general"),
@@ -167,6 +168,14 @@ export class MgT2ItemSheet extends ItemSheet {
                 "dualCockpit": game.i18n.localize("MGT2.Spacecraft.BridgeType.dualCockpit"),
                 "small": game.i18n.localize("MGT2.Spacecraft.BridgeType.small"),
                 "command": game.i18n.localize("MGT2.Spacecraft.BridgeType.command")
+            }
+
+            context.DEFENCE_LIST = {
+                "meson": game.i18n.localize("MGT2.Spacecraft.DefenceType.meson"),
+                "nuclear": game.i18n.localize("MGT2.Spacecraft.DefenceType.nuclear"),
+                "blackGlobe": game.i18n.localize("MGT2.Spacecraft.DefenceType.blackGlobe"),
+                "laserPD": game.i18n.localize("MGT2.Spacecraft.DefenceType.laserPD"),
+                "gaussPD": game.i18n.localize("MGT2.Spacecraft.DefenceType.gaussPD"),
             }
 
             context.selectTonOptions = {
@@ -849,7 +858,7 @@ export class MgT2ItemSheet extends ItemSheet {
             }
             item.system.hardware.tons = rating;
             item.system.cost = rating * 0.1;
-        } else if (["sensor", "stateroom", "weapon"].includes(item.system.hardware.system)) {
+        } else if (["sensor", "stateroom", "defence"].includes(item.system.hardware.system)) {
             // Use manual values.
         } else {
             let cost = parseFloat(item.system.hardware.tonnage.cost);

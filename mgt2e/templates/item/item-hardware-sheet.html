@@ -234,6 +234,21 @@
                 <label class="resource-label checkbox-label">{{localize 'MGT2.TravellerSheet.fib'}}</label>
             </div>
         </div>
+        {{else if (ifEquals system.hardware.system "defence")}}
+            <div class="shadow grid grid-3col">
+                <div class="resource">
+                    <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.DefenceTypeLabel'}}</label>
+                    <select name="system.hardware.defenceType">
+                        {{selectOptions DEFENCE_LIST selected=system.hardware.defenceType}}
+                    </select>
+                </div>
+
+                <div class="resource">
+                    <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.DefenceEffectLabel'}}</label>
+                    <input type="text" name="system.hardware.defenceEffect"
+                           value="{{system.hardware.defenceEffect}}" data-type="String"/>
+                </div>
+            </div>
         {{else if (ifEquals system.hardware.system "weapon")}}
             <div class="shadow">
                 {{#if activeWeapons}}

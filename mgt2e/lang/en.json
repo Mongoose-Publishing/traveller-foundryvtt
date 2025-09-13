@@ -640,6 +640,7 @@
   "MGT2.Spacecraft.System.power": "Power",
   "MGT2.Spacecraft.System.fuel": "Fuel",
   "MGT2.Spacecraft.System.weapon": "Weapon",
+  "MGT2.Spacecraft.System.defence": "Defence",
   "MGT2.Spacecraft.System.armour": "Armour",
   "MGT2.Spacecraft.System.computer": "Computer",
   "MGT2.Spacecraft.System.cargo": "Cargo Hold",
@@ -659,6 +660,20 @@
   "MGT2.Spacecraft.SensorSuite.nas": "NAS",
   "MGT2.Spacecraft.SensorSuite.densitometer": "Densitometer",
   "MGT2.Spacecraft.SensorSuite.jammers": "Jammers",
+
+  "MGT2.Spacecraft.DefenceType.meson":  "Meson Screen",
+  "MGT2.Spacecraft.DefenceType.nuclear":  "Nuclear Damper",
+  "MGT2.Spacecraft.DefenceType.blackGlobe": "Black Globe",
+  "MGT2.Spacecraft.DefenceType.laserPD": "Laser Point Defence",
+  "MGT2.Spacecraft.DefenceType.gaussPD": "Gauss Point Defence",
+
+  "MGT2.Spacecraft.DefenceTypeLabel": "Defence Type",
+  "MGT2.Spacecraft.DefenceEffectLabel": "Effect",
+  "MGT2.Spacecraft.DefenceModeLabel": "Mode",
+
+  "MGT2.Spacecraft.DefenceMode.nuclear": "Nuclear",
+  "MGT2.Spacecraft.DefenceMode.meson": "Meson",
+  "MGT2.Spacecraft.DefenceMode.missile": "Missiles",
 
   "MGT2.Spacecraft.ArmouredBulkhead": "Armoured Bulkhead",
   "MGT2.Spacecraft.Battery": "Battery",

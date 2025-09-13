@@ -322,6 +322,14 @@ MGT2.SPACE_MOUNTS = {
     "spinal": { "multiplier": 1000, "hardpoints": 0.01 }
 }
 
+MGT2.SPACECRAFT_DEFENCES = {
+    "meson": { "damageType": "meson", "skill": "gunner.screen" },
+    "nuclear": { "damageType": "nuclear", "skill": "gunner.screen" },
+    "blackGlobe": { "damageType": "all", "capacitors": true },
+    "laserPD": { "damageType": "missile" },
+    "gaussPD": { "damageType": "missile" }
+}
+
 MGT2.SPACECRAFT_ADVANCES = {
     "earlyPrototype": { "tl": -2, "tonnage": 2, "cost": 11, "modifications": -2 },
     "prototype": { "tl": -1, "tonnage": 1, "cost": 6, "modifications": -1 },

@@ -345,7 +345,7 @@ export class MgT2ActorSheet extends ActorSheet {
                     context.bridgeItems.push(i);
                 } else if (["power", "m-drive", "j-drive", "r-drive", "armour", "fuel"].includes(h.system)) {
                     context.coreItems.push(i);
-                } else if (["weapon"].includes(h.system)) {
+                } else if (["weapon", "defence"].includes(h.system)) {
                     context.weaponItems.push(i);
                 } else if (["stateroom", "common"].includes(h.system)) {
                     context.livingItems.push(i);
@@ -437,6 +437,15 @@ export class MgT2ActorSheet extends ActorSheet {
         context.roles = roles;
         context.shipWeapons = shipWeapons;
         context.departments = departments;
+
+        for (let o of context.system.spacecraft.hullOptions.split(" ")) {
+            if (MGT2.SPACECRAFT_HULLS[o]) {
+                let option = MGT2.SPACECRAFT_HULLS[o];
+                if (option.tonPc) {
+                    dtonsUsed += (context.system.spacecraft.dtons * option.tonPc) / 100;
+                }
+            }
+        }
 
         context.bandwidthUsed = bandwidthUsed;
         context.dtonsUsed = Math.round(dtonsUsed * 100) / 100;
