@@ -176,6 +176,7 @@ export class MgT2ItemSheet extends ItemSheet {
                 "blackGlobe": game.i18n.localize("MGT2.Spacecraft.DefenceType.blackGlobe"),
                 "laserPD": game.i18n.localize("MGT2.Spacecraft.DefenceType.laserPD"),
                 "gaussPD": game.i18n.localize("MGT2.Spacecraft.DefenceType.gaussPD"),
+                "repulsor": game.i18n.localize("MGT2.Spacecraft.DefenceType.repulsor")
             }
 
             context.selectTonOptions = {

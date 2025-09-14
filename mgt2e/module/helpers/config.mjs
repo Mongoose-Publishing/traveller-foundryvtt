@@ -327,7 +327,8 @@ MGT2.SPACECRAFT_DEFENCES = {
     "nuclear": { "damageType": "nuclear", "skill": "gunner.screen" },
     "blackGlobe": { "damageType": "all", "capacitors": true },
     "laserPD": { "damageType": "missile" },
-    "gaussPD": { "damageType": "missile" }
+    "gaussPD": { "damageType": "missile" },
+    "repulsor": { "damagaType": "missile", "skill": "gunner.capital" }
 }
 
 MGT2.SPACECRAFT_ADVANCES = {
@@ -884,7 +885,7 @@ MGT2.COMPUTERS = {
 };
 
 MGT2.WEAPONS = {
-    "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting" ],
+    "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting", "meson", "nuclear" ],
     "traits": {
         "artillery": { "scale": "traveller" },
         "ap": {  "value": 1, "min": 1, "max": 999, "conflict": [ "loPen" ] },
@@ -912,6 +913,7 @@ MGT2.WEAPONS = {
         "silent": { "scale": "traveller" },
         "smart": { },
         "smasher": { "scale": "traveller" },
+        "spinal": { "scale": "spacecraft", "value": 2, "min": 1, "max": 5 },
         "stun": { "scale": "traveller" },
         "veryBulky": { "scale": "traveller", "conflict": [ "bulky" ] },
         "veryDangerous": { "scale": "traveller", "conflict": [ "dangerous" ] },
