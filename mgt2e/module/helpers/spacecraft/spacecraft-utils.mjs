@@ -9,6 +9,17 @@ export async function calculateSpacecraftCost(actor) {
 
     spacecraft.baseCost = Number(spacecraft.dtons) * 0.05;
     spacecraft.baseCost *= MGT2.SHIP_CONFIGURATION[spacecraft.configuration].cost;
+
+    let options = spacecraft.hullOptions;
+    for (let o of options.split(" ")) {
+        if (MGT2.SPACECRAFT_HULLS[o]) {
+            let option = MGT2.SPACECRAFT_HULLS[o];
+            if (option.cost) {
+                spacecraft.baseCost = (spacecraft.baseCost * (100 + option.cost) / 100);
+            }
+        }
+    }
+
     totalCost = spacecraft.baseCost;
     spacecraft.cost = totalCost;
 

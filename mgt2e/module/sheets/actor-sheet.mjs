@@ -279,11 +279,11 @@ export class MgT2ActorSheet extends ActorSheet {
         let fuelTotal = 0;
 
         let dtons = parseInt(actorData.spacecraft.dtons);
-        let hits = dtons / 2.5;
+        let hits = (dtons / 2.5);
         if (dtons >= 100000) {
-            hits = Math.floor(dtons / 1.5);
+            hits = (dtons / 1.5);
         } else if (dtons >= 25000) {
-            hits = Math.floor(dtons / 2);
+            hits = (dtons / 2);
         }
         let options = actorData.spacecraft.hullOptions;
         for (let o of options.split(" ")) {
@@ -298,13 +298,15 @@ export class MgT2ActorSheet extends ActorSheet {
         if (actorData.spacecraft.configuration) {
             config = MGT2.SHIP_CONFIGURATION[actorData.spacecraft.configuration];
             if (config) {
-                hits = Math.floor(hits * config.hull);
+                hits = (hits * config.hull);
             }
         }
+        hits = Math.floor(hits);
 
         if (hits !== actorData.hits.max && actorData.settings.autoHits) {
             actorData.hits.max = hits;
             actorData.hits.value = hits - actorData.hits.damage;
+            context.actor.update({"system.hits.max": hits });
         }
 
         let mdrive = 0;
@@ -2265,7 +2267,7 @@ export class MgT2ActorSheet extends ActorSheet {
             itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Mechanic");
             img = "systems/mgt2e/icons/items/roles/maintenance.svg";
             system.role.actions[(t++).toString(36)] = {
-                "title": "Steward",
+                "title": "Mechanic",
                 "action": "skill", "cha": "INT", "skill": "mechanic", "target": 8, "dm": 0
             }
         } else {

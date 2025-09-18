@@ -2100,11 +2100,31 @@ Handlebars.registerHelper('selectedWeaponId', function(actions, id) {
     }
 });
 
+Handlebars.registerHelper('showAttachedWeapons', function(ship, item) {
+    let weapons = item.system?.hardware?.weapons;
+    if (weapons) {
+        let text = "";
+        for (let wpnId in weapons) {
+            console.log(wpnId);
+            let wpn = ship.items.get(wpnId);
+            if (wpn) {
+                let label = wpn.name;
+                let q = weapons[wpnId].quantity;
+
+                text += `<br/>${label}`;
+                if (q > 1) {
+                    text += ` x${q}`;
+                }
+            }
+        }
+        return text;
+    }
+
+    return "";
+});
+
 Handlebars.registerHelper('showSpacecraftAttacks', function(roles, item) {
     let html = "";
-
-    console.log(roles);
-    console.log(item);
 
     for (let r of roles) {
         console.log(r);
@@ -2122,7 +2142,6 @@ Handlebars.registerHelper('showSpacecraftAttacks', function(roles, item) {
             }
         }
     }
-
 
     return html;
 });
