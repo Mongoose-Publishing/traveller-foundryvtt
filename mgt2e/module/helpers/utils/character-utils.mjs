@@ -99,7 +99,6 @@ export async function randomiseAssociate(item) {
 }
 
 export async function calculateCost(actor) {
-    console.log("calculateCost:");
     if (actor.type === "spacecraft") {
         await calculateSpacecraftCost(actor);
     }

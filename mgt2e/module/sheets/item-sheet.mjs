@@ -650,6 +650,9 @@ export class MgT2ItemSheet extends ItemSheet {
             item.system.cost = toFloat(item.system.hardware.tonnage.cost * item.system.hardware.tons);
         } else if (item.system.hardware.system === "bridge") {
             let cost = Math.ceil(shipTons / 100) * 0.5;
+            if (item.system.hardware.holographicControls) {
+                cost *= 1.25;
+            }
             let tons = 3;
             let bridgeType = item.system.hardware.bridgeType;
 
@@ -686,9 +689,6 @@ export class MgT2ItemSheet extends ItemSheet {
             }
             if (bridgeType === "small") {
                 cost *= 0.5;
-            }
-            if (item.system.hardware.holographicControls) {
-                cost *= 1.25;
             }
             item.system.cost = cost;
             item.system.hardware.tons = tons;

@@ -648,10 +648,7 @@ Tools.npcInlineDisplay = function(a, actor) {
 }
 
 Tools.prettyNumber = function(value, digits) {
-    let num = parseFloat(value).toFixed(digits);
-    let str = `${num}`.replaceAll(/\.?0*$/g, "");
-
-    return str;
+    return new Intl.NumberFormat(undefined, { maximumFractionDigits: digits}).format(parseFloat(value));
 }
 
 Tools.inlineSpacecraftData = function(heading, items) {
@@ -687,7 +684,7 @@ Tools.inlineSpacecraftData = function(heading, items) {
     html += "<td>";
     for (let i in items) {
         if (i>0) html += "<br/>";
-        if (items[i].cost > 0) {
+        if (items[i].cost !== 0) {
             html += Tools.prettyNumber(items[i].cost, 3);
         } else {
             html += "&mdash;";
