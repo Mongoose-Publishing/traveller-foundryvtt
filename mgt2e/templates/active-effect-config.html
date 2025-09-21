@@ -3,30 +3,30 @@
     <!-- Effect Header -->
     <header class="sheet-header shadow">
         <h1 class="effect-title">
-            <input type="text" name="data.name" value="{{ data.name }}"/>
+            <input type="text" name="document.name" value="{{ document.name }}"/>
         </h1>
     </header>
 
     <section>
         <div class="shadow">
             <div class="form-group">
-                <label>{{ localize "EFFECT.Disabled" }}</label>
-                <input type="checkbox" name="disabled" {{ checked data.disabled }}/>
+                <label>{{ localize "MGT2.Effects.Disabled" }}</label>
+                <input type="checkbox" name="disabled" {{ checked document.disabled }}/>
             </div>
             {{#if isActorEffect}}
             <div class="form-group">
-                <label>{{ localize "EFFECT.Origin" }}</label>
+                <label>{{ localize "MGT2.Effects.Origin" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="origin" value="{{ data.origin }}" disabled/>
+                    <input type="text" name="origin" value="{{ document.origin }}" disabled/>
                 </div>
             </div>
             {{/if}}
 
             {{#if isItemEffect}}
             <div class="form-group">
-                <label>{{ localize "EFFECT.Transfer" }}</label>
+                <label>{{ localize "MGT2.Effects.Transfer" }}</label>
                 <div class="form-fields">
-                    <input type="checkbox" name="transfer" {{checked data.transfer}}/>
+                    <input type="checkbox" name="transfer" {{checked document.transfer}}/>
                 </div>
             </div>
             {{/if}}
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label>Type</label>
                 <div class="form-fields">
-                    {{localize (concat 'MGT2.Effects.Type.' data.flags.augmentType)}}
+                    {{localize (concat 'MGT2.Effects.Type.' document.system.augmentType)}}
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 </div>
             </header>
             <ol class="changes-list">
-                {{#each data.changes as |change i|}}
+                {{#each document.changes as |change i|}}
                 <li class="effect-change flexrow" data-index="{{i}}">
                     <div class="key">
                         <select name="changes.{{i}}.key">
@@ -63,7 +63,6 @@
                         </select>
                     </div>
 
-                    <!-- <input type="hidden" name="changes.{{i}}.mode" value="0"/> -->
                     <div class="value">
                         <input type="text" name="changes.{{i}}.value" value="{{change.value}}"/>
                     </div>

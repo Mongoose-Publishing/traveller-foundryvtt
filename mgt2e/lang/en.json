@@ -1053,6 +1053,9 @@
   "MGT2.Armour.Psi": "Psi",
   "MGT2.Armour.VaccSuit": "Vacc Suit {skill}",
 
+  "MGT2.Effects.Disabled": "Disabled",
+  "MGT2.Effects.Origin": "Origin",
+  "MGT2.Effects.Transfer": "Transfer",
   "MGT2.Effects.AugmentEffects": "Augment Effects",
   "MGT2.Effects.Create": "Add",
   "MGT2.Effects.Delete": "Create",

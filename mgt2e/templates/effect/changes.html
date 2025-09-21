@@ -1,0 +1,45 @@
+<section class="tab changes scrollable{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+    <div class="form-group">
+        <label>Type</label>
+        <div class="form-fields">
+            {{localize (concat 'MGT2.Effects.Type.' document.system.augmentType)}}
+        </div>
+    </div>
+    <header class="effect-change effects-header flexrow">
+        <div class="key">{{ localize "EFFECT.ChangeKey" }}</div>
+        <div class="mode">{{ localize "EFFECT.ChangeMode" }}</div>
+        <div class="value">{{ localize "EFFECT.ChangeValue" }}</div>
+        <div class="effect-controls">
+            <a class="effect-control" data-action="addChange"><i class="far fa-plus-square"></i></a>
+        </div>
+    </header>
+    <ol class="changes-list">
+        {{#each document.changes as |change i|}}
+            <li class="effect-change flexrow" data-index="{{i}}">
+                <div class="key">
+                    <select name="changes.{{i}}.key" data-dtype="text">
+                        {{selectOptions ../targets selected=change.key}}
+                    </select>
+                </div>
+
+                <div class="active-effecode">
+                    <select name="changes.{{i}}.mode" data-dtype="Number">
+                        {{selectOptions ../modes selected=change.mode}}
+                    </select>
+                </div>
+
+                <div class="active-priority">
+                    <input type="text" name="changes.{{i}}.priority" value="{{change.priority}}"/>
+                </div>
+
+                <div class="value">
+                    <input type="text" name="changes.{{i}}.value" value="{{change.value}}"/>
+                </div>
+                <div class="effect-controls">
+                    <a class="effect-control" data-action="deleteChange"><i class="fas fa-trash"></i></a>
+                </div>
+            </li>
+        {{/each}}
+    </ol>
+</section>
+
