@@ -53,6 +53,5 @@ export class MgT2Effect extends ActiveEffect {
             case "toggle":
                 return effect.update({disabled: !effect.data.disabled});
         }
-
     }
 }

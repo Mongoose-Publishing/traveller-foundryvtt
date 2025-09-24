@@ -50,6 +50,8 @@ export class MgT2ItemSheet extends ItemSheet {
             context.rollData = actor.getRollData();
         }
 
+        context.isEditable = this.isEditable;
+
         // Add the actor's data to context.data for easier access, as well as flags.
         context.enrichedDescription = await TextEditor.enrichHTML(
             this.object.system.description,

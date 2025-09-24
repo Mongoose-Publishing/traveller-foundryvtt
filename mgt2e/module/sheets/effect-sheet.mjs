@@ -32,12 +32,30 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
 
         let augmentType = context.document?.system?.augmentType;
         if (!augmentType) {
+            // This was the old V12 way of doing it.
             augmentType = context.data.flags.augmentType;
+            if (!augmentType) {
+                // Try and guess the augment type. May be needed if previous version was run on V13.
+                if (this.object.changes.length === 0) {
+                    augmentType = "skillDM";
+                } else {
+                    let key = this.object.changes[0].key;
+                    if (key.startsWith("system.char")) {
+                        augmentType = "chaDM";
+                    } else if (key.startsWith("system.skills")) {
+                        augmentType = "skillDM";
+                    } else {
+                        augmentType = "miscDM";
+                    }
+                    context.document.system.augmentType = augmentType;
+                    context.document.update({"system.augmentType": augmentType});
+                }
+            }
         }
 
         context.effectType = MGT2.EFFECTS[augmentType];
 
-        let prop = context.effectType.property;
+        let prop = context.effectType?.property;
         if (context.effectType.targets === "char") {
             context.targets = {};
             for (const k of ['STR', 'DEX', 'END', 'INT', 'PSI']) {
@@ -126,43 +144,33 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
             labelPrefix: "EFFECT.TABS"
         }
     };
-    
+
     // V13
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
-
-        console.log("_prepareContext:");
-        console.log("OPTIONS:");
-        console.log(options);
-        console.log("CONTEXT:");
-        console.log(context);
-        console.log("THIS");
-        console.log(this);
-
-        let augmentType = context.document.system.augmentType;
-        console.log("augmentType:");
-        console.log(augmentType);
-
+        let augmentType = context.document.system?.augmentType;
+        if (augmentType === null) {
+            // This is a pre-v13 augment, so need to try and fix it.
+            console.log("Migrating effect to v13");
+            if (context.document.flags.augmentType && typeof context.document.flags.augmentType === "string") {
+                console.log("Augment flag is a string, so copy that");
+                augmentType = context.document.flags.augmentType;
+            } else {
+                console.log("Unknown augment type - assuming skillDM");
+                augmentType = "skillDM";
+            }
+            context.document.system.augmentType = augmentType;
+        }
         context.effectType = MGT2.EFFECTS[augmentType];
-
-        console.log("MODES:");
-        console.log(CONST.MODES);
-        console.log(context.modes);
-        console.log(context.document.modes);
-        //context.modes = globalThis.CONST.ACTIVE_EFFECT_MODES;
-        console.log("globalThis");
-        console.log(globalThis);
 
         let prop = context.effectType?.property;
         if (context.effectType?.targets === "char") {
-            console.log("CHA");
             context.targets = {};
             for (const k of ['STR', 'DEX', 'END', 'INT', 'PSI']) {
                 let key = "system.characteristics." + k + "." + prop;
                 context.targets[key] = k;
             }
         } else if (context.effectType?.targets === "skills") {
-            console.log("SKILLS");
             context.targets = {};
             let skills = MGT2.getDefaultSkills();
             for (let id in skills) {
@@ -175,7 +183,6 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
                 }
             }
         } else {
-            console.log("OTHER");
             context.targets = {};
             context.targets["system.modifiers.encumbrance.multiplierBonus" ] = "Carry Multiplier";
             context.targets["system.modifiers.encumbrance." + prop] = "Encumbrance DM";
@@ -198,17 +205,10 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
 
     async _onChangeForm(formConfig, event) {
         console.log("_onChangeForm:");
-        console.log(formConfig);
-        console.log(event);
-
         console.log("TARGET: " + event.target.name);
         console.log("VALUE: " + event.target.value);
 
         await super._onChangeForm(formConfig, event);
-
-        console.log("After super");
-        console.log(this.object);
-        console.log(this.document);
 
         // We don't seem to save changes automatically.
         let ae = foundry.utils.duplicate(this.document);
