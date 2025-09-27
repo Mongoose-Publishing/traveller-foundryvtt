@@ -92,6 +92,7 @@ caption {
 }
 
 .journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h2 {
+    color: black;
     text-transform: uppercase;
     border: none;
     font-weight: bold;
@@ -99,6 +100,7 @@ caption {
 }
 
 .journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h3 {
+    color: black;
     text-transform: uppercase;
     border: none;
     font-weight: bold;
@@ -106,12 +108,14 @@ caption {
 }
 
 .journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h4 {
+    color: black;
     border: none;
     font-weight: bold;
     font-size: 16pt
 }
 
 .journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h5 {
+  color: black;
   border: none;
   font-weight: bold;
   font-style: italic;
@@ -119,6 +123,7 @@ caption {
 }
 
 .journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h6 {
+  color: black;
   border: none;
   font-weight: bold;
   font-style: italic;
@@ -171,6 +176,10 @@ div.journal-career {
     background-color: #eff0f0;
     padding: 0.25em;
     color: black;
+}
+
+div.journal-career table {
+  background-color: white;
 }
 
 .journal-sheet form.journal-header input.title {

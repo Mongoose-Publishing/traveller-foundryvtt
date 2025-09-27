@@ -389,7 +389,7 @@ Hooks.on('renderChatMessage', function(app, html) {
 Hooks.on('ready', () => {
     if (game.user.isGM) {
         // Do we need to run a migration?
-        const LATEST_SCHEMA_VERSION = 9;
+        const LATEST_SCHEMA_VERSION = 10;
         const currentVersion = parseInt(game.settings.get("mgt2e", "systemSchemaVersion"));
         console.log(`Schema version is ${currentVersion}`);
         if (!currentVersion || currentVersion < LATEST_SCHEMA_VERSION) {
@@ -711,20 +711,6 @@ Hooks.once("ready", async function() {
     });
 });
 
-/*
-Hooks.on("applyActiveEffect", (actor, effectData) => {
-   const actorData = actor.system;
-   let key = effectData.KEY;
-   let value = effectData.value;
-   let type = effectData.effect.data.flags.augmentType;
-
-   console.log(type);
-
-   if (type === "chaAug") {
-
-   }
-});
-*/
 Hooks.on("combatTurn", (combat, data, options) => {
     // This is the actor which just finished their turn.
     let combatant = combat.combatant.actor;

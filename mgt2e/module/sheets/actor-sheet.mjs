@@ -70,12 +70,21 @@ export class MgT2ActorSheet extends ActorSheet {
             let numTerms = context.terms.length;
             let numYears = 0;
             for (let t of context.terms) {
-                numYears += parseInt(t.system.term.termLength);
+                if (t.system.term?.termLength) {
+                    numYears += parseInt(t.system.term.termLength);
+                } else if (!t.system.term) {
+                    t.system.term = {
+                        termLength: 4
+                    }
+                    numYears += 4;
+                }
             }
             let year = parseInt(actorData.entryYear) - numYears;
             for (let t of context.terms) {
-                t.system.term.startYear = year;
-                year += parseInt(t.system.term.termLength);
+                if (t.system.term?.startYear) {
+                    t.system.term.startYear = year;
+                    year += parseInt(t.system.term.termLength);
+                }
             }
             actorData.entryAge = parseInt(actorData.startAge) + numYears;
             actorData.birthYear = parseInt(actorData.entryYear) - parseInt(actorData.entryAge);
