@@ -6,17 +6,39 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
-## Develop
+## 0.15.0 (Beta)
+
+Migration Notes: There is a migration step for fixing active effects. Foundry v13 enforces
+some sanity checking which highlights a bug in older versions of MgT2e. 0.15.0 includes a
+migration step which fixes items with active effects defined, so that they will work on both
+v12 and v13.
+
+This version is marked as v13 as maximum compatibility, but v12 as verified. It seems to be
+working on v13, but use with care.
 
 * Journal styles now apply when editing journal pages.
 * Added a world setting to define a default Traveller actor, from which the list of
   skills is taken for new actors and item skill lists.
 * Added support for concealed M-Drives.
+* Added support for oversized J and M drives.
 * Cost of armoured bulkheads corrected. Bulkheads have their own section on the journal sheet.
 * Added option for Holographic controls to Bridges.
 * Implemented costs for more hull options.
 * Display power requirements for general hardware types in ship journal sheet.
-
+* Added basic tracking for defensive ship systems such as screens and point
+  defence systems. This doesn't allow them to be used, but is preparation for later.
+* Ship hardware is now sorted alphabetically when listed in a journal entry.
+* Added repulsors as defensive ship options. Added meson and nuclear as damage types
+  on weapons, so that we can later implement nuclear dampers and meson screens.
+* Added spinal as a weapon trait, so we can later implement armour as a percentage reduction
+  rather than absolute reduction.
+* Mounted weapons are listed on the hardware mount on ship sheets.
+* Fixed some very old bugs with active effects which 'worked' pre-v13, but which break in
+  Foundry v13. Using Foundry v13 prior to 0.15.0 will actually corrupt any active effects.
+  A migration has been added to fix things before upgrade.
+* Added support for v2 API on active effects dialog, which is needed for v13.
+* Improvements to CSS when using dark mode in v13.
+* Removed very old migration steps.
 
 ## 0.14.0 (Beta)
 
