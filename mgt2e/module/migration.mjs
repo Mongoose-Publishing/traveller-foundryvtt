@@ -2,74 +2,22 @@ import { MGT2 } from "./helpers/config.mjs";
 import {getTraitValue} from "./helpers/dice-rolls.mjs";
 
 async function migrateActorData(actor, fromVersion) {
+    if (!actor.name) {
+        return {};
+    }
     console.log(`MIGRATE ACTOR ${actor.name} FROM ${fromVersion}`);
-    console.log(actor);
+
     if (actor.items) {
         for (let item of actor.items) {
             console.log(`Actor ${actor.name} has item ${item.name}`);
-            console.log(item);
             if (item && item.update) {
-                const updateData = migrateItemData(item, fromVersion);
-                if (!foundry.utils.isEmpty(updateData)) {
-                    console.log(`Migrating Item entity ${item.name} from ${fromVersion} for ${actor.name}`);
-                    await item.update(updateData);
-                }
+                migrateItemData(item, fromVersion);
             }
         }
     }
-
-    if (fromVersion < 2) {
-        console.log("Converting to v2 (Stun Damage)");
-        if (actor.system.damage && actor.type === "traveller") {
-            actor.system.damage.END.tmp = parseInt(0);
-        }
-        if (actor.system.hits && (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature")) {
-            actor.system.hits.tmpDamage = parseInt(0);
-        }
+    if (fromVersion < 7) {
+        console.log("No longer supporting conversion from schema pre-7");
     }
-    if (fromVersion < 5) {
-        console.log("Converting to v5 (Spacecraft Naval data)");
-        if (actor.type === "spacecraft") {
-            actor.system.spacecraft.navy = {
-                "navy": false,
-                "supplies": {
-                    "value": 0,
-                    "max": 0
-                },
-                "cei": {
-                    "value": 7,
-                    "current": 7
-                },
-                "morale": 7,
-                "divisions": { }
-            };
-        }
-    }
-    if (fromVersion < 6) {
-        console.log("Converting to v6 (Creature traits and behaviours)");
-        if (actor.type === "creature" && actor.system.behaviour != null) {
-            const oldBehaviours = actor.system.behaviour.toLowerCase();
-            let updated = "";
-            for (let b in CONFIG.MGT2.CREATURES.behaviours) {
-                if (oldBehaviours.indexOf(b.toLowerCase()) > -1) {
-                    updated += (updated.length>0?" ":"") + b;
-                }
-            }
-            actor.system.behaviour = updated;
-        }
-        if (actor.type === "creature" && actor.system.traits != null) {
-            const oldTraits = actor.system.traits.toLowerCase();
-            let updated = "";
-            for (let t in CONFIG.MGT2.CREATURES.traits) {
-                if (oldTraits.indexOf(t.toLowerCase()) > -1) {
-                    updated += (updated.length>0?",":"") + t;
-                }
-            }
-            actor.system.traits = updated;
-        }
-        return actor.system;
-    }
-
     if (fromVersion < 8) {
         console.log("Converting to v8 (Spacecraft computers)");
         if (actor.type === "spacecraft") {
@@ -116,6 +64,7 @@ async function migrateActorData(actor, fromVersion) {
                 console.log("Removing legacy active effect from " + actor.name);
                 actor.effects.delete(e._id);
             });
+            actor.update({"effects": actor.effects});
         }
     }
 
@@ -129,19 +78,18 @@ function addWeaponTrait(traits, trait) {
     return trait;
 }
 
-function migrateItemData(item, fromVersion) {
+async function migrateItemData(item, fromVersion) {
     console.log(`MIGRATE ITEM DATA ${fromVersion}`);
     if (fromVersion < 4) {
         if (item.system.term) {
-            item.system.term.termLength = 4;
-            return item.system;
+            await item.update({"system.term.termLength": 4});
         }
     }
     if (fromVersion < 7) {
         console.log("Converting to v7 (Weapon and armour traits)");
         if (item.system.armour && item.system.armour.otherTypes) {
             item.system.armour.otherTypes = item.system.armour.otherTypes.toLowerCase();
-            return item.system;
+            await item.update({"system.armour.otherTypes": item.system.armour.otherTypes });
         }
         if (item.system.weapon && item.system.weapon.traits) {
             let traits = item.system.weapon.traits.toLowerCase();
@@ -179,28 +127,47 @@ function migrateItemData(item, fromVersion) {
                     }
                 }
             }
-            item.system.weapon.traits = updated;
-            return item.system;
+            await item.update({"system.weapon.traits": updated});
         }
+    }
+    if (fromVersion < 10) {
+        // Need to update augment types, move it from flag to system
+        item.effects.forEach(e => {
+           if (e.flags.augmentType) {
+               let augmentType = e.flags.augmentType;
+               if (e.system.augmentType) {
+                   // Already correct.
+               } else {
+                   if (typeof augmentType === "string") {
+                       e.system.augmentType = augmentType;
+                   } else {
+                       e.system.augmentType = "skillDM";
+                   }
+                   e.update({"system.augmentType": augmentType});
+               }
+               e.update({"flags.-=augmentType": null});
+           }
+        });
     }
     return {};
 }
 
 export async function migrateWorld(fromVersion) {
-    console.log("**** MIGRATE SCHEMA TO v9 ****");
+    console.log("**** MIGRATE SCHEMA TO v10 ****");
 
     for (let actor of game.actors.contents) {
         const updateData = migrateActorData(actor, fromVersion);
         if (!foundry.utils.isEmpty(updateData)) {
-            console.log(`Migrating Actor entity ${actor.name} from ${fromVersion}`);
+            //console.log(`Migrating Actor entity ${actor.name} from ${fromVersion}`);
             await actor.update(updateData);
         }
     }
 
+
     for (let item of game.items.contents) {
         const updateData = migrateItemData(item, fromVersion);
         if (!foundry.utils.isEmpty(updateData)) {
-            console.log(`Migrating Item entity ${item.name} from ${fromVersion}`);
+            //console.log(`Migrating Item entity ${item.name} from ${fromVersion}`);
             await item.update(updateData);
         }
     }
@@ -212,26 +179,18 @@ export async function migrateWorld(fromVersion) {
                 console.log(`Migrating Actor token ${token.name}`);
                 const actor = duplicate(t.delta);
                 actor.type = t.actor?.type;
-                const update = migrateActorData(actor, fromVersion);
-                mergeObject(t.delta, update);
+                migrateActorData(actor, fromVersion);
             }
             return t;
         });
-
-        const sceneUpdate = { tokens };
-
-        if (!foundry.utils.isEmpty(sceneUpdate)) {
-            console.log(`Migrating Scene ${scene.name}.`);
-            await scene.update(sceneUpdate);
-        }
     }
 
-    for (let pack of game.packs) {
-        if (pack.metadata.package !== "world") {
+    for (let pack of game.packs.contents) {
+        if (pack.metadata.packageType !== "world") {
             continue;
         }
         const packType = pack.metadata.type;
-        if (!["Item"].includes(packType)) {
+        if (!["Item", "Actor"].includes(packType)) {
             console.log(`Ignoring pack ${pack.metadata.label}`);
             continue;
         }
@@ -242,14 +201,9 @@ export async function migrateWorld(fromVersion) {
         const documents = await pack.getDocuments();
 
         for (let document of documents) {
-            let updateData = {};
             switch (packType) {
                 case "Item":
-                    updateData = migrateItemData(document, fromVersion);
-                    if (!foundry.utils.isEmpty(updateData)) {
-                        console.log(`Migrating pack Item entity ${document.name} from ${fromVersion}`);
-                        await document.update(updateData);
-                    }
+                    await migrateItemData(document, fromVersion);
                     break;
             }
         }
