@@ -11,9 +11,9 @@
 Migration Notes: There is a migration step for fixing active effects. Foundry v13 enforces
 some sanity checking which highlights a bug in older versions of MgT2e. 0.15.0 includes a
 migration step which fixes items with active effects defined, so that they will work on both
-v12 and v13.
+v12 and v13. You should upgrade to v0.15.0 before migrating to v13.
 
-This version is marked as v13 as maximum compatibility, but v12 as verified. It seems to be
+This version is marked as v13 as maximum compatibility, and v12 as verified. It seems to be
 working on v13, but use with care.
 
 * Journal styles now apply when editing journal pages.
