@@ -890,6 +890,16 @@ export class MgT2ActorSheet extends ActorSheet {
             this._setItemStatus(this.actor, item, MgT2Item.CARRIED);
         });
 
+        html.find('.deck-plan-add').click(ev => {
+            this._addDeckPlan(this.actor);
+        });
+
+        html.find('.deck-plan-delete').click(ev => {
+            const div = $(ev.currentTarget).parents(".deck-plan");
+            const idx = div.data("deckId");
+            this._removeDeckPlan(idx);
+        });
+
         html.find('.crew-delete').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
@@ -1544,6 +1554,35 @@ export class MgT2ActorSheet extends ActorSheet {
                 new MgT2SpacecraftRepairDialog(shipActor, actorCrew).render(true);
             }
         }
+    }
+
+    // Add a new deck plan.
+    _addDeckPlan() {
+        let decks = null;
+        if (!this.actor?.system?.spacecraft?.deckplans) {
+            decks = {
+                1: "systems/mgt2e/images/deck-plan.svg"
+            };
+        } else {
+            decks = this.actor.system.spacecraft.deckplans;
+            let keys = Object.keys(decks);
+            let n = keys.length + 1;
+            decks[n] = "systems/mgt2e/images/deck-plan.svg";
+        }
+        this.actor.update({"system.spacecraft.deckplans": decks });
+    }
+
+    async _removeDeckPlan(idx) {
+        let decks = {};
+        let count = 1;
+        for (let d in this.actor.system.spacecraft.deckplans) {
+            if (parseInt(d) === parseInt(idx)) {
+                continue;
+            }
+            decks[count++] = this.actor.system.spacecraft.deckplans[d];
+        }
+        await this.actor.update({"system.spacecraft.deckplans": null });
+        this.actor.update({"system.spacecraft.deckplans": decks });
     }
 
     _onCrewDragStart(event, options) {
