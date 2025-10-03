@@ -1484,6 +1484,12 @@ Handlebars.registerHelper('termYear', function(data, term) {
     return 1105;
 });
 
+Handlebars.registerHelper('prettyNumber', function(value, precision) {
+    if (precision === undefined || precision === null) {
+        precision = 1;
+    }
+    return Tools.prettyNumber(value, precision);
+});
 
 /**
  * Given an active effect, display the key in a readable form.
