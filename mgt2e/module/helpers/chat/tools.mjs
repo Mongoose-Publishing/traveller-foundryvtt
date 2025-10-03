@@ -730,7 +730,7 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     }
     html += `<br style="clear:both"/>`;
     html += `</div>`;
-    html += `<div class="spacecraft-description">${actor.system.description}</div>`
+    html += `<div class="spacecraft-description">${actor.system.description}</div>`;
 
     // Data stats to the right.
     html += `<div class="spacecraft-right">`;
@@ -869,6 +869,14 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     html += `<div class="starship-image">`;
     html += `<img style="border: none" src="${actor.img}"/>`
     html += `</div>`;
+
+    if (actor.system.spacecraft.deckplans) {
+        html += `<div class="starship-deckplans">`;
+        for (let d in actor.system.spacecraft.deckplans) {
+            html += `<img style="border: none" src="${actor.system.spacecraft.deckplans[d]}"/>`;
+        }
+        html += `</div>`;
+    }
 
     html += `</div>`;
     a.innerHTML = html;
