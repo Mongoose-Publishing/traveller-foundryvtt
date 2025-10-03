@@ -900,6 +900,12 @@ export class MgT2ActorSheet extends ActorSheet {
             this._removeDeckPlan(idx);
         });
 
+        html.find('.deck-plan-open').click(ev => {
+            const div = $(ev.currentTarget).parents(".deck-plan");
+            const idx = div.data("deckId");
+            this._openDeckPlan(idx);
+        });
+
         html.find('.crew-delete').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");
@@ -1583,6 +1589,15 @@ export class MgT2ActorSheet extends ActorSheet {
         }
         await this.actor.update({"system.spacecraft.deckplans": null });
         this.actor.update({"system.spacecraft.deckplans": decks });
+    }
+
+    async _openDeckPlan(idx) {
+        let img = this.actor.system.spacecraft.deckplans[idx];
+
+        const popout = new ImagePopout(img,
+            { title: this.actor.name + " Deck Plan " + idx,
+              uuid: this.actor.uuid });
+        popout.render(true);
     }
 
     _onCrewDragStart(event, options) {
