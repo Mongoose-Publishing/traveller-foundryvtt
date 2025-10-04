@@ -97,7 +97,9 @@
                     <input class="field-value writable" type="text" name="system.rads" value="{{system.rads}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.initiative.value" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
+                    <label for="system.initiative.value" class="field-label">
+                        {{localize 'MGT2.TravellerSheet.Init'}}
+                    </label>
                     <input class="field-value" type="text" name="system.initiative.value"
                            value="{{system.initiative.value}}" data-dtype="Number" readonly/>
                 </div>
@@ -105,7 +107,6 @@
                     <label for="system.dodge" class="field-label">
                         <i class="fas fa-dice"></i>
                         {{localize 'MGT2.TravellerSheet.Dodge'}}
-
                     </label>
                     <input class="field-value" type="text" _name="system.dodge"
                            value="{{system.dodge}}" data-dtype="Number" readonly/>

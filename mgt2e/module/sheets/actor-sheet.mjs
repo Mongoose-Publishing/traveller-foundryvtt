@@ -1097,7 +1097,7 @@ export class MgT2ActorSheet extends ActorSheet {
             this._clearStatus(this.actor, 'inCover');
         });
         html.find('initRoll').click(ev => {
-            this._initRoll(this.actor);
+            this._rollInit(this.actor);
         });
         html.find('.showIdCard').click(ev => {
             new NpcIdCard(this.actor).render(true);
@@ -1438,7 +1438,7 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     _rollInit(actor) {
-
+        // Roll initiative and add to combat tracker.
     }
 
     _reloadWeapon(item) {
