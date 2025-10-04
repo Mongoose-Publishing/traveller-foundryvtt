@@ -208,6 +208,11 @@ div.journal-career div.career-right {
     margin-left: 300px;
 }
 
+div.journal-career div.career-right h2 {
+  color: white;
+}
+
+
 div.journal-career div.career-right table {
     margin-left: 1em;
     margin-right: 1em;
