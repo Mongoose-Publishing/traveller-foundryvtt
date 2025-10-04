@@ -8,8 +8,6 @@
     const a = event.currentTarget;
     const action = a?.dataset?.effecttype ? a.dataset.effecttype : null;
 
-    console.log("onManageActiveEffect: " + action);
-
     if (action) {
         let eff = CONFIG.MGT2.EFFECTS[action];
         if (eff) {
@@ -19,6 +17,7 @@
                 icon: "icons/svg/aura.svg",
                 origin: owner.uuid,
                 disabled: false,
+                transfer: true,
                 system: {
                     augmentType: action
                 },

@@ -95,8 +95,6 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
 
     // V12
     async _updateObject(event, formData) {
-        console.log("_updateObject:");
-
         let ae = foundry.utils.duplicate(this.object);
         ae.name = formData.document.name;
 
@@ -122,7 +120,6 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
           closeOnSubmit: false
       }
     };
-
 
     // V13
     static PARTS = {
@@ -204,10 +201,6 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
     }
 
     async _onChangeForm(formConfig, event) {
-        console.log("_onChangeForm:");
-        console.log("TARGET: " + event.target.name);
-        console.log("VALUE: " + event.target.value);
-
         await super._onChangeForm(formConfig, event);
 
         // We don't seem to save changes automatically.
@@ -220,6 +213,7 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
 
             ae.changes[idx][param] = event.target.value;
         }
+
         await this.document.update(ae);
     }
 

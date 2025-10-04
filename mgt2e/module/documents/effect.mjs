@@ -55,6 +55,7 @@ export class MgT2Effect extends ActiveEffect {
                     "type": "none",
                     "target": "DEX",
                     "value": 0,
+                    transfer: true,
                     disabled: true
                 }]);
             case "edit":

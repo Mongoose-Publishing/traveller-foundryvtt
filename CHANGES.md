@@ -6,7 +6,7 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
-## Develop
+## 0.15.1 (Beta)
 
 * Automatically enable effects on components if the parent is equipped.
 * Allow deck plans to be added to spacecraft sheets.
