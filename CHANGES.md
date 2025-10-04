@@ -6,6 +6,16 @@
   is held down.
 * Career terms aren't always added in the correct order.
 
+## Develop
+
+* Automatically enable effects on components if the parent is equipped.
+* Allow deck plans to be added to spacecraft sheets.
+* Automatically set the player name field on a character sheet if a non-GM user creates
+  a Traveller actor.
+* If a non-GM creates a Traveller actor, and they don't already have a default character
+  set, then we set this actor as this player's default. There is a world setting to
+  disable this feature.
+
 ## 0.15.0 (Beta)
 
 Migration Notes: There is a migration step for fixing active effects. Foundry v13 enforces
