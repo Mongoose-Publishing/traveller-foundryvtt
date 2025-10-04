@@ -648,7 +648,11 @@ Tools.npcInlineDisplay = function(a, actor) {
 }
 
 Tools.prettyNumber = function(value, digits) {
-    return new Intl.NumberFormat(undefined, { maximumFractionDigits: digits}).format(parseFloat(value));
+    let f = parseFloat(value);
+    if (isNaN(f)) {
+        f = 0;
+    }
+    return new Intl.NumberFormat(undefined, { maximumFractionDigits: digits}).format(f);
 }
 
 Tools.inlineSpacecraftData = function(heading, items) {
