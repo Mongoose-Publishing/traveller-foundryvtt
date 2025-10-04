@@ -63,7 +63,7 @@
                            data-cha="{{key}}"
                            title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
                     <span class="characteristic-dm {{chaStatus char}}">
-                        {{numberFormat char.dm sign=true}}
+                        {{prettyNumber char.dm 0}}
                     </span>
                     <br/>
                     <input class="characteristic-readonly"

@@ -195,6 +195,14 @@ Hooks.once('init', async function() {
         type: Boolean,
         default: false
     });
+    game.settings.register('mgt2e', 'autoPlayerCharacter', {
+        name: game.i18n.localize("MGT2.Settings.AutoPlayerCharacter.Name"),
+        hint: game.i18n.localize("MGT2.Settings.AutoPlayerCharacter.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true
+    });
     game.settings.register('mgt2e', 'defaultTraveller', {
         name: game.i18n.localize("MGT2.Settings.DefaultTraveller.Name"),
         hint: game.i18n.localize("MGT2.Settings.DefaultTraveller.Hint"),
@@ -480,11 +488,22 @@ Hooks.on("createItem", (item) => {
  * We need to fill in from CONFIG structures. We need to do it this
  * way since V12, since we can't access the template.json in V12.
  */
-Hooks.on("createActor", (actor) => {
+Hooks.on("createActor", (actor, data, userId) => {
     if (!game.users.current.isGM) {
-        return;
+        let player = game.users.current;
+        if (game.user._id === userId && actor.type === "traveller") {
+            let playerName = player.name;
+            if (player.character === null && game.settings.get("mgt2e", "autoPlayerCharacter")) {
+                player.update({"character": actor._id});
+            }
+            // If we don't do both of the following, player name isn't set
+            // after updating the default character.
+            actor.system.player = playerName;
+            actor.update({"system.player": playerName});
+        } else {
+            return;
+        }
     }
-    console.log("createActor:");
 
     if (actor.type === "traveller" && game.settings.get("mgt2e", "visionDefaultTraveller")) {
         actor.update({"prototypeToken.sight.enabled": true});
