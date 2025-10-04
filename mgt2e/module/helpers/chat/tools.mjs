@@ -647,12 +647,16 @@ Tools.npcInlineDisplay = function(a, actor) {
     return a;
 }
 
-Tools.prettyNumber = function(value, digits) {
+Tools.prettyNumber = function(value, digits, sign) {
     let f = parseFloat(value);
     if (isNaN(f)) {
         f = 0;
     }
-    return new Intl.NumberFormat(undefined, { maximumFractionDigits: digits}).format(f);
+    let prefix = "";
+    if (sign && f >= 0) {
+        prefix = "+";
+    }
+    return prefix + (new Intl.NumberFormat(undefined, { maximumFractionDigits: digits}).format(f));
 }
 
 Tools.inlineSpacecraftData = function(heading, items) {

@@ -1503,11 +1503,11 @@ Handlebars.registerHelper('termYear', function(data, term) {
     return 1105;
 });
 
-Handlebars.registerHelper('prettyNumber', function(value, precision) {
+Handlebars.registerHelper('prettyNumber', function(value, precision, sign) {
     if (precision === undefined || precision === null) {
         precision = 1;
     }
-    return Tools.prettyNumber(value, precision);
+    return Tools.prettyNumber(value, precision, sign);
 });
 
 /**
