@@ -36,8 +36,12 @@ export async function calculateSpacecraftCost(actor) {
         }
     }
 
-    await actor.update({"system.spacecraft.baseCost": spacecraft.baseCost });
-    await actor.update({"system.spacecraft.cost": spacecraft.cost });
+    //if (actor.permission >= 3 && !(actor?.compendium?.locked)) {
+    if (actor.canUserModify(game.user)) {
+        console.log("TRYING TO MODIFY");
+        await actor.update({"system.spacecraft.baseCost": spacecraft.baseCost});
+        await actor.update({"system.spacecraft.cost": spacecraft.cost});
+    }
 }
 
 export function getShipData(actor) {

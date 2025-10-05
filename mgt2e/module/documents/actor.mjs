@@ -1276,7 +1276,20 @@ export class MgT2Actor extends Actor {
       }
 
       return html;
+    }
 
+    safeUpdate(data) {
+        if (this.canUserModify(game.user)) {
+            return this.update(data);
+        }
+        return null;
+    }
+
+    async syncedUpdate(data) {
+        if (context.actor.canUserModify(game.user)) {
+            return await this.update(data);
+        }
+        return null;
     }
 
 }

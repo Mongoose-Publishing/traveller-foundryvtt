@@ -315,7 +315,9 @@ export class MgT2ActorSheet extends ActorSheet {
         if (hits !== actorData.hits.max && actorData.settings.autoHits) {
             actorData.hits.max = hits;
             actorData.hits.value = hits - actorData.hits.damage;
-            context.actor.update({"system.hits.max": hits });
+            if (context.actor.canUserModify(game.user)) {
+                context.actor.update({"system.hits.max": hits});
+            }
         }
 
         let mdrive = 0;
@@ -479,24 +481,24 @@ export class MgT2ActorSheet extends ActorSheet {
         if (fuelTotal !== actorData.spacecraft.fuel.max) {
             actorData.spacecraft.fuel.max = fuelTotal;
             actorData.spacecraft.fuel.value = Math.min(actorData.spacecraft.fuel.value, fuelTotal);
-            context.actor.update({"system.spacecraft.fuel": actorData.spacecraft.fuel });
+            context.actor.safeUpdate({"system.spacecraft.fuel": actorData.spacecraft.fuel });
         }
         if (bandwidthTotal !== actorData.spacecraft.processing) {
             actorData.spacecraft.processing = bandwidthTotal;
-            context.actor.update({"system.spacecraft.processing": bandwidthTotal});
+            context.actor.safeUpdate({"system.spacecraft.processing": bandwidthTotal});
         }
 
         if (jdrive !== actorData.spacecraft.jdrive) {
             actorData.spacecraft.jdrive = jdrive;
-            context.actor.update({"system.spacecraft.jdrive": jdrive });
+            context.actor.safeUpdate({"system.spacecraft.jdrive": jdrive });
         }
         if (mdrive !== actorData.spacecraft.mdrive) {
             actorData.spacecraft.mdrive = mdrive;
-            context.actor.update({"system.spacecraft.mdrive": mdrive });
+            context.actor.safeUpdate({"system.spacecraft.mdrive": mdrive });
         }
         if (rdrive !== actorData.spacecraft.rdrive) {
             actorData.spacecraft.jdrive = jdrive;
-            context.actor.update({"system.spacecraft.rdrive": rdrive });
+            context.actor.safeUpdate({"system.spacecraft.rdrive": rdrive });
         }
 
     }
@@ -785,7 +787,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 armour.name = "Protection";
             }
             if (context.actor) {
-                context.actor.update({"system.armour": armour});
+                context.actor.safeUpdate({"system.armour": armour});
             }
         }
     }
@@ -806,6 +808,13 @@ export class MgT2ActorSheet extends ActorSheet {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
             item.sheet.render(true);
+        });
+
+        // Read only event.
+        html.find('.deck-plan-open').click(ev => {
+            const div = $(ev.currentTarget).parents(".deck-plan");
+            const idx = div.data("deckId");
+            this._openDeckPlan(idx);
         });
 
         // Skill rolls.
@@ -898,12 +907,6 @@ export class MgT2ActorSheet extends ActorSheet {
             const div = $(ev.currentTarget).parents(".deck-plan");
             const idx = div.data("deckId");
             this._removeDeckPlan(idx);
-        });
-
-        html.find('.deck-plan-open').click(ev => {
-            const div = $(ev.currentTarget).parents(".deck-plan");
-            const idx = div.data("deckId");
-            this._openDeckPlan(idx);
         });
 
         html.find('.crew-delete').click(ev => {
@@ -1122,7 +1125,6 @@ export class MgT2ActorSheet extends ActorSheet {
     }
     html.find('div.skill-draggable').each((i, div) => {
       if (div.getAttribute("data-rolltype") === "skill") {
-        //console.log(div.getAttribute("data-skill"));
         let options = {};
         options.skill = div.getAttribute("data-skill");
         handler = ev => this._onSkillDragStart(ev, options);
@@ -1132,7 +1134,6 @@ export class MgT2ActorSheet extends ActorSheet {
     });
     html.find('div.characteristic-draggable').each((i, div) => {
       if (div.getAttribute("data-rolltype") === "characteristic") {
-        //console.log(div.getAttribute("data-skill"));
         let options = {};
         options.cha = div.getAttribute("data-cha");
         handler = ev => this._onCharacteristicDragStart(ev, options);
@@ -1141,7 +1142,6 @@ export class MgT2ActorSheet extends ActorSheet {
       }
     });
         html.find('img.actor-draggable').each((i, img) => {
-            //console.log(div.getAttribute("data-skill"));
             let options = {};
             options.actorId = img.getAttribute("data-actor-id");
             handler = ev => this._onCrewDragStart(ev, options);

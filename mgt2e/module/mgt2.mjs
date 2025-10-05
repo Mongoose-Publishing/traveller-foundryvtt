@@ -645,11 +645,7 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
 });
 
 Hooks.on("preUpdateToken", (token, data, moved) => {
-    console.log("preUpdateToken:");
-    console.log(token);
-
     if (data?.actor?.system?.hits) {
-        console.log(`preUpdateToken: "${token.name}" has hits`);
         let hits = parseInt(data.actor.system.hits.value);
         let max = parseInt(token.actor.system.hits.max);
 
@@ -658,7 +654,6 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
             // Travellers use their characteristics as hitpoints.
             // HITS is just a sum of STR, DEX and END for purposes of
             // showing the resource bar.
-            console.log(data);
             if (data.actor.system.status) {
                 if (actor.system.status.woundLevel > 1) {
                     tokenObject.toggleEffect("systems/mgt2e/icons/effects/unconscious.svg", {
@@ -786,7 +781,6 @@ Hooks.on("dropCanvasData", (canvas, data) =>{
 // Dropping a skill on the macro bar. An entire skill tree is dragged,
 // not just a speciality.
 async function createTravellerMacro(data, slot) {
-    console.log("createTravellerMacro:");
     let actorId = data.actorId;
     let dragData = data.data;
 
@@ -2116,7 +2110,6 @@ Handlebars.registerHelper('showAttachedWeapons', function(ship, item) {
     if (weapons) {
         let text = "";
         for (let wpnId in weapons) {
-            console.log(wpnId);
             let wpn = ship.items.get(wpnId);
             if (wpn) {
                 let label = wpn.name;
@@ -2130,7 +2123,6 @@ Handlebars.registerHelper('showAttachedWeapons', function(ship, item) {
         }
         return text;
     }
-
     return "";
 });
 
