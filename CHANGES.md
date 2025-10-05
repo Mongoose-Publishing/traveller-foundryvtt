@@ -5,6 +5,8 @@
 * Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
   is held down.
 * Career terms aren't always added in the correct order.
+* On Foundry v13, active effects may need to have the 'Apply Effect' option toggled off and on before
+  they take effect.
 
 ## 0.15.1 (Beta)
 
