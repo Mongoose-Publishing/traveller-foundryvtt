@@ -316,7 +316,7 @@ export class MgT2ActorSheet extends ActorSheet {
             actorData.hits.max = hits;
             actorData.hits.value = hits - actorData.hits.damage;
             if (context.actor.canUserModify(game.user)) {
-                context.actor.update({"system.hits.max": hits});
+                context.actor.safeUpdate({"system.hits.max": hits});
             }
         }
 
@@ -500,7 +500,6 @@ export class MgT2ActorSheet extends ActorSheet {
             actorData.spacecraft.jdrive = jdrive;
             context.actor.safeUpdate({"system.spacecraft.rdrive": rdrive });
         }
-
     }
 
     _prepareSpacecraftCrew(context) {
@@ -613,7 +612,6 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             } else if (i.type === 'armour') {
                 armour.push(i);
-                this._calculateArmour(context);
             } else if (i.type === 'term') {
                 terms.push(i);
             } else if (i.type === "associate") {
@@ -623,6 +621,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 gear.push(i);
             }
         }
+        this._calculateArmour(context);
 
         this.actor.system.weightCarried = weight;
         this.actor.system.modifiers.encumbrance.auto = 0;
