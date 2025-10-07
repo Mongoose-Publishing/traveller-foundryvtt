@@ -1,0 +1,22 @@
+{
+  "name": "Examples",
+  "sorting": "a",
+  "folder": null,
+  "type": "JournalEntry",
+  "_id": "AtVxzbK3Ni1eyvY2",
+  "description": "",
+  "sort": 0,
+  "color": "#f1511b",
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.0.0",
+    "createdTime": 1759532781300,
+    "modifiedTime": 1759532818029,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!AtVxzbK3Ni1eyvY2"
+}
