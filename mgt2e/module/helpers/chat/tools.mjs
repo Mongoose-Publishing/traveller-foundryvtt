@@ -154,61 +154,6 @@ Tools.debugSelected = function(chatData) {
     }
 }
 
-Tools.renumber = function() {
-    const selected = Tools.getSelected();
-
-    console.log("Tools.rename:");
-
-    if (selected.length === 0) {
-        ui.notifications.error("No tokens selected");
-        return;
-    }
-    const allTokens = selected[0].scene.tokens;
-
-    let number = 1;
-    for (let token of selected) {
-        if (!token.owner) {
-            // Don't have permission to update token.
-            continue;
-        }
-        console.log("Renaming " + token.name);
-        let baseName = token.name;
-        if (baseName.indexOf("#") > -1) {
-            let count = 0;
-            for (let t of allTokens) {
-                if (baseName === t.name && !count) {
-                    count++;
-                } else if (baseName === t.name) {
-                    // We have a duplicate.
-                    baseName = token.name.replaceAll(/ *#.*/g, "");
-                    console.log("Change [" + token.name + "] [" + baseName + "]");
-                    count++;
-                    break;
-                }
-            }
-            if (count < 2) {
-                continue;
-            }
-        }
-        let done = false;
-        while (!done) {
-            name = baseName + " #" + number++;
-            done = true;
-            for (let t of allTokens) {
-                if (name === t.name) {
-                    console.log("Found a collision with " + t.name);
-                    done = false;
-                    break;
-                }
-            }
-        }
-        console.log("Renamed to " + token.name);
-        token.document.update({ "name": name });
-
-    }
-
-}
-
 Tools.applyDamageToCha= function(damage, actorData, cha) {
     if (damage > 0) {
         let dmg = Math.min(damage, actorData.characteristics[cha].current);
@@ -344,7 +289,9 @@ Tools.requestedSkillCheck = async function(skillFqn, skillOptions) {
         "description": skillOptions.description,
         "success": skillOptions.success,
         "failure": skillOptions.failure,
-        "cost": skillOptions.cost
+        "cost": skillOptions.cost,
+        "quick": skillOptions.quick?skillOptions.quick:false,
+        "rollType": skillOptions.rollType?skillOptions.rollType:"standard"
     });
 
 };
@@ -369,41 +316,67 @@ Tools.damage = function(chatData, args) {
 };
 
 Tools.showSkills = function(chatData) {
-    const user = game.users.current;
-    const selected = canvas.tokens.controlled;
+    let actors = Tools.getSelectedOwned();
 
-    console.log(selected);
-
-    if (selected.length === 0) {
-        ui.notifications.error("You need to select a token");
-        return;
-    } else if (selected.length > 1) {
-        ui.notifications.error("You must have only one token selected");
+    if (actors.length === 0) {
         return;
     }
 
-    let token = selected[0];
-    let name = token.data.name;
-    console.log(name);
-
-    let text = `<h1>${name}</h1>`;
-
-    let actorId = token.data.actorId;
-    let actor = game.actors.get(actorId);
-    if (!actor) {
-        ui.notifications.error("Unable to find actor " + actorId);
-        return;
-    }
+    let actor = actors[0];
     let skills = actor.system.skills;
 
-    console.log(skills);
-
+    let text = "";
     for (let skill in skills) {
-        text += `${skills[skill].label}<br/>`;
-//        text += `${skill.label}<br/>`;
+        if (!skills[skill].trained) {
+            continue;
+        }
+        if (skills[skill].specialities) {
+            for (let spec in skills[skill].specialities) {
+                let skillFqn = skill + "." + spec;
+                text += `${skillFqn}: ${actor.getSkillLabel(skillFqn, true)}<br/>`;
+            }
+        } else {
+            text += `${skill}: ${actor.getSkillLabel(skill, true)}<br/>`;
+        }
     }
 
     this.message(chatData, text);
+}
+
+Tools.rollChatSkill = async function(chatData, args) {
+    let actors = Tools.getSelectedOwned();
+
+    let skillFqn = null;
+    if (args.length > 0) {
+        skillFqn = args[0];
+    }
+    if (!skillFqn) {
+        return;
+    }
+    args.shift();
+    let options = { quick: true };
+    while (args.length > 0) {
+        let val = ""+args[0];
+        if (val.match(/[A-Za-z][A-Za-z][A-Za-z]/)) {
+            options.cha = val.toUpperCase();
+        } else if (val === "+") {
+            options.rollType = "boon";
+        } else if (val === "-") {
+            options.rollType = "bane";
+        } else if (parseInt(val) !== NaN && parseInt(val) != 0) {
+            options.dm = parseInt(val);
+        }
+        args.shift();
+    }
+
+    let text = "";
+    for (let actor of actors) {
+        Tools.requestedSkillCheck(skillFqn, options);
+    }
+}
+
+Tools.rollChatAttack = async function(chatData, args) {
+
 }
 
 Tools.currentTime = function(chatData, args) {

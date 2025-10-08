@@ -453,6 +453,11 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     } else if (message.indexOf("/debug") === 0) {
         Tools.debugSelected(chatData);
         return false;
+    } else if (message.indexOf("/skill") === 0) {
+        let args = message.split(" ");
+        args.shift();
+        Tools.rollChatSkill(chatData, args);
+        return false;
     }
 
     return true;
@@ -865,7 +870,7 @@ function rollSkillMacro(skillName, options) {
       }
   }
 
-  if (game.settings.get("mgt2e", "quickRolls")) {
+  if (game.settings.get("mgt2e", "quickRolls") || options.quick) {
       rollSkill(actor, skillName, options);
   } else {
       new MgT2SkillDialog(actor, skillName, options).render(true);
