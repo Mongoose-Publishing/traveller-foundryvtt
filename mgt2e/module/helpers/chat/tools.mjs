@@ -522,9 +522,9 @@ Tools.actorInlineDisplay = async function(actorId) {
     }
 
     if (actor.type === "creature") {
-        Tools.creatureInlineDisplay(a, actor);
+        await Tools.creatureInlineDisplay(a, actor);
     } else if (actor.type === "npc" || actor.type==="traveller") {
-        Tools.npcInlineDisplay(a, actor);
+        await Tools.npcInlineDisplay(a, actor);
     } else if (actor.type === "spacecraft") {
         await Tools.spacecraftInlineDisplay(a, actor);
     } else if (actor.type === "vehicle") {
@@ -535,11 +535,18 @@ Tools.actorInlineDisplay = async function(actorId) {
     return a;
 }
 
-Tools.creatureInlineDisplay = function(a, actor) {
+Tools.creatureInlineDisplay = async function(a, actor) {
     let html = `<div class="inline-creature actor-link" data-actor-id="${actor.uuid}">`;
     html += `<h2>${actor.name}</h2>`;
     html += `<img src="${actor.img}"/>`;
-    html += `${actor.system.description}`;
+
+    if (actor.system.description) {
+        let d = await TextEditor.enrichHTML(
+            actor.system.description,
+            { secrets: ((actor.permission > 2)?true:false) }
+        );
+        html += d;
+    }
 
     html += `<table class="creature-stats">`;
     html += `<tr><th>Animal</th><th>Hits</th><th>Speed</th></tr>`;
@@ -557,7 +564,7 @@ Tools.creatureInlineDisplay = function(a, actor) {
     return a;
 }
 
-Tools.npcInlineDisplay = function(a, actor) {
+Tools.npcInlineDisplay = async function(a, actor) {
     let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/>`;
     html += `<span class="actor-link rollable name" data-actor-id="${actor.uuid}">${actor.name}</span>`;
     html += `<span class="profession">${actor.system.sophont.profession}</span>`;
@@ -640,7 +647,17 @@ Tools.npcInlineDisplay = function(a, actor) {
     html += `</div>`;
     html += `</div>`;
     html += `</div>`;
-    html += `</div></div>`;
+    html += `</div>`;
+
+    if (actor.system.description) {
+        let d = await TextEditor.enrichHTML(
+            actor.system.description,
+            { secrets: ((actor.permission > 2)?true:false) }
+        );
+        html += d;
+    }
+
+    html += `</div>`;
 
     a.innerHTML = html;
 
@@ -738,7 +755,14 @@ Tools.spacecraftInlineDisplay = async function(a, actor) {
     }
     html += `<br style="clear:both"/>`;
     html += `</div>`;
-    html += `<div class="spacecraft-description">${actor.system.description}</div>`;
+
+    if (actor.system.description) {
+        let d = await TextEditor.enrichHTML(
+            actor.system.description,
+            { secrets: ((actor.permission > 2)?true:false) }
+        );
+        html += `<div class="spacecraft-description">${d}</div>`;
+    }
 
     // Data stats to the right.
     html += `<div class="spacecraft-right">`;
@@ -902,8 +926,13 @@ Tools.vehicleInlineDisplay = async function(a, actor) {
 
     let vehicle = actor.system.vehicle;
 
-    console.log(actor.system);
-    html += `<div>${actor.system.description}</div>`;
+    if (actor.system.description) {
+        let d = await TextEditor.enrichHTML(
+            actor.system.description,
+            { secrets: ((actor.permission > 2)?true:false) }
+        );
+        html += `<div>${d}</div>`;
+    }
 
     let skill = actor.getSkillLabel(vehicle.skill, false);
     let speed = vehicle.speed;
