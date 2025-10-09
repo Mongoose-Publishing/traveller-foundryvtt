@@ -1,5 +1,5 @@
 import {onManageActiveEffect} from "../helpers/effects.mjs";
-import {rollAttack, hasTrait, getTraitValue, toFloat, rollSpaceAttack} from "../helpers/dice-rolls.mjs";
+import {rollAttack, hasTrait, getTraitValue, toFloat, rollSpaceAttack, getFloat} from "../helpers/dice-rolls.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {MgT2Item} from "../documents/item.mjs";
@@ -864,30 +864,30 @@ export class MgT2ItemSheet extends ItemSheet {
         } else if (["sensor", "stateroom", "defence"].includes(item.system.hardware.system)) {
             // Use manual values.
         } else {
-            let cost = parseFloat(item.system.hardware.tonnage.cost);
-            let power = parseFloat(item.system.hardware.powerPerTon);
-            let percent = parseFloat(item.system.hardware.tonnage.percent);
-            let rating = parseInt(item.system.hardware.rating);
-            let base = parseFloat(item.system.hardware.tonnage.tons);
-            let minimum = parseFloat(item.system.hardware.tonnage.minimum);
+            let cost = getFloat(item.system.hardware.tonnage.cost);
+            let power = getFloat(item.system.hardware.powerPerTon);
+            let percent = getFloat(item.system.hardware.tonnage.percent);
+            let rating = getFloat(item.system.hardware.rating);
+            let base = getFloat(item.system.hardware.tonnage.tons);
+            let minimum = getFloat(item.system.hardware.tonnage.minimum);
             let totalTons = 0;
 
             // Handle conversion from the pre-0.14 way of doing things.
             if (item.system.hardware.tonnage.costCalc === undefined) {
-                if (cost === 0 && parseFloat(item.system.cost) > 0) {
-                    cost == parseFloat(item.system.cost);
+                if (cost === 0 && getFloat(item.system.cost) > 0) {
+                    cost == getFloat(item.system.cost);
                     item.system.hardware.tonnage.costCalc = "fixedCost";
                 }
             }
             if (item.system.hardware.tonnage.tonCalc === undefined) {
-                if (base === 0 && parseFloat(item.system.hardware.tons > 0)) {
+                if (base === 0 && getFloat(item.system.hardware.tons > 0)) {
                     base = parseFloat(item.system.hardware.tons > 0);
                     item.system.hardware.tonnage.tonCalc = "fixedTons";
                 }
             }
             if (item.system.hardware.tonnage.powerCalc === undefined) {
-                if (power === 0 && parseFloat(item.system.hardware.power) > 0) {
-                    power = parseFloat(item.system.hardware.power);
+                if (power === 0 && getFloat(item.system.hardware.power) > 0) {
+                    power = getFloat(item.system.hardware.power);
                     item.system.hardware.tonnage.powerCalc = "fixedPower";
                 }
             }

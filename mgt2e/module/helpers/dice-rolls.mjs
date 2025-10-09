@@ -30,6 +30,14 @@ export function toFloat(number) {
     return number;
 }
 
+export function getFloat(number) {
+    let value = parseFloat(number);
+    if (isNaN(value)) {
+        value = 0;
+    }
+    return value;
+}
+
 // Really basic dice rolling functions
 export async function roll(dice) {
     const roll = await new Roll(dice, null).evaluate();
