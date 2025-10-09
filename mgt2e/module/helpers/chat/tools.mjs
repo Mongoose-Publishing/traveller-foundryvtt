@@ -349,6 +349,7 @@ Tools.showSkills = function(chatData) {
         }
     }
 
+    chatData.whisper = [ game.user.id ];
     this.message(chatData, text);
 }
 
