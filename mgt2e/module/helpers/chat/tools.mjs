@@ -327,16 +327,25 @@ Tools.showSkills = function(chatData) {
 
     let text = "";
     for (let skill in skills) {
-        if (!skills[skill].trained) {
+        let skillData = skills[skill];
+        if (!skillData.trained) {
             continue;
         }
+        let shown = false;
         if (skills[skill].specialities) {
             for (let spec in skills[skill].specialities) {
                 let skillFqn = skill + "." + spec;
-                text += `${skillFqn}: ${actor.getSkillLabel(skillFqn, true)}<br/>`;
+                let specData = skills[skill].specialities[spec];
+                console.log(skillData);
+
+                if ((skillData.individual && specData.trained) || specData.value > 0) {
+                    text += `${actor.getSkillLabel(skillFqn, true)}<br/>`;
+                    shown = true;
+                }
             }
-        } else {
-            text += `${skill}: ${actor.getSkillLabel(skill, true)}<br/>`;
+        }
+        if (!shown) {
+            text += `${actor.getSkillLabel(skill, true)}<br/>`;
         }
     }
 

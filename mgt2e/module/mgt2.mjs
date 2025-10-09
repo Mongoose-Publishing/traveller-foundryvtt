@@ -437,7 +437,7 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
         args.shift();
         Tools.damage(chatData, args);
         return false;
-    } else if (message.indexOf("/showskills") === 0) {
+    } else if (message.indexOf("/skills") === 0) {
         Tools.showSkills(chatData);
         return false;
     } else if (message.indexOf("/time") === 0) {
