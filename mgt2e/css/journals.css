@@ -468,6 +468,10 @@ div.inline-actor .skill-list {
     padding-bottom: 4px;
 }
 
+table {
+  background: none;
+}
+
 table.creature-stats {
     text-align: left;
     width: 400px;
