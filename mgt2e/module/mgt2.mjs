@@ -425,7 +425,6 @@ Hooks.on('ready', () => {
     });
 });
 
-
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
     if (message.indexOf("/upp") === 0) {
         let args = message.split(" ");
@@ -438,7 +437,9 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
         Tools.damage(chatData, args);
         return false;
     } else if (message.indexOf("/skills") === 0) {
-        Tools.showSkills(chatData);
+        let args = message.split(" ");
+        args.shift();
+        Tools.showSkills(chatData, args);
         return false;
     } else if (message.indexOf("/time") === 0) {
         let args = message.split(" ");

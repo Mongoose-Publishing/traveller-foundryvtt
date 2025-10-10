@@ -315,11 +315,24 @@ Tools.damage = function(chatData, args) {
     Tools.applyDamageToTokens(damage, damageOptions);
 };
 
-Tools.showSkills = function(chatData) {
+Tools.showSkills = function(chatData, args) {
     let actors = Tools.getSelectedOwned();
 
     if (actors.length === 0) {
         return;
+    }
+
+    let labelName = true;
+    let all = false;
+    while (args.length > 0) {
+        let option = args[0];
+        if (option.startsWith("i")) {
+            labelName = false;
+        }
+        if (option.startsWith("a")) {
+            all = true;
+        }
+        args.shift();
     }
 
     let actor = actors[0];
@@ -328,7 +341,7 @@ Tools.showSkills = function(chatData) {
     let text = "";
     for (let skill in skills) {
         let skillData = skills[skill];
-        if (!skillData.trained) {
+        if (!skillData.trained && !all) {
             continue;
         }
         let shown = false;
@@ -336,16 +349,23 @@ Tools.showSkills = function(chatData) {
             for (let spec in skills[skill].specialities) {
                 let skillFqn = skill + "." + spec;
                 let specData = skills[skill].specialities[spec];
-                console.log(skillData);
 
-                if ((skillData.individual && specData.trained) || specData.value > 0) {
-                    text += `${actor.getSkillLabel(skillFqn, true)}<br/>`;
+                if ((skillData.individual && specData.trained) || specData.value > 0 || all) {
+                    if (labelName) {
+                        text += `${actor.getSkillLabel(skillFqn, true)}<br/>`;
+                    } else {
+                        text += `${skillFqn}<br/>`;
+                    }
                     shown = true;
                 }
             }
         }
         if (!shown) {
-            text += `${actor.getSkillLabel(skill, true)}<br/>`;
+            if (labelName) {
+                text += `${actor.getSkillLabel(skill, true)}<br/>`;
+            } else {
+                text += `${skill}<br/>`;
+            }
         }
     }
 
