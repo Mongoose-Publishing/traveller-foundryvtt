@@ -1,0 +1,35 @@
+{
+  "folder": "YwyA9IaCzOx58Xnq",
+  "name": "Military Consultant",
+  "type": "term",
+  "_id": "qjJYcI4aZT0C1Gs9",
+  "img": "systems/mgt2e/icons/misc/career.svg",
+  "system": {
+    "term": {
+      "number": 0,
+      "termLength": 4,
+      "assignment": "Military Consultant",
+      "randomTerm": false,
+      "randomLength": ""
+    },
+    "description": "<p>You serve a term as a @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.eMNMnFAdboIQ1bUH]{Military Consultant}. You consult with paramilitary and military organisations, providing training and strategy advice.</p>\n<p>This is an example career term. Add details on what happened during this term here.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.1.17-DEV",
+    "createdTime": 1760087085042,
+    "modifiedTime": 1760087658195,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!items!qjJYcI4aZT0C1Gs9"
+}

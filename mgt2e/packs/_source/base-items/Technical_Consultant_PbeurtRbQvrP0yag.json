@@ -1,0 +1,35 @@
+{
+  "folder": "YwyA9IaCzOx58Xnq",
+  "name": "Technical Consultant",
+  "type": "term",
+  "_id": "PbeurtRbQvrP0yag",
+  "img": "systems/mgt2e/icons/misc/career.svg",
+  "system": {
+    "term": {
+      "number": 0,
+      "termLength": 4,
+      "assignment": "Technical Consultant",
+      "randomTerm": false,
+      "randomLength": ""
+    },
+    "description": "<p>You serve a term as a @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.eMNMnFAdboIQ1bUH]{Technical Career}. You consult with businesses, providing specialist technical services</p>\n<p>This is an example career term. Add details on what happened during this term here.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.1.17-DEV",
+    "createdTime": 1760087185506,
+    "modifiedTime": 1760087693277,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!items!PbeurtRbQvrP0yag"
+}

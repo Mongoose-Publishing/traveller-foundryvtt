@@ -1,0 +1,35 @@
+{
+  "folder": "YwyA9IaCzOx58Xnq",
+  "name": "Business Consultant",
+  "type": "term",
+  "_id": "LYPcdUEC7yXpNL3H",
+  "img": "systems/mgt2e/icons/misc/career.svg",
+  "system": {
+    "term": {
+      "number": 0,
+      "termLength": 4,
+      "assignment": "Business Consultant",
+      "randomTerm": false,
+      "randomLength": ""
+    },
+    "description": "<p>You serve a term as a @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.eMNMnFAdboIQ1bUH]{Business Consultant}. You consult with businesses, providing business advice and strategy.</p>\n<p>This is an example career term. Add details on what happened during this term here.</p>\n<p>&nbsp;</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.1.17-DEV",
+    "createdTime": 1760087322394,
+    "modifiedTime": 1760087621641,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!items!LYPcdUEC7yXpNL3H"
+}

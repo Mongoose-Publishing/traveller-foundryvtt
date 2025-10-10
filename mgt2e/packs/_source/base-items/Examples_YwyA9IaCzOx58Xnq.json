@@ -1,0 +1,22 @@
+{
+  "name": "Examples",
+  "sorting": "a",
+  "folder": null,
+  "type": "Item",
+  "_id": "YwyA9IaCzOx58Xnq",
+  "description": "",
+  "sort": 0,
+  "color": "#f1511b",
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.1.17-DEV",
+    "createdTime": 1760087057287,
+    "modifiedTime": 1760101465288,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!YwyA9IaCzOx58Xnq"
+}

@@ -150,6 +150,80 @@
         "lastModifiedBy": "XsiBG1ohlPVbUVQC"
       },
       "_key": "!journal.pages!daLn8GLKHRgnJBax.eBUfwBRUB8sJVH8g"
+    },
+    {
+      "sort": 200000,
+      "name": "Skill",
+      "type": "text",
+      "_id": "9tkPjL06eDg382W2",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>/skill &lt;skillname&gt; [&lt;CHA&gt;] [&lt;DM&gt;] [+|-]</p><p>Roll a skill for the current character. Either the selected token, or the default character for the player. This does not open the skill dialog, it just does a straight roll.</p><p>The + or - symbol by itself signifies a boon or bane.</p><p>The skill name should be the internal skill name. For using a speciality, use a dot between the two. E.g. electronics.computers to roll the computers skill.</p><p></p><h3>Default Skill Names</h3><p>The full list of default internal skill names is listed below:</p><p></p><ul><li><p>admin</p></li><li><p>advocate</p></li><li><p>animals</p><ul><li><p>animals.handling</p></li><li><p>animals.vetinary</p></li><li><p>animals.training</p></li></ul></li><li><p>art</p><ul><li><p>art.performer</p></li><li><p>art.holography</p></li><li><p>art.instrument</p></li><li><p>art.visualMedia</p></li><li><p>art.write</p></li></ul></li><li><p>astrogation</p></li><li><p>athletics</p><ul><li><p>athletics.dexterity</p></li><li><p>athletics.endurance</p></li><li><p>athletics.strength</p></li></ul></li><li><p>broker</p></li><li><p>carouse</p></li><li><p>deception</p></li><li><p>diplomat</p></li><li><p>drive</p><ul><li><p>drive.hovercraft</p></li><li><p>drive.mole</p></li><li><p>drive.track</p></li><li><p>drive.walker</p></li><li><p>drive.wheel</p></li></ul></li><li><p>electronics</p><ul><li><p>electronics.comms</p></li><li><p>electronics.computers</p></li><li><p>electronics.remoteOps</p></li><li><p>electronics.sensors</p></li><li><p>electronics.security</p></li></ul></li><li><p>engineer</p><ul><li><p>engineer.mDrive</p></li><li><p>engineer.jDrive</p></li><li><p>engineer.lifeSupport</p></li><li><p>engineer.power</p></li></ul></li><li><p>explosives</p></li><li><p>flyer</p><ul><li><p>flyer.airship</p></li><li><p>flyer.grav</p></li><li><p>flyer.ornithopter</p></li><li><p>flyer.rotor</p></li><li><p>flyer.wing</p></li></ul></li><li><p>gambler</p></li><li><p>gunner</p><ul><li><p>gunner.turret</p></li><li><p>gunner.ortillery</p></li><li><p>gunner.screen</p></li><li><p>gunner.capital</p></li></ul></li><li><p>guncombat</p><ul><li><p>guncombat.archaic</p></li><li><p>guncombat.energy</p></li><li><p>guncombat.slug</p></li></ul></li><li><p>heavyweapons</p><ul><li><p>heavyweapons.artillery</p></li><li><p>heavyweapons.portable</p></li><li><p>heavyweapons.vehicle</p></li></ul></li><li><p>independence</p></li><li><p>investigate</p></li><li><p>jackofalltrades</p></li><li><p>language</p><ul><li><p>language.galanglic</p></li><li><p>language.vilani</p></li><li><p>language.zdetl</p></li><li><p>language.oynprith</p></li><li><p>language.trokh</p></li><li><p>language.gvegh</p></li></ul></li><li><p>leadership</p></li><li><p>mechanic</p></li><li><p>medic</p></li><li><p>melee</p><ul><li><p>melee.unarmed</p></li><li><p>melee.blade</p></li><li><p>melee.bludgeon</p></li><li><p>melee.natural</p></li></ul></li><li><p>navigation</p></li><li><p>persuade</p></li><li><p>pilot</p><ul><li><p>pilot.smallCraft</p></li><li><p>pilot.spacecraft</p></li><li><p>pilot.capitalShips</p></li></ul></li><li><p>profession</p><ul><li><p>profession.belter</p></li><li><p>profession.biologicals</p></li><li><p>profession.civilEngineering</p></li><li><p>profession.construction</p></li><li><p>profession.hydroponics</p></li><li><p>profession.polymers</p></li><li><p>profession.robotics</p></li></ul></li><li><p>recon</p></li><li><p>science</p><ul><li><p>science.archaeology</p></li><li><p>science.astronomy</p></li><li><p>science.biology</p></li><li><p>science.chemistry</p></li><li><p>science.cosmology</p></li><li><p>science.cybernetics</p></li><li><p>science.economics</p></li><li><p>science.genetics</p></li><li><p>science.history</p></li><li><p>science.linquistics</p></li><li><p>science.philosophy</p></li><li><p>science.physics</p></li><li><p>science.planetology</p></li><li><p>science.psionicology</p></li><li><p>science.psycology</p></li><li><p>science.robotics</p></li><li><p>science.sophontology</p></li><li><p>science.xenology</p></li></ul></li><li><p>seafarer</p><ul><li><p>seafarer.oceanShips</p></li><li><p>seafarer.personal</p></li><li><p>seafarer.sail</p></li><li><p>seafarer.submarine</p></li></ul></li><li><p>stealth</p></li><li><p>steward</p></li><li><p>streetwise</p></li><li><p>survival</p></li><li><p>tactics</p><ul><li><p>tactics.military</p></li><li><p>tactics.naval</p></li></ul></li><li><p>vaccsuit</p></li><li><p>telepathy</p></li><li><p>clairvoyance</p></li><li><p>telekinesis</p></li><li><p>awareness</p></li><li><p>teleportation</p><p></p></li></ul>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.15.1.17-DEV",
+        "createdTime": 1760092318577,
+        "modifiedTime": 1760093344668,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!daLn8GLKHRgnJBax.9tkPjL06eDg382W2"
+    },
+    {
+      "sort": 300000,
+      "name": "Skills",
+      "type": "text",
+      "_id": "2viOiQM3yzIlBY7b",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>/skills [all] [int]</p><p>Displays the full list of skills for the current character. The output is always whispered to the user executing the command.</p><p>By default, the full name of the skills is shown, and only trained skills are displayed.</p><p>Use 'all' as an optional argument to list all the skills defined on the character.</p><p>User 'int' as an optional argument to show the internal names of the skills. This doesn't display the level of the skills.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.15.1.17-DEV",
+        "createdTime": 1760092540920,
+        "modifiedTime": 1760093463213,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!daLn8GLKHRgnJBax.2viOiQM3yzIlBY7b"
     }
   ],
   "sort": 300000,

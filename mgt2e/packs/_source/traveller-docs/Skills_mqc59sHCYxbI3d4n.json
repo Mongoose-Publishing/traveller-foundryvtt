@@ -128,7 +128,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>You can edit a skill on an actor by clicking the <strong>Edit</strong> link on skill roll and skill experience dialogs. This allows you to edit or delete the skill in question.</p><p>This option is only available on character sheets opened directly from the Actor entry in the Actor sidebar, or from character sheets opened from a linked token.</p><p>A skill can be added from the <strong>Add skill</strong> option on the Settings tab of most character sheets.</p><h3>Packages</h3><p>The Package actor type behaves slightly different in a couple of respects. Firstly, the <strong>Add skill</strong> option is directly available on the skill sheet.</p><p>Secondly, when a skill is deleted, it isn't actually deleted but instead marked as deleted.</p><p>When the package is dragged onto another actor (an NPC or Traveller), it will remove that skill from the target actor.</p><p>This can be used to modify what skills are available for characters.</p><p>Any new skills will also be added to the target actor.</p><h2>Adding Skills</h2><p>Adding a skill</p>"
+        "content": "<p>You can edit a skill on an actor by clicking the <strong>Edit</strong> link on skill roll and skill experience dialogs. This allows you to edit or delete the skill in question.</p><p>This option is only available on character sheets opened directly from the Actor entry in the Actor sidebar, or from character sheets opened from a linked token.</p><p>A skill can be added from the <strong>Add skill</strong> option on the Settings tab of most character sheets.</p><h3>Packages</h3><p>The Package actor type behaves slightly different in a couple of respects. Firstly, the <strong>Add skill</strong> option is directly available on the skill sheet.</p><p>Secondly, when a skill is deleted, it isn't actually deleted but instead marked as deleted.</p><p>When the package is dragged onto another actor (an NPC or Traveller), it will remove that skill from the target actor.</p><p>This can be used to modify what skills are available for characters.</p><p>Any new skills will also be added to the target actor.</p><h2>Adding Skills</h2><p>Adding a skill can be done from the Settings tab of a character. Each skill must have a unique internal name which is used to identify it.</p><p>A skill can be added as a speciality of another one.</p><p>Combat skills are listed for making weapon attacks,</p><p>Individual skills are those like Profession. They are parent skills, and being trained in the parent doesn't make you trained in the specialities.</p>"
       },
       "video": {
         "controls": true,
@@ -147,7 +147,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.11.8.6-DEV",
         "createdTime": 1742162325727,
-        "modifiedTime": 1742162587955,
+        "modifiedTime": 1760101621174,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!mqc59sHCYxbI3d4n.NvCJoXPKHATe66wa"
