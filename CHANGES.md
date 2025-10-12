@@ -8,6 +8,22 @@
 * On Foundry v13, active effects may need to have the 'Apply Effect' option toggled off and on before
   they take effect.
 
+## 0.15.2 (Beta)
+
+* Perform a permission check before updating a spacecraft actor. Sometimes cost calculations
+  were causing permission errors for scpacecraft in a locked compendium.
+* Move some of the source images out of the package.
+* Protection from active effects was only being applied if another armour types was already
+  being worn.
+* Character description is now displayed after the stat block, when an NPC or Traveller is
+  embedded in a journal page.
+* Add a /skill chat command to roll a named skill from the chat window. This is designed to allow
+  users who can't see the character sheet to make skill checks.
+* Update the /skills chat command to display a character's list of skills to the chat.
+* Expand the example career, with some documentation and career term items.
+* Change CSS of tables to have no background, making them more readable in dark mode.
+
+
 ## 0.15.1 (Beta)
 
 * Automatically enable effects on components if the parent is equipped.
