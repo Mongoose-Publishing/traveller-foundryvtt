@@ -1,4 +1,5 @@
 import {MGT2} from "../config.mjs";
+import {MgT2Item} from "../../documents/item.mjs";
 
 
 export async function calculateSpacecraftCost(actor) {
@@ -413,4 +414,42 @@ export function calculateHardwareAdvantages(item) {
     if (system === "power") {
         item.system.hardware.power = (item.system.hardware.rating * output) / 100;
     }
+}
+
+export function fuelCost(spacecraft) {
+    let jumpRating = 0;
+    let jumpFuel = 0;
+    let weekFuel = 0;
+
+    for (let i of spacecraft.items) {
+        if (i.type === "hardware" && i.system.hardware.system === "j-drive") {
+            if (i.system.status === MgT2Item.ACTIVE) {
+                jumpRating = i.system.hardware.rating;
+                let list = i.system.hardware.advantages.split(",");
+                let reduce = 0;
+                for (let a of list) {
+                    let t = a.trim().split(" ")[0];
+                    let n = a.trim().split(" ")[1];
+                    let adv = MGT2.SPACECRAFT_ADVANTAGES["j-drive"][t];
+                    if (adv) {
+                        if (adv.fuel) {
+                            reduce += parseInt(adv.fuel) * parseInt(n);
+                            console.log("Reduce fuel by " + reduce);
+                        }
+                    }
+                }
+                let baseCost = parseFloat(spacecraft.system.spacecraft.dtons) / 10;
+                jumpFuel = baseCost * (100 + reduce) / 100;
+            }
+        } else if (i.type === "hardware" && i.system.hardware.system === "power") {
+            if (i.system.status === MgT2Item.ACTIVE && !i.system.hardware.battery) {
+                let t = parseFloat(i.system.hardware.tons);
+                weekFuel = Math.max(1, t / 10) / 4;
+                console.log("Tons " + t);
+                console.log("Week " + weekFuel);
+            }
+        }
+    }
+
+    return { "jumpFuel": jumpFuel, "rating": jumpRating, "weekFuel": weekFuel };
 }

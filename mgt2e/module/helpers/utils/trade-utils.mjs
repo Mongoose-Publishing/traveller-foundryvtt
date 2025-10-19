@@ -93,6 +93,47 @@ function freightDm(worldActor) {
     return dm;
 }
 
+// This does oddq to axial. Also converts to zero based coordinates first.
+// https://www.redblobgames.com/grids/hexagons/#conversions-offset
+function worldToHex(world) {
+    console.log(world.system.world.location);
+    let x = parseInt(world.system.world.location.x)-1;
+    let y = parseInt(world.system.world.location.y)-1;
+
+    console.log(x + ", " + y);
+
+    let parity = x&1;
+    let q = x;
+    let r = y - (x - parity) / 2;
+
+    return { 'q': q, 'r': r };
+}
+
+function axial_subtract(a, b) {
+    return { 'q': a.q - b.q, 'r': a.r - b.r };
+}
+
+// Count the hexes between two worlds.
+// https://www.redblobgames.com/grids/hexagons/
+// Using odd-q coordinate system. Also convert to 0 based rather than 1 based.
+function distanceBetweenWorlds(sourceWorld, destinationWorld) {
+    let h1 = worldToHex(sourceWorld);
+    let h2 = worldToHex(destinationWorld);
+    console.log(h1);
+    console.log(h2);
+
+    let vec = axial_subtract(h1, h2);
+    return (Math.abs(vec.q) + Math.abs(vec.q + vec.r) + Math.abs(vec.r)) / 2;
+}
+
+/**
+ * Calculate available freight between two worlds.
+ *
+ * @param sourceWorld           This world, where freight is going from.
+ * @param destinationWorld      Dropped wrold, where freight is going to.
+ * @param effect
+ * @returns {Promise<{majorLots: number, minorLots: number, incidentalLots: number}>}
+ */
 export async function calculateFreightLots(sourceWorld, destinationWorld, effect) {
     let availableFreight = {
         incidentalLots: 0,
@@ -109,7 +150,9 @@ export async function calculateFreightLots(sourceWorld, destinationWorld, effect
     }
     await sourceWorld.deleteEmbeddedDocuments("Item", list);
 
-    let parsecsDm = 0;
+    let parsecs = distanceBetweenWorlds(sourceWorld, destinationWorld);
+    console.log("Distance: " + parsecs + "pc");
+    let parsecsDm = parsecs - 1;
     let price = 1000;
     let worldDm = freightDm(sourceWorld) + freightDm(destinationWorld) - parsecsDm;
     let name = "Cargo to " + destinationWorld.name;

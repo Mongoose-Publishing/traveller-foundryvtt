@@ -1286,7 +1286,7 @@ export class MgT2Actor extends Actor {
     }
 
     async syncedUpdate(data) {
-        if (context.actor.canUserModify(game.user)) {
+        if (this.canUserModify(game.user)) {
             return await this.update(data);
         }
         return null;

@@ -80,6 +80,17 @@
     {{else}}
         <div class="items">
             <div class="grid grid-3col">
+                {{#if system.finance }}
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.Finance.Cash'}}</label>
+                        <input class="field-value" name="system.finance.cash" type="text" value="{{system.finance.cash}}"/>
+                    </div>
+                    <div></div><div></div>
+                {{else}}
+                    <div><span class="add-finance-data">+Add Finance</span></div>
+                    <div></div>
+                    <div></div>
+                {{/if}}
                 <div class="resource flex-group-center">
                     <label class="field-label">{{localize 'MGT2.TravellerSheet.CargoSpace'}}</label>
                     <input class="field-value" type="text" value="{{system.spacecraft.cargo}}dt" readonly/>

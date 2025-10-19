@@ -374,4 +374,18 @@ export class MgT2Item extends Item {
     moveSoftware(srcActor, destActor) {
 
     }
+
+    safeUpdate(data) {
+        if (this.canUserModifer(game.user)) {
+            return this.update(data);
+        }
+        return null;
+    }
+
+    async syncdUpdate(data) {
+        if (this.canUserModifer(game.user)) {
+            return await this.update(data);
+        }
+        return null;
+    }
 }

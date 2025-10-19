@@ -2254,3 +2254,32 @@ span.button {
 table.ship-data th {
   vertical-align: top;
 }
+
+.value-box {
+  display: inline-block;
+  text-align: center;
+  background-color: #00000020;
+  border: 1px solid black;
+  padding: 2px;
+  border-radius: 2px;
+  width: 100%;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.two-data {
+  width: 95%;
+  text-align: center;
+}
+
+.two-data label {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.two-data .value-input {
+  width: 100%;
+  margin-left: 3px;
+  margin-right: 3px;
+  background-color: #f0f0f0;
+}

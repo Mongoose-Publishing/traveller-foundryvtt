@@ -17,6 +17,8 @@ import { MGT2 } from "../helpers/config.mjs";
 import {NpcIdCard} from "../helpers/id-card.mjs";
 import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
+import {MgT2TransferCargoDialog} from "../helpers/transfer-cargo-dialog.mjs";
+import {fuelCost} from "../helpers/spacecraft/spacecraft-utils.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -318,6 +320,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 context.actor.safeUpdate({"system.hits.max": hits});
             }
         }
+
+        context.fuelRequirements = fuelCost(context.actor);
 
         let mdrive = 0;
         let rdrive = 0;
@@ -1030,6 +1034,28 @@ export class MgT2ActorSheet extends ActorSheet {
                 void this._spacecraftRemoveHullOption(o.data("optionId"));
             });
 
+            html.find('.add-finance-data').click(ev => {
+               if (!this.actor.system.finance) {
+                   this.actor.system.finance = {
+                       "cash": 0,
+                       "mortage": 0,
+                       "totalMortage": 0,
+                       "runningCosts": 0
+                   }
+                   this.actor.update({"system.finance": this.actor.system.finance });
+               }
+            });
+
+            html.find('.remove-finance-data').click(ev => {
+                if (this.actor.system.finance) {
+                    this.actor.update({"system.-=finance": null });
+                }
+            });
+
+            html.find('.add-navy-data').click(ev => {
+
+            });
+
         } else if (this.actor.type === "traveller" || this.actor.type === "npc") {
             html.find('.roll-upp').click(ev => {
                this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });
@@ -1501,7 +1527,9 @@ export class MgT2ActorSheet extends ActorSheet {
             let target = isNaN(action.target)?null:parseInt(action.target);
             let dm = action.dm?action.dm:0;
 
-            if (skill.startsWith("pilot")) {
+            if (!skill) {
+                return;
+            } else if (skill.startsWith("pilot")) {
                 if (shipActor.getFlag("mgt2e", "damage_pilotDM")) {
                     dm += parseInt(shipActor.getFlag("mgt2e", "damage_pilotDM"));
                 }
@@ -2020,8 +2048,14 @@ export class MgT2ActorSheet extends ActorSheet {
 
         if (actor.uuid.indexOf(srcActorId) === -1) {
             // Move between different actors.
-            let srcActor = game.actors.get(srcActorId);
-            if (srcActor) {
+            let srcActor = await game.actors.get(srcActorId);
+
+            if (srcActor.type === "world" && this.actor.type === "spacecraft") {
+                console.log("Move to spacecraft");
+                let item = srcActor.items.get(itemId);
+                new MgT2TransferCargoDialog(srcActor, this.actor, item).render(true);
+                return false;
+            } else if (srcActor) {
                 let item = srcActor.items.get(itemId);
                 if (item.type === "hardware" || item.type === "role" || item.type === "term" || item.type === "software") {
                     return true;

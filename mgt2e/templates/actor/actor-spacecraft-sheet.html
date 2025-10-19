@@ -6,39 +6,54 @@
             <img class="profile-img shadow actor-draggable" src="{{actor.img}}" data-edit="img" data-actor-id="{{actor._id}}"
                  title="{{actor.name}}"/>
 
-            <div class="side-panel hits-box shadow">
-                <label for="system.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+            <div class="side-panel shadow">
+                <label class="box-title">{{localize 'MGT2.TravellerSheet.Hull'}}: {{prettyNumber system.hits.max 0 false}}</label>
 
-                <div>
-                    <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
-                    <input class="characteristic-value" type="number" name="system.hits.damage"
-                           title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
-                           value="{{system.hits.damage}}" data-dtype="Number"/>
-                </div>
-                <div>
-                    <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
-                    <input class="characteristic-readonly" type="number"
-                           title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
-                           value="{{system.hits.value}}"/>
+                <div class="grid-2col two-data flex-group-center">
+                    <div>
+                        <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                        <br/>
+                        <input class="value-input" type="number" name="system.hits.damage"
+                               title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
+                               value="{{system.hits.damage}}" data-dtype="Number"/>
+                    </div>
+
+                    <div>
+                        <label class="left-label">{{localize 'MGT2.TravellerSheet.Hull'}}</label>
+                        <br/>
+                        <span class="value-box">{{system.hits.value}}</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="side-panel hits-box shadow">
-                <label for="system.fuel" class="box-title">{{localize 'MGT2.TravellerSheet.Fuel'}}</label>
+            {{#if system.spacecraft.fuel.max includeZero=false}}
+                <div class="side-panel shadow">
+                    <label class="box-title">{{localize 'MGT2.TravellerSheet.Fuel'}}: {{prettyNumber system.spacecraft.fuel.max 2 false}}</label>
 
-                <div>
-                    <label class="left-label">{{localize 'MGT2.TravellerSheet.CurrentFuel'}}</label>
-                    <input class="characteristic-value" type="number" name="system.spacecraft.fuel.value"
-                           title="{{localize 'MGT2.TravellerSheet.CurrentFuel'}}"
-                           value="{{system.spacecraft.fuel.value}}" data-dtype="Number"/>
+                    <div class="grid-2col two-data flex-group-center">
+                        <div class="grid-span-2">
+                            <label class="left-label">{{localize 'MGT2.TravellerSheet.CurrentFuel'}}</label>
+                            <input class="value-input" type="number" name="system.spacecraft.fuel.value"
+                                   title="{{localize 'MGT2.TravellerSheet.CurrentFuel'}}"
+                                   value="{{system.spacecraft.fuel.value}}" data-dtype="Number"/>
+                        </div>
+                        {{#if fuelRequirements.jumpFuel includeZero=false}}
+                            <div>
+                                <label class="left-label">Jump-1</label>
+                                <br/>
+                                <span class="value-box">{{prettyNumber fuelRequirements.jumpFuel 2 false}}</span>
+                            </div>
+                        {{/if}}
+                        {{#if fuelRequirements.weekFuel includeZero=false}}
+                            <div>
+                                <label class="left-label">Weekly</label>
+                                <br/>
+                                <span class="value-box">{{prettyNumber fuelRequirements.weekFuel 2 false}}</span>
+                            </div>
+                        {{/if}}
+                    </div>
                 </div>
-                <div>
-                    <label class="left-label">{{localize 'MGT2.TravellerSheet.MaxFuel'}}</label>
-                    <input class="characteristic-readonly" type="number"
-                           title="{{localize 'MGT2.TravellerSheet.MaxFuel'}}"
-                           value="{{system.spacecraft.fuel.max}}"/>
-                </div>
-            </div>
+            {{/if}}
 
             {{#if system.spacecraft.navy.naval}}
                 <div class="side-panel supply-box shadow">
