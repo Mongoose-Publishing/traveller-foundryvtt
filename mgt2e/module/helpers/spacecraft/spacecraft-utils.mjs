@@ -1,5 +1,6 @@
 import {MGT2} from "../config.mjs";
 import {MgT2Item} from "../../documents/item.mjs";
+import {MgT2BuyCargoApp} from "../dialogs/buy-cargo-app.mjs";
 
 
 export async function calculateSpacecraftCost(actor) {
@@ -449,4 +450,104 @@ export function fuelCost(spacecraft) {
     }
 
     return { "jumpFuel": jumpFuel, "rating": jumpRating, "weekFuel": weekFuel };
+}
+
+export async function buyCargoDialog(worldActor, shipActor, item) {
+    if (!item || !item.system?.cargo) {
+        return false;
+    }
+
+    let freeSpace = parseFloat(shipActor.system.spacecraft.cargo);
+    for (let i of shipActor.items) {
+        if (i.type === "cargo") {
+            freeSpace -= parseFloat(i.system.quantity);
+        }
+    }
+    console.log("Cargo Remaining: " + freeSpace);
+    if (freeSpace <= 0) {
+        ui.notifications.warn("The ship has no available cargo space");
+        return false;
+    }
+
+    if (item.system.cargo.freight) {
+        console.log("Freight cargo");
+
+        let destination = await fromUuid(item.system.cargo.destinationId);
+
+        if (item.system.quantity > freeSpace) {
+            ui.notifications.warn("Not enough space");
+            return false;
+        }
+
+        let data = {
+            "item": item,
+            "destination": destination,
+            "freeSpace": freeSpace
+        };
+
+        const content = await renderTemplate("systems/mgt2e/templates/dialogs/transfer-freight.html", data);
+        const transferCargo = await foundry.applications.api.DialogV2.confirm({
+            window: {
+                title: "Transfer Freight?"
+            },
+            content,
+            modal: true
+        });
+        console.log("Answer is " + transferCargo);
+
+        if (transferCargo) {
+            // Remove from world.
+            worldActor.deleteEmbeddedDocuments("Item", [ item.id ]);
+
+            const itemData = {
+                "name": item.name,
+                "img": item.img,
+                "type": "cargo",
+                "system": item.system
+            }
+            itemData.system.cargo.confirmed = true;
+            console.log(itemData);
+            Item.create(itemData, { parent: shipActor });
+        }
+
+        return transferCargo;
+    } else if (item.system.cargo.speculative) {
+        console.log("Speculative cargo");
+
+        if (!shipActor.system.finance) {
+            ui.notifications.warn("Ship has no financial information");
+            return false;
+        }
+        if (parseInt(item.system.cost) > parseInt(shipActor.system.finance.cash)) {
+            ui.notifications.warn("Cargo is too expensive");
+            return false;
+        }
+
+        new MgT2BuyCargoApp(worldActor, shipActor, item).render(true);
+    }
+    return false;
+}
+
+// Transfer cargo from a ship to a world.
+export async function sellCargoDialog(shipActor, worldActor, item) {
+    if (!item || !item.system?.cargo) {
+        return false;
+    }
+    if (item.system.cargo.freight) {
+        console.log("Sell freight cargo");
+        let destination = await fromUuid(item.system.cargo.destinationId);
+        console.log(item);
+
+        if (item.system.cargo.destinationId !== worldActor.uuid) {
+            ui.notifications.warn("Wrong world");
+            return;
+        }
+
+        let price = parseInt(item.system.cargo.price) * parseInt(item.system.quantity);
+        shipActor.deleteEmbeddedDocuments("Item", [ item.id ]);
+        shipActor.update({"system.finance.cash": parseInt(shipActor.system.finance.cash) + price });
+
+    } else if (item.system.cargo.speculative) {
+
+    }
 }

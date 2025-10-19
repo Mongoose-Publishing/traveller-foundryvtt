@@ -1,19 +1,27 @@
-import {MgT2Item} from "../documents/item.mjs";
+import {MgT2Item} from "../../documents/item.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 // First attempt at ApplicationV2 dialog.
 // see: https://foundryvtt.wiki/en/development/api/applicationv2
-export class MgT2TransferCargoDialog extends HandlebarsApplicationMixin(ApplicationV2) {
+// Dialog to buy speculative cargo.
+export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
+
+    constructor(worldActor, shipActor, cargoItem) {
+        super();
+        this.worldActor = worldActor;
+        this.shipActor = shipActor;
+        this.cargoItem = cargoItem;
+    }
 
     static DEFAULT_OPTIONS = {
         tag: "form",
         form: {
-            handler: MgT2TransferCargoDialog.formHandler,
+            handler: MgT2BuyCargoApp.formHandler,
             submitOnChange: false,
             closeOnSubmit: false
         },
         actions: {
-            changeQuantity: MgT2TransferCargoDialog.changeQuantityAction
+            changeQuantity: MgT2BuyCargoApp.changeQuantityAction
         },
         window: {
             title: "Transfer Cargo to Ship"
@@ -22,7 +30,7 @@ export class MgT2TransferCargoDialog extends HandlebarsApplicationMixin(Applicat
 
     static PARTS = {
         form: {
-            template: "systems/mgt2e/templates/transfer-cargo-dialog.html"
+            template: "systems/mgt2e/templates/dialogs/transfer-cargo-dialog.html"
         }
     }
 
@@ -48,14 +56,24 @@ export class MgT2TransferCargoDialog extends HandlebarsApplicationMixin(Applicat
         console.log("_preparePartContext: " + partId);
         context.partId = `${this.id}-${partId}`;
 
-        if (this.srcItem) {
+        let freeSpace = parseFloat(this.shipActor.system.spacecraft.cargo);
+        for (let i of this.shipActor.items) {
+            if (i.type === "cargo") {
+                freeSpace -= parseFloat(i.system.quantity);
+            }
+        }
+        context.freeSpace = freeSpace;
+        context.availableCash = this.shipActor.system.finance.cash;
+
+        if (this.cargoItem) {
             // This should always be set.
-            console.log(this.srcItem);
-            context.item = this.srcItem;
-            context.cargo = this.srcItem.system.cargo;
+            console.log(this.cargoItem);
+            context.item = this.cargoItem;
+            context.cargo = this.cargoItem.system.cargo;
             if (context.cargo.speculative) {
                 // Speculative Goods
                 context.speculative = true;
+                context.variance = this.cargoItem.system.cost - this.cargoItem.system.cargo.price;
             } else if (context.cargo.freight) {
                 // Freight. Nice and easy.
                 context.speculative = false;
@@ -76,18 +94,19 @@ export class MgT2TransferCargoDialog extends HandlebarsApplicationMixin(Applicat
 
     static async formHandler(event, form, formData) {
 
+        console.log("formHandler:");
+        console.log(event);
+        console.log(form);
+        console.log(formData);
+
+        return null;
     }
 
     static changeQuantityAction(event, target) {
         console.log("changeQuantityAction:");
     }
 
-    constructor(srcActor, destActor, srcItem) {
-        super();
-        this.srcActor = srcActor;
-        this.destActor = destActor;
-        this.srcItem = srcItem;
-    }
+
 
     getData() {
         console.log("Number is " + this.transferNumber);
@@ -128,13 +147,13 @@ export class MgT2TransferCargoDialog extends HandlebarsApplicationMixin(Applicat
         console.log("Custom number " + number);
 
         // Need to find the item that has been copied to the destination.
-        let destItems = this.destActor.items.contents
+        let destItems = this.shipActor.items.contents
         this.destItem = null;
         for (let i=0; i < destItems.length; i++) {
-            console.log(this.srcItem.name + "  ==  " + destItems[i].name);
-            if (this.srcItem.name === destItems[i].name) {
-                console.log(this.srcItem.name + "  ===  " + destItems[i].name);
-                if (this.srcItem.system.quantity === destItems[i].system.quantity) {
+            console.log(this.cargoItem.name + "  ==  " + destItems[i].name);
+            if (this.cargoItem.name === destItems[i].name) {
+                console.log(this.cargoItem.name + "  ===  " + destItems[i].name);
+                if (this.cargoItem.system.quantity === destItems[i].system.quantity) {
                     this.destItem = destItems[i];
                     break;
                 }
@@ -149,17 +168,17 @@ export class MgT2TransferCargoDialog extends HandlebarsApplicationMixin(Applicat
         } else {
             // Number is the custom number.
         }
-        console.log("Source item is [" + this.srcItem.name + "]");
+        console.log("Source item is [" + this.cargoItem.name + "]");
         console.log("Destination item is [" + this.destItem.name + "]");
 
-        if (number >= this.srcItem.system.quantity) {
-            this.srcActor.deleteEmbeddedDocuments("Item", [this.srcItem.id]);
+        if (number >= this.cargoItem.system.quantity) {
+            this.worldActor.deleteEmbeddedDocuments("Item", [this.cargoItem.id]);
         } else if (number < 1) {
             //this.destActor.deleteEmbeddedDocuments("Item", [this.destItem.id]);
         } else {
-            this.srcItem.system.quantity -= number;
+            this.cargoItem.system.quantity -= number;
             this.destItem.system.quantity = number;
-            this.srcItem.update({ "system.quantity": this.srcItem.system.quantity });
+            this.cargoItem.update({ "system.quantity": this.cargoItem.system.quantity });
             this.destItem.update({ "system.quantity": this.destItem.system.quantity });
 
             if (this.destItem.system.status) {
@@ -176,4 +195,4 @@ export class MgT2TransferCargoDialog extends HandlebarsApplicationMixin(Applicat
     }
 }
 
-window.MgT2TransferCargoDialog = MgT2TransferCargoDialog;
+window.MgT2BuyCargoApp = MgT2BuyCargoApp;

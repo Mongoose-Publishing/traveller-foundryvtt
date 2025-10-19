@@ -66,6 +66,9 @@ export class MgT2Item extends Item {
                     ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.OnlyOnCharacter",
                         {item: this.name, type: this.type}));
                     return false;
+                } else if (this.type === "cargo") {
+                    // Only allow cargo to be added if it has a confirmed flag set.
+                    return !!this.system.cargo.confirmed;
                 }
             } else if (this.actor.type === "world") {
                 // Nothing to do here.
@@ -112,6 +115,9 @@ export class MgT2Item extends Item {
             this.update({"system.term.termLength": r.total });
             this.update({"system.term.randomTerm": false });
             return;
+        } else if (actor.type === "spacecraft" && this.type === "cargo") {
+            // Removed the confirmation flag.
+            this.update({"system.cargo.-=confirmed": null});
         }
     }
 

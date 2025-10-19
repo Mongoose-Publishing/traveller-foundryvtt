@@ -16,9 +16,11 @@ import {Tools} from "../helpers/chat/tools.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {NpcIdCard} from "../helpers/id-card.mjs";
 import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
-import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
-import {MgT2TransferCargoDialog} from "../helpers/transfer-cargo-dialog.mjs";
-import {fuelCost} from "../helpers/spacecraft/spacecraft-utils.mjs";
+import {
+    buyCargoDialog,
+    fuelCost,
+    sellCargoDialog
+} from "../helpers/spacecraft/spacecraft-utils.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -2031,7 +2033,6 @@ export class MgT2ActorSheet extends ActorSheet {
             if (item && item.type === "term" && (this.actor.type === "traveller" || this.actor.type === "package")) {
                 await this._onDropTerm(item);
             }
-
             return true;
         }
 
@@ -2051,8 +2052,16 @@ export class MgT2ActorSheet extends ActorSheet {
             if (srcActor.type === "world" && this.actor.type === "spacecraft") {
                 console.log("Move to spacecraft");
                 let item = srcActor.items.get(itemId);
-                new MgT2TransferCargoDialog(srcActor, this.actor, item).render(true);
-                return false;
+                if (item.type === "cargo") {
+                    await buyCargoDialog(srcActor, this.actor, item);
+                }
+                return true;
+            } else if (srcActor.type === "spacecraft" && this.actor.type === "world") {
+                let item = srcActor.items.get(itemId);
+                if (item.type === "cargo") {
+                    await sellCargoDialog(srcActor, this.actor, item);
+                }
+                return true;
             } else if (srcActor) {
                 let item = srcActor.items.get(itemId);
                 if (item.type === "hardware" || item.type === "role" || item.type === "term" || item.type === "software") {
