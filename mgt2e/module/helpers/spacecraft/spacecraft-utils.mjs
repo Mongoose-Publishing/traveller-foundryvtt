@@ -434,7 +434,6 @@ export function fuelCost(spacecraft) {
                     if (adv) {
                         if (adv.fuel) {
                             reduce += parseInt(adv.fuel) * parseInt(n);
-                            console.log("Reduce fuel by " + reduce);
                         }
                     }
                 }
@@ -445,8 +444,6 @@ export function fuelCost(spacecraft) {
             if (i.system.status === MgT2Item.ACTIVE && !i.system.hardware.battery) {
                 let t = parseFloat(i.system.hardware.tons);
                 weekFuel = Math.max(1, t / 10) / 4;
-                console.log("Tons " + t);
-                console.log("Week " + weekFuel);
             }
         }
     }

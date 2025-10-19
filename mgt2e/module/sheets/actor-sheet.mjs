@@ -311,14 +311,12 @@ export class MgT2ActorSheet extends ActorSheet {
                 hits = (hits * config.hull);
             }
         }
-        hits = Math.floor(hits);
+        hits = parseInt(Math.floor(hits));
 
-        if (hits !== actorData.hits.max && actorData.settings.autoHits) {
+        if (hits !== parseInt(actorData.hits.max) && actorData.settings.autoHits) {
             actorData.hits.max = hits;
             actorData.hits.value = hits - actorData.hits.damage;
-            if (context.actor.canUserModify(game.user)) {
-                context.actor.safeUpdate({"system.hits.max": hits});
-            }
+            context.actor.safeUpdate({"system.hits.max": hits});
         }
 
         context.fuelRequirements = fuelCost(context.actor);

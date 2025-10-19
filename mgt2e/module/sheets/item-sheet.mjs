@@ -621,7 +621,6 @@ export class MgT2ItemSheet extends ItemSheet {
         if (ship === null || ship.type !== "spacecraft") {
             return;
         }
-
         if (!item.system.status) {
             switch (item.system.hardware.system) {
                 case "power": case "j-drive": case "m-drive":
