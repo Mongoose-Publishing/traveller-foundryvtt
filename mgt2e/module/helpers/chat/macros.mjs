@@ -283,6 +283,9 @@ MgT2eMacros.specialityGain = function(actorId, skill, level) {
 
         if (skills[skillId] && skills[skillId].specialities[specId]) {
             let spec = skills[skillId].specialities[specId];
+            if (skills[skillId].individual) {
+                spec.trained = true;
+            }
             if (level === "undefined") {
                 if (spec.value < 4) {
                     spec.value = Number(spec.value) + 1;
