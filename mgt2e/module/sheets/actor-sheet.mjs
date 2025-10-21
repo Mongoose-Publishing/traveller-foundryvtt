@@ -1145,7 +1145,12 @@ export class MgT2ActorSheet extends ActorSheet {
         li.setAttribute("draggable", true);
         li.addEventListener("dragstart", handler, false);
       });
-
+    }
+    if (this.actor.type === "world") {
+        html.find('.trade-item').each((i, li) => {
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", handler, false);
+        });
     }
     html.find('div.skill-draggable').each((i, div) => {
       if (div.getAttribute("data-rolltype") === "skill") {

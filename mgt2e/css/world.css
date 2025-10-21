@@ -45,3 +45,42 @@
   text-align: center;
   font-size: x-large;
 }
+
+
+table.trade-list {
+}
+
+table.trade-list th {
+  font-weight: bold;
+}
+
+table.trade-list td.trade-quantity {
+  text-align: right;
+}
+
+table.trade-list td.trade-price {
+  text-align: right;
+}
+
+
+td.trade-name img {
+  width: 32px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+span.sale1 {
+  color: green;
+}
+
+span.sale-1 {
+  color: red;
+}
+
+span.buy1 {
+  color: red;
+}
+
+span.buy-1 {
+  color: green;
+}

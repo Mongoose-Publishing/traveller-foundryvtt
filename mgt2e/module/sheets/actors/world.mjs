@@ -25,6 +25,12 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
             // Append to gear.
             if (i.type === 'cargo') {
+                // Add some meta data.
+                let basePrice = i.system.cargo.price;
+                i.system.cargo.costDiff = i.system.cost - basePrice;
+                i.system.cargo.costSign = Math.sign(i.system.cargo.costDiff);
+                i.system.cargo.saleDiff = i.system.cargo.salePrice - basePrice;
+                i.system.cargo.saleSign = Math.sign(i.system.cargo.saleDiff);
                 context.cargo.push(i);
             } else if (i.type === "worlddata") {
                 if (i.system?.world?.datatype === "faction") {

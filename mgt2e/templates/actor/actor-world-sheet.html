@@ -276,27 +276,54 @@
                             <input class="generateSpeculative" type="button" value="Speculate"/>
                         </div>
                         {{#if cargo}}
-                            <ol class="items-list actor-items grid grid-3col">
+                            <table class="trade-list items-list">
+                                <tr class="trade-list-header">
+                                    <th class="trade-name">Trade Good</th>
+                                    <th class="trade-quantity">Quantity</th>
+                                    <th class="trade-buy">Buy (Cr)</th>
+                                    <th class="trade-buy">+/-</th>
+                                    <th class="trade-sell">Sell (Cr)</th>
+                                    <th class="trade-sell">+/-</th>
+                                </tr>
                                 {{#each cargo as |item id|}}
                                     {{#if item.system.cargo.speculative}}
-                                        <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
-                                            <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
-                                            <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                                            {{#if item.system.quantity includeZero=false}}
-                                            <span>{{item.system.quantity}}dt</span>
-                                            <br/>
-                                            {{/if}}
-                                            {{#if item.system.cost includeZero=false}}
-                                            <span>Cr{{niceNumber item.system.cost}}</span>
-                                            {{/if}}
-                                            <div class="item-controls">
-                                                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                                            </div>
-                                        </li>
+                                        <tr class="item item-gear ship-cargo trade-item" data-item-id="{{item._id}}">
+                                            <td class="trade-name"><img src="{{item.img}}"/> {{item.name}}</td>
+                                            <td class="trade-quantity">
+                                                {{#if item.system.quantity includeZero=false}}
+                                                    {{item.system.quantity}}
+                                                {{else}}
+                                                    -
+                                                {{/if}}
+                                            </td>
+                                            <td class="trade-price">
+                                                {{#if item.system.quantity includeZero=false}}
+                                                    {{prettyNumber item.system.cost 0 false}}
+                                                {{else}}
+                                                    -
+                                                {{/if}}
+                                            </td>
+                                            <td class="trade-price">
+                                                {{#if item.system.quantity includeZero=false}}
+                                                    <span class="buy{{item.system.cargo.costSign}}">
+                                                        {{prettyNumber item.system.cargo.costDiff 0 true}}
+                                                    </span>
+                                                {{else}}
+                                                    -
+                                                {{/if}}
+                                            </td>
+                                            <td class="trade-price">
+                                                {{prettyNumber item.system.cargo.salePrice 0 false}}
+                                            </td>
+                                            <td class="trade-price">
+                                                <span class="sale{{item.system.cargo.saleSign}}">
+                                                    {{prettyNumber item.system.cargo.saleDiff 0 true}}
+                                                </span>
+                                            </td>
+                                        </tr>
                                     {{/if}}
                                 {{/each}}
-                            </ol>
+                            </table>
                         {{else}}
                             <p>{{localize 'MGT2.TravellerSheet.DragCargo'}}</p>
                         {{/if}}
@@ -304,9 +331,6 @@
                 </div>
             </div>
         </div>
-
     </section>
-
-
 </form>
 

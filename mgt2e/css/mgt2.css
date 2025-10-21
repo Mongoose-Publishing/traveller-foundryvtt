@@ -2283,3 +2283,7 @@ table.ship-data th {
   margin-right: 3px;
   background-color: #f0f0f0;
 }
+
+li.ship-cargo h4.price-only {
+  color: #707070;
+}

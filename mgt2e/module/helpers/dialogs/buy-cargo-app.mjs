@@ -30,8 +30,21 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     static PARTS = {
         form: {
-            template: "systems/mgt2e/templates/dialogs/transfer-cargo-dialog.html"
+            template: "systems/mgt2e/templates/dialogs/buy-speculative.html"
+        },
+        footer: {
+            template: "templates/generic/form-footer.hbs"
         }
+    }
+
+    async _prepareContext(options) {
+        const context = {
+            buttons: [
+                { type: "submit", icon: "fa-solid fa-save", label: "Accept" }
+            ]
+        }
+
+        return context;
     }
 
     /**
@@ -74,18 +87,20 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 // Speculative Goods
                 context.speculative = true;
                 context.variance = this.cargoItem.system.cost - this.cargoItem.system.cargo.price;
-            } else if (context.cargo.freight) {
-                // Freight. Nice and easy.
-                context.speculative = false;
-                let worldId = context.cargo.destinationId;
-                let world = await fromUuid(worldId);
-                console.log(world);
-                context.destination = world;
+
+                context.QUANTITY_LIST = {};
+
+                // What's the most that we can buy? Limited by cargo and price.
+                let maxQuantity = Math.min(freeSpace, this.cargoItem.system.quantity);
+                maxQuantity = Math.min(maxQuantity, parseInt(context.availableCash / this.cargoItem.system.cost));
+                for (let q=1; q <= maxQuantity; q++) {
+                    context.QUANTITY_LIST[q] = `${q}dt (Cr${q * this.cargoItem.system.cost})`;
+                }
+                context.qty = maxQuantity;
             } else {
                 // Unexpected. Probably not dragged from a world.
                 context.error = "Don't know what to do";
             }
-
         }
 
         return context;
@@ -120,7 +135,7 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
     activateListeners(html) {
         super.activateListeners(html);
         const save = html.find("button[class='save']");
-        save.on("click", event => this.onSaveClick(event, html));
+        //save.on("click", event => this.onSaveClick(event, html));
 
         html.find(".quantity-inc").click(ev => this._changeQuantity(+1, html));
         html.find(".quantity-dec").click(ev => this._changeQuantity(-1, html));

@@ -1,13 +1,29 @@
 <div>
-    <h2>Buy {{item.name}}</h2>
+    <div>
+        <h2>{{item.name}}</h2>
 
-    <p>
-        <b>Total Available: </b> {{item.system.quantity}}dt
-    </p>
-    <p>
-        <b>Unit Price: </b> Cr{{prettyNumber item.system.cost 0 false}}
-    </p>
-    <p>
-        <b>Purchase Units: </b> 0
-    </p>
+        <p>
+            <b>Total Available:</b> {{prettyNumber item.system.quantity 0 false}}dt
+        </p>
+        <p>
+            <b>Unit Price:</b> Cr{{prettyNumber item.system.cost 0 false}}
+        </p>
+        <p>
+            <b>Available Cash:</b> Cr{{prettyNumber availableCash 0 false}}
+        </p>
+        <p>
+            <b>Free Space:</b> {{prettyNumber freeSpace 0 false}}dt
+        </p>
+        <p>
+            <b>Price Variant:</b> Cr{{prettyNumber variance 0 true}}
+        </p>
+
+        <p>
+            <label>Quantity
+                <select name="quantitySelect">
+                    {{selectOptions QUANTITY_LIST selected=qty}}
+                </select>
+            </label>
+        </p>
+    </div>
 </div>

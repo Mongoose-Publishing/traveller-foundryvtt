@@ -96,11 +96,8 @@ function freightDm(worldActor) {
 // This does oddq to axial. Also converts to zero based coordinates first.
 // https://www.redblobgames.com/grids/hexagons/#conversions-offset
 function worldToHex(world) {
-    console.log(world.system.world.location);
     let x = parseInt(world.system.world.location.x)-1;
     let y = parseInt(world.system.world.location.y)-1;
-
-    console.log(x + ", " + y);
 
     let parity = x&1;
     let q = x;
@@ -119,9 +116,6 @@ function axial_subtract(a, b) {
 function distanceBetweenWorlds(sourceWorld, destinationWorld) {
     let h1 = worldToHex(sourceWorld);
     let h2 = worldToHex(destinationWorld);
-    console.log(h1);
-    console.log(h2);
-
     let vec = axial_subtract(h1, h2);
     return (Math.abs(vec.q) + Math.abs(vec.q + vec.r) + Math.abs(vec.r)) / 2;
 }
@@ -152,8 +146,63 @@ export async function calculateFreightLots(sourceWorld, destinationWorld, effect
 
     let parsecs = distanceBetweenWorlds(sourceWorld, destinationWorld);
     console.log("Distance: " + parsecs + "pc");
+
+    if (parsecs < 1) {
+        ui.notifications.warn("You can't trade with the same world");
+        return null;
+    }
+    if (parsecs > 6) {
+        ui.notifications.warn("There is no trade beyond 6 parsecs");
+        return null;
+    }
+
     let parsecsDm = parsecs - 1;
-    let price = 1000;
+    let price = 1000, highPassage = 9000, middlePassage  = 6500, basicPassage = 2000, lowPassage = 700;
+    switch (parsecs) {
+        case 1:
+            highPassage = 9000;
+            middlePassage = 6500;
+            basicPassage = 2000;
+            lowPassage = 700;
+            price = 1000;
+            break;
+        case 2:
+            highPassage = 14000;
+            middlePassage = 10000;
+            basicPassage = 3000;
+            lowPassage = 1300;
+            price = 1600;
+            break;
+        case 3:
+            highPassage = 21000;
+            middlePassage = 14000;
+            basicPassage = 5000;
+            lowPassage = 2200;
+            price = 2600;
+            break;
+        case 4:
+            highPassage = 34000;
+            middlePassage = 23000;
+            basicPassage = 8000;
+            lowPassage = 3900;
+            price = 4400;
+            break;
+        case 5:
+            highPassage = 60000;
+            middlePassage = 40000;
+            basicPassage = 14000;
+            lowPassage = 7200;
+            price = 8500;
+            break;
+        case 6:
+            highPassage = 210000;
+            middlePassage = 130000;
+            basicPassage = 55000;
+            lowPassage = 27000;
+            price = 32000;
+            break;
+    }
+
     let worldDm = freightDm(sourceWorld) + freightDm(destinationWorld) - parsecsDm;
     let name = "Cargo to " + destinationWorld.name;
 
@@ -294,7 +343,7 @@ async function getSalePrice(basePrice, dm) {
 }
 
 
-async function createTradeItem(worldActor, item) {
+async function createTradeItem(worldActor, item, available) {
     const srcCargo = item.system.cargo;
 
     // Need to roll for how many tons of this type of good. However,
@@ -311,15 +360,17 @@ async function createTradeItem(worldActor, item) {
         tonnage = tonnage.replace(/([0-9]+D6)/i, `($1 ${modifier})`);
     }
     const roll = await new Roll(tonnage).evaluate();
-    if (roll.total <= 0) {
+    let tonnes = roll.total;
+    if (tonnes <= 0 || !available) {
         // No cargo here due to population modifier.
-        return;
+        // However, we want to display it due to recording the sale price.
+        tonnes = 0;
     }
 
     // First, if this trade item already exists as speculative trade, append it.
     for (let i of worldActor.items) {
         if (item.name === i.name && i.type === "cargo" && i.system.cargo.speculative) {
-            i.system.quantity += roll.total;
+            i.system.quantity += tonnes;
             i.update({"system.quantity": i.system.quantity });
             return;
         }
@@ -332,13 +383,14 @@ async function createTradeItem(worldActor, item) {
         dm += Number(worldActor.system.world.meta.brokerScore);
     }
     let cost = await getPurchasePrice(srcCargo.price, dm);
+    let sell = await getSalePrice(srcCargo.price, dm);
 
     const itemData = {
         "name": item.name,
         "img": item.img,
         "type": "cargo",
         "system": {
-            "quantity": roll.total,
+            "quantity": tonnes,
             "description": item.system.description,
             "cost": cost,
             "cargo": {
@@ -346,11 +398,12 @@ async function createTradeItem(worldActor, item) {
                 "availability": srcCargo.availability,
                 "purchaseDM": srcCargo.purchaseDM,
                 "saleDM": srcCargo.saleDM,
-                "tons": roll.total,
+                "tons": tonnes,
                 "illegal": srcCargo.illegal,
                 "sourceId": worldActor.uuid,
                 "destinationId": null,
-                "speculative": true
+                "speculative": true,
+                "salePrice": sell
             }
         }
     }
@@ -408,9 +461,7 @@ export async function createSpeculativeGoods(worldActor, illegal) {
                 }
             }
         }
-        if (available) {
-            await createTradeItem(worldActor, item);
-        }
+        await createTradeItem(worldActor, item, available);
     }
     // Now look for the random extras. Roll once per population code.
     let number = tradeFolder.contents.length;
@@ -430,7 +481,7 @@ export async function createSpeculativeGoods(worldActor, illegal) {
                 item = null;
             }
         }
-        await createTradeItem(worldActor, item);
+        await createTradeItem(worldActor, item, true);
     }
 
 }
