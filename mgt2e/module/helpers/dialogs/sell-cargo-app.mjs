@@ -4,12 +4,12 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 // First attempt at ApplicationV2 dialog.
 // see: https://foundryvtt.wiki/en/development/api/applicationv2
 // Dialog to buy speculative cargo.
-export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
+export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
-    constructor(worldActor, shipActor, cargoItem) {
+    constructor(shipActor, worldActor, cargoItem) {
         super();
-        this.worldActor = worldActor;
         this.shipActor = shipActor;
+        this.worldActor = worldActor;
         this.cargoItem = cargoItem;
     }
 
@@ -21,7 +21,7 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
             closeOnSubmit: false
         },
         actions: {
-            changeQuantity: MgT2BuyCargoApp.changeQuantityAction
+            changeQuantity: MgT2SellCargoApp.changeQuantityAction
         },
         window: {
             title: "Transfer Cargo to Ship"
@@ -30,7 +30,7 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     static PARTS = {
         form: {
-            template: "systems/mgt2e/templates/dialogs/buy-speculative.html"
+            template: "systems/mgt2e/templates/dialogs/sell-speculative.html"
         },
         footer: {
             template: "templates/generic/form-footer.hbs"
@@ -40,7 +40,7 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
     async _prepareContext(options) {
         const context = {
             buttons: [
-                { type: "submit", icon: "fa-solid fa-save", label: "Buy" }
+                { type: "submit", icon: "fa-solid fa-save", label: "Sell" }
             ]
         }
 
@@ -69,30 +69,23 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
         console.log("_preparePartContext: " + partId);
         context.partId = `${this.id}-${partId}`;
 
-        let freeSpace = parseFloat(this.shipActor.system.spacecraft.cargo);
-        for (let i of this.shipActor.items) {
-            if (i.type === "cargo") {
-                freeSpace -= parseFloat(i.system.quantity);
-            }
-        }
-        context.freeSpace = freeSpace;
-        context.availableCash = this.shipActor.system.finance.cash;
-
         if (this.cargoItem) {
             // This should always be set.
             console.log(this.cargoItem);
             context.item = this.cargoItem;
             context.cargo = this.cargoItem.system.cargo;
             if (context.cargo.speculative) {
-                // Speculative Goods
-                context.speculative = true;
-                context.variance = this.cargoItem.system.cost - this.cargoItem.system.cargo.price;
-
+                // What price is the world buying at?
+                context.salePrice = 0;
+                for (let i of this.worldActor.items) {
+                    if (i.type === "cargo" && i.name === this.cargoItem.name) {
+                        context.salePrice = i.system.cargo.salePrice;
+                        context.variance = i.system.cargo.salePrice - i.system.cargo.price;
+                    }
+                }
                 context.QUANTITY_LIST = {};
-
                 // What's the most that we can buy? Limited by cargo and price.
-                let maxQuantity = Math.min(freeSpace, this.cargoItem.system.quantity);
-                maxQuantity = Math.min(maxQuantity, parseInt(context.availableCash / this.cargoItem.system.cost));
+                let maxQuantity = this.cargoItem.system.quantity;
                 for (let q=1; q <= maxQuantity; q++) {
                     context.QUANTITY_LIST[q] = `${q}dt (Cr${q * this.cargoItem.system.cost})`;
                 }

@@ -1931,7 +1931,7 @@ export class MgT2ActorSheet extends ActorSheet {
                     name: item.name,
                     img: item.img,
                     type: item.type,
-                    system: deepClone(item.system)
+                    system: foundry.utils.deepClone(item.system)
                 };
                 if (this.actor.type === "npc" && (itemData.type === "term" || itemData.type === "associate")) {
                     // NPCs don't have career terms or associates.
