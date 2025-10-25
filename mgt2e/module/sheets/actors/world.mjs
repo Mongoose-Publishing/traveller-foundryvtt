@@ -211,6 +211,17 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         // Do thing.
         super._onDropItem(event, data);
         console.log("On drop item");
+        let droppedItem = await fromUuid(data.uuid);
+        if (!droppedItem) {
+            return;
+        }
+
+        if (["cargo"].includes(droppedItem.type)) {
+            console.log("Dropping cargo on world");
+
+            return true;
+        }
+
         return;
     }
 

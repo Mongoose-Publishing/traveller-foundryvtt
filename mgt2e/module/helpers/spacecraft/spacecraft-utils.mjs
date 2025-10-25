@@ -1,6 +1,7 @@
 import {MGT2} from "../config.mjs";
 import {MgT2Item} from "../../documents/item.mjs";
 import {MgT2BuyCargoApp} from "../dialogs/buy-cargo-app.mjs";
+import {MgT2SellCargoApp} from "../dialogs/sell-cargo-app.mjs";
 
 
 export async function calculateSpacecraftCost(actor) {
@@ -505,7 +506,7 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
                 "type": "cargo",
                 "system": item.system
             }
-            itemData.system.cargo.confirmed = true;
+            itemData.system.confirmed = shipActor.uuid;
             console.log(itemData);
             Item.create(itemData, { parent: shipActor });
         }
@@ -548,6 +549,11 @@ export async function sellCargoDialog(shipActor, worldActor, item) {
         shipActor.update({"system.finance.cash": parseInt(shipActor.system.finance.cash) + price });
 
     } else if (item.system.cargo.speculative) {
-
+        console.log("Sell speculative cargo");
+        if (!shipActor.system.finance) {
+            ui.notifications.warn("Ship has no financial information");
+            return false;
+        }
+        new MgT2SellCargoApp(shipActor, worldActor, item).render(true);
     }
 }

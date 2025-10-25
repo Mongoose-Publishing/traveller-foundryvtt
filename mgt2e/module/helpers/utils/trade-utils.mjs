@@ -256,10 +256,7 @@ function getModifiedPrice(basePrice, percentage) {
     return Math.round((Number(basePrice) * Number(percentage)) / 100);
 }
 
-async function getPurchasePrice(basePrice, dm) {
-    let roll = await new Roll(`3D6 + ${dm}`, null).evaluate();
-    let total = roll.total;
-
+async function getPurchasePrice(basePrice, total) {
     if (total < -3) {
         return getModifiedPrice(basePrice, 300);
     } else if (total > 25) {
@@ -299,10 +296,7 @@ async function getPurchasePrice(basePrice, dm) {
     }
 }
 
-async function getSalePrice(basePrice, dm) {
-    let roll = await new Roll(`3D6 + ${dm}`, null).evaluate();
-    let total = roll.total;
-
+async function getSalePrice(basePrice, total) {
     if (total < -3) {
         return getModifiedPrice(basePrice, 10);
     } else if (total > 25) {
@@ -382,8 +376,9 @@ async function createTradeItem(worldActor, item, available) {
     } else {
         dm += Number(worldActor.system.world.meta.brokerScore);
     }
-    let cost = await getPurchasePrice(srcCargo.price, dm);
-    let sell = await getSalePrice(srcCargo.price, dm);
+    const costRoll = await new Roll(`3D6 + ${dm}`, null).evaluate();
+    let cost = await getPurchasePrice(srcCargo.price, costRoll.total);
+    let sell = await getSalePrice(srcCargo.price, costRoll.total);
 
     const itemData = {
         "name": item.name,
@@ -404,7 +399,8 @@ async function createTradeItem(worldActor, item, available) {
                 "destinationId": null,
                 "speculative": true,
                 "salePrice": sell
-            }
+            },
+            "confirmed": worldActor.uuid
         }
     }
     await Item.create(itemData, { parent: worldActor });
@@ -483,5 +479,16 @@ export async function createSpeculativeGoods(worldActor, illegal) {
         }
         await createTradeItem(worldActor, item, true);
     }
+}
 
+export function outputTradeChat(actor, title, text) {
+    let html = `<div class="chat-package"><h3>${title}</h3>`;
+    html += `${text}`;
+    html += `</div>`;
+
+    let chatData = {
+        speaker: ChatMessage.getSpeaker({actor: actor}),
+        content: html
+    };
+    ChatMessage.create(chatData, {});
 }

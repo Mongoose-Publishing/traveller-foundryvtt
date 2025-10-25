@@ -116,8 +116,8 @@
                         <span>{{item.system.quantity}}dt</span>
                         <br/>
                         {{/if}}
-                        {{#if item.system.cargo.price includeZero=false}}
-                        <span>Cr{{niceNumber item.system.cargo.price}}</span>
+                        {{#if item.system.cost includeZero=false}}
+                        <span>Cr{{niceNumber item.system.cost}}</span>
                         {{/if}}
                         <div class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

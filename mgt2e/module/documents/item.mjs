@@ -67,11 +67,17 @@ export class MgT2Item extends Item {
                         {item: this.name, type: this.type}));
                     return false;
                 } else if (this.type === "cargo") {
-                    // Only allow cargo to be added if it has a confirmed flag set.
-                    return !!this.system.cargo.confirmed;
+                    // Only allow cargo to be added if it's been marked to be added.
+                    return this.system.confirmed === this.actor.uuid;
                 }
             } else if (this.actor.type === "world") {
                 // Nothing to do here.
+                if (["term", "associate", "role"].includes(this.type)) {
+                    return false;
+                }
+                if (["cargo"].includes(this.type)) {
+                    return this.system.confirmed === this.actor.uuid;
+                }
             } else if (this.actor.type === "vehicle") {
                 if (["term", "associate", "worlddata"].includes(this.type)) {
                     ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.NotOnVehicle",

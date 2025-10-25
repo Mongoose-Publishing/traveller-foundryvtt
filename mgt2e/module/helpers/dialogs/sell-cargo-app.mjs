@@ -1,4 +1,6 @@
 import {MgT2Item} from "../../documents/item.mjs";
+import {outputTradeChat} from "../utils/trade-utils.mjs";
+import {Tools} from "../chat/tools.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 // First attempt at ApplicationV2 dialog.
@@ -16,7 +18,7 @@ export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) 
     static DEFAULT_OPTIONS = {
         tag: "form",
         form: {
-            handler: MgT2BuyCargoApp.formHandler,
+            handler: MgT2SellCargoApp.formHandler,
             submitOnChange: false,
             closeOnSubmit: false
         },
@@ -69,6 +71,8 @@ export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) 
         console.log("_preparePartContext: " + partId);
         context.partId = `${this.id}-${partId}`;
 
+        console.log(this.cargoItem);
+
         if (this.cargoItem) {
             // This should always be set.
             console.log(this.cargoItem);
@@ -79,10 +83,16 @@ export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) 
                 context.salePrice = 0;
                 for (let i of this.worldActor.items) {
                     if (i.type === "cargo" && i.name === this.cargoItem.name) {
-                        context.salePrice = i.system.cargo.salePrice;
+                        context.salePrice = parseInt(i.system.cargo.salePrice);
                         context.variance = i.system.cargo.salePrice - i.system.cargo.price;
+                        context.profit = i.system.cargo.salePrice - this.cargoItem.system.cost;
+
+                        this.matchedItem = i;
+                        console.log(`Compare to [${i.name}] sell price Cr${context.salePrice} for item of Cr${this.cargoItem.system.cost}`);
+                        break;
                     }
                 }
+                this.salePrice = context.salePrice;
                 context.QUANTITY_LIST = {};
                 // What's the most that we can buy? Limited by cargo and price.
                 let maxQuantity = this.cargoItem.system.quantity;
@@ -102,33 +112,36 @@ export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) 
 
     static async formHandler(event, form, formData) {
         if (event.type === "submit") {
+            console.log("Selling speculative item " + this.cargoItem.name);
             let quantity = parseInt(formData.object.quantitySelect);
+            let totalCost = quantity * this.salePrice;
+            let totalProfit = quantity * (this.salePrice - this.cargoItem.system.cost);
 
-            this.shipActor.system.finance.cash -= quantity * this.cargoItem.system.cost;
-
-            this.cargoItem.system.quantity -= quantity;
-
-            const itemData = {
-                "name": this.cargoItem.name,
-                "img": this.cargoItem.img,
-                "type": "cargo",
-                "system": foundry.utils.deepClone(this.cargoItem.system)
-            }
-            itemData.system.cargo.confirmed = true;
-            itemData.system.cargo.meta = {
-                purchasePrice: itemData.system.cost
-            }
-            itemData.system.quantity = quantity;
-            Item.create(itemData, { parent: this.shipActor });
+            this.shipActor.system.finance.cash += totalCost;
             this.shipActor.update({"system.finance": this.shipActor.system.finance})
 
+            this.cargoItem.system.quantity -= quantity;
             if (this.cargoItem.system.quantity > 0) {
                 this.cargoItem.update({"system.quantity": this.cargoItem.system.quantity });
             } else {
-                this.worldActor.deleteEmbeddedDocuments("Item", [ this.cargoItem.id]);
+                console.log("Deleting item from ship " + this.shipActor.name);
+                this.shipActor.deleteEmbeddedDocuments("Item", [ this.cargoItem.id]);
             }
-
+            if (this.matchedItem) {
+                this.matchedItem.system.quantity += quantity;
+                this.matchedItem.update({"system.quantity": quantity});
+            }
             this.close();
+
+            // Output sale information to the chat.
+            const title = `${this.cargoItem.name}`;
+            let text = `<p><b>Sold at:</b> ${this.worldActor.name}</p>`;
+            text += `<p><b>Quantity:</b> ${Tools.prettyNumber(quantity, 0)}dt</p>`;
+            text += `<p><b>Unit Sale Price:</b> Cr${Tools.prettyNumber(this.salePrice, 0)}</p>`;
+            text += `<p><b>Total Sale Price:</b> Cr${Tools.prettyNumber(totalCost, 0)}</p>`;
+            text += `<p><b>Total Profit:</b> Cr${Tools.prettyNumber(totalProfit, 0, true)}</p>`;
+            outputTradeChat(this.shipActor, title, text);
+
         }
 
         return null;

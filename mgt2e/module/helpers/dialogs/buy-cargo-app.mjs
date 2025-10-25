@@ -1,4 +1,6 @@
 import {MgT2Item} from "../../documents/item.mjs";
+import {outputTradeChat} from "../utils/trade-utils.mjs";
+import {Tools} from "../chat/tools.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 // First attempt at ApplicationV2 dialog.
@@ -110,8 +112,9 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static async formHandler(event, form, formData) {
         if (event.type === "submit") {
             let quantity = parseInt(formData.object.quantitySelect);
+            let totalCost = quantity * this.cargoItem.system.cost;
 
-            this.shipActor.system.finance.cash -= quantity * this.cargoItem.system.cost;
+            this.shipActor.system.finance.cash -= totalCost;
 
             this.cargoItem.system.quantity -= quantity;
 
@@ -121,7 +124,7 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 "type": "cargo",
                 "system": foundry.utils.deepClone(this.cargoItem.system)
             }
-            itemData.system.cargo.confirmed = true;
+            itemData.system.confirmed = this.shipActor.uuid;
             itemData.system.cargo.meta = {
                 purchasePrice: itemData.system.cost
             }
@@ -134,8 +137,14 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
             } else {
                 this.worldActor.deleteEmbeddedDocuments("Item", [ this.cargoItem.id]);
             }
-
             this.close();
+
+            const title = `${this.cargoItem.name}`;
+            let text = `<p><b>Purchased from:</b> ${this.worldActor.name}</p>`;
+            text += `<p><b>Quantity:</b> ${quantity}dt</p>`;
+            text += `<p><b>Unit Price:</b> Cr${Tools.prettyNumber(this.cargoItem.system.cost, 0)}</p>`;
+            text += `<p><b>Total Price:</b> Cr${Tools.prettyNumber(totalCost, 0)}</p>`;
+            outputTradeChat(this.shipActor, title, text);
         }
 
         return null;

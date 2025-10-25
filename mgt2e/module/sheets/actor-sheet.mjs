@@ -2023,36 +2023,48 @@ export class MgT2ActorSheet extends ActorSheet {
      */
     async _onDropItem(event, data) {
         super._onDropItem(event, data);
+        console.log("_onDropItem:");
 
         if (this.actor.type === "vehicle") {
             return;
         }
-
+        console.log("1");
         let item = await fromUuid(data.uuid);
         if (!item) {
+            console.log(`${data.uuid} is not an item`);
             return;
         }
-
+        console.log("2: " + data.uuid);
         if (!data || !data.uuid || data.uuid.indexOf("Actor") !== 0) {
+
+            if (data.uuid.indexOf("Scene")) {
+                console.log("Item dragged from Scene, probably from token. Not yet handled");
+            }
+
             // This hasn't been dragged from another actor.
             if (item && item.type === "term" && (this.actor.type === "traveller" || this.actor.type === "package")) {
                 await this._onDropTerm(item);
             }
             return true;
         }
-
+        console.log("3");
         if (event.shiftKey) {
             // If shift is held down on drop, copy rather than move.
             return;
         }
-
+        console.log("4");
         let actor = this.actor;
         let srcActorId = data.uuid.replace(/Actor\.([a-z0-9]*)\..*/gi, "$1");
         let itemId = data.uuid.replace(/Actor\.[a-z0-9]*\.Item\.([a-z0-9]*)/gi, "$1");
 
+        console.log(data.uuid);
+        console.log("srcActorId: " + srcActorId);
+        console.log("itemId: " + itemId);
+
         if (actor.uuid.indexOf(srcActorId) === -1) {
             // Move between different actors.
             let srcActor = await game.actors.get(srcActorId);
+            console.log(`From ${srcActor.name} to ${actor.name}`);
 
             if (srcActor.type === "world" && this.actor.type === "spacecraft") {
                 console.log("Move to spacecraft");
