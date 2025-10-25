@@ -232,7 +232,7 @@ MgT2eMacros.chaGain = function(args) {
 
         if (actor && actor.system.characteristics[cha]) {
             let current = Number(actor.system.characteristics[cha].value);
-            if (min && min > current) {
+            if (min && min > (current + level)) {
                 actor.system.characteristics[cha].value = min;
                 text += `Setting <b>${cha}</b> to ${actor.system.characteristics[cha].value}.`;
             } else if (level > 0) {
