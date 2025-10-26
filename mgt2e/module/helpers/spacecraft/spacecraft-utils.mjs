@@ -506,8 +506,6 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
                 "type": "cargo",
                 "system": item.system
             }
-            itemData.system.confirmed = shipActor.uuid;
-            console.log(itemData);
             Item.create(itemData, { parent: shipActor });
         }
 

@@ -399,8 +399,7 @@ async function createTradeItem(worldActor, item, available) {
                 "destinationId": null,
                 "speculative": true,
                 "salePrice": sell
-            },
-            "confirmed": worldActor.uuid
+            }
         }
     }
     await Item.create(itemData, { parent: worldActor });

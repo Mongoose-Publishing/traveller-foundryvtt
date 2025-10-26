@@ -124,7 +124,6 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 "type": "cargo",
                 "system": foundry.utils.deepClone(this.cargoItem.system)
             }
-            itemData.system.confirmed = this.shipActor.uuid;
             itemData.system.cargo.meta = {
                 purchasePrice: itemData.system.cost
             }

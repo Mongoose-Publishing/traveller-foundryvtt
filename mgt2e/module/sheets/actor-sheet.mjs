@@ -2022,75 +2022,63 @@ export class MgT2ActorSheet extends ActorSheet {
      * Override item drop. Need to remove item from source character.
      */
     async _onDropItem(event, data) {
-        super._onDropItem(event, data);
         console.log("_onDropItem:");
 
-        if (this.actor.type === "vehicle") {
-            return;
+        // Not enough data to do anything with. Simply return without trying any further.
+        if (!data || !data.uuid) {
+            return false;
         }
-        console.log("1");
         let item = await fromUuid(data.uuid);
         if (!item) {
-            console.log(`${data.uuid} is not an item`);
-            return;
+            // Item doesn't seem to exist, don't do anything.
+            ui.notifications.error(`Unable to find item with id [${data.uuid}]`);
+            return false;
         }
-        console.log("2: " + data.uuid);
-        if (!data || !data.uuid || data.uuid.indexOf("Actor") !== 0) {
-
-            if (data.uuid.indexOf("Scene")) {
-                console.log("Item dragged from Scene, probably from token. Not yet handled");
-            }
-
-            // This hasn't been dragged from another actor.
-            if (item && item.type === "term" && (this.actor.type === "traveller" || this.actor.type === "package")) {
-                await this._onDropTerm(item);
-            }
-            return true;
+        if (["associate", "worlddata" ].includes(item.type)) {
+            // Meta item, so just pass through to the usual item handler.
+            return super._onDropItem(event, data);
+        } else if (item.type === "term" && [ "traveller", "package"].includes(actor.type)) {
+            return await this._onDropTerm(item);
         }
-        console.log("3");
+
+        // If not dragged from another (different) actor, just let the normal item handler deal with things.
+        if (!item.parent || this.actor.uuid === item.parent.uuid) {
+            return super._onDropItem(event, data);
+        }
+
+        let srcActor = item.parent;
+
+        // If moving trade goods between worlds and spacecraft, use the trade system.
+        if (srcActor.type === "world" && this.actor.type === "spacecraft") {
+            if (item.type === "cargo") {
+                await buyCargoDialog(srcActor, this.actor, item);
+            }
+            return false;
+        } else if (srcActor.type === "spacecraft" && this.actor.type === "world") {
+            if (item.type === "cargo") {
+                await sellCargoDialog(srcActor, this.actor, item);
+            }
+            return false;
+        }
+
+        // If shift is held down on drop, copy rather than move. Use the standard handler.
         if (event.shiftKey) {
-            // If shift is held down on drop, copy rather than move.
-            return;
+            return super._onDropItem(event, data);
         }
-        console.log("4");
-        let actor = this.actor;
-        let srcActorId = data.uuid.replace(/Actor\.([a-z0-9]*)\..*/gi, "$1");
-        let itemId = data.uuid.replace(/Actor\.[a-z0-9]*\.Item\.([a-z0-9]*)/gi, "$1");
 
-        console.log(data.uuid);
-        console.log("srcActorId: " + srcActorId);
-        console.log("itemId: " + itemId);
+        console.log(`From ${srcActor.name} to ${this.actor.name}`);
 
-        if (actor.uuid.indexOf(srcActorId) === -1) {
-            // Move between different actors.
-            let srcActor = await game.actors.get(srcActorId);
-            console.log(`From ${srcActor.name} to ${actor.name}`);
-
-            if (srcActor.type === "world" && this.actor.type === "spacecraft") {
-                console.log("Move to spacecraft");
-                let item = srcActor.items.get(itemId);
-                if (item.type === "cargo") {
-                    await buyCargoDialog(srcActor, this.actor, item);
-                }
+        if (srcActor) {
+            if (item.type === "hardware" || item.type === "role" || item.type === "term" || item.type === "software") {
                 return true;
-            } else if (srcActor.type === "spacecraft" && this.actor.type === "world") {
-                let item = srcActor.items.get(itemId);
-                if (item.type === "cargo") {
-                    await sellCargoDialog(srcActor, this.actor, item);
-                }
-                return true;
-            } else if (srcActor) {
-                let item = srcActor.items.get(itemId);
-                if (item.type === "hardware" || item.type === "role" || item.type === "term" || item.type === "software") {
-                    return true;
-                }
+            }
 
-                if (parseInt(item.system.quantity) > 1) {
-                    new MgT2QuantityDialog(srcActor, actor, item).render(true);
-                } else {
-                    srcActor.deleteEmbeddedDocuments("Item", [itemId]);
-                    ui.notifications.info(`Moved '${item.name}' from '${srcActor.name}' to '${actor.name}'`);
-                }
+            if (parseInt(item.system.quantity) > 1) {
+                new MgT2QuantityDialog(srcActor, this.actor, item).render(true);
+            } else {
+                ui.notifications.info(`Moved '${item.name}' from '${srcActor.name}' to '${this.actor.name}'`);
+                srcActor.deleteEmbeddedDocuments("Item", [item._id]);
+                return super._onDropItem(event, data);
             }
         }
         return true;

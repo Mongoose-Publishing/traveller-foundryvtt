@@ -62,21 +62,23 @@ export class MgT2Item extends Item {
             console.log(`Adding item '${this.type}' to '${this.actor.type}'`);
             // This item is being dropped onto an Actor object.
             if (this.actor.type === "spacecraft") {
-                if (this.type === "term" || this.type === "associate") {
+                if ([ "term", "associate", "worlddata"].includes(this.type)) {
                     ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.OnlyOnCharacter",
                         {item: this.name, type: this.type}));
                     return false;
                 } else if (this.type === "cargo") {
                     // Only allow cargo to be added if it's been marked to be added.
-                    return this.system.confirmed === this.actor.uuid;
+                    return true;
                 }
             } else if (this.actor.type === "world") {
                 // Nothing to do here.
                 if (["term", "associate", "role"].includes(this.type)) {
+                    ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.OnlyOnCharacter",
+                        {item: this.name, type: this.type}));
                     return false;
                 }
                 if (["cargo"].includes(this.type)) {
-                    return this.system.confirmed === this.actor.uuid;
+                    return true;
                 }
             } else if (this.actor.type === "vehicle") {
                 if (["term", "associate", "worlddata"].includes(this.type)) {
@@ -85,7 +87,7 @@ export class MgT2Item extends Item {
                     return false;
                 }
             } else {
-                if (this.type === "cargo" || this.type === "hardware" || this.type === "role") {
+                if ([ "cargo", "hardware", "role", "worlddata"].includes(this.type)) {
                     ui.notifications.warn(game.i18n.format("MGT2.Warn.Drop.NotOnCharacter",
                         { item: this.name, type: this.type }));
                     return false;
@@ -121,9 +123,6 @@ export class MgT2Item extends Item {
             this.update({"system.term.termLength": r.total });
             this.update({"system.term.randomTerm": false });
             return;
-        } else if (actor.type === "spacecraft" && this.type === "cargo") {
-            // Removed the confirmation flag.
-            this.update({"system.cargo.-=confirmed": null});
         }
     }
 
