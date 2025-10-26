@@ -8,6 +8,15 @@
 * On Foundry v13, active effects may need to have the 'Apply Effect' option toggled off and on before
   they take effect.
 
+## 0.15.3 (Beta)
+
+* Fix some macro bugs around training Profession skills. Each individual speciality needs to be
+  marked as trained if it is raised. Training Profession itself to 0, also now allows player
+  to select a speciality to train to zero.
+* Fix bug where sitting a 'min' and a 'level' greater than 1 on the training macro could
+  give the wrong result. Now correctly applies the bonus before raising to minimum level.
+
+
 ## 0.15.2 (Beta)
 
 * Perform a permission check before updating a spacecraft actor. Sometimes cost calculations
