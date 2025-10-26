@@ -90,6 +90,18 @@ MgT2eMacros.skillGain = function(args) {
             }
             if (specId && skill.specialities && skill.specialities[specId] && skill.individual) {
                 skill.specialities[specId].trained = true;
+            } else if (!specId && skill.specialities && skill.individual) {
+                // Need to select which one to set to trained.
+                text += `Select a speciality to train:<br/>`;
+                for (let s in skill.specialities) {
+                    let spec = skillId + "." + s;
+                    let specName = actor.getSkillLabel(spec, false);
+                    let current = Number(skill.specialities[s].value);
+
+                    if (!skill.specialities[s].trained) {
+                        text += `<span class="skillGain-spec" data-actorId="${actor._id}" data-skill="${spec}" data-level="${level}">${specName} ${current}</span><br/>`;
+                    }
+                }
             } else if (!added) {
                 text += `${skillName} is unchanged`;
             }
