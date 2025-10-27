@@ -84,23 +84,8 @@ export class MgT2QuantityDialog extends Application {
         let option = html.find(".quantity")[0].value;
         let number = parseInt(html.find(".number")[0].value);
 
-        console.log("Option selected " + option);
-        console.log("Custom number " + number);
-
-        // Need to find the item that has been copied to the destination.
-        let destItems = this.destActor.items.contents
-        this.destItem = null;
-        for (let i=0; i < destItems.length; i++) {
-            console.log(this.srcItem.name + "  ==  " + destItems[i].name);
-            if (this.srcItem.name === destItems[i].name) {
-                console.log(this.srcItem.name + "  ===  " + destItems[i].name);
-                if (this.srcItem.system.quantity === destItems[i].system.quantity) {
-                    this.destItem = destItems[i];
-                    break;
-                }
-            }
-        }
-        console.log(this.destItem);
+        // We need to create a new item at the destination.
+        this.destItem = foundry.utils.duplicate(this.srcItem);
 
         if (option === "one") {
             number = 1;
@@ -109,23 +94,17 @@ export class MgT2QuantityDialog extends Application {
         } else {
             // Number is the custom number.
         }
-        console.log("Source item is [" + this.srcItem.name + "]");
-        console.log("Destination item is [" + this.destItem.name + "]");
 
         if (number >= this.srcItem.system.quantity) {
             this.srcActor.deleteEmbeddedDocuments("Item", [this.srcItem.id]);
-        } else if (number < 1) {
-            //this.destActor.deleteEmbeddedDocuments("Item", [this.destItem.id]);
         } else {
             this.srcItem.system.quantity -= number;
-            this.destItem.system.quantity = number;
             this.srcItem.update({ "system.quantity": this.srcItem.system.quantity });
-            this.destItem.update({ "system.quantity": this.destItem.system.quantity });
 
-            if (this.destItem.system.status) {
-                this.destItem.system.status = MgT2Item.OWNED;
-                this.destItem.update({ "system.status": this.destItem.system.status });
-            }
+            this.destItem.system.quantity = number;
+            this.destItem.system.status = MgT2Item.OWNED;
+
+            Item.create(this.destItem, { parent: this.destActor });
         }
 
         this.close();
