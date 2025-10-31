@@ -1089,3 +1089,20 @@ Tools.mgt2eClick = function(event) {
         throw e;
     }
 };
+
+// Get a list of quantities, from 1 to max. If max is large, then we simplify the list.
+Tools.getQuantities = function(max) {
+    let list = [];
+
+    for (let i=1; i < Math.min(10, max); i++) {
+        list.push(i);
+    }
+    for (let i=10; i < Math.min(25, max); i+=5) {
+        list.push(i);
+    }
+    for (let i=25; i < Math.min(200, max); i+= 25) {
+        list.push(i);
+    }
+
+    return list;
+}

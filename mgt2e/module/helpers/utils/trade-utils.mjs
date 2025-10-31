@@ -1,3 +1,4 @@
+import {Tools} from "../chat/tools.mjs";
 
 export async function freightTraffic(dm) {
     const roll = await new Roll(`2D6 + ${dm}`, null).evaluate();
@@ -490,4 +491,129 @@ export function outputTradeChat(actor, title, text) {
         content: html
     };
     ChatMessage.create(chatData, {});
+}
+
+/**
+ * Handler for buying speculative trade goods.
+ * This is only ever executed by the GM.
+ */
+export async function tradeBuyGoodsHandler(queryData) {
+    console.log("tradeBuyGoodsHandler:");
+    console.log(queryData);
+
+    let worldActor = await fromUuid(queryData.worldActorId);
+    let shipActor = await fromUuid(queryData.shipActorId);
+    let cargoItem = await fromUuid(queryData.cargoItemId);
+    let quantity = queryData.quantity;
+    let totalCost = quantity * cargoItem.system.cost;
+
+    const itemData = {
+        "name": cargoItem.name,
+        "img": cargoItem.img,
+        "type": "cargo",
+        "system": foundry.utils.deepClone(cargoItem.system)
+    }
+    itemData.system.cargo.meta = {
+        purchasePrice: itemData.system.cost
+    }
+    itemData.system.quantity = quantity;
+    Item.create(itemData, { parent: shipActor });
+    shipActor.update({"system.finance.cash": shipActor.system.finance.cash - totalCost})
+
+    cargoItem.system.quantity -= quantity;
+    if (cargoItem.system.quantity > 0) {
+        cargoItem.update({"system.quantity": cargoItem.system.quantity });
+    } else {
+        worldActor.deleteEmbeddedDocuments("Item", [ cargoItem.id]);
+    }
+
+    const title = `${cargoItem.name}`;
+    let text = `<p><b>Purchased from:</b> ${worldActor.name}</p>`;
+    text += `<p><b>Quantity:</b> ${quantity}dt</p>`;
+    text += `<p><b>Unit Price:</b> Cr${Tools.prettyNumber(cargoItem.system.cost, 0)}</p>`;
+    text += `<p><b>Total Price:</b> Cr${Tools.prettyNumber(totalCost, 0)}</p>`;
+    outputTradeChat(shipActor, title, text);
+}
+
+// Moving goods from ship to world.
+export async function tradeSellGoodsHandler(queryData) {
+    let worldActor = await fromUuid(queryData.worldActorId);
+    let shipActor = await fromUuid(queryData.shipActorId);
+    let cargoItem = await fromUuid(queryData.cargoItemId);
+    let matchedItem = queryData.matchedItemId?(await fromUuid(queryData.matchedItemId)):null;
+    let salePrice = queryData.salePrice;
+    let quantity = queryData.quantity;
+
+    let totalCost = cargoItem.system.cost * quantity;
+    let totalProfit = (salePrice - cargoItem.system.cost) * quantity;
+
+    shipActor.system.finance.cash += totalCost;
+    shipActor.update({"system.finance": shipActor.system.finance})
+
+    cargoItem.system.quantity -= quantity;
+    if (cargoItem.system.quantity > 0) {
+        cargoItem.update({"system.quantity": cargoItem.system.quantity });
+    } else {
+        console.log("Deleting item from ship " + shipActor.name);
+        shipActor.deleteEmbeddedDocuments("Item", [ cargoItem.id]);
+    }
+    if (matchedItem) {
+        matchedItem.system.quantity += quantity;
+        matchedItem.update({"system.quantity": quantity});
+    }
+
+    // Output sale information to the chat.
+    const title = `${cargoItem.name}`;
+    let text = `<p><b>Sold at:</b> ${worldActor.name}</p>`;
+    text += `<p><b>Quantity:</b> ${Tools.prettyNumber(quantity, 0)}dt</p>`;
+    text += `<p><b>Unit Sale Price:</b> Cr${Tools.prettyNumber(salePrice, 0)}</p>`;
+    text += `<p><b>Total Sale Price:</b> Cr${Tools.prettyNumber(totalCost, 0)}</p>`;
+    text += `<p><b>Total Profit:</b> Cr${Tools.prettyNumber(totalProfit, 0, true)}</p>`;
+    outputTradeChat(shipActor, title, text);
+}
+
+export async function tradeBuyFreightHandler(queryData) {
+    // Remove from world.
+    let worldActor = await fromUuid(queryData.worldActorId);
+    let shipActor = await fromUuid(queryData.shipActorId);
+    let freightItem = await fromUuid(queryData.cargoItemId);
+
+    let destinationWorld = await fromUuid(freightItem.system.cargo.destinationId);
+
+    worldActor.deleteEmbeddedDocuments("Item", [ freightItem.id ]);
+    const itemData = {
+        "name": freightItem.name,
+        "img": freightItem.img,
+        "type": "cargo",
+        "system": foundry.utils.deepClone(freightItem.system)
+    }
+    Item.create(itemData, { parent: shipActor });
+
+    // Output purchase information to the chat.
+    const title = `Freight Contracted`;
+    let text = `<p><b>Contracted at:</b> ${worldActor.name}</p>`;
+    text += `<p><b>To be taken to:</b> ${destinationWorld.name}</p>`;
+    text += `<p><b>Quantity:</b> ${Tools.prettyNumber(freightItem.system.quantity, 0)}dt</p>`;
+    text += `<p><b>Contracted Price:</b> Cr${Tools.prettyNumber(freightItem.system.cost * freightItem.system.quantity, 0)}</p>`;
+    outputTradeChat(shipActor, title, text);
+}
+
+export async function tradeSellFreightHandler(queryData) {
+    // Remove from ship. We don't bother adding it to the world, because
+    // the world won't be giving an option to buy it back.
+    let worldActor = await fromUuid(queryData.worldActorId);
+    let shipActor = await fromUuid(queryData.shipActorId);
+    let freightItem = await fromUuid(queryData.cargoItemId);
+
+    let price = parseInt(freightItem.system.cost) * parseInt(freightItem.system.quantity);
+
+    shipActor.deleteEmbeddedDocuments("Item", [ freightItem.id ]);
+    shipActor.update({"system.finance.cash": parseInt(shipActor.system.finance.cash) + price});
+
+    // Output sale information to the chat.
+    const title = `Freight Delivered`;
+    let text = `<p><b>Delivered to:</b> ${worldActor.name}</p>`;
+    text += `<p><b>Quantity:</b> ${Tools.prettyNumber(freightItem.system.quantity, 0)}dt</p>`;
+    text += `<p><b>Total Payment:</b> Cr${Tools.prettyNumber(freightItem.system.cost * freightItem.system.quantity, 0)}</p>`;
+    outputTradeChat(shipActor, title, text);
 }

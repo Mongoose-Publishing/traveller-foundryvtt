@@ -2,6 +2,7 @@ import {MGT2} from "../config.mjs";
 import {MgT2Item} from "../../documents/item.mjs";
 import {MgT2BuyCargoApp} from "../dialogs/buy-cargo-app.mjs";
 import {MgT2SellCargoApp} from "../dialogs/sell-cargo-app.mjs";
+import {tradeBuyFreightHandler, tradeSellFreightHandler} from "../utils/trade-utils.mjs";
 
 
 export async function calculateSpacecraftCost(actor) {
@@ -494,19 +495,19 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
             content,
             modal: true
         });
-        console.log("Answer is " + transferCargo);
 
         if (transferCargo) {
-            // Remove from world.
-            worldActor.deleteEmbeddedDocuments("Item", [ item.id ]);
-
-            const itemData = {
-                "name": item.name,
-                "img": item.img,
-                "type": "cargo",
-                "system": item.system
+            let data = {
+                type: "tradeBuyFreight",
+                shipActorId: shipActor.uuid,
+                worldActorId: worldActor.uuid,
+                cargoItemId: item.uuid
             }
-            Item.create(itemData, { parent: shipActor });
+            if (game.user.isGM) {
+                await tradeBuyFreightHandler(data);
+            } else {
+                game.socket.emit("system.mgt2e", data);
+            }
         }
 
         return transferCargo;
@@ -534,18 +535,21 @@ export async function sellCargoDialog(shipActor, worldActor, item) {
     }
     if (item.system.cargo.freight) {
         console.log("Sell freight cargo");
-        let destination = await fromUuid(item.system.cargo.destinationId);
-        console.log(item);
-
         if (item.system.cargo.destinationId !== worldActor.uuid) {
             ui.notifications.warn("Wrong world");
             return;
         }
-
-        let price = parseInt(item.system.cargo.price) * parseInt(item.system.quantity);
-        shipActor.deleteEmbeddedDocuments("Item", [ item.id ]);
-        shipActor.update({"system.finance.cash": parseInt(shipActor.system.finance.cash) + price });
-
+        let data = {
+            type: "tradeSellFreight",
+            shipActorId: shipActor.uuid,
+            worldActorId: worldActor.uuid,
+            cargoItemId: item.uuid
+        }
+        if (game.user.isGM) {
+            await tradeSellFreightHandler(data);
+        } else {
+            game.socket.emit("system.mgt2e", data);
+        }
     } else if (item.system.cargo.speculative) {
         console.log("Sell speculative cargo");
         if (!shipActor.system.finance) {

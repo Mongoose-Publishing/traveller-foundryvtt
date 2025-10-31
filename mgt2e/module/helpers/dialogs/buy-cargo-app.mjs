@@ -1,5 +1,5 @@
 import {MgT2Item} from "../../documents/item.mjs";
-import {outputTradeChat} from "../utils/trade-utils.mjs";
+import {outputTradeChat, tradeBuyFreightHandler, tradeBuyGoodsHandler} from "../utils/trade-utils.mjs";
 import {Tools} from "../chat/tools.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
@@ -111,39 +111,23 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     static async formHandler(event, form, formData) {
         if (event.type === "submit") {
+            console.log("Buying speculative item " + this.cargoItem.name);
             let quantity = parseInt(formData.object.quantitySelect);
-            let totalCost = quantity * this.cargoItem.system.cost;
 
-            this.shipActor.system.finance.cash -= totalCost;
-
-            this.cargoItem.system.quantity -= quantity;
-
-            const itemData = {
-                "name": this.cargoItem.name,
-                "img": this.cargoItem.img,
-                "type": "cargo",
-                "system": foundry.utils.deepClone(this.cargoItem.system)
+            const data = {
+                type: "tradeBuyGoods",
+                shipActorId: this.shipActor.uuid,
+                worldActorId: this.worldActor.uuid,
+                cargoItemId: this.cargoItem.uuid,
+                quantity: quantity
             }
-            itemData.system.cargo.meta = {
-                purchasePrice: itemData.system.cost
-            }
-            itemData.system.quantity = quantity;
-            Item.create(itemData, { parent: this.shipActor });
-            this.shipActor.update({"system.finance": this.shipActor.system.finance})
-
-            if (this.cargoItem.system.quantity > 0) {
-                this.cargoItem.update({"system.quantity": this.cargoItem.system.quantity });
-            } else {
-                this.worldActor.deleteEmbeddedDocuments("Item", [ this.cargoItem.id]);
-            }
+            // const queryValue = await gm.query("mgt2e.tradeBuyGoods", data, { timeout: 30 * 1000 });
             this.close();
-
-            const title = `${this.cargoItem.name}`;
-            let text = `<p><b>Purchased from:</b> ${this.worldActor.name}</p>`;
-            text += `<p><b>Quantity:</b> ${quantity}dt</p>`;
-            text += `<p><b>Unit Price:</b> Cr${Tools.prettyNumber(this.cargoItem.system.cost, 0)}</p>`;
-            text += `<p><b>Total Price:</b> Cr${Tools.prettyNumber(totalCost, 0)}</p>`;
-            outputTradeChat(this.shipActor, title, text);
+            if (game.user.isGM) {
+                await tradeBuyGoodsHandler(data);
+            } else {
+                game.socket.emit("system.mgt2e", data);
+            }
         }
 
         return null;

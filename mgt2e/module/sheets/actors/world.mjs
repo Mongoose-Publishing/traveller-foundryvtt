@@ -158,6 +158,13 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
     activateListeners(html) {
         super.activateListeners(html);
 
+        // Define trade drag listener here, because all players should be able to do it.
+        let handler = ev => this._onDragStart(ev);
+        html.find('.trade-item').each((i, li) => {
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", handler, false);
+        });
+
         html.find('.createFreight').click(ev => {
             createFreight(this.actor, 1, 1000);
         });

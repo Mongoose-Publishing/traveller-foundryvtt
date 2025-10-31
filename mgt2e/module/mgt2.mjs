@@ -26,6 +26,7 @@ import {MgT2Effect} from "./documents/effect.mjs";
 import { migrateWorld } from "./migration.mjs";
 import { NpcIdCard } from "./helpers/id-card.mjs";
 import {hasTrait} from "./helpers/dice-rolls.mjs";
+import {tradeBuyGoodsHandler, tradeSellGoodsHandler, tradeBuyFreightHandler, tradeSellFreightHandler} from "./helpers/utils/trade-utils.mjs";
 
 
 /* -------------------------------------------- */
@@ -247,6 +248,9 @@ Hooks.once('init', async function() {
     decimals: 0
   };
 
+  // v13 only: https://foundryvtt.wiki/en/development/api/sockets
+  // CONFIG.queries["mgt2e.tradeBuyGoods"] = tradeBuyGoodsHandler;
+
   // Define custom Document classes
   CONFIG.Actor.documentClass = MgT2Actor;
   CONFIG.Item.documentClass = MgT2Item;
@@ -273,12 +277,22 @@ Hooks.once('init', async function() {
 
     // Sockets
     game.socket.on("system.mgt2e", (data) => {
-       if (data.type === "showIdCard") {
-           let actor = data.actor;
-           new NpcIdCard(actor).render(true);
-       }
+        if (data.type === "showIdCard") {
+            let actor = data.actor;
+            new NpcIdCard(actor).render(true);
+        }
+        if (game.user === game.users.activeGM) {
+            if (data.type === "tradeBuyGoods") {
+                tradeBuyGoodsHandler(data);
+            } else if (data.type === "tradeSellGoods") {
+                tradeSellGoodsHandler(data);
+            } else if (data.type === "tradeBuyFreight") {
+                tradeBuyFreightHandler(data);
+            } else if (data.type === "tradeSellFreight") {
+                tradeSellFreightHandler(data);
+            }
+        }
     });
-
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();

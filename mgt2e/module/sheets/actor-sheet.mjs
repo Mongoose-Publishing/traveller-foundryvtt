@@ -1139,18 +1139,15 @@ export class MgT2ActorSheet extends ActorSheet {
 
     // Drag events for macros.
     let handler = ev => this._onDragStart(ev);
+
+    // Don't have to be owner to manage trade.
+
     if (this.actor.owner) {
       html.find('li.item').each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
         li.setAttribute("draggable", true);
         li.addEventListener("dragstart", handler, false);
       });
-    }
-    if (this.actor.type === "world") {
-        html.find('.trade-item').each((i, li) => {
-            li.setAttribute("draggable", true);
-            li.addEventListener("dragstart", handler, false);
-        });
     }
     html.find('div.skill-draggable').each((i, div) => {
       if (div.getAttribute("data-rolltype") === "skill") {
