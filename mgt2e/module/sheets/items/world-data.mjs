@@ -45,9 +45,8 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
                 break;
             case "star":
                 break;
-            case "sector":
-                break;
         }
+        context.worldData = worldData;
 
         return context;
     }

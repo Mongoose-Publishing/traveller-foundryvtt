@@ -25,6 +25,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         context.factions = [];
         context.localGoods = [];
         context.destinations = [];
+        context.passengers = [];
 
         context.destinationWorlds = null;
         for (let i of context.items) {
@@ -70,6 +71,8 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             } else if (i.type === "worlddata") {
                 if (i.system?.world?.datatype === "faction") {
                     context.factions.push(i);
+                } else if (i.system?.world?.datatype === "passenger") {
+                    context.passengers.push(i);
                 }
             }
         }

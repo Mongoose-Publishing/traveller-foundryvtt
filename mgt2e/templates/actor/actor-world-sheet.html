@@ -71,16 +71,31 @@
             </h1>
 
             <div class="shadow">
-                <div class="grid grid-4col">
-                    <div class="resource flex-group-left grid-span-2">
-                        <label for="system.world.location.sector" class="field-label">Sector</label>
+                <div class="grid grid-7col">
+                    <div class="resource flex-group-center grid-span-5">
+                        <label class="field-label">Sector</label>
+                    </div>
+                    <div class="resource flex-group-center grid-span-2">
+                        <label class="field-label">Planet</label>
+                    </div>
+                    <div class="resource flex-group-left grid-span-3">
+                        <label for="system.world.location.sector" class="field-label">Name</label>
                         <input class="field-value writable" name="system.world.location.sector" type="text" value="{{system.world.location.sector}}"/>
                     </div>
-                    <div class="resource flex-group-left">
+                    <div class="resource flex-group-center">
+                        <label for="system.world.location.sectorX" class="field-label">X</label>
+                        <input class="field-value writable" name="system.world.location.sectorX" type="text" value="{{system.world.location.sectorX}}"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label for="system.world.location.sectorY" class="field-label">Y</label>
+                        <input class="field-value writable" name="system.world.location.sectorY" type="text" value="{{system.world.location.sectorY}}"/>
+                    </div>
+
+                    <div class="resource flex-group-center">
                         <label for="system.world.location.x" class="field-label">X</label>
                         <input class="field-value writable" name="system.world.location.x" type="text" value="{{system.world.location.x}}"/>
                     </div>
-                    <div class="resource flex-group-left">
+                    <div class="resource flex-group-center">
                         <label for="system.world.location.y" class="field-label">Y</label>
                         <input class="field-value writable" name="system.world.location.y" type="text" value="{{system.world.location.y}}"/>
                     </div>

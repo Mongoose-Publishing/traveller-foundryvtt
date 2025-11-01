@@ -260,6 +260,8 @@
         "map": "systems/mgt2e/images/world-map.svg",
         "location": {
           "sector": "",
+          "sectorX": 0,
+          "sectorY": 0,
           "x": 1,
           "y": 1,
           "systemUuid": null
