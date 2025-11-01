@@ -114,11 +114,21 @@ function axial_subtract(a, b) {
 // Count the hexes between two worlds.
 // https://www.redblobgames.com/grids/hexagons/
 // Using odd-q coordinate system. Also convert to 0 based rather than 1 based.
-function distanceBetweenWorlds(sourceWorld, destinationWorld) {
+export function distanceBetweenWorlds(sourceWorld, destinationWorld) {
     let h1 = worldToHex(sourceWorld);
     let h2 = worldToHex(destinationWorld);
     let vec = axial_subtract(h1, h2);
     return (Math.abs(vec.q) + Math.abs(vec.q + vec.r) + Math.abs(vec.r)) / 2;
+}
+
+export async function clearFreight(sourceWorld, destinationWorldId) {
+    let list = [];
+    for (let i of sourceWorld.items) {
+        if (i.type === "cargo" && i.system.cargo.destinationId === destinationWorldId) {
+            list.push(i._id);
+        }
+    }
+    await sourceWorld.deleteEmbeddedDocuments("Item", list);
 }
 
 /**
@@ -211,19 +221,22 @@ export async function calculateFreightLots(sourceWorld, destinationWorld, effect
     let majorLots = await freightTraffic(worldDm - 4);
     for (let i=0; i < majorLots; i++) {
         let tonnageRoll = await new Roll("1D6 * 10").evaluate();
-        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price, parsecs);
+        createFreight("Major Lot", sourceWorld, destinationWorld,
+            tonnageRoll.total, price, parsecs);
     }
     // Minor lots
     let minorLots = await freightTraffic(worldDm);
     for (let i=0; i < minorLots; i++) {
         let tonnageRoll = await new Roll("1D6 * 5").evaluate();
-        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price, parsecs);
+        createFreight("Minor Lot", sourceWorld, destinationWorld,
+            tonnageRoll.total, price, parsecs);
     }
     // Incidental lots
     let incidentalLots = await freightTraffic(worldDm);
     for (let i=0; i < incidentalLots; i++) {
         let tonnageRoll = await new Roll("1D6").evaluate();
-        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price, parsecs);
+        createFreight("Incidental Lot", sourceWorld, destinationWorld,
+            tonnageRoll.total, price, parsecs);
     }
 
     return availableFreight;
@@ -236,6 +249,7 @@ export function createFreight(name, worldActor, destinationWorld, tonnage, price
         "type": "cargo",
         "system": {
             "quantity": tonnage,
+            "cost": 0,
             "cargo": {
                 "price": price,
                 "availability": "",
@@ -245,6 +259,7 @@ export function createFreight(name, worldActor, destinationWorld, tonnage, price
                 "illegal": false,
                 "sourceId": worldActor.uuid,
                 "destinationId": destinationWorld.uuid,
+                "destinationName": destinationWorld.name,
                 "parsecs": parsecs,
                 "freight": true
             },
@@ -450,7 +465,12 @@ export async function createSpeculativeGoods(worldActor, illegal) {
     }
     await worldActor.deleteEmbeddedDocuments("Item", list);
 
-    let tradeFolder = game.items.folders.getName("Trade Goods");
+    let tradeFolderName = "Trade Goods";
+    if (worldActor.system.world.meta?.tradeFolder) {
+        tradeFolderName = worldActor.system.world.meta?.tradeFolder;
+    }
+
+    let tradeFolder = game.items.folders.getName(tradeFolderName);
     if (!tradeFolder) {
         // Need to look for a compendium entry instead.
         tradeFolder = game.packs.get("mgt2e.base-items")?.folders?.getName("Trade Goods");

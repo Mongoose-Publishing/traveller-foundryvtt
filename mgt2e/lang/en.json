@@ -369,6 +369,16 @@
   "MGT2.WorldSheet.UWP.LawLevel": "Law Level",
   "MGT2.WorldSheet.UWP.TechLevel": "Tech Level",
 
+  "MGT2.WorldSheet.LocalBroker": "World's Broker Skill",
+  "MGT2.WorldSheet.Broker": "Broker:",
+  "MGT2.WorldSheet.Streetwise": "Streetwise:",
+  "MGT2.WorldSheet.DropBroker": "Drop actor to set ship broker",
+  "MGT2.WorldSheet.DropStreetwise": "Drop actor to set ship streetwise",
+  "MGT2.WorldSheet.TradeFolder": "Trade Folder",
+  "MGT2.WorldSheet.TradeFolderHint": "Name of folder of cargo items to use as speculative trade goods on this world",
+  "MGT2.WorldSheet.DropStreetwise": "Drop actor to set ship streetwise",
+  "MGT2.WorldSheet.LocalGoods": "Local Goods",
+
   "MGT2.WorldSheet.Atmosphere.Composition.0": "None",
   "MGT2.WorldSheet.Atmosphere.Composition.1": "Trace",
   "MGT2.WorldSheet.Atmosphere.Composition.2": "Very Thin, Tainted",

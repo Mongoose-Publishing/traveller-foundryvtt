@@ -209,44 +209,34 @@
                     </div>
 
                     <div class="tab" data-group="primary" data-tab="freight">
-                        {{#if cargo}}
-                            <table class="trade-list items-list">
-                                <tr class="trade-list-header">
-                                    <th class="trade-name">Freight Destination</th>
-                                    <th class="trade-quantity">Quantity</th>
-                                    <th class="trade-buy">Price (Cr)</th>
-                                </tr>
-                                {{#each cargo as |item id|}}
-                                    {{#unless item.system.cargo.speculative}}
-                                        <tr class="item item-gear ship-cargo trade-item" data-item-id="{{item._id}}">
-                                            <td class="trade-name"><img src="{{item.img}}"/> {{item.name}}</td>
-                                            <td class="trade-quantity">
-                                                {{#if item.system.quantity includeZero=false}}
-                                                {{item.system.quantity}}
-                                                {{else}}
-                                                -
-                                                {{/if}}
-                                            </td>
-                                            <td class="trade-price">
-                                                {{#if item.system.quantity includeZero=false}}
-                                                {{prettyNumber item.system.cost 0 false}}
-                                                {{else}}
-                                                -
-                                                {{/if}}
-                                            </td>
-                                        </tr>
-                                    {{/unless}}
-                                {{/each}}
-                            </table>
+                        {{#if destinationWorlds}}
+                            {{#each destinationWorlds as |w wid|}}
+                                <h3 class="destination-title" data-destination-id="{{wid}}">
+                                    {{w.name}} ({{w.parsecs}}pc)
+                                    {{#if ../isEditable}}
+                                        <a style="float:right" class="freight-clear" title="Clear Freight"><i class="fas fa-trash"></i></a>
+                                    {{/if}}
+                                </h3>
+                                <ol class="items-list actor-items grid grid-4col">
+                                    {{#each w.freight as |freight|}}
+                                        <li class="item item-gear freight" data-item-id="{{freight._id}}">
+                                            <h4>{{freight.name}} - {{freight.system.quantity}}dt</h4>
+                                            <img title="{{nameQuantity freight}}" src="{{freight.img}}"/>
+                                            <span>Cr{{prettyNumber freight.system.cargo.price 0 false}} / dt</span><br/>
+                                            <span><b>Cr{{prettyNumber freight.system.cargo.totalPrice 0 false}}</b></span>
+                                        </li>
+                                    {{/each}}
+                                </ol>
+                            {{/each}}
                         {{else}}
-                            <p>{{localize 'MGT2.TravellerSheet.DragCargo'}}</p>
+                            <p>Drag worlds here to calculate freight to them</p>
                         {{/if}}
                     </div>
 
                     <div class="tab" data-group="primary" data-tab="trade">
                         <div class="trade-configuration grid grid-3col">
                             <div class="trade">
-                                <label class="broker-label">Local Broker</label><br/>
+                                <label class="broker-label">{{localize "MGT2.WorldSheet.LocalBroker"}}</label><br/>
                                 <input class="writable" name="system.world.meta.localBrokerScore"
                                        type="text" value="{{system.world.meta.localBrokerScore}}"/>
                                 <br/>
@@ -257,10 +247,10 @@
                                     <label class="trader-name">{{brokerActorName}}</label>
                                     <br/>
                                     <img src="{{brokerActorImg}}"/>
-                                    <label class="trader-skill">Broker:</label><br/>
+                                    <label class="trader-skill">{{localize "MGT2.WorldSheet.Broker"}}</label><br/>
                                     <span class="trader-score">{{system.world.meta.brokerScore}}</span>
                                 {{else}}
-                                    <span class="trader-drop">Drop actor to set ship broker</span>
+                                    <span class="trader-drop">{{localize "MGT2.WorldSheet.DropBroker"}}</span>
                                 {{/if}}
                                 <div style="clear:both"></div>
                             </div>
@@ -270,18 +260,22 @@
                                     <label class="trader-name">{{streetwiseActorName}}</label>
                                     <br/>
                                     <img src="{{streetwiseActorImg}}"/>
-                                    <label class="trader-skill">Streetwise:</label><br/>
+                                    <label class="trader-skill">{{localize "MGT2.WorldSheet.Streetwise"}}</label><br/>
                                     <span class="trader-score">{{system.world.meta.streetwiseScore}}</span>
                                 {{else}}
-                                    <span class="trader-drop">Drop actor to set ship streetwise</span>
+                                    <span class="trader-drop">{{localize "MGT2.WorldSheet.DropStreetwise"}}</span>
                                 {{/if}}
                                 <div style="clear:both"></div>
                             </div>
                         </div>
 
                         {{#if isEditable}}
+                            <p title="{{localize 'MGT2.WorldSheet.TradeFolderHint'}}">
+                                <label>{{localize "MGT2.WorldSheet.TradeFolder"}}:</label>
+                                <input name="system.world.meta.tradeFolder" value="{{system.world.meta.tradeFolder}}" placeholder="Trade Goods"/>
+                            </p>
                             {{#if localGoods}}
-                                <h4>Local Goods</h4>
+                                <h4>{{localize "MGT2.WorldSheet.LocalGoods"}}</h4>
                                 <ol class="items-list actor-items grid grid-3col">
                                     {{#each localGoods as |cargo id|}}
                                     <li class="item item-gear world-faction" data-item-id="{{cargo._id}}">

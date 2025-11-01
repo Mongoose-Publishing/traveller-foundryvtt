@@ -112,12 +112,18 @@
                     <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
                         <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                         <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                        {{#if item.system.quantity includeZero=false}}
-                        <span>{{item.system.quantity}}dt</span>
-                        <br/>
-                        {{/if}}
-                        {{#if item.system.cost includeZero=false}}
-                        <span>Cr{{niceNumber item.system.cost}}</span>
+                        {{#if item.system.cargo.destinationName}}
+                            <span>{{item.system.cargo.destinationName}}</span>
+                            <br/>
+                            <span>Cr{{niceNumber item.system.cargo.price}}</span>
+                        {{else}}
+                            {{#if item.system.quantity includeZero=false}}
+                                <span>{{item.system.quantity}}dt</span>
+                                <br/>
+                            {{/if}}
+                            {{#if item.system.cost includeZero=false}}
+                                <span>Cr{{niceNumber item.system.cost}}</span>
+                            {{/if}}
                         {{/if}}
                         <div class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

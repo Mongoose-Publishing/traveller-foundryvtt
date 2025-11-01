@@ -118,7 +118,7 @@ export class MgT2ItemSheet extends ItemSheet {
                 context.destinationWorld = await fromUuid(context.item.system.cargo.destinationId);
             }
 
-            context.totalCost = context.item.system.cost * context.system.quantity;
+            context.totalCost = context.item.system.cargo.price * context.system.quantity;
         }
 
         if (context.item.type === "armour") {
@@ -1194,9 +1194,9 @@ export class MgT2ItemSheet extends ItemSheet {
                 const value = $(ev.currentTarget).val();
                 if (value) {
                     if (this.item.system.cargo.purchaseDM.length > 0) {
-                        this.item.system.cargo.purchaseDM += `, ${value} 0`;
+                        this.item.system.cargo.purchaseDM += `, ${value} 1`;
                     } else {
-                        this.item.system.cargo.purchaseDM = `${value} 0`;
+                        this.item.system.cargo.purchaseDM = `${value} 1`;
                     }
                     this.item.update({"system.cargo": this.item.system.cargo});
                 }
@@ -1295,7 +1295,7 @@ export class MgT2ItemSheet extends ItemSheet {
                 let value = parseInt(text.replace(/[^-0-9]/g, ""));
                 value += parseInt(modifier);
                 value = Math.min(12, value);
-                value = Math.max(-12, value);
+                value = Math.max(1, value);
                 // We can change.
                 const updated = trait + " " + value;
                 let traits = this.item.system.cargo[field];

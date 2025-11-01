@@ -1,6 +1,11 @@
 import {MgT2ActorSheet} from "../actor-sheet.mjs";
 import {MgT2Item} from "../../documents/item.mjs";
-import {calculateFreightLots, createFreight, createSpeculativeGoods } from "../../helpers/utils/trade-utils.mjs";
+import {
+    calculateFreightLots, clearFreight,
+    createFreight,
+    createSpeculativeGoods,
+    distanceBetweenWorlds
+} from "../../helpers/utils/trade-utils.mjs";
 import {createWorld, setTradeCodes } from "../../helpers/utils/world-utils.mjs";
 import {MGT2} from "../../helpers/config.mjs";
 
@@ -15,11 +20,13 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         });
     }
 
-    _prepareItems(context) {
+    async _prepareItems(context) {
         context.cargo = [];
         context.factions = [];
         context.localGoods = [];
+        context.destinations = [];
 
+        context.destinationWorlds = null;
         for (let i of context.items) {
             i.img = i.img || CONFIG.MGT2.DEFAULT_ITEM_ICON;
             i.cssStyle = "";
@@ -28,12 +35,35 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             if (i.type === 'cargo') {
                 // Add some meta data.
                 let basePrice = i.system.cargo.price;
-                if (i.system.cargo.speculative || i.system.cargo.freight) {
+                if (i.system.cargo.speculative) {
                     i.system.cargo.costDiff = i.system.cost - basePrice;
                     i.system.cargo.costSign = Math.sign(i.system.cargo.costDiff);
                     i.system.cargo.saleDiff = i.system.cargo.salePrice - basePrice;
                     i.system.cargo.saleSign = Math.sign(i.system.cargo.saleDiff);
                     context.cargo.push(i);
+                } else if (i.system.cargo.freight) {
+                    let destId = i.system.cargo.destinationId;
+                    if (!context.destinationWorlds) {
+                        context.destinationWorlds = {};
+                    }
+                    if (context.destinationWorlds[destId]) {
+
+                    } else {
+                        let world = await fromUuid(destId);
+                        context.destinationWorlds[destId] = {
+                            name: world.name,
+                            parsecs: distanceBetweenWorlds(context.actor, world),
+                            freight: [],
+                            lowPassengers: [],
+                            basicPassengers: [],
+                            middlePassengers: [],
+                            highPassengers: [],
+                            mail: []
+                        }
+                        console.log("Added destination " + world.name);
+                    }
+                    i.system.cargo.totalPrice = parseInt(i.system.cargo.price) * parseInt(i.system.quantity);
+                    context.destinationWorlds[destId].freight.push(i);
                 } else {
                     context.localGoods.push(i);
                 }
@@ -181,6 +211,10 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             li.addEventListener("dragstart", handler, false);
         });
 
+        html.find('.freight-clear').click(ev => {
+            const e = $(ev.currentTarget).parents(".destination-title");
+            clearFreight(this.actor, e.data("destinationId"));
+        });
         html.find('.createFreight').click(ev => {
             createFreight(this.actor, 1, 1000);
         });
