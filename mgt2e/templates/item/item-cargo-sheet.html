@@ -3,87 +3,184 @@
     <div class="sidebar">
       <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
-      <div class="shadow item-side-panel">
-        <div class="resource flex-group-center">
-          <label for="system.quantity" class="resource-label">Quantity</label><br/>
-
-          <div class="incdec">
-            <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
-            <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
-            <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
-          </div>
+      {{#if system.cargo}}
+        <div class="shadow item-side-panel">
+            <div class="cargo-data">
+                <div class="resource">
+                    <label>Quantity</label>
+                    <span class="value-box">{{item.system.quantity}}dt</span>
+                </div>
+                {{#if item.system.cargo.parsecs}}
+                    <div class="resource">
+                        <label>Parsecs</label>
+                        <span class="value-box">{{item.system.cargo.parsecs}}pc</span>
+                    </div>
+                {{/if}}
+                <div class="resource">
+                    <label>Unit Value</label>
+                    <span class="value-box">Cr{{prettyNumber item.system.cost 0 false}}</span>
+                </div>
+                <div class="resource">
+                    <label>Total Value</label>
+                    <span class="value-box">Cr{{prettyNumber totalCost 0 false}}</span>
+                </div>
+            </div>
         </div>
-      </div>
+      {{else}}
+          <div class="shadow item-side-panel">
+            <div class="resource flex-group-center">
+              <label for="system.quantity" class="resource-label">Quantity</label><br/>
+
+              <div class="incdec">
+                <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
+                <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+                <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
+              </div>
+            </div>
+          </div>
+      {{/if}}
     </div>
 
     <div class="flex-group-left">
       <h1 class="charname shadow">
         <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
       </h1>
-      <div class="shadow">
-        <div class="resources grid grid-3col flex-group-center">
-          <div class="resource">
-            <label for="system.cargo.price" class="resource-label">Base Price</label>
-            <input type="text" name="system.cargo.price" value="{{system.cargo.price}}" data-dtype="Number"/>
+      {{#if system.cargo.freight}}
+          <div class="shadow freight-data">
+              <div class="resources grid grid-5col flex-group-center">
+                  <div class="world-block grid-span-2">
+                      <label>{{sourceWorld.name}}</label>
+                      <img class="world" src="{{sourceWorld.img}}"/>
+                      <div class="uwp-digits">
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Port'}}">
+                              {{sourceWorld.system.world.uwp.port}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Size'}}">
+                              {{toHex sourceWorld.system.world.uwp.size}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Atmosphere'}}">
+                              {{toHex sourceWorld.system.world.uwp.atmosphere}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Hydrographics'}}">
+                              {{toHex sourceWorld.system.world.uwp.hydrographics}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Population'}}">
+                              {{toHex sourceWorld.system.world.uwp.population}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Government'}}">
+                              {{toHex sourceWorld.system.world.uwp.government}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.LawLevel'}}">
+                              {{toHex sourceWorld.system.world.uwp.lawLevel}}
+                          </div>
+                          <div class="uwp-dash">-</div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.TechLevel'}}">
+                              {{toHex sourceWorld.system.world.uwp.techLevel}}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="resource freight-arrow">
+                      <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                  <div class="world-block grid-span-2">
+                      <label>{{destinationWorld.name}}</label>
+                      <img class="world" src="{{destinationWorld.img}}"/>
+                      <div class="uwp-digits">
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Port'}}">
+                              {{destinationWorld.system.world.uwp.port}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Size'}}">
+                              {{toHex destinationWorld.system.world.uwp.size}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Atmosphere'}}">
+                              {{toHex destinationWorld.system.world.uwp.atmosphere}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Hydrographics'}}">
+                              {{toHex destinationWorld.system.world.uwp.hydrographics}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Population'}}">
+                              {{toHex destinationWorld.system.world.uwp.population}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.Government'}}">
+                              {{toHex destinationWorld.system.world.uwp.government}}
+                          </div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.LawLevel'}}">
+                              {{toHex destinationWorld.system.world.uwp.lawLevel}}
+                          </div>
+                          <div class="uwp-dash">-</div>
+                          <div class="uwp-digit" title="{{localize 'MGT2.WorldSheet.UWP.TechLevel'}}">
+                              {{toHex destinationWorld.system.world.uwp.techLevel}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div class="resource">
-            <label for="system.cargo.tons" class="resource-label">Tons</label><br/>
-            <input class="item-tons" type="text" name="system.cargo.tons" value="{{system.cargo.tons}}" data-dtype="String"/>
-            <span class="quantity-roll rollable"><i class="fas fa-dice"></i></span>
-          </div>
+      {{else}}
+          <div class="shadow">
+            <div class="resources grid grid-3col flex-group-center">
+              <div class="resource">
+                <label for="system.cargo.price" class="resource-label">Base Price</label>
+                <input type="text" name="system.cargo.price" value="{{system.cargo.price}}" data-dtype="Number"/>
+              </div>
+              <div class="resource">
+                <label for="system.cargo.tons" class="resource-label">Tons</label><br/>
+                <input class="item-tons" type="text" name="system.cargo.tons" value="{{system.cargo.tons}}" data-dtype="String"/>
+                <span class="quantity-roll rollable"><i class="fas fa-dice"></i></span>
+              </div>
+                <div class="resource">
+                    <label for="system.cargo.illegal" class="resource-label">Illegal</label><br/>
+                    <input class="item-illegal" type="checkbox" name="system.cargo.illegal" {{checked system.cargo.illegal}} data-dtype="boolean"/>
+                </div>
+            </div>
             <div class="resource">
-                <label for="system.cargo.illegal" class="resource-label">Illegal</label><br/>
-                <input class="item-illegal" type="checkbox" name="system.cargo.illegal" {{checked system.cargo.illegal}} data-dtype="boolean"/>
+              <label for="system.cargo.availability" class="resource-label">Availability</label>
+              {{#if (isOwner .)}}
+                {{#if availability}}
+                  <span style="display: inline-block; float: right">
+                      <i class="fa fa-add"></i><select class="availability-selector">
+                         {{selectOptions availability }}
+                      </select>
+                  </span>
+                {{/if}}
+              {{/if}}
+              <div class="pill-container">
+                {{#each haveAvailability as |a id|}}
+                  <div class="pill cargo-pill" data-trait-id="{{id}}">{{a}}&nbsp;<i class="fas fa-xmark avail-remove"> </i></div>
+                {{/each}}
+              </div>
+              <br/>
             </div>
-        </div>
-        <div class="resource">
-          <label for="system.cargo.availability" class="resource-label">Availability</label>
-          {{#if (isOwner .)}}
-            {{#if availability}}
-              <span style="display: inline-block; float: right">
-                  <i class="fa fa-add"></i><select class="availability-selector">
-                     {{selectOptions availability }}
-                  </select>
-              </span>
-            {{/if}}
-          {{/if}}
-          <div class="pill-container">
-            {{#each haveAvailability as |a id|}}
-              <div class="pill cargo-pill" data-trait-id="{{id}}">{{a}}&nbsp;<i class="fas fa-xmark avail-remove"> </i></div>
-            {{/each}}
+
+            <div class="resource">
+                <label for="system.cargo.purchaseDM" class="resource-label">Purchase DM</label>
+                {{#if (isOwner .)}}
+                <span style="display: inline-block; float: right">
+                    <i class="fa fa-add"></i><select class="purchase-selector">
+                       {{selectOptions purchaseTraits }}
+                    </select>
+                </span>
+                {{/if}}
+                <div class="pill-container purchase">
+                  {{{showCargoTraits . system.cargo.purchaseDM}}}
+                </div>
+              <br/>
+            </div>
+
+            <div class="resource">
+                <label for="system.cargo.saleDM" class="resource-label">Sale DM</label>
+                {{#if (isOwner .)}}
+                <span style="display: inline-block; float: right">
+                    <i class="fa fa-add"></i><select class="sale-selector">
+                       {{selectOptions saleTraits }}
+                    </select>
+                </span>
+                {{/if}}
+                <div class="pill-container sale">
+                  {{{showCargoTraits . system.cargo.saleDM}}}
+                </div>
+            </div>
           </div>
-          <br/>
-        </div>
-
-        <div class="resource">
-            <label for="system.cargo.purchaseDM" class="resource-label">Purchase DM</label>
-            {{#if (isOwner .)}}
-            <span style="display: inline-block; float: right">
-                <i class="fa fa-add"></i><select class="purchase-selector">
-                   {{selectOptions purchaseTraits }}
-                </select>
-            </span>
-            {{/if}}
-            <div class="pill-container purchase">
-              {{{showCargoTraits . system.cargo.purchaseDM}}}
-            </div>
-          <br/>
-        </div>
-
-        <div class="resource">
-            <label for="system.cargo.saleDM" class="resource-label">Sale DM</label>
-            {{#if (isOwner .)}}
-            <span style="display: inline-block; float: right">
-                <i class="fa fa-add"></i><select class="sale-selector">
-                   {{selectOptions saleTraits }}
-                </select>
-            </span>
-            {{/if}}
-            <div class="pill-container sale">
-              {{{showCargoTraits . system.cargo.saleDM}}}
-            </div>
-        </div>
-      </div>
+      {{/if}}
 
       <div class="shadow">
         {{editor enrichedDescription target="system.description"

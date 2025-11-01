@@ -509,7 +509,6 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
                 game.socket.emit("system.mgt2e", data);
             }
         }
-
         return transferCargo;
     } else if (item.system.cargo.speculative) {
         console.log("Speculative cargo");
@@ -518,11 +517,14 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
             ui.notifications.warn("Ship has no financial information");
             return false;
         }
+        if (parseInt(item.system.quantity < 1)) {
+            ui.notifications.warn("World doesn't have any goods of this type");
+            return false;
+        }
         if (parseInt(item.system.cost) > parseInt(shipActor.system.finance.cash)) {
             ui.notifications.warn("Cargo is too expensive");
             return false;
         }
-
         new MgT2BuyCargoApp(worldActor, shipActor, item).render(true);
     }
     return false;

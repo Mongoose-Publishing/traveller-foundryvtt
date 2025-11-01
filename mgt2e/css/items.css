@@ -375,3 +375,39 @@ textarea.culture {
   height: 10em;
   overflow: auto;
 }
+
+.world-block {
+  border: 2px solid black;
+  border-radius: 5px;
+  min-width: 180px;
+}
+
+.cargo-data label {
+  font-weight: bold;
+  text-align: center;
+  display: block;
+}
+
+.cargo-data .value-box {
+  margin-bottom: 10px;
+}
+
+.world-block label {
+  display: block;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.world-block img.world {
+  width: 64px;
+}
+
+.freight-data .freight-arrow {
+  font-size: xxx-large;
+}
+
+.freight-data .resource label {
+  text-transform: uppercase;
+}

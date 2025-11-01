@@ -112,6 +112,15 @@ export class MgT2ItemSheet extends ItemSheet {
             context.skills = MGT2.getDefaultSkills();
         }
 
+        if (context.item.type === "cargo") {
+            if (context.item.system?.cargo?.freight) {
+                context.sourceWorld = await fromUuid(context.item.system.cargo.sourceId);
+                context.destinationWorld = await fromUuid(context.item.system.cargo.destinationId);
+            }
+
+            context.totalCost = context.item.system.cost * context.system.quantity;
+        }
+
         if (context.item.type === "armour") {
             context.YESNO = {
                 "0": game.i18n.localize("MGT2.Base.No"),

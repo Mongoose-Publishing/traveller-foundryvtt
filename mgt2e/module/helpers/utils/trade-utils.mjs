@@ -205,31 +205,31 @@ export async function calculateFreightLots(sourceWorld, destinationWorld, effect
     }
 
     let worldDm = freightDm(sourceWorld) + freightDm(destinationWorld) - parsecsDm;
-    let name = "Cargo to " + destinationWorld.name;
+    let name = "Freight to " + destinationWorld.name;
 
     // Major lots
     let majorLots = await freightTraffic(worldDm - 4);
     for (let i=0; i < majorLots; i++) {
         let tonnageRoll = await new Roll("1D6 * 10").evaluate();
-        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price);
+        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price, parsecs);
     }
     // Minor lots
     let minorLots = await freightTraffic(worldDm);
     for (let i=0; i < minorLots; i++) {
         let tonnageRoll = await new Roll("1D6 * 5").evaluate();
-        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price);
+        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price, parsecs);
     }
     // Incidental lots
     let incidentalLots = await freightTraffic(worldDm);
     for (let i=0; i < incidentalLots; i++) {
         let tonnageRoll = await new Roll("1D6").evaluate();
-        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price);
+        createFreight(name, sourceWorld, destinationWorld, tonnageRoll.total, price, parsecs);
     }
 
     return availableFreight;
 }
 
-export function createFreight(name, worldActor, destinationWorld, tonnage, price) {
+export function createFreight(name, worldActor, destinationWorld, tonnage, price, parsecs) {
     const itemData = {
         "name": name,
         "img": "systems/mgt2e/icons/cargo/cargo.svg",
@@ -245,6 +245,7 @@ export function createFreight(name, worldActor, destinationWorld, tonnage, price
                 "illegal": false,
                 "sourceId": worldActor.uuid,
                 "destinationId": destinationWorld.uuid,
+                "parsecs": parsecs,
                 "freight": true
             },
             "description": "Freight from " + worldActor.name + " to " + destinationWorld.name
@@ -482,7 +483,7 @@ export async function createSpeculativeGoods(worldActor, illegal) {
 }
 
 export function outputTradeChat(actor, title, text) {
-    let html = `<div class="chat-package"><h3>${title}</h3>`;
+    let html = `<div class="chat-trade"><h3>${title}</h3>`;
     html += `${text}`;
     html += `</div>`;
 

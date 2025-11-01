@@ -277,11 +277,15 @@ Hooks.once('init', async function() {
 
     // Sockets
     game.socket.on("system.mgt2e", (data) => {
+        if (data.type) {
+            console.log(data.type);
+        }
         if (data.type === "showIdCard") {
             let actor = data.actor;
             new NpcIdCard(actor).render(true);
         }
         if (game.user === game.users.activeGM) {
+            console.log("We are the GM");
             if (data.type === "tradeBuyGoods") {
                 tradeBuyGoodsHandler(data);
             } else if (data.type === "tradeSellGoods") {
@@ -1584,6 +1588,9 @@ Handlebars.registerHelper('itemHasStatus', function(item) {
 
 Handlebars.registerHelper('toHex', function(value) {
     // Allow going up to H, so not really 'hexadecimal'.
+    if (value === null || value === undefined || parseInt(value) === NaN) {
+        return "?"
+    }
     return parseInt(value).toString(18).toUpperCase();
 });
 

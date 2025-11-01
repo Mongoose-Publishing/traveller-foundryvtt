@@ -210,29 +210,36 @@
 
                     <div class="tab" data-group="primary" data-tab="freight">
                         {{#if cargo}}
-                        <ol class="items-list actor-items grid grid-3col">
-                            {{#each cargo as |item id|}}
-                                {{#unless item.system.cargo.speculative}}
-                                    <li class="item item-gear ship-cargo" data-item-id="{{item._id}}">
-                                        <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
-                                        <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                                        {{#if item.system.quantity includeZero=false}}
-                                        <span>{{item.system.quantity}}dt</span>
-                                        <br/>
-                                        {{/if}}
-                                        {{#if item.system.cargo.price includeZero=false}}
-                                        <span>Cr{{niceNumber item.system.cargo.price}}</span>
-                                        {{/if}}
-                                        <div class="item-controls">
-                                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </li>
-                                {{/unless}}
-                            {{/each}}
-                        </ol>
+                            <table class="trade-list items-list">
+                                <tr class="trade-list-header">
+                                    <th class="trade-name">Freight Destination</th>
+                                    <th class="trade-quantity">Quantity</th>
+                                    <th class="trade-buy">Price (Cr)</th>
+                                </tr>
+                                {{#each cargo as |item id|}}
+                                    {{#unless item.system.cargo.speculative}}
+                                        <tr class="item item-gear ship-cargo trade-item" data-item-id="{{item._id}}">
+                                            <td class="trade-name"><img src="{{item.img}}"/> {{item.name}}</td>
+                                            <td class="trade-quantity">
+                                                {{#if item.system.quantity includeZero=false}}
+                                                {{item.system.quantity}}
+                                                {{else}}
+                                                -
+                                                {{/if}}
+                                            </td>
+                                            <td class="trade-price">
+                                                {{#if item.system.quantity includeZero=false}}
+                                                {{prettyNumber item.system.cost 0 false}}
+                                                {{else}}
+                                                -
+                                                {{/if}}
+                                            </td>
+                                        </tr>
+                                    {{/unless}}
+                                {{/each}}
+                            </table>
                         {{else}}
-                        <p>{{localize 'MGT2.TravellerSheet.DragCargo'}}</p>
+                            <p>{{localize 'MGT2.TravellerSheet.DragCargo'}}</p>
                         {{/if}}
                     </div>
 

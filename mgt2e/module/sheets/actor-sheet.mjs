@@ -1662,6 +1662,7 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     async _onDrop(event) {
+        console.log("_onDrop:");
         let data;
         try {
             data = JSON.parse(event.dataTransfer.getData('text/plain'));

@@ -39,6 +39,12 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             }
         }
     }
+    _canDragStart() {
+        // If you can see it, you can drag from it. This allows the
+        // trade mechanism, but means we need to be careful about
+        // everything else.
+        return true
+    }
 
     async getData() {
         const context = await super.getData();
@@ -157,6 +163,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
     activateListeners(html) {
         super.activateListeners(html);
+        console.log("World Activate Listeners:");
 
         // Define trade drag listener here, because all players should be able to do it.
         let handler = ev => this._onDragStart(ev);
