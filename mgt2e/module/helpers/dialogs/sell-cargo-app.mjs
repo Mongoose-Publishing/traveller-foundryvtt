@@ -1,5 +1,5 @@
 import {MgT2Item} from "../../documents/item.mjs";
-import {outputTradeChat, tradeSellGoodsHandler} from "../utils/trade-utils.mjs";
+import {getHighestModifier, getSalePrice, outputTradeChat, tradeSellGoodsHandler} from "../utils/trade-utils.mjs";
 import {Tools} from "../chat/tools.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
@@ -26,7 +26,7 @@ export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) 
             changeQuantity: MgT2SellCargoApp.changeQuantityAction
         },
         window: {
-            title: "Transfer Cargo to Ship"
+            title: "Sell Cargo to World"
         }
     }
 
@@ -91,6 +91,25 @@ export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) 
                         console.log(`Compare to [${i.name}] sell price Cr${context.salePrice} for item of Cr${this.cargoItem.system.cost}`);
                         break;
                     }
+                }
+                if (!this.matchedItem) {
+                    // This world doesn't know about this type of item. Need to dynamically work out price.
+                    console.log("This item is unknown at this world");
+                    let dm = 0 - Number(this.worldActor.system.world.meta.localBrokerScore);
+                    if (this.cargoItem.system.cargo.illegal) {
+                        dm += Number(this.worldActor.system.world.meta.streetwiseScore);
+                    } else {
+                        dm += Number(this.worldActor.system.world.meta.brokerScore);
+                    }
+                    const costRoll = await new Roll(`3D6 + ${dm}`, null).evaluate();
+                    const saleDM =
+                        getHighestModifier(this.worldActor, this.cargoItem.system.cargo.saleDM) -
+                        getHighestModifier(this.worldActor, this.cargoItem.system.cargo.purchaseDM);
+                    let salePrice = await getSalePrice(this.cargoItem.system.cargo.price, costRoll.total + saleDM);
+
+                    context.salePrice = salePrice;
+                    context.variance = salePrice - this.cargoItem.system.cargo.price;
+                    context.profit = salePrice - this.cargoItem.system.cost;
                 }
                 this.salePrice = context.salePrice;
                 context.QUANTITY_LIST = {};

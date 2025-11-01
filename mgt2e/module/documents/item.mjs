@@ -59,7 +59,6 @@ export class MgT2Item extends Item {
      */
     _preCreate(data, options, userId) {
         if (this.actor) {
-            console.log(`Adding item '${this.type}' to '${this.actor.type}'`);
             // This item is being dropped onto an Actor object.
             if (this.actor.type === "spacecraft") {
                 if ([ "term", "associate", "worlddata"].includes(this.type)) {

@@ -18,6 +18,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
     _prepareItems(context) {
         context.cargo = [];
         context.factions = [];
+        context.localGoods = [];
 
         for (let i of context.items) {
             i.img = i.img || CONFIG.MGT2.DEFAULT_ITEM_ICON;
@@ -27,11 +28,15 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             if (i.type === 'cargo') {
                 // Add some meta data.
                 let basePrice = i.system.cargo.price;
-                i.system.cargo.costDiff = i.system.cost - basePrice;
-                i.system.cargo.costSign = Math.sign(i.system.cargo.costDiff);
-                i.system.cargo.saleDiff = i.system.cargo.salePrice - basePrice;
-                i.system.cargo.saleSign = Math.sign(i.system.cargo.saleDiff);
-                context.cargo.push(i);
+                if (i.system.cargo.speculative || i.system.cargo.freight) {
+                    i.system.cargo.costDiff = i.system.cost - basePrice;
+                    i.system.cargo.costSign = Math.sign(i.system.cargo.costDiff);
+                    i.system.cargo.saleDiff = i.system.cargo.salePrice - basePrice;
+                    i.system.cargo.saleSign = Math.sign(i.system.cargo.saleDiff);
+                    context.cargo.push(i);
+                } else {
+                    context.localGoods.push(i);
+                }
             } else if (i.type === "worlddata") {
                 if (i.system?.world?.datatype === "faction") {
                     context.factions.push(i);
@@ -48,6 +53,10 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
     async getData() {
         const context = await super.getData();
+
+        if (context.actor.permission > 2) {
+            context.isEditable = true;
+        }
 
         context.enrichedDescription = await TextEditor.enrichHTML(
             this.object.system.description,

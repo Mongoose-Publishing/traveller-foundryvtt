@@ -258,7 +258,7 @@ function getModifiedPrice(basePrice, percentage) {
     return Math.round((Number(basePrice) * Number(percentage)) / 100);
 }
 
-async function getPurchasePrice(basePrice, total) {
+export async function getPurchasePrice(basePrice, total) {
     if (total < -3) {
         return getModifiedPrice(basePrice, 300);
     } else if (total > 25) {
@@ -298,7 +298,7 @@ async function getPurchasePrice(basePrice, total) {
     }
 }
 
-async function getSalePrice(basePrice, total) {
+export async function getSalePrice(basePrice, total) {
     if (total < -3) {
         return getModifiedPrice(basePrice, 10);
     } else if (total > 25) {
@@ -338,6 +338,22 @@ async function getSalePrice(basePrice, total) {
     }
 }
 
+export function getHighestModifier(worldActor, modifiers) {
+    let codes = modifiers.split(",");
+    let dm = 0;
+
+    for (let code of codes) {
+        let c = code.trim().split(" ")[0];
+        let v = code.trim().split(" ")[1];
+        if (worldActor.system.world.uwp.codes.indexOf(c) > -1) {
+            if (parseInt(v) > dm) {
+                dm = parseInt(v);
+            }
+        }
+    }
+
+    return dm;
+}
 
 async function createTradeItem(worldActor, item, available) {
     const srcCargo = item.system.cargo;
@@ -378,9 +394,17 @@ async function createTradeItem(worldActor, item, available) {
     } else {
         dm += Number(worldActor.system.world.meta.brokerScore);
     }
+    // Now need to modify based on trade codes.
+    let purchaseDM =
+        getHighestModifier(worldActor, item.system.cargo.purchaseDM) -
+        getHighestModifier(worldActor, item.system.cargo.saleDM);
+    let saleDM =
+        getHighestModifier(worldActor, item.system.cargo.saleDM) -
+        getHighestModifier(worldActor, item.system.cargo.purchaseDM);
+
     const costRoll = await new Roll(`3D6 + ${dm}`, null).evaluate();
-    let cost = await getPurchasePrice(srcCargo.price, costRoll.total);
-    let sell = await getSalePrice(srcCargo.price, costRoll.total);
+    let cost = await getPurchasePrice(srcCargo.price, costRoll.total + purchaseDM);
+    let sell = await getSalePrice(srcCargo.price, costRoll.total + saleDM);
 
     const itemData = {
         "name": item.name,
@@ -416,9 +440,12 @@ export async function createSpeculativeGoods(worldActor, illegal) {
     // When generating speculative trade, remove any previous speculative trade
     // goods and regenerate a new list from scratch.
     let list = [];
+    let localGoods = [];
     for (let i of worldActor.items) {
         if (i.type === "cargo" && i.system.cargo.speculative) {
             list.push(i._id);
+        } else if (i.type === "cargo" && !i.system.cargo.freight) {
+            localGoods.push(i);
         }
     }
     await worldActor.deleteEmbeddedDocuments("Item", list);
@@ -432,7 +459,12 @@ export async function createSpeculativeGoods(worldActor, illegal) {
             return;
         }
     }
-    // First, look for the standard goods available.
+    // First, deal with any local unique goods on this world.
+    for (let item of localGoods) {
+        await createTradeItem(worldActor, item, true);
+    }
+
+    // Second, look for the standard goods available.
     for (let item of tradeFolder.contents) {
         if (item.name === "Spare Parts") {
             // Hack to avoid including spare parts. Need a better way
@@ -505,8 +537,8 @@ export async function tradeBuyGoodsHandler(queryData) {
     let worldActor = await fromUuid(queryData.worldActorId);
     let shipActor = await fromUuid(queryData.shipActorId);
     let cargoItem = await fromUuid(queryData.cargoItemId);
-    let quantity = queryData.quantity;
-    let totalCost = quantity * cargoItem.system.cost;
+    let quantity = parseInt(queryData.quantity);
+    let totalCost = quantity * parseInt(cargoItem.system.cost);
 
     const itemData = {
         "name": cargoItem.name,
@@ -519,7 +551,7 @@ export async function tradeBuyGoodsHandler(queryData) {
     }
     itemData.system.quantity = quantity;
     Item.create(itemData, { parent: shipActor });
-    shipActor.update({"system.finance.cash": shipActor.system.finance.cash - totalCost})
+    shipActor.update({"system.finance.cash": parseInt(shipActor.system.finance.cash) - parseInt(totalCost)})
 
     cargoItem.system.quantity -= quantity;
     if (cargoItem.system.quantity > 0) {
@@ -542,13 +574,19 @@ export async function tradeSellGoodsHandler(queryData) {
     let shipActor = await fromUuid(queryData.shipActorId);
     let cargoItem = await fromUuid(queryData.cargoItemId);
     let matchedItem = queryData.matchedItemId?(await fromUuid(queryData.matchedItemId)):null;
-    let salePrice = queryData.salePrice;
-    let quantity = queryData.quantity;
+    let salePrice = parseInt(queryData.salePrice);
+    let quantity = parseInt(queryData.quantity);
 
-    let totalCost = cargoItem.system.cost * quantity;
-    let totalProfit = (salePrice - cargoItem.system.cost) * quantity;
+    let totalCost = parseInt(cargoItem.system.cost) * quantity;
+    let totalProfit = (salePrice - parseInt(cargoItem.system.cost)) * quantity;
+    if (totalCost === NaN) {
+        totalCost = 0;
+    }
+    if (totalProfit === NaN) {
+        totalProfit = 0;
+    }
 
-    shipActor.system.finance.cash += totalCost;
+    shipActor.system.finance.cash = parseInt(shipActor.system.finance.cash) + parseInt(totalCost);
     shipActor.update({"system.finance": shipActor.system.finance})
 
     cargoItem.system.quantity -= quantity;

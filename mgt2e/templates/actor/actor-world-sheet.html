@@ -279,9 +279,31 @@
                             </div>
                         </div>
 
-                        <div>
-                            <input class="generateSpeculative" type="button" value="Speculate"/>
-                        </div>
+                        {{#if isEditable}}
+                            {{#if localGoods}}
+                                <h4>Local Goods</h4>
+                                <ol class="items-list actor-items grid grid-3col">
+                                    {{#each localGoods as |cargo id|}}
+                                    <li class="item item-gear world-faction" data-item-id="{{cargo._id}}">
+                                        <h4>{{cargo.name}}</h4>
+                                        <img title="{{cargo.name}}" src="{{cargo.img}}"/>
+                                        {{#if cargo.system.description}}
+                                        <span>{{{cargo.system.description}}}</span>
+                                        {{/if}}
+                                        <br/>
+                                        <div class="item-controls">
+                                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </li>
+                                    {{/each}}
+                                </ol>
+                            {{/if}}
+                            <div>
+                                <input class="generateSpeculative" type="button" value="Speculate"/>
+                            </div>
+                        {{/if}}
+
                         {{#if cargo}}
                             <table class="trade-list items-list">
                                 <tr class="trade-list-header">
