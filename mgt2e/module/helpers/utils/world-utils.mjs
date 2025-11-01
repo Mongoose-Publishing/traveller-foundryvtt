@@ -240,7 +240,7 @@ export function setTradeCodes(worldActor) {
     uwp.size = Number(uwp.size);
     uwp.population = Number(uwp.population);
     uwp.lawLevel = Number(uwp.lawLevel);
-    uwp.goverment = Number(uwp.goverment);
+    uwp.government = Number(uwp.government);
     uwp.hydrographics = Number(uwp.hydrographics);
 
     // Agricultural
