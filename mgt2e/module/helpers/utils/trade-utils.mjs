@@ -793,3 +793,27 @@ export async function tradeSellFreightHandler(queryData) {
     text += `<p><b>Total Payment:</b> Cr${Tools.prettyNumber(freightItem.system.cost * freightItem.system.quantity, 0)}</p>`;
     outputTradeChat(shipActor, title, text);
 }
+
+export async function tradeEmbarkPassengerHandler(queryData) {
+    let worldActor = await fromUuid(queryData.worldActorId);
+    let shipActor = await fromUuid(queryData.shipActorId);
+    let passengerItem = await fromUuid(queryData.passengerItemId);
+
+    console.log("Creating passenger NPC");
+
+    let folderName = "NPC Passengers";
+    let npcFolder = await game.actors.folders.getName(folderName);
+    if (!npcFolder) {
+        npcFolder = await Folder.create({"name": folderName, "type": "Actor", color: "#FF0000" });
+    }
+    console.log(npcFolder);
+
+    let npcData = {
+        "type": "npc",
+        "name": "Generic Passenger",
+        "img": `systems/mgt2e/icons/cargo/passenger-${passengerItem.system.world.passage}.svg`,
+        "folder": npcFolder._id
+    }
+    let npc = await Actor.implementation.create(npcData);
+
+}

@@ -82,7 +82,6 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         if (this.cargoItem) {
             // This should always be set.
-            console.log(this.cargoItem);
             context.item = this.cargoItem;
             context.cargo = this.cargoItem.system.cargo;
             if (context.cargo.speculative) {

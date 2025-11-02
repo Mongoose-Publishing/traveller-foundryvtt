@@ -539,7 +539,7 @@ Hooks.on("createActor", (actor, data, userId) => {
         actor.update({"prototypeToken.sight.enabled": true});
     }
 
-    if (actor.type === "traveller") {
+    if (["taveller", "world"].includes(actor.type)) {
         actor.update({"prototypeToken.actorLink": true});
     }
 

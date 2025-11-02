@@ -1,0 +1,26 @@
+<div>
+    <div>
+        <h2>{{passenger.name}}</h2>
+
+        <p>
+            <b>Passengers Available:</b> {{prettyNumber passenger.system.quantity 0 false}}
+        </p>
+        <p>
+            <b>Available Staterooms:</b> 0
+        </p>
+        <p>
+            <b>Ticket Price:</b> Cr{{prettyNumber passenger.system.world.price 0 false}}
+        </p>
+        <p>
+            <b>Cargo Space:</b> {{prettyNumber freeSpace 0 false}}dt
+        </p>
+
+        <p>
+            <label>Quantity
+                <select class="quantity_select" name="quantitySelect">
+                    {{selectOptions QUANTITY_LIST selected=qty}}
+                </select>
+            </label>
+        </p>
+    </div>
+</div>

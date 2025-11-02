@@ -3,6 +3,7 @@ import {MgT2Item} from "../../documents/item.mjs";
 import {MgT2BuyCargoApp} from "../dialogs/buy-cargo-app.mjs";
 import {MgT2SellCargoApp} from "../dialogs/sell-cargo-app.mjs";
 import {tradeBuyFreightHandler, tradeSellFreightHandler} from "../utils/trade-utils.mjs";
+import {MgT2EmbarkPassengerApp} from "../dialogs/embark-passenger-app.mjs";
 
 
 export async function calculateSpacecraftCost(actor) {
@@ -454,6 +455,15 @@ export function fuelCost(spacecraft) {
     return { "jumpFuel": jumpFuel, "rating": jumpRating, "weekFuel": weekFuel };
 }
 
+export async function embarkPassengerDialog(worldActor, shipActor, item) {
+    if (!item || !item.system?.world || item.system.world.datatype !== "passenger") {
+        return false;
+    }
+    new MgT2EmbarkPassengerApp(worldActor, shipActor, item).render(true);
+
+    return false;
+}
+
 export async function buyCargoDialog(worldActor, shipActor, item) {
     if (!item || !item.system?.cargo) {
         return false;
@@ -465,15 +475,12 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
             freeSpace -= parseFloat(i.system.quantity);
         }
     }
-    console.log("Cargo Remaining: " + freeSpace);
     if (freeSpace <= 0) {
         ui.notifications.warn("The ship has no available cargo space");
         return false;
     }
 
     if (item.system.cargo.freight) {
-        console.log("Freight cargo");
-
         let destination = await fromUuid(item.system.cargo.destinationId);
 
         if (item.system.quantity > freeSpace) {
@@ -511,8 +518,6 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
         }
         return transferCargo;
     } else if (item.system.cargo.speculative) {
-        console.log("Speculative cargo");
-
         if (!shipActor.system.finance) {
             ui.notifications.warn("Ship has no financial information");
             return false;

@@ -17,7 +17,7 @@ import { MGT2 } from "../helpers/config.mjs";
 import {NpcIdCard} from "../helpers/id-card.mjs";
 import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
 import {
-    buyCargoDialog,
+    buyCargoDialog, embarkPassengerDialog,
     fuelCost,
     sellCargoDialog
 } from "../helpers/spacecraft/spacecraft-utils.mjs";
@@ -2032,7 +2032,7 @@ export class MgT2ActorSheet extends ActorSheet {
             ui.notifications.error(`Unable to find item with id [${data.uuid}]`);
             return false;
         }
-        if (["associate", "worlddata" ].includes(item.type)) {
+        if (["associate"].includes(item.type)) {
             // Meta item, so just pass through to the usual item handler.
             return super._onDropItem(event, data);
         } else if (item.type === "term" && [ "traveller", "package"].includes(actor.type)) {
@@ -2050,6 +2050,8 @@ export class MgT2ActorSheet extends ActorSheet {
         if (srcActor.type === "world" && this.actor.type === "spacecraft") {
             if (item.type === "cargo") {
                 await buyCargoDialog(srcActor, this.actor, item);
+            } else if (item.type === "worlddata" && item.system.world.datatype === "passenger") {
+                await embarkPassengerDialog(srcActor, this.actor, item);
             }
             return false;
         } else if (srcActor.type === "spacecraft" && this.actor.type === "world") {
@@ -2057,6 +2059,10 @@ export class MgT2ActorSheet extends ActorSheet {
                 await sellCargoDialog(srcActor, this.actor, item);
             }
             return false;
+        }
+        if (["worlddata"].includes(item.type)) {
+            // Meta item, so just pass through to the usual item handler.
+            return super._onDropItem(event, data);
         }
 
         // If shift is held down on drop, copy rather than move. Use the standard handler.

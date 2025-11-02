@@ -28,6 +28,14 @@ export class MgT2Actor extends Actor {
         // documents or derived data.
         if (this.system.hits && this.type !== "traveller") {
             let hits = this.system.hits;
+            if (!hits) {
+                this.system.hits = {
+                    damage: 0,
+                    value: 21,
+                    max: 21
+                }
+                hits = this.system.hits;
+            }
             if (hits.value !== (hits.max - hits.damage)) {
                 hits.value = parseInt(hits.max) - parseInt(hits.damage);
             }
@@ -176,8 +184,11 @@ export class MgT2Actor extends Actor {
         if (!actorData.system) {
             return;
         }
-        const dex = parseInt(actorData.system.characteristics["DEX"].dm);
-        const int = parseInt(actorData.system.characteristics["INT"].dm);
+        let dex = parseInt(actorData.system.characteristics["DEX"]?.dm);
+        let int = parseInt(actorData.system.characteristics["INT"]?.dm);
+
+        if (isNaN(dex)) dex = 0;
+        if (isNaN(int)) int = 0;
 
         if (typeof actorData.system.initiative === "number") {
             actorData.system.initiative = {
@@ -283,8 +294,8 @@ export class MgT2Actor extends Actor {
         const actorData = actor.system;
 
         actorData.totalSkills = this._countSkillLevels(actorData.skills);
-        actorData.maxSkills = (parseInt(actorData.characteristics.INT.value) +
-            parseInt(actorData.characteristics.EDU.value)) * 3;
+        actorData.maxSkills = (parseInt(actorData.characteristics?.INT?.value) +
+            parseInt(actorData.characteristics?.EDU?.value)) * 3;
 
         for (const char in actorData.characteristics) {
             let value = actorData.characteristics[char].value;
@@ -300,10 +311,13 @@ export class MgT2Actor extends Actor {
         }
 
         if (actorData.hits && actorData.settings.autoHits) {
-            let maxHits = actorData.characteristics.STR.value +
-                actorData.characteristics.DEX.value +
-                actorData.characteristics.END.value;
+            let maxHits = actorData.characteristics.STR?.value +
+                actorData.characteristics.DEX?.value +
+                actorData.characteristics.END?.value;
 
+            if (isNaN(maxHits)) {
+                maxHits = 21;
+            }
             actorData.hits.max = maxHits;
             actorData.hits.value = maxHits - actorData.hits.damage;
         }
