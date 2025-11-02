@@ -20,14 +20,26 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         });
     }
 
+    async getDestination(worldActor, destinationWorlds, destId) {
+        if (!destinationWorlds[destId]) {
+            let world = await fromUuid(destId);
+            destinationWorlds[destId] = {
+                name: world.name,
+                parsecs: distanceBetweenWorlds(worldActor, world),
+                freight: [],
+                passengers: [],
+                mail: []
+            }
+        }
+        return destinationWorlds[destId];
+    }
+
     async _prepareItems(context) {
         context.cargo = [];
         context.factions = [];
         context.localGoods = [];
-        context.destinations = [];
-        context.passengers = [];
 
-        context.destinationWorlds = null;
+        let destinationWorlds = {};
         for (let i of context.items) {
             i.img = i.img || CONFIG.MGT2.DEFAULT_ITEM_ICON;
             i.cssStyle = "";
@@ -43,28 +55,9 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                     i.system.cargo.saleSign = Math.sign(i.system.cargo.saleDiff);
                     context.cargo.push(i);
                 } else if (i.system.cargo.freight) {
-                    let destId = i.system.cargo.destinationId;
-                    if (!context.destinationWorlds) {
-                        context.destinationWorlds = {};
-                    }
-                    if (context.destinationWorlds[destId]) {
-
-                    } else {
-                        let world = await fromUuid(destId);
-                        context.destinationWorlds[destId] = {
-                            name: world.name,
-                            parsecs: distanceBetweenWorlds(context.actor, world),
-                            freight: [],
-                            lowPassengers: [],
-                            basicPassengers: [],
-                            middlePassengers: [],
-                            highPassengers: [],
-                            mail: []
-                        }
-                        console.log("Added destination " + world.name);
-                    }
                     i.system.cargo.totalPrice = parseInt(i.system.cargo.price) * parseInt(i.system.quantity);
-                    context.destinationWorlds[destId].freight.push(i);
+                    let dest = await this.getDestination(context.actor, destinationWorlds, i.system.cargo.destinationId);
+                    dest.freight.push(i);
                 } else {
                     context.localGoods.push(i);
                 }
@@ -72,11 +65,14 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                 if (i.system?.world?.datatype === "faction") {
                     context.factions.push(i);
                 } else if (i.system?.world?.datatype === "passenger") {
-                    context.passengers.push(i);
+                    let dest = await this.getDestination(context.actor, destinationWorlds, i.system.world.destinationId);
+                    dest.passengers.push(i);
                 }
             }
         }
+        context.destinationWorlds = destinationWorlds;
     }
+
     _canDragStart() {
         // If you can see it, you can drag from it. This allows the
         // trade mechanism, but means we need to be careful about
@@ -96,7 +92,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             { secrets: ((context.actor.permission > 2)?true:false) }
         );
 
-        this._prepareItems(context);
+        await this._prepareItems(context);
 
         context.system = context.actor.system;
         context.world = context.system.world;
@@ -205,7 +201,6 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
     activateListeners(html) {
         super.activateListeners(html);
-        console.log("World Activate Listeners:");
 
         // Define trade drag listener here, because all players should be able to do it.
         let handler = ev => this._onDragStart(ev);

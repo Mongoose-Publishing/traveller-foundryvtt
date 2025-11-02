@@ -1,5 +1,53 @@
 import {Tools} from "../chat/tools.mjs";
 
+
+export async function passengerTraffic(dm) {
+    const roll = await new Roll(`2D6 + ${dm}`, null).evaluate();
+    const total = roll.total;
+
+    let die = "0";
+    if (total > 1) {
+        switch (total) {
+            case 2: case 3:
+                die = "1D6";
+                break;
+            case 4: case 5: case 6:
+                die = "2D6";
+                break;
+            case 7: case 8: case 9: case 10:
+                die = "3D6";
+                break;
+            case 11: case 12: case 13:
+                die = "4D6";
+                break;
+            case 14: case 15:
+                die = "5D6";
+                break;
+            case 16:
+                die = "6D6";
+                break;
+            case 17:
+                die = "7D6";
+                break;
+            case 18:
+                die = "8D6";
+                break;
+            case 19:
+                die = "9D6";
+                break;
+            default:
+                die = "10D6";
+                break;
+        }
+    } else {
+        return 0;
+    }
+
+    const passengers = await new Roll(die, null).evaluate();
+    return passengers.total;
+}
+
+
 export async function freightTraffic(dm) {
     const roll = await new Roll(`2D6 + ${dm}`, null).evaluate();
     const total = roll.total;
@@ -85,9 +133,9 @@ function freightDm(worldActor) {
         dm += 2;
     }
 
-    if (uwp.zone === "AMBER") {
+    if (uwp.zone === "Amber") {
         dm -= 2;
-    } else if (uwp.zone === "RED") {
+    } else if (uwp.zone === "Red") {
         dm -= 6;
     }
 
@@ -125,6 +173,9 @@ export async function clearFreight(sourceWorld, destinationWorldId) {
     let list = [];
     for (let i of sourceWorld.items) {
         if (i.type === "cargo" && i.system.cargo.destinationId === destinationWorldId) {
+            list.push(i._id);
+        }
+        if (i.type === "worlddata" && i.system.world.destinationId === destinationWorldId) {
             list.push(i._id);
         }
     }
@@ -215,7 +266,6 @@ export async function calculateFreightLots(sourceWorld, destinationWorld, effect
     }
 
     let worldDm = freightDm(sourceWorld) + freightDm(destinationWorld) - parsecsDm;
-    let name = "Freight to " + destinationWorld.name;
 
     // Major lots
     let majorLots = await freightTraffic(worldDm - 4);
@@ -239,7 +289,74 @@ export async function calculateFreightLots(sourceWorld, destinationWorld, effect
             tonnageRoll.total, price, parsecs);
     }
 
+    // Passengers
+    let passengerDM = 0 - parsecsDm;
+    for (let w of [ sourceWorld, destinationWorld ]) {
+        console.log(w.name);
+        if (parseInt(w.system.world.uwp.population) <= 1) {
+            passengerDM -= 4;
+        } else if (parseInt(w.system.world.uwp.population) >= 8) {
+            passengerDM += 3;
+        } else if (parseInt(w.system.world.uwp.population) >= 6) {
+            passengerDM += 1;
+        }
+        switch (w.system.world.uwp.port) {
+            case "A":
+                passengerDM += 2;
+                break;
+            case "B":
+                passengerDM += 1;
+                break;
+            case "C": case "D":
+                break;
+            case "E":
+                passengerDM -= 1;
+                break;
+            default:
+                passengerDM -= 3;
+        }
+        if (w.system.world.uwp.zone === "Amber") {
+            passengerDM += 1;
+        } else if (w.system.world.uwp.zone === "Red") {
+            passengerDM -= 3;
+        }
+    }
+    // Low Passage
+    let lowPassengers = await passengerTraffic(passengerDM + 1);
+    createPassengers("Low Passage", "low", sourceWorld, destinationWorld, lowPassengers, lowPassage, parsecs);
+    let basicPassengers = await passengerTraffic(passengerDM);
+    createPassengers("Basic Passage", "basic", sourceWorld, destinationWorld, basicPassengers, basicPassage, parsecs);
+    let middlePassengers = await passengerTraffic(passengerDM);
+    createPassengers("Middle Passage", "middle", sourceWorld, destinationWorld, middlePassengers, middlePassage, parsecs);
+    let highPassengers = await passengerTraffic(passengerDM - 4);
+    createPassengers("High Passage", "high", sourceWorld, destinationWorld, highPassengers, highPassage, parsecs);
+
     return availableFreight;
+}
+
+export function createPassengers(name, passage, worldActor, destinationWorld, number, price, parsecs) {
+    if (number < 1) {
+        return;
+    }
+    const itemData = {
+        "name": name,
+        "img": `systems/mgt2e/icons/cargo/passenger-${passage}.svg`,
+        "type": "worlddata",
+        "system": {
+            "quantity": number,
+            "cost": 0,
+            "world": {
+                "datatype": "passenger",
+                "passage": passage,
+                "sourceId": worldActor.uuid,
+                "destinationId": destinationWorld.uuid,
+                "parsecs": parsecs,
+                "price": price
+            },
+            "description": `Passengers from ${worldActor.name} to ${destinationWorld.name}`
+        }
+    };
+    Item.create(itemData, { parent: worldActor });
 }
 
 export function createFreight(name, worldActor, destinationWorld, tonnage, price, parsecs) {

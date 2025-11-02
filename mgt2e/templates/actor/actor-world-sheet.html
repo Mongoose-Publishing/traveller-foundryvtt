@@ -232,6 +232,17 @@
                                         <a style="float:right" class="freight-clear" title="Clear Freight"><i class="fas fa-trash"></i></a>
                                     {{/if}}
                                 </h3>
+                                <h4>Passengers</h4>
+                                <ol class="items-list actor-items grid grid-4col">
+                                    {{#each w.passengers as |p|}}
+                                        <li class="item item-gear freight" data-item-id="{{p._id}}">
+                                            <h4>{{p.name}} x{{p.system.quantity}}</h4>
+                                            <img title="{{nameQuantity p}}" src="{{p.img}}"/>
+                                            <span>Cr{{prettyNumber p.system.world.price 0 false}}</span><br/>
+                                        </li>
+                                    {{/each}}
+                                </ol>
+                                <h4>Freight</h4>
                                 <ol class="items-list actor-items grid grid-4col">
                                     {{#each w.freight as |freight|}}
                                         <li class="item item-gear freight" data-item-id="{{freight._id}}">
