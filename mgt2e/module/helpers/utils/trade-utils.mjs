@@ -1,4 +1,6 @@
 import {Tools} from "../chat/tools.mjs";
+import {generateVilaniName} from "./name-utils.mjs";
+import {choose, roll} from "../dice-rolls.mjs";
 
 
 export async function passengerTraffic(dm) {
@@ -806,13 +808,21 @@ export async function tradeEmbarkPassengerHandler(queryData) {
     if (!npcFolder) {
         npcFolder = await Folder.create({"name": folderName, "type": "Actor", color: "#FF0000" });
     }
-    console.log(npcFolder);
-
+    let name = generateVilaniName();
     let npcData = {
         "type": "npc",
-        "name": "Generic Passenger",
+        "name": name,
         "img": `systems/mgt2e/icons/cargo/passenger-${passengerItem.system.world.passage}.svg`,
-        "folder": npcFolder._id
+        "folder": npcFolder._id,
+        "system": {
+            "sophont": {
+                age: await roll("2D6 + 20"),
+                species: choose([ "Vilani", "Vilani", "Vilani", "Solomani", "Solomani", "Vargr", "Aslan", "Bwap" ]),
+                gender: choose([ "Male", "Female" ]),
+                profession: choose([ "Tourist", "Office Worker", "Manager", "Refugee", "Specialist" ]),
+                homeworld: worldActor.name
+            }
+        }
     }
     let npc = await Actor.implementation.create(npcData);
 

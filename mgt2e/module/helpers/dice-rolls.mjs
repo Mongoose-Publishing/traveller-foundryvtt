@@ -30,6 +30,11 @@ export function toFloat(number) {
     return number;
 }
 
+export function choose(values) {
+    let i = parseInt(Math.random() * (values.length));
+    return values[i];
+}
+
 export function getFloat(number) {
     let value = parseFloat(number);
     if (isNaN(value)) {
