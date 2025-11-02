@@ -8,6 +8,13 @@
 * On Foundry v13, active effects may need to have the 'Apply Effect' option toggled off and on before
   they take effect.
 
+## 0.15.4 (Beta)
+
+* Fixed bug where Rich trade codes weren't being correctly applied to worlds due to the
+  government property being misspelt.
+* Allow EDU and SOC to be used by augments. These aren't usually modified by augments, but
+  in rare cases they might need to be.
+
 ## 0.15.3 (Beta)
 
 * Fix some macro bugs around training Profession skills. Each individual speciality needs to be
