@@ -163,7 +163,7 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         let prop = context.effectType?.property;
         if (context.effectType?.targets === "char") {
             context.targets = {};
-            for (const k of ['STR', 'DEX', 'END', 'INT', 'PSI']) {
+            for (const k of ['STR', 'DEX', 'END', 'INT', 'EDU', 'SOC', 'PSI']) {
                 let key = "system.characteristics." + k + "." + prop;
                 context.targets[key] = k;
             }
