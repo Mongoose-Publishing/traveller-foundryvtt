@@ -1167,13 +1167,25 @@ export class MgT2ActorSheet extends ActorSheet {
         div.addEventListener("dragstart", handler, options);
       }
     });
-        html.find('img.actor-draggable').each((i, img) => {
-            let options = {};
-            options.actorId = img.getAttribute("data-actor-id");
+    html.find('img.actor-draggable').each((i, img) => {
+        let options = {};
+        options.actorId = img.getAttribute("data-actor-id");
+        handler = ev => this._onCrewDragStart(ev, options);
+        img.setAttribute("draggable", true);
+        img.addEventListener("dragstart", handler, options);
+    });
+    html.find('li.actor-passenger').each((i, li) => {
+        let options = {};
+        options.actorId = li.getAttribute("data-actor-id");
+        options.destinationId = li.getAttribute("data-destination-id");
+        console.log(options.actorId);
+        console.log(options.destinationId);
+        if (options.destinationId) {
             handler = ev => this._onCrewDragStart(ev, options);
-            img.setAttribute("draggable", true);
-            img.addEventListener("dragstart", handler, options);
-        });
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", handler, options);
+        }
+    });
     html.find('li.item').each((i, li) => {
         let options = {};
         handler = ev => this._onDragStart(ev);

@@ -62,7 +62,7 @@ export function generateVilaniName() {
     }
 
     // --- 3. Family/Clan Name (2-4 Syllables) ---
-    const familyName = buildNamePart(2, 4);
+    const familyName = buildNamePart(2, 3);
 
     // --- 4. Caste Name/Title (Optional, used in formal/business) ---
     // We'll skip the formal social/caste name for a common use name format.

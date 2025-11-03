@@ -83,12 +83,13 @@ export class MgT2EmbarkPassengerApp extends HandlebarsApplicationMixin(Applicati
         context.price = this.passengerItem.system.world.price;
         context.passage = this.passengerItem.system.world.passage;
 
-        context.destinationWorld = await fromUuid(this.passengerItem.system.world.destinationId);
+        this.destinationWorld = await fromUuid(this.passengerItem.system.world.destinationId);
+        context.destinationWorld = this.destinationWorld;
 
         context.QUANTITY_LIST = {};
         let maxQuantity = quantity;
         for (let q=1; q <= maxQuantity; q++) {
-            context.QUANTITY_LIST[q] = `${q}dt (Cr${q * this.passengerItem.system.world.price})`;
+            context.QUANTITY_LIST[q] = `${q} (Cr${q * this.passengerItem.system.world.price})`;
         }
         context.qty = maxQuantity;
         console.log(context.qty);

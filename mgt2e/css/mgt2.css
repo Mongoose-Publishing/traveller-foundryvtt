@@ -1795,6 +1795,15 @@ section.id-card .showIdCard {
   background-color: #e0e0ff;
 }
 
+.actor-crew-list li.actor-passenger h4 {
+  background-color: #404040;
+}
+
+
+.actor-crew-list li.actor-passenger {
+  background-color: #D0D0E0;
+}
+
 .actor-crew .band {
   width: 100%;
   font-size: 8px;

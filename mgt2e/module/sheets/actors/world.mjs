@@ -280,12 +280,42 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         return;
     }
 
+    async _disembark(passenger) {
+        let shipActor = await fromUuid(passenger.system.meta.spacecraftId);
+        if (!shipActor) {
+            ui.notifications.error("Unable to find spacecraft this actor is on");
+            return;
+        }
+        console.log(shipActor.name);
+        let list = [];
+        for (let p in shipActor.system.crewed.passengers) {
+            let data = shipActor.system.crewed.passengers[p];
+            if (data.destinationId === this.actor.uuid) {
+                list.push(await fromUuid("Actor."+p));
+            }
+        }
+        console.log(list);
+        if (list.length > 0) {
+            // This needs to be done as GM.
+        }
+    }
+
     async _onDropActor(event, data) {
         let droppedActor = await fromUuid(data.uuid);
         if (!droppedActor) {
             return;
         }
         console.log("_onDropActor:");
+        if (droppedActor.type === "npc" && droppedActor.system.meta) {
+            if (droppedActor.system.meta.destinationId === this.actor.uuid) {
+                console.log("Getting off here");
+                this._disembark(droppedActor);
+            } else {
+                ui.notifications.warn(`${droppedActor.name} doesn't want to disembark here`);
+            }
+            return;
+        }
+
         if (["npc", "traveller"].includes(droppedActor.type)) {
             console.log("Trader");
             if (event.target.closest(".brokerDropZone")) {
@@ -305,7 +335,6 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             calculateFreightLots(this.actor, droppedActor, 0);
             return;
         }
-
 
         // Do nothing.
         return true;

@@ -1126,25 +1126,27 @@ export class MgT2Actor extends Actor {
           this.update({"system.characteristics": upp});
           html += "</div></div>";
 
-          let who = null;
-          if (game.users.current.isGM) {
-              if (game.settings.get("mgt2e", "gmSheetNotification") === "private") {
-                  who = [game.user.id];
+          if (!options.quiet) {
+              let who = null;
+              if (game.users.current.isGM) {
+                  if (game.settings.get("mgt2e", "gmSheetNotification") === "private") {
+                      who = [game.user.id];
+                  }
+              } else {
+                  if (game.settings.get("mgt2e", "playerSheetNotification") === "private") {
+                      who = [game.user.id];
+                  } else if (game.settings.get("mgt2e", "playerSheetNotification") === "gm") {
+                      who = [game.user.id, game.users.activeGM ];
+                  }
               }
-          } else {
-              if (game.settings.get("mgt2e", "playerSheetNotification") === "private") {
-                  who = [game.user.id];
-              } else if (game.settings.get("mgt2e", "playerSheetNotification") === "gm") {
-                  who = [game.user.id, game.users.activeGM ];
+              let chatData = {
+                  user: game.user.id,
+                  speaker: ChatMessage.getSpeaker(),
+                  whisper: who,
+                  content: html
               }
+              ChatMessage.create(chatData, {});
           }
-          let chatData = {
-              user: game.user.id,
-              speaker: ChatMessage.getSpeaker(),
-              whisper: who,
-              content: html
-          }
-          ChatMessage.create(chatData, {});
       }
   }
 

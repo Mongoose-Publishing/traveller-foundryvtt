@@ -800,6 +800,8 @@ export async function tradeEmbarkPassengerHandler(queryData) {
     let worldActor = await fromUuid(queryData.worldActorId);
     let shipActor = await fromUuid(queryData.shipActorId);
     let passengerItem = await fromUuid(queryData.passengerItemId);
+    let destinationActor = await fromUuid(passengerItem.system.world.destinationId);
+    let quantity = parseInt(queryData.quantity);
 
     console.log("Creating passenger NPC");
 
@@ -808,22 +810,49 @@ export async function tradeEmbarkPassengerHandler(queryData) {
     if (!npcFolder) {
         npcFolder = await Folder.create({"name": folderName, "type": "Actor", color: "#FF0000" });
     }
-    let name = generateVilaniName();
-    let npcData = {
-        "type": "npc",
-        "name": name,
-        "img": `systems/mgt2e/icons/cargo/passenger-${passengerItem.system.world.passage}.svg`,
-        "folder": npcFolder._id,
-        "system": {
-            "sophont": {
-                age: await roll("2D6 + 20"),
-                species: choose([ "Vilani", "Vilani", "Vilani", "Solomani", "Solomani", "Vargr", "Aslan", "Bwap" ]),
-                gender: choose([ "Male", "Female" ]),
-                profession: choose([ "Tourist", "Office Worker", "Manager", "Refugee", "Specialist" ]),
-                homeworld: worldActor.name
+
+    let passengers = [];
+    let description = `Passenger from ${worldActor.name} to ${destinationActor.name} on the ${shipActor.name}.`;
+    for (let p=0; p < quantity; p++) {
+        let name = generateVilaniName();
+        let npcData = {
+            "type": "npc",
+            "name": name,
+            "img": `systems/mgt2e/icons/cargo/passenger-${passengerItem.system.world.passage}.svg`,
+            "folder": npcFolder._id,
+            "system": {
+                "sophont": {
+                    age: await roll("2D6 + 20"),
+                    species: choose(["Vilani", "Vilani", "Vilani", "Solomani", "Solomani", "Vargr", "Aslan", "Bwap"]),
+                    gender: choose(["Male", "Female"]),
+                    profession: choose(["Tourist", "Office Worker", "Manager", "Refugee", "Specialist"]),
+                    homeworld: worldActor.name
+                },
+                "meta": {
+                    passage: passengerItem.system.world.passage,
+                    price: passengerItem.system.world.price,
+                    destinationName: destinationActor.name,
+                    destinationId: passengerItem.system.world.destinationId,
+                    spacecraftId: shipActor.uuid
+                },
+                "description": description
             }
         }
+        let npc = await Actor.implementation.create(npcData);
+        npc.rollUPP({shift: true, quiet: true});
+        passengers.push(npc);
+        shipActor.system.crewed.passengers[npc._id] = {
+            roles: [ "NONE" ],
+            passage: passengerItem.system.world.passage,
+            destinationId: passengerItem.system.world.destinationId
+        }
     }
-    let npc = await Actor.implementation.create(npcData);
+    shipActor.update({"system.crewed.passengers": shipActor.system.crewed.passengers });
 
+    passengerItem.system.quantity -= quantity;
+    if (passengerItem.system.quantity > 0) {
+        passengerItem.update({"system.quantity": passengerItem.system.quantity });
+    } else {
+        worldActor.deleteEmbeddedDocuments("Item", [ passengerItem.id ]);
+    }
 }

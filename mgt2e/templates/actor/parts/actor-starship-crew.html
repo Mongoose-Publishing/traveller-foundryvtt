@@ -71,21 +71,30 @@
 
     <ol class="items-list actor-crew-list grid grid-3col">
         {{#each passengers as |crewMember|}}
-        <li class="actor-crew" data-actor-id="{{crewMember._id}}">
+        <li class="actor-crew {{#if crewMember.system.meta.passage}}actor-passenger{{/if}}"
+            data-actor-id="{{crewMember._id}}"
+            data-destination-id="{{crewMember.system.meta.destinationId}}"
+        >
             <h4 title="{{crewMember.name}}">{{crewMember.name}}</h4>
             <img class="embedded-actor-portrait" data-actor-id="{{crewMember._id}}"  title="{{crewMember.name}}" src="{{crewMember.img}}"/>
 
-            {{#if crewMember.system.sophont.species}}
-                <div>{{crewMember.system.sophont.species}}</div>
-            {{/if}}
-
-            {{#if crewMember.system.sophont.profession}}
-                <div>{{crewMember.system.sophont.profession}}</div>
+            {{#if crewMember.system.meta}}
+                <div>{{crewMember.system.meta.destinationName}}</div>
+                <div>Cr{{prettyNumber crewMember.system.meta.price 0 false}}</div>
+            {{else}}
+                {{#if crewMember.system.sophont.species}}
+                    <div>{{crewMember.system.sophont.species}}</div>
+                {{/if}}
+                {{#if crewMember.system.sophont.profession}}
+                    <div>{{crewMember.system.sophont.profession}}</div>
+                {{/if}}
             {{/if}}
 
             <div class="item-controls">
-                <a class="item-control passenger-crew" title="Make crew">
-                    <i class="fas fa-person-military-pointing"></i></a>
+                {{#unless crewMember.system.meta}}
+                    <a class="item-control passenger-crew" title="Make crew">
+                        <i class="fas fa-person-military-pointing"></i></a>
+                {{/unless}}
                 <a class="item-control passenger-delete" title="Remove Crew">
                     <i class="fas fa-trash"></i></a>
             </div>
