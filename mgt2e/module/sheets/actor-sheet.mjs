@@ -1178,8 +1178,6 @@ export class MgT2ActorSheet extends ActorSheet {
         let options = {};
         options.actorId = li.getAttribute("data-actor-id");
         options.destinationId = li.getAttribute("data-destination-id");
-        console.log(options.actorId);
-        console.log(options.destinationId);
         if (options.destinationId) {
             handler = ev => this._onCrewDragStart(ev, options);
             li.setAttribute("draggable", true);

@@ -1,0 +1,18 @@
+<div>
+<h2>Disembark Passengers</h2>
+
+    <p>
+        <b>Destination World: </b> {{destinationName}}
+    </p>
+    <p>
+        <b>Passenger: </b> {{passengerName}}
+    </p>
+    <h4>Other Passengers Also Leaving</h4>
+
+    <ol>
+        {{#each passengerList as | actor | }}
+            <li>{{actor.name}}</li>
+        {{/each}}
+    </ol>
+
+</div>

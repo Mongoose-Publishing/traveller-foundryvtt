@@ -4,7 +4,7 @@ import {
     calculateFreightLots, clearFreight,
     createFreight,
     createSpeculativeGoods,
-    distanceBetweenWorlds
+    distanceBetweenWorlds, tradeDisembarkPassengerHandler
 } from "../../helpers/utils/trade-utils.mjs";
 import {createWorld, setTradeCodes } from "../../helpers/utils/world-utils.mjs";
 import {MGT2} from "../../helpers/config.mjs";
@@ -286,17 +286,45 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             ui.notifications.error("Unable to find spacecraft this actor is on");
             return;
         }
-        console.log(shipActor.name);
         let list = [];
+        let idList = [];
         for (let p in shipActor.system.crewed.passengers) {
             let data = shipActor.system.crewed.passengers[p];
             if (data.destinationId === this.actor.uuid) {
                 list.push(await fromUuid("Actor."+p));
+                idList.push(p);
             }
         }
         console.log(list);
         if (list.length > 0) {
+            let contentData = {
+                destinationName: this.actor.name,
+                passengerName: passenger.name,
+                passengerList: list
+            }
+            const content = await renderTemplate("systems/mgt2e/templates/dialogs/disembark-passengers.html", contentData);
+
+            const disembark = await foundry.applications.api.DialogV2.confirm({
+                window: {
+                    title: "Disembark Passengers?"
+                },
+                content,
+                modal: true
+            });
             // This needs to be done as GM.
+            if (disembark) {
+                const data = {
+                    type: "tradeDisembarkPassenger",
+                    shipActorId: shipActor.uuid,
+                    worldActorId: this.actor.uuid,
+                    passengerList: idList
+                }
+                if (game.user.isGM) {
+                    await tradeDisembarkPassengerHandler(data);
+                } else {
+                    game.socket.emit("system.mgt2e", data);
+                }
+            }
         }
     }
 

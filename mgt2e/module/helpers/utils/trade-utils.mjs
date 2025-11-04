@@ -856,3 +856,21 @@ export async function tradeEmbarkPassengerHandler(queryData) {
         worldActor.deleteEmbeddedDocuments("Item", [ passengerItem.id ]);
     }
 }
+
+export async function tradeDisembarkPassengerHandler(queryData) {
+    const shipActor = await fromUuid(queryData.shipActorId);
+    const worldActor = await fromUuid(queryData.worldActorId);
+    const actorList = [];
+
+    for (let p in queryData.passengerList) {
+        let id = queryData.passengerList[p];
+        let data = shipActor.system.crewed.passengers[id];
+        shipActor.update({ [`system.crewed.passengers.-=${id}`]: null});
+
+        let npc = await fromUuid(`Actor.${id}`);
+        let folder = await npc.folder;
+        if (folder.name === "NPC Passengers") {
+            npc.delete();
+        }
+    }
+}
