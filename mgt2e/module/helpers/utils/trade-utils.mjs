@@ -848,6 +848,11 @@ export async function tradeEmbarkPassengerHandler(queryData) {
         }
     }
     shipActor.update({"system.crewed.passengers": shipActor.system.crewed.passengers });
+    if (shipActor.system.finance) {
+        let gain = parseInt(passengerItem.system.world.price) * parseInt(quantity);
+        let cash = parseInt(shipActor.system.finance.cash) + gain;
+        shipActor.update({"system.finance.cash": cash});
+    }
 
     passengerItem.system.quantity -= quantity;
     if (passengerItem.system.quantity > 0) {

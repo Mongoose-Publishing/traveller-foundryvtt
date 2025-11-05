@@ -80,7 +80,11 @@
 
             {{#if crewMember.system.meta}}
                 <div>{{crewMember.system.meta.destinationName}}</div>
-                <div>Cr{{prettyNumber crewMember.system.meta.price 0 false}}</div>
+                <div>
+                    Cr{{prettyNumber crewMember.system.meta.price 0 false}} /
+                    {{crewMember.system.meta.passage}}
+                </div>
+                <div>{{crewMember.system.sophont.species}} / {{crewMember.system.sophont.profession}}</div>
             {{else}}
                 {{#if crewMember.system.sophont.species}}
                     <div>{{crewMember.system.sophont.species}}</div>
