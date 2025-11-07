@@ -63,10 +63,14 @@ Tools.message = function(chatData, message) {
  * ownership permission on. If none are selected, gets the players main
  * character, if they are not the GM, and they have ownership permission.
  */
-Tools.getSelectedOwned = function() {
+Tools.getSelectedOwned = function(a) {
     const user = game.users.current;
     const selected = canvas.tokens.controlled;
     const list = [];
+
+    if (a) {
+        return [ a ];
+    }
 
     if (selected.length > 0) {
         for (let t of selected) {

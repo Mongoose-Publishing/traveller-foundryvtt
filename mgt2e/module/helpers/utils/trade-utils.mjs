@@ -1,6 +1,7 @@
 import {Tools} from "../chat/tools.mjs";
 import {generateVilaniName} from "./name-utils.mjs";
 import {choose, roll} from "../dice-rolls.mjs";
+import {npcgen} from "./npcgen-utils.mjs";
 
 
 export async function passengerTraffic(dm) {
@@ -821,11 +822,17 @@ export async function tradeEmbarkPassengerHandler(queryData) {
             "img": `systems/mgt2e/icons/cargo/passenger-${passengerItem.system.world.passage}.svg`,
             "folder": npcFolder._id,
             "system": {
+                "settings": {
+                    hideUntrained: true,
+                    lockCharacteristis: true
+                },
                 "sophont": {
                     age: await roll("2D6 + 20"),
+                    /*
                     species: choose(["Vilani", "Vilani", "Vilani", "Solomani", "Solomani", "Vargr", "Aslan", "Bwap"]),
                     gender: choose(["Male", "Female"]),
                     profession: choose(["Tourist", "Office Worker", "Manager", "Refugee", "Specialist"]),
+                    */
                     homeworld: worldActor.name
                 },
                 "meta": {
@@ -838,8 +845,9 @@ export async function tradeEmbarkPassengerHandler(queryData) {
                 "description": description
             }
         }
+        await npcgen(npcData);
+
         let npc = await Actor.implementation.create(npcData);
-        npc.rollUPP({shift: true, quiet: true});
         passengers.push(npc);
         shipActor.system.crewed.passengers[npc._id] = {
             roles: [ "NONE" ],

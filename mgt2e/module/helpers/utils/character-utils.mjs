@@ -1,4 +1,5 @@
 import {calculateSpacecraftCost} from "../spacecraft/spacecraft-utils.mjs";
+import {MGT2} from "../config.mjs";
 
 async function getPowerOrInfluence() {
     const roll = await new Roll("2D6", null).evaluate();
@@ -102,4 +103,97 @@ export async function calculateCost(actor) {
     if (actor.type === "spacecraft") {
         await calculateSpacecraftCost(actor);
     }
+}
+
+export function copySkills(actorData) {
+    const BASE_SKILLS = MGT2.getDefaultSkills();
+    if ([ "traveller", "npc", "package", "creature" ].includes(actorData.type)) {
+        // Need to add skills.
+        if (!actorData.system.skills) {
+            actorData.system.skills = {};
+        }
+        for (let s in BASE_SKILLS) {
+            if (actorData.system.skills[s]) {
+                continue;
+            }
+            actorData.system.skills[s] = JSON.parse(
+                JSON.stringify(BASE_SKILLS[s])
+            )
+            actorData.system.skills[s].id = s;
+            actorData.system.skills[s].value = 0;
+            if (actorData.system.skills[s].specialities) {
+                for (let sp in actorData.system.skills[s].specialities) {
+                    actorData.system.skills[s].specialities[sp].id = sp;
+                    actorData.system.skills[s].specialities[sp].value = 0;
+                }
+            }
+            if (!actorData.system.skills[s].icon) {
+                actorData.system.skills[s].icon = `systems/mgt2e/icons/skills/${s}.svg`;
+            }
+        }
+    }
+}
+
+export async function rollUPP(actorData, options) {
+    let upp = actorData.system.characteristics;
+
+    if (!options) {
+        options = {};
+    }
+
+    if (upp) {
+        let html = `<div class="chat-package">`;
+        html += `<p><b>${actorData.name}</b></p>`;
+        html += `<div class="stats grid grid-3col">`;
+
+        let prefix = options.shift ? "~" : "";
+        for (let c in upp) {
+            if (upp[c].show) {
+                let dice = "2D6";
+                if (options.ctrl) {
+                    let roll = await new Roll("2D6", null).evaluate();
+                    let modifier = 0;
+                    switch (roll.total) {
+                        case 2:
+                            modifier = -2;
+                            break;
+                        case 3:
+                        case 4:
+                            modifier = -1;
+                            break;
+                        case 10:
+                        case 11:
+                            modifier = +1;
+                            break;
+                        case 12:
+                            modifier = +2;
+                            break;
+                    }
+                    upp[c].value += modifier;
+                    html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">+/-<br/>${(modifier >= 0) ? ("+" + modifier) : modifier}</span></div>`;
+                } else {
+                    if (upp[c].roll) {
+                        dice = upp[c].roll;
+                    }
+                    if (options.shift) {
+                        let totals = [];
+                        for (let i = 0; i < 5; i++) {
+                            let roll = await new Roll(dice, null).evaluate();
+                            totals.push(roll.total);
+                        }
+                        totals = totals.sort(function (a, b) {
+                            return a - b;
+                        });
+                        upp[c].value = totals[2];
+                    } else {
+                        let roll = await new Roll(dice, null).evaluate();
+                        upp[c].value = roll.total;
+                    }
+                    html += `<div class="stat resource"><span class="stat-hdr">${c}</span><span class="stat-val">${prefix}${dice}<br/>${upp[c].value}</span></div>`;
+                }
+            }
+        }
+        return html;
+    }
+    return null;
 }

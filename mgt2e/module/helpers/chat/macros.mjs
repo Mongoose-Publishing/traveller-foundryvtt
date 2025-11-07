@@ -30,10 +30,10 @@ MgT2eMacros.skillGain = function(args) {
         level = Number(level);
     }
 
-    for (let actor of Tools.getSelectedOwned()) {
+    for (let actor of Tools.getSelectedOwned(args.actor)) {
         let skill = actor.system.skills[skillId];
         let text = "";
-        let skillName = actor.getSkillLabel(args.skill, false);
+        let skillName = args.quiet?args.skill:actor.getSkillLabel(args.skill, false);
         let added = false;
 
         if (!skill) {
@@ -92,14 +92,22 @@ MgT2eMacros.skillGain = function(args) {
                 skill.specialities[specId].trained = true;
             } else if (!specId && skill.specialities && skill.individual) {
                 // Need to select which one to set to trained.
-                text += `Select a speciality to train:<br/>`;
-                for (let s in skill.specialities) {
-                    let spec = skillId + "." + s;
-                    let specName = actor.getSkillLabel(spec, false);
-                    let current = Number(skill.specialities[s].value);
+                if (args.quiet) {
+                    // If running automatically, select a random speciality.
+                    let keys = Object.keys(skill.specialities);
+                    let r = Math.floor(Math.random() * keys.length);
+                    skill.specialities[keys[r]].trained = true;
+                    skill.specialities[keys[r]].value = 0;
+                } else {
+                    text += `Select a speciality to train:<br/>`;
+                    for (let s in skill.specialities) {
+                        let spec = skillId + "." + s;
+                        let specName = actor.getSkillLabel(spec, false);
+                        let current = Number(skill.specialities[s].value);
 
-                    if (!skill.specialities[s].trained) {
-                        text += `<span class="skillGain-spec" data-actorId="${actor._id}" data-skill="${spec}" data-level="${level}">${specName} ${current}</span><br/>`;
+                        if (!skill.specialities[s].trained) {
+                            text += `<span class="skillGain-spec" data-actorId="${actor._id}" data-skill="${spec}" data-level="${level}">${specName} ${current}</span><br/>`;
+                        }
                     }
                 }
             } else if (!added) {
@@ -131,6 +139,8 @@ MgT2eMacros.skillGain = function(args) {
                         } else if (level > current) {
                             skill.specialities[specId].value = level;
                             text += `Setting <b>${skillName}</b> to ${level}.`;
+                        } else if (args.quiet && current >= level) {
+                            skill.specialities[specId].value += 1;
                         } else if (!added) {
                             text += `<b>${skillName}</b> is unchanged.`;
                         }
@@ -140,14 +150,29 @@ MgT2eMacros.skillGain = function(args) {
                 } else {
                     // Player has to select which speciality to raise.
                     // Put the choice into the chat.
-                    text += `Select a speciality to train:<br/>`;
-                    for (let s in skill.specialities) {
-                        let spec = skillId + "." + s;
-                        let specName = actor.getSkillLabel(spec, false);
-                        let current = Number(skill.specialities[s].value);
+                    if (args.quiet) {
+                        // If running automatically, select a random speciality.
+                        let keys = Object.keys(skill.specialities);
+                        let r = Math.floor(Math.random() * keys.length);
+                        let current = Number(skill.specialities[keys[r]].value);
+                        if (current >= level) {
+                            skill.specialities[keys[r]].value += 1;
+                        } else {
+                            skill.specialities[keys[r]].value = level;
+                        }
+                        if (skill.individual) {
+                            skill.specialities[keys[r]].trained = true;
+                        }
+                    } else {
+                        text += `Select a speciality to train:<br/>`;
+                        for (let s in skill.specialities) {
+                            let spec = skillId + "." + s;
+                            let specName = actor.getSkillLabel(spec, false);
+                            let current = Number(skill.specialities[s].value);
 
-                        if ((level === undefined || level > current) && current < 4) {
-                            text += `<span class="skillGain-spec" data-actorId="${actor._id}" data-skill="${spec}" data-level="${level}">${specName} ${current}</span><br/>`;
+                            if ((level === undefined || level > current) && current < 4) {
+                                text += `<span class="skillGain-spec" data-actorId="${actor._id}" data-skill="${spec}" data-level="${level}">${specName} ${current}</span><br/>`;
+                            }
                         }
                     }
                 }
@@ -161,7 +186,9 @@ MgT2eMacros.skillGain = function(args) {
                 text += `<b>${skillName}</b> is unchanged.`;
             }
         }
-        actor.update({"system.skills": actor.system.skills});
+        if (!args.actor) {
+            actor.update({"system.skills": actor.system.skills});
+        }
 
         let html = `<div class="chat-package"><h3>${actor.name}</h3>`;
         if (context) {
@@ -170,11 +197,13 @@ MgT2eMacros.skillGain = function(args) {
         html += `<p>${text}</p>`;
         html += `</div>`;
 
-        let chatData = {
-            speaker: ChatMessage.getSpeaker({actor: actor}),
-            content: html
-        };
-        ChatMessage.create(chatData, {});
+        if (!args.quiet) {
+            let chatData = {
+                speaker: ChatMessage.getSpeaker({actor: actor}),
+                content: html
+            };
+            ChatMessage.create(chatData, {});
+        }
     }
 };
 
@@ -239,7 +268,7 @@ MgT2eMacros.chaGain = function(args) {
         min = Number(min);
     }
 
-    for (let actor of Tools.getSelectedOwned()) {
+    for (let actor of Tools.getSelectedOwned(args.actor)) {
         let text = "";
 
         if (actor && actor.system.characteristics[cha]) {
@@ -263,7 +292,9 @@ MgT2eMacros.chaGain = function(args) {
                 }
             }
         }
-        actor.update({"system.characteristics": actor.system.characteristics});
+        if (!args.actor) {
+            actor.update({"system.characteristics": actor.system.characteristics});
+        }
 
         let html = `<div class="chat-package"><h3>${actor.name}</h3>`;
         if (context) {
@@ -272,11 +303,13 @@ MgT2eMacros.chaGain = function(args) {
         html += `<p>${text}</p>`;
         html += `</div>`;
 
-        let chatData = {
-            speaker: ChatMessage.getSpeaker({actor: actor}),
-            content: html
-        };
-        ChatMessage.create(chatData, {});
+        if (!args.quiet) {
+            let chatData = {
+                speaker: ChatMessage.getSpeaker({actor: actor}),
+                content: html
+            };
+            ChatMessage.create(chatData, {});
+        }
     }
 }
 
