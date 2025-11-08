@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46666"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="ABC.svg"
+   inkscape:export-filename="/home/sam/rpg/traveller-models/ships/deepnight/deepnight-grey.png"
+   inkscape:export-xdpi="150"
+   inkscape:export-ydpi="150"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.1918616"
+     inkscape:cx="62.926767"
+     inkscape:cy="391.824"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     inkscape:snap-grids="true"
+     objecttolerance="20"
+     inkscape:window-width="2560"
+     inkscape:window-height="1343"
+     inkscape:window-x="1200"
+     inkscape:window-y="160"
+     inkscape:window-maximized="1"
+     inkscape:snap-object-midpoints="true"
+     gridtolerance="10"
+     inkscape:snap-center="true"
+     inkscape:pagecheckerboard="0"
+     units="px"
+     height="512px">
+    <inkscape:grid
+       type="xygrid"
+       id="grid838" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g75939"
+       transform="translate(30.802579,-24.351647)">
+      <rect
+         style="fill:#ffcc00;fill-opacity:0.998891;stroke:#000000;stroke-width:1.15912;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+         id="rect188"
+         width="54.761906"
+         height="54.761906"
+         x="10"
+         y="30"
+         ry="10"
+         rx="10" />
+      <g
+         aria-label="A"
+         id="text5804"
+         style="font-size:45.4117px;line-height:1.25;font-family:Anton;-inkscape-font-specification:Anton;font-variant-ligatures:none;stroke-width:4.41144">
+        <path
+           d="m 27.027085,76.885277 3.769171,-39.008652 h 13.214805 l 3.723759,39.008652 h -7.402107 l -0.54494,-6.312227 h -4.722817 l -0.454117,6.312227 z m 8.628223,-12.53363 h 3.542113 L 37.471776,44.506734 h -0.363294 z"
+           id="path75532" />
+      </g>
+    </g>
+    <g
+       id="g75929"
+       transform="translate(-77.2725,34.733531)">
+      <rect
+         style="fill:#ffcc00;fill-opacity:0.998891;stroke:#000000;stroke-width:1.15912;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+         id="rect188-3"
+         width="54.761906"
+         height="54.761906"
+         x="85.834785"
+         y="32.667789"
+         ry="10"
+         rx="10" />
+      <g
+         aria-label="β"
+         id="text8184"
+         style="font-size:40.7082px;line-height:1.25;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:none;stroke-width:3.95453">
+        <path
+           d="m 107.2725,70.036961 v 9.83914 h -3.67725 v -30.59078 q 0,-9.063935 8.46762,-9.063935 8.62664,0 8.62664,7.652664 0,5.446312 -3.41885,7.434017 5.56557,1.788935 5.56557,7.096107 0,9.421722 -9.58074,9.421722 -4.21393,0 -5.98299,-1.788935 z m 0,-4.770492 q 2.20635,3.43873 6.12213,3.43873 5.72459,0 5.72459,-6.241394 0,-5.605328 -9.22295,-5.168033 v -3.379098 q 7.21537,0 7.21537,-6.360656 0,-4.353074 -4.65123,-4.353074 -5.18791,0 -5.18791,6.201639 z"
+           style="font-family:Anton;-inkscape-font-specification:Anton"
+           id="path75511" />
+      </g>
+    </g>
+    <g
+       id="g75934"
+       transform="translate(16.175035,-22.320934)">
+      <rect
+         style="fill:#ffcc00;fill-opacity:0.998891;stroke:#000000;stroke-width:1.15912;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+         id="rect188-6"
+         width="54.761906"
+         height="54.761906"
+         x="56.444012"
+         y="94.93998"
+         ry="10"
+         rx="10" />
+      <g
+         aria-label="C"
+         id="text68155"
+         style="font-size:51.9332px;line-height:1.25;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:none;stroke-width:2.16388">
+        <path
+           d="m 69.803001,115.30995 v -9.34798 H 97.84693 v 14.02196 l -18.695952,18.69596 h -9.347977 v -3.116 l 18.695953,-18.69595 v -6.23198 h -9.347976 v 4.67399 z m 19.215285,18.95561 q 0,-1.81766 1.29833,-3.11599 1.29833,-1.29833 3.115992,-1.29833 1.817662,0 3.115992,1.29833 1.29833,1.29833 1.29833,3.11599 0,1.81767 -1.29833,3.116 -1.29833,1.29833 -3.115992,1.29833 -1.817662,0 -3.115992,-1.29833 -1.29833,-1.29833 -1.29833,-3.116 z"
+           style="font-family:Bilanidin;-inkscape-font-specification:Bilanidin"
+           id="path75553" />
+      </g>
+    </g>
+  </g>
+</svg>

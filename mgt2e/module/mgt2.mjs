@@ -27,7 +27,7 @@ import { migrateWorld } from "./migration.mjs";
 import { NpcIdCard } from "./helpers/id-card.mjs";
 import {hasTrait} from "./helpers/dice-rolls.mjs";
 import {tradeBuyGoodsHandler, tradeSellGoodsHandler, tradeBuyFreightHandler, tradeSellFreightHandler} from "./helpers/utils/trade-utils.mjs";
-import {npcgen} from "./helpers/utils/npcgen-utils.mjs";
+import {generateNpc, generateText} from "./helpers/utils/npcgen-utils.mjs";
 
 
 /* -------------------------------------------- */
@@ -43,7 +43,8 @@ Hooks.once('init', async function() {
         MgT2Item,
         rollSkillMacro,
         rollAttackMacro,
-        npcgen
+        generateNpc,
+        generateText
     };
 
     game.settings.register("mgt2e", "systemSchemaVersion", {

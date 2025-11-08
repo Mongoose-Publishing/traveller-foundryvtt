@@ -1,7 +1,7 @@
 import {Tools} from "../chat/tools.mjs";
 import {generateVilaniName} from "./name-utils.mjs";
 import {choose, roll} from "../dice-rolls.mjs";
-import {npcgen} from "./npcgen-utils.mjs";
+import {generateNpc } from "./npcgen-utils.mjs";
 
 
 export async function passengerTraffic(dm) {
@@ -845,7 +845,7 @@ export async function tradeEmbarkPassengerHandler(queryData) {
                 "description": description
             }
         }
-        await npcgen(npcData);
+        await generateNpc(npcData);
 
         let npc = await Actor.implementation.create(npcData);
         passengers.push(npc);

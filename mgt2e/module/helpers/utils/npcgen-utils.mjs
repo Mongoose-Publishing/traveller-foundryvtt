@@ -4,8 +4,19 @@ import {copySkills, rollUPP} from "./character-utils.mjs";
 import {choose} from "../dice-rolls.mjs";
 
 
-function getTable(folder, tableName) {
-    let table = folder.contents.find(d => d.name === tableName);
+async function getTable(folder, tableName, variantName) {
+    let table = folder.contents.find(d => d.name === `${tableName} ${variantName}`);
+    if (!table) {
+        table = await folder.contents.find(d => d.name === tableName);
+        if (!table) {
+            for (const child of await folder.children) {
+                table = await getTable(child.folder, tableName, variantName);
+                if (table) {
+                    break;
+                }
+            }
+        }
+    }
     return table;
 }
 
@@ -30,8 +41,8 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
     let text = await getFromTable(folder, tableName, variant);
     if (!text) {
         console.log(`getCompoundFromTable: No text for [${tableName} ${variant}]`)
+        return "";
     }
-    console.log(text);
     let result = "";
     let tokens = text.split(" ");
     let description = null;
@@ -44,7 +55,24 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
             if (t) {
                 result += " " + t;
             }
-        } else if (t.startsWith("[")) {
+        } else if (t.startsWith("$")) {
+            console.log(`${tableName}: [${t}]`);
+            t = t.substring(1).replaceAll(/_/g, " ");
+            let titleCase = false;
+            if (t.startsWith("^")) {
+                titleCase = true;
+                t = t.substring(1);
+            }
+            t = await getCompoundFromTable(npcData, folder, t);
+
+            if (t) {
+                if (titleCase) {
+                    t = t.substring(0, 1).toUpperCase() + t.substring(1);
+                }
+                t = t.replaceAll(/ /g, "");
+                result += " " + t;
+            }
+        } else if (npcData && t.startsWith("[")) {
             t = t.replaceAll(/[\[\]]/g, "");
             let skill = t.split("+")[0];
             let value = t.split("+")[1];
@@ -67,7 +95,7 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
             result += " " + t;
         }
     }
-    if (description) {
+    if (npcData && description) {
         if (npcData.system.description) {
             npcData.system.description += " " + description;
         } else {
@@ -77,8 +105,21 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
     return result.trim();
 }
 
-export async function npcgen(npcData, folderName) {
+export async function generateText(tableName,variantName, folderName) {
+    if (!folderName) {
+        folderName = "NPC Generator";
+    }
+    let folder = await game.tables.folders.getName(folderName);
+    if (!folder) {
+        return "";
+    }
+    return await getCompoundFromTable(null, folder, tableName, variantName)
+}
 
+export async function generateNpc(npcData, folderName) {
+    // npcData is assumed to not be an Actor object, just the data that is passed
+    // when an Actor is created. So the Actor needs to be created with this data
+    // after the function has returned.
     if (!npcData) {
         console.log("No npc");
         return false;
@@ -105,6 +146,13 @@ export async function npcgen(npcData, folderName) {
     let gender = await getCompoundFromTable(npcData, folder, "Gender", species);
     npcData.system.sophont.gender = gender;
     npcData.name = await getCompoundFromTable(npcData, folder, "Name " + species, gender);
-    npcData.system.sophont.profession = await getCompoundFromTable(npcData, folder, "Profession");
 
+    let profession = "";
+    let passage = npcData.system.meta?.passage;
+    if (passage && await getTable(folder, `Profession ${species}`, passage)) {
+        profession = await getCompoundFromTable(npcData, folder, `Profession ${species}`, passage);
+    } else {
+        profession = await getCompoundFromTable(npcData, folder, "Profession", passage);
+    }
+    npcData.system.sophont.profession = profession?profession:choose([ "Hitchhiker", "Tourist", "Slacker" ] );
 }
