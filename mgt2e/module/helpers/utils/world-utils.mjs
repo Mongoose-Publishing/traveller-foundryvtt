@@ -394,3 +394,22 @@ export async function setFactions(worldActor) {
         await Item.create(itemData, { parent: worldActor });
     }
 }
+
+export async function worldDropBrokerHandler(queryData) {
+    let worldActor = await fromUuid(queryData.worldActorId);
+
+    if (worldActor) {
+        if (queryData.skill === "broker") {
+            worldActor.system.world.meta.brokerActorId = queryData.brokerActorId;
+            worldActor.system.world.meta.brokerScore = queryData.skillScore;
+        } else if (queryData.skill === "streetwise") {
+            worldActor.system.world.meta.streetwiseActorId = queryData.brokerActorId;
+            worldActor.system.world.meta.streetwiseScore = queryData.skillScore;
+        } else if (queryData.skill === "steward") {
+            worldActor.system.world.meta.stewardActorId = queryData.brokerActorId;
+            worldActor.system.world.meta.stewardScore = queryData.skillScore;
+        }
+        worldActor.update({"system.world.meta": worldActor.system.world.meta });
+    }
+
+}

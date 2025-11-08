@@ -821,18 +821,16 @@ export async function tradeEmbarkPassengerHandler(queryData) {
             "name": name,
             "img": `systems/mgt2e/icons/cargo/passenger-${passengerItem.system.world.passage}.svg`,
             "folder": npcFolder._id,
+            "ownership": {
+                default: 2
+            },
             "system": {
                 "settings": {
                     hideUntrained: true,
                     lockCharacteristis: true
                 },
                 "sophont": {
-                    age: await roll("2D6 + 20"),
-                    /*
-                    species: choose(["Vilani", "Vilani", "Vilani", "Solomani", "Solomani", "Vargr", "Aslan", "Bwap"]),
-                    gender: choose(["Male", "Female"]),
-                    profession: choose(["Tourist", "Office Worker", "Manager", "Refugee", "Specialist"]),
-                    */
+                    age: await roll("16 + 2D6"),
                     homeworld: worldActor.name
                 },
                 "meta": {

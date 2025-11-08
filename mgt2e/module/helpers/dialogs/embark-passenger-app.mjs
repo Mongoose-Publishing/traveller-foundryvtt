@@ -104,7 +104,7 @@ export class MgT2EmbarkPassengerApp extends HandlebarsApplicationMixin(Applicati
             let quantity = parseInt(formData.object.quantitySelect);
 
             const data = {
-                type: "embarkPassenger",
+                type: "tradeEmbarkPassenger",
                 shipActorId: this.shipActor.uuid,
                 worldActorId: this.worldActor.uuid,
                 passengerItemId: this.passengerItem.uuid,

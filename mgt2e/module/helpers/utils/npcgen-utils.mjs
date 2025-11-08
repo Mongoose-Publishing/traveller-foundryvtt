@@ -17,21 +17,30 @@ async function getTable(folder, tableName, variantName) {
             }
         }
     }
+    // If in a compendium, need an extra step to get the actual table.
+    if (table?.uuid && table.uuid.startsWith("Compendium")) {
+        table = await fromUuid(table.uuid);
+    }
     return table;
 }
 
 // Look for table "X Y". If that doesn't exist, just look for table "X"
 async function getFromTable(folder, tableName, variantName) {
-    let table = folder.contents.find(d => d.name === `${tableName} ${variantName}`);
+    let table = await folder.contents.find(d => d.name === `${tableName} ${variantName}`);
     if (!table) {
         table = await folder.contents.find(d => d.name === tableName);
         if (!table) {
+            console.log("Looking for children");
             for (const child of await folder.children) {
                 let result = await getFromTable(child.folder, tableName, variantName);
                 if (result) return result;
             }
             return null;
         }
+    }
+    // If in a compendium, need an extra step to get the actual table.
+    if (table.uuid && table.uuid.startsWith("Compendium")) {
+        table = await fromUuid(table.uuid);
     }
     let result = await table.roll();
     return result.results[0].text;
@@ -56,7 +65,6 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
                 result += " " + t;
             }
         } else if (t.startsWith("$")) {
-            console.log(`${tableName}: [${t}]`);
             t = t.substring(1).replaceAll(/_/g, " ");
             let titleCase = false;
             if (t.startsWith("^")) {
@@ -74,21 +82,40 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
             }
         } else if (npcData && t.startsWith("[")) {
             t = t.replaceAll(/[\[\]]/g, "");
-            let skill = t.split("+")[0];
-            let value = t.split("+")[1];
-
-            let args = {
-                actor: npcData,
-                quiet: true
-            };
-            skill = choose(skill.split("|"));
-            if (skill.toUpperCase() === skill && skill.length === 3) {
-                args.cha = skill;
+            let skill = t;
+            let value = 0;
+            if (t.indexOf("+") > -1) {
+                skill = t.split("+")[0];
+                value = t.split("+")[1];
+            } else if (t.indexOf("-") > -1 ) {
+                skill = t.split("-")[0];
+                value = t.split("-")[1];
+                value = 0 - parseInt(value);
             } else {
-                args.skill = skill;
+                value = 0;
             }
-            args.level = parseInt(value);
-            MgT2eMacros.skillGain(args);
+            if (skill === "age") {
+                try {
+                    let ageRoll = await new Roll(value).evaluate();
+                    let inc = parseInt(ageRoll.total);
+                    npcData.system.sophont.age += inc;
+                } catch (e) {
+                    console.log(`Invalid roll value [${value}] for age`);
+                }
+            } else {
+                let args = {
+                    actor: npcData,
+                    quiet: true
+                };
+                skill = choose(skill.split("|"));
+                if (skill.toUpperCase() === skill && skill.length === 3) {
+                    args.cha = skill;
+                } else {
+                    args.skill = skill;
+                }
+                args.level = parseInt(value);
+                MgT2eMacros.skillGain(args);
+            }
         } else if (t === "#") {
             description = "";
         } else {
@@ -96,6 +123,8 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
         }
     }
     if (npcData && description) {
+        description = description.replaceAll(/{{(.*?)}}/g, '<section class="secret">$1</section>');
+
         if (npcData.system.description) {
             npcData.system.description += " " + description;
         } else {
@@ -105,15 +134,42 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
     return result.trim();
 }
 
-export async function generateText(tableName,variantName, folderName) {
+async function getFolder(folderName) {
     if (!folderName) {
         folderName = "NPC Generator";
     }
     let folder = await game.tables.folders.getName(folderName);
     if (!folder) {
+        let pack = await game.packs.get("mgt2e.base-tables");
+        folder = await pack.folders.getName("NPC Generator");
+        if (!folder) {
+            ui.notifications.error(`Unable to find folder [${folderName}] for NPC generation`);
+            return null;
+        }
+    }
+    return folder;
+}
+
+export async function generateInternalText(tableName, variantName, folderName) {
+    if (!folderName) {
+        folderName = "NPC Generator";
+    }
+    let folder = await getFolder(folderName);
+    if (!folder) {
         return "";
     }
     return await getCompoundFromTable(null, folder, tableName, variantName)
+}
+
+export async function generateText(tableName, variantName, folderName) {
+    let text = await generateInternalText(tableName, variantName, folderName);
+
+    console.log(text);
+    text = text.replaceAll(/\[.*\]/g, "");
+    text = text.replaceAll(/#.*/g, "");
+    console.log(text);
+
+    return text;
 }
 
 export async function generateNpc(npcData, folderName) {
@@ -121,7 +177,7 @@ export async function generateNpc(npcData, folderName) {
     // when an Actor is created. So the Actor needs to be created with this data
     // after the function has returned.
     if (!npcData) {
-        console.log("No npc");
+        ui.notifications.error("No NPC data passed to generateNpc function");
         return false;
     }
     if (!npcData.system.characteristics) {
@@ -132,13 +188,9 @@ export async function generateNpc(npcData, folderName) {
     copySkills(npcData);
     await rollUPP(npcData, { shift: true, quiet: true });
 
-    if (!folderName) {
-        folderName = "NPC Generator";
-    }
-    let folder = await game.tables.folders.getName(folderName);
+    let folder = await getFolder(folderName);
     if (!folder) {
-        console.log("No folder found");
-        return false;
+        return null;
     }
 
     let species = await getCompoundFromTable(npcData, folder, "Species");
@@ -155,4 +207,5 @@ export async function generateNpc(npcData, folderName) {
         profession = await getCompoundFromTable(npcData, folder, "Profession", passage);
     }
     npcData.system.sophont.profession = profession?profession:choose([ "Hitchhiker", "Tourist", "Slacker" ] );
+    return true;
 }

@@ -6,7 +6,7 @@ import {
     createSpeculativeGoods,
     distanceBetweenWorlds, tradeDisembarkPassengerHandler
 } from "../../helpers/utils/trade-utils.mjs";
-import {createWorld, setTradeCodes } from "../../helpers/utils/world-utils.mjs";
+import {createWorld, setTradeCodes, worldDropBrokerHandler} from "../../helpers/utils/world-utils.mjs";
 import {MGT2} from "../../helpers/config.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
@@ -78,6 +78,12 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         // trade mechanism, but means we need to be careful about
         // everything else.
         return true
+    }
+
+    _canDragDrop() {
+        // Allow freight, trade goods and passengers to be dropped on
+        // a world.
+        return true;
     }
 
     async getData() {
@@ -205,6 +211,10 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         // Define trade drag listener here, because all players should be able to do it.
         let handler = ev => this._onDragStart(ev);
         html.find('.trade-item').each((i, li) => {
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", handler, false);
+        });
+        html.find('.freight').each((i, li) => {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", handler, false);
         });
@@ -346,14 +356,28 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
         if (["npc", "traveller"].includes(droppedActor.type)) {
             console.log("Trader");
-            if (event.target.closest(".brokerDropZone")) {
-                this.actor.system.world.meta.brokerActorId = droppedActor.uuid;
-                this.actor.system.world.meta.brokerScore = droppedActor.system.skills["broker"].value;
-            } else if (event.target.closest(".streetwiseDropZone")) {
-                this.actor.system.world.meta.streetwiseActorId = droppedActor.uuid;
-                this.actor.system.world.meta.streetwiseScore = droppedActor.system.skills["streetwise"].value;
+            let data = {
+                type: "worldDropBroker",
+                brokerActorId: droppedActor.uuid,
+                worldActorId: this.actor.uuid,
             }
-            this.actor.update({"system.world.meta": this.actor.system.world.meta});
+            if (event.target.closest(".brokerDropZone")) {
+                //this.actor.system.world.meta.brokerActorId = droppedActor.uuid;
+                //this.actor.system.world.meta.brokerScore = droppedActor.system.skills["broker"].value;
+                data.skill = "broker";
+                data.skillScore = parseInt(droppedActor.system.skills["broker"].value);
+            } else if (event.target.closest(".streetwiseDropZone")) {
+                //this.actor.system.world.meta.streetwiseActorId = droppedActor.uuid;
+                //this.actor.system.world.meta.streetwiseScore = droppedActor.system.skills["streetwise"].value;
+                data.skill = "streetwise";
+                data.skillScore = parseInt(droppedActor.system.skills["streetwise"].value);
+            }
+            if (game.user.isGM) {
+                await worldDropBrokerHandler(data);
+            } else {
+                game.socket.emit("system.mgt2e", data);
+            }
+            //this.actor.update({"system.world.meta": this.actor.system.world.meta});
             return;
         }
 

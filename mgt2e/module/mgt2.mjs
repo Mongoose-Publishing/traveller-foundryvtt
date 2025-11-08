@@ -26,7 +26,14 @@ import {MgT2Effect} from "./documents/effect.mjs";
 import { migrateWorld } from "./migration.mjs";
 import { NpcIdCard } from "./helpers/id-card.mjs";
 import {hasTrait} from "./helpers/dice-rolls.mjs";
-import {tradeBuyGoodsHandler, tradeSellGoodsHandler, tradeBuyFreightHandler, tradeSellFreightHandler} from "./helpers/utils/trade-utils.mjs";
+import {
+    tradeBuyGoodsHandler,
+    tradeSellGoodsHandler,
+    tradeBuyFreightHandler,
+    tradeSellFreightHandler,
+    tradeEmbarkPassengerHandler, tradeDisembarkPassengerHandler
+} from "./helpers/utils/trade-utils.mjs";
+import { worldDropBrokerHandler } from "./helpers/utils/world-utils.mjs";
 import {generateNpc, generateText} from "./helpers/utils/npcgen-utils.mjs";
 
 
@@ -297,6 +304,12 @@ Hooks.once('init', async function() {
                 tradeBuyFreightHandler(data);
             } else if (data.type === "tradeSellFreight") {
                 tradeSellFreightHandler(data);
+            } else if (data.type === "tradeEmbarkPassenger") {
+                tradeEmbarkPassengerHandler(data);
+            } else if (data.type === "tradeDisembarkPassenger") {
+                tradeDisembarkPassengerHandler(data);
+            } else if (data.type === "worldDropBroker") {
+                worldDropBrokerHandler(data);
             }
         }
     });
