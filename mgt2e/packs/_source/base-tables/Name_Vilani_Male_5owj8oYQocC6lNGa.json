@@ -1,0 +1,74 @@
+{
+  "folder": "t85YBjArVegjKBuG",
+  "name": "Name Vilani Male",
+  "_id": "5owj8oYQocC6lNGa",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 2,
+      "range": [
+        1,
+        2
+      ],
+      "drawn": false,
+      "_id": "pZm7ZBPtXOp2dqgk",
+      "text": "!Name_Vilani_First_Male !Name_Vilani_Family",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!5owj8oYQocC6lNGa.pZm7ZBPtXOp2dqgk"
+    },
+    {
+      "type": "text",
+      "weight": 3,
+      "range": [
+        3,
+        5
+      ],
+      "drawn": false,
+      "_id": "C6kP5d8igkKLO1vb",
+      "text": "!Name_Vilani_First_Male !Name_Vilani_Lineage !Name_Vilani_Family",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!5owj8oYQocC6lNGa.C6kP5d8igkKLO1vb"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "_id": "TA827dYVM597VpnY",
+      "text": "!Name_Solomani_First_Male !Name_Vilani_Lineage !Name_Vilani_Family",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!5owj8oYQocC6lNGa.TA827dYVM597VpnY"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622372585,
+    "modifiedTime": 1762622372585,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d6",
+  "_key": "!tables!5owj8oYQocC6lNGa"
+}

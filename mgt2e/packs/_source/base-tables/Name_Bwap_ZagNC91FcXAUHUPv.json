@@ -1,0 +1,44 @@
+{
+  "folder": "ohBlRNMYhRr4ZrUL",
+  "name": "Name Bwap",
+  "_id": "ZagNC91FcXAUHUPv",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "GpCrScDb2rozqtII",
+      "text": "!Name_Bwap_Short !Name_Bwap_Official",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!ZagNC91FcXAUHUPv.GpCrScDb2rozqtII"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622356355,
+    "modifiedTime": 1762622356355,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d1",
+  "_key": "!tables!ZagNC91FcXAUHUPv"
+}

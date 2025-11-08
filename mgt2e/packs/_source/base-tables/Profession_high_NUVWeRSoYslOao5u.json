@@ -1,0 +1,119 @@
+{
+  "folder": "a0DEGnaZ8vNn1WHn",
+  "name": "Profession high",
+  "img": "systems/mgt2e/icons/misc/text.svg",
+  "description": "<p>Random professions for passengers in high passage.</p>",
+  "results": [
+    {
+      "type": "text",
+      "weight": 2,
+      "range": [
+        1,
+        2
+      ],
+      "drawn": false,
+      "_id": "BJ4Vx1qo7Xx9kl46",
+      "text": "Banker [SOC+2] [EDU+1] [broker+2] [admin|leadership+2] [admin|persuade|diplomat+1]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!NUVWeRSoYslOao5u.BJ4Vx1qo7Xx9kl46"
+    },
+    {
+      "type": "text",
+      "weight": 2,
+      "range": [
+        3,
+        4
+      ],
+      "drawn": false,
+      "_id": "QJU9f3ls618YgVeG",
+      "text": "Noble [SOC+3] [carouse+2] [persuade+1] [diplomat+1] [carouse|deception|diplomat|persuade+1] [flyer|drive+1]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!NUVWeRSoYslOao5u.QJU9f3ls618YgVeG"
+    },
+    {
+      "type": "text",
+      "weight": 3,
+      "range": [
+        5,
+        7
+      ],
+      "drawn": false,
+      "_id": "qoUHBc62ZCmlUzTl",
+      "text": "Merchant [SOC+1] [INT+1] [broker+3] [admin+2] [diplomat|carouse|persuade|deception+1] [profession+1]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!NUVWeRSoYslOao5u.qoUHBc62ZCmlUzTl"
+    },
+    {
+      "type": "text",
+      "weight": 2,
+      "range": [
+        8,
+        9
+      ],
+      "drawn": false,
+      "_id": "FB2UmMDlk0ADQryM",
+      "text": "Diplomat [SOC+2] [INT+1] [EDU+1] [diplomat+3] [profession+0] [electronics+0]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!NUVWeRSoYslOao5u.FB2UmMDlk0ADQryM"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "_id": "RWD1sPZyMFky3Ka2",
+      "text": "Agent [INT+2] [EDU+2] [INT+1] [deception+2] [electronics+2]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!NUVWeRSoYslOao5u.RWD1sPZyMFky3Ka2"
+    },
+    {
+      "type": "text",
+      "weight": 2,
+      "range": [
+        11,
+        12
+      ],
+      "drawn": false,
+      "_id": "oXbkaJKahS6EgQ3X",
+      "text": "Manager [SOC+1] [EDU+2] [admin+2] [leadership+1] [profession+3] [electronics|science+1]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!NUVWeRSoYslOao5u.oXbkaJKahS6EgQ3X"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762627070992,
+    "modifiedTime": 1762645983938,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d12",
+  "_id": "NUVWeRSoYslOao5u",
+  "sort": 350000,
+  "_key": "!tables!NUVWeRSoYslOao5u"
+}

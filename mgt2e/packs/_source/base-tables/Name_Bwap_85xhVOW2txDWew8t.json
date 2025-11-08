@@ -1,0 +1,74 @@
+{
+  "folder": "a0DEGnaZ8vNn1WHn",
+  "name": "Name Bwap",
+  "_id": "85xhVOW2txDWew8t",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "wsGJoqQ8Qgc0QNjO",
+      "text": "Zzzz",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!85xhVOW2txDWew8t.wsGJoqQ8Qgc0QNjO"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "_id": "P7gdx7Eb4hsGnh73",
+      "text": "Ssssh",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!85xhVOW2txDWew8t.P7gdx7Eb4hsGnh73"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "_id": "I5WDOTYf7ixlkhbL",
+      "text": "Fizzz",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!85xhVOW2txDWew8t.I5WDOTYf7ixlkhbL"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762550842758,
+    "modifiedTime": 1762550842758,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "",
+  "_key": "!tables!85xhVOW2txDWew8t"
+}

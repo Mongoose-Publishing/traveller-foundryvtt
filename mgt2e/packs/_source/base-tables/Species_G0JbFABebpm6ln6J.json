@@ -1,0 +1,74 @@
+{
+  "folder": "a0DEGnaZ8vNn1WHn",
+  "name": "Species",
+  "img": "systems/mgt2e/icons/misc/text.svg",
+  "description": "<p>Random list of species.</p>",
+  "results": [
+    {
+      "type": "text",
+      "weight": 10,
+      "range": [
+        1,
+        10
+      ],
+      "drawn": false,
+      "_id": "NQyLjsOFlA5ehVgJ",
+      "text": "Solomani [admin|electronics|profession+0] [carouse|persuade|gambler+0] [athletics|art|streetwise|drive+0]",
+      "img": "systems/mgt2e/icons/misc/2D6/11.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!G0JbFABebpm6ln6J.NQyLjsOFlA5ehVgJ"
+    },
+    {
+      "type": "text",
+      "weight": 7,
+      "range": [
+        11,
+        17
+      ],
+      "drawn": false,
+      "_id": "lNuAqmUpUzWOrAWd",
+      "text": "Vilani [admin|electronics|profession+0] [carouse|persuade|deception+0] [athletics|art|streetwise+0] [language.vilani+1]",
+      "img": "systems/mgt2e/icons/misc/2D6/12.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!G0JbFABebpm6ln6J.lNuAqmUpUzWOrAWd"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        18,
+        18
+      ],
+      "drawn": false,
+      "_id": "nv653u5wdbFMnOXX",
+      "text": "Bwap [STR-4] [END-4] [admin+1] [science+0] [electronics+0] [broker|advocate|investigate|language+0]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!G0JbFABebpm6ln6J.nv653u5wdbFMnOXX"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 300000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": "RollTable.P6nWw54ggLCWWtHW",
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762550842758,
+    "modifiedTime": 1762627943124,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d18",
+  "_id": "G0JbFABebpm6ln6J",
+  "_key": "!tables!G0JbFABebpm6ln6J"
+}

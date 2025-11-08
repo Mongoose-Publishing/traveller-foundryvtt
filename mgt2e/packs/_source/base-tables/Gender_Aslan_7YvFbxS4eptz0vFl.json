@@ -1,0 +1,59 @@
+{
+  "folder": "a0DEGnaZ8vNn1WHn",
+  "name": "Gender Aslan",
+  "img": "systems/mgt2e/icons/misc/text.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "FBzriheQ2zc2xlSf",
+      "text": "Male",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!7YvFbxS4eptz0vFl.FBzriheQ2zc2xlSf"
+    },
+    {
+      "type": "text",
+      "weight": 3,
+      "range": [
+        2,
+        4
+      ],
+      "drawn": false,
+      "_id": "5s4X4IlNKm7sEMGm",
+      "text": "Female",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!7YvFbxS4eptz0vFl.5s4X4IlNKm7sEMGm"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": "RollTable.dK9BDD4iWbCeMwt7",
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762550842758,
+    "modifiedTime": 1762627457221,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d4",
+  "_id": "7YvFbxS4eptz0vFl",
+  "_key": "!tables!7YvFbxS4eptz0vFl"
+}

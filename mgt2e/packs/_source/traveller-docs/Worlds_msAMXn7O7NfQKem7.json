@@ -1,0 +1,98 @@
+{
+  "folder": "81lpHPvcOeOkc8gf",
+  "name": "Worlds",
+  "_id": "msAMXn7O7NfQKem7",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Worlds",
+      "type": "text",
+      "_id": "320XNEoMDJgfI5H0",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Worlds are an Actor type which represent worlds and systems within the game. Traveller mixes the idea of a 'World' and a 'Star System' together, and the same is done here.</p><p>By default, when a World actor is created, its prototype token is defined as being linked to the Actor object.</p><p>To be useful, Worlds need to be visible to players. However, they don't need write permissions in order to use most of their facilities.</p><h2>Usage</h2><p>Word actors are designed to be used in the following situations:</p><ul><li><p>Representing a world within the game, and displaying basic information about it. It would be possible to use a Journal entry for this, but having an Actor allows a token to be placed on a map.</p></li><li><p>Trade is possible directly with a world. Trade goods can be bought and sold from a world by players, by dragging goods from the World sheet to a Spacecraft sheet.</p></li></ul><h3>Future Plans</h3><ul><li><p>Using them as a shop for buying goods.</p></li><li><p>Tracking Patrons and other 'things of interest'</p></li><li><p>Linking to Traveller Map</p></li></ul><p></p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.15.4.1-DEV",
+        "createdTime": 1762115361692,
+        "modifiedTime": 1762115959931,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!msAMXn7O7NfQKem7.320XNEoMDJgfI5H0"
+    },
+    {
+      "sort": 200000,
+      "name": "Trade",
+      "type": "text",
+      "_id": "kGhA6qpliUs4DBRi",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The Mongoose Traveller trade system is implemented within Foundry. The idea is that players should for the most part be able to manage trade themselves, without having to refer to the GM.</p><p>Unless a player has write permission to a world, a GM does need to be logged in whilst trade is being performed. The GM is also needed to 're-roll' what trade goods are available.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.15.4.1-DEV",
+        "createdTime": 1762115677224,
+        "modifiedTime": 1762116006591,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!msAMXn7O7NfQKem7.kGhA6qpliUs4DBRi"
+    }
+  ],
+  "sort": 600000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762115334934,
+    "modifiedTime": 1762115346023,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!journal!msAMXn7O7NfQKem7"
+}

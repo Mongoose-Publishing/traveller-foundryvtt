@@ -1,0 +1,209 @@
+{
+  "folder": "t85YBjArVegjKBuG",
+  "name": "Name Vilani First Female",
+  "_id": "Rx5RMFsgJ6ISzBQ8",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "cGztxjNuFdYIyOF5",
+      "text": "Sharik",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.cGztxjNuFdYIyOF5"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "_id": "XR4kwFswRGh4aKkz",
+      "text": "Gamaagin",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.XR4kwFswRGh4aKkz"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "_id": "bGfzXNRVLohPuV2b",
+      "text": "Nashu",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.bGfzXNRVLohPuV2b"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "_id": "ELDQ8uX7QUVb7iGk",
+      "text": "Eshi",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.ELDQ8uX7QUVb7iGk"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "_id": "I1DYj1INWcbdnhN5",
+      "text": "Kaagira",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.I1DYj1INWcbdnhN5"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "_id": "9A80KN2xBamNXT0v",
+      "text": "Riga",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.9A80KN2xBamNXT0v"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "_id": "qnez57DMJZZbihAx",
+      "text": "Eleni",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.qnez57DMJZZbihAx"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "_id": "BaLGFmSaAUHJT8XD",
+      "text": "Iikush",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.BaLGFmSaAUHJT8XD"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "_id": "Itws6A9WtkBQI9oV",
+      "text": "Musush",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.Itws6A9WtkBQI9oV"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "_id": "ob81jNGT2bvded4U",
+      "text": "Shana",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.ob81jNGT2bvded4U"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "_id": "7oQT34ssDyYOFH0R",
+      "text": "Daslija",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.7oQT34ssDyYOFH0R"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "_id": "FlQJDF6v9NbQ6uLI",
+      "text": "Niaghuvi",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Rx5RMFsgJ6ISzBQ8.FlQJDF6v9NbQ6uLI"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622372585,
+    "modifiedTime": 1762622372585,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d12",
+  "_key": "!tables!Rx5RMFsgJ6ISzBQ8"
+}

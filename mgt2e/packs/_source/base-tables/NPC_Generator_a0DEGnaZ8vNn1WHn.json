@@ -1,0 +1,22 @@
+{
+  "name": "NPC Generator",
+  "sorting": "a",
+  "folder": null,
+  "type": "RollTable",
+  "_id": "a0DEGnaZ8vNn1WHn",
+  "description": "",
+  "sort": 100000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762550842748,
+    "modifiedTime": 1762550842777,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!a0DEGnaZ8vNn1WHn"
+}

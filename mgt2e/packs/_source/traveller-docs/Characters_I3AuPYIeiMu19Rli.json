@@ -191,6 +191,43 @@
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!I3AuPYIeiMu19Rli.Ka7A46blZ1vFnLf1"
+    },
+    {
+      "sort": 400000,
+      "name": "NPC Generator",
+      "type": "text",
+      "_id": "vV1c1FsobIl4UqzV",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The system has a built-in random NPC generator. By default, it is used to randomly generate passengers. However, it can be used separately, and can be extended.</p><p>The bulk of the work is done via RollTables, which are looked for in the <strong>NPC Generator</strong> folder. Only tables in this folder are used, though other folders can be passed if a different set of configuration options is wanted.</p><p>There are a number of tables required, and they need to follow a certain pattern.</p><p></p><h3>Species</h3><p>The first table is \"Species\", This contains a list of species names, which are also used to find the next set of tables.</p><p>Results could be as simple as:</p><ul><li><p>Human</p></li><li><p>Aslan</p></li><li><p>Vargr</p></li></ul><p>The species name is added to the NPC sheet, and then used to look for the following tables:</p><h3>Gender</h3><p>The next table is <strong>Gender &lt;Species&gt;</strong>, and if that is not found, simply <strong>Gender</strong>.</p><p>It will normally consist of two options, <em>Male</em> and <em>Female</em>. However, it can be extended to include any number of options. It can also be used to set the frequency of each gender.</p><h3>Name</h3><p>The <strong>Name</strong> table is used to randomly generate a name for the NPC. There will a table for each Species, possibly split by Gender. For example:</p><ul><li><p>Name Human Male</p></li><li><p>Name Human Female</p></li><li><p>Name Bwap</p></li></ul><p>Humans have two tables, one for Male names and one for Female names.</p><p>Bwaps have a single table.</p><p>The entries in these tables can be a simple list of names. However, they will often be more complicated than that, and refer to sub-tables.</p><p>An entry for the Name Human Male table might be:</p><ul><li><p>!Name_Human_First_Male !Name_Human_Family</p></li></ul><p>The ! at the start of a word means go off an find a table of that name (underscores are replaced with spaces) and replace the table name with the result of the second table.</p><p>So for this example, a random human male first name would be chosen, followed by a random human surname.</p><h3>Profession</h3><p>Finally, the profession table is rolled to check the profession of the NPC. This may be a single table, but will be searched in the following order:</p><ul><li><p>Profession &lt;species&gt; &lt;passage&gt;</p></li><li><p>Profession &lt;species&gt;</p></li><li><p>Profession &lt;passage&gt;</p></li><li><p>Profression</p></li></ul><p>Each species can have its own profession table, plus each level of passage (low, basic, middle and high) can each have their own professions table as well.</p><p></p><h2>Using the Tables</h2><p>These tables are automatically used when a random passenger is dragged onto a spacecraft from a world. An NPC will be created, and placed in the <strong>NPC Passengers</strong> folder for Actors. When the passenger disembarks, the NPC will be deleted if it is still in this folder.</p><p>If the NPC is removed out of the folder, then it will not be deleted. This allows some NPCs to be kept for later use if they turn out to be memorable.</p><h3>Scripted Used</h3><p>It is also possible to use these tables from a macro using the following code:</p><pre><code>let text = await game.mgt2e.generateText(\"Profession\")</code></pre><p>The argument to generateText is the name of the table to use.</p><h3>Creating an NPC</h3><p>It is also possible to generate an NPC with the <code>generateNpc()</code> method.</p><pre><code>let npcData = {\n    type: \"npc\",\n    name: \"Unnamed\",\n    img: `systems/mgt2e/icons/actors/traveller-red.svg`,\n    system: {\n        settings: {\n        hideUntrained: true,\n        lockCharacteristis: true\n    },\n    sophont: {\n        age: await roll(\"16 + 2D6\"),\n        homeworld: worldActor.name\n    }\n}\n\ngame.mgt2e.generateNpc(npcData);\nActor.create(npcData);</code></pre><h2>Advanced Options</h2><p>When calling `generateText()`, certain text commands can be inserted into the contents of the roll tables. The text is split into words, and words beginning with a special character will be treated specially.</p><h4>!TableName</h4><p>Finds the table named, and replaces this word with the results of that table.</p><h4>$TableName</h4><p>As for !TableName, but any whitespace is removed from the results.</p><h4>$^TableName</h4><p>As for $TableName, but the first letter is capitalised.</p><h4>[STR+1] or [admin+1]</h4><p>Increment characteristic or skill by the given amount. This only applies when calling generateNpc, and modifies the npcData block. Some special fields are also supported. For now, `age` is the only one.</p><p>Note that if a skill with specialities is chosen, then a random speciality will be incremented. If you want to modify a specific speciality, use &lt;skill&gt;.&lt;speciality&gt; format.</p><p>If you want to select from a range of skills, you can specify multiple skills like this:</p><pre><code>[admin|diplomat|persuade+2]</code></pre><p>This will randomly select one of admin, diplmat or persuade, and add +2 to it.</p><h4>[STR-1]</h4><p>Decrement characteristic by the given amount.</p><h4># Some text</h4><p>Everything after a '#' is stripped from the text output, but added to the <code>description</code> field of the npcData. If some of this text is enclosed in {{ }} then it will be marked as secret in the NPC description, so players will not be able to see it.</p><p></p><h2>Examples</h2><p>See the following examples for profession</p><ul><li><p>Scientist [age+2D6] [INT+1] [EDU+3] [science+2] [science+1] [admin|profession+0] # A scientist going to a conference. {{They are actually a spy}}</p></li></ul><p>Adds 2D6 to the NPCs age, increments INT by 1 and EDU by 3, adds +2 to a random Science skill, and +1 to another random Science skill (they could both select the same skill), and either set admin or professiont to 0. Then adds \"A scientist going to a conference\" to the NPCs description. The text <em>They are actually a spy</em> will be included as a secret block, so won't be visible to players.</p><p>The only text put in the Profession field for the NPC would be \"Scientist\"</p><p></p><p></p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.15.4.1-DEV",
+        "createdTime": 1762557766011,
+        "modifiedTime": 1762626533016,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!I3AuPYIeiMu19Rli.vV1c1FsobIl4UqzV"
     }
   ],
   "sort": 200000,

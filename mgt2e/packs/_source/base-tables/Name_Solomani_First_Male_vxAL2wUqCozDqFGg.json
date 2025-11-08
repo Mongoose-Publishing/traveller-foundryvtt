@@ -1,0 +1,539 @@
+{
+  "folder": "neczsv0mlogKhWUG",
+  "name": "Name Solomani First Male",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 3,
+      "range": [
+        1,
+        3
+      ],
+      "drawn": false,
+      "_id": "dfxra938UV2yiimM",
+      "text": "James",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.dfxra938UV2yiimM"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "_id": "OhJ1NhQqkt3VMnxq",
+      "text": "Michael",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.OhJ1NhQqkt3VMnxq"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "_id": "zNlJ9d8rpwFIP522",
+      "text": "John",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.zNlJ9d8rpwFIP522"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "_id": "pE2Rp7WyAnvqQzPO",
+      "text": "Robert",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.pE2Rp7WyAnvqQzPO"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "_id": "mgrAj6D7vE1isgBw",
+      "text": "David",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.mgrAj6D7vE1isgBw"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "_id": "oyCSKqlbgJSgFo6Y",
+      "text": "William",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.oyCSKqlbgJSgFo6Y"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "_id": "17X8eUoTcozpu4Px",
+      "text": "Richard",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.17X8eUoTcozpu4Px"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "_id": "rHIsTVbvm7HCEi8I",
+      "text": "Joseph",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.rHIsTVbvm7HCEi8I"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "_id": "w8c3xgI9KrPMkKKE",
+      "text": "Thomas",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.w8c3xgI9KrPMkKKE"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "_id": "2NQJMOvY57dYnAix",
+      "text": "Christopher",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.2NQJMOvY57dYnAix"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        13,
+        13
+      ],
+      "drawn": false,
+      "_id": "99jSkEQbFS2nQYwz",
+      "text": "Charles",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.99jSkEQbFS2nQYwz"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        14,
+        14
+      ],
+      "drawn": false,
+      "_id": "UZW7eaC0EoKAxP1u",
+      "text": "Daniel",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.UZW7eaC0EoKAxP1u"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        15,
+        15
+      ],
+      "drawn": false,
+      "_id": "Nin4KLNxcFp8bvaD",
+      "text": "Matthew",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.Nin4KLNxcFp8bvaD"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        16,
+        16
+      ],
+      "drawn": false,
+      "_id": "6gCxdCweFbnhDUYt",
+      "text": "Anthony",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.6gCxdCweFbnhDUYt"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        17,
+        17
+      ],
+      "drawn": false,
+      "_id": "YS1Tfe4vCMR7QWxI",
+      "text": "Mark",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.YS1Tfe4vCMR7QWxI"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        18,
+        18
+      ],
+      "drawn": false,
+      "_id": "sx7TJTKfLDcMoMum",
+      "text": "Steven",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.sx7TJTKfLDcMoMum"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "_id": "5nWDgRkLNzMWrrch",
+      "text": "Donald",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.5nWDgRkLNzMWrrch"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        20,
+        20
+      ],
+      "drawn": false,
+      "_id": "QjCtKrJ6RM2RiFzZ",
+      "text": "Andrew",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.QjCtKrJ6RM2RiFzZ"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        21,
+        21
+      ],
+      "drawn": false,
+      "_id": "6ZcOEdnD0oPJBp6x",
+      "text": "Joshua",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.6ZcOEdnD0oPJBp6x"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        22,
+        22
+      ],
+      "drawn": false,
+      "_id": "3hEuFXdqiMSo1GsL",
+      "text": "Paul",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.3hEuFXdqiMSo1GsL"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        23,
+        23
+      ],
+      "drawn": false,
+      "_id": "vi491KlCWuwKto83",
+      "text": "Kenneth",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.vi491KlCWuwKto83"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        24,
+        24
+      ],
+      "drawn": false,
+      "_id": "y9Wlibh5HvQH2hXy",
+      "text": "Kevin",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.y9Wlibh5HvQH2hXy"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        25,
+        25
+      ],
+      "drawn": false,
+      "_id": "DPngWJygidVyH0RH",
+      "text": "Brian",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.DPngWJygidVyH0RH"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        26,
+        26
+      ],
+      "drawn": false,
+      "_id": "pPj2SB0gAHF7dxzo",
+      "text": "Timothy",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.pPj2SB0gAHF7dxzo"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        27,
+        27
+      ],
+      "drawn": false,
+      "_id": "FMrlAPXsJK0D6Awc",
+      "text": "Ronald",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.FMrlAPXsJK0D6Awc"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        28,
+        28
+      ],
+      "drawn": false,
+      "_id": "RMFr1LjgKxtQ0ntV",
+      "text": "Jason",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.RMFr1LjgKxtQ0ntV"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        29,
+        29
+      ],
+      "drawn": false,
+      "_id": "H0eU5IpNTlMBNzZd",
+      "text": "George",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.H0eU5IpNTlMBNzZd"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        30,
+        30
+      ],
+      "drawn": false,
+      "_id": "jrVHRfgwKl8YpPJM",
+      "text": "Edward",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.jrVHRfgwKl8YpPJM"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        31,
+        31
+      ],
+      "drawn": false,
+      "_id": "NbxEDYEddn4Nw5FW",
+      "text": "Jeffrey",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.NbxEDYEddn4Nw5FW"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        32,
+        32
+      ],
+      "drawn": false,
+      "_id": "FmkWybQDr8wUKIrE",
+      "text": "Ryan",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.FmkWybQDr8wUKIrE"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        33,
+        33
+      ],
+      "drawn": false,
+      "_id": "rH1tvSEUTwwU7rk0",
+      "text": "Jacob",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.rH1tvSEUTwwU7rk0"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        34,
+        34
+      ],
+      "drawn": false,
+      "_id": "S4BPc0hwDytt0tsn",
+      "text": "Nicholas",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.S4BPc0hwDytt0tsn"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        35,
+        35
+      ],
+      "drawn": false,
+      "_id": "iXlhrMEybaRuPXgI",
+      "text": "Gary",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.iXlhrMEybaRuPXgI"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        36,
+        36
+      ],
+      "drawn": false,
+      "_id": "LqwijgT9aWqS9z20",
+      "text": "Eric",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!vxAL2wUqCozDqFGg.LqwijgT9aWqS9z20"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": false,
+  "sort": 125000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": "RollTable.xxU56nbFwp6Im4p5",
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622392205,
+    "modifiedTime": 1762622392205,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d36",
+  "_id": "vxAL2wUqCozDqFGg",
+  "_key": "!tables!vxAL2wUqCozDqFGg"
+}

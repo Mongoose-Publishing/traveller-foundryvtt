@@ -1,0 +1,59 @@
+{
+  "folder": "3DWr8u09KMeu7cn0",
+  "name": "Vilani Name",
+  "_id": "Oj1b0XXixXyNKwfZ",
+  "img": "systems/mgt2e/icons/misc/ABC.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "Cwz681LZGyXTbcxl",
+      "text": "$^Vilani_Word $^Vilani_Word",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Oj1b0XXixXyNKwfZ.Cwz681LZGyXTbcxl"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "_id": "mi4rfOWqmwViVCG6",
+      "text": "$^Vilani_Word $^Vilani_Word $^Vilani_Word",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!Oj1b0XXixXyNKwfZ.mi4rfOWqmwViVCG6"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 200000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "RollTable.Oj1b0XXixXyNKwfZ",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762601634914,
+    "modifiedTime": 1762601634914,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d1",
+  "_key": "!tables!Oj1b0XXixXyNKwfZ"
+}

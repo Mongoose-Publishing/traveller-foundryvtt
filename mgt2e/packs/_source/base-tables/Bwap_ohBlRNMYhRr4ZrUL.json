@@ -1,0 +1,22 @@
+{
+  "name": "Bwap",
+  "sorting": "a",
+  "folder": "a0DEGnaZ8vNn1WHn",
+  "type": "RollTable",
+  "_id": "ohBlRNMYhRr4ZrUL",
+  "description": "",
+  "sort": 200000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622356335,
+    "modifiedTime": 1762622362681,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!ohBlRNMYhRr4ZrUL"
+}

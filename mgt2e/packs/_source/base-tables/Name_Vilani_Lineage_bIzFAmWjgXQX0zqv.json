@@ -1,0 +1,209 @@
+{
+  "folder": "t85YBjArVegjKBuG",
+  "name": "Name Vilani Lineage",
+  "_id": "bIzFAmWjgXQX0zqv",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "3tFF7eTNBcShPqCc",
+      "text": "Shugashiik",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.3tFF7eTNBcShPqCc"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "_id": "y0dNiMULEf2zX3mD",
+      "text": "Indunna",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.y0dNiMULEf2zX3mD"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "_id": "I6JCY2trh9pPRl4j",
+      "text": "Shikarrida",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.I6JCY2trh9pPRl4j"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "_id": "ReGe8kwatM2LZIVI",
+      "text": "Agardur",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.ReGe8kwatM2LZIVI"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "_id": "7nHxeuph8PQN04uJ",
+      "text": "Ugugme",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.7nHxeuph8PQN04uJ"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "_id": "sXDVOgpLY1BVmSHR",
+      "text": "Umdadusag",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.sXDVOgpLY1BVmSHR"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "_id": "ulJYd6ZMUc8hbObv",
+      "text": "Irirun",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.ulJYd6ZMUc8hbObv"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "_id": "LKdLcv1YXEH20KsJ",
+      "text": "Irgakusela",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.LKdLcv1YXEH20KsJ"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "_id": "CpYRjnTNB4tzCmSM",
+      "text": "Udliraa",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.CpYRjnTNB4tzCmSM"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "_id": "lBL9xwW7581e5awq",
+      "text": "Amligishe",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.lBL9xwW7581e5awq"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "_id": "ycuhHzcO9BIPbWSF",
+      "text": "Arkigaga",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.ycuhHzcO9BIPbWSF"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "_id": "3hT6ZmkIcJD3Pmwx",
+      "text": "Kami",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!bIzFAmWjgXQX0zqv.3hT6ZmkIcJD3Pmwx"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622372585,
+    "modifiedTime": 1762622372585,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d12",
+  "_key": "!tables!bIzFAmWjgXQX0zqv"
+}

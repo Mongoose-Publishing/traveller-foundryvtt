@@ -1,0 +1,104 @@
+{
+  "folder": "3DWr8u09KMeu7cn0",
+  "name": "Vilani Pattern",
+  "_id": "RzbQ5gGlDLPRaBfy",
+  "img": "systems/mgt2e/icons/misc/ABC.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 3,
+      "range": [
+        1,
+        2
+      ],
+      "drawn": false,
+      "_id": "o2cNmor6iYVTmLbC",
+      "text": "$Vilani_C $Vilani_V",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!RzbQ5gGlDLPRaBfy.o2cNmor6iYVTmLbC"
+    },
+    {
+      "type": "text",
+      "weight": 3,
+      "range": [
+        3,
+        5
+      ],
+      "drawn": false,
+      "_id": "yQVZQj3Ubg17l098",
+      "text": "$Vilani_C $Vilani_V $Vilani_C",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!RzbQ5gGlDLPRaBfy.yQVZQj3Ubg17l098"
+    },
+    {
+      "type": "text",
+      "weight": 2,
+      "range": [
+        6,
+        7
+      ],
+      "drawn": false,
+      "_id": "Jv7bU2RV8WdX9h1n",
+      "text": "$Vilani_V $Vilani_C",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!RzbQ5gGlDLPRaBfy.Jv7bU2RV8WdX9h1n"
+    },
+    {
+      "type": "text",
+      "weight": 3,
+      "range": [
+        8,
+        10
+      ],
+      "drawn": false,
+      "_id": "tlQtj6SOkqJfk6cV",
+      "text": "$Vilani_C $Vilani_V $Vilani_V",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!RzbQ5gGlDLPRaBfy.tlQtj6SOkqJfk6cV"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "_id": "1aFfRXTx1iNBQWan",
+      "text": "$Vilani_C $Vilani_V $Vilani_C $Vilani_V",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!RzbQ5gGlDLPRaBfy.1aFfRXTx1iNBQWan"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 150000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "RollTable.RzbQ5gGlDLPRaBfy",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762601634914,
+    "modifiedTime": 1762601634914,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d12",
+  "_key": "!tables!RzbQ5gGlDLPRaBfy"
+}

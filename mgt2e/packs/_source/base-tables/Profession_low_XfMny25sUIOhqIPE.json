@@ -1,0 +1,119 @@
+{
+  "folder": "a0DEGnaZ8vNn1WHn",
+  "name": "Profession low",
+  "img": "systems/mgt2e/icons/misc/text.svg",
+  "description": "<p>Random profesions for passengers in low passage.</p>",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "GquPfsISynL6FD4t",
+      "text": "Dock Worker [SOC-1] [EDU-1] [profession.construction+0] # Low skilled labourer.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XfMny25sUIOhqIPE.GquPfsISynL6FD4t"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "_id": "aJntRcEsDX7W0Y2a",
+      "text": "Cleaner [SOC-2] [EDU-1] [streetwise+0] # Low skilled minimum wage worker.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XfMny25sUIOhqIPE.aJntRcEsDX7W0Y2a"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "_id": "PnplKCjc5bdhXhGI",
+      "text": "Veteran [age+3D6] [DEX+1] [STR+1] [END+1] [guncombat+2] [recon|stealth|leadership+1] # Old veteran.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XfMny25sUIOhqIPE.PnplKCjc5bdhXhGI"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "_id": "YsmEPEvzfbp5N0Za",
+      "text": "Scavenger [SOC-1] [streetwise+2] [deception+0] [recon+0]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XfMny25sUIOhqIPE.YsmEPEvzfbp5N0Za"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "_id": "vamrspVI1YmTBN3E",
+      "text": "Wanderer [SOC-1] [age+1D6] [streetwise+1] [language+1] [athletics+0]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XfMny25sUIOhqIPE.vamrspVI1YmTBN3E"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "_id": "kzeJWciBaJg9RzY8",
+      "text": "Refugee [SOC-2] [streetwise+1] [profession+1]",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XfMny25sUIOhqIPE.kzeJWciBaJg9RzY8"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762627028940,
+    "modifiedTime": 1762627067135,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d6",
+  "_id": "XfMny25sUIOhqIPE",
+  "sort": 200000,
+  "_key": "!tables!XfMny25sUIOhqIPE"
+}

@@ -1,0 +1,209 @@
+{
+  "folder": "ohBlRNMYhRr4ZrUL",
+  "name": "Name Bwap Short",
+  "_id": "pHG4qetUT5wIuWPF",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "WpAiTRLGjoWbgyiC",
+      "text": "Wab",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.WpAiTRLGjoWbgyiC"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "_id": "wgSy6P38YStXvmet",
+      "text": "Kewa",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.wgSy6P38YStXvmet"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "_id": "WPKlsZnO0TI8IRyS",
+      "text": "Pakar",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.WPKlsZnO0TI8IRyS"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "_id": "riTuqK1wzzWig8T4",
+      "text": "Dalglee",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.riTuqK1wzzWig8T4"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "_id": "rL5nXMql1YbBa80V",
+      "text": "Awa",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.rL5nXMql1YbBa80V"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "_id": "HQN2QgWtplsOnymD",
+      "text": "Uwab",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.HQN2QgWtplsOnymD"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "_id": "VZmPsJuwYjSJ6BYt",
+      "text": "Kera",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.VZmPsJuwYjSJ6BYt"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "_id": "YT1MRgWf15PBBuBd",
+      "text": "Ruwap",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.YT1MRgWf15PBBuBd"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "_id": "ziNU0oaVlq6a1zwX",
+      "text": "Huu",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.ziNU0oaVlq6a1zwX"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "_id": "3CHmxi51CIGGKxdQ",
+      "text": "Wapi",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.3CHmxi51CIGGKxdQ"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "_id": "fPMtMv8KmxnJpZDM",
+      "text": "Ker",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.fPMtMv8KmxnJpZDM"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "_id": "LJIauXxwmdkm1o6E",
+      "text": "Awaba",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!pHG4qetUT5wIuWPF.LJIauXxwmdkm1o6E"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622356355,
+    "modifiedTime": 1762622356355,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d12",
+  "_key": "!tables!pHG4qetUT5wIuWPF"
+}

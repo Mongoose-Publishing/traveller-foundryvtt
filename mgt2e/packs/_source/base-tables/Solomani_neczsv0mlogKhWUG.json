@@ -1,0 +1,22 @@
+{
+  "name": "Solomani",
+  "sorting": "a",
+  "folder": "a0DEGnaZ8vNn1WHn",
+  "type": "RollTable",
+  "_id": "neczsv0mlogKhWUG",
+  "description": "",
+  "sort": 400000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622392192,
+    "modifiedTime": 1762622395778,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!neczsv0mlogKhWUG"
+}

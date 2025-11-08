@@ -1,0 +1,269 @@
+{
+  "folder": "3DWr8u09KMeu7cn0",
+  "name": "Vilani C",
+  "_id": "BLIKGEiRxJbqpbxQ",
+  "img": "systems/mgt2e/icons/misc/ABC.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "070uJDzQSlSmFKpT",
+      "text": "k",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.070uJDzQSlSmFKpT"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "_id": "lImxxOgPLorooF8b",
+      "text": "g",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.lImxxOgPLorooF8b"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "_id": "j0KqRBS3F7PNAFdw",
+      "text": "t",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.j0KqRBS3F7PNAFdw"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "_id": "Gd72yKzV1heVw6rh",
+      "text": "d",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.Gd72yKzV1heVw6rh"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "_id": "ffk50d5Oq0YtcA5s",
+      "text": "p",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.ffk50d5Oq0YtcA5s"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "_id": "lw3l72sFtyfre3UA",
+      "text": "b",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.lw3l72sFtyfre3UA"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "_id": "JPXgBb9kvpIQQbgA",
+      "text": "s",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.JPXgBb9kvpIQQbgA"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "_id": "obiNY5uN4n1m7b4G",
+      "text": "z",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.obiNY5uN4n1m7b4G"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "_id": "egps6TWOqgV0vrsm",
+      "text": "sh",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.egps6TWOqgV0vrsm"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "_id": "LnNhfBfBXYDiAsOQ",
+      "text": "r",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.LnNhfBfBXYDiAsOQ"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "_id": "Oy0bqT0WCs1wumjj",
+      "text": "l",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.Oy0bqT0WCs1wumjj"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "_id": "bnSTAOgH5UP0fI7u",
+      "text": "m",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.bnSTAOgH5UP0fI7u"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        13,
+        13
+      ],
+      "drawn": false,
+      "_id": "D08hoQTqDgBZOvHc",
+      "text": "n",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.D08hoQTqDgBZOvHc"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        14,
+        14
+      ],
+      "drawn": false,
+      "_id": "7rmAXNjyfAxmXr1m",
+      "text": "kh",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.7rmAXNjyfAxmXr1m"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        15,
+        15
+      ],
+      "drawn": false,
+      "_id": "gqsnS6gfJ9d72TPw",
+      "text": "h",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.gqsnS6gfJ9d72TPw"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        16,
+        16
+      ],
+      "drawn": false,
+      "_id": "NIL6OW188khMuDse",
+      "text": "ch",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!BLIKGEiRxJbqpbxQ.NIL6OW188khMuDse"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "RollTable.BLIKGEiRxJbqpbxQ",
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762601634914,
+    "modifiedTime": 1762601634914,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d16",
+  "_key": "!tables!BLIKGEiRxJbqpbxQ"
+}

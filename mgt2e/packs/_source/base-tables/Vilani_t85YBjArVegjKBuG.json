@@ -1,0 +1,22 @@
+{
+  "name": "Vilani",
+  "sorting": "a",
+  "folder": "a0DEGnaZ8vNn1WHn",
+  "type": "RollTable",
+  "_id": "t85YBjArVegjKBuG",
+  "description": "",
+  "sort": 300000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622372575,
+    "modifiedTime": 1762622375618,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!t85YBjArVegjKBuG"
+}

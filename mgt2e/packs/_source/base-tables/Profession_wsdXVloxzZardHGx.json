@@ -1,0 +1,104 @@
+{
+  "folder": "a0DEGnaZ8vNn1WHn",
+  "name": "Profession",
+  "_id": "wsdXVloxzZardHGx",
+  "img": "systems/mgt2e/icons/misc/text.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "Yc7WMUr9CX8TtYvr",
+      "text": "Entertainer [art+2] [DEX+2] # An entertainer looking for work.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!wsdXVloxzZardHGx.Yc7WMUr9CX8TtYvr"
+    },
+    {
+      "type": "text",
+      "weight": 5,
+      "range": [
+        2,
+        6
+      ],
+      "drawn": false,
+      "_id": "357wySeKSDS7kFtv",
+      "text": "Officer Worker [EDU+1] [profession+2] [admin+1] # Business person on a business trip.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!wsdXVloxzZardHGx.357wySeKSDS7kFtv"
+    },
+    {
+      "type": "text",
+      "weight": 3,
+      "range": [
+        7,
+        9
+      ],
+      "drawn": false,
+      "_id": "DIh0A3ajS8RTn1s9",
+      "text": "Tourist [profession+0] [electronics.computers+1] # On holiday, looking to see some sights.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!wsdXVloxzZardHGx.DIh0A3ajS8RTn1s9"
+    },
+    {
+      "type": "text",
+      "weight": 2,
+      "range": [
+        10,
+        11
+      ],
+      "drawn": false,
+      "_id": "PSfVKx1J7cqrkex1",
+      "text": "Scientist [science+2] # Scientist going to a conference.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!wsdXVloxzZardHGx.PSfVKx1J7cqrkex1"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "_id": "ZE9E87pCUEUbkXdK",
+      "text": "Officer Worker [EDU+1] [profession+2] # Business person on a business trip. {{Actually a secret agent}}",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!wsdXVloxzZardHGx.ZE9E87pCUEUbkXdK"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 500000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762550842758,
+    "modifiedTime": 1762627028951,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d12",
+  "_key": "!tables!wsdXVloxzZardHGx"
+}

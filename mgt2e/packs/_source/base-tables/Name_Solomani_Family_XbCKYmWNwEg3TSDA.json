@@ -1,0 +1,539 @@
+{
+  "folder": "neczsv0mlogKhWUG",
+  "name": "Name Solomani Family",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 3,
+      "range": [
+        1,
+        3
+      ],
+      "drawn": false,
+      "_id": "dfxra938UV2yiimM",
+      "text": "Smith",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.dfxra938UV2yiimM"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "_id": "OhJ1NhQqkt3VMnxq",
+      "text": "Jones",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.OhJ1NhQqkt3VMnxq"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "_id": "zNlJ9d8rpwFIP522",
+      "text": "Williams",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.zNlJ9d8rpwFIP522"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "_id": "gIJPPclyay9aS9xs",
+      "text": "Taylor",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.gIJPPclyay9aS9xs"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "_id": "fmyxFqChzTJkosDK",
+      "text": "Brown",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.fmyxFqChzTJkosDK"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "_id": "KBZeM3GJ85z26zt4",
+      "text": "Davies",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.KBZeM3GJ85z26zt4"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "_id": "JVYt6t0uSwk5mrxd",
+      "text": "Evans",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.JVYt6t0uSwk5mrxd"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "_id": "EOoWG3zQcQuK1wJO",
+      "text": "Wilson",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.EOoWG3zQcQuK1wJO"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "_id": "JvTSKeZLjEI4g5pt",
+      "text": "Thomas",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.JvTSKeZLjEI4g5pt"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "_id": "tmuH2XXTAMjpp2wz",
+      "text": "Johnson",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.tmuH2XXTAMjpp2wz"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        13,
+        13
+      ],
+      "drawn": false,
+      "_id": "p4GG5yjzXaNiPfIN",
+      "text": "Roberts",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.p4GG5yjzXaNiPfIN"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        14,
+        14
+      ],
+      "drawn": false,
+      "_id": "UIHjMwV8DNs2f8tU",
+      "text": "Robinson",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.UIHjMwV8DNs2f8tU"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        15,
+        15
+      ],
+      "drawn": false,
+      "_id": "5OMk43dDVmIHxIDE",
+      "text": "Thompson",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.5OMk43dDVmIHxIDE"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        16,
+        16
+      ],
+      "drawn": false,
+      "_id": "VIS9DdEe8lePlhdb",
+      "text": "Wright",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.VIS9DdEe8lePlhdb"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        17,
+        17
+      ],
+      "drawn": false,
+      "_id": "oOqN6Zd5K8s7mWzT",
+      "text": "Walker",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.oOqN6Zd5K8s7mWzT"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        18,
+        18
+      ],
+      "drawn": false,
+      "_id": "xNemUIitReCnvQaA",
+      "text": "White",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.xNemUIitReCnvQaA"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "_id": "d3KTbyVyXuv91HXp",
+      "text": "Edwards",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.d3KTbyVyXuv91HXp"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        20,
+        20
+      ],
+      "drawn": false,
+      "_id": "nM1YATKQ9Bekq0oS",
+      "text": "Hughes",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.nM1YATKQ9Bekq0oS"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        21,
+        21
+      ],
+      "drawn": false,
+      "_id": "coItbC2KvuIQAmKo",
+      "text": "Green",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.coItbC2KvuIQAmKo"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        22,
+        22
+      ],
+      "drawn": false,
+      "_id": "9UuQYmD1LCw9RyDT",
+      "text": "Hall",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.9UuQYmD1LCw9RyDT"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        23,
+        23
+      ],
+      "drawn": false,
+      "_id": "c0g2kwuN7s8nZ65z",
+      "text": "Lewis",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.c0g2kwuN7s8nZ65z"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        24,
+        24
+      ],
+      "drawn": false,
+      "_id": "gC7agTq8CB8XNdHd",
+      "text": "Harris",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.gC7agTq8CB8XNdHd"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        25,
+        25
+      ],
+      "drawn": false,
+      "_id": "y6IdtdBjKCFOvywf",
+      "text": "Clarke",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.y6IdtdBjKCFOvywf"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        26,
+        26
+      ],
+      "drawn": false,
+      "_id": "H9Djr43EI76mDpc0",
+      "text": "Patel",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.H9Djr43EI76mDpc0"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        27,
+        27
+      ],
+      "drawn": false,
+      "_id": "baNFjbGXTmvfK9wQ",
+      "text": "Jackson",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.baNFjbGXTmvfK9wQ"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        28,
+        28
+      ],
+      "drawn": false,
+      "_id": "Chu4XuRICdUzdrjz",
+      "text": "Wood",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.Chu4XuRICdUzdrjz"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        29,
+        29
+      ],
+      "drawn": false,
+      "_id": "DrkVX6Z4QN3V44VB",
+      "text": "Turner",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.DrkVX6Z4QN3V44VB"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        30,
+        30
+      ],
+      "drawn": false,
+      "_id": "xDL0EO9BBydEk0Lg",
+      "text": "Martin",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.xDL0EO9BBydEk0Lg"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        31,
+        31
+      ],
+      "drawn": false,
+      "_id": "Nj18f1W6d1MEBYy8",
+      "text": "Cooper",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.Nj18f1W6d1MEBYy8"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        32,
+        32
+      ],
+      "drawn": false,
+      "_id": "BZzqmzSmqOXgigM1",
+      "text": "Hill",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.BZzqmzSmqOXgigM1"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        33,
+        33
+      ],
+      "drawn": false,
+      "_id": "oyxxJEqtrcD7UdDj",
+      "text": "Ward",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.oyxxJEqtrcD7UdDj"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        34,
+        34
+      ],
+      "drawn": false,
+      "_id": "uFnDDEPwefeYBjNL",
+      "text": "Morris",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.uFnDDEPwefeYBjNL"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        35,
+        35
+      ],
+      "drawn": false,
+      "_id": "3cED80suJHHw1YOO",
+      "text": "Moore",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.3cED80suJHHw1YOO"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        36,
+        36
+      ],
+      "drawn": false,
+      "_id": "Tx9eSJCITjF60PXg",
+      "text": "Clarke",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!XbCKYmWNwEg3TSDA.Tx9eSJCITjF60PXg"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": "RollTable.vxAL2wUqCozDqFGg",
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622392205,
+    "modifiedTime": 1762622392205,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d36",
+  "_id": "XbCKYmWNwEg3TSDA",
+  "_key": "!tables!XbCKYmWNwEg3TSDA"
+}
