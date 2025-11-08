@@ -539,7 +539,8 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
 
     if (weapon && weapon.system.notes && weapon.system.notes.length > 0) {
-        content += `<span class="weapon-notes">${weapon.system.notes}</span>`;
+        let enriched = await TextEditor.enrichHTML(weapon.system.notes);
+        content += `<span class="weapon-notes">${enriched}</span>`;
     }
     content += "</div>";
 
