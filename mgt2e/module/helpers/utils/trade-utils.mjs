@@ -205,6 +205,9 @@ export async function calculateFreightLots(sourceWorld, destinationWorld, effect
         if (i.type === "cargo" && i.system.cargo.destinationId === destinationWorld.uuid) {
             list.push(i._id);
         }
+        if (i.type === "worlddata" && i.system.world.destinationId === destinationWorld.uuid) {
+            list.push(i._id);
+        }
     }
     await sourceWorld.deleteEmbeddedDocuments("Item", list);
 
@@ -772,7 +775,7 @@ export async function tradeBuyFreightHandler(queryData) {
     let text = `<p><b>Contracted at:</b> ${worldActor.name}</p>`;
     text += `<p><b>To be taken to:</b> ${destinationWorld.name}</p>`;
     text += `<p><b>Quantity:</b> ${Tools.prettyNumber(freightItem.system.quantity, 0)}dt</p>`;
-    text += `<p><b>Contracted Price:</b> Cr${Tools.prettyNumber(freightItem.system.cost * freightItem.system.quantity, 0)}</p>`;
+    text += `<p><b>Contracted Price:</b> Cr${Tools.prettyNumber(freightItem.system.cargo.price * freightItem.system.quantity, 0)}</p>`;
     outputTradeChat(shipActor, title, text);
 }
 
@@ -875,7 +878,7 @@ export async function tradeDisembarkPassengerHandler(queryData) {
 
         let npc = await fromUuid(`Actor.${id}`);
         let folder = await npc.folder;
-        if (folder.name === "NPC Passengers") {
+        if (folder?.name === "NPC Passengers") {
             npc.delete();
         }
     }

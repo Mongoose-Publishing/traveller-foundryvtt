@@ -491,7 +491,8 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
         let data = {
             "item": item,
             "destination": destination,
-            "freeSpace": freeSpace
+            "freeSpace": freeSpace,
+            "totalPrice": parseInt(item.system.quantity) * parseInt(item.system.cargo.price)
         };
 
         const content = await renderTemplate("systems/mgt2e/templates/dialogs/transfer-freight.html", data);
@@ -510,7 +511,7 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
                 worldActorId: worldActor.uuid,
                 cargoItemId: item.uuid
             }
-            if (game.user.isGM) {
+            if (worldActor.permission > 2) {
                 await tradeBuyFreightHandler(data);
             } else {
                 game.socket.emit("system.mgt2e", data);
