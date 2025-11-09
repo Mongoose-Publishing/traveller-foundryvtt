@@ -8,6 +8,41 @@
 * On Foundry v13, active effects may need to have the 'Apply Effect' option toggled off and on before
   they take effect.
 
+# 0.15.5 (Beta)
+
+* Refactoring of the drop handler for cargo and worlds. Now works a lot better, and
+  supports non-GM users dropping and dragging items from worlds which they don't own,
+  by using a socket to process the work as a GM user (if available).
+* Fixed speculative cargo so that prices are correctly modified by the world trade
+  codes.
+* When listing speculative cargo on a world, show buy and sell prices, plus the variance
+  from the 'norm' for this type of trade good. Speculative cargo is also shown as a table
+  rather than as a grid.
+* When freight and trade goods are dragged from or to a world from a ship, dialogs are
+  used to display profit and loss, and to provide a chance to modify quantity being
+  bought or sold.
+* Spacecraft now have a finance option, which allows them to carry cash. When trade is
+  performed, this value is automatically modified. Attempts to buy trade goods when you
+  don't have enough cash are also prevented.
+* Passengers are now available at worlds to be given passage to. The world they are going
+  to is tracked, so they can be disembarked at their destination.
+* Passengers are randomly generated as NPCs, with a random name, profession and basic
+  list of skills and a description.
+* Implemented random name generator using Roll Tables. Initially supports Vilani, but
+  could be extended to support names in other languages. It is possible for users to
+  extend this by adding their own tables.
+* Overly complex random NPC generator has been added using Roll Tables. NPC skills
+  and characteristics can be added and modified. Descriptions can be set, including
+  addition of 'secret' information only visible to the GM. This can be extended by
+  users.
+* Name generator can be called from a macro with a simple script such as:
+  let text = await game.mgt2e.generateText("Vilani Name");
+* NPC generator can be called from a macro, allowing it to modify an existing NPC
+  or pass it data for a new NPC:
+  await game.mgt2e.generateNpc(npcData, "NPC Generator");
+* When an attack is made, the weapon's notes field is now output using an enriched
+  description. This allows macros to be placed in the text, which can be clicked on.
+
 ## 0.15.4 (Beta)
 
 * Fixed bug where Rich trade codes weren't being correctly applied to worlds due to the
