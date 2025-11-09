@@ -1,7 +1,6 @@
 import {Tools} from "../chat/tools.mjs";
-import {generateVilaniName} from "./name-utils.mjs";
-import {choose, roll} from "../dice-rolls.mjs";
-import {generateNpc } from "./npcgen-utils.mjs";
+import {roll} from "../dice-rolls.mjs";
+import {generateNpc} from "./npcgen-utils.mjs";
 
 
 export async function passengerTraffic(dm) {
@@ -815,10 +814,9 @@ export async function tradeEmbarkPassengerHandler(queryData) {
     let passengers = [];
     let description = `Passenger from ${worldActor.name} to ${destinationActor.name} on the ${shipActor.name}.`;
     for (let p=0; p < quantity; p++) {
-        let name = generateVilaniName();
         let npcData = {
             "type": "npc",
-            "name": name,
+            "name": "Passenger",
             "img": `systems/mgt2e/icons/cargo/passenger-${passengerItem.system.world.passage}.svg`,
             "folder": npcFolder._id,
             "ownership": {
@@ -827,7 +825,7 @@ export async function tradeEmbarkPassengerHandler(queryData) {
             "system": {
                 "settings": {
                     hideUntrained: true,
-                    lockCharacteristis: true
+                    lockCharacteristics: true
                 },
                 "sophont": {
                     age: await roll("16 + 2D6"),

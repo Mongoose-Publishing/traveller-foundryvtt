@@ -329,7 +329,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                     worldActorId: this.actor.uuid,
                     passengerList: idList
                 }
-                if (game.user.isGM) {
+                if (this.actor.permission > 2) {
                     await tradeDisembarkPassengerHandler(data);
                 } else {
                     game.socket.emit("system.mgt2e", data);
@@ -346,7 +346,6 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         console.log("_onDropActor:");
         if (droppedActor.type === "npc" && droppedActor.system.meta) {
             if (droppedActor.system.meta.destinationId === this.actor.uuid) {
-                console.log("Getting off here");
                 this._disembark(droppedActor);
             } else {
                 ui.notifications.warn(`${droppedActor.name} doesn't want to disembark here`);
@@ -355,35 +354,32 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         }
 
         if (["npc", "traveller"].includes(droppedActor.type)) {
-            console.log("Trader");
             let data = {
                 type: "worldDropBroker",
                 brokerActorId: droppedActor.uuid,
                 worldActorId: this.actor.uuid,
             }
             if (event.target.closest(".brokerDropZone")) {
-                //this.actor.system.world.meta.brokerActorId = droppedActor.uuid;
-                //this.actor.system.world.meta.brokerScore = droppedActor.system.skills["broker"].value;
                 data.skill = "broker";
                 data.skillScore = parseInt(droppedActor.system.skills["broker"].value);
             } else if (event.target.closest(".streetwiseDropZone")) {
-                //this.actor.system.world.meta.streetwiseActorId = droppedActor.uuid;
-                //this.actor.system.world.meta.streetwiseScore = droppedActor.system.skills["streetwise"].value;
                 data.skill = "streetwise";
                 data.skillScore = parseInt(droppedActor.system.skills["streetwise"].value);
             }
-            if (game.user.isGM) {
+            if (this.actor.permission > 2) {
                 await worldDropBrokerHandler(data);
             } else {
                 game.socket.emit("system.mgt2e", data);
             }
-            //this.actor.update({"system.world.meta": this.actor.system.world.meta});
             return;
         }
 
         if (droppedActor.type === "world") {
             // Need to calculate trade.
-            console.log("Freight");
+            if (this.actor.permission < 3) {
+                ui.notifications.error(`You do not have permission to calculate trade for ${this.actor.name}`);
+                return;
+            }
             calculateFreightLots(this.actor, droppedActor, 0);
             return;
         }

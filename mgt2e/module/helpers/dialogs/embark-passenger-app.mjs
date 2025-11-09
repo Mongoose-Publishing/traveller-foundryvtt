@@ -112,7 +112,7 @@ export class MgT2EmbarkPassengerApp extends HandlebarsApplicationMixin(Applicati
             }
             // const queryValue = await gm.query("mgt2e.tradeBuyGoods", data, { timeout: 30 * 1000 });
             this.close();
-            if (game.user.isGM) {
+            if (this.worldActor.permission > 2) {
                 await tradeEmbarkPassengerHandler(data);
             } else {
                 game.socket.emit("system.mgt2e", data);

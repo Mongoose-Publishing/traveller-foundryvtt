@@ -122,7 +122,7 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
             // const queryValue = await gm.query("mgt2e.tradeBuyGoods", data, { timeout: 30 * 1000 });
             this.close();
-            if (game.user.isGM) {
+            if (this.worldActor.permission > 2) {
                 await tradeBuyGoodsHandler(data);
             } else {
                 game.socket.emit("system.mgt2e", data);
