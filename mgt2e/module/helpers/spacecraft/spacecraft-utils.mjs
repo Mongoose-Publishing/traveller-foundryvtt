@@ -564,5 +564,12 @@ export async function sellCargoDialog(shipActor, worldActor, item) {
             return false;
         }
         new MgT2SellCargoApp(shipActor, worldActor, item).render(true);
+    } else {
+        // This is a raw cargo item. It hasn't been bought from a world.
+        item.system.cargo.speculative = true;
+        item.system.cargo.salePrice = item.system.cargo.price;
+        item.system.cost = item.system.cargo.price;
+
+        new MgT2SellCargoApp(shipActor, worldActor, item).render(true);
     }
 }

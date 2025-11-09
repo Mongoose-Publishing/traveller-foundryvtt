@@ -2,7 +2,7 @@
   "id": "mgt2e",
   "title": "Mongoose Traveller 2e",
   "description": "A system for Mongoose Traveller 2e. This includes rules specific to this version of Traveller.",
-  "version": "0.15.4.1-DEV",
+  "version": "0.15.4.3-DEV",
   "compatibility": {
     "minimum": 12,
     "verified": 12,
@@ -52,6 +52,14 @@
       "module": "mgt2e",
       "path": "packs/base-macros",
       "type": "Macro"
+    },
+    {
+      "name": "base-tables",
+      "label": "MgT2e Base Tables",
+      "system": "mgt2e",
+      "module": "mgt2e",
+      "path": "packs/base-tables",
+      "type": "RollTable"
     }
   ],
   "packFolders": [
@@ -63,7 +71,7 @@
         "PLAYER": "OBSERVER"
       },
       "packs": [
-        "base-items", "base-actors", "traveller-docs", "base-macros"
+        "base-items", "base-actors", "traveller-docs", "base-macros", "base-tables"
       ]
     }
   ],

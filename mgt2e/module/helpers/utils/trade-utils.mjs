@@ -782,8 +782,7 @@ export async function tradeSellFreightHandler(queryData) {
     let worldActor = await fromUuid(queryData.worldActorId);
     let shipActor = await fromUuid(queryData.shipActorId);
     let freightItem = await fromUuid(queryData.cargoItemId);
-
-    let price = parseInt(freightItem.system.cost) * parseInt(freightItem.system.quantity);
+    let price = parseInt(freightItem.system.cargo.price) * parseInt(freightItem.system.quantity);
 
     shipActor.deleteEmbeddedDocuments("Item", [ freightItem.id ]);
     shipActor.update({"system.finance.cash": parseInt(shipActor.system.finance.cash) + price});
@@ -792,7 +791,7 @@ export async function tradeSellFreightHandler(queryData) {
     const title = `Freight Delivered`;
     let text = `<p><b>Delivered to:</b> ${worldActor.name}</p>`;
     text += `<p><b>Quantity:</b> ${Tools.prettyNumber(freightItem.system.quantity, 0)}dt</p>`;
-    text += `<p><b>Total Payment:</b> Cr${Tools.prettyNumber(freightItem.system.cost * freightItem.system.quantity, 0)}</p>`;
+    text += `<p><b>Total Payment:</b> Cr${Tools.prettyNumber(price, 0)}</p>`;
     outputTradeChat(shipActor, title, text);
 }
 
@@ -811,7 +810,6 @@ export async function tradeEmbarkPassengerHandler(queryData) {
         npcFolder = await Folder.create({"name": folderName, "type": "Actor", color: "#FF0000" });
     }
 
-    let passengers = [];
     let description = `Passenger from ${worldActor.name} to ${destinationActor.name} on the ${shipActor.name}.`;
     for (let p=0; p < quantity; p++) {
         let npcData = {
@@ -844,7 +842,6 @@ export async function tradeEmbarkPassengerHandler(queryData) {
         await generateNpc(npcData);
 
         let npc = await Actor.implementation.create(npcData);
-        passengers.push(npc);
         shipActor.system.crewed.passengers[npc._id] = {
             roles: [ "NONE" ],
             passage: passengerItem.system.world.passage,
