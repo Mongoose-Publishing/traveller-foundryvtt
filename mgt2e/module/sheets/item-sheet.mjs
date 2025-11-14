@@ -519,11 +519,30 @@ export class MgT2ItemSheet extends ItemSheet {
             context.weapons[""] = "";
             if (context.item.parent && context.item.parent.type === "spacecraft") {
                 const spacecraft = context.item.parent;
-                console.log(spacecraft);
                 for (let i of spacecraft.items) {
                     if (i.type === "hardware" && i.system.hardware.system === "weapon") {
-                        console.log(i);
-                        context.weapons[i._id] = i.name;
+                        let wname = "";
+                        if (i.system.hardware.weapons) {
+                            for (let w in i.system.hardware.weapons) {
+                                let wpn = spacecraft.items.get(w);
+                                if (wpn) {
+                                    if (wname) {
+                                        wname = `, ${wpn.name}`;
+                                    } else {
+                                        wname = wpn.name;
+                                    }
+                                    if (i.system.hardware.weapons[w].quantity > 1) {
+                                        wname += ` x${i.system.hardware.weapons[w].quantity}`;
+                                    }
+                                }
+                            }
+                        }
+                        if (wname) {
+                            wname = `${i.name} (${wname})`;
+                        } else {
+                            wname = i.name;
+                        }
+                        context.weapons[i._id] = wname;
                     }
                 }
             }
