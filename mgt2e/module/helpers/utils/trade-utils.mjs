@@ -785,16 +785,36 @@ export async function tradeSellFreightHandler(queryData) {
     let worldActor = await fromUuid(queryData.worldActorId);
     let shipActor = await fromUuid(queryData.shipActorId);
     let freightItem = await fromUuid(queryData.cargoItemId);
-    let price = parseInt(freightItem.system.cargo.price) * parseInt(freightItem.system.quantity);
 
-    shipActor.deleteEmbeddedDocuments("Item", [ freightItem.id ]);
-    shipActor.update({"system.finance.cash": parseInt(shipActor.system.finance.cash) + price});
+    let list = [];
+    let manifestText = "";
+    let totalPrice = 0;
+    let totalQuantity = 0;
+    console.log("Shipping to " + worldActor.uuid);
+    for (let i of shipActor.items) {
+        if (i.type === "cargo" && i.system?.cargo?.freight) {
+            console.log(`${i.name} - ${i.system.cargo.destinationId}`);
+            if (i.system.cargo.destinationId === worldActor.uuid) {
+                let price = parseInt(i.system.cargo.price) * parseInt(i.system.quantity);
+                if (price === NaN) {
+                    continue;
+                }
+                totalPrice += price;
+                totalQuantity += parseInt(i.system.quantity);
+                manifestText += `<li><b>${i.name} ${i.system.quantity}t @ Cr${Tools.prettyNumber(price, 0, false)}</b></li>`;
+                list.push(i.id);
+            }
+        }
+    }
+    shipActor.deleteEmbeddedDocuments("Item", list);
+    shipActor.update({"system.finance.cash": parseInt(shipActor.system.finance.cash) + totalPrice});
 
     // Output sale information to the chat.
     const title = `Freight Delivered`;
     let text = `<p><b>Delivered to:</b> ${worldActor.name}</p>`;
-    text += `<p><b>Quantity:</b> ${Tools.prettyNumber(freightItem.system.quantity, 0)}dt</p>`;
-    text += `<p><b>Total Payment:</b> Cr${Tools.prettyNumber(price, 0)}</p>`;
+    text += `<ul>${manifestText}</ul>`;
+    text += `<p><b>Total Quantity:</b> ${Tools.prettyNumber(totalQuantity, 0)}dt</p>`;
+    text += `<p><b>Total Payment:</b> Cr${Tools.prettyNumber(totalPrice, 0)}</p>`;
     outputTradeChat(shipActor, title, text);
 }
 
