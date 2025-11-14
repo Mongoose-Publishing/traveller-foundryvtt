@@ -57,6 +57,24 @@ Tools.message = function(chatData, message) {
     ChatMessage.create(chatData);
 }
 
+// Not really hexadecimal, so can't use normal maths functions.
+// Skips some letters (I and O) to avoid confusion.
+Tools.toHex = function(value) {
+    if (value === null || value === undefined || parseInt(value) === NaN) {
+        return "?"
+    }
+    let vals = [
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+        "A", "B", "C", "D", "E", "F", "G", "H", "J", "K",
+        "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V",
+        "W", "X", "Y", "Z"
+    ];
+    let n = parseInt(value);
+    if (n < 0 || n >= vals.length) {
+        return "?";
+    }
+    return vals[n];
+}
 
 /**
  * Gets owned actors. Returns a list of selected actors that this user has

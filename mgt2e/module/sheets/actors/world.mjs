@@ -120,7 +120,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         }
 
         context.ATMOSPHERE_SELECT = {};
-        for (let d in CONFIG.MGT2.WORLD.size) {
+        for (let d in CONFIG.MGT2.WORLD.atmosphere) {
             context.ATMOSPHERE_SELECT[d] = game.i18n.localize("MGT2.WorldSheet.Atmosphere.Composition." + d);
         }
 

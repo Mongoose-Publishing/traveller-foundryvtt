@@ -1603,13 +1603,8 @@ Handlebars.registerHelper('itemHasStatus', function(item) {
 });
 
 Handlebars.registerHelper('toHex', function(value) {
-    // Allow going up to H, so not really 'hexadecimal'.
-    if (value === null || value === undefined || parseInt(value) === NaN) {
-        return "?"
-    }
-    return parseInt(value).toString(18).toUpperCase();
+    return Tools.toHex(value);
 });
-
 
 Handlebars.registerHelper('showStatus', function(actor, status) {
     let type = "statusWarn";
