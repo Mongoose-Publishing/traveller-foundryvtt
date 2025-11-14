@@ -2,7 +2,7 @@
   "folder": "ohBlRNMYhRr4ZrUL",
   "name": "Name Bwap Short",
   "_id": "pHG4qetUT5wIuWPF",
-  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
     {
@@ -201,7 +201,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622356355,
-    "modifiedTime": 1762622356355,
+    "modifiedTime": 1763127290056,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "formula": "1d12",

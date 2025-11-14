@@ -2,7 +2,7 @@
   "folder": "neczsv0mlogKhWUG",
   "name": "Name Solomani Male",
   "_id": "xxU56nbFwp6Im4p5",
-  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
     {
@@ -51,7 +51,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622392205,
-    "modifiedTime": 1762622392205,
+    "modifiedTime": 1763127326973,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "formula": "1d4",

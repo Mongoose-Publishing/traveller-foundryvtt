@@ -2,7 +2,7 @@
   "folder": "t85YBjArVegjKBuG",
   "name": "Name Vilani Male",
   "_id": "5owj8oYQocC6lNGa",
-  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
     {
@@ -66,7 +66,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622372585,
-    "modifiedTime": 1762622372585,
+    "modifiedTime": 1763127350116,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "formula": "1d6",

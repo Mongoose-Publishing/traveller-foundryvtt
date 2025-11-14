@@ -2,7 +2,7 @@
   "folder": "ohBlRNMYhRr4ZrUL",
   "name": "Name Bwap",
   "_id": "ZagNC91FcXAUHUPv",
-  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
     {
@@ -36,7 +36,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622356355,
-    "modifiedTime": 1762622356355,
+    "modifiedTime": 1763127280596,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "formula": "1d1",
