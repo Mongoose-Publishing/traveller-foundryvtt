@@ -1,0 +1,22 @@
+{
+  "name": "Other Goods",
+  "sorting": "a",
+  "folder": null,
+  "type": "Item",
+  "_id": "gz0iHsTR2gP8lMHf",
+  "description": "",
+  "sort": 0,
+  "color": "#f1511b",
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.5.4-DEV",
+    "createdTime": 1763316714071,
+    "modifiedTime": 1763316755920,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!gz0iHsTR2gP8lMHf"
+}
