@@ -636,7 +636,6 @@ export async function createSpeculativeGoods(worldActor, illegal) {
     }
     // Now look for the random extras. Roll once per population code.
     let number = tradeFolder.contents.length;
-    console.log("Number of options:" + number);
     for (let r=0; r < worldActor.system.world.uwp.population; r++) {
         let item = null;
         while (item === null) {
@@ -653,6 +652,55 @@ export async function createSpeculativeGoods(worldActor, illegal) {
             }
         }
         await createTradeItem(worldActor, item, true);
+    }
+    // Finally, add some spare parts. This next bit is custom, since the rules don't say
+    // how many spare parts should be available to buy at a starport.
+    let spDm = "1D6";
+    switch (worldActor.system.world.uwp.port) {
+        case 'A':
+            spDm = "8D6";
+            break;
+        case 'B':
+            spDm = "4D6";
+            break;
+        case 'C':
+            spDm = "2D6";
+            break;
+        case 'D':
+            spDm = "2D3";
+            break;
+        case 'E':
+            spDm = "1D3";
+            break;
+        default:
+            return;
+    }
+    let spareRoll = await new Roll(`${spDm}`, null).evaluate();
+    let tonnes = spareRoll.total * parseInt(worldActor.system.world.uwp.population / 3);
+    if (tonnes > 0) {
+        const sparePartsData = {
+            "name": "Spare Parts",
+            "img": "systems/mgt2e/icons/cargo/spare_parts.svg",
+            "type": "cargo",
+            "system": {
+                "quantity": tonnes,
+                "description": "Spare parts for repairing spacecraft",
+                "cost": 100000,
+                "cargo": {
+                    "price": 100000,
+                    "availability": "all",
+                    "purchaseDM": "",
+                    "saleDM": "",
+                    "tons": 1,
+                    "illegal": false,
+                    "sourceId": worldActor.uuid,
+                    "destinationId": null,
+                    "speculative": true,
+                    "salePrice": 50000
+                }
+            }
+        }
+        await Item.create(sparePartsData, {parent: worldActor});
     }
 }
 

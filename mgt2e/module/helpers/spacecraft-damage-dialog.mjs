@@ -1,4 +1,4 @@
-import {hasTrait} from "../helpers/dice-rolls.mjs";
+import {getTraitValue, hasTrait} from "../helpers/dice-rolls.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 
 export class MgT2SpacecraftDamageDialog extends Application {
@@ -21,6 +21,7 @@ export class MgT2SpacecraftDamageDialog extends Application {
         console.log("SpacecraftDamageDialog: " + damage);
 
         console.log(actor);
+        console.log(damageOptions);
 
         this.actor = actor;
         this.damageOptions = damageOptions;
@@ -36,14 +37,26 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.laser = damageOptions.damageType;
         this.armour = this.data.spacecraft.armour ?? 0;
 
-        this.actualDamage = this.damage;
-        if (this.ap < this.armour) {
-            this.actualDamage = this.damage - (this.armour - this.ap);
+        this.armourAsPercentage = false;
+        if (hasTrait(damageOptions.traits, "spinal")) {
+            let spinal = parseInt(getTraitValue(damageOptions.traits, "spinal"));
+            if (spinal > 0) {
+                this.armour = this.armour * spinal;
+            }
+            this.armourAsPercentage = true;
+            this.ap = 0;
+            this.actualDamage = this.damage * this.multiplier;
+            this.actualDamage = Math.floor(this.actualDamage * (1 - this.armour / 100));
+        } else {
+            this.actualDamage = this.damage;
+            if (this.ap < this.armour) {
+                this.actualDamage = this.damage - (this.armour - this.ap);
+            }
+            if (this.actualDamage < 0) {
+                this.actualDamage = 0;
+            }
+            this.actualDamage *= this.multiplier;
         }
-        if (this.actualDamage < 0) {
-            this.actualDamage = 0;
-        }
-        this.actualDamage *= this.multiplier;
 
         this.crits = {};
         this.crits.effectCrit = false;
@@ -142,7 +155,8 @@ export class MgT2SpacecraftDamageDialog extends Application {
             "shipCriticals": this.shipCriticals,
             "criticalEffectRoll": this.criticalEffectRoll,
             "criticalLabels": this.criticalLabels,
-            "multiplier": this.multiplier
+            "multiplier": this.multiplier,
+            "armourAsPercentage": this.armourAsPercentage
         }
     }
 
