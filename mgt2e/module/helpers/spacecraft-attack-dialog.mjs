@@ -99,6 +99,11 @@ export class MgT2SpacecraftAttackDialog extends Application {
             "dm": this.dm,
             "ranges": this.ranges,
             "range": this.range,
+            "rollTypes": {
+                "normal": game.i18n.localize("MGT2.TravellerSheet.Normal"),
+                "boon": game.i18n.localize("MGT2.TravellerSheet.Boon"),
+                "bane": game.i18n.localize("MGT2.TravellerSheet.Bane"),
+            },
             "gunnerSkillLabel": this.gunner.getSkillLabel(this.weaponItem.system.weapon.skill, true)
         }
     }
@@ -117,8 +122,6 @@ export class MgT2SpacecraftAttackDialog extends Application {
     }
 
     onWeaponSelect(event, html) {
-        console.log("SELECTED");
-
         let wpnId = $(event.currentTarget).val();
 
         this.weaponSelected = wpnId;
@@ -128,7 +131,6 @@ export class MgT2SpacecraftAttackDialog extends Application {
 
     async onRollClick(event, html) {
         event.preventDefault();
-        console.log("onRollClick:");
 
         let dm = parseInt(html.find("input[class='skillDialogDM']")[0].value);
         let rollType = html.find(".skillDialogRollType")[0].value;
@@ -151,7 +153,6 @@ export class MgT2SpacecraftAttackDialog extends Application {
             options.quantity = weapons[this.weaponItem.id].quantity;
         }
         if (this.weaponItem.hasTrait("missile")) {
-            console.log("MISSILES LAUNCHED!");
             launchMissiles(this.starship, this.weaponItem, options);
         } else {
             rollSpaceAttack(this.starship, this.gunner, this.weaponItem, options);

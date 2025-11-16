@@ -10,17 +10,16 @@
         </p>
     </div>
 
-    <div class="shadow">
+    <div class="shadow grid grid-2col">
         <div>
-            <label>Weapon</label>
+            <label>Weapon</label><br/>
             <select class="attackDialogWeapon" name="weaponSelected">
                 {{selectOptions weaponSelect selected=weaponSelected}}
             </select>
         </div>
 
         <div>
-            <label>Range</label>
-
+            <label>Range</label><br/>
             <select class="attackDialogRange" name="range">
                 {{selectOptions ranges selected=range}}
             </select>
@@ -32,11 +31,7 @@
         <div class="boon-selection">
             <label for="dicetype" class="skillDialogLabel">Roll Type</label>
             <select class="skillDialogRollType" name="dicetype">
-                {{#select "normal"}}
-                    <option value="normal">Normal</option>
-                    <option value="boon">Boon</option>
-                    <option value="bane">Bane</option>
-                {{/select}}
+                {{selectOptions rollTypes selected="normal"}}
             </select>
         </div>
 
