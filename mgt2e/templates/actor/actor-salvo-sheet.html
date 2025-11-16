@@ -1,6 +1,9 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
     <h1>TARGET: {{targetName}}</h1>
     <div class="salvo shadow grid grid-5col">
+        <div>
+            {{shipActor.name}}
+        </div>
         <div class="resource flex-group-center">
             <label class="field-label">Salvo Size</label>
             <input class="field-value" type="text" name="system.size.value"
@@ -18,8 +21,8 @@
         </div>
         <div class="resource flex-group-center">
             <label class="field-label">Damage</label>
-            <input class="field-value" type="text" name="system.damage"
-                   value="{{system.damage}}"/>
+            <input class="field-value" type="text" name="damage"
+                   value="{{damage}}"/>
         </div>
     </div>
 </form>

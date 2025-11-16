@@ -586,14 +586,12 @@ export async function launchMissiles(shipActor, weaponItem, options) {
         system: {
             source: {
                 id: shipActor.uuid,
-                name: shipActor.name,
-                img: shipActor.img,
+                weaponId: weaponItem.uuid
             },
             size: {
                 max: salvoSize,
                 value: salvoSize,
             },
-            damage: "2D6",
             endurance: {
                 max: 10,
                 value: 10

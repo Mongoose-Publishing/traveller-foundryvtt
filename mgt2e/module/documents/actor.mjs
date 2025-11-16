@@ -97,7 +97,7 @@ export class MgT2Actor extends Actor {
                 damage = Tools.applyDamageToCha(damage, this.system, "DEX");
             }
             return this.update({"system.damage": this.system.damage});
-        } else {
+        } else if (this.system.hits) {
             let hits = this.system.hits;
             if (isDelta) {
                 hits.damage -= parseInt(value);
@@ -120,7 +120,6 @@ export class MgT2Actor extends Actor {
      */
     prepareDerivedData() {
         const actorData = this;
-        const flags = actorData.flags.traveller || {};
 
         // Make separate methods for each Actor type (traveller, npc, etc.) to keep
         // things organized.

@@ -265,8 +265,8 @@
       },
       "thrust": 0,
       "distance": 10,
-      "damage": "2D6",
       "source": {
+        "weaponId": null,
         "id": null,
         "img": null
       }

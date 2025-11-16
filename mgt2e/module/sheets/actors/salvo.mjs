@@ -28,11 +28,18 @@ export class MgT2SalvoActorSheet extends MgT2ActorSheet {
         // Do thing.
     }
 
-    getData() {
-        const context = super.getData();
+    async getData() {
+        const context = await super.getData();
         console.log("SALVO getData");
 
         context.targetName = "THE ENEMY";
+        console.log(this.actor);
+
+        let shipActor = await fromUuid(this.actor.system.source.id);
+        let weaponItem = await fromUuid(this.actor.system.source.weaponId);
+
+        context.shipActor = shipActor;
+        context.weaponItem = weaponItem;
 
         return context;
     }
