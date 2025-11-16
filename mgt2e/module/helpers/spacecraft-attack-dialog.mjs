@@ -116,6 +116,13 @@ export class MgT2SpacecraftAttackDialog extends Application {
                 "dm": dm
             })
         }
+        this.TARGETS.sort((a, b) => {
+            if (a.distance !== b.distance) {
+                return a.distance - b.distance;
+            } else {
+                return a.name.localeCompare(b.name);
+            }
+        });
     }
 
     setRanges(html) {
