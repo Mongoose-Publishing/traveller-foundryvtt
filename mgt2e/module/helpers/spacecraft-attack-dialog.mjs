@@ -1,6 +1,7 @@
 import {rollSpaceAttack, hasTrait, getTraitValue} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
 import {launchMissiles} from "./spacecraft/spacecraft-utils.mjs";
+import {MGT2} from "./config.mjs";
 
 export class MgT2SpacecraftAttackDialog extends Application {
     static get defaultOptions() {
@@ -63,6 +64,58 @@ export class MgT2SpacecraftAttackDialog extends Application {
                 break;
             }
         }
+
+        this.calculateTargets();
+    }
+
+    calculateTargets() {
+        const user = game.users.current;
+        const selected = canvas.tokens.controlled;
+        const targets = user.targets;
+
+        if (selected.length !== 1) {
+            // Must have exactly one token selected.
+            return;
+        }
+        if (targets.length < 1) {
+            // We must have some selected targets.
+            return;
+        }
+        this.TARGETS = [];
+
+        this.attackerName = selected[0].name;
+        const X = parseInt(selected[0].center.x);
+        const Y = parseInt(selected[0].center.y);
+
+        for (let token of targets) {
+            let x = parseInt(token.center.x);
+            let y = parseInt(token.center.y);
+            const dx = Math.abs(X - x);
+            const dy = Math.abs(Y - y);
+            let d = Math.sqrt(dx * dx + dy * dy);
+            let km =  parseInt((d / canvas.grid.size) * canvas.grid.distance);
+
+            let range = null;
+            let dm = 0;
+            for (let r in MGT2.SPACE_RANGES) {
+                console.log(r);
+                let rangeData = MGT2.SPACE_RANGES[r];
+                if (km < rangeData.distance) {
+                    range = r;
+                    dm = rangeData.dm;
+                    break;
+                }
+            }
+
+            this.TARGETS.push({
+                "name": token.name,
+                "distance": km,
+                "uuid": token.uuid,
+                "range": range,
+                "rangeName": game.i18n.localize("MGT2.Spacecraft.Range."+range),
+                "dm": dm
+            })
+        }
     }
 
     setRanges(html) {
@@ -104,7 +157,8 @@ export class MgT2SpacecraftAttackDialog extends Application {
                 "boon": game.i18n.localize("MGT2.TravellerSheet.Boon"),
                 "bane": game.i18n.localize("MGT2.TravellerSheet.Bane"),
             },
-            "gunnerSkillLabel": this.gunner.getSkillLabel(this.weaponItem.system.weapon.skill, true)
+            "gunnerSkillLabel": this.gunner.getSkillLabel(this.weaponItem.system.weapon.skill, true),
+            "TARGETS": this.TARGETS
         }
     }
 

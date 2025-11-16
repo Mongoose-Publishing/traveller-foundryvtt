@@ -156,26 +156,17 @@ export class MgT2AttackDialog extends Application {
         this.attackerName = selected[0].name;
         const X = parseInt(selected[0].center.x);
         const Y = parseInt(selected[0].center.y);
-        console.log("Me: " + X + ", " + Y);
 
         for (let token of targets) {
             let x = parseInt(token.center.x);
             let y = parseInt(token.center.y);
-            let d = 0;
             const dx = Math.abs(X - x);
             const dy = Math.abs(Y - y);
 
-            if (true) {
-                // True euclidean distance.
-                d = Math.sqrt(dx * dx + dy * dy);
-            } else {
-                const diagonal = Math.min( dx, dy);
-                const straight = Math.abs(dx - dy);
-                d = diagonal + straight;
-            }
+            // True euclidean distance.
+            let d = Math.sqrt(dx * dx + dy * dy);
             let metres = (d / canvas.grid.size) * canvas.grid.distance;
             metres = parseFloat(metres.toFixed(1));
-            console.log(token.name + " " + metres + "m");
 
             this.TARGETS.push({ "name": token.name, "distance": metres});
             this.TARGETS.sort((a, b) => {

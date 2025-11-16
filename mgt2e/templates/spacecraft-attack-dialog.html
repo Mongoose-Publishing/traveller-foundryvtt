@@ -10,6 +10,18 @@
         </p>
     </div>
 
+    {{#if TARGETS}}
+        <div class="shadow">
+            <h4>Targets</h4>
+
+            <ul class="targets">
+                {{#each TARGETS as |target|}}
+                    <li>[{{target.rangeName}}] {{prettyNumber target.distance 0 false}}km - {{target.name}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+
     <div class="shadow grid grid-2col">
         <div>
             <label>Weapon</label><br/>
@@ -24,7 +36,6 @@
                 {{selectOptions ranges selected=range}}
             </select>
         </div>
-
     </div>
 
     <div class="shadow grid grid-2col">

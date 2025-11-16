@@ -840,6 +840,18 @@
   "MGT2.Spacecraft.Hull.breakawayHulls": "Breakaway Hulls",
   "MGT2.Spacecraft.Hull.solarCoating": "Solar Coating",
 
+  "MGT2.Spacecraft.Range.adjacent": "Adjacent",
+  "MGT2.Spacecraft.Range.close": "Close",
+  "MGT2.Spacecraft.Range.short": "Short",
+  "MGT2.Spacecraft.Range.medium": "Medium",
+  "MGT2.Spacecraft.Range.long": "Long",
+  "MGT2.Spacecraft.Range.verylong": "Very Long",
+  "MGT2.Spacecraft.Range.distant": "Distant",
+  "MGT2.Spacecraft.Range.verydistant": "Very Distant",
+  "MGT2.Spacecraft.Range.far": "Far",
+  "MGT2.Spacecraft.Range.null": "Out of range",
+
+
   "MGT2.Trade.Ag": "Agricultural",
   "MGT2.Trade.As": "Asteroid",
   "MGT2.Trade.Ba": "Barren",
