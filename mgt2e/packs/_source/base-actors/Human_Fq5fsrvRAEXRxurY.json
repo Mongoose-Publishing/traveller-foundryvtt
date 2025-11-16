@@ -53,6 +53,10 @@
         "auto": 0,
         "effect": 0,
         "dm": 0
+      },
+      "armour": {
+        "custom": 0,
+        "effect": 0
       }
     },
     "hits": {
@@ -70,6 +74,7 @@
       "lockCharacteristics": false,
       "lockSkills": false,
       "autoAge": false,
+      "autoHits": true,
       "useCustomDice": true
     },
     "characteristics": {
@@ -996,7 +1001,8 @@
       "homeworld": ""
     },
     "cash": 0,
-    "maxSkills": null
+    "maxSkills": null,
+    "totalSkills": null
   },
   "prototypeToken": {
     "name": "Human",
@@ -1200,10 +1206,10 @@
   },
   "_stats": {
     "systemId": "mgt2e",
-    "systemVersion": "0.9.0",
-    "coreVersion": "12.329",
+    "systemVersion": "0.15.5.4-DEV",
+    "coreVersion": "12.331",
     "createdTime": 1721479602768,
-    "modifiedTime": 1721508335146,
+    "modifiedTime": 1763144967105,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "compendiumSource": null,
     "duplicateSource": null

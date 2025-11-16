@@ -1,5 +1,5 @@
 {
-  "folder": "nTFQBn7eKDifeKFR",
+  "folder": "gz0iHsTR2gP8lMHf",
   "name": "Spare Parts",
   "type": "cargo",
   "_id": "xeK8FQNfbi6Qpapz",
@@ -18,7 +18,7 @@
     "cost": 1000
   },
   "effects": [],
-  "sort": 0,
+  "sort": 100000,
   "ownership": {
     "default": 0,
     "mhUjqDVicnwIUaiq": 3
@@ -31,7 +31,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.12.0.0",
     "createdTime": 1745143681314,
-    "modifiedTime": 1745144385329,
+    "modifiedTime": 1763316730185,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_key": "!items!xeK8FQNfbi6Qpapz"
