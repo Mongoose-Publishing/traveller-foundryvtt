@@ -290,6 +290,11 @@ export class MgT2ActorSheet extends ActorSheet {
         let powerUsed = parseInt(actorData.spacecraft.dtons) * 0.2;
         let fuelTotal = 0;
 
+        if (actorData.salvo) {
+            // This is a missile salvo, so we don't need to track anything.
+            return;
+        }
+
         let dtons = parseInt(actorData.spacecraft.dtons);
         let hits = (dtons / 2.5);
         if (dtons >= 100000) {

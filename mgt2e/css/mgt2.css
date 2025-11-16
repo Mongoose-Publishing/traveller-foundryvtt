@@ -2310,3 +2310,26 @@ table.ship-data th {
 li.ship-cargo h4.price-only {
   color: #707070;
 }
+
+div.spacecraft-attacks label {
+  font-weight: bold;
+  font-size: larger;
+  border-bottom: 1px solid black;
+  display: block;
+}
+
+div.spacecraft-attacks .weapon-action-button {
+  display: block;
+  border: 1px solid black;
+  padding: 2px 5px 2px 5px;
+  background-color: #f1511b;
+  color: white;
+  border-radius: 5px;
+  margin-right: 3px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+div.spacecraft-attacks .weapon-action-button:hover {
+  box-shadow: 0 2px 5px #800000;
+}

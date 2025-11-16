@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle", "world" ],
+    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle", "world", "salvo" ],
     "templates": {
       "base": {
         "speed": {
@@ -253,6 +253,23 @@
                 "divisions": { }
             }
         }
+    },
+    "salvo": {
+      "size": {
+        "max": 1,
+        "value": 1
+      },
+      "endurance": {
+        "max": 10,
+        "value": 10
+      },
+      "thrust": 0,
+      "distance": 10,
+      "damage": "2D6",
+      "source": {
+        "id": null,
+        "img": null
+      }
     },
     "world": {
       "description": "",

@@ -8,16 +8,15 @@
         <p>
             {{gunnerSkillLabel}}
         </p>
-
     </div>
 
     <div class="shadow">
-        <img class="attack-actor" src="{{starship.img}}" width="40px"/>
-        <h4>{{starship.name}}</h4>
-
-        <select class="attackDialogWeapon" name="weaponSelected">
-            {{selectOptions weaponSelect selected=weaponSelected}}
-        </select>
+        <div>
+            <label>Weapon</label>
+            <select class="attackDialogWeapon" name="weaponSelected">
+                {{selectOptions weaponSelect selected=weaponSelected}}
+            </select>
+        </div>
 
         <div>
             <label>Range</label>

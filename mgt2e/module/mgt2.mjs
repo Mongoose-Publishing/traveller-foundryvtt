@@ -9,6 +9,7 @@ import { MgT2NPCActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2CreatureActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2WorldActorSheet } from "./sheets/actors/world.mjs";
 import { MgT2VehicleActorSheet } from "./sheets/actors/vehicle.mjs";
+import { MgT2SalvoActorSheet } from "./sheets/actors/salvo.mjs";
 import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 import { MgT2AssociateItemSheet } from "./sheets/items/associate.mjs";
@@ -275,6 +276,7 @@ Hooks.once('init', async function() {
   Actors.registerSheet("mgt2e", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
   Actors.registerSheet("mgt2e", MgT2WorldActorSheet, { label: "World Sheet", types: [ "world"], makeDefault: true });
   Actors.registerSheet("mgt2e", MgT2VehicleActorSheet, { label: "Vehicle Sheet", types: [ "vehicle"], makeDefault: true });
+  Actors.registerSheet("mgt2e", MgT2SalvoActorSheet, { label: "Salvo Sheet", types: [ "salvo"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
   Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
@@ -2164,26 +2166,41 @@ Handlebars.registerHelper('showAttachedWeapons', function(ship, item) {
     return "";
 });
 
-Handlebars.registerHelper('showSpacecraftAttacks', function(roles, item) {
+Handlebars.registerHelper('showSpacecraftAttacks', function(shipActor, roles) {
     let html = "";
 
-    for (let r of roles) {
-        console.log(r);
-        if (r.system.role.actions) {
-            for (let a in r.system.role.actions) {
-                console.log(a);
-                if (r.system.role.actions[a].action === "weapon") {
-                    if (r.system.role.actions[a].weapon === item._id) {
-                        html = "Crewed";
-                        if (item.system.hardware.weapons) {
+    console.log(shipActor);
 
-                        }
-                    }
-                }
+    let weapons = [];
+    for (let item of shipActor.items) {
+        if (item.type === "hardware" && item.system?.hardware?.system === "weapon") {
+            for (let w in item.system.hardware.weapons) {
+                // If we have at least one weapon attached, add it to the list.
+                weapons.push(item);
+                break;
             }
         }
     }
 
+    if (weapons.length === 0) {
+        return "No weapons attached";
+    }
+
+    for (let wpnMount of weapons) {
+        html += `<div class="mount"><label>${wpnMount.name}</label>`;
+
+        for (let wpnId in wpnMount.system.hardware.weapons) {
+            let wpn = shipActor.items.get(wpnId);
+            html += `<span class="weapon-action-button">`;
+            html += `${wpn.name}`;
+            if (wpnMount.system.hardware.weapons[wpnId].quantity > 1) {
+                html += ` x ${wpnMount.system.hardware.weapons[wpnId].quantity}`;
+            }
+            html += `</span>`;
+        }
+
+        html += `</div>`;
+    }
     return html;
 });
 

@@ -1,5 +1,6 @@
 import {rollSpaceAttack, hasTrait, getTraitValue} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
+import {launchMissiles} from "./spacecraft/spacecraft-utils.mjs";
 
 export class MgT2SpacecraftAttackDialog extends Application {
     static get defaultOptions() {
@@ -23,6 +24,8 @@ export class MgT2SpacecraftAttackDialog extends Application {
             return;
         }
 
+        this.options.title = `${starshipActor.name} firing ${weaponMount.name}`;
+
         this.weaponSelect = {};
         this.weaponSelected = null;
         this.weaponItem = null;
@@ -30,8 +33,7 @@ export class MgT2SpacecraftAttackDialog extends Application {
         this.ranges = {};
         this.range = "medium";
 
-        if (this.mount.type === "hardware" && this.mount.system.hardware.system === "weapon") {
-            console.log(this.mount);
+        if (this.mount.type === "hardware" && this.mount?.system?.hardware?.system === "weapon") {
             let weapons = this.mount.system.hardware.weapons;
             // Could have multiple types of weapons. If so, need a select box.
             for (let w in weapons) {
@@ -57,7 +59,7 @@ export class MgT2SpacecraftAttackDialog extends Application {
         }
         for (let r in CONFIG.MGT2.SPACE_RANGES ) {
             this.ranges[r] = game.i18n.localize("MGT2.Item.SpaceRange." + r) + ` (${CONFIG.MGT2.SPACE_RANGES[r].dm})`;
-            if (r === this.weaponItem.system.weapon.spaceRange) {
+            if (r === this.weaponItem?.system?.weapon?.spaceRange) {
                 break;
             }
         }
@@ -148,8 +150,12 @@ export class MgT2SpacecraftAttackDialog extends Application {
         if (weapons[this.weaponItem.id].quantity > 1) {
             options.quantity = weapons[this.weaponItem.id].quantity;
         }
-
-        rollSpaceAttack(this.starship, this.gunner, this.weaponItem, options);
+        if (this.weaponItem.hasTrait("missile")) {
+            console.log("MISSILES LAUNCHED!");
+            launchMissiles(this.starship, this.weaponItem, options);
+        } else {
+            rollSpaceAttack(this.starship, this.gunner, this.weaponItem, options);
+        }
 
         this.close();
     }

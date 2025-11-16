@@ -574,3 +574,56 @@ export async function sellCargoDialog(shipActor, worldActor, item) {
         new MgT2SellCargoApp(shipActor, worldActor, item).render(true);
     }
 }
+
+export async function launchMissiles(shipActor, weaponItem, options) {
+    console.log("Launching missiles " + weaponItem.name);
+
+    let salvoSize = options.quantity ? options.quantity : 1;
+    let data = {
+        name: shipActor.name + " / " + weaponItem.name,
+        type: "salvo",
+        img: weaponItem.img,
+        system: {
+            source: {
+                id: shipActor.uuid,
+                name: shipActor.name,
+                img: shipActor.img,
+            },
+            size: {
+                max: salvoSize,
+                value: salvoSize,
+            },
+            damage: "2D6",
+            endurance: {
+                max: 10,
+                value: 10
+            },
+            thrust: 10
+        },
+        prototypeToken: {
+            actorLink: true,
+            height: 0.5,
+            width: 0.5,
+            sight: {
+                enabled: false
+            },
+            bar1: {
+                attribute: "salvo.size"
+            },
+            bar2: {
+                attribute: "salvo.endurance"
+            }
+        }
+    }
+    let salvo = await Actor.implementation.create(data);
+    let trackingData = shipActor.system.spacecraft.tracking;
+    if (!trackingData) {
+        trackingData = {
+            outgoing: {},
+            incoming: {}
+        }
+    }
+    trackingData.outgoing[salvo.uuid] = {};
+
+    await shipActor.update({"system.spacecraft.tracking": trackingData });
+}
