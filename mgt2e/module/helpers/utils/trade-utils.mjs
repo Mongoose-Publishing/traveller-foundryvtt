@@ -655,34 +655,28 @@ export async function createSpeculativeGoods(worldActor, illegal) {
     }
     // Finally, add some spare parts. This next bit is custom, since the rules don't say
     // how many spare parts should be available to buy at a starport.
-    let spDm = -8;
+    let spDm = "1D6";
     switch (worldActor.system.world.uwp.port) {
         case 'A':
-            spDm = 4;
+            spDm = "8D6";
             break;
         case 'B':
-            spDm = 2;
+            spDm = "4D6";
             break;
         case 'C':
-            spDm = 0;
+            spDm = "2D6";
             break;
         case 'D':
-            spDm = -2;
+            spDm = "2D3";
             break;
         case 'E':
-            spDm = -5;
+            spDm = "1D3";
             break;
+        default:
+            return;
     }
-    if (parseInt(worldActor.system.world.uwp.techLevel < 8)) {
-        spDm -= 2;
-    } else if (parseInt(worldActor.system.world.uwp.techLevel > 11)) {
-        spDm += 2;
-    }
-    if (parseInt(worldActor.system.world.uwp.population < 5)) {
-        spDm -= 2;
-    }
-    let spareRoll = await new Roll(`2D6 + ${spDm}`, null).evaluate();
-    let tonnes = spareRoll.total * worldActor.system.world.uwp.population;
+    let spareRoll = await new Roll(`${spDm}`, null).evaluate();
+    let tonnes = spareRoll.total * parseInt(worldActor.system.world.uwp.population / 3);
     if (tonnes > 0) {
         const sparePartsData = {
             "name": "Spare Parts",
