@@ -888,7 +888,7 @@ MGT2.WEAPONS = {
     "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting", "meson", "nuclear" ],
     "traits": {
         "artillery": { "scale": "traveller" },
-        "ap": {  "value": 1, "min": 1, "max": 999, "conflict": [ "loPen" ] },
+        "ap": {  "value": 1, "min": 1, "max": 999, "conflict": [ "loPen", "spinal" ] },
         "auto": {  "value": 2, "min": 2, "max": 99, "conflict": [ "oneUse" ] },
         "blast": { "scale": "traveller", "value": 1, "min": 1, "max": 10000 },
         "bulky": { "scale": "traveller", "conflict": [ "veryBulky" ] },
@@ -913,7 +913,7 @@ MGT2.WEAPONS = {
         "silent": { "scale": "traveller" },
         "smart": { },
         "smasher": { "scale": "traveller" },
-        "spinal": { "scale": "spacecraft", "value": 2, "min": 1, "max": 5 },
+        "spinal": { "scale": "spacecraft", "value": 3, "min": 1, "max": 5, "conflict": [ "ap"] },
         "stun": { "scale": "traveller" },
         "veryBulky": { "scale": "traveller", "conflict": [ "bulky" ] },
         "veryDangerous": { "scale": "traveller", "conflict": [ "dangerous" ] },

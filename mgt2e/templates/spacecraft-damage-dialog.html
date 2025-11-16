@@ -21,7 +21,10 @@
             <input class="baseAP" type="text" name="ap" value="{{ap}}" data-dtype="Number"/>
         </div>
         <div class="resource flex-group-center">
-            <label for="armour" class="resource-label">ARMOUR</label>
+            <label for="armour" class="resource-label">
+                ARMOUR
+                {{#if armourAsPercentage}} %{{/if}}
+            </label>
             <input type="text" name="armour" value="{{armour}}" data-dtype="Number"/>
         </div>
         <div class="resource flex-group-center">
