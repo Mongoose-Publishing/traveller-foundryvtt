@@ -66,9 +66,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="51.428571"
-     inkscape:cy="271.42857"
+     inkscape:zoom="2.8"
+     inkscape:cx="104.64286"
+     inkscape:cy="248.21429"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -76,7 +76,7 @@
      inkscape:window-width="2560"
      inkscape:window-height="1343"
      inkscape:window-x="1200"
-     inkscape:window-y="381"
+     inkscape:window-y="160"
      inkscape:window-maximized="1"
      inkscape:snap-grids="true"
      units="px"
@@ -133,42 +133,55 @@
      id="layer1"
      style="display:inline">
     <g
-       id="g446"
-       transform="matrix(0.53664085,0,0,0.53664085,92.45669,38.745805)">
-      <path
-         style="fill:#ffff00;stroke:#ff0000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
-         d="m -39.203867,113.19789 9.558032,5.01313 -5.249405,-6.97199 9.558023,5.01312 -6.894669,-8.30366 6.267489,2.34976 -5.249406,-6.97198"
-         id="path4575" />
-      <path
-         style="fill:#999999;stroke:#cccccc;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
-         d="m -80.433331,82.549997 -7.835448,-17.234497 18.488867,4.072338 39.486481,31.960252 -10.653418,13.16216 z"
-         id="path4573" />
-    </g>
-    <g
        id="g446-3"
-       transform="matrix(0.53664085,0,0,0.53664085,85.497143,10.733631)"
+       transform="matrix(0.32962055,0.42347809,-0.42347809,0.32962055,124.81456,42.478624)"
        style="display:inline">
-      <path
-         style="fill:#ffff00;stroke:#ff0000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
-         d="m -39.203867,113.19789 9.558032,5.01313 -5.249405,-6.97199 9.558023,5.01312 -6.894669,-8.30366 6.267489,2.34976 -5.249406,-6.97198"
-         id="path4575-6" />
-      <path
-         style="fill:#999999;stroke:#cccccc;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
-         d="m -80.433331,82.549997 -7.835448,-17.234497 18.488867,4.072338 39.486481,31.960252 -10.653418,13.16216 z"
-         id="path4573-7" />
+      <g
+         id="g510">
+        <path
+           style="fill:#ffff00;stroke:#ff0000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
+           d="m -38.779287,112.65241 9.558032,5.01313 -5.249405,-6.97199 9.558023,5.01312 -6.894669,-8.30366 6.267489,2.34976 -5.249406,-6.97198"
+           id="path4575-6" />
+        <path
+           style="fill:#999999;stroke:#cccccc;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
+           d="m -79.730819,82.728347 -7.604793,-15.915887 17.295585,3.465698 40.463114,31.495082 -9.690792,12.45019 z"
+           id="path4573-7"
+           sodipodi:nodetypes="cccccc" />
+      </g>
     </g>
     <g
-       id="g446-5"
-       transform="matrix(0.53664085,0,0,0.53664085,122.11342,15.680317)"
+       id="g446-3-3"
+       transform="matrix(0.32962055,0.42347809,-0.42347809,0.32962055,103.64789,74.228623)"
        style="display:inline">
-      <path
-         style="fill:#ffff00;stroke:#ff0000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
-         d="m -39.203867,113.19789 9.558032,5.01313 -5.249405,-6.97199 9.558023,5.01312 -6.894669,-8.30366 6.267489,2.34976 -5.249406,-6.97198"
-         id="path4575-3" />
-      <path
-         style="fill:#999999;stroke:#cccccc;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
-         d="m -80.433331,82.549997 -7.835448,-17.234497 18.488867,4.072338 39.486481,31.960252 -10.653418,13.16216 z"
-         id="path4573-5" />
+      <g
+         id="g510-6">
+        <path
+           style="fill:#ffff00;stroke:#ff0000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
+           d="m -38.779287,112.65241 9.558032,5.01313 -5.249405,-6.97199 9.558023,5.01312 -6.894669,-8.30366 6.267489,2.34976 -5.249406,-6.97198"
+           id="path4575-6-7" />
+        <path
+           style="fill:#999999;stroke:#cccccc;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
+           d="m -79.730819,82.728347 -7.604793,-15.915887 17.295585,3.465698 40.463114,31.495082 -9.690792,12.45019 z"
+           id="path4573-7-5"
+           sodipodi:nodetypes="cccccc" />
+      </g>
+    </g>
+    <g
+       id="g446-3-35"
+       transform="matrix(0.32962055,0.42347809,-0.42347809,0.32962055,145.98122,63.64529)"
+       style="display:inline">
+      <g
+         id="g510-62">
+        <path
+           style="fill:#ffff00;stroke:#ff0000;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
+           d="m -38.779287,112.65241 9.558032,5.01313 -5.249405,-6.97199 9.558023,5.01312 -6.894669,-8.30366 6.267489,2.34976 -5.249406,-6.97198"
+           id="path4575-6-9" />
+        <path
+           style="fill:#999999;stroke:#cccccc;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:49.5999;paint-order:markers fill stroke;stop-color:#000000"
+           d="m -79.730819,82.728347 -7.604793,-15.915887 17.295585,3.465698 40.463114,31.495082 -9.690792,12.45019 z"
+           id="path4573-7-1"
+           sodipodi:nodetypes="cccccc" />
+      </g>
     </g>
   </g>
   <g
