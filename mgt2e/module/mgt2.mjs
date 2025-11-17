@@ -9,7 +9,7 @@ import { MgT2NPCActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2CreatureActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2WorldActorSheet } from "./sheets/actors/world.mjs";
 import { MgT2VehicleActorSheet } from "./sheets/actors/vehicle.mjs";
-import { MgT2SalvoActorSheet } from "./sheets/actors/salvo.mjs";
+import { MgT2SwarmActorSheet } from "./sheets/actors/swarm.mjs";
 import { MgT2ItemSheet } from "./sheets/item-sheet.mjs";
 import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 import { MgT2AssociateItemSheet } from "./sheets/items/associate.mjs";
@@ -276,7 +276,7 @@ Hooks.once('init', async function() {
   Actors.registerSheet("mgt2e", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
   Actors.registerSheet("mgt2e", MgT2WorldActorSheet, { label: "World Sheet", types: [ "world"], makeDefault: true });
   Actors.registerSheet("mgt2e", MgT2VehicleActorSheet, { label: "Vehicle Sheet", types: [ "vehicle"], makeDefault: true });
-  Actors.registerSheet("mgt2e", MgT2SalvoActorSheet, { label: "Salvo Sheet", types: [ "salvo"], makeDefault: true });
+  Actors.registerSheet("mgt2e", MgT2SwarmActorSheet, { label: "Swarm Sheet", types: [ "swarm"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
   Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });

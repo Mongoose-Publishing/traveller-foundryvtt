@@ -1,5 +1,4 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
-    <h1>TARGET: {{targetName}}</h1>
     <div class="salvo shadow grid grid-5col">
         <div>
             {{shipActor.name}}
@@ -11,13 +10,13 @@
         </div>
         <div class="resource flex-group-center">
             <label class="field-label">Thrust</label>
-            <input class="field-value" type="text"  name="system.thrust"
+            <input class="field-value" type="text"  name="system.salvo.thrust"
                 value="{{system.thrust}}"/>
         </div>
         <div class="resource flex-group-center">
             <label class="field-label">Endurance</label>
-            <input class="field-value" type="text" name="system.endurance.value"
-                   value="{{system.endurance.value}}"/>
+            <input class="field-value" type="text" name="system.salvo.endurance.value"
+                   value="{{system.salvo.endurance.value}}"/>
         </div>
         <div class="resource flex-group-center">
             <label class="field-label">Damage</label>

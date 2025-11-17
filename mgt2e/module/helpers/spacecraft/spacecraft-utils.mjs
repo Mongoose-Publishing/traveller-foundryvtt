@@ -581,22 +581,23 @@ export async function launchMissiles(shipActor, weaponItem, options) {
     let salvoSize = options.quantity ? options.quantity : 1;
     let data = {
         name: shipActor.name + " / " + weaponItem.name,
-        type: "salvo",
+        type: "swarm",
         img: weaponItem.img,
         system: {
-            source: {
-                id: shipActor.uuid,
-                weaponId: weaponItem.uuid
-            },
+            swarmType: "salvo",
+            sourceId: shipActor.uuid,
             size: {
                 max: salvoSize,
                 value: salvoSize,
             },
-            endurance: {
-                max: 10,
-                value: 10
-            },
-            thrust: 10
+            salvo: {
+                weaponId: weaponItem.uuid,
+                endurance: {
+                    max: 10,
+                    value: 10
+                },
+                thrust: 10
+            }
         },
         prototypeToken: {
             actorLink: true,
@@ -606,7 +607,7 @@ export async function launchMissiles(shipActor, weaponItem, options) {
                 enabled: false
             },
             bar1: {
-                attribute: "salvo.size"
+                attribute: "size"
             },
             bar2: {
                 attribute: "salvo.endurance"

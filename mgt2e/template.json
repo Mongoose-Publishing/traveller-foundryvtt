@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle", "world", "salvo" ],
+    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle", "world", "swarm" ],
     "templates": {
       "base": {
         "speed": {
@@ -254,21 +254,12 @@
             }
         }
     },
-    "salvo": {
+    "swarm": {
+      "swarmType": "salvo",
+      "sourceId": null,
       "size": {
         "max": 1,
         "value": 1
-      },
-      "endurance": {
-        "max": 10,
-        "value": 10
-      },
-      "thrust": 0,
-      "distance": 10,
-      "source": {
-        "weaponId": null,
-        "id": null,
-        "img": null
       }
     },
     "world": {
