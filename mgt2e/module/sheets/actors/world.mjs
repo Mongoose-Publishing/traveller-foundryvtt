@@ -250,6 +250,27 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             }
             this.actor.update({"system.world.uwp.bases": this.actor.system.world.uwp.bases});
         });
+        html.find('.faction-add').click(ev => {
+           // Add faction
+            console.log("Click faction");
+            this._createFaction();
+        });
+    }
+
+    async _createFaction() {
+        console.log("_createFaction:");
+        let itemData = {
+            name: "Faction",
+            type: "worlddata",
+            system: {
+                world: {
+                    datatype: "faction",
+                    government: 7,
+                    strength: "minor"
+                }
+            }
+        };
+        Item.create(itemData, { parent: this.actor });
     }
 
     async _onDrop(event) {
