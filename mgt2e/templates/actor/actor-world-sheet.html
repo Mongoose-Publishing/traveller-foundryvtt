@@ -203,7 +203,7 @@
                                         {{localize (concat 'MGT2.WorldSheet.Faction.Strength.' faction.system.world.strength)}}
                                     </div>
                                     {{#if faction.system.description}}
-                                        <span>{{{faction.system.description}}}</span>
+                                        <span>{{{lookup ../factionText faction._id}}}</span>
                                     {{/if}}
                                     {{#if ../isEditable}}
                                         <div class="item-controls">
@@ -230,8 +230,8 @@
                                 <div>
                                     {{patron.system.world.species}} / {{patron.system.world.profession}}
                                 </div>
-                                {{#if faction.system.description}}
-                                <span>{{{faction.system.description}}}</span>
+                                {{#if patron.system.description}}
+                                    <span>{{{lookup ../patronText patron._id}}}</span>
                                 {{/if}}
                                 {{#if ../isEditable}}
                                     <div class="item-controls">

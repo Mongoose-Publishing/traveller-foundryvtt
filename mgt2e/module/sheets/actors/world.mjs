@@ -39,6 +39,10 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         context.factions = [];
         context.patrons = [];
         context.localGoods = [];
+        // Faction and Patron text may include secrets, so we need to pre-process depending
+        // on whether we hide the secret blocks or not from the description.
+        context.patronText = {};
+        context.factionText = {};
 
         let destinationWorlds = {};
         for (let i of context.items) {
@@ -65,9 +69,19 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             } else if (i.type === "worlddata") {
                 if (i.system?.world?.datatype === "faction") {
                     context.factions.push(i);
+                    context.factionText[i._id] = await TextEditor.enrichHTML(
+                        i.system.description, {
+                            secrets: context.isEditable
+                        }
+                    );
                 } else if (i.system?.world?.datatype === "patron") {
                     if (!i.system.world.hidden || context.actor.permission > 2) {
                         context.patrons.push(i);
+                        context.patronText[i._id] = await TextEditor.enrichHTML(
+                            i.system.description, {
+                                secrets: context.isEditable
+                            }
+                        );
                     }
                 } else if (i.system?.world?.datatype === "passenger") {
                     let dest = await this.getDestination(context.actor, destinationWorlds, i.system.world.destinationId);
@@ -96,6 +110,8 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
         if (context.actor.permission > 2) {
             context.isEditable = true;
+        } else {
+            context.isEditable = false;
         }
 
         context.enrichedDescription = await TextEditor.enrichHTML(
