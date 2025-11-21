@@ -8,6 +8,17 @@
 * On Foundry v13, active effects may need to have the 'Apply Effect' option toggled off and on before
   they take effect.
 
+# Develop
+
+* Expanded some of the options for world codes.
+* Changed selling of freight to sell all freight to a world in one action.
+* Weapon mounts now display attached weapon names in crew role drop down.
+* Added spare parts to the list of speculative trade items.
+* Added macros to automatically resize world and ship tokens depending on scale
+  of scene.
+* Improved support for world factions.
+* Added basic support for world patrons.
+
 # 0.15.5 (Beta)
 
 * Refactoring of the drop handler for cargo and worlds. Now works a lot better, and
