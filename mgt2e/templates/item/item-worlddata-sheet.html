@@ -12,17 +12,38 @@
         <section class="shadow">
             <div class="flex-group-left">
                 {{#if (ifEquals item.system.world.datatype "faction")}}
-                    <div class="shadow grid grid-4col">
+                    <div class="shadow grid grid-2col">
                         <div>
-                            {{governmentLabel}}
+                            <select name="system.world.government">
+                                {{selectOptions GOVERNMENT_SELECT selected=system.world.government}}
+                            </select>
                         </div>
                         <div>
-                            {{factionStrength}}
+                            <select name="system.world.strength">
+                                {{selectOptions FACTION_STRENGTH_SELECT selected=system.world.strength}}
+                            </select>
                         </div>
                     </div>
                 {{else if (ifEquals item.system.world.datatype "passenger")}}
                     <div class="shadow">
                         {{passage}}
+                    </div>
+                {{else if (ifEquals item.system.world.datatype "patron")}}
+                    <div class="shadow">
+                        <div class="shadow grid grid-3col">
+                            <div>
+                                <label>Species</label><br/>
+                                <input class="" name="system.world.species" type="text" value="{{system.world.species}}" placeholder="Species"/>
+                            </div>
+                            <div class="grid-span-2">
+                                <label>Profession</label><br/>
+                                <input class="" name="system.world.profession" type="text" value="{{system.world.profession}}" placeholder="Profession"/>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="system.world.hidden" {{checked system.world.hidden}} data-dtype="Boolean" />
+                                <label for="system.world.hidden" class="resource-label">Hidden to players</label>
+                            </div>
+                        </div>
                     </div>
                 {{else if (ifEquals item.system.world.datatype "star")}}
                     <div class="shadow">

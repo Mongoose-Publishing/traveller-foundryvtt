@@ -37,6 +37,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
     async _prepareItems(context) {
         context.cargo = [];
         context.factions = [];
+        context.patrons = [];
         context.localGoods = [];
 
         let destinationWorlds = {};
@@ -64,6 +65,10 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             } else if (i.type === "worlddata") {
                 if (i.system?.world?.datatype === "faction") {
                     context.factions.push(i);
+                } else if (i.system?.world?.datatype === "patron") {
+                    if (!i.system.world.hidden || context.actor.permission > 2) {
+                        context.patrons.push(i);
+                    }
                 } else if (i.system?.world?.datatype === "passenger") {
                     let dest = await this.getDestination(context.actor, destinationWorlds, i.system.world.destinationId);
                     dest.passengers.push(i);
@@ -252,8 +257,11 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         });
         html.find('.faction-add').click(ev => {
            // Add faction
-            console.log("Click faction");
             this._createFaction();
+        });
+        html.find('.patron-add').click(ev => {
+            // Add Patron
+            this._createPatron();
         });
     }
 
@@ -267,6 +275,23 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                     datatype: "faction",
                     government: 7,
                     strength: "minor"
+                }
+            }
+        };
+        Item.create(itemData, { parent: this.actor });
+    }
+
+    async _createPatron() {
+        console.log("_createPatron:");
+        let itemData = {
+            name: "Patron",
+            type: "worlddata",
+            system: {
+                world: {
+                    datatype: "patron",
+                    hidden: true,
+                    species: "Human",
+                    profession: "Patron"
                 }
             }
         };
