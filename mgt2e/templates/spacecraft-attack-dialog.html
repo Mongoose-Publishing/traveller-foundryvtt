@@ -15,9 +15,9 @@
             <h4>Targets</h4>
 
             <ul class="targets">
-                {{#each TARGETS as |target|}}
-                    <li>[{{target.rangeName}}] {{prettyNumber target.distance 0 false}}km - {{target.name}}</li>
-                {{/each}}
+                <select class="attackDialogTargets" name="target">
+                    {{selectOptions TARGET_LIST}}
+                </select>
             </ul>
         </div>
     {{/if}}
@@ -50,7 +50,6 @@
             <label for="dm" class="skillDialogLabel">DM</label>
             <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
         </div>
-
     </div>
 
     <footer class="sheet-footer flexrow">

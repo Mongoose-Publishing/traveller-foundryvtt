@@ -2,6 +2,7 @@ import {rollSpaceAttack, hasTrait, getTraitValue} from "../helpers/dice-rolls.mj
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
 import {launchMissiles} from "./spacecraft/spacecraft-utils.mjs";
 import {MGT2} from "./config.mjs";
+import {Tools} from "./chat/tools.mjs";
 
 export class MgT2SpacecraftAttackDialog extends Application {
     static get defaultOptions() {
@@ -38,7 +39,6 @@ export class MgT2SpacecraftAttackDialog extends Application {
             let weapons = this.mount.system.hardware.weapons;
             // Could have multiple types of weapons. If so, need a select box.
             for (let w in weapons) {
-                console.log(`Weapon id in mount: ${w}`);
                 let wpnItem = this.starship.items.get(w);
                 if (!wpnItem) {
                     ui.notifications.error(`Weapon item [${w}] does not exist`);
@@ -54,7 +54,6 @@ export class MgT2SpacecraftAttackDialog extends Application {
                     this.weaponSelect[w] = wpnItem.name;
                 }
             }
-            console.log(this.weaponSelect);
         } else {
             return;
         }
@@ -66,6 +65,28 @@ export class MgT2SpacecraftAttackDialog extends Application {
         }
 
         this.calculateTargets();
+    }
+
+    calculateSizeDm(mountType, dtons) {
+        // Initial 'to hit' DM is based on target size.
+        let dm = Math.min(6, parseInt(dtons/ 1000));
+
+        if (mountType.startsWith("bay.")) {
+            if (dtons <= 100) {
+                dm -= 4;
+            } else if (dtons <= 2000) {
+                dm -= 2;
+            }
+        } else if (mountType === "spinal") {
+            if (dtons <= 2000) {
+                dm = -99;
+            } else if (dtons <= 5000) {
+                dm -= 8;
+            } else if (dtons <= 10000) {
+                dm -= 4;
+            }
+        }
+        return dm;
     }
 
     calculateTargets() {
@@ -83,11 +104,17 @@ export class MgT2SpacecraftAttackDialog extends Application {
         }
         this.TARGETS = [];
 
+        let mountType = this.mount.system.hardware.mount;
+
         this.attackerName = selected[0].name;
         const X = parseInt(selected[0].center.x);
         const Y = parseInt(selected[0].center.y);
 
         for (let token of targets) {
+            if (token.actor?.type !== "spacecraft") {
+                continue;
+            }
+
             let x = parseInt(token.center.x);
             let y = parseInt(token.center.y);
             const dx = Math.abs(X - x);
@@ -96,9 +123,8 @@ export class MgT2SpacecraftAttackDialog extends Application {
             let km =  parseInt((d / canvas.grid.size) * canvas.grid.distance);
 
             let range = null;
-            let dm = 0;
+            let dm = -99;
             for (let r in MGT2.SPACE_RANGES) {
-                console.log(r);
                 let rangeData = MGT2.SPACE_RANGES[r];
                 if (km < rangeData.distance) {
                     range = r;
@@ -106,15 +132,18 @@ export class MgT2SpacecraftAttackDialog extends Application {
                     break;
                 }
             }
-
-            this.TARGETS.push({
-                "name": token.name,
-                "distance": km,
-                "uuid": token.uuid,
-                "range": range,
-                "rangeName": game.i18n.localize("MGT2.Spacecraft.Range."+range),
-                "dm": dm
-            })
+            let dtons = token.actor?.system?.spacecraft?.dtons;
+            dm += this.calculateSizeDm(mountType, dtons);
+            if (dm > -50) {
+                this.TARGETS.push({
+                    "name": token.name,
+                    "distance": km,
+                    "id": token.id,
+                    "range": range,
+                    "rangeName": game.i18n.localize("MGT2.Spacecraft.Range." + range),
+                    "dm": dm
+                })
+            }
         }
         this.TARGETS.sort((a, b) => {
             if (a.distance !== b.distance) {
@@ -123,6 +152,15 @@ export class MgT2SpacecraftAttackDialog extends Application {
                 return a.name.localeCompare(b.name);
             }
         });
+        this.TARGET_LIST={};
+        for (let t in this.TARGETS) {
+            let target = this.TARGETS[t];
+            let dm = target.dm;
+            if (dm >= 0) {
+                dm = "+" + dm;
+            }
+            this.TARGET_LIST[target.id] = `${Tools.prettyNumber(target.distance, 0, false)}km (${target.rangeName}) ${target.name} [DM${dm}]`;
+        }
     }
 
     setRanges(html) {
@@ -165,7 +203,8 @@ export class MgT2SpacecraftAttackDialog extends Application {
                 "bane": game.i18n.localize("MGT2.TravellerSheet.Bane"),
             },
             "gunnerSkillLabel": this.gunner.getSkillLabel(this.weaponItem.system.weapon.skill, true),
-            "TARGETS": this.TARGETS
+            "TARGETS": this.TARGETS,
+            "TARGET_LIST": this.TARGET_LIST
         }
     }
 
@@ -201,12 +240,18 @@ export class MgT2SpacecraftAttackDialog extends Application {
             range = html.find(".attackDialogRange")[0].value;
             rangeDM = parseInt(CONFIG.MGT2.SPACE_RANGES[range].dm);
         }
+        if (html.find(".attackDialogTargets")[0]) {
+            let targetId = html.find(".attackDialogTargets")[0].value;
+            let target = this.TARGETS.filter(t => { return t.id === targetId })[0];
+            range = target.range;
+            rangeDM = parseInt(target.dm);
+        }
 
         let options = {
             "dm": dm,
             "skill": 0,
             "range": range,
-            "rangedm": rangeDM,
+            "rangeDM": rangeDM,
             "boon": rollType
         }
         let weapons = this.mount.system.hardware.weapons

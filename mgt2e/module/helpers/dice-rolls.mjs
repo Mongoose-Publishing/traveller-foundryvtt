@@ -599,6 +599,13 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
             damageDice += ` + ${quantityBonus * (options.quantity - 1)}`;
         }
     }
+    if (options.rangeDM) {
+        if (options.rangeDM > 0) {
+            dice += " + " + options.rangeDM;
+        } else if (options.rangeDM < 0) {
+            dice += " " + options.rangeDM;
+        }
+    }
 
     const attackRoll = await new Roll(dice, gunner?gunner.getRollData():null).evaluate();
     let effect = Math.max(0, attackRoll.total - 8);
@@ -610,7 +617,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         title = `${options.results["cha"]} ${options.results["chadm"]} Skill ${options.results["base"]}`;
         title = addTitle(title, options, "weapon");
         title = addTitle(title, options, "dm");
-        title = addTitle(title, options, "rangedm");
+        title = addTitle(title, options, "rangeDM");
     }
 
     let mount = weaponItem.system.weapon.mount;
@@ -664,7 +671,9 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                     <img class="skillcheck-thumb" src="${starship ? starship.thumbnail : ""}" title="${starship ? starship.name : ""}"/>
                     <img class="skillcheck-thumb" src="${gunner ? gunner.thumbnail : ""}" title="${gunner ? gunner.name : ""}"/>
                     <b title="${title}">${options.results.label} ${score}</b><br/>
-                    ${game.i18n.localize("MGT2.Item.SpaceRange." + options.range)}<br/>
+                    ${game.i18n.localize("MGT2.Item.SpaceRange." + options.range)}
+                    ${(options.rangeDM>=0)?("+"+options.rangeDM):(options.rangeDM)}
+                    <br/>
                     ${weaponItem.system.weapon.damage}<br/>
                 </div>
                 <hr/>
