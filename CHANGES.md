@@ -8,7 +8,7 @@
 * On Foundry v13, active effects may need to have the 'Apply Effect' option toggled off and on before
   they take effect.
 
-# Develop
+# 0.15.6 (Beta)
 
 * Expanded some of the options for world codes.
 * Changed selling of freight to sell all freight to a world in one action.
@@ -18,6 +18,8 @@
   of scene.
 * Improved support for world factions.
 * Added basic support for world patrons.
+* Added "DEFAULT TRAVELLER" actor to the compendium.
+* Removed freight and mail goods from the list of speculative trade items.
 
 # 0.15.5 (Beta)
 
