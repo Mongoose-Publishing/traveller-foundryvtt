@@ -108,6 +108,7 @@
                     <a class="item" data-tab="data">World Data</a>
                     <a class="item" data-tab="description">Description</a>
                     <a class="item" data-tab="factions">Factions</a>
+                    <a class="item" data-tab="patrons">Patrons</a>
                     <a class="item" data-tab="map">Map</a>
                     <a class="item" data-tab="freight">Freight</a>
                     <a class="item" data-tab="trade">Trade</a>
@@ -188,6 +189,10 @@
                     </div>
 
                     <div class="tab" data-group="primary" data-tab="factions">
+                        {{#if isEditable}}
+                            <span class="faction-add rollable">+ Add Faction</span>
+                            <br/>
+                        {{/if}}
                         {{#if factions}}
                         <ol class="items-list actor-items">
                             {{#each factions as |faction id|}}
@@ -200,11 +205,41 @@
                                     {{#if faction.system.description}}
                                         <span>{{{faction.system.description}}}</span>
                                     {{/if}}
+                                    {{#if ../isEditable}}
+                                        <div class="item-controls">
+                                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    {{/if}}
+                                </li>
+                            {{/each}}
+                        </ol>
+                        {{/if}}
+                    </div>
+
+                    <div class="tab" data-group="primary" data-tab="patrons">
+                        {{#if isEditable}}
+                        <span class="patron-add rollable">+ Add Patron</span>
+                        <br/>
+                        {{/if}}
+                        {{#if patrons}}
+                        <ol class="items-list actor-items">
+                            {{#each patrons as |patron id|}}
+                            <li class="item item-gear world-faction" data-item-id="{{patron._id}}">
+                                <h4>{{patron.name}}</h4>
+                                <div>
+                                    {{patron.system.world.species}} / {{patron.system.world.profession}}
+                                </div>
+                                {{#if faction.system.description}}
+                                <span>{{{faction.system.description}}}</span>
+                                {{/if}}
+                                {{#if ../isEditable}}
                                     <div class="item-controls">
                                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                                         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                                     </div>
-                                </li>
+                                {{/if}}
+                            </li>
                             {{/each}}
                         </ol>
                         {{/if}}

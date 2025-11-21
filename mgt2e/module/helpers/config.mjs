@@ -1007,7 +1007,12 @@ MGT2.WORLD = {
         7: { "diameter": "11,200km"  },
         8: { "diameter": "12,800km"  },
         9: { "diameter": "14,400km"  },
-        10: { "diameter": "16,000km"  }
+        10: { "diameter": "16,000km"  },
+        11: { "diameter": "17,600km"  },
+        12: { "diameter": "19,200km"  },
+        13: { "diameter": "20,800km"  },
+        14: { "diameter": "22,400km"  },
+        15: { "diameter": "24,000km"  }
     },
     "atmosphere": {
         0: { "techBonus": 1 },
@@ -1122,5 +1127,16 @@ MGT2.WORLD = {
         "N": {},
         "S": {},
         "W": {}
+    }
+}
+
+MGT2.WORLD_DATA = {
+    "factionStrength": {
+        "obscure": {},
+        "fringe": {},
+        "minor": {},
+        "notable": {},
+        "significant": {},
+        "overwhelming": {}
     }
 }

@@ -21,10 +21,20 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
 
         context.TYPE_SELECT = {
             "faction": "Faction",
+            "patron": "Patron",
             "passenger": "Passenger",
             "star": "Star",
             "planet": "Planet"
         };
+
+        context.GOVERNMENT_SELECT = {};
+        for (let d in CONFIG.MGT2.WORLD.government) {
+            context.GOVERNMENT_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.WorldSheet.Government.Type." + d)}`;
+        }
+        context.FACTION_STRENGTH_SELECT = {};
+        for (let d in CONFIG.MGT2.WORLD_DATA.factionStrength) {
+            context.FACTION_STRENGTH_SELECT[d] = `${game.i18n.localize("MGT2.WorldSheet.Faction.Strength." + d)}`;
+        }
 
         let worldData = this.item.system.world;
         switch (worldData.datatype) {
@@ -40,6 +50,8 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
                 break;
             case "passenger":
                 context.passage = game.i18n.localize("MGT2.WorldSheet.Passage." + worldData.passage);
+                break;
+            case "patron":
                 break;
             case "planet":
                 break;
@@ -73,6 +85,9 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
                 case "sector":
                     this._initSector();
                     break;
+                case "patron":
+                    this._initPatron();
+                    break;
             }
         });
 
@@ -83,6 +98,16 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
             "datatype": "faction",
             "government": await roll2D6(),
             "strength": "minor"
+        }
+        await this.item.update({"system.world": data});
+    }
+
+    async _initPatron() {
+        let data = {
+            "datatype": "patron",
+            "species": "",
+            "profession": "",
+            "hidden": true
         }
         await this.item.update({"system.world": data});
     }

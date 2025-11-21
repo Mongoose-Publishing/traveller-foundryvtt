@@ -37,6 +37,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
     async _prepareItems(context) {
         context.cargo = [];
         context.factions = [];
+        context.patrons = [];
         context.localGoods = [];
 
         let destinationWorlds = {};
@@ -64,6 +65,10 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             } else if (i.type === "worlddata") {
                 if (i.system?.world?.datatype === "faction") {
                     context.factions.push(i);
+                } else if (i.system?.world?.datatype === "patron") {
+                    if (!i.system.world.hidden || context.actor.permission > 2) {
+                        context.patrons.push(i);
+                    }
                 } else if (i.system?.world?.datatype === "passenger") {
                     let dest = await this.getDestination(context.actor, destinationWorlds, i.system.world.destinationId);
                     dest.passengers.push(i);
@@ -250,6 +255,47 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             }
             this.actor.update({"system.world.uwp.bases": this.actor.system.world.uwp.bases});
         });
+        html.find('.faction-add').click(ev => {
+           // Add faction
+            this._createFaction();
+        });
+        html.find('.patron-add').click(ev => {
+            // Add Patron
+            this._createPatron();
+        });
+    }
+
+    async _createFaction() {
+        console.log("_createFaction:");
+        let itemData = {
+            name: "Faction",
+            type: "worlddata",
+            system: {
+                world: {
+                    datatype: "faction",
+                    government: 7,
+                    strength: "minor"
+                }
+            }
+        };
+        Item.create(itemData, { parent: this.actor });
+    }
+
+    async _createPatron() {
+        console.log("_createPatron:");
+        let itemData = {
+            name: "Patron",
+            type: "worlddata",
+            system: {
+                world: {
+                    datatype: "patron",
+                    hidden: true,
+                    species: "Human",
+                    profession: "Patron"
+                }
+            }
+        };
+        Item.create(itemData, { parent: this.actor });
     }
 
     async _onDrop(event) {
