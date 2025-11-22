@@ -163,12 +163,14 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
         let prop = context.effectType?.property;
         if (context.effectType?.targets === "char") {
             context.targets = {};
+            context.targets[""] = "-";
             for (const k of ['STR', 'DEX', 'END', 'INT', 'EDU', 'SOC', 'PSI']) {
                 let key = "system.characteristics." + k + "." + prop;
                 context.targets[key] = k;
             }
         } else if (context.effectType?.targets === "skills") {
             context.targets = {};
+            context.targets[""] = "-";
             let skills = MGT2.getDefaultSkills();
             for (let id in skills) {
                 let baseKey = "system.skills."+id
@@ -181,6 +183,7 @@ export class MgT2EffectSheet extends ActiveEffectConfig {
             }
         } else {
             context.targets = {};
+            context.targets[""] = "-";
             context.targets["system.modifiers.encumbrance.multiplierBonus" ] = "Carry Multiplier";
             context.targets["system.modifiers.encumbrance." + prop] = "Encumbrance DM";
             context.targets["system.modifiers.physical." + prop] = "Physical DM";
