@@ -128,6 +128,12 @@
                 <input type="checkbox" name="system.hardware.armouredBulkhead" {{checked system.hardware.armouredBulkhead}} data-dtype="Boolean" />
                 <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.ArmouredBulkhead'}}</label>
             </div>
+            {{#if (ifEquals system.hardware.system "common")}}
+                <div>
+                    <input type="checkbox" name="system.hardware.autoCost" {{checked system.hardware.autoCost}} data-dtype="Boolean" />
+                    <label class="resource-label checkbox-label">{{localize 'MGT2.Spacecraft.AutoCost'}}</label>
+                </div>
+            {{/if}}
             {{#if (ifEquals system.hardware.system "m-drive")}}
                 <div>
                     <input type="checkbox" name="system.hardware.concealedDrive" {{checked system.hardware.concealedDrive}} data-dtype="Boolean" />

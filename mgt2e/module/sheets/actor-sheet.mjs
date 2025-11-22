@@ -2532,6 +2532,7 @@ export class MgT2ActorSheet extends ActorSheet {
             system.hardware.system = "common";
             system.hardware.tonnage.tons = 1;
             system.hardware.rating = 1;
+            system.hardware.autoCost = true;
             system.cost = 0.1;
         } else if (systemType === "sensor") {
             itemName = "Basic Sensors";

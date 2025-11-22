@@ -887,7 +887,11 @@ export class MgT2ItemSheet extends ItemSheet {
                 rating = 0;
             }
             item.system.hardware.tons = rating;
-            item.system.cost = rating * 0.1;
+            if (item.system.hardware.autoCost) {
+                item.system.cost = rating * 0.1;
+            }
+        } else if (["cargo"].includes(item.system.hardware.system)) {
+            // Nothing automatic.
         } else if (["sensor", "stateroom", "defence"].includes(item.system.hardware.system)) {
             // Use manual values.
         } else {
