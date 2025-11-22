@@ -53,7 +53,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             if (i.type === 'cargo') {
                 // Add some meta data.
                 let basePrice = i.system.cargo.price;
-                if (i.system.cargo.speculative) {
+                if (i.system.cargo.speculative || i.system.cargo.purchasable) {
                     i.system.cargo.costDiff = i.system.cost - basePrice;
                     i.system.cargo.costSign = Math.sign(i.system.cargo.costDiff);
                     i.system.cargo.saleDiff = i.system.cargo.salePrice - basePrice;

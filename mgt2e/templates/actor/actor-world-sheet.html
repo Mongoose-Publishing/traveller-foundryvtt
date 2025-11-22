@@ -370,9 +370,9 @@
                                     <th class="trade-sell">+/-</th>
                                 </tr>
                                 {{#each cargo as |item id|}}
-                                    {{#if item.system.cargo.speculative}}
+                                    {{#if (or item.system.cargo.speculative item.system.cargo.purchasable)}}
                                         <tr class="item item-gear ship-cargo trade-item" data-item-id="{{item._id}}">
-                                            <td class="trade-name"><img src="{{item.img}}"/> {{item.name}}</td>
+                                            <td class="trade-name item-edit"><img src="{{item.img}}"/> {{item.name}}</td>
                                             <td class="trade-quantity">
                                                 {{#if item.system.quantity includeZero=false}}
                                                     {{item.system.quantity}}

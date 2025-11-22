@@ -71,14 +71,12 @@ export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) 
         console.log("_preparePartContext: " + partId);
         context.partId = `${this.id}-${partId}`;
 
-        console.log(this.cargoItem);
-
         if (this.cargoItem) {
             // This should always be set.
             console.log(this.cargoItem);
             context.item = this.cargoItem;
             context.cargo = this.cargoItem.system.cargo;
-            if (context.cargo.speculative) {
+            if (context.cargo.speculative || context.cargo.purchasable) {
                 // What price is the world buying at?
                 context.salePrice = 0;
                 for (let i of this.worldActor.items) {
@@ -116,7 +114,7 @@ export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) 
                 // What's the most that we can buy? Limited by cargo and price.
                 let maxQuantity = this.cargoItem.system.quantity;
                 for (let q=1; q <= maxQuantity; q++) {
-                    context.QUANTITY_LIST[q] = `${q}dt (Cr${q * this.cargoItem.system.cost})`;
+                    context.QUANTITY_LIST[q] = `${q}dt (Cr${q * context.salePrice})`;
                 }
                 context.qty = maxQuantity;
             } else {
