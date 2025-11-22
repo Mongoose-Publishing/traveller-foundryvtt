@@ -173,6 +173,15 @@ export class MgT2ActorSheet extends ActorSheet {
             } else {
                 context.suggestedHits = "";
             }
+            context.SIZE_SELECT = [];
+            for (let sz=-4; sz <= 6; sz++) {
+                let num = `${sz}`;
+                let label = CONFIG.MGT2.CREATURES.sizes[num].label;
+                context.SIZE_SELECT.push({
+                    "id": sz,
+                    "value": `${game.i18n.localize("MGT2.TravellerSheet.SizeClass." + label)} (${num})`
+                });
+            }
         } else if (type === "spacecraft") {
             context.selectShipTL = {};
             for (let tl = 7; tl <= 17; tl++) {
@@ -1219,6 +1228,10 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _creatureSelectBehaviour(selectedBehaviour) {
         // Creatures can have multiple behaviours.
+        if (!selectedBehaviour || selectedBehaviour.length === 0) {
+            console.log("BAD");
+            return;
+        }
         if (this.actor.system.behaviour) {
             this.actor.system.behaviour += " " + selectedBehaviour;
         } else {
