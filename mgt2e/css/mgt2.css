@@ -1066,9 +1066,12 @@ div.attack-message {
 }
 
 div.attack-message h2 {
+  font-size: x-large;
+  font-family: Anton;
   color: white;
   background-color: #ff311b;
   padding: 2px;
+  margin-bottom: 2px;
 }
 
 div.skill-message {
@@ -1078,14 +1081,18 @@ div.skill-message {
 }
 
 div.skill-message h2 {
+  font-size: x-large;
+  font-family: Anton;
   color: white;
   background-color: #f1511b;
   padding: 2px;
+  margin-bottom: 2px;
 }
 
 div.skill-message h3 {
   font-size: large;
   font-weight: bold;
+  margin-top: 4px;
   color: #f1511b;
   padding: 2px;
   border-bottom: 2px solid #f1511b;
