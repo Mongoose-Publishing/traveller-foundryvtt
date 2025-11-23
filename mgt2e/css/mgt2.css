@@ -1067,7 +1067,7 @@ div.attack-message {
 
 div.attack-message h2 {
   font-size: x-large;
-  font-family: Anton;
+  font-family: "Roboto", sans-serif;
   color: white;
   background-color: #ff311b;
   padding: 2px;
@@ -1082,7 +1082,7 @@ div.skill-message {
 
 div.skill-message h2 {
   font-size: x-large;
-  font-family: Anton;
+  font-family: "Roboto", sans-serif;
   color: white;
   background-color: #f1511b;
   padding: 2px;
