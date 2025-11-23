@@ -505,10 +505,10 @@ async function createTradeItem(worldActor, item, available) {
     } else if (worldActor.system.world.uwp.population >= 9) {
         modifier = "+ 3";
     }
-    if (modifier && tonnage.indexOf("D6") > -1) {
+    if (modifier && tonnage && (""+tonnage).indexOf("D6") > -1) {
         tonnage = tonnage.replace(/([0-9]+D6)/i, `($1 ${modifier})`);
     }
-    const roll = await new Roll(tonnage).evaluate();
+    const roll = await new Roll(""+tonnage).evaluate();
     let tonnes = roll.total;
     if (tonnes <= 0 || !available) {
         // No cargo here due to population modifier.
@@ -579,7 +579,7 @@ export async function createSpeculativeGoods(worldActor, illegal) {
     let list = [];
     let localGoods = [];
     for (let i of worldActor.items) {
-        if (i.type === "cargo" && i.system.cargo.speculative) {
+        if (i.type === "cargo" && (i.system.cargo.speculative || i.system.cargo.purchasable)) {
             list.push(i._id);
         } else if (i.type === "cargo" && !i.system.cargo.freight) {
             localGoods.push(i);
@@ -695,7 +695,7 @@ export async function createSpeculativeGoods(worldActor, illegal) {
                     "illegal": false,
                     "sourceId": worldActor.uuid,
                     "destinationId": null,
-                    "speculative": true,
+                    "purchasable": true,
                     "salePrice": 50000
                 }
             }
@@ -768,6 +768,7 @@ export async function tradeSellGoodsHandler(queryData) {
     let quantity = parseInt(queryData.quantity);
 
     let totalCost = parseInt(cargoItem.system.cost) * quantity;
+    let totalSalePrice = salePrice * quantity;
     let totalProfit = (salePrice - parseInt(cargoItem.system.cost)) * quantity;
     if (totalCost === NaN) {
         totalCost = 0;
@@ -776,19 +777,18 @@ export async function tradeSellGoodsHandler(queryData) {
         totalProfit = 0;
     }
 
-    shipActor.system.finance.cash = parseInt(shipActor.system.finance.cash) + parseInt(totalCost);
+    shipActor.system.finance.cash = parseInt(shipActor.system.finance.cash) + parseInt(totalSalePrice);
     shipActor.update({"system.finance": shipActor.system.finance})
 
     cargoItem.system.quantity -= quantity;
     if (cargoItem.system.quantity > 0) {
         cargoItem.update({"system.quantity": cargoItem.system.quantity });
     } else {
-        console.log("Deleting item from ship " + shipActor.name);
         shipActor.deleteEmbeddedDocuments("Item", [ cargoItem.id]);
     }
     if (matchedItem) {
         matchedItem.system.quantity += quantity;
-        matchedItem.update({"system.quantity": quantity});
+        matchedItem.update({"system.quantity": matchedItem.system.quantity});
     }
 
     // Output sale information to the chat.

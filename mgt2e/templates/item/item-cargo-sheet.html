@@ -3,7 +3,7 @@
     <div class="sidebar">
       <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
-      {{#if system.cargo}}
+      {{#if (or system.cargo.speculative system.cargo.freight)}}
         <div class="shadow item-side-panel">
             <div class="cargo-data">
                 <div class="resource">

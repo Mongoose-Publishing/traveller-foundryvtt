@@ -760,9 +760,11 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
 
 Hooks.once("ready", async function() {
     Hooks.on("hotbarDrop", (bar, data, slot) => {
-        if (data.type === "Item" || data.data?.dragType === "skill") {
+        if (data.type === "Actor" || data.type === "Item" || data.data?.dragType === "skill") {
             createTravellerMacro(data, slot);
             return false;
+        } else {
+            console.log(data);
         }
     });
 });
@@ -849,6 +851,20 @@ async function createTravellerMacro(data, slot) {
             ui.notifications.warn(`Don't know what to do with "${label}"`);
         }
         return false;
+    } else if (data.type === "Actor") {
+        let actor = await Actor.fromDropData(data);
+        if (actor) {
+            let label = actor.name;
+            let command = `Hotbar.toggleDocumentSheet("${actor.uuid}")`;
+
+            let macro = await Macro.create({
+                name: label,
+                type: "script",
+                command: command,
+                img: actor.img
+            });
+            game.user.assignHotbarMacro(macro, slot);
+        }
     } else if (dragData.dragType === "skill") {
         let actor = game.actors.find(a => (a._id === actorId));
         if (!actor) {

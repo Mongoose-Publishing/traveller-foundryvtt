@@ -84,7 +84,7 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
             // This should always be set.
             context.item = this.cargoItem;
             context.cargo = this.cargoItem.system.cargo;
-            if (context.cargo.speculative) {
+            if (context.cargo.speculative || context.cargo.purchasable) {
                 // Speculative Goods
                 context.speculative = true;
                 context.variance = this.cargoItem.system.cost - this.cargoItem.system.cargo.price;

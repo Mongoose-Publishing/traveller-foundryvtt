@@ -112,19 +112,7 @@
                 <div class="resource flex-group-center">
                     <label for="system.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
                     <select class="field-value expand writable" name="system.size">
-                        {{#select system.size}}
-                            <option value="-4">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-4)</option>
-                            <option value="-3">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-3)</option>
-                            <option value="-2">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-2)</option>
-                            <option value="-1">{{localize "MGT2.TravellerSheet.SizeClass.small"}} (-1)</option>
-                            <option value="0">{{localize "MGT2.TravellerSheet.SizeClass.medium"}}</option>
-                            <option value="1">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+1)</option>
-                            <option value="2">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+2)</option>
-                            <option value="3">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+3)</option>
-                            <option value="4">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+4)</option>
-                            <option value="5">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+5)</option>
-                            <option value="6">{{localize "MGT2.TravellerSheet.SizeClass.large"}} (+6)</option>
-                        {{/select}}
+                        {{selectOptions SIZE_SELECT selected=system.size}}
                     </select>
                 </div>
                 <div class="resource flex-group-center">

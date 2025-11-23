@@ -83,8 +83,10 @@ export class MgT2CrewMemberDialog extends Application {
 
         html.find('.addRoleSelect').click(ev => {
             const val = $(ev.currentTarget).val();
-            this.close();
-            this.refresh(val, html);
+            if (val && val.length !== 0) {
+                this.close();
+                this.refresh(val, html);
+            }
         });
 
         console.log("Activated listeners");

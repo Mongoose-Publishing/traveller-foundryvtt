@@ -173,6 +173,15 @@ export class MgT2ActorSheet extends ActorSheet {
             } else {
                 context.suggestedHits = "";
             }
+            context.SIZE_SELECT = [];
+            for (let sz=-4; sz <= 6; sz++) {
+                let num = `${sz}`;
+                let label = CONFIG.MGT2.CREATURES.sizes[num].label;
+                context.SIZE_SELECT.push({
+                    "id": sz,
+                    "value": `${game.i18n.localize("MGT2.TravellerSheet.SizeClass." + label)} (${num})`
+                });
+            }
         } else if (type === "spacecraft") {
             context.selectShipTL = {};
             for (let tl = 7; tl <= 17; tl++) {
@@ -258,6 +267,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 "armour": game.i18n.localize("TYPES.Item.armour"),
                 "augment": game.i18n.localize("TYPES.Item.augment"),
                 "item": game.i18n.localize("TYPES.Item.item"),
+                "software": game.i18n.localize("TYPES.Item.software"),
                 "weapon": game.i18n.localize("TYPES.Item.weapon")
             }
         }
@@ -1224,6 +1234,10 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _creatureSelectBehaviour(selectedBehaviour) {
         // Creatures can have multiple behaviours.
+        if (!selectedBehaviour || selectedBehaviour.length === 0) {
+            console.log("BAD");
+            return;
+        }
         if (this.actor.system.behaviour) {
             this.actor.system.behaviour += " " + selectedBehaviour;
         } else {
@@ -2537,6 +2551,7 @@ export class MgT2ActorSheet extends ActorSheet {
             system.hardware.system = "common";
             system.hardware.tonnage.tons = 1;
             system.hardware.rating = 1;
+            system.hardware.autoCost = true;
             system.cost = 0.1;
         } else if (systemType === "sensor") {
             itemName = "Basic Sensors";

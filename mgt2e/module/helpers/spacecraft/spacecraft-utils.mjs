@@ -518,12 +518,12 @@ export async function buyCargoDialog(worldActor, shipActor, item) {
             }
         }
         return transferCargo;
-    } else if (item.system.cargo.speculative) {
+    } else if (item.system.cargo.speculative || item.system.cargo.purchasable) {
         if (!shipActor.system.finance) {
             ui.notifications.warn("Ship has no financial information");
             return false;
         }
-        if (parseInt(item.system.quantity < 1)) {
+        if (!parseFloat(item.system.quantity) > 0) {
             ui.notifications.warn("World doesn't have any goods of this type");
             return false;
         }
@@ -562,6 +562,10 @@ export async function sellCargoDialog(shipActor, worldActor, item) {
         console.log("Sell speculative cargo");
         if (!shipActor.system.finance) {
             ui.notifications.warn("Ship has no financial information");
+            return false;
+        }
+        if (item.system.cargo.sourceId === worldActor.uuid) {
+            ui.notifications.warn("You can't sell back at the same world");
             return false;
         }
         new MgT2SellCargoApp(shipActor, worldActor, item).render(true);

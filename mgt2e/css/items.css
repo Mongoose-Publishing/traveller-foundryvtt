@@ -131,7 +131,7 @@ input.item-tons {
     position: relative;
 }
 
-.expand {
+div.resource .expand {
     width: 100%;
 }
 
