@@ -267,6 +267,7 @@ export class MgT2ActorSheet extends ActorSheet {
                 "armour": game.i18n.localize("TYPES.Item.armour"),
                 "augment": game.i18n.localize("TYPES.Item.augment"),
                 "item": game.i18n.localize("TYPES.Item.item"),
+                "software": game.i18n.localize("TYPES.Item.software"),
                 "weapon": game.i18n.localize("TYPES.Item.weapon")
             }
         }
