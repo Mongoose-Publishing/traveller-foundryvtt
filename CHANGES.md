@@ -2,11 +2,31 @@
 
 ## Known Issues
 
-* Behaviour drop down on Creature character sheet immediately closes after opening unless mouse button
-  is held down.
 * Career terms aren't always added in the correct order.
-* On Foundry v13, active effects may need to have the 'Apply Effect' option toggled off and on before
-  they take effect.
+
+# 0.15.7 (Beta)
+
+* Secret text in World factions and patrons is now hidden from players who don't
+  have ownership permission on the World.
+* When actors are dropped on the hotbar, they now show the correct label and image.
+* Spare Parts can now have their quantity modified, allowing them to be consumed
+  whilst repairing a ship.
+* Fixed some issues with selling prices in the trade system. Also prevent trade
+  goods from being resold back to the same world.
+* Common areas now have a flag to specify with to auto calculate the cost or not.
+  This allows special common areas (bars, pools, kitchens etc) to have a cost
+  other than the standard.
+* Cargo holds can have a cost associated with them.
+* Fixed problem with some drop down menus, where a null or empty response was causing
+  the menu to close as soon as it opened on some browsers.
+* On V13, active effects now show an 'empty' option as the default, making it obvious
+  that a valid result needs to be selected. Previously, it was displaying the first
+  item as selected, but it hadn't actually selected it.
+* An overly broad CSS definition was affecting the playlist display on V13. This has
+  been tightened up, so playlists should display correctly.
+* Added 'Software' to the list of items that can be created directly from an actor's
+  sheet.
+* Set the verified version of Foundry to be V13.
 
 # 0.15.6 (Beta)
 
