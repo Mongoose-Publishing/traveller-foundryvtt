@@ -60,7 +60,7 @@ caption {
 }
 
 .journal-sheet table td,th {
-  border: 1px solid black;
+  _border: 1px solid black;
   padding: 3px;
   min-width: 3em;
 }

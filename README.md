@@ -2,11 +2,11 @@
 
 **Version:**  0.15.7
 
-This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v12.
-Support for v13 is coming, but there are known issues that need resolving.
-It is currently in beta, so suggestions and bug reports are
-greatly appreciated. The basic game rules are currently supported, but new features are being added
-all the time.
+This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v12
+and v13.
+
+It is currently in beta, so suggestions and bug reports are greatly appreciated. The basic game rules
+are currently supported, but new features are being added all the time.
 
 ![Mongoose Traveller on Foundry](docs/traveller-foundry.png)
 
@@ -19,6 +19,7 @@ Currently, it provides support for:
 * Support for background and alien race packages.
 * Career terms for character generation, including allies, contacts and enemies.
 * Basic support for spacecraft, and combat between spacecraft.
+* The Speculative Trade, Freight and Passenger rules are implemented for Worlds.
 
 Note that it does not currently include 'content' such as equipment lists.
 

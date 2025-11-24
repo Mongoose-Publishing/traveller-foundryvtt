@@ -42,10 +42,12 @@
           </select>
         {{/if}}
 
-        {{editor
-            enrichedDescription target="system.description"
-            button=true editable=editable
-        }}
+          <div class="item-description">
+            {{editor
+                enrichedDescription target="system.description"
+                button=true editable=editable
+            }}
+          </div>
       </div>
 
       {{#each system.role.actions as |action id|}}

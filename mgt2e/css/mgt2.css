@@ -325,11 +325,6 @@ h1.charname input {
   height: 100%;
 }
 
-.editor {
-  height: 100%;
-  min-height: 50px;
-}
-
 .system-mgt2 .tox .tox-editor-container {
   background: #fff;
   height: 100%;
@@ -1236,7 +1231,14 @@ textarea.traits {
   margin-bottom: 10px;
 }
 
-.description .editor {
+.actor-description .editor {
+  padding: 5px;
+  min-height: 200px;
+  height: 100%;
+}
+
+.item-description .editor {
+  padding: 5px;
   min-height: 200px;
   height: 100%;
 }
@@ -1457,13 +1459,14 @@ h1.charname input {
   padding: 2px;
 }
 
-.bio-box {
+.actor-description {
   min-height: 200px;
   border: 2px groove #f0f0f0;
 }
 
-.bio-box editor {
+.actor-description editor {
   height: 100%;
+  min-height: 100px;
 }
 
 .character-right div.npc-info {
