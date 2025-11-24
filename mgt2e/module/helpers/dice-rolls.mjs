@@ -1122,7 +1122,7 @@ export async function rollSkill(actor, skill, options) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];
 
-                if (spec.value > 0 || spec.augment || spec.augdm || spec.bonus) {
+                if (spec.value > 0 || spec.augment || spec.augdm || spec.bonus || spec.expert) {
                     let stotal = parseInt(total) + parseInt(spec.value);
                     let slabel = `${skillLabel(spec)} (${spec.value})`;
 
@@ -1130,17 +1130,25 @@ export async function rollSkill(actor, skill, options) {
                     specAug = 0;
                     specBonus = 0;
                     specNotes = "";
+                    if (spec.expert && !isNaN(spec.expert) && parseInt(spec.expert) > 0) {
+                        if (spec.value < parseInt(spec.expert) - 1) {
+                            stotal = parseInt(total) + parseInt(spec.expert) - 1;
+                        } else {
+                            stotal ++;
+                        }
+                        slabel += ` Expert/${spec.expert}`;
+                    }
                     if (spec.augment && !isNaN(spec.augment) && parseInt(spec.augment) !== 0) {
                         stotal += parseInt(spec.augment);
-                        slabel = `${skillLabel(spec)} (${spec.value + spec.augment})`;
+                        slabel += ` (+${augment})`;
                     }
                     if (spec.augdm && !isNaN(spec.augdm) && parseInt(spec.augdm) !== 0) {
                         stotal += parseInt(spec.augdm);
-                        specNotes += `DM ${parseInt(spec.augdm)} `;
+                        specNotes += ` DM ${parseInt(spec.augdm)}`;
                     }
                     if (spec.bonus && !isNaN(spec.bonus) && parseInt(spec.bonus) !== 0) {
                         stotal += parseInt(spec.bonus);
-                        specNotes += `${spec.notes} ${parseInt(spec.bonus)} `
+                        specNotes += ` ${spec.notes} ${parseInt(spec.bonus)}`
                     }
 
                     if (isPerson && defaultCha && spec.default && spec.default !== skill.default) {

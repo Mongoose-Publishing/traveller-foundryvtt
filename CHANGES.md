@@ -4,6 +4,18 @@
 
 * Career terms aren't always added in the correct order.
 
+# Develop
+
+* Improvements to chat CSS on Foundry V13.
+* When the 'split attack/damage roll' option was enabled, the displayed dice results
+  was different to the dice result actually used for calculating the attack. Also made
+  some improvements to display of split damage rolls.
+* Skill DMs from augments was not being correctly included in rolls for speciality skills.
+* When rolling a parent skill, specialities weren't displayed if they had a score of zero,
+  but had augment bonuses.
+* Armour items were not displaying list of installed software packages.
+* Include Expert Software bonuses on speciality skills when rolling the parent.
+
 # 0.15.7 (Beta)
 
 * Secret text in World factions and patrons is now hidden from players who don't
