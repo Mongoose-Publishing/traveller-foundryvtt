@@ -4,9 +4,10 @@
 
 * Career terms aren't always added in the correct order.
 
-# Develop
+# 0.15.8 (Beta)
 
 * Improvements to chat CSS on Foundry V13.
+* Fixes to CSS clashes with Foundry V13.
 * When the 'split attack/damage roll' option was enabled, the displayed dice results
   was different to the dice result actually used for calculating the attack. Also made
   some improvements to display of split damage rolls.
