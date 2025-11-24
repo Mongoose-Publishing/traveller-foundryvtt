@@ -518,9 +518,13 @@ export async function rollAttack(actor, weapon, attackOptions) {
             }
 
             if (game.settings.get("mgt2e", "splitAttackDamage")) {
+                let splitTitle = `${dmg}`;
+                if (effect > 0) {
+                    splitTitle += ` + ${effect}`;
+                }
                 content += `<button data-options='${json}'
-                                title="Roll Damage"
-                                class="damage-roll-button">Roll Damage ${dmg}</button>`;
+                                title="Click to roll damage"
+                                class="damage-roll-button">Roll Damage ${splitTitle}</button>`;
             } else {
                 content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
                 content += `<button data-damage="${damageEffect}" data-options='${json}'
@@ -547,7 +551,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
     content += "</div>";
 
-    if (roll && actor && !game.settings.get("mgt2e", "splitAttackDamage")) {
+    if (roll && actor && (!game.settings.get("mgt2e", "splitAttackDamage") || attacks > 0)) {
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             content: content,
