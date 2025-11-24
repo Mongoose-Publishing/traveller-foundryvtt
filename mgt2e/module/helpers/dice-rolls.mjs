@@ -1028,6 +1028,9 @@ export async function rollSkill(actor, skill, options) {
     if (skillDM !== 0) {
         dice += " + " + skillDM + "[AugDM]";
     }
+    if (specDM !== 0) {
+        dice += " + " + specDM + "[AugDM]";
+    }
     if (options.dm) {
         if (options.dm > 0) {
             dice += " +" + options.dm;
@@ -1118,7 +1121,8 @@ export async function rollSkill(actor, skill, options) {
         if (skill && skill.specialities != null && speciality == null && !noSpeciality) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];
-                if (spec.value > 0) {
+
+                if (spec.value > 0 || spec.augment || spec.augdm || spec.bonus) {
                     let stotal = parseInt(total) + parseInt(spec.value);
                     let slabel = `${skillLabel(spec)} (${spec.value})`;
 
