@@ -222,6 +222,7 @@
   "MGT2.Skills.untrained": "Untrained",
 
 
+  "MGT2.Edit": "Edit",
   "MGT2.EditItem": "Edit Item",
   "MGT2.DeleteItem": "Delete Item",
 
@@ -269,6 +270,8 @@
   "MGT2.TravellerSheet.CEI": "CEI",
   "MGT2.TravellerSheet.ECEI": "ECEI",
   "MGT2.TravellerSheet.Morale": "Morale",
+  "MGT2.TravellerSheet.Attack": "Attacks",
+  "MGT2.TravellerSheet.Reload": "Reload",
 
   "MGT2.TravellerSheet.InitThrust": "Thrust",
   "MGT2.TravellerSheet.InitPilot": "Pilot",

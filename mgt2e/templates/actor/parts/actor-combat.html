@@ -12,7 +12,7 @@
       </div>
       <div>
         <label class="prot-type" title="Rad Shielding">{{localize 'MGT2.TravellerSheet.Rad'}}</label>
-        <input class="armour-value" type="text" name="system.armour.rad" title="{{localize 'MGT2.TravellerSheet.Radiation'}}"
+        <input class="armour-value" type="text" name="system.armour.rad" title="{{localize 'MGT2.TravellerSheet.RadiationShielding'}}"
                value="{{system.armour.rad}}" readonly data-dtype="Number"/>
       </div>
       {{#if system.armour.otherProtection}}
@@ -51,14 +51,14 @@
                   <br/>
                   {{#if item.system.weapon.magazine includeZero=false}}
                     {{#if item.system.weapon.ammo includeZero=false}}
-                      <a class="item-attack rollable" data-roll-type="item" title="Attack">Attack</a>
+                      <a class="item-attack rollable" data-roll-type="item" title="Attack">{{localize 'MGT2.TravellerSheet.Attack'}}</a>
                     {{else}}
-                      <a class="item-reload" data-roll-type="item" title="Reload">Reload</a>
+                      <a class="item-reload" data-roll-type="item" title="Reload">{{localize 'MGT2.TravellerSheet.Reload'}}</a>
                     {{/if}}
                   {{else}}
-                    <a class="item-attack rollable" data-roll-type="item" title="Attack">Attack</a>
+                    <a class="item-attack rollable" data-roll-type="item" title="Attack">{{localize 'MGT2.TravellerSheet.Attack'}}</a>
                   {{/if}}
-                  <a class="item-edit">Edit</a>
+                  <a class="item-edit">{{localize 'MGT2.Edit'}}</a>
                   <br/>
                 </li>
               {{/if}}
