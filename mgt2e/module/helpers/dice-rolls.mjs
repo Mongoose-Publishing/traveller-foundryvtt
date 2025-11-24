@@ -363,7 +363,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
     let minDice = dmg.replaceAll(/D6/g, "D1").replaceAll(/d6/g, "D1");
     let redDice = dmg.replaceAll(/D6/g, "D3").replaceAll(/d6/g, "D3");
 
-    const roll = await new Roll(dice, actor?actor.getRollData():null).evaluate();
+    let roll = null;
     let damageRoll = null;
     for (let attack=1; attack <= attacks; attack++) {
         if (attacks > 1) {
@@ -378,6 +378,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
         let effect = 0, attackTotal = 0;
         if (actor) {
             const attackRoll = await new Roll(dice, actor ? actor.getRollData() : null).evaluate();
+            if (!roll) {
+                roll = attackRoll;
+            }
             attackTotal = attackRoll.total;
             effect = attackTotal - 8;
         }
@@ -544,19 +547,19 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
     content += "</div>";
 
-    if (actor && !game.settings.get("mgt2e", "splitAttackDamage")) {
+    if (roll && actor && !game.settings.get("mgt2e", "splitAttackDamage")) {
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             content: content,
             rollMode: game.settings.get("core", "rollMode")
         });
-    } else if (actor) {
+    } else if (roll && actor) {
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             flavor: content,
             rollMode: game.settings.get("core", "rollMode")
         });
-    } else {
+    } else if (damageRoll) {
         damageRoll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             flavor: content,
