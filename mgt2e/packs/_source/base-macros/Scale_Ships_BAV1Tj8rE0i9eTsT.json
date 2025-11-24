@@ -1,7 +1,7 @@
 {
   "name": "Scale Ships",
   "type": "script",
-  "command": "// Re=-size spacecraft tokens based on the scale that you want to use.\n\nconst method = await foundry.applications.api.DialogV2.wait({\n  window: { title: \"What to scale everything to?\" },\n  content: \"<p>What scale of ship do you want to be the norm?</p>\",\n  buttons: [\n    { \"label\": \"Smallcraft\", action: \"+2\" },\n    { \"label\": \"Spacecraft\", action: \"0\" },\n    { \"label\": \"Capital Ships\", action: \"-4\" }\n  ]\n});\n\n\nlet scale = parseInt(method);\n\nlet selected = canvas.tokens.controlled;\n\nlet size = [ 0, 3, 10, 30, 100, 300, 1000, 3000, 10000, 100000, 300000, 1000000, 3000000, 10000000 ];\n\nlet width = [ 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];\n\nfor (let token of selected) {\n  let type = token.document.actor.type;\n  if (type === \"spacecraft\") {\n    let dtons = token.document.actor.system.spacecraft.dtons;\n\n    let s = 0;\n    for (let i=0; i < size.length; i++) {\n      if (dtons >= size[i]) {\n        s = i;\n      } else {\n        break;\n      }\n    }\n    s = Math.max(0, s + scale);\n    let w = width[s];\n    token.document.update({\"height\": w});\n    token.document.update({\"width\": w});\n  }\n}",
+  "command": "// Re=-size spacecraft tokens based on the scale that you want to use.\n\nconst method = await foundry.applications.api.DialogV2.wait({\n  window: { title: \"What to scale everything to?\" },\n  content: \"<p>What scale of ship do you want to be the norm?</p>\",\n  buttons: [\n    { \"label\": \"Smallcraft\", action: \"+2\" },\n    { \"label\": \"Spacecraft\", action: \"0\" },\n    { \"label\": \"Capital Ships\", action: \"-4\" }\n  ]\n});\n\n\nlet scale = parseInt(method);\n\nlet selected = canvas.tokens.controlled;\n\nlet size = [ 0, 3, 10, 30, 100, 300, 1000, 3000, 10000, 100000, 300000, 1000000, 3000000, 10000000 ];\n\nlet width = [ 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];\n\nfor (let token of selected) {\n  let type = token.document.actor.type;\n  if (type === \"spacecraft\") {\n    let dtons = token.document.actor.system.spacecraft.dtons;\n\n    let s = 0;\n    for (let i=0; i < size.length; i++) {\n      if (dtons >= size[i]) {\n        s = i;\n      } else {\n        break;\n      }\n    }\n    s = Math.max(0, s + scale);\n    let w = width[s];\n    await token.document.update({\"height\": w});\n    await token.document.update({\"width\": w});\n  }\n}",
   "img": "systems/mgt2e/icons/macros/scale-ships.svg",
   "author": "mhUjqDVicnwIUaiq",
   "scope": "global",
@@ -18,7 +18,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.15.5.6-DEV",
     "createdTime": 1763500620769,
-    "modifiedTime": 1763500622787,
+    "modifiedTime": 1763982279915,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "BAV1Tj8rE0i9eTsT",
