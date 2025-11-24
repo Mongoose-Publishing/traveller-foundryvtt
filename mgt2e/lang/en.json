@@ -222,6 +222,9 @@
   "MGT2.Skills.untrained": "Untrained",
 
 
+  "MGT2.EditItem": "Edit Item",
+  "MGT2.DeleteItem": "Delete Item",
+
 
 
   "MGT2.TravellerSheet.Player": "Player",
@@ -255,13 +258,17 @@
   "MGT2.TravellerSheet.Prot": "Prot",
   "MGT2.TravellerSheet.Protection": "Prot",
   "MGT2.TravellerSheet.Rad": "Rad",
-  "MGT2.TravellerSheet.Radiation": "Radiation Protection",
+  "MGT2.TravellerSheet.Radiation": "Radiation",
+  "MGT2.TravellerSheet.RadiationShielding": "Radiation Protection",
   "MGT2.TravellerSheet.Energy": "Energy Protection",
   "MGT2.TravellerSheet.EnergyTypes": "Energy Types",
   "MGT2.TravellerSheet.Attacks": "Attacks",
   "MGT2.TravellerSheet.DamageTaken": "Damage Taken",
   "MGT2.TravellerSheet.HitsRemaining": "Hits Remaining",
   "MGT2.TravellerSheet.Hull": "Hull",
+  "MGT2.TravellerSheet.CEI": "CEI",
+  "MGT2.TravellerSheet.ECEI": "ECEI",
+  "MGT2.TravellerSheet.Morale": "Morale",
 
   "MGT2.TravellerSheet.InitThrust": "Thrust",
   "MGT2.TravellerSheet.InitPilot": "Pilot",
@@ -346,7 +353,14 @@
   "MGT2.TravellerSheet.UseCustomDice": "Racial package",
   "MGT2.TravellerSheet.AutoAge": "Auto age",
   "MGT2.TravellerSheet.AutoHits": "Auto HITS",
+  "MGT2.TravellerSheet.AutoHitsTitle": "Automatically calculate hits",
   "MGT2.TravellerSheet.EnforceLimits": "Enforce Limits",
+  "MGT2.TravellerSheet.EnforceLimitsTitle": "Enforce TL limits",
+  "MGT2.TravellerSheet.StandardDesign": "Standard Design",
+  "MGT2.TravellerSheet.StandardDesignTitle": "10% discount on ship cost",
+  "MGT2.TravellerSheet.NavalVessel": "Naval Vessel",
+  "MGT2.TravellerSheet.AddDeck": "Add Deck",
+  "MGT2.TravellerSheet.SpacecraftTypeCode": "Spacecraft type code",
   "MGT2.TravellerSheet.LockUPP": "Lock UPP",
   "MGT2.TravellerSheet.RandomRoll": "Re-roll characteristics (shift for average, ctrl for vary)",
 
@@ -356,6 +370,8 @@
   "MGT2.TravellerSheet.RDriveText": "Reaction Drive thrust.",
   "MGT2.TravellerSheet.PowerText": "Power consumption /\nPower Available",
   "MGT2.TravellerSheet.AddHardwareToSet": "\nSet from Hardware tab.",
+  "MGT2.TravellerSheet.Jump1": "Jump-1",
+  "MGT2.TravellerSheet.Weekly": "Weekly",
 
   "MGT2.WorldSheet.Sector": "Sector",
   "MGT2.WorldSheet.X": "X",
