@@ -1263,6 +1263,20 @@
   "MGT2.Role.BuiltIn.Action.Evade": "Evade",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Make Pilot",
 
+  "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
+  "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",
+  "MGT2.Dialog.EmbarkPassengers": "Embark Passengers",
+  "MGT2.Dialog.TotalAvailable":  "Total Available",
+  "MGT2.Dialog.UnitPrice": "Unit Price",
+  "MGT2.Dialog.AvailableCash": "Available Cash",
+  "MGT2.Dialog.FreeSpace": "Free Space",
+  "MGT2.Dialog.PriceVariant": "Price Variant",
+  "MGT2.Dialog.Quantity": "Quantity",
+  "MGT2.Dialog.Profit": "Profit",
+  "MGT2.Dialog.PassengersAvailable": "Passengers Available",
+  "MGT2.Dialog.AvailableStaterooms": "Available Staterooms",
+  "MGT2.Dialog.TicketPrice": "Ticket Price",
+
   "MGT2.SpacecraftRepairDialog.Title": "Repair System",
 
   "TYPES.Actor.traveller": "Traveller",

@@ -26,7 +26,7 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
             changeQuantity: MgT2BuyCargoApp.changeQuantityAction
         },
         window: {
-            title: "Transfer Cargo to Ship"
+            title: "MGT2.Dialog.TransferCargoToShip"
         }
     }
 
@@ -40,6 +40,7 @@ export class MgT2BuyCargoApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     async _prepareContext(options) {
+        let a = game.i18n.localize("h");
         const context = {
             buttons: [
                 { type: "submit", icon: "fa-solid fa-save", label: "Buy" }

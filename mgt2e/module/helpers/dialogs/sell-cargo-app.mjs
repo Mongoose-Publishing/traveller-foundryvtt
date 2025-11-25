@@ -26,7 +26,7 @@ export class MgT2SellCargoApp extends HandlebarsApplicationMixin(ApplicationV2) 
             changeQuantity: MgT2SellCargoApp.changeQuantityAction
         },
         window: {
-            title: "Sell Cargo to World"
+            title: "MGT2.Dialog.SellCargoToWorld"
         }
     }
 
