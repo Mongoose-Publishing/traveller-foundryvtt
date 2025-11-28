@@ -340,6 +340,33 @@ export async function setCulturalDifferences(worldActor) {
     }
 }
 
+export async function createPatron(worldActor) {
+    let itemData = {
+        name: "Patron",
+        type: "worlddata",
+        system: {
+            world: {
+                datatype: "patron",
+                hidden: true,
+                species: "Human",
+                profession: "Patron"
+            }
+        }
+    };
+    let patronFolder = await getRollTableFolder("Patron Generator");
+    if (patronFolder) {
+        let result = await getFromNamedTable(factionFolder, "Patrons", worldActor.system.world.uwp.lawLevel);
+        if (result) {
+            itemData.system.description = result.text;
+            if (result.name) {
+                itemData.name = result.name;
+            }
+        }
+    }
+
+    Item.create(itemData, { parent: worldActor });
+}
+
 // Create a faction. If there is a suitable roll table, we also randomly select
 // some text for that faction.
 export async function createFaction(worldActor) {
@@ -364,20 +391,23 @@ export async function createFaction(worldActor) {
             factionStrength = "overwhelming";
             break;
     }
+    let govLevel = await roll("2D6 - 7");
+    govLevel += parseInt(worldActor.system.uwp.population);
+    govLevel = Math.max(0, govLevel);
     let itemData = {
         name: "Faction",
         type: "worlddata",
         system: {
             world: {
                 datatype: "faction",
-                government: await roll("2D6"),
+                government: govLevel,
                 strength: factionStrength
             }
         }
     };
     let factionFolder = await getRollTableFolder("Faction Generator");
     if (factionFolder) {
-        let result = await getFromNamedTable(factionFolder, "Faction", itemData.system.world.government);
+        let result = await getFromNamedTable(factionFolder, "Factions", itemData.system.world.government);
         if (result) {
             itemData.system.description = result.text;
             if (result.name) {

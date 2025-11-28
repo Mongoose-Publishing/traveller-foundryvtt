@@ -283,7 +283,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         });
     }
 
-    async createPatron() {
+    async _createPatron() {
         console.log("_createPatron:");
         let itemData = {
             name: "Patron",
