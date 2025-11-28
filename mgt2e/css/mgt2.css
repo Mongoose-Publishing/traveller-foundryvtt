@@ -568,11 +568,11 @@ h1.charname input {
 
 .actor .characteristic-value {
   background-color: #f0f0f0;
-  width: 3em;
+  width: 2.5em;
 }
 
 .actor .characteristic-readonly {
-  width: 3em;
+  width: 2em;
   color: #404040;
 }
 

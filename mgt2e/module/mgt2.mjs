@@ -102,6 +102,14 @@ Hooks.once('init', async function() {
             console.log(`Setting quickRolls to ${value}`)
         }
     });
+    game.settings.register('mgt2e', 'quickRolls', {
+        name: game.i18n.localize("MGT2.Settings.NPCHits.Name"),
+        hint: game.i18n.localize("MGT2.Settings.NPCHits.Hint"),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true
+    });
     game.settings.register('mgt2e', 'skillColumns', {
         name: game.i18n.localize("MGT2.Settings.SkillColumns.Name"),
         hint: game.i18n.localize("MGT2.Settings.SkillColumns.Hint"),

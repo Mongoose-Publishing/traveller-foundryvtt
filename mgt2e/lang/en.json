@@ -49,6 +49,8 @@
   "MGT2.Settings.DefaultTraveller.Hint": "Name of Traveller actor to use for default skills and settings",
   "MGT2.Settings.AutoPlayerCharacter.Name": "Auto set player character",
   "MGT2.Settings.AutoPlayerCharacter.Hint": "If a player creates a new character, automatically set it as their default if they don't yet have a default",
+  "MGT2.Settings.NPCHits.Name": "NPCs use characteristics for damage",
+  "MGT2.Settings.NPCHits.Hint": "By default, NPCs use characteristics for damage like Travellers. Disable this to use a simplified hits system instead",
 
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",
@@ -1276,6 +1278,9 @@
   "MGT2.Dialog.PassengersAvailable": "Passengers Available",
   "MGT2.Dialog.AvailableStaterooms": "Available Staterooms",
   "MGT2.Dialog.TicketPrice": "Ticket Price",
+
+  "MGT2.Dialog.EnableDamage.Title": "Enable damage for this NPC?",
+  "MGT2.Dialog.EnableDamage.Text": "If enabled, then damage will be applied to STR, DEX and END rather than to a single HITS value.",
 
   "MGT2.SpacecraftRepairDialog.Title": "Repair System",
 

@@ -1,28 +1,46 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
-    {{#if true}}
     <section class="npc-sheet">
         <div class="character-left">
             <img class="profile-img actor-draggable shadow" src="{{actor.img}}" data-edit="img" data-actor-id="{{actor._id}}"
                  title="{{actor.name}}" height="100" width="100"/>
 
             {{#if (isObserver .)}}
-            <div class="side-panel hits-box shadow">
-                <label for="system.hits.damage" class="box-title">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                <div class="side-panel hits-box shadow">
+                    <label for="system.hits.damage" class="box-title">
+                        {{localize 'MGT2.TravellerSheet.Damage'}}
+                        <i class="fa-solid fa-gear edit-dmg"></i>
+                    </label>
 
-                <div>
-                    <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
-                    <input class="characteristic-value" type="number" name="system.hits.damage"
-                           title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
-                           value="{{system.hits.damage}}" data-dtype="Number"/>
+                    {{#if system.damage}}
+                        <div class="grid grid-3col inset">
+                            {{#each system.damage as |dmg key|}}
+                                {{#if (isChaShown ../system key)}}
+                                    <div class="resource flex-group-center">
+                                        <label for="system.damage.{{key}}" class="resource-label">{{key}}</label>
+                                        <input class="writable" type="text"
+                                               name="system.damage.{{key}}.value"
+                                               value="{{dmg.value}}"
+                                               data-dtype="Number"/>
+                                    </div>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                    {{else}}
+                        <div>
+                            <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                            <input class="characteristic-value" type="number" name="system.hits.damage"
+                                   title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
+                                   value="{{system.hits.damage}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
+                            <input class="characteristic-readonly" type="number"
+                                   title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
+                                   value="{{system.hits.value}}"/>
+                        </div>
+                    {{/if}}
                 </div>
-                <div>
-                    <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
-                    <input class="characteristic-readonly" type="number"
-                           title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
-                           value="{{system.hits.value}}"/>
-                </div>
-            </div>
-            {{> "systems/mgt2e/templates/actor/parts/actor-combat.html"}}
+                {{> "systems/mgt2e/templates/actor/parts/actor-combat.html"}}
             {{/if}}
         </div>
 
@@ -68,7 +86,17 @@
                                        title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
                                 <span class="characteristic-dm {{chaStatus char}}">{{prettyNumber char.dm 0 true}}</span>
                                 <br/>
-                                <input class="characteristic-value writable" type="number" min="0" max="20" step="1" name="system.characteristics.{{key}}.value" value="{{char.value}}" data-dtype="Number"/>
+                                {{#if ../system.damage}}
+                                    <input class="characteristic-readonly"
+                                           type="number" min="0" max="20" step="1"
+                                           name="system.characteristics.{{key}}.current"
+                                           value="{{char.current}}"
+                                           data-dtype="Number" readonly/> /
+                                {{/if}}
+                                <input class="characteristic-value writable"
+                                       type="number" min="0" max="20" step="1"
+                                       name="system.characteristics.{{key}}.value"
+                                       value="{{char.value}}" data-dtype="Number"/>
                             </div>
                             {{/if}}
                         {{/each}}
@@ -194,11 +222,6 @@
             </div>
             {{/if}}
         </div>
-
-
     </section>
-    {{else}}
-    {{> "systems/mgt2e/templates/actor/parts/actor-id-card.html"}}
-    {{/if}}
 </form>
 

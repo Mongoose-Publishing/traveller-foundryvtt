@@ -87,7 +87,7 @@ export class MgT2Actor extends Actor {
      * Used for updating damage on the actor.
      */
     modifyTokenAttribute(attribute, value, isDelta, isBar) {
-        if (this.type === "traveller") {
+        if (this.type === "traveller" || this.system.damage) {
             let damage = parseInt(value);
             if (isDelta && damage < 0) {
                 damage = Math.abs(damage);
@@ -235,7 +235,7 @@ export class MgT2Actor extends Actor {
      * Prepare Character type specific data
      */
     _prepareTravellerData(actor) {
-        if (actor.type !== 'traveller') return;
+        if (!["traveller", "npc"].includes(actor.type)) return;
 
         const sys = actor.system;
         if (sys.characteristics.INT && sys.characteristics.EDU) {
@@ -293,23 +293,6 @@ export class MgT2Actor extends Actor {
         if (actor.type !== 'npc') return;
         const actorData = actor.system;
 
-        actorData.totalSkills = this._countSkillLevels(actorData.skills);
-        actorData.maxSkills = (parseInt(actorData.characteristics?.INT?.value) +
-            parseInt(actorData.characteristics?.EDU?.value)) * 3;
-
-        for (const char in actorData.characteristics) {
-            let value = actorData.characteristics[char].value;
-            if (actorData.characteristics[char].augment) {
-                value += parseInt(actorData.characteristics[char].augment);
-                console.log("Augmented value is " + value);
-            }
-            if (actorData.characteristics[char].min) {
-                value = Math.max(value, Number(actorData.characteristics[char].min));
-            }
-            actorData.characteristics[char].current = value;
-            actorData.characteristics[char].dm = this.getModifier(value);
-        }
-
         if (actorData.hits && actorData.settings.autoHits) {
             let maxHits = actorData.characteristics.STR?.value +
                 actorData.characteristics.DEX?.value +
@@ -321,8 +304,6 @@ export class MgT2Actor extends Actor {
             actorData.hits.max = maxHits;
             actorData.hits.value = maxHits - actorData.hits.damage;
         }
-        this._prepareEncumbrance(actor);
-        this._prepareInitiative(actor);
     }
 
     _prepareCreatureData(actor) {
@@ -563,7 +544,7 @@ export class MgT2Actor extends Actor {
           }
       }
 
-      if (this.type === "traveller") {
+      if (this.type === "traveller" || this.system.damage) {
           // This is a Traveller, so more complicated.
           if (options.noUI) {
               this.applyActualDamageToTraveller(damage, options);
@@ -572,6 +553,17 @@ export class MgT2Actor extends Actor {
           }
       } else {
           this.applyActualDamageToPerson(damage, options);
+      }
+  }
+
+  addDamageValues() {
+      if (!this.system.damage) {
+          this.system.damage = {
+              "STR": { value: 0 },
+              "DEX": { value: 0 },
+              "END": { value: 0, tmp: 0 }
+          }
+          this.update({"system.damage": this.system.damage });
       }
   }
 

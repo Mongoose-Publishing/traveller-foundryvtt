@@ -2643,8 +2643,19 @@ export class MgT2ActorSheet extends ActorSheet {
         }
     }
 
-    _editDamage(ev, actor) {
-        new MgT2ChaDialog(actor).render(true);
+    async _editDamage(ev, actor) {
+        if (actor.system.damage) {
+            new MgT2ChaDialog(actor).render(true);
+        } else {
+            // Give the option of switching on damage.
+            let confirm = await foundry.applications.api.DialogV2.confirm({
+                window: { title: "MGT2.Dialog.EnableDamage.Title" },
+                content: `<p>${game.i18n.localize("MGT2.Dialog.EnableDamage.Text")}</p>`
+            })
+            if (confirm) {
+                actor.addDamageValues();
+            }
+        }
     }
 
     /*

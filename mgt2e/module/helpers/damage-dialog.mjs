@@ -48,6 +48,7 @@ export class MgT2DamageDialog extends Application {
             this.radiationDamage = damageOptions.radiation;
             this.actualRadiation = this.radiationDamage - this.armourRads;
         }
+        console.log(data.damage);
 
         this.DMG_STR = data.damage.STR.value;
         this.DMG_DEX = data.damage.DEX.value;
