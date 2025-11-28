@@ -392,7 +392,7 @@ export async function createFaction(worldActor) {
             break;
     }
     let govLevel = await roll("2D6 - 7");
-    govLevel += parseInt(worldActor.system.uwp.population);
+    govLevel += parseInt(worldActor.system.world.uwp.population);
     govLevel = Math.max(0, govLevel);
     let itemData = {
         name: "Faction",
