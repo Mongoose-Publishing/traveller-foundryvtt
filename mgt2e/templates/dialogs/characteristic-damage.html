@@ -1,0 +1,24 @@
+
+<div>
+    <div>
+        {{#if (ifEquals ACTOR.type "npc")}}
+            <button type="button" data-action="disable">{{localize "MGT2.Dialog.CharacteristicDamage.Discard"}}</button>
+        {{/if}}
+        <p>
+            {{localize "MGT2.Dialog.CharacteristicDamage.Text"}}
+        </p>
+        <ol class="grid grid-3col">
+
+            <li class="always"><input type="checkbox" checked readonly><label>STR</label></li>
+            <li class="always"><input type="checkbox" checked readonly><label>DEX</label></li>
+            <li class="always"><input type="checkbox" checked readonly><label>END</label></li>
+
+            {{#each LIST as |cha name|}}
+            <li class="chaItem cha-{{name}}" data-id="{{name}}">
+                <input type="checkbox" name="{{name}}" {{checked cha}}><label>{{name}}</label>
+            </li>
+            {{/each}}
+        </ol>
+    </div>
+</div>
+

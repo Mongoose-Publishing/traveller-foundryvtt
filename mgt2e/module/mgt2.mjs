@@ -102,9 +102,9 @@ Hooks.once('init', async function() {
             console.log(`Setting quickRolls to ${value}`)
         }
     });
-    game.settings.register('mgt2e', 'quickRolls', {
-        name: game.i18n.localize("MGT2.Settings.NPCHits.Name"),
-        hint: game.i18n.localize("MGT2.Settings.NPCHits.Hint"),
+    game.settings.register('mgt2e', 'npcChaDamage', {
+        name: game.i18n.localize("MGT2.Settings.NPCChaDamage.Name"),
+        hint: game.i18n.localize("MGT2.Settings.NPCChaDamage.Hint"),
         scope: 'world',
         config: true,
         type: Boolean,
@@ -561,6 +561,8 @@ Hooks.on("createActor", (actor, data, userId) => {
         actor.update({"prototypeToken.sight.enabled": true});
     } else if ((actor.type === "spacecraft" || actor.type === "vehicle") && game.settings.get("mgt2e", "visionDefaultSpacecraft")) {
         actor.update({"prototypeToken.sight.enabled": true});
+    } else if (actor.type === "npc" && game.settings.get("mgt2e", "npcChaDamage")) {
+        actor.addDamageValues();
     }
 
     if (["taveller", "world"].includes(actor.type)) {

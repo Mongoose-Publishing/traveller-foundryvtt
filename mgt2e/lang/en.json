@@ -49,8 +49,8 @@
   "MGT2.Settings.DefaultTraveller.Hint": "Name of Traveller actor to use for default skills and settings",
   "MGT2.Settings.AutoPlayerCharacter.Name": "Auto set player character",
   "MGT2.Settings.AutoPlayerCharacter.Hint": "If a player creates a new character, automatically set it as their default if they don't yet have a default",
-  "MGT2.Settings.NPCHits.Name": "NPCs use characteristics for damage",
-  "MGT2.Settings.NPCHits.Hint": "By default, NPCs use characteristics for damage like Travellers. Disable this to use a simplified hits system instead",
+  "MGT2.Settings.NPCChaDamage.Name": "NPCs use characteristics for damage",
+  "MGT2.Settings.NPCChaDamage.Hint": "By default, NPCs use characteristics for damage like Travellers. Disable this to use a simplified hits system instead",
 
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",
@@ -1282,6 +1282,11 @@
   "MGT2.Dialog.EnableDamage.Title": "Enable damage for this NPC?",
   "MGT2.Dialog.EnableDamage.Text": "If enabled, then damage will be applied to STR, DEX and END rather than to a single HITS value.",
 
+  "MGT2.Dialog.CharacteristicDamage.Title": "Show Damaged Characteristics",
+  "MGT2.Dialog.CharacteristicDamage.Text": "Select which characteristics to show damage for",
+  "MGT2.Dialog.CharacteristicDamage.Discard": "Revert to using HITS",
+
+
   "MGT2.SpacecraftRepairDialog.Title": "Repair System",
 
   "TYPES.Actor.traveller": "Traveller",
@@ -1303,6 +1308,8 @@
   "TYPES.Item.role": "Crew Role",
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "World Data",
+
+  "Save": "Save",
 
   "TRAVELLER.Add": "Add"
 }
