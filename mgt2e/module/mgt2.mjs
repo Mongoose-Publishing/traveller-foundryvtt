@@ -108,7 +108,7 @@ Hooks.once('init', async function() {
         scope: 'world',
         config: true,
         type: Boolean,
-        default: true
+        default: false
     });
     game.settings.register('mgt2e', 'skillColumns', {
         name: game.i18n.localize("MGT2.Settings.SkillColumns.Name"),
@@ -565,7 +565,7 @@ Hooks.on("createActor", (actor, data, userId) => {
         actor.addDamageValues();
     }
 
-    if (["taveller", "world"].includes(actor.type)) {
+    if (["traveller", "world"].includes(actor.type)) {
         actor.update({"prototypeToken.actorLink": true});
     }
 
