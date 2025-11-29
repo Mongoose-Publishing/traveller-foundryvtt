@@ -311,6 +311,10 @@ export function setTradeCodes(worldActor) {
 }
 
 export async function setCulturalDifferences(worldActor) {
+    if (worldActor.system.description && worldActor.system.description !== '') {
+        return;
+    }
+
     // Look for the "Cultural Differences" roll table.
     let rollTable = game.tables.getName("Cultural Differences");
 
@@ -332,8 +336,16 @@ export async function setCulturalDifferences(worldActor) {
     if (rollTable) {
         if (rollTable) {
             const roll = await rollTable.roll();
-            let text = roll.results[0].text;
-            worldActor.update({ "system.world.extra.culturalDifferences": text });
+            const result = roll.results[0];
+
+            let description = "";
+            if (result.name) {
+                description = `<p><b>${game.i18n.localize("MGT2.WorldSheet.Culture")}: ${result.name}</b></p>`;
+                description += result.description;
+            } else if (result.text) {
+                description = result.text;
+            }
+            worldActor.update({"system.description": description});
         }
     } else {
         worldActor.update({ "system.world.extra.culturalDifferences": "Create a 'Cultural Differences' roll table" });

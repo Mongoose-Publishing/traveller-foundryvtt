@@ -1,14 +1,17 @@
 
 // Look for the named folder. Checks for an i18n version of the folder first.
-export async function getRollTableFolder(folderName) {
+export async function getRollTableFolder(folderName, packName) {
     if (!folderName) {
         return null;
+    }
+    if (packName === null) {
+        packName = "mgt2e.base-tables";
     }
     let folder = await game.tables.folders.getName(`${folderName} ${game.i18n.lang}`);
     if (!folder) {
         folder = await game.tables.folders.getName(folderName);
         if (!folder) {
-            let pack = await game.packs.get("mgt2e.base-tables");
+            let pack = await game.packs.get(packName);
             folder = await pack.folders.getName(folderName);
             if (!folder) {
                 ui.notifications.error(`Unable to find folder [${folderName}] for roll tables`);
