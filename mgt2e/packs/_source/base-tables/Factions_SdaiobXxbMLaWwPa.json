@@ -1,0 +1,209 @@
+{
+  "folder": "iSwBLLghzu3fo1Bz",
+  "name": "Factions",
+  "_id": "SdaiobXxbMLaWwPa",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "description": "<p>Random factions, for use with the world faction generator. This is just a set of examples to use as a base. If you want to expand it, copy the <em>Faction Generator</em> folder into your world, and start editing.</p><p>Note that you can create other tables \"Factions X\" where X is the government code of the faction. These will be used instead of this table if they exist.</p>",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "R9JS0gJvJLj8aPZ7",
+      "text": "A corporation which  is growing in power and openly bashing heads with the government.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.R9JS0gJvJLj8aPZ7"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "_id": "udCTMs7Ho78FglP3",
+      "text": "A religious organisation which is wanting to push its views on the world.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.udCTMs7Ho78FglP3"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "_id": "SZoSWwWJjSXFWTpG",
+      "text": "A shadowy cable of multiple organisations, who don't have an obvious leader.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.SZoSWwWJjSXFWTpG"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "_id": "CKWuyWVV6nHvPcAD",
+      "text": "A group of techno-socialists who believe that information wants to be free.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.CKWuyWVV6nHvPcAD"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "_id": "Xu2e5ZRJxFXlWK9b",
+      "text": "A military faction that believes that projection of military power is what the world needs.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.Xu2e5ZRJxFXlWK9b"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "_id": "p3HzrkFdI3ButemD",
+      "text": "A political faction that believes that it can do a better job than the current government.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.p3HzrkFdI3ButemD"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "_id": "hJgR2898D31c12bb",
+      "text": "A group of animal rights activists.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.hJgR2898D31c12bb"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "_id": "ky8sa6vnf92uVUA9",
+      "text": "A faction within the government that is pushing for extra rights for a particular racial group.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.ky8sa6vnf92uVUA9"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "_id": "eEbzVaFWbeOctYuA",
+      "text": "A corporation that is manipulating things behind the scenes.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.eEbzVaFWbeOctYuA"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "_id": "4pvJ90GqaNzz8pVB",
+      "text": "A green faction looking to protect the environment.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.4pvJ90GqaNzz8pVB"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "_id": "vN1lm86hNld69xRy",
+      "text": "A grass roots organisation made up of young adults trying to fight for better quality of life for themselves.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.vN1lm86hNld69xRy"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "_id": "rlHHZyNhfZUzCLBh",
+      "text": "Organisation founded by offworlders trying to influence politics to favour offworld interests.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {},
+      "_key": "!tables.results!SdaiobXxbMLaWwPa.rlHHZyNhfZUzCLBh"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.8.6-DEV",
+    "createdTime": 1764435525998,
+    "modifiedTime": 1764459310787,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d12",
+  "_key": "!tables!SdaiobXxbMLaWwPa"
+}
