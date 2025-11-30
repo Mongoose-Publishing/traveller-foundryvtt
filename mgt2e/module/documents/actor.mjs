@@ -293,7 +293,9 @@ export class MgT2Actor extends Actor {
         if (actor.type !== 'npc') return;
         const actorData = actor.system;
 
-        if (actorData.hits && actorData.settings.autoHits) {
+        if (actorData.damage) {
+            // Already done in prepareTraveller
+        } else if (actorData.hits && actorData.settings.autoHits) {
             let maxHits = actorData.characteristics.STR?.value +
                 actorData.characteristics.DEX?.value +
                 actorData.characteristics.END?.value;
@@ -573,8 +575,6 @@ export class MgT2Actor extends Actor {
       if (hasTrait(options.traits, "stun")) {
           stun = true;
       }
-      console.log(damage);
-      console.log(options);
 
       if (options.directChaDamage) {
           // Damage it to be applied to specific characteristics, not

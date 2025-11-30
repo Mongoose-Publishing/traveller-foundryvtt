@@ -50,20 +50,20 @@ export class MgT2DamageDialog extends Application {
         }
         console.log(data.damage);
 
-        this.DMG_STR = data.damage.STR.value;
-        this.DMG_DEX = data.damage.DEX.value;
-        this.DMG_END = data.damage.END.value;
+        this.DMG_STR = parseInt(data.damage.STR.value);
+        this.DMG_DEX = parseInt(data.damage.DEX.value);
+        this.DMG_END = parseInt(data.damage.END.value);
 
-        this.STR = data.characteristics.STR.current;
-        this.DEX = data.characteristics.DEX.current;
-        this.END = data.characteristics.END.current;
+        this.STR = parseInt(data.characteristics.STR.current);
+        this.DEX = parseInt(data.characteristics.DEX.current);
+        this.END = parseInt(data.characteristics.END.current);
 
         // For historical reasons 'laser' is the damage type.
         if (data.characteristics[this.laser]) {
-            this.XXX = data.characteristics[this.laser].current;
+            this.XXX = parseInt(data.characteristics[this.laser].current);
             this.XXX_VALUE = this.XXX;
             if (data.damage[this.laser]) {
-                this.DMG_XXX = data.damage[this.laser].value;
+                this.DMG_XXX = parseInt(data.damage[this.laser].value);
             } else {
                 this.DMG_XXX = 0;
                 data.damage[this.laser] = {
@@ -197,13 +197,13 @@ export class MgT2DamageDialog extends Application {
     async doneClick(event, html) {
         event.preventDefault();
 
-        let str = this.getIntValue(html, ".DMG_STR");
-        let dex = this.getIntValue(html, ".DMG_DEX");
-        let end = this.getIntValue(html, ".DMG_END");
+        let str = Math.max(0, this.getIntValue(html, ".DMG_STR") - this.DMG_STR);
+        let dex = Math.max(0, this.getIntValue(html, ".DMG_DEX") - this.DMG_DEX);
+        let end = Math.max(0, this.getIntValue(html, ".DMG_END") - this.DMG_END);
         let xxx = null;
         let damage = 0;
         if (this.XXX) {
-            xxx = this.getIntValue(html, ".DMG_XXX");
+            xxx = Math.max(0, this.getIntValue(html, ".DMG_XXX") - this.DMG_XXX);
             this.damageOptions.characteristics = { };
             this.damageOptions.characteristics[this.laser] = xxx;
             this.damageOptions.directChaDamage = true;

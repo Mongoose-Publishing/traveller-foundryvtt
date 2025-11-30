@@ -4,6 +4,25 @@
 
 * Career terms aren't always added in the correct order.
 
+# Develop (Beta)
+
+* Added some initial Spanish translations
+* Improvements to use of i18n text strings
+* NPCs can now take characteristic damage rather than having a HITS score. This can be
+  toggled for individual NPCs. There is also a setting which controls whether new NPCs
+  use characteristic damage or HITS. Currently defaults to HITS, but will switch in a
+  later release.
+* Updates to the characteristic damage control dialog for actors. Now uses DialogV2,
+  and includes option to toggle damage type for NPCs.
+* Fixes in how some roll tables are processed. V13 makes some backwards incompatible
+  changes to roll tables. Try to allow both V12 and V13 tables.
+* Added a simple faction generator for worlds using roll tables. An example roll table
+  is included in the compendium pack.
+* Fixed bug where faction government type was incorrectly calculated.
+* Fixed bug where Traveller actor types were no longer setting the 'linked actor' flag
+  automatically on their prototype token. Worlds and Travellers automatically have this
+  set to true when the actor is created.
+
 # 0.15.8 (Beta)
 
 * Improvements to chat CSS on Foundry V13.
