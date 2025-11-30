@@ -67,6 +67,7 @@ td.trade-name img {
   width: 32px;
   margin-right: 5px;
   vertical-align: middle;
+  display: inline-block;
 }
 
 span.sale1 {

@@ -363,7 +363,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
     let minDice = dmg.replaceAll(/D6/g, "D1").replaceAll(/d6/g, "D1");
     let redDice = dmg.replaceAll(/D6/g, "D3").replaceAll(/d6/g, "D3");
 
-    const roll = await new Roll(dice, actor?actor.getRollData():null).evaluate();
+    let roll = null;
     let damageRoll = null;
     for (let attack=1; attack <= attacks; attack++) {
         if (attacks > 1) {
@@ -378,6 +378,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
         let effect = 0, attackTotal = 0;
         if (actor) {
             const attackRoll = await new Roll(dice, actor ? actor.getRollData() : null).evaluate();
+            if (!roll) {
+                roll = attackRoll;
+            }
             attackTotal = attackRoll.total;
             effect = attackTotal - 8;
         }
@@ -515,9 +518,13 @@ export async function rollAttack(actor, weapon, attackOptions) {
             }
 
             if (game.settings.get("mgt2e", "splitAttackDamage")) {
+                let splitTitle = `${dmg}`;
+                if (effect > 0) {
+                    splitTitle += ` + ${effect}`;
+                }
                 content += `<button data-options='${json}'
-                                title="Roll Damage"
-                                class="damage-roll-button">Roll Damage ${dmg}</button>`;
+                                title="Click to roll damage"
+                                class="damage-roll-button">Roll Damage ${splitTitle}</button>`;
             } else {
                 content += `<div class="damage-message" data-damage="${damageEffect}" data-options='${json}'>`;
                 content += `<button data-damage="${damageEffect}" data-options='${json}'
@@ -544,19 +551,19 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
     content += "</div>";
 
-    if (actor && !game.settings.get("mgt2e", "splitAttackDamage")) {
+    if (roll && actor && (!game.settings.get("mgt2e", "splitAttackDamage") || attacks > 0)) {
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             content: content,
             rollMode: game.settings.get("core", "rollMode")
         });
-    } else if (actor) {
+    } else if (roll && actor) {
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             flavor: content,
             rollMode: game.settings.get("core", "rollMode")
         });
-    } else {
+    } else if (damageRoll) {
         damageRoll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             flavor: content,
@@ -1030,6 +1037,9 @@ export async function rollSkill(actor, skill, options) {
     if (skillDM !== 0) {
         dice += " + " + skillDM + "[AugDM]";
     }
+    if (specDM !== 0) {
+        dice += " + " + specDM + "[AugDM]";
+    }
     if (options.dm) {
         if (options.dm > 0) {
             dice += " +" + options.dm;
@@ -1120,7 +1130,8 @@ export async function rollSkill(actor, skill, options) {
         if (skill && skill.specialities != null && speciality == null && !noSpeciality) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];
-                if (spec.value > 0) {
+
+                if (spec.value > 0 || spec.augment || spec.augdm || spec.bonus || spec.expert) {
                     let stotal = parseInt(total) + parseInt(spec.value);
                     let slabel = `${skillLabel(spec)} (${spec.value})`;
 
@@ -1128,17 +1139,25 @@ export async function rollSkill(actor, skill, options) {
                     specAug = 0;
                     specBonus = 0;
                     specNotes = "";
+                    if (spec.expert && !isNaN(spec.expert) && parseInt(spec.expert) > 0) {
+                        if (spec.value < parseInt(spec.expert) - 1) {
+                            stotal = parseInt(total) + parseInt(spec.expert) - 1;
+                        } else {
+                            stotal ++;
+                        }
+                        slabel += ` Expert/${spec.expert}`;
+                    }
                     if (spec.augment && !isNaN(spec.augment) && parseInt(spec.augment) !== 0) {
                         stotal += parseInt(spec.augment);
-                        slabel = `${skillLabel(spec)} (${spec.value + spec.augment})`;
+                        slabel += ` (+${augment})`;
                     }
                     if (spec.augdm && !isNaN(spec.augdm) && parseInt(spec.augdm) !== 0) {
                         stotal += parseInt(spec.augdm);
-                        specNotes += `DM ${parseInt(spec.augdm)} `;
+                        specNotes += ` DM ${parseInt(spec.augdm)}`;
                     }
                     if (spec.bonus && !isNaN(spec.bonus) && parseInt(spec.bonus) !== 0) {
                         stotal += parseInt(spec.bonus);
-                        specNotes += `${spec.notes} ${parseInt(spec.bonus)} `
+                        specNotes += ` ${spec.notes} ${parseInt(spec.bonus)}`
                     }
 
                     if (isPerson && defaultCha && spec.default && spec.default !== skill.default) {

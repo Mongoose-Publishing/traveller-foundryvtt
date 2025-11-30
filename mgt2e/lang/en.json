@@ -49,6 +49,8 @@
   "MGT2.Settings.DefaultTraveller.Hint": "Name of Traveller actor to use for default skills and settings",
   "MGT2.Settings.AutoPlayerCharacter.Name": "Auto set player character",
   "MGT2.Settings.AutoPlayerCharacter.Hint": "If a player creates a new character, automatically set it as their default if they don't yet have a default",
+  "MGT2.Settings.NPCChaDamage.Name": "NPCs use characteristics for damage",
+  "MGT2.Settings.NPCChaDamage.Hint": "By default, NPCs use characteristics for damage like Travellers. Disable this to use a simplified hits system instead",
 
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",
@@ -222,6 +224,10 @@
   "MGT2.Skills.untrained": "Untrained",
 
 
+  "MGT2.Edit": "Edit",
+  "MGT2.EditItem": "Edit Item",
+  "MGT2.DeleteItem": "Delete Item",
+
 
 
   "MGT2.TravellerSheet.Player": "Player",
@@ -255,7 +261,8 @@
   "MGT2.TravellerSheet.Prot": "Prot",
   "MGT2.TravellerSheet.Protection": "Prot",
   "MGT2.TravellerSheet.Rad": "Rad",
-  "MGT2.TravellerSheet.Radiation": "Radiation Protection",
+  "MGT2.TravellerSheet.Radiation": "Radiation",
+  "MGT2.TravellerSheet.RadiationShielding": "Radiation Protection",
   "MGT2.TravellerSheet.Energy": "Energy Protection",
   "MGT2.TravellerSheet.EnergyTypes": "Energy Types",
   "MGT2.TravellerSheet.Attacks": "Attacks",
@@ -263,6 +270,11 @@
   "MGT2.TravellerSheet.DamageTaken": "Damage Taken",
   "MGT2.TravellerSheet.HitsRemaining": "Hits Remaining",
   "MGT2.TravellerSheet.Hull": "Hull",
+  "MGT2.TravellerSheet.CEI": "CEI",
+  "MGT2.TravellerSheet.ECEI": "ECEI",
+  "MGT2.TravellerSheet.Morale": "Morale",
+  "MGT2.TravellerSheet.Attack": "Attacks",
+  "MGT2.TravellerSheet.Reload": "Reload",
 
   "MGT2.TravellerSheet.InitThrust": "Thrust",
   "MGT2.TravellerSheet.InitPilot": "Pilot",
@@ -347,7 +359,14 @@
   "MGT2.TravellerSheet.UseCustomDice": "Racial package",
   "MGT2.TravellerSheet.AutoAge": "Auto age",
   "MGT2.TravellerSheet.AutoHits": "Auto HITS",
+  "MGT2.TravellerSheet.AutoHitsTitle": "Automatically calculate hits",
   "MGT2.TravellerSheet.EnforceLimits": "Enforce Limits",
+  "MGT2.TravellerSheet.EnforceLimitsTitle": "Enforce TL limits",
+  "MGT2.TravellerSheet.StandardDesign": "Standard Design",
+  "MGT2.TravellerSheet.StandardDesignTitle": "10% discount on ship cost",
+  "MGT2.TravellerSheet.NavalVessel": "Naval Vessel",
+  "MGT2.TravellerSheet.AddDeck": "Add Deck",
+  "MGT2.TravellerSheet.SpacecraftTypeCode": "Spacecraft type code",
   "MGT2.TravellerSheet.LockUPP": "Lock UPP",
   "MGT2.TravellerSheet.RandomRoll": "Re-roll characteristics (shift for average, ctrl for vary)",
 
@@ -357,6 +376,8 @@
   "MGT2.TravellerSheet.RDriveText": "Reaction Drive thrust.",
   "MGT2.TravellerSheet.PowerText": "Power consumption /\nPower Available",
   "MGT2.TravellerSheet.AddHardwareToSet": "\nSet from Hardware tab.",
+  "MGT2.TravellerSheet.Jump1": "Jump-1",
+  "MGT2.TravellerSheet.Weekly": "Weekly",
 
   "MGT2.WorldSheet.Sector": "Sector",
   "MGT2.WorldSheet.X": "X",
@@ -481,6 +502,7 @@
   "MGT2.WorldSheet.Facility.capital": "Capital Ships",
   "MGT2.WorldSheet.Facility.limited": "Limited",
   "MGT2.WorldSheet.Facility.full": "Full",
+  "MGT2.WorldSheet.Culture": "Culture",
 
   "MGT2.Vehicle.Spaces": "Spaces",
   "MGT2.Vehicle.Chassis": "Chassis",
@@ -1257,6 +1279,28 @@
   "MGT2.Role.BuiltIn.Action.Evade": "Evade",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Make Pilot",
 
+  "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
+  "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",
+  "MGT2.Dialog.EmbarkPassengers": "Embark Passengers",
+  "MGT2.Dialog.TotalAvailable":  "Total Available",
+  "MGT2.Dialog.UnitPrice": "Unit Price",
+  "MGT2.Dialog.AvailableCash": "Available Cash",
+  "MGT2.Dialog.FreeSpace": "Free Space",
+  "MGT2.Dialog.PriceVariant": "Price Variant",
+  "MGT2.Dialog.Quantity": "Quantity",
+  "MGT2.Dialog.Profit": "Profit",
+  "MGT2.Dialog.PassengersAvailable": "Passengers Available",
+  "MGT2.Dialog.AvailableStaterooms": "Available Staterooms",
+  "MGT2.Dialog.TicketPrice": "Ticket Price",
+
+  "MGT2.Dialog.EnableDamage.Title": "Enable damage for this NPC?",
+  "MGT2.Dialog.EnableDamage.Text": "If enabled, then damage will be applied to STR, DEX and END rather than to a single HITS value.",
+
+  "MGT2.Dialog.CharacteristicDamage.Title": "Show Damaged Characteristics",
+  "MGT2.Dialog.CharacteristicDamage.Text": "Select which characteristics to show damage for",
+  "MGT2.Dialog.CharacteristicDamage.Discard": "Revert to using HITS",
+
+
   "MGT2.SpacecraftRepairDialog.Title": "Repair System",
 
   "TYPES.Actor.traveller": "Traveller",
@@ -1278,6 +1322,8 @@
   "TYPES.Item.role": "Crew Role",
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "World Data",
+
+  "Save": "Save",
 
   "TRAVELLER.Add": "Add"
 }

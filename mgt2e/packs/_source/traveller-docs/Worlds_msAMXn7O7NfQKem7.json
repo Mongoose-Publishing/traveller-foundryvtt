@@ -76,6 +76,80 @@
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!msAMXn7O7NfQKem7.kGhA6qpliUs4DBRi"
+    },
+    {
+      "sort": 300000,
+      "name": "Factions",
+      "type": "text",
+      "_id": "aXcOm9h7aOibuHXX",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Factions represent internal divisions on a world. They may be political groups, corporations, religions or nations that are separate from the main government. See the @UUID[Compendium.mgt2e-core.mgt2e-core-docs.JournalEntry.mLitXfWxiPePWZDd.JournalEntryPage.3NiSuEt71bB7qoTx#rivals,-factions,-connections-and-colonies]{World and Universe Creation} chapter of the core rulebook.</p><p>Each faction has a strength (from <em>Obscure</em> to <em>Overwhelming</em>), as well as its own government type.</p><p>If a world has no factions defined, then when the <strong>Generate</strong> button is pressed on a world, a set of random factions will be generated.</p><h2>Faction Tables</h2><p>In the <strong>MgT2e Base Tables</strong> compendium pack, thre is a folder named @UUID[Compendium.mgt2e.base-tables.Folder.iSwBLLghzu3fo1Bz]{Faction Generator}. This contains a roll table which is used to generate some simple random faction descriptions.</p><p>When a faction is created, this table will be used to generate text for the faction.</p><p>If you copy the folder to your world, that the local copy of this folder will be used instead, allowing you to modify and expand the list of factions that will be used.</p><p>The generator will look for a roll table named '<strong>Factions X</strong>', where X is the government code of the faction (from 0 to 12). If one is not found, then it will simply look for the '<strong>Factions</strong>' table in that folder.</p><p>If you want an internationalised version of the tables, then add the language code to the name of the folder, e.g. \"Faction Generator es\" for a Spanish translation of the tables.</p><h3>V13</h3><p>There are differences in how RollTables are used between Foundry v12 and v13. In v12, a roll table simply has a text field. This is used in the description of the faction.</p><p>In v13, they have a name and a description. If you are using v13 you can make use of this for finer grained control over the factions.</p><p>The name is copied into the name of the faction, and the description is copied into the description. Any secret text will only be displayed to the owner of a world.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.15.8.6-DEV",
+        "createdTime": 1764437676231,
+        "modifiedTime": 1764447234294,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!msAMXn7O7NfQKem7.aXcOm9h7aOibuHXX"
+    },
+    {
+      "sort": 400000,
+      "name": "Patrons",
+      "type": "text",
+      "_id": "0PRBgAccLyakpT7G",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Patrons represent interesting people on a world who make provide jobs or plot hooks for the players. Patrons may be marked as private, in which case only the owner of the world can see them.</p><p>Patrons are not full NPCs, they simply have some basic information (name, species and profession) along with a description.</p><p> </p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "mgt2e",
+        "systemVersion": "0.15.8.6-DEV",
+        "createdTime": 1764438296556,
+        "modifiedTime": 1764438394663,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!msAMXn7O7NfQKem7.0PRBgAccLyakpT7G"
     }
   ],
   "sort": 600000,

@@ -6,7 +6,7 @@
   "_id": "a0DEGnaZ8vNn1WHn",
   "description": "",
   "sort": 100000,
-  "color": null,
+  "color": "#ff4f14",
   "flags": {},
   "_stats": {
     "compendiumSource": null,
@@ -15,7 +15,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762550842748,
-    "modifiedTime": 1762550842777,
+    "modifiedTime": 1764447378498,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_key": "!folders!a0DEGnaZ8vNn1WHn"

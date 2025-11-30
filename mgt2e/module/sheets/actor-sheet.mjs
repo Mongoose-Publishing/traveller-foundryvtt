@@ -3,8 +3,6 @@ import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/ef
 import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
 import {MgT2XPDialog } from "../helpers/xp-dialog.mjs";
 import {MgT2QuantityDialog } from "../helpers/quantity-dialog.mjs";
-import {MgT2ChaDialog } from "../helpers/cha-dialog.mjs";
-import {MgT2DamageDialog } from "../helpers/damage-dialog.mjs";
 import {MgT2AddSkillDialog } from "../helpers/add-skill-dialog.mjs";
 import {MgT2CrewMemberDialog } from "../helpers/crew-member-dialog.mjs";
 import {MgT2SpacecraftAttackDialog } from "../helpers/spacecraft-attack-dialog.mjs";
@@ -12,7 +10,6 @@ import {MgT2SpacecraftRepairDialog } from "../helpers/spacecraft-repair-dialog.m
 import {rollSkill} from "../helpers/dice-rolls.mjs";
 import {skillLabel} from "../helpers/dice-rolls.mjs";
 import {MgT2Item} from "../documents/item.mjs";
-import {Tools} from "../helpers/chat/tools.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {NpcIdCard} from "../helpers/id-card.mjs";
 import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
@@ -21,6 +18,7 @@ import {
     fuelCost,
     sellCargoDialog
 } from "../helpers/spacecraft/spacecraft-utils.mjs";
+import {MgT2CharacteristicDamageApp} from "../helpers/dialogs/characteristic-damage.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -2648,8 +2646,19 @@ export class MgT2ActorSheet extends ActorSheet {
         }
     }
 
-    _editDamage(ev, actor) {
-        new MgT2ChaDialog(actor).render(true);
+    async _editDamage(ev, actor) {
+        if (actor.system.damage) {
+            new MgT2CharacteristicDamageApp(actor).render(true);
+        } else {
+            // Give the option of switching on damage.
+            let confirm = await foundry.applications.api.DialogV2.confirm({
+                window: { title: "MGT2.Dialog.EnableDamage.Title" },
+                content: `<p>${game.i18n.localize("MGT2.Dialog.EnableDamage.Text")}</p>`
+            })
+            if (confirm) {
+                actor.addDamageValues();
+            }
+        }
     }
 
     /*

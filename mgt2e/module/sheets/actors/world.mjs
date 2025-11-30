@@ -6,8 +6,10 @@ import {
     createSpeculativeGoods,
     distanceBetweenWorlds, tradeDisembarkPassengerHandler
 } from "../../helpers/utils/trade-utils.mjs";
-import {createWorld, setTradeCodes, worldDropBrokerHandler} from "../../helpers/utils/world-utils.mjs";
+import {createFaction, createWorld, setTradeCodes, worldDropBrokerHandler} from "../../helpers/utils/world-utils.mjs";
 import {MGT2} from "../../helpers/config.mjs";
+import {getFromNamedTable, getRollTableFolder} from "../../helpers/utils/table-utils.mjs";
+import {roll} from "../../helpers/dice-rolls.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
     static get defaultOptions() {
@@ -273,28 +275,12 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         });
         html.find('.faction-add').click(ev => {
            // Add faction
-            this._createFaction();
+            createFaction(this.actor);
         });
         html.find('.patron-add').click(ev => {
             // Add Patron
             this._createPatron();
         });
-    }
-
-    async _createFaction() {
-        console.log("_createFaction:");
-        let itemData = {
-            name: "Faction",
-            type: "worlddata",
-            system: {
-                world: {
-                    datatype: "faction",
-                    government: 7,
-                    strength: "minor"
-                }
-            }
-        };
-        Item.create(itemData, { parent: this.actor });
     }
 
     async _createPatron() {

@@ -255,10 +255,14 @@ Tools.rollSplitDamage = async function(damageOptions) {
     damageOptions.damage = baseDamage;
     let damageEffect = baseDamage + effect;
     let titleText = "Now the damage has been rolled";
+    let splitTitle = `${dice}`;
+    if (effect > 0) {
+        splitTitle += ` + ${effect}`;
+    }
 
     let json = JSON.stringify(damageOptions);
     let content = `<div class="attack-message">`;
-    content += `<h2>Roll ${dice} Damage</h2>`;
+    content += `<h2>Roll ${splitTitle} Damage</h2>`;
 
     content += `<div class="message-content"><div>`;
     if (actor) {

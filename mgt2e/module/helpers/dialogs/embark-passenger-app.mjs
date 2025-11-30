@@ -31,7 +31,7 @@ export class MgT2EmbarkPassengerApp extends HandlebarsApplicationMixin(Applicati
             changeQuantity: MgT2EmbarkPassengerApp.changeQuantityAction
         },
         window: {
-            title: "Embark Passengers"
+            title: "MGT2.Dialog.EmbarkPassengers"
         }
     }
 

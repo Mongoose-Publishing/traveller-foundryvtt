@@ -1,0 +1,22 @@
+{
+  "name": "Faction Generator",
+  "sorting": "a",
+  "folder": null,
+  "type": "RollTable",
+  "_id": "iSwBLLghzu3fo1Bz",
+  "description": "",
+  "sort": 0,
+  "color": "#ff4f14",
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.15.8.6-DEV",
+    "createdTime": 1764435473996,
+    "modifiedTime": 1764447383569,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!iSwBLLghzu3fo1Bz"
+}

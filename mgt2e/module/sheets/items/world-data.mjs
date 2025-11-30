@@ -1,5 +1,6 @@
 import {MgT2ItemSheet} from "../item-sheet.mjs";
 import {roll2D6} from "../../helpers/dice-rolls.mjs";
+import {getFromNamedTable} from "../../helpers/utils/table-utils.mjs";
 
 export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
     static get defaultOptions() {
@@ -61,6 +62,22 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
         context.worldData = worldData;
 
         return context;
+    }
+
+    // Inside the "Generate Faction" folder, expects to see:
+    //   Faction Name <govCode>
+    //   Faction Text <govCode>
+    generateFaction(worldActor) {
+        let factionFolder = "Faction Generator";
+
+        let result = getFromNamedTable(factionFolder, "Faction", worldActor.system.world.uwp.government);
+        console.log(result);
+        if (result) {
+            this.item.update({"system.description": result.text })
+            if (result.name) {
+                this.item.update({"name": result.name });
+            }
+        }
     }
 
     activateListeners(html) {

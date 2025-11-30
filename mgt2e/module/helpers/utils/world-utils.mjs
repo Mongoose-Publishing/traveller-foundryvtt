@@ -4,6 +4,7 @@
 import {roll, roll2D6} from "../dice-rolls.mjs";
 import {roll1D6} from "../dice-rolls.mjs";
 import {MGT2} from "../config.mjs";
+import {getFromNamedTable, getRollTableFolder} from "./table-utils.mjs";
 
 
 
@@ -310,6 +311,10 @@ export function setTradeCodes(worldActor) {
 }
 
 export async function setCulturalDifferences(worldActor) {
+    if (worldActor.system.description && worldActor.system.description !== '') {
+        return;
+    }
+
     // Look for the "Cultural Differences" roll table.
     let rollTable = game.tables.getName("Cultural Differences");
 
@@ -331,12 +336,99 @@ export async function setCulturalDifferences(worldActor) {
     if (rollTable) {
         if (rollTable) {
             const roll = await rollTable.roll();
-            let text = roll.results[0].text;
-            worldActor.update({ "system.world.extra.culturalDifferences": text });
+            const result = roll.results[0];
+
+            let description = "";
+            if (result.name) {
+                description = `<p><b>${game.i18n.localize("MGT2.WorldSheet.Culture")}: ${result.name}</b></p>`;
+                description += result.description;
+            } else if (result.text) {
+                description = result.text;
+            }
+            worldActor.update({"system.description": description});
         }
     } else {
         worldActor.update({ "system.world.extra.culturalDifferences": "Create a 'Cultural Differences' roll table" });
     }
+}
+
+export async function createPatron(worldActor) {
+    let itemData = {
+        name: "Patron",
+        type: "worlddata",
+        system: {
+            world: {
+                datatype: "patron",
+                hidden: true,
+                species: "Human",
+                profession: "Patron"
+            }
+        }
+    };
+    let patronFolder = await getRollTableFolder("Patron Generator");
+    if (patronFolder) {
+        let result = await getFromNamedTable(factionFolder, "Patrons", worldActor.system.world.uwp.lawLevel);
+        if (result) {
+            itemData.system.description = result.text;
+            if (result.name) {
+                itemData.name = result.name;
+            }
+        }
+    }
+
+    Item.create(itemData, { parent: worldActor });
+}
+
+// Create a faction. If there is a suitable roll table, we also randomly select
+// some text for that faction.
+export async function createFaction(worldActor) {
+    let factionStrength = "";
+    switch (await roll("2D6")) {
+        case 2: case 3:
+            factionStrength = "obscure";
+            break;
+        case 4: case 5:
+            factionStrength = "fringe";
+            break;
+        case 6: case 7:
+            factionStrength = "minor";
+            break;
+        case 8: case 9:
+            factionStrength = "notable";
+            break;
+        case 10: case 11:
+            factionStrength = "significant";
+            break;
+        case 12:
+            factionStrength = "overwhelming";
+            break;
+    }
+    let govLevel = await roll("2D6 - 7");
+    govLevel += parseInt(worldActor.system.world.uwp.population);
+    govLevel = Math.max(0, govLevel);
+    let itemData = {
+        name: "Faction",
+        type: "worlddata",
+        system: {
+            world: {
+                datatype: "faction",
+                government: govLevel,
+                strength: factionStrength
+            }
+        }
+    };
+    let factionFolder = await getRollTableFolder("Faction Generator");
+    if (factionFolder) {
+        let result = await getFromNamedTable(factionFolder, "Factions", itemData.system.world.government);
+        if (result) {
+            itemData.system.description = result.text;
+            if (result.name) {
+                itemData.name = result.name;
+            }
+        }
+    }
+
+    await Item.create(itemData, { parent: worldActor });
 }
 
 export async function setFactions(worldActor) {
@@ -356,42 +448,7 @@ export async function setFactions(worldActor) {
 
     let numFactions = await roll(dice);
     for (let f=0; f < numFactions; f++) {
-        let strength = "";
-        switch (await roll("2D6")) {
-            case 2: case 3:
-                strength = "obscure";
-                break;
-            case 4: case 5:
-                strength = "fringe";
-                break;
-            case 6: case 7:
-                strength = "minor";
-                break;
-            case 8: case 9:
-                strength = "notable";
-                break;
-            case 10: case 11:
-                strength = "significant";
-                break;
-            case 12:
-                strength = "overwhelming";
-                break;
-        }
-
-        const itemData = {
-            "name": "World Faction",
-            "img": "",
-            "type": "worlddata",
-            "system": {
-                "description": "World Faction",
-                "world": {
-                    "datatype": "faction",
-                    "government": await roll("2D6"),
-                    "strength": strength
-                }
-            }
-        }
-        await Item.create(itemData, { parent: worldActor });
+        createFaction(worldActor);
     }
 }
 

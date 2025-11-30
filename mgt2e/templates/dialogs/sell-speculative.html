@@ -3,17 +3,17 @@
         <h2>{{item.name}}</h2>
 
         <p>
-            <b>Total Available:</b> {{prettyNumber item.system.quantity 0 false}}dt
+            <b>{{localize "MGT2.Dialog.TotalAvailable"}}:</b> {{prettyNumber item.system.quantity 0 false}}dt
         </p>
         <p>
-            <b>Unit Price:</b> Cr{{prettyNumber salePrice 0 false}}
+            <b>{{localize "MGT2.Dialog.UnitPrice"}}:</b> Cr{{prettyNumber salePrice 0 false}}
         </p>
         <p>
-            <b>Profit:</b> Cr{{prettyNumber profit 0 true}}
+            <b>{{localize "MGT2.Dialog.Profit"}}:</b> Cr{{prettyNumber profit 0 true}}
         </p>
 
         <p>
-            <label>Quantity
+            <label>{{localize "MGT2.Dialog.Quantity"}}
                 <select class="quantity_select" name="quantitySelect">
                     {{selectOptions QUANTITY_LIST selected=qty}}
                 </select>

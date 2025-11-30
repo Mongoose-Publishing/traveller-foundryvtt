@@ -1,7 +1,7 @@
 {
   "name": "Scale Worlds",
   "type": "script",
-  "command": "// For any world tokens selected, it will scale them to the\n// right size given their UWP diameter and the grid size of\n// the scene. Assumes that the grid scale is in kilometres.\n\nlet selected = canvas.tokens.controlled;\n\n\nfor (let token of selected) {\n  let type = token.document.actor.type;\n  if (type === \"world\") {\n    let diameter = token.document.actor.system.world.uwp.size;\n\n    let px = canvas.scene.grid.size;\n    let d = canvas.scene.grid.distance;\n\n    let w = parseInt((diameter * 1600) / d);\n    if (w < 1) {\n      w = 0.5;\n    } else if (w > 50) {\n      w = 50;\n    }\n\n    token.document.update({\"height\": w});\n    token.document.update({\"width\": w});\n  }\n}",
+  "command": "// For any world tokens selected, it will scale them to the\n// right size given their UWP diameter and the grid size of\n// the scene. Assumes that the grid scale is in kilometres.\n\nlet selected = canvas.tokens.controlled;\n\n\nfor (let token of selected) {\n  let type = token.document.actor.type;\n  if (type === \"world\") {\n    let diameter = token.document.actor.system.world.uwp.size;\n\n    let px = canvas.scene.grid.size;\n    let d = canvas.scene.grid.distance;\n\n    let w = parseInt((diameter * 1600) / d);\n    if (w < 1) {\n      w = 0.5;\n    } else if (w > 50) {\n      w = 50;\n    }\n\n    await token.document.update({\"height\": w});\n    await token.document.update({\"width\": w});\n  }\n}",
   "img": "systems/mgt2e/icons/macros/scale-worlds.svg",
   "author": "mhUjqDVicnwIUaiq",
   "scope": "global",
@@ -18,7 +18,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.15.5.6-DEV",
     "createdTime": 1763500622768,
-    "modifiedTime": 1763506041457,
+    "modifiedTime": 1763982270059,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "qaDapPxzkNdklekX",
