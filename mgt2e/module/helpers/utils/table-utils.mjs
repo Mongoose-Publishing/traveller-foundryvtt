@@ -4,7 +4,7 @@ export async function getRollTableFolder(folderName, packName) {
     if (!folderName) {
         return null;
     }
-    if (packName === null) {
+    if (!packName) {
         packName = "mgt2e.base-tables";
     }
     let folder = await game.tables.folders.getName(`${folderName} ${game.i18n.lang}`);
@@ -12,6 +12,10 @@ export async function getRollTableFolder(folderName, packName) {
         folder = await game.tables.folders.getName(folderName);
         if (!folder) {
             let pack = await game.packs.get(packName);
+            if (pack === null) {
+                console.log(`Cannot find pack '${packName}'`);
+                return null;
+            }
             folder = await pack.folders.getName(folderName);
             if (!folder) {
                 ui.notifications.error(`Unable to find folder [${folderName}] for roll tables`);
