@@ -4,7 +4,7 @@
 
 * Career terms aren't always added in the correct order.
 
-# Develop (Beta)
+# 0.16.0 (Beta)
 
 * Added some initial Spanish translations
 * Improvements to use of i18n text strings
