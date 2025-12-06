@@ -2123,8 +2123,13 @@ Handlebars.registerHelper('showBases', function(key, bases) {
     for (let i in list) {
         if (list[i].length > 0) {
             let base = list[i].trim();
-            html += `<span class='pill world-pill' data-base-id='${base}' title='${game.i18n.localize("MGT2.WorldSheet.Bases."+base)}'>`;
-            html += `&nbsp;${game.i18n.localize("MGT2.WorldSheet.Bases." + base)} `;
+            if (MGT2.WORLD.bases[base]) {
+                html += `<span class='pill world-pill' data-base-id='${base}' title='${game.i18n.localize("MGT2.WorldSheet.Bases." + base)}'>`;
+                html += `&nbsp;${game.i18n.localize("MGT2.WorldSheet.Bases." + base)} `;
+            } else {
+                html += `<span class='pill world-pill' data-base-id='${base}'>`;
+                html += `&nbsp;${base} `;
+            }
             if (key.owner) {
                 html += `&nbsp;<i class="fas fa-xmark base-remove"> </i>`;
             } else {
