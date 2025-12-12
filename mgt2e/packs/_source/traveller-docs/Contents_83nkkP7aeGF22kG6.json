@@ -15,7 +15,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img style=\"border:none\" src=\"systems/mgt2e/images/traveller-alpha.png\" width=\"300\" class=\" centered\" /><p>This is a FoundryVTT system for <strong>Mongoose Traveller 2e</strong>. It provides character sheets and support for game rules. The core system does not contain much in the way of 'content', in the form of equipment lists.</p><p>The below documentation covers how to use the Foundry System with Traveller. It doesn't describe the Traveller rules themselves.</p><p></p><h2>Contents</h2><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.I3AuPYIeiMu19Rli]{Characters and Skills}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.s8DAOTe8r1s1TE7k]{Creating and Using Items}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.daLn8GLKHRgnJBax]{Chat Commands}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.XqtcLHYC383iXuNo]{Spacecraft}</p><p></p><h2>Further Help</h2><p>If you have questions, bugs or need help, then there are a couple of good places to go:</p><ul><li><p><a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/issues\">GitHub Issue Tracker</a></p></li><li><p><a href=\"https://discord.gg/vmDRBCJw\">Traveller Discord</a></p></li></ul><p></p><p></p>",
+        "content": "<img src=\"systems/mgt2e/images/traveller-sunburst.svg\" class=\" centered\" width=\"300\" /><p>This is a FoundryVTT system for <strong>Mongoose Traveller 2e</strong>. It provides character sheets and support for game rules. The core system does not contain much in the way of 'content', in the form of equipment lists.</p><p>The below documentation covers how to use the Foundry System with Traveller. It doesn't describe the Traveller rules themselves.</p><p></p><h2>Contents</h2><p>@UUID[.mXeFfBZITS7IkfPU]{Recent Changes}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.V8trIYLYHch6WjEo]{Introduction}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.daLn8GLKHRgnJBax]{Chat Commands}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.XqtcLHYC383iXuNo]{Spacecraft}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.b3GTINzvb5g0tz9H]{Core Rules}</p><p></p><p></p><h2>Further Help</h2><p>If you have questions, bugs or need help, then there are a couple of good places to go:</p><ul><li><p><a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/issues\">GitHub Issue Tracker</a></p></li><li><p><a href=\"https://discord.gg/vmDRBCJw\">Traveller Discord</a></p></li></ul><p></p><p></p>",
         "markdown": ""
       },
       "video": {
@@ -32,10 +32,10 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.10.1",
-        "coreVersion": "12.331",
+        "coreVersion": "12.343",
         "createdTime": 1717857026252,
-        "modifiedTime": 1765227649805,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq",
+        "modifiedTime": 1765548775991,
+        "lastModifiedBy": "Zj6ESAn9IiciiMCF",
         "compendiumSource": null,
         "duplicateSource": null
       },
@@ -91,7 +91,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>A number of art assets are included with the system.</p><h2>Images</h2><p>Images are mostly for use as tokens on a map.</p><h3>Spacecraft</h3><p>There are tokens available for some of the most common spacecraft found in the Third Imperium. These are each available in eight different colours.</p><p>The tokens are at a scale of 256px per square, and are scaled according to the size of the spacecraft, following a logorithmic scale.</p><p>This token size isn't enforced, but gives a reasonable indication of the size of vessels when using the tokens on a map for spacecombat.</p><table><tbody><tr><td><p><strong>Spacecraft Tonnage</strong></p></td><td><p><strong>Token Size</strong></p></td></tr><tr><td><p>1-29t</p></td><td><p>1x1 square</p></td></tr><tr><td><p>30-99t</p></td><td><p>2x2 squares</p></td></tr><tr><td><p>100-299t</p></td><td><p>3x3 squares</p></td></tr><tr><td><p>300-999t</p></td><td><p>4x4 squares</p></td></tr><tr><td><p>1,000t+</p></td><td><p>5x5 squares</p></td></tr></tbody></table><p>Note that these tokens are scaled down from the original SVG artwork, where they are sized at 256px per 1.5m for character scale.</p><p>The original art is available <a href=\"https://gitlab.com/samuelpenn/spacecraft-dungeondraft/-/tree/main/src/objects?ref_type=heads\">available here</a>.</p><p></p><h3>Vehicles</h3><p>Vehicle tokens are also provided. These are also at 256px per square, and available in a range of colours. These are sized to fit alongside character tokens on a map, so use 1.5m per 256px.</p><p></p><h2>Icons</h2><p>Icons are designed for items or as graphical icons.</p><p></p>"
+        "content": "<p>The MgT2e system comes with a number of assets included, to aid in running a game of Traveller. Some of these are tokens, others are icons, or artwork to decorate a landing page with.</p><h2>Images</h2><p>Within the systems/mgt2e/images/ folder are a number of tokens.</p><h3>Spacecraft</h3><p>There are tokens available for some of the most common spacecraft found in the Third Imperium. These are each available in eight different shades. Each of the ships described in the core rules are included. Tokens for other ships will eventually be available in the High Guard supplement.</p><p></p><img src=\"systems/mgt2e/images/tokens/spacecraft/black/close_escort.webp\" title=\"Close Escort\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/empress_marava.webp\" title=\"Empress Marava\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/far_trader.webp\" title=\"Far Trader\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/free_trader.webp\" title=\"Free Trader width=\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/gig.webp\" title=\"Gig\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/lab_ship.webp\" title=\"Laboratory SHip\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/launch.webp\" title=\"Launch\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/light_fighter.webp\" title=\"Light Fighter\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/mercenary_cruiser.webp\" title=\"Mercenary Cruiser\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/military_gig.webp\" title=\"Military Gig\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/passenger_shuttle.webp\" title=\"Passenger Shuttle\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/patrol_corvette.webp\" title=\"Patrol Corvette\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/pinnace.webp\" title=\"Pinnace\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/planetoid.webp\" title=\"Planetoid\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/safari_ship.webp\" title=\"Safari Ship\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/scout.webp\" title=\"Scout\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/seeker.webp\" title=\"Seeker\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/ships_boat.webp\" title=\"Ship's Boat\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/shuttle.webp\" title=\"Shuttle\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/slow_boat.webp\" title=\"Slow Boat\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/slow_pinnace.webp\" title=\"Slow Pinnace\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/subsidised_liner.webp\" title=\"Subsidised Liner\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/subsidised_merchant.webp\" title=\"Subsidised Merchant\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/survey_scout.webp\" title=\"Survey Scout\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/system_defence_boat.webp\" title=\"System Defence Boat\" width=\"128\" height=\"128\" /><img src=\"systems/mgt2e/images/tokens/spacecraft/black/yacht.webp\" title=\"Yacht\" width=\"128\" height=\"128\" /><p></p><p>The tokens are not drawn to a linear scale. Larger ships will have a larger token, but the scale is logarithmic. A ship that is less than 30t has a token 256px (designed to be one square) wide. Every ten fold increase in mass increases the size of the token by 2 squares.</p><p>This token size isn't enforced, but gives a reasonable indication of the size of vessels when using the tokens on a map for spacecombat.</p><table><tbody><tr><td><p><strong>Spacecraft Tonnage</strong></p></td><td><p><strong>Token Size</strong></p></td></tr><tr><td><p>1-29t</p></td><td><p>1x1 square</p></td></tr><tr><td><p>30-99t</p></td><td><p>2x2 squares</p></td></tr><tr><td><p>100-299t</p></td><td><p>3x3 squares</p></td></tr><tr><td><p>300-999t</p></td><td><p>4x4 squares</p></td></tr><tr><td><p>1,000t+</p></td><td><p>5x5 squares</p></td></tr></tbody></table><p>Note that these tokens are scaled down from the original SVG artwork, where they are sized at 256px per 1.5m for character scale.</p><p>The original art is available <a href=\"https://gitlab.com/samuelpenn/spacecraft-dungeondraft/-/tree/main/src/objects?ref_type=heads\">available here</a>.</p><p></p><h3>Vehicles</h3><p>Vehicle tokens are also provided. These are also at 256px per square, and available in a range of colours. These are sized to fit alongside character tokens on a map, so use 1.5m per 256px. Many are based on the vehicles described in the core rules. Actual sizes aren't give, so the token sizes are very much a guess based on what seems reasonable.</p><p></p><img src=\"systems/mgt2e/images/tokens/vehicles/black/8_wheeled_atv.webp\" width=\"128\" /><p></p><p></p><h2>Icons</h2><p>Icons are designed for items or as graphical icons.</p><p></p>"
       },
       "video": {
         "controls": true,
@@ -106,12 +106,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "12.343",
         "systemId": "mgt2e",
         "systemVersion": "0.11.8.5-DEV",
         "createdTime": 1740349712645,
-        "modifiedTime": 1765228487804,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+        "modifiedTime": 1765560401442,
+        "lastModifiedBy": "Zj6ESAn9IiciiMCF"
       },
       "_key": "!journal.pages!83nkkP7aeGF22kG6.w3pCgGRMfD9DxJH5"
     },
@@ -128,7 +128,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Added upgrade message to the chat, to publish where the documentation can be found, and what the latest changes are.</p></li><li><p>Tidied up some of the images and icons that are shipped with the system, removing some which are no longer wanted.</p></li></ul>"
       },
       "video": {
         "controls": true,
@@ -143,12 +143,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "12.343",
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1765235166599,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+        "modifiedTime": 1765545274606,
+        "lastModifiedBy": "Zj6ESAn9IiciiMCF"
       },
       "_key": "!journal.pages!83nkkP7aeGF22kG6.mXeFfBZITS7IkfPU"
     },
