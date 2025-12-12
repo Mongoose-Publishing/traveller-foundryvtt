@@ -255,7 +255,7 @@ Hooks.once('init', async function() {
     CONFIG.ActiveEffect.legacyTransferral = false;
 
     // Add custom constants for configuration.
-  CONFIG.MGT2 = MGT2;
+    CONFIG.MGT2 = MGT2;
 
   /**
    * Set an initiative formula for the system
@@ -465,7 +465,10 @@ Hooks.on('ready', () => {
 
         Tools.requestedSkillCheck(skillFqn, skillOptions);
     });
+
 });
+
+
 
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
     if (message.indexOf("/upp") === 0) {
@@ -2295,5 +2298,19 @@ Handlebars.registerHelper("showEffectPill", function(actor, effect) {
 /* -------------------------------------------- */
 
 Hooks.once("ready", async function() {
+    if (game.user.isGM) {
+        let v = game.system.version;
+
+        if (foundry.utils.isNewerVersion(v, "0.16.0")) {
+            let d = await fromUuid("Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6.JournalEntryPage.mXeFfBZITS7IkfPU");
+            if (d && d.text && d.text.content) {
+                let text = `<h1>MgT2e ${v}</h1>${d.text.content}`;
+                let chatData = {
+                    content: text
+                };
+                ChatMessage.create(chatData, {});
+            }
+        }
+    }
 });
 
