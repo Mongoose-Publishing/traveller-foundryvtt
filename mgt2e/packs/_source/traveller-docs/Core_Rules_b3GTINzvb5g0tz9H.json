@@ -31,7 +31,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.0",
         "createdTime": 1765318322148,
@@ -68,7 +68,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.0",
         "createdTime": 1765318340389,
@@ -90,7 +90,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": ""
+        "content": "<p>Combat is implemented in as much as attacks can be made, damage rolled and applied to Travellers, Creatures and Vehicles.</p><h2>Some Assumptions</h2><h3>Battle Maps</h3><p>Unlike some other game systems, Traveller doesn't require the use of battle maps in a game at all. Many players and GMs use Theatre of the Mind, using tokens on a scene only to track damage and list the available targets.</p><p>Some people struggle to imagine scenes in their head though, or just prefer to have a pretty map with well defined placement of characters and enemies. If using such a 'battle map', whether you use a grid or not is optional.</p><p>The MgT2e system doesn't enforce either, though there are some features that will make use of a scaled map if you are using one.</p><p>The general assumption is a 1.5m grid (square or hex), but again this is not enforced.</p><h4>Some Map Features</h4><h5>Making Attacks</h5><p>When making an attack, if you have a single token selected, then that token will be assumed to be the one making the attack.</p><p>If you have other tokens selected as targets (press 'T' when hovering over them), then these will be assumed as potential targets.</p><p>This allows the attack dialog to display the distance to each target, allowing you to more easily select the range of an attack.</p><h5>Grenades</h5><p>If the damage from a grenade, or other weapon with a blast radius, is dragged onto a map, then the blast radius will be automatically displayed on the map.</p><p>If the attack missed, then there is a world setting to allow for random displacement. However, this doesn't account for walls.</p><p></p>"
       },
       "video": {
         "controls": true,
@@ -105,12 +105,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "12.343",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.0",
         "createdTime": 1765318344101,
-        "modifiedTime": 1765318385255,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+        "modifiedTime": 1765707768285,
+        "lastModifiedBy": "Zj6ESAn9IiciiMCF"
       },
       "_key": "!journal.pages!b3GTINzvb5g0tz9H.KlmiZrvBGDx1E0BL"
     },
@@ -142,7 +142,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.0",
         "createdTime": 1765318354669,
@@ -179,7 +179,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.0",
         "createdTime": 1765318363333,
@@ -201,7 +201,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>This journal covers how MgT2e implements the various rules in Mongoose Traveller 2e. Not all rules are implemented, and some are allowed but not implemented.</p><p>This journal doesn't cover what the rules <em>are</em>, it's not a replacement for the Core Rules book. When used in reference with that book (soon to be available as a Compendium), it should help guide how to use Foundry with Mongoose Traveller.</p><p></p>"
+        "content": "<p>This journal covers how MgT2e implements the various rules in Mongoose Traveller 2e. Not all rules are implemented, and of those that are, they may not be enforced. This isn't a computer game, but a TTRPG that happens to run on a computer. Where possible, some things are implemented so that the GM and Players are allowed to interpret exactly what happens.</p><p>This journal doesn't cover what the rules <em>are</em>, it's not a replacement for the Core Rules book. When used in reference with that book (soon to be available as a Compendium), it should help guide how to use Foundry with Mongoose Traveller.</p><p></p>"
       },
       "video": {
         "controls": true,
@@ -216,12 +216,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "12.343",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.0",
         "createdTime": 1765318381335,
-        "modifiedTime": 1765318508439,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+        "modifiedTime": 1765704520442,
+        "lastModifiedBy": "Zj6ESAn9IiciiMCF"
       },
       "_key": "!journal.pages!b3GTINzvb5g0tz9H.mQKPrptWzDezOlvB"
     },
@@ -253,7 +253,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406829663,
@@ -290,7 +290,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406835213,
@@ -327,7 +327,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406839412,
@@ -364,7 +364,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406844059,
@@ -401,7 +401,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406848650,
@@ -438,7 +438,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406857492,
@@ -475,7 +475,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406861294,
@@ -512,7 +512,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406901932,
@@ -531,7 +531,7 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.348",
     "systemId": "mgt2e",
     "systemVersion": "0.16.1.0",
     "createdTime": 1765318280115,

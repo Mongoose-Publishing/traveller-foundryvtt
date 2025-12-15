@@ -30,13 +30,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.15.0.0",
         "createdTime": null,
         "modifiedTime": 1760203726308,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
+        "exportSource": null
       },
+      "category": null,
       "_key": "!journal.pages!eMNMnFAdboIQ1bUH.oozZrB5PZ7XsWNNU"
     }
   ],
@@ -46,21 +48,21 @@
     "mhUjqDVicnwIUaiq": 3
   },
   "flags": {
-    "core": {
-      "sourceId": "Compendium.mongoose-traveller-core.traveller-rules.JournalEntry.jTNzNT72bGa9feD7"
-    }
+    "core": {}
   },
   "_stats": {
     "compendiumSource": "Compendium.mongoose-traveller-core.traveller-rules.JournalEntry.jTNzNT72bGa9feD7",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.348",
     "systemId": "mgt2e",
     "systemVersion": "0.15.0.0",
     "createdTime": 1759532800850,
     "modifiedTime": 1760087298700,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "_id": "eMNMnFAdboIQ1bUH",
   "sort": 100000,
+  "categories": [],
   "_key": "!journal!eMNMnFAdboIQ1bUH"
 }

@@ -61,6 +61,13 @@ Hooks.once('init', async function() {
         default: 0
     });
 
+    game.settings.register("mgt2e", "lastVersionReported", {
+        config: false,
+        scope: "world",
+        type: String,
+        default: "0.0.0"
+    });
+
     game.settings.register('mgt2e', 'verboseSkillRolls', {
         name: game.i18n.localize("MGT2.Settings.Verbose.Name"),
         hint: game.i18n.localize("MGT2.Settings.Verbose.Hint"),
@@ -2299,17 +2306,22 @@ Handlebars.registerHelper("showEffectPill", function(actor, effect) {
 
 Hooks.once("ready", async function() {
     if (game.user.isGM) {
-        let v = game.system.version;
+        let currentVersion = game.system.version;
+        let lastVersion = game.settings.get("mgt2e", "lastVersionReported");
 
-        if (foundry.utils.isNewerVersion(v, "0.16.0")) {
+        if (foundry.utils.isNewerVersion(currentVersion, lastVersion)) {
+            let text = "";
             let d = await fromUuid("Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6.JournalEntryPage.mXeFfBZITS7IkfPU");
             if (d && d.text && d.text.content) {
-                let text = `<h1>MgT2e ${v}</h1>${d.text.content}`;
-                let chatData = {
-                    content: text
-                };
-                ChatMessage.create(chatData, {});
+                text = `<h1>MgT2e ${currentVersion}</h1>${d.text.content}`;
+            } else {
+                text = `<p>Upgraded to ${currentVersion}`;
             }
+            let chatData = {
+                content: text
+            };
+            ChatMessage.create(chatData, {});
+            game.settings.set("mgt2e", "lastVersionReported", currentVersion);
         }
     }
 });
