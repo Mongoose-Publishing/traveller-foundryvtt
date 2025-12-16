@@ -162,7 +162,7 @@ Hooks.once('init', async function() {
         name: game.i18n.localize("MGT2.Settings.AutoResizeSpacecraft.Name"),
         hint: game.i18n.localize("MGT2.Settings.AutoResizeSpacecraft.Hint"),
         scope: 'world',
-        config: true,
+        config: false,
         type: Boolean,
         default: true
     });
