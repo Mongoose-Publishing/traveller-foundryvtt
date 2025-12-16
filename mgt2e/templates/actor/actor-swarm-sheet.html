@@ -1,7 +1,12 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
     <div class="salvo shadow grid grid-5col">
         <div>
-            {{shipActor.name}}
+            <img class="profile-img actor-draggable" data-actor-id="{{actor._id}}" src="{{actor.img}}" width="96" height="96"/>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">TL</label>
+            <input class="field-value" type="text" name="system.salvo.tl"
+                   value="{{system.salvo.tl}}"/>
         </div>
         <div class="resource flex-group-center">
             <label class="field-label">Salvo Size</label>
@@ -11,7 +16,7 @@
         <div class="resource flex-group-center">
             <label class="field-label">Thrust</label>
             <input class="field-value" type="text"  name="system.salvo.thrust"
-                value="{{system.thrust}}"/>
+                value="{{system.salvo.thrust}}"/>
         </div>
         <div class="resource flex-group-center">
             <label class="field-label">Endurance</label>
@@ -22,6 +27,13 @@
             <label class="field-label">Damage</label>
             <input class="field-value" type="text" name="damage"
                    value="{{damage}}"/>
+        </div>
+
+        <div class="button-roll-impact">
+            Roll Impact
+        </div>
+        <div class="">
+            Endurance
         </div>
     </div>
 </form>

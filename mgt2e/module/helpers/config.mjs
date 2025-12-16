@@ -897,6 +897,7 @@ MGT2.WEAPONS = {
         "destructive": { },
         "fire": { "scale": "traveller" },
         "ion": { "scale": "spacecraft" },
+        "longRange": { "scale": "spacecraft" },
         "laserSight": { "scale": "traveller" },
         "loPen": { "value": 2, "min": 2, "max": 99, "conflict": [ "ap" ] },
         "missile": { "scale": "spacecraft", "value": 1, "min": 1, "max": 120 },
@@ -915,6 +916,8 @@ MGT2.WEAPONS = {
         "smasher": { "scale": "traveller" },
         "spinal": { "scale": "spacecraft", "value": 3, "min": 1, "max": 5, "conflict": [ "ap"] },
         "stun": { "scale": "traveller" },
+        "thrust": { "scale": "spacecraft", "value": 10, "min": 1, "max": 20 },
+        "torpedo": { "scale": "spacecraft" },
         "veryBulky": { "scale": "traveller", "conflict": [ "bulky" ] },
         "veryDangerous": { "scale": "traveller", "conflict": [ "dangerous" ] },
         "zeroG": { "scale": "traveller" }

@@ -985,6 +985,10 @@
   "MGT2.Item.WeaponTrait.Label.psiAp": "PSI AP",
   "MGT2.Item.WeaponTrait.Label.missile": "Missile",
   "MGT2.Item.WeaponTrait.Label.spinal": "Spinal Weapon",
+  "MGT2.Item.WeaponTrait.Label.thrust": "Thrust",
+  "MGT2.Item.WeaponTrait.Label.longRange": "Long Range",
+  "MGT2.Item.WeaponTrait.Label.multiWarhead": "Multiple Warheads",
+  "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",
 
   "MGT2.Item.WeaponTrait.Text.ap": "Armour Piercing",
   "MGT2.Item.WeaponTrait.Text.auto": "Automatic Fire",
@@ -1015,6 +1019,10 @@
   "MGT2.Item.WeaponTrait.Text.orbitalBombardment": "DM-8 to attack ships, no Blast trait v ground targets",
   "MGT2.Item.WeaponTrait.Text.missile": "Missile launcher",
   "MGT2.Item.WeaponTrait.Text.spinal": "Damage reduced by armour as percentage",
+  "MGT2.Item.WeaponTrait.Text.thrust": "Missile Thrust",
+  "MGT2.Item.WeaponTrait.Text.longRange": "Long Range Missile",
+  "MGT2.Item.WeaponTrait.Text.multiWarhead": "Multiple Warheads",
+  "MGT2.Item.WeaponTrait.Text.torpedo": "Missile is Torpedo",
 
   "MGT2.Attack.Dangerous": "Weapon has exploded!",
   "MGT2.Attack.DragMe": "Drag to character sheet, or click to apply to selected tokens.",

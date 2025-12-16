@@ -1,4 +1,6 @@
 import {MgT2ActorSheet} from "../actor-sheet.mjs";
+import {MgT2MissileAttackApp} from "../../helpers/dialogs/missile-attack-app.mjs";
+import {createSpeculativeGoods} from "../../helpers/utils/trade-utils.mjs";
 
 // This is a very simplified Spacecraft sheet.
 export class MgT2SwarmActorSheet extends MgT2ActorSheet {
@@ -31,6 +33,7 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
     async getData() {
         const context = await super.getData();
         console.log("MgT2SwarmActorSheet.getData:");
+        console.log(this.actor);
 
         context.shipActor = await fromUuid(this.actor.system.sourceId);
         console.log(context.shipActor);
@@ -57,11 +60,26 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         return;
     }
 
-    activateLiseners(html) {
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        html.find('.button-roll-impact').click(ev => {
+            console.log("yes");
+            new MgT2MissileAttackApp(this.actor, null).render(true);
+        });
+
         return;
     }
 
     preUpdateActor() {
         // nothing
+    }
+
+    rollImpact(context) {
+        let dmg = this.actor.system.salvo.damage;
+        let size = this.actor.system.size.value;
+        let smartTL = this.actor.system.salvo.tl;
+
+        let attackDM = size + smartTL;
     }
 }

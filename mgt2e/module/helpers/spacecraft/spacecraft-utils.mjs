@@ -582,7 +582,22 @@ export async function sellCargoDialog(shipActor, worldActor, item) {
 export async function launchMissiles(shipActor, weaponItem, options) {
     console.log("Launching missiles " + weaponItem.name);
 
+    console.log(weaponItem);
+    console.log(options);
+    let thrust = 10;
+    if (weaponItem.hasTrait("thrust")) {
+        thrust = weaponItem.getWeaponTraitValue("thrust");
+        console.log("Thrust is: " + thrust);
+    }
+    let isLongRange = weaponItem.hasTrait("longRange");
+    let isTorpedo = weaponItem.hasTrait("torpedo");
+
     let salvoSize = options.quantity ? options.quantity : 1;
+    let techLevel = parseInt(weaponItem.system.tl);
+    if (parseInt(shipActor.system.spacecraft.tl) > techLevel) {
+        techLevel = parseInt(shipActor.system.spacecraft.tl);
+    }
+
     let data = {
         name: shipActor.name + " / " + weaponItem.name,
         type: "swarm",
@@ -595,12 +610,14 @@ export async function launchMissiles(shipActor, weaponItem, options) {
                 value: salvoSize,
             },
             salvo: {
+                type: isTorpedo?"torpedo":"missile",
+                tl: techLevel,
                 weaponId: weaponItem.uuid,
                 endurance: {
                     max: 10,
                     value: 10
                 },
-                thrust: 10
+                "thrust": thrust
             }
         },
         prototypeToken: {
@@ -618,7 +635,11 @@ export async function launchMissiles(shipActor, weaponItem, options) {
             }
         }
     }
+    if (!isLongRange && !isTorpedo) {
+        data.system.salvo.endurance.half = 5;
+    }
     let salvo = await Actor.implementation.create(data);
+    salvo.sheet.render(true);
     let trackingData = shipActor.system.spacecraft.tracking;
     if (!trackingData) {
         trackingData = {

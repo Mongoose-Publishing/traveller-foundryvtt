@@ -179,6 +179,19 @@ export class MgT2Item extends Item {
         return null;
     }
 
+    getWeaponTraitValue(trait) {
+        let t = this.getWeaponTrait(trait);
+        if (!t || t.length === 0) {
+            return 0;
+        }
+        let v = t.replaceAll(/.* /g, "");
+        v = parseInt(v);
+        if (isNaN(v)) {
+            return 0;
+        }
+        return v;
+    }
+
     printWeaponTraits() {
         let text = "";
         if (this.type === "weapon" && this.system.weapon) {
