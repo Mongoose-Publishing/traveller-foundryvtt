@@ -119,7 +119,8 @@ caption {
   border: none;
   font-weight: bold;
   font-style: italic;
-  font-size: 14pt
+  font-size: 14pt;
+  margin-bottom: 0px;
 }
 
 .journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h6 {
@@ -127,7 +128,8 @@ caption {
   border: none;
   font-weight: bold;
   font-style: italic;
-  font-size: 12pt
+  font-size: 12pt;
+  margin-bottom: 0px;
 }
 
 

@@ -62,6 +62,13 @@ Hooks.once('init', async function() {
         default: 0
     });
 
+    game.settings.register("mgt2e", "lastVersionReported", {
+        config: false,
+        scope: "world",
+        type: String,
+        default: "0.0.0"
+    });
+
     game.settings.register('mgt2e', 'verboseSkillRolls', {
         name: game.i18n.localize("MGT2.Settings.Verbose.Name"),
         hint: game.i18n.localize("MGT2.Settings.Verbose.Hint"),
@@ -156,7 +163,7 @@ Hooks.once('init', async function() {
         name: game.i18n.localize("MGT2.Settings.AutoResizeSpacecraft.Name"),
         hint: game.i18n.localize("MGT2.Settings.AutoResizeSpacecraft.Hint"),
         scope: 'world',
-        config: true,
+        config: false,
         type: Boolean,
         default: true
     });
@@ -256,7 +263,7 @@ Hooks.once('init', async function() {
     CONFIG.ActiveEffect.legacyTransferral = false;
 
     // Add custom constants for configuration.
-  CONFIG.MGT2 = MGT2;
+    CONFIG.MGT2 = MGT2;
 
   /**
    * Set an initiative formula for the system
@@ -467,7 +474,10 @@ Hooks.on('ready', () => {
 
         Tools.requestedSkillCheck(skillFqn, skillOptions);
     });
+
 });
+
+
 
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
     if (message.indexOf("/upp") === 0) {
@@ -2125,8 +2135,13 @@ Handlebars.registerHelper('showBases', function(key, bases) {
     for (let i in list) {
         if (list[i].length > 0) {
             let base = list[i].trim();
-            html += `<span class='pill world-pill' data-base-id='${base}' title='${game.i18n.localize("MGT2.WorldSheet.Bases."+base)}'>`;
-            html += `&nbsp;${game.i18n.localize("MGT2.WorldSheet.Bases." + base)} `;
+            if (MGT2.WORLD.bases[base]) {
+                html += `<span class='pill world-pill' data-base-id='${base}' title='${game.i18n.localize("MGT2.WorldSheet.Bases." + base)}'>`;
+                html += `&nbsp;${game.i18n.localize("MGT2.WorldSheet.Bases." + base)} `;
+            } else {
+                html += `<span class='pill world-pill' data-base-id='${base}'>`;
+                html += `&nbsp;${base} `;
+            }
             if (key.owner) {
                 html += `&nbsp;<i class="fas fa-xmark base-remove"> </i>`;
             } else {
@@ -2307,5 +2322,24 @@ Handlebars.registerHelper("showEffectPill", function(actor, effect) {
 /* -------------------------------------------- */
 
 Hooks.once("ready", async function() {
+    if (game.user.isGM) {
+        let currentVersion = game.system.version;
+        let lastVersion = game.settings.get("mgt2e", "lastVersionReported");
+
+        if (foundry.utils.isNewerVersion(currentVersion, lastVersion)) {
+            let text = "";
+            let d = await fromUuid("Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6.JournalEntryPage.mXeFfBZITS7IkfPU");
+            if (d && d.text && d.text.content) {
+                text = `<h1>MgT2e ${currentVersion}</h1>${d.text.content}`;
+            } else {
+                text = `<p>Upgraded to ${currentVersion}`;
+            }
+            let chatData = {
+                content: text
+            };
+            ChatMessage.create(chatData, {});
+            game.settings.set("mgt2e", "lastVersionReported", currentVersion);
+        }
+    }
 });
 

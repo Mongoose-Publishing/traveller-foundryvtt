@@ -4,6 +4,14 @@
 
 * Career terms aren't always added in the correct order.
 
+# 0.16.1 (Beta)
+
+* Career terms can be dragged and dropped on Travellers again.
+* Some missing world base codes have been added to l10n strings.
+* Illegal world base codes are now displayed better on a world sheet if they are added
+  using the API.
+* Fixed CSS for the description editor on the Package Actor.
+
 # 0.16.0 (Beta)
 
 * Added some initial Spanish translations

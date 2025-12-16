@@ -216,7 +216,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         context.BASES_SELECT = {
             "": ""
         }
-        for (let b of [ "N", "S", "M", "C"]) {
+        for (let b of [ "N", "S", "M", "C", "D", "W"]) {
             if (context.world.uwp.bases.indexOf(b) === -1) {
                 context.BASES_SELECT[b] = game.i18n.localize("MGT2.WorldSheet.Bases." + b);
             }
@@ -266,12 +266,14 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         html.find('.base-add').click(ev => {
             // Add base
             const value = $(ev.currentTarget).val();
-            if (this.actor.system.world.uwp.bases) {
-                this.actor.system.world.uwp.bases += ", " + value;
-            } else {
-                this.actor.system.world.uwp.bases = value;
+            if (MGT2.WORLD.bases[value]) {
+                if (this.actor.system.world.uwp.bases) {
+                    this.actor.system.world.uwp.bases += ", " + value;
+                } else {
+                    this.actor.system.world.uwp.bases = value;
+                }
+                this.actor.update({"system.world.uwp.bases": this.actor.system.world.uwp.bases});
             }
-            this.actor.update({"system.world.uwp.bases": this.actor.system.world.uwp.bases});
         });
         html.find('.faction-add').click(ev => {
            // Add faction

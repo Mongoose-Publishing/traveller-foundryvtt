@@ -1,0 +1,542 @@
+{
+  "folder": "81lpHPvcOeOkc8gf",
+  "name": "Core Rules",
+  "_id": "b3GTINzvb5g0tz9H",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Traveller Creation",
+      "type": "text",
+      "_id": "vE5oPwBjke2E33MU",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Travellers can be created using a <strong>Traveller</strong> type of Actor. An NPC is a simplified Traveller which lacks most of the information around the life path character generation.</p><h2>Rolling Characteristics</h2><p>You can roll characteristics by clicking the dice symbol next to the characteristics on the Traveller sheet. This will roll 2D6 for each characteristic.</p><p>They will automatically calculate the Dice Modifier for that characteristic.</p><p>You can use a <strong>Package</strong> actor to define different characteristic rolls for non-human characters. Set it as a racial package, and define what dice rolls are used for each characteristic. When the Package is dragged onto a <strong>Traveller</strong> or <strong>NPC</strong> sheet, the sheet will remember what dice to roll each time.</p><p>Characteristics supported are: STR, DEX, END, INT, EDU, SOC, CHA, TER, PSI, WLT, LCK, MRL, STY, RES, FOL, REP</p><h2>Background Skills</h2><p>Click the Background Skills tick box to display which skills can be selected as background skills.</p><p>By default, characters are created at 18 years old.</p><p></p><iframe width=\"1036\" height=\"583\" src=\"https://www.youtube.com/embed/hOwzflHXzqM?autolay=1&amp;loop=1\"></iframe><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.0",
+        "createdTime": 1765318322148,
+        "modifiedTime": 1765392821051,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.vE5oPwBjke2E33MU"
+    },
+    {
+      "sort": 200000,
+      "name": "Skills",
+      "type": "text",
+      "_id": "cpzlygn2W5KqyaG6",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The following skills are provided by default. These are the internal names of the skills, which should be used in macros and API calls.</p><ul><li><p>admin</p></li><li><p>advocate</p></li><li><p>animals</p><ul><li><p>handling</p></li><li><p>vetinary</p></li><li><p>training</p></li></ul></li><li><p>art</p><ul><li><p>performer</p></li><li><p>holography</p></li><li><p>instrument</p></li><li><p>visualMedia</p></li><li><p>write</p></li></ul></li><li><p>astrogation</p></li><li><p>athletics</p><ul><li><p>dexterity</p></li><li><p>endurance</p></li><li><p>strength</p></li></ul></li><li><p>broker</p></li><li><p>carouse</p></li><li><p>deception</p></li><li><p>diplomat</p></li><li><p>drive</p><ul><li><p>drive.hovercraft</p></li><li><p>drive.mole</p></li><li><p>drive.track</p></li><li><p>drive.walker</p></li><li><p>drive.wheel</p></li></ul></li><li><p>electronics</p><ul><li><p>comms</p></li><li><p>computers</p></li><li><p>remoteOps</p></li><li><p>sensors</p></li></ul></li><li><p>engineer</p><ul><li><p>mDrive</p></li><li><p>jDrive</p></li><li><p>lifeSupport</p></li><li><p>power</p></li></ul></li><li><p>explosives</p></li><li><p>flyer</p><ul><li><p>airship</p></li><li><p>grav</p></li><li><p>ornithopter</p></li><li><p>rotor</p></li><li><p>wing</p></li></ul></li><li><p>gambler</p></li><li><p>gunner</p><ul><li><p>turret</p></li><li><p>ortillery</p></li><li><p>screen</p></li><li><p>capital</p></li></ul></li><li><p>guncombat</p><ul><li><p>archaic</p></li><li><p>energy</p></li><li><p>slug</p></li></ul></li><li><p>heavyweapons</p><ul><li><p>artillery</p></li><li><p>portable</p></li><li><p>vehicle</p></li></ul></li><li><p>independence</p></li><li><p>investigate</p></li><li><p>jackofalltrades</p><ul><li><p>language.galanglic</p></li><li><p>language.vilani</p></li><li><p>language.zdetl</p></li><li><p>language.oynprith</p></li><li><p>language.trokh</p></li><li><p>language.gvegh</p></li></ul></li><li><p>leadership</p></li><li><p>mechanic</p></li><li><p>medic</p></li><li><p>melee</p><ul><li><p>unarmed</p></li><li><p>blade</p></li><li><p>bludgeon</p></li><li><p>natural</p></li></ul></li><li><p>navigation</p></li><li><p>persuade</p></li><li><p>pilot</p><ul><li><p>smallCraft</p></li><li><p>spacecraft</p></li><li><p>capitalShips</p></li></ul></li><li><p>profession</p><ul><li><p>belter</p></li><li><p>biologicals</p></li><li><p>civilEngineering</p></li><li><p>construction</p></li><li><p>hydroponics</p></li><li><p>polymers</p></li><li><p>robotics</p></li></ul></li><li><p>recon</p></li><li><p>science</p><ul><li><p>archaeology</p></li><li><p>astronomy</p></li><li><p>biology</p></li><li><p>chemistry</p></li><li><p>cosmology</p></li><li><p>cybernetics</p></li><li><p>economics</p></li><li><p>genetics</p></li><li><p>history</p></li><li><p>linquistics</p></li><li><p>philosopy</p></li><li><p>physics</p></li><li><p>planetology</p></li><li><p>psionicology</p></li><li><p>psycology</p></li><li><p>robotics</p></li><li><p>sophontology</p></li><li><p>xenology</p></li><li><p>philosophy</p></li></ul></li><li><p>seafarer</p><ul><li><p>oceanShips</p></li><li><p>personal</p></li><li><p>sail</p></li><li><p>submarine</p></li></ul></li><li><p>stealth</p></li><li><p>steward</p></li><li><p>streetwise</p></li><li><p>survival</p></li><li><p>tactics</p><ul><li><p>military</p></li><li><p>naval</p></li></ul></li><li><p>vaccsuit</p></li><li><p>telepathy</p></li><li><p>clairvoyance</p></li><li><p>telekinesis</p></li><li><p>awareness</p></li><li><p>teleportation</p></li><li><p>untrained</p></li></ul>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.0",
+        "createdTime": 1765318340389,
+        "modifiedTime": 1765396852252,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.cpzlygn2W5KqyaG6"
+    },
+    {
+      "sort": 300000,
+      "name": "Combat",
+      "type": "text",
+      "_id": "KlmiZrvBGDx1E0BL",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Combat is implemented in as much as attacks can be made, damage rolled and applied to Travellers, Creatures and Vehicles.</p><h2>Some Assumptions</h2><h3>Battle Maps</h3><p>Unlike some other game systems, Traveller doesn't require the use of battle maps in a game at all. Many players and GMs use Theatre of the Mind, using tokens on a scene only to track damage and list the available targets.</p><p>Some people struggle to imagine scenes in their head though, or just prefer to have a pretty map with well defined placement of characters and enemies. If using such a 'battle map', whether you use a grid or not is optional.</p><p>The MgT2e system doesn't enforce either, though there are some features that will make use of a scaled map if you are using one.</p><p>The general assumption is a 1.5m grid (square or hex), but again this is not enforced.</p><h4>Some Map Features</h4><h5>Making Attacks</h5><p>When making an attack, if you have a single token selected, then that token will be assumed to be the one making the attack.</p><p>If you have other tokens selected as targets (press 'T' when hovering over them), then these will be assumed as potential targets.</p><p>This allows the attack dialog to display the distance to each target, allowing you to more easily select the range of an attack.</p><h5>Grenades</h5><p>If the damage from a grenade, or other weapon with a blast radius, is dragged onto a map, then the blast radius will be automatically displayed on the map.</p><p>If the attack missed, then there is a world setting to allow for random displacement. However, this doesn't account for walls.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.343",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.0",
+        "createdTime": 1765318344101,
+        "modifiedTime": 1765707768285,
+        "lastModifiedBy": "Zj6ESAn9IiciiMCF"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.KlmiZrvBGDx1E0BL"
+    },
+    {
+      "sort": 400000,
+      "name": "Trade",
+      "type": "text",
+      "_id": "DHrzw8S7F6Xpq23b",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The Traveller trade system is implemented using the World and Spacecraft actors, and the Cargo Item types.</p><p></p><h2>Passengers</h2><p>To generate passengers, you need two or more Worlds defined, each with non-zero populations. They should have different X and Y coordinates as well.</p><p>If you have World A and World B, open both world sheets, and drag the planet icon from World B to World A. On the <strong>Freight</strong> tab on World A, you should see a list of passengers created. This will be the passengers wanting to travel to World B.</p><p>You can then drag the passengers from the world sheet onto a spacecraft sheet. The spacecraft will have cash added to it as the passengers pay for their trip.</p><p>Later, you can drag the passengers from the spacecraft to World B. The passengers will be removed from the spacecraft.</p><p>We do not use the random passenger table in the core rules. Instead, a much more flexible system is used to generate passengers, based on their class.</p><p></p><h4>Missing Features</h4><ul><li><p>There are no modifiers to numbers or types of passengers according to Steward skill, or whether the ship has luxury staterooms.</p></li><li><p>There is no tracking of how many staterooms (or cold berths) are taken up with passengers</p></li><li><p>We don't account for the luggage of High Passengers.</p></li></ul><p></p><h2>Freight</h2><p>Freight is calculated in the same way as for Passengers. Drag the world you are going to, to the world you are currently at. Freight lots will be calculated for that trip, and added to the World sheet.</p><h4>Missing Features</h4><ul><li><p>We don't currently handle Mail.</p></li></ul><p></p><h2>Speculative Trade</h2><p>Speculative trade isn't based on a destination world, so there is only one set of speculative trade goods. These are displayed on the Trade tab of a world.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.0",
+        "createdTime": 1765318354669,
+        "modifiedTime": 1765482420100,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.DHrzw8S7F6Xpq23b"
+    },
+    {
+      "sort": 500000,
+      "name": "World and Universe Creation",
+      "type": "text",
+      "_id": "a8lmGYQKy6e8Kvtu",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.0",
+        "createdTime": 1765318363333,
+        "modifiedTime": 1765318367028,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.a8lmGYQKy6e8Kvtu"
+    },
+    {
+      "sort": 0,
+      "name": "Introduction",
+      "type": "text",
+      "_id": "mQKPrptWzDezOlvB",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>This journal covers how MgT2e implements the various rules in Mongoose Traveller 2e. Not all rules are implemented, and of those that are, they may not be enforced. This isn't a computer game, but a TTRPG that happens to run on a computer. Where possible, some things are implemented so that the GM and Players are allowed to interpret exactly what happens.</p><p>This journal doesn't cover what the rules <em>are</em>, it's not a replacement for the Core Rules book. When used in reference with that book (soon to be available as a Compendium), it should help guide how to use Foundry with Mongoose Traveller.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.343",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.0",
+        "createdTime": 1765318381335,
+        "modifiedTime": 1765704520442,
+        "lastModifiedBy": "Zj6ESAn9IiciiMCF"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.mQKPrptWzDezOlvB"
+    },
+    {
+      "sort": 350000,
+      "name": "Encounters and Dangers",
+      "type": "text",
+      "_id": "EVJc4lsREdIbPwXs",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.1-DEV",
+        "createdTime": 1765406829663,
+        "modifiedTime": 1765406924314,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.EVJc4lsREdIbPwXs"
+    },
+    {
+      "sort": 375000,
+      "name": "Equipment",
+      "type": "text",
+      "_id": "3I8ChK7WUiRJRA1g",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<h2>Computers and Software</h2><h3><span style=\"font-family:Roboto, sans-serif\"><strong>Computers</strong></span></h3><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">A Computer is any item that has the Computer option enabled.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">Generic Items, Augments, Armour and Weapons can have computers enabled on them. Once the computer is enabled, the bandwidth capability of the software can be set on a range of 0 to 4.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">Currently, this value is for informational purposes only. No limitations are enforced as to what software can be run on a computer.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">Once an item has an embedded computer enabled, it will also list the software packages that are currently installed on it.</span></p><h4><span style=\"font-family:Roboto, sans-serif\"><strong>Using Computers</strong></span></h4><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">If a computer has software installed on it, then the list will be displayed, along with the option to make skill checks direct from the computer.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">The type of software package (see below) will determine how these skills are used.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;min-height:1rem;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"></p><h3><span style=\"font-family:Roboto, sans-serif\"><strong>Software</strong></span></h3><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">Software is a special type of item that can be installed on anything with an embedded computer, or on a spacecraft.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">There are two types of softwrae: Personal and Spacecraft.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">Personal software can be installed onto embedded computers.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">Spacecraft software only runs on a ship's computer.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;min-height:1rem;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"></p><h4><span style=\"font-family:Roboto, sans-serif\"><strong>Software Properties</strong></span></h4><h5><span style=\"font-family:Roboto, sans-serif\"><strong>Interface Type</strong></span></h5><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">If the software is an interface, then you can set the type of interface it provides. You can select the interface type from the drop down. A computer needs to have an interface installed on it for it to be usable.</span></p><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">Currently, there is basic enforcement of this. If multiple interfaces are installed on a computer, the best is used.</span></p><h5><span style=\"font-family:Roboto, sans-serif\"><strong>Installed On</strong></span></h5><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">If a software item is owned by an Actor, then the \"Installed On\" drop down will list all the other items this Actor has that have the ability to run software. Select the one that you want to run this software package on.</span></p><h5><span style=\"font-family:Roboto, sans-serif\"><strong>Software Features</strong></span></h5><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">The features of the software define what it does. Normally, most software provides the ability to run skills.</span></p><h6><span style=\"font-family:Roboto, sans-serif\"><em><strong>Generic</strong></em></span></h6><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">This software doesn't do anything that is covered by rules automation.</span></p><h6><span style=\"font-family:Roboto, sans-serif\"><em><strong>Agent</strong></em></span></h6><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">An agent skill can only be used with Electronics (Computers). Gives the user +1 if they have the skill,, or the agent does the check itself if not.</span></p><h6><span style=\"font-family:Roboto, sans-serif\"><em><strong>Expert Package</strong></em></span></h6><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">This is an expert package, and obeys the rules of expert packages. The skill can be rolled from the computer that it is installed on.</span></p><h6><span style=\"font-family:Roboto, sans-serif\"><em><strong>Skill Augment</strong></em></span></h6><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">A skill augment gives a direct bonus to a skill check, but the user needs to have the skill.</span></p><h6><span style=\"font-family:Roboto, sans-serif\"><em><strong>Task Skill</strong></em></span></h6><p style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:var(--color-scrollbar) var(--color-scrollbar-track);margin:0.5em 0px;color:rgb(0, 0, 0);font-family:Roboto, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgb(240, 239, 239);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:start\"><span style=\"font-family:Roboto, sans-serif\">The computer makes the skill check itself, without any reference to the Actor's own skill.</span></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.1-DEV",
+        "createdTime": 1765406835213,
+        "modifiedTime": 1765407122972,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.3I8ChK7WUiRJRA1g"
+    },
+    {
+      "sort": 387500,
+      "name": "Vehicles",
+      "type": "text",
+      "_id": "gyEtkATPfOboVVw2",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.1-DEV",
+        "createdTime": 1765406839412,
+        "modifiedTime": 1765406923405,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.gyEtkATPfOboVVw2"
+    },
+    {
+      "sort": 393750,
+      "name": "Spacecraft Operations",
+      "type": "text",
+      "_id": "3UIRgWe3AZBIfz33",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.1-DEV",
+        "createdTime": 1765406844059,
+        "modifiedTime": 1765406923016,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.3UIRgWe3AZBIfz33"
+    },
+    {
+      "sort": 396875,
+      "name": "Space Combat",
+      "type": "text",
+      "_id": "Dv2CjMLzuNPGW8jc",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.1-DEV",
+        "createdTime": 1765406848650,
+        "modifiedTime": 1765406922599,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.Dv2CjMLzuNPGW8jc"
+    },
+    {
+      "sort": 398438,
+      "name": "Spacecraft Construction",
+      "type": "text",
+      "_id": "V72NpMxmVaVaDeoZ",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.1-DEV",
+        "createdTime": 1765406857492,
+        "modifiedTime": 1765406922218,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.V72NpMxmVaVaDeoZ"
+    },
+    {
+      "sort": 399610,
+      "name": "Psionics",
+      "type": "text",
+      "_id": "1JLKrN15qv6BkdH1",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.1-DEV",
+        "createdTime": 1765406861294,
+        "modifiedTime": 1765406921831,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.1JLKrN15qv6BkdH1"
+    },
+    {
+      "sort": 399219,
+      "name": "Common Spacecraft",
+      "type": "text",
+      "_id": "HaLlRboLWqWHc3V9",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mgt2e",
+        "systemVersion": "0.16.1.1-DEV",
+        "createdTime": 1765406901932,
+        "modifiedTime": 1765406909950,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!b3GTINzvb5g0tz9H.HaLlRboLWqWHc3V9"
+    }
+  ],
+  "sort": 700000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "13.348",
+    "systemId": "mgt2e",
+    "systemVersion": "0.16.1.0",
+    "createdTime": 1765318280115,
+    "modifiedTime": 1765318284064,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!journal!b3GTINzvb5g0tz9H"
+}

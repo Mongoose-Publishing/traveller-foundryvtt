@@ -138,7 +138,6 @@ async function setBase(worldActor, base, target) {
 
     const r = await roll(`2D6`);
     if (r >= target) {
-        console.log("Adding base " + base);
         if (uwp.bases === "") {
             uwp.bases = base;
         } else {
@@ -150,8 +149,6 @@ async function setBase(worldActor, base, target) {
 async function setBases(worldActor) {
     let uwp = worldActor.system.world.uwp;
     uwp.bases = "";
-
-    console.log("setBases:");
 
     switch (worldActor.system.world.uwp.port) {
         case 'A':

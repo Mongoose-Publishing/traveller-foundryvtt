@@ -32,13 +32,15 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.4.8",
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "createdTime": 1717536354073,
         "modifiedTime": 1742162301246,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
-        "duplicateSource": null
+        "duplicateSource": null,
+        "exportSource": null
       },
+      "category": null,
       "_key": "!journal.pages!mqc59sHCYxbI3d4n.48J7dTTg4FOc15AR"
     },
     {
@@ -69,13 +71,15 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.4.8",
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "createdTime": 1717536727580,
         "modifiedTime": 1742161939379,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
-        "duplicateSource": null
+        "duplicateSource": null,
+        "exportSource": null
       },
+      "category": null,
       "_key": "!journal.pages!mqc59sHCYxbI3d4n.n4BlyOqow3tB82No"
     },
     {
@@ -106,13 +110,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.11.6",
         "createdTime": 1738789470004,
         "modifiedTime": 1738789528308,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
+        "exportSource": null
       },
+      "category": null,
       "_key": "!journal.pages!mqc59sHCYxbI3d4n.qUoNybgvkx1pHjsW"
     },
     {
@@ -143,13 +149,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "mgt2e",
         "systemVersion": "0.11.8.6-DEV",
         "createdTime": 1742162325727,
         "modifiedTime": 1760101621174,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
+        "exportSource": null
       },
+      "category": null,
       "_key": "!journal.pages!mqc59sHCYxbI3d4n.NvCJoXPKHATe66wa"
     }
   ],
@@ -162,12 +170,14 @@
   "_stats": {
     "systemId": "mgt2e",
     "systemVersion": "0.4.8",
-    "coreVersion": "12.329",
+    "coreVersion": "13.348",
     "createdTime": 1717536338263,
     "modifiedTime": 1717864110439,
     "lastModifiedBy": "Uzw5MJmM0BRE3sSL",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
+  "categories": [],
   "_key": "!journal!mqc59sHCYxbI3d4n"
 }

@@ -1459,6 +1459,18 @@ h1.charname input {
   padding: 2px;
 }
 
+.package-description .editor {
+  padding: 5px;
+  min-height: 100px;
+  height: 100%;
+}
+
+.package-description {
+  min-height: 100px;
+  border: 2px groove #f0f0f0;
+}
+
+
 .actor-description {
   min-height: 200px;
   border: 2px groove #f0f0f0;

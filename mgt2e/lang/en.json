@@ -491,6 +491,8 @@
   "MGT2.WorldSheet.Bases.N": "Navy",
   "MGT2.WorldSheet.Bases.M": "Military",
   "MGT2.WorldSheet.Bases.C": "Corsair",
+  "MGT2.WorldSheet.Bases.D": "Naval Depot",
+  "MGT2.WorldSheet.Bases.W": "Way Station",
 
   "MGT2.WorldSheet.Facility.berthingCost": "Berth Cost (Cr/Wk)",
   "MGT2.WorldSheet.Facility.shipyard": "Shipyard",

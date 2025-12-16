@@ -2062,8 +2062,8 @@ export class MgT2ActorSheet extends ActorSheet {
         if (["associate"].includes(item.type)) {
             // Meta item, so just pass through to the usual item handler.
             return super._onDropItem(event, data);
-        } else if (item.type === "term" && [ "traveller", "package"].includes(actor.type)) {
-            return await this._onDropTerm(item);
+        } else if (item.type === "term" && [ "traveller", "package"].includes(this.actor.type)) {
+            return super._onDropItem(event, data);
         }
 
         // If not dragged from another (different) actor, just let the normal item handler deal with things.
