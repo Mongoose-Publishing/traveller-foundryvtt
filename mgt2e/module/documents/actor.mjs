@@ -712,9 +712,17 @@ export class MgT2Actor extends Actor {
           let ap = parseInt(options.ap);
           armour = Math.max(0, armour - ap);
       }
+      if (options.isMissile) {
+          console.log("MISSILE HIT");
+          console.log(options);
+          damage = options.damage;
+      }
       damage = Math.max(0, damage - armour);
       if (options.multiplier && parseInt(options.multiplier) > 1) {
           damage *= parseInt(options.multiplier);
+      }
+      if (options.isMissile) {
+          damage *= options.effect;
       }
       ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
           { "actor": this.name, "damage": damage}))

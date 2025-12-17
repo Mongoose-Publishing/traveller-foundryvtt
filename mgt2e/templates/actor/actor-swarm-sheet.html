@@ -1,39 +1,64 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
-    <div class="salvo shadow grid grid-5col">
-        <div>
-            <img class="profile-img actor-draggable" data-actor-id="{{actor._id}}" src="{{actor.img}}" width="96" height="96"/>
-        </div>
-        <div class="resource flex-group-center">
-            <label class="field-label">TL</label>
-            <input class="field-value" type="text" name="system.salvo.tl"
-                   value="{{system.salvo.tl}}"/>
-        </div>
-        <div class="resource flex-group-center">
-            <label class="field-label">Salvo Size</label>
-            <input class="field-value" type="text" name="system.size.value"
-                   value="{{system.size.value}}"/>
-        </div>
-        <div class="resource flex-group-center">
-            <label class="field-label">Thrust</label>
-            <input class="field-value" type="text"  name="system.salvo.thrust"
-                value="{{system.salvo.thrust}}"/>
-        </div>
-        <div class="resource flex-group-center">
-            <label class="field-label">Endurance</label>
-            <input class="field-value" type="text" name="system.salvo.endurance.value"
-                   value="{{system.salvo.endurance.value}}"/>
-        </div>
-        <div class="resource flex-group-center">
-            <label class="field-label">Damage</label>
-            <input class="field-value" type="text" name="damage"
-                   value="{{damage}}"/>
-        </div>
 
-        <div class="button-roll-impact">
-            Roll Impact
-        </div>
-        <div class="">
-            Endurance
-        </div>
-    </div>
+    <section class="traveller-sheet">
+        {{#if system.salvo}}
+            <div class="swarm-left">
+                <img class="profile-img shadow actor-draggable" data-actor-id="{{actor._id}}"
+                     src="{{actor.img}}" />
+
+                <div class="side-panel shadow resource flex-group-center">
+                    <label class="box-title">Salvo Size</label>
+                    <input class="field-value writable" type="text" name="system.size.value"
+                           value="{{system.size.value}}"/>
+                </div>
+
+                <div class="side-panel shadow resource flex-group-center" title="Flight Endurance">
+                    <label class="box-title">Endurance</label>
+                    <input class="field-value writable" type="text" name="system.salvo.endurance.value"
+                           value="{{system.salvo.endurance.value}}"/>
+                </div>
+            </div>
+            <div class="swarm-right">
+                <h1 class="charname shadow">{{actor.name}}</h1>
+
+                <div class="salvo shadow grid grid-3col">
+                    <div class="resource flex-group-center">
+                        <label class="field-label">TL</label>
+                        <input class="field-value" type="text" name="system.salvo.tl"
+                               readonly value="{{system.salvo.tl}}"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">Thrust</label>
+                        <input class="field-value" type="text"  name="system.salvo.thrust"
+                               readonly value="{{system.salvo.thrust}}"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">Damage</label>
+                        <input class="field-value" type="text" name="damage"
+                               readonly value="{{damage}}"/>
+                    </div>
+
+                </div>
+
+                <div class="salvo shadow grid grid-2col">
+                    <div>
+                        <h4>Source</h4>
+                        <img src="{{shipActor.img}}" width="96px" height="96px"/>
+                    </div>
+                    <div class="selectTarget">
+                        <h4>Target</h4>
+                        <img src="{{TARGET_ICON}}" width="96px" height="96px"/>
+                    </div>
+                </div>
+                <div class="grid-2col">
+                    <div class="salvo-action button-roll-impact">
+                        Roll Impact
+                    </div>
+                    <div class="salvo-action button-roll-endurance">
+                        Endurance
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    </section>
 </form>

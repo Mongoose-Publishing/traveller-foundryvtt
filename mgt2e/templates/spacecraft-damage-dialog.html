@@ -32,7 +32,7 @@
             <input class="actualDamage" type="text" name="actualDamage" value="{{actualDamage}}" data-dtype="Number"/>
         </div>
         <div class="resource flex-group-center">
-            <label for="multiplier" class="resource-label">MULTIPLIER</label>
+            <label for="multiplier" class="resource-label">{{#if isMissile}}MISSILES{{else}}MULTIPLIER{{/if}}</label>
             <input type="text" name="multiplier" value="{{multiplier}}" data-dtype="Number"/>
         </div>
     </div>

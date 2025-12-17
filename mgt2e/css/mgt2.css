@@ -2355,3 +2355,44 @@ div.spacecraft-attacks .weapon-action-button {
 div.spacecraft-attacks .weapon-action-button:hover {
   box-shadow: 0 2px 5px #800000;
 }
+
+.swarm-left .side-panel {
+  width: 120px;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.swarm-left img.profile-img {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 120px;
+  flex: 0 0 105px;
+  width: 120px;
+  height: 100%;
+  margin-right: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.swarm-left .side-panel {
+  width: 120px;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.swarm-right {
+  margin-left: 10px;
+}
+
+.salvo-action {
+  display: block;
+  border: 1px solid black;
+  padding: 2px 5px 2px 5px;
+  background-color: #f1511b;
+  color: white;
+  border-radius: 5px;
+  margin-right: 3px;
+  margin-bottom: 2px;
+  cursor: pointer;
+  text-align: center;
+}

@@ -594,6 +594,9 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let text = "";
 
     let score = gunner?gunner.getAttackSkill(weaponItem, options):0;
+    if (options.score) {
+        score = options.score;
+    }
 
     let dice = `${options.results?options.results.dice:"2D6"} + ${score}`;
     let damageDice = weaponItem.system.weapon.damage;
@@ -613,9 +616,17 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
             dice += " " + options.rangeDM;
         }
     }
+    let isMissile = false;
+    if (options.salvoSize) {
+        console.log("this is a missile " + options.salvoSize);
+        isMissile = true;
+    }
 
     const attackRoll = await new Roll(dice, gunner?gunner.getRollData():null).evaluate();
     let effect = Math.max(0, attackRoll.total - 8);
+    if (isMissile) {
+        effect = Math.min(effect, options.salvoSize);
+    }
     const damageRoll = await new Roll(damageDice, null).evaluate();
 
     let title = "";
@@ -629,18 +640,24 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
 
     let mount = weaponItem.system.weapon.mount;
     let multiplier = 1;
-    if (CONFIG.MGT2.SPACE_MOUNTS[mount]) {
+    if (CONFIG.MGT2.SPACE_MOUNTS[mount] && !isMissile) {
         multiplier = parseInt(CONFIG.MGT2.SPACE_MOUNTS[mount].multiplier);
     }
     console.log(`Space attack for ${mount} has multiplier ${multiplier}`);
 
     let totalMultipliedDamage = (damageRoll.total + effect) * multiplier;
     let dmgText = `Damage ${damageRoll.total}`;
-    if (effect > 0) {
+    if (isMissile) {
+        dmgText += ` (x${effect} impacts)`;
+    } else if (effect > 0) {
         dmgText += ` (+${effect})`;
     }
     if (multiplier > 1) {
         dmgText += ` x${multiplier}`;
+    }
+    if (isMissile) {
+        multiplier = effect;
+        effect = 0;
     }
     let ap = 0;
     if (weaponItem.hasTrait("ap")) {
@@ -664,7 +681,8 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         "tl": weaponItem.system.tl,
         "damageType": weaponItem.system.damageType,
         "radiation": radiationDamage,
-        "ranged": true
+        "ranged": true,
+        "isMissile": isMissile
     };
     let json = JSON.stringify(damageOptions);
     text = `

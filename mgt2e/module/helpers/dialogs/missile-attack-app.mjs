@@ -69,7 +69,8 @@ export class MgT2MissileAttackApp extends HandlebarsApplicationMixin(Application
         }
         context.salvoActor = this.salvoActor;
         context.DAMAGE = "";
-        context.weaponItem = await fromUuid(this.salvoActor.system.salvo.weaponId);
+        this.weaponItem = await fromUuid(this.salvoActor.system.salvo.weaponId);
+        context.weaponItem = this.weaponItem;
         if (context.weaponItem) {
             context.DAMAGE = context.weaponItem.system.weapon.damage;
         }
@@ -82,25 +83,11 @@ export class MgT2MissileAttackApp extends HandlebarsApplicationMixin(Application
 
 
     static async formHandler(event, form, formData) {
-        return;
+        console.log(event);
+        console.log(form);
+        console.log(formData);
         if (event.type === "submit") {
-            console.log("Buying speculative item " + this.cargoItem.name);
-            let quantity = parseInt(formData.object.quantitySelect);
-
-            const data = {
-                type: "tradeBuyGoods",
-                shipActorId: this.shipActor.uuid,
-                worldActorId: this.worldActor.uuid,
-                cargoItemId: this.cargoItem.uuid,
-                quantity: quantity
-            }
-            // const queryValue = await gm.query("mgt2e.tradeBuyGoods", data, { timeout: 30 * 1000 });
-            this.close();
-            if (this.worldActor.permission > 2) {
-                await tradeBuyGoodsHandler(data);
-            } else {
-                game.socket.emit("system.mgt2e", data);
-            }
+            MgT2MissileAttackApp.rollImpact();
         }
 
         return null;
@@ -108,17 +95,25 @@ export class MgT2MissileAttackApp extends HandlebarsApplicationMixin(Application
 
     static selectTargetAction(event, target) {
         console.log("selectTargetAction:");
+        console.log(event);
+        console.log(target);
+    }
 
-        let selected = Tools.getSelected();
-        console.log(selected);
-        if (selected.length > 0) {
-            let token = selected[0];
-            console.log(token.document.uuid);
-            this.targetActor = token.document.actor;
+    static rollImpact() {
+        let attackDice = "2D6";
+        let smartDm = 1;
+        let targetTL = parseInt(this.targetActor.system.spacecraft.tl);
+        let missileTL = parseInt(this.salvoActor.system.salvo.tl);
+        if (targetTL < missileTL) {
+            smartDm = Math.min(6, missileTL - targetTL);
         }
-        this.render();
+        let attackDm = smartDm + parseInt(this.salvoActor.system.salvo.size.value);
 
+        let attackOptions = {
+            "score": attackDm,
+            "salvoSize": parseInt(this.salvoActor.system.salvo.size.value)
+        };
+        rollSpaceAttack(this.salvoActor, null, this.weaponItem, attackOptions);
     }
 }
 
-window.MgT2BuyCargoApp = MgT2BuyCargoApp;

@@ -617,6 +617,7 @@ export async function launchMissiles(shipActor, weaponItem, options) {
                     max: 10,
                     value: 10
                 },
+                targetId: null,
                 "thrust": thrust
             }
         },

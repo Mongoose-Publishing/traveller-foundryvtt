@@ -27,7 +27,12 @@ export class MgT2SpacecraftDamageDialog extends Application {
         this.damageOptions = damageOptions;
         this.data = actor.system;
 
-        this.damage = damageOptions.damage + Math.max(0, damageOptions.effect);
+        if (damageOptions.isMissile) {
+            this.damage = damageOptions.damage;
+            this.isMissile = true;
+        } else {
+            this.damage = damageOptions.damage + Math.max(0, damageOptions.effect);
+        }
         this.ap = damageOptions.ap?parseInt(damageOptions.ap):0;
         if (damageOptions.scale !== "spacecraft") {
             this.damage = parseInt (this.damage / 10);
@@ -156,7 +161,8 @@ export class MgT2SpacecraftDamageDialog extends Application {
             "criticalEffectRoll": this.criticalEffectRoll,
             "criticalLabels": this.criticalLabels,
             "multiplier": this.multiplier,
-            "armourAsPercentage": this.armourAsPercentage
+            "armourAsPercentage": this.armourAsPercentage,
+            "isMissile": this.isMissile
         }
     }
 
