@@ -594,11 +594,14 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let text = "";
 
     let score = gunner?gunner.getAttackSkill(weaponItem, options):0;
-    if (options.score) {
-        score = options.score;
+    if (options.attackDM) {
+        score = options.attackDM;
+    }
+    let dice = `${options.results?options.results.dice:"2D6"} + ${score}`;
+    if (options.dm) {
+        dice += ` + ${options.dm}`;
     }
 
-    let dice = `${options.results?options.results.dice:"2D6"} + ${score}`;
     let damageDice = weaponItem.system.weapon.damage;
     console.log("rollSpaceAttack:");
 

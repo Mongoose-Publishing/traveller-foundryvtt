@@ -57,7 +57,9 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
             }
 
         } else if (this.actor.system.swarmType === "squadron") {
-
+            context.type = "squadron";
+            // HITS, divided between all fighters.
+            // Multiple types of fighters. Count of each type.
         } else {
             context.type = "unknown";
         }
@@ -84,6 +86,10 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
             console.log("yes");
             this.rollImpact();
         });
+        html.find('.size-dec').click(ev => this.modifySize(-1));
+        html.find('.size-inc').click(ev => this.modifySize(+1));
+        html.find('.end-dec').click(ev => this.modifyEndurance(-1));
+        html.find('.end-inc').click(ev => this.modifyEndurance(+1));
 
         return;
     }
@@ -102,9 +108,24 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         this.render();
     }
 
+    modifySize(value) {
+        let s = parseInt(this.actor.system.size.value) + value;
+        s = Math.max(0, s);
+        s = Math.min(this.actor.system.size.max, s);
+        this.actor.update({"system.size.value": s});
+    }
+    modifyEndurance(value) {
+        let s = parseInt(this.actor.system.salvo.endurance.value)+ value;
+        s = Math.max(0, s);
+        s = Math.min(this.actor.system.salvo.endurance.max, s);
+        this.actor.update({"system.salvo.endurance.value": s});
+    }
+
     preUpdateActor() {
         // nothing
     }
+
+
 
     async rollImpact() {
         let targetId = this.actor.system?.salvo?.targetId;
@@ -125,7 +146,6 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         }
         let weaponItem = await fromUuid(this.actor.system.salvo.weaponId);
 
-
         let smartDM = 1;
         if (targetTL > smartTL) {
             smartDM = 1;
@@ -136,9 +156,10 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         let attackDM = size + smartDM;
 
         let attackOptions = {
-            "score": attackDM,
+            "attackDM": attackDM,
             "salvoSize": size
         };
-        rollSpaceAttack(this.actor, null, weaponItem, attackOptions);
+        new MgT2MissileAttackApp(this.actor, targetActor, weaponItem, attackOptions).render(true);
+        //rollSpaceAttack(this.actor, null, weaponItem, attackOptions);
     }
 }

@@ -587,21 +587,24 @@ export async function launchMissiles(shipActor, weaponItem, options) {
     let thrust = 10;
     if (weaponItem.hasTrait("thrust")) {
         thrust = weaponItem.getWeaponTraitValue("thrust");
-        console.log("Thrust is: " + thrust);
+    }
+    let salvoSize = options.quantity ? options.quantity : 1;
+    if (weaponItem.hasTrait("missile")) {
+        salvoSize = salvoSize * weaponItem.getWeaponTraitValue("missile");
     }
     let isLongRange = weaponItem.hasTrait("longRange");
     let isTorpedo = weaponItem.hasTrait("torpedo");
 
-    let salvoSize = options.quantity ? options.quantity : 1;
     let techLevel = parseInt(weaponItem.system.tl);
     if (parseInt(shipActor.system.spacecraft.tl) > techLevel) {
         techLevel = parseInt(shipActor.system.spacecraft.tl);
     }
 
-    let data = {
-        name: shipActor.name + " / " + weaponItem.name,
+    let actorData = {
+        name: shipActor.name + " / Salvo ",
         type: "swarm",
         img: weaponItem.img,
+        ownership: shipActor.ownership,
         system: {
             swarmType: "salvo",
             sourceId: shipActor.uuid,
@@ -637,18 +640,50 @@ export async function launchMissiles(shipActor, weaponItem, options) {
         }
     }
     if (!isLongRange && !isTorpedo) {
-        data.system.salvo.endurance.half = 5;
+        actorData.system.salvo.endurance.half = 5;
     }
-    let salvo = await Actor.implementation.create(data);
-    salvo.sheet.render(true);
-    let trackingData = shipActor.system.spacecraft.tracking;
-    if (!trackingData) {
-        trackingData = {
-            outgoing: {},
-            incoming: {}
+    if (game.user.isGM) {
+        actorData.name = await getNextSwarmName(actorData.name);
+        let salvo = await Actor.implementation.create(actorData);
+        salvo.sheet.render(true);
+    } else {
+        let data = {
+            type: "launchSwarm",
+            swarmData: actorData,
+            userId: game.user.uuid
+        }
+        game.socket.emit("system.mgt2e", data);
+    }
+}
+
+async function getNextSwarmName(baseName) {
+    let name = null;
+    for (let i=0; i < MGT2.ALPHABET.length; i++) {
+        let a = await game.actors.getName(`${baseName} ${MGT2.ALPHABET[i]}`);
+        if (!a) {
+            name = `${baseName} ${MGT2.ALPHABET[i]}`;
+            break;
         }
     }
-    trackingData.outgoing[salvo.uuid] = {};
+    return name;
+}
 
-    await shipActor.update({"system.spacecraft.tracking": trackingData });
+// Callback which is run as the GM user
+export async function launchSwarmHandler(data) {
+    let actorData = data.swarmData;
+
+    actorData.name = await getNextSwarmName(actorData.name);
+
+    let swarm = await Actor.implementation.create(actorData);
+    game.socket.emit("system.mgt2e", {
+        type: "showSwarm",
+        userId: data.userId,
+        actorId: swarm.uuid
+    });
+}
+
+// Callback for the callback, which is run as the original user again.
+export async function showSwarmHandler(data) {
+    let swarm = await fromUuid(data.actorId);
+    swarm.sheet.render(true);
 }

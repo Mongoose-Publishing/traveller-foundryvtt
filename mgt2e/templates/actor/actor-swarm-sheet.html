@@ -8,14 +8,22 @@
 
                 <div class="side-panel shadow resource flex-group-center">
                     <label class="box-title">Salvo Size</label>
-                    <input class="field-value writable" type="text" name="system.size.value"
-                           value="{{system.size.value}}"/>
+                    <div class="incdec size">
+                        <span class="size-dec"><i class="fa-regular fa-square-minus"></i></span>
+                        <input class="field-value writable" type="text" name="system.size.value"
+                               value="{{system.size.value}}"/>
+                        <span class="size-inc"><i class="fa-regular fa-square-plus"></i></span>
+                    </div>
                 </div>
 
                 <div class="side-panel shadow resource flex-group-center" title="Flight Endurance">
                     <label class="box-title">Endurance</label>
-                    <input class="field-value writable" type="text" name="system.salvo.endurance.value"
-                           value="{{system.salvo.endurance.value}}"/>
+                    <div class="incdec endurance">
+                        <span class="end-dec"><i class="fa-regular fa-square-minus"></i></span>
+                        <input class="field-value writable" type="text" name="system.salvo.endurance.value"
+                               value="{{system.salvo.endurance.value}}"/>
+                        <span class="end-inc"><i class="fa-regular fa-square-plus"></i></span>
+                    </div>
                 </div>
             </div>
             <div class="swarm-right">

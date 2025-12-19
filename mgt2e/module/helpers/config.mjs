@@ -13,6 +13,11 @@ MGT2.HARDWARE_GENERAL = "general";
 MGT2.HARDWARE_ARMOUR = "armour";
 MGT2.HARDWARE_JUMP = "jump";
 
+MGT2.ALPHABET = [ "Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel",
+                  "India", "Juliett", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa",
+                  "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey",
+                  "Xray", "Yankee", "Zulu" ];
+
 MGT2.DEFAULT_ITEM_ICON = "systems/mgt2e/icons/items/item.svg";
 
 MGT2.SHIP_HARDWARE = {

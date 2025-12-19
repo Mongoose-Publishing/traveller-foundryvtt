@@ -36,6 +36,9 @@ import {
 } from "./helpers/utils/trade-utils.mjs";
 import { worldDropBrokerHandler } from "./helpers/utils/world-utils.mjs";
 import {generateNpc, generateText} from "./helpers/utils/npcgen-utils.mjs";
+import {
+    launchSwarmHandler, showSwarmHandler
+} from "./helpers/spacecraft/spacecraft-utils.mjs";
 
 
 /* -------------------------------------------- */
@@ -312,7 +315,6 @@ Hooks.once('init', async function() {
             new NpcIdCard(actor).render(true);
         }
         if (game.user === game.users.activeGM) {
-            console.log("We are the GM");
             if (data.type === "tradeBuyGoods") {
                 tradeBuyGoodsHandler(data);
             } else if (data.type === "tradeSellGoods") {
@@ -327,6 +329,12 @@ Hooks.once('init', async function() {
                 tradeDisembarkPassengerHandler(data);
             } else if (data.type === "worldDropBroker") {
                 worldDropBrokerHandler(data);
+            } else if (data.type === "launchSwarm") {
+                launchSwarmHandler(data);
+            }
+        } else if (game.user.uuid === data.userId) {
+            if (data.type === "showSwarm") {
+                showSwarmHandler(data);
             }
         }
     });
