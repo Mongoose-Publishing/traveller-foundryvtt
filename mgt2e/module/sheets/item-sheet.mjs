@@ -559,11 +559,17 @@ export class MgT2ItemSheet extends ItemSheet {
             // This item has an embedded computer.
             context.SOFTWARE = [];
             let found = [];
-            for (let s of context.item.system.computer.software) {
-                let software = context.item.parent.items.get(s);
-                if (software) {
-                    context.SOFTWARE.push(software);
-                    found.push(s);
+            if (context.item.system.computer.software) {
+                try {
+                    for (let s of context.item.system.computer.software) {
+                        let software = context.item.parent.items.get(s);
+                        if (software) {
+                            context.SOFTWARE.push(software);
+                            found.push(s);
+                        }
+                    }
+                } catch {
+                    // Not iterable
                 }
             }
             // It's easier to track what we found, than it is to track what wasn't
