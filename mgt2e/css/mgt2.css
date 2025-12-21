@@ -1713,6 +1713,26 @@ section.id-card .showIdCard {
   content: "";
 }
 
+ul.comma-list {
+  list-style: none;
+  margin-block-start: 0;
+  margin: 0;
+  padding: 0;
+}
+
+ul.comma-list li {
+  display: inline;
+}
+
+ul.comma-list li:after {
+  content: ", ";
+}
+
+ul.comma-list li:last-child:after {
+  content: "."
+}
+
+
 .id-card div.description {
   height: 80px;
   scrollbar-color: #808080 #d0d0d0;

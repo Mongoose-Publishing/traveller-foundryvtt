@@ -2701,18 +2701,6 @@ export class MgT2ActorSheet extends ActorSheet {
     */
 }
 
-export class MgT2NPCActorSheet extends MgT2ActorSheet {
-    static get defaultOptions() {
-        return foundry.utils.mergeObject(super.defaultOptions, {
-            classes: ["mgt2e", "sheet", "actor"],
-            template: "systems/mgt2e/templates/actor/actor-sheet.html",
-            width: 720,
-            height: 600,
-            tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
-        });
-    }
-}
-
 export class MgT2CreatureActorSheet extends MgT2ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {

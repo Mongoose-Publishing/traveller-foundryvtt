@@ -1,8 +1,9 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
     <section class="npc-sheet">
         <div class="character-left">
-            <img class="profile-img actor-draggable shadow" src="{{actor.img}}" data-edit="img" data-actor-id="{{actor._id}}"
-                 title="{{actor.name}}" height="100" width="100"/>
+            <img class="profile-img actor-draggable shadow" src="{{actor.img}}"
+                 data-edit="img" data-actor-id="{{actor._id}}"
+                 title="{{actor.name}}"/>
 
             {{#if (isObserver .)}}
                 <div class="side-panel hits-box shadow">
@@ -45,182 +46,115 @@
         </div>
 
         <div class="character-right">
-            <h1 class="charname shadow">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
-            </h1>
+            <h1 class="charname shadow">{{actor.name}}</h1>
 
             <div class="shadow grid grid-5col">
-                <div class="resource flex-group-left grid-span-2">
-                    <label for="system.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
-                    <input class="field-value writable" name="system.sophont.species" type="text" value="{{system.sophont.species}}"/>
-                </div>
-                <div class="resource flex-group-left">
-                    <label for="system.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
-                    <input class="field-value writable" name="system.sophont.gender" type="text" value="{{system.sophont.gender}}"/>
-                </div>
+                {{#if stsrem.sophont.species}}
+                    <div class="resource flex-group-left grid-span-2">
+                        <label for="system.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
+                        <input class="field-value writable" name="system.sophont.species" type="text" value="{{system.sophont.species}}"/>
+                    </div>
+                {{/if}}
+                {{#if system.sophont.gender}}
+                    <div class="resource flex-group-left">
+                        <label for="system.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
+                        <input class="field-value writable" name="system.sophont.gender" type="text" value="{{system.sophont.gender}}"/>
+                    </div>
+                {{/if}}
                 <div class="resource flex-group-left grid-span-2">
                     <label for="system.sophont.profession" class="field-label">
                         {{localize 'MGT2.TravellerSheet.Profession'}}
-                        <span class="showIdCard"><i class="fa-solid fa-id-card"></i></span>
                     </label>
                     <input class="field-value writable" name="system.sophont.profession" type="text" value="{{system.sophont.profession}}"/>
                 </div>
             </div>
-
-            <div class="shadow">
-                {{#if (isOwner .) }}
-                    {{#unless system.settings.lockCharacteristics}}
-                        <span class="roll-upp rollable" style="float:right; display: inline-block" title="{{localize 'MGT2.TravellerSheet.RandomRoll'}}"><i class="fas fa-dice"> </i></span>
-                    {{/unless}}
-                {{/if}}
-                <div class="no-space grid grid-{{system.settings.columns}}col">
-                    {{#if (isObserver .)}}
-                        {{#each system.characteristics as | char key | }}
-                            {{#if char.show}}
-                            <div class="resource flex-group-center {{#unless ../system.settings.lockCharacteristics}}characteristic-draggable{{/unless}}"
-                                 data-rolltype="characteristic" data-cha="{{key}}">
-                                <label for="system.characteristics.{{key}}.value"
-                                       class="characteristic-title rollable"
-                                       data-roll="2d6+@{{key}}" data-label="{{key}}"
-                                       data-cha="{{key}}"
-                                       title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
-                                <span class="characteristic-dm {{chaStatus char}}">{{prettyNumber char.dm 0 true}}</span>
-                                <br/>
-                                {{#if ../system.damage}}
-                                    <input class="characteristic-readonly"
-                                           type="number" min="0" max="20" step="1"
-                                           name="system.characteristics.{{key}}.current"
-                                           value="{{char.current}}"
-                                           data-dtype="Number" readonly/> /
-                                {{/if}}
-                                <input class="characteristic-value writable"
-                                       type="number" min="0" max="20" step="1"
-                                       name="system.characteristics.{{key}}.value"
-                                       value="{{char.value}}" data-dtype="Number"/>
-                            </div>
-                            {{/if}}
-                        {{/each}}
-                    {{else}}
-                        {{#each system.characteristics as | char key | }}
-                            {{#if char.show}}
-                            <div class="resource flex-group-center">
-                                <label for="system.characteristics.{{key}}.value"
-                                       class="characteristic-title"
-                                       title="{{localize (concat 'MGT2.Characteristics.' key) }}">{{key}}</label>
-                                <span class="characteristic-dm {{chaStatus char}}">{{numberFormat char.dm sign=true}}</span>
-                            </div>
-                            {{/if}}
-                        {{/each}}
-                    {{/if}}
-                </div>
-            </div>
-
             {{#if (isObserver .) }}
-            <div class="shadow grid grid-5col">
-                <div class="resource flex-group-center">
-                    <label for="system.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
-                    <input class="field-value writable" type="text" name="system.speed.base" value="{{system.speed.base}}" data-dtype="Number"/>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
-                    <input class="field-value writable" type="text" name="system.size" value="{{system.size}}" data-dtype="Number"/>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.initiative.value" class="field-label">INIT</label>
-                    <input class="field-value" type="text" name="system.initiative.value"
-                           value="{{system.initiative.value}}" data-dtype="Number" readonly/>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.hits.value" class="field-label">MAX HITS</label>
-                    <input class="field-value {{#unless system.settings.autoHits}}writable{{/unless}}"
-                           {{#if system.settings.autoHits}}readonly{{/if}}
-                           type="text" name="system.hits.max"
-                           value="{{system.hits.max}}"
-                           data-dtype="Number"/>
-                </div>
-                <div class="resource flex-group-center dodgeRoll" title="Click to dodge, shift-click to reset">
-                    <label for="system.dodge" class="field-label">
-                        <i class="fas fa-dice"></i>
-                        {{localize 'MGT2.TravellerSheet.Dodge'}}
+                <div class="shadow grid grid-5col">
+                    <div class="resource flex-group-center">
+                        <label for="system.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
+                        <input class="field-value writable" type="text" name="system.speed.base" value="{{system.speed.base}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label for="system.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
+                        <input class="field-value writable" type="text" name="system.size" value="{{system.size}}" data-dtype="Number"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label for="system.initiative.value" class="field-label">INIT</label>
+                        <input class="field-value" type="text" name="system.initiative.value"
+                               value="{{system.initiative.value}}" data-dtype="Number" readonly/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label for="system.hits.value" class="field-label">MAX HITS</label>
+                        <input class="field-value {{#unless system.settings.autoHits}}writable{{/unless}}"
+                               {{#if system.settings.autoHits}}readonly{{/if}}
+                        type="text" name="system.hits.max"
+                        value="{{system.hits.max}}"
+                        data-dtype="Number"/>
+                    </div>
+                    <div class="resource flex-group-center dodgeRoll" title="Click to dodge, shift-click to reset">
+                        <label for="system.dodge" class="field-label">
+                            <i class="fas fa-dice"></i>
+                            {{localize 'MGT2.TravellerSheet.Dodge'}}
 
-                    </label>
-                    <input class="field-value" type="text" _name="system.dodge"
-                           value="{{system.dodge}}" data-dtype="Number" readonly/>
+                        </label>
+                        <input class="field-value" type="text" _name="system.dodge"
+                               value="{{system.dodge}}" data-dtype="Number" readonly/>
+                    </div>
+                </div>
+            {{/if}}
+            <div class="shadow">
+                <div class="no-space grid grid-3col">
+                    <div class="npc-traits">
+                        <h2>Traits</h2>
+                        <table>
+                            {{#each TRAITS as | row key | }}
+                                <tr>
+                                    {{#if row.left}}
+                                        <th>{{row.left.trait}}</th><td>{{row.left.value}}</td>
+                                    {{/if}}
+                                    {{#if row.right}}
+                                        <th>{{row.right.trait}}</th><td>{{row.right.value}}</td>
+                                    {{/if}}
+                                </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                    <div class="grid-span-2">
+                        <h2>Skills</h2>
+
+                        <span>{{{showSimpleSkills actor}}}</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>Equipment</h2>
+
+                    <table>
+                        <tr>
+                            <th>Weapons</th>
+                            <td>
+                                <ul class="comma-list">
+                                    {{#each WEAPONS as | item id |}}
+                                        <li class="item-attack item rollable" data-roll-type="item" data-attack-id="{{item._id}}">{{item.name}}</li>
+                                    {{/each}}
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Other</th>
+                            <td>
+                                <ul class="comma-list">
+                                    {{#each GEAR as | item id |}}
+                                        <li class="item-edit item rollable" data-roll-type="item" data-item-id="{{item._id}}">{{item.name}}</li>
+                                    {{/each}}
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            {{/if}}
 
             {{> "systems/mgt2e/templates/actor/parts/actor-status.html"}}
 
-            {{#if (isObserver .) }}
-            <div class="shadow">
-                <nav class="sheet-tabs tabs" data-group="primary">
-                    <a class="item" data-tab="skills">Skills</a>
-                    <a class="item" data-tab="items">Equipment</a>
-                    <a class="item" data-tab="biography">Biography</a>
-                    {{#if (isOwner .)}}
-                        <a class="item" data-tab="settings">Settings</a>
-                    {{/if}}
-                </nav>
-
-                <div class="sheet-body">
-                    {{!-- Skills Tab --}}
-                    <div class="tab skills" data-group="primary" data-tab="skills">
-                        {{> "systems/mgt2e/templates/actor/parts/actor-skills.html"}}
-                    </div>
-
-                    {{!-- Biography Tab --}}
-                    <div class="tab biography" data-group="primary" data-tab="biography">
-
-                        <div class="resources grid grid-6col">
-                            <div class="resource flex-group-center">
-                                <label for="system.sophont.age" class="resource-label">Age</label>
-                                <input type="text" name="system.sophont.age" value="{{system.sophont.age}}"
-                                       class="writable" data-dtype="Number"/>
-                            </div>
-                            <div class="resource flex-group-center">
-                                <label for="system.sophont.height" class="resource-label">Height (cm)</label>
-                                <input type="text" name="system.sophont.height" value="{{system.sophont.height}}"
-                                       class="writable" data-dtype="Number"/>
-                            </div>
-                            <div class="resource flex-group-center">
-                                <label for="system.sophont.weight" class="resource-label">Weight (kg)</label>
-                                <input type="text" name="system.sophont.weight" value="{{system.sophont.weight}}"
-                                       class="writable" data-dtype="Number"/>
-                            </div>
-                            <div class="resource flex-group-center">
-                                <label for="system.finance.cash" class="resource-label">Credits</label>
-                                <input type="text" name="system.finance.cash" value="{{system.finance.cash}}"
-                                       class="writable" data-dtype="Number"/>
-                            </div>
-                            <div class="resource flex-group-left grid-span-2">
-                                <label for="system.sophont.homeworld" class="resource-label">Homeworld</label>
-                                <input type="text" name="system.sophont.homeworld" value="{{system.sophont.homeworld}}"
-                                       class="writable" data-dtype="String"/>
-                            </div>
-                        </div>
-
-                        <section class="actor-description">
-                            {{editor
-                                enrichedDescription target="system.description"
-                                button=true editable=editable}}
-                        </section>
-                    </div>
-
-                    {{!-- Owned Items Tab --}}
-                    <div class="tab items" data-group="primary" data-tab="items">
-                        {{> "systems/mgt2e/templates/actor/parts/actor-items.html"}}
-                    </div>
-
-                    {{!-- Settings Tab --}}
-                    {{#if (isOwner .)}}
-                        <section class="tab settings flexcol" data-group="primary" data-tab="settings">
-                            {{> "systems/mgt2e/templates/actor/parts/actor-settings.html"}}
-                        </section>
-                    {{/if}}
-                </div>
-            </div>
-            {{/if}}
         </div>
     </section>
 </form>

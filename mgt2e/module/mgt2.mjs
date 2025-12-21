@@ -5,7 +5,7 @@ import { MgT2Actor } from "./documents/actor.mjs";
 import { MgT2Item } from "./documents/item.mjs";
 // Import sheet classes.
 import { MgT2ActorSheet } from "./sheets/actor-sheet.mjs";
-import { MgT2NPCActorSheet } from "./sheets/actor-sheet.mjs";
+import { MgT2NpcActorSheet } from "./sheets/actors/npc.mjs";
 import { MgT2CreatureActorSheet } from "./sheets/actor-sheet.mjs";
 import { MgT2WorldActorSheet } from "./sheets/actors/world.mjs";
 import { MgT2VehicleActorSheet } from "./sheets/actors/vehicle.mjs";
@@ -290,7 +290,7 @@ Hooks.once('init', async function() {
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("mgt2e", MgT2ActorSheet, { label: "Traveller Sheet", makeDefault: true });
-  Actors.registerSheet("mgt2e", MgT2NPCActorSheet, { label: "NPC Sheet", types: [ "npc"], makeDefault: false });
+  Actors.registerSheet("mgt2e", MgT2NpcActorSheet, { label: "NPC Sheet", types: [ "npc"], makeDefault: false });
   Actors.registerSheet("mgt2e", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
   Actors.registerSheet("mgt2e", MgT2WorldActorSheet, { label: "World Sheet", types: [ "world"], makeDefault: true });
   Actors.registerSheet("mgt2e", MgT2VehicleActorSheet, { label: "Vehicle Sheet", types: [ "vehicle"], makeDefault: true });
@@ -1786,6 +1786,8 @@ Handlebars.registerHelper('showSimpleSkills', function(actor) {
 
         for (let key in skills) {
             let skill = skills[key];
+            const dataRoll='data-rolltype="skill" data-roll="2d6"';
+            const dataSkill=`data-skill="${key}"`;
 
             if (skill.trained) {
                 let showParent = true;
@@ -1793,13 +1795,15 @@ Handlebars.registerHelper('showSimpleSkills', function(actor) {
                     for (let specKey in skill.specialities) {
                         let spec = skill.specialities[specKey];
                         if (spec.value > 0) {
+                            const dataSkillFqn=`data-skill-fqn="${key}.${specKey}"`;
                             showParent = false;
-                            html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})/${spec.value}</li>`;
+                            html += `<li class="rollable" ${dataRoll} ${dataSkillFqn} data-spec="${specKey}">${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})&nbsp;${spec.value}</li>`;
                         }
                     }
                 }
                 if (showParent) {
-                    html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}/${skill.value}</li>`;
+                    const dataSkillFqn=`data-skill-fqn="${key}"`;
+                    html += `<li class="rollable" ${dataRoll} ${dataSkillFqn}>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;${skill.value}</li>`;
                 }
             }
         }
