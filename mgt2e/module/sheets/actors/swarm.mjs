@@ -44,14 +44,17 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
             if (context.weaponItem) {
                 context.damage = context.weaponItem.system.weapon.damage;
             }
+            this.weaponItem = context.weaponItem;
 
-            context.TARGET_ICON = "systems/mgt2e/icons/misc/unknown-target.svg";
             let targetId = this.actor.system?.salvo?.targetId;
             if (targetId) {
+                console.log("Have a target id set");
                 this.targetActor = await fromUuid(targetId);
                 if (this.targetActor) {
-                    context.TARGET_ICON = this.targetActor.img;
+                    context.SMART_DM = this.getSmartDM(this.targetActor);
+                    context.SIZE_DM = this.getSizeDM(this.targetActor);
                 }
+                context.targetActor = this.targetActor;
             } else {
                 this.targetActor = null;
             }
@@ -99,13 +102,23 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
 
         let selected = Tools.getSelected();
         console.log(selected);
-        if (selected.length > 0) {
-            let token = selected[0];
+        for (let token of selected) {
+            console.log(token.name);
+            if (token.document.actor._id === this.actor._id) {
+                console.log("Not me");
+                continue;
+            }
+            if (token.document.actor.type !== "spacecraft") {
+                console.log("Not a spacecraft");
+                console.log(token.document.actor.type);
+                continue;
+            }
             console.log(token.document.uuid);
+            console.log("Selected target " + token.document.actor.name);
             this.targetActor = token.document.actor;
             this.actor.update({"system.salvo.targetId": token.document.actor.uuid });
         }
-        this.render();
+        this.render(true);
     }
 
     modifySize(value) {
@@ -125,7 +138,39 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         // nothing
     }
 
+    getSmartDM(targetActor) {
+        if (this.actor.system.salvo && targetActor) {
+            console.log(this.actor);
+            let smartTL = parseInt(this.actor.system.salvo?.tl);
+            console.log(targetActor);
+            let targetTL = parseInt(targetActor.system.spacecraft.tl);
 
+            if (targetTL > smartTL) {
+                return 1;
+            } else {
+                return Math.min(6, smartTL - targetTL);
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    getSizeDM(targetActor) {
+        if (this.actor.system.salvo && targetActor) {
+            if (targetActor.system.spacecraft.dtons >= 2000) {
+                return 0;
+            }
+            let dm = 0;
+            if (this.weaponItem) {
+                if (this.weaponItem.hasTrait("torpedo")) {
+                    dm = -2;
+                }
+            }
+            return dm;
+        } else {
+            return 0;
+        }
+    }
 
     async rollImpact() {
         let targetId = this.actor.system?.salvo?.targetId;

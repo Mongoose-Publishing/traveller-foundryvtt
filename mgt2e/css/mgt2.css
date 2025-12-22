@@ -2376,8 +2376,12 @@ div.spacecraft-attacks .weapon-action-button:hover {
   box-shadow: 0 2px 5px #800000;
 }
 
+.swarm-left {
+  float: left;
+}
+
 .swarm-left .side-panel {
-  width: 120px;
+  width: 96px;
   padding: 0;
   margin-bottom: 10px;
 }
@@ -2394,11 +2398,6 @@ div.spacecraft-attacks .weapon-action-button:hover {
   padding: 0;
 }
 
-.swarm-left .side-panel {
-  width: 120px;
-  padding: 0;
-  margin-bottom: 10px;
-}
 
 .swarm-right {
   margin-left: 10px;
@@ -2415,4 +2414,54 @@ div.spacecraft-attacks .weapon-action-button:hover {
   margin-bottom: 2px;
   cursor: pointer;
   text-align: center;
+}
+
+.swarm-sheet img.profile-img {
+  width: 96px;
+  height: 96px;
+  border: none;
+  background: none;
+}
+
+.swarm-sheet h1.charname {
+  color: #f1511b;
+  background-color: #414042;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+.swarm-sheet div.resource label.field-label {
+  color: black;
+  background-color: #f1511b;
+  border: none;
+  border-radius: 0;
+}
+
+.swarm-sheet div.resource input.field-value {
+  color: white;
+  border: none;
+}
+
+.swarm-sheet .swarm-left .side-panel .box-title {
+  color: black;
+  background-color: #f1511b;
+}
+
+.swarm-sheet .swarm-left .side-panel input.field-value {
+  width: 40px;
+  background-color: #414042;
+  color: white;
+}
+
+.swarm-right .salvo {
+  color: white;
+}
+
+.salvo h2 {
+  background-color: #f1511b;
+  color: black;
+  padding-left: 0.5em;
+  text-transform: uppercase;
 }

@@ -1289,6 +1289,19 @@
   "MGT2.Role.BuiltIn.Action.Evade": "Evade",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Make Pilot",
 
+  "MGT2.Swarm.MissileSource": "Missile Source",
+  "MGT2.Swarm.MissileTarget": "Missile Target",
+  "MGT2.Swarm.SelectTarget": "SELECT TARGET",
+  "MGT2.Swarm.ShipName": "Ship Name",
+  "MGT2.Swarm.TargetName": "Target Name",
+  "MGT2.Swarm.WeaponSystem": "Weapon System",
+  "MGT2.Swarm.Size": "Size",
+  "MGT2.Swarm.Endurance": "Fuel",
+  "MGT2.Swarm.TL": "Smart TL",
+  "MGT2.Swarm.Thrust": "Thrust",
+  "MGT2.Swarm.Damage": "Damage",
+  "MGT2.Swarm.RollImpact": "Roll Impact",
+
   "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
   "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",
   "MGT2.Dialog.EmbarkPassengers": "Embark Passengers",
@@ -1318,6 +1331,7 @@
   "TYPES.Actor.creature": "Creature",
   "TYPES.Actor.spacecraft": "Spacecraft",
   "TYPES.Actor.package": "Package",
+  "TYPES.Actor.swarm": "Swarm",
   "TYPES.Actor.vehicle": "Vehicle",
   "TYPES.Actor.world": "World",
 

@@ -1,13 +1,14 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
 
-    <section class="traveller-sheet">
+    <section class="swarm-sheet">
         {{#if system.salvo}}
             <div class="swarm-left">
-                <img class="profile-img shadow actor-draggable" data-actor-id="{{actor._id}}"
+                <img class="profile-img shadow actor-draggable"
+                     data-actor-id="{{actor._id}}"
                      src="{{actor.img}}" />
 
-                <div class="side-panel shadow resource flex-group-center">
-                    <label class="box-title">Salvo Size</label>
+                <div class="side-panel resource flex-group-center">
+                    <label class="box-title">{{localize "MGT2.Swarm.Size"}}</label>
                     <div class="incdec size">
                         <span class="size-dec"><i class="fa-regular fa-square-minus"></i></span>
                         <input class="field-value writable" type="text" name="system.size.value"
@@ -16,8 +17,8 @@
                     </div>
                 </div>
 
-                <div class="side-panel shadow resource flex-group-center" title="Flight Endurance">
-                    <label class="box-title">Endurance</label>
+                <div class="side-panel resource flex-group-center" title="Flight Endurance">
+                    <label class="box-title">{{localize "MGT2.Swarm.Endurance"}}</label>
                     <div class="incdec endurance">
                         <span class="end-dec"><i class="fa-regular fa-square-minus"></i></span>
                         <input class="field-value writable" type="text" name="system.salvo.endurance.value"
@@ -25,45 +26,67 @@
                         <span class="end-inc"><i class="fa-regular fa-square-plus"></i></span>
                     </div>
                 </div>
+
             </div>
-            <div class="swarm-right">
+
+            <div class="swarm-top">
+
                 <h1 class="charname shadow">{{actor.name}}</h1>
 
-                <div class="salvo shadow grid grid-3col">
+                <div class="grid grid-3col">
                     <div class="resource flex-group-center">
-                        <label class="field-label">TL</label>
+                        <label class="field-label">{{localize "MGT2.Swarm.TL"}}</label>
                         <input class="field-value" type="text" name="system.salvo.tl"
                                readonly value="{{system.salvo.tl}}"/>
                     </div>
                     <div class="resource flex-group-center">
-                        <label class="field-label">Thrust</label>
+                        <label class="field-label">{{localize "MGT2.Swarm.Thrust"}}</label>
                         <input class="field-value" type="text"  name="system.salvo.thrust"
                                readonly value="{{system.salvo.thrust}}"/>
                     </div>
                     <div class="resource flex-group-center">
-                        <label class="field-label">Damage</label>
+                        <label class="field-label">{{localize "MGT2.Swarm.Damage"}}</label>
                         <input class="field-value" type="text" name="damage"
                                readonly value="{{damage}}"/>
                     </div>
 
                 </div>
+            </div>
 
-                <div class="salvo shadow grid grid-2col">
+            <div class="swarm-right">
+                <div class="salvo grid grid-2col">
                     <div>
-                        <h4>Source</h4>
-                        <img src="{{shipActor.img}}" width="96px" height="96px"/>
+                        <h2>{{localize "MGT2.Swarm.MissileSource"}}</h2>
+                        <h3>{{localize "MGT2.Swarm.ShipName"}}</h3>
+                        <p>
+                            {{shipActor.name}}
+                        </p>
+                        <h3>{{localize "MGT2.Swarm.WeaponSystem"}}</h3>
+                        <p>
+                           {{weaponItem.name}} ({{system.size.max}})
+                        </p>
                     </div>
                     <div class="selectTarget">
-                        <h4>Target</h4>
-                        <img src="{{TARGET_ICON}}" width="96px" height="96px"/>
+                        <h2>{{localize "MGT2.Swarm.MissileTarget"}}</h2>
+                        <p>
+                            {{#if targetActor}}
+                                <h3>{{localize "MGT2.Swarm.TargetName"}}</h3>
+                                <p>{{targetActor.name}}</p>
+
+                                <h3>Target Details</h3>
+                                <p>
+                                    <b>Smart DM:</b> {{SMART_DM}}<br/>
+                                    <b>Size DM:</b> {{SIZE_DM}}<br/>
+                                </p>
+                            {{else}}
+                                <div class="selectTarget">{{localize "MGT2.Swarm.SelectTarget"}}</div>
+                            {{/if}}
+                        </p>
                     </div>
                 </div>
                 <div class="grid-2col">
                     <div class="salvo-action button-roll-impact">
-                        Roll Impact
-                    </div>
-                    <div class="salvo-action button-roll-endurance">
-                        Endurance
+                        {{localize "MGT2.Swarm.RollImpact"}}
                     </div>
                 </div>
             </div>
