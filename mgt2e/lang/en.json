@@ -1301,6 +1301,7 @@
   "MGT2.Swarm.Thrust": "Thrust",
   "MGT2.Swarm.Damage": "Damage",
   "MGT2.Swarm.RollImpact": "Roll Impact",
+  "MGT2.Swarm.ClearTarget": "Unset Target",
 
   "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
   "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",

@@ -71,22 +71,26 @@
                         <p>
                             {{#if targetActor}}
                                 <h3>{{localize "MGT2.Swarm.TargetName"}}</h3>
-                                <p>{{targetActor.name}}</p>
+                                <p>{{targetToken.name}}</p>
 
                                 <h3>Target Details</h3>
                                 <p>
                                     <b>Smart DM:</b> {{SMART_DM}}<br/>
                                     <b>Size DM:</b> {{SIZE_DM}}<br/>
                                 </p>
+
+                                <div class="grid-2col">
+                                    <div class="salvo-action button-roll-impact">
+                                        {{localize "MGT2.Swarm.RollImpact"}}
+                                    </div>
+                                    <div class="salvo-action button-clear-target">
+                                        {{localize "MGT2.Swarm.ClearTarget"}}
+                                    </div>
+                                </div>
                             {{else}}
                                 <div class="selectTarget">{{localize "MGT2.Swarm.SelectTarget"}}</div>
                             {{/if}}
                         </p>
-                    </div>
-                </div>
-                <div class="grid-2col">
-                    <div class="salvo-action button-roll-impact">
-                        {{localize "MGT2.Swarm.RollImpact"}}
                     </div>
                 </div>
             </div>

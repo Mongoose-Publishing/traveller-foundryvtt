@@ -48,12 +48,15 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
 
             let targetId = this.actor.system?.salvo?.targetId;
             if (targetId) {
-                console.log("Have a target id set");
+                console.log("Have a target id set: " + targetId);
                 this.targetActor = await fromUuid(targetId);
+                this.targetToken = this.targetActor.token;
+                console.log(this.targetActor);
                 if (this.targetActor) {
                     context.SMART_DM = this.getSmartDM(this.targetActor);
                     context.SIZE_DM = this.getSizeDM(this.targetActor);
                 }
+                context.targetToken = this.targetToken;
                 context.targetActor = this.targetActor;
             } else {
                 this.targetActor = null;
@@ -86,8 +89,10 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         });
 
         html.find('.button-roll-impact').click(ev => {
-            console.log("yes");
             this.rollImpact();
+        });
+        html.find('.button-clear-target').click(ev => {
+            this.clearTarget();
         });
         html.find('.size-dec').click(ev => this.modifySize(-1));
         html.find('.size-inc').click(ev => this.modifySize(+1));
@@ -101,24 +106,24 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         console.log("selectTargetAction:");
 
         let selected = Tools.getSelected();
-        console.log(selected);
         for (let token of selected) {
-            console.log(token.name);
+            console.log(token);
             if (token.document.actor._id === this.actor._id) {
-                console.log("Not me");
                 continue;
             }
             if (token.document.actor.type !== "spacecraft") {
-                console.log("Not a spacecraft");
-                console.log(token.document.actor.type);
                 continue;
             }
-            console.log(token.document.uuid);
             console.log("Selected target " + token.document.actor.name);
+            this.targetToken = token;
             this.targetActor = token.document.actor;
-            this.actor.update({"system.salvo.targetId": token.document.actor.uuid });
+            this.actor.update({"system.salvo.targetId": token.document.uuid });
         }
         this.render(true);
+    }
+
+    clearTarget() {
+        this.actor.update({"system.salvo.targetId": null});
     }
 
     modifySize(value) {
@@ -140,9 +145,7 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
 
     getSmartDM(targetActor) {
         if (this.actor.system.salvo && targetActor) {
-            console.log(this.actor);
             let smartTL = parseInt(this.actor.system.salvo?.tl);
-            console.log(targetActor);
             let targetTL = parseInt(targetActor.system.spacecraft.tl);
 
             if (targetTL > smartTL) {
