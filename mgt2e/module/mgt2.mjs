@@ -119,7 +119,7 @@ Hooks.once('init', async function() {
         scope: 'world',
         config: true,
         type: Boolean,
-        default: false
+        default: true
     });
     game.settings.register('mgt2e', 'skillColumns', {
         name: game.i18n.localize("MGT2.Settings.SkillColumns.Name"),
