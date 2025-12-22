@@ -21,20 +21,35 @@ export class MgT2NpcActorSheet extends MgT2ActorSheet {
 
     prepareBaseData() {
         // Nothing to prepare.
+        console.log("npc.prepareBaseData:");
+        super.prepareBaseData();
     }
 
     prepareDerivedData() {
         // Nothing to prepare.
+        console.log("npc.prepareDerivedData");
+        super.prepareDerivedData();
     }
 
     _preUpdate(changes, options, user) {
         // Do thing.
+        console.log("_preUpdate:");
+    }
+
+    _canDragDrop() {
+        return true;
+    }
+
+    async _onDrop(event) {
+        console.log("npc._onDrop()");
+        return super._onDrop(event);
     }
 
     async getData() {
         const context = await super.getData();
         console.log("MgT2NpcActorSheet.getData:");
         console.log(this.actor);
+        context.system = this.actor.system;
 
         const traits = this.actor.system.characteristics;
         context.TRAITS = [];
@@ -108,7 +123,7 @@ export class MgT2NpcActorSheet extends MgT2ActorSheet {
     }
 
     activateListeners(html) {
-        //super.activateListeners(html);
+        super.activateListeners(html);
         console.log("NPC LISTENERS");
 
         html.find(".item-edit").click(ev => {
@@ -117,7 +132,7 @@ export class MgT2NpcActorSheet extends MgT2ActorSheet {
             const item = this.actor.items.get(id);
             item.sheet.render(true);
         });
-        html.find('.rollable').click(ev => this._onRollWrapper(ev, this.actor));
+        //html.find('.rollable').click(ev => this._onRollWrapper(ev, this.actor));
 
         let handler = ev => this._onDragStart(ev);
         html.find('img.actor-draggable').each((i, img) => {

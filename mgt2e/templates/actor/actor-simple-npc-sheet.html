@@ -46,26 +46,25 @@
         </div>
 
         <div class="character-right">
-            <h1 class="charname shadow">{{actor.name}}</h1>
+            <div class="shadow title">
+                <h1 class="charname shadow">{{actor.name}}</h1>
+                {{#if system.sophont.profession}}
+                    <h2 class="charname">{{system.sophont.profession}}</h2>
+                {{/if}}
+            </div>
 
             <div class="shadow grid grid-5col">
-                {{#if stsrem.sophont.species}}
-                    <div class="resource flex-group-left grid-span-2">
-                        <label for="system.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
-                        <input class="field-value writable" name="system.sophont.species" type="text" value="{{system.sophont.species}}"/>
-                    </div>
-                {{/if}}
-                {{#if system.sophont.gender}}
-                    <div class="resource flex-group-left">
-                        <label for="system.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
-                        <input class="field-value writable" name="system.sophont.gender" type="text" value="{{system.sophont.gender}}"/>
-                    </div>
-                {{/if}}
                 <div class="resource flex-group-left grid-span-2">
-                    <label for="system.sophont.profession" class="field-label">
-                        {{localize 'MGT2.TravellerSheet.Profession'}}
-                    </label>
-                    <input class="field-value writable" name="system.sophont.profession" type="text" value="{{system.sophont.profession}}"/>
+                    <label for="system.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>
+                    <input class="field-value writable" name="system.sophont.species" type="text" value="{{system.sophont.species}}"/>
+                </div>
+                <div class="resource flex-group-left grid-span-2">
+                    <label for="system.sophont.gender" class="field-label">{{localize 'MGT2.TravellerSheet.Gender'}}</label>
+                    <input class="field-value writable" name="system.sophont.gender" type="text" value="{{system.sophont.gender}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="system.sophont.age" class="field-label">{{localize 'MGT2.TravellerSheet.Age'}}</label>
+                    <input class="field-value writable" name="system.sophont.age" type="text" value="{{system.sophont.age}}"/>
                 </div>
             </div>
             {{#if (isObserver .) }}
@@ -110,7 +109,8 @@
                             {{#each TRAITS as | row key | }}
                                 <tr>
                                     {{#if row.left}}
-                                        <th>{{row.left.trait}}</th><td>{{row.left.value}}</td>
+                                        <th>{{row.left.trait}}</th>
+                                        <td>{{row.left.value}}</td>
                                     {{/if}}
                                     {{#if row.right}}
                                         <th>{{row.right.trait}}</th><td>{{row.right.value}}</td>

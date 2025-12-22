@@ -17,7 +17,10 @@
     }
   ],
   "esmodules": ["module/mgt2.mjs" ],
-  "styles": ["css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css", "css/software.css", "css/world.css" ],
+  "styles": [
+    "css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css",
+    "css/software.css", "css/world.css", "css/npc.css"
+  ],
   "background": "systems/mgt2e/images/traveller.webp",
   "scripts": [ ],
   "packs": [
@@ -84,7 +87,7 @@
     {
       "lang": "es",
       "name": "Español",
-      "path": "lang/es.json" 
+      "path": "lang/es.json"
    }
   ],
   "socket": true,

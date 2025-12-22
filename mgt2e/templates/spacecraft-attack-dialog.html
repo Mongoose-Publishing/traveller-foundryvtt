@@ -24,14 +24,14 @@
 
     <div class="shadow grid grid-2col">
         <div>
-            <label>Weapon</label><br/>
+            <label>{{localize "MGT2.TravellerSheet.Weapons"}}</label><br/>
             <select class="attackDialogWeapon" name="weaponSelected">
                 {{selectOptions weaponSelect selected=weaponSelected}}
             </select>
         </div>
 
         <div>
-            <label>Range</label><br/>
+            <label>{{localize "MGT2.Item.RangeSpace"}}</label><br/>
             <select class="attackDialogRange" name="range">
                 {{selectOptions ranges selected=range}}
             </select>
@@ -53,10 +53,7 @@
     </div>
 
     <footer class="sheet-footer flexrow">
-        {{#if parryBonus includeZero=true}}
-            <button type="submit" name="submit" class="parryRoll">Parry (+{{parryBonus}})</button>
-        {{/if}}
-        <button type="submit" name="submit" class="attackRoll">Attack</button>
+        <button type="submit" name="submit" class="attackRoll">{{localize "MGT2.TravellerSheet.Attack"}}</button>
     </footer>
 
 </form>
