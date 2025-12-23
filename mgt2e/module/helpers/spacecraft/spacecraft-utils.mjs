@@ -601,7 +601,7 @@ export async function launchMissiles(shipActor, weaponItem, options) {
     }
 
     let actorData = {
-        name: shipActor.name + " / Salvo ",
+        name: shipActor.name + " / Salvo",
         type: "swarm",
         img: weaponItem.img,
         ownership: shipActor.ownership,

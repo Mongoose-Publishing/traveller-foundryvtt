@@ -275,12 +275,32 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         this.actor.update({"system.salvo.targetId": null});
     }
 
-    deleteSwarm() {
-        // Delete the swarm actor object and all tokens.
+    // Delete the swarm actor object and all tokens.
+    async deleteSwarm() {
+        let confirm = await foundry.applications.api.DialogV2.confirm({
+            window: { title: "MGT2.Swarm.DeleteConfirm.Title" },
+            content: `<p>${game.i18n.localize("MGT2.Swarm.DeleteConfirm.Text")}</p>`
+        })
+        if (!confirm) {
+            return;
+        }
+
         let actorId = this.actor._id;
         for (let token of game.scenes.current.tokens) {
-            console.log(token);
+            if (token.actorId === actorId) {
+                try {
+                    token.delete();
+                } catch (e) {
+                    console.log(e);
+                }
+            }
         }
+        try {
+            this.actor.delete();
+        } catch (e) {
+            console.log(e);
+        }
+        this.close();
     }
 
     modifyFighters(fighterId, value) {

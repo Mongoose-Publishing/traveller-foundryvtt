@@ -1307,6 +1307,9 @@
   "MGT2.Swarm.Armour": "Armour",
   "MGT2.Swarm.SquadronTL": "TL",
 
+  "MGT2.Swarm.DeleteConfirm.Title": "Delete Swarm?",
+  "MGT2.Swarm.DeleteConfirm.Text": "The Salvo/Squadrom and all its tokens will be deleted.",
+
   "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
   "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",
   "MGT2.Dialog.EmbarkPassengers": "Embark Passengers",
