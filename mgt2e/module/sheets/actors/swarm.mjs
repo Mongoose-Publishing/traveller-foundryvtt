@@ -50,14 +50,20 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
             if (targetId) {
                 console.log("Have a target id set: " + targetId);
                 this.targetActor = await fromUuid(targetId);
-                this.targetToken = this.targetActor.token;
-                console.log(this.targetActor);
                 if (this.targetActor) {
+                    console.log(this.targetActor);
+                    if (this.targetActor.actor) {
+                        this.targetToken = this.targetActor;
+                        this.targetActor = this.targetActor.actor;
+                    } else {
+                        // What now?
+                    }
+
                     context.SMART_DM = this.getSmartDM(this.targetActor);
                     context.SIZE_DM = this.getSizeDM(this.targetActor);
+                    context.targetToken = this.targetToken;
+                    context.targetActor = this.targetActor;
                 }
-                context.targetToken = this.targetToken;
-                context.targetActor = this.targetActor;
             } else {
                 this.targetActor = null;
             }
@@ -220,6 +226,9 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         html.find('.button-clear-target').click(ev => {
             this.clearTarget();
         });
+        html.find('.button-delete-swarm').click(ev => {
+            this.deleteSwarm();
+        });
         html.find('.button-create-squadron').click(ev => {
             this._createSquadron();
         });
@@ -266,6 +275,14 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         this.actor.update({"system.salvo.targetId": null});
     }
 
+    deleteSwarm() {
+        // Delete the swarm actor object and all tokens.
+        let actorId = this.actor._id;
+        for (let token of game.scenes.current.tokens) {
+            console.log(token);
+        }
+    }
+
     modifyFighters(fighterId, value) {
         console.log(fighterId);
         for (let f in this.actor.system.squadron.fighters) {
@@ -308,41 +325,45 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
     }
 
     getSmartDM(targetActor) {
-        if (this.actor.system.salvo && targetActor) {
-            let smartTL = parseInt(this.actor.system.salvo?.tl);
-            let targetTL = parseInt(targetActor.system.spacecraft.tl);
+        try {
+            if (this.actor.system.salvo && targetActor) {
+                let smartTL = parseInt(this.actor.system.salvo?.tl);
+                let targetTL = parseInt(targetActor.system.spacecraft.tl);
 
-            if (targetTL > smartTL) {
-                return 1;
-            } else {
-                return Math.min(6, smartTL - targetTL);
+                if (targetTL > smartTL) {
+                    return 1;
+                } else {
+                    return Math.min(6, smartTL - targetTL);
+                }
             }
-        } else {
-            return 0;
+        } catch (e) {
+            console.log(e);
         }
+        return 0;
     }
 
     getSizeDM(targetActor) {
-        if (this.actor.system.salvo && targetActor) {
-            if (targetActor.system.spacecraft.dtons >= 2000) {
-                return 0;
-            }
-            let dm = 0;
-            if (this.weaponItem) {
-                if (this.weaponItem.hasTrait("torpedo")) {
-                    dm = -2;
+        try {
+            if (this.actor.system.salvo && targetActor) {
+                if (targetActor.system.spacecraft.dtons >= 2000) {
+                    return 0;
                 }
+                let dm = 0;
+                if (this.weaponItem) {
+                    if (this.weaponItem.hasTrait("torpedo")) {
+                        dm = -2;
+                    }
+                }
+                return dm;
             }
-            return dm;
-        } else {
-            return 0;
+        } catch (e) {
+            console.log(e);
         }
+        return 0;
     }
 
     async rollImpact() {
-        let targetId = this.actor.system?.salvo?.targetId;
-        let targetActor = await fromUuid(targetId);
-        if (!targetActor) {
+        if (!this.targetActor) {
             ui.notifications.warn("No target specified");
             return;
         }
@@ -350,7 +371,7 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         let dmg = this.actor.system.salvo.damage;
         let size = parseInt(this.actor.system.size.value);
         let smartTL = parseInt(this.actor.system.salvo.tl);
-        let targetTL = parseInt(targetActor.system.spacecraft.tl);
+        let targetTL = parseInt(this.targetActor.system.spacecraft.tl);
 
         if (size < 1) {
             ui.notifications.warn("There are no missiles left in the salvo");
@@ -371,7 +392,7 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
             "attackDM": attackDM,
             "salvoSize": size
         };
-        new MgT2MissileAttackApp(this.actor, targetActor, weaponItem, attackOptions).render(true);
+        new MgT2MissileAttackApp(this.actor, this.targetActor, weaponItem, attackOptions).render(true);
         //rollSpaceAttack(this.actor, null, weaponItem, attackOptions);
     }
 }

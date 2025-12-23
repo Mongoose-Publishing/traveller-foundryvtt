@@ -4,6 +4,18 @@
 
 * Career terms aren't always added in the correct order.
 
+
+# develop
+
+* Added notification that is output to the chat when the system is updated.
+* Added alternative actor sheet for NPCs. This is a simpler, more compact sheet that is
+  still experimental.
+* Added new actor to handle fighter squadrons and missile salvos. Missile salvos have
+  basic functionality, fighter squadrons just hold some data for now and don't do anything.
+* Added new icons for fighter squadrons.
+* Added new weapon traits for specifying missile and torpedo information.
+* Updated some documentation.
+
 # 0.16.1 (Beta)
 
 * Career terms can be dragged and dropped on Travellers again.

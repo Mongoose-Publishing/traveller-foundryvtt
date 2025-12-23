@@ -122,6 +122,7 @@ export class MgT2MissileAttackApp extends HandlebarsApplicationMixin(Application
             "dm": customDM
         };
         rollSpaceAttack(this.salvoActor, null, this.weaponItem, attackOptions);
+        this.close();
     }
 }
 
