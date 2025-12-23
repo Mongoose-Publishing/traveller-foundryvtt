@@ -650,6 +650,10 @@ Hooks.on("createActor", (actor, data, userId) => {
             actor.img = `systems/mgt2e/images/tokens/spacecraft/white/far_trader.webp`;
         } else if (actor.type === "vehicle") {
             actor.img = `systems/mgt2e/images/tokens/vehicles/white/jeep.webp`;
+        } else if (actor.type === "swarm") {
+            let colours = [ "white", "grey", "gold", "blue", "red", "green" ];
+            let c = colours[colours.length * Math.random() | 0];
+            actor.img = `systems/mgt2e/icons/actors/squadron-${c}.svg`;
         } else if (actor.type === "world") {
             actor.img = `systems/mgt2e/icons/actors/world.svg`;
         } else {

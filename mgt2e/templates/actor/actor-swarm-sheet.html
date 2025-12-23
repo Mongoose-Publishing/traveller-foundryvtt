@@ -26,11 +26,9 @@
                         <span class="end-inc"><i class="fa-regular fa-square-plus"></i></span>
                     </div>
                 </div>
-
             </div>
 
             <div class="swarm-top">
-
                 <h1 class="charname shadow">{{actor.name}}</h1>
 
                 <div class="grid grid-3col">
@@ -93,6 +91,77 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        {{else if system.squadron}}
+            <div class="swarm-left">
+                <img class="profile-img shadow actor-draggable"
+                     data-actor-id="{{actor._id}}"
+                     src="{{actor.img}}" />
+
+                <div class="side-panel resource flex-group-center">
+                    <label class="box-title">{{localize "MGT2.Swarm.Size"}}</label>
+                    <div class="incdec size">
+                        <span class="size-dec"><i class="fa-regular fa-square-minus"></i></span>
+                        <input class="field-value writable" type="text" name="system.size.value"
+                               value="{{system.size.value}}"/>
+                        <span class="size-inc"><i class="fa-regular fa-square-plus"></i></span>
+                    </div>
+                </div>
+                <div class="side-panel resource flex-group-center">
+                    <label class="box-title">{{localize "MGT2.Swarm.Hull"}}</label>
+                    <input class="field-value writable" type="text" name="system.hits.value"
+                           value="{{system.hits.value}}"/>
+                </div>
+                <div class="side-panel resource flex-group-center">
+                    <label class="box-title">{{localize "MGT2.Swarm.Damage"}}</label>
+                    <input class="field-value writable" type="text" name="system.hits.damage"
+                           value="{{system.hits.damage}}"/>
+                </div>
+            </div>
+            <div class="swarm-top">
+                <h1 class="charname shadow"><input type="text" name="name" value="{{actor.name}}"/></h1>
+
+                <div class="grid grid-4col">
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize "MGT2.Swarm.SquadronTL"}}</label>
+                        <input class="field-value" type="text" name="system.squadron.tl"
+                               value="{{system.squadron.tl}}"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize "MGT2.Swarm.Thrust"}}</label>
+                        <input class="field-value" type="text"  name="system.squadron.thrust"
+                               value="{{system.squadron.thrust}}"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize "MGT2.Swarm.Armour"}}</label>
+                        <input class="field-value" type="text" name="system.squadron.armour"
+                               value="{{system.squadron.armour}}"/>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize "MGT2.Swarm.MaxHull"}}</label>
+                        <input class="field-value" type="text" name="system.squadron.hull.max"
+                               value="{{system.hits.max}}"/>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="swarm-right">
+                {{#each system.squadron.fighters as | fighter name | }}
+                    <div class="fighter" data-fighter-id="{{fighter.uuid}}">
+                        <h3>
+                            <span class="num-dec"><i class="fa-regular fa-square-minus"></i></span>
+                            <span class="num-inc"><i class="fa-regular fa-square-plus"></i></span>
+                            {{name}} x{{fighter.number}}
+                        </h3>
+
+                        <p>
+                            <b>Thrust: </b> {{fighter.thrust}}<br/>
+                            <b>Armour: </b> {{fighter.armour}}<br/>
+                            <b>Hull: </b> {{fighter.hull}}<br/>
+                        </p>
+                    </div>
+                {{/each}}
             </div>
         {{/if}}
     </section>

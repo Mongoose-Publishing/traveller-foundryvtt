@@ -2465,3 +2465,15 @@ div.spacecraft-attacks .weapon-action-button:hover {
   padding-left: 0.5em;
   text-transform: uppercase;
 }
+
+.swarm-sheet h1.charname input {
+  color: #f1511b;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.swarm-sheet .fighter {
+  color: white;
+}

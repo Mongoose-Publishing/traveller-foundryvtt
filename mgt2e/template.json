@@ -255,7 +255,7 @@
         }
     },
     "swarm": {
-      "swarmType": "salvo",
+      "swarmType": "squadron",
       "sourceId": null,
       "size": {
         "max": 1,
