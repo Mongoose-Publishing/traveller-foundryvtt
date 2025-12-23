@@ -2477,3 +2477,7 @@ div.spacecraft-attacks .weapon-action-button:hover {
 .swarm-sheet .fighter {
   color: white;
 }
+
+.button-create-squadron {
+  color: white;
+}

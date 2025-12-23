@@ -62,36 +62,6 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
                 this.targetActor = null;
             }
         } else if (this.actor.system.swarmType === "squadron") {
-            if (!this.actor.system.squadron) {
-                // This isn't created automatically, so create some basic data.
-                this.actor.system = {
-                    "swarmType": "squadron",
-                    "hits": {
-                        "value": 0,
-                        "max": 0,
-                        "damage": 0
-                    },
-                    "squadron": {
-                        "tl": 8,
-                        "thrust": 0,
-                        "armour": 0,
-                        "hull": 0
-                    }
-                };
-                await this.actor.update({"system": this.actor.system });
-                this.actor.prototypeToken = {
-                    height: 0.5,
-                    width: 0.5,
-                    sight: {
-                        enabled: false
-                    },
-                    bar1: {
-                        attribute: "size"
-                    }
-                }
-                await this.actor.update({"prototypeToken": this.actor.prototypeToken });
-                this.render(true);
-            }
             context.type = "squadron";
             this._prepareFighters();
             // HITS, divided between all fighters.
@@ -101,6 +71,40 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         }
 
         return context;
+    }
+
+    async _createSquadron() {
+        if (!this.actor.system.squadron) {
+            // This isn't created automatically, so create some basic data.
+            this.actor.system = {
+                "swarmType": "squadron",
+                "hits": {
+                    "value": 0,
+                    "max": 0,
+                    "damage": 0
+                },
+                "squadron": {
+                    "tl": 8,
+                    "thrust": 0,
+                    "armour": 0,
+                    "hull": 0
+                }
+            };
+            await this.actor.update({"system": this.actor.system });
+            this.actor.prototypeToken = {
+                height: 0.5,
+                width: 0.5,
+                sight: {
+                    enabled: false
+                },
+                bar1: {
+                    attribute: "size"
+                }
+            }
+            await this.actor.update({"prototypeToken": this.actor.prototypeToken });
+            this.render(true);
+        }
+        this.render(true);
     }
 
     async _onDrop(event) {
@@ -215,6 +219,9 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         });
         html.find('.button-clear-target').click(ev => {
             this.clearTarget();
+        });
+        html.find('.button-create-squadron').click(ev => {
+            this._createSquadron();
         });
         html.find('.size-dec').click(ev => this.modifySize(-1));
         html.find('.size-inc').click(ev => this.modifySize(+1));
