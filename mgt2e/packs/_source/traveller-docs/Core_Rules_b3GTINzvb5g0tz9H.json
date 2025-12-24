@@ -16,7 +16,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>Travellers can be created using a <strong>Traveller</strong> type of Actor. An NPC is a simplified Traveller which lacks most of the information around the life path character generation.</p><h2>Rolling Characteristics</h2><p>You can roll characteristics by clicking the dice symbol next to the characteristics on the Traveller sheet. This will roll 2D6 for each characteristic.</p><p>They will automatically calculate the Dice Modifier for that characteristic.</p><p>You can use a <strong>Package</strong> actor to define different characteristic rolls for non-human characters. Set it as a racial package, and define what dice rolls are used for each characteristic. When the Package is dragged onto a <strong>Traveller</strong> or <strong>NPC</strong> sheet, the sheet will remember what dice to roll each time.</p><p>Characteristics supported are: STR, DEX, END, INT, EDU, SOC, CHA, TER, PSI, WLT, LCK, MRL, STY, RES, FOL, REP</p><h2>Background Skills</h2><p>Click the Background Skills tick box to display which skills can be selected as background skills.</p><p>By default, characters are created at 18 years old.</p><p></p><iframe width=\"1036\" height=\"583\" src=\"https://www.youtube.com/embed/hOwzflHXzqM?autolay=1&amp;loop=1\"></iframe><p></p>"
+        "content": "<p>Travellers can be created using a <strong>Traveller</strong> type of Actor. An NPC is a simplified Traveller which lacks most of the information around the life path character generation.</p><h2>Rolling Characteristics</h2><p>You can roll characteristics by clicking the dice symbol next to the characteristics on the Traveller sheet. This will roll 2D6 for each characteristic.</p><p>They will automatically calculate the Dice Modifier for that characteristic.</p><p>You can use a <strong>Package</strong> actor to define different characteristic rolls for non-human characters. Set it as a racial package, and define what dice rolls are used for each characteristic. When the Package is dragged onto a <strong>Traveller</strong> or <strong>NPC</strong> sheet, the sheet will remember what dice to roll each time.</p><p>Characteristics supported are: STR, DEX, END, INT, EDU, SOC, CHA, TER, PSI, WLT, LCK, MRL, STY, RES, FOL, REP</p><h2>Background Skills</h2><p>Click the Background Skills tick box to display which skills can be selected as background skills.</p><p>By default, characters are created at 18 years old.</p><p></p>"
       },
       "video": {
         "controls": true,
@@ -31,11 +31,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "12.331",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.0",
         "createdTime": 1765318322148,
-        "modifiedTime": 1765392821051,
+        "modifiedTime": 1766049145153,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!b3GTINzvb5g0tz9H.vE5oPwBjke2E33MU"
@@ -312,7 +312,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": ""
+        "content": "<p>Minimal support, waiting for the next version of the Vehicle Handbook to come out.</p><p></p>"
       },
       "video": {
         "controls": true,
@@ -327,11 +327,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "12.331",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406839412,
-        "modifiedTime": 1765406923405,
+        "modifiedTime": 1766509026438,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!b3GTINzvb5g0tz9H.gyEtkATPfOboVVw2"
@@ -386,7 +386,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": ""
+        "content": "<p>Space combat is partly implemented. There are lots of options which aren't quite there yet, but there should be enough to be able to run the bits that aren't manually.</p><p></p><h2>Maps and Tokens</h2><p>Maps aren't necessary for space combat, but they can be used if you want to determine distance between ships.</p><h3>Creating a Scene</h3><p>Create a scene with a grid scale of around 1,000km may be convenient. A scale of 1,600km means that planets are 1 grid square/hex wide for every point of size, which has a nice symmetry but isn't needed.</p><p></p><p>There is a @UUID[Compendium.mgt2e.base-macros.Macro.qaDapPxzkNdklekX]{Scale Worlds} macro that will resize a world token to the right size for the current scene scale. However, you should ensure that the scene has a suitable scale otherwise planets will be too big or too small to be useful.</p><p></p><p>On such a map, if you select another ship as a target when making spacecraft attacks, ranges to each target will be given, along with modifiers for target size.</p><p></p><p>Alternatively, you can not use the map and determine ranges yourself, or use a simple range tracker by using thrust points.</p><p></p><h2>Combat Rounds</h2><p>Space craft can be added to the combat tracker.</p><p>The ship's thrust and pilot's kill will act as an initiative bonus.</p><p></p><h2>Crew</h2><p>Add roles to a ship, and assign crew members to the roles.</p><p>There is a 'Make PIlot' action under the Pilot Role. This will make the current crew member the pilot, and it is their skill which will affect ship actions.</p><p>Gunners can be assigned to guns, and used to fire the guns.</p><p></p><h2>Attack and Damage</h2><p>Things implemented:</p><ul><li><p>Damage to spacecraft</p></li><li><p>Damage multiplier for different sized mounts (turrets, barbettes, bays).</p></li><li><p>Damage multiple for spacecraft scale v human scale and vice versa.</p></li></ul><p></p><h3>Critical Hits</h3><p>They will be recorded, but they aren't all fully implemented.</p><p>Cargo will be randomly destroyed.</p><p>Crew will not be randomly hurt.</p><p></p><h3>Missiles</h3><p>If a weapon is a missile, then a Missile Salvo actor will be created. This can be placed on the map to track position.</p><p>Point Defence and electronic warfare needs to be done manually.</p><p></p>"
       },
       "video": {
         "controls": true,
@@ -401,11 +401,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "12.331",
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.1-DEV",
         "createdTime": 1765406848650,
-        "modifiedTime": 1765406922599,
+        "modifiedTime": 1766508997526,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!b3GTINzvb5g0tz9H.Dv2CjMLzuNPGW8jc"

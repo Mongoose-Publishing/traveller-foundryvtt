@@ -636,7 +636,9 @@ export async function launchMissiles(shipActor, weaponItem, options) {
             },
             bar2: {
                 attribute: "salvo.endurance"
-            }
+            },
+            displayBars: 50,
+            displayName: 50
         }
     }
     if (!isLongRange && !isTorpedo) {
