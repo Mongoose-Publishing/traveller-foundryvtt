@@ -5,7 +5,7 @@
 * Career terms aren't always added in the correct order.
 
 
-# develop
+# 0.17.0 (Beta)
 
 * Added notification that is output to the chat when the system is updated.
 * Added alternative actor sheet for NPCs. This is a simpler, more compact sheet that is
