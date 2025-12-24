@@ -15,6 +15,7 @@
 * Added new icons for fighter squadrons.
 * Added new weapon traits for specifying missile and torpedo information.
 * Updated some documentation.
+* New NPCs now default to taking damage on characteristics.
 
 # 0.16.1 (Beta)
 
