@@ -49,7 +49,9 @@
             <div class="shadow title">
                 <h1 class="charname shadow">{{actor.name}}</h1>
                 {{#if system.sophont.profession}}
-                    <h2 class="charname">{{system.sophont.profession}}</h2>
+                    {{#unless (ifEquals actor.name system.sophont.profession) }}
+                        <h2 class="charname">{{system.sophont.profession}}</h2>
+                    {{/unless}}
                 {{/if}}
             </div>
 
@@ -128,13 +130,13 @@
                 <div>
                     <h2>Equipment</h2>
 
-                    <table>
+                    <table class="equipment">
                         <tr>
                             <th>Weapons</th>
                             <td>
                                 <ul class="comma-list">
                                     {{#each WEAPONS as | item id |}}
-                                        <li class="item-attack item rollable" data-roll-type="item" data-attack-id="{{item._id}}">{{item.name}}</li>
+                                    <li class="item rollable" data-roll-type="item" data-item-id="{{item._id}}"><span class="item-edit">{{item.name}}</span></li>
                                     {{/each}}
                                 </ul>
                             </td>
@@ -144,7 +146,7 @@
                             <td>
                                 <ul class="comma-list">
                                     {{#each GEAR as | item id |}}
-                                        <li class="item-edit item rollable" data-roll-type="item" data-item-id="{{item._id}}">{{item.name}}</li>
+                                        <li class="item rollable" data-roll-type="item" data-item-id="{{item._id}}"><span class="item-edit">{{item.name}}</span></li>
                                     {{/each}}
                                 </ul>
                             </td>

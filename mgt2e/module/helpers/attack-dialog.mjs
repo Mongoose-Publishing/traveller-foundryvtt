@@ -27,10 +27,6 @@ export class MgT2AttackDialog extends Application {
         this.fullAuto = 1; // Full auto uses three times the ammo.
         this.rangeUnit = "m";
 
-        console.log("ATTACK DIALOG");
-        console.log(this.skill);
-        console.log(this.speciality);
-
         if (hasTrait(this.weapon.system.weapon.traits, "auto")) {
             this.auto = getTraitValue(this.weapon.system.weapon.traits, "auto");
         }
@@ -52,7 +48,6 @@ export class MgT2AttackDialog extends Application {
 
         // Work out what the skill bonus is.
         this.score = parseInt(getSkillValue(this.actor, this.skill, this.speciality));
-        console.log(this.score);
         this.parryScore = this.score;
         if (data.characteristics && data.characteristics[this.cha]) {
             this.score += parseInt(data.characteristics[this.cha].dm);
@@ -72,7 +67,6 @@ export class MgT2AttackDialog extends Application {
         this.damage = this.damage.replace(/ *\* *10/, "D");
 
         this.range = parseInt(this.weapon.system.weapon.range);
-        console.log("Range: " + this.range);
         this.melee = true;
         if (this.range > 0) {
             this.melee = false;
@@ -138,14 +132,10 @@ export class MgT2AttackDialog extends Application {
         const selected = canvas.tokens.controlled;
         const targets = user.targets;
 
-        console.log(selected);
-        console.log(targets);
-
         if (selected.length !== 1) {
             // We must have exactly one token selected. This is the current user.
             return;
         }
-        console.log("We have selected 1 token");
 
         if (targets.length < 1) {
             // We must also have some targets selected.
@@ -304,7 +294,6 @@ export class MgT2AttackDialog extends Application {
 
         if (this.weapon.hasTrait("shield")) {
             let shield =  getTraitValue(this.weapon.system.weapon.traits, "shield");
-            console.log("Shield trait is " + shield);
             if (this.parryScore < 0) {
                 this.parryScore = parseInt(shield) - 1;
             } else {

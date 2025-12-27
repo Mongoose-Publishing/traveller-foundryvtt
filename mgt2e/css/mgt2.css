@@ -2481,3 +2481,8 @@ div.spacecraft-attacks .weapon-action-button:hover {
 .button-create-squadron {
   color: white;
 }
+
+.armour-box .armour-stat {
+  text-align: left;
+  padding-left: 0.5em;
+}

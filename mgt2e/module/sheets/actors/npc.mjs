@@ -108,11 +108,13 @@ export class MgT2NpcActorSheet extends MgT2ActorSheet {
     _prepareItems(context) {
         context.GEAR = [];
         context.WEAPONS = [];
+        context.activeWeapons = [];
 
         for (let i of context.items) {
             if (i.type === "weapon") {
+                context.WEAPONS.push(i);
                 if (i.system.status === MgT2Item.EQUIPPED) {
-                    context.WEAPONS.push(i);
+                    context.activeWeapons.push(i);
                 }
             } else {
                 if ([ MgT2Item.EQUIPPED, MgT2Item.CARRIED].includes(i.system.status)) {
@@ -147,9 +149,8 @@ export class MgT2NpcActorSheet extends MgT2ActorSheet {
 
     _onRollWrapper(ev, actor) {
         const target = $(ev.currentTarget);
-        if (target.data("itemId")) {
-            let itemId = target.data("itemId");
-        } else if (target.data("attackId")) {
+
+        if (target.data("attackId")) {
             let itemId = target.data("attackId");
             let item = actor.items.get(itemId);
             item.roll();

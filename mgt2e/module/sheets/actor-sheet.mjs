@@ -1139,9 +1139,6 @@ export class MgT2ActorSheet extends ActorSheet {
         html.find('initRoll').click(ev => {
             this._rollInit(this.actor);
         });
-        html.find('.showIdCard').click(ev => {
-            new NpcIdCard(this.actor).render(true);
-        });
 
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
@@ -2585,8 +2582,6 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     _onRollWrapper(event, actor) {
-        console.log("_onRollWrapper:");
-
         event.preventDefault();
         const element = event.currentTarget;
         const dataset = element.dataset;

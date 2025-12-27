@@ -1,30 +1,22 @@
 
 {{#if system.armour.name}}
-  <div class="side-panel armour-box shadow flex-group-center">
-    <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}}</label>
-    <label class="armour-name" title="{{system.armour.name}}">{{system.armour.name}}</label>
+    <div class="side-panel armour-box shadow">
+        <label class="box-title">{{localize 'MGT2.TravellerSheet.Armour'}} {{system.armour.protection}}</label>
+        <label class="armour-name" title="{{system.armour.name}}">{{system.armour.name}}</label>
 
-    <div class="grid grid-3col inset">
-      <div>
-        <label class="prot-type" title="Protection">{{localize 'MGT2.TravellerSheet.Prot'}}</label>
-        <input class="armour-value" type="text" name="system.armour.protection" title="{{localize 'MGT2.TravellerSheet.Protection'}}"
-               value="{{system.armour.protection}}" readonly data-dtype="Number"/>
-      </div>
-      <div>
-        <label class="prot-type" title="Rad Shielding">{{localize 'MGT2.TravellerSheet.Rad'}}</label>
-        <input class="armour-value" type="text" name="system.armour.rad" title="{{localize 'MGT2.TravellerSheet.RadiationShielding'}}"
-               value="{{system.armour.rad}}" readonly data-dtype="Number"/>
-      </div>
-      {{#if system.armour.otherProtection}}
-      <div>
-        <label class="prot-type" title="{{localize 'MGT2.TravellerSheet.Energy'}}">🔥</label>
-        <input class="armour-value" type="text" name="system.armour.otherProtection" title="{{localize 'MGT2.TravellerSheet.Energy'}}"
-               value="{{system.armour.otherProtection}}" readonly data-dtype="Number"/>
-      </div>
-      <input type="text" name="system.armour.otherTypes" title="{{localize 'MGT2.TravellerSheet.EnergyTypes'}}" class="grid-span-3"
-             value="{{system.armour.otherTypes}}" readonly data-dtype="String"/>
-      {{/if}}
-    </div>
+        {{#if system.armour.otherProtection}}
+            <div class="armour-stat">
+                <span>{{system.armour.otherTypes}}</span>
+                <span>{{system.armour.otherProtection}}</span>
+            </div>
+        {{/if}}
+
+        {{#if system.armour.rad}}
+            <div class="armour-stat">
+                <span>Radiation</span>
+                <span>{{system.armour.rad}}</span>
+            </div>
+        {{/if}}
   </div>
 {{/if}}
 
@@ -51,7 +43,7 @@
                   <br/>
                   {{#if item.system.weapon.magazine includeZero=false}}
                     {{#if item.system.weapon.ammo includeZero=false}}
-                      <a class="item-attack rollable" data-roll-type="item" title="Attack">{{localize 'MGT2.TravellerSheet.Attack'}}</a>
+                      <a class="item-attack rollable" data-roll-type="item" data-attack-id="{{item._id}}" title="Attack">{{localize 'MGT2.TravellerSheet.Attack'}}</a>
                     {{else}}
                       <a class="item-reload" data-roll-type="item" title="Reload">{{localize 'MGT2.TravellerSheet.Reload'}}</a>
                     {{/if}}

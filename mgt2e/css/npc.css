@@ -76,3 +76,30 @@
   background-color: #414042;
   color: white;
 }
+
+.npc-sheet table.equipment th {
+  text-align: left;
+  vertical-align: top;
+  background-color: #f1511b;
+  color: black;
+  font-size: larger;
+  text-transform: uppercase;
+}
+
+.npc-sheet table.equipment td {
+  background-color: #414042;
+  color: white;
+}
+
+.npc-sheet .rollable:hover,.rollable:focus {
+  color: white;
+  text-shadow: 0 0 10px white;
+  cursor: pointer;
+}
+
+.npc-sheet li.active-weapon {
+  color: white;
+}
+.npc-sheet li.active-weapon img {
+  border: none;
+}
