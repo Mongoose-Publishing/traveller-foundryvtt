@@ -14,6 +14,15 @@
   padding: 0;
 }
 
+.npc-sheet h1.charname input {
+  color: #f1511b;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+
 .npc-sheet h2.charname {
   text-transform: uppercase;
   color: #f1511b;
@@ -102,4 +111,20 @@
 }
 .npc-sheet li.active-weapon img {
   border: none;
+}
+
+.npc-sheet .damage-stat label {
+  padding: 0;
+  margin: 0;
+  color: black;
+  width: 100%;
+  display: inline-block;
+  background: #f1511b;
+  text-align: center;
+}
+
+.npc-sheet .damage-stat input {
+  background-color: #414042;
+  border: none;
+  color: white;
 }
