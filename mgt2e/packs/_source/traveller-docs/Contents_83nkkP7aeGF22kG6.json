@@ -128,7 +128,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Added upgrade message to the chat, to publish where the documentation can be found, and what the latest changes are.</p></li><li><p>Tidied up some of the images and icons that are shipped with the system, removing some which are no longer wanted.</p></li><li><p>Added experimental alternative NPC sheet. Has a simplified compact design for less important characters. To use, go to the Sheet menu on the top bar of an NPC actor sheet, and select the 'NPC Sheet' option. These currently lack a lot of editing options.</p></li><li><p>Added preliminary and experimental support for Missile Salvos and Fighter Squadrons. This uses a new actor type called a 'Swarm'. To use, make a missile attack from a Spacecraft. A 'Salvo' actor will be automatically created. You can then select/target an enemy ship to add them as a target of the missile salvo. Fighter Squadrons have only limited functionality. Drag a fighter onto the squadron sheet to track them.</p></li></ul>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Improvements to the look and capability of the alternative NPC character sheet. Name can now be edited, improvements to display of weapons and armour. The profession is not shown if it is the same as the actor's name.</p></li><li><p>Fixed some issues with the BuyItem dialog. It wasn't handling the default option properly, and didn't give great feedback if there wasn't anyone with cash to buy the item.</p></li></ul>"
       },
       "video": {
         "controls": true,
@@ -143,12 +143,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "12.331",
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1765545274606,
-        "lastModifiedBy": "Zj6ESAn9IiciiMCF"
+        "modifiedTime": 1767016082617,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!83nkkP7aeGF22kG6.mXeFfBZITS7IkfPU"
     },

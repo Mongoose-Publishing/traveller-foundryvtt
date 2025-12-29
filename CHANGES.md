@@ -4,6 +4,13 @@
 
 * Career terms aren't always added in the correct order.
 
+# 0.17.1 (Beta)
+
+* Improvements to the alternative NPC character sheet. Name is editable, profession is only
+  displayed if it is different to the name, weapons and attacks displayed better.
+* Fixes to the BuyItem dialog which is invoked from a macro. It wasn't handling the default
+  option correctly, and also didn't give meaningful feedback if nobody could afford the item.
+
 
 # 0.17.0 (Beta)
 
