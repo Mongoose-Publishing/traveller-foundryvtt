@@ -40,17 +40,30 @@ export class MgT2BuyDialog extends Application {
             this.LIST[this.actor.uuid] = `${this.actor.name} : Cr${cash.toLocaleString()}`;
 
             after = "Cr" + (cash - Number(this.item.system.cost) * this.quantity).toLocaleString();
+        } else if (this.actor) {
+            ui.notifications.warn(game.i18n.format("MGT2.Warn.ThisActorCannotBuy",
+                { "actor": this.actor.name, "item": this.item.name }));
+            this.close();
+            return;
         }
 
         for (let a of game.actors) {
             if (a.permission >= 3 && a.system.finance && Number(a.system.finance.cash) >= totalPrice) {
                 let cash = Number(a.system.finance.cash);
                 this.LIST[a.uuid] = `${a.name} : Cr${cash.toLocaleString()}`;
+                if (!this.actor) {
+                    this.actor = a;
+                }
 
                 if (after === null) {
                     after = "Cr" + (cash - Number(this.item.system.cost) * this.quantity).toLocaleString();
                 }
             }
+        }
+        if (!this.actor) {
+            ui.notifications.warn(game.i18n.localize("MGT2.Warn.NoActorsToBuy"));
+            this.close();
+            return;
         }
 
         return {
@@ -84,6 +97,10 @@ export class MgT2BuyDialog extends Application {
 
     async onBuyClick(event, html) {
         event.preventDefault();
+        if (!this.actor) {
+            ui.notifications.warn("Please select an actor to buy this item");
+            return;
+        }
         this.close();
 
         let cash = Number(this.actor.system.finance.cash);
