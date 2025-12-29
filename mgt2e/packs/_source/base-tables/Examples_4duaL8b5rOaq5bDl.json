@@ -1,0 +1,22 @@
+{
+  "name": "Examples",
+  "sorting": "a",
+  "folder": null,
+  "type": "RollTable",
+  "_id": "4duaL8b5rOaq5bDl",
+  "description": "",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.17.1.0",
+    "createdTime": 1767027625665,
+    "modifiedTime": 1767027625665,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!folders!4duaL8b5rOaq5bDl"
+}
