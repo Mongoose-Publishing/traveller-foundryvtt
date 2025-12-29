@@ -42,6 +42,7 @@
   font-family: "Roboto", sans-serif;
   font-weight: bold;
   color: black;
+  padding-left: 0.25em;
 }
 
 .npc-sheet .resource {
