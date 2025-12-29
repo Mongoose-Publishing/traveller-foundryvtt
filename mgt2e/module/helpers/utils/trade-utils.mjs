@@ -524,6 +524,7 @@ async function createTradeItem(worldActor, item, available) {
             return;
         }
     }
+
     // Calculate cost.
     let dm = 0 - Number(worldActor.system.world.meta.localBrokerScore);
     if (srcCargo.illegal) {
@@ -538,6 +539,40 @@ async function createTradeItem(worldActor, item, available) {
     let saleDM =
         getHighestModifier(worldActor, item.system.cargo.saleDM) -
         getHighestModifier(worldActor, item.system.cargo.purchaseDM);
+
+    // See if we need to apply random modifiers.
+    let sellRollTable = await game.tables.getName("Trade Sell Modifiers");
+    if (sellRollTable) {
+        const roll = await sellRollTable.roll();
+        const result = roll.results[0];
+        let val = 0;
+        if (result.name) {
+            val = result.name;
+        } else if (result.text) {
+            val = result.text;
+        }
+        val = val.replaceAll(/[^-0-9]/g, "");
+        val = parseInt(val);
+        if (!isNaN(val)) {
+            saleDM = saleDM + val;
+        }
+    }
+    let buyRollRable = await game.tables.getName("Trade Buy Modifiers");
+    if (buyRollRable) {
+        const roll = await buyRollRable.roll();
+        const result = roll.results[0];
+        let val = 0;
+        if (result.name) {
+            val = result.name;
+        } else if (result.text) {
+            val = result.text;
+        }
+        val = val.replaceAll(/[^-0-9]/g, "");
+        val = parseInt(val);
+        if (!isNaN(val)) {
+            purchaseDM = saleDM + val;
+        }
+    }
 
     const costRoll = await new Roll(`3D6 + ${dm}`, null).evaluate();
     let cost = await getPurchasePrice(srcCargo.price, costRoll.total + purchaseDM);
