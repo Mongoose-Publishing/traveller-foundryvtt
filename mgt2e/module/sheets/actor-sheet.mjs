@@ -1653,7 +1653,6 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     _onCrewDragStart(event, options) {
-        console.log("_onCrewDragStart:");
         let dragData = {
             type: "Actor",
             uuid: "Actor." + options.actorId
@@ -1662,8 +1661,6 @@ export class MgT2ActorSheet extends ActorSheet {
     }
 
     _onSkillDragStart(event, options) {
-        console.log("_onSkillDragStart:");
-        console.log(options);
         let dragData = {
             actorId: this.actor.id,
             sceneId: this.actor.isToken ? canvas.scene?.id : null,
@@ -1687,6 +1684,7 @@ export class MgT2ActorSheet extends ActorSheet {
 
     async _onDrop(event) {
         console.log("_onDrop:");
+        console.log(event);
         let data;
         try {
             data = JSON.parse(event.dataTransfer.getData('text/plain'));
@@ -1694,6 +1692,7 @@ export class MgT2ActorSheet extends ActorSheet {
             console.log("Could not parse data");
             return false;
         }
+        console.log(data);
         switch (data.type) {
         case "Item":
             return this._onDropItem(event, data);
@@ -1707,6 +1706,8 @@ export class MgT2ActorSheet extends ActorSheet {
             return this._onDropCharacteristic(event, data);
         case "Skill":
             return this._onDropSkillRequest(event, data);
+        case "Fuel":
+            return this._onDropFuel(event, data);
         }
         return true;
     }
@@ -2115,6 +2116,50 @@ export class MgT2ActorSheet extends ActorSheet {
     // Drop a Term onto an Actor. Only applies to Travellers or Packages.
     async _onDropTerm(item) {
         let actor = this.actor;
+    }
+
+    async _onDropFuel(event, data) {
+        if (this.actor.type !== "spacecraft") {
+            return;
+        }
+        console.log("Dropping fuel");
+        console.log(data);
+        let maxFuel = this.actor.system.spacecraft.fuel.max;
+        let currentFuel = this.actor.system.spacecraft.fuel.value;
+
+        let needed = maxFuel - currentFuel;
+        let cost = needed * data.cost;
+
+        if (!this.actor.system.finance) {
+            ui.notifications.warn("This ship has no finance");
+            return;
+        }
+
+        let contentData = {
+            sourceName: data.worldName,
+            fuelType: data.fuel,
+            fuelPrice: data.cost,
+            fuelCost: cost,
+            fuelNeeded: needed
+        }
+        const content = await renderTemplate("systems/mgt2e/templates/dialogs/buy-fuel.html", contentData);
+
+        const buy = await foundry.applications.api.DialogV2.confirm({
+            window: {
+                title: "Purchase Fuel?"
+            },
+            content,
+            modal: true
+        });
+
+        if (cost <= this.actor.system.finance.cash) {
+            this.actor.system.finance.cash -= cost;
+            this.actor.system.spacecraft.fuel.value = maxFuel;
+            this.actor.update({"system.finance.cash": this.actor.system.finance.cash });
+            this.actor.update({"system.spacecraft.fuel.value": this.actor.system.spacecraft.fuel.value });
+        }
+
+
     }
 
     async _onDropUPP(event, data) {

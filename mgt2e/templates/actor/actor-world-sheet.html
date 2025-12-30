@@ -37,7 +37,7 @@
                 <h3>Facilities</h3>
 
                 <div class="resource">
-                    <label class="resource-label">Berth Cost (Cr/Wk)</label>
+                    <label class="resource-label">{{localize "MGT2.WorldSheet.Facility.BerthCost"}}</label>
                     <input class="field-value"
                            name="system.world.extra.berthingCost"
                            value="{{system.world.extra.berthingCost}}"
@@ -45,22 +45,62 @@
                 </div>
 
                 <div class="resource">
-                    <label class="resource-label">Shipyard</label>
+                    <label class="resource-label">{{localize "MGT2.WorldSheet.Facility.Shipyard"}}</label>
                     <select class="field-value" name="system.world.extra.shipyard">
                         {{selectOptions SHIPYARD_SELECT selected=system.world.extra.shipyard}}
                     </select>
                 </div>
 
                 <div class="resource">
-                    <label class="resource-label">Repair</label>
+                    <label class="resource-label">{{localize "MGT2.WorldSheet.Facility.Repair"}}</label>
                     <select class="field-value" name="system.world.extra.repair">
                         {{selectOptions REPAIR_SELECT selected=system.world.extra.repair}}
                     </select>
                 </div>
 
                 <div class="resource">
+                    <label class="resource-label">{{localize "MGT2.WorldSheet.Facility.Fuel"}}</label>
+
+                    <select class="field-value" name="system.world.extra.fuel">
+                        {{selectOptions FUEL_SELECT selected=system.world.extra.fuel}}
+                    </select>
+                </div>
+                {{#if (ifEquals system.world.extra.fuel "unrefined")}}
+                    <div class="resource fuelPurchase" data-fuel-cost="100" data-fuel-type="unrefined"
+                         title="{{localize 'MGT2.WorldSheet.Facility.BuyFuelTitle'}}">
+                        <img src="systems/mgt2e/icons/cargo/unrefined_fuel.svg" draggable="false"/>
+                        <span>Buy Unrefined Fuel<br/>(Cr100)</span>
+                    </div>
+                {{else if (ifEquals system.world.extra.fuel "refined")}}
+                    <div class="fuelPurchase" data-fuel-cost="500" data-fuel-type="refined"
+                         title="{{localize 'MGT2.WorldSheet.Facility.BuyFuelTitle'}}">
+                        <img src="systems/mgt2e/icons/cargo/refined_fuel.svg" draggable="false"/>
+                        <span>Buy Refined Fuel<br/>(Cr500)</span>
+                    </div>
+                {{/if}}
+                <div class="fuelPurchase" data-fuel-cost="0" data-fuel-type="unrefined"
+                     title="{{localize 'MGT2.WorldSheet.Facility.BuyFuelTitle'}}">
+                    <img src="systems/mgt2e/icons/cargo/unrefined_fuel.svg" draggable="false"/>
+                    <span>Wilderness Fuel<br/>(Free)</span>
+                </div>
+
+
+                <ol class="items-list actor-items grid grid-4col">
+                    {{#each w.freight as |freight|}}
+                    <li class="item item-gear freight" data-item-id="{{freight._id}}">
+                        <h4>{{freight.name}} - {{freight.system.quantity}}dt</h4>
+                        <img title="{{nameQuantity freight}}" src="{{freight.img}}"/>
+                        <span>Cr{{prettyNumber freight.system.cargo.price 0 false}} / dt</span><br/>
+                        <span><b>Cr{{prettyNumber freight.system.cargo.totalPrice 0 false}}</b></span>
+                    </li>
+                    {{/each}}
+                </ol>
+
+
+
+                <div class="resource">
                     <input type="checkbox" name="system.world.extra.highport" {{checked system.world.extra.highport}} data-dtype="Boolean" />
-                    <label for="system.world.extra.highport" class="resource-label">Highport</label>
+                    <label for="system.world.extra.highport" class="resource-label">{{localize "MGT2.WorldSheet.Facility.Highport"}}</label>
                 </div>
             </div>
         </div>

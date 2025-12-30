@@ -198,20 +198,20 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         }
 
         context.SHIPYARD_SELECT = {
-            "": "None",
-            "smallcraft": "Smallcraft",
-            "spacecraft": "Spacecraft",
-            "capital": "Capital Ships"
+            "": game.i18n.localize("MGT2.WorldSheet.Facility.none"),
+            "smallcraft": game.i18n.localize("MGT2.WorldSheet.Facility.smallcraft"),
+            "spacecraft": game.i18n.localize("MGT2.WorldSheet.Facility.spacecraft"),
+            "capital": game.i18n.localize("MGT2.WorldSheet.Facility.capital")
         }
         context.REPAIR_SELECT = {
-            "": "None",
-            "limited": "Limited",
-            "repair": "Full"
+            "": game.i18n.localize("MGT2.WorldSheet.Facility.none"),
+            "limited": game.i18n.localize("MGT2.WorldSheet.Facility.limited"),
+            "repair": game.i18n.localize("MGT2.WorldSheet.Facility.full")
         }
         context.FUEL_SELECT = {
-            "": "None",
-            "unrefinedd": "Unrefined",
-            "refined": "Refined"
+            "": game.i18n.localize("MGT2.WorldSheet.Facility.none"),
+            "unrefined": game.i18n.localize("MGT2.WorldSheet.Facility.unrefined"),
+            "refined": game.i18n.localize("MGT2.WorldSheet.Facility.refined")
         }
         context.BASES_SELECT = {
             "": ""
@@ -228,6 +228,18 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         return context;
     }
 
+    _onFuelDragStart(event, options) {
+        console.log("onFuelDragStart");
+        console.log(options);
+        let dragData = {
+            "type": "Fuel",
+            "worldName": options.worldName,
+            "fuel": options.fuel,
+            "cost": options.cost
+        }
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+    }
+
     activateListeners(html) {
         super.activateListeners(html);
 
@@ -241,6 +253,16 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", handler, false);
         });
+        html.find('.fuelPurchase').each((i, div) => {
+            div.setAttribute('draggable', true);
+            let options = {
+                worldName: this.actor.name,
+                fuel: div.getAttribute("data-fuel-type"),
+                cost: div.getAttribute("data-fuel-cost")
+            }
+            let fuelHandler = ev => this._onFuelDragStart(ev, options);
+            div.addEventListener("dragstart", fuelHandler, false);
+        })
 
         html.find('.freight-clear').click(ev => {
             const e = $(ev.currentTarget).parents(".destination-title");
@@ -355,7 +377,6 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                 idList.push(p);
             }
         }
-        console.log(list);
         if (list.length > 0) {
             let contentData = {
                 destinationName: this.actor.name,

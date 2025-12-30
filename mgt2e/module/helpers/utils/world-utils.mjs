@@ -220,9 +220,11 @@ export async function setPortFacilities(worldActor) {
             break;
         case 'E':
             extra.berthingCost = 0;
+            extra.fuel = null;
             break;
         default:
             extra.berthingCost = 0;
+            extra.fuel = null;
             break;
     }
 
@@ -465,5 +467,5 @@ export async function worldDropBrokerHandler(queryData) {
         }
         worldActor.update({"system.world.meta": worldActor.system.world.meta });
     }
-
 }
+
