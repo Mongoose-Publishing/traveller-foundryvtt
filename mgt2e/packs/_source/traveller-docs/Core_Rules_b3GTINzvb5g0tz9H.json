@@ -164,7 +164,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": ""
+        "content": "<p>The World Sheet has basic world generation built in.</p><p>Click the 'Generate' button to randomly generate a new world.</p><p>Facilities and bases will be generated based on the starport type.</p><p></p><h3>Refuelling</h3><p>Options to buy fuel are available at the world.</p><p></p><h3>Factions</h3><p>If there are no factions on a world, factions will be randomly generated when the world is generated.</p><p></p><p></p><h3>Patrons</h3><p>Patrons can be added, aren't currently randomly generated.</p>"
       },
       "video": {
         "controls": true,

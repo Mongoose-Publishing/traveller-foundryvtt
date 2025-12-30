@@ -423,9 +423,69 @@ async function applyJDriveCritical(actor, effects, level) {
     await applyHullCritical(actor, effects, level);
 }
 
+function getRandomOccupants(actor, number) {
+    let victims = [];
+    let occupants = [];
+
+    let crew = actor.system.crewed.crew;
+    for (let o in crew) {
+        occupants.push(o);
+    }
+
+    let passengers = actor.system.crewed.passengers;
+    for (let o in passengers) {
+        occupants.push(o);
+    }
+
+    if (occupants.length > 0) {
+        if (occupants.length <= number) {
+            // Everybody gets hit.
+            return occupants;
+        }
+        for (let i = 0; i < number; i++) {
+            let v = parseInt(Math.random() * occupants.length);
+            victims.push(occupants[v]);
+            occupants.splice(v, 1);
+        }
+    }
+
+    return victims;
+}
+
 async function applyCrewCritical(actor, effects, level) {
     await applyHullCritical(actor, effects, level);
+
+    console.log("applyCrewCritical:");
+
+    if (effects["crewDamaged"]) {
+        let numberDice = effects["crewDamaged"].split(",")[0];
+        let damageDice = effects["crewDamaged"].split(",")[1];
+
+        const numberRoll = await new Roll(numberDice, null).evaluate();
+        const number = numberRoll.total;
+
+        let victims = getRandomOccupants(actor, number);
+        console.log(victims);
+
+        for (let v in victims) {
+            let victimId = victims[v];
+            let victimActor = await game.actors.get(victimId);
+            if (victimActor) {
+                let dmgRoll = await new Roll(damageDice, null).evaluate();
+                let dmg = dmgRoll.total;
+                console.log(`${victimActor.name} is going to take ${dmg} damage`);
+                victimActor.applyDamageToPerson(dmg, {
+                    damage: dmg
+                });
+            }
+        }
+
+
+    }
+
 }
+
+
 
 async function applyBridgeCritical(actor, effects, level) {
     await applyHullCritical(actor, effects, level);
