@@ -28,15 +28,11 @@ export async function setSpacecraftCriticalLevel(actor, critical, level) {
             if (level <= currentLevel) {
                 level = currentLevel + 1;
             }
-            console.log("New modified level is " + currentLevel);
             await actor.setFlag("mgt2e", "crit_" + critical, level);
             await actor.setFlag("mgt2e", "hasCrits", true);
-            console.log(`Set critical ${critical} to ${level}`);
 
             if (MGT2.SPACECRAFT_CRITICALS[critical][level]) {
                 let effects = MGT2.SPACECRAFT_CRITICALS[critical][level-1];
-                console.log(`Critical for ${critical} level ${level} has effects`);
-                console.log(effects);
                 switch (critical) {
                     case "armour":
                         applyArmourCritical(actor, effects, level);
@@ -93,6 +89,14 @@ async function applyHullCritical(actor, effects, level) {
         actor.update({"system.hits.damage": actor.system.hits.damage });
         ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.Damage",
             {"name": actor.name, "hits": hits }));
+
+        let title = game.i18n.format("MGT2.Spacecraft.Critical.hull.Title", { "severity": level });
+        let text = game.i18n.format("MGT2.Spacecraft.Critical.hull." + level);
+        let content = game.i18n.format("MGT2.Spacecraft.Critical.hull.Text",
+            { "damage": hits }
+        );
+
+        criticalToChat(actor, level, title, text, content);
     }
     if (effects["hull"]) {
         const sev = effects["hull"];
@@ -121,6 +125,13 @@ async function applyArmourCritical(actor, effects, level) {
         dmg = Math.min(actor.system.spacecraft.armour, dmg + currentDmg);
         actor.setFlag("mgt2e", "damage_armour", dmg);
         actor.setFlag("mgt2e", "damageSev_armour", level);
+
+        let title = game.i18n.format("MGT2.Spacecraft.Critical.armour.Title", { "severity": level });
+        let text = game.i18n.format("MGT2.Spacecraft.Critical.armour." + level);
+        let content = game.i18n.format("MGT2.Spacecraft.Critical.armour.Text",
+            { "damage": dmg }
+        );
+        criticalToChat(actor, level, title, text, content);
     }
 
     await applyHullCritical(actor, effects, level);
@@ -133,6 +144,10 @@ async function applySensorCritical(actor, effects, level) {
         actor.setFlag("mgt2e", "damageSev_sensorDM", level);
         ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.SensorDM",
             {"name": actor.name, "dm": dm }));
+
+        let title = game.i18n.format("MGT2.Spacecraft.Critical.sensors.Title", { "severity": level });
+        let text = game.i18n.format("MGT2.Spacecraft.Critical.sensors.penalty", { "penalty": 2 });
+        criticalToChat(actor, level, title, text, null);
     }
     if (effects["sensorMax"]) {
         const maxRange = effects["sensorMax"];
@@ -140,14 +155,23 @@ async function applySensorCritical(actor, effects, level) {
         actor.setFlag("mgt2e", "damageSev_sensorMax", level);
         ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.SensorMax",
             {"name": actor.name, "range": maxRange }));
+
+        let title = game.i18n.format("MGT2.Spacecraft.Critical.sensors.Title", { "severity": level });
+        let text = game.i18n.format("MGT2.Spacecraft.Critical.sensors.reduced", { "range": maxRange });
+        criticalToChat(actor, level, title, text, null);
     }
     if (effects["sensorsDisabled"]) {
         const sensors = actor.getHardwareList("sensor");
+        let list = [];
         for (let sensor of sensors) {
             sensor.update({"system.status": MgT2Item.DAMAGED});
             ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.SensorDisabled",
                 {"name": actor.name, "item": item.name }));
+            list.push(item.name)
         }
+        let title = game.i18n.format("MGT2.Spacecraft.Critical.sensors.Title", { "severity": level });
+        let text = game.i18n.format("MGT2.Spacecraft.Critical.sensors.disabled");
+        criticalToChat(actor, level, title, text, null);
     }
 }
 
@@ -438,7 +462,7 @@ function getRandomOccupants(actor, number) {
     }
 
     if (occupants.length > 0) {
-        if (occupants.length <= number) {
+        if (number === 0 || occupants.length <= number) {
             // Everybody gets hit.
             return occupants;
         }
@@ -458,15 +482,22 @@ async function applyCrewCritical(actor, effects, level) {
     console.log("applyCrewCritical:");
 
     if (effects["crewDamaged"]) {
-        let numberDice = effects["crewDamaged"].split(",")[0];
-        let damageDice = effects["crewDamaged"].split(",")[1];
+        let numberDice = 0; // Zero means everyone.
+        let damageDice = effects["crewDamaged"];
+
+        // If this is just a single value, then it applies to all occupants.
+        // If it's comma separated, it applies to a limited number.
+        if (effects["crewDamaged"].indexOf(",") > -1) {
+            numberDice = effects["crewDamaged"].split(",")[0];
+            damageDice = effects["crewDamaged"].split(",")[1];
+        }
 
         const numberRoll = await new Roll(numberDice, null).evaluate();
         const number = numberRoll.total;
 
         let victims = getRandomOccupants(actor, number);
-        console.log(victims);
 
+        let results = [];
         for (let v in victims) {
             let victimId = victims[v];
             let victimActor = await game.actors.get(victimId);
@@ -477,16 +508,61 @@ async function applyCrewCritical(actor, effects, level) {
                 victimActor.applyDamageToPerson(dmg, {
                     damage: dmg
                 });
+                results.push({
+                    "actor": victimActor,
+                    "damage": dmg
+                })
             }
         }
 
+        let contentData = {
+            shipActor: actor,
+            severity: level,
+            victimCount: victims.length,
+            damageDice: damageDice,
+            criticalTitle: game.i18n.format("MGT2.Spacecraft.Critical.crew.Title", { "severity": level }),
+            criticalText: game.i18n.format("MGT2.Spacecraft.Critical.crew." + level),
+            victims: results
+        }
+        const content = await renderTemplate("systems/mgt2e/templates/chat/spaceship-critical.html", contentData);
 
+        let chatData = {
+
+            content: content
+        }
+        ChatMessage.create(chatData);
     }
 
 }
 
+async function criticalToChat(actor, level, title, text, content) {
+    console.log("criticalToChat:");
+    console.log(actor);
+    let shipName = actor.name;
+    if (actor.token?.name) {
+        shipName = actor.token.name;
+    }
+    let contentData = {
+        shipName: shipName,
+        shipActor: actor,
+        severity: level,
+        criticalTitle: title,
+        criticalText: text,
+        content: content
+    }
+    const html = await renderTemplate("systems/mgt2e/templates/chat/spaceship-critical.html", contentData);
+    let chatData = {
+        content: html
+    }
+    ChatMessage.create(chatData);
+}
 
 
 async function applyBridgeCritical(actor, effects, level) {
     await applyHullCritical(actor, effects, level);
+}
+
+
+function getCriticalTemplate() {
+
 }

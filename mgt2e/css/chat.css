@@ -1,0 +1,51 @@
+
+.mgt2e-chat-message {
+  border: 3px solid #ff311b;
+  border-radius: 5px;
+  margin-bottom: 2px;
+  margin-top: 16px;
+}
+
+.mgt2e-chat-content {
+  padding: 3px;
+}
+
+.mgt2e-chat-message img.chat-sticker {
+  width: 52px;
+  height: 52px;
+  float: right;
+  position: relative;
+  margin-top: -20px;
+  border-radius: 50pc;
+  border: 4px solid #ff311b;
+  background-color: white;
+}
+
+.mgt2e-chat-message h2 {
+  font-size: large;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  background-color: #ff311b;
+  padding: 2px;
+  margin-bottom: 2px;
+}
+
+.mgt2e-chat-message img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  object-position: 0 0;
+  float: left;
+  margin-right: 4px;
+  margin-bottom: 2px;
+}
+
+.mgt2e-chat-message span.actor-uuid-link {
+  text-decoration: underline solid;
+  color: #ff311b;
+}
+
+.mgt2e-chat-message .critical-text {
+  font-style: italic;
+  color: #444444;
+}

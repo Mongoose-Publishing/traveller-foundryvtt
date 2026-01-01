@@ -1,0 +1,33 @@
+<div class="mgt2e-chat-message">
+    <img class="chat-sticker actor-uuid-link" src="{{shipActor.img}}" data-actor-id="{{shipActor.uuid}}"/>
+    <h2>
+        {{#if shipActor.token.name}}
+            {{shipActor.token.name}}
+        {{else}}
+            {{shipActor.name}}
+        {{/if}}
+    </h2>
+
+    <div class="mgt2e-chat-content">
+        <h3>{{criticalTitle}}</h3>
+
+        <p class="critical-text">
+            {{{criticalText}}}
+        </p>
+
+        <div class="critical-results">
+            {{#if victims}}
+                <ul>
+                    {{#each victims as |victim|}}
+                        <li><span class="actor-uuid-link" data-actor-id="{{victim.actor.uuid}}">{{victim.actor.name}}</span> takes {{victim.damage}} hits</li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            {{#if content}}
+                <p>
+                    {{{content}}}
+                </p>
+            {{/if}}
+        </div>
+    </div>
+</div>

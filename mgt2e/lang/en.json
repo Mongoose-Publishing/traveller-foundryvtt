@@ -833,6 +833,39 @@
   "MGT2.Spacecraft.CriticalLabel.jumpDM": "Jump",
   "MGT2.Spacecraft.CriticalLabel.armour": "Armour",
 
+  "MGT2.Spacecraft.Critical.hull.Title": "Hull Critical ({severity})",
+  "MGT2.Spacecraft.Critical.hull.Text": "Starship takes {damage} hits to the hull",
+  "MGT2.Spacecraft.Critical.hull.1": "Spacecraft suffers <b>1D</b> damage",
+  "MGT2.Spacecraft.Critical.hull.2": "Spacecraft suffers <b>2D</b> damage",
+  "MGT2.Spacecraft.Critical.hull.3": "Spacecraft suffers <b>3D</b> damage",
+  "MGT2.Spacecraft.Critical.hull.4": "Spacecraft suffers <b>4D</b> damage",
+  "MGT2.Spacecraft.Critical.hull.5": "Spacecraft suffers <b>5D</b> damage",
+  "MGT2.Spacecraft.Critical.hull.6": "Spacecraft suffers <b>6D</b> damage",
+
+  "MGT2.Spacecraft.Critical.armour.Title": "Armour Critical ({severity})",
+  "MGT2.Spacecraft.Critical.armour.Text": "Starship armour reduced by <b>{damage}</b>",
+  "MGT2.Spacecraft.Critical.armour.1": "Armour reduced by <b>1</b>",
+  "MGT2.Spacecraft.Critical.armour.2": "Armour reduced by <b>D3</b>",
+  "MGT2.Spacecraft.Critical.armour.3": "Armour reduced by <b>1D</b>",
+  "MGT2.Spacecraft.Critical.armour.4": "Armour reduced by <b>1D</b>",
+  "MGT2.Spacecraft.Critical.armour.5": "Armour reduced by <b>2D</b>, <b>Hull Severity</b> increased by <b>+1</b>",
+  "MGT2.Spacecraft.Critical.armour.6": "Armour reduced by <b>2D</b>, <b>Hull Severity</b> increased by <b>+1</b>",
+
+  "MGT2.Spacecraft.Critical.sensors.Title": "Sensor Critical ({severity})",
+  "MGT2.Spacecraft.Critical.sensors.penalty": "All checks to use sensors suffer <b>DM-{penalty}</b>",
+  "MGT2.Spacecraft.Critical.sensors.reduced": "Sensors inoperative beyond <b>{range}</b> range",
+  "MGT2.Spacecraft.Critical.sensors.disabled": "Sensors disabled",
+
+
+
+  "MGT2.Spacecraft.Critical.crew.Title": "Crew Critical ({severity})",
+  "MGT2.Spacecraft.Critical.crew.1": "Random occupant takes 1D damage",
+  "MGT2.Spacecraft.Critical.crew.2": "Life supports fails in 1D hours",
+  "MGT2.Spacecraft.Critical.crew.3": "1D occupants take 2D damage",
+  "MGT2.Spacecraft.Critical.crew.4": "Random occupant takes {damage} damage",
+  "MGT2.Spacecraft.Critical.crew.5": "Random occupant takes {damage} damage",
+  "MGT2.Spacecraft.Critical.crew.6": "Random occupant takes {damage} damage",
+
   "MGT2.Spacecraft.Advances.earlyPrototype": "Early Prototype",
   "MGT2.Spacecraft.Advances.prototype": "Prototype",
   "MGT2.Spacecraft.Advances.budget": "Budget",

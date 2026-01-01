@@ -39,6 +39,7 @@ import {generateNpc, generateText} from "./helpers/utils/npcgen-utils.mjs";
 import {
     launchSwarmHandler, showSwarmHandler
 } from "./helpers/spacecraft/spacecraft-utils.mjs";
+import {onManageActiveEffect} from "./helpers/effects.mjs";
 
 
 /* -------------------------------------------- */
@@ -387,6 +388,16 @@ async function openActorSheet(actorId) {
 }
 
 Hooks.on('renderChatMessage', function(app, html) {
+
+    // Allow actor links to be opened from chat messages.
+    html.find(".actor-uuid-link").click(ev => {
+        let actorIcon = ev.currentTarget;
+        let actorUuid = actorIcon.getAttribute("data-actor-id");
+        fromUuid(actorUuid).then(actor => {
+            actor.sheet.render(true);
+        });
+    });
+
     const damageMessage = html.find(".damage-message")[0];
     if (damageMessage) {
         damageMessage.setAttribute("draggable", true);
@@ -520,6 +531,11 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
         let args = message.split(" ");
         args.shift();
         Tools.rollChatSkill(chatData, args);
+        return false;
+    } else if (message.indexOf("/mgt2e-test") === 0) {
+        let args = message.split(" ");
+        args.shift();
+        Tools.test(chatData,args);
         return false;
     }
 

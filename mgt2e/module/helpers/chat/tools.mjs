@@ -5,6 +5,7 @@ import {MgT2eMacros} from "./macros.mjs";
 import {calculateCost} from "../utils/character-utils.mjs";
 import {getShipData} from "../spacecraft/spacecraft-utils.mjs";
 import {MGT2} from "../config.mjs";
+import {setSpacecraftCriticalLevel} from "../spacecraft/criticals.mjs";
 
 export const Tools = {};
 
@@ -1131,4 +1132,12 @@ Tools.getQuantities = function(max) {
     }
 
     return list;
+}
+
+Tools.test = async function(chatData, args) {
+    let a = game.actors.getName("Beowulf");
+
+    let effects = MGT2.SPACECRAFT_CRITICALS["crew"][0];
+
+    await setSpacecraftCriticalLevel(a, "crew", 1);
 }
