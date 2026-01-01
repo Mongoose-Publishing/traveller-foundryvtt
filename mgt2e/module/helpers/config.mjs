@@ -476,7 +476,12 @@ MGT2.SPACECRAFT_CRITICALS = {
         { "lifeSupportFails": "immediate" }
     ],
     "bridge": [
-
+        { "bridgeStation": true  },
+        { "computer": "reboot" },
+        { "computer": "damaged" },
+        { "bridgeStation": true, "crewDamaged": "1,1D6 * 1D6" },
+        { "computer": "destroyed" },
+        { "bridgeStation": true, "crewDamaged": "1,1D6 * 1D6", "hull": 1 }
     ]
 }
 

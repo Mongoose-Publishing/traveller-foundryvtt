@@ -432,6 +432,9 @@ async function applyFuelCritical(actor, effects, level) {
             ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.FuelLeakRound",
                 {"name": actor.name }));
         }
+        let title = game.i18n.format("MGT2.Spacecraft.Critical.fuel.Title", { "severity": level });
+        let text = game.i18n.format("MGT2.Spacecraft.Critical.fuel." + level);
+        criticalToChat(actor, level, title, text, null);
     }
     if (effects["lose"]) {
         console.log("Losing fuel");
@@ -443,10 +446,19 @@ async function applyFuelCritical(actor, effects, level) {
         actor.update({"system.spacecraft.fuel.value": Math.max(0, fuel)});
         ui.notifications.info(game.i18n.format("MGT2.Spacecraft.CriticalEffects.FuelLoss",
             {"name": actor.name, "percentage": loss }));
+        let title = game.i18n.format("MGT2.Spacecraft.Critical.fuel.Title", { "severity": level });
+        let text = game.i18n.format("MGT2.Spacecraft.Critical.fuel." + level);
+
+        criticalToChat(actor, level, title, text, {
+            content: game.i18n.format("MGT2.Spacecraft.Critical.fuel.Lost", {
+                lost: parseInt((loss * maxFuel) / 100),
+                remaining: fuel
+            })
+        });
     }
     if (effects["destroyed"]) {
         let tanks = actor.getHardwareList("fuel");
-        console.log("Found " + tanks.length + " tanks of fuel");
+        let item = null;
         if (tanks) {
             for (let t of tanks) {
                 if (t.system.status !== "DESTROYED") {
@@ -456,9 +468,24 @@ async function applyFuelCritical(actor, effects, level) {
                             { "name": actor.name, "item": t.name }
                         )
                     );
+                    item = t;
                     break;
                 }
             }
+        }
+        let title = game.i18n.format("MGT2.Spacecraft.Critical.fuel.Title", { "severity": level });
+        let text = game.i18n.format("MGT2.Spacecraft.Critical.fuel." + level);
+
+        if (item) {
+            criticalToChat(actor, level, title, text, {
+                content: game.i18n.format("MGT2.Spacecraft.Critical.fuel.Destroyed", {
+                    name: item.name
+                })
+            });
+        } else {
+            criticalToChat(actor, level, title, text, {
+                content: game.i18n.format("MGT2.Spacecraft.Critical.fuel.NotDestroyed")
+            });
         }
     }
 
@@ -466,8 +493,9 @@ async function applyFuelCritical(actor, effects, level) {
 }
 
 async function applyMDriveCritical(actor, effects, level) {
-    console.log("applyMDriveCritical:");
-    console.log(effects);
+    let title = game.i18n.format("MGT2.Spacecraft.Critical.mDrive.Title", { "severity": level });
+    let text = game.i18n.format("MGT2.Spacecraft.Critical.mDrive." + level);
+    let content = null;
 
     if (effects["pilotDM"]) {
         // Penalty to piloting check.
@@ -492,12 +520,15 @@ async function applyMDriveCritical(actor, effects, level) {
             }
         }
     }
+    criticalToChat(actor, level, title, text, { 'content': content });
+
     await applyHullCritical(actor, effects, level);
 }
 
 async function applyJDriveCritical(actor, effects, level) {
-    console.log("applyJDriveCritical:");
-    console.log(effects);
+    let title = game.i18n.format("MGT2.Spacecraft.Critical.jDrive.Title", { "severity": level });
+    let text = game.i18n.format("MGT2.Spacecraft.Critical.jDrive." + level);
+    let content = null;
 
     if (effects["jumpDM"]) {
         // Penalty to jump engineering check.
@@ -530,6 +561,7 @@ async function applyJDriveCritical(actor, effects, level) {
             }
         }
     }
+    criticalToChat(actor, level, title, text, { 'content': content });
 
     await applyHullCritical(actor, effects, level);
 }
@@ -651,6 +683,19 @@ async function criticalToChat(actor, level, title, text, options) {
 
 
 async function applyBridgeCritical(actor, effects, level) {
+    let title = game.i18n.format("MGT2.Spacecraft.Critical.bridge.Title", { "severity": level });
+    let text = game.i18n.format("MGT2.Spacecraft.Critical.bridge." + level);
+    let content = null;
+
+    if (effects["bridgeStation"]) {
+    }
+    if (effects["computer"]) {
+        
+    }
+
+    criticalToChat(actor, level, title, text, { 'content': content });
+
+    await applyCrewCritical(actor, effects, 0);
     await applyHullCritical(actor, effects, level);
 }
 
