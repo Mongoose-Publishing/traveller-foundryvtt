@@ -423,9 +423,9 @@ MGT2.SPACECRAFT_CRITICALS = {
         { "weaponDM": -1 },
         { "disabled": true },
         { "destroyed": "1" },
-        { "destroyed": "1", "hull": 1 },
-        { "destroyed": "1D3", "hull": 1 },
-        { "destroyed": "1D6", "hull": 1 }
+        { "destroyed": "1", "hull": "1" },
+        { "destroyed": "1D3", "hull": "1" },
+        { "destroyed": "1D6", "hull": "1" }
     ],
     "armour": [
         { "armour": "1" },

@@ -1761,10 +1761,10 @@ Handlebars.registerHelper('showCriticals', function(actor) {
         if (actor.flags.mgt2e["damage_" + d]) {
             let label = game.i18n.localize("MGT2.Spacecraft.CriticalLabel."+d);
             let value = actor.flags.mgt2e["damage_" + d];
-            if (parseInt(value) !== NaN && parseInt(value) !== 0) {
+            if (!isNaN(parseInt(value)) && parseInt(value) !== 0) {
                 value = " (" + parseInt(value) + ")";
             } else {
-                value = "";
+                value = " (" + value + ")";
             }
             label += `${value} <i class="fas fa-xmark critEffDel"> </i>`;
             html += `<div class="resource critical criticalEffect" data-id="${d}"><label>${label}</label></div>`;
@@ -2241,8 +2241,6 @@ Handlebars.registerHelper('showAttachedWeapons', function(ship, item) {
 
 Handlebars.registerHelper('showSpacecraftAttacks', function(shipActor, roles) {
     let html = "";
-
-    console.log(shipActor);
 
     let weapons = [];
     for (let item of shipActor.items) {

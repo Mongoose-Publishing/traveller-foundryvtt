@@ -1186,10 +1186,8 @@ export class MgT2Actor extends Actor {
   getItemsByType(type) {
       let list = [];
       for (let i of this.items.contents) {
-          console.log(i.name);
           if (i.type === type) {
               list.push(i);
-              console.log("Adding " + i.name);
           }
       }
       return list;
