@@ -49,6 +49,8 @@
   "MGT2.Settings.DefaultTraveller.Hint": "Nombre del actor Viajero a utilizar para habilidades y configuraciones predeterminadas",
   "MGT2.Settings.AutoPlayerCharacter.Name": "Establecer automáticamente Viajero de jugador",
   "MGT2.Settings.AutoPlayerCharacter.Hint": "Si un jugador crea un nuevo Viajero, establecerlo automáticamente como su predeterminado si aún no tiene uno",
+  "MGT2.Settings.NPCChaDamage.Name": "Los PNJs utilizan los Atributos para infligir daño.",
+  "MGT2.Settings.NPCChaDamage.Hint": "Por defecto, los PNJs utilizan los Atributos para el daño como los viajeros. Desactiva esta opción para utilizar un sistema de golpes simplificado.",
 
   "MGT2.Characteristics.STR": "Fuerza",
   "MGT2.Characteristics.DEX": "Destreza",
@@ -221,6 +223,13 @@
   "MGT2.Skills.teleportation": "Teletransporte",
   "MGT2.Skills.untrained": "No Entrenado",
 
+
+  "MGT2.Edit": "Editar",
+  "MGT2.EditItem": "Editar Objeto",
+  "MGT2.DeleteItem": "Eliminar Objeto",
+
+
+
   "MGT2.TravellerSheet.Player": "Jugador",
   "MGT2.TravellerSheet.Species": "Especie",
   "MGT2.TravellerSheet.Gender": "Género",
@@ -252,13 +261,20 @@
   "MGT2.TravellerSheet.Prot": "Prot",
   "MGT2.TravellerSheet.Protection": "Protección",
   "MGT2.TravellerSheet.Rad": "Rad",
-  "MGT2.TravellerSheet.Radiation": "Protección Rad.",
+  "MGT2.TravellerSheet.Radiation": "Radiación",
+  "MGT2.TravellerSheet.RadiationShielding": "Blindaje contra Radiación",
   "MGT2.TravellerSheet.Energy": "Protección Energética",
   "MGT2.TravellerSheet.EnergyTypes": "Tipos de Energía",
   "MGT2.TravellerSheet.Attacks": "Ataques",
+  "MGT2.TravellerSheet.Weapons": "Armas",  
   "MGT2.TravellerSheet.DamageTaken": "Daño Recibido",
   "MGT2.TravellerSheet.HitsRemaining": "Daño Restante",
   "MGT2.TravellerSheet.Hull": "Casco",
+  "MGT2.TravellerSheet.CEI": "CEI",
+  "MGT2.TravellerSheet.ECEI": "ECEI",
+  "MGT2.TravellerSheet.Morale": "Moral",
+  "MGT2.TravellerSheet.Attack": "Ataques",
+  "MGT2.TravellerSheet.Reload": "Recarga",
 
   "MGT2.TravellerSheet.InitThrust": "Propulsión",
   "MGT2.TravellerSheet.InitPilot": "Pilotar",
@@ -342,8 +358,15 @@
   "MGT2.TravellerSheet.Bane": "Desventaja",
   "MGT2.TravellerSheet.UseCustomDice": "Tirada Personalizada",
   "MGT2.TravellerSheet.AutoAge": "Envejecimiento automático",
-  "MGT2.TravellerSheet.AutoHits": "Daños Automáticos",
+  "MGT2.TravellerSheet.AutoHits": "Impactos automáticos",
+  "MGT2.TravellerSheet.AutoHitsTitle": "Calcular Impactos Automáticamente",
   "MGT2.TravellerSheet.EnforceLimits": "Forzar Límites",
+  "MGT2.TravellerSheet.EnforceLimitsTitle": "Aplicar los Límites de NT",
+  "MGT2.TravellerSheet.StandardDesign": "Diseño Estándar",
+  "MGT2.TravellerSheet.StandardDesignTitle": "10% de descuento en el coste de la nave",
+  "MGT2.TravellerSheet.NavalVessel": "Buque Naval",
+  "MGT2.TravellerSheet.AddDeck": "Añadir Cubierta",
+  "MGT2.TravellerSheet.SpacecraftTypeCode": "Código de Tipo de Astronave",
   "MGT2.TravellerSheet.LockUPP": "Bloquear PPU",
   "MGT2.TravellerSheet.RandomRoll": "Volver a tirar características (Shift para media, Ctrl para variar)",
 
@@ -353,6 +376,8 @@
   "MGT2.TravellerSheet.RDriveText": "propulsión del Motor-R.",
   "MGT2.TravellerSheet.PowerText": "Consumo de Potencia /\nPotencia Disponible",
   "MGT2.TravellerSheet.AddHardwareToSet": "\nEstablecer desde la pestaña Hardware.",
+  "MGT2.TravellerSheet.Jump1": "Salto-1",
+  "MGT2.TravellerSheet.Weekly": "Semanal",
 
   "MGT2.WorldSheet.Sector": "Sector",
   "MGT2.WorldSheet.X": "X",
@@ -464,10 +489,12 @@
 
   "MGT2.WorldSheet.Bases.S": "Exploración",
   "MGT2.WorldSheet.Bases.N": "Naval",
-  "MGT2.WorldSheet.Bases.M": "Militar",
+  "MGT2.WorldSheet.Bases.M": "Ejército",
   "MGT2.WorldSheet.Bases.C": "Corsaria",
+  "MGT2.WorldSheet.Bases.D": "Depósito Naval",
+  "MGT2.WorldSheet.Bases.W": "Estación de Paso",  
 
-  "MGT2.WorldSheet.Facility.berthingCost": "Costo de Atraque (Cr/Sem)",
+  "MGT2.WorldSheet.Facility.berthingCost": "Costo de Atraque (Cr./Sem)",
   "MGT2.WorldSheet.Facility.shipyard": "Astillero",
   "MGT2.WorldSheet.Facility.repair": "Reparación",
   "MGT2.WorldSheet.Facility.highport": "Puerto Orbital",
@@ -477,6 +504,7 @@
   "MGT2.WorldSheet.Facility.capital": "Naves Capitales",
   "MGT2.WorldSheet.Facility.limited": "Limitado",
   "MGT2.WorldSheet.Facility.full": "Completo",
+  "MGT2.WorldSheet.Culture": "Cultura",
 
   "MGT2.Vehicle.Spaces": "Espacios",
   "MGT2.Vehicle.Chassis": "Chasis",
@@ -701,6 +729,7 @@
   "MGT2.Spacecraft.Battery": "Batería",
   "MGT2.Spacecraft.BatteryCharge": "Carga",
   "MGT2.Spacecraft.ConcealedDrive": "Motor Oculto",
+  "MGT2.Spacecraft.AutoCost": "Cálculo automático de coste",  
   "MGT2.Spacecraft.HolographicControls": "Controles Holográficos",
   "MGT2.Spacecraft.BridgeType.standard": "Puente",
   "MGT2.Spacecraft.BridgeType.cockpit": "Cabina de Vuelo",
@@ -761,7 +790,6 @@
   "MGT2.Spacecraft.Criticals.powerPlant": "Planta de Energía",
   "MGT2.Spacecraft.Criticals.fuel": "Combustible",
   "MGT2.Spacecraft.Criticals.weapon": "Arma",
-  "MGT2.Spacecraft.Criticals.defence": "Defensa",
   "MGT2.Spacecraft.Criticals.armour": "Blindaje",
   "MGT2.Spacecraft.Criticals.hull": "Casco",
   "MGT2.Spacecraft.Criticals.mDrive": "Motor-M",
@@ -792,7 +820,7 @@
   "MGT2.Spacecraft.CriticalLabel.powerPlant": "Potencia Reducida",
   "MGT2.Spacecraft.CriticalLabel.sensorDM": "Sensor Dañado",
   "MGT2.Spacecraft.CriticalLabel.sensorMax": "Sensor Limitado",
-  "MGT2.Spacecraft.CriticalLabel.pilotDM": "Pilotaje",
+  "MGT2.Spacecraft.CriticalLabel.pilotDM": "Pilotaje",  
   "MGT2.Spacecraft.CriticalLabel.thrust": "Propulsión",
   "MGT2.Spacecraft.CriticalLabel.jumpDM": "Salto",
   "MGT2.Spacecraft.CriticalLabel.armour": "Blindaje",
@@ -836,6 +864,17 @@
   "MGT2.Spacecraft.Hull.hamsterCage": "Jaula de Hámster",
   "MGT2.Spacecraft.Hull.breakawayHulls": "Cascos Escindibles",
   "MGT2.Spacecraft.Hull.solarCoating": "Revestimiento Solar (Paneles Solares)",
+
+  "MGT2.Spacecraft.Range.adjacent": "Adyacente",
+  "MGT2.Spacecraft.Range.close": "Cercana",
+  "MGT2.Spacecraft.Range.short": "Corta",
+  "MGT2.Spacecraft.Range.medium": "Media",
+  "MGT2.Spacecraft.Range.long": "Larga",
+  "MGT2.Spacecraft.Range.verylong": "Muy Larga",
+  "MGT2.Spacecraft.Range.distant": "Lejana",
+  "MGT2.Spacecraft.Range.verydistant": "Muy Lejana",
+  "MGT2.Spacecraft.Range.far": "Distante",
+  "MGT2.Spacecraft.Range.null": "Fuera de Alcance",
 
   "MGT2.Trade.Ag": "Agrícola",
   "MGT2.Trade.As": "Asteroide",
@@ -945,6 +984,11 @@
   "MGT2.Item.WeaponTrait.Label.psiAp": "PA PSI",
   "MGT2.Item.WeaponTrait.Label.missile": "Misil",
   "MGT2.Item.WeaponTrait.Label.spinal": "Arma Espinal",
+  "MGT2.Item.WeaponTrait.Label.thrust": "Propulsión",
+  "MGT2.Item.WeaponTrait.Label.longRange": "Largo Alcance",
+  "MGT2.Item.WeaponTrait.Label.multiWarhead": "Ojivas Múltiples",
+  "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",  
+  
 
   "MGT2.Item.WeaponTrait.Text.ap": "Penetración de Armadura: Reduce el valor de Armadura del objetivo en X puntos; si el resultado es cero o menos, el ataque ignora la Armadura.",
   "MGT2.Item.WeaponTrait.Text.auto": "Fuego Automático (Simple/Ráfaga/Automático): `Ráfaga´ (MD -4, 3 veces munición) o asalto único (MD -1 por X ráfagas de disparo, más munición).",
@@ -975,6 +1019,10 @@
   "MGT2.Item.WeaponTrait.Text.orbitalBombardment": "MD-8 para atacar naves, sin rasgo Explosión contra objetivos terrestres",
   "MGT2.Item.WeaponTrait.Text.missile": "Proyectil autoguiado que utiliza la habilidad de Misil o Artillería para atacar y rastrear un objetivo.",
   "MGT2.Item.WeaponTrait.Text.spinal": "Integrada en la estructura central (espina dorsal) de la nave, otorga un arco de fuego fijo y una gran potencia. (Manual Naval Pg 28)",
+  "MGT2.Item.WeaponTrait.Text.thrust": "Propulsión del Misil",
+  "MGT2.Item.WeaponTrait.Text.longRange": "Misil de largo alcance",
+  "MGT2.Item.WeaponTrait.Text.multiWarhead": "Misil de ojivas múltiples",
+  "MGT2.Item.WeaponTrait.Text.torpedo": "El Misil es un Torpedo.",
 
   "MGT2.Attack.Dangerous": "Si tirada de ataque falla, el portador recibe 1 Dado de Daño.",
   "MGT2.Attack.DragMe": "Arrastra a la hoja de Viajero, o haz clic para aplicar a los tokens seleccionados.",
@@ -986,7 +1034,7 @@
 
   "MGT2.SpacecraftDamageDialog.Title": "Danos de la Nave Espacial",
 
-  "MGT2.Item.RangeM": "Distancia (m)",
+  "MGT2.Item.RangeM": "Alcance (m)",
   "MGT2.Item.RangeKM": "Distancia (km)",
   "MGT2.Item.RangeSpace": "Alcance",
   "MGT2.Item.MinRange": "Distancia Mínima (km)",
@@ -1090,6 +1138,10 @@
   "MGT2.Effects.Type.skillDM": "MD a Habilidad",
   "MGT2.Effects.Type.skillExpert": "Programa Experto",
   "MGT2.Effects.Type.miscDM": "Otro",
+
+  "MGT2.Effects.SoftwareEffects": "Características de Software",
+  "MGT2.Effects.Software.Class.personal": "Software Personal",
+  "MGT2.Effects.Software.Class.spacecraft": "Software de Astronave",
   
   "MGT2.Effects.Software.Type.generic": "Genérico",
   "MGT2.Effects.Software.Type.interface": "Interfaz",
@@ -1198,6 +1250,8 @@
 
   "MGT2.Error.NotEnoughCash": "{actor} no tiene suficientes Créditos para gastar {cost} Cr.",
   "MGT2.Info.BuyItem": "{actor} gasta {cost} Cr. en la compra de {item}",
+  "MGT2.Warn.NoActorsToBuy": "No hay personajes disponibles que puedan comprar este objeto",
+  "MGT2.Warn.ThisActorCannotBuy": "{actor} no tiene suficientes Créditos para comprar {item}",
 
   "MGT2.Role.isDepartment": "El rol es un cargo",
   "MGT2.Role.RoleAssignment": "Asignación de Rol",
@@ -1236,6 +1290,49 @@
   "MGT2.Role.BuiltIn.Action.WildLanding": "Aterrizaje Forzoso",
   "MGT2.Role.BuiltIn.Action.Evade": "Evadir",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Pilotar",
+  
+  "MGT2.Swarm.MissileSource": "Origen de Misiles",
+  "MGT2.Swarm.MissileTarget": "Objetivo de Misiles",
+  "MGT2.Swarm.SelectTarget": "SELECCIONAR OBJETIVO",
+  "MGT2.Swarm.ShipName": "Nombre de la Nave",
+  "MGT2.Swarm.TargetName": "Nombre del Objetivo",
+  "MGT2.Swarm.WeaponSystem": "Sistema de Armas",
+  "MGT2.Swarm.Size": "Tamaño",
+  "MGT2.Swarm.Endurance": "Combustible",
+  "MGT2.Swarm.TL": "NT Inteligente",
+  "MGT2.Swarm.Thrust": "Propulsión",
+  "MGT2.Swarm.Damage": "Daño",
+  "MGT2.Swarm.RollImpact": "Tirar Impacto",
+  "MGT2.Swarm.ClearTarget": "Desmarcar Objetivo",
+  "MGT2.Swarm.MaxHull": "Casco Máx.",
+  "MGT2.Swarm.Hull": "Casco",
+  "MGT2.Swarm.Armour": "Blindaje",
+  "MGT2.Swarm.SquadronTL": "NT",
+
+  "MGT2.Swarm.DeleteConfirm.Title": "¿Eliminar Enjambre de la Flota?",
+  "MGT2.Swarm.DeleteConfirm.Text": "La Salva/Escuadrón y todas sus fichas serán eliminadas.",  
+  
+  "MGT2.Dialog.TransferCargoToShip": "Transferir Carga a la Astronave",
+  "MGT2.Dialog.SellCargoToWorld": "Vender Carga al Mundo",
+  "MGT2.Dialog.EmbarkPassengers": "Embarcar Pasajeros",
+  "MGT2.Dialog.TotalAvailable": "Total Disponible",
+  "MGT2.Dialog.UnitPrice": "Precio Unidad",
+  "MGT2.Dialog.AvailableCash": "Efectivo Disponible",
+  "MGT2.Dialog.FreeSpace": "Espacio Libre",
+  "MGT2.Dialog.PriceVariant": "Variante de Precio",
+  "MGT2.Dialog.Quantity": "Cantidad",
+  "MGT2.Dialog.Profit": "Beneficio",
+  "MGT2.Dialog.PassengersAvailable": "Pasajeros Disponibles",
+  "MGT2.Dialog.AvailableStaterooms": "Alojamientos Disponibles",
+  "MGT2.Dialog.TicketPrice": "Precio del Billete",
+
+  "MGT2.Dialog.EnableDamage.Title": "¿Habilitar daño para este PNJ?",
+  "MGT2.Dialog.EnableDamage.Text": "Si está habilitado, el daño se aplicará a FUE, DES y RES en lugar de a un único valor de IMPACTO.",
+
+  "MGT2.Dialog.CharacteristicDamage.Title": "Mostrar Atributos Dañados",
+  "MGT2.Dialog.CharacteristicDamage.Text": "Selecciona para qué Atributos mostrar el daño",
+  "MGT2.Dialog.CharacteristicDamage.Discard": "Volver a usar IMPACTOS",
+
 
   "MGT2.SpacecraftRepairDialog.Title": "Reparar Sistema",
 
@@ -1244,6 +1341,7 @@
   "TYPES.Actor.creature": "Criatura",
   "TYPES.Actor.spacecraft": "Astronave",
   "TYPES.Actor.package": "Paquete",
+  "TYPES.Actor.swarm": "Enjambre",  
   "TYPES.Actor.vehicle": "Vehículo",
   "TYPES.Actor.world": "Mundo",
 
@@ -1258,6 +1356,8 @@
   "TYPES.Item.role": "Rol de Tripulación",
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "Datos del Mundo",
+  
+  "Save": "Guardar",  
 
   "TRAVELLER.Add": "Añadir"
 }
