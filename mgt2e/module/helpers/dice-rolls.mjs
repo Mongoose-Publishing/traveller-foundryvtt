@@ -839,6 +839,7 @@ export async function rollSkill(actor, skill, options) {
             }
         }
         skill = MGT2.getDefaultSkills()[skillId];
+        skill.id = skillId;
         title = skillLabel(skill, skillId);
         if (specId) {
             speciality = skill.specialities[specId];
@@ -1148,9 +1149,11 @@ export async function rollSkill(actor, skill, options) {
             text += `<p>${cha} cost is ${cost}</p>`;
         }
         let bestEffect = effect;
+        let specialities = [];
         if (skill && skill.specialities != null && speciality == null && !noSpeciality) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];
+                let speciality = {};
 
                 if (spec.value > 0 || spec.augment || spec.augdm || spec.bonus || spec.expert) {
                     let stotal = parseInt(total) + parseInt(spec.value);
@@ -1199,6 +1202,14 @@ export async function rollSkill(actor, skill, options) {
                     } else {
                         text += `<h3 class="subroll">${slabel} <span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${stotal}</span></h3>`;
                     }
+
+                    speciality = {
+                        label: slabel,
+                        specNotes: specNotes,
+                        total: stotal,
+                        effectLabel: getEffectLabel(stotal - difficulty)
+                    }
+                    specialities.push(speciality);
                 }
             }
         }
@@ -1214,6 +1225,31 @@ export async function rollSkill(actor, skill, options) {
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             flavor: text,
+            rollMode: game.settings.get("core", "rollMode")
+        });
+
+        let contentData = {
+            actor: actor,
+            agent: options.agent,
+            skillIcon: skill?`systems/mgt2e/icons/skills/${skill.id}.svg`:"",
+            skillTitle: title,
+            skillText: skillText,
+            skillNotes: skillNotes,
+            checkText: checkText,
+            effect: effect,
+            total: total,
+            difficulty: difficulty,
+            effectLabel: getEffectLabel(effect),
+            specialities: specialities,
+            description: options.description,
+            success: (bestEffect >= 0)?options.success:null,
+            failure: (bestEffect >= 0)?null:options.failure
+        }
+
+        const html = await renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
+        roll.toMessage({
+            speaker: ChatMessage.getSpeaker({actor: actor}),
+            flavor: html,
             rollMode: game.settings.get("core", "rollMode")
         });
     }

@@ -1,9 +1,10 @@
 
 .mgt2e-chat-message {
-  border: 3px solid #ff311b;
+  border: 3px solid #f1511b;
   border-radius: 5px;
   margin-bottom: 2px;
   margin-top: 16px;
+  background-color: white;
 }
 
 .mgt2e-chat-content {
@@ -21,13 +22,24 @@
   background-color: white;
 }
 
+.mgt2e-chat-message img.chat-dice {
+  width: 52px;
+  height: 52px;
+  float: right;
+  position: relative;
+  margin-top: -20px;
+  border: none;
+  background-color: transparent;
+}
+
+
 .mgt2e-chat-message h2 {
   font-size: large;
   font-family: "Roboto", sans-serif;
-  color: white;
-  background-color: #ff311b;
+  background-color: #f1511b;
   padding: 2px;
   margin-bottom: 2px;
+  color: black;
 }
 
 .mgt2e-chat-message img {
@@ -49,3 +61,50 @@
   font-style: italic;
   color: #444444;
 }
+
+.mgt2e-chat-message h3 {
+  font-weight: bold;
+  clear: both;
+}
+
+.mgt2e-chat-message p.skill-text {
+  font-size: larger;
+}
+
+.mgt2e-chat-message .skillcheck-message {
+
+}
+
+.mgt2e-chat-message .skillcheck-description {
+  font-size: medium;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+
+.mgt2e-chat-message .skillcheck-button {
+  background-color: #a0a0a0;
+  font-size: medium;
+}
+
+.mgt2e-chat-message .requested-target {
+  float: left;
+  display: inline-block;
+  font-size: 24px;
+  margin-right: 4px;
+}
+
+.mgt2e-chat-message .requested-target img.dice-icon {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+}
+
+.mgt2e-chat-message .requested-target .skill-difficulty {
+  font-size: 32px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  color: black;
+  display: inline-block;
+}
+

@@ -817,6 +817,7 @@ span.skill-roll {
   white-space: nowrap;
   word-break: break-all;
   font-size: larger;
+  margin-right: 4px;
 }
 
 div.skill-description {

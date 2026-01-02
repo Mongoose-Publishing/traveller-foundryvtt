@@ -1,0 +1,27 @@
+<div class="mgt2e-chat-message skill-box">
+    {{#if skillIcon}}
+        <img class="chat-sticker" src="{{skillIcon}}"/>
+    {{/if}}
+
+    <h2>{{{skillTitle}}}</h2>
+
+    <div class="mgt2e-chat-content">
+        <span class="requested-target">
+            <img class="dice-icon" src="systems/mgt2e/icons/misc/2D6.svg"/>
+            {{difficulty}}
+        </span>
+
+        {{#if description}}
+            <div class="skillcheck-description">
+                {{{description}}}
+            </div>
+        {{/if}}
+
+        <div class="skillcheck-message" data-skillcheck="{{skillFqn}}" data-options='{{json}}'>
+            <button data-skillcheck="{{skillFqn}}" data-options='{{json}}'
+                    title="{{skillTitle}}" class="skillcheck-button">
+                {{{skillTitle}}}
+            </button>
+        </div>
+    </div>
+</div>

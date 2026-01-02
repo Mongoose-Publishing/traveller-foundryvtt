@@ -356,7 +356,7 @@ MgT2eMacros.specialityGain = function(actorId, skill, level) {
     }
 };
 
-MgT2eMacros.skillCheck = function(args, ask) {
+MgT2eMacros.skillCheck = async function(args, ask) {
     let skillFqn = args.skill;
     let target = args.target?args.target:8;
     let dm = args.dm?Number(args.dm):0;
@@ -383,14 +383,24 @@ MgT2eMacros.skillCheck = function(args, ask) {
         if (skillFqn && !skill) {
             ui.notifications.error(`Skill [${skillId}] is unrecognised.`);
         }
+        if (skill && !skill.id) {
+            skill.id = skillId;
+        }
 
         if (!cha) {
             cha = skill.default;
         }
         if (CONFIG.MGT2.CHARACTERISTICS[cha]) {
-            title = `${cha} + `;
+            title = `${cha}`;
         }
-        title += skillLabel(skill, skillId);
+        if (skill) {
+            title += ` + ${skillLabel(skill, skillId)}`;
+            if (specId) {
+                let specLabel = skillLabel(skill.specialities[specId], specId);
+                specLabel = specLabel.replaceAll(/ /g, "&nbsp;");
+                title += ` (${specLabel})`;
+            }
+        }
 
         let html = `<div class='skill-message'><h2>${title}</h2><div class="message-content">`;
         if (args.text) {
@@ -419,18 +429,21 @@ MgT2eMacros.skillCheck = function(args, ask) {
         }
         let json = JSON.stringify(jsonData);
 
-        html += `<div class="skillcheck-message" data-skillcheck="${skillFqn}" data-options='${json}'>`;
-        html += `<button data-skillcheck="${skillFqn}" data-options='${json}'
-                    title="${title}"
-                    class="skillcheck-button">Roll ${title}</button>`;
-        html += `</div>`;
+        let contentData = {
+            skillIcon: skill?`systems/mgt2e/icons/skills/${skill.id}.svg`:"",
+            skillTitle: title,
+            skillFqn: skillFqn,
+            json: json,
+            difficulty: args.target,
+            description: args.text,
+        }
 
+        const content = await renderTemplate("systems/mgt2e/templates/chat/skill-request.html", contentData);
         let chatData = {
-            content: html,
+            content: content,
             rollMode: game.settings.get("core", "rollMode")
-        };
+        }
         ChatMessage.create(chatData, {});
-
     } else {
         let options = {
             "difficulty": target,

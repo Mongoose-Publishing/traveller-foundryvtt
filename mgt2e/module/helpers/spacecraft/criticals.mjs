@@ -690,7 +690,7 @@ async function applyBridgeCritical(actor, effects, level) {
     if (effects["bridgeStation"]) {
     }
     if (effects["computer"]) {
-        
+
     }
 
     criticalToChat(actor, level, title, text, { 'content': content });
@@ -699,7 +699,3 @@ async function applyBridgeCritical(actor, effects, level) {
     await applyHullCritical(actor, effects, level);
 }
 
-
-function getCriticalTemplate() {
-
-}
