@@ -1222,12 +1222,19 @@ export async function rollSkill(actor, skill, options) {
         }
         text += "</div></div>";
 
+        /*
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             flavor: text,
             rollMode: game.settings.get("core", "rollMode")
         });
+        */
 
+        if (options.dm > 0) {
+            title += ` + ${options.dm}`;
+        } else if (options.dm < 0) {
+            title += ` - ${Math.abs(options.dm)}`;
+        }
         let contentData = {
             actor: actor,
             agent: options.agent,
@@ -1243,7 +1250,8 @@ export async function rollSkill(actor, skill, options) {
             specialities: specialities,
             description: options.description,
             success: (bestEffect >= 0)?options.success:null,
-            failure: (bestEffect >= 0)?null:options.failure
+            failure: (bestEffect >= 0)?null:options.failure,
+            useChatIcons: game.settings.get("mgt2e", "useChatIcons")
         }
 
         const html = await renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
