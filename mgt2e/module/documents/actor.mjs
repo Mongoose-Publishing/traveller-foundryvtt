@@ -436,23 +436,25 @@ export class MgT2Actor extends Actor {
           if (u.active && u.name === this.system.player) {
               if (this.ownership[u._id] !== undefined) {
                   if (this.ownership[u.id] === 3) {
-                      return u.uuid;
+                      return u;
                   }
               } else if (this.ownership["default"] === 3) {
-                  return u.uuid;
+                  return u;
               }
           }
       }
       // No matches, now look for a non-GM with ownership permissions.
+      console.log("Looking just at permissions");
       for (let u in this.ownership) {
-          if (this.ownership[u] === 3 && game.users.get(u).active) {
+          if (this.ownership[u] === 3 && game.users.get(u)?.active) {
               if (!game.users.get(u).isGM) {
-                  return u.uuid;
+                  return u;
               }
           }
       }
+      console.log("Just use the GM");
       // Finally, just find an active GM.
-      return game.users.activeGM?.uuid;
+      return game.users.activeGM;
   }
 
   applyDamageToPerson(damage, options) {
@@ -462,8 +464,24 @@ export class MgT2Actor extends Actor {
       options.armour = 0;
 
       if (this.permission < 3) {
-          console.log("No permission, forward to GM");
-          let alternativePlayer = findActorOwner();
+          let alternativePlayer = this.findActorOwner();
+          if (alternativePlayer) {
+              game.socket.emit("system.mgt2e", {
+                  type: "applyDamageToPerson",
+                  userId: alternativePlayer.uuid,
+                  actorId: this.uuid,
+                  damage: damage,
+                  damageOptions: options,
+                  currentPlayerId: game.users.current.uuid,
+              });
+              ui.notifications.info(game.i18n.format("MGT2.Info.ActorOwnerFound", {
+                  "actor": this.name,
+                  "player": alternativePlayer.name
+              }));
+          } else {
+              ui.notifications.error(game.i18n.format("MGT2.Error.NoSuitableOwner", { "actor": this.name }));
+          }
+          return;
       }
 
       // Check for characteristic damage
@@ -797,9 +815,6 @@ export class MgT2Actor extends Actor {
   }
 
   applyDamage(damage, options, multiSelect) {
-      console.log(`applyDamage: [${this.name}] [${damage}] [${multiSelect?"multi-select":"single"}]`);
-      console.log(options);
-
       if (this.type === "spacecraft") {
           if (options.scale !== "spacecraft") {
               damage = parseInt(damage / 10);

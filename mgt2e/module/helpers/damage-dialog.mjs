@@ -107,6 +107,8 @@ export class MgT2DamageDialog extends Application {
     }
 
     getData() {
+        console.log(this.actor);
+        console.log(this.actor.token);
         return {
             "actor": this.actor,
             "data": this.data,

@@ -8,7 +8,11 @@
 <form class="flexcol damage-dialog">
 
     <h1 class="charname shadow">
-        {{actor.name}}
+        {{#if actor.token}}
+            {{actor.token.name}}
+        {{else}}
+            {{actor.name}}
+        {{/if}}
     </h1>
 
     {{#if playerRequestName}}

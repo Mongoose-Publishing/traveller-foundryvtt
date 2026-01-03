@@ -231,11 +231,22 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
     for (let token of tokens) {
         if (!token.isOwner) {
             // Don't have permission to update token.
-            ui.notifications.warn("Cannot apply damage to " + token.name);
             let alternativePlayer = token.actor.findActorOwner();
+
+            if (!alternativePlayer) {
+                ui.notifications.error(game.i18n.format("MGT2.Error.NoSuitableOwner", {
+                    "actor": token.document.name
+                }));
+                continue;
+            }
+            ui.notifications.info(game.i18n.format("MGT2.Info.ActorOwnerFound", {
+                "actor": token.document.name,
+                "player": alternativePlayer.name
+            }));
+
             let data = {
                 type: "applyDamageToActor",
-                userId: alternativePlayer,
+                userId: alternativePlayer.uuid,
                 actorId: token.actor.uuid,
                 damage: damage,
                 damageOptions: damageOptions,
@@ -243,21 +254,32 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
             }
             game.socket.emit("system.mgt2e", data);
             continue;
-        } else {
+        } else if (["traveller", "spacecraft"].includes(token.actor.type)) {
             // Do have permission, but are we the right person?
             let alternativePlayer = token.actor.findActorOwner();
-            if (alternativePlayer !==- game.users.current.uuid) {
+            if (!alternativePlayer) {
+                ui.notifications.error(game.i18n.format("MGT2.Error.NoSuitableOwner", {
+                    "actor": token.document.name
+                }));
+                continue;
+            }
+            if (alternativePlayer.uuid !== game.users.current.uuid) {
                 let data = {
                     type: "applyDamageToActor",
-                    userId: alternativePlayer,
+                    userId: alternativePlayer.uuid,
                     actorId: token.actor.uuid,
                     damage: damage,
                     damageOptions: damageOptions,
                     currentPlayerId: game.users.current.uuid
                 }
                 game.socket.emit("system.mgt2e", data);
-                continue;
 
+                ui.notifications.info(game.i18n.format("MGT2.Info.ActorOwnerFound", {
+                    "actor": token.document.name,
+                    "player": alternativePlayer.name
+                }));
+
+                continue;
             }
         }
         token.actor.applyDamage(damage, damageOptions, (tokens.size > 1));
@@ -1175,6 +1197,10 @@ Tools.applyDamageHandler = async function(data) {
         if (player) {
             data.damageOptions.playerRequestName = player.name;
         }
-        actor.applyDamage(data.damage, data.damageOptions, false);
+        if (data.type === "applyDamageToActor") {
+            actor.applyDamage(data.damage, data.damageOptions, false);
+        } else if (data.type === "applyDamageToPerson") {
+            actor.applyDamageToPerson(data.damage, data.damageOptions);
+        }
     }
 }

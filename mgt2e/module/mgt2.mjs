@@ -308,20 +308,14 @@ Hooks.once('init', async function() {
 
     // Sockets
     game.socket.on("system.mgt2e", (data) => {
-        if (data.type) {
-            console.log(data.type);
-        }
         if (data.type === "showIdCard") {
             let actor = data.actor;
             new NpcIdCard(actor).render(true);
         }
-        console.log(data.userId);
         if (game.user.uuid === data.userId) {
-            console.log("Found User Match");
             if (data.type === "showSwarm") {
                 showSwarmHandler(data);
-            } else if (data.type === "applyDamageToActor") {
-                console.log("Apply damage");
+            } else if (data.type === "applyDamageToActor" || data.type === "applyDamageToPerson") {
                 Tools.applyDamageHandler(data);
             }
         } else if (game.user === game.users.activeGM) {
