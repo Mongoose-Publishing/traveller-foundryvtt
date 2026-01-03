@@ -232,6 +232,17 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
         if (!token.isOwner) {
             // Don't have permission to update token.
             ui.notifications.warn("Cannot apply damage to " + token.name);
+            let alternativePlayer = token.actor.findActorOwner();
+            let data = {
+                type: "applyDamageToActor",
+                userId: alternativePlayer,
+                actorId: token.actor.uuid,
+                damage: damage,
+                damageOptions: damageOptions,
+                currentPlayerId: game.users.current.uuid
+            }
+            console.log(data);
+            game.socket.emit("system.mgt2e", data);
             continue;
         }
         token.actor.applyDamage(damage, damageOptions, (tokens.size > 1));
@@ -1140,4 +1151,15 @@ Tools.test = async function(chatData, args) {
     let effects = MGT2.SPACECRAFT_CRITICALS["crew"][0];
 
     await setSpacecraftCriticalLevel(a, "crew", 1);
+}
+
+Tools.applyDamageHandler = async function(data) {
+    let actor = await fromUuid(data.actorId);
+    if (actor) {
+        let player = await fromUuid(data.currentPlayerId);
+        if (player) {
+            data.damageOptions.playerRequestName = player.name;
+        }
+        actor.applyDamage(data.damage, data.damageOptions, false);
+    }
 }

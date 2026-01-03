@@ -29,7 +29,15 @@
             <div class="shadow grid grid-7col">
                 <div class="resource flex-group-left grid-span-2">
                     <label for="system.player" class="field-label">{{localize 'MGT2.TravellerSheet.Player'}}</label>
-                    <input class="field-value writable" name="system.player" type="text" value="{{system.player}}"/>
+                    <input class="field-value writable" name="system.player" type="text"
+                           value="{{system.player}}" list="player-options-list"/>
+
+                    <datalist id="player-options-list">
+                        {{#each PLAYER_LIST as |player|}}
+                            <option value="{{player}}"|>{{player}}</option>
+                        {{/each}}
+                    </datalist>
+
                 </div>
                 <div class="resource flex-group-left grid-span-2">
                     <label for="system.sophont.species" class="field-label">{{localize 'MGT2.TravellerSheet.Species'}}</label>

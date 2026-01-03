@@ -427,11 +427,39 @@ export class MgT2Actor extends Actor {
       return score;
   }
 
+  findActorOwner() {
+      // Find the active player who owns this actor. If there are none, select the Gamemaster.
+      console.log("findActorOwner:");
+      // First, look for the player mentioned on the character sheet. They must be active,
+      // and also have ownership permission of this actor.
+      for (let u of game.users) {
+          if (u.active && u.name === this.system.player && this.ownership[u.uuid] === 3) {
+              console.log("Found a match for " + u.name);
+              return u.uuid;
+          }
+      }
+      // No matches, now look for a non-GM with ownership permissions.
+      for (let u in this.ownership) {
+          if (this.ownership[u] === 3 && game.users.get(u).active) {
+              if (!game.users.get(u).isGM) {
+                  return u.uuid;
+              }
+          }
+      }
+      // Finally, just find an active GM.
+      return game.users.activeGM?.uuid;
+  }
+
   applyDamageToPerson(damage, options) {
       let armour = 0;
       let armourText = ""
       let radiationDamage = options.radiation ? options.radiation : 0;
       options.armour = 0;
+
+      if (this.permission < 3) {
+          console.log("No permission, forward to GM");
+          let alternativePlayer = findActorOwner();
+      }
 
       // Check for characteristic damage
       let damageType = options.damageType ? options.damageType : "standard";
@@ -489,18 +517,7 @@ export class MgT2Actor extends Actor {
                   }
               }
           }
-          // Any special modifiers?
-          /*
-           * These should already be accounted for.
-          if (this.system.modifiers.armour?.custom) {
-              armour += Number(this.system.modifiers.armour.custom);
-              armourText += `Custom +${this.system.modifiers.armour.custom} `;
-          }
-          if (this.system.modifiers.armour?.effect) {
-              armour += Number(this.system.modifiers.armour.effect);
-              armourText += `Other +${this.system.modifiers.armour.effect} `;
-          }
-          */
+
           // Finally, any cover options?
           if (this.getFlag("mgt2e", "inCover")) {
               const coverBonus = parseInt(this.getFlag("mgt2e", "inCover"));

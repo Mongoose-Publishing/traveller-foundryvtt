@@ -315,7 +315,16 @@ Hooks.once('init', async function() {
             let actor = data.actor;
             new NpcIdCard(actor).render(true);
         }
-        if (game.user === game.users.activeGM) {
+        console.log(data.userId);
+        if (game.user.uuid === data.userId) {
+            console.log("Found User Match");
+            if (data.type === "showSwarm") {
+                showSwarmHandler(data);
+            } else if (data.type === "applyDamageToActor") {
+                console.log("Apply damage");
+                Tools.applyDamageHandler(data);
+            }
+        } else if (game.user === game.users.activeGM) {
             if (data.type === "tradeBuyGoods") {
                 tradeBuyGoodsHandler(data);
             } else if (data.type === "tradeSellGoods") {
@@ -332,10 +341,6 @@ Hooks.once('init', async function() {
                 worldDropBrokerHandler(data);
             } else if (data.type === "launchSwarm") {
                 launchSwarmHandler(data);
-            }
-        } else if (game.user.uuid === data.userId) {
-            if (data.type === "showSwarm") {
-                showSwarmHandler(data);
             }
         }
     });

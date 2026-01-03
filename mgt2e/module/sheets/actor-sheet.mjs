@@ -65,6 +65,12 @@ export class MgT2ActorSheet extends ActorSheet {
         context.flags = actorData.flags;
         context.currentYear = game.settings.get("mgt2e", "currentYear");
 
+        context.PLAYER_LIST = [];
+        for (let u of game.users) {
+            context.PLAYER_LIST.push(u.name);
+        }
+
+
         // Prepare character data and items.
         if (type === 'traveller' || type === 'package') {
             this._prepareItems(context);

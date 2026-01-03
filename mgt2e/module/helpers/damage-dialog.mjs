@@ -131,7 +131,8 @@ export class MgT2DamageDialog extends Application {
             "woundsEffect": this.woundsEffect,
             "radiation": this.radiationDamage,
             "actualRadiation": this.actualRadiation,
-            "armourRads": this.armourRads
+            "armourRads": this.armourRads,
+            "playerRequestName": this.damageOptions.playerRequestName
         }
     }
 

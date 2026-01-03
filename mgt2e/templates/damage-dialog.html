@@ -11,6 +11,10 @@
         {{actor.name}}
     </h1>
 
+    {{#if playerRequestName}}
+        <h2 class="charname shadow">Damage requested by {{playerRequestName}}</h2>
+    {{/if}}
+
     <div class="shadow grid grid-4col">
         <div class="resource flex-group-center">
             <label for="damage" class="resource-label">DAMAGE</label>
