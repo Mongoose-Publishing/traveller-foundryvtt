@@ -128,7 +128,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Added option to modify the rules for speculative trade. Two roll tables can be added to a world (examples are included in the compendium) to modify the buy/sell DMs to make trade easier or harder.</p><ul><li><p>@UUID[Compendium.mgt2e.base-tables.RollTable.zsNYgBxi8BuMwzsI]{Trade Buy Modifiers}</p></li><li><p>@UUID[Compendium.mgt2e.base-tables.RollTable.URaBZYegz9Y5hUlF]{Trade Sell Modifiers}</p></li></ul></li><li><p>Worlds now show if they have refined/unrefined fuel. Added option to buy fuel from worlds, and automatically refuel spacecraft.</p></li></ul>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Added option to modify the rules for speculative trade. Two roll tables can be added to a world (examples are included in the compendium) to modify the buy/sell DMs to make trade easier or harder.</p><ul><li><p>@UUID[Compendium.mgt2e.base-tables.RollTable.zsNYgBxi8BuMwzsI]{Trade Buy Modifiers}</p></li><li><p>@UUID[Compendium.mgt2e.base-tables.RollTable.URaBZYegz9Y5hUlF]{Trade Sell Modifiers}</p></li></ul></li><li><p>Worlds now show if they have refined/unrefined fuel. Added option to buy fuel from worlds, and automatically refuel spacecraft.</p></li><li><p>Support for Spacechip Criticals against crew members. Damage is applied to random occupants of the ship.</p></li><li><p>Critical hit results are now output to the chat, not just as notifications. Switched to using templating for this, to make the code nicer.</p></li><li><p>Updated the skill checks to use templating, and updated the look and feel of skill checks to hopefully give them a cleaner look.</p></li><li><p>Traveller 'Player Name' field now shows a drop down list of all the players in the game, allowing quick selection.</p></li><li><p>Lots of back end changes to allow damage handling to be  passed onto a different user if this user doesn't have permission. Players causing damage to NPCs, will pass the action to the GM user. GM caused damage can also be passed to the player owning the actor, to allow them to distribute between characteristics.</p></li></ul>"
       },
       "video": {
         "controls": true,
@@ -147,7 +147,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1767103555625,
+        "modifiedTime": 1767482063067,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!83nkkP7aeGF22kG6.mXeFfBZITS7IkfPU"
