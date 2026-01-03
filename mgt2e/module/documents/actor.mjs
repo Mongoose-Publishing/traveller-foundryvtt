@@ -433,9 +433,14 @@ export class MgT2Actor extends Actor {
       // First, look for the player mentioned on the character sheet. They must be active,
       // and also have ownership permission of this actor.
       for (let u of game.users) {
-          if (u.active && u.name === this.system.player && this.ownership[u.uuid] === 3) {
-              console.log("Found a match for " + u.name);
-              return u.uuid;
+          if (u.active && u.name === this.system.player) {
+              if (this.ownership[u._id] !== undefined) {
+                  if (this.ownership[u.id] === 3) {
+                      return u.uuid;
+                  }
+              } else if (this.ownership["default"] === 3) {
+                  return u.uuid;
+              }
           }
       }
       // No matches, now look for a non-GM with ownership permissions.

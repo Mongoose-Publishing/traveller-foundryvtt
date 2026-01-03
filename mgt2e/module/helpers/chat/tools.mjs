@@ -241,9 +241,24 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
                 damageOptions: damageOptions,
                 currentPlayerId: game.users.current.uuid
             }
-            console.log(data);
             game.socket.emit("system.mgt2e", data);
             continue;
+        } else {
+            // Do have permission, but are we the right person?
+            let alternativePlayer = token.actor.findActorOwner();
+            if (alternativePlayer !==- game.users.current.uuid) {
+                let data = {
+                    type: "applyDamageToActor",
+                    userId: alternativePlayer,
+                    actorId: token.actor.uuid,
+                    damage: damage,
+                    damageOptions: damageOptions,
+                    currentPlayerId: game.users.current.uuid
+                }
+                game.socket.emit("system.mgt2e", data);
+                continue;
+
+            }
         }
         token.actor.applyDamage(damage, damageOptions, (tokens.size > 1));
     }
