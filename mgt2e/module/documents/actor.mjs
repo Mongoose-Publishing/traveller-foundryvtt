@@ -482,6 +482,23 @@ export class MgT2Actor extends Actor {
               ui.notifications.error(game.i18n.format("MGT2.Error.NoSuitableOwner", { "actor": this.name }));
           }
           return;
+      } else if (this.type === "traveller" && game.users.current.isGM) {
+          let alternativePlayer = this.findActorOwner();
+          if (alternativePlayer && alternativePlayer.uuid !== game.users.current.uuid) {
+              game.socket.emit("system.mgt2e", {
+                  type: "applyDamageToPerson",
+                  userId: alternativePlayer.uuid,
+                  actorId: this.uuid,
+                  damage: damage,
+                  damageOptions: options,
+                  currentPlayerId: game.users.current.uuid,
+              });
+              ui.notifications.info(game.i18n.format("MGT2.Info.ActorOwnerFound", {
+                  "actor": this.name,
+                  "player": alternativePlayer.name
+              }));
+              return;
+          }
       }
 
       // Check for characteristic damage
