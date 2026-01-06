@@ -98,15 +98,16 @@ export class MgT2SpacecraftDamageDialog extends Application {
 
         // Current critical state.
         this.shipCriticals = {};
-        for (let c in MGT2.SPACECRAFT_CRITICALS) {
-            let severity = this.actor.flags.mgt2e["crit_"+c];
-            if (severity) {
-                this.shipCriticals[c] = parseInt(severity);
-            } else {
-                this.shipCriticals[c] = 0;
+        if (this.actor.flags.mgt2e) {
+            for (let c in MGT2.SPACECRAFT_CRITICALS) {
+                let severity = this.actor.flags.mgt2e["crit_" + c];
+                if (severity) {
+                    this.shipCriticals[c] = parseInt(severity);
+                } else {
+                    this.shipCriticals[c] = 0;
+                }
             }
         }
-
         if (this.crits.numCrits > 0) {
             this.crits.criticals = [];
             for (let c = 0; c < this.crits.numCrits; c++) {
