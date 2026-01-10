@@ -2310,8 +2310,8 @@ export class MgT2ActorSheet extends ActorSheet {
                 }
             }
 
-            itemData.name = `New term ${number}`;
-            itemData.system.description = game.i18n.localize("MGT2.History.EventsMishapsPromotions");
+            itemData.name = game.i18n.format("MGT2.TravellerSheet.NewTerm", { "number": number });
+            itemData.system.description = game.i18n.localize("MGT2.TravellerSheet.EventsMishapsPromotions");
             itemData.system.term = {};
             itemData.system.term.number = number;
         }

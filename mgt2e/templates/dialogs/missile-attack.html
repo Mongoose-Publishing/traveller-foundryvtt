@@ -4,27 +4,27 @@
 
         <div class="grid-2col">
             <div>
-                <h4>Source</h4>
+                <h4>{{localize 'MGT2.Source'}}</h4>
 
                 <img src="{{salvoActor.img}}" width="64" height="64"/>
 
             </div>
 
             <div data-action="selectTarget">
-                <h4>Target</h4>
+                <h4>{{localize 'MGT2.Target'}}</h4>
                 <img src="{{targetActor.img}}" width="64" height="64"/>
 
             </div>
         </div>
 
         <p>
-            <b>Damage: </b> {{DAMAGE}}
+            <b>{{localize 'MGT2.Damage'}}: </b> {{DAMAGE}}
         </p>
         <p>
-            <b>Salvo Size: </b> {{SIZE}}
+            <b>{{localize 'MGT2.Swarm.SalvoSize'}}: </b> {{SIZE}}
         </p>
         <p>
-            <b>DM: </b> <input name="DM" value="{{DM}}"/>
+            <b>{{localize 'MGT2.DM'}}: </b> <input name="DM" value="{{DM}}"/>
         </p>
 
     </div>

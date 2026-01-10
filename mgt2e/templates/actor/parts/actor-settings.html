@@ -1,17 +1,23 @@
 <section>
     <div class="resources grid grid-4col">
         <div class="resource flex-group-center">
-            <label for="system.totalSkills" class="resource-label">Skills Learned</label>
+            <label for="system.totalSkills" class="resource-label">
+                {{localize 'MGT2.TravellerSheet.SkillsLearned.Label'}}
+            </label>
             <input type="text" name="system.totalSkills" value="{{system.totalSkills}}"
                    data-dtype="Number" readonly/>
         </div>
         <div class="resource flex-group-center">
-            <label for="system.maxSkills" class="resource-label">Max Skills</label>
+            <label for="system.maxSkills" class="resource-label">
+                {{localize 'MGT2.TravellerSheet.MaxSkills.Label'}}
+            </label>
             <input type="text" name="system.maxSkills" value="{{system.maxSkills}}"
                    data-dtype="Number"/>
         </div>
         <div>
-            <label for="system.settings.columns" class="resource-label">Characteristics</label><br/>
+            <label for="system.settings.columns" class="resource-label">
+                {{localize 'MGT2.TravellerSheet.Characteristics.Label'}}
+            </label><br/>
             <select name="system.settings.columns">
                 {{selectOptions selectColumns selected=system.settings.columns}}
             </select>
@@ -50,8 +56,7 @@
         <br/>
     {{/if}}
 
-
-    <h3>Encumbrance DM</h3>
+    <h3>{{localize 'MGT2.TravellerSheet.EncumbranceDM'}}</h3>
     <div class="resources grid grid-4col">
         <div class="resource flex-group-center">
             <label for="system.modifiers.encumbrance.custom" class="resource-label">Custom</label>
@@ -74,7 +79,7 @@
                    data-dtype="Number" class="characteristic-readonly" readonly/>
         </div>
     </div>
-    <h3>Physical DM</h3>
+    <h3>{{localize 'MGT2.TravellerSheet.PhysicalDM'}}</h3>
     <div class="resources grid grid-4col">
         <div class="resource flex-group-center">
             <label for="system.modifiers.physical.custom" class="resource-label">Custom</label>
@@ -97,7 +102,7 @@
                    data-dtype="Number" class="characteristic-readonly" readonly/>
         </div>
     </div>
-    <h3>Melee DM</h3>
+    <h3>{{localize 'MGT2.TravellerSheet.MeleeDM'}}</h3>
     <div class="resources grid grid-4col">
         <div class="resource flex-group-center">
             <label for="system.modifiers.melee.custom" class="resource-label">Custom</label>
@@ -120,7 +125,7 @@
                    data-dtype="Number" class="characteristic-readonly" readonly/>
         </div>
     </div>
-    <h3>Gun Combat DM</h3>
+    <h3>{{localize 'MGT2.TravellerSheet.GunCombatDM'}}</h3>
     <div class="resources grid grid-4col">
         <div class="resource flex-group-center">
             <label for="system.modifiers.guncombat.custom" class="resource-label">Custom</label>
@@ -143,7 +148,7 @@
                    data-dtype="Number" class="characteristic-readonly" readonly/>
         </div>
     </div>
-    <h3>Armour</h3>
+    <h3>{{localize 'MGT2.TravellerSheet.ArmourDM'}}</h3>
     <div class="resources grid grid-4col">
         <div class="resource flex-group-center">
             <label for="system.modifiers.armour.custom" class="resource-label">Custom</label>
@@ -159,7 +164,7 @@
 
 </section>
 <br/>
-<h3>Display Characteristics</h3>
+<h3>{{localize 'MGT2.TravellerSheet.DisplayCharacteristics'}}</h3>
 <section class="resources grid grid-3col">
     {{#each system.characteristics as | char key | }}
     <div class="resource flex-group-left">

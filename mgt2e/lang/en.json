@@ -245,8 +245,6 @@
   "MGT2.EditItem": "Edit Item",
   "MGT2.DeleteItem": "Delete Item",
 
-
-
   "MGT2.TravellerSheet.Player": "Player",
   "MGT2.TravellerSheet.Species": "Species",
   "MGT2.TravellerSheet.Gender": "Gender",
@@ -417,6 +415,7 @@
   "MGT2.TravellerSheet.YearBorn.Title": "Age when you were born",
 
   "MGT2.TravellerSheet.CareerTerms": "Career Terms",
+  "MGT2.TravellerSheet.NewTerm": "New Term {number}",
   "MGT2.TravellerSheet.EventsMishapsPromotions": "Events, mishaps and promotions.",
 
 
@@ -1028,6 +1027,24 @@
   "MGT2.Spacecraft.Range.far": "Far",
   "MGT2.Spacecraft.Range.null": "Out of range",
 
+  "MGT2.TravellerSheet.SkillsLearned.Label": "Skills Learned",
+  "MGT2.TravellerSheet.MaxSkills.Label": "Max Skills",
+  "MGT2.TravellerSheet.Characteristics.Label": "Characteristics",
+  "MGT2.TravellerSheet.SkillsLearned.Title": "Total points of skills learned",
+  "MGT2.TravellerSheet.MaxSkills.Title": "Maximum skill points that can be learned (INT + EDU)",
+  "MGT2.TravellerSheet.Characteristics.Title": "How many columns to display characteristics in",
+  "MGT2.TravellerSheet.AddNewSkill": "Add New Skill",
+
+  "MGT2.TravellerSheet.EncumbranceDM": "Encumbrance DM",
+  "MGT2.TravellerSheet.PhysicalDM": "Physical DM",
+  "MGT2.TravellerSheet.MeleeDM": "Melee DM",
+  "MGT2.TravellerSheet.GunCombatDM": "Gun Combat DM",
+  "MGT2.TravellerSheet.ArmourDM": "Armour DM",
+  "MGT2.TravellerSheet.Custom": "Custom",
+  "MGT2.TravellerSheet.Auto": "Auto",
+  "MGT2.TravellerSheet.FromItems": "From Items",
+  "MGT2.TravellerSheet.TotalDM": "Total DM",
+  "MGT2.TravellerSheet.DisplayCharacteristics": "Display Characteristics",
 
   "MGT2.Trade.Ag": "Agricultural",
   "MGT2.Trade.As": "Asteroid",
@@ -1468,9 +1485,11 @@
   "MGT2.Swarm.Hull": "Hull",
   "MGT2.Swarm.Armour": "Armour",
   "MGT2.Swarm.SquadronTL": "TL",
+  "MGT2.Swarm.SalvoSize": "TL",
 
   "MGT2.Swarm.DeleteConfirm.Title": "Delete Swarm?",
   "MGT2.Swarm.DeleteConfirm.Text": "The Salvo/Squadrom and all its tokens will be deleted.",
+
 
   "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
   "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",
@@ -1493,6 +1512,11 @@
   "MGT2.Dialog.CharacteristicDamage.Text": "Select which characteristics to show damage for",
   "MGT2.Dialog.CharacteristicDamage.Discard": "Revert to using HITS",
 
+  "MGT2.Source": "Source",
+  "MGT2.Target": "Target",
+  "MGT2.DM": "DM",
+  "MGT2.Damage": "Damage",
+  "MGT2.Remove": "Remove",
 
   "MGT2.SpacecraftRepairDialog.Title": "Repair System",
 
