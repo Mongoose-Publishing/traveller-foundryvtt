@@ -2311,13 +2311,14 @@ export class MgT2ActorSheet extends ActorSheet {
             }
 
             itemData.name = `New term ${number}`;
-            itemData.system.description = "Events, mishaps and promotions.";
+            itemData.system.description = game.i18n.localize("MGT2.History.EventsMishapsPromotions");
             itemData.system.term = {};
             itemData.system.term.number = number;
         }
         if (type === "associate") {
             console.log("Create associate");
-            itemData.name = "Unnamed " + header.dataset.relation;
+            itemData.name = game.i18n.localize("MGT2.History.Unnamed") + " " +
+                game.i18n.localize("MGT2.History.Relation." + header.dataset.relation);
             itemData.system.associate = {};
             itemData.system.associate.relationship = header.dataset.relation;
             await randomiseAssociate(itemData);

@@ -52,6 +52,23 @@
   "MGT2.Settings.NPCChaDamage.Name": "NPCs use characteristics for damage",
   "MGT2.Settings.NPCChaDamage.Hint": "By default, NPCs use characteristics for damage like Travellers. Disable this to use a simplified hits system instead",
 
+  "MGT2.STR": "STR",
+  "MGT2.DEX": "DEX",
+  "MGT2.END": "END",
+  "MGT2.INT": "INT",
+  "MGT2.EDU": "EDU",
+  "MGT2.SOC": "SOC",
+  "MGT2.CHA": "CHA",
+  "MGT2.TER": "TER",
+  "MGT2.PSI": "PSI",
+  "MGT2.WLT": "WLT",
+  "MGT2.LCK": "LCK",
+  "MGT2.MRL": "MRL",
+  "MGT2.STY": "STY",
+  "MGT2.RES": "RES",
+  "MGT2.FOL": "FOL",
+  "MGT2.REP": "REP",
+
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",
   "MGT2.Characteristics.END": "Endurance",
@@ -378,6 +395,30 @@
   "MGT2.TravellerSheet.AddHardwareToSet": "\nSet from Hardware tab.",
   "MGT2.TravellerSheet.Jump1": "Jump-1",
   "MGT2.TravellerSheet.Weekly": "Weekly",
+
+  "MGT2.TravellerSheet.HeavyLoad": "Heavy Load",
+  "MGT2.TravellerSheet.MaxLoad": "Max Load",
+  "MGT2.TravellerSheet.WeightCarried": "Weight Carried",
+
+  "MGT2.TravellerSheet.ItemsInUse": "Items in Use",
+  "MGT2.TravellerSheet.ItemsCarried": "Items in Use",
+  "MGT2.TravellerSheet.ItemsOwned": "Items in Use",
+
+  "MGT2.TravellerSheet.CareerTerms": "Career Terms",
+  "MGT2.TravellerSheet.CurrentYear.Label": "Current Year",
+  "MGT2.TravellerSheet.CurrentYear.Title": "Current year in the campaign",
+  "MGT2.TravellerSheet.StartAge.Label": "Start Age",
+  "MGT2.TravellerSheet.StartAge.Title": "Age of character when character generation begins",
+  "MGT2.TravellerSheet.EntryYear.Label": "Entry Year",
+  "MGT2.TravellerSheet.EntryYear.Title": "Year you enter the campaign",
+  "MGT2.TravellerSheet.EntryAge.Label": "Entry Age",
+  "MGT2.TravellerSheet.EntryAge.Title": "Age when you enter the campaign",
+  "MGT2.TravellerSheet.YearBorn.Label": "Year Born",
+  "MGT2.TravellerSheet.YearBorn.Title": "Age when you were born",
+
+  "MGT2.TravellerSheet.CareerTerms": "Career Terms",
+  "MGT2.TravellerSheet.EventsMishapsPromotions": "Events, mishaps and promotions.",
+
 
   "MGT2.WorldSheet.Sector": "Sector",
   "MGT2.WorldSheet.X": "X",
@@ -1268,6 +1309,7 @@
   "MGT2.Effects.Software.InterfaceType.intellect": "Intellect",
 
   "MGT2.History.CareerTerms": "Career Terms",
+  "MGT2.History.Year": "Year",
   "MGT2.History.Career": "Career",
   "MGT2.History.Notes": "Notes",
   "MGT2.History.AddTerm": "Add term",
@@ -1309,6 +1351,10 @@
   "MGT2.History.Degree.Influence.4": "Highly influential",
   "MGT2.History.Degree.Influence.5": "Extremely influential",
   "MGT2.History.Degree.Influence.6": "Kingmaker",
+  "MGT2.History.Unnamed": "Unnamed",
+  "MGT2.History.RelationHeader": "Relation",
+  "MGT2.History.Name": "Name",
+  "MGT2.History.AssociatesText": "Contacts, allies and rivals encountered during character generation.",
 
   "MGT2.Finance.Cash": "Cash (Cr)",
   "MGT2.Finance.Pension": "Pension (Cr/Year)",

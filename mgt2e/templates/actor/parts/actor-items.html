@@ -1,24 +1,23 @@
 
 <div class="grid grid-3col">
     <div class="resource flex-group-center">
-        <label class="field-label">Heavy Load</label>
+        <label class="field-label">{{localize 'MGT2.TravellerSheet.HeavyLoad'}}</label>
         <input class="field-value" type="text" value="{{system.heavyLoad}}kg" readonly/>
     </div>
     <div class="resource flex-group-center">
-        <label class="field-label">Max Load</label>
+        <label class="field-label">{{localize 'MGT2.TravellerSheet.MaxLoad'}}</label>
         <input class="field-value" type="text" value="{{system.maxLoad}}kg" readonly/>
     </div>
 
     <div class="resource flex-group-center">
-        <label class="field-label">Weight Carried</label>
+        <label class="field-label">{{localize 'MGT2.TravellerSheet.WeightCarried'}}</label>
         <input class="field-value" type="text" value="{{prettyNumber system.weightCarried 2}}kg" readonly/>
     </div>
-
 </div>
 
 <hr/>
 
-<h2>Items in use</h2>
+<h2>{{localize 'MGT2.TravellerSheet.ItemsInUse'}}</h2>
 
 <ol class="items-list actor-items grid grid-3col">
     {{#each items as |item id|}}
@@ -49,7 +48,7 @@
     <li></li>
 </ol>
 
-<h2>Items Carried</h2>
+<h2>{{localize 'MGT2.TravellerSheet.ItemsCarried'}}</h2>
 
 <ol class="items-list actor-items grid grid-3col">
     {{#each items as |item id|}}
@@ -82,7 +81,7 @@
 
 {{#if (isOwner .)}}
 <h2>
-    Items Owned
+    {{localize 'MGT2.TravellerSheet.ItemsOwned'}}
     <div class="resource addNewItem">
         {{localize 'MGT2.TravellerSheet.AddItem'}}
         <select class="addItemSelect">

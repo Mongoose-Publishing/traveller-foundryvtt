@@ -1,28 +1,28 @@
-<h2>Career Terms</h2>
+<h2>{{localize 'MGT2.History.CareerTerms'}}</h2>
 
 <div class="resources grid grid-5col">
-    <div class="resource flex-group-center" title="Current year in the campaign">
-        <label for="system.currentYear" class="resource-label">Current Year</label><br/>
+    <div class="resource flex-group-center" title="{{localize 'MGT2.TravellerSheet.CurrentYear.Title'}}">
+        <label for="system.currentYear" class="resource-label">{{localize 'MGT2.TravellerSheet.CurrentYear.Label'}}</label><br/>
         <input type="text" name="system.currentYear" value="{{currentYear}}"
                data-dtype="Number" readonly/>
     </div>
-    <div class="resource flex-group-center" title="Age of character when character generation begins">
-        <label for="system.startAge" class="resource-label">Start Age</label><br/>
+    <div class="resource flex-group-center" title="{{localize 'MGT2.TravellerSheet.StartAge.Title'}}">
+        <label for="system.startAge" class="resource-label">{{localize 'MGT2.TravellerSheet.StartAge.Label'}}</label><br/>
         <input type="text" name="system.startAge" value="{{system.startAge}}"
                data-dtype="Number" class="input-value"/>
     </div>
-    <div class="resource flex-group-center" title="Year you enter the campaign">
-        <label for="system.entryYear" class="resource-label">Entry Year</label><br/>
+    <div class="resource flex-group-center" title="{{localize 'MGT2.TravellerSheet.EntryYear.Title'}}">
+        <label for="system.entryYear" class="resource-label">{{localize 'MGT2.TravellerSheet.EntryYear.Label'}}</label><br/>
         <input type="text" name="system.entryYear" value="{{system.entryYear}}"
                data-dtype="Number" class="input-value"/>
     </div>
-    <div class="resource flex-group-center" title="Age when you enter the campaign">
-        <label for="system.entryAge" class="resource-label">Entry Age</label><br/>
+    <div class="resource flex-group-center" title="{{localize 'MGT2.TravellerSheet.EntryAge.Title'}}">
+        <label for="system.entryAge" class="resource-label">{{localize 'MGT2.TravellerSheet.EntryAge.Label'}}</label><br/>
         <input type="text" name="system.entryAge" value="{{system.entryAge}}"
                data-dtype="Number" readonly/>
     </div>
-    <div class="resource flex-group-center" title="Age when you were born">
-        <label for="system.birthYear" class="resource-label">Year Born</label><br/>
+    <div class="resource flex-group-center" title="{{localize 'MGT2.TravellerSheet.YearBorn.Title'}}">
+        <label for="system.birthYear" class="resource-label">{{localize 'MGT2.TravellerSheet.YearBorn.Label'}}</label><br/>
         <input type="text" name="system.birthYear" value="{{system.birthYear}}"
                data-dtype="Number" readonly/>
     </div>
@@ -30,11 +30,11 @@
 
 <ol class="history-list">
     <li class="item flexrow history-header">
-        <div class="history-number">Year</div>
-        <div class="history-name">Career</div>
-        <div class="history-notes">Notes</div>
+        <div class="history-number">{{localize 'MGT2.History.Year'}}</div>
+        <div class="history-name">{{localize 'MGT2.History.Career'}}</div>
+        <div class="history-notes">{{localize 'MGT2.History.Notes'}}</div>
         <div class="item-controls">
-            <a class="item-control item-create" title="Create term" data-name="Term" data-type="term"><i class="fas fa-plus"></i> Add</a>
+            <a class="item-control item-create" title="Create term" data-name="Term" data-type="term"><i class="fas fa-plus"></i> {{localize 'TRAVELLER.Add'}}</a>
         </div>
     </li>
     {{#each terms as |item id|}}
@@ -59,10 +59,10 @@
     {{/each}}
 </ol>
 
-<h2>Associates</h2>
+<h2>{{localize 'MGT2.History.Associates'}}</h2>
 
 <p>
-    Contacts, allies and rivals encountered during character generation.
+    {{localize 'MGT2.History.AssociatesText'}}
 </p>
 <p>
     <label class="item-create add-associate" data-type="associate" data-relation="contact"><i class="fas fa-plus"></i> {{localize 'MGT2.History.Relation.contact'}}</label>
@@ -73,9 +73,9 @@
 
 <ol class="history-list">
     <li class="item flexrow history-header">
-        <div class="history-relation">Relation</div>
-        <div class="history-name">Name</div>
-        <div class="history-notes">Notes</div>
+        <div class="history-relation">{{localize 'MGT2.History.RelationHeader'}}</div>
+        <div class="history-name">{{localize 'MGT2.History.Name'}}</div>
+        <div class="history-notes">{{localize 'MGT2.History.Notes'}}</div>
         <div class="item-controls">
 
         </div>
