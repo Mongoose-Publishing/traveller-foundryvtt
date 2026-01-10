@@ -2226,8 +2226,6 @@ Handlebars.registerHelper('showAttachedWeapons', function(ship, item) {
 Handlebars.registerHelper('showSpacecraftAttacks', function(shipActor, roles) {
     let html = "";
 
-    console.log(shipActor);
-
     let weapons = [];
     for (let item of shipActor.items) {
         if (item.type === "hardware" && item.system?.hardware?.system === "weapon") {
