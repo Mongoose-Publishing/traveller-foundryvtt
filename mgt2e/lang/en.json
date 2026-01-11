@@ -1512,11 +1512,29 @@
   "MGT2.Dialog.CharacteristicDamage.Text": "Select which characteristics to show damage for",
   "MGT2.Dialog.CharacteristicDamage.Discard": "Revert to using HITS",
 
+  "MGT2.Dialog.RememberCharacteristic": "Remember Characteristic",
+  "MGT2.Dialog.RollType": "Roll Type",
+
+  "MGT2.ExceptionalFailure": "Exceptional Failure",
+  "MGT2.AverageFailure": "Average Failure",
+  "MGT2.MarginalFailure": "Marginal Failure",
+  "MGT2.MarginalSuccess": "Marginal Success",
+  "MGT2.AverageSuccess": "Average Success",
+  "MGT2.ExceptionalSuccess": "Exceptional Success",
+  "MGT2.ChainBonus": "Chain Bonus",
+  "MGT2.SkillCheck.Specialisation": "specialisation check",
+  "MGT2.SkillCheck.Creature": "creature skill check",
+  "MGT2.SkillCheck.Skill": "skill check",
+  "MGT2.SkillCheck.Characteristic": "characteristic check",
+  "MGT2.SkillCheck.Untrained": "untrained",
+
   "MGT2.Source": "Source",
   "MGT2.Target": "Target",
   "MGT2.DM": "DM",
   "MGT2.Damage": "Damage",
   "MGT2.Remove": "Remove",
+  "MGT2.Difficulty": "Difficulty",
+  "MGT2.Roll": "Roll",
 
   "MGT2.SpacecraftRepairDialog.Title": "Repair System",
 
