@@ -1502,8 +1502,27 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
         // Specialities?
         if (!backgroundOnly && skill.specialities && showSpecs) {
             html += `<input type="text" value="${skill.trained?0:untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
+
+            let SPECS = [];
+            // Sort specialities into alphabetical order according to l10n label.
             for (let sid in skill.specialities) {
-                let spec = skill.specialities[sid];
+                let spec = foundry.utils.deepClone(skill.specialities[sid]);
+                spec.id = sid;
+                spec.label = skillLabel(spec, sid);
+                SPECS.push(spec);
+            }
+            SPECS = SPECS.sort((a, b) => {
+                if (a.label < b.label) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+                return 0;
+            });
+
+            for (let i in SPECS) {
+                let sid = SPECS[i].id;
+                let spec = SPECS[i];
                 spec.value = Number(spec.value);
                 if (isNaN(spec.value) || spec.value < 0) {
                     spec.value = 0;

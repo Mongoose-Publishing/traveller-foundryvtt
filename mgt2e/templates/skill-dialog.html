@@ -2,7 +2,7 @@
 
     <div class="shadow">
         {{#if showEdit}}
-            <span class="edit-skill">Edit</span>
+            <span class="edit-skill">{{localize "MGT2.Edit"}}</span>
         {{/if}}
 
         <h3 class="skill-dialog-title">
@@ -40,7 +40,7 @@
         {{#if showCha}}
             <label class="skillDialogRemember">
                 <input class="rememberChaCheck" type="checkbox" name="remember" value="false"/>
-                <span>Remember characteristic</span>
+                <span>{{localize "MGT2.Dialog.RememberCharacteristic"}}</span>
             </label>
         {{/if}}
 
@@ -54,7 +54,7 @@
 
         <div class="grid grid-4col">
             <div class="skill-boon">
-                <label for="dicetype" class="skillDialogLabel">Roll Type</label>
+                <label for="dicetype" class="skillDialogLabel">{{localize "MGT2.Dialog.RollType"}}</label>
                 <br/>
                 <select class="skillDialogRollType" name="dicetype">
                     {{selectOptions BOON_SELECT selected=boonBane}}
@@ -62,7 +62,7 @@
             </div>
 
             <div class="skill-difficulty grid-span-2">
-                <label for="difficulty" class="skillDialogLabel">Difficulty</label>
+                <label for="difficulty" class="skillDialogLabel">{{localize "MGT2.Difficulty"}}</label>
                 <br/>
                 <select class="skillDialogDifficulty" name="difficulty">
                     {{selectOptions TARGET_SELECT selected=target}}
@@ -70,14 +70,14 @@
             </div>
 
             <div class="skill-dm">
-                <label for="dm" class="skillDialogLabel">DM</label>
+                <label for="dm" class="skillDialogLabel">{{localize "MGT2.DM"}}</label>
                 <br/>
                 <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
             </div>
         </div>
     </div>
     <footer class="sheet-footer flexrow">
-        <button type="submit" name="submit" class="skillRoll">Roll <i class="fas fa-dice"></i></button>
+        <button type="submit" name="submit" class="skillRoll">{{localize "MGT2.Roll"}} <i class="fas fa-dice"></i></button>
     </footer>
 
 </form>

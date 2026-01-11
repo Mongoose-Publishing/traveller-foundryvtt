@@ -24,7 +24,7 @@
 {{/if}}
 
 <section class="{{skillListClasses}}">
-    {{#each system.skills as |skill key|}}
-        {{{skillBlock ../system key skill}}}
+    {{#each SKILLS as |skill key|}}
+        {{{skillBlock ../system skill.id skill}}}
     {{/each}}
 </section>

@@ -603,7 +603,6 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     }
 
     let damageDice = weaponItem.system.weapon.damage;
-    console.log("rollSpaceAttack:");
 
     if (options && !Number.isNaN(options.quantity) && parseInt(options.quantity) > 1) {
         let found = damageDice.match(/[0-9][0-9]*[dD]/);
@@ -621,7 +620,6 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     }
     let isMissile = false;
     if (options.salvoSize) {
-        console.log("this is a missile " + options.salvoSize);
         isMissile = true;
     }
 
@@ -646,7 +644,6 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     if (CONFIG.MGT2.SPACE_MOUNTS[mount] && !isMissile) {
         multiplier = parseInt(CONFIG.MGT2.SPACE_MOUNTS[mount].multiplier);
     }
-    console.log(`Space attack for ${mount} has multiplier ${multiplier}`);
 
     let totalMultipliedDamage = (damageRoll.total + effect) * multiplier;
     let dmgText = `Damage ${damageRoll.total}`;
@@ -747,32 +744,32 @@ function getEffectLabel(effect) {
     let effectType, effectClass;
     let chain = "+0";
     if (effect <= -6) {
-        effectType = "Exceptional Failure";
+        effectType = game.i18n.localize("MGT2.ExceptionalFailure");
         effectClass = "rollFailure";
         chain = "-3";
     } else if (effect <= -2) {
-        effectType = "Average Failure";
+        effectType = game.i18n.localize("MGT2.AverageFailure");
         effectClass = "rollFailure";
         chain = "-2";
     } else if (effect <= -1) {
-        effectType = "Marginal Failure";
+        effectType = game.i18n.localize("MGT2.MarginalFailure");
         effectClass = "rollMarginal";
         chain = "-1";
     } else if (effect <= 0) {
-        effectType = "Marginal Success";
+        effectType = game.i18n.localize("MGT2.MarginalSuccess");
         effectClass = "rollSuccess";
         chain = "+1";
     } else if (effect <= 5) {
-        effectType = "Average Success";
+        effectType = game.i18n.localize("MGT2.AverageSuccess");
         effectClass = "rollSuccess";
         chain = "+2";
     } else {
-        effectType = "Exceptional Success";
+        effectType = game.i18n.localize("MGT2.ExceptionalSuccess");
         effectClass = "rollSuccess";
         chain = "+3";
     }
 
-    return `<span class='effectRoll ${effectClass}'>${effectType} [${effect>=0?"+":""}${effect}]</span><br/>Chain Bonus ${chain}`;
+    return `<span class='effectRoll ${effectClass}'>${effectType} [${effect>=0?"+":""}${effect}]</span><br/>${game.i18n.localize("MGT2.ChainBonus")} ${chain}`;
 }
 
 function getSkillBonus(data, skill, speciality) {
@@ -1072,25 +1069,25 @@ export async function rollSkill(actor, skill, options) {
         }
     }
     if (options.rollType === "boon") {
-        skillText += " <span class='boon'>[Boon]</span>";
+        skillText += ` <span class='boon'>[${game.i18n.localize("MGT2.TravellerSheet.Boon")}]</span>`;
     } else if (options.rollType === "bane") {
-        skillText += " <span class='bane'>[Bane]</span>";
+        skillText += ` <span class='bane'>[${game.i18n.localize("MGT2.TravellerSheet.Bane")}]</span>`;
     }
 
     let checkText;
     if (options.agent) {
         checkText = `Agent check by <b>${options.agent}</b>`;
     } else if (creatureCheck) {
-        checkText = "Creature skill check";
+        checkText = game.i18n.localize("MGT2.SkillCheck.Creature");
     } else if (specialityCheck) {
-        checkText = "Specialisation check";
+        checkText = game.i18n.localize("MGT2.SkillCheck.Specialisation");
     } else if (skillCheck) {
-        checkText = "Skill check";
+        checkText = game.i18n.localize("MGT2.SkillCheck.Skill");
     } else {
-        checkText = "Characteristic check";
+        checkText = game.i18n.localize("MGT2.SkillCheck.Characteristic");
     }
     if (untrainedCheck) {
-        checkText += " (untrained)";
+        checkText += ` (${game.i18n.localize("MGT2.SkillCheck.Untrained")})`;
     }
     let difficulty = 8;
     if (options.difficulty !== undefined) {

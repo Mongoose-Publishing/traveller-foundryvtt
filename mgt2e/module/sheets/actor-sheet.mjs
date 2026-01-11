@@ -70,6 +70,25 @@ export class MgT2ActorSheet extends ActorSheet {
             context.PLAYER_LIST.push(u.name);
         }
 
+        if (actorData.skills) {
+            // Provide an alphabetically sorted list of skills.
+            context.SKILLS = [];
+            for (let skillId in actorData.skills) {
+                let skill = foundry.utils.deepClone(actorData.skills[skillId]);
+                if (!skill.label) {
+                    skill.label = skillLabel(skill, skillId);
+                }
+                context.SKILLS.push(skill);
+            }
+            context.SKILLS = context.SKILLS.sort((a, b) => {
+                if (a.label < b.label) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+                return 0;
+            });
+        }
 
         // Prepare character data and items.
         if (type === 'traveller' || type === 'package') {
