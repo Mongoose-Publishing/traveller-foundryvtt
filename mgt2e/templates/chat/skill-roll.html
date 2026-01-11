@@ -5,7 +5,8 @@
                  src="{{actor.img}}" data-actor-id="{{actor.uuid}}"/>
         {{/if}}
         {{#if skillIcon}}
-            <img class="chat-sticker" src="{{skillIcon}}"/>
+            <img class="chat-sticker skillcheck-button" title="{{label}}"
+                 src="{{skillIcon}}" data-skillcheck="admin" data-options='{{options}}'/>
         {{/if}}
     {{/if}}
 

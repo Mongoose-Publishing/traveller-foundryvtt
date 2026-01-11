@@ -799,6 +799,7 @@ function getSkillBonus(data, skill, speciality) {
 export async function rollSkill(actor, skill, options) {
     const data = actor?actor.system:null;
     let   title = "";
+    let   label = "";
     let   skillText = "";
     let   text = "";
     let   creatureCheck = false;
@@ -842,6 +843,7 @@ export async function rollSkill(actor, skill, options) {
             speciality = skill.specialities[specId];
             title += ` (${skillLabel(speciality, specId)})`;
         }
+        label = title;
         skillText = `${title} ${options.level}`;
     } else if (skill && (typeof skill === 'string' || skill instanceof String)) {
         // If a skill has been passed as a string, we need to find the skill object.
@@ -856,13 +858,17 @@ export async function rollSkill(actor, skill, options) {
             speciality = options.speciality;
         }
         skill = data.skills[skill];
+        label = skillLabel(skill);
         if (speciality) {
             speciality = skill.specialities[speciality];
+            label = `${label} (${skillLabel(speciality)})`;
         }
     } else if (skill) {
         // We have been passed a skill object (probably).
+        label = skillLabel(skill);
         if (options.speciality) {
             speciality = options.speciality;
+            label = `${label} (${skillLabel(speciality)})`;
         }
     }
 
@@ -1236,6 +1242,7 @@ export async function rollSkill(actor, skill, options) {
             actor: actor,
             agent: options.agent,
             skillIcon: skill?`systems/mgt2e/icons/skills/${skill.id}.svg`:"",
+            label: label,
             skillTitle: title,
             skillText: skillText,
             skillNotes: skillNotes,
@@ -1248,7 +1255,8 @@ export async function rollSkill(actor, skill, options) {
             description: options.description,
             success: (bestEffect >= 0)?options.success:null,
             failure: (bestEffect >= 0)?null:options.failure,
-            useChatIcons: game.settings.get("mgt2e", "useChatIcons")
+            useChatIcons: game.settings.get("mgt2e", "useChatIcons"),
+            options: JSON.stringify(options)
         }
 
         const html = await renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
