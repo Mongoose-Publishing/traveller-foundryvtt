@@ -5,7 +5,7 @@
 
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
-                    <label for="system.quantity" class="resource-label">Quantity</label>
+                    <label for="system.quantity" class="resource-label">{{localize "MGT2.Item.Quantity"}}</label>
                     <div class="incdec">
                         <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
                         <input class="writable" type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
@@ -16,28 +16,28 @@
 
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
-                    <label class="resource-label">Legality</label>
+                    <label class="resource-label">{{localize "MGT2.Item.Legality"}}</label>
                     <br/>
                     <select class="writable" name="system.legality">
                         {{selectOptions WEAPON_LEGALITY selected=system.legality}}
                     </select>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.weapon.magazine" class="resource-label">Magazine Size</label>
+                    <label for="system.weapon.magazine" class="resource-label">{{localize "MGT2.Item.MagazineSize"}}</label>
                     <input class="writable" type="text" name="system.weapon.magazine" value="{{system.weapon.magazine}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.weapon.magazineCost" class="resource-label">Magazine Cost</label>
+                    <label for="system.weapon.magazineCost" class="resource-label">{{localize "MGT2.Item.MagazineCost"}}</label>
                     <input class="writable" type="text" name="system.weapon.magazineCost" value="{{system.weapon.magazineCost}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.weapon.ammo" class="resource-label">Ammo</label>
+                    <label for="system.weapon.ammo" class="resource-label">{{localize "MGT2.Item.Ammo"}}</label>
                     <input class="writable" type="text" name="system.weapon.ammo" value="{{system.weapon.ammo}}" data-dtype="Number"/>
                 </div>
             </div>
 
             <div class="shadow item-side-panel">
-                <button type="submit" name="submit" class="damageDone">Damage <i class="fas fa-dice"></i></button>
+                <button type="submit" name="submit" class="damageDone">{{localize "MGT2.Damage"}} <i class="fas fa-dice"></i></button>
             </div>
         </div>
 
@@ -51,16 +51,16 @@
                         {{> "systems/mgt2e/templates/item/parts/item-techLevel.html"}}
                     </div>
                     <div class="resource">
-                        <label for="system.weight" class="resource-label">KG</label>
+                        <label for="system.weight" class="resource-label">{{localize "MGT2.Item.Weight"}}</label>
                         <input class="writable" type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
-                        <label for="system.cost" class="resource-label">Cost</label>
+                        <label for="system.cost" class="resource-label">{{localize "MGT2.Item.Cost"}}</label>
                         <input class="writable" type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
-                        <label for="system.weapon.scale" class="resource-label">Scale</label>
+                        <label for="system.weapon.scale" class="resource-label">{{localize "MGT2.Item.WeaponScale"}}</label>
                         <br/>
                         <select class="expand writable" name="system.weapon.scale" title="Weapon Scale">
                             {{selectOptions weaponScale selected=system.weapon.scale}}
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="resource">
-                        <label for="system.weapon.damage" class="resource-label">Damage</label>
+                        <label for="system.weapon.damage" class="resource-label">{{localize "MGT2.Damage"}}</label>
                         <input class="writable" type="text" name="system.weapon.damage" value="{{system.weapon.damage}}" data-dtype="String"/>
                     </div>
 
@@ -96,7 +96,7 @@
                     {{/if}}
 
                     <div class="resource grid-span-3 flex-group-left">
-                        <label for="system.weapon.traits" class="resource-label">Traits</label>
+                        <label for="system.weapon.traits" class="resource-label">{{localize "MGT2.Item.WeaponTraits"}}</label>
                         {{#if (isOwner .)}}
                             <span style="display: inline-block; float: right">
                                 <i class="fa fa-add"></i><select class="trait-selector">
@@ -125,7 +125,7 @@
                     {{/if}}
                 </div>
                 {{#unless system.links}}
-                    <span class="button allow-links">Allow components</span>
+                    <span class="button allow-links">{{localize "MGT2.Item.AllowComponents"}}</span>
                 {{/unless}}
             </div>
 
@@ -136,44 +136,44 @@
             <div class="shadow">
                 <div class="resources grid grid-3col flex-group-left">
                     <div class="resource">
-                        <label for="system.weapon.characteristic" class="resource-label">Characteristic</label><br/>
+                        <label for="system.weapon.characteristic" class="resource-label">{{localize "MGT2.Characteristic"}}</label><br/>
                         <select class="writable" name="system.weapon.characteristic">
                             {{selectOptions weaponCha selected=system.weapon.characteristic}}
                         </select>
                     </div>
                     <div class="resource grid-span-2">
-                        <label for="system.weapon.skill" class="resource-label">Skill</label><br/>
+                        <label for="system.weapon.skill" class="resource-label">{{localize "MGT2.Skill"}}</label><br/>
                         <select class="writable" name="system.weapon.skill">
                             {{selectOptions combatSkills selected=system.weapon.skill}}
                         </select>
                     </div>
                     <div class="resource">
-                        <label for="system.weapon.damageBonus" class="resource-label">Damage DM</label><br/>
+                        <label for="system.weapon.damageBonus" class="resource-label">{{localize 'MGT2.Item.DamageDM'}}</label><br/>
                         <select class="writable" name="system.weapon.damageBonus">
                             {{selectOptions weaponDamageBonus selected=system.weapon.damageBonus}}
                         </select>
                     </div>
 
                     <div class="resource">
-                        <label for="system.weapon.attackBonus" class="resource-label">Attack DM</label><br/>
+                        <label for="system.weapon.attackBonus" class="resource-label">{{localize "MGT2.Item.AttackDM"}}</label><br/>
                         <input class="writable" type="text" name="system.weapon.attackBonus"
                                value="{{system.weapon.attackBonus}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
-                        <label for="system.weapon.parryBonus" class="resource-label">Parry DM</label><br/>
+                        <label for="system.weapon.parryBonus" class="resource-label">{{localize "MGT2.Item.ParryDM"}}</label><br/>
                         <input class="writable" type="text" name="system.weapon.parryBonus"
                                value="{{system.weapon.parryBonus}}" data-dtype="Number"/>
                     </div>
 
                     <div class="resource">
-                        <label for="system.weapon.damageType" class="resource-label">Damage Type</label><br/>
+                        <label for="system.weapon.damageType" class="resource-label">{{localize "MGT2.Item.DamageType"}}</label><br/>
                         <select class="writable" name="system.weapon.damageType">
                             {{selectOptions energyTypes selected=system.weapon.damageType}}
                         </select>
                     </div>
                     <div class="resource grid-span-2">
-                        <label for="system.notes" class="resource-label">Notes</label><br/>
+                        <label for="system.notes" class="resource-label">{{localize "MGT2.Item.Notes"}}</label><br/>
                         <input class="writable" type="text" name="system.notes" placeholder="Text shown when used"
                                value="{{system.notes}}" data-dtype="String"/>
                     </div>

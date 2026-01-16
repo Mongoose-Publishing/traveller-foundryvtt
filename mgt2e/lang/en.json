@@ -402,7 +402,6 @@
   "MGT2.TravellerSheet.ItemsCarried": "Items in Use",
   "MGT2.TravellerSheet.ItemsOwned": "Items in Use",
 
-  "MGT2.TravellerSheet.CareerTerms": "Career Terms",
   "MGT2.TravellerSheet.CurrentYear.Label": "Current Year",
   "MGT2.TravellerSheet.CurrentYear.Title": "Current year in the campaign",
   "MGT2.TravellerSheet.StartAge.Label": "Start Age",
@@ -417,7 +416,6 @@
   "MGT2.TravellerSheet.CareerTerms": "Career Terms",
   "MGT2.TravellerSheet.NewTerm": "New Term {number}",
   "MGT2.TravellerSheet.EventsMishapsPromotions": "Events, mishaps and promotions.",
-
 
   "MGT2.WorldSheet.Sector": "Sector",
   "MGT2.WorldSheet.X": "X",
@@ -438,7 +436,6 @@
   "MGT2.WorldSheet.DropStreetwise": "Drop actor to set ship streetwise",
   "MGT2.WorldSheet.TradeFolder": "Trade Folder",
   "MGT2.WorldSheet.TradeFolderHint": "Name of folder of cargo items to use as speculative trade goods on this world",
-  "MGT2.WorldSheet.DropStreetwise": "Drop actor to set ship streetwise",
   "MGT2.WorldSheet.LocalGoods": "Local Goods",
 
   "MGT2.WorldSheet.Atmosphere.Composition.0": "None",
@@ -1069,6 +1066,18 @@
   "MGT2.Trade.Amber": "Amber Zone",
   "MGT2.Trade.Red": "Red Zone",
 
+  "MGT2.Item.DamageDM": "Damage DM",
+  "MGT2.Item.AttackDM": "Attack DM",
+  "MGT2.Item.ParryDM": "Parry DM",
+  "MGT2.Item.DamageType": "Damage Type",
+  "MGT2.Item.Notes": "Notes",
+  "MGT2.Item.AllowComponents": "Allow Components",
+  "MGT2.Item.EmbedComputer": "Embed Computer",
+  "MGT2.Item.WeaponScale": "Scale",
+  "MGT2.Item.Legality": "Legality",
+  "MGT2.Item.MagazineSize": "Magazine Size",
+  "MGT2.Item.MagazineCost": "Magazine Cost",
+  "MGT2.Item.Ammo": "Ammo",
   "MGT2.Item.TL": "Tech Level",
   "MGT2.Item.Weight": "Weight (KG)",
   "MGT2.Item.Cost": "Cost (Cr)",
@@ -1122,6 +1131,7 @@
   "MGT2.Item.EnergyType.meson": "Meson",
   "MGT2.Item.EnergyType.nuclear": "Nuclear",
 
+  "MGT2.Item.WeaponTraits": "Traits",
   "MGT2.Item.WeaponTrait.Label.ap": "AP",
   "MGT2.Item.WeaponTrait.Label.auto": "Auto",
   "MGT2.Item.WeaponTrait.Label.bulky": "Bulky",
@@ -1535,6 +1545,8 @@
   "MGT2.Remove": "Remove",
   "MGT2.Difficulty": "Difficulty",
   "MGT2.Roll": "Roll",
+  "MGT2.Characteristic": "Characteristic",
+  "MGT2.Skill": "Skill",
 
   "MGT2.SpacecraftRepairDialog.Title": "Repair System",
 

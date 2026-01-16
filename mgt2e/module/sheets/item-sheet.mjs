@@ -440,6 +440,15 @@ export class MgT2ItemSheet extends ItemSheet {
                     context.combatSkills[skillId] = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
                 }
             }
+            let sorted = Object.entries(context.combatSkills).sort((a,b) => {
+                if (a[0] === "") return -1;
+                if (b[0] === "") return 1;
+                if (a[1] < b[1]) {
+                    return -1;
+                }
+                return 1;
+            });
+            context.combatSkills = Object.fromEntries(sorted);
         } else if (item.type === "cargo") {
             context.availability = {};
             context.haveAvailability = {};

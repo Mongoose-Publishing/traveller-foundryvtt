@@ -83,7 +83,7 @@ export class MgT2ActorSheet extends ActorSheet {
             context.SKILLS = context.SKILLS.sort((a, b) => {
                 if (a.label < b.label) {
                     return -1;
-                } else {
+                } else if (a.label > b.label) {
                     return 1;
                 }
                 return 0;
