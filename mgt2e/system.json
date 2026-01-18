@@ -2,7 +2,7 @@
   "id": "mgt2e",
   "title": "Mongoose Traveller 2e",
   "description": "A system for Mongoose Traveller 2e. This includes rules specific to this version of Traveller.",
-  "version": "0.17.2.0",
+  "version": "0.17.2.3-DEV",
   "compatibility": {
     "minimum": 12,
     "verified": 13,
@@ -57,6 +57,14 @@
       "type": "Macro"
     },
     {
+      "name": "base-scenes",
+      "label": "MgT2e Base Scenes",
+      "system": "mgt2e",
+      "module": "mgt2e",
+      "path": "packs/base-scenes",
+      "type": "Scene"
+    },
+    {
       "name": "base-tables",
       "label": "MgT2e Base Tables",
       "system": "mgt2e",
@@ -74,7 +82,7 @@
         "PLAYER": "OBSERVER"
       },
       "packs": [
-        "base-items", "base-actors", "traveller-docs", "base-macros", "base-tables"
+        "base-items", "base-actors", "traveller-docs", "base-macros", "base-scenes", "base-tables"
       ]
     }
   ],
@@ -97,8 +105,8 @@
   },
   "primaryTokenAttribute": "hits",
   "secondaryTokenAttribute": null,
-  "url": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/",
-  "manifest": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/release/system.json",
-  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/v0.17.2/release/mongoose-traveller.zip",
+  "url": "https://filehost.notasnark.net/foundry/mgt2e/README.html",
+  "manifest": "https://filehost.notasnark.net/foundry/mgt2e/system.json",
+  "download": "https://filehost.notasnark.net/foundry/mgt2e/mongoose-traveller.zip",
   "license": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/LICENSE.txt"
 }
