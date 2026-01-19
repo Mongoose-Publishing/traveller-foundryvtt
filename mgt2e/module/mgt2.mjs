@@ -817,8 +817,6 @@ Hooks.once("ready", async function() {
 
     if (game.user.isGM) {
         if (game.scenes.size === 0) {
-            console.log("CREATE SCENE");
-
             const pack = game.packs.get("mgt2e.base-scenes");
             const entry = await pack.getIndex();
             const sceneId = entry.find(e => e.name === "Mongoose Traveller 2e")?._id;

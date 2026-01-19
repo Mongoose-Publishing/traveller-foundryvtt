@@ -116,7 +116,6 @@ export function getTraitValue(traits, trait) {
     return 0;
 }
 
-//export async function rollAttack(actor, weapon, skillDM, dm, rollType, range, autoOption, isParry, shotsFired) {
 export async function rollAttack(actor, weapon, attackOptions) {
     const   system = actor?actor.system:null;
     let     content = "Attack";
@@ -570,6 +569,34 @@ export async function rollAttack(actor, weapon, attackOptions) {
             rollMode: game.settings.get("core", "rollMode")
         });
     }
+/*
+    console.log("NEW STUFF");
+    if (weapon) {
+        content += `<h2>${weapon.name} ${(baseRange > 0 && rangeBand) ? (" @ " + rangeDistance + rangeUnit) : ""}</h2>`;
+    } else if (attackOptions.title) {
+        content += `<h2>${attackOptions.title}</h2>`
+    }
+
+    let contentData = {
+        actor: actor,
+        weapon: weapon,
+        damage: dmg,
+        baseRange: baseRange,
+        rangeBand: rangeBand,
+        rangeDistance: rangeDistance,
+        rangeUnit: rangeUnit,
+        attackOptions: attackOptions,
+        useChatIcons: game.settings.get("mgt2e", "useChatIcons"),
+    }
+
+    const html = await renderTemplate("systems/mgt2e/templates/chat/attack-roll.html", contentData);
+    roll.toMessage({
+        speaker: ChatMessage.getSpeaker({actor: actor}),
+        flavor: html,
+        rollMode: game.settings.get("core", "rollMode")
+    });
+*/
+
 }
 
 export async function rollDamage(actor, weapon, options) {

@@ -1,5 +1,5 @@
 {
-  "name": "Mongoose Traveller 2e",
+  "name": "MgT2e",
   "backgroundColor": "#404040",
   "background": {
     "fit": "fill",
@@ -27,7 +27,7 @@
   "width": 5000,
   "height": 3000,
   "padding": 0.1,
-  "navigation": false,
+  "navigation": true,
   "navOrder": 0,
   "navName": "",
   "foreground": null,
@@ -139,7 +139,7 @@
   "weather": "",
   "folder": null,
   "ownership": {
-    "default": 0,
+    "default": 2,
     "OKj1civBZWPZt3CA": 3
   },
   "flags": {},
@@ -150,8 +150,8 @@
     "systemId": "mgt2e",
     "systemVersion": "0.17.2.3-DEV",
     "createdTime": 1768776288192,
-    "modifiedTime": 1768776292583,
-    "lastModifiedBy": "OKj1civBZWPZt3CA"
+    "modifiedTime": 1768844329350,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "PbalMCO2fVOib6Pd",
   "active": false,
