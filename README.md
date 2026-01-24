@@ -1,6 +1,6 @@
 # Mongoose Traveller for FoundryVTT
 
-**Version:**  0.17.2
+**Version:**  0.17.3
 
 This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v12
 and v13.
@@ -96,9 +96,13 @@ Some icons are taken from svgicons.com and game-icons.net. See the READMEs in th
 
 Starship icons are drawn by Samuel Penn, and available under a CC0 license.
 
+Default scene background is the Omega Nebula, a public domain image from Wikipedia:
+https://commons.wikimedia.org/wiki/File:Omega_Nebula.jpg
+
 ### Acknowledgments
 
 * Some CSS fixes by https://github.com/ryanwalder (Contributed)
 * Inline macro execution based on code from https://github.com/fpiechowski/inline-macro-execution by Mesayah (MIT)
+* Spanish translations by https://github.com/Xyxorswords
 
 

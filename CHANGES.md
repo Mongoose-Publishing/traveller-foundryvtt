@@ -4,6 +4,24 @@
 
 * Career terms aren't always added in the correct order.
 
+# 0.17.3 (Beta)
+
+Note that support for FoundryVTT 12 will be dropped in 0.18. You will need to migrate
+to FoundryVTT 13.
+
+* Added options via roll tables to modify the rules for speculative trade, making it
+  it easier or harder.
+* Worlds display if they have refined or unrefined fuel, and ships can refuel from a
+  world.
+* Support added for spacecraft criticals against crew members.
+* Results of ship criticals are now displayed to the chat.
+* Added new templates for skill check results.
+* The 'Player' field on a Traveller sheet now displays a drop down list of players.
+* Damage against actors is now passed to the GM to apply if a player doesn't have
+  permission.
+* Improved use of i18n strings rather than hard coded text.
+* A Traveller default scene is created when a new world is started.
+
 # 0.17.2 (Beta)
 
 * Fix bug with Foundry 13 where damage couldn't be applied to spacecraft due to change in
