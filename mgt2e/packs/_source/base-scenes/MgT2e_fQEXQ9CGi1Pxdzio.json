@@ -32,7 +32,7 @@
   "navName": "",
   "foreground": null,
   "foregroundElevation": 6,
-  "thumb": "worlds/mongoose-traveller/assets/scenes/QArAptQe8uL9xWbH-thumb.webp",
+  "thumb": "systems/mgt2e/assets/scenes/fQEXQ9CGi1Pxdzio-thumb.webp",
   "initial": {
     "x": null,
     "y": null,
@@ -87,13 +87,13 @@
       "author": "mhUjqDVicnwIUaiq",
       "shape": {
         "type": "r",
-        "width": 1688,
-        "height": 188,
+        "width": 1000,
+        "height": 100,
         "radius": null,
         "points": []
       },
-      "x": 2188,
-      "y": 1425,
+      "x": 2500,
+      "y": 1500,
       "elevation": 0,
       "sort": 0,
       "rotation": 0,
@@ -107,14 +107,14 @@
       "texture": null,
       "text": "Science Fiction Adventure in the Far Future",
       "fontFamily": "Signika",
-      "fontSize": 64,
+      "fontSize": 48,
       "textColor": "#ffffff",
       "textAlpha": 1,
       "hidden": false,
       "locked": false,
       "interface": false,
       "flags": {},
-      "_key": "!scenes.drawings!2TE1WheOT6AMbP1P.PB2cPjCAJ4UKr7We"
+      "_key": "!scenes.drawings!fQEXQ9CGi1Pxdzio.PB2cPjCAJ4UKr7We"
     }
   ],
   "tokens": [],
@@ -138,10 +138,10 @@
         "tint": "#ffffff",
         "alphaThreshold": 0.75
       },
-      "x": 1800,
-      "y": 700,
-      "width": 2400,
-      "height": 1200,
+      "x": 2300,
+      "y": 1000,
+      "width": 1400,
+      "height": 700,
       "elevation": 0,
       "sort": 0,
       "occlusion": {
@@ -163,7 +163,7 @@
         "volume": 0
       },
       "flags": {},
-      "_key": "!scenes.tiles!2TE1WheOT6AMbP1P.GK84Wqnka6KATFJt"
+      "_key": "!scenes.tiles!fQEXQ9CGi1Pxdzio.GK84Wqnka6KATFJt"
     }
   ],
   "walls": [],
@@ -184,13 +184,13 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "mgt2e",
-    "systemVersion": "0.17.2.11-DEV",
-    "createdTime": 1769261597787,
-    "modifiedTime": 1769261597787,
+    "systemVersion": "0.17.2.12-DEV",
+    "createdTime": 1769266375218,
+    "modifiedTime": 1769266379305,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
-  "_id": "2TE1WheOT6AMbP1P",
+  "_id": "fQEXQ9CGi1Pxdzio",
   "active": false,
   "sort": 0,
-  "_key": "!scenes!2TE1WheOT6AMbP1P"
+  "_key": "!scenes!fQEXQ9CGi1Pxdzio"
 }
