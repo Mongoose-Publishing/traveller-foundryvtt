@@ -522,9 +522,14 @@ span.internal-macro img {
 div.traveller-credits {
     background-color: #eed4c5;
     border: 2px solid #f37021;
+    color: black;
     float: left;
     width: 49%;
     padding: 1em;
+}
+
+div.traveller-credits p {
+  color: black;
 }
 
 div.traveller-contents {

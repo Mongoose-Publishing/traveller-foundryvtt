@@ -1,12 +1,12 @@
-<div class="mgt2e-chat-message skill-box">
+<div class="mgt2e-chat-message attack-box">
     {{#if useChatIcons}}
         {{#if actor}}
             <img class="chat-sticker actor-uuid-link" title="{{actor.name}}"
                  src="{{actor.img}}" data-actor-id="{{actor.uuid}}"/>
         {{/if}}
-        {{#if skillIcon}}
-            <img class="chat-sticker skillcheck-button" title="{{label}}"
-                 src="{{skillIcon}}" data-skillcheck="admin" data-options='{{options}}'/>
+        {{#if weapon.img}}
+            <img class="chat-sticker attack-button" title="{{label}}"
+                 src="{{weapon.img}}" />
         {{/if}}
     {{/if}}
 
@@ -25,11 +25,34 @@
     </h2>
 
     <div class="mgt2e-chat-content">
-        <h3>{{skillTitle}}</h3>
+        {{#if weapon}}
+            <h3>
+                {{weapon.name}}
+                {{#if baseRange includeZero=false}}
+                    {{#if rangeDistance includeZero=false}}
+                        @ {{rangeDistance}}{{rangeUnit}}
+                    {{/if}}
+                {{/if}}
+            </h3>
+        {{else if attackOptions.title }}
+            <h3>{{attackOptions.title}}</h3>
+        {{else}}
+            <h3>Attack</h3>
+        {{/if}}
 
-        {{#if description}}
+        <p>
+            <b>Skill DM: </b> {{attackOptions.skillDM}}
+            {{#if attackOptions.dm includeZero=false}}
+                + {[attackOptions.dm}}
+            {{/if}}
+        </p>
+        <p>
+            <b>Damage: </b> {{damage}}
+        </p>
+
+        {{#if attackOptions.description}}
             <div class="skill-description">
-                {{{description}}}
+                {{{attackOptions.description}}}
             </div>
         {{/if}}
 
