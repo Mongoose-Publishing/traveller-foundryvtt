@@ -21,6 +21,8 @@ to FoundryVTT 13.
   permission.
 * Improved use of i18n strings rather than hard coded text.
 * A Traveller default scene is created when a new world is started.
+* Skills should be listed in alphabetical order now, regardless of language.
+* Fixed bug with weapon attack links on the new NPC character sheet.
 
 # 0.17.2 (Beta)
 

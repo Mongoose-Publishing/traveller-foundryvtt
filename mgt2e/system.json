@@ -2,7 +2,7 @@
   "id": "mgt2e",
   "title": "Mongoose Traveller 2e",
   "description": "A system for Mongoose Traveller 2e. This includes rules specific to this version of Traveller.",
-  "version": "0.17.3.1",
+  "version": "0.17.3.2",
   "compatibility": {
     "minimum": 12,
     "verified": 13,

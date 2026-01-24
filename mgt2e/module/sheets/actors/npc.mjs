@@ -159,6 +159,14 @@ export class MgT2NpcActorSheet extends MgT2ActorSheet {
             game.mgt2e.rollSkillMacro(skillFqn, {
                 actor: this.actor
             });
+        } else if (ev.currentTarget?.dataset?.rollType) {
+            // Copied from superclass. We seem to be mixing ways of doing things.
+            let dataset = ev.currentTarget.dataset;
+            if (dataset.rollType === "item") {
+                const itemId = ev.currentTarget.closest('.item').dataset.itemId;
+                const item = this.actor.items.get(itemId);
+                if (item) return item.roll();
+            }
         }
     }
 
