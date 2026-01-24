@@ -1,0 +1,196 @@
+{
+  "name": "MgT2e",
+  "backgroundColor": "#404040",
+  "background": {
+    "fit": "fill",
+    "src": "systems/mgt2e/images/default_background.webp",
+    "anchorX": 0,
+    "anchorY": 0,
+    "offsetX": 0,
+    "offsetY": 0,
+    "scaleX": 1,
+    "scaleY": 1,
+    "rotation": 0,
+    "tint": "#ffffff",
+    "alphaThreshold": 0
+  },
+  "grid": {
+    "type": 1,
+    "size": 100,
+    "color": "#000000",
+    "style": "solidLines",
+    "thickness": 1,
+    "alpha": 0.25,
+    "distance": 1.5,
+    "units": "m"
+  },
+  "width": 5000,
+  "height": 3000,
+  "padding": 0.1,
+  "navigation": false,
+  "navOrder": 0,
+  "navName": "",
+  "foreground": null,
+  "foregroundElevation": 6,
+  "thumb": "worlds/mongoose-traveller/assets/scenes/QArAptQe8uL9xWbH-thumb.webp",
+  "initial": {
+    "x": null,
+    "y": null,
+    "scale": 0.5
+  },
+  "tokenVision": false,
+  "fog": {
+    "exploration": true,
+    "overlay": null,
+    "colors": {
+      "explored": null,
+      "unexplored": null
+    }
+  },
+  "environment": {
+    "darknessLevel": 0,
+    "darknessLock": false,
+    "globalLight": {
+      "enabled": true,
+      "alpha": 0.5,
+      "bright": false,
+      "color": null,
+      "coloration": 1,
+      "luminosity": 0,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "cycle": true,
+    "base": {
+      "hue": 0,
+      "intensity": 0,
+      "luminosity": 0,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "dark": {
+      "hue": 0.7138888888888889,
+      "intensity": 0,
+      "luminosity": -0.25,
+      "saturation": 0,
+      "shadows": 0
+    }
+  },
+  "drawings": [
+    {
+      "_id": "PB2cPjCAJ4UKr7We",
+      "author": "mhUjqDVicnwIUaiq",
+      "shape": {
+        "type": "r",
+        "width": 1688,
+        "height": 188,
+        "radius": null,
+        "points": []
+      },
+      "x": 2188,
+      "y": 1425,
+      "elevation": 0,
+      "sort": 0,
+      "rotation": 0,
+      "bezierFactor": 0,
+      "fillType": 0,
+      "fillColor": "#ffffff",
+      "fillAlpha": 0.1,
+      "strokeWidth": 8,
+      "strokeColor": "#ffffff",
+      "strokeAlpha": 0,
+      "texture": null,
+      "text": "Science Fiction Adventure in the Far Future",
+      "fontFamily": "Signika",
+      "fontSize": 64,
+      "textColor": "#ffffff",
+      "textAlpha": 1,
+      "hidden": false,
+      "locked": false,
+      "interface": false,
+      "flags": {},
+      "_key": "!scenes.drawings!2TE1WheOT6AMbP1P.PB2cPjCAJ4UKr7We"
+    }
+  ],
+  "tokens": [],
+  "lights": [],
+  "notes": [],
+  "sounds": [],
+  "regions": [],
+  "templates": [],
+  "tiles": [
+    {
+      "texture": {
+        "src": "systems/mgt2e/images/traveller-sunburst.svg",
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "offsetX": 0,
+        "offsetY": 0,
+        "fit": "fill",
+        "scaleX": 1,
+        "scaleY": 1,
+        "rotation": 0,
+        "tint": "#ffffff",
+        "alphaThreshold": 0.75
+      },
+      "x": 1800,
+      "y": 700,
+      "width": 2400,
+      "height": 1200,
+      "elevation": 0,
+      "sort": 0,
+      "occlusion": {
+        "mode": 0,
+        "alpha": 0
+      },
+      "_id": "GK84Wqnka6KATFJt",
+      "rotation": 0,
+      "alpha": 1,
+      "hidden": false,
+      "locked": false,
+      "restrictions": {
+        "light": false,
+        "weather": false
+      },
+      "video": {
+        "loop": true,
+        "autoplay": true,
+        "volume": 0
+      },
+      "flags": {},
+      "_key": "!scenes.tiles!2TE1WheOT6AMbP1P.GK84Wqnka6KATFJt"
+    }
+  ],
+  "walls": [],
+  "playlist": null,
+  "playlistSound": null,
+  "journal": null,
+  "journalEntryPage": null,
+  "weather": "",
+  "folder": null,
+  "ownership": {
+    "default": 2,
+    "OKj1civBZWPZt3CA": 3,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "mgt2e",
+    "systemVersion": "0.17.2.11-DEV",
+    "createdTime": 1769261597787,
+    "modifiedTime": 1769261597787,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_id": "2TE1WheOT6AMbP1P",
+  "active": false,
+  "sort": 0,
+  "_key": "!scenes!2TE1WheOT6AMbP1P"
+}
