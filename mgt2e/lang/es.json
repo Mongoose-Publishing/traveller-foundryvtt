@@ -266,7 +266,7 @@
   "MGT2.TravellerSheet.Energy": "Protección Energética",
   "MGT2.TravellerSheet.EnergyTypes": "Tipos de Energía",
   "MGT2.TravellerSheet.Attacks": "Ataques",
-  "MGT2.TravellerSheet.Weapons": "Armas",  
+  "MGT2.TravellerSheet.Weapons": "Armas",
   "MGT2.TravellerSheet.DamageTaken": "Daño Recibido",
   "MGT2.TravellerSheet.HitsRemaining": "Daño Restante",
   "MGT2.TravellerSheet.Hull": "Casco",
@@ -492,7 +492,7 @@
   "MGT2.WorldSheet.Bases.M": "Ejército",
   "MGT2.WorldSheet.Bases.C": "Corsaria",
   "MGT2.WorldSheet.Bases.D": "Depósito Naval",
-  "MGT2.WorldSheet.Bases.W": "Estación de Paso",  
+  "MGT2.WorldSheet.Bases.W": "Estación de Paso",
 
   "MGT2.WorldSheet.Facility.berthingCost": "Costo de Atraque (Cr./Sem)",
   "MGT2.WorldSheet.Facility.shipyard": "Astillero",
@@ -729,7 +729,7 @@
   "MGT2.Spacecraft.Battery": "Batería",
   "MGT2.Spacecraft.BatteryCharge": "Carga",
   "MGT2.Spacecraft.ConcealedDrive": "Motor Oculto",
-  "MGT2.Spacecraft.AutoCost": "Cálculo automático de coste",  
+  "MGT2.Spacecraft.AutoCost": "Cálculo automático de coste",
   "MGT2.Spacecraft.HolographicControls": "Controles Holográficos",
   "MGT2.Spacecraft.BridgeType.standard": "Puente",
   "MGT2.Spacecraft.BridgeType.cockpit": "Cabina de Vuelo",
@@ -768,23 +768,23 @@
   "MGT2.DamageDialog.Total": "Total",
   "MGT2.DamageDialog.Current": "Actual",
 
-  "MGT2.Damage.Wound.Minor": "Herida Menor",
-  "MGT2.Damage.Wound.Major": "Herida Grave",
-  "MGT2.Damage.Wound.Severe": "Herida Seria",
-  "MGT2.Damage.Wound.Crippling": "Herida Lisiante",
-  "MGT2.Damage.Wound.Critical": "Herida Crítica",
-  "MGT2.Damage.Wound.Mortal": "Herida Mortal",
-  "MGT2.Damage.Wound.Devastating": "Herida Devastadora",
-  "MGT2.Damage.Wound.Stun": "Aturdido",
+  "MGT2.DamageWound.Minor": "Herida Menor",
+  "MGT2.DamageWound.Major": "Herida Grave",
+  "MGT2.DamageWound.Severe": "Herida Seria",
+  "MGT2.DamageWound.Crippling": "Herida Lisiante",
+  "MGT2.DamageWound.Critical": "Herida Crítica",
+  "MGT2.DamageWound.Mortal": "Herida Mortal",
+  "MGT2.DamageWound.Devastating": "Herida Devastadora",
+  "MGT2.DamageWound.Stun": "Aturdido",
 
-  "MGT2.Damage.Wound.MinorEffect": "No tienen efectos adicionales.",
-  "MGT2.Damage.Wound.MajorEffect": "Afecta a la capacidad de realizar acciones con esa parte del cuerpo hasta que se haya curado.",
-  "MGT2.Damage.Wound.SevereEffect": "Deja inconsciente y tendrá secuelas graves incluso tras la recuperación.",
-  "MGT2.Damage.Wound.CripplingEffect": "La zona afectada queda completamente inutilizada y sufrirá daño permanente.",
-  "MGT2.Damage.Wound.CriticalEffect": "La zona afectada queda completamente inutilizada y sufrirá daño permanente.",
-  "MGT2.Damage.Wound.MortalEffect": "Suficiente para mutilar un miembro o decapitar, deberá reemplazar o esperar a que le vuelvan a crecer la extremidad o los órganos afectados.",
-  "MGT2.Damage.Wound.DevastatingEffect": "La zona impactada queda completamente destruida, vaporizada o reducida a pulpa. Tiene un efecto principalmente cinemático.",
-  "MGT2.Damage.Wound.StunEffect": "Queda incapacitado y no podrá realizar ninguna acción durante un número de turnos igual al daño que excedió su RES.",
+  "MGT2.DamageWound.MinorEffect": "No tienen efectos adicionales.",
+  "MGT2.DamageWound.MajorEffect": "Afecta a la capacidad de realizar acciones con esa parte del cuerpo hasta que se haya curado.",
+  "MGT2.DamageWound.SevereEffect": "Deja inconsciente y tendrá secuelas graves incluso tras la recuperación.",
+  "MGT2.DamageWound.CripplingEffect": "La zona afectada queda completamente inutilizada y sufrirá daño permanente.",
+  "MGT2.DamageWound.CriticalEffect": "La zona afectada queda completamente inutilizada y sufrirá daño permanente.",
+  "MGT2.DamageWound.MortalEffect": "Suficiente para mutilar un miembro o decapitar, deberá reemplazar o esperar a que le vuelvan a crecer la extremidad o los órganos afectados.",
+  "MGT2.DamageWound.DevastatingEffect": "La zona impactada queda completamente destruida, vaporizada o reducida a pulpa. Tiene un efecto principalmente cinemático.",
+  "MGT2.DamageWound.StunEffect": "Queda incapacitado y no podrá realizar ninguna acción durante un número de turnos igual al daño que excedió su RES.",
 
   "MGT2.Spacecraft.Criticals.sensors": "Sensores",
   "MGT2.Spacecraft.Criticals.powerPlant": "Planta de Energía",
@@ -820,7 +820,7 @@
   "MGT2.Spacecraft.CriticalLabel.powerPlant": "Potencia Reducida",
   "MGT2.Spacecraft.CriticalLabel.sensorDM": "Sensor Dañado",
   "MGT2.Spacecraft.CriticalLabel.sensorMax": "Sensor Limitado",
-  "MGT2.Spacecraft.CriticalLabel.pilotDM": "Pilotaje",  
+  "MGT2.Spacecraft.CriticalLabel.pilotDM": "Pilotaje",
   "MGT2.Spacecraft.CriticalLabel.thrust": "Propulsión",
   "MGT2.Spacecraft.CriticalLabel.jumpDM": "Salto",
   "MGT2.Spacecraft.CriticalLabel.armour": "Blindaje",
@@ -987,8 +987,8 @@
   "MGT2.Item.WeaponTrait.Label.thrust": "Propulsión",
   "MGT2.Item.WeaponTrait.Label.longRange": "Largo Alcance",
   "MGT2.Item.WeaponTrait.Label.multiWarhead": "Ojivas Múltiples",
-  "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",  
-  
+  "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",
+
 
   "MGT2.Item.WeaponTrait.Text.ap": "Penetración de Armadura: Reduce el valor de Armadura del objetivo en X puntos; si el resultado es cero o menos, el ataque ignora la Armadura.",
   "MGT2.Item.WeaponTrait.Text.auto": "Fuego Automático (Simple/Ráfaga/Automático): `Ráfaga´ (MD -4, 3 veces munición) o asalto único (MD -1 por X ráfagas de disparo, más munición).",
@@ -1142,7 +1142,7 @@
   "MGT2.Effects.SoftwareEffects": "Características de Software",
   "MGT2.Effects.Software.Class.personal": "Software Personal",
   "MGT2.Effects.Software.Class.spacecraft": "Software de Astronave",
-  
+
   "MGT2.Effects.Software.Type.generic": "Genérico",
   "MGT2.Effects.Software.Type.interface": "Interfaz",
   "MGT2.Effects.Software.Type.agent": "Agente",
@@ -1290,7 +1290,7 @@
   "MGT2.Role.BuiltIn.Action.WildLanding": "Aterrizaje Forzoso",
   "MGT2.Role.BuiltIn.Action.Evade": "Evadir",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Pilotar",
-  
+
   "MGT2.Swarm.MissileSource": "Origen de Misiles",
   "MGT2.Swarm.MissileTarget": "Objetivo de Misiles",
   "MGT2.Swarm.SelectTarget": "SELECCIONAR OBJETIVO",
@@ -1310,8 +1310,8 @@
   "MGT2.Swarm.SquadronTL": "NT",
 
   "MGT2.Swarm.DeleteConfirm.Title": "¿Eliminar Enjambre de la Flota?",
-  "MGT2.Swarm.DeleteConfirm.Text": "La Salva/Escuadrón y todas sus fichas serán eliminadas.",  
-  
+  "MGT2.Swarm.DeleteConfirm.Text": "La Salva/Escuadrón y todas sus fichas serán eliminadas.",
+
   "MGT2.Dialog.TransferCargoToShip": "Transferir Carga a la Astronave",
   "MGT2.Dialog.SellCargoToWorld": "Vender Carga al Mundo",
   "MGT2.Dialog.EmbarkPassengers": "Embarcar Pasajeros",
@@ -1341,7 +1341,7 @@
   "TYPES.Actor.creature": "Criatura",
   "TYPES.Actor.spacecraft": "Astronave",
   "TYPES.Actor.package": "Paquete",
-  "TYPES.Actor.swarm": "Enjambre",  
+  "TYPES.Actor.swarm": "Enjambre",
   "TYPES.Actor.vehicle": "Vehículo",
   "TYPES.Actor.world": "Mundo",
 
@@ -1356,8 +1356,8 @@
   "TYPES.Item.role": "Rol de Tripulación",
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "Datos del Mundo",
-  
-  "Save": "Guardar",  
+
+  "Save": "Guardar",
 
   "TRAVELLER.Add": "Añadir"
 }

@@ -77,30 +77,34 @@ export class MgT2DamageDialog extends Application {
             this.wounds = "-";
             this.woundsEffect = "";
         } else if (this.stun) {
-            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Stun");
-            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.StunEffect");
+            this.wounds = game.i18n.localize("MGT2.DamageWound.Stun");
+            this.woundsEffect = game.i18n.localize("MGT2.DamageWound.StunEffect");
         } else if (this.actualDamage < parseInt(totalEND / 2)) {
-            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Minor");
-            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.MinorEffect");
+            this.wounds = game.i18n.localize("MGT2.DamageWound.Minor");
+            this.woundsEffect = game.i18n.localize("MGT2DamageWound.MinorEffect");
         } else if (this.actualDamage <= totalEND) {
-            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Major");
-            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.MajorEffect");
+            this.wounds = game.i18n.localize("MGT2.DamageWound.Major");
+            this.woundsEffect = game.i18n.localize("MGT2.DamageWound.MajorEffect");
         } else if (this.actualDamage < totalEND * 2) {
-            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Severe");
-            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.SevereEffect");
+            this.wounds = game.i18n.localize("MGT2.DamageWound.Severe");
+            this.woundsEffect = game.i18n.localize("MGT2.DamageWound.SevereEffect");
         } else if (this.actualDamage < totalEND * 3) {
-            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Crippling");
-            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.CripplingEffect");
+            this.wounds = game.i18n.localize("MGT2.DamageWound.Crippling");
+            this.woundsEffect = game.i18n.localize("MGT2.DamageWound.CripplingEffect");
         } else if (this.actualDamage < totalEND * 4) {
-            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Critical");
-            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.CriticalEffect");
+            this.wounds = game.i18n.localize("MGT2.DamageWound.Critical");
+            this.woundsEffect = game.i18n.localize("MGT2.DamageWound.CriticalEffect");
         } else if (this.actualDamage < totalEND * 5) {
-            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Mortal");
-            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.MortalEffect");
+            this.wounds = game.i18n.localize("MGT2.DamageWound.Mortal");
+            this.woundsEffect = game.i18n.localize("MGT2.DamageWound.MortalEffect");
         } else {
-            this.wounds = game.i18n.localize("MGT2.Damage.Wound.Devastating");
-            this.woundsEffect = game.i18n.localize("MGT2.Damage.Wound.DevastatingEffect");
+            this.wounds = game.i18n.localize("MGT2.DamageWound.Devastating");
+            this.woundsEffect = game.i18n.localize("MGT2.DamageWound.DevastatingEffect");
         }
+        console.log("WOUNDS WOUNDS WOUNDS");
+        console.log(this.wounds);
+        console.log(this.woundsEffect);
+        console.log(game.i18n.localize("MGT2.DamageDialog.WoundEffect"));
 
         this.remainingDamage = this.actualDamage;
 

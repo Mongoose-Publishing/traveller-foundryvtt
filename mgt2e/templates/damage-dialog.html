@@ -21,19 +21,19 @@
 
     <div class="shadow grid grid-4col">
         <div class="resource flex-group-center">
-            <label for="damage" class="resource-label">DAMAGE</label>
+            <label for="damage" class="resource-label">{{localize "MGT2.DamageDialog.Damage"}}</label>
             <input type="text" name="damage" value="{{damage}}" data-dtype="Number" readonly/>
         </div>
         <div class="resource flex-group-center">
-            <label for="ap" class="resource-label">AP</label>
+            <label for="ap" class="resource-label">{{localize "MGT2.DamageDialog.AP"}}</label>
             <input type="text" name="ap" value="{{ap}}" data-dtype="Number" readonly/>
         </div>
         <div class="resource flex-group-center">
-            <label for="armour" class="resource-label">ARMOUR</label>
+            <label for="armour" class="resource-label">{{localize "MGT2.DamageDialog.Armour"}}</label>
             <input type="text" name="armour" value="{{armour}}" data-dtype="Number" readonly/>
         </div>
         <div class="resource flex-group-center">
-            <label for="actualDamage" class="resource-label">ACTUAL</label>
+            <label for="actualDamage" class="resource-label">{{localize "MGT2.DamageDialog.Actual"}}</label>
             <input type="text" name="actualDamage" value="{{actualDamage}}" data-dtype="Number" readonly/>
         </div>
 
@@ -45,17 +45,17 @@
 
         {{#if radiation}}
             <div class="resource flex-group-center">
-                <label for="radiation" class="resource-label">RADIATION</label>
+                <label for="radiation" class="resource-label">{{localize "MGT2.DamageDialog.Radiation"}}</label>
                 <input type="text" name="damage" value="{{radiation}}" data-dtype="Number" readonly/>
             </div>
             <div class="resource flex-group-center">
             </div>
             <div class="resource flex-group-center">
-                <label for="armourRads" class="resource-label">RADS</label>
+                <label for="armourRads" class="resource-label">{{localize "MGT2.DamageDialog.ArmourRads"}}</label>
                 <input type="text" name="armourRads" value="{{armourRads}}" data-dtype="Number" readonly/>
             </div>
             <div class="resource flex-group-center">
-                <label for="actualRadiation" class="resource-label">ACTUAL</label>
+                <label for="actualRadiation" class="resource-label">{{localize "MGT2.DamageDialog.Actual"}}</label>
                 <input type="text" name="actualRadiation" value="{{actualRadiation}}" data-dtype="Number" readonly/>
             </div>
         {{/if}}
@@ -66,7 +66,7 @@
 
         <div class="damage-header grid grid-4col">
             <div class="flex-group-center">
-                <label>To Apply:</label>
+                <label>{{localize "MGT2.DamageDialog.ToApply"}}</label>
                 <input class="characteristic-readonly remaining"
                        type="number"
                        name="remainingDamage"
@@ -75,7 +75,7 @@
             </div>
 
             <div class="flex-group-left grid-span-2" title="{{woundsEffect}}">
-                <label>Wound Effect</label>
+                <label>{{localize "MGT2.DamageDialog.WoundEffect"}}</label>
                 <input class="characteristic-readonly remaining"
                        type="text"
                        name="woundEffects"
