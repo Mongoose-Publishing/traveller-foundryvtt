@@ -1525,6 +1525,10 @@
   "MGT2.Dialog.RememberCharacteristic": "Remember Characteristic",
   "MGT2.Dialog.RollType": "Roll Type",
 
+  "MGT2.Dialog.ApplyDamage.Title": "Apply Damage to {name}?",
+  "MGT2.Dialog.ApplyDamage.What": "<span class='player-name'>{playerName}</span> wants to cause <span class='damage-value'>{damage} HITS</span> to {actorName}.",
+  "MGT2.Dialog.ApplyDamage.ClickYes": "Click YES to allow this.",
+
   "MGT2.ExceptionalFailure": "Exceptional Failure",
   "MGT2.AverageFailure": "Average Failure",
   "MGT2.MarginalFailure": "Marginal Failure",

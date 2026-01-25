@@ -457,7 +457,7 @@ export class MgT2Actor extends Actor {
       return game.users.activeGM;
   }
 
-  applyDamageToPerson(damage, options) {
+  async applyDamageToPerson(damage, options) {
       let armour = 0;
       let armourText = ""
       let radiationDamage = options.radiation ? options.radiation : 0;
@@ -610,6 +610,39 @@ export class MgT2Actor extends Actor {
               new MgT2DamageDialog(this, damage, options).render(true);
           }
       } else {
+          // In this situation, we don't need an apply damage dialog. However, we want to verify
+          // that the GM is happy for the player to apply damage to this token. So we need a simple
+          // yes/no confirmation.
+          if (options.playerRequestName) {
+              let actorName = this.name;
+              if (this.token) {
+                  actorName = this.token.name;
+              }
+              let contentData = {
+                  playerName: options.playerRequestName,
+                  actorName: actorName,
+                  actor: this,
+                  damage: damage
+              }
+              const content = await renderTemplate("systems/mgt2e/templates/dialogs/apply-damage-check.html", contentData);
+
+              let confirmed = false;
+              try {
+                  const yes = await foundry.applications.api.DialogV2.confirm({
+                      window: {
+                          title: game.i18n.format("MGT2.Dialog.ApplyDamage", {name: actorName})
+                      },
+                      content,
+                      modal: true
+                  });
+                  if (yes) confirmed = true;
+              } catch (e) {
+                  // Dialog cancelled. Assume no.
+              }
+              if (!confirmed) {
+                  return;
+              }
+          }
           this.applyActualDamageToPerson(damage, options);
       }
   }

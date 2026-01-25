@@ -2488,6 +2488,22 @@ div.spacecraft-attacks .weapon-action-button:hover {
   padding-left: 0.5em;
 }
 
+.apply-damage-check img {
+  width: 128px;
+  float: right;
+  padding-left: 8px;
+}
 
+.apply-damage-check span.player-name {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.apply-damage-check span.damage-value {
+  font-weight: bold;
+  border: 1px solid white;
+  padding: 2px;
+  white-space: nowrap;
+}
 
 
