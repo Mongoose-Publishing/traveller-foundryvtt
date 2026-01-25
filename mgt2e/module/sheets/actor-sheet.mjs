@@ -107,10 +107,8 @@ export class MgT2ActorSheet extends ActorSheet {
             }
             let year = parseInt(actorData.entryYear) - numYears;
             for (let t of context.terms) {
-                if (t.system.term?.startYear) {
-                    t.system.term.startYear = year;
-                    year += parseInt(t.system.term.termLength);
-                }
+                t.system.term.startYear = year;
+                year += parseInt(t.system.term.termLength);
             }
             actorData.entryAge = parseInt(actorData.startAge) + numYears;
             actorData.birthYear = parseInt(actorData.entryYear) - parseInt(actorData.entryAge);
