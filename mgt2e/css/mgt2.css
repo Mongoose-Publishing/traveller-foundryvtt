@@ -2506,4 +2506,6 @@ div.spacecraft-attacks .weapon-action-button:hover {
   white-space: nowrap;
 }
 
-
+.image-gallery img {
+  display: inline-block;
+}

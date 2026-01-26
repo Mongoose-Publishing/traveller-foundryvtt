@@ -4,6 +4,14 @@
 
 * Career terms aren't always added in the correct order.
 
+# Dev
+
+* When player applies damage to an actor that only has HITS, and it is handed over to
+  the GM to handle, the GM now gets a confirmation prompt rather than the damage being
+  applied automatically.
+* Fixed localisation bug on the damage dialog, due to conflicting i18n keys.
+* The Traveller actor sheet now displays the start year for each career term.
+
 # 0.17.3 (Beta)
 
 Note that support for FoundryVTT 12 will be dropped in 0.18. You will need to migrate
