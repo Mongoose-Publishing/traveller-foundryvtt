@@ -11,6 +11,7 @@
   applied automatically.
 * Fixed localisation bug on the damage dialog, due to conflicting i18n keys.
 * The Traveller actor sheet now displays the start year for each career term.
+* Gunner's characteristic bonus is now included when making attack rolls from a spacecraft.
 
 # 0.17.3 (Beta)
 

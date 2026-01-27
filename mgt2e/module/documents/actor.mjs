@@ -933,6 +933,8 @@ export class MgT2Actor extends Actor {
   }
 
   getAttackSkill(weaponItem, options) {
+      let dm = 0;
+
       if (weaponItem && weaponItem?.system?.weapon) {
           let score = this.getWeaponSkill(weaponItem, options);
 
@@ -942,6 +944,14 @@ export class MgT2Actor extends Actor {
                   options.results["weapon"] = parseInt(weaponItem.system.weapon.attackBonus);
               }
           }
+
+          if (weaponItem.system.weapon.characteristic) {
+              let cha = weaponItem.system.weapon.characteristic;
+              if (this.system.characteristics[cha]) {
+                  score += this.system.characteristics[cha].dm;
+              }
+          }
+
           return score;
       }
       return this.getUntrained();

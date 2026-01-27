@@ -187,6 +187,16 @@ export class MgT2SpacecraftAttackDialog extends Application {
     }
 
     getData() {
+        console.log(this.weaponItem);
+        let cha = this.weaponItem.system.weapon.characteristic;
+        let chaDM = 0;
+        if (cha) {
+            if (this.gunner.system.characteristics[cha]) {
+                chaDM = this.gunner.system.characteristics[cha].dm;
+            }
+        }
+        let chaLabel = chaDM?`${cha} ${chaDM}`:"";
+
         return {
             "starship": this.starship,
             "gunner": this.gunner,
@@ -202,6 +212,7 @@ export class MgT2SpacecraftAttackDialog extends Application {
                 "boon": game.i18n.localize("MGT2.TravellerSheet.Boon"),
                 "bane": game.i18n.localize("MGT2.TravellerSheet.Bane"),
             },
+            "gunnerChaLabel": chaLabel,
             "gunnerSkillLabel": this.gunner.getSkillLabel(this.weaponItem.system.weapon.skill, true),
             "TARGETS": this.TARGETS,
             "TARGET_LIST": this.TARGET_LIST
