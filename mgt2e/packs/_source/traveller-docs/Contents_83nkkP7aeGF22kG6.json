@@ -128,7 +128,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>When player applies damage to an actor with only HITS, the GM is now shown a confirmation dialog to allow them to approve or deny the request.</p></li><li><p>Fixed localisation bug on the damage dialog which was causing text to not be correctly displayed.</p></li><li><p>Start year is now shown for each career term on the Traveller character sheet.</p></li><li><p><strong>Support will be dropped for FoundryVTT 12 in 0.18 release.</strong></p></li></ul>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>When player applies damage to an actor with only HITS, the GM is now shown a confirmation dialog to allow them to approve or deny the request.</p></li><li><p>Fixed localisation bug on the damage dialog which was causing text to not be correctly displayed.</p></li><li><p>Start year is now shown for each career term on the Traveller character sheet.</p></li><li><p>Gunner's characteristic bonus is now included when making an attack roll from spacecraft.</p></li><li><p>Fixed some text issues on the equipment tab for character sheets.</p></li><li><p><strong>Support will be dropped for FoundryVTT 12 in 0.18 release.</strong></p></li></ul>"
       },
       "video": {
         "controls": true,
@@ -147,7 +147,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1769375574646,
+        "modifiedTime": 1769555882800,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!83nkkP7aeGF22kG6.mXeFfBZITS7IkfPU"
