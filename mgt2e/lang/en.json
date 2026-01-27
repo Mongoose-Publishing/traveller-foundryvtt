@@ -399,8 +399,8 @@
   "MGT2.TravellerSheet.WeightCarried": "Weight Carried",
 
   "MGT2.TravellerSheet.ItemsInUse": "Items in Use",
-  "MGT2.TravellerSheet.ItemsCarried": "Items in Use",
-  "MGT2.TravellerSheet.ItemsOwned": "Items in Use",
+  "MGT2.TravellerSheet.ItemsCarried": "Items Carried",
+  "MGT2.TravellerSheet.ItemsOwned": "Items Owned",
 
   "MGT2.TravellerSheet.CurrentYear.Label": "Current Year",
   "MGT2.TravellerSheet.CurrentYear.Title": "Current year in the campaign",
