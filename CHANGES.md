@@ -4,7 +4,10 @@
 
 * Career terms aren't always added in the correct order.
 
-# Dev
+Note that support for FoundryVTT 12 will be dropped in 0.18. You will need to migrate
+to FoundryVTT 13.
+
+# 0.17.4 (Beta)
 
 * When player applies damage to an actor that only has HITS, and it is handed over to
   the GM to handle, the GM now gets a confirmation prompt rather than the damage being
@@ -15,9 +18,6 @@
 * Fixed some text issues for equipment section headings on the character sheet.
 
 # 0.17.3 (Beta)
-
-Note that support for FoundryVTT 12 will be dropped in 0.18. You will need to migrate
-to FoundryVTT 13.
 
 * Added options via roll tables to modify the rules for speculative trade, making it
   it easier or harder.
