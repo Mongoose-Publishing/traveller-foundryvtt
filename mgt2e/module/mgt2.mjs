@@ -386,21 +386,21 @@ async function openActorSheet(actorId) {
     }
 }
 
-Hooks.on('renderChatMessage', function(app, html) {
-
+Hooks.on('renderChatMessageHTML', function(message, html, data) {
     // Allow actor links to be opened from chat messages.
-    html.find(".actor-uuid-link").click(ev => {
-        let actorIcon = ev.currentTarget;
-        let actorUuid = actorIcon.getAttribute("data-actor-id");
-        fromUuid(actorUuid).then(actor => {
-            actor.sheet.render(true);
-        });
-    });
+    const actorLink = html.querySelector(".actor-uuid-link");
+    if (actorLink) {
+        actorLink.onclick = () => {
+            const actorUuid = actorLink.getAttribute("data-actor-id");
+            fromUuid(actorUuid).then(actor => {
+                actor.sheet.render(true);
+            });
+        }
+    }
 
-    const damageMessage = html.find(".damage-message")[0];
+    const damageMessage = html.querySelector(".damage-message");
     if (damageMessage) {
         damageMessage.setAttribute("draggable", true);
-
         let dragData = {
             type: "Damage",
             laser: false,
@@ -411,29 +411,25 @@ Hooks.on('renderChatMessage', function(app, html) {
             options: damageMessage.getAttribute("data-options"),
             tl: parseInt(damageMessage.getAttribute("data-tl"))
         }
-
         damageMessage.addEventListener("dragstart", ev => {
             return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
         });
     }
-    const skillMessage = html.find(".skillcheck-message")[0];
+
+    const skillMessage = html.querySelector(".skillcheck-message");
     if (skillMessage) {
         skillMessage.setAttribute("draggable", true);
-
         let dragData = {
             type: "Skill",
             skill: skillMessage.getAttribute("data-skillcheck"),
             options: skillMessage.getAttribute("data-options")
         };
-
-        console.log(dragData);
-
         skillMessage.addEventListener("dragstart", ev => {
-           return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+            return ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
         });
     }
 
-    const uppMessage = html.find(".upp-data")[0];
+    const uppMessage = html.querySelector(".upp-data");
     if (uppMessage) {
         uppMessage.setAttribute("draggable", true);
         let dragData = {
@@ -450,17 +446,15 @@ Hooks.on('renderChatMessage', function(app, html) {
         });
     }
 
-    const skillGainLinks = html.find(".skillGain-spec");
-    for (let i=0; i < skillGainLinks.length; i++) {
-        let link = skillGainLinks[i];
+    const skillGainLinks = html.querySelectorAll(".skillGain-spec");
+    skillGainLinks.forEach((link, i) => {
         link.addEventListener("click", ev => {
             let actorId = link.getAttribute("data-actorId");
             let skill = link.getAttribute("data-skill");
             let level = link.getAttribute("data-level");
             MgT2eMacros.specialityGain(actorId, skill, level);
         });
-    }
-
+    });
 });
 
 Hooks.on('ready', () => {
