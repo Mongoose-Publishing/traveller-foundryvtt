@@ -24,7 +24,7 @@ import {MgT2CharacteristicDamageApp} from "../helpers/dialogs/characteristic-dam
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class MgT2ActorSheet extends ActorSheet {
+export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
 
     /** @override */
     static get defaultOptions() {

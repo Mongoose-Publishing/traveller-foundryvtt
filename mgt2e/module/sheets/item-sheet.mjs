@@ -10,7 +10,7 @@ import {calculateHardwareAdvantages} from "../helpers/spacecraft/spacecraft-util
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class MgT2ItemSheet extends ItemSheet {
+export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
 
     /** @override */
     static get defaultOptions() {

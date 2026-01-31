@@ -41,6 +41,10 @@ import {
 } from "./helpers/spacecraft/spacecraft-utils.mjs";
 import {onManageActiveEffect} from "./helpers/effects.mjs";
 
+const { Actors, Items } = foundry.documents.collections;
+const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
+//const { ActiveEffectConfig } = foundry.applications.sheets.ActiveEffectConfig;
+//const { DocumentSheetConfig } = foundry.applications.apps.DocumentSheetConfig;
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -198,7 +202,7 @@ Hooks.once('init', async function() {
         name: game.i18n.localize("MGT2.Settings.PlayerVision.Traveller.Name"),
         hint: game.i18n.localize("MGT2.Settings.PlayerVision.Traveller.Hint"),
         scope: 'world',
-        config: true,
+        config: false,
         type: Boolean,
         default: false
     });
@@ -206,7 +210,7 @@ Hooks.once('init', async function() {
         name: game.i18n.localize("MGT2.Settings.PlayerVision.NPC.Name"),
         hint: game.i18n.localize("MGT2.Settings.PlayerVision.NPC.Hint"),
         scope: 'world',
-        config: true,
+        config: false,
         type: Boolean,
         default: false
     });
@@ -214,7 +218,7 @@ Hooks.once('init', async function() {
         name: game.i18n.localize("MGT2.Settings.PlayerVision.Creature.Name"),
         hint: game.i18n.localize("MGT2.Settings.PlayerVision.Creature.Hint"),
         scope: 'world',
-        config: true,
+        config: false,
         type: Boolean,
         default: false
     });
@@ -222,7 +226,7 @@ Hooks.once('init', async function() {
         name: game.i18n.localize("MGT2.Settings.PlayerVision.Spacecraft.Name"),
         hint: game.i18n.localize("MGT2.Settings.PlayerVision.Spacecraft.Hint"),
         scope: 'world',
-        config: true,
+        config: false,
         type: Boolean,
         default: false
     });
@@ -240,7 +244,7 @@ Hooks.once('init', async function() {
         scope: 'world',
         config: true,
         type: String,
-        default: ""
+        default: "DEFAULT TRAVELLER"
     });
     game.settings.register('mgt2e', 'blastEffectDivergence', {
         name: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Name"),

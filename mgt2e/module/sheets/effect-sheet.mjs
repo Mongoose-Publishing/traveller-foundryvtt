@@ -6,7 +6,7 @@ import {MgT2Effect} from "../documents/effect.mjs";
 /**
  * Need to support both V12 and V13.
  */
-export class MgT2EffectSheet extends ActiveEffectConfig {
+export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectConfig {
     // V12
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
