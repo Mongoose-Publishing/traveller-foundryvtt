@@ -156,7 +156,7 @@ MgT2eMacros.skillGain = function(args) {
                         let r = Math.floor(Math.random() * keys.length);
                         let current = Number(skill.specialities[keys[r]].value);
                         if (current >= level) {
-                            skill.specialities[keys[r]].value += 1;
+                            skill.specialities[keys[r]].value = current + 1;
                         } else {
                             skill.specialities[keys[r]].value = level;
                         }
@@ -176,11 +176,11 @@ MgT2eMacros.skillGain = function(args) {
                         }
                     }
                 }
-            } else if (level === undefined && skill.value < 4) {
-                skill.value += 1;
+            } else if (level === undefined && parseInt(skill.value) < 4) {
+                skill.value = parseInt(skill.value) + 1;
                 text += `Incrementing <b>${skillName}</b> to ${skill.value}.`;
             } else if (level > skill.value) {
-                skill.value = level;
+                skill.value = parseInt(level);
                 text += `Setting <b>${skillName}</b> to ${level}.`;
             } else if (!added) {
                 text += `<b>${skillName}</b> is unchanged.`;
