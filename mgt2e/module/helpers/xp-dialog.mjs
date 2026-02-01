@@ -88,7 +88,7 @@ export class MgT2XPDialog extends Application {
         } else {
             this.cost = 1;
             if (this.formData.value > 0) {
-                this.cost = Math.pow(2, this.formData.value);
+                this.cost = Math.pow(2, Number(this.formData.value));
             }
         }
     }
@@ -155,19 +155,20 @@ export class MgT2XPDialog extends Application {
 
         if (this.chaOnly && this.cost > 0) {
             while (this.formData.xp >= this.cost) {
-                this.formData.value += 1;
-                this.formData.xp -= this.cost;
+                this.formData.value = Number(this.formData.value) + 1;
+                this.formData.xp = Number(this.formData.xp) - this.cost;
             }
             this.actor.update({"system.characteristics": this.actor.system.characteristics});
         } else if (this.cost > 0) {
             while (this.formData.xp >= this.cost) {
                 if (!this.formData.trained) {
                     this.formData.trained = true;
-                    this.formData.xp -= this.cost;
+                    this.formData.xp = Number(this.formData.xp) - this.cost;
                 } else {
-                    this.formData.value += 1;
+                    this.formData.value = Number(this.formData.value) + 1;
                     this.formData.xp -= this.cost;
                 }
+                this.cost = Math.pow(2, Number(this.formData.value));
             }
             this.actor.update({ "system.skills": this.actor.system.skills });
         }
