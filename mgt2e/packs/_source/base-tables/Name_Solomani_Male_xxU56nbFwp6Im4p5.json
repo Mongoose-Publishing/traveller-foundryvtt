@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "dfxra938UV2yiimM",
-      "text": "!Name_Solomani_First_Male !Name_Solomani_Family",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "!Name_Solomani_First_Male !Name_Solomani_Family",
+      "name": "",
       "_key": "!tables.results!xxU56nbFwp6Im4p5.dfxra938UV2yiimM"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "OhJ1NhQqkt3VMnxq",
-      "text": "!Name_Solomani_First_Male !Name_Solomani_First_Male !Name_Solomani_Family",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "!Name_Solomani_First_Male !Name_Solomani_First_Male !Name_Solomani_Family",
+      "name": "",
       "_key": "!tables.results!xxU56nbFwp6Im4p5.OhJ1NhQqkt3VMnxq"
     }
   ],
@@ -47,12 +69,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622392205,
     "modifiedTime": 1763127326973,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d4",
   "_key": "!tables!xxU56nbFwp6Im4p5"

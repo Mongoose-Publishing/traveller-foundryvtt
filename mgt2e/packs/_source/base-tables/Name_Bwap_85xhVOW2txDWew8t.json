@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "wsGJoqQ8Qgc0QNjO",
-      "text": "Zzzz",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Zzzz",
+      "name": "",
       "_key": "!tables.results!85xhVOW2txDWew8t.wsGJoqQ8Qgc0QNjO"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "P7gdx7Eb4hsGnh73",
-      "text": "Ssssh",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Ssssh",
+      "name": "",
       "_key": "!tables.results!85xhVOW2txDWew8t.P7gdx7Eb4hsGnh73"
     },
     {
@@ -44,10 +66,21 @@
       ],
       "drawn": false,
       "_id": "I5WDOTYf7ixlkhbL",
-      "text": "Fizzz",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Fizzz",
+      "name": "",
       "_key": "!tables.results!85xhVOW2txDWew8t.I5WDOTYf7ixlkhbL"
     }
   ],
@@ -62,12 +95,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762550842758,
     "modifiedTime": 1762550842758,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "",
   "_key": "!tables!85xhVOW2txDWew8t"

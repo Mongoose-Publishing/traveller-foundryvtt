@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "rutbfvvVjsvJNYXc",
-      "text": "Eneri",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Eneri",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.rutbfvvVjsvJNYXc"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "dX23wVCJ5P1sWykW",
-      "text": "Adkhar",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Adkhar",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.dX23wVCJ5P1sWykW"
     },
     {
@@ -44,10 +66,21 @@
       ],
       "drawn": false,
       "_id": "K0uQFCjdXNHAxDLP",
-      "text": "Ganidiirsi",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Ganidiirsi",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.K0uQFCjdXNHAxDLP"
     },
     {
@@ -59,10 +92,21 @@
       ],
       "drawn": false,
       "_id": "8YIXzfmeuhrkF5gX",
-      "text": "Shannash",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Shannash",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.8YIXzfmeuhrkF5gX"
     },
     {
@@ -74,10 +118,21 @@
       ],
       "drawn": false,
       "_id": "Wid9x1zpjk805S9Z",
-      "text": "Ishugi",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Ishugi",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.Wid9x1zpjk805S9Z"
     },
     {
@@ -89,10 +144,21 @@
       ],
       "drawn": false,
       "_id": "Us0K7JYMlMVudQGJ",
-      "text": "Khazuni",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Khazuni",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.Us0K7JYMlMVudQGJ"
     },
     {
@@ -104,10 +170,21 @@
       ],
       "drawn": false,
       "_id": "MmzX034OYdpDHeF1",
-      "text": "Ganimakkur",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Ganimakkur",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.MmzX034OYdpDHeF1"
     },
     {
@@ -119,10 +196,21 @@
       ],
       "drawn": false,
       "_id": "j5efQVff6ej5iKhd",
-      "text": "Mazun",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Mazun",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.j5efQVff6ej5iKhd"
     },
     {
@@ -134,10 +222,21 @@
       ],
       "drawn": false,
       "_id": "MXtQMKuvUbFHguUe",
-      "text": "Tamesha",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Tamesha",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.MXtQMKuvUbFHguUe"
     },
     {
@@ -149,10 +248,21 @@
       ],
       "drawn": false,
       "_id": "I4aYVzqyN1lU1fFO",
-      "text": "Khugi",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Khugi",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.I4aYVzqyN1lU1fFO"
     },
     {
@@ -164,10 +274,21 @@
       ],
       "drawn": false,
       "_id": "EGcv9dCK8ZChwf5a",
-      "text": "Kishakhir",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Kishakhir",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.EGcv9dCK8ZChwf5a"
     },
     {
@@ -179,10 +300,21 @@
       ],
       "drawn": false,
       "_id": "u1SwIkL5T8qQ2rNA",
-      "text": "Irkirin",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Irkirin",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.u1SwIkL5T8qQ2rNA"
     },
     {
@@ -194,10 +326,21 @@
       ],
       "drawn": false,
       "_id": "zWXOLpPBEZ3tVU6x",
-      "text": "$^Vilani_Word",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "$^Vilani_Word",
+      "name": "",
       "_key": "!tables.results!bPSqTN1VybsLOwd1.zWXOLpPBEZ3tVU6x"
     }
   ],
@@ -212,12 +355,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622372585,
     "modifiedTime": 1763127356386,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d18",
   "_key": "!tables!bPSqTN1VybsLOwd1"

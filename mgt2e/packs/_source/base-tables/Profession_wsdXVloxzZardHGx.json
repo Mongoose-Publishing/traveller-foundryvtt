@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "Yc7WMUr9CX8TtYvr",
-      "text": "Entertainer [art+2] [DEX+2] # An entertainer looking for work.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Entertainer [art+2] [DEX+2] # An entertainer looking for work.",
+      "name": "",
       "_key": "!tables.results!wsdXVloxzZardHGx.Yc7WMUr9CX8TtYvr"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "357wySeKSDS7kFtv",
-      "text": "Officer Worker [EDU+1] [profession+2] [admin+1] # Business person on a business trip.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Officer Worker [EDU+1] [profession+2] [admin+1] # Business person on a business trip.",
+      "name": "",
       "_key": "!tables.results!wsdXVloxzZardHGx.357wySeKSDS7kFtv"
     },
     {
@@ -44,10 +66,21 @@
       ],
       "drawn": false,
       "_id": "DIh0A3ajS8RTn1s9",
-      "text": "Tourist [profession+0] [electronics.computers+1] # On holiday, looking to see some sights.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Tourist [profession+0] [electronics.computers+1] # On holiday, looking to see some sights.",
+      "name": "",
       "_key": "!tables.results!wsdXVloxzZardHGx.DIh0A3ajS8RTn1s9"
     },
     {
@@ -59,10 +92,21 @@
       ],
       "drawn": false,
       "_id": "PSfVKx1J7cqrkex1",
-      "text": "Scientist [science+2] # Scientist going to a conference.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Scientist [science+2] # Scientist going to a conference.",
+      "name": "",
       "_key": "!tables.results!wsdXVloxzZardHGx.PSfVKx1J7cqrkex1"
     },
     {
@@ -74,10 +118,21 @@
       ],
       "drawn": false,
       "_id": "ZE9E87pCUEUbkXdK",
-      "text": "Officer Worker [EDU+1] [profession+2] # Business person on a business trip. {{Actually a secret agent}}",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Officer Worker [EDU+1] [profession+2] # Business person on a business trip. {{Actually a secret agent}}",
+      "name": "",
       "_key": "!tables.results!wsdXVloxzZardHGx.ZE9E87pCUEUbkXdK"
     }
   ],
@@ -92,12 +147,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762550842758,
     "modifiedTime": 1762627028951,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d12",
   "_key": "!tables!wsdXVloxzZardHGx"

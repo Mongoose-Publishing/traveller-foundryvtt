@@ -13,10 +13,21 @@
       ],
       "drawn": false,
       "_id": "pZm7ZBPtXOp2dqgk",
-      "text": "!Name_Vilani_First_Female !Name_Vilani_Family",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "!Name_Vilani_First_Female !Name_Vilani_Family",
+      "name": "",
       "_key": "!tables.results!YTRbQmJjaE0S9vky.pZm7ZBPtXOp2dqgk"
     },
     {
@@ -28,10 +39,21 @@
       ],
       "drawn": false,
       "_id": "C6kP5d8igkKLO1vb",
-      "text": "!Name_Vilani_First_Female !Name_Vilani_Lineage !Name_Vilani_Family",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "!Name_Vilani_First_Female !Name_Vilani_Lineage !Name_Vilani_Family",
+      "name": "",
       "_key": "!tables.results!YTRbQmJjaE0S9vky.C6kP5d8igkKLO1vb"
     },
     {
@@ -43,10 +65,21 @@
       ],
       "drawn": false,
       "_id": "aMMSTgfAIo4WxrY0",
-      "text": "!Name_Vilani_Solomani_Female !Name_Vilani_Lineage !Name_Vilani_Family",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "!Name_Vilani_Solomani_Female !Name_Vilani_Lineage !Name_Vilani_Family",
+      "name": "",
       "_key": "!tables.results!YTRbQmJjaE0S9vky.aMMSTgfAIo4WxrY0"
     }
   ],
@@ -61,12 +94,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": "RollTable.5owj8oYQocC6lNGa",
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622372585,
     "modifiedTime": 1763127366747,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d6",
   "_id": "YTRbQmJjaE0S9vky",

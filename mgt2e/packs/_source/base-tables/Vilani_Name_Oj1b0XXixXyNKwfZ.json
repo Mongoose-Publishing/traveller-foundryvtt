@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "Cwz681LZGyXTbcxl",
-      "text": "$^Vilani_Word $^Vilani_Word",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "$^Vilani_Word $^Vilani_Word",
+      "name": "",
       "_key": "!tables.results!Oj1b0XXixXyNKwfZ.Cwz681LZGyXTbcxl"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "mi4rfOWqmwViVCG6",
-      "text": "$^Vilani_Word $^Vilani_Word $^Vilani_Word",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "$^Vilani_Word $^Vilani_Word $^Vilani_Word",
+      "name": "",
       "_key": "!tables.results!Oj1b0XXixXyNKwfZ.mi4rfOWqmwViVCG6"
     }
   ],
@@ -47,12 +69,13 @@
   "_stats": {
     "compendiumSource": "RollTable.Oj1b0XXixXyNKwfZ",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762601634914,
     "modifiedTime": 1762601634914,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d1",
   "_key": "!tables!Oj1b0XXixXyNKwfZ"

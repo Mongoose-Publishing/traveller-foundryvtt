@@ -13,10 +13,21 @@
       ],
       "drawn": false,
       "_id": "f5083OeozEi6vmuh",
-      "text": "Mary",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Mary",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.f5083OeozEi6vmuh"
     },
     {
@@ -28,10 +39,21 @@
       ],
       "drawn": false,
       "_id": "1ENAhJWcmJY4YZEj",
-      "text": "Patricia",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Patricia",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.1ENAhJWcmJY4YZEj"
     },
     {
@@ -43,10 +65,21 @@
       ],
       "drawn": false,
       "_id": "df8Ad9Xq7KsBqT0b",
-      "text": "Jennifer",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Jennifer",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.df8Ad9Xq7KsBqT0b"
     },
     {
@@ -58,10 +91,21 @@
       ],
       "drawn": false,
       "_id": "nC1qa9UWWkUkOPQh",
-      "text": "Linda",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Linda",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.nC1qa9UWWkUkOPQh"
     },
     {
@@ -73,10 +117,21 @@
       ],
       "drawn": false,
       "_id": "hxmhYdHd0TDgYh7W",
-      "text": "Elizabeth",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Elizabeth",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.hxmhYdHd0TDgYh7W"
     },
     {
@@ -88,10 +143,21 @@
       ],
       "drawn": false,
       "_id": "1zllpRahXgxUhyj3",
-      "text": "Barbara",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Barbara",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.1zllpRahXgxUhyj3"
     },
     {
@@ -103,10 +169,21 @@
       ],
       "drawn": false,
       "_id": "Q9pJxEVcBvj02cVz",
-      "text": "Susan",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Susan",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.Q9pJxEVcBvj02cVz"
     },
     {
@@ -118,10 +195,21 @@
       ],
       "drawn": false,
       "_id": "xluz4YMmUwc6maXy",
-      "text": "Jessica",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Jessica",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.xluz4YMmUwc6maXy"
     },
     {
@@ -133,10 +221,21 @@
       ],
       "drawn": false,
       "_id": "ertJomoUum4KQU1z",
-      "text": "Karen",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Karen",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.ertJomoUum4KQU1z"
     },
     {
@@ -148,10 +247,21 @@
       ],
       "drawn": false,
       "_id": "XnkpcKKtrlnDkKy8",
-      "text": "Sarah",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Sarah",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.XnkpcKKtrlnDkKy8"
     },
     {
@@ -163,10 +273,21 @@
       ],
       "drawn": false,
       "_id": "9aDepFrOUU9SM4iX",
-      "text": "Lisa",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Lisa",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.9aDepFrOUU9SM4iX"
     },
     {
@@ -178,10 +299,21 @@
       ],
       "drawn": false,
       "_id": "Ecnb1bGLKMisrDes",
-      "text": "Nancy",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Nancy",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.Ecnb1bGLKMisrDes"
     },
     {
@@ -193,10 +325,21 @@
       ],
       "drawn": false,
       "_id": "XFc2xpTdVolvAsJR",
-      "text": "Sandra",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Sandra",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.XFc2xpTdVolvAsJR"
     },
     {
@@ -208,10 +351,21 @@
       ],
       "drawn": false,
       "_id": "zfHlc3BAF5IOktJA",
-      "text": "Ashley",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Ashley",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.zfHlc3BAF5IOktJA"
     },
     {
@@ -223,10 +377,21 @@
       ],
       "drawn": false,
       "_id": "EvtE4MGJFwKoL1K4",
-      "text": "Emily",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Emily",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.EvtE4MGJFwKoL1K4"
     },
     {
@@ -238,10 +403,21 @@
       ],
       "drawn": false,
       "_id": "dgETEGi1TrUgFs84",
-      "text": "Kimberly",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Kimberly",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.dgETEGi1TrUgFs84"
     },
     {
@@ -253,10 +429,21 @@
       ],
       "drawn": false,
       "_id": "ojrDv6r1tYwj8T0m",
-      "text": "Betty",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Betty",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.ojrDv6r1tYwj8T0m"
     },
     {
@@ -268,10 +455,21 @@
       ],
       "drawn": false,
       "_id": "hCkPwDRh5jcGLWTB",
-      "text": "Margaret",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Margaret",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.hCkPwDRh5jcGLWTB"
     },
     {
@@ -283,10 +481,21 @@
       ],
       "drawn": false,
       "_id": "miJFJpoRaljbawbe",
-      "text": "Donna",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Donna",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.miJFJpoRaljbawbe"
     },
     {
@@ -298,10 +507,21 @@
       ],
       "drawn": false,
       "_id": "6Nccf8EZJFu5RtYQ",
-      "text": "Michalle",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Michalle",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.6Nccf8EZJFu5RtYQ"
     },
     {
@@ -313,10 +533,21 @@
       ],
       "drawn": false,
       "_id": "XcqB3GMl41bWqXBp",
-      "text": "Carol",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Carol",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.XcqB3GMl41bWqXBp"
     },
     {
@@ -328,10 +559,21 @@
       ],
       "drawn": false,
       "_id": "QZe5qUAd2v3EcMM0",
-      "text": "Amanda",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Amanda",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.QZe5qUAd2v3EcMM0"
     },
     {
@@ -343,10 +585,21 @@
       ],
       "drawn": false,
       "_id": "E807bhqHufpZxo3n",
-      "text": "Meliisa",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Meliisa",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.E807bhqHufpZxo3n"
     },
     {
@@ -358,10 +611,21 @@
       ],
       "drawn": false,
       "_id": "JoELX2qHWcjk02zI",
-      "text": "Debora",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Debora",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.JoELX2qHWcjk02zI"
     },
     {
@@ -373,10 +637,21 @@
       ],
       "drawn": false,
       "_id": "KGmznhczAFQfjqFh",
-      "text": "Stephanie",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Stephanie",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.KGmznhczAFQfjqFh"
     },
     {
@@ -388,10 +663,21 @@
       ],
       "drawn": false,
       "_id": "BoXosy2QbcOWgUxK",
-      "text": "Rebecca",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Rebecca",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.BoXosy2QbcOWgUxK"
     },
     {
@@ -403,10 +689,21 @@
       ],
       "drawn": false,
       "_id": "MrVHeNWyPVIWzMWy",
-      "text": "Sharon",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Sharon",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.MrVHeNWyPVIWzMWy"
     },
     {
@@ -418,10 +715,21 @@
       ],
       "drawn": false,
       "_id": "K7wGSxCCADfuZb81",
-      "text": "Laura",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Laura",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.K7wGSxCCADfuZb81"
     },
     {
@@ -433,10 +741,21 @@
       ],
       "drawn": false,
       "_id": "EKlyvkohfWGqpSKL",
-      "text": "Cynthia",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Cynthia",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.EKlyvkohfWGqpSKL"
     },
     {
@@ -448,10 +767,21 @@
       ],
       "drawn": false,
       "_id": "wpfJdPAxhZc2gD7a",
-      "text": "Amy",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Amy",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.wpfJdPAxhZc2gD7a"
     },
     {
@@ -463,10 +793,21 @@
       ],
       "drawn": false,
       "_id": "xnLYs9kWfaJ4Aq3O",
-      "text": "Kathleen",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Kathleen",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.xnLYs9kWfaJ4Aq3O"
     },
     {
@@ -478,10 +819,21 @@
       ],
       "drawn": false,
       "_id": "RaaKqn5l1NLHxXDR",
-      "text": "Angela",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Angela",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.RaaKqn5l1NLHxXDR"
     },
     {
@@ -493,10 +845,21 @@
       ],
       "drawn": false,
       "_id": "DgACxDskanYYIrTC",
-      "text": "Dorothy",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Dorothy",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.DgACxDskanYYIrTC"
     },
     {
@@ -508,10 +871,21 @@
       ],
       "drawn": false,
       "_id": "clO6GLQSsSqEEqb3",
-      "text": "Shirley",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Shirley",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.clO6GLQSsSqEEqb3"
     },
     {
@@ -523,10 +897,21 @@
       ],
       "drawn": false,
       "_id": "tnvE9YMuEXWeXg8U",
-      "text": "Emma",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Emma",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.tnvE9YMuEXWeXg8U"
     },
     {
@@ -538,10 +923,21 @@
       ],
       "drawn": false,
       "_id": "KEaQ3EAKC52L6v26",
-      "text": "Brenda",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Brenda",
+      "name": "",
       "_key": "!tables.results!2Ub5vmclhhZt4W1T.KEaQ3EAKC52L6v26"
     }
   ],
@@ -556,12 +952,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": "RollTable.vxAL2wUqCozDqFGg",
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622392205,
     "modifiedTime": 1763127316704,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d36",
   "_id": "2Ub5vmclhhZt4W1T",

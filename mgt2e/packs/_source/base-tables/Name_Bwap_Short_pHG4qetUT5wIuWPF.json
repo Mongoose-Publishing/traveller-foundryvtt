@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "WpAiTRLGjoWbgyiC",
-      "text": "Wab",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Wab",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.WpAiTRLGjoWbgyiC"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "wgSy6P38YStXvmet",
-      "text": "Kewa",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Kewa",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.wgSy6P38YStXvmet"
     },
     {
@@ -44,10 +66,21 @@
       ],
       "drawn": false,
       "_id": "WPKlsZnO0TI8IRyS",
-      "text": "Pakar",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Pakar",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.WPKlsZnO0TI8IRyS"
     },
     {
@@ -59,10 +92,21 @@
       ],
       "drawn": false,
       "_id": "riTuqK1wzzWig8T4",
-      "text": "Dalglee",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Dalglee",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.riTuqK1wzzWig8T4"
     },
     {
@@ -74,10 +118,21 @@
       ],
       "drawn": false,
       "_id": "rL5nXMql1YbBa80V",
-      "text": "Awa",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Awa",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.rL5nXMql1YbBa80V"
     },
     {
@@ -89,10 +144,21 @@
       ],
       "drawn": false,
       "_id": "HQN2QgWtplsOnymD",
-      "text": "Uwab",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Uwab",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.HQN2QgWtplsOnymD"
     },
     {
@@ -104,10 +170,21 @@
       ],
       "drawn": false,
       "_id": "VZmPsJuwYjSJ6BYt",
-      "text": "Kera",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Kera",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.VZmPsJuwYjSJ6BYt"
     },
     {
@@ -119,10 +196,21 @@
       ],
       "drawn": false,
       "_id": "YT1MRgWf15PBBuBd",
-      "text": "Ruwap",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Ruwap",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.YT1MRgWf15PBBuBd"
     },
     {
@@ -134,10 +222,21 @@
       ],
       "drawn": false,
       "_id": "ziNU0oaVlq6a1zwX",
-      "text": "Huu",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Huu",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.ziNU0oaVlq6a1zwX"
     },
     {
@@ -149,10 +248,21 @@
       ],
       "drawn": false,
       "_id": "3CHmxi51CIGGKxdQ",
-      "text": "Wapi",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Wapi",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.3CHmxi51CIGGKxdQ"
     },
     {
@@ -164,10 +274,21 @@
       ],
       "drawn": false,
       "_id": "fPMtMv8KmxnJpZDM",
-      "text": "Ker",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Ker",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.fPMtMv8KmxnJpZDM"
     },
     {
@@ -179,10 +300,21 @@
       ],
       "drawn": false,
       "_id": "LJIauXxwmdkm1o6E",
-      "text": "Awaba",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Awaba",
+      "name": "",
       "_key": "!tables.results!pHG4qetUT5wIuWPF.LJIauXxwmdkm1o6E"
     }
   ],
@@ -197,12 +329,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622356355,
     "modifiedTime": 1763127290056,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d12",
   "_key": "!tables!pHG4qetUT5wIuWPF"

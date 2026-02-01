@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "R9JS0gJvJLj8aPZ7",
-      "text": "A corporation which  is openly acting against the main government.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A corporation which  is openly acting against the main government.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.R9JS0gJvJLj8aPZ7"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "udCTMs7Ho78FglP3",
-      "text": "A religious organisation.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A religious organisation.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.udCTMs7Ho78FglP3"
     },
     {
@@ -44,10 +66,21 @@
       ],
       "drawn": false,
       "_id": "SZoSWwWJjSXFWTpG",
-      "text": "A shadowy cable of multiple organisations.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A shadowy cable of multiple organisations.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.SZoSWwWJjSXFWTpG"
     },
     {
@@ -59,10 +92,21 @@
       ],
       "drawn": false,
       "_id": "CKWuyWVV6nHvPcAD",
-      "text": "A group of techno-socialists.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A group of techno-socialists.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.CKWuyWVV6nHvPcAD"
     },
     {
@@ -74,10 +118,21 @@
       ],
       "drawn": false,
       "_id": "Xu2e5ZRJxFXlWK9b",
-      "text": "A military faction.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A military faction.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.Xu2e5ZRJxFXlWK9b"
     },
     {
@@ -89,10 +144,21 @@
       ],
       "drawn": false,
       "_id": "p3HzrkFdI3ButemD",
-      "text": "A political faction that believes that it can do a better job than the current government.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A political faction that believes that it can do a better job than the current government.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.p3HzrkFdI3ButemD"
     },
     {
@@ -104,10 +170,21 @@
       ],
       "drawn": false,
       "_id": "hJgR2898D31c12bb",
-      "text": "A group of animal rights activists.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A group of animal rights activists.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.hJgR2898D31c12bb"
     },
     {
@@ -119,10 +196,21 @@
       ],
       "drawn": false,
       "_id": "ky8sa6vnf92uVUA9",
-      "text": "A specific racial group on the world.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A specific racial group on the world.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.ky8sa6vnf92uVUA9"
     },
     {
@@ -134,10 +222,21 @@
       ],
       "drawn": false,
       "_id": "eEbzVaFWbeOctYuA",
-      "text": "A corporation that is manipulating things behind the scenes.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A corporation that is manipulating things behind the scenes.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.eEbzVaFWbeOctYuA"
     },
     {
@@ -149,10 +248,21 @@
       ],
       "drawn": false,
       "_id": "4pvJ90GqaNzz8pVB",
-      "text": "A green faction looking to protect the environment.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A green faction looking to protect the environment.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.4pvJ90GqaNzz8pVB"
     },
     {
@@ -164,10 +274,21 @@
       ],
       "drawn": false,
       "_id": "vN1lm86hNld69xRy",
-      "text": "A grass roots organisation made up of young adults.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "A grass roots organisation made up of young adults.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.vN1lm86hNld69xRy"
     },
     {
@@ -179,10 +300,21 @@
       ],
       "drawn": false,
       "_id": "rlHHZyNhfZUzCLBh",
-      "text": "Offworlder influenced faction.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Offworlder influenced faction.",
+      "name": "",
       "_key": "!tables.results!SdaiobXxbMLaWwPa.rlHHZyNhfZUzCLBh"
     }
   ],
@@ -197,12 +329,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.8.6-DEV",
     "createdTime": 1764435525998,
     "modifiedTime": 1764500438528,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d12",
   "_key": "!tables!SdaiobXxbMLaWwPa"

@@ -802,17 +802,17 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
 });
 
 
+Hooks.on("hotbarDrop", (bar, data, slot) => {
+    if (data.type === "Actor" || data.type === "Item" || data.data?.dragType === "skill") {
+        createTravellerMacro(data, slot);
+        return false;
+    } else {
+        console.log(data);
+        return true;
+    }
+});
 
 Hooks.once("ready", async function() {
-    Hooks.on("hotbarDrop", (bar, data, slot) => {
-        if (data.type === "Actor" || data.type === "Item" || data.data?.dragType === "skill") {
-            createTravellerMacro(data, slot);
-            return false;
-        } else {
-            console.log(data);
-        }
-    });
-
     if (game.user.isGM) {
         if (game.scenes.size === 0) {
             const pack = game.packs.get("mgt2e.base-scenes");

@@ -13,10 +13,21 @@
       ],
       "drawn": false,
       "_id": "FBzriheQ2zc2xlSf",
-      "text": "Male",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Male",
+      "name": "",
       "_key": "!tables.results!dK9BDD4iWbCeMwt7.FBzriheQ2zc2xlSf"
     },
     {
@@ -28,10 +39,21 @@
       ],
       "drawn": false,
       "_id": "5s4X4IlNKm7sEMGm",
-      "text": "Female",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Female",
+      "name": "",
       "_key": "!tables.results!dK9BDD4iWbCeMwt7.5s4X4IlNKm7sEMGm"
     }
   ],
@@ -46,12 +68,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": "RollTable.MGkgv6RM6feTyojG",
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762550842758,
     "modifiedTime": 1762627028951,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d2",
   "_id": "dK9BDD4iWbCeMwt7",

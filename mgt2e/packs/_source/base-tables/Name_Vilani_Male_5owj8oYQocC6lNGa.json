@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "pZm7ZBPtXOp2dqgk",
-      "text": "!Name_Vilani_First_Male !Name_Vilani_Family",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "!Name_Vilani_First_Male !Name_Vilani_Family",
+      "name": "",
       "_key": "!tables.results!5owj8oYQocC6lNGa.pZm7ZBPtXOp2dqgk"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "C6kP5d8igkKLO1vb",
-      "text": "!Name_Vilani_First_Male !Name_Vilani_Lineage !Name_Vilani_Family",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "!Name_Vilani_First_Male !Name_Vilani_Lineage !Name_Vilani_Family",
+      "name": "",
       "_key": "!tables.results!5owj8oYQocC6lNGa.C6kP5d8igkKLO1vb"
     },
     {
@@ -44,10 +66,21 @@
       ],
       "drawn": false,
       "_id": "TA827dYVM597VpnY",
-      "text": "!Name_Solomani_First_Male !Name_Vilani_Lineage !Name_Vilani_Family",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "!Name_Solomani_First_Male !Name_Vilani_Lineage !Name_Vilani_Family",
+      "name": "",
       "_key": "!tables.results!5owj8oYQocC6lNGa.TA827dYVM597VpnY"
     }
   ],
@@ -62,12 +95,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622372585,
     "modifiedTime": 1763127350116,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d6",
   "_key": "!tables!5owj8oYQocC6lNGa"

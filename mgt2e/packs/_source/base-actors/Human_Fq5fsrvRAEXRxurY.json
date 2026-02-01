@@ -1075,7 +1075,6 @@
     "detectionModes": [],
     "flags": {},
     "randomImg": false,
-    "hexagonalShape": 0,
     "occludable": {
       "radius": 0
     },
@@ -1090,7 +1089,14 @@
         "scale": 1,
         "texture": null
       }
-    }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null
   },
   "items": [
     {
@@ -1120,12 +1126,13 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.9.0",
-        "coreVersion": "12.329",
+        "coreVersion": "13.351",
         "createdTime": 1721479631665,
         "modifiedTime": 1721508335146,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
-        "duplicateSource": null
+        "duplicateSource": null,
+        "exportSource": null
       },
       "_key": "!actors.items!Fq5fsrvRAEXRxurY.9C4weE30XWGOwGG6"
     },
@@ -1138,9 +1145,7 @@
       "folder": "bXGbV4AjDY6AJGxk",
       "sort": 200000,
       "flags": {
-        "core": {
-          "sourceId": "Compendium.mgt2e.base-items.Item.uTtH5mXI2i0byiXO"
-        }
+        "core": {}
       },
       "system": {
         "tl": "0",
@@ -1150,9 +1155,11 @@
         "active": false,
         "quantity": 1,
         "status": null,
+        "legality": 9,
         "weapon": {
           "scale": "traveller",
           "range": 0,
+          "minRange": 0,
           "damage": "1D6",
           "magazine": 0,
           "ammo": 0,
@@ -1185,12 +1192,13 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.9.0",
-        "coreVersion": "12.329",
+        "coreVersion": "13.351",
         "createdTime": 1721479777059,
         "modifiedTime": 1721479777059,
         "lastModifiedBy": "KjVCQnLdKUJeJDZy",
         "compendiumSource": "Compendium.mgt2e.base-items.Item.uTtH5mXI2i0byiXO",
-        "duplicateSource": null
+        "duplicateSource": null,
+        "exportSource": null
       },
       "_key": "!actors.items!Fq5fsrvRAEXRxurY.EKeeioF23WiBgczK"
     }
@@ -1207,12 +1215,13 @@
   "_stats": {
     "systemId": "mgt2e",
     "systemVersion": "0.15.5.4-DEV",
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "createdTime": 1721479602768,
     "modifiedTime": 1763144967105,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "Fq5fsrvRAEXRxurY",
   "sort": 100000,

@@ -182,12 +182,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.17.3.0",
     "createdTime": 1769275345727,
     "modifiedTime": 1769275348519,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "_id": "w7pS87VnJjdw0ctW",
   "active": false,

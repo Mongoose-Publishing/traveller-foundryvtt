@@ -1,0 +1,28 @@
+{
+  "name": "Create NPC",
+  "type": "script",
+  "command": "/*\n * Creates a random NPC using the NPC generator roll tables.\n * Copy the \"NPC Generator\" folder from the \"MgT2e Base Tables\"\n * compendium into your world, in order to edit your own copy\n * of the generator.\n */\n\nlet npcData = {\n    \"type\": \"npc\",\n    \"name\": \"AAA\",\n    \"img\": `systems/mgt2e/icons/cargo/passenger-high.svg`,\n    \"ownership\": {\n        default: 2\n    },\n    \"system\": {\n        \"settings\": {\n            hideUntrained: true,\n            lockCharacteristics: true\n        },\n        \"sophont\": {\n            age: 24,\n            homeworld: \"Bork\"\n        },\n        \"description\": \"Randomly generated\"\n    }\n}\nawait game.mgt2e.generateNpc(npcData);\n\nActor.implementation.create(npcData);",
+  "img": "systems/mgt2e/icons/misc/D66.svg",
+  "author": "mhUjqDVicnwIUaiq",
+  "scope": "global",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.17.4.4-DEV",
+    "createdTime": 1769959610924,
+    "modifiedTime": 1769959819417,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_id": "syDZckLCMGZ8qxIe",
+  "sort": 0,
+  "_key": "!macros!syDZckLCMGZ8qxIe"
+}

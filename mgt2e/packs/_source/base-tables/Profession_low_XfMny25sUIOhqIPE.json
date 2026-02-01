@@ -13,10 +13,21 @@
       ],
       "drawn": false,
       "_id": "GquPfsISynL6FD4t",
-      "text": "Dock Worker [SOC-1] [EDU-1] [profession.construction+0] # Low skilled labourer.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Dock Worker [SOC-1] [EDU-1] [profession.construction+0] # Low skilled labourer.",
+      "name": "",
       "_key": "!tables.results!XfMny25sUIOhqIPE.GquPfsISynL6FD4t"
     },
     {
@@ -28,10 +39,21 @@
       ],
       "drawn": false,
       "_id": "aJntRcEsDX7W0Y2a",
-      "text": "Cleaner [SOC-2] [EDU-1] [streetwise+0] # Low skilled minimum wage worker.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Cleaner [SOC-2] [EDU-1] [streetwise+0] # Low skilled minimum wage worker.",
+      "name": "",
       "_key": "!tables.results!XfMny25sUIOhqIPE.aJntRcEsDX7W0Y2a"
     },
     {
@@ -43,10 +65,21 @@
       ],
       "drawn": false,
       "_id": "PnplKCjc5bdhXhGI",
-      "text": "Veteran [age+3D6] [DEX+1] [STR+1] [END+1] [guncombat+2] [recon|stealth|leadership+1] # Old veteran.",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Veteran [age+3D6] [DEX+1] [STR+1] [END+1] [guncombat+2] [recon|stealth|leadership+1] # Old veteran.",
+      "name": "",
       "_key": "!tables.results!XfMny25sUIOhqIPE.PnplKCjc5bdhXhGI"
     },
     {
@@ -58,10 +91,21 @@
       ],
       "drawn": false,
       "_id": "YsmEPEvzfbp5N0Za",
-      "text": "Scavenger [SOC-1] [streetwise+2] [deception+0] [recon+0]",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Scavenger [SOC-1] [streetwise+2] [deception+0] [recon+0]",
+      "name": "",
       "_key": "!tables.results!XfMny25sUIOhqIPE.YsmEPEvzfbp5N0Za"
     },
     {
@@ -73,10 +117,21 @@
       ],
       "drawn": false,
       "_id": "vamrspVI1YmTBN3E",
-      "text": "Wanderer [SOC-1] [age+1D6] [streetwise+1] [language+1] [athletics+0]",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Wanderer [SOC-1] [age+1D6] [streetwise+1] [language+1] [athletics+0]",
+      "name": "",
       "_key": "!tables.results!XfMny25sUIOhqIPE.vamrspVI1YmTBN3E"
     },
     {
@@ -88,10 +143,21 @@
       ],
       "drawn": false,
       "_id": "kzeJWciBaJg9RzY8",
-      "text": "Refugee [SOC-2] [streetwise+1] [profession+1]",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Refugee [SOC-2] [streetwise+1] [profession+1]",
+      "name": "",
       "_key": "!tables.results!XfMny25sUIOhqIPE.kzeJWciBaJg9RzY8"
     }
   ],
@@ -105,12 +171,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762627028940,
     "modifiedTime": 1762627067135,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d6",
   "_id": "XfMny25sUIOhqIPE",

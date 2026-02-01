@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "3tFF7eTNBcShPqCc",
-      "text": "Shugashiik",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Shugashiik",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.3tFF7eTNBcShPqCc"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "y0dNiMULEf2zX3mD",
-      "text": "Indunna",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Indunna",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.y0dNiMULEf2zX3mD"
     },
     {
@@ -44,10 +66,21 @@
       ],
       "drawn": false,
       "_id": "I6JCY2trh9pPRl4j",
-      "text": "Shikarrida",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Shikarrida",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.I6JCY2trh9pPRl4j"
     },
     {
@@ -59,10 +92,21 @@
       ],
       "drawn": false,
       "_id": "ReGe8kwatM2LZIVI",
-      "text": "Agardur",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Agardur",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.ReGe8kwatM2LZIVI"
     },
     {
@@ -74,10 +118,21 @@
       ],
       "drawn": false,
       "_id": "7nHxeuph8PQN04uJ",
-      "text": "Ugugme",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Ugugme",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.7nHxeuph8PQN04uJ"
     },
     {
@@ -89,10 +144,21 @@
       ],
       "drawn": false,
       "_id": "sXDVOgpLY1BVmSHR",
-      "text": "Umdadusag",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Umdadusag",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.sXDVOgpLY1BVmSHR"
     },
     {
@@ -104,10 +170,21 @@
       ],
       "drawn": false,
       "_id": "ulJYd6ZMUc8hbObv",
-      "text": "Irirun",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Irirun",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.ulJYd6ZMUc8hbObv"
     },
     {
@@ -119,10 +196,21 @@
       ],
       "drawn": false,
       "_id": "LKdLcv1YXEH20KsJ",
-      "text": "Irgakusela",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Irgakusela",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.LKdLcv1YXEH20KsJ"
     },
     {
@@ -134,10 +222,21 @@
       ],
       "drawn": false,
       "_id": "CpYRjnTNB4tzCmSM",
-      "text": "Udliraa",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Udliraa",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.CpYRjnTNB4tzCmSM"
     },
     {
@@ -149,10 +248,21 @@
       ],
       "drawn": false,
       "_id": "lBL9xwW7581e5awq",
-      "text": "Amligishe",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Amligishe",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.lBL9xwW7581e5awq"
     },
     {
@@ -164,10 +274,21 @@
       ],
       "drawn": false,
       "_id": "ycuhHzcO9BIPbWSF",
-      "text": "Arkigaga",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Arkigaga",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.ycuhHzcO9BIPbWSF"
     },
     {
@@ -179,10 +300,21 @@
       ],
       "drawn": false,
       "_id": "3hT6ZmkIcJD3Pmwx",
-      "text": "Kami",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "Kami",
+      "name": "",
       "_key": "!tables.results!bIzFAmWjgXQX0zqv.3hT6ZmkIcJD3Pmwx"
     }
   ],
@@ -197,12 +329,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622372585,
     "modifiedTime": 1763127345640,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d12",
   "_key": "!tables!bIzFAmWjgXQX0zqv"

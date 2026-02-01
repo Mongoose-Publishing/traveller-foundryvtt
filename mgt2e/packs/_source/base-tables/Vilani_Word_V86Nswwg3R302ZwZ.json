@@ -14,10 +14,21 @@
       ],
       "drawn": false,
       "_id": "gHt3zAYiu0zcxnMt",
-      "text": "$Vilani_Pattern $Vilani_Pattern",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "$Vilani_Pattern $Vilani_Pattern",
+      "name": "",
       "_key": "!tables.results!V86Nswwg3R302ZwZ.gHt3zAYiu0zcxnMt"
     },
     {
@@ -29,10 +40,21 @@
       ],
       "drawn": false,
       "_id": "kydnggVcrs6GTXAo",
-      "text": "$Vilani_Pattern $Vilani_Pattern $Vilani_Pattern",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "$Vilani_Pattern $Vilani_Pattern $Vilani_Pattern",
+      "name": "",
       "_key": "!tables.results!V86Nswwg3R302ZwZ.kydnggVcrs6GTXAo"
     },
     {
@@ -44,10 +66,21 @@
       ],
       "drawn": false,
       "_id": "KqBoObEkNtlPGmnb",
-      "text": "$Vilani_Pattern $Vilani_Pattern $Vilani_Pattern $Vilani_Pattern",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "$Vilani_Pattern $Vilani_Pattern $Vilani_Pattern $Vilani_Pattern",
+      "name": "",
       "_key": "!tables.results!V86Nswwg3R302ZwZ.KqBoObEkNtlPGmnb"
     }
   ],
@@ -62,12 +95,13 @@
   "_stats": {
     "compendiumSource": "RollTable.V86Nswwg3R302ZwZ",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762601634914,
     "modifiedTime": 1762601634914,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d6",
   "_key": "!tables!V86Nswwg3R302ZwZ"

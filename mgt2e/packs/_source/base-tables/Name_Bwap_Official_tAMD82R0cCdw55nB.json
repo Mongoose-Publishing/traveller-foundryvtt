@@ -1,8 +1,37 @@
 {
-  "name": "Trade Buy Modifiers",
-  "img": "systems/mgt2e/icons/misc/2D6.svg",
-  "description": "<p>This table can be used to modify the speculative trade system. To use it, copy it into your world.</p><p>Whenever the <strong>Buy Price</strong> of a speculative trade good is calculated, this table will be rolled on, and the result used to modify the buy price roll.</p><p>Negative numbers are bad for players (they increase the buy price). Positive numbers are good (they decrease the buy price).</p><p>This example table is 2D6, but it doesn't have to be. It could be 1D6, or even 1D1 with a single entry if you just want to apply a fixed modifier to everything. It's designed to make the speculative trade system harder, with a chance of some goods being unexpectadly more expensive to buy.</p><p>Why you might want to use it is left up to the Referee.</p>",
+  "folder": "ohBlRNMYhRr4ZrUL",
+  "name": "Name Bwap Official",
+  "_id": "tAMD82R0cCdw55nB",
+  "img": "systems/mgt2e/icons/misc/text.svg",
+  "description": "",
   "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "_id": "VrYfZLxCcDqXaiJo",
+      "img": "icons/svg/d20-black.svg",
+      "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": 1769962606131,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "<p>Bawap-Ukerwa</p>",
+      "name": "",
+      "documentUuid": null,
+      "_key": "!tables.results!tAMD82R0cCdw55nB.VrYfZLxCcDqXaiJo"
+    },
     {
       "type": "text",
       "weight": 1,
@@ -11,7 +40,7 @@
         2
       ],
       "drawn": false,
-      "_id": "sRdNuMp7utvGz4ET",
+      "_id": "HSzMv8zPecvQ4jAE",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -25,9 +54,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "-4",
+      "description": "Awap-Akerwuu",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.sRdNuMp7utvGz4ET"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.HSzMv8zPecvQ4jAE"
     },
     {
       "type": "text",
@@ -37,7 +66,7 @@
         3
       ],
       "drawn": false,
-      "_id": "pIduKTN7ZzM1YYjA",
+      "_id": "IGoJLwm09IM6MI56",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -51,9 +80,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "-3",
+      "description": "Paka-Akerwa",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.pIduKTN7ZzM1YYjA"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.IGoJLwm09IM6MI56"
     },
     {
       "type": "text",
@@ -63,7 +92,7 @@
         4
       ],
       "drawn": false,
-      "_id": "H5ID94Uf8vHJ4DB3",
+      "_id": "JkdJEMmgFlRfHd8k",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -77,9 +106,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "-2",
+      "description": "Dalglee Hahsh",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.H5ID94Uf8vHJ4DB3"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.JkdJEMmgFlRfHd8k"
     },
     {
       "type": "text",
@@ -89,7 +118,7 @@
         5
       ],
       "drawn": false,
-      "_id": "5UUaFpDHPexYz6lE",
+      "_id": "qKqagn8TJGAeLutO",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -103,9 +132,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "-1",
+      "description": "Wap-Awa",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.5UUaFpDHPexYz6lE"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.qKqagn8TJGAeLutO"
     },
     {
       "type": "text",
@@ -115,7 +144,7 @@
         6
       ],
       "drawn": false,
-      "_id": "5novHsX9IiIepqnp",
+      "_id": "UNhMDJSAqQefZ1bc",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -129,9 +158,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "0",
+      "description": "Ubawa-Pakar",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.5novHsX9IiIepqnp"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.UNhMDJSAqQefZ1bc"
     },
     {
       "type": "text",
@@ -141,7 +170,7 @@
         7
       ],
       "drawn": false,
-      "_id": "cfrouw61CNIGB2Lo",
+      "_id": "DftsvoTwhpTlqBeh",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -155,9 +184,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "0",
+      "description": "Kerawap-Aka",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.cfrouw61CNIGB2Lo"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.DftsvoTwhpTlqBeh"
     },
     {
       "type": "text",
@@ -167,7 +196,7 @@
         8
       ],
       "drawn": false,
-      "_id": "528nqZ3SdnGjPp6u",
+      "_id": "TA2pMQNrJaPu4ykz",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -181,9 +210,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "0",
+      "description": "Ruwapa-Wer-Wab",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.528nqZ3SdnGjPp6u"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.TA2pMQNrJaPu4ykz"
     },
     {
       "type": "text",
@@ -193,7 +222,7 @@
         9
       ],
       "drawn": false,
-      "_id": "vuMBfxIOUGzavBWd",
+      "_id": "KRQzEhakNReRPE4E",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -207,9 +236,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "0",
+      "description": "Hap-Hapuu",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.vuMBfxIOUGzavBWd"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.KRQzEhakNReRPE4E"
     },
     {
       "type": "text",
@@ -219,7 +248,7 @@
         10
       ],
       "drawn": false,
-      "_id": "mkfTmMWeAYPmKC7t",
+      "_id": "GxNloalkRcT0n9vK",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -233,9 +262,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "0",
+      "description": "Awap-Pii",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.mkfTmMWeAYPmKC7t"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.GxNloalkRcT0n9vK"
     },
     {
       "type": "text",
@@ -245,7 +274,7 @@
         11
       ],
       "drawn": false,
-      "_id": "MgHjCZHVOaQ93Mdb",
+      "_id": "6fMVfV0FbbVZEwwk",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -259,9 +288,9 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "0",
+      "description": "Akewa-Ruk-Wab",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.MgHjCZHVOaQ93Mdb"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.6fMVfV0FbbVZEwwk"
     },
     {
       "type": "text",
@@ -271,7 +300,7 @@
         12
       ],
       "drawn": false,
-      "_id": "26v5g3kVxAXHgB5X",
+      "_id": "iTMkrNMo2fJrXsYp",
       "img": "icons/svg/d20-black.svg",
       "flags": {},
       "_stats": {
@@ -285,14 +314,14 @@
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "0",
+      "description": "Bawap-Awaba",
       "name": "",
-      "_key": "!tables.results!zsNYgBxi8BuMwzsI.26v5g3kVxAXHgB5X"
+      "_key": "!tables.results!tAMD82R0cCdw55nB.iTMkrNMo2fJrXsYp"
     }
   ],
   "replacement": true,
   "displayRoll": true,
-  "folder": "4duaL8b5rOaq5bDl",
+  "sort": 100000,
   "ownership": {
     "default": 0,
     "mhUjqDVicnwIUaiq": 3
@@ -303,14 +332,12 @@
     "duplicateSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.17.1.0",
-    "createdTime": 1767027639268,
-    "modifiedTime": 1767027639268,
+    "systemVersion": "0.15.4.1-DEV",
+    "createdTime": 1762622356355,
+    "modifiedTime": 1769962925712,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },
-  "formula": "2D6",
-  "_id": "zsNYgBxi8BuMwzsI",
-  "sort": 0,
-  "_key": "!tables!zsNYgBxi8BuMwzsI"
+  "formula": "1d12",
+  "_key": "!tables!tAMD82R0cCdw55nB"
 }

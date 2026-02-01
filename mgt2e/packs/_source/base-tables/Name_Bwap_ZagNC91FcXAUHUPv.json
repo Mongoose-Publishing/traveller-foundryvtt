@@ -14,10 +14,22 @@
       ],
       "drawn": false,
       "_id": "GpCrScDb2rozqtII",
-      "text": "!Name_Bwap_Short !Name_Bwap_Official",
       "img": "icons/svg/d20-black.svg",
-      "documentId": null,
       "flags": {},
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": 1769962511495,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "description": "",
+      "name": "!Name_Bwap_Short !Name_Bwap_Official",
+      "documentUuid": null,
       "_key": "!tables.results!ZagNC91FcXAUHUPv.GpCrScDb2rozqtII"
     }
   ],
@@ -32,12 +44,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622356355,
     "modifiedTime": 1763127280596,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "formula": "1d1",
   "_key": "!tables!ZagNC91FcXAUHUPv"
