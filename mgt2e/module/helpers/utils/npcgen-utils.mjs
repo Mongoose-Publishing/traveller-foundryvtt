@@ -30,7 +30,6 @@ async function getFromTable(folder, tableName, variantName) {
     if (!table) {
         table = await folder.contents.find(d => d.name === tableName);
         if (!table) {
-            console.log("Looking for children");
             for (const child of await folder.children) {
                 let result = await getFromTable(child.folder, tableName, variantName);
                 if (result) return result;
@@ -43,13 +42,16 @@ async function getFromTable(folder, tableName, variantName) {
         table = await fromUuid(table.uuid);
     }
     let result = await table.roll();
-    return result.results[0].text;
+    let text = result.results[0].description;
+    if (!text) {
+        text = result.results[0].name;
+    }
+    return text;
 }
 
 async function getCompoundFromTable(npcData, folder, tableName, variant) {
     let text = await getFromTable(folder, tableName, variant);
     if (!text) {
-        console.log(`getCompoundFromTable: No text for [${tableName} ${variant}]`)
         return "";
     }
     let result = "";
@@ -164,10 +166,8 @@ export async function generateInternalText(tableName, variantName, folderName) {
 export async function generateText(tableName, variantName, folderName) {
     let text = await generateInternalText(tableName, variantName, folderName);
 
-    console.log(text);
     text = text.replaceAll(/\[.*\]/g, "");
     text = text.replaceAll(/#.*/g, "");
-    console.log(text);
 
     return text;
 }
