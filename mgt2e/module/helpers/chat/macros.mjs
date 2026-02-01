@@ -253,7 +253,7 @@ MgT2eMacros.cash = function(args) {
     }
 }
 
-MgT2eMacros.chaGain = function(args) {
+MgT2eMacros.chaGain = async function(args) {
     let cha = args.cha;
     let level = args.level;
     let context = args.text;
@@ -261,6 +261,10 @@ MgT2eMacros.chaGain = function(args) {
 
     if (!level) {
         level = 1;
+    } else if (level.indexOf("D")) {
+        // This is a dice roll.
+        let roll = await new Roll(level, null).evaluate();
+        level = Number(roll.total);
     } else {
         level = Number(level);
     }
