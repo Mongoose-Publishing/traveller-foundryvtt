@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/common_consumables.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 500,
       "availability": "All",
       "purchaseDM": "Ag +3, Wa +2, Ga +1, As -4",
       "saleDM": "As +1, Fl +1, Ic +1, Hi +1",
       "tons": "2D6 * 20",
       "illegal": false,
-      "price": 500
+      "cost": 100
     },
+    "description": "<p>Food, drink and other agricultural products.</p>",
     "quantity": 1,
-    "description": "<p>Food, drink and other agricultural products.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -22,9 +23,7 @@
     "mhUjqDVicnwIUaiq": 3
   },
   "flags": {
-    "core": {
-      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.1Oa8D1wzX9WxM80T"
-    },
+    "core": {},
     "cf": {
       "id": null
     }
@@ -32,12 +31,13 @@
   "_stats": {
     "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.1Oa8D1wzX9WxM80T",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.11.6.13-DEV",
     "createdTime": 1739833676234,
     "modifiedTime": 1739833676234,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "folder": "nTFQBn7eKDifeKFR",
   "_id": "533ebkR8ulswOkUf",

@@ -23,9 +23,7 @@
     "mhUjqDVicnwIUaiq": 3
   },
   "flags": {
-    "core": {
-      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.3KkyMdy56vec3vT1"
-    },
+    "core": {},
     "cf": {
       "id": null
     }
@@ -33,12 +31,13 @@
   "_stats": {
     "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.3KkyMdy56vec3vT1",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.13.2.0",
     "createdTime": 1739833676234,
     "modifiedTime": 1753212465713,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "folder": "nTFQBn7eKDifeKFR",
   "_id": "Gj8jPTDP3hkDGcK6",

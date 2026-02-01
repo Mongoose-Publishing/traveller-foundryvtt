@@ -25,7 +25,12 @@
           "target": 4
         }
       },
-      "description": ""
+      "description": "",
+      "department": false,
+      "colour": null,
+      "dei": 0,
+      "positions": 1,
+      "show": true
     }
   },
   "effects": [],
@@ -39,12 +44,13 @@
   "_stats": {
     "systemId": "mgt2e",
     "systemVersion": "0.10.1",
-    "coreVersion": "12.329",
+    "coreVersion": "13.351",
     "createdTime": 1720365386673,
     "modifiedTime": 1725187224192,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "8u1yBIkGf5HHW4ZA",
   "sort": 100000,

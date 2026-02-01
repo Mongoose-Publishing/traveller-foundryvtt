@@ -24,12 +24,13 @@
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.1.17-DEV",
     "createdTime": 1760087085042,
     "modifiedTime": 1760087658195,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "_key": "!items!qjJYcI4aZT0C1Gs9"
 }

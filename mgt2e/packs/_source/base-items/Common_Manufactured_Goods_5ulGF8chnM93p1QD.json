@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/common_manufactured_goods.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 20000,
       "availability": "All",
       "purchaseDM": "Na +2, In +5",
       "saleDM": "Ni +3, Hi +2",
       "tons": "2D6 * 10",
       "illegal": false,
-      "price": 20000
+      "cost": 100
     },
+    "description": "<p>Household appliances, clothing and so forth.</p>",
     "quantity": 70,
-    "description": "<p>Household appliances, clothing and so forth.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -22,9 +23,7 @@
     "mhUjqDVicnwIUaiq": 3
   },
   "flags": {
-    "core": {
-      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.T3ybozgvG4NGBH74"
-    },
+    "core": {},
     "cf": {
       "id": null
     }
@@ -32,12 +31,13 @@
   "_stats": {
     "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.T3ybozgvG4NGBH74",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.11.6.13-DEV",
     "createdTime": 1739833676234,
     "modifiedTime": 1739833676234,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "folder": "nTFQBn7eKDifeKFR",
   "_id": "5ulGF8chnM93p1QD",

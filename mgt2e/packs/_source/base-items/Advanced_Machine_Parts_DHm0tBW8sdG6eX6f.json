@@ -23,19 +23,18 @@
     "mhUjqDVicnwIUaiq": 3
   },
   "flags": {
-    "core": {
-      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.9mS3AV5CDjqWP0s7"
-    }
+    "core": {}
   },
   "_stats": {
     "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.9mS3AV5CDjqWP0s7",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.12.0.0",
     "createdTime": 1739833676234,
     "modifiedTime": 1744545880455,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "folder": "nTFQBn7eKDifeKFR",
   "_id": "DHm0tBW8sdG6eX6f",

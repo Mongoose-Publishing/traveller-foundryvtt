@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/common_raw_materials.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 5000,
       "availability": "All",
       "purchaseDM": "Ag +3, Ga +2",
       "saleDM": "In +2, Po +2",
       "tons": "2D6 * 20",
       "illegal": false,
-      "price": 5000
+      "cost": 100
     },
+    "description": "<p>Metal, plastics, chemicals and other basic materials.</p>",
     "quantity": 1,
-    "description": "<p>Metal, plastics, chemicals and other basic materials.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -22,9 +23,7 @@
     "mhUjqDVicnwIUaiq": 3
   },
   "flags": {
-    "core": {
-      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.VCTF5w5LL7QzO7ML"
-    },
+    "core": {},
     "cf": {
       "id": null
     }
@@ -32,12 +31,13 @@
   "_stats": {
     "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.VCTF5w5LL7QzO7ML",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.11.6.13-DEV",
     "createdTime": 1739833676234,
     "modifiedTime": 1739833676234,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "folder": "nTFQBn7eKDifeKFR",
   "_id": "R1ePzU4fHk0wOwMr",

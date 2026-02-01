@@ -33,7 +33,12 @@
           "target": 10
         }
       },
-      "description": ""
+      "description": "",
+      "department": false,
+      "colour": null,
+      "dei": 0,
+      "positions": 1,
+      "show": true
     }
   },
   "effects": [],
@@ -48,12 +53,13 @@
   "_stats": {
     "systemId": "mgt2e",
     "systemVersion": "0.10.1",
-    "coreVersion": "12.329",
+    "coreVersion": "13.351",
     "createdTime": 1720364288589,
     "modifiedTime": 1725187252997,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "HFzaHWDXr6Nq4MJU",
   "sort": 0,

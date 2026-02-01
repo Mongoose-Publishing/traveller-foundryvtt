@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/live_animals.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 10000,
       "availability": "Ag, Ga",
       "purchaseDM": "Ag +2",
       "saleDM": "Lo +3",
       "tons": "1D6 * 10",
       "illegal": false,
-      "price": 10000
+      "cost": 100
     },
+    "description": "<p>Riding animals, beasts of burden, exotic pets.</p>",
     "quantity": 1,
-    "description": "<p>Riding animals, beasts of burden, exotic pets.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -22,19 +23,18 @@
     "mhUjqDVicnwIUaiq": 3
   },
   "flags": {
-    "core": {
-      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.Xwx2byeHVkQERdYQ"
-    }
+    "core": {}
   },
   "_stats": {
     "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.Xwx2byeHVkQERdYQ",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.11.6.13-DEV",
     "createdTime": 1739833676234,
     "modifiedTime": 1739833676234,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "folder": "nTFQBn7eKDifeKFR",
   "_id": "QpoNk6DRrwISWuYm",

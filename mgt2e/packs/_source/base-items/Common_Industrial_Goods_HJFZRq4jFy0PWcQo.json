@@ -4,16 +4,17 @@
   "img": "systems/mgt2e/icons/cargo/common_industrial_goods.svg",
   "system": {
     "cargo": {
-      "cost": 100,
+      "price": 10000,
       "availability": "All",
       "purchaseDM": "Na +2, In +5",
       "saleDM": "Ni +3, Ag +2",
       "tons": "2D6 * 10",
       "illegal": false,
-      "price": 10000
+      "cost": 100
     },
+    "description": "<p>Machine components and spare parts for common machinery.</p>",
     "quantity": 1,
-    "description": "<p>Machine components and spare parts for common machinery.</p>"
+    "cost": 1000
   },
   "effects": [],
   "ownership": {
@@ -22,9 +23,7 @@
     "mhUjqDVicnwIUaiq": 3
   },
   "flags": {
-    "core": {
-      "sourceId": "Compendium.mongoose-traveller-core.cargo-items.Item.AQVNKVKAUo0RCU2E"
-    },
+    "core": {},
     "cf": {
       "id": null
     }
@@ -32,12 +31,13 @@
   "_stats": {
     "compendiumSource": "Compendium.mongoose-traveller-core.cargo-items.Item.AQVNKVKAUo0RCU2E",
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.11.6.13-DEV",
     "createdTime": 1739833676234,
     "modifiedTime": 1739833676234,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "folder": "nTFQBn7eKDifeKFR",
   "_id": "HJFZRq4jFy0PWcQo",
