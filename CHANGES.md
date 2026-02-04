@@ -7,6 +7,17 @@
 Note that support for FoundryVTT 12 will be dropped in 0.18. You will need to migrate
 to FoundryVTT 13.
 
+# 0.18.0 (Beta)
+
+* Extensive updates to Spanish translations.
+* Allow train macro to modify characteristics by a dice roll
+* Code changes to remove support for deprecated name spaces.
+* Fix XP cost calculation issues.
+* Fixes to casting issues between integers and strings when training skills.
+* Added links to getting started videos in the documentation.
+* Dropped support for Foundry 12.
+
+
 # 0.17.4 (Beta)
 
 * When player applies damage to an actor that only has HITS, and it is handed over to

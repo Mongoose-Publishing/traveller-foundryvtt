@@ -642,6 +642,16 @@ Tools.creatureInlineDisplay = async function(a, actor) {
     return a;
 }
 
+Tools.packageInlineDisplay = async function(a, actor) {
+    let contentData = {
+        actor: actor
+    }
+    let html = await renderTemplate("systems/mgt2e/templates/journals/actor-package.html", contentData);
+
+    a.innerHTML = html;
+    return a;
+}
+
 Tools.npcInlineDisplay = async function(a, actor) {
     let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/>`;
     html += `<span class="actor-link rollable name" data-actor-id="${actor.uuid}">${actor.name}</span>`;
@@ -734,7 +744,6 @@ Tools.npcInlineDisplay = async function(a, actor) {
         );
         html += d;
     }
-
     html += `</div>`;
 
     a.innerHTML = html;

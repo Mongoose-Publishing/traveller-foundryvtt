@@ -15,7 +15,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller-sunburst.svg\" class=\" centered\" width=\"300\" /><p>This is a FoundryVTT system for <strong>Mongoose Traveller 2e</strong>. It provides character sheets and support for game rules. The core system does not contain much in the way of 'content', in the form of equipment lists.</p><p>The below documentation covers how to use the Foundry System with Traveller. It doesn't describe the Traveller rules themselves.</p><p></p><h2>Contents</h2><p>@UUID[.mXeFfBZITS7IkfPU]{Recent Changes} - List of changes to the system</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.V8trIYLYHch6WjEo]{Getting Started} - Help and guides for new Referees and Players</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.daLn8GLKHRgnJBax]{Chat Commands} - Macros and chat commands that are built in</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.XqtcLHYC383iXuNo]{Spacecraft}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.b3GTINzvb5g0tz9H]{Core Rules} - Overview of which Traveller rules are implemented in Foundry</p><p></p><p></p><h2>Further Help</h2><p>If you have questions, bugs or need help, then there are a couple of good places to go:</p><ul><li><p><a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/issues\">GitHub Issue Tracker</a></p></li><li><p><a href=\"https://discord.gg/vmDRBCJw\">Traveller Discord</a></p></li></ul><p></p><p></p>",
+        "content": "<img src=\"systems/mgt2e/images/traveller-sunburst.svg\" width=\"300\" style=\"width:60%;margin-left:20%;margin-right:20%\" /><p style=\"text-align:right\"></p><p>This is a FoundryVTT system for <strong>Mongoose Traveller 2e</strong>. It provides character sheets and support for game rules. The core system does not contain much in the way of 'content', in the form of equipment lists.</p><p>The below documentation covers how to use the Foundry System with Traveller. It doesn't describe the Traveller rules themselves.</p><p></p><h2>Contents</h2><p>@UUID[.mXeFfBZITS7IkfPU]{Recent Changes} - List of changes to the system</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.V8trIYLYHch6WjEo]{Getting Started} - Help and guides for new Referees and Players</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.daLn8GLKHRgnJBax]{Chat Commands} - Macros and chat commands that are built in</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.XqtcLHYC383iXuNo]{Spacecraft}</p><p></p><p>@UUID[Compendium.mgt2e.traveller-docs.JournalEntry.b3GTINzvb5g0tz9H]{Core Rules} - Overview of which Traveller rules are implemented in Foundry</p><p></p><p></p><h2>Further Help</h2><p>If you have questions, bugs or need help, then there are a couple of good places to go:</p><ul><li><p><a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/issues\">GitHub Issue Tracker</a></p></li><li><p><a href=\"https://discord.gg/vmDRBCJw\">Traveller Discord</a></p></li></ul><p></p><p></p>",
         "markdown": ""
       },
       "video": {
@@ -34,7 +34,7 @@
         "systemVersion": "0.10.1",
         "coreVersion": "13.351",
         "createdTime": 1717857026252,
-        "modifiedTime": 1766049330623,
+        "modifiedTime": 1770159267721,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -134,7 +134,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>When player applies damage to an actor with only HITS, the GM is now shown a confirmation dialog to allow them to approve or deny the request.</p></li><li><p>Fixed localisation bug on the damage dialog which was causing text to not be correctly displayed.</p></li><li><p>Start year is now shown for each career term on the Traveller character sheet.</p></li><li><p>Gunner's characteristic bonus is now included when making an attack roll from spacecraft.</p></li><li><p>Fixed some text issues on the equipment tab for character sheets.</p></li><li><p><strong>Support will be dropped for FoundryVTT 12 in 0.18 release.</strong></p></li></ul>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Compregensive update for Spanish translation changes by Xyxorswords</p></li><li><p>Allow `train` macros for characteristics to have a random modifier (e.g. 1D3)</p></li><li><p>Some backend improvements for Foundry13 support.</p></li><li><p>Fixes to the skill XP dialog, for calculating XP cost.</p></li><li><p>Fix some issues when training skills around casting of Javascript values.</p></li><li><p>Disabled some MgT2e settings for token defaults which are now overridden by native support in Foundry 13.</p></li><li><p><strong>Dropped support for Foundry 12.</strong></p></li></ul>"
       },
       "video": {
         "controls": true,
@@ -153,7 +153,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1769555882800,
+        "modifiedTime": 1770159260414,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
