@@ -785,11 +785,11 @@
   "MGT2.Spacecraft.ExtendedDriveTitle": "Select this if the drive needs to move\nmore than just the ship.\nDrop tanks, external cargo or craft",
   "MGT2.Spacecraft.ExtendedDriveTons": "Extended by (Tons)",
 
-  "MGT2.Damage.Okay": "{name} is okay.",
-  "MGT2.Damage.Injured": "{name} is injured.",
-  "MGT2.Damage.Unconscious": "{name} is unconscious.",
-  "MGT2.Damage.Dead": "{name} is dead.",
-  "MGT2.Damage.Destroyed": "{name} is destroyed.",
+  "MGT2.DamageEffect.Okay": "{name} is okay.",
+  "MGT2.DamageEffect.Injured": "{name} is injured.",
+  "MGT2.DamageEffect.Unconscious": "{name} is knocked unconscious.",
+  "MGT2.DamageEffect.Dead": "{name} is killed.",
+  "MGT2.DamageEffect.Destroyed": "{name} is destroyed.",
 
   "MGT2.Damage.MassiveDamage": "{name} takes massive damage.",
   "MGT2.Damage.HeavyDamage": "{name} takes heavy damage.",
@@ -1441,6 +1441,8 @@
   "MGT2.Info.BuyItem": "{actor} spends Cr{cost} on buying {item}",
   "MGT2.Warn.NoActorsToBuy": "No actors available who can buy this item",
   "MGT2.Warn.ThisActorCannotBuy": "{actor} doesn't have enough cash to buy {item}",
+
+  "MGT2.Error.NoStatus": "Unable to find status '{status}'",
 
   "MGT2.Role.isDepartment": "Role is a department",
   "MGT2.Role.RoleAssignment": "Role Assignment",

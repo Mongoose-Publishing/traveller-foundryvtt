@@ -40,6 +40,7 @@ import {
     launchSwarmHandler, showSwarmHandler
 } from "./helpers/spacecraft/spacecraft-utils.mjs";
 import {onManageActiveEffect} from "./helpers/effects.mjs";
+const  { renderTemplate } = foundry.applications.handlebars;
 
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
@@ -378,6 +379,17 @@ Hooks.on("init", function() {
     body.on("click", ".actor-link", ev =>  {
        const actorId = $(ev.currentTarget).data("actorId");
        openActorSheet(actorId);
+    });
+
+    CONFIG.statusEffects.push({
+        id: "destroyed",
+        name: "EFFECT.Destroyed",
+        img: "systems/mgt2e/icons/effects/destroyed.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "injured",
+        name: "EFFECT.Injured",
+        img: "systems/mgt2e/icons/effects/injured.svg"
     });
 })
 
@@ -731,82 +743,113 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
     }
 });
 
-Hooks.on("preUpdateToken", (token, data, moved) => {
-    if (data?.actor?.system?.hits) {
-        let hits = parseInt(data.actor.system.hits.value);
-        let max = parseInt(token.actor.system.hits.max);
-
-        let actorType = token.actor.type;
-        if (actorType === "traveller") {
-            // Travellers use their characteristics as hitpoints.
-            // HITS is just a sum of STR, DEX and END for purposes of
-            // showing the resource bar.
-            if (data.actor.system.status) {
-                if (actor.system.status.woundLevel > 1) {
-                    tokenObject.toggleEffect("systems/mgt2e/icons/effects/unconscious.svg", {
-                        "overlay": true,
-                        "active": false
-                    });
-                }
-            }
-        } else if (actorType === "creature" || actorType === "npc") {
-            // NPCs and Creatures use a generic HITS value.
-            let half = parseInt(max / 2);
-            let tenth = parseInt(max / 10);
-
-            let text = "";
-
-            let tokenObject = token.object;
-            if (hits <= 0) {
-                // Token is dead.
-                text += `They are dead.`;
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/dead.svg", { "overlay": true, "active": true });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/unconscious.svg", { "overlay": true, "active": false });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/injured.svg", { "overlay": false, "active": false });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/destroyed.svg", { "overlay": true, "active": false });
-            } else if (hits <= tenth) {
-                // Token is unconscious.
-                text += `They are unconscious.`;
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/dead.svg", { "overlay": true, "active": false });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/unconscious.svg", { "overlay": true, "active": true });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/injured.svg", { "overlay": false, "active": false });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/destroyed.svg", { "overlay": true, "active": false });
-            } else if (hits <= half) {
-                // Token is bloodied.
-                text += `They are shaken.`;
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/dead.svg", { "overlay": true, "active": false });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/unconscious.svg", { "overlay": true, "active": false });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/injured.svg", { "overlay": false, "active": true });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/destroyed.svg", { "overlay": true, "active": false });
-            } else {
-                // Token is okay.
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/dead.svg", { "overlay": true, "active": false });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/unconscious.svg", { "overlay": true, "active": false });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/injured.svg", { "overlay": false, "active": false });
-                tokenObject.toggleEffect("systems/mgt2e/icons/effects/destroyed.svg", { "overlay": true, "active": false });
-            }
-            if (text.length > 0) {
-                let chatData = {
-                    user: game.user.id,
-                    speaker: ChatMessage.getSpeaker(),
-                    content: text
-                }
-                ChatMessage.create(chatData, {});
-            }
-        } else {
-            // Healed. Nothing to say.
-            return;
-        }
-    }
-    return true;
-});
-
 Hooks.on("updateActor", async (actor, updateData, options, userId) => {
    console.log("updateActor:");
-   console.log(updateData);
+   //console.log(updateData);
 
-   const damage = getProperty(updateData, "system.damage");
-   if (damage === undefined) return;
+    let isUnconscious = false;
+    let isDead = false;
+    let isDestroyed = false;
+
+    let wasUnconscious = actor.effects.find(e => e.name === "unconscious");
+    let wasDead = actor.effects.find(e => e.name === "dead");
+    let wasDestroyed = actor.effects.find(e => e.name === "destroyed");
+
+    if (foundry.utils.getProperty(updateData, "system.damage")) {
+       if (actor.system.characteristics) {
+           let char = actor.system.characteristics;
+           let str = Number(char['STR'].current);
+           let dex = Number(char['DEX'].current);
+           let end = Number(char['END'].current);
+
+           let numAtZero = 0;
+           if (str < 1) numAtZero++;
+           if (dex < 1) numAtZero++;
+           if (end < 1) numAtZero++;
+
+           switch (numAtZero) {
+               case 0:
+                   actor.setDeadEffect(false);
+                   actor.setUnconsciousEffect(false);
+                   actor.setBloodiedEffect(false);
+                   break;
+               case 1:
+                   actor.setDeadEffect(false);
+                   actor.setUnconsciousEffect(false);
+                   actor.setBloodiedEffect(true);
+                   break;
+               case 2:
+                   actor.setDeadEffect(false);
+                   actor.setUnconsciousEffect(true);
+                   actor.setBloodiedEffect(true);
+                   isUnconscious = true;
+                   break;
+               case 3:
+                   actor.setDeadEffect(true);
+                   actor.setUnconsciousEffect(false);
+                   actor.setBloodiedEffect(false);
+                   isDead = true;
+                   break;
+           }
+       }
+    } else if (foundry.utils.getProperty(updateData, "system.hits")) {
+        if (["npc", "creature"].includes(actor.type)) {
+            let hits = Number(actor.system.hits.value);
+            let max = Number(actor.system.hits.max);
+
+            if (hits > max/2) {
+                actor.setDeadEffect(false);
+                actor.setUnconsciousEffect(false);
+                actor.setBloodiedEffect(false);
+            } else if (hits > max/10) {
+                actor.setDeadEffect(false);
+                actor.setUnconsciousEffect(false);
+                actor.setBloodiedEffect(true);
+            } else if (hits > 0) {
+                actor.setDeadEffect(false);
+                actor.setUnconsciousEffect(true);
+                actor.setBloodiedEffect(true);
+                isUnconscious = true;
+            } else {
+                actor.setDeadEffect(true);
+                actor.setUnconsciousEffect(false);
+                actor.setBloodiedEffect(false);
+                isDead = true;
+            }
+        } else if (["spacecraft"].includes(actor.type)) {
+            let hits = Number(actor.system.hits.value);
+            let max = Number(actor.system.hits.max);
+
+            if (hits > 0) {
+                actor.setDestroyedEffect(false);
+            } else {
+                actor.setDestroyedEffect(true);
+            }
+        }
+    }
+    let actorName = actor?.token?.name?actor.token.name:actor.name;
+    let text = "";
+    if (isDead && !wasDead) {
+        text = game.i18n.format("MGT2.DamageEffect.Dead", { name: actorName });
+    } else if (isUnconscious && !wasUnconscious) {
+        text = game.i18n.format("MGT2.DamageEffect.Unconscious", { name: actorName });
+    }
+
+    let contentData = {
+        useChatIcons: game.settings.get("mgt2e", "useChatIcons"),
+        actor: actor,
+        text: text
+    }
+    const content = await renderTemplate("systems/mgt2e/templates/chat/damage-update.html", contentData);
+    if (text.length > 0) {
+        let chatData = {
+            user: game.user.id,
+            speaker: ChatMessage.getSpeaker(),
+            content: content
+        }
+        ChatMessage.create(chatData, {});
+    }
+
 
    console.log(CONFIG.statusEffects);
 });

@@ -1,0 +1,19 @@
+<div class="mgt2e-chat-message damage-update-box">
+    {{#if useChatIcons}}
+        {{#if actor}}
+            <img class="chat-sticker actor-uuid-link" title="{{actor.name}}"
+                 src="{{actor.img}}" data-actor-id="{{actor.uuid}}"/>
+        {{/if}}
+    {{/if}}
+    <h2>
+        {{#if actor}}
+            {{#if actor.token.name}}
+                {{actor.token.name}}
+            {{else}}
+                {{actor.name}}
+            {{/if}}
+        {{/if}}
+    </h2>
+
+    <p class="mgt2e-chat-content">{{text}}</p>
+</div>

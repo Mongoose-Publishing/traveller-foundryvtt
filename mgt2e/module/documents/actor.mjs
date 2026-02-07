@@ -1402,4 +1402,64 @@ export class MgT2Actor extends Actor {
         return null;
     }
 
+    setEffect(status, value, overlay) {
+        const statusEffect = CONFIG.statusEffects.find(e => e.id === status);
+
+        if (!statusEffect) {
+            ui.notifications.error(
+                game.i18n.format("MGT2.Error.NoStatus", { status: status })
+            );
+            return;
+        }
+
+        const name = game.i18n.localize(statusEffect.name);
+        const effect = this.effects.find(e => e.name === name);
+
+        if (value && effect) {
+            return;
+        } else if (!value && !effect) {
+            return;
+        } else if (value) {
+            this.createEmbeddedDocuments("ActiveEffect", [{
+                name: name,
+                icon: statusEffect.img,
+                changes: [],
+                statuses: [ status ],
+                flags: {
+                    "core": {
+                        overlay: overlay
+                    }
+                }
+            }]);
+
+        } else if (effect) {
+            effect.delete();
+        }
+
+    }
+
+    setDeadEffect(value) {
+        this.setEffect("dead", value, true);
+    }
+
+    setUnconsciousEffect(value) {
+        this.setEffect("unconscious", value,  true);
+    }
+
+    setBloodiedEffect(value) {
+        this.setEffect("bleeding", value,  false);
+    }
+
+    setFrightenedEffect(value) {
+        this.setEffect("fear", value,  false);
+    }
+
+    setStunnedEffect(value) {
+        this.setEffect("stun", value,  false);
+    }
+
+    setDestroyedEffect(value) {
+        this.setEffect("destroyed", value,  true);
+    }
+
 }
