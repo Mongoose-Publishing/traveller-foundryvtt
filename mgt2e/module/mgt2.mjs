@@ -801,6 +801,15 @@ Hooks.on("preUpdateToken", (token, data, moved) => {
     return true;
 });
 
+Hooks.on("updateActor", async (actor, updateData, options, userId) => {
+   console.log("updateActor:");
+   console.log(updateData);
+
+   const damage = getProperty(updateData, "system.damage");
+   if (damage === undefined) return;
+
+   console.log(CONFIG.statusEffects);
+});
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type === "Actor" || data.type === "Item" || data.data?.dragType === "skill") {
