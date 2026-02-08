@@ -545,23 +545,15 @@ MgT2eMacros.createItem = async function(args, buy) {
                 added=true;
                 continue;
             }
-            if (false) {
-                let cash = Number(actor.system.finance.cash);
-                if (cost > cash) {
-                    ui.notifications.error(
-                        game.i18n.format("MGT2.Error.NotEnoughCash",
-                            {"actor": actor.name, "cost": cost})
-                    )
-                    added = true; // Not really, but we don't want a "no tokens" error
-                    continue;
-                }
-                await actor.update({"system.finance.cash": cash - cost});
-                let d = await Item.create(item, {parent: actor});
-                d.update({"system.quantity": quantity});
-            }
             if (cost === 0 && actor.permission >= 3) {
+                // Force item to be sorted last in the list. This is required for
+                // career terms.
+                let maxSort = 0;
+                for (let i of actor.items) {
+                    maxSort = Math.max(maxSort, i.sort);
+                }
                 let d = await Item.create(item, {parent: actor});
-                d.update({"system.quantity": quantity});
+                d.update({"sort": maxSort + 1000, "system.quantity": quantity});
                 ui.notifications.info(
                     game.i18n.format("MGT2.Info.CreateItem", {"item": item.name, "actor": actor.name})
                 );

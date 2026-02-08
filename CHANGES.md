@@ -1,11 +1,11 @@
 # Release Notes
 
-## Known Issues
+# Develop
 
-* Career terms aren't always added in the correct order.
-
-Note that support for FoundryVTT 12 will be dropped in 0.18. You will need to migrate
-to FoundryVTT 13.
+* Tokens now have effects added to them when actor is damaged.
+* Chat messages will be output when an actor takes damage.
+* When a macro was used to add a career item to an actor, the career wasn't always
+  added as the most recent career. This has been fixed.
 
 # 0.18.0 (Beta)
 
