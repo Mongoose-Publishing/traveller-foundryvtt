@@ -691,18 +691,33 @@ Hooks.on("createActor", (actor, data, userId) => {
     }
 });
 
-Hooks.on("preUpdateActor", (actor, data, options, userId) => {
-    if (data?.system?.damage) {
-        // This is a Traveller with full damage by stat
-        const damage = data.system.damage;
-        let endDmg = parseInt(damage.END?damage.END.value:actor.system.damage.END.value);
-        let strDmg = parseInt(damage.STR?damage.STR.value:actor.system.damage.STR.value);
-        let dexDmg = parseInt(damage.DEX?damage.DEX.value:actor.system.damage.DEX.value);
+Hooks.on("preUpdateActor2", (actor, changedData, options, userId) => {
+    if (game.user.id !== userId) return;
+    console.log("preUpdateActor");
+    if (foundry.utils.getProperty(changedData, "system.damage")) {
+        // The damage applied by the update.
+        const damage = foundry.utils.getProperty(changedData, "system.damage");
+        console.log(damage);
+        let endDmg = parseInt(damage.END?damage.END.value:0);
+        let strDmg = parseInt(damage.STR?damage.STR.value:0);
+        let dexDmg = parseInt(damage.DEX?damage.DEX.value:0);
+
+        // The damage before the update.
+        const currentDamage = actor.system.damage;
+        console.log(currentDamage);
+        let endCur = parseInt(currentDamage.END.value);
+        let strCur = parseInt(currentDamage.STR.value);
+        let dexCur = parseInt(currentDamage.DEX.value);
+
         let endMax = actor.system.characteristics.END.value;
         let strMax = actor.system.characteristics.STR.value;
         let dexMax = actor.system.characteristics.DEX.value;
 
-        console.log(`Damage is STR ${strDmg} DEX ${dexDmg} END ${endDmg}`);
+        // How much damage was actually done in this attack?
+        let totalDamage = (endDmg - endCur) + (strDmg - strCur) + (dexDmg - dexCur);
+
+        console.log(`Damage is STR ${strCur} DEX ${dexCur} END ${endCur}`);
+        console.log(`Damage is STR ${strDmg} DEX ${dexDmg} END ${endDmg} TOTAL ${totalDamage}`);
 
         let atZero = 0;
         if (endDmg >= endMax) atZero++;
@@ -722,10 +737,12 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
                 actor.unsetFlag("mgt2e", "disabled");
                 actor.unsetFlag("mgt2e", "dead");
         }
-    } else if (data?.system?.hits) {
+    } else if (changedData?.system?.hits) {
+        console.log("NPC OR CREATURE");
         // This is an NPC or Creature
-        let dmg = data.system.hits.damage?data.system.hits.damage:actor.system.hits.damage;
-        let max = data.system.hits.max?data.system.hits.max:actor.system.hits.max;
+        const hits = foundry.utils.getProperty(changedData, "system.hits");
+        let dmg = hits.damage?hits.damage:actor.system.hits.damage;
+        let max = hits.max?hits.max:actor.system.hits.max;
 
         if (dmg >= max) {
             actor.setFlag("mgt2e", "dead", "true");
@@ -745,6 +762,7 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
 
 Hooks.on("updateActor", async (actor, updateData, options, userId) => {
    console.log("updateActor:");
+   if (game.user._id !== userId) return;
    //console.log(updateData);
 
     let isUnconscious = false;
@@ -771,23 +789,23 @@ Hooks.on("updateActor", async (actor, updateData, options, userId) => {
                case 0:
                    actor.setDeadEffect(false);
                    actor.setUnconsciousEffect(false);
-                   actor.setBloodiedEffect(false);
+                   actor.setInjuredEffect(false);
                    break;
                case 1:
                    actor.setDeadEffect(false);
                    actor.setUnconsciousEffect(false);
-                   actor.setBloodiedEffect(true);
+                   actor.setInjuredEffect(true);
                    break;
                case 2:
                    actor.setDeadEffect(false);
                    actor.setUnconsciousEffect(true);
-                   actor.setBloodiedEffect(true);
+                   actor.setInjuredEffect(true);
                    isUnconscious = true;
                    break;
                case 3:
                    actor.setDeadEffect(true);
                    actor.setUnconsciousEffect(false);
-                   actor.setBloodiedEffect(false);
+                   actor.setInjuredEffect(false);
                    isDead = true;
                    break;
            }
@@ -800,20 +818,20 @@ Hooks.on("updateActor", async (actor, updateData, options, userId) => {
             if (hits > max/2) {
                 actor.setDeadEffect(false);
                 actor.setUnconsciousEffect(false);
-                actor.setBloodiedEffect(false);
+                actor.setInjuredEffect(false);
             } else if (hits > max/10) {
                 actor.setDeadEffect(false);
                 actor.setUnconsciousEffect(false);
-                actor.setBloodiedEffect(true);
+                actor.setInjuredEffect(true);
             } else if (hits > 0) {
                 actor.setDeadEffect(false);
                 actor.setUnconsciousEffect(true);
-                actor.setBloodiedEffect(true);
+                actor.setInjuredEffect(true);
                 isUnconscious = true;
             } else {
                 actor.setDeadEffect(true);
                 actor.setUnconsciousEffect(false);
-                actor.setBloodiedEffect(false);
+                actor.setInjuredEffect(false);
                 isDead = true;
             }
         } else if (["spacecraft"].includes(actor.type)) {
@@ -827,6 +845,8 @@ Hooks.on("updateActor", async (actor, updateData, options, userId) => {
             }
         }
     }
+    /*
+     * This will all be done when damage is applied.
     let actorName = actor?.token?.name?actor.token.name:actor.name;
     let text = "";
     if (isDead && !wasDead) {
@@ -849,9 +869,9 @@ Hooks.on("updateActor", async (actor, updateData, options, userId) => {
         }
         ChatMessage.create(chatData, {});
     }
+*/
 
-
-   console.log(CONFIG.statusEffects);
+   //console.log(CONFIG.statusEffects);
 });
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {

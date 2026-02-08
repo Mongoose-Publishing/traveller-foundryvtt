@@ -785,23 +785,17 @@
   "MGT2.Spacecraft.ExtendedDriveTitle": "Select this if the drive needs to move\nmore than just the ship.\nDrop tanks, external cargo or craft",
   "MGT2.Spacecraft.ExtendedDriveTons": "Extended by (Tons)",
 
-  "MGT2.DamageEffect.Okay": "{name} is okay.",
-  "MGT2.DamageEffect.Injured": "{name} is injured.",
-  "MGT2.DamageEffect.Unconscious": "{name} is knocked unconscious.",
-  "MGT2.DamageEffect.Dead": "{name} is killed.",
-  "MGT2.DamageEffect.Destroyed": "{name} is destroyed.",
+  "MGT2.DamageEffect.Injured": "They are injured.",
+  "MGT2.DamageEffect.Unconscious": "They are knocked unconscious.",
+  "MGT2.DamageEffect.Dead": "They are killed.",
+  "MGT2.DamageEffect.Destroyed": "They are destroyed.",
 
-  "MGT2.Damage.MassiveDamage": "{name} takes massive damage.",
-  "MGT2.Damage.HeavyDamage": "{name} takes heavy damage.",
-  "MGT2.Damage.ModerateDamage": "{name} takes moderate damage.",
-  "MGT2.Damage.LightDamage": "{name} takes light damage.",
-
-  "MGT2.Damage.EvenMoreDead": "They are definitely still dead.",
-  "MGT2.Damage.Killed": "They are killed.",
-  "MGT2.Damage.KnockedOut": "They are knocked unconscious.",
-  "MGT2.Damage.StillOut": "They are still unconscious.",
-  "MGT2.Damage.Hurt": "They are badly hurt.",
-  "MGT2.Damage.StillHurt": "They are badly hurt.",
+  "MGT2.DamageTaken.Value": "Takes {dmg} hits.",
+  "MGT2.DamageTaken.Minor": "Takes a minor wound.",
+  "MGT2.DamageTaken.Major": "Takes a major wound (½ END).",
+  "MGT2.DamageTaken.Severe": "Takes a severe wound (END).",
+  "MGT2.DamageTaken.Crippling": "Takes a crippling wound (END x2).",
+  "MGT2.DamageTaken.Critical": "Takes a critical wound (END x3).",
 
   "MGT2.DamageDialog.Title": "Apply Damage",
   "MGT2.DamageDialog.Damage": "DAMAGE",
@@ -1578,6 +1572,9 @@
   "TYPES.Item.role": "Crew Role",
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "World Data",
+
+  "EFFECT.Injured": "Injured",
+  "EFFECT.Destroyed": "Destroyed",
 
   "Save": "Save",
 

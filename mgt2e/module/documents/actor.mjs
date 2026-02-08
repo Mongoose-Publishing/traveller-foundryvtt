@@ -6,6 +6,7 @@ import {getTraitValue, hasTrait, isNonZero, isNumber, skillLabel} from "../helpe
 import {MgT2SpacecraftDamageDialog} from "../helpers/spacecraft-damage-dialog.mjs";
 import {setSpacecraftCriticalLevel} from "../helpers/spacecraft/criticals.mjs";
 import {MgT2VehicleDamageDialog} from "../helpers/vehicle-damage-dialog.mjs";
+const  { renderTemplate } = foundry.applications.handlebars;
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -658,7 +659,7 @@ export class MgT2Actor extends Actor {
       }
   }
 
-  applyActualDamageToTraveller(damage, options) {
+  async applyActualDamageToTraveller(damage, options) {
       let stun = false;
       let stuns = 0;
       if (hasTrait(options.traits, "stun")) {
@@ -683,6 +684,7 @@ export class MgT2Actor extends Actor {
           this.system.rads += options.actualRadiation;
           this.update({ "system.rads": this.system.rads });
       }
+      let totalDamage = damage;
 
       if (stun) {
           if (options.characteristics) {
@@ -702,7 +704,7 @@ export class MgT2Actor extends Actor {
               this.system.damage.DEX.value += parseInt(options.characteristics.DEX);
               this.system.damage.END.value += parseInt(options.characteristics.END);
 
-              let totalDamage = options.characteristics.STR + options.characteristics.DEX + options.characteristics.END;
+              totalDamage = options.characteristics.STR + options.characteristics.DEX + options.characteristics.END;
               ui.notifications.info(game.i18n.format("MGT2.Info.Damage",
                   {"actor": this.name, "damage": totalDamage}))
 
@@ -743,6 +745,70 @@ export class MgT2Actor extends Actor {
       for (let c of [ "STR", "DEX", "END"]) {
           this.system.damage[c].value = Math.min(this.system.damage[c].value, this.system.characteristics[c].value);
       }
+
+      if (totalDamage > 0) {
+          let actorName = this?.token?.name?this.token.name:this.name;
+          let wasInjured = this.effects.find(e => e.name === "injured");
+          let wasUnconscious = this.effects.find(e => e.name === "unconscious");
+          let wasDead = this.effects.find(e => e.name === "dead");
+          let isInjured = false, isUnconscious = false, isDead = false;
+          let numAtZero = 0;
+          let END = Number(this.system.characteristics.END.value);
+
+          if (this.system.damage.STR.value >= this.system.characteristics.STR.value) numAtZero++;
+          if (this.system.damage.DEX.value >= this.system.characteristics.DEX.value) numAtZero++;
+          if (this.system.damage.END.value >= this.system.characteristics.END.value) numAtZero++;
+          if (numAtZero === 1) {
+              isInjured = true;
+              this.setInjuredEffect(true);
+          } else if (numAtZero === 2) {
+              isUnconscious = true;
+              this.setUnconsciousEffect(true);
+          } else if (numAtZero === 3) {
+              isDead = true;
+              isUnconscious = false;
+              this.setUnconsciousEffect(false);
+              this.setDeadEffect(true);
+          }
+
+          let text = `${actorName} takes ${totalDamage} damage. `;
+          if (totalDamage >= END * 3) {
+              text = `${game.i18n.localize("MGT2.DamageTaken.Critical")} `;
+          } else if (totalDamage >= END * 2) {
+              text = `${game.i18n.localize("MGT2.DamageTaken.Crippling")} `;
+          } else if (totalDamage >= END) {
+              text = `${game.i18n.localize("MGT2.DamageTaken.Severe")} `;
+          } else if (totalDamage >= END /2) {
+              text = `${game.i18n.localize("MGT2.DamageTaken.Major")} `;
+          } else {
+              text = `${game.i18n.localize("MGT2.DamageTaken.Minor")} `;
+          }
+
+          if (isDead && !wasDead) {
+              text += game.i18n.localize("MGT2.DamageEffect.Dead");
+          } else if (isUnconscious && !wasUnconscious) {
+              text += game.i18n.localize("MGT2.DamageEffect.Unconscious");
+          } else if (isInjured && !wasInjured) {
+              text += game.i18n.localize("MGT2.DamageEffect.Injured");
+          }
+
+          let contentData = {
+              useChatIcons: game.settings.get("mgt2e", "useChatIcons"),
+              actor: this,
+              text: text
+          }
+          const content = await renderTemplate("systems/mgt2e/templates/chat/damage-update.html", contentData);
+          if (text.length > 0) {
+              let chatData = {
+                  user: game.user.id,
+                  speaker: ChatMessage.getSpeaker(),
+                  content: content
+              }
+              ChatMessage.create(chatData, {});
+          }
+      }
+
+
       this.update({"system.damage": this.system.damage });
   }
 
@@ -1435,7 +1501,6 @@ export class MgT2Actor extends Actor {
         } else if (effect) {
             effect.delete();
         }
-
     }
 
     setDeadEffect(value) {
@@ -1446,8 +1511,8 @@ export class MgT2Actor extends Actor {
         this.setEffect("unconscious", value,  true);
     }
 
-    setBloodiedEffect(value) {
-        this.setEffect("bleeding", value,  false);
+    setInjuredEffect(value) {
+        this.setEffect("injured", value,  false);
     }
 
     setFrightenedEffect(value) {
