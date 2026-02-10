@@ -1,5 +1,11 @@
 {{#if (hasStatus actor)}}
   <div class="shadow">
+    {{#each actor.effects as |e|}}
+      {{#if e.flags.mgt2e.effect}}
+        {{{showStatus actor e.flags.mgt2e.effect }}}
+      {{/if}}
+    {{/each}}
+
     {{#if actor.flags.mgt2e.dead}}{{{showStatus actor "dead"}}}{{/if}}
     {{#if actor.flags.mgt2e.disabled}}{{{showStatus actor "dead"}}}{{/if}}
     {{#if actor.flags.mgt2e.unconscious}}{{{showStatus actor "unconscious"}}}{{/if}}

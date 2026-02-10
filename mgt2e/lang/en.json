@@ -796,6 +796,8 @@
   "MGT2.DamageTaken.Severe": "Takes a severe wound (END).",
   "MGT2.DamageTaken.Crippling": "Takes a crippling wound (END x2).",
   "MGT2.DamageTaken.Critical": "Takes a critical wound (END x3).",
+  "MGT2.DamageTaken.Stun": "Takes stun damage.",
+  "MGT2.DamageTaken.Radiation": "Takes radiation damage.",
 
   "MGT2.DamageDialog.Title": "Apply Damage",
   "MGT2.DamageDialog.Damage": "DAMAGE",
@@ -1575,6 +1577,9 @@
 
   "EFFECT.Injured": "Injured",
   "EFFECT.Destroyed": "Destroyed",
+  "EFFECT.FirstAid": "First Aid",
+  "EFFECT.Encumbered": "Encumbered",
+  "EFFECT.VaccSuit": "Vacc Suit",
 
   "Save": "Save",
 

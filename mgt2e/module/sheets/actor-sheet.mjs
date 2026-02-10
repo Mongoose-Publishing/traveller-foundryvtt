@@ -665,22 +665,17 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         this.actor.system.weightCarried = weight;
         this.actor.system.modifiers.encumbrance.auto = 0;
 
-        // Only update the actor if the flag has changed.
-        let wasEncumbered = !!this.actor.getFlag("mgt2e", "encumbered");
-        let wasVaccSuit = !!this.actor.getFlag("mgt2e", "vaccSuit");
-        let isVaccSuit = false;
 
         if ( game.settings.get("mgt2e", "useEncumbrance")) {
             if (weight > this.actor.system.heavyLoad) {
                 this.actor.system.modifiers.encumbrance.auto = -2;
-                if (!wasEncumbered) {
-                    this.actor.setFlag("mgt2e", "encumbered", true);
-                }
-            } else if (wasEncumbered) {
-                this.actor.setFlag("mgt2e", "encumbered", false);
+                this.actor.setEncumberedEffect(true);
+            } else {
+                this.actor.setEncumberedEffect(false);
             }
         }
 
+        let isVaccSuit = false;
         if (skillNeeded >= 0) {
             let vaccSkill = -3;
             if (vs && vs.trained) {
@@ -694,15 +689,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 isVaccSuit = true;
             }
         }
-        if (isVaccSuit !== wasVaccSuit) {
-            if (isVaccSuit) {
-                // Causes infinite loop. Why?
-                //this.actor.setFlag("mgt2e", "vaccSuit", true);
-            } else {
-                // Causes infinite loop. Why?
-                //this.actor.setFlag("mgt2e", "vaccSuit", false);
-            }
-        }
+        this.actor.setVaccSuitEffect(isVaccSuit);
 
         // Assign and return
         context.gear = gear;
@@ -1508,6 +1495,10 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
 
     _clearStatus(actor, status) {
         actor.unsetFlag("mgt2e", status);
+        let e = actor.effects.find(e => e?.flags?.mgt2e?.effect === status);
+        if (e) {
+            e.delete();
+        }
     }
 
     _rollInit(actor) {

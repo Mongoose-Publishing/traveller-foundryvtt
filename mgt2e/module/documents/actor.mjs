@@ -665,6 +665,7 @@ export class MgT2Actor extends Actor {
       if (hasTrait(options.traits, "stun")) {
           stun = true;
       }
+      console.log(this);
 
       if (options.directChaDamage) {
           // Damage it to be applied to specific characteristics, not
@@ -738,7 +739,9 @@ export class MgT2Actor extends Actor {
 
           }
           if (needsFirstAid) {
-              this.setFlag("mgt2e", "needsFirstAid", true);
+              console.log("Actor needs first aid, setting effect");
+              //this.setFlag("mgt2e", "needsFirstAid", true);
+              this.setFirstAidEffect(true);
           }
       }
 
@@ -746,7 +749,7 @@ export class MgT2Actor extends Actor {
           this.system.damage[c].value = Math.min(this.system.damage[c].value, this.system.characteristics[c].value);
       }
 
-      if (totalDamage > 0) {
+      if (totalDamage > 0 || options.actualRadiation > 0) {
           let actorName = this?.token?.name?this.token.name:this.name;
           let wasInjured = this.effects.find(e => e.name === "injured");
           let wasUnconscious = this.effects.find(e => e.name === "unconscious");
@@ -760,7 +763,6 @@ export class MgT2Actor extends Actor {
           if (this.system.damage.END.value >= this.system.characteristics.END.value) numAtZero++;
           if (numAtZero === 1) {
               isInjured = true;
-              this.setInjuredEffect(true);
           } else if (numAtZero === 2) {
               isUnconscious = true;
               this.setUnconsciousEffect(true);
@@ -771,8 +773,10 @@ export class MgT2Actor extends Actor {
               this.setDeadEffect(true);
           }
 
-          let text = `${actorName} takes ${totalDamage} damage. `;
-          if (totalDamage >= END * 3) {
+          let text = "";
+          if (stun) {
+              text = `${game.i18n.localize("MGT2.DamageTaken.Stun")} `;
+          } else if (totalDamage >= END * 3) {
               text = `${game.i18n.localize("MGT2.DamageTaken.Critical")} `;
           } else if (totalDamage >= END * 2) {
               text = `${game.i18n.localize("MGT2.DamageTaken.Crippling")} `;
@@ -780,8 +784,11 @@ export class MgT2Actor extends Actor {
               text = `${game.i18n.localize("MGT2.DamageTaken.Severe")} `;
           } else if (totalDamage >= END /2) {
               text = `${game.i18n.localize("MGT2.DamageTaken.Major")} `;
-          } else {
+          } else if (totalDamage > 0) {
               text = `${game.i18n.localize("MGT2.DamageTaken.Minor")} `;
+          }
+          if (options.actualRadiation > 0) {
+              text += `${game.i18n.localize("MGT2.DamageTaken.Radiation")} `;
           }
 
           if (isDead && !wasDead) {
@@ -1468,7 +1475,7 @@ export class MgT2Actor extends Actor {
         return null;
     }
 
-    setEffect(status, value, overlay) {
+    setEffect(status, value, overlay, locked) {
         const statusEffect = CONFIG.statusEffects.find(e => e.id === status);
 
         if (!statusEffect) {
@@ -1494,10 +1501,13 @@ export class MgT2Actor extends Actor {
                 flags: {
                     "core": {
                         overlay: overlay
+                    },
+                    "mgt2e": {
+                        effect: status,
+                        locked: locked?true:false
                     }
                 }
             }]);
-
         } else if (effect) {
             effect.delete();
         }
@@ -1523,8 +1533,24 @@ export class MgT2Actor extends Actor {
         this.setEffect("stun", value,  false);
     }
 
+    setFirstAidEffect(value) {
+        this.setEffect("needsFirstAid", value,  false);
+    }
+
+    setSurgeryEffect(value) {
+        this.setEffect("needsSurgery", value,  false);
+    }
+
     setDestroyedEffect(value) {
         this.setEffect("destroyed", value,  true);
+    }
+
+    setEncumberedEffect(value) {
+        this.setEffect("encumbered", value,  false);
+    }
+
+    setVaccSuitEffect(value) {
+        this.setEffect("vaccSuit", value,  false);
     }
 
 }

@@ -383,13 +383,33 @@ Hooks.on("init", function() {
 
     CONFIG.statusEffects.push({
         id: "destroyed",
-        name: "EFFECT.Destroyed",
+        name: "MGT2.EFFECT.Destroyed",
         img: "systems/mgt2e/icons/effects/destroyed.svg"
     });
     CONFIG.statusEffects.push({
         id: "injured",
         name: "EFFECT.Injured",
         img: "systems/mgt2e/icons/effects/injured.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "needsFirstAid",
+        name: "EFFECT.FirstAid",
+        img: "systems/mgt2e/icons/effects/firstaid.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "needsSurgery",
+        name: "EFFECT.Surgery",
+        img: "systems/mgt2e/icons/effects/surgery.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "encumbered",
+        name: "EFFECT.Encumbered",
+        img: "systems/mgt2e/icons/effects/encumbered.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "vaccSuit",
+        name: "EFFECT.VaccSuit",
+        img: "systems/mgt2e/icons/effects/vaccsuit.svg"
     });
 })
 
@@ -774,6 +794,7 @@ Hooks.on("updateActor", async (actor, updateData, options, userId) => {
     let wasDestroyed = actor.effects.find(e => e.name === "destroyed");
 
     if (foundry.utils.getProperty(updateData, "system.damage")) {
+        console.log("Updating data for damage");
        if (actor.system.characteristics) {
            let char = actor.system.characteristics;
            let str = Number(char['STR'].current);
@@ -789,28 +810,25 @@ Hooks.on("updateActor", async (actor, updateData, options, userId) => {
                case 0:
                    actor.setDeadEffect(false);
                    actor.setUnconsciousEffect(false);
-                   actor.setInjuredEffect(false);
                    break;
                case 1:
                    actor.setDeadEffect(false);
                    actor.setUnconsciousEffect(false);
-                   actor.setInjuredEffect(true);
                    break;
                case 2:
                    actor.setDeadEffect(false);
                    actor.setUnconsciousEffect(true);
-                   actor.setInjuredEffect(true);
                    isUnconscious = true;
                    break;
                case 3:
                    actor.setDeadEffect(true);
                    actor.setUnconsciousEffect(false);
-                   actor.setInjuredEffect(false);
                    isDead = true;
                    break;
            }
        }
     } else if (foundry.utils.getProperty(updateData, "system.hits")) {
+        console.log("Updating data for hits");
         if (["npc", "creature"].includes(actor.type)) {
             let hits = Number(actor.system.hits.value);
             let max = Number(actor.system.hits.max);
@@ -1748,6 +1766,13 @@ Handlebars.registerHelper('effect', function(key) {
  * Does not check to see if a traveller, npc or creature.
  */
 Handlebars.registerHelper('hasStatus', function(actor) {
+
+    for (let e of actor.effects) {
+        if (e.flags?.mgt2e?.effect) {
+            return true;
+        }
+    }
+
     const status = actor.flags.mgt2e;
     if (!status) return false;
 
