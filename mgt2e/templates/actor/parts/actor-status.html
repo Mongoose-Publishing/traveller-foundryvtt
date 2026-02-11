@@ -2,7 +2,7 @@
   <div class="shadow">
     {{#each actor.effects as |e|}}
       {{#if e.flags.mgt2e.effect}}
-        {{{showStatus actor e.flags.mgt2e.effect }}}
+        {{{showStatus actor e.flags.mgt2e.effect e }}}
       {{/if}}
     {{/each}}
 

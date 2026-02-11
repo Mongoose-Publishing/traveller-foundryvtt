@@ -92,7 +92,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
 
         // Prepare character data and items.
         if (type === 'traveller' || type === 'package') {
-            this._prepareItems(context);
+            await this._prepareItems(context);
             let numTerms = context.terms.length;
             let numYears = 0;
             for (let t of context.terms) {
@@ -116,9 +116,9 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 actorData.sophont.age = parseInt(game.settings.get("mgt2e", "currentYear")) - actorData.birthYear;
             }
         } else if (type === 'npc') {
-            this._prepareItems(context);
+            await this._prepareItems(context);
         } else if (type === 'creature') {
-            this._prepareItems(context);
+            await this._prepareItems(context);
         } else if (type === 'spacecraft') {
             this._prepareSpacecraftItems(context);
             this._prepareSpacecraftCrew(context);
@@ -606,7 +606,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
      *
      * @return {undefined}
      */
-    _prepareItems(context) {
+    async _prepareItems(context) {
         // Initialize containers.
         const gear = [];
         const weapons = [];
@@ -665,13 +665,21 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         this.actor.system.weightCarried = weight;
         this.actor.system.modifiers.encumbrance.auto = 0;
 
-
-        if ( game.settings.get("mgt2e", "useEncumbrance")) {
-            if (weight > this.actor.system.heavyLoad) {
-                this.actor.system.modifiers.encumbrance.auto = -2;
-                this.actor.setEncumberedEffect(true);
-            } else {
-                this.actor.setEncumberedEffect(false);
+        // If STR goes to zero, we get two rapid updates which result in two
+        // encumbered effects being set. Try to lock this check to avoid it.
+        if (!this.actor.encLock) {
+            this.actor.encLock = true;
+            try {
+                if (game.settings.get("mgt2e", "useEncumbrance")) {
+                    if (weight > this.actor.system.heavyLoad) {
+                        this.actor.system.modifiers.encumbrance.auto = -2;
+                        await this.actor.setEncumberedEffect(true);
+                    } else {
+                        await this.actor.setEncumberedEffect(false);
+                    }
+                }
+            } finally {
+                delete this.actor.encLock;
             }
         }
 
@@ -1109,6 +1117,9 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         });
         html.find('.statusFatigued').click(ev => {
             this._clearStatus(this.actor, "fatigued");
+        });
+        html.find('.statusInjured').click(ev => {
+            this._clearStatus(this.actor, "injured");
         });
         html.find('.statusHighGravity').click(ev => {
            this._clearStatus(this.actor, 'highGravity');

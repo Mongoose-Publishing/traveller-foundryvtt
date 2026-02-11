@@ -781,20 +781,9 @@ Hooks.on("preUpdateActor2", (actor, changedData, options, userId) => {
 });
 
 Hooks.on("updateActor", async (actor, updateData, options, userId) => {
-   console.log("updateActor:");
    if (game.user._id !== userId) return;
-   //console.log(updateData);
-
-    let isUnconscious = false;
-    let isDead = false;
-    let isDestroyed = false;
-
-    let wasUnconscious = actor.effects.find(e => e.name === "unconscious");
-    let wasDead = actor.effects.find(e => e.name === "dead");
-    let wasDestroyed = actor.effects.find(e => e.name === "destroyed");
 
     if (foundry.utils.getProperty(updateData, "system.damage")) {
-        console.log("Updating data for damage");
        if (actor.system.characteristics) {
            let char = actor.system.characteristics;
            let str = Number(char['STR'].current);
@@ -807,89 +796,39 @@ Hooks.on("updateActor", async (actor, updateData, options, userId) => {
            if (end < 1) numAtZero++;
 
            switch (numAtZero) {
-               case 0:
-                   actor.setDeadEffect(false);
-                   actor.setUnconsciousEffect(false);
-                   break;
-               case 1:
-                   actor.setDeadEffect(false);
-                   actor.setUnconsciousEffect(false);
-                   break;
                case 2:
-                   actor.setDeadEffect(false);
                    actor.setUnconsciousEffect(true);
-                   isUnconscious = true;
                    break;
                case 3:
                    actor.setDeadEffect(true);
                    actor.setUnconsciousEffect(false);
-                   isDead = true;
                    break;
            }
        }
     } else if (foundry.utils.getProperty(updateData, "system.hits")) {
-        console.log("Updating data for hits");
         if (["npc", "creature"].includes(actor.type)) {
             let hits = Number(actor.system.hits.value);
             let max = Number(actor.system.hits.max);
 
             if (hits > max/2) {
-                actor.setDeadEffect(false);
-                actor.setUnconsciousEffect(false);
-                actor.setInjuredEffect(false);
+                // No effects.
             } else if (hits > max/10) {
-                actor.setDeadEffect(false);
-                actor.setUnconsciousEffect(false);
                 actor.setInjuredEffect(true);
             } else if (hits > 0) {
-                actor.setDeadEffect(false);
                 actor.setUnconsciousEffect(true);
                 actor.setInjuredEffect(true);
-                isUnconscious = true;
             } else {
                 actor.setDeadEffect(true);
                 actor.setUnconsciousEffect(false);
                 actor.setInjuredEffect(false);
-                isDead = true;
             }
         } else if (["spacecraft"].includes(actor.type)) {
             let hits = Number(actor.system.hits.value);
-            let max = Number(actor.system.hits.max);
-
-            if (hits > 0) {
-                actor.setDestroyedEffect(false);
-            } else {
+            if (hits < 1) {
                 actor.setDestroyedEffect(true);
             }
         }
     }
-    /*
-     * This will all be done when damage is applied.
-    let actorName = actor?.token?.name?actor.token.name:actor.name;
-    let text = "";
-    if (isDead && !wasDead) {
-        text = game.i18n.format("MGT2.DamageEffect.Dead", { name: actorName });
-    } else if (isUnconscious && !wasUnconscious) {
-        text = game.i18n.format("MGT2.DamageEffect.Unconscious", { name: actorName });
-    }
-
-    let contentData = {
-        useChatIcons: game.settings.get("mgt2e", "useChatIcons"),
-        actor: actor,
-        text: text
-    }
-    const content = await renderTemplate("systems/mgt2e/templates/chat/damage-update.html", contentData);
-    if (text.length > 0) {
-        let chatData = {
-            user: game.user.id,
-            speaker: ChatMessage.getSpeaker(),
-            content: content
-        }
-        ChatMessage.create(chatData, {});
-    }
-*/
-
-   //console.log(CONFIG.statusEffects);
 });
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
@@ -1801,9 +1740,27 @@ Handlebars.registerHelper('toHex', function(value) {
     return Tools.toHex(value);
 });
 
-Handlebars.registerHelper('showStatus', function(actor, status) {
+Handlebars.registerHelper('showStatus', function(actor, status, effect) {
     let type = "statusWarn";
     let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
+
+    // If this is a proper sttus effect, then we can use a generic solution
+    // and skip everything else.
+    if (effect && effect?.flags?.mgt2e) {
+        let statusEffect = CONFIG.statusEffects.find(e => e.id === status);
+        if (statusEffect) {
+            label = game.i18n.localize(statusEffect.name);
+            type = effect.flags.mgt2e.css;
+
+            if (!effect.flags.mgt2e.locked) {
+                const statusName = "status" + status.charAt(0).toUpperCase() + status.slice(1);
+                label += ` <i class="fas fa-xmark ${statusName}"> </i>`;
+            }
+            return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
+        } else {
+            return "";
+        }
+    }
 
     if (status === "fatigued") {
         label += ` <i class="fas fa-xmark statusFatigued"> </i>`;
@@ -1833,7 +1790,7 @@ Handlebars.registerHelper('showStatus', function(actor, status) {
     } else if (status === "lowGravity") {
         label += ` <i class="fas fa-xmark statusLowGravity"> </i>`;
     } else if (status === "zeroGravity") {
-        label += ` <i class="fas fa-xmark statuszeroGravity"> </i>`;
+        label += ` <i class="fas fa-xmark statusZeroGravity"> </i>`;
     } else if (status === "diseased") {
         label += ` <i class="fas fa-xmark statusDiseased"> </i>`;
     } else if (status === "poisoned") {

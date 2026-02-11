@@ -1475,7 +1475,7 @@ export class MgT2Actor extends Actor {
         return null;
     }
 
-    setEffect(status, value, overlay, locked) {
+    async setEffect(status, value, overlay, locked, css) {
         const statusEffect = CONFIG.statusEffects.find(e => e.id === status);
 
         if (!statusEffect) {
@@ -1493,7 +1493,7 @@ export class MgT2Actor extends Actor {
         } else if (!value && !effect) {
             return;
         } else if (value) {
-            this.createEmbeddedDocuments("ActiveEffect", [{
+            await this.createEmbeddedDocuments("ActiveEffect", [{
                 name: name,
                 icon: statusEffect.img,
                 changes: [],
@@ -1504,53 +1504,58 @@ export class MgT2Actor extends Actor {
                     },
                     "mgt2e": {
                         effect: status,
-                        locked: locked?true:false
+                        locked: locked?true:false,
+                        css: "status" + css
                     }
                 }
             }]);
         } else if (effect) {
-            effect.delete();
+            try {
+                effect.delete();
+            } catch (e) {
+                // Already deleted.
+            }
         }
     }
 
     setDeadEffect(value) {
-        this.setEffect("dead", value, true);
+        this.setEffect("dead", value, true, false,"Bad");
     }
 
     setUnconsciousEffect(value) {
-        this.setEffect("unconscious", value,  true);
+        this.setEffect("unconscious", value,  true, false, "Bad");
     }
 
     setInjuredEffect(value) {
-        this.setEffect("injured", value,  false);
+        this.setEffect("injured", value,  false, false, "Warn");
     }
 
     setFrightenedEffect(value) {
-        this.setEffect("fear", value,  false);
+        this.setEffect("fear", value,  false, false, "Warn");
     }
 
     setStunnedEffect(value) {
-        this.setEffect("stun", value,  false);
+        this.setEffect("stun", value,  false, false, "Warn");
     }
 
     setFirstAidEffect(value) {
-        this.setEffect("needsFirstAid", value,  false);
+        this.setEffect("needsFirstAid", value,  false, false, "Warn");
     }
 
     setSurgeryEffect(value) {
-        this.setEffect("needsSurgery", value,  false);
+        this.setEffect("needsSurgery", value,  false, false, "Bad");
     }
 
     setDestroyedEffect(value) {
-        this.setEffect("destroyed", value,  true);
+        this.setEffect("destroyed", value,  true, false, "Bad");
     }
 
-    setEncumberedEffect(value) {
-        this.setEffect("encumbered", value,  false);
+    async setEncumberedEffect(value) {
+        await this.setEffect("encumbered", value,  false, true, "Warn");
     }
 
     setVaccSuitEffect(value) {
-        this.setEffect("vaccSuit", value,  false);
+        this.setEffect("vaccSuit", value,  false, true, "Warn");
     }
 
 }
