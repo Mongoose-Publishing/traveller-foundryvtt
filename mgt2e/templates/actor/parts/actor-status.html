@@ -3,6 +3,8 @@
     {{#each actor.effects as |e|}}
       {{#if e.flags.mgt2e.effect}}
         {{{showStatus actor e.flags.mgt2e.effect e }}}
+      {{else}}
+        {{{showStatus actor null e }}}
       {{/if}}
     {{/each}}
 

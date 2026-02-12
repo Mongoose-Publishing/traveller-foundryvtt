@@ -1760,6 +1760,19 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
         } else {
             return "";
         }
+    } else if (effect && effect.statuses) {
+        // This isn't a status we've added. It's been manually added.
+        let text = "";
+        for (let s of effect.statuses) {
+            let statusEffect = CONFIG.statusEffects.find(e => e.id === s);
+            if (statusEffect) {
+                label = game.i18n.localize(statusEffect.name);
+                text += `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
+            }
+        }
+        return text;
+    } else if (!status) {
+        return "";
     }
 
     if (status === "fatigued") {
