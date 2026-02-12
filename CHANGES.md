@@ -1,6 +1,6 @@
 # Release Notes
 
-# Develop
+# 0.18.1 (Beta)
 
 * Tokens now have effects added to them when actor is damaged.
 * Chat messages will be output when an actor takes damage.
