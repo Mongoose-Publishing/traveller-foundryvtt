@@ -163,7 +163,7 @@
   "MGT2.Skills.robotics": "Robótica",
   "MGT2.Skills.sophontology": "Sofontología",
   "MGT2.Skills.xenology": "Xenología",
-  "MGT2.Skills.melee": "Combate Cuerpo a Cuerpo",
+  "MGT2.Skills.melee": "Combate CaC",
   "MGT2.Skills.bludgeon": "Contundentes",
   "MGT2.Skills.unarmed": "Desarmado",
   "MGT2.Skills.blade": "Filo",
@@ -284,7 +284,7 @@
   "MGT2.TravellerSheet.Energy": "Protección Energética",
   "MGT2.TravellerSheet.EnergyTypes": "Tipos de Energía",
   "MGT2.TravellerSheet.Attacks": "Ataques",
-  "MGT2.TravellerSheet.Weapons": "Armas",
+  "MGT2.TravellerSheet.Weapons": "Armas",  
   "MGT2.TravellerSheet.DamageTaken": "Daño Recibido",
   "MGT2.TravellerSheet.HitsRemaining": "Daño Restante",
   "MGT2.TravellerSheet.Hull": "Casco",
@@ -533,7 +533,7 @@
   "MGT2.WorldSheet.Bases.M": "Ejército",
   "MGT2.WorldSheet.Bases.C": "Corsaria",
   "MGT2.WorldSheet.Bases.D": "Depósito Naval",
-  "MGT2.WorldSheet.Bases.W": "Estación de Paso",
+  "MGT2.WorldSheet.Bases.W": "Estación de Paso",  
 
   "MGT2.WorldSheet.Facility.berthingCost": "Costo de Litera (Cr./Sem)",
   "MGT2.WorldSheet.Facility.shipyard": "Astillero",
@@ -778,7 +778,7 @@
   "MGT2.Spacecraft.Battery": "Batería",
   "MGT2.Spacecraft.BatteryCharge": "Carga",
   "MGT2.Spacecraft.ConcealedDrive": "Motor Oculto",
-  "MGT2.Spacecraft.AutoCost": "Cálculo automático de coste",
+  "MGT2.Spacecraft.AutoCost": "Cálculo automático de coste",  
   "MGT2.Spacecraft.HolographicControls": "Controles Holográficos",
   "MGT2.Spacecraft.BridgeType.standard": "Puente",
   "MGT2.Spacecraft.BridgeType.cockpit": "Cabina de Vuelo",
@@ -789,11 +789,19 @@
   "MGT2.Spacecraft.ExtendedDriveTitle": "Selecciona esto si el motor necesita mover\nmás que solo la nave.\n`Depósitos desechables´, `Montura externa de carga´ o naves secundarias",
   "MGT2.Spacecraft.ExtendedDriveTons": "Mayor Tamaño de Mortor por (Tonelaje)",
 
-  "MGT2.DamageEffect.Okay": "{name} está Bien.",
-  "MGT2.DamageEffect.Injured": "{name} está Herido.",
-  "MGT2.DamageEffect.Unconscious": "{name} está Inconsciente.",
-  "MGT2.DamageEffect.Dead": "{name} está Muerto.",
-  "MGT2.DamageEffect.Destroyed": "{name} está Destruido.",
+  "MGT2.DamageEffect.Injured": "Está herido.",
+  "MGT2.DamageEffect.Unconscious": "Ha quedado inconsciente.",
+  "MGT2.DamageEffect.Dead": "Ha muerto.",
+  "MGT2.DamageEffect.Destroyed": "Ha sido destruido.",
+
+  "MGT2.DamageTaken.Value": "Sufre {dmg} impactos.",
+  "MGT2.DamageTaken.Minor": "Sufre una herida leve.",
+  "MGT2.DamageTaken.Major": "Sufre una herida grave (½ RES).",
+  "MGT2.DamageTaken.Severe": "Sufre una herida severa (RES).",
+  "MGT2.DamageTaken.Crippling": "Sufre una herida lisiante (RES x2).",
+  "MGT2.DamageTaken.Critical": "Sufre una herida crítica (RES x3)",
+  "MGT2.DamageTaken.Stun": "Sufre daño por aturdimiento.",
+  "MGT2.DamageTaken.Radiation": "Sufre daño por radiación.",
 
   "MGT2.DamageDialog.Title": "Aplicar Daño",
   "MGT2.DamageDialog.Damage": "DAÑO",
@@ -859,7 +867,7 @@
   "MGT2.Spacecraft.CriticalLabel.powerPlant": "Potencia Reducida",
   "MGT2.Spacecraft.CriticalLabel.sensorDM": "Sensor Dañado",
   "MGT2.Spacecraft.CriticalLabel.sensorMax": "Sensor Limitado",
-  "MGT2.Spacecraft.CriticalLabel.pilotDM": "Pilotaje",
+  "MGT2.Spacecraft.CriticalLabel.pilotDM": "Pilotaje",  
   "MGT2.Spacecraft.CriticalLabel.thrust": "Propulsión",
   "MGT2.Spacecraft.CriticalLabel.jumpDM": "Salto",
   "MGT2.Spacecraft.CriticalLabel.armour": "Blindaje",
@@ -1159,8 +1167,8 @@
   "MGT2.Item.WeaponTrait.Label.thrust": "Propulsión",
   "MGT2.Item.WeaponTrait.Label.longRange": "Largo Alcance",
   "MGT2.Item.WeaponTrait.Label.multiWarhead": "Ojivas Múltiples",
-  "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",
-
+  "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",  
+  
 
   "MGT2.Item.WeaponTrait.Text.ap": "Penetración de Armadura: Reduce el valor de Armadura del objetivo en X puntos; si el resultado es cero o menos, el ataque ignora la Armadura.",
   "MGT2.Item.WeaponTrait.Text.auto": "Fuego Automático (Simple/Ráfaga/Automático): `Ráfaga´ (MD -4, 3 veces munición) o asalto único (MD -1 por X ráfagas de disparo, más munición).",
@@ -1314,7 +1322,7 @@
   "MGT2.Effects.SoftwareEffects": "Características de Software",
   "MGT2.Effects.Software.Class.personal": "Software Personal",
   "MGT2.Effects.Software.Class.spacecraft": "Software de Astronave",
-
+  
   "MGT2.Effects.Software.Type.generic": "Genérico",
   "MGT2.Effects.Software.Type.interface": "Interfaz",
   "MGT2.Effects.Software.Type.agent": "Agente",
@@ -1433,6 +1441,8 @@
   "MGT2.Warn.NoActorsToBuy": "No hay personajes disponibles que puedan comprar este objeto",
   "MGT2.Warn.ThisActorCannotBuy": "{actor} no tiene suficientes Créditos para comprar {item}",
 
+  "MGT2.Error.NoStatus": "No se ha podido encontrar el estado '{status}'",
+
   "MGT2.Role.isDepartment": "El rol es un cargo",
   "MGT2.Role.RoleAssignment": "Asignación de Rol",
   "MGT2.Role.RoleActions": "Acciones",
@@ -1470,7 +1480,7 @@
   "MGT2.Role.BuiltIn.Action.WildLanding": "Aterrizaje Forzoso",
   "MGT2.Role.BuiltIn.Action.Evade": "Evadir",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Pilotar",
-
+  
   "MGT2.Swarm.MissileSource": "Origen de Misiles",
   "MGT2.Swarm.MissileTarget": "Objetivo de Misiles",
   "MGT2.Swarm.SelectTarget": "SELECCIONAR OBJETIVO",
@@ -1491,8 +1501,8 @@
   "MGT2.Swarm.SalvoSize": "NT",
 
   "MGT2.Swarm.DeleteConfirm.Title": "¿Eliminar Enjambre de la Flota?",
-  "MGT2.Swarm.DeleteConfirm.Text": "La Salva/Escuadrón y todas sus fichas serán eliminadas.",
-
+  "MGT2.Swarm.DeleteConfirm.Text": "La Salva/Escuadrón y todas sus fichas serán eliminadas.",  
+  
   "MGT2.Dialog.TransferCargoToShip": "Transferir Carga a la Astronave",
   "MGT2.Dialog.SellCargoToWorld": "Vender Carga al Mundo",
   "MGT2.Dialog.EmbarkPassengers": "Embarcar Pasajeros",
@@ -1527,7 +1537,7 @@
   "MGT2.MarginalSuccess": "Éxito Marginal",
   "MGT2.AverageSuccess": "Éxito Normal",
   "MGT2.ExceptionalSuccess": "Éxito Excepcional",
-  "MGT2.ChainBonus": "Bonificador por Tareas Encadenadas",
+  "MGT2.ChainBonus": "Modificador al Siguiente Chequeo",
   "MGT2.SkillCheck.Specialisation": "tirada de especialidad",
   "MGT2.SkillCheck.Creature": "tirada de habilidad de criatura",
   "MGT2.SkillCheck.Skill": "tirada de habilidad",
@@ -1551,7 +1561,7 @@
   "TYPES.Actor.creature": "Criatura",
   "TYPES.Actor.spacecraft": "Astronave",
   "TYPES.Actor.package": "Paquete",
-  "TYPES.Actor.swarm": "Enjambre",
+  "TYPES.Actor.swarm": "Enjambre",  
   "TYPES.Actor.vehicle": "Vehículo",
   "TYPES.Actor.world": "Mundo",
 
@@ -1567,7 +1577,13 @@
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "Datos del Mundo",
 
-  "Save": "Guardar",
+  "EFFECT.Injured": "Herido",
+  "EFFECT.Destroyed": "Destruido",
+  "EFFECT.FirstAid": "Primeros Auxilios",
+  "EFFECT.Encumbered": "Sobrecargado",
+  "EFFECT.VaccSuit": "Traje de Vacío",
+  
+  "Save": "Guardar",  
 
   "TRAVELLER.Add": "Añadir"
 }
