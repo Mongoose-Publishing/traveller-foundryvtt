@@ -665,8 +665,6 @@ export class MgT2Actor extends Actor {
       if (hasTrait(options.traits, "stun")) {
           stun = true;
       }
-      console.log(this);
-
       if (options.directChaDamage) {
           // Damage it to be applied to specific characteristics, not
           // using the usual END/STR/DEX chain.
@@ -740,7 +738,6 @@ export class MgT2Actor extends Actor {
           }
           if (needsFirstAid) {
               console.log("Actor needs first aid, setting effect");
-              //this.setFlag("mgt2e", "needsFirstAid", true);
               this.setFirstAidEffect(true);
           }
       }
@@ -824,13 +821,16 @@ export class MgT2Actor extends Actor {
      * @param damage    Actual damage to be applied.
      * @param options   List of options.
      */
-  applyActualDamageToPerson(damage, options) {
+  async applyActualDamageToPerson(damage, options) {
       let stun = false;
       if (hasTrait(options.traits, "stun")) {
           stun = true;
       }
       let hits = this.system.hits;
-      console.log(hits);
+      let wasInjured = this.effects.find(e => e.name === "injured");
+      let wasUnconscious = this.effects.find(e => e.name === "unconscious");
+      let wasDead = this.effects.find(e => e.name === "dead");
+      let isInjured = false, isUnconscious = false, isDead = false;
 
       if (stun) {
           console.log("STUNS");
@@ -859,10 +859,62 @@ export class MgT2Actor extends Actor {
               );
           }
       } else {
-          hits.damage += damage;
+          hits.damage = Math.min(hits.max, hits.damage + damage);
       }
-      hits.value = hits.max - hits.damage;
+      hits.value = Math.max(0, hits.max - hits.damage);
       this.update({"system.hits": this.system.hits});
+
+      let text = "";
+      if (options.isMinimumDamage) {
+          text += `${game.i18n.localize("MGT2.DamageTaken.MinimumDamage")} `;
+      } else if (options.isReducedDamage) {
+          text += `${game.i18n.localize("MGT2.DamageTaken.ReducedDamage")} `;
+      }
+      if (stun) {
+        text += `${game.i18n.localize("MGT2.DamageTaken.Stun")} `;
+      } else {
+          if (damage >= hits.max / 3) {
+              text += `${game.i18n.localize("MGT2.DamageTaken.Creature.Heavy")} `;
+          } else if (damage > 0) {
+              text += `${game.i18n.localize("MGT2.DamageTaken.Creature.Light")} `;
+          }
+      }
+      if (hits.value > hits.max / 2) {
+          // Nothing.
+      } else if (hits.value > hits.max / 10) {
+          if (!wasInjured) {
+              text += `${game.i18n.localize("MGT2.DamageEffect.Injured")} `;
+          }
+      } else if (hits.value > 0) {
+          if (!wasUnconscious) {
+              text += `${game.i18n.localize("MGT2.DamageEffect.Unconscious")} `;
+              if (this.hasCreatureTrait("tough")) {
+                  text += `${game.i18n.localize("MGT2.DamageTaken.Tough")} `;
+              }
+          }
+      } else {
+          if (!wasDead) {
+              text += `${game.i18n.localize("MGT2.DamageEffect.Dead")} `;
+              if (this.hasCreatureTrait("tough")) {
+                  text += `${game.i18n.localize("MGT2.DamageTaken.Tough")} `;
+              }
+          }
+      }
+
+      let contentData = {
+        useChatIcons: game.settings.get("mgt2e", "useChatIcons"),
+        actor: this,
+        text: text
+      }
+      const content = await renderTemplate("systems/mgt2e/templates/chat/damage-update.html", contentData);
+      if (text.length > 0) {
+        let chatData = {
+          user: game.user.id,
+          speaker: ChatMessage.getSpeaker(),
+          content: content
+        }
+        ChatMessage.create(chatData, {});
+      }
   }
 
   applyDamageToSpacecraft(damage, options) {
@@ -963,16 +1015,22 @@ export class MgT2Actor extends Actor {
           }
           if (this.hasCreatureTrait("particulate") && options.minimumDamage) {
               if (options.damageType !== "fire") {
+                  options.isMinimumDamage = true;
                   damage = options.minimumDamage;
               }
           } else if (this.hasCreatureTrait("gossamer") && options.minimumDamage) {
+              options.isMinimumDamage = true;
               damage = options.minimumDamage;
           } else if (this.hasCreatureTrait("dispersed") && options.reducedDamage) {
               if (options.damageType === "fire" || options.damageType === "cutting") {
                   // Normal damage.
               } else {
+                  options.isReducedDamage = true;
                   damage = options.reducedDamage;
               }
+          } else if (this.hasCreatureTrait("tough") && options.reducedDamage) {
+              options.isReducedDamage = true;
+              damage = options.reducedDamage;
           }
           this.applyDamageToPerson(damage, options);
       } else if (this.type === "traveller" || this.type === "npc") {

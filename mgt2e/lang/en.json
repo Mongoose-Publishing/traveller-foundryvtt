@@ -799,6 +799,13 @@
   "MGT2.DamageTaken.Stun": "Takes stun damage.",
   "MGT2.DamageTaken.Radiation": "Takes radiation damage.",
 
+  "MGT2.DamageTaken.Creature.Light": "Takes a light wound.",
+  "MGT2.DamageTaken.Creature.Heavy": "Takes a heavy wound.",
+
+  "MGT2.DamageTaken.MinimumDamage": "Takes <b>minimum damage</b>.",
+  "MGT2.DamageTaken.ReducedDamage": "Takes <b>reduced damage</b>.",
+  "MGT2.DamageTaken.Tough": "<i>Roll [[/r 2D6 # Get better on 8+]] to recover</i>.",
+
   "MGT2.DamageDialog.Title": "Apply Damage",
   "MGT2.DamageDialog.Damage": "DAMAGE",
   "MGT2.DamageDialog.AP": "AP",
