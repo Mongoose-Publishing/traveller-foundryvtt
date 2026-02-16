@@ -359,8 +359,11 @@ export async function rollAttack(actor, weapon, attackOptions) {
 
     // Creatures sometimes take reduced (D6 -> D3) or minimum (D6 -> D1) damage.
     // We try to convert the damage dice, and
-    let minDice = dmg.replaceAll(/D6/g, "D1").replaceAll(/d6/g, "D1");
     let redDice = dmg.replaceAll(/D6/g, "D3").replaceAll(/d6/g, "D3");
+    let minDice = dmg.replaceAll(/D6/g, "D1").replaceAll(/d6/g, "D1");
+    // Also need to remove plus/minuses. This doesn't work if there are multiple dice
+    // numbers in the damage, such as "2D6 + 3D6".
+    minDice = minDice.replaceAll(/.*([0-9])D1.*/g, "$1D1");
 
     let roll = null;
     let damageRoll = null;
@@ -1032,18 +1035,18 @@ export async function rollSkill(actor, skill, options) {
                 //skillNotes += `Aug&nbsp;${skill.augment}`;
             }
             if (speciality) {
-                value = speciality.value;
+                value = parseInt(speciality.value) || 0;
                 title += " (" + skillLabel(speciality) + ")";
                 skillText += " (" + skillLabel(speciality) + ")";
                 specialityCheck = true;
                 if ((options.expert || isNonZero(speciality.expert)) && (cha === "INT" || cha === "EDU")) {
                     value += 1;
                     let expert = 0;
-                    if (Number(options.expert) > expert) {
-                        expert = Number(options.expert);
+                    if (parseInt(options.expert) > expert) {
+                        expert = parseInt(options.expert) || 0;
                     }
-                    if (Number(speciality.expert) > expert) {
-                        expert = Number(speciality.expert);
+                    if (parseInt(speciality.expert) > expert) {
+                        expert = parseInt(speciality.expert) || 0;
                     }
                     specNotes += `Expert/${expert}`;
                 }
@@ -1203,7 +1206,7 @@ export async function rollSkill(actor, skill, options) {
                     }
                     if (spec.augment && !isNaN(spec.augment) && parseInt(spec.augment) !== 0) {
                         stotal += parseInt(spec.augment);
-                        slabel += ` (+${augment})`;
+                        slabel += ` (+${spec.augment})`;
                     }
                     if (spec.augdm && !isNaN(spec.augdm) && parseInt(spec.augdm) !== 0) {
                         stotal += parseInt(spec.augdm);
