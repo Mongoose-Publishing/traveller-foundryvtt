@@ -1,5 +1,11 @@
 # Release Notes
 
+# 0.18.2 (Beta)
+
+* Damage based chat messages extended to creatures.
+* Support for Tough and Particulate creature traits.
+* Bug fixes around augments.
+
 # 0.18.1 (Beta)
 
 * Tokens now have effects added to them when actor is damaged.
