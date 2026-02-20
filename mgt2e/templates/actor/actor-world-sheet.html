@@ -147,6 +147,24 @@
 
             {{#if planets}}
                 <div class="shadow">
+                    <ol class="items-list actor-items star-list">
+                        {{#each stars as |star id|}}
+                            <li class="item item-world" data-item-id="{{star._id}}">
+                                <span class="uwp-data-name">{{star.name}}</span>
+                                <span class="uwp-data-star">
+                                    {{star.system.world.spectralType}}
+                                    {{star.system.world.luminosityClass}}
+                                </span>
+                                {{#if ../isEditable}}
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                {{/if}}
+                            </li>
+                        {{/each}}
+                    </ol>
+                    <hr/>
                     <ol class="items-list actor-items planet-list">
                         {{#each planets as |planet id|}}
                         <li class="item item-world" data-item-id="{{planet._id}}">
@@ -170,10 +188,10 @@
                                 {{/if}}
                             </span>
                             {{#if ../isEditable}}
-                            <div class="item-controls">
-                                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                            </div>
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
                             {{/if}}
                         </li>
                         {{/each}}

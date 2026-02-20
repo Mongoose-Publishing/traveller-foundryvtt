@@ -40,6 +40,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         context.cargo = [];
         context.factions = [];
         context.patrons = [];
+        context.stars = [];
         context.planets = [];
         context.localGoods = [];
         // Faction and Patron text may include secrets, so we need to pre-process depending
@@ -91,6 +92,8 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                     dest.passengers.push(i);
                 } else if (i.system?.world?.datatype === "planet") {
                     context.planets.push(i);
+                } else if (i.system?.world?.datatype === "star") {
+                    context.stars.push(i);
                 }
             }
         }

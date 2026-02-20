@@ -47,8 +47,11 @@
                     </div>
                 {{else if (ifEquals item.system.world.datatype "star")}}
                     <div class="shadow">
-                        <select name="system.world.strength">
-                            {{selectOptions FACTION_STRENGTH_SELECT selected=system.world.strength}}
+                        <select name="system.world.spectralType">
+                            {{selectOptions HR_SELECT selected=system.world.spectralType}}
+                        </select>
+                        <select name="system.world.luminosityClass">
+                            {{selectOptions LC_SELECT selected=system.world.luminosityClass}}
                         </select>
                     </div>
                 {{else if (ifEquals item.system.world.datatype "planet")}}

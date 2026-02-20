@@ -1142,6 +1142,10 @@ MGT2.WORLD = {
         "N": {},
         "S": {},
         "W": {}
+    },
+    "stellar": {
+        "luminosity": [ "Ia", "Ib", "II", "III", "IV", "V", "VI" ],
+        "hr": [ "O", "B", "A", "F", "G", "K", "M", "BD", "D" ]
     }
 }
 

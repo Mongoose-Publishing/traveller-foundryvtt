@@ -80,6 +80,23 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
             context.TECH_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
         }
 
+        context.HR_SELECT = {};
+        for (let d of [ "O", "B", "A", "F", "G", "K", "M" ]) {
+            for (let s=0; s < 10; s++) {
+                context.HR_SELECT[d+""+s] = d+s;
+            }
+        }
+        context.HR_SELECT["BD"] = "BD";
+        context.HR_SELECT["D"] = "D";
+
+        context.LC_SELECT = {
+            "": "-"
+        };
+        for (let d in CONFIG.MGT2.WORLD.stellar.luminosity) {
+            let v = CONFIG.MGT2.WORLD.stellar.luminosity[d];
+            context.LC_SELECT[v] = v;
+        }
+
         let worldData = this.item.system.world;
         console.log(worldData);
         switch (worldData.datatype) {
@@ -104,6 +121,10 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
                 }
                 break;
             case "star":
+                if (!worldData.spectralType) {
+                    worldData.spectralType = "G2";
+                    worldData.luminosityClass = "V";
+                }
                 break;
         }
         context.worldData = worldData;
