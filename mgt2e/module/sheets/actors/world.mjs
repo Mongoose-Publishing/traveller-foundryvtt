@@ -40,6 +40,7 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         context.cargo = [];
         context.factions = [];
         context.patrons = [];
+        context.planets = [];
         context.localGoods = [];
         // Faction and Patron text may include secrets, so we need to pre-process depending
         // on whether we hide the secret blocks or not from the description.
@@ -88,6 +89,8 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                 } else if (i.system?.world?.datatype === "passenger") {
                     let dest = await this.getDestination(context.actor, destinationWorlds, i.system.world.destinationId);
                     dest.passengers.push(i);
+                } else if (i.system?.world?.datatype === "planet") {
+                    context.planets.push(i);
                 }
             }
         }
@@ -154,7 +157,13 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
         context.POPULATION_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.population) {
-            context.POPULATION_SELECT[d] = CONFIG.MGT2.WORLD.population[d].range.toLocaleString();
+            let v = parseInt(CONFIG.MGT2.WORLD.population[d].range);
+            v = v * Math.max(1, parseInt(context.world.extra.popDigit) || 1);
+            context.POPULATION_SELECT[d] = v.toLocaleString();
+        }
+        context.POPULATION_DIGIT_SELECT = {};
+        for (let d=1; d < 10; d++) {
+            context.POPULATION_DIGIT_SELECT[d] = d;
         }
 
         context.GOVERNMENT_SELECT = {};
@@ -168,6 +177,14 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         }
 
         context.TECH_SELECT = {};
+        for (let d in CONFIG.MGT2.WORLD.techLevel) {
+            context.TECH_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
+        }
+        context.ZONE_SELECT = {
+            "": "-",
+            "Amber": game.i18n.localize("MGT2.Trade.Amber"),
+            "Red": game.i18n.localize("MGT2.Trade.Red")
+        };
         for (let d in CONFIG.MGT2.WORLD.techLevel) {
             context.TECH_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
         }
@@ -203,10 +220,16 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             "spacecraft": game.i18n.localize("MGT2.WorldSheet.Facility.spacecraft"),
             "capital": game.i18n.localize("MGT2.WorldSheet.Facility.capital")
         }
+        if (context.world.extra.repair === "repair") {
+            // This was using the wrong value.
+            if (context.actor.permission >= 3) {
+                context.world.extra.repair = "full";
+            }
+        }
         context.REPAIR_SELECT = {
             "": game.i18n.localize("MGT2.WorldSheet.Facility.none"),
             "limited": game.i18n.localize("MGT2.WorldSheet.Facility.limited"),
-            "repair": game.i18n.localize("MGT2.WorldSheet.Facility.full")
+            "full": game.i18n.localize("MGT2.WorldSheet.Facility.full")
         }
         context.FUEL_SELECT = {
             "": game.i18n.localize("MGT2.WorldSheet.Facility.none"),

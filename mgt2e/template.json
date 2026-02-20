@@ -290,7 +290,9 @@
         "extra":  {
           "temperature": 0,
           "berthingCost": 1000,
-          "culturalDifferences": ""
+          "culturalDifferences": "",
+          "popDigit": 1,
+          "allegiance": ""
         },
         "meta": {
           "localBrokerScore": 2,

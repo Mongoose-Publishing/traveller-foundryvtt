@@ -34,7 +34,7 @@
             </div>
 
             <div class="side-panel shadow facilities">
-                <h3>Facilities</h3>
+                <h3>{{localize "MGT2.WorldSheet.Facilities"}}</h3>
 
                 <div class="resource">
                     <label class="resource-label">{{localize "MGT2.WorldSheet.Facility.BerthCost"}}</label>
@@ -96,8 +96,6 @@
                     {{/each}}
                 </ol>
 
-
-
                 <div class="resource">
                     <input type="checkbox" name="system.world.extra.highport" {{checked system.world.extra.highport}} data-dtype="Boolean" />
                     <label for="system.world.extra.highport" class="resource-label">{{localize "MGT2.WorldSheet.Facility.Highport"}}</label>
@@ -113,88 +111,129 @@
             <div class="shadow">
                 <div class="grid grid-7col">
                     <div class="resource flex-group-center grid-span-5">
-                        <label class="field-label">Sector</label>
+                        <label class="field-label">{{localize "MGT2.WorldSheet.Sector"}}</label>
                     </div>
                     <div class="resource flex-group-center grid-span-2">
-                        <label class="field-label">Planet</label>
+                        <label class="field-label">{{localize "MGT2.WorldSheet.Planet"}}</label>
                     </div>
                     <div class="resource flex-group-left grid-span-3">
-                        <label for="system.world.location.sector" class="field-label">Name</label>
+                        <label for="system.world.location.sector" class="field-label">{{localize "MGT2.WorldSheet.SectorName"}}</label>
                         <input class="field-value writable" name="system.world.location.sector" type="text" value="{{system.world.location.sector}}"/>
                     </div>
                     <div class="resource flex-group-center">
-                        <label for="system.world.location.sectorX" class="field-label">X</label>
+                        <label for="system.world.location.sectorX" class="field-label">{{localize "MGT2.WorldSheet.X"}}</label>
                         <input class="field-value writable" name="system.world.location.sectorX" type="text" value="{{system.world.location.sectorX}}"/>
                     </div>
                     <div class="resource flex-group-center">
-                        <label for="system.world.location.sectorY" class="field-label">Y</label>
+                        <label for="system.world.location.sectorY" class="field-label">{{localize "MGT2.WorldSheet.Y"}}</label>
                         <input class="field-value writable" name="system.world.location.sectorY" type="text" value="{{system.world.location.sectorY}}"/>
                     </div>
 
                     <div class="resource flex-group-center">
-                        <label for="system.world.location.x" class="field-label">X</label>
+                        <label for="system.world.location.x" class="field-label">{{localize "MGT2.WorldSheet.X"}}</label>
                         <input class="field-value writable" name="system.world.location.x" type="text" value="{{system.world.location.x}}"/>
                     </div>
                     <div class="resource flex-group-center">
-                        <label for="system.world.location.y" class="field-label">Y</label>
+                        <label for="system.world.location.y" class="field-label">{{localize "MGT2.WorldSheet.Y"}}</label>
                         <input class="field-value writable" name="system.world.location.y" type="text" value="{{system.world.location.y}}"/>
                     </div>
-                </div>
 
+                    <div class="resource flex-group-center grid-span-5">
+                        <label for="system.world.extra.allegiance" class="field-label">{{localize "MGT2.WorldSheet.Allegiance"}}</label>
+                        <input class="field-value writable" name="system.world.extra.allegiance" type="text" value="{{system.world.extra.allegiance}}"/>
+                    </div>
+                </div>
             </div>
+
+            {{#if planets}}
+                <div class="shadow">
+                    <ol class="items-list actor-items planet-list">
+                        {{#each planets as |planet id|}}
+                        <li class="item item-world" data-item-id="{{planet._id}}">
+                            <span class="uwp-data-name">{{planet.name}}</span>
+                            <span class="uwp-data-type">
+                                {{localize (concat "MGT2.WorldData.Planet.Type." planet.system.world.planetType)}}
+                            </span>
+                            <span class="uwp-data-uwp">
+                                {{#if (ifEquals planet.system.world.planetType "terrestrial")}}
+                                    {{system.world.uwp.port}}
+                                    {{toHex planet.system.world.uwp.size}}
+                                    {{toHex planet.system.world.uwp.atmosphere}}
+                                    {{toHex planet.system.world.uwp.hydrographics}}
+                                    {{toHex planet.system.world.uwp.population}}
+                                    {{toHex planet.system.world.uwp.government}}
+                                    {{toHex planet.system.world.uwp.lawLevel}}
+                                    -
+                                    {{toHex planet.system.world.uwp.techLevel}}
+                                {{else}}
+                                    -
+                                {{/if}}
+                            </span>
+                            {{#if ../isEditable}}
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                            </div>
+                            {{/if}}
+                        </li>
+                        {{/each}}
+                    </ol>
+
+                </div>
+            {{/if}}
 
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
-                    <a class="item" data-tab="data">World Data</a>
-                    <a class="item" data-tab="description">Description</a>
-                    <a class="item" data-tab="factions">Factions</a>
-                    <a class="item" data-tab="patrons">Patrons</a>
-                    <a class="item" data-tab="map">Map</a>
-                    <a class="item" data-tab="freight">Freight</a>
-                    <a class="item" data-tab="trade">Trade</a>
+                    <a class="item" data-tab="data">{{localize "MGT2.WorldSheet.WorldData"}}</a>
+                    <a class="item" data-tab="description">{{localize "MGT2.WorldSheet.Description"}}</a>
+                    <a class="item" data-tab="factions">{{localize "MGT2.WorldSheet.Factions"}}</a>
+                    <a class="item" data-tab="patrons">{{localize "MGT2.WorldSheet.Patrons"}}</a>
+                    <a class="item" data-tab="map">{{localize "MGT2.WorldSheet.Map"}}</a>
+                    <a class="item" data-tab="freight">{{localize "MGT2.WorldSheet.Freight"}}</a>
+                    <a class="item" data-tab="trade">{{localize "MGT2.WorldSheet.Trade"}}</a>
                 </nav>
 
                 <div class="sheet-body">
                     {{!-- World Data Tab --}}
                     <div class="tab" data-group="primary" data-tab="data">
-                        <div class="grid grid-2col uwp-data">
-                            <label for="system.world.uwp.port" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Port'}}</label>
-                            <select name="system.world.uwp.port" class="uwp-code">
+                        <div class="grid grid-5col uwp-data">
+                            <label for="system.world.uwp.port" class="field-label grid-span-2">{{localize 'MGT2.WorldSheet.UWP.Port'}}</label>
+                            <select name="system.world.uwp.port" class="uwp-code grid-span-3">
                                 {{selectOptions PORT_SELECT selected=system.world.uwp.port}}
                             </select>
 
-                            <label for="system.world.uwp.size" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Size'}}</label>
-                            <select name="system.world.uwp.size" class="uwp-code" type="number">
+                            <label for="system.world.uwp.size" class="field-label grid-span-2">{{localize 'MGT2.WorldSheet.UWP.Size'}}</label>
+                            <select name="system.world.uwp.size" class="uwp-code grid-span-3" type="number">
                                 {{selectOptions SIZE_SELECT selected=system.world.uwp.size}}
                             </select>
 
-                            <label for="system.world.uwp.atmosphere" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Atmosphere'}}</label>
-                            <select name="system.world.uwp.atmosphere" class="uwp-code" type="number">
+                            <label for="system.world.uwp.atmosphere" class="field-label grid-span-2">{{localize 'MGT2.WorldSheet.UWP.Atmosphere'}}</label>
+                            <select name="system.world.uwp.atmosphere" class="uwp-code grid-span-3" type="number">
                                 {{selectOptions ATMOSPHERE_SELECT selected=system.world.uwp.atmosphere}}
                             </select>
 
-                            <label for="system.world.uwp.hydrographics" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Hydrographics'}}</label>
-                            <select name="system.world.uwp.hydrographics" class="uwp-code" type="number">
+                            <label for="system.world.uwp.hydrographics" class="field-label grid-span-2">{{localize 'MGT2.WorldSheet.UWP.Hydrographics'}}</label>
+                            <select name="system.world.uwp.hydrographics" class="uwp-code grid-span-3" type="number">
                                 {{selectOptions HYDROGRAPHICS_SELECT selected=system.world.uwp.hydrographics}}
                             </select>
 
-                            <label for="system.world.uwp.population" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Population'}}</label>
-                            <select name="system.world.uwp.population" class="uwp-code" type="number">
+                            <label for="system.world.uwp.population" class="field-label grid-span-2">{{localize 'MGT2.WorldSheet.UWP.Population'}}</label>
+                            <select name="system.world.uwp.population" class="uwp-code grid-span-2" type="number">
                                 {{selectOptions POPULATION_SELECT selected=system.world.uwp.population}}
                             </select>
 
-                            <label for="system.world.uwp.government" class="field-label">{{localize 'MGT2.WorldSheet.UWP.Government'}}</label>
-                            <select name="system.world.uwp.government" class="uwp-code" type="number">
+                            <label for="system.world.uwp.government" class="field-label grid-span-2">{{localize 'MGT2.WorldSheet.UWP.Government'}}</label>
+                            <select name="system.world.uwp.government" class="uwp-code grid-span-3" type="number">
                                 {{selectOptions GOVERNMENT_SELECT selected=system.world.uwp.government}}
                             </select>
 
-                            <label for="system.world.uwp.lawLevel" class="field-label">{{localize 'MGT2.WorldSheet.UWP.LawLevel'}}</label>
-                            <select name="system.world.uwp.lawLevel" class="uwp-code" type="number">
+                            <label for="system.world.uwp.lawLevel" class="field-label grid-span-2">{{localize 'MGT2.WorldSheet.UWP.LawLevel'}}</label>
+                            <select name="system.world.uwp.lawLevel" class="uwp-code grid-span-3" type="number">
                                 {{selectOptions LAW_SELECT selected=system.world.uwp.lawLevel}}
                             </select>
 
-                            <label for="system.world.uwp.techLevel" class="field-label">{{localize 'MGT2.WorldSheet.UWP.TechLevel'}}</label>
-                            <select name="system.world.uwp.techLevel" class="uwp-code" type="number">
+                            <label for="system.world.uwp.techLevel" class="field-label grid-span-2">{{localize 'MGT2.WorldSheet.UWP.TechLevel'}}</label>
+                            <select name="system.world.uwp.techLevel" class="uwp-code grid-span-3" type="number">
                                 {{selectOptions TECH_SELECT selected=system.world.uwp.techLevel}}
                             </select>
                         </div>
@@ -217,6 +256,16 @@
                             <div class="pill-container">
                                 {{{showWorldTraits . system.world.uwp.codes}}}
                             </div>
+                            <br/>
+                            <label>{{localize "MGT2.WorldSheet.TradeZone"}}</label>
+                            <select name="system.world.uwp.zone" class="uwp-code grid-span-1" type="text">
+                                {{selectOptions ZONE_SELECT selected=system.world.uwp.zone}}
+                            </select>
+                            <label>{{localize "MGT2.WorldSheet.PopDigit"}}</label>
+                            <select name="system.world.extra.popDigit" class="uwp-code grid-span-1" type="number">
+                                {{selectOptions POPULATION_DIGIT_SELECT selected=system.world.extra.popDigit}}
+                            </select>
+
                         </div>
 
                         <div style="clear:both"></div>

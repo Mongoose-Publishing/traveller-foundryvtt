@@ -271,6 +271,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             }
         } else if (type === "traveller" || type === "npc" || type === "package") {
             context.selectSize = {
+                "-6": "Small -6",
+                "-5": "Small -5",
                 "-4": "Small -4",
                 "-3": "Small -3",
                 "-2": "Small -2",
@@ -281,7 +283,9 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 "3": "Large +3",
                 "4": "Large +4",
                 "5": "Large +5",
-                "6": "Large +6"
+                "6": "Large +6",
+                "7": "Large +7",
+                "8": "Large +8"
             };
             context.CREATE_ITEM_SELECT = {
                 "": "",

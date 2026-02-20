@@ -25,6 +25,11 @@
   color: var(--mongoose-text);
 }
 
+.editor-content {
+  background: var(--mongoose-page);
+  color: var(--mongoose-text);
+}
+
 img {
   border: none;
 }
@@ -83,7 +88,7 @@ caption {
 
 /* Documentation */
 
-.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h1 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol, .editor-content) h1 {
     color: var(--mongoose-orange);
     text-transform: uppercase;
     border-bottom: 3px solid var(--mongoose-orange);
@@ -91,7 +96,7 @@ caption {
     font-size: 24pt;
 }
 
-.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h2 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol, .editor-content) h2 {
     color: black;
     text-transform: uppercase;
     border: none;
@@ -99,7 +104,7 @@ caption {
     font-size: 20pt;
 }
 
-.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h3 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol, .editor-content) h3 {
     color: black;
     text-transform: uppercase;
     border: none;
@@ -107,14 +112,14 @@ caption {
     font-size: 18pt;
 }
 
-.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h4 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol, .editor-content) h4 {
     color: black;
     border: none;
     font-weight: bold;
     font-size: 16pt
 }
 
-.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h5 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol, .editor-content) h5 {
   color: black;
   border: none;
   font-weight: bold;
@@ -123,7 +128,7 @@ caption {
   margin-bottom: 0px;
 }
 
-.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol) h6 {
+.journal-sheet :is(section.journal-entry-content.flexcol, form.editable.flexcol, .editor-content) h6 {
   color: black;
   border: none;
   font-weight: bold;
