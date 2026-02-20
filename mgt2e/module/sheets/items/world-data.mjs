@@ -6,7 +6,7 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["mgt2", "sheet", "item", "world-data" ],
-            width: 520,
+            width: 560,
             height: 480,
             tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "attributes" }]
         });

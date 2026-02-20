@@ -145,47 +145,14 @@
                 </div>
             </div>
 
-            {{#if planets}}
-                <div class="shadow">
-                    <ol class="items-list actor-items star-list">
-                        {{#each stars as |star id|}}
-                            <li class="item item-world" data-item-id="{{star._id}}">
-                                <span class="uwp-data-name">{{star.name}}</span>
-                                <span class="uwp-data-star">
-                                    {{star.system.world.spectralType}}
-                                    {{star.system.world.luminosityClass}}
-                                </span>
-                                {{#if ../isEditable}}
-                                    <div class="item-controls">
-                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                                    </div>
-                                {{/if}}
-                            </li>
-                        {{/each}}
-                    </ol>
-                    <hr/>
-                    <ol class="items-list actor-items planet-list">
-                        {{#each planets as |planet id|}}
-                        <li class="item item-world" data-item-id="{{planet._id}}">
-                            <span class="uwp-data-name">{{planet.name}}</span>
-                            <span class="uwp-data-type">
-                                {{localize (concat "MGT2.WorldData.Planet.Type." planet.system.world.planetType)}}
-                            </span>
-                            <span class="uwp-data-uwp">
-                                {{#if (ifEquals planet.system.world.planetType "terrestrial")}}
-                                    {{system.world.uwp.port}}
-                                    {{toHex planet.system.world.uwp.size}}
-                                    {{toHex planet.system.world.uwp.atmosphere}}
-                                    {{toHex planet.system.world.uwp.hydrographics}}
-                                    {{toHex planet.system.world.uwp.population}}
-                                    {{toHex planet.system.world.uwp.government}}
-                                    {{toHex planet.system.world.uwp.lawLevel}}
-                                    -
-                                    {{toHex planet.system.world.uwp.techLevel}}
-                                {{else}}
-                                    -
-                                {{/if}}
+            <div class="shadow">
+                <ol class="items-list actor-items planet-list">
+                    {{#each stars as |star id|}}
+                        <li class="item item-world" data-item-id="{{star._id}}">
+                            <span class="uwp-data-name">{{star.name}}</span>
+                            <span class="uwp-data-star">
+                                {{star.system.world.spectralType}}
+                                {{star.system.world.luminosityClass}}
                             </span>
                             {{#if ../isEditable}}
                                 <div class="item-controls">
@@ -194,11 +161,47 @@
                                 </div>
                             {{/if}}
                         </li>
-                        {{/each}}
-                    </ol>
-
-                </div>
-            {{/if}}
+                    {{/each}}
+                </ol>
+                {{#if isEditable}}
+                    <span class="star-add rollable">+ {{localize "MGT2.WorldSheet.AddStar"}}</span>
+                {{/if}}
+                <hr/>
+                <ol class="items-list actor-items planet-list">
+                    {{#each planets as |planet id|}}
+                    <li class="item item-world" data-item-id="{{planet._id}}">
+                        <span class="uwp-data-name">{{planet.name}}</span>
+                        <span class="uwp-data-type">
+                            {{localize (concat "MGT2.WorldData.Planet.Type." planet.system.world.planetType)}}
+                        </span>
+                        <span class="uwp-data-uwp">
+                            {{#if (ifEquals planet.system.world.planetType "terrestrial")}}
+                                {{system.world.uwp.port}}
+                                {{toHex planet.system.world.uwp.size}}
+                                {{toHex planet.system.world.uwp.atmosphere}}
+                                {{toHex planet.system.world.uwp.hydrographics}}
+                                {{toHex planet.system.world.uwp.population}}
+                                {{toHex planet.system.world.uwp.government}}
+                                {{toHex planet.system.world.uwp.lawLevel}}
+                                -
+                                {{toHex planet.system.world.uwp.techLevel}}
+                            {{else}}
+                                -
+                            {{/if}}
+                        </span>
+                        {{#if ../isEditable}}
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                            </div>
+                        {{/if}}
+                    </li>
+                    {{/each}}
+                </ol>
+                {{#if isEditable}}
+                    <span class="planet-add rollable">+ {{localize "MGT2.WorldSheet.AddPlanet"}}</span>
+                {{/if}}
+            </div>
 
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
@@ -292,7 +295,7 @@
 
                     <div class="tab" data-group="primary" data-tab="factions">
                         {{#if isEditable}}
-                            <span class="faction-add rollable">+ Add Faction</span>
+                            <span class="faction-add rollable">+ {{localize "MGT2.WorldSheet.AddFaction"}}</span>
                             <br/>
                         {{/if}}
                         {{#if factions}}
@@ -321,7 +324,7 @@
 
                     <div class="tab" data-group="primary" data-tab="patrons">
                         {{#if isEditable}}
-                        <span class="patron-add rollable">+ Add Patron</span>
+                        <span class="patron-add rollable">+ {{localize "MGT2.WorldSheet.AddPatron"}}</span>
                         <br/>
                         {{/if}}
                         {{#if patrons}}

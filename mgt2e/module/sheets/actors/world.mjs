@@ -331,10 +331,17 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             // Add Patron
             this._createPatron();
         });
+        html.find('.planet-add').click(ev => {
+            // Add Patron
+            this._createPlanet();
+        });
+        html.find('.star-add').click(ev => {
+            // Add Patron
+            this._createStar();
+        });
     }
 
     async _createPatron() {
-        console.log("_createPatron:");
         let itemData = {
             name: "Patron",
             type: "worlddata",
@@ -344,6 +351,35 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                     hidden: true,
                     species: "Human",
                     profession: "Patron"
+                }
+            }
+        };
+        Item.create(itemData, { parent: this.actor });
+    }
+
+    async _createPlanet() {
+        let itemData = {
+            name: "Planet",
+            type: "worlddata",
+            system: {
+                world: {
+                    datatype: "planet",
+                    planetType: "largeGas"
+                }
+            }
+        };
+        Item.create(itemData, { parent: this.actor });
+    }
+
+    async _createStar() {
+        let itemData = {
+            name: "Star",
+            type: "worlddata",
+            system: {
+                world: {
+                    datatype: "star",
+                    spectralType: "G2",
+                    luminosityClass: "V"
                 }
             }
         };

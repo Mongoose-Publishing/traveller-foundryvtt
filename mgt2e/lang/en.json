@@ -442,6 +442,11 @@
   "MGT2.WorldSheet.PopDigit": "Population Digit",
   "MGT2.WorldSheet.TradeZone": "Trade Zone",
 
+  "MGT2.WorldSheet.AddStar": "Add Star",
+  "MGT2.WorldSheet.AddPlanet": "Add Planet",
+  "MGT2.WorldSheet.AddFaction": "Add Faction",
+  "MGT2.WorldSheet.AddPatron": "Add Patron",
+
   "MGT2.WorldSheet.LocalBroker": "World's Broker Skill",
   "MGT2.WorldSheet.Broker": "Broker:",
   "MGT2.WorldSheet.Streetwise": "Streetwise:",
