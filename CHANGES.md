@@ -1,5 +1,14 @@
 # Release Notes
 
+# 0.18.3 (Beta)
+
+* Some CSS fixes, including fixes to vehicle sheet so text is readable.
+* Added new statistics to worlds, including population digit, trade zones
+  and allegiance.
+* Added support for recording stellar and planetary information in the system,
+  other than the main world. List of planetary objects displayed in the world
+  sheet.
+
 # 0.18.2 (Beta)
 
 * Damage based chat messages extended to creatures.
