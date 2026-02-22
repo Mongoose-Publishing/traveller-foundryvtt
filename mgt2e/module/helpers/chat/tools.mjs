@@ -607,6 +607,8 @@ Tools.actorInlineDisplay = async function(actorId) {
         await Tools.spacecraftInlineDisplay(a, actor);
     } else if (actor.type === "vehicle") {
         await Tools.vehicleInlineDisplay(a, actor);
+    } else if (actor.type === "package") {
+        await Tools.packageInlineDisplay(a, actor);
     } else {
         a.innerHTML = `Currently only supports Travellers, NPCs and Spacecraft`;
     }
@@ -646,7 +648,7 @@ Tools.packageInlineDisplay = async function(a, actor) {
     let contentData = {
         actor: actor
     }
-    let html = await renderTemplate("systems/mgt2e/templates/journals/actor-package.html", contentData);
+    let html = await renderTemplate("systems/mgt2e/templates/journal/actor-package.html", contentData);
 
     a.innerHTML = html;
     return a;

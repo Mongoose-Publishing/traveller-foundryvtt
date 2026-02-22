@@ -1,15 +1,26 @@
-<div class="inline-actor">
-    <h2>{{actor.name}}</h2>
-    <span class="actor-link rollable name" data-actor-id="{{actor.uuid}}">{{actor.name}}</span>
+<div class="inline-actor inline-package">
+    <h2><span class="rollable actor-link" data-actor-id="{{actor.uuid}}">{{actor.name}}</span></h2>
 
-    <div class="grid grid-4col actor-cha-list">
-        <div class="species-title">STR</div><div>{{actor.system.characteristics.STR.value}}</div>
-        <div class="species-title">INT</div><div>{{actor.system.characteristics.INT.value}}</div>
-        <div class="species-title">DEX</div><div>{{actor.system.characteristics.DEX.value}}</div>
-        <div class="species-title">EDU</div><div>{{actor.system.characteristics.EDU.value}}</div>
-        <div class="species-title">END</div><div>{{actor.system.characteristics.END.value}}</div>
-        <div class="species-title">SOC</div><div>{{actor.system.characteristics.SOC.value}}</div>
-        <div class="species-title grid-span-4">Skilld</div>
+    <div>
+        <div class="grid grid-4col actor-cha-list grid-span-1" style="float:left">
+            <div class="species-title">STR</div><div>{{actor.system.characteristics.STR.value}}</div>
+            <div class="species-title">INT</div><div>{{actor.system.characteristics.INT.value}}</div>
+            <div class="species-title">DEX</div><div>{{actor.system.characteristics.DEX.value}}</div>
+            <div class="species-title">EDU</div><div>{{actor.system.characteristics.EDU.value}}</div>
+            <div class="species-title">END</div><div>{{actor.system.characteristics.END.value}}</div>
+            <div class="species-title">SOC</div><div>{{actor.system.characteristics.SOC.value}}</div>
+            <div class="species-title grid-span-4">Skills</div>
+        </div>
+        <div>
+            <h3>Benefits</h3>
+            <p>
+                List of benefits goes here.
+            </p>
+        </div>
+        <div style="clear: both">
+            <span>{{{showSimpleSkills actor}}}</span>
+        </div>
     </div>
-
 </div>
+
+{{{actor.system.description}}}

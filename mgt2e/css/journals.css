@@ -732,3 +732,13 @@ table.mongoose-equipment td {
   padding-left: 5px;
   padding-right: 5px;
 }
+
+div.inline-package h2 span.actor-link {
+  color: var(--mongoose-orange);
+}
+
+.inline-package h3 {
+  color: black;
+  background-color: var(--mongoose-orange);
+  margin-left: 40%;
+}
