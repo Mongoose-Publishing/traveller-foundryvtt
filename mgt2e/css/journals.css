@@ -718,7 +718,6 @@ table.mongoose-equipment td {
 
 .simple-table {
   background-color: transparent;
-  border: none;
 }
 
 .simple-table th {
@@ -731,6 +730,7 @@ table.mongoose-equipment td {
 .simple-table td {
   padding-left: 5px;
   padding-right: 5px;
+  border: 1px solid black;
 }
 
 div.inline-package h2 span.actor-link {
