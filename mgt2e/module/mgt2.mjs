@@ -887,16 +887,16 @@ Hooks.on("combatRound", (combat, data, options) => {
     combatant.unsetFlag("mgt2e", "reaction");
 
     // If stunned, reduce rounds left to be stunned
-    let stunned = combatant.getFlag("mgt2e", "stunned");
-    if (stunned) {
-        let rounds = combatant.getFlag("mgt2e", "stunnedRounds");
-        rounds = rounds?parseInt(rounds):0;
-
-        if (--rounds < 1) {
-            combatant.unsetFlag("mgt2e", "stunned");
-            combatant.unsetFlag("mgt2e", "stunnedRounds");
-        } else {
-            combatant.setFlag("mgt2e", "stunnedRounds", rounds);
+    let stunnedEffect = combatant.effects.find(e => e.statuses?.values()?.next()?.value === "stun");
+    if (stunnedEffect) {
+        if (parseInt(stunnedEffect.flags?.mgt2e?.value) !== NaN) {
+            let rounds = parseInt(stunnedEffect.flags.mgt2e.value);
+            if (rounds > 1) {
+                rounds -= 1;
+                stunnedEffect.setFlag("mgt2e", "value", rounds);
+            } else {
+                stunnedEffect.delete();
+            }
         }
     }
 });
@@ -1710,8 +1710,8 @@ Handlebars.registerHelper('hasStatus', function(actor) {
         if (e.flags?.mgt2e?.effect) {
             return true;
         }
+        return true;
     }
-
     const status = actor.flags.mgt2e;
     if (!status) return false;
 
@@ -1744,7 +1744,7 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
     let type = "statusWarn";
     let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
 
-    // If this is a proper sttus effect, then we can use a generic solution
+    // If this is a proper status effect, then we can use a generic solution
     // and skip everything else.
     if (effect && effect?.flags?.mgt2e) {
         let statusEffect = CONFIG.statusEffects.find(e => e.id === status);
@@ -1752,6 +1752,9 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
             label = game.i18n.localize(statusEffect.name);
             type = effect.flags.mgt2e.css;
 
+            if (!isNaN(parseInt(effect.flags.mgt2e.value))) {
+                label += ` (${parseInt(effect.flags.mgt2e.value)})`;
+            }
             if (!effect.flags.mgt2e.locked) {
                 const statusName = "status" + status.charAt(0).toUpperCase() + status.slice(1);
                 label += ` <i class="fas fa-xmark ${statusName}"> </i>`;
@@ -2040,6 +2043,7 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
     // 'behaviours' is a string of space separated behaviour values. Some will have values
     // Want to return <span> elements with localised names.
     let html = "";
+    console.log(traits);
     let list = traits.split(",");
     for (let i in list) {
         if (list[i].length > 0) {

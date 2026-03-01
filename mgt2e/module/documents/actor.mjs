@@ -694,6 +694,18 @@ export class MgT2Actor extends Actor {
           if (this.system.damage.END.value > this.system.characteristics.END.value) {
               stuns = this.system.damage.END.value - this.system.characteristics.END.value;
               this.system.damage.END.value = this.system.characteristics.END.value;
+              let stunnedEffect = this.getEffect("stun");
+              if (stunnedEffect) {
+                  let v = stunnedEffect.getFlag("mgt2e", "value");
+                  if (v && parseInt(v) !== NaN) {
+                      v = parseInt(v) + stuns;
+                  } else {
+                      v = stuns;
+                  }
+                  stunnedEffect.setFlag("mgt2e", "value", v);
+              } else {
+                  this.setStunnedEffect(stuns);
+              }
           }
       } else {
           let needsFirstAid = false;
@@ -833,7 +845,6 @@ export class MgT2Actor extends Actor {
       let isInjured = false, isUnconscious = false, isDead = false;
 
       if (stun) {
-          console.log("STUNS");
           if (!hits.tmpDamage) {
               hits.tmpDamage = 0;
           }
@@ -1537,6 +1548,20 @@ export class MgT2Actor extends Actor {
         return null;
     }
 
+    getEffect(status) {
+        const statusEffect = CONFIG.statusEffects.find(e => e.id === status);
+
+        if (!statusEffect) {
+            ui.notifications.error(
+                game.i18n.format("MGT2.Error.NoStatus", { status: status })
+            );
+            return null;
+        }
+
+        const name = game.i18n.localize(statusEffect.name);
+        return this.effects.find(e => e.name === name);
+    }
+
     async setEffect(status, value, overlay, locked, css) {
         const statusEffect = CONFIG.statusEffects.find(e => e.id === status);
 
@@ -1544,16 +1569,16 @@ export class MgT2Actor extends Actor {
             ui.notifications.error(
                 game.i18n.format("MGT2.Error.NoStatus", { status: status })
             );
-            return;
+            return false;
         }
 
         const name = game.i18n.localize(statusEffect.name);
         const effect = this.effects.find(e => e.name === name);
 
         if (value && effect) {
-            return;
+            return false;
         } else if (!value && !effect) {
-            return;
+            return false;
         } else if (value) {
             await this.createEmbeddedDocuments("ActiveEffect", [{
                 name: name,
@@ -1567,17 +1592,21 @@ export class MgT2Actor extends Actor {
                     "mgt2e": {
                         effect: status,
                         locked: locked?true:false,
-                        css: "status" + css
+                        css: "status" + css,
+                        value: value
                     }
                 }
             }]);
         } else if (effect) {
             try {
                 effect.delete();
+                return true;
             } catch (e) {
                 // Already deleted.
             }
+            return false;
         }
+        return true;
     }
 
     setDeadEffect(value) {
@@ -1597,7 +1626,7 @@ export class MgT2Actor extends Actor {
     }
 
     setStunnedEffect(value) {
-        this.setEffect("stun", value,  false, false, "Warn");
+        return this.setEffect("stun", value,  false, false, "Bad");
     }
 
     setFirstAidEffect(value) {

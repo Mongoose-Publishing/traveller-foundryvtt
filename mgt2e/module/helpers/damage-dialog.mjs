@@ -101,10 +101,6 @@ export class MgT2DamageDialog extends Application {
             this.wounds = game.i18n.localize("MGT2.DamageWound.Devastating");
             this.woundsEffect = game.i18n.localize("MGT2.DamageWound.DevastatingEffect");
         }
-        console.log("WOUNDS WOUNDS WOUNDS");
-        console.log(this.wounds);
-        console.log(this.woundsEffect);
-        console.log(game.i18n.localize("MGT2.DamageDialog.WoundEffect"));
 
         this.remainingDamage = this.actualDamage;
 
@@ -162,7 +158,11 @@ export class MgT2DamageDialog extends Application {
         let currentScore = this.getIntValue(html, ".VAL_" + cha);
         let maxScore = this.getIntValue(html, this.data.characteristics[cha].value);
 
-        if (this.remainingDamage <= currentScore) {
+        if (this.stun) {
+            currentDmg += this.remainingDamage;
+            currentScore -= this.remainingDamage;
+            this.remainingDamage = 0;
+        } else if (this.remainingDamage <= currentScore) {
             currentDmg += this.remainingDamage;
             currentScore -= this.remainingDamage;
             this.remainingDamage = 0;

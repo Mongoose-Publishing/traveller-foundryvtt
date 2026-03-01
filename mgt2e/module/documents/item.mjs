@@ -192,10 +192,11 @@ export class MgT2Item extends Item {
         return v;
     }
 
-    printWeaponTraits() {
+    printWeaponTraits(otherTraits) {
+        console.log("printWeaponTraits:" + otherTraits);
         let text = "";
-        if (this.type === "weapon" && this.system.weapon) {
-            const traits = this.system.weapon.traits.split(",");
+        if ((this.type === "weapon" && this.system.weapon) || otherTraits) {
+            const traits = otherTraits?otherTraits.split(","):this.system.weapon.traits.split(",");
             for (let t of traits) {
                 const trait = t.replaceAll(/[^a-zA-Z]/g, "");
                 const value = t.replaceAll(/[^0-9]/g, "");

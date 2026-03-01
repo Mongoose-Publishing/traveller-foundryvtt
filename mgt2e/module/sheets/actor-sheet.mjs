@@ -1119,6 +1119,9 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         html.find('.statusStunned').click(ev => {
             this._clearStunned(this.actor);
         });
+        html.find('.statusStun').click(ev => {
+            this._clearStatus(this.actor, "stun");
+        });
         html.find('.statusFatigued').click(ev => {
             this._clearStatus(this.actor, "fatigued");
         });

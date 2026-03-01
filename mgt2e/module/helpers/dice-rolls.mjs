@@ -116,6 +116,29 @@ export function getTraitValue(traits, trait) {
     return 0;
 }
 
+export function printWeaponTraits(traits) {
+    console.log("printWeaponTraits: " + traits);
+    let text = "";
+    if (traits) {
+        const list = traits.split(",");
+        for (let t of list) {
+            const trait = t.replaceAll(/[^a-zA-Z]/g, "");
+            const value = t.replaceAll(/[^0-9]/g, "");
+            if (CONFIG.MGT2.WEAPONS.traits[trait]) {
+                let label = game.i18n.localize("MGT2.Item.WeaponTrait.Label." + trait);
+                if (text) {
+                    text += ", ";
+                }
+                text += label;
+                if (value) {
+                    text += " " + value;
+                }
+            }
+        }
+    }
+    return text;
+}
+
 export async function rollAttack(actor, weapon, attackOptions) {
     const   system = actor?actor.system:null;
     let     content = "Attack";
@@ -248,10 +271,20 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
 
     let traits = weapon?weapon.system.weapon.traits:"";
+    console.log("FROM WEAPON: " + traits);
+    if (attackOptions.traits) {
+        console.log("FROM ATTACK: " + attackOptions.traits);
+        if (traits.length > 0) {
+            traits = ", " + attackOptions.traits;
+        } else {
+            traits = attackOptions.traits;
+        }
+    }
+    console.log(traits);
     let destructive = false;
     let bonusPsiAP = 0;
-    if (weapon) {
-        if (weapon.hasTrait("psiDmg")) {
+    if (weapon || traits) {
+        if (hasTrait(traits, "psiDmg")) {
             let psi = attackOptions.psiDM;
             let psiDmg = getTraitValue(traits, "psiDmg");
             let bonus = 0;
@@ -265,7 +298,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 dmg += ` + ${bonus}[PSI]`;
             }
         }
-        if (weapon.hasTrait("psiAp")) {
+        if (hasTrait(traits,"psiAp")) {
             let psi = attackOptions.psiDM;
             let psiAp = getTraitValue(traits, "psiAp");
             if (attackOptions.psiDM) {
@@ -276,8 +309,8 @@ export async function rollAttack(actor, weapon, attackOptions) {
             }
         }
 
-        destructive = weapon.hasTrait("destructive");
-        let damageBonus = weapon.system.weapon.damageBonus;
+        destructive = hasTrait(traits,"destructive");
+        let damageBonus = weapon?weapon.system.weapon.damageBonus:null;
         if (damageBonus && actor && actor.system.characteristics && actor.system.characteristics[damageBonus]) {
             damageBonus = actor.system.characteristics[damageBonus].dm;
             if (damageBonus > 0) {
@@ -289,7 +322,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
 
         if (!attackOptions.isParry) {
             let scale = "";
-            if (weapon.system.weapon.scale === "spacecraft") {
+            if (weapon && weapon.system.weapon.scale === "spacecraft") {
                 scale = " [Spacecraft]";
             }
             content += `<b>Damage:</b> ${dmg.toUpperCase()}${scale} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
@@ -300,7 +333,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
             }
         }
         if (traits && traits !== "") {
-            content += `<b>Traits:</b> ${weapon.printWeaponTraits()}<br/>`
+            content += `<b>Traits:</b> ${printWeaponTraits(traits)}<br/>`
         } else {
             traits = "";
         }
@@ -389,9 +422,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
 
         let effectClass = "rollFailure";
         let effectText = "Miss";
-        if (effect <= -5 && (hasTrait(weapon.system.weapon.traits, "dangerous")||hasTrait(weapon.system.traits, "veryDangerous"))) {
+        if (effect <= -5 && (hasTrait(traits, "dangerous")||hasTrait(traits, "veryDangerous"))) {
             effectText = game.i18n.localize("MGT2.Attack.Dangerous");
-        } else if (effect <= -3 && (hasTrait(weapon.system.weapon.traits, "veryDangerous"))) {
+        } else if (effect <= -3 && (hasTrait(traits, "veryDangerous"))) {
             effectText = game.i18n.localize("MGT2.Attack.Dangerous");
         } else if (effect === 0) {
             effectClass = "rollMarginal";
@@ -471,9 +504,6 @@ export async function rollAttack(actor, weapon, attackOptions) {
             if (hasTrait(traits, "blast")) {
                 dmgText += ` /&nbsp;Blast&nbsp;${getTraitValue(traits, "blast")}m`;
                 blastRadius = getTraitValue(traits, "blast");
-            } else if (hasTrait(attackOptions.traits, "blast")) {
-                dmgText += ` /&nbsp;Blast&nbsp;${getTraitValue(attackOptions.traits, "blast")}m`;
-                blastRadius = getTraitValue(attackOptions.traits, "blast");
             }
 
             let titleText = game.i18n.localize("MGT2.Attack.DragMe");
@@ -487,7 +517,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 "effect": effect,
                 "multiplier": 1,
                 "scale": weapon?weapon.system.weapon.scale:"traveller",
-                "traits": weapon?weapon.system.weapon.traits:"",
+                "traits": traits,
                 "ap": ap,
                 "tl": tl,
                 "damageType": damageType,
