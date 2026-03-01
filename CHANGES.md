@@ -1,5 +1,10 @@
 # Release Notes
 
+# 0.18.4 (Beta)
+
+* Improvements to how stuns are handled on creatures and Travellers.
+* Improvements to display of tables in Journals.
+
 # 0.18.3 (Beta)
 
 * Some CSS fixes, including fixes to vehicle sheet so text is readable.

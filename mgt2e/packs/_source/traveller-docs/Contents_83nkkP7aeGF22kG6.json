@@ -134,7 +134,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Various CSS fixes, including the vehicle sheet.</p></li><li><p>Added some extra creature traits from the Companion.</p></li><li><p>Added support for population digit and trade zone on world sheets, along with allegiance.</p></li><li><p>Support for Planet and Star data types on a world sheet. Simple tracking of other objects in a star system, with basic information and display of them.</p></li></ul><p></p>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Improvements to how stun effects are handled on Travellers and Creatures.</p></li><li><p>Improvements to CSS for display of tables in journals.</p></li></ul><p></p>"
       },
       "video": {
         "controls": true,
@@ -153,7 +153,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1771766291965,
+        "modifiedTime": 1772396817709,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
