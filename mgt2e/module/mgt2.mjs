@@ -1207,6 +1207,20 @@ Handlebars.registerHelper('isItemCarried', function(item) {
     return false;
 });
 
+Handlebars.registerHelper('isItemGeneral', function(item) {
+    if (item.type === 'item') {
+        return true;
+    }
+    return false;
+});
+
+Handlebars.registerHelper('isItemAugment', function(item) {
+    if (item.type === 'augment') {
+        return true;
+    }
+    return false;
+});
+
 Handlebars.registerHelper('isItemOwned', function(item) {
     if (item.system.status === MgT2Item.EQUIPPED || item.system.status === MgT2Item.CARRIED) {
         return false;
