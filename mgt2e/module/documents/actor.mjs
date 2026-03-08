@@ -530,7 +530,7 @@ export class MgT2Actor extends Actor {
               let armourData = this.system.armour;
               if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
                   let otherProt = armourData.otherProtection ? parseInt(armourData.otherProtection) : 0;
-                  if (otherProt > 0) {
+                  if (otherProt !== 0) {
                       armour += otherProt;
                       armourText += `${options.damageType} + ${otherProt} `;
                   }
