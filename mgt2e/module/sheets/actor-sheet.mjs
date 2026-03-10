@@ -710,6 +710,9 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         context.armour = armour;
         context.terms = terms;
         context.associates = associates;
+
+        context.GEAR = context.gear;
+        context.WEAPONS = context.weapons;
     }
 
     _setItemStatus(actor, item, status) {

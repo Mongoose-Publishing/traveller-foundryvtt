@@ -97,31 +97,9 @@ export class MgT2NpcActorSheet extends MgT2ActorSheet {
             }
             context.TRAITS.push(row);
         }
+        await this._prepareItems(context);
 
         return context;
-    }
-
-    _onDrop(event) {
-        // Nothing
-    }
-
-    _prepareItems(context) {
-        context.GEAR = [];
-        context.WEAPONS = [];
-        context.activeWeapons = [];
-
-        for (let i of context.items) {
-            if (i.type === "weapon") {
-                context.WEAPONS.push(i);
-                if (i.system.status === MgT2Item.EQUIPPED) {
-                    context.activeWeapons.push(i);
-                }
-            } else {
-                if ([ MgT2Item.EQUIPPED, MgT2Item.CARRIED].includes(i.system.status)) {
-                    context.GEAR.push(i);
-                }
-            }
-        }
     }
 
     activateListeners(html) {
