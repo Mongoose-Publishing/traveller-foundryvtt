@@ -612,6 +612,21 @@ MgT2eMacros.createAssociate = async function(args) {
 MgT2eMacros.roll = async function(args) {
     let uuid = args.uuid;
     let dice = args.dice;
+    let text = args.text;
+
+    if (text) {
+        let data = await foundry.applications.api.DialogV2.input({
+            window: { title: text },
+            content: `<input type='text' name='dm'>`,
+            ok: {
+                label: "Roll",
+                icon: "fa-solid fa-dice",
+            }
+        });
+        if (data && data.dm && !isNaN(parseInt(data.dm))) {
+            dice = dice + " + " + data.dm;
+        }
+    }
 
     let table = null;
 
