@@ -614,7 +614,7 @@ MgT2eMacros.roll = async function(args) {
     let dice = args.dice;
     let text = args.text;
 
-    if (text) {
+    if (text && dice) {
         let data = await foundry.applications.api.DialogV2.input({
             window: { title: text },
             content: `<input type='text' name='dm'>`,
@@ -635,7 +635,11 @@ MgT2eMacros.roll = async function(args) {
     }
 
     if (table) {
-        let roll = new Roll(dice);
-        table.draw({roll});
+        if (!dice) {
+            table.draw();
+        } else {
+            let roll = new Roll(dice);
+            table.draw({roll});
+        }
     }
 }
