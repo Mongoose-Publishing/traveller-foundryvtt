@@ -5,7 +5,7 @@ import {rollSpaceAttack} from "../dice-rolls.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 // see: https://foundryvtt.wiki/en/development/api/applicationv2
-export class MgT2MissileAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
+export class MgT2SquadronAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     constructor(salvoActor, targetActor, weaponItem, attackOptions) {
         super();

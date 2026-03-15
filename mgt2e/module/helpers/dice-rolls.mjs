@@ -1062,7 +1062,7 @@ export async function rollSkill(actor, skill, options) {
             }
             if (skill.augment) {
                 value += parseInt(skill.augment);
-                //skillNotes += `Aug&nbsp;${skill.augment}`;
+                skillNotes += `Aug&nbsp;${skill.augment}`;
             }
             if (speciality) {
                 value = parseInt(speciality.value) || 0;
