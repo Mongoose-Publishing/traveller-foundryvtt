@@ -134,7 +134,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Allow macro links to roll tables to ask for a Dice Modifier from the player.</p></li><li><p>Fixed display of speed on Creature inline journal entries.</p></li><li><p>Fixed spelling of psychology skill. This will mean new actors will have a science.psychology speciality, and old actors will retain science.psycology</p></li><li><p>Added extra actor images for world types.</p></li><li><p>Fixed item issues with NPC character sheet.</p></li><li><p>Allow energy protection for armour to be negative.</p></li><li><p>Display augment bonus when rolling skills.</p></li></ul><p></p>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Allow macro links to roll tables to ask for a Dice Modifier from the player.</p></li><li><p>Fixed display of speed on Creature inline journal entries.</p></li><li><p>Fixed spelling of psychology skill. This will mean new actors will have a science.psychology speciality, and old actors will retain science.psycology</p></li><li><p>Added extra actor images for world types.</p></li><li><p>Fixed item issues with NPC character sheet.</p></li><li><p>Allow energy protection for armour to be negative.</p></li><li><p>Display augment bonus when rolling skills.</p></li><li><p>Clicking on the skill icon in chat would only ever roll the admin skill.</p></li></ul><p></p>"
       },
       "video": {
         "controls": true,
@@ -153,7 +153,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1773570671274,
+        "modifiedTime": 1773589509984,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },

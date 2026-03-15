@@ -1,5 +1,9 @@
 # Release Notes
 
+# 0.18.6 (Beta)
+
+* Clicking on skill icon in chat only ever rolled the admin skill.
+
 # 0.18.5 (Beta)
 
 * Allow journal macro links to roll tables to request a Dice Modifier to the roll if a text
