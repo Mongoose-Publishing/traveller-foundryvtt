@@ -796,7 +796,7 @@ MGT2.SKILLS = {
         },
         "psionicology": {
         },
-        "psycology": {
+        "psychology": {
         },
         "robotics": {
         },
@@ -949,6 +949,7 @@ MGT2.CREATURES = {
     "grazer": { "skills": [ ] },
     "hunter": { "skills": [ "survival" ] },
     "hijacker": { "skills": [ ] },
+    "inexplicable": { "skills": [ ] },
     "intimidator": { "skills": [ "persuade" ] },
     "killer": { "skills": [ "melee.natural" ] },
     "intermittent": { "skills": [ ] },
@@ -963,6 +964,7 @@ MGT2.CREATURES = {
     "alarm": { },
     "amphibious": {},
     "camouflaged": { "skills": [ { skill: "stealth", bonus: 2 }] },
+    "composite": { },
     "clever": { },
     "diseased": {},
     "dispersed": {},
@@ -1140,6 +1142,10 @@ MGT2.WORLD = {
         "N": {},
         "S": {},
         "W": {}
+    },
+    "stellar": {
+        "luminosity": [ "Ia", "Ib", "II", "III", "IV", "V", "VI" ],
+        "hr": [ "O", "B", "A", "F", "G", "K", "M", "BD", "D" ]
     }
 }
 

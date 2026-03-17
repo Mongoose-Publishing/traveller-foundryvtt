@@ -159,11 +159,24 @@
                             {{name}} x{{fighter.number}}
                         </h3>
 
-                        <p>
-                            <b>Thrust: </b> {{fighter.thrust}}<br/>
-                            <b>Armour: </b> {{fighter.armour}}<br/>
-                            <b>Hull: </b> {{fighter.hull}}<br/>
-                        </p>
+                        <div class="grid grid-2col">
+                            <div>
+                                <b>Thrust: </b> {{fighter.thrust}}<br/>
+                                <b>Armour: </b> {{fighter.armour}}<br/>
+                                <b>Hull: </b> {{fighter.hull}}<br/>
+                            </div>
+
+                            <div>
+                                {{#each fighter.actions_ as | action |}}
+                                    <input class="squadron-action" type="button"
+                                           data-fighter-id="{{fighter.uuid}}"
+                                           data-crew-id="{{action.crewId}}"
+                                           data-role-id="{{action.roleId}}"
+                                           data-action-id="{{action.actionId}}"
+                                           value="{{action.label}} ({{action.wpnItem.name}})"/>
+                                {{/each}}
+                            </div>
+                        </div>
                     </div>
                 {{/each}}
             </div>

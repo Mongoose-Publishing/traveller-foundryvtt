@@ -607,6 +607,8 @@ Tools.actorInlineDisplay = async function(actorId) {
         await Tools.spacecraftInlineDisplay(a, actor);
     } else if (actor.type === "vehicle") {
         await Tools.vehicleInlineDisplay(a, actor);
+    } else if (actor.type === "package") {
+        await Tools.packageInlineDisplay(a, actor);
     } else {
         a.innerHTML = `Currently only supports Travellers, NPCs and Spacecraft`;
     }
@@ -630,7 +632,7 @@ Tools.creatureInlineDisplay = async function(a, actor) {
     html += `<tr><th>Animal</th><th>Hits</th><th>Speed</th></tr>`;
     html += `<tr class="noborder"><td>`;
     html += `<a class="embedded-actor-link actor-draggable" data-actor-id="${actor.uuid}">${actor.name}</a></td>`;
-    html += `<td>${actor.system.hits.max}</td><td>${actor.system.speed.value}</td></tr>`;
+    html += `<td>${actor.system.hits.max}</td><td>${actor.system.speed.base}</td></tr>`;
 
     html += `<tr><th>Skills</th><td colspan="2">${actor.printSkills()}</td></tr>`;
     html += `<tr><th>Attacks</th><td colspan="2">${actor.printAttacks()}</td></tr>`;
@@ -646,7 +648,7 @@ Tools.packageInlineDisplay = async function(a, actor) {
     let contentData = {
         actor: actor
     }
-    let html = await renderTemplate("systems/mgt2e/templates/journals/actor-package.html", contentData);
+    let html = await renderTemplate("systems/mgt2e/templates/journal/actor-package.html", contentData);
 
     a.innerHTML = html;
     return a;

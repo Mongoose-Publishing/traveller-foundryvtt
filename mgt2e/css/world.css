@@ -113,3 +113,25 @@ span.buy-1 {
   float: left;
   padding-right: 4px;
 }
+
+ol.planet-list li.item-world {
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+ol.planet-list li.item-world .uwp-data-name {
+  display: inline-block;
+  text-align: left;
+  width: 8em;
+}
+ol.planet-list li.item-world .uwp-data-type {
+  display: inline-block;
+  text-align: left;
+  width: 8em;
+}
+ol.planet-list li.item-world .uwp-data-uwp {
+  display: inline-block;
+  text-align: left;
+  width: 8em;
+}

@@ -1230,18 +1230,21 @@ textarea.traits {
 .creature-sheet .description {
   padding: 5px;
   margin-bottom: 10px;
+  background-color: #F0F0F0;
 }
 
 .actor-description .editor {
   padding: 5px;
   min-height: 200px;
   height: 100%;
+  background-color: #F0F0F0;
 }
 
 .item-description .editor {
   padding: 5px;
   min-height: 200px;
   height: 100%;
+  background-color: #F0F0F0;
 }
 
 .tox-tinymce {
