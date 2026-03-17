@@ -54,6 +54,14 @@
 
         <div class="grid grid-4col">
             <div class="skill-boon">
+                <label for="rollmode" class="skillDialogLabel">{{localize "MGT2.Dialog.RollType"}}</label>
+                <br/>
+                <select class="skillDialogRollMode" name="rollmode">
+                    {{selectOptions MODE_SELECT selected=mode}}
+                </select>
+            </div>
+
+            <div class="skill-boon">
                 <label for="dicetype" class="skillDialogLabel">{{localize "MGT2.Dialog.RollType"}}</label>
                 <br/>
                 <select class="skillDialogRollType" name="dicetype">

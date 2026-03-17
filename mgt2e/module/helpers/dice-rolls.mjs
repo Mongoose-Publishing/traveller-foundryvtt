@@ -1322,9 +1322,9 @@ export async function rollSkill(actor, skill, options) {
         const html = await renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
-            flavor: html,
-            rollMode: game.settings.get("core", "rollMode")
-        });
+            flavor: html,},
+            {rollMode: options.rollMode}
+        );
     }
     return roll.total;
 }

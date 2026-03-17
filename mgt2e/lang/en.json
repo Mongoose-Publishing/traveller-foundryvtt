@@ -1567,6 +1567,10 @@
 
   "MGT2.Dialog.RememberCharacteristic": "Remember Characteristic",
   "MGT2.Dialog.RollType": "Roll Type",
+  "MGT2.Dialog.Public": "Public Roll",
+  "MGT2.Dialog.Private": "Private Roll",
+  "MGT2.Dialog.Blind": "Blind GM Roll",
+  "MGT2.Dialog.Self": "Self Roll",
 
   "MGT2.Dialog.ApplyDamage.Title": "Apply Damage to {name}?",
   "MGT2.Dialog.ApplyDamage.What": "<span class='player-name'>{playerName}</span> wants to cause <span class='damage-value'>{damage} HITS</span> to {actorName}.",
