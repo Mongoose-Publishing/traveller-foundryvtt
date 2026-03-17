@@ -1567,6 +1567,7 @@
 
   "MGT2.Dialog.RememberCharacteristic": "Remember Characteristic",
   "MGT2.Dialog.RollType": "Roll Type",
+  "MGT2.Dialog.RollMode": "Roll Mode",
   "MGT2.Dialog.Public": "Public Roll",
   "MGT2.Dialog.Private": "Private Roll",
   "MGT2.Dialog.Blind": "Blind GM Roll",
