@@ -1535,14 +1535,16 @@ export class MgT2Actor extends Actor {
     }
 
     safeUpdate(data) {
-        if (this.canUserModify(game.user) && !this.compendium?.locked) {
+        let u = game.user;
+        if ((u.isGM || this.canUserModify(u)) && !this.compendium?.locked) {
             return this.update(data);
         }
         return null;
     }
 
     async syncedUpdate(data) {
-        if (this.canUserModify(game.user) && !this.comendium?.locked) {
+        let u = game.user;
+        if ((u.isGM || this.canUserModify(game.user)) && !this.compendium?.locked) {
             return await this.update(data);
         }
         return null;

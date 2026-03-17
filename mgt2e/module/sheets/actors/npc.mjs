@@ -104,7 +104,6 @@ export class MgT2NpcActorSheet extends MgT2ActorSheet {
 
     activateListeners(html) {
         super.activateListeners(html);
-        console.log("NPC LISTENERS");
 
         html.find(".item-edit").click(ev => {
             const id = $(ev.currentTarget).data("itemId");
