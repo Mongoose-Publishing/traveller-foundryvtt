@@ -936,6 +936,17 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             this._setItemStatus(this.actor, item, MgT2Item.CARRIED);
         });
 
+        html.find('.item-message').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            const html = 
+            `<div style="display: flex; justify-content: space-between">
+                <img alt=${item.name} src=${item.img} height=50><span><b>${item.name}</b></span>
+            </div>
+            <p>${item.system.description}</p>`;
+            ChatMessage.create({ content: html})
+        });
+
         html.find('.deck-plan-add').click(ev => {
             this._addDeckPlan(this.actor);
         });
