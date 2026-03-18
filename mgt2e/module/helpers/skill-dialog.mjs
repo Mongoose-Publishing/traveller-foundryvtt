@@ -169,6 +169,8 @@ export class MgT2SkillDialog extends Application {
         MODE_SELECT["blindroll"] = game.i18n.localize("MGT2.Dialog.Blind");
         MODE_SELECT["selfroll"] = game.i18n.localize("MGT2.Dialog.Self");
 
+        let mode = game.settings.get("core", "rollMode")
+
         let TARGET_SELECT = {};
         for (let t=2; t <= 16; t += 2) {
             TARGET_SELECT[t] = game.i18n.localize("MGT2.TaskDifficulty." + t) + ` (${t}+)`;
@@ -197,7 +199,8 @@ export class MgT2SkillDialog extends Application {
             "CHA_SELECT": CHA_SELECT,
             "BOON_SELECT": BOON_SELECT,
             "TARGET_SELECT": TARGET_SELECT,
-            "MODE_SELECT": MODE_SELECT
+            "MODE_SELECT": MODE_SELECT,
+            "mode": mode
         }
     }
 
