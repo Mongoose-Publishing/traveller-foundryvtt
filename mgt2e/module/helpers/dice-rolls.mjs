@@ -1139,7 +1139,7 @@ export async function rollSkill(actor, skill, options) {
     } else if (options.rollType === "bane") {
         skillText += ` <span class='bane'>[${game.i18n.localize("MGT2.TravellerSheet.Bane")}]</span>`;
     }
-
+    const rollMode = options.rollMode ? options.rollMode : game.settings.get("core", "rollMode")
     let checkText;
     if (options.agent) {
         checkText = `Agent check by <b>${options.agent}</b>`;
@@ -1322,8 +1322,10 @@ export async function rollSkill(actor, skill, options) {
         const html = await renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
-            flavor: html,},
-            {rollMode: options.rollMode}
+            flavor: html},
+            {
+                rollMode: rollMode
+            }
         );
     }
     return roll.total;
