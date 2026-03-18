@@ -7,6 +7,7 @@ export const preloadHandlebarsTemplates = async function() {
     return loadTemplates([
         // Actor partials.
         "systems/mgt2e/templates/actor/parts/actor-items.html",
+        "systems/mgt2e/templates/actor/parts/actor-items-categorised.html",
         "systems/mgt2e/templates/actor/parts/actor-combat.html",
         "systems/mgt2e/templates/actor/parts/actor-status.html",
         "systems/mgt2e/templates/actor/parts/actor-effects.html",
