@@ -384,6 +384,7 @@
   "MGT2.TravellerSheet.SpacecraftTypeCode": "Spacecraft type code",
   "MGT2.TravellerSheet.LockUPP": "Lock UPP",
   "MGT2.TravellerSheet.RandomRoll": "Re-roll characteristics (shift for average, ctrl for vary)",
+  "MGT2.TravellerSheet.category": "Sort items by category",
 
   "MGT2.TravellerSheet.CargoText": "Total cargo capacity.",
   "MGT2.TravellerSheet.JDriveText": "Jump distance.",

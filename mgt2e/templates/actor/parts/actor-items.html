@@ -1,4 +1,3 @@
-
 <div class="grid grid-3col">
     <div class="resource flex-group-center">
         <label class="field-label">{{localize 'MGT2.TravellerSheet.HeavyLoad'}}</label>
@@ -17,31 +16,98 @@
 
 <hr/>
 
-<h2>{{localize 'MGT2.TravellerSheet.GeneralItems'}}
-    {{#if (isOwner .)}}
+<h2>{{localize 'MGT2.TravellerSheet.ItemsInUse'}}</h2>
+
+<ol class="items-list actor-items grid grid-3col">
+    {{#each items as |item id|}}
+        {{#if (isItemEquipped item)}}
+            <li class="item item-{{item.type}} {{item.cssStyle}}" data-item-id="{{item._id}}">
+                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+                {{#if item.system.armour}}
+                <label>Prot:</label> <span>{{formula ../actor item.system.armour.protection}}</span><br/>
+                {{/if}}
+                {{#if item.system.weapon}}
+                <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span><br/>
+                {{/if}}
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
+                {{/if}}
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{carryItem item}}}
+                        {{{storeItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
+            </li>
+        {{/if}}
+    {{/each}}
+    <li></li>
+</ol>
+
+<h2>{{localize 'MGT2.TravellerSheet.ItemsCarried'}}</h2>
+
+<ol class="items-list actor-items grid grid-3col">
+    {{#each items as |item id|}}
+        {{#if (isItemCarried item)}}
+            <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
+                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+                {{#if item.system.armour}}
+                <label>Prot:</label> <span>{{formula ../actor item.system.armour.protection}}</span><br/>
+                {{/if}}
+                {{#if item.system.weapon}}
+                <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span><br/>
+                {{/if}}
+                {{#if item.system.weight  includeZero=false}}
+                    <span>{{item.system.weight}}kg</span>
+                {{/if}}
+                {{#if (isOwner ..)}}
+                    <div class="item-controls">
+                        {{{equipItem item}}}
+                        {{{storeItem item}}}
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                {{/if}}
+            </li>
+        {{/if}}
+    {{/each}}
+    <li></li>
+</ol>
+
+{{#if (isOwner .)}}
+<h2>
+    {{localize 'MGT2.TravellerSheet.ItemsOwned'}}
     <div class="resource addNewItem">
         {{localize 'MGT2.TravellerSheet.AddItem'}}
         <select class="addItemSelect">
             {{selectOptions CREATE_ITEM_SELECT}}
         </select>
     </div>
-    {{/if}}
 </h2>
+
 <ol class="items-list actor-items grid grid-3col">
     {{#each items as |item id|}}
-        {{#if (isItemGeneral item)}}
-            <li class="item item-{{item.type}} {{item.cssStyle}}" data-item-id="{{item._id}}">
+        {{#if (isItemOwned item)}}
+            <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
                 <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                 <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+                {{#if item.system.armour}}
+                    <label>Prot:</label> <span>{{formula ../actor item.system.armour.protection}}</span><br/>
+                {{/if}}
+                {{#if item.system.weapon}}
+                    <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span><br/>
+                {{/if}}
                 {{#if item.system.weight  includeZero=false}}
                     <span>{{item.system.weight}}kg</span>
                 {{/if}}
                 {{#if (isOwner ..)}}
                     <div class="item-controls">
-                        <a class="item-control item-message" title="Message Item"><i class="fas fa-comment"></i></a>
                         {{{equipItem item}}}
                         {{{carryItem item}}}
-                        {{{storeItem item}}}
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                     </div>
@@ -51,109 +117,4 @@
     {{/each}}
     <li></li>
 </ol>
-
-<h2>{{localize 'MGT2.TravellerSheet.Augments'}}</h2>
-<ol class="items-list actor-items grid grid-3col">
-    {{#each items as |item id|}}
-        {{#if (isItemAugment item)}}
-            <li class="item item-{{item.type}} {{item.cssStyle}}" data-item-id="{{item._id}}">
-                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
-                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                {{#if item.system.weight  includeZero=false}}
-                    <span>{{item.system.weight}}kg</span>
-                {{/if}}
-                {{#if (isOwner ..)}}
-                    <div class="item-controls">
-                        <a class="item-control item-message" title="Message Item"><i class="fas fa-comment"></i></a>
-                        {{{equipItem item}}}
-                        {{{carryItem item}}}
-                        {{{storeItem item}}}
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                    </div>
-                {{/if}}
-            </li>
-        {{/if}}
-    {{/each}}
-    <li></li>
-</ol>
-
-<h2>{{localize 'MGT2.TravellerSheet.Software'}}</h2>
-<ol class="items-list actor-items grid grid-4col">
-    {{#each items as |item id|}}
-        {{#if item.system.software}}
-            <li class="item item-{{item.type}} {{item.cssStyle}}" data-item-id="{{item._id}}">
-                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
-                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                {{#if item.system.weight  includeZero=false}}
-                    <span>{{item.system.weight}}kg</span>
-                {{/if}}
-                {{#if (isOwner ..)}}
-                    <div class="item-controls">
-                        <a class="item-control item-message" title="Message Item"><i class="fas fa-comment"></i></a>
-                        {{{equipItem item}}}
-                        {{{carryItem item}}}
-                        {{{storeItem item}}}
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                    </div>
-                {{/if}}
-            </li>
-        {{/if}}
-    {{/each}}
-    <li></li>
-</ol>
-
-<h2>{{localize 'MGT2.TravellerSheet.Armour'}}</h2>
-<ol class="items-list actor-items grid grid-3col">
-    {{#each items as |item id|}}
-        {{#if item.system.armour}}
-            <li class="item item-{{item.type}} {{item.cssStyle}}" data-item-id="{{item._id}}">
-                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
-                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                <label>Prot:</label> <span>{{formula ../actor item.system.armour.protection}}</span><br/>
-                {{#if item.system.weight  includeZero=false}}
-                    <span>{{item.system.weight}}kg</span>
-                {{/if}}
-                {{#if (isOwner ..)}}
-                    <div class="item-controls">
-                        <a class="item-control item-message" title="Message Item"><i class="fas fa-comment"></i></a>
-                        {{{equipItem item}}}
-                        {{{carryItem item}}}
-                        {{{storeItem item}}}
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                    </div>
-                {{/if}}
-            </li>
-        {{/if}}
-    {{/each}}
-    <li></li>
-</ol>
-
-<h2>{{localize 'MGT2.TravellerSheet.Weapons'}}</h2>
-<ol class="items-list actor-items grid grid-3col">
-    {{#each items as |item id|}}
-        {{#if item.system.weapon}}
-            <li class="item item-{{item.type}} {{item.cssStyle}}" data-item-id="{{item._id}}">
-                <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
-                <img title="{{nameQuantity item}}" src="{{item.img}}"/>
-                <label>Dmg:</label> <span>{{item.system.weapon.damage}}</span><br/>
-                {{#if item.system.weight  includeZero=false}}
-                    <span>{{item.system.weight}}kg</span>
-                {{/if}}
-                {{#if (isOwner ..)}}
-                    <div class="item-controls">
-                        <a class="item-control item-message" title="Message Item"><i class="fas fa-comment"></i></a>
-                        {{{equipItem item}}}
-                        {{{carryItem item}}}
-                        {{{storeItem item}}}
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                    </div>
-                {{/if}}
-            </li>
-        {{/if}}
-    {{/each}}
-    <li></li>
-</ol>
+{{/if}}
