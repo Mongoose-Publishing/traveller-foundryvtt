@@ -2197,7 +2197,7 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
             html += `<span class='pill cargo-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Trade."+trait)}'>`;
             if (key.owner) {
                 value = parseInt(value);
-                if (value > 1) {
+                if (value > -12) {
                     html += `<i class="fas fa-minus trait-minus"> </i>`;
                 }
                 if (value < 12) {

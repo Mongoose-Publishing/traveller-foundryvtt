@@ -123,6 +123,11 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             if (actorData.settings.autoAge) {
                 actorData.sophont.age = parseInt(game.settings.get("mgt2e", "currentYear")) - actorData.birthYear;
             }
+            console.log("NumTerms: " + numTerms);
+            if (actorData.terms !== numTerms) {
+                console.log("Setting number of terms to " + numTerms);
+                context.actor.safeUpdate({"system.terms": numTerms});
+            }
         } else if (type === 'npc') {
             await this._prepareItems(context);
         } else if (type === 'creature') {
@@ -718,6 +723,9 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         context.armour = armour;
         context.terms = terms;
         context.associates = associates;
+
+        context.GEAR = context.gear;
+        context.WEAPONS = context.weapons;
     }
 
     _setItemStatus(actor, item, status) {

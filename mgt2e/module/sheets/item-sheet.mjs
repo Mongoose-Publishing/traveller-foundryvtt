@@ -1333,7 +1333,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                 let value = parseInt(text.replace(/[^-0-9]/g, ""));
                 value += parseInt(modifier);
                 value = Math.min(12, value);
-                value = Math.max(1, value);
+                value = Math.max(-12, value);
                 // We can change.
                 const updated = trait + " " + value;
                 let traits = this.item.system.cargo[field];

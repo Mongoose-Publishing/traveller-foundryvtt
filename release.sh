@@ -95,6 +95,12 @@ RELEASE_URL="https://github.com/Mongoose-Publishing/traveller-foundryvtt/"
 # Zip up system archive, minus the source json.
 if [ $LOCAL = "yes" ]
 then
+  if [[ $release =~ v[0-9].* ]]
+  then
+    echo "Running LOCAL build on RELEASE branch $release"
+    exit 1
+  fi
+
   echo "Publishing locally to $LOCAL_PUBLISH_DIR"
   sed -i "s/\"version\": \".*\",/\"version\": \"${version}.${build}-DEV\",/" mgt2e/system.json
   sed -i "s#\"download\": .*#\"download\": \"$LOCAL_DOWNLOAD_URL\",#" mgt2e/system.json

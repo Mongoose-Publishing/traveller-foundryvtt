@@ -157,6 +157,7 @@
   "MGT2.Skills.history": "Historia",
   "MGT2.Skills.linquistics": "Lingüística",
   "MGT2.Skills.planetology": "Planetología",
+  "MGT2.Skills.psychology": "Psicología",
   "MGT2.Skills.psycology": "Psicología",
   "MGT2.Skills.psionicology": "Psiónica",
   "MGT2.Skills.chemistry": "Química",
@@ -284,7 +285,7 @@
   "MGT2.TravellerSheet.Energy": "Protección Energética",
   "MGT2.TravellerSheet.EnergyTypes": "Tipos de Energía",
   "MGT2.TravellerSheet.Attacks": "Ataques",
-  "MGT2.TravellerSheet.Weapons": "Armas",  
+  "MGT2.TravellerSheet.Weapons": "Armas",
   "MGT2.TravellerSheet.DamageTaken": "Daño Recibido",
   "MGT2.TravellerSheet.HitsRemaining": "Daño Restante",
   "MGT2.TravellerSheet.Hull": "Casco",
@@ -421,6 +422,17 @@
   "MGT2.TravellerSheet.EventsMishapsPromotions": "Eventos, infortunios y promociones.",
 
   "MGT2.WorldSheet.Sector": "Sector",
+  "MGT2.WorldSheet.Planet": "Planeta",
+  "MGT2.WorldSheet.SectorName": "Nombre del Sector",
+  "MGT2.WorldSheet.Allegiance": "Lealtad",
+  "MGT2.WorldSheet.Facilities": "Instalaciones",
+  "MGT2.WorldSheet.WorldData": "Datos del Mundo",
+  "MGT2.WorldSheet.Description": "Descripción",
+  "MGT2.WorldSheet.Factions": "Facciones",
+  "MGT2.WorldSheet.Patrons": "Patrones",
+  "MGT2.WorldSheet.Map": "Mapa",
+  "MGT2.WorldSheet.Freight": "Mercancías",
+  "MGT2.WorldSheet.Trade": "Comercio",
   "MGT2.WorldSheet.X": "X",
   "MGT2.WorldSheet.Y": "Y",
   "MGT2.WorldSheet.UWP.Port": "Puerto",
@@ -431,6 +443,13 @@
   "MGT2.WorldSheet.UWP.Government": "Gobierno",
   "MGT2.WorldSheet.UWP.LawLevel": "Nivel de Ley",
   "MGT2.WorldSheet.UWP.TechLevel": "Nivel Tecnológico",
+  "MGT2.WorldSheet.PopDigit": "Dígito de Población",
+  "MGT2.WorldSheet.TradeZone": "Zona de comercio",
+
+  "MGT2.WorldSheet.AddStar": "Añadir Estrella",
+  "MGT2.WorldSheet.AddPlanet": "Añadir Planeta",
+  "MGT2.WorldSheet.AddFaction": "Añadir Facción",
+  "MGT2.WorldSheet.AddPatron": "Añadir Patrón",
 
   "MGT2.WorldSheet.LocalBroker": "Habilidad Comerciante/Guía local del Mundo",
   "MGT2.WorldSheet.Broker": "Broker:",
@@ -533,7 +552,7 @@
   "MGT2.WorldSheet.Bases.M": "Ejército",
   "MGT2.WorldSheet.Bases.C": "Corsaria",
   "MGT2.WorldSheet.Bases.D": "Depósito Naval",
-  "MGT2.WorldSheet.Bases.W": "Estación de Paso",  
+  "MGT2.WorldSheet.Bases.W": "Estación de Paso",
 
   "MGT2.WorldSheet.Facility.berthingCost": "Costo de Litera (Cr./Sem)",
   "MGT2.WorldSheet.Facility.shipyard": "Astillero",
@@ -554,6 +573,18 @@
   "MGT2.WorldSheet.Facility.BerthCost": "Coste de Litera (Cr/Sem)",
   "MGT2.WorldSheet.Facility.Highport": "Puerto Orbital",
   "MGT2.WorldSheet.Facility.BuyFuelTitle": "Arrastra a la nave espacial para comprar/repostar",
+
+  "MGT2.WorldData.Type.faction": "Facción",
+  "MGT2.WorldData.Type.patron": "Patrón",
+  "MGT2.WorldData.Type.passenger": "Pasajero",
+  "MGT2.WorldData.Type.star": "Estrella",
+  "MGT2.WorldData.Type.planet": "Planeta",
+
+  "MGT2.WorldData.Planet.Type.terrestrial": "Terrestre",
+  "MGT2.WorldData.Planet.Type.planetoidBelt": "Cinturón de planetoides",
+  "MGT2.WorldData.Planet.Type.smallGas": "Gigante gaseoso pequeño",
+  "MGT2.WorldData.Planet.Type.largeGas": "Gigante gaseoso grande",
+  "MGT2.WorldData.Planet.Type.main": "Mundo principal",
 
   "MGT2.Vehicle.Spaces": "Espacios",
   "MGT2.Vehicle.Chassis": "Chasis",
@@ -658,6 +689,7 @@
   "MGT2.Creature.Behaviour.siren": "Sirena",
   "MGT2.Creature.Behaviour.trapper": "Trampero",
   "MGT2.Creature.Behaviour.sophont": "Sofonte",
+  "MGT2.Creature.Behaviour.inexplicable": "Inexplicable",
 
   "MGT2.Creature.BehaviourText.herbivore": "Se alimenta de vegetales",
   "MGT2.Creature.BehaviourText.omnivore": "Se alimenta de toda clase de sustancias orgánicas.",
@@ -681,10 +713,12 @@
   "MGT2.Creature.BehaviourText.siren": "Crea un señuelo para atraer a sus presas. Por lo general, este señuelo será específico para la especie de la que se alimenta la sirena, pero algunos señuelos raros son universales. Las sirenas tienen Subterfugio, como la venus atrapamoscas.",
   "MGT2.Creature.BehaviourText.sophont": "Ser con inteligencia artificial o a una entidad ficticia similar a un ser humano.",
   "MGT2.Creature.BehaviourText.trapper": "Animal que permite a su presa caer en una trampa. Generalmente, cualquier criatura sorprendida por un trampero queda atrapada, como la araña",
+  "MGT2.Creature.BehaviourText.inexplicable": "El animal posee una o más capacidades que parecen desafiar las leyes de la naturaleza o que no tienen una explicación biológica aparente.",
 
   "MGT2.Creature.Trait.alarm": "Alarma",
   "MGT2.Creature.Trait.amphibious": "Anfibio",
   "MGT2.Creature.Trait.camouflaged": "Camuflaje",
+  "MGT2.Creature.Trait.composite": "Compuesto",
   "MGT2.Creature.Trait.diseased": "Enfermedad",
   "MGT2.Creature.Trait.echolocation": "Ecolocación",
   "MGT2.Creature.Trait.fastMetabolism": "Metabolismo Rápido",
@@ -778,7 +812,7 @@
   "MGT2.Spacecraft.Battery": "Batería",
   "MGT2.Spacecraft.BatteryCharge": "Carga",
   "MGT2.Spacecraft.ConcealedDrive": "Motor Oculto",
-  "MGT2.Spacecraft.AutoCost": "Cálculo automático de coste",  
+  "MGT2.Spacecraft.AutoCost": "Cálculo automático de coste",
   "MGT2.Spacecraft.HolographicControls": "Controles Holográficos",
   "MGT2.Spacecraft.BridgeType.standard": "Puente",
   "MGT2.Spacecraft.BridgeType.cockpit": "Cabina de Vuelo",
@@ -802,6 +836,13 @@
   "MGT2.DamageTaken.Critical": "Sufre una herida crítica (RES x3)",
   "MGT2.DamageTaken.Stun": "Sufre daño por aturdimiento.",
   "MGT2.DamageTaken.Radiation": "Sufre daño por radiación.",
+
+  "MGT2.DamageTaken.Creature.Light": "Sufre una herida ligera.",
+  "MGT2.DamageTaken.Creature.Heavy": "Sufre una herida pesada.",
+
+  "MGT2.DamageTaken.MinimumDamage": "Sufre <b>Daño Mínimo</b>.",
+  "MGT2.DamageTaken.ReducedDamage": "Sufre <b>Daño Reducido</b>.",
+  "MGT2.DamageTaken.Tough": "<i>Tira [[/r 2D6 # Se recupera con 8+]] para  que la criatura recupere 1/4 de sus puntos de vida normales y continúa actuando con normalidad</i>.",
 
   "MGT2.DamageDialog.Title": "Aplicar Daño",
   "MGT2.DamageDialog.Damage": "DAÑO",
@@ -867,7 +908,7 @@
   "MGT2.Spacecraft.CriticalLabel.powerPlant": "Potencia Reducida",
   "MGT2.Spacecraft.CriticalLabel.sensorDM": "Sensor Dañado",
   "MGT2.Spacecraft.CriticalLabel.sensorMax": "Sensor Limitado",
-  "MGT2.Spacecraft.CriticalLabel.pilotDM": "Pilotaje",  
+  "MGT2.Spacecraft.CriticalLabel.pilotDM": "Pilotaje",
   "MGT2.Spacecraft.CriticalLabel.thrust": "Propulsión",
   "MGT2.Spacecraft.CriticalLabel.jumpDM": "Salto",
   "MGT2.Spacecraft.CriticalLabel.armour": "Blindaje",
@@ -1167,8 +1208,8 @@
   "MGT2.Item.WeaponTrait.Label.thrust": "Propulsión",
   "MGT2.Item.WeaponTrait.Label.longRange": "Largo Alcance",
   "MGT2.Item.WeaponTrait.Label.multiWarhead": "Ojivas Múltiples",
-  "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",  
-  
+  "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",
+
 
   "MGT2.Item.WeaponTrait.Text.ap": "Penetración de Armadura: Reduce el valor de Armadura del objetivo en X puntos; si el resultado es cero o menos, el ataque ignora la Armadura.",
   "MGT2.Item.WeaponTrait.Text.auto": "Fuego Automático (Simple/Ráfaga/Automático): `Ráfaga´ (MD -4, 3 veces munición) o asalto único (MD -1 por X ráfagas de disparo, más munición).",
@@ -1322,7 +1363,7 @@
   "MGT2.Effects.SoftwareEffects": "Características de Software",
   "MGT2.Effects.Software.Class.personal": "Software Personal",
   "MGT2.Effects.Software.Class.spacecraft": "Software de Astronave",
-  
+
   "MGT2.Effects.Software.Type.generic": "Genérico",
   "MGT2.Effects.Software.Type.interface": "Interfaz",
   "MGT2.Effects.Software.Type.agent": "Agente",
@@ -1480,7 +1521,7 @@
   "MGT2.Role.BuiltIn.Action.WildLanding": "Aterrizaje Forzoso",
   "MGT2.Role.BuiltIn.Action.Evade": "Evadir",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Pilotar",
-  
+
   "MGT2.Swarm.MissileSource": "Origen de Misiles",
   "MGT2.Swarm.MissileTarget": "Objetivo de Misiles",
   "MGT2.Swarm.SelectTarget": "SELECCIONAR OBJETIVO",
@@ -1501,8 +1542,8 @@
   "MGT2.Swarm.SalvoSize": "NT",
 
   "MGT2.Swarm.DeleteConfirm.Title": "¿Eliminar Enjambre de la Flota?",
-  "MGT2.Swarm.DeleteConfirm.Text": "La Salva/Escuadrón y todas sus fichas serán eliminadas.",  
-  
+  "MGT2.Swarm.DeleteConfirm.Text": "La Salva/Escuadrón y todas sus fichas serán eliminadas.",
+
   "MGT2.Dialog.TransferCargoToShip": "Transferir Carga a la Astronave",
   "MGT2.Dialog.SellCargoToWorld": "Vender Carga al Mundo",
   "MGT2.Dialog.EmbarkPassengers": "Embarcar Pasajeros",
@@ -1561,7 +1602,7 @@
   "TYPES.Actor.creature": "Criatura",
   "TYPES.Actor.spacecraft": "Astronave",
   "TYPES.Actor.package": "Paquete",
-  "TYPES.Actor.swarm": "Enjambre",  
+  "TYPES.Actor.swarm": "Enjambre",
   "TYPES.Actor.vehicle": "Vehículo",
   "TYPES.Actor.world": "Mundo",
 
@@ -1582,8 +1623,8 @@
   "EFFECT.FirstAid": "Primeros Auxilios",
   "EFFECT.Encumbered": "Sobrecargado",
   "EFFECT.VaccSuit": "Traje de Vacío",
-  
-  "Save": "Guardar",  
+
+  "Save": "Guardar",
 
   "TRAVELLER.Add": "Añadir"
 }

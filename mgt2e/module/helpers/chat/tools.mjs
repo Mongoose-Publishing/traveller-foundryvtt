@@ -632,7 +632,7 @@ Tools.creatureInlineDisplay = async function(a, actor) {
     html += `<tr><th>Animal</th><th>Hits</th><th>Speed</th></tr>`;
     html += `<tr class="noborder"><td>`;
     html += `<a class="embedded-actor-link actor-draggable" data-actor-id="${actor.uuid}">${actor.name}</a></td>`;
-    html += `<td>${actor.system.hits.max}</td><td>${actor.system.speed.value}</td></tr>`;
+    html += `<td>${actor.system.hits.max}</td><td>${actor.system.speed.base}</td></tr>`;
 
     html += `<tr><th>Skills</th><td colspan="2">${actor.printSkills()}</td></tr>`;
     html += `<tr><th>Attacks</th><td colspan="2">${actor.printAttacks()}</td></tr>`;
