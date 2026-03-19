@@ -1282,6 +1282,9 @@ Handlebars.registerHelper('cycleItem', function (item) {
 
     let title = "";
     let icon = "";
+    if (item.system.weight === undefined) {
+        return "";
+    }
     if (!item.system.status || item.system.status === MgT2Item.OWNED) {
         title = "Owned";
         icon = "fa-house";
