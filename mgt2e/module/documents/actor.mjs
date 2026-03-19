@@ -42,16 +42,6 @@ export class MgT2Actor extends Actor {
             }
             hits.tmpDamage = Math.min(hits.tmpDamage, hits.damage);
         }
-
-        for (const effect of this.effects) {
-            const source = effect._source._id;
-            if (effect.origin) {
-                const item = fromUuidSync(effect.origin);
-                if (item) {
-                    //effect.isSuppressed = (item.system.status !== MgT2Item.EQUIPPED);
-                }
-            }
-        }
     }
 
     async _preUpdate(changes, options, user) {
