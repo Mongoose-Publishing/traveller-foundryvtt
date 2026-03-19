@@ -1304,6 +1304,7 @@ Handlebars.registerHelper('cycleItem', function (item) {
             icon = "fa-shirt";
         }
         if (item.type === "weapon") {
+            title = "Held";
             icon = "fa-gun";
         }
         return `<a class="item-control item-store" title="${title}"><i class="fas ${icon}"></i></a>`;
