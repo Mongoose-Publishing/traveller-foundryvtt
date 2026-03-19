@@ -400,14 +400,16 @@ export class MgT2Item extends Item {
     }
 
     safeUpdate(data) {
-        if (this.canUserModifer(game.user) && !this.compendium?.locked) {
+        let u = game.user;
+        if ((u.isGM || this.canUserModifer(game.user)) && !this.compendium?.locked) {
             return this.update(data);
         }
         return null;
     }
 
     async syncdUpdate(data) {
-        if (this.canUserModifer(game.user) && !this.compendium?.locked) {
+        let u = game.user;
+        if ((u.isGM || this.canUserModifer(game.user)) && !this.compendium?.locked) {
             return await this.update(data);
         }
         return null;

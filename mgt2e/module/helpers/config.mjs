@@ -796,7 +796,7 @@ MGT2.SKILLS = {
         },
         "psionicology": {
         },
-        "psycology": {
+        "psychology": {
         },
         "robotics": {
         },
