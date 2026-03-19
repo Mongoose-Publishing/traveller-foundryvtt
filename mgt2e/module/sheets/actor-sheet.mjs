@@ -940,11 +940,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
             const richDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description);
-            const html = 
-            `<div style="display: flex; justify-content: space-between">
-                <img alt=${item.name} src=${item.img} height=50><span><b>${item.name}</b></span>
-            </div>
-            <p>${richDescription}</p>`;
+            const content = {"item": item, "richDescription": richDescription}
+            const html = await renderTemplate("systems/mgt2e/templates/chat/item.html", content);
             ChatMessage.create({ content: html})
         });
 
