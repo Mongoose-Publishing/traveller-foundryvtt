@@ -43,7 +43,6 @@
   background-color: transparent;
 }
 
-
 .mgt2e-chat-message h2 {
   font-size: large;
   font-family: "Roboto", sans-serif;
@@ -120,8 +119,9 @@
 }
 
 .mgt2e-chat-content .details-block {
-  display: flex; 
-  justify-content: space-between
+  display: flex;
+  justify-content: space-between;
+  clear: both;
 }
 
 .mgt2e-chat-content .details-block p {
