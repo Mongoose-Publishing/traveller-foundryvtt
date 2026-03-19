@@ -313,10 +313,6 @@ Hooks.once('init', async function() {
 
     // Sockets
     game.socket.on("system.mgt2e", (data) => {
-        if (data.type === "showIdCard") {
-            let actor = data.actor;
-            new NpcIdCard(actor).render(true);
-        }
         if (game.user.uuid === data.userId) {
             if (data.type === "showSwarm") {
                 showSwarmHandler(data);
@@ -430,6 +426,15 @@ Hooks.on('renderChatMessageHTML', function(message, html, data) {
             const actorUuid = actorLink.getAttribute("data-actor-id");
             fromUuid(actorUuid).then(actor => {
                 actor.sheet.render(true);
+            });
+        }
+    }
+    const itemLink = html.querySelector(".item-uuid-link");
+    if (itemLink) {
+        itemLink.onclick = () => {
+            const itemUuid = itemLink.getAttribute("data-item-id");
+            fromUuid(itemUuid).then(item => {
+                item.sheet.render(true);
             });
         }
     }
