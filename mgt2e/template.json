@@ -137,8 +137,7 @@
       "startAge": 18,
       "termLength": 4,
       "entryYear": 1105,
-      "entryAge": 18,
-      "notes": ""
+      "entryAge": 18
     },
     "npc": {
         "templates": [ "base", "characteristics", "skills", "armour", "sophont" ],

@@ -130,9 +130,6 @@
                     {{#if (isObserver .)}}
                         <a class="item" data-tab="history">{{localize 'MGT2.TravellerSheet.History'}}</a>
                     {{/if}}
-                    {{#if (isObserver .)}}
-                        <a class="item" data-tab="notes">{{localize 'MGT2.TravellerSheet.Notes'}}</a>
-                    {{/if}}
                     {{#if (isOwner .)}}
                         <a class="item" data-tab="settings">{{localize 'MGT2.TravellerSheet.Settings'}}</a>
                     {{/if}}
@@ -218,17 +215,6 @@
                     <div class="tab history" data-group="primary" data-tab="history">
                         <section>
                             {{> "systems/mgt2e/templates/actor/parts/actor-terms.html"}}
-                        </section>
-                    </div>
-                    {{/if}}
-
-                    {{#if (isObserver .)}}
-                    {{!-- Notes Tab --}}
-                    <div class="tab notes" data-group="primary" data-tab="notes">
-                        <section class="notes-description">
-                            {{editor
-                                enrichedNotes target="system.notes"
-                                button=true editable=editable}}
                         </section>
                     </div>
                     {{/if}}
