@@ -52,7 +52,7 @@
             </p>
         {{/if}}
 
-        <div class="grid grid-4col">
+        <div class="grid grid-3col">
             <div class="skill-boon">
                 <label for="rollmode" class="skillDialogLabel">{{localize "MGT2.Dialog.RollMode"}}</label>
                 <br/>
@@ -61,19 +61,19 @@
                 </select>
             </div>
 
-            <div class="skill-boon">
-                <label for="dicetype" class="skillDialogLabel">{{localize "MGT2.Dialog.RollType"}}</label>
-                <br/>
-                <select class="skillDialogRollType" name="dicetype">
-                    {{selectOptions BOON_SELECT selected=boonBane}}
-                </select>
-            </div>
-
             <div class="skill-difficulty grid-span-2">
                 <label for="difficulty" class="skillDialogLabel">{{localize "MGT2.Difficulty"}}</label>
                 <br/>
                 <select class="skillDialogDifficulty" name="difficulty">
                     {{selectOptions TARGET_SELECT selected=target}}
+                </select>
+            </div>
+
+            <div class="skill-boon">
+                <label for="dicetype" class="skillDialogLabel">{{localize "MGT2.Dialog.RollType"}}</label>
+                <br/>
+                <select class="skillDialogRollType" name="dicetype">
+                    {{selectOptions BOON_SELECT selected=boonBane}}
                 </select>
             </div>
 
