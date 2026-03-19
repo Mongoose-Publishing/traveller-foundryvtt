@@ -1207,20 +1207,6 @@ Handlebars.registerHelper('isItemCarried', function(item) {
     return false;
 });
 
-Handlebars.registerHelper('isItemGeneral', function(item) {
-    if (item.type === 'item') {
-        return true;
-    }
-    return false;
-});
-
-Handlebars.registerHelper('isItemAugment', function(item) {
-    if (item.type === 'augment') {
-        return true;
-    }
-    return false;
-});
-
 Handlebars.registerHelper('isItemOwned', function(item) {
     if (item.system.status === MgT2Item.EQUIPPED || item.system.status === MgT2Item.CARRIED) {
         return false;
@@ -2231,7 +2217,7 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
             html += `<span class='pill cargo-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Trade."+trait)}'>`;
             if (key.owner) {
                 value = parseInt(value);
-                if (value > 1) {
+                if (value > -12) {
                     html += `<i class="fas fa-minus trait-minus"> </i>`;
                 }
                 if (value < 12) {

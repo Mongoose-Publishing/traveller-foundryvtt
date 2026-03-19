@@ -42,16 +42,6 @@ export class MgT2Actor extends Actor {
             }
             hits.tmpDamage = Math.min(hits.tmpDamage, hits.damage);
         }
-
-        for (const effect of this.effects) {
-            const source = effect._source._id;
-            if (effect.origin) {
-                const item = fromUuidSync(effect.origin);
-                if (item) {
-                    //effect.isSuppressed = (item.system.status !== MgT2Item.EQUIPPED);
-                }
-            }
-        }
     }
 
     async _preUpdate(changes, options, user) {
@@ -530,7 +520,7 @@ export class MgT2Actor extends Actor {
               let armourData = this.system.armour;
               if (armourData.otherTypes && armourData.otherTypes.indexOf(options.damageType) > -1) {
                   let otherProt = armourData.otherProtection ? parseInt(armourData.otherProtection) : 0;
-                  if (otherProt > 0) {
+                  if (otherProt !== 0) {
                       armour += otherProt;
                       armourText += `${options.damageType} + ${otherProt} `;
                   }
@@ -1535,14 +1525,16 @@ export class MgT2Actor extends Actor {
     }
 
     safeUpdate(data) {
-        if (this.canUserModify(game.user) && !this.compendium?.locked) {
+        let u = game.user;
+        if ((u.isGM || this.canUserModify(u)) && !this.compendium?.locked) {
             return this.update(data);
         }
         return null;
     }
 
     async syncedUpdate(data) {
-        if (this.canUserModify(game.user) && !this.comendium?.locked) {
+        let u = game.user;
+        if ((u.isGM || this.canUserModify(game.user)) && !this.compendium?.locked) {
             return await this.update(data);
         }
         return null;

@@ -1062,7 +1062,7 @@ export async function rollSkill(actor, skill, options) {
             }
             if (skill.augment) {
                 value += parseInt(skill.augment);
-                //skillNotes += `Aug&nbsp;${skill.augment}`;
+                skillNotes += `Aug&nbsp;${skill.augment}`;
             }
             if (speciality) {
                 value = parseInt(speciality.value) || 0;
@@ -1139,7 +1139,7 @@ export async function rollSkill(actor, skill, options) {
     } else if (options.rollType === "bane") {
         skillText += ` <span class='bane'>[${game.i18n.localize("MGT2.TravellerSheet.Bane")}]</span>`;
     }
-
+    const rollMode = options.rollMode ? options.rollMode : game.settings.get("core", "rollMode")
     let checkText;
     if (options.agent) {
         checkText = `Agent check by <b>${options.agent}</b>`;
@@ -1298,10 +1298,18 @@ export async function rollSkill(actor, skill, options) {
         } else if (options.dm < 0) {
             title += ` - ${Math.abs(options.dm)}`;
         }
+        let skillFqn = null;
+        if (skill) {
+            skillFqn = skill.id;
+            if (speciality) {
+                skillFqn = `${skillFqn}.${speciality.id}`;
+            }
+        }
         let contentData = {
             actor: actor,
             agent: options.agent,
             skillIcon: skill?`systems/mgt2e/icons/skills/${skill.id}.svg`:"",
+            skillFqn: skillFqn,
             label: label,
             skillTitle: title,
             skillText: skillText,
@@ -1322,9 +1330,11 @@ export async function rollSkill(actor, skill, options) {
         const html = await renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
-            flavor: html,
-            rollMode: game.settings.get("core", "rollMode")
-        });
+            flavor: html},
+            {
+                rollMode: rollMode
+            }
+        );
     }
     return roll.total;
 }

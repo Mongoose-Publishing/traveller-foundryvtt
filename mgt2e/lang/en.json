@@ -217,7 +217,8 @@
   "MGT2.Skills.physics": "Physics",
   "MGT2.Skills.planetology": "Planetology",
   "MGT2.Skills.psionicology": "Psionicology",
-  "MGT2.Skills.psycology": "Psycology",
+  "MGT2.Skills.psycology": "Psychology",
+  "MGT2.Skills.psychology": "Psychology",
   "MGT2.Skills.sophontology": "Sophontology",
   "MGT2.Skills.xenology": "Xenology",
   "MGT2.Skills.seafarer": "Seafarer",
@@ -402,9 +403,6 @@
   "MGT2.TravellerSheet.ItemsInUse": "Items in Use",
   "MGT2.TravellerSheet.ItemsCarried": "Items Carried",
   "MGT2.TravellerSheet.ItemsOwned": "Items Owned",
-  "MGT2.TravellerSheet.GeneralItems": "General Items",
-  "MGT2.TravellerSheet.Augments": "Augments",
-  "MGT2.TravellerSheet.Software": "Software",
 
   "MGT2.TravellerSheet.CurrentYear.Label": "Current Year",
   "MGT2.TravellerSheet.CurrentYear.Title": "Current year in the campaign",
@@ -1325,6 +1323,7 @@
   "MGT2.Item.Hardware.Tonnage.Title.powerByRating": "Power is based on rating of item",
   "MGT2.Item.Hardware.Tonnage.Title.fixedPower": "Power is a fixed value",
 
+  "MGT2.Item.ClickToChat": "Send item info to chat",
 
   "MGT2.Armour.FormType": "Armour Type",
   "MGT2.Armour.Form.Standard": "Standard",
@@ -1568,6 +1567,11 @@
 
   "MGT2.Dialog.RememberCharacteristic": "Remember Characteristic",
   "MGT2.Dialog.RollType": "Roll Type",
+  "MGT2.Dialog.RollMode": "Roll Mode",
+  "MGT2.Dialog.Public": "Public Roll",
+  "MGT2.Dialog.Private": "Private Roll",
+  "MGT2.Dialog.Blind": "Blind GM Roll",
+  "MGT2.Dialog.Self": "Self Roll",
 
   "MGT2.Dialog.ApplyDamage.Title": "Apply Damage to {name}?",
   "MGT2.Dialog.ApplyDamage.What": "<span class='player-name'>{playerName}</span> wants to cause <span class='damage-value'>{damage} HITS</span> to {actorName}.",

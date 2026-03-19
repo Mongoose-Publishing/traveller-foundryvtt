@@ -3,6 +3,7 @@ import {MgT2MissileAttackApp} from "../../helpers/dialogs/missile-attack-app.mjs
 import {createSpeculativeGoods} from "../../helpers/utils/trade-utils.mjs";
 import {Tools} from "../../helpers/chat/tools.mjs";
 import {rollSpaceAttack} from "../../helpers/dice-rolls.mjs";
+import {MgT2SpacecraftAttackDialog} from "../../helpers/spacecraft-attack-dialog.mjs";
 
 // This is a very simplified Spacecraft sheet.
 export class MgT2SwarmActorSheet extends MgT2ActorSheet {
@@ -128,6 +129,8 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
     }
 
     async _onDropActor(event, data) {
+        console.log(event);
+        console.log(data);
         if (this.actor.system.swarmType !== "squadron") {
             // Only squadrons can have actors dragged to them. For now.
             return;
@@ -140,6 +143,7 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
             // Wrong type.
             return;
         }
+        console.log(actor);
         if (actor.system.spacecraft.dtons > 50) {
             ui.notifications.warn("Fighters cannot be heavier than 50 tons");
             return;
@@ -185,6 +189,37 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
                 }
                 if (armour === -1 || fighter.armour < armour) {
                     armour = parseInt(fighter.armour);
+                }
+
+                // Work out attack options. Need to find attack roles, and if they have a weapon
+                // and mount we add them to the list.
+                let fighterActor = await fromUuid(fighter.uuid);
+
+                fighter.actions = [];
+                for (let crewId in fighterActor.system.crewed.crew) {
+                    let crewActor = await fromUuid(crewId);
+                    let roles = fighterActor.system.crewed.crew[crewId];
+                    for (let roleId in roles) {
+                        let roleItem = fighterActor.items.get(roleId);
+                        if (roleItem) {
+                            for (let actionId in roleItem.system.role.actions) {
+                                let action = roleItem.system.role.actions[actionId];
+                                if (action.action === "weapon") {
+                                    console.log(action);
+                                    let wpnId = action.weapon;
+                                    let wpnItem = fighterActor.items.get(wpnId);
+
+                                    fighter.actions.push({
+                                        label: action.title,
+                                        crewId: crewId,
+                                        roleId: roleId,
+                                        actionId: actionId,
+                                        wpnItem: wpnItem
+                                    });
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -247,9 +282,47 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
             let id = f.data("fighterId");
             this.modifyFighters(id, +1);
         });
+        html.find('.squadron-action').click(ev => {
+            let i = $(ev.currentTarget);
+            console.log(i.data("fighterId"));
+            this.runSquadronAction(i);
+        });
 
         return;
     }
+
+    async runSquadronAction(element) {
+        let fighterId = element.data("fighterId");
+        let crewId = element.data("crewId");
+        let roleId = element.data("roleId");
+        let actionId = element.data("actionId");
+
+        let fighterActor = await fromUuid(fighterId);
+        if (!fighterActor) {
+            return;
+        }
+
+        let roleItem = fighterActor.items.get(roleId);
+        console.log(roleItem);
+        if (roleItem?.system?.role?.actions[actionId]) {
+            let action = roleItem?.system?.role?.actions[actionId];
+            if (action.action === "weapon") {
+                console.log("Shooting!");
+                this.squadronActionWeapon(fighterActor, action, crewId);
+            }
+        }
+    }
+
+    async squadronActionWeapon(fighterActor, action, crewId) {
+        let weaponItem = fighterActor.items.get(action.weapon);
+        console.log(crewId);
+        let crewActor = await fromUuid("Actor." + crewId);
+        let attackOptions = {
+            damage: 50
+        };
+        new MgT2SpacecraftAttackDialog(fighterActor, crewActor, weaponItem, 0).render(true);
+    }
+
 
     selectTarget() {
         console.log("selectTargetAction:");

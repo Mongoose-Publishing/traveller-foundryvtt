@@ -1,5 +1,36 @@
 # Release Notes
 
+# 0.18.7 (Beta)
+
+* Undo 'fix' that prevented trade goods from having negative traits.
+* Check to prevent errors when recalculating derived values on items and errors was incorrectly
+  preventing GMs from running the check. Allow GM to always run the update unless the object is
+  in a locked compendium pack.
+* Set the terms attribute on actors so that it can be used in macros. This is a count of the
+  number of career terms on a Traveller. It was previously always set to zero.
+
+# 0.18.6 (Beta)
+
+* Clicking on skill icon in chat only ever rolled the admin skill.
+
+# 0.18.5 (Beta)
+
+* Allow journal macro links to roll tables to request a Dice Modifier to the roll if a text
+  attribute is included. e.g.: [[/mgt2e roll uuid="my.table.uuid" dice="2D6" text="Bonus to roll"]]
+* Fixed issue where inline Creature templates were not displaying the correct speed.
+* Spelling psychology correctly. The science.psycology skill has been renamed science.psychology.
+  New actors will have the new spelling, old actors will retain the old spelling. Both spellings
+  have l10n text for the correct spelling of the word when it is displayed. We can't rename old
+  skills, because there could be references to it in augments, macros and other places.
+* Added some extra actor images for different world types. These may be used by a future version
+  of the Traveller Map module.
+* Change simplified NPC sheet to use standard items and drop handlers. This should fix the
+  problem with armour sometimes not displaying.
+* Fix issue where 'other' protection types weren't allowed to be negative. Negative values allow
+  armour to be worse against certain energy types.
+* Display augment bonus on skill rolls.
+* Backend work on further support for fighter squadrons.
+
 # 0.18.4 (Beta)
 
 * Improvements to how stuns are handled on creatures and Travellers.
@@ -23,7 +54,7 @@
 # 0.18.1 (Beta)
 
 * Tokens now have effects added to them when actor is damaged.
-* Chat messages will be output when an actor takes damage.
+* Chat messages will be output when an actor takes diamage.
 * When a macro was used to add a career item to an actor, the career wasn't always
   added as the most recent career. This has been fixed.
 

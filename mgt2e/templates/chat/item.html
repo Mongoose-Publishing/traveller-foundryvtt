@@ -1,0 +1,35 @@
+<div class="mgt2e-chat-message item-box">
+    <img class="chat-sticker-item" title="{{item.name}}" src="{{item.img}}" />
+    <h2>
+        {{item.name}}
+    </h2>
+
+    <div class="mgt2e-chat-content">
+        <div class="details-block">
+            <p>
+                {{localize 'MGT2.Item.TL'}}: {{{item.system.tl}}}
+            </p>
+
+            <p>
+                {{localize 'MGT2.Item.Legality'}}: {{{item.system.legality}}}
+            </p>
+
+            {{#if item.system.weapon}}
+            <p>
+                Damage: {{{item.system.weapon.damage}}}
+            </p>
+            {{/if}}
+
+            {{#if item.system.armour}}
+            <p>
+                Protection: {{{item.system.armour.protection}}}
+            </p>
+            {{/if}}
+        </div>
+        {{#if richDescription}}
+            <div>
+                {{{richDescription}}}
+            </div>
+        {{/if}}
+    </div>
+</div>
