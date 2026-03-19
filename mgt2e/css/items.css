@@ -147,6 +147,7 @@ img.career {
 }
 
 .item-sheet h1.charname {
+    position: relative;
     background-color: #72bce8;
 }
 
@@ -410,4 +411,11 @@ textarea.culture {
 
 .freight-data .resource label {
   text-transform: uppercase;
+}
+
+.item-to-chat {
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  cursor: pointer;
 }

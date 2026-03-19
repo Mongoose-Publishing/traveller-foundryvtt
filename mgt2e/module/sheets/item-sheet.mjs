@@ -1193,6 +1193,20 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
            this.item.statusClick();
         });
 
+        html.find('.item-to-chat').click(async ev => {
+            console.log("item to chat");
+            //const li = $(ev.currentTarget).parents(".item");
+            //const item = this.actor.items.get(li.data("itemId"));
+            const span = $(ev.currentTarget);
+            console.log(span);
+            console.log(span.data("itemId"));
+            const item = await fromUuid(span.data("itemId"));
+            const richDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description);
+            const content = {"item": item, "richDescription": richDescription}
+            const html = await renderTemplate("systems/mgt2e/templates/chat/item.html", content);
+            ChatMessage.create({ content: html})
+        });
+
         if (this.item.type === "weapon") {
             html.find(".trait-selector").click(ev => {
                 const value = $(ev.currentTarget).val();

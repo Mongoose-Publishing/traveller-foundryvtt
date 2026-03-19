@@ -1322,6 +1322,7 @@
   "MGT2.Item.Hardware.Tonnage.Title.powerByRating": "Power is based on rating of item",
   "MGT2.Item.Hardware.Tonnage.Title.fixedPower": "Power is a fixed value",
 
+  "MGT2.Item.ClickToChat": "Send item info to chat",
 
   "MGT2.Armour.FormType": "Armour Type",
   "MGT2.Armour.Form.Standard": "Standard",

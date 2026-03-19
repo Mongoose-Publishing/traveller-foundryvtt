@@ -44,6 +44,10 @@
     <div class="flex-group-left">
       <h1 class="charname shadow">
         <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+          <span class="item-to-chat" data-item-id="{{item.uuid}}"
+                title="{{localize 'MGT2.Item.ClickToChat'}}">
+                    <i class="fas fa-comment"></i>
+          </span>
       </h1>
       {{#if system.cargo.freight}}
           <div class="shadow freight-data">
