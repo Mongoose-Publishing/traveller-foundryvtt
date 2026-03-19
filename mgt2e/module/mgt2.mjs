@@ -1278,6 +1278,36 @@ Handlebars.registerHelper('carryItem', function(item) {
     return `<a class="item-control item-carry" title="${title}"><i class="fas ${icon}"></i></a>`;
 });
 
+Handlebars.registerHelper('cycleItem', function (item) {
+
+    let title = "";
+    let icon = "";
+    if (!item.system.status || item.system.status === MgT2Item.OWNED) {
+        title = "Owned";
+        icon = "fa-house";
+        return `<a class="item-control item-carry" title="${title}"><i class="fas ${icon}"></i></a>`;
+    }
+
+    if (item.system.status === MgT2Item.CARRIED) {
+        title = "Carried";
+        icon = "fa-suitcase";
+        
+        return `<a class="item-control item-activate" title="${title}"><i class="fas ${icon}"></i></a>`;
+    }
+
+    if (item.system.status === MgT2Item.EQUIPPED) {
+        title = "Equipped";
+        icon = "fa-hand-fist";
+        if (item.type === "armour") {
+            title = "Worn";
+            icon = "fa-shirt";
+        }
+        if (item.type === "weapon") {
+            icon = "fa-gun";
+        }
+        return `<a class="item-control item-store" title="${title}"><i class="fas ${icon}"></i></a>`;
+    }
+});
 
 Handlebars.registerHelper('isTrained', function(skill) {
     if (skill) {
