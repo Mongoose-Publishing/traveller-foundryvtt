@@ -163,6 +163,14 @@ export class MgT2SkillDialog extends Application {
         BOON_SELECT["boon"] = game.i18n.localize("MGT2.TravellerSheet.Boon");
         BOON_SELECT["bane"] = game.i18n.localize("MGT2.TravellerSheet.Bane");
 
+        let MODE_SELECT = {};
+        MODE_SELECT["publicroll"] = game.i18n.localize("MGT2.Dialog.Public");
+        MODE_SELECT["gmroll"] = game.i18n.localize("MGT2.Dialog.Private");
+        MODE_SELECT["blindroll"] = game.i18n.localize("MGT2.Dialog.Blind");
+        MODE_SELECT["selfroll"] = game.i18n.localize("MGT2.Dialog.Self");
+
+        let mode = game.settings.get("core", "rollMode")
+
         let TARGET_SELECT = {};
         for (let t=2; t <= 16; t += 2) {
             TARGET_SELECT[t] = game.i18n.localize("MGT2.TaskDifficulty." + t) + ` (${t}+)`;
@@ -190,7 +198,9 @@ export class MgT2SkillDialog extends Application {
             "showEdit": !(this.actor && this.actor.parent),
             "CHA_SELECT": CHA_SELECT,
             "BOON_SELECT": BOON_SELECT,
-            "TARGET_SELECT": TARGET_SELECT
+            "TARGET_SELECT": TARGET_SELECT,
+            "MODE_SELECT": MODE_SELECT,
+            "mode": mode
         }
     }
 
@@ -213,6 +223,7 @@ export class MgT2SkillDialog extends Application {
             remember = html.find(".rememberChaCheck")[0].checked;
         }
         let rollType = html.find(".skillDialogRollType")[0].value;
+        let rollMode = html.find(".skillDialogRollMode")[0].value;
         let difficulty = parseInt(html.find(".skillDialogDifficulty")[0].value);
 
         if (this.actor) {
@@ -236,7 +247,8 @@ export class MgT2SkillDialog extends Application {
             "description": this.skillOptions.description,
             "success": this.skillOptions.success,
             "failure": this.skillOptions.failure,
-            "cost": this.skillOptions.cost
+            "cost": this.skillOptions.cost,
+            "rollMode": rollMode
         };
         if (this.skillOptions.agent) {
             options.agent = this.skillOptions.agent;
