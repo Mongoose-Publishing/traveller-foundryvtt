@@ -62,10 +62,12 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             actorData.description,
             { secrets: ((context.actor.permission > 2)?true:false) }
         );
-        context.enrichedFinanceDescription = await foundry.applications.ux.TextEditor.enrichHTML(
-            actorData.finance.description,
-            { secrets: ((context.actor.permission > 2)?true:false) }
-        );
+        if (actorData.finance) {
+            context.enrichedFinanceDescription = await foundry.applications.ux.TextEditor.enrichHTML(
+                actorData.finance.description,
+                {secrets: ((context.actor.permission > 2) ? true : false)}
+            );
+        }
         context.flags = actorData.flags;
         context.currentYear = game.settings.get("mgt2e", "currentYear");
 
