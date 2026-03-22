@@ -1,5 +1,13 @@
 # Release Notes
 
+# 0.18.8 (Beta)
+
+* Added roll mode selector in skill roll dialog, so users can change whether a skill roll
+  will be private or public directly from the roll.
+* Physical items now have a "send to chat" link on the sheet. Description of the item will
+  be broadcast to the chat, with a clickable link to open the sheet.
+* Added text box for financial notes.
+
 # 0.18.7 (Beta)
 
 * Undo 'fix' that prevented trade goods from having negative traits.
