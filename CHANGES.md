@@ -1,5 +1,9 @@
 # Release Notes
 
+# 0.18.9 (Beta)
+
+* Fix bug with new finance description.
+
 # 0.18.8 (Beta)
 
 * Added roll mode selector in skill roll dialog, so users can change whether a skill roll

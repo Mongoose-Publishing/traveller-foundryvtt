@@ -134,7 +134,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Undo 'fix' that prevented trade goods from having negative traits.</p></li><li><p>Improvements to permission checks when recalculating values on actors and items. Allow GMs to always update objects in these situations.</p></li><li><p>Set the 'terms' attribute on an actor equal to the number of terms that they have, so that it can be used in macros.</p></li></ul><p></p>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Add financial notes to the Traveller sheet.</p></li><li><p>Allow item descriptions to be sent to the chat.</p></li><li><p>Add private/public option to skill roll dialog.</p></li></ul><p></p>"
       },
       "video": {
         "controls": true,
@@ -153,7 +153,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1773865702551,
+        "modifiedTime": 1774193191949,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
