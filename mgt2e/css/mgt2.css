@@ -1240,6 +1240,13 @@ textarea.traits {
   background-color: #F0F0F0;
 }
 
+.finance-description .editor {
+  padding: 5px;
+  min-height: 100px;
+  height: 100%;
+  background-color: #F0F0F0;
+}
+
 .item-description .editor {
   padding: 5px;
   min-height: 200px;
@@ -1481,6 +1488,16 @@ h1.charname input {
 }
 
 .actor-description editor {
+  height: 100%;
+  min-height: 100px;
+}
+
+.finance-description {
+  min-height: 100px;
+  border: 2px groove #f0f0f0;
+}
+
+.finance-description editor {
   height: 100%;
   min-height: 100px;
 }
