@@ -4,6 +4,12 @@
 
 * Fix bug with new finance description.
 
+# Develop
+
+* Add 'hidden' flag to world factions, so that they can be hidden from players in the same
+  way as patrons can be.
+* Add a setting flag that causes UWP values to be always displayed as hexadecimal.
+
 # 0.18.8 (Beta)
 
 * Added roll mode selector in skill roll dialog, so users can change whether a skill roll

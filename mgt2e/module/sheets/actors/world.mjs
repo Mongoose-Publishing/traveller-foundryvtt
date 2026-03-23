@@ -10,6 +10,7 @@ import {createFaction, createWorld, setTradeCodes, worldDropBrokerHandler} from 
 import {MGT2} from "../../helpers/config.mjs";
 import {getFromNamedTable, getRollTableFolder} from "../../helpers/utils/table-utils.mjs";
 import {roll} from "../../helpers/dice-rolls.mjs";
+import {Tools} from "../../helpers/chat/tools.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
     static get defaultOptions() {
@@ -147,24 +148,28 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
         context.SIZE_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.size) {
-            context.SIZE_SELECT[d] = `${CONFIG.MGT2.WORLD.size[d].diameter}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.SIZE_SELECT[d] = `${h} - ${CONFIG.MGT2.WORLD.size[d].diameter}`;
         }
 
         context.ATMOSPHERE_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.atmosphere) {
-            context.ATMOSPHERE_SELECT[d] = game.i18n.localize("MGT2.WorldSheet.Atmosphere.Composition." + d);
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.ATMOSPHERE_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.WorldSheet.Atmosphere.Composition." + d)}`;
         }
 
         context.HYDROGRAPHICS_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.hydrographics) {
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
             context.HYDROGRAPHICS_SELECT[d] = `${ parseInt(d) * 10 }% - ${game.i18n.localize("MGT2.WorldSheet.Hydrographics.Description."+d)}`;
         }
 
         context.POPULATION_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.population) {
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
             let v = parseInt(CONFIG.MGT2.WORLD.population[d].range);
             v = v * Math.max(1, parseInt(context.world.extra.popDigit) || 1);
-            context.POPULATION_SELECT[d] = v.toLocaleString();
+            context.POPULATION_SELECT[d] = `${h} - ${v.toLocaleString()}`;
         }
         context.POPULATION_DIGIT_SELECT = {};
         for (let d=1; d < 10; d++) {
@@ -173,17 +178,20 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
         context.GOVERNMENT_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.government) {
-            context.GOVERNMENT_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.WorldSheet.Government.Type." + d)}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.GOVERNMENT_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.WorldSheet.Government.Type." + d)}`;
         }
 
         context.LAW_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.lawLevel) {
-            context.LAW_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.WorldSheet.Law.Weapons." + d)}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.LAW_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.WorldSheet.Law.Weapons." + d)}`;
         }
 
         context.TECH_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.techLevel) {
-            context.TECH_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.TECH_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
         }
         context.ZONE_SELECT = {
             "": "-",
@@ -191,7 +199,8 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             "Red": game.i18n.localize("MGT2.Trade.Red")
         };
         for (let d in CONFIG.MGT2.WORLD.techLevel) {
-            context.TECH_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.TECH_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
         }
 
         context.BROKER_SELECT = {}

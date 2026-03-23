@@ -268,6 +268,14 @@ Hooks.once('init', async function() {
        type: Boolean,
        default: false
     });
+    game.settings.register('mgt2e', "hexInWorldMenus", {
+        name: game.i18n.localize("MGT2.Settings.HexInWorldMenus.Name"),
+        hint: game.i18n.localize("MGT2.Settings.HexInWorldMenus.Hint"),
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: false
+    });
 
     CONFIG.ActiveEffect.legacyTransferral = false;
 
