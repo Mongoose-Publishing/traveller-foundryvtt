@@ -72,12 +72,14 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                 }
             } else if (i.type === "worlddata") {
                 if (i.system?.world?.datatype === "faction") {
-                    context.factions.push(i);
-                    context.factionText[i._id] = await TextEditor.enrichHTML(
-                        i.system.description, {
-                            secrets: context.isEditable
-                        }
-                    );
+                    if (!i.system.world.hidden || context.actor.permission > 2) {
+                        context.factions.push(i);
+                        context.factionText[i._id] = await TextEditor.enrichHTML(
+                            i.system.description, {
+                                secrets: context.isEditable
+                            }
+                        );
+                    }
                 } else if (i.system?.world?.datatype === "patron") {
                     if (!i.system.world.hidden || context.actor.permission > 2) {
                         context.patrons.push(i);
