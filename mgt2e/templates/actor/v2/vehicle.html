@@ -1,3 +1,54 @@
 <section class="sheet-body">
-    Hello
+    <div class="actor-left">
+        <img class="profile-img shadow actor-draggable" src="{{actor.img}}"
+             data-edit="img" data-actor-id="{{actor._id}}"
+             title="{{actor.name}}" width="100%"/>
+
+        <div class="side-panel hits-box shadow">
+            <label class="box-title">
+                {{localize 'MGT2.TravellerSheet.Damage'}}
+            </label>
+
+            <div>
+                <label class="left-label">{{localize 'MGT2.TravellerSheet.Damage'}}</label>
+                <input class="characteristic-value" type="number" name="system.hits.damage"
+                       title="{{localize 'MGT2.TravellerSheet.DamageTaken'}}"
+                       value="{{system.hits.damage}}" data-dtype="Number"/>
+            </div>
+            <div>
+                <label class="left-label">{{localize 'MGT2.TravellerSheet.HitsRemaining'}}</label>
+                <input class="characteristic-readonly" type="number"
+                       title="{{localize 'MGT2.TravellerSheet.HitsRemaining'}}"
+                       value="{{system.hits.value}}"/>
+            </div>
+        </div>
+    </div>
+    <div class="actor-right">
+        <h1 class="actor-name shadow">
+            <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+        </h1>
+        <h4>
+            <select class="field-value" name="system.vehicle.type">
+                {{selectOptions TYPE_SELECT selected=system.vehicle.type}}
+            </select>
+        </h4>
+
+        <div>
+            <div class="shadow grid grid-5col">
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.tl" class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+                    <input class="field-value writable" name="system.vehicle.tl" type="text" value="{{system.vehicle.tl}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.spaces" class="field-label">{{localize 'MGT2.Vehicle.Spaces'}}</label>
+                    <input class="field-value writable" name="system.vehicle.spaces" type="text" value="{{system.vehicle.spaces}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="system.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.Hits'}}</label>
+                    <input class="field-value writable" name="system.hits.max" type="text" value="{{system.hits.max}}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>

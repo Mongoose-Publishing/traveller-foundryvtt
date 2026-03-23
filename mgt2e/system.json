@@ -19,7 +19,8 @@
   "esmodules": ["module/mgt2.mjs" ],
   "styles": [
     "css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css",
-    "css/software.css", "css/world.css", "css/npc.css", "css/chat.css"
+    "css/software.css", "css/world.css", "css/npc.css", "css/chat.css",
+    "css/mgt2e.css"
   ],
   "background": "systems/mgt2e/images/traveller.webp",
   "scripts": [ ],

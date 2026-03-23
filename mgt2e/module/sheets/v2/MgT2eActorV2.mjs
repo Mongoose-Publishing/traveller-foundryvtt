@@ -1,10 +1,10 @@
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
-class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
+export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
     static DEFAULT_OPTIONS = {
         tag: "form", // The outer element type
-        classes: ["my-system", "sheet", "actor"],
+        classes: ["mgt2e", "sheet", "actor"],
         position: {width: 720, height: 600},
         window: {
             resizable: true,
@@ -12,10 +12,10 @@ class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         },
         // Map your HTML [data-action] attributes to JS functions
         actions: {
-            rollCheck: MgT2ActorV2.onRollCheck
+            rollCheck: MgT2eActorV2.onRollCheck
         },
         form: {
-            handler: MgT2ActorV2.onFormSubmit,
+            handler: MgT2eActorV2.onFormSubmit,
             submitOnChange: true,
             closeOnSubmit: false
         }
@@ -32,6 +32,14 @@ class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
             template: ""
         }
     };
+
+    onRollCheck() {
+
+    }
+
+    onFormSubmit() {
+
+    }
 
     async _prepareContext(options) {
         const context = {

@@ -1543,6 +1543,22 @@
   "MGT2.Swarm.DeleteConfirm.Title": "Delete Swarm?",
   "MGT2.Swarm.DeleteConfirm.Text": "The Salvo/Squadrom and all its tokens will be deleted.",
 
+  "MGT2.VehicleSheet.Structure": "Structure",
+
+  "MGT2.Vehicle.Type.aeroplane": "Aeroplane",
+  "MGT2.Vehicle.Type.airship": "Airship",
+  "MGT2.Vehicle.Type.gravVehicle": "Grav Vehicle",
+  "MGT2.Vehicle.Type.groundVehicle": "Ground Vehicle",
+  "MGT2.Vehicle.Type.hovercraft": "Hovercraft",
+  "MGT2.Vehicle.Type.rotorcraft": "Rotorcraft",
+  "MGT2.Vehicle.Type.structure": "Structure",
+  "MGT2.Vehicle.Type.submersible": "Submersible",
+  "MGT2.Vehicle.Type.walker": "Walker",
+  "MGT2.Vehicle.Type.watercraft": "Watercraft",
+
+  "MGT2.Vehicle.Feature.aerodyne": "Aerodyne",
+  "MGT2.Vehicle.Feature.AFV": "AFV",
+  "MGT2.Vehicle.Feature.agile": "Agile",
 
   "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
   "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",

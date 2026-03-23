@@ -171,6 +171,7 @@
         "spaces": 4,
         "chassis": "lightGround",
         "subtype": "openFrame",
+        "type": "groundVehicle",
         "traits": "",
         "tl": 7,
         "armour": {

@@ -278,7 +278,136 @@ MGT2.VEHICLES = {
       "subsonic": { band: 8, max: 1200 },
       "supersonic": { band: 9, max: 6000 },
       "hypersonic": { band: 10 }
-  }
+  },
+    "TYPE": {
+        "aeroplane": {
+            tl: 4,
+            skill: [ "flyer.wing" ],
+            agility: 1,
+            hull: 0.5,
+            shipping: 1,
+            cost: 15000,
+            traits: [ ],
+            allowedFeatures: [
+                "agile", "fast", "floats", "foldingWings", "hypersonic", "jetEngines",
+                "openFrame", "openTopped", "slow", "stol", "supersonic", "tiltEngines"
+            ]
+        },
+        "airship": {
+            tl: 3,
+            skills: [ "flyer.airship" ],
+            agility: -3,
+            hull: 0.2,
+            shipping: 0.1,
+            traits: [ "VTOL" ],
+            cost: 300,
+            allowedFeatures: [
+                "agile", "fast", "openFrame", "rigid", "slow", "streamlined"
+            ]
+        },
+        "gravVehicle": {
+            tl: 8,
+            skills: [ "flyer.grav" ],
+            agility: 1,
+            hull: 2,
+            shipping: 0.5,
+            traits: [ "VTOL" ],
+            cost: 30000,
+            allowedFeatures: [
+                "AFV", "agile", "fast", "openFrame", "openTopped", "slow",
+                "streamlined"
+            ]
+        },
+        "groundVehicle": {
+            tl: 1,
+            skills: [ "drive.wheel", "drive.track", "drive.mole" ],
+            agiliy: 0,
+            hull: 2,
+            shipping: 1,
+            traits: [],
+            cost: 750,
+            allowedFeatures: [
+                "AFV", "agile", "ATV", "fast", "monowheel", "offRoader", "openFrame",
+                "openTopped", "railRider", "slow", "smartWheels", "streamlined", "tracks",
+                "tunneller"
+            ]
+        },
+        "hovercraft": {
+            tl: 5,
+            skills: [ "drive.hovercraft" ],
+            agility: 1,
+            hull: 0.5,
+            shipping: 0.5,
+            traits: [],
+            cost: 10000,
+            allowedFeatures: [
+                "agile", "fast", "openFrame", "openTopped", "slow"
+            ]
+        },
+        "rotorcraft": {
+            tl: 5,
+            skills: [ "flyer.rotor", "flyer.ornithopter" ],
+            agility: 0,
+            hull: 0.5,
+            shipping: 1,
+            traits: [ "VTOL" ],
+            cost: 25000,
+            allowedFeatures: [
+                "aerodyne", "agile", "fast", "floats", "foldingWings", "openFrame", "openTopped",
+                "ornithopter", "slow", "streamlined"
+            ]
+        },
+        "structure": {
+            tl: 0,
+            skills: [],
+            agility: -6,
+            hull: 1,
+            shipping: 0.5,
+            traits: [],
+            cost: 50,
+            allowedFeatures: [
+                "AFV", "openFrame", "openTopped", "streamlined"
+            ]
+        },
+        "submersible": {
+            tl: 4,
+            skills: [ "seafarer.submarine" ],
+            agility: -2,
+            hull: 3,
+            shipping: 0.5,
+            traits: [],
+            cost: 50000,
+            allowedFeatures: [
+                "AFV", "agile", "fast", "openFrame", "openTopped", "slow", "tunneller"
+            ]
+        },
+        "walker": {
+            tl: 8,
+            skills: [ "drive.walker" ],
+            agility: 0,
+            hull: 2,
+            shipping: 0.5,
+            traits: [ "ATV" ],
+            cost: 10000,
+            allowedFeatures: [
+                "AFV", "agile", "fast", "multiLegged", "openFrame", "openTopped",
+                "slow", "tunneller"
+            ]
+        },
+        "watercraft": {
+            tl: 0,
+            skills: [ "seafarer.oceanShips", "seafarer.personal", "seafarer.sail"],
+            agility: -2,
+            hull: 2,
+            shipping: 0.5,
+            traits: [],
+            cost: 2000,
+            allowedFeatures: [
+                "AFV", "agile", "fast", "floats", "hydrofoil", "openFrame",
+                "openTopped", "slow"
+            ]
+        }
+    }
 };
 
 MGT2.SHIP_CONFIGURATION = {

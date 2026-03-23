@@ -16,6 +16,8 @@ import { MgT2AssociateItemSheet } from "./sheets/items/associate.mjs";
 import { MgT2WorldDataItemSheet } from "./sheets/items/world-data.mjs";
 import { MgT2SoftwareItemSheet } from "./sheets/items/software.mjs";
 
+import { MgT2eVehicleSheet } from "./sheets/v2/Vehicle.mjs";
+
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
@@ -300,6 +302,7 @@ Hooks.once('init', async function() {
   Actors.registerSheet("mgt2e", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
   Actors.registerSheet("mgt2e", MgT2WorldActorSheet, { label: "World Sheet", types: [ "world"], makeDefault: true });
   Actors.registerSheet("mgt2e", MgT2VehicleActorSheet, { label: "Vehicle Sheet", types: [ "vehicle"], makeDefault: true });
+  Actors.registerSheet("mgt2e", MgT2eVehicleSheet, { label: "Vehicle Sheet 2", types: [ "vehicle"], makeDefault: false });
   Actors.registerSheet("mgt2e", MgT2SwarmActorSheet, { label: "Swarm Sheet", types: [ "swarm"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });

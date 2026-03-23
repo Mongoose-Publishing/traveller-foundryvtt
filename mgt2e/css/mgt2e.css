@@ -1,0 +1,72 @@
+.mgt2e .sheet-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.mgt2e .shadow {
+  background-color: #414042;
+  color: white;
+  border: none;
+  padding: 0;
+}
+
+.mgt2e img.profile {
+  background: none;
+}
+
+.mgt2e .box-title {
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  background-color: #f1511b;
+  color: white;
+  width: 100%;
+  margin-top: 0;
+}
+
+.mgt2e div.actor-left {
+  flex: 0 0 170px;
+  width: 170px;
+}
+
+.mgt2e div.actor-right {
+  width: 100%;
+  margin-left: 10px;
+}
+
+.mgt2e h1.actor-name {
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  padding: 2px;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: bold;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  margin-top: 0;
+  border-bottom: 0;
+}
+
+.mgt2e h1.actor-name input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.mgt2e .field-value {
+  color: white;
+  background: none;
+  text-align: center;
+}
+
+.mgt2e select.field-value {
+  background-color: #4b4a44;
+  color: white;
+  text-align: left;
+}
