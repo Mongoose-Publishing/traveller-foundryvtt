@@ -1278,10 +1278,14 @@ Handlebars.registerHelper('cycleItem', function (item) {
     if (item.type === "armour") {
             equipTitle = "Wear";
             equipIcon = "far fa-shirt";
-        }
-        if (item.type === "weapon") {
+        };
+    if (item.type === "weapon") {
             equipIcon = "far fa-gun";
-        }
+        };
+    if (item.type === "augment") {
+        equipTitle = "Install";
+        equipIcon = "far fa-microchip";
+    }
 
     if (item.system.weight === undefined) {
         return "";
@@ -1308,6 +1312,11 @@ Handlebars.registerHelper('cycleItem', function (item) {
             equipTitle = "Held";
             equipIcon = "fas fa-gun";
         }
+        if (item.type === "augment") {
+        equipTitle = "Installed";
+        equipIcon = "fas fa-microchip";
+    }
+
     }
     return `
     <a class="item-control item-activate" title="${equipTitle}"><i class="${equipIcon}"></i></a>
@@ -1315,7 +1324,6 @@ Handlebars.registerHelper('cycleItem', function (item) {
     <a class="item-control item-store" title="${storeTitle}"><i class="${storeIcon}"></i></a>
     `;
 });
-
 Handlebars.registerHelper('isTrained', function(skill) {
     if (skill) {
         if (skill.trained) {
