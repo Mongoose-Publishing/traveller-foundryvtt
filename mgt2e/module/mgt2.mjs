@@ -1266,38 +1266,54 @@ Handlebars.registerHelper('carryItem', function(item) {
 });
 
 Handlebars.registerHelper('cycleItem', function (item) {
+    let storeTitle = "Store";
+    let storeIcon = "far fa-house";
 
-    let title = "";
-    let icon = "";
+    let carryTitle = "Carry";
+    let carryIcon = "far fa-suitcase";
+    
+    let equipTitle = "Equip";
+    let equipIcon = "far fa-hand-fist";
+
+    if (item.type === "armour") {
+            equipTitle = "Wear";
+            equipIcon = "far fa-shirt";
+        }
+        if (item.type === "weapon") {
+            equipIcon = "far fa-gun";
+        }
+
     if (item.system.weight === undefined) {
         return "";
     }
     if (!item.system.status || item.system.status === MgT2Item.OWNED) {
-        title = "Owned";
-        icon = "fa-house";
-        return `<a class="item-control item-carry" title="${title}"><i class="fas ${icon}"></i></a>`;
+        storeTitle = "Stored";
+        storeIcon = "fas fa-house";
     }
 
     if (item.system.status === MgT2Item.CARRIED) {
-        title = "Carried";
-        icon = "fa-suitcase";
-        
-        return `<a class="item-control item-activate" title="${title}"><i class="fas ${icon}"></i></a>`;
+        carryTitle = "Carried";
+        carryIcon = "fas fa-suitcase";
     }
 
     if (item.system.status === MgT2Item.EQUIPPED) {
-        title = "Equipped";
-        icon = "fa-hand-fist";
+        equipTitle = "Equipped";
+        equipIcon = "fas fa-hand-fist";
+
         if (item.type === "armour") {
-            title = "Worn";
-            icon = "fa-shirt";
+            equipTitle = "Worn";
+            equipIcon = "fas fa-shirt";
         }
         if (item.type === "weapon") {
-            title = "Held";
-            icon = "fa-gun";
+            equipTitle = "Held";
+            equipIcon = "fas fa-gun";
         }
-        return `<a class="item-control item-store" title="${title}"><i class="fas ${icon}"></i></a>`;
     }
+    return `
+    <a class="item-control item-activate" title="${equipTitle}"><i class="${equipIcon}"></i></a>
+    <a class="item-control item-carry" title="${carryTitle}"><i class="${carryIcon}"></i></a>
+    <a class="item-control item-store" title="${storeTitle}"><i class="${storeIcon}"></i></a>
+    `;
 });
 
 Handlebars.registerHelper('isTrained', function(skill) {
