@@ -5,6 +5,7 @@ import { MGT2 } from "../helpers/config.mjs";
 import {MgT2Item} from "../documents/item.mjs";
 import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
 import {calculateHardwareAdvantages} from "../helpers/spacecraft/spacecraft-utils.mjs";
+import {tradeDisembarkPassengerHandler} from "../helpers/utils/trade-utils.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -1194,12 +1195,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
         });
 
         html.find('.item-to-chat').click(async ev => {
-            console.log("item to chat");
-            //const li = $(ev.currentTarget).parents(".item");
-            //const item = this.actor.items.get(li.data("itemId"));
             const span = $(ev.currentTarget);
-            console.log(span);
-            console.log(span.data("itemId"));
             const item = await fromUuid(span.data("itemId"));
             const richDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description);
             const content = {"item": item, "richDescription": richDescription}

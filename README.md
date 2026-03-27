@@ -1,6 +1,6 @@
 # Mongoose Traveller for FoundryVTT
 
-**Version:**  0.18.7
+**Version:**  0.18.9
 
 This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v13.
 
@@ -103,5 +103,6 @@ https://commons.wikimedia.org/wiki/File:Omega_Nebula.jpg
 * Some CSS fixes by https://github.com/ryanwalder (Contributed)
 * Inline macro execution based on code from https://github.com/fpiechowski/inline-macro-execution by Mesayah (MIT)
 * Spanish translations by https://github.com/Xyxorswords
+* Some features contributed by https://github.com/hakeem4321
 
 

@@ -130,7 +130,8 @@
           "medicalDebt": 0,
           "mortgage": 0,
           "livingCosts": 0,
-          "otherIncome": 0
+          "otherIncome": 0,
+          "description": ""
       },
       "player": "",
       "terms": 0,

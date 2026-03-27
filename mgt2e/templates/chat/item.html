@@ -1,29 +1,44 @@
 <div class="mgt2e-chat-message item-box">
-    <img class="chat-sticker-item" title="{{item.name}}" src="{{item.img}}" />
+    <img class="chat-sticker-item item-uuid-link" data-item-id="{{item.uuid}}"
+         title="{{item.name}}" src="{{item.img}}" />
     <h2>
         {{item.name}}
     </h2>
 
     <div class="mgt2e-chat-content">
-        <div class="details-block">
-            <p>
-                {{localize 'MGT2.Item.TL'}}: {{{item.system.tl}}}
-            </p>
-
-            <p>
-                {{localize 'MGT2.Item.Legality'}}: {{{item.system.legality}}}
-            </p>
+        <div class="details-block grid grid-span-3">
+            {{#if item.system.tl includeZero=false}}
+                <div>
+                    <b>{{localize 'MGT2.Item.TL'}}:</b> {{{item.system.tl}}}
+                </div>
+            {{/if}}
+            {{#if item.system.cost includeZero=false}}
+                <div>
+                    <b>{{localize 'MGT2.Item.Cost'}}:</b> {{prettyNumber item.system.cost 0 false}}
+                </div>
+            {{/if}}
+            {{#if item.system.weight includeZero=false}}
+                <div>
+                    <b>{{localize 'MGT2.Item.Weight'}}:</b> {{prettyNumber item.system.weight 0 false}}
+                </div>
+            {{/if}}
+            <div>
+                <b>{{localize 'MGT2.Item.Legality'}}:</b> {{{item.system.legality}}}
+            </div>
 
             {{#if item.system.weapon}}
-            <p>
-                Damage: {{{item.system.weapon.damage}}}
-            </p>
+                <div>
+                    <b>{{localize 'MGT2.TravellerSheet.Damage'}}:</b> {{{item.system.weapon.damage}}}
+                </div>
+                <div>
+                    <b>{{localize 'MGT2.Item.RangeM'}}:</b> {{{item.system.weapon.range}}}
+                </div>
             {{/if}}
 
             {{#if item.system.armour}}
-            <p>
-                Protection: {{{item.system.armour.protection}}}
-            </p>
+            <div>
+                <b>{{localize 'MGT2.TravellerSheet.Protection'}}:</b> {{{item.system.armour.protection}}}
+            </div>
             {{/if}}
         </div>
         {{#if richDescription}}

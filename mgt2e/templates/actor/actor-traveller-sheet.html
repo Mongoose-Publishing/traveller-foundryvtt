@@ -168,6 +168,12 @@
                                 <input  class="credits writable" name="system.finance.livingCosts" type="text" value="{{system.finance.livingCosts}}"/>
                             </div>
                         </div>
+                        <label class="profile-label">{{localize 'MGT2.Finance.Notes'}}</label>
+                        <section class="finance-description">
+                            {{editor
+                                enrichedFinanceDescription target="system.finance.description"
+                                button=true editable=editable}}
+                        </section>
 
                     </div>
 

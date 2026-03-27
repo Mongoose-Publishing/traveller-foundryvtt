@@ -119,14 +119,12 @@
 }
 
 .mgt2e-chat-content .details-block {
-  display: flex;
-  justify-content: space-between;
   clear: both;
 }
 
-.mgt2e-chat-content .details-block p {
-  border-color: #f1511b;
-  border-style: solid;
-  border-radius: 5px;
-  padding-left: 5px;
+.mgt2e-chat-content .details-block div {
+  _border: 1px solid #f1511b;
+  _border-radius: 5px;
+  margin: 0;
+  padding: 0;
 }
