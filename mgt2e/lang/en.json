@@ -263,6 +263,9 @@
 
   "MGT2.TravellerSheet.Skills": "Skills",
   "MGT2.TravellerSheet.Equipment": "Equipment",
+  "MGT2.TravellerSheet.GeneralItems": "General Items",
+  "MGT2.TravellerSheet.Augments": "Augments",
+  "MGT2.TravellerSheet.Software": "Software",
   "MGT2.TravellerSheet.Finance": "Finance",
   "MGT2.TravellerSheet.Biography": "Biography",
   "MGT2.TravellerSheet.History": "History",
