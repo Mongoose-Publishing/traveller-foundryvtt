@@ -2314,7 +2314,7 @@ Handlebars.registerHelper('showWorldTraits', function(key, traits, auto) {
             }
             html += `<span class='pill world-pill' data-code-id='${trait}' title='${game.i18n.localize("MGT2.Trade."+trait)}'>`;
             html += `&nbsp;${game.i18n.localize("MGT2.Trade." + trait)} `;
-            if (!auto) {
+            if (!auto && key.owner) {
                 html += `&nbsp;<i class="fas fa-xmark code-remove"> </i>`;
             } else {
                 html += "&nbsp;";
