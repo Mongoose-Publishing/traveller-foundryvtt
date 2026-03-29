@@ -23,11 +23,9 @@ patch=$(echo $version | cut -d "." -f 3)
 minor=$(echo $version | cut -d "." -f 2)
 major=$(echo $version | cut -d "." -f 1)
 
-# Build gets incremented every time this script runs.
-build=$((build + 1))
-
+dev=0
 LOCAL=no
-while getopts "LMmpsb" opt
+while getopts "LMmpsbS" opt
 do
   case "${opt}" in
     L)
@@ -53,6 +51,10 @@ do
       ;;
     s)
       okay=1
+      dev=1
+      ;;
+    S)
+      okay=1
       ;;
     b)
       branch=1
@@ -64,6 +66,8 @@ do
   esac
 done
 
+# Build gets incremented every time this script runs.
+build=$((build + $dev))
 
 if [ -z $okay ]
 then
