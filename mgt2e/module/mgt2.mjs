@@ -2302,7 +2302,7 @@ Handlebars.registerHelper('showBases', function(key, bases) {
     return html;
 });
 
-Handlebars.registerHelper('showWorldTraits', function(key, traits) {
+Handlebars.registerHelper('showWorldTraits', function(key, traits, auto) {
     // 'traits' are comma separated list of cargo traits. Each has a bonus attached to it.
     let html = "";
     let list = traits.split(",");
@@ -2312,10 +2312,10 @@ Handlebars.registerHelper('showWorldTraits', function(key, traits) {
             if (trait.indexOf(" ") > -1) {
                 trait = trait.split(" ")[0].trim();
             }
-            html += `<span class='pill world-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Trade."+trait)}'>`;
+            html += `<span class='pill world-pill' data-code-id='${trait}' title='${game.i18n.localize("MGT2.Trade."+trait)}'>`;
             html += `&nbsp;${game.i18n.localize("MGT2.Trade." + trait)} `;
-            if (false) {
-                html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i>`;
+            if (!auto) {
+                html += `&nbsp;<i class="fas fa-xmark code-remove"> </i>`;
             } else {
                 html += "&nbsp;";
             }

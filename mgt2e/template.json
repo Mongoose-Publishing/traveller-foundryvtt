@@ -293,7 +293,8 @@
           "berthingCost": 1000,
           "culturalDifferences": "",
           "popDigit": 1,
-          "allegiance": ""
+          "allegiance": "",
+          "autoCodes": true
         },
         "meta": {
           "localBrokerScore": 2,

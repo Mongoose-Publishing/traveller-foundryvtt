@@ -235,6 +235,10 @@ export function setTradeCodes(worldActor) {
     let codes = "";
     let uwp = worldActor.system.world.uwp;
 
+    if (!worldActor.system.world.extra.autoCodes) {
+        return;
+    }
+
     // Force values to numbers. The HTML selects tend to set everything to strings.
     uwp.atmosphere = Number(uwp.atmosphere);
     uwp.size = Number(uwp.size);

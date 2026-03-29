@@ -261,6 +261,15 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         if (Object.keys(context.BASES_SELECT).length === 1) {
             context.BASES_SELECT = null;
         }
+        context.CODES_SELECT = {
+            "": ""
+        }
+        for (let code in CONFIG.MGT2.TRADE.codes) {
+            if (this.actor.system.world.uwp.codes.indexOf(code) === -1) {
+                //context.CODES_SELECT[code] = `${game.i18n.localize("MGT2.Trade." + code)} (${code})`;
+                context.CODES_SELECT[code] = code;
+            }
+        }
 
         return context;
     }
@@ -333,6 +342,32 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                 }
                 this.actor.update({"system.world.uwp.bases": this.actor.system.world.uwp.bases});
             }
+        });
+        html.find('.code-remove').click(ev => {
+            // Remove base
+            const e = $(ev.currentTarget).parents(".world-pill");
+            const id = e.data("codeId");
+            let re = new RegExp(` ?${id},?`, "g");
+            let b = this.actor.system.world.uwp.codes.replaceAll(re, "").replaceAll(/,$/g, "").trim();
+            this.actor.update({"system.world.uwp.codes": b});
+        });
+        html.find('.code-add').click(ev => {
+            // Add base
+            const value = $(ev.currentTarget).val();
+            if (CONFIG.MGT2.TRADE.codes[value]) {
+                if (this.actor.system.world.uwp.codes) {
+                    this.actor.system.world.uwp.codes += ", " + value;
+                } else {
+                    this.actor.system.world.uwp.codes = value;
+                }
+                this.actor.update({"system.world.uwp.codes": this.actor.system.world.uwp.codes});
+            }
+        });
+        html.find('.unlock-trade-codes').click(ev => {
+           this.actor.update({"system.world.extra.autoCodes": false});
+        });
+        html.find('.lock-trade-codes').click(ev => {
+            this.actor.update({"system.world.extra.autoCodes": true});
         });
         html.find('.faction-add').click(ev => {
            // Add faction
