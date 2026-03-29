@@ -7,7 +7,7 @@
   "scope": "global",
   "command": "/*\n * Generate a random name and output it to the chat.\n * generateText() takes the name of the Roll Table to use\n * in the \"NPC Generator\" folder.\n *\n * First parameter is the base name of the table.\n * Second (optional) parameter is the variant.\n * Third (optional) parameter is name of folder.\n *\n * Variant is appended to the base table name, and if not, falls\n * back to looking for the base table name.\n */\n\n//let text = await game.mgt2e.generateText(\"Name Bwap\");\n//let text = await game.mgt2e.generateText(\"Name Solomani\", \"Male\");\nlet text = await game.mgt2e.generateText(\"Name Vilani\", \"Male\");\n\nlet data = {\n  content: text\n}\nChatMessage.create(data);",
   "folder": null,
-  "sort": 0,
+  "sort": 300000,
   "ownership": {
     "default": 0,
     "mhUjqDVicnwIUaiq": 3
@@ -21,7 +21,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.17.4.4-DEV",
     "createdTime": 1769959781190,
-    "modifiedTime": 1769963216620,
+    "modifiedTime": 1774779114089,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_key": "!macros!f8KzFH79S1B0jPsp"
