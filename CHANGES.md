@@ -1,6 +1,6 @@
 # Release Notes
 
-# Develop
+# 0.19.0 (Beta)
 
 * Add 'hidden' flag to world factions, so that they can be hidden from players in the same
   way as patrons can be.
