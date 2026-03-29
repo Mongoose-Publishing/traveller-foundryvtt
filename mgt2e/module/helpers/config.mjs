@@ -79,6 +79,7 @@ MGT2.SHIP_HARDWARE = {
 }
 
 MGT2.VEHICLES = {
+  // Chassis is deprecated in 2026 vehicle design rules.
   "CHASSIS": {
       "lightGround": {
           "tl": 4, "skill": "drive.wheel", "agility": 0, "minSpaces": 1, "maxSpaces": 20,
@@ -1026,6 +1027,7 @@ MGT2.COMPUTERS = {
 MGT2.WEAPONS = {
     "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting", "meson", "nuclear" ],
     "traits": {
+        "accurate": { "scale": "traveller", "conflict": [ "inaccurate" ]},
         "artillery": { "scale": "traveller" },
         "ap": {  "value": 1, "min": 1, "max": 999, "conflict": [ "loPen", "spinal" ] },
         "auto": {  "value": 2, "min": 2, "max": 99, "conflict": [ "oneUse" ] },
@@ -1035,6 +1037,7 @@ MGT2.WEAPONS = {
         "dangerous": { "scale": "traveller", "conflict": [ "veryDangerous" ] },
         "destructive": { },
         "fire": { "scale": "traveller" },
+        "inaccurate": { "scale": "traveller", "conflict": [ "accurate"] },
         "ion": { "scale": "spacecraft" },
         "longRange": { "scale": "spacecraft" },
         "laserSight": { "scale": "traveller" },

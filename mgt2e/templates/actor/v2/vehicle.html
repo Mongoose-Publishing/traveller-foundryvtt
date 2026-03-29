@@ -76,12 +76,13 @@
 
             <div class="shadow grid grid-3col">
                 <div class="resource flex-group-left">
-                    <label for="system.vehicle.traits" class="field-label">{{localize 'MGT2.Vehicle.Traits'}}</label>
-                    <input class="field-value writable" name="system.vehicle.traits" type="text" value="{{system.vehicle.trait}}"/>
-                </div>
-                <div class="resource flex-group-left">
-                    <label for="system.vehicle.features" class="field-label">{{localize 'MGT2.Vehicle.Features'}}</label>
-                    <input class="field-value writable" name="system.vehicle.features" type="text" value="{{system.vehicle.features}}"/>
+                    <label class="field-label">{{localize 'MGT2.Vehicle.TraitsTitle'}}</label>
+                    <select data-action="addTrait" data-label="Add Trait">
+                        {{selectOptions SELECT_TRAITS}}
+                    </select>
+                    <div class="pill-container">
+                        {{{showVehicleTraits . system.vehicle.traits}}}
+                    </div>
                 </div>
             </div>
         </div>

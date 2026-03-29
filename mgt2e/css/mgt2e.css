@@ -70,3 +70,15 @@
   color: white;
   text-align: left;
 }
+
+div.pill-container {
+  width: 100%;
+  background-color: #808080;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.mgt2e .pill-container .trait-pill {
+  background-color: #f1511b;
+  color: white;
+}

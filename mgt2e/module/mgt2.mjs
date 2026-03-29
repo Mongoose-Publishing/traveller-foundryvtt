@@ -2224,6 +2224,10 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
 
 Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
     // 'traits' are comma separated list of vehicle traits.
+    console.log("showVehicleTraits: " + traits);
+    if (!traits || traits==="") {
+        return "";
+    }
     let html = "";
     let list = traits.split(",");
     for (let i in list) {
@@ -2234,7 +2238,7 @@ Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
                 value = trait.split(" ")[1].trim();
                 trait = trait.split(" ")[0].trim();
             }
-            html += `<span class='pill cargo-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Trade."+trait)}'>`;
+            html += `<span class='pill trait-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Vehicle.Trait."+trait)}'>`;
             if (key.owner) {
                 value = parseInt(value);
                 if (value > -12) {
@@ -2244,12 +2248,12 @@ Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
                     html += `<i class="fas fa-plus trait-plus"> </i>`;
                 }
             }
-            html += `&nbsp;${game.i18n.localize("MGT2.Trade." + trait)} `;
+            html += `&nbsp;${game.i18n.localize("MGT2.Vehicle.Trait." + trait)} `;
             if (value) {
                 html += `${(value>=0)?"+":""}${value} `;
             }
             if (key.owner) {
-                html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i>`;
+                html += `&nbsp;<i class="fas fa-xmark" data-trait-id="${trait}" data-action="removeTrait"> </i>`;
             } else {
                 html += "&nbsp;";
             }
