@@ -162,6 +162,10 @@
         "damage": 0,
         "criticals": {}
       },
+      "structure": {
+        "value": 1,
+        "damage": 0
+      },
       "initiative": {
         "base": 0,
         "value": 0
@@ -173,6 +177,7 @@
         "subtype": "openFrame",
         "type": "groundVehicle",
         "traits": "",
+        "features": "",
         "tl": 7,
         "armour": {
           "base": 0,
@@ -180,7 +185,9 @@
           "rear": 0,
           "sides": 0,
           "top": 0,
-          "bottom": 0
+          "bottom": 0,
+          "port": 0,
+          "starboard": 0
         },
         "cost": 10000,
         "skill": "drive.wheel",

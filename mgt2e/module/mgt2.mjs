@@ -2214,6 +2214,45 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
     return html;
 });
 
+Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
+    // 'traits' are comma separated list of vehicle traits.
+    let html = "";
+    let list = traits.split(",");
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let trait = list[i].trim();
+            let value = null;
+            if (trait.indexOf(" ") > -1) {
+                value = trait.split(" ")[1].trim();
+                trait = trait.split(" ")[0].trim();
+            }
+            html += `<span class='pill cargo-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Trade."+trait)}'>`;
+            if (key.owner) {
+                value = parseInt(value);
+                if (value > -12) {
+                    html += `<i class="fas fa-minus trait-minus"> </i>`;
+                }
+                if (value < 12) {
+                    html += `<i class="fas fa-plus trait-plus"> </i>`;
+                }
+            }
+            html += `&nbsp;${game.i18n.localize("MGT2.Trade." + trait)} `;
+            if (value) {
+                html += `${(value>=0)?"+":""}${value} `;
+            }
+            if (key.owner) {
+                html += `&nbsp;<i class="fas fa-xmark trait-remove"> </i>`;
+            } else {
+                html += "&nbsp;";
+            }
+            html += "</span>";
+        }
+    }
+
+    return html;
+});
+
+
 Handlebars.registerHelper('showSpacecraftHullTraits', function(key, traits) {
     let html = "";
     let list = traits.split(" ");
