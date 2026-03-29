@@ -260,22 +260,38 @@
                         </div>
 
                         <div class="extra-data">
-                            <h3>Bases
-                            {{#if BASES_SELECT }}
-                            <span style="display: inline-block; text-align: right; font-size: smaller">
-                                <i class="fas fa-plus"></i> <select class="base-add">
-                                    {{selectOptions BASES_SELECT }}
-                                </select>
-                            </span>
-                            {{/if}}
+                            <h3>{{localize "MGT2.WorldSheet.BasesTitle"}}
+                                {{#if isEditable}}
+                                    {{#if BASES_SELECT }}
+                                    <span style="display: inline-block; text-align: right; font-size: smaller">
+                                        <i class="fas fa-plus"></i> <select class="base-add">
+                                            {{selectOptions BASES_SELECT }}
+                                        </select>
+                                    </span>
+                                    {{/if}}
+                                {{/if}}
                             </h3>
                             <div class="pill-container">
                                 {{{showBases . system.world.uwp.bases}}}
                             </div>
-
-                            <h3>Trade Codes</h3>
+                            <br/>
+                            <h3>{{localize "MGT2.WorldSheet.TradeCodes"}}
+                                {{#if isEditable}}
+                                    <span style="display: inline-block; text-align: right; font-size: smaller">
+                                        {{#if system.world.extra.autoCodes}}
+                                            <i class="fas fa-lock unlock-trade-codes"></i>
+                                        {{else}}
+                                            <i class="fas fa-unlock lock-trade-codes"></i>
+                                            <i class="fas fa-plus"></i>
+                                            <select class="code-add">
+                                                {{selectOptions CODES_SELECT}}
+                                            </select>
+                                        {{/if}}
+                                    </span>
+                                {{/if}}
+                            </h3>
                             <div class="pill-container">
-                                {{{showWorldTraits . system.world.uwp.codes}}}
+                                {{{showWorldTraits . system.world.uwp.codes system.world.extra.autoCodes}}}
                             </div>
                             <br/>
                             <label>{{localize "MGT2.WorldSheet.TradeZone"}}</label>

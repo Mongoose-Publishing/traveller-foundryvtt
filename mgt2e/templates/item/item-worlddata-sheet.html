@@ -23,6 +23,10 @@
                                 {{selectOptions FACTION_STRENGTH_SELECT selected=system.world.strength}}
                             </select>
                         </div>
+                        <div>
+                            <input type="checkbox" name="system.world.hidden" {{checked system.world.hidden}} data-dtype="Boolean" />
+                            <label for="system.world.hidden" class="resource-label">Hidden to players</label>
+                        </div>
                     </div>
                 {{else if (ifEquals item.system.world.datatype "passenger")}}
                     <div class="shadow">

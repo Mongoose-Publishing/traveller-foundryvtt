@@ -10,6 +10,7 @@ import {createFaction, createWorld, setTradeCodes, worldDropBrokerHandler} from 
 import {MGT2} from "../../helpers/config.mjs";
 import {getFromNamedTable, getRollTableFolder} from "../../helpers/utils/table-utils.mjs";
 import {roll} from "../../helpers/dice-rolls.mjs";
+import {Tools} from "../../helpers/chat/tools.mjs";
 
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
     static get defaultOptions() {
@@ -72,12 +73,14 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                 }
             } else if (i.type === "worlddata") {
                 if (i.system?.world?.datatype === "faction") {
-                    context.factions.push(i);
-                    context.factionText[i._id] = await TextEditor.enrichHTML(
-                        i.system.description, {
-                            secrets: context.isEditable
-                        }
-                    );
+                    if (!i.system.world.hidden || context.actor.permission > 2) {
+                        context.factions.push(i);
+                        context.factionText[i._id] = await TextEditor.enrichHTML(
+                            i.system.description, {
+                                secrets: context.isEditable
+                            }
+                        );
+                    }
                 } else if (i.system?.world?.datatype === "patron") {
                     if (!i.system.world.hidden || context.actor.permission > 2) {
                         context.patrons.push(i);
@@ -145,24 +148,28 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
         context.SIZE_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.size) {
-            context.SIZE_SELECT[d] = `${CONFIG.MGT2.WORLD.size[d].diameter}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.SIZE_SELECT[d] = `${h} - ${CONFIG.MGT2.WORLD.size[d].diameter}`;
         }
 
         context.ATMOSPHERE_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.atmosphere) {
-            context.ATMOSPHERE_SELECT[d] = game.i18n.localize("MGT2.WorldSheet.Atmosphere.Composition." + d);
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.ATMOSPHERE_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.WorldSheet.Atmosphere.Composition." + d)}`;
         }
 
         context.HYDROGRAPHICS_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.hydrographics) {
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
             context.HYDROGRAPHICS_SELECT[d] = `${ parseInt(d) * 10 }% - ${game.i18n.localize("MGT2.WorldSheet.Hydrographics.Description."+d)}`;
         }
 
         context.POPULATION_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.population) {
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
             let v = parseInt(CONFIG.MGT2.WORLD.population[d].range);
             v = v * Math.max(1, parseInt(context.world.extra.popDigit) || 1);
-            context.POPULATION_SELECT[d] = v.toLocaleString();
+            context.POPULATION_SELECT[d] = `${h} - ${v.toLocaleString()}`;
         }
         context.POPULATION_DIGIT_SELECT = {};
         for (let d=1; d < 10; d++) {
@@ -171,17 +178,20 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
 
         context.GOVERNMENT_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.government) {
-            context.GOVERNMENT_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.WorldSheet.Government.Type." + d)}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.GOVERNMENT_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.WorldSheet.Government.Type." + d)}`;
         }
 
         context.LAW_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.lawLevel) {
-            context.LAW_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.WorldSheet.Law.Weapons." + d)}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.LAW_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.WorldSheet.Law.Weapons." + d)}`;
         }
 
         context.TECH_SELECT = {};
         for (let d in CONFIG.MGT2.WORLD.techLevel) {
-            context.TECH_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.TECH_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
         }
         context.ZONE_SELECT = {
             "": "-",
@@ -189,7 +199,8 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             "Red": game.i18n.localize("MGT2.Trade.Red")
         };
         for (let d in CONFIG.MGT2.WORLD.techLevel) {
-            context.TECH_SELECT[d] = `${d} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
+            const h = game.settings.get("mgt2e", "hexInWorldMenus")?Tools.toHex(d):d;
+            context.TECH_SELECT[d] = `${h} - ${game.i18n.localize("MGT2.Item.Tech." + d)}`;
         }
 
         context.BROKER_SELECT = {}
@@ -249,6 +260,15 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
         }
         if (Object.keys(context.BASES_SELECT).length === 1) {
             context.BASES_SELECT = null;
+        }
+        context.CODES_SELECT = {
+            "": ""
+        }
+        for (let code in CONFIG.MGT2.TRADE.codes) {
+            if (this.actor.system.world.uwp.codes.indexOf(code) === -1) {
+                //context.CODES_SELECT[code] = `${game.i18n.localize("MGT2.Trade." + code)} (${code})`;
+                context.CODES_SELECT[code] = code;
+            }
         }
 
         return context;
@@ -322,6 +342,32 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                 }
                 this.actor.update({"system.world.uwp.bases": this.actor.system.world.uwp.bases});
             }
+        });
+        html.find('.code-remove').click(ev => {
+            // Remove base
+            const e = $(ev.currentTarget).parents(".world-pill");
+            const id = e.data("codeId");
+            let re = new RegExp(` ?${id},?`, "g");
+            let b = this.actor.system.world.uwp.codes.replaceAll(re, "").replaceAll(/,$/g, "").trim();
+            this.actor.update({"system.world.uwp.codes": b});
+        });
+        html.find('.code-add').click(ev => {
+            // Add base
+            const value = $(ev.currentTarget).val();
+            if (CONFIG.MGT2.TRADE.codes[value]) {
+                if (this.actor.system.world.uwp.codes) {
+                    this.actor.system.world.uwp.codes += ", " + value;
+                } else {
+                    this.actor.system.world.uwp.codes = value;
+                }
+                this.actor.update({"system.world.uwp.codes": this.actor.system.world.uwp.codes});
+            }
+        });
+        html.find('.unlock-trade-codes').click(ev => {
+           this.actor.update({"system.world.extra.autoCodes": false});
+        });
+        html.find('.lock-trade-codes').click(ev => {
+            this.actor.update({"system.world.extra.autoCodes": true});
         });
         html.find('.faction-add').click(ev => {
            // Add faction

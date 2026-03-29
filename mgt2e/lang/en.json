@@ -51,6 +51,8 @@
   "MGT2.Settings.AutoPlayerCharacter.Hint": "If a player creates a new character, automatically set it as their default if they don't yet have a default",
   "MGT2.Settings.NPCChaDamage.Name": "NPCs use characteristics for damage",
   "MGT2.Settings.NPCChaDamage.Hint": "By default, NPCs use characteristics for damage like Travellers. Disable this to use a simplified hits system instead",
+  "MGT2.Settings.HexInWorldMenus.Name": "Use Hex when displaying world data",
+  "MGT2.Settings.HexInWorldMenus.Hint": "Though the UWP will always show hexadecimals, other places show world data as decimal numbers unless this is set to true",
 
   "MGT2.STR": "STR",
   "MGT2.DEX": "DEX",
@@ -442,6 +444,8 @@
   "MGT2.WorldSheet.UWP.TechLevel": "Tech Level",
   "MGT2.WorldSheet.PopDigit": "Population Digit",
   "MGT2.WorldSheet.TradeZone": "Trade Zone",
+  "MGT2.WorldSheet.TradeCodes": "Trade Codes",
+  "MGT2.WorldSheet.BasesTitle": "Bases",
 
   "MGT2.WorldSheet.AddStar": "Add Star",
   "MGT2.WorldSheet.AddPlanet": "Add Planet",

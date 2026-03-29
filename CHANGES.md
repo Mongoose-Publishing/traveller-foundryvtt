@@ -1,5 +1,14 @@
 # Release Notes
 
+# 0.19.0 (Beta)
+
+* Add 'hidden' flag to world factions, so that they can be hidden from players in the same
+  way as patrons can be.
+* Add a setting flag that causes UWP values to be always displayed as hexadecimal.
+* Allow world trade codes to be manually set, rather than automatically calculated from UWP.
+* Added new "Skill Request" macro to the compendium to allow skill check requests to be sent to players.
+* Update to Spanish translations
+
 # 0.18.9 (Beta)
 
 * Fix bug with new finance description.
