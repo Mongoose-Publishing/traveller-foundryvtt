@@ -7,38 +7,43 @@
 
     <div class="mgt2e-chat-content">
         <div class="details-block grid grid-span-3">
-            {{#if item.system.tl includeZero=false}}
+            {{#if item.system.cargo}}
+                <div><b>{{localize 'MGT2.Item.BasePrice'}}:</b> Cr{{prettyNumber item.system.cargo.price 0 false}}</div>
+                <div><b>{{localize 'MGT2.Item.Tons'}}:</b> {{prettyNumber item.system.cargo.tons 0 false}}</div>
+            {{else}}
+                {{#if item.system.tl includeZero=false}}
+                    <div>
+                        <b>{{localize 'MGT2.Item.TL'}}:</b> {{{item.system.tl}}}
+                    </div>
+                {{/if}}
+                {{#if item.system.cost includeZero=false}}
+                    <div>
+                        <b>{{localize 'MGT2.Item.Cost'}}:</b> {{prettyNumber item.system.cost 0 false}}
+                    </div>
+                {{/if}}
+                {{#if item.system.weight includeZero=false}}
+                    <div>
+                        <b>{{localize 'MGT2.Item.Weight'}}:</b> {{prettyNumber item.system.weight 0 false}}
+                    </div>
+                {{/if}}
                 <div>
-                    <b>{{localize 'MGT2.Item.TL'}}:</b> {{{item.system.tl}}}
+                    <b>{{localize 'MGT2.Item.Legality'}}:</b> {{{item.system.legality}}}
                 </div>
-            {{/if}}
-            {{#if item.system.cost includeZero=false}}
-                <div>
-                    <b>{{localize 'MGT2.Item.Cost'}}:</b> {{prettyNumber item.system.cost 0 false}}
-                </div>
-            {{/if}}
-            {{#if item.system.weight includeZero=false}}
-                <div>
-                    <b>{{localize 'MGT2.Item.Weight'}}:</b> {{prettyNumber item.system.weight 0 false}}
-                </div>
-            {{/if}}
-            <div>
-                <b>{{localize 'MGT2.Item.Legality'}}:</b> {{{item.system.legality}}}
-            </div>
 
-            {{#if item.system.weapon}}
-                <div>
-                    <b>{{localize 'MGT2.TravellerSheet.Damage'}}:</b> {{{item.system.weapon.damage}}}
-                </div>
-                <div>
-                    <b>{{localize 'MGT2.Item.RangeM'}}:</b> {{{item.system.weapon.range}}}
-                </div>
-            {{/if}}
+                {{#if item.system.weapon}}
+                    <div>
+                        <b>{{localize 'MGT2.TravellerSheet.Damage'}}:</b> {{{item.system.weapon.damage}}}
+                    </div>
+                    <div>
+                        <b>{{localize 'MGT2.Item.RangeM'}}:</b> {{{item.system.weapon.range}}}
+                    </div>
+                {{/if}}
 
-            {{#if item.system.armour}}
-            <div>
-                <b>{{localize 'MGT2.TravellerSheet.Protection'}}:</b> {{{item.system.armour.protection}}}
-            </div>
+                {{#if item.system.armour}}
+                <div>
+                    <b>{{localize 'MGT2.TravellerSheet.Protection'}}:</b> {{{item.system.armour.protection}}}
+                </div>
+                {{/if}}
             {{/if}}
         </div>
         {{#if richDescription}}

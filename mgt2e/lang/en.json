@@ -1109,6 +1109,12 @@
   "MGT2.Trade.Amber": "Amber Zone",
   "MGT2.Trade.Red": "Red Zone",
 
+  "MGT2.Item.BasePrice": "Base Price",
+  "MGT2.Item.Tons": "Tons",
+  "MGT2.Item.Illegal": "Illegal",
+  "MGT2.Item.Availability": "Availability",
+  "MTT2.Item.PurchaseDM": "Purchase DM",
+  "MGT2.Item.SaleDM": "Sale DM",
   "MGT2.Item.DamageDM": "Damage DM",
   "MGT2.Item.AttackDM": "Attack DM",
   "MGT2.Item.ParryDM": "Parry DM",

@@ -1025,6 +1025,15 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             item.sheet.render(true);
         });
 
+        html.find('.item-to-chat').click(async ev => {
+            const span = $(ev.currentTarget);
+            const item = await fromUuid(span.data("itemId"));
+            const richDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description);
+            const content = {"item": item, "richDescription": richDescription}
+            const html = await renderTemplate("systems/mgt2e/templates/chat/item.html", content);
+            ChatMessage.create({ content: html})
+        });
+
         // -------------------------------------------------------------
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
@@ -1192,15 +1201,6 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
 
         html.find(".item-status").click(ev => {
            this.item.statusClick();
-        });
-
-        html.find('.item-to-chat').click(async ev => {
-            const span = $(ev.currentTarget);
-            const item = await fromUuid(span.data("itemId"));
-            const richDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description);
-            const content = {"item": item, "richDescription": richDescription}
-            const html = await renderTemplate("systems/mgt2e/templates/chat/item.html", content);
-            ChatMessage.create({ content: html})
         });
 
         if (this.item.type === "weapon") {
