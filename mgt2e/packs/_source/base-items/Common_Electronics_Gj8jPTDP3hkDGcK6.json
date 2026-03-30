@@ -7,7 +7,7 @@
       "price": 20000,
       "availability": "All ",
       "purchaseDM": "In +2, Ri +1, Ht 3",
-      "saleDM": "Na +2, In +5",
+      "saleDM": " Ni 2, Lt 1, Po 1",
       "tons": "2D6 * 10",
       "illegal": false,
       "cost": 100
@@ -33,9 +33,9 @@
     "duplicateSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.13.2.0",
+    "systemVersion": "0.19.0.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1753212465713,
+    "modifiedTime": 1774890413903,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },

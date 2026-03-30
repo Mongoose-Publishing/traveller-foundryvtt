@@ -7,7 +7,7 @@
       "price": 100000,
       "availability": "As, De, Hi, Wa",
       "purchaseDM": "As +2, Hi +1",
-      "saleDM": "In +2, Ag +1, Lt 2",
+      "saleDM": " Lt 1, Ri 2",
       "tons": "1D6",
       "illegal": false,
       "cost": 100
@@ -30,9 +30,9 @@
     "duplicateSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.13.2.0",
+    "systemVersion": "0.19.0.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1753212565140,
+    "modifiedTime": 1774890489909,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },
