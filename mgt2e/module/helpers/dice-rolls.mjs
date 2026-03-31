@@ -653,14 +653,13 @@ function addTitle(text, options, property) {
 export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let text = "";
 
+    // score will include the default DM from the options
     let score = gunner?gunner.getAttackSkill(weaponItem, options):0;
     if (options.attackDM) {
+        // If attackDM is set, replaces any skill score. Used in missile and squadron attacks.
         score = options.attackDM;
     }
     let dice = `${options.results?options.results.dice:"2D6"} + ${score}`;
-    if (options.dm) {
-        dice += ` + ${options.dm}`;
-    }
 
     let damageDice = weaponItem.system.weapon.damage;
 

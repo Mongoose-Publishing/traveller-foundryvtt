@@ -1069,8 +1069,6 @@ export class MgT2Actor extends Actor {
   }
 
   getAttackSkill(weaponItem, options) {
-      let dm = 0;
-
       if (weaponItem && weaponItem?.system?.weapon) {
           let score = this.getWeaponSkill(weaponItem, options);
 
