@@ -639,7 +639,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             i.img = i.img || MGT2.DEFAULT_ITEM_ICON;
             i.cssStyle = "";
 
-            if (i.system.weight !== undefined) {
+            if (i.system.weight && !isNaN(parseFloat(i.system.weight))) {
                 if (i.system.status === MgT2Item.CARRIED) {
                     weight += parseFloat(i.system.weight) * parseFloat(i.system.quantity);
                 } else if (i.system.status === MgT2Item.EQUIPPED) {
