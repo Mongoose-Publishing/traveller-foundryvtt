@@ -3,7 +3,10 @@
 
     <div class="shadow">
         <img class="attack-actor" src="{{gunner.img}}" width="40px"/>
-        <h4>{{gunner.name}}</h4>
+        <h4>
+            {{gunner.name}}
+            {{#if number includeZero=false}} x{{number}}{{/if}}
+        </h4>
 
         <p>
             {{gunnerChaLabel}} {{gunnerSkillLabel}}

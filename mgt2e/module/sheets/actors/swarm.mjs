@@ -229,7 +229,7 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
             hull = Math.max(0, hull);
 
             let sq = this.actor.system.squadron;
-            if (tl != sq.tl || thrust != sq.thrust || armour != sq.armour || hull != sq.hull) {
+            if (tl !== sq.tl || thrust !== sq.thrust || armour !== sq.armour || hull !== sq.hull) {
                 await this.actor.update({"system.squadron": {
                         "tl": tl,
                         "thrust": thrust,
@@ -238,7 +238,7 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
                     }
                 });
             }
-            if (maxHits != this.actor.system.hits.max) {
+            if (maxHits !== this.actor.system.hits.max) {
                 await this.actor.update({"system.hits.max": maxHits });
             }
         }
@@ -317,10 +317,16 @@ export class MgT2SwarmActorSheet extends MgT2ActorSheet {
         let weaponItem = fighterActor.items.get(action.weapon);
         console.log(crewId);
         let crewActor = await fromUuid("Actor." + crewId);
+        let number = 1;
+
+        if (this.actor.system.squadron.fighters[fighterActor.name]) {
+            number = parseInt(this.actor.system.squadron.fighters[fighterActor.name].number);
+        }
         let attackOptions = {
-            damage: 50
+            dm: 0,
+            squadronSize: number
         };
-        new MgT2SpacecraftAttackDialog(fighterActor, crewActor, weaponItem, 0).render(true);
+        new MgT2SpacecraftAttackDialog(fighterActor, crewActor, weaponItem, attackOptions).render(true);
     }
 
 

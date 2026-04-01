@@ -2529,3 +2529,16 @@ div.spacecraft-attacks .weapon-action-button:hover {
 .image-gallery img {
   display: inline-block;
 }
+
+.swarm-label {
+  display: block;
+  clear: both;
+  width: 100%;
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+  border-top: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
