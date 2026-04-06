@@ -1,4 +1,3 @@
-
 <div class="grid grid-3col">
     <div class="resource flex-group-center">
         <label class="field-label">{{localize 'MGT2.TravellerSheet.HeavyLoad'}}</label>
@@ -16,6 +15,17 @@
 </div>
 
 <hr/>
+{{#if isEditable}}
+    <input type="checkbox" name="system.settings.sortByCategory" {{checked system.settings.sortByCategory}} data-dtype="Boolean" />
+    <label for="system.settings.sortByCategory" class="resource-label">{{localize 'MGT2.TravellerSheet.CategorySort'}}</label>
+    <div class="resource addNewItem">
+        {{localize 'MGT2.TravellerSheet.AddItem'}}
+        <select class="addItemSelect">
+            {{selectOptions CREATE_ITEM_SELECT}}
+        </select>
+    </div>
+    <br style="clear: both"/>
+{{/if}}
 
 <h2>{{localize 'MGT2.TravellerSheet.ItemsInUse'}}</h2>
 
@@ -80,15 +90,6 @@
 </ol>
 
 {{#if (isOwner .)}}
-<h2>
-    {{localize 'MGT2.TravellerSheet.ItemsOwned'}}
-    <div class="resource addNewItem">
-        {{localize 'MGT2.TravellerSheet.AddItem'}}
-        <select class="addItemSelect">
-            {{selectOptions CREATE_ITEM_SELECT}}
-        </select>
-    </div>
-</h2>
 
 <ol class="items-list actor-items grid grid-3col">
     {{#each items as |item id|}}

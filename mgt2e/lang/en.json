@@ -263,6 +263,9 @@
 
   "MGT2.TravellerSheet.Skills": "Skills",
   "MGT2.TravellerSheet.Equipment": "Equipment",
+  "MGT2.TravellerSheet.GeneralItems": "General Items",
+  "MGT2.TravellerSheet.Augments": "Augments",
+  "MGT2.TravellerSheet.Software": "Software",
   "MGT2.TravellerSheet.Finance": "Finance",
   "MGT2.TravellerSheet.Biography": "Biography",
   "MGT2.TravellerSheet.History": "History",
@@ -387,6 +390,7 @@
   "MGT2.TravellerSheet.SpacecraftTypeCode": "Spacecraft type code",
   "MGT2.TravellerSheet.LockUPP": "Lock UPP",
   "MGT2.TravellerSheet.RandomRoll": "Re-roll characteristics (shift for average, ctrl for vary)",
+  "MGT2.TravellerSheet.CategorySort": "Sort by category",
 
   "MGT2.TravellerSheet.CargoText": "Total cargo capacity.",
   "MGT2.TravellerSheet.JDriveText": "Jump distance.",
