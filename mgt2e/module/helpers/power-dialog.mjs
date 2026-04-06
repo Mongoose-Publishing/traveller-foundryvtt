@@ -54,6 +54,7 @@ export class MgT2PowerDialog extends Application {
             "cha": "PSI",
             "skill": skillLabel(this.data.skills[this.skill]),
             "speciality": (this.skill && this.speciality) ? skillLabel(this.data.skills[this.skill].specialities[this.speciality]) : "",
+            "dm": 0,
             "dicetype": "normal",
             "RANGES": this.RANGES,
             "ROLLTYPES": this.ROLLTYPES,
