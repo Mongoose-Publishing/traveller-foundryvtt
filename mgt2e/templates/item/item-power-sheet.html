@@ -1,0 +1,66 @@
+<form class="{{cssClass}} item flexcol" autocomplete="off">
+    <section class="item-sheet">
+        <div class="sidebar">
+            <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+
+            {{#if system.status}}
+            <div class="item-status item-status-{{system.status}}">{{system.status}}</div>
+            {{/if}}
+
+        </div>
+
+        <div class="flex-group-left">
+            <h1 class="item-power charname shadow">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Name" />
+                <span class="item-to-chat" data-item-id="{{item.uuid}}" title="{{localize 'MGT2.Item.ClickToChat'}}">
+                    <i class="fas fa-comment"></i>
+                </span>
+            </h1>
+            <div class="shadow">
+                <div class="resources grid grid-3col flex-group-left">
+                    <div class="resource ">
+                        <label for="system.power.check" class="resource-label">{{localize
+                            "MGT2.Psi.Check"}}</label><br />
+                        <select class="writable" name="system.power.check">
+                            {{selectOptions difficulty selected=system.power.check}}
+                        </select>
+                    </div>
+                    <div class="resource ">
+                        <label for="system.power.time" class="resource-label">{{localize
+                            "MGT2.Psi.Time"}}</label><br />
+                        <select class="writable" name="system.power.time">
+                            {{selectOptions timeFrame selected=system.power.time}}
+                        </select>
+                    </div>
+                    <div class="resource">
+                        <label for="system.power.skill" class="resource-label">{{localize
+                            "MGT2.Psi.Talent"}}</label><br />
+                        <select class="writable" name="system.power.skill">
+                            {{selectOptions psiSkills selected=system.power.skill}}
+                        </select>
+                    </div>
+                    <div class="resource grid-span-2">
+                        <label for="system.power.range" class="resource-label">{{localize
+                            "MGT2.Psi.Reach"}}</label><br />
+                        <select class="writable" name="system.power.range">
+                            {{selectOptions psionicRange selected=system.power.range}}
+                        </select>
+                    </div>
+                    <div class="resource">
+                        <label for="system.power.cost" class="resource-label">{{localize
+                            "MGT2.Psi.Cost"}}</label>
+                        <input class="writable" type="text" name="system.power.cost"
+                            value="{{system.power.cost}}" data-dtype="String" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item-description shadow">
+                {{editor enrichedDescription target="system.description"
+                button=true editable=editable}}
+            </div>
+        </div>
+    </section>
+
+</form>

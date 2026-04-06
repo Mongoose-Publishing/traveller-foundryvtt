@@ -307,7 +307,7 @@
     }
   },
   "Item": {
-    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software", "worlddata" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software", "worlddata", "power" ],
     "templates": {
       "base": {
         "tl": 0,
@@ -365,6 +365,15 @@
           "bandwidth": 0
         },
         "installedOn": null
+      },
+      "power": {
+        "power": {
+          "check": "8",
+          "time": "1",
+          "range": "3",
+          "skill": "telepathy",
+          "cost": 0
+        }
       },
       "term": {
           "term": {
@@ -449,6 +458,9 @@
     },
     "associate": {
       "templates": [ "associate" ]
+    },
+    "power": {
+      "templates": [ "power" ]
     },
     "cargo": {
       "templates": [ "cargo"],

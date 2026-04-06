@@ -1,5 +1,6 @@
 
 import {MgT2AttackDialog } from "../helpers/attack-dialog.mjs";
+import {MgT2PowerDialog } from "../helpers/power-dialog.mjs";
 import {rollAttack} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
 
@@ -163,6 +164,19 @@ export class MgT2Item extends Item {
                 } else {
                     // No Ammo.
                 }
+            }
+        }
+        if (item.type === "power" && this.actor.system.characteristics) {
+            if (!this.actor.system.damage["PSI"]) {
+            this.actor.system.damage["PSI"] = { "value": 0 };
+            };
+            if (this.actor.system.characteristics["PSI"].value <= this.actor.system.damage["PSI"].value){
+                ui.notifications.warn(game.i18n.format("MGT2.Warn.NoPsi",
+                    { "actor": this.actor.name }));
+                return;
+            }
+            if (!quickRoll) {
+                new MgT2PowerDialog(this.actor, item).render(true);
             }
         }
     }

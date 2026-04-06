@@ -1,0 +1,44 @@
+<form class="flexcol skilldialog">
+    <div class="shadow">
+        <b>{{power.name}}</b><br/>
+        {{#if cha}}
+            <i>{{cha}} + {{skill}}{{#if speciality}} ({{speciality}}){{/if}} at {{score}}</i>
+        {{else}}
+            <i>{{skill}}{{#if speciality}} ({{speciality}}){{/if}} at {{score}}</i>
+        {{/if}}
+    </div>
+
+
+    <div class="shadow grid grid-3col">
+        <div class="mode-selection">
+            <label for="rollmode" class="skillDialogLabel">Roll Mode</label>
+            <select class="skillDialogRollMode" name="rollmode">
+                {{selectOptions MODE_SELECT selected=mode}}
+            </select>
+        </div>
+        <div class="boon-selection">
+            <label for="dicetype" class="skillDialogLabel">Roll Type</label>
+            <select class="skillDialogRollType" name="dicetype">
+                {{selectOptions ROLLTYPES selected="normal"}}
+            </select>
+        </div>
+
+        <div class="bonus-selection">
+            <label for="dm" class="skillDialogLabel">DM</label><br>
+            <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}" />
+        </div>
+
+        <div class="range-selection grid-span-3">
+            <label for="range" class="skillDialogLabel">Range</label>
+            <select class="skillDialogRange" name="range">
+                {{selectOptions RANGES selected=system.power.range}}
+            </select>
+        </div>
+
+    </div>
+
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="roll">Attack</button>
+    </footer>
+
+</form>
