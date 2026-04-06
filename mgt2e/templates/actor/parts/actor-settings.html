@@ -29,9 +29,6 @@
             <input type="checkbox" name="system.settings.lockCharacteristics" {{checked system.settings.lockCharacteristics}} data-dtype="Boolean" />
             <label for="system.settings.lockCharacteristics" class="resource-label">{{localize 'MGT2.TravellerSheet.LockUPP'}}</label>
             <br/>
-            <input type="checkbox" name="system.settings.sortByCategory" {{checked system.settings.sortByCategory}} data-dtype="Boolean" />
-            <label for="system.settings.sortByCategory" class="resource-label">{{localize 'MGT2.TravellerSheet.category'}}</label>
-            <br/>
 
             {{#if (ifEquals actor.type "npc")}}
                 {{#unless actor.system.damage}}

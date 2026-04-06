@@ -603,7 +603,7 @@ Hooks.on("createItem", (item) => {
         } else {
             item.img = "systems/mgt2e/icons/items/item.svg";
         }
-        item.update({ "img": item.img });
+        item.safeUpdate({ "img": item.img });
     }
 });
 
@@ -1296,7 +1296,7 @@ Handlebars.registerHelper('cycleItem', function (item) {
 
     let carryTitle = "Carry";
     let carryIcon = "far fa-suitcase";
-    
+
     let equipTitle = "Equip";
     let equipIcon = "far fa-hand-fist";
 

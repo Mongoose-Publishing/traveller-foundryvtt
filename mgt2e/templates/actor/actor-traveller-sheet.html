@@ -124,7 +124,9 @@
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
                     <a class="item" data-tab="skills">{{localize 'MGT2.TravellerSheet.Skills'}}</a>
-                    <a class="item" data-tab="items">{{localize 'MGT2.TravellerSheet.Equipment'}}</a>
+                    {{#if (isObserver .)}}
+                        <a class="item" data-tab="items">{{localize 'MGT2.TravellerSheet.Equipment'}}</a>
+                    {{/if}}
                     <a class="item" data-tab="finance">{{localize 'MGT2.TravellerSheet.Finance'}}</a>
                     <a class="item" data-tab="biography">{{localize 'MGT2.TravellerSheet.Biography'}}</a>
                     {{#if (isObserver .)}}
@@ -174,7 +176,6 @@
                                 enrichedFinanceDescription target="system.finance.description"
                                 button=true editable=editable}}
                         </section>
-
                     </div>
 
                     {{!-- Biography Tab --}}
@@ -220,15 +221,14 @@
                     {{/if}}
 
                     {{#if (isObserver .)}}
-                    {{!-- Owned Items Tab --}}
-                    <div class="tab items" data-group="primary" data-tab="items">
-                        {{#unless system.settings.sortByCategory}}
-                            {{> "systems/mgt2e/templates/actor/parts/actor-items.html"}}
-                        {{/unless}}
-                        {{#if system.settings.sortByCategory}}
-                            {{> "systems/mgt2e/templates/actor/parts/actor-items-categorised.html"}}
-                        {{/if}}
-                    </div>
+                        {{!-- Owned Items Tab --}}
+                        <div class="tab items" data-group="primary" data-tab="items">
+                            {{#if system.settings.sortByCategory}}
+                                {{> "systems/mgt2e/templates/actor/parts/actor-items-categorised.html"}}
+                            {{else}}
+                                {{> "systems/mgt2e/templates/actor/parts/actor-items.html"}}
+                            {{/if}}
+                        </div>
                     {{/if}}
 
                     {{!-- Settings Tab --}}

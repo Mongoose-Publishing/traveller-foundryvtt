@@ -206,10 +206,16 @@
                         </section>
                     </div>
 
-                    {{!-- Owned Items Tab --}}
-                    <div class="tab items" data-group="primary" data-tab="items">
-                        {{> "systems/mgt2e/templates/actor/parts/actor-items.html"}}
-                    </div>
+                    {{#if (isObserver .)}}
+                        {{!-- Owned Items Tab --}}
+                        <div class="tab items" data-group="primary" data-tab="items">
+                            {{#if system.settings.sortByCategory}}
+                                {{> "systems/mgt2e/templates/actor/parts/actor-items-categorised.html"}}
+                            {{else}}
+                                {{> "systems/mgt2e/templates/actor/parts/actor-items.html"}}
+                            {{/if}}
+                        </div>
+                    {{/if}}
 
                     {{!-- Settings Tab --}}
                     {{#if (isOwner .)}}
