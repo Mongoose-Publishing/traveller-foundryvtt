@@ -170,7 +170,7 @@ export class MgT2Item extends Item {
             if (!this.actor.system.damage["PSI"]) {
             this.actor.system.damage["PSI"] = { "value": 0 };
             };
-            if (this.actor.system.characteristics["PSI"].value <= this.actor.system.damage["PSI"].value){
+            if (this.actor.system.characteristics["PSI"].current <= 0){
                 ui.notifications.warn(game.i18n.format("MGT2.Warn.NoPsi",
                     { "actor": this.actor.name }));
                 return;
