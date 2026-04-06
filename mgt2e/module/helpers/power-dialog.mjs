@@ -43,7 +43,7 @@ export class MgT2PowerDialog extends Application {
             "selfroll": game.i18n.localize("MGT2.Dialog.Self")
         }
 
-        let mode = game.settings.get("core", "rollMode")
+        this.mode = game.settings.get("core", "rollMode")
 
     }
 
