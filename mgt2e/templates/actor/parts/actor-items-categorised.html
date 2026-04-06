@@ -72,8 +72,8 @@
 
 {{#if software}}
     <h2>{{localize 'MGT2.TravellerSheet.Software'}}</h2>
-    <ol class="items-list actor-items grid grid-4col">
-        {{#each items as |item id|}}
+    <ol class="items-list actor-items grid grid-3col">
+        {{#each software as |item id|}}
             <li class="item item-{{item.type}} {{item.cssStyle}} item-status-{{item.system.status}}" data-item-id="{{item._id}}">
                 <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                 <img title="{{nameQuantity item}}" src="{{item.img}}"/>
