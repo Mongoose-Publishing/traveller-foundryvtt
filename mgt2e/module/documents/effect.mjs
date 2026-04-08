@@ -19,7 +19,7 @@ export class MgT2Effect extends ActiveEffect {
                 // then this component is also equipped.
                 let linkedId = this.parent.system.component.linkedTo;
                 let parent = this.parent?.parent?.items?.get(linkedId);
-                return parent.system.status !== MgT2Item.EQUIPPED;
+                return parent?.system?.status !== MgT2Item.EQUIPPED;
             }
             return true;
         }
