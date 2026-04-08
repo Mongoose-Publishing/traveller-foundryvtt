@@ -15,11 +15,12 @@ export class MgT2SpacecraftAttackDialog extends Application {
         return options;
     }
 
-    constructor(starshipActor, gunnerActor, weaponMount, dm) {
+    constructor(starshipActor, gunnerActor, weaponMount, attackOptions) {
         super();
         this.starship = starshipActor;
         this.gunner = gunnerActor;
         this.mount = weaponMount;
+        this.attackOptions = attackOptions;
 
         if (!this.mount) {
             ui.notifications.error(game.i18n.localize("MGT2.Error.NoWeaponMount"));
@@ -31,9 +32,13 @@ export class MgT2SpacecraftAttackDialog extends Application {
         this.weaponSelect = {};
         this.weaponSelected = null;
         this.weaponItem = null;
-        this.dm = isNaN(dm)?0:parseInt(dm);
+        this.dm = isNaN(this.attackOptions.dm)?0:parseInt(this.attackOptions.dm);
         this.ranges = {};
         this.range = "medium";
+        this.number = 0;
+        if (attackOptions?.squadronSize) {
+            this.number = parseInt(attackOptions.squadronSize);
+        }
 
         if (this.mount.type === "hardware" && this.mount?.system?.hardware?.system === "weapon") {
             let weapons = this.mount.system.hardware.weapons;
@@ -207,6 +212,7 @@ export class MgT2SpacecraftAttackDialog extends Application {
             "dm": this.dm,
             "ranges": this.ranges,
             "range": this.range,
+            "number": this.number,
             "rollTypes": {
                 "normal": game.i18n.localize("MGT2.TravellerSheet.Normal"),
                 "boon": game.i18n.localize("MGT2.TravellerSheet.Boon"),
@@ -272,6 +278,9 @@ export class MgT2SpacecraftAttackDialog extends Application {
         if (this.weaponItem.hasTrait("missile")) {
             launchMissiles(this.starship, this.weaponItem, options);
         } else {
+            if (this.attackOptions.squadronSize) {
+                options.squadronSize = parseInt(this.attackOptions.squadronSize);
+            }
             rollSpaceAttack(this.starship, this.gunner, this.weaponItem, options);
         }
 

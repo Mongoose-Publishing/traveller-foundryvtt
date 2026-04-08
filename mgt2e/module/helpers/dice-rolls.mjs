@@ -653,14 +653,13 @@ function addTitle(text, options, property) {
 export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let text = "";
 
+    // score will include the default DM from the options
     let score = gunner?gunner.getAttackSkill(weaponItem, options):0;
     if (options.attackDM) {
+        // If attackDM is set, replaces any skill score. Used in missile and squadron attacks.
         score = options.attackDM;
     }
     let dice = `${options.results?options.results.dice:"2D6"} + ${score}`;
-    if (options.dm) {
-        dice += ` + ${options.dm}`;
-    }
 
     let damageDice = weaponItem.system.weapon.damage;
 
@@ -679,14 +678,20 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         }
     }
     let isMissile = false;
+    let isSquadron = false;
     if (options.salvoSize) {
         isMissile = true;
+    } else if (options.squadronSize) {
+        isSquadron = true;
+        dice += ` + ${options.squadronSize - 1}`;
     }
 
     const attackRoll = await new Roll(dice, gunner?gunner.getRollData():null).evaluate();
     let effect = Math.max(0, attackRoll.total - 8);
     if (isMissile) {
         effect = Math.min(effect, options.salvoSize);
+    } else if (isSquadron) {
+        effect = Math.min(effect, options.squadronSize);
     }
     const damageRoll = await new Roll(damageDice, null).evaluate();
 
@@ -709,15 +714,23 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
     let dmgText = `Damage ${damageRoll.total}`;
     if (isMissile) {
         dmgText += ` (x${effect} impacts)`;
+    } else if (isSquadron) {
+        dmgText += ` (x${effect} attacks)`;
     } else if (effect > 0) {
         dmgText += ` (+${effect})`;
     }
     if (multiplier > 1) {
         dmgText += ` x${multiplier}`;
     }
-    if (isMissile) {
+    let swarmLabel = "";
+    if (isMissile || isSquadron) {
         multiplier = effect;
         effect = 0;
+        if (isMissile) {
+            swarmLabel = `<span class="swarm-label">x${options.salvoSize} Missiles</span>`;
+        } else {
+            swarmLabel = `<span class="swarm-label">x${options.squadronSize} Fighters</span>`;
+        }
     }
     let ap = 0;
     if (weaponItem.hasTrait("ap")) {
@@ -742,7 +755,8 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         "damageType": weaponItem.system.damageType,
         "radiation": radiationDamage,
         "ranged": true,
-        "isMissile": isMissile
+        "isMissile": isMissile,
+        "isSquadron": isSquadron
     };
     let json = JSON.stringify(damageOptions);
     text = `
@@ -760,20 +774,19 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
                     ${(options.rangeDM>=0)?("+"+options.rangeDM):(options.rangeDM)}
                     <br/>
                     ${weaponItem.system.weapon.damage}<br/>
+                    ${swarmLabel}
                 </div>
-                <hr/>
             `;
     };
 
     text += `
-                <div class="rollResult">
+                <div class="rollResult" style="margin-top: 8px;">
                     <b>Attack Roll: </b>
                     <span class="skill-roll inline-roll inline-result" title="${dice}">
                         <i class="fas fa-dice"> </i> ${attackRoll.total}
                     </span>
                     Effect ${(effect>0)?"+":""}${effect}
                 </div>
-                <hr/>
                 <div class="damage-message" data-damage="${damageRoll.total + effect}" data-vers="2" data-options='${json}'>
                     <button data-damage="${(damageRoll.total + effect)}" data-vers="2"
                             data-options='${json}' class="damage-button"

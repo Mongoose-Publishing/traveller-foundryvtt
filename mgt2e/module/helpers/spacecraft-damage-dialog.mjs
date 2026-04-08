@@ -70,7 +70,6 @@ export class MgT2SpacecraftDamageDialog extends Application {
         if (this.actualDamage > 0 && damageOptions.effect >= 6) {
             this.crits.effectCrit = true;
             this.crits.effectSeverity = damageOptions.effect - 5;
-            console.log("Effect Critical: " + damageOptions.effect - 5);
         }
         // Gain a critical every time pass 10% of hull damage.
         this.originalDamage = damageOptions.originalDamage;
@@ -81,7 +80,6 @@ export class MgT2SpacecraftDamageDialog extends Application {
         let firstSustainedLevel = 0;
         for (let d=0; d < 10; d++) {
             let limit = parseInt(((d + 1) * this.maxHits) / 10);
-            console.log(`${d} ${limit} ${this.originalDamage} ${this.actualDamage}`);
             if ( limit >= this.originalDamage + this.actualDamage) {
                 this.damageTrack[d] = "undamaged";
             } else if (limit >= this.originalDamage) {

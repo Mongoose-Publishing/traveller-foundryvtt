@@ -2509,3 +2509,30 @@ div.spacecraft-attacks .weapon-action-button:hover {
 .image-gallery img {
   display: inline-block;
 }
+
+.swarm-label {
+  display: block;
+  clear: both;
+  width: 100%;
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+  border-top: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+ol.actor-items li.item-status-equipped {
+  background-color: #D0D0D0;
+  border-width: 2px;
+  font-weight: bold;
+}
+
+ol.actor-items li.item-status-owned {
+  opacity: 0.65;
+}
+
+ol.actor-items li.item-status- {
+  opacity: 0.65;
+}

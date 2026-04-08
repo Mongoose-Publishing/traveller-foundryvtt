@@ -486,6 +486,10 @@ export function getHighestModifier(worldActor, modifiers) {
             if (parseInt(v) > dm) {
                 dm = parseInt(v);
             }
+        } else if (worldActor.system.world.uwp.zone === c) {
+            if (parseInt(v) > dm) {
+                dm = parseInt(v);
+            }
         }
     }
 

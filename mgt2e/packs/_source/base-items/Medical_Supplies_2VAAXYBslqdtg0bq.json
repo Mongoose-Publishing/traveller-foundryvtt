@@ -6,7 +6,7 @@
     "cargo": {
       "price": 50000,
       "availability": "HT, Hi",
-      "purchaseDM": "Hi +2",
+      "purchaseDM": "Ht 2",
       "saleDM": "In +2, Po +1, Ri +1",
       "tons": "1D6 * 5",
       "illegal": false,
@@ -30,9 +30,9 @@
     "duplicateSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.19.0.0",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1774890445767,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },

@@ -484,6 +484,11 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                     context.saleTraits[trait] = game.i18n.localize("MGT2.Trade." + trait);
                 }
             }
+            for (let trait in CONFIG.MGT2.TRADE.zones) {
+                if (!hasTrait(item.system.cargo.saleDM, trait)) {
+                    context.saleTraits[trait] = game.i18n.localize("MGT2.Trade." + trait);
+                }
+            }
         } else if (item.type === "term") {
             context.showRandom = true;
             if (item.parent && item.parent.type === "traveller") {
@@ -1025,6 +1030,15 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             item.sheet.render(true);
         });
 
+        html.find('.item-to-chat').click(async ev => {
+            const span = $(ev.currentTarget);
+            const item = await fromUuid(span.data("itemId"));
+            const richDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description);
+            const content = {"item": item, "richDescription": richDescription}
+            const html = await renderTemplate("systems/mgt2e/templates/chat/item.html", content);
+            ChatMessage.create({ content: html})
+        });
+
         // -------------------------------------------------------------
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
@@ -1194,15 +1208,6 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
            this.item.statusClick();
         });
 
-        html.find('.item-to-chat').click(async ev => {
-            const span = $(ev.currentTarget);
-            const item = await fromUuid(span.data("itemId"));
-            const richDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description);
-            const content = {"item": item, "richDescription": richDescription}
-            const html = await renderTemplate("systems/mgt2e/templates/chat/item.html", content);
-            ChatMessage.create({ content: html})
-        });
-
         if (this.item.type === "weapon") {
             html.find(".trait-selector").click(ev => {
                 const value = $(ev.currentTarget).val();
@@ -1336,7 +1341,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
 
     async _modifyCargoTrait(trait, field, modifier) {
         console.log(`_modifyCargoTrait: [${trait}] [${field}] [${modifier}]`);
-        const traitData = MGT2.TRADE.codes[trait];
+        const traitData = MGT2.TRADE.codes[trait]?MGT2.TRADE.codes[trait]:MGT2.TRADE.zones[trait];
         if (traitData) {
             const text = this.item.getCargoTrait(field, trait);
             if (traitData) {
