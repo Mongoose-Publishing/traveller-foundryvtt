@@ -291,7 +291,14 @@ MGT2.VEHICLES = {
             traits: [ ],
             allowedFeatures: [
                 "agile", "fast", "floats", "foldingWings", "hypersonic", "jetEngines",
-                "openFrame", "openTopped", "slow", "stol", "supersonic", "tiltEngines"
+                "openFrame", "openTopped", "slow", "STOL", "supersonic", "tiltEngines"
+            ],
+            performance: [
+                { min: 4, max: 4, speed: "medium", range: 300 },
+                { min: 5, max: 6, speed: "high", range: 600 },
+                { min: 7, max: 8, speed: "fast", range: 1200 },
+                { min: 9, max: 10, speed: "veryFast", range: 2400 },
+                { min: 11, speed: "veryFast", range: 4800 }
             ]
         },
         "airship": {
@@ -304,6 +311,14 @@ MGT2.VEHICLES = {
             cost: 300,
             allowedFeatures: [
                 "agile", "fast", "openFrame", "rigid", "slow", "streamlined"
+            ],
+            performance: [
+                { min: 3, max: 3, speed: "idle", range: 100 },
+                { min: 4, max: 4, speed: "slow", range: 4000 },
+                { min: 5, max: 7, speed: "medium", range: 6000 },
+                { min: 8, max: 9, speed: "medium", range: 8000 },
+                { min: 10, max: 11, speed: "medium", range: 12000 },
+                { min: 12, speed: "medium", range: 18000 }
             ]
         },
         "gravVehicle": {
@@ -317,6 +332,13 @@ MGT2.VEHICLES = {
             allowedFeatures: [
                 "AFV", "agile", "fast", "openFrame", "openTopped", "slow",
                 "streamlined"
+            ],
+            performance: [
+                { min: 8, max: 8, speed: "high", range: 1000 },
+                { min: 9, max: 10, speed: "fast", range: 2000 },
+                { min: 11, max: 12, speed: "fast", range: 3000 },
+                { min: 13, max: 14, speed: "veryFast", range: 4000 },
+                { min: 15, speed: "veryFast", range: 5000 }
             ]
         },
         "groundVehicle": {
@@ -331,6 +353,15 @@ MGT2.VEHICLES = {
                 "AFV", "agile", "ATV", "fast", "monowheel", "offRoader", "openFrame",
                 "openTopped", "railRider", "slow", "smartWheels", "streamlined", "tracks",
                 "tunneller"
+            ],
+            performance: [
+                { min: 1, max: 2, speed: "idle", range: 0 },
+                { min: 3, max: 3, speed: "idle", range: 50 },
+                { min: 4, max: 4, speed: "verySlow", range: 100 },
+                { min: 5, max: 6, speed: "slow", range: 300 },
+                { min: 7, max: 8, speed: "medium", range: 500 },
+                { min: 9, max: 10, speed: "high", range: 800 },
+                { min: 11, speed: "fast", range: 1000 }
             ]
         },
         "hovercraft": {
@@ -343,6 +374,13 @@ MGT2.VEHICLES = {
             cost: 10000,
             allowedFeatures: [
                 "agile", "fast", "openFrame", "openTopped", "slow"
+            ],
+            performance: [
+                { min: 5, max: 5, speed: "slow", range: 300 },
+                { min: 6, max: 7, speed: "medium", range: 400 },
+                { min: 8, max: 9, speed: "high", range: 500 },
+                { min: 10, max: 11, speed: "high", range: 600 },
+                { min: 12, speed: "fast", range: 800 }
             ]
         },
         "rotorcraft": {
@@ -356,6 +394,12 @@ MGT2.VEHICLES = {
             allowedFeatures: [
                 "aerodyne", "agile", "fast", "floats", "foldingWings", "openFrame", "openTopped",
                 "ornithopter", "slow", "streamlined"
+            ],
+            performance: [
+                { min: 5, max: 6, speed: "medium", range: 500 },
+                { min: 7, max: 7, speed: "high", range: 1000 },
+                { min: 8, max: 10, speed: "high", range: 2000 },
+                { min: 11, speed: "fast", range: 4000 }
             ]
         },
         "structure": {
@@ -368,6 +412,9 @@ MGT2.VEHICLES = {
             cost: 50,
             allowedFeatures: [
                 "AFV", "openFrame", "openTopped", "streamlined"
+            ],
+            performance: [
+                { min: 0, speed: "stopped", range: 0 }
             ]
         },
         "submersible": {
@@ -380,6 +427,14 @@ MGT2.VEHICLES = {
             cost: 50000,
             allowedFeatures: [
                 "AFV", "agile", "fast", "openFrame", "openTopped", "slow", "tunneller"
+            ],
+            performance: [
+                { min: 4, max: 4, speed: "idle", range: 50, safeDepth: 50, crushDepth: 150 },
+                { min: 5, max: 5, speed: "verySlow", range: 100, safeDepth: 200, crushDepth: 600 },
+                { min: 6, max: 8, speed: "slow", range: 150, safeDepth: 300, crushDepth: 900 },
+                { min: 9, max: 11, speed: "slow", range: 200, safeDepth: 600, crushDepth: 1800 },
+                { min: 12, max: 14, speed: "medium", range: 300, safeDepth: 2000, crushDepth: 6000 },
+                { min: 15, speed: "high", range: 500, safeDepth: 4000, crushDepth: 12000 }
             ]
         },
         "walker": {
@@ -393,6 +448,13 @@ MGT2.VEHICLES = {
             allowedFeatures: [
                 "AFV", "agile", "fast", "multiLegged", "openFrame", "openTopped",
                 "slow", "tunneller"
+            ],
+            performance: [
+                { min: 8, max: 8, speed: "verySlow", range: 150 },
+                { min: 9, max: 10, speed: "slow", range: 300 },
+                { min: 11, max: 12, speed: "medium", range: 450 },
+                { min: 13, max: 14, speed: "high", range: 600 },
+                { min: 15, speed: "high", range: 750 }
             ]
         },
         "watercraft": {
@@ -406,8 +468,66 @@ MGT2.VEHICLES = {
             allowedFeatures: [
                 "AFV", "agile", "fast", "floats", "hydrofoil", "openFrame",
                 "openTopped", "slow"
+            ],
+            performance: [
+                { min: 0, max: 2, speed: "idle", range: 0 },
+                { min: 3, max: 3, speed: "idle", range: 100 },
+                { min: 4, max: 4, speed: "verySlow", range: 200 },
+                { min: 5, max: 5, speed: "verySlow", range: 400 },
+                { min: 6, max: 7, speed: "slow", range: 600 },
+                { min: 8, max: 11, speed: "slow", range: 800 },
+                { min: 12, speed: "medium", range: 1200 }
             ]
         }
+    },
+    FEATURES: {
+        "aerodyne": { tl: 7, conflict: [ "foldingWings", "ornithopter" ], speed: +1, shipping: 0.5, cost: +30 },
+        "AFV": { tl: 5, conflict: [ "hydrofoil", "openTopped" ], minSize: 20, speed: -1, cost: +100 },
+        "agile": { tl: 1, conflict: [ "railRider" ], agility: +1, cost: +100 },
+        "ATV": { tl: 0, conflict: [ "offRiader", "railRider", "tracks" ], cost: +30 },
+        "biotech": { tl: 0 },
+        "fast": { tl: 0, conflict: [ "slow", "supersonic" ], speed: +1, range: 0.5, cost: +100 },
+        "floats": { tl: 4, speed: -1, cost: +20 },
+        "foldingWings": { tl: 4, conflicts: [ "aerodyne" ], shipping: 0.75, cost: +20 },
+        "hydrofoil": { tl: 3, conflicts: [ "AFV"], speed: +1, cost: +200 },
+        "hypersonic": { tl: 8, conflicts: [ "openFrame", "openTopped", "supersonic"],
+            requires: [ "jet" ], speedBand: "hypersonic", range: 0.5, cost: +400
+        },
+        "jet": { tl: 6, speed: +1, range: 1.5, cost: +200 },
+        "locomotive": { tl: 3, minSize: 20, agility: -1, cost: +50, traits: [ "unresponsive" ] },
+        "monowheel": { tl: 9, conflicts: [ "tracks" ], agility: +2, speed: +1, shipping: 0.5, cost: +200 },
+        "multiLegged": { tl: 8, agility: +1, cost: +100 },
+        "offRoader": { tl: 0, conflicts: [ "ATV", "railRider", "tracks"], cost: +15 },
+        "openFrame": { tl: 0, conflicts: [ "hypersonic", "openTopped", "supersonic" ],
+            minSize: 1, maxSize: 3, agility: +1, speed: +1, range: 0.8, shipping: 0.5, cost: -30
+        },
+        "openTopped": { tl: 0, conflicts: [ "AFV", "hypersonic", "openFrame", "supersonic" ], cost: -15 },
+        "ornithopter": { tl: 8, conflicts: [ "aerodyne" ], agility: +1, speed: -1, range: 0.75, shipping: 0.75, cost: +20 },
+        "railRider": { tl: 1, conflicts: [ "agile", "ATV", "offRoader", "tracked" ], agility: -2, speed: +1, cost: +50 },
+        "responsive": { tl: 0, conflicts: [ "unresponsive" ], range: 0.75, cost: +100 },
+        "rigid": { tl: 4, range: 1.5, shipping: 5, cost: +200 },
+        "slow": { tl: 0, conflicts: [ "fast" ], speed: -1, range: 1.5, cost: -25 },
+        "smartWheels": { tl: 9, agility: +1, range: 1.1, cost: +130 },
+        "STOL": { tl: 4, cost: +30 },
+        "streamlined": { tl: 1, conflicts: [ "tunneller" ], agility: +1, speed: +1, cost: +200 },
+        "supersonic": { tl: 6, conflicts: [ "fast", "hypersonic", "openFrame", "openTopped" ],
+            speedBand: "supersonic", range: 0.8, cost: +200
+        },
+        "tiltEngines": { tl: 8, speed: -1, cost: +100, traits: [ "VTOL" ] },
+        "tracks": { tl: 5, conflicts: [ "ATV", "monowheel", "offRoader" ], speed: -1, cost: +100 },
+        "tunneller": { tl: 7, conflicts: [ "streamlined" ], minSize: 20, agility: -1, speed: -1, cost: +800 },
+        "unresponsive": { tl: 0, conflicts: [ "locomotive", "responsive" ], cost: -25, traits: [ "unresponsive "]}
+    },
+    TRAITS: {
+        "AFV": {},
+        "ATV": {},
+        "offRoader": {},
+        "openVehicle": {},
+        "openTopped": {},
+        "responsive": {},
+        "tracked": {},
+        "unresponsive": {},
+        "VTOL": {}
     }
 };
 

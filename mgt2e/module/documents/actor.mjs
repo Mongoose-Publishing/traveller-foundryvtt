@@ -118,6 +118,7 @@ export class MgT2Actor extends Actor {
         this._prepareNpcData(actorData);
         this._prepareCreatureData(actorData);
         this._prepareSpacecraftData(actorData);
+        this._prepareVehicleData(actorData);
     }
 
 
@@ -219,6 +220,41 @@ export class MgT2Actor extends Actor {
           }
       }
       return total;
+    }
+
+    // Prepare derived data for vehicles.
+    _prepareVehicleData(actorData) {
+      if (!["vehicle"].includes(actorData.type)) return;
+
+      console.log("_prepareVehicleData:");
+      console.log(actorData);
+
+      const s = Math.ceil(Math.max(1, parseInt(actorData.system.hits.value) / 10));
+      actorData.system.structure.value = s;
+
+      let vehicleType = actorData.system.vehicle.type;
+      if (!CONFIG.MGT2.VEHICLES.TYPE[vehicleType]) {
+          vehicleType = actorData.system.vehicle.type = "groundVehicle";
+      }
+      const typeData = CONFIG.MGT2.VEHICLES.TYPE[vehicleType];
+      if (actorData.system.vehicle.tl < typeData.tl) {
+          actorData.system.vehicle.tl = typeData.tl;
+      }
+      const techLevel = parseInt(actorData.system.vehicle.tl);
+
+      // Performance
+      let speedBand = "idle";
+      let range = 0;
+
+      for (let i=0; i < typeData.performance.length; i++) {
+          if (typeData.performance[i].min <= techLevel) {
+              speedBand = typeData.performance[i].speed;
+              range = typeData.performance[i].range;
+          }
+      }
+      actorData.system.vehicle.speed = speedBand;
+      actorData.system.vehicle.range = range;
+
     }
 
     /**

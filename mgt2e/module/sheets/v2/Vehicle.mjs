@@ -13,12 +13,12 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         actions: {
             rollCheck: MgT2eActorV2.onRollCheck,
             test: MgT2eVehicleSheet.#test,
-            addTrait: {
-                handler: MgT2eVehicleSheet.#addTrait,
+            addFeature: {
+                handler: MgT2eVehicleSheet.#addFeature,
                 buttons: [0, 1, 2],
                 event: "change"
             },
-            removeTrait: MgT2eVehicleSheet.#removeTrait
+            removeFeature: MgT2eVehicleSheet.#removeFeature
         },
         form: {
             handler: MgT2eVehicleSheet.#onFormSubmit,
@@ -39,34 +39,54 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
     };
 
-    static async #addTrait(event, target) {
-        console.log("addTrait:");
-        console.log(event);
-        console.log(target);
+    static async #addFeature(event, target) {
+        console.log("addFeature:");
 
-        console.log(event.target.value);
+        let feature = event.target.value;
 
-        let trait = event.target.value;
-
-        if (this.document.system.vehicle.traits === "") {
-            this.document.system.vehicle.traits = trait;
+        if (this.document.system.vehicle.features === "") {
+            this.document.system.vehicle.features = feature;
         } else {
-            this.document.system.vehicle.traits += "," + trait;
+            this.document.system.vehicle.features += "," + feature;
         }
-        this.document.update({"system.vehicle.traits": this.document.system.vehicle.traits});
+        this.document.update({"system.vehicle.features": this.document.system.vehicle.features});
     }
 
-    static async #removeTrait(event, target) {
-        let traitId = event.target.dataset["traitId"];
+    static async #removeFeature(event, target) {
+        let featureId = event.target.dataset["featureId"];
 
-        let traits = this.document.system.vehicle.traits;
-        let re = new RegExp(` ?${traitId},?`, "g");
-        let b = traits.replaceAll(re, "").replaceAll(/,$/g, "").trim();
-        this.actor.update({"system.vehicle.traits": b});
+        let features = this.document.system.vehicle.features;
+        let re = new RegExp(` ?${featureId},?`, "g");
+        let b = features.replaceAll(re, "").replaceAll(/,$/g, "").trim();
+        b = b.replaceAll(/,,/g, ",");
+        this.actor.update({"system.vehicle.features": b});
     }
 
     static async #test(event, target) {
         console.log("TEST");
+    }
+
+    async _calculateTypes() {
+        const vehicleType = this.document.system.vehicle.type;
+        const typeConfig = CONFIG.MGT2.VEHICLES.TYPE[vehicleType];
+
+        if (!typeConfig) {
+            console.log(`Unknown vehicle type [${vehicleType}]`);
+            return;
+        }
+        let traits = this.document.system.vehicle.traits;
+        for (let t of typeConfig.traits) {
+            if (traits.indexOf(t) === -1) {
+                traits = traits + "," + t;
+            }
+        }
+        if (traits !== this.document.system.vehicle.traits) {
+            await this.document.update({"system.vehicle.traits": traits});
+        }
+    }
+
+    prepareData() {
+        console.log("prepareDerivedData:");
     }
 
     async _prepareContext(options) {
@@ -79,6 +99,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             tabs: this._getTabs(options)
         };
 
+        await this._calculateTypes();
+
         context.structure = Math.ceil(this.document.system.hits.max / 10);
 
         context.TYPE_SELECT = {};
@@ -86,19 +108,22 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             context.TYPE_SELECT[t] = game.i18n.localize(`MGT2.Vehicle.Type.${t}`);
         }
 
-        context.SELECT_TRAITS = {};
-        context.SELECT_TRAITS[""] = "";
+        context.SELECT_FEATURES = {};
+        context.SELECT_FEATURES[""] = "";
         if (CONFIG.MGT2.VEHICLES.TYPE[this.document.system.vehicle.type]) {
             let allowedFeatures = CONFIG.MGT2.VEHICLES.TYPE[this.document.system.vehicle.type].allowedFeatures;
             if (allowedFeatures) {
                 for (let t in allowedFeatures) {
-                    if (this.document.system.vehicle.traits.indexOf(allowedFeatures[t]) === -1) {
-                        context.SELECT_TRAITS[allowedFeatures[t]] = game.i18n.localize("MGT2.Vehicle.Trait." + allowedFeatures[t]);
+                    if (this.document.system.vehicle?.features?.indexOf(allowedFeatures[t]) === -1) {
+                        context.SELECT_FEATURES[allowedFeatures[t]] = game.i18n.localize("MGT2.Vehicle.Feature." + allowedFeatures[t]);
                     }
                 }
             }
         }
-        console.log(context.SELECT_TRAITS);
+        context.SELECT_TECHLEVEL = {};
+        for (let tl=0; tl < 20; tl++) {
+            context.SELECT_TECHLEVEL[tl] = tl;
+        }
 
         return context;
     }
@@ -106,13 +131,13 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
     _onRender(context, options) {
         super._onRender(context, options);
 
-        const traitSelect = this.element.querySelector('select[data-action="addTrait"]');
+        const traitSelect = this.element.querySelector('select[data-action="addFeature"]');
         if (traitSelect) {
             console.log("found");
             //traitSelect.removeEventListener("change", this.#addTrait.bind(this));
             traitSelect.addEventListener("change", (ev) => {
                 // Manually trigger your private static method
-                MgT2eVehicleSheet.#addTrait.call(this, ev, ev.currentTarget);
+                MgT2eVehicleSheet.#addFeature.call(this, ev, ev.currentTarget);
             });
         }
     }

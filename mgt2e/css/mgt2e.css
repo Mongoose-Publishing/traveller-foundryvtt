@@ -82,3 +82,16 @@ div.pill-container {
   background-color: #f1511b;
   color: white;
 }
+
+.mgt2e .pill-container .trait-pill i {
+  background-color: black;
+  color: white;
+  opacity: 0.5;
+  margin-top: 1px;
+}
+
+
+.mgt2e .pill-container .invalid-pill {
+  background-color: #909090;
+  color: #404040;
+}

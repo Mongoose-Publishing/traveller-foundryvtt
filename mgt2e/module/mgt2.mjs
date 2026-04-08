@@ -2292,6 +2292,48 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
     return html;
 });
 
+Handlebars.registerHelper('showVehicleFeatures', function(key, traits) {
+    // 'traits' are comma separated list of vehicle traits.
+    console.log("showVehicleFeatures: " + traits);
+    if (!traits || traits==="") {
+        return "";
+    }
+    const vehicle = key?.actor?.system?.vehicle;
+    const type = vehicle.type;
+
+    let html = "";
+    let list = traits.split(",");
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let trait = list[i].trim();
+
+            let legal = false;
+            let required = false;
+            if (CONFIG.MGT2.VEHICLES.TYPE[type]?.traits?.includes(trait)) {
+                required = legal = true;
+            } else if (CONFIG.MGT2.VEHICLES.TYPE[type]?.allowedFeatures?.includes(trait)) {
+                legal = true;
+            }
+
+            html += `<span class='pill trait-pill ${legal?"":"invalid-pill"}' data-feature-id='${trait}' title='${game.i18n.localize("MGT2.Vehicle.Feature."+trait)}'>`;
+            html += `&nbsp;${game.i18n.localize("MGT2.Vehicle.Feature." + trait)} `;
+            if (key.owner) {
+                if (!required) {
+                    html += `&nbsp;<i class="fas fa-xmark" data-feature-id="${trait}" data-action="removeFeature"> </i>`;
+                } else {
+                    html + `&nbsp;`;
+                }
+            } else {
+                html += "&nbsp;";
+            }
+            html += "</span>";
+        }
+    }
+
+    return html;
+});
+
+/*
 Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
     // 'traits' are comma separated list of vehicle traits.
     console.log("showVehicleTraits: " + traits);
@@ -2303,37 +2345,16 @@ Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
     for (let i in list) {
         if (list[i].length > 0) {
             let trait = list[i].trim();
-            let value = null;
-            if (trait.indexOf(" ") > -1) {
-                value = trait.split(" ")[1].trim();
-                trait = trait.split(" ")[0].trim();
-            }
-            html += `<span class='pill trait-pill' data-trait-id='${trait}' title='${game.i18n.localize("MGT2.Vehicle.Trait."+trait)}'>`;
-            if (key.owner) {
-                value = parseInt(value);
-                if (value > -12) {
-                    html += `<i class="fas fa-minus trait-minus"> </i>`;
-                }
-                if (value < 12) {
-                    html += `<i class="fas fa-plus trait-plus"> </i>`;
-                }
-            }
+
+            html += `<span class='pill trait-pill ${legal?"":"invalid-pill"}' title='${game.i18n.localize("MGT2.Vehicle.Trait."+trait)}'>`;
             html += `&nbsp;${game.i18n.localize("MGT2.Vehicle.Trait." + trait)} `;
-            if (value) {
-                html += `${(value>=0)?"+":""}${value} `;
-            }
-            if (key.owner) {
-                html += `&nbsp;<i class="fas fa-xmark" data-trait-id="${trait}" data-action="removeTrait"> </i>`;
-            } else {
-                html += "&nbsp;";
-            }
             html += "</span>";
         }
     }
 
     return html;
 });
-
+*/
 
 Handlebars.registerHelper('showSpacecraftHullTraits', function(key, traits) {
     let html = "";
