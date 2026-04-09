@@ -2309,9 +2309,7 @@ Handlebars.registerHelper('showVehicleFeatures', function(key, traits) {
 
             let legal = false;
             let required = false;
-            if (CONFIG.MGT2.VEHICLES.TYPE[type]?.traits?.includes(trait)) {
-                required = legal = true;
-            } else if (CONFIG.MGT2.VEHICLES.TYPE[type]?.allowedFeatures?.includes(trait)) {
+            if (CONFIG.MGT2.VEHICLES.TYPE[type]?.allowedFeatures?.includes(trait)) {
                 legal = true;
             }
 

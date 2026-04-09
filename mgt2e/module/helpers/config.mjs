@@ -482,9 +482,11 @@ MGT2.VEHICLES = {
     },
     FEATURES: {
         "aerodyne": { tl: 7, conflict: [ "foldingWings", "ornithopter" ], speed: +1, shipping: 0.5, cost: +30 },
-        "AFV": { tl: 5, conflict: [ "hydrofoil", "openTopped" ], minSize: 20, speed: -1, cost: +100 },
+        "AFV": { tl: 5, conflict: [ "hydrofoil", "openTopped" ], traits: [ "AFV", "offRoader" ],
+            minSize: 20, speed: -1, cost: +100
+        },
         "agile": { tl: 1, conflict: [ "railRider" ], agility: +1, cost: +100 },
-        "ATV": { tl: 0, conflict: [ "offRiader", "railRider", "tracks" ], cost: +30 },
+        "ATV": { tl: 0, conflict: [ "offRiader", "railRider", "tracks" ], traits: [ "ATV"], cost: +30 },
         "biotech": { tl: 0 },
         "fast": { tl: 0, conflict: [ "slow", "supersonic" ], speed: +1, range: 0.5, cost: +100 },
         "floats": { tl: 4, speed: -1, cost: +20 },
@@ -497,14 +499,16 @@ MGT2.VEHICLES = {
         "locomotive": { tl: 3, minSize: 20, agility: -1, cost: +50, traits: [ "unresponsive" ] },
         "monowheel": { tl: 9, conflicts: [ "tracks" ], agility: +2, speed: +1, shipping: 0.5, cost: +200 },
         "multiLegged": { tl: 8, agility: +1, cost: +100 },
-        "offRoader": { tl: 0, conflicts: [ "ATV", "railRider", "tracks"], cost: +15 },
+        "offRoader": { tl: 0, conflicts: [ "ATV", "railRider", "tracks"], traits: [ "offRoader" ], cost: +15 },
         "openFrame": { tl: 0, conflicts: [ "hypersonic", "openTopped", "supersonic" ],
             minSize: 1, maxSize: 3, agility: +1, speed: +1, range: 0.8, shipping: 0.5, cost: -30
         },
-        "openTopped": { tl: 0, conflicts: [ "AFV", "hypersonic", "openFrame", "supersonic" ], cost: -15 },
+        "openTopped": { tl: 0, conflicts: [ "AFV", "hypersonic", "openFrame", "supersonic" ],
+            traits: [ "openTopped"], cost: -15
+        },
         "ornithopter": { tl: 8, conflicts: [ "aerodyne" ], agility: +1, speed: -1, range: 0.75, shipping: 0.75, cost: +20 },
         "railRider": { tl: 1, conflicts: [ "agile", "ATV", "offRoader", "tracked" ], agility: -2, speed: +1, cost: +50 },
-        "responsive": { tl: 0, conflicts: [ "unresponsive" ], range: 0.75, cost: +100 },
+        "responsive": { tl: 0, conflicts: [ "unresponsive" ], traits: [ "reponsive" ], range: 0.75, cost: +100 },
         "rigid": { tl: 4, range: 1.5, shipping: 5, cost: +200 },
         "slow": { tl: 0, conflicts: [ "fast" ], speed: -1, range: 1.5, cost: -25 },
         "smartWheels": { tl: 9, agility: +1, range: 1.1, cost: +130 },
@@ -514,7 +518,7 @@ MGT2.VEHICLES = {
             speedBand: "supersonic", range: 0.8, cost: +200
         },
         "tiltEngines": { tl: 8, speed: -1, cost: +100, traits: [ "VTOL" ] },
-        "tracks": { tl: 5, conflicts: [ "ATV", "monowheel", "offRoader" ], speed: -1, cost: +100 },
+        "tracks": { tl: 5, conflicts: [ "ATV", "monowheel", "offRoader" ], traits: [ "tracked"], speed: -1, cost: +100 },
         "tunneller": { tl: 7, conflicts: [ "streamlined" ], minSize: 20, agility: -1, speed: -1, cost: +800 },
         "unresponsive": { tl: 0, conflicts: [ "locomotive", "responsive" ], cost: -25, traits: [ "unresponsive "]}
     },
