@@ -1,5 +1,22 @@
 # Release Notes
 
+
+# 0.19.1 (Beta)
+
+* Equipment lists now have an option to sort by type of the item, rather than by status.
+  Styling of the equipment items is now more pronounced to show difference between owned
+  but not carried, carried and equipped items.
+* Fix bug where DM was applied twice for starship attacks.
+* Trade zones (Amber/Red) are now correctly calculated in freight costs.
+* Amber and Red zones can now be added (again) to sale DM modifiers for cargo items.
+* Fixed the sale/purchase DMs for some cargo items in the compendium, which were wrong.
+* Fixes to i18n strings for cargo items.
+* Improved results of "send to chat" for cargo items.
+* Allow item-to-chat to be used when item doesn't have edit permission.
+* Improved look and behaviour of world sheets for non-owners.
+* Fighter squadrons can now make attacks.
+* World trade codes can now be set manually.
+
 # 0.19.0 (Beta)
 
 * Add 'hidden' flag to world factions, so that they can be hidden from players in the same

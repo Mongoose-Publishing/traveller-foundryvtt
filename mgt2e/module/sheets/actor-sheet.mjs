@@ -55,6 +55,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         // Use a safe clone of the actor data for further operations.
         const actorData = context.actor.system;
         const type = context.actor.type;
+        context.isEditable = this.isEditable;
 
         // Add the actor's data to context.data for easier access, as well as flags.
         context.system = actorData;
@@ -121,9 +122,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             if (actorData.settings.autoAge) {
                 actorData.sophont.age = parseInt(game.settings.get("mgt2e", "currentYear")) - actorData.birthYear;
             }
-            console.log("NumTerms: " + numTerms);
             if (actorData.terms !== numTerms) {
-                console.log("Setting number of terms to " + numTerms);
                 context.actor.safeUpdate({"system.terms": numTerms});
             }
         } else if (type === 'npc') {
@@ -630,6 +629,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         const terms = [];
         const associates = [];
         const powers = [];
+        const augments = [];
+        const software = [];
 
         let weight = 0;
         let skillNeeded = -3;
@@ -673,6 +674,10 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 powers.push(i);
             } else if (i.type === "associate") {
                 associates.push(i);
+            } else if (i.type === "software") {
+                software.push(i);
+            } else if (i.type === "augment") {
+                augments.push(i);
             } else {
                 // Everything else.
                 gear.push(i);
@@ -725,6 +730,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         context.terms = terms;
         context.powers = powers;
         context.associates = associates;
+        context.software = software;
+        context.augments = augments;
 
         context.GEAR = context.gear;
         context.WEAPONS = context.weapons;

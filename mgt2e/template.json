@@ -72,6 +72,7 @@
             "resetOnRoll": false,
             "columns": 3,
             "lockCharacteristics": false,
+            "sortByCategory": false,
             "lockSkills": false,
             "autoAge":  true,
             "autoHits": true

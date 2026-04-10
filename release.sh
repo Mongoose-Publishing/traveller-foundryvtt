@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 function die {
     echo $*
     exit 1
@@ -17,15 +16,24 @@ then
   . ./.env
 fi
 
+# Sanity check
+cat mgt2e/system.json | jq .version || die "Invalid json format"
+
 version=$(cat mgt2e/system.json | jq -r .version)
 build=$(echo $version | cut -d "." -f 4 | sed 's/[^0-9]//g')
 patch=$(echo $version | cut -d "." -f 3)
 minor=$(echo $version | cut -d "." -f 2)
 major=$(echo $version | cut -d "." -f 1)
 
+re="^[0-9]+$"
+[[ $major =~ $re ]] || die "Version number is not a number"
+[[ $minor =~ $re ]] || die "Version number is not a number"
+[[ $patch =~ $re ]] || die "Version number is not a number"
+[[ $build =~ $re ]] || die "Version number is not a number"
+
 dev=0
 LOCAL=no
-while getopts "LMmpsbS" opt
+while getopts "LMmpsbSv:" opt
 do
   case "${opt}" in
     L)
@@ -59,6 +67,9 @@ do
     b)
       branch=1
       ;;
+    v)
+      FOUNDRY_VERSION=$OPTARG
+      ;;
     *)
       echo "Unknown option"
       exit 1
@@ -75,7 +86,6 @@ then
   exit 1
 fi
 version=${major}.${minor}.${patch}
-
 
 # Build the binary db files. Export to json, clean, then rebuild.
 ./mkpacks unpack || die "Unable to unpack compendiums"
@@ -95,6 +105,8 @@ release=$(git branch --show-current)
 RELEASE_DOWNLOAD_URL="https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/${release}/release/mongoose-traveller.zip"
 RELEASE_MANIFEST_URL="https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/release/system.json"
 RELEASE_URL="https://github.com/Mongoose-Publishing/traveller-foundryvtt/"
+
+sed -i "s#\"maximum\": .*#\"maximum\": $FOUNDRY_VERSION#" mgt2e/system.json
 
 # Zip up system archive, minus the source json.
 if [ $LOCAL = "yes" ]
