@@ -255,6 +255,27 @@ export class MgT2Actor extends Actor {
       actorData.system.vehicle.speed = speedBand;
       actorData.system.vehicle.range = range;
 
+      actorData.system.vehicle.traits = "";
+      if (typeData.traits && typeData.traits.length > 0) {
+          for (let trait of typeData.traits) {
+              console.log("Type Trait: " + trait);
+              actorData.system.vehicle.traits += ","+trait;
+          }
+      }
+      for (let feature of actorData.system.vehicle.features.split(",")) {
+          console.log(feature);
+          if (!feature || !CONFIG.MGT2.VEHICLES.FEATURES[feature]) {
+              continue;
+          }
+          const fData = CONFIG.MGT2.VEHICLES.FEATURES[feature];
+          if (fData.traits && fData.traits.length > 0) {
+              for (let trait of fData.traits) {
+                  actorData.system.vehicle.traits += "," + trait;
+              }
+          }
+      }
+      actorData.system.vehicle.traits = actorData.system.vehicle.traits.replaceAll(/^,/g, "");
+
     }
 
     /**

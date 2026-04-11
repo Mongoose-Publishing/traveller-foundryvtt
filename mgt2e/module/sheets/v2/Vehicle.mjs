@@ -113,9 +113,21 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         if (CONFIG.MGT2.VEHICLES.TYPE[this.document.system.vehicle.type]) {
             let allowedFeatures = CONFIG.MGT2.VEHICLES.TYPE[this.document.system.vehicle.type].allowedFeatures;
             if (allowedFeatures) {
-                for (let t in allowedFeatures) {
-                    if (this.document.system.vehicle?.features?.indexOf(allowedFeatures[t]) === -1) {
-                        context.SELECT_FEATURES[allowedFeatures[t]] = game.i18n.localize("MGT2.Vehicle.Feature." + allowedFeatures[t]);
+                console.log("FEATURES: " + this.document.system.vehicle?.features);
+                for (let f of allowedFeatures) {
+                    console.log(f);
+                    let conflict = false;
+                    if (CONFIG.MGT2.VEHICLES.FEATURES[f]?.conflicts) {
+                        for (let c of CONFIG.MGT2.VEHICLES.FEATURES[f].conflicts) {
+                            console.log("  - " + c);
+                            if (this.document.system.vehicle?.features?.indexOf(c) > -1) {
+                                conflict = true;
+                                continue;
+                            }
+                        }
+                    }
+                    if (!conflict && this.document.system.vehicle?.features?.indexOf(f) === -1) {
+                        context.SELECT_FEATURES[f] = game.i18n.localize("MGT2.Vehicle.Feature." + f);
                     }
                 }
             }

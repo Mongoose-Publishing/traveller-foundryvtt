@@ -1619,6 +1619,17 @@
   "MGT2.Vehicle.Trait.unresponsive": "Unresponsive",
   "MGT2.Vehicle.Trait.VTOL": "VTOL",
 
+  "MGT2.Vehicle.Power.unpowered": "Unpowered",
+  "MGT2.Vehicle.Power.muscle": "Muscle",
+  "MGT2.Vehicle.Power.wind": "Wind",
+  "MGT2.Vehicle.Power.grid": "Grid",
+  "MGT2.Vehicle.Power.beamed": "Beamed",
+  "MGT2.Vehicle.Power.fission": "Fission",
+  "MGT2.Vehicle.Power.fusion": "Fusion",
+  "MGT2.Vehicle.Power.antimatter": "Anti-Matter",
+  "MGT2.Vehicle.Power.fusionPlus": "Fusion+",
+  "MGT2.Vehicle.Power.solar": "Solar",
+
   "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
   "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",
   "MGT2.Dialog.EmbarkPassengers": "Embark Passengers",

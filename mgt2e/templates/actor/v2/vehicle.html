@@ -89,6 +89,10 @@
                 </div>
 
                 <div class="resource flex-group-left">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.TraitsTitle'}}</label>
+                    <div class="pill-container">
+                        {{{showVehicleTraits . system.vehicle.traits}}}
+                    </div>
                     <label class="field-label">{{localize 'MGT2.Vehicle.Speed'}}</label>
                     <span>{{system.vehicle.speed}}</span>
                 </div>

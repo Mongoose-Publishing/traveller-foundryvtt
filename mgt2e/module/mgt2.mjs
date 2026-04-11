@@ -2331,7 +2331,6 @@ Handlebars.registerHelper('showVehicleFeatures', function(key, traits) {
     return html;
 });
 
-/*
 Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
     // 'traits' are comma separated list of vehicle traits.
     console.log("showVehicleTraits: " + traits);
@@ -2344,7 +2343,7 @@ Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
         if (list[i].length > 0) {
             let trait = list[i].trim();
 
-            html += `<span class='pill trait-pill ${legal?"":"invalid-pill"}' title='${game.i18n.localize("MGT2.Vehicle.Trait."+trait)}'>`;
+            html += `<span class='pill trait-pill' title='${game.i18n.localize("MGT2.Vehicle.Trait."+trait)}'>`;
             html += `&nbsp;${game.i18n.localize("MGT2.Vehicle.Trait." + trait)} `;
             html += "</span>";
         }
@@ -2352,7 +2351,7 @@ Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
 
     return html;
 });
-*/
+
 
 Handlebars.registerHelper('showSpacecraftHullTraits', function(key, traits) {
     let html = "";
