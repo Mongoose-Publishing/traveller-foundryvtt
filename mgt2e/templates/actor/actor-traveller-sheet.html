@@ -12,7 +12,7 @@
                         {{#if (isChaShown ../system key)}}
                             <div class="resource flex-group-center">
                                 <label for="system.damage.{{key}}" class="resource-label">{{key}}</label>
-                                <input class="writable" type="text" name="system.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
+                                <input class="writable hits-state-{{dmg.state}}" type="text" name="system.damage.{{key}}.value" value="{{dmg.value}}" data-dtype="Number"/>
                             </div>
                         {{/if}}
                     {{/each}}

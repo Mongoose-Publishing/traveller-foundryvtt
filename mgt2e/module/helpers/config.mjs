@@ -840,6 +840,7 @@ MGT2.getDefaultSkills = function() {
 
 MGT2.EFFECT_TYPES = {
   "CHA_AUG": "chaAug",
+  "CHA_BASE": "chaBase",
   "CHA_DM": "chaDM",
   "CHA_BOON": "chaBoon",
   "CHA_BANE": "chaBane",
@@ -851,6 +852,7 @@ MGT2.EFFECT_TYPES = {
 
 MGT2.EFFECTS = {
   "chaAug": { "targets": "char", "value": true, "property": "augment", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
+  "chaBase": { "targets": "char", "value": true, "property": "value", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "chaDM": { "targets": "char", "value": true, "property": "augdm", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "chaBoon": { "targets": "char", "value": false, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE },
   "chaBane":  { "targets": "char", "value": false, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE },
