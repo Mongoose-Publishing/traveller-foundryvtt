@@ -134,7 +134,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Equipment lists on Traveller/NPC sheets can now be sorted by type as well as by status.</p></li><li><p>Styling of items now changes based on owned/carried/equipped status.</p></li><li><p>Fix bug where starship attack DM was being applied twice.</p></li><li><p>Trade Zones (Amber/Red) can now be added into Sales/Purchase DMs</p></li><li><p>Trade Zones are now factored into the sale/purchase cost of trade goods.</p></li><li><p>Fixed some sale/purchase DMs on trade goods included into the compendium pack.</p></li><li><p>Fixes for the item-to-chat action. Works now if player doesn't have edit permission on the item, improved display of cargo items sent to chat and tidied up i18n strings for cargo.</p></li><li><p>Improved look and behaviour of world sheets for non-owners.</p></li><li><p>Fighter squadrons can now make attacks.</p></li><li><p>Trade Codes can now be set manually on worlds.</p></li></ul><p></p>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>The 'Characteristic Augment' active effect has been split into \"Characteristic Bonus' and 'Characteristic Base'. The former is the old effect renamed, and now does not affect how much damage can be taken. 'Characteristic Base' affects the base value of the characteristic, and does change how much damage can be taken.</p></li><li><p>Damage values are now coloured, with yellow indicating more than half damage, and red indicating that characteristic is at maximum damage.</p></li><li><p>Stars and planets have been moved to the bottom of the Data tab for world sheets.</p></li><li><p>Improved handling of the situation where an item with a component is moved to another actor's sheet, but the component is not moved.</p></li></ul><p></p>"
       },
       "video": {
         "controls": true,
@@ -153,7 +153,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1775636734019,
+        "modifiedTime": 1775995564417,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
