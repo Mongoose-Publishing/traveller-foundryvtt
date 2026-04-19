@@ -523,7 +523,7 @@ MGT2.VEHICLES = {
         "unresponsive": { tl: 0, conflicts: [ "locomotive", "responsive" ], cost: -25, traits: [ "unresponsive "]}
     },
     TRAITS: {
-        "AFV": {},
+        "AFV": { armour: 3 },
         "ATV": {},
         "offRoader": {},
         "openVehicle": {},
@@ -534,10 +534,12 @@ MGT2.VEHICLES = {
         "VTOL": {}
     },
     POWER: {
-        "unpowered": { tl: 0, spaces: +5, speedBand: "stopped", cost: -80 },
-        "muscle": {},
-        "wind": {},
-        "grid": {},
+        "unpowered": { tl: 0, spaces: +50, speedBand: "stopped", cost: -80 },
+        "muscle": { tl: 0, spaces: +40, speedBand: "idle", cost: -70, secondary: { spaces: -5, costPerSpace: 100 } },
+        "wind": { tl: 1, spaces: +20, speedBand: "idle", cost: -60, shipping: 2, secondary: { spaces: -25, costPerSpace: 200 } },
+        "wind5": { tl: 5, spaces: +20, speedBand: "verySlow", cost: -60, shipping: 2, secondary: { spaces: -25, costPerSpace: 200 } },
+        "wind9": { tl: 9, spaces: +20, speedBand: "slow", cost: -60, shipping: 2, secondary: { spaces: -25, costPerSpace: 200 } },
+        "grid": { tl: 4, spaces: +40, cost: 100, secondary: { spaces: -10, cost: 100 } },
         "beamed": {},
         "fission": {},
         "fusion": {},

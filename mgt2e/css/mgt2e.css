@@ -26,6 +26,16 @@
   margin-top: 0;
 }
 
+.mgt2e div.actor-header {
+  width: 100%;
+}
+
+.mgt2e .profile-img {
+  width: 120px;
+  height: 120px;
+  float: left;
+}
+
 .mgt2e div.actor-left {
   flex: 0 0 170px;
   width: 170px;

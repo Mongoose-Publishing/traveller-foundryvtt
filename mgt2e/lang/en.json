@@ -658,12 +658,24 @@
   "MGT2.Vehicle.Sheet.Passengers": "Passengers",
   "MGT2.Vehicle.Sheet.Cargo": "Cargo",
   "MGT2.Vehicle.Sheet.Shipping": "Shipping",
+  "MGT2.Vehicle.Sheet.Comfort": "Comfort",
 
   "MGT2.Vehicle.Face.front": "Front",
   "MGT2.Vehicle.Face.rear": "Rear",
   "MGT2.Vehicle.Face.sides": "Side",
   "MGT2.Vehicle.Face.top": "Top",
   "MGT2.Vehicle.Face.bottom": "Bottom",
+
+  "MGT2.Vehicle.ComfortLevel.intolerable": "Intolerable",
+  "MGT2.Vehicle.ComfortLevel.uncomfortable": "Uncomfortable Seating",
+  "MGT2.Vehicle.ComfortLevel.basicSeating": "Basic Seating",
+  "MGT2.Vehicle.ComfortLevel.longDuration": "Long Duration Seating",
+  "MGT2.Vehicle.ComfortLevel.extendedSeating": "Extended Seating",
+  "MGT2.Vehicle.ComfortLevel.basicComfort": "Basic Comfort",
+  "MGT2.Vehicle.ComfortLevel.standardComfort": "Standard Comfort",
+  "MGT2.Vehicle.ComfortLevel.goodComfort": "Good Comfort",
+  "MGT2.Vehicle.ComfortLevel.excellentComfort": "Excellent Comfort",
+  "MGT2.Vehicle.ComfortLevel.luxuryComfort": "Luxury Comfort",
 
   "MGT2.TravellerSheet.SizeClass.small": "Small",
   "MGT2.TravellerSheet.SizeClass.medium": "Medium",
@@ -1567,7 +1579,12 @@
   "MGT2.Swarm.DeleteConfirm.Title": "Delete Swarm?",
   "MGT2.Swarm.DeleteConfirm.Text": "The Salvo/Squadrom and all its tokens will be deleted.",
 
-  "MGT2.VehicleSheet.Structure": "Structure",
+  "MGT2.Vehicle.Structure": "Structure",
+
+  "MGT2.VehicleTab.design": "Design",
+  "MGT2.VehicleTab.power": "Power",
+  "MGT2.VehicleTab.crew": "Crew",
+  "MGT2.VehicleTab.equipment": "Equipment",
 
   "MGT2.Vehicle.Type.aeroplane": "Aeroplane",
   "MGT2.Vehicle.Type.airship": "Airship",
@@ -1625,6 +1642,8 @@
   "MGT2.Vehicle.Power.unpowered": "Unpowered",
   "MGT2.Vehicle.Power.muscle": "Muscle",
   "MGT2.Vehicle.Power.wind": "Wind",
+  "MGT2.Vehicle.Power.wind5": "Wind (TL 5+)",
+  "MGT2.Vehicle.Power.wind9": "Wind (TL 9+)",
   "MGT2.Vehicle.Power.grid": "Grid",
   "MGT2.Vehicle.Power.beamed": "Beamed",
   "MGT2.Vehicle.Power.fission": "Fission",

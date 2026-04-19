@@ -197,6 +197,7 @@
         "range": 400,
         "crew": 1,
         "passengers": 0,
+        "comfort": 0,
         "cargo": 0,
         "shipping": 3
       }

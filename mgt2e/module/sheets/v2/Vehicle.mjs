@@ -28,16 +28,45 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
     };
 
     static PARTS = {
+        main: {
+            template: "systems/mgt2e/templates/actor/v2/vehicle.html"
+        },
         tabs: {
             template: "templates/generic/tab-navigation.hbs"
         },
-        main: {
-            template: "systems/mgt2e/templates/actor/v2/vehicle.html"
+        design: {
+            template: "systems/mgt2e/templates/actor/v2/vehicle-design.html",
+            scrollable: ['']
+        },
+        power: {
+            template: "systems/mgt2e/templates/actor/v2/vehicle-power.html",
+            scrollable: ['']
+        },
+        crew: {
+            template: "systems/mgt2e/templates/actor/v2/vehicle-crew.html",
+            scrollable: ['']
+        },
+        equipment: {
+            template: "systems/mgt2e/templates/actor/v2/vehicle-equipment.html",
+            scrollable: ['']
         },
         footer: {
             template: "systems/mgt2e/templates/actor/v2/footer.html"
         }
     };
+
+    static TABS = {
+        primary: {
+            tabs: [
+                { id: "design" },
+                { id: "power", icon: "systems/mgt2e/icons/tabs/power.svg" },
+                { id: "crew" },
+                { id: "equipment" },
+            ],
+            labelPrefix: "MGT2.VehicleTab",
+            initial: "design"
+        }
+    }
 
     static async #addFeature(event, target) {
         console.log("addFeature:");
@@ -96,7 +125,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             system: this.document.system,
             items: this.document.items,
             config: CONFIG.MGT2,
-            tabs: this._getTabs(options)
+            tabs: this._prepareTabs("primary")
         };
 
         await this._calculateTypes();
@@ -137,8 +166,25 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             context.SELECT_TECHLEVEL[tl] = tl;
         }
 
+        context.SELECT_POWER = {};
+        for (let p in CONFIG.MGT2.VEHICLES.POWER) {
+            context.SELECT_POWER[p] = game.i18n.localize(`MGT2.Vehicle.Power.${p}`);
+        }
+
         return context;
     }
+
+    _preparePartContext(partId, context) {
+        console.log(partId);
+        context.tab = context.tabs[partId];
+
+        if (!this.document.system.vehicle.primaryPower) {
+            this.document.system.vehicle.primaryPower = "unpowered";
+        }
+
+        return context;
+    }
+
 
     _onRender(context, options) {
         super._onRender(context, options);
@@ -159,7 +205,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         await this.document.update(formData.object);
     }
 
-    _getTabs(options) {
+    _getTabs2(options) {
         return "";
     }
 }
