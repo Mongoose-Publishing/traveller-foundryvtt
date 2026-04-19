@@ -92,10 +92,20 @@
                                            value="{{char.current}}"
                                            data-dtype="Number" readonly/> /
                                 {{/if}}
-                                <input class="characteristic-value writable"
-                                       type="number" min="0" max="20" step="1"
-                                       name="system.characteristics.{{key}}.value"
-                                       value="{{char.value}}" data-dtype="Number"/>
+                                {{#if (lookup (lookup ../actor.overrides.system.characteristics key) "value") }}
+                                    <input class="characteristic-readonly"
+                                           type="number" min="0" max="20" step="1"
+                                           name="system.characteristics.{{key}}.value"
+                                           value="{{char.value}}" readonly
+                                           title="{{localize 'MGT2.Effects.EffectLocked'}}"
+                                           data-dtype="Number"/>
+                                {{else}}
+                                    <input class="characteristic-value writable"
+                                           type="number" min="0" max="20" step="1"
+                                           name="system.characteristics.{{key}}.value"
+                                           value="{{char.value}}"
+                                           data-dtype="Number"/>
+                                {{/if}}
                             </div>
                             {{/if}}
                         {{/each}}

@@ -1035,7 +1035,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             const item = await fromUuid(span.data("itemId"));
             const richDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description);
             const content = {"item": item, "richDescription": richDescription}
-            const html = await renderTemplate("systems/mgt2e/templates/chat/item.html", content);
+            const html = await foundry.applications.handlebars.renderTemplate("systems/mgt2e/templates/chat/item.html", content);
             ChatMessage.create({ content: html})
         });
 

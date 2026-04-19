@@ -54,13 +54,13 @@ export class MgT2DamageDialog extends Application {
         this.DMG_DEX = parseInt(data.damage.DEX.value);
         this.DMG_END = parseInt(data.damage.END.value);
 
-        this.STR = parseInt(data.characteristics.STR.current);
-        this.DEX = parseInt(data.characteristics.DEX.current);
-        this.END = parseInt(data.characteristics.END.current);
+        this.STR = parseInt(data.characteristics.STR.value) - this.DMG_STR;
+        this.DEX = parseInt(data.characteristics.DEX.value) - this.DMG_DEX;
+        this.END = parseInt(data.characteristics.END.value) - this.DMG_END;
 
         // For historical reasons 'laser' is the damage type.
         if (data.characteristics[this.laser]) {
-            this.XXX = parseInt(data.characteristics[this.laser].current);
+            this.XXX = parseInt(data.characteristics[this.laser].value);
             this.XXX_VALUE = this.XXX;
             if (data.damage[this.laser]) {
                 this.DMG_XXX = parseInt(data.damage[this.laser].value);
@@ -70,6 +70,8 @@ export class MgT2DamageDialog extends Application {
                     value: 0
                 };
             }
+            this.XXX -= this.DMG_XXX;
+            this.XXX_VALUE = this.XXX;
         }
 
         let totalEND = parseInt(data.characteristics.END.value);

@@ -2536,3 +2536,15 @@ ol.actor-items li.item-status-owned {
 ol.actor-items li.item-status- {
   opacity: 0.65;
 }
+
+.hits-box input.hits-state-okay {
+
+}
+
+.hits-box input.hits-state-low {
+  background-color: #ffffd0;
+}
+
+.hits-box input.hits-state-zero {
+  background-color: #ffd0d0;
+}

@@ -1,5 +1,15 @@
 # Release Notes
 
+# 0.19.2 (Beta)
+
+* Change to how characteristic augments work. Cha Augment split into Cha Bonus, and Cha Base.
+  The former don't increase the hits for resisting damage (and what existing ones become),
+  the Cha Base ones increase the base characteristic and therefore number of hits.
+* If you have a Cha Base augment applied, then you can't edit the value of that characteristic.
+* Damage now displays yellow for over half damage, and red if the characteristic is fully used.
+* World sheets have moved the list of stars and planets to the bottom of the world data tab.
+* Better coping with the situation where an item with a component is deleted or moved to another
+  actor.
 
 # 0.19.1 (Beta)
 

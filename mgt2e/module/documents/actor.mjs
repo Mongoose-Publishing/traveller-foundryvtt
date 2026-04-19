@@ -324,12 +324,21 @@ export class MgT2Actor extends Actor {
         }
 
         if (sys.damage && sys.hits) {
-            let hits = sys.characteristics.STR.current + sys.characteristics.DEX.current +
-                sys.characteristics.END.current;
             let maxHits = sys.characteristics.STR.value + sys.characteristics.DEX.value +
                 sys.characteristics.END.value;
+            let totalDmg = sys.damage["STR"].value + sys.damage["DEX"].value + sys.damage["END"].value;
+            for (let c in sys.damage) {
+                if (sys.damage[c].value >= sys.characteristics[c].value) {
+                    sys.damage[c].state = "zero";
+                } else if (sys.damage[c].value >= sys.characteristics[c].value / 2) {
+                    sys.damage[c].state = "low";
+                } else {
+                    sys.damage[c].state = "okay";
+                }
+            }
+            if (isNaN(totalDmg)) totalDmg = 0;
 
-            sys.hits.value = hits;
+            sys.hits.value = Math.max(0, maxHits - totalDmg);
             sys.hits.max = maxHits;
         }
         this._prepareEncumbrance(actor);
