@@ -105,3 +105,17 @@ div.pill-container {
   background-color: #909090;
   color: #404040;
 }
+
+.mgt2e .vehicle-type {
+  display: inline-block;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.mgt2e .vehicle-traits {
+  display: inline-block;
+  float: right;
+  font-weight: bold;
+  font-size: large;
+  padding-top: 0.5em;
+}

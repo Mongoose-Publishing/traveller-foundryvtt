@@ -11,8 +11,13 @@
                 <h1 class="actor-name shadow">
                     <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
                 </h1>
-                <h4>{{localize (concat "MGT2.Vehicle.Type." system.vehicle.type)}}</h4>
+                <div class="vehicle-type">{{localize (concat "MGT2.Vehicle.Type." system.vehicle.type)}}</div>
+                <!-- Traits -->
+                <div class="vehicle-traits">
+                    {{{showVehicleTraits . system.vehicle.traits}}}
+                </div>
 
+                <hr style="clear: right"/>
 
                 <div class="grid grid-5col">
                     <div class="resource flex-group-center">

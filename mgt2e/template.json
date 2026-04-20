@@ -180,6 +180,8 @@
         "traits": "",
         "features": "",
         "tl": 7,
+        "primaryPower": "unpowered",
+        "secondaryPower": "unpowered",
         "armour": {
           "base": 0,
           "front" : 0,

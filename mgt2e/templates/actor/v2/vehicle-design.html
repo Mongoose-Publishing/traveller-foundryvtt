@@ -1,74 +1,85 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="design">
 
-    <h4>
-        <select class="field-value" name="system.vehicle.type">
-            {{selectOptions TYPE_SELECT selected=system.vehicle.type}}
-        </select>
-    </h4>
+    <div class="grid grid-3col">
+        <div>
+            <h4>Core Design</h4>
 
-    <div>
-        <div class="shadow grid grid-5col">
-            <div class="resource flex-group-left">
-                <label for="system.vehicle.tl" class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+            <select class="field-value" name="system.vehicle.type">
+                {{selectOptions TYPE_SELECT selected=system.vehicle.type}}
+            </select>
 
-                <select name="system.vehicle.tl">
-                    {{selectOptions SELECT_TECHLEVEL selected=system.vehicle.tl }}
-                </select>
-            </div>
-            <div class="resource flex-group-left">
-                <label for="system.vehicle.spaces" class="field-label">{{localize 'MGT2.Vehicle.Spaces'}}</label>
-                <input class="field-value writable" name="system.vehicle.spaces" type="text" value="{{system.vehicle.spaces}}"/>
-            </div>
-            <div class="resource flex-group-left">
-                <label for="system.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.Hits'}}</label>
-                <input class="field-value writable" name="system.hits.max" type="text" value="{{system.hits.max}}"/>
-            </div>
-            <div class="resource flex-group-left">
-                <label for="system.vehicle.agility" class="field-label">{{localize 'MGT2.Vehicle.Agility'}}</label>
-                <input class="field-value writable" name="system.vehicle.agility" type="text" value="{{system.vehicle.agility}}"/>
-            </div>
-            <div class="resource flex-group-left">
-                <label for="system.vehicle.cost" class="field-label">{{localize 'MGT2.Vehicle.Cost'}}</label>
-                <input class="field-value writable" name="system.vehicle.cost" type="text" value="{{system.vehicle.cost}}"/>
+            <label>{{localize 'MGT2.Vehicle.FeaturesTitle'}}</label>
+            <select class="field-value" data-action="addFeature" data-label="Add Feature">
+                {{selectOptions SELECT_FEATURES}}
+            </select>
+            <div class="pill-container">
+                {{{showVehicleFeatures . system.vehicle.features}}}
             </div>
 
-            <div class="resource flex-group-left">
-                <label for="system.vehicle.crew" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Crew'}}</label>
-                <input class="field-value writable" name="system.vehicle.crew" type="text" value="{{system.vehicle.crew}}"/>
-            </div>
-            <div class="resource flex-group-left">
-                <label for="system.vehicle.passengers" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Passengers'}}</label>
-                <input class="field-value writable" name="system.vehicle.passengers" type="text" value="{{system.vehicle.passengers}}"/>
-            </div>
-            <div class="resource flex-group-left">
-                <label for="system.vehicle.cargo" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Cargo'}}</label>
-                <input class="field-value writable" name="system.vehicle.cargo" type="text" value="{{system.vehicle.cargo}}"/>
-            </div>
-            <div class="resource flex-group-left">
-                <label for="system.vehicle.shipping" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Shipping'}}</label>
-                <input class="field-value writable" name="system.vehicle.shipping" type="text" value="{{system.vehicle.shipping}}"/>
-            </div>
-        </div>
+            <div class="shadow grid grid-3col">
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.tl" class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
 
-        <div class="shadow grid grid-3col">
-            <div class="resource flex-group-left grid-span-2">
-                <label class="field-label">{{localize 'MGT2.Vehicle.FeaturesTitle'}}</label>
-                <select data-action="addFeature" data-label="Add Feature">
-                    {{selectOptions SELECT_FEATURES}}
-                </select>
-                <div class="pill-container">
-                    {{{showVehicleFeatures . system.vehicle.features}}}
+                    <select name="system.vehicle.tl">
+                        {{selectOptions SELECT_TECHLEVEL selected=system.vehicle.tl }}
+                    </select>
+                </div>
+
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.spaces" class="field-label">{{localize 'MGT2.Vehicle.Spaces'}}</label>
+                    <input class="field-value writable" name="system.vehicle.spaces" type="text" value="{{system.vehicle.spaces}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="system.hits.max" class="field-label">{{localize 'MGT2.TravellerSheet.Hits'}}</label>
+                    <input class="field-value writable" name="system.hits.max" type="text" value="{{system.hits.max}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.agility" class="field-label">{{localize 'MGT2.Vehicle.Agility'}}</label>
+                    <input class="field-value writable" name="system.vehicle.agility" type="text" value="{{system.vehicle.agility}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.cost" class="field-label">{{localize 'MGT2.Vehicle.Cost'}}</label>
+                    <input class="field-value writable" name="system.vehicle.cost" type="text" value="{{system.vehicle.cost}}"/>
+                </div>
+
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.crew" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Crew'}}</label>
+                    <input class="field-value writable" name="system.vehicle.crew" type="text" value="{{system.vehicle.crew}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.passengers" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Passengers'}}</label>
+                    <input class="field-value writable" name="system.vehicle.passengers" type="text" value="{{system.vehicle.passengers}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.cargo" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Cargo'}}</label>
+                    <input class="field-value writable" name="system.vehicle.cargo" type="text" value="{{system.vehicle.cargo}}"/>
+                </div>
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.shipping" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Shipping'}}</label>
+                    <input class="field-value writable" name="system.vehicle.shipping" type="text" value="{{system.vehicle.shipping}}"/>
                 </div>
             </div>
 
-            <div class="resource flex-group-left">
-                <label class="field-label">{{localize 'MGT2.Vehicle.TraitsTitle'}}</label>
-                <div class="pill-container">
-                    {{{showVehicleTraits . system.vehicle.traits}}}
-                </div>
-                <label class="field-label">{{localize 'MGT2.Vehicle.Speed'}}</label>
-                <span>{{system.vehicle.speed}}</span>
-            </div>
         </div>
+
+        <div>
+            <h4>Customisations</h4>
+
+            <label>{{localize 'MGT2.Vehicle.PrimaryPower'}}</label>
+            <select class="field-value" name="system.vehicle.primaryPower">
+                {{selectOptions SELECT_POWER selected=system.vehicle.primaryPower}}
+            </select>
+
+            <label>{{localize 'MGT2.Vehicle.SecondaryPower'}}</label>
+            <select class="field-value" name="system.vehicle.secondaryPower">
+                {{selectOptions SELECT_POWER selected=system.vehicle.secondaryPower}}
+            </select>
+
+        </div>
+
+        <div>
+            <h4>Options</h4>
+        </div>
+
     </div>
 </section>

@@ -29,7 +29,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
     static PARTS = {
         main: {
-            template: "systems/mgt2e/templates/actor/v2/vehicle.html"
+            template: "systems/mgt2e/templates/actor/v2/vehicle.html",
+            scrollable: ['']
         },
         tabs: {
             template: "templates/generic/tab-navigation.hbs"
@@ -168,8 +169,37 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         context.SELECT_POWER = {};
         for (let p in CONFIG.MGT2.VEHICLES.POWER) {
+            if (CONFIG.MGT2.VEHICLES.POWER[p].conflicts?.includes(this.document.system.vehicle.type)) {
+                continue;
+            }
             context.SELECT_POWER[p] = game.i18n.localize(`MGT2.Vehicle.Power.${p}`);
         }
+
+        const spaces = parseInt(this.document.system.vehicle.spaces);
+        if (spaces >= 2000) {
+            this.document.system.vehicle.size = 6;
+            context.sizeLabel = "massive";
+        } else if (spaces >= 1000) {
+            this.document.system.vehicle.size = 5;
+            context.sizeLabel = "huge";
+        } else if (spaces >= 200) {
+            this.document.system.vehicle.size = 4;
+            context.sizeLabel = "huge";
+        } else if (spaces >= 100) {
+            this.document.system.vehicle.size = 3;
+            context.sizeLabel = "heavy";
+        } else if (spaces >= 20) {
+            this.document.system.vehicle.size = 2;
+            context.sizeLabel = "heavy";
+        } else if (spaces >= 4) {
+            this.document.system.vehicle.size = 1;
+            context.sizeLabel = "light";
+        } else {
+            this.document.system.vehicle.size = 0;
+            context.sizeLabel = "small";
+        }
+
+        let spaceRemaining = spaces;
 
         return context;
     }

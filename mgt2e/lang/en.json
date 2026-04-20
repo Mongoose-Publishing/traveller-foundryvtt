@@ -1585,6 +1585,8 @@
   "MGT2.VehicleTab.power": "Power",
   "MGT2.VehicleTab.crew": "Crew",
   "MGT2.VehicleTab.equipment": "Equipment",
+  "MGT2.Vehicle.PrimaryPower": "Primary Power",
+  "MGT2.Vehicle.SecondaryPower": "Secondary Power",
 
   "MGT2.Vehicle.Type.aeroplane": "Aeroplane",
   "MGT2.Vehicle.Type.airship": "Airship",
