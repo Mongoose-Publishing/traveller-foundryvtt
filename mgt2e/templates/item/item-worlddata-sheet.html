@@ -1,11 +1,15 @@
-<form class="{{cssClass}} world-data" autocomplete="off">
+<form class="{{cssClass}} world-data flexcol" autocomplete="off">
     <div class="item=sheet">
-        <section class="world-data-sheet">
+        <section class="world-data-sheet grid grid-2col">
+            <select name="system.world.datatype" class="world-data-type">
+                {{selectOptions TYPE_SELECT selected=system.world.datatype}}
+            </select>
             <h1 class="charname">
-                <select name="system.world.datatype" class="world-data-type">
-                    {{selectOptions TYPE_SELECT selected=system.world.datatype}}
-                </select>
                 <input class="world-data-name" name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+                <span class="item-to-chat" data-item-id="{{item.uuid}}"
+                      title="{{localize 'MGT2.Item.ClickToChat'}}">
+                    <i class="fas fa-comment"></i>
+                </span>
             </h1>
         </section>
 

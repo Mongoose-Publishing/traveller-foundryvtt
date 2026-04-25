@@ -541,6 +541,8 @@ Tools.macroExecutionEnricher = function(match, options) {
             return Tools.actorInlineDisplay(macroName);
         } else if (type === "/item") {
             return Tools.itemInlineDisplay(macroName, argsString, title, flavor);
+        } else if (type === "/upp") {
+            return Tools.uppInlineDisplay(macroName, argsString, title, flavor);
         } else {
             console.log(type);
         }
@@ -561,6 +563,86 @@ Tools.blockInline = async function(argsString) {
         const value = match[2] ?? match[3];
         args[key] = value;
     }
+    return args;
+}
+
+Tools.getHexFromUpp = function(upp) {
+    let data = { str: 7, dex: 7, end: 7, int: 7, edu: 7, soc: 7 }
+
+    if (upp && upp.length >= 3) {
+        data.str = parseInt(upp.substring(0, 1), 16);
+        data.dex = parseInt(upp.substring(1, 2), 16);
+        data.end = parseInt(upp.substring(2, 3), 16);
+    }
+    if (upp && upp.length >= 6) {
+        data.int = parseInt(upp.substring(3, 4), 16);
+        data.edu = parseInt(upp.substring(4, 5), 16);
+        data.soc = parseInt(upp.substring(5, 6), 16);
+    }
+
+    return data;
+}
+
+Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
+    console.log("uppInlineDisplay:");
+    console.log(name);
+    console.log(argsString);
+
+    const args = await Tools.blockInline(argsString);
+    console.log(args);
+    const a = document.createElement("div");
+
+    let html = `<div class="inline-upp">`;
+    html += `<span class="name">${name}`;
+    if (args.species) {
+        html += `<span class="extra-data">${args.species}</span>`;
+    }
+    html += `</span>`;
+    if (args.profession) {
+        html += `<span class="profession">${args.profession}`;
+        if (args.gender || args.age) {
+            html += `<span class="extra-data">`;
+            if (args.gender) html += `${args.gender}`;
+            if (args.age) html += ` ${args.age}`;
+            html += `</span>`;
+        }
+        html += `</span>`;
+    } else if (args.gender || args.age) {
+        html += `<span class="profession">`;
+        if (args.gender) html += `${args.gender}`;
+        if (args.age) html += ` ${args.age}`;
+        html += `</span>`;
+    }
+
+    if (args.upp) {
+        html += `<div class="inline-upp grid grid-8col">`;
+        let upp = Tools.getHexFromUpp(args.upp, 0);
+        for (let c of [ "str", "dex", "end", "int", "edu", "soc" ]) {
+            html += `<div><div>${c.toUpperCase()}</div><div>${upp[c]}</div></div>`;
+        }
+        html += `</div>`;
+    }
+
+    if (args.skills) {
+        let skillHtml = "";
+        let skills = args.skills.split(",");
+
+        for (let key of skills) {
+            let skillFqn = key.split(" ")[0];
+            let skillVal = key.split(" ")[1];
+
+            skillHtml += `<li>${skillFqn.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
+
+        }
+        html += `<ul class="skill-list">${skillHtml}</ul>`;
+
+        html += `</div>`;
+    }
+
+    html += `</div>`;
+
+    a.innerHTML = html;
+    return a;
 }
 
 Tools.itemInlineDisplay = async function(itemId) {

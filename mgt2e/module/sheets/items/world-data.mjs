@@ -220,7 +220,16 @@ export class MgT2WorldDataItemSheet extends MgT2ItemSheet {
     async _initPlanet() {
         let data = {
             "datatype": "planet",
-            "uwp": "X300000-0",
+            "uwp": {
+              port: "X",
+              size: 0,
+              atmosphere: 0,
+              hydrographics: 0,
+              population: 0,
+              governmetn: 0,
+              lawLevel: 0,
+              techLevel: 0
+            },
             "worldId": null
         }
         await this.item.update({"system.world": data});
