@@ -32,16 +32,19 @@
             {{/if}}
         </h3>
 
-        {{#if description}}
-            <p>{{description}}</p>
-        {{/if}}
-
-
         {{#if showCha}}
             <label class="skillDialogRemember">
                 <input class="rememberChaCheck" type="checkbox" name="remember" value="false"/>
                 <span>{{localize "MGT2.Dialog.RememberCharacteristic"}}</span>
             </label>
+        {{/if}}
+
+        {{#if expert includeZero=false}}
+            <p>Expert/{{expert}}</p>
+        {{/if}}
+
+        {{#if description}}
+            <p>{{description}}</p>
         {{/if}}
 
         {{{augmentedSkill skill spec}}}
