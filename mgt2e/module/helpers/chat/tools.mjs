@@ -6,6 +6,7 @@ import {calculateCost} from "../utils/character-utils.mjs";
 import {getShipData} from "../spacecraft/spacecraft-utils.mjs";
 import {MGT2} from "../config.mjs";
 import {setSpacecraftCriticalLevel} from "../spacecraft/criticals.mjs";
+import {getHighestModifier} from "../utils/trade-utils.mjs";
 
 export const Tools = {};
 
@@ -542,7 +543,7 @@ Tools.macroExecutionEnricher = function(match, options) {
         } else if (type === "/item") {
             return Tools.itemInlineDisplay(macroName, argsString, title, flavor);
         } else if (type === "/upp") {
-            return Tools.uppInlineDisplay(macroName, argsString, title, flavor);
+            return Tools.uppInlineDisplay(macroName, macroName + " " + argsString, title, flavor);
         } else {
             console.log(type);
         }
@@ -582,6 +583,33 @@ Tools.getHexFromUpp = function(upp) {
 
     return data;
 }
+
+Tools.getSkillLabel = function(skills, skillFqn) {
+    let label = "";
+    let skillId = skillFqn, specId = null;
+    if (skillFqn.indexOf(".") > -1) {
+        skillId = skillFqn.replace(/\..*/, "");
+        specId = skillFqn.replace(/.*\./, "");
+    }
+    let skillLabel = game.i18n.localize("MGT2.Skills." + skillId);
+    let specLabel = specId?game.i18n.localize("MGT2.Skills." + specId):"";
+    if (skills[skillId]) {
+        if (skills[skillId].label) {
+            skillLabel = skills[skillId.label];
+        }
+        if (specId && skills[skillId].specialities) {
+            if (skills[skillId].specialities[specId]?.label) {
+                specLabel = skills[skillId].specialities[specId].label;
+            }
+        }
+    }
+    label = skillLabel;
+    if (specId && specLabel) {
+        label = `${skillLabel} (${specLabel})`;
+    }
+
+    return label;
+};
 
 Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
     console.log("uppInlineDisplay:");
@@ -626,13 +654,15 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
     if (args.skills) {
         let skillHtml = "";
         let skills = args.skills.split(",");
+        let SKILLS = MGT2.getDefaultSkills();
 
         for (let key of skills) {
-            let skillFqn = key.split(" ")[0];
-            let skillVal = key.split(" ")[1];
+            let skillFqn = key.trim().split(" ")[0];
+            let skillVal = key.trim().split(" ")[1];
+            if (!skillVal) skillVal = 0;
+            let skillLabel = Tools.getSkillLabel(SKILLS, skillFqn);
 
-            skillHtml += `<li>${skillFqn.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
-
+            skillHtml += `<li>${skillLabel.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
         }
         html += `<ul class="skill-list">${skillHtml}</ul>`;
 
