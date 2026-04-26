@@ -25,6 +25,7 @@ export class MgT2Actor extends Actor {
 
     /** @override */
     prepareBaseData() {
+        super.prepareBaseData(); // needed to clear the ActiveEffect phases, so they can be applied.
         // Data modifications in this step occur before processing embedded
         // documents or derived data.
         if (this.system.hits && this.type !== "traveller") {
