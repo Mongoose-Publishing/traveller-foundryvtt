@@ -1241,7 +1241,7 @@ Handlebars.registerHelper('isItemOwned', function(item) {
     if (item.system.status === MgT2Item.EQUIPPED || item.system.status === MgT2Item.CARRIED) {
         return false;
     }
-    if (item.type === "term" || item.type === "associate") {
+    if (item.type === "term" || item.type === "associate" || item.type === "power") {
         return false;
     }
     return true;

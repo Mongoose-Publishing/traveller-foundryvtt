@@ -1,0 +1,18 @@
+<h2>{{localize 'MGT2.TravellerSheet.Powers'}}</h2>
+
+<ol class="items-list actor-items grid grid-3col">
+    {{#each powers as |item id|}}
+        <li class="item item-{{item.type}} {{item.cssStyle}}" data-item-id="{{item._id}}">
+            <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
+            <img title="{{nameQuantity item}}" src="{{item.img}}"/>
+            {{#if (isOwner ..)}}
+                <div class="item-controls">
+                    <a class="item-control rollable" data-roll-type="item" title="{{localize 'MGT2.EditItem'}}"><i class="fas fa-brain"></i></a>
+                    <a class="item-control item-edit" title="{{localize 'MGT2.EditItem'}}"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="{{localize 'MGT2.DeleteItem'}}"><i class="fas fa-trash"></i></a>
+                </div>
+            {{/if}}
+        </li>
+    {{/each}}
+    <li></li>
+</ol>

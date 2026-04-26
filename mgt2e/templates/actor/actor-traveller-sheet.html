@@ -135,7 +135,11 @@
                     <a class="item" data-tab="skills">{{localize 'MGT2.TravellerSheet.Skills'}}</a>
                     {{#if (isObserver .)}}
                         <a class="item" data-tab="items">{{localize 'MGT2.TravellerSheet.Equipment'}}</a>
+                        {{#if system.characteristics.PSI.show}}
+                          <a class="item" data-tab="powers">{{localize 'MGT2.TravellerSheet.Powers'}}</a>
+                        {{/if}}
                     {{/if}}
+                    
                     <a class="item" data-tab="finance">{{localize 'MGT2.TravellerSheet.Finance'}}</a>
                     <a class="item" data-tab="biography">{{localize 'MGT2.TravellerSheet.Biography'}}</a>
                     {{#if (isObserver .)}}
@@ -228,6 +232,15 @@
                         </section>
                     </div>
                     {{/if}}
+
+                    {{!-- {{#if (isObserver .)}} --}}
+                    <div class="tab powers" data-group="primary" data-tab="powers">
+                        <section>
+                            {{> "systems/mgt2e/templates/actor/parts/actor-powers.html"}}
+                        </section>
+                    </div>
+                    {{!-- {{/if}} --}}
+
 
                     {{#if (isObserver .)}}
                         {{!-- Owned Items Tab --}}
