@@ -1340,7 +1340,7 @@ export async function rollSkill(actor, skill, options) {
             options: JSON.stringify(options)
         }
 
-        const html = await renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
+        const html = await foundry.applications.handlebars.renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             flavor: html},

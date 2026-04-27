@@ -64,7 +64,7 @@ export class MgT2SkillDialog extends Application {
 
         this.value = data?data.skills["jackofalltrades"].value - 3:-3;
         this.cha = skillOptions.cha;
-        this.expert = 0;
+        this.expert = skillOptions.expert?skillOptions.expert:0;
         this.augment = 0;
         this.augdm = 0;
         this.penalty = 0;
@@ -185,6 +185,7 @@ export class MgT2SkillDialog extends Application {
             "skill": this.skillData,
             "description": this.description,
             "spec": this.specData,
+            "expert": this.expert,
             "skillText": this.skillText,
             "value": this.value,
             "showCha": (this.actor && this.skillData && this.actor.type !== "creature"),

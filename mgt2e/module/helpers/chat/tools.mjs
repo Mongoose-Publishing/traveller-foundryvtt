@@ -6,6 +6,7 @@ import {calculateCost} from "../utils/character-utils.mjs";
 import {getShipData} from "../spacecraft/spacecraft-utils.mjs";
 import {MGT2} from "../config.mjs";
 import {setSpacecraftCriticalLevel} from "../spacecraft/criticals.mjs";
+import {getHighestModifier} from "../utils/trade-utils.mjs";
 
 export const Tools = {};
 
@@ -541,6 +542,8 @@ Tools.macroExecutionEnricher = function(match, options) {
             return Tools.actorInlineDisplay(macroName);
         } else if (type === "/item") {
             return Tools.itemInlineDisplay(macroName, argsString, title, flavor);
+        } else if (type === "/upp") {
+            return Tools.uppInlineDisplay(macroName, macroName + " " + argsString, title, flavor);
         } else {
             console.log(type);
         }
@@ -561,6 +564,115 @@ Tools.blockInline = async function(argsString) {
         const value = match[2] ?? match[3];
         args[key] = value;
     }
+    return args;
+}
+
+Tools.getHexFromUpp = function(upp) {
+    let data = { str: 7, dex: 7, end: 7, int: 7, edu: 7, soc: 7 }
+
+    if (upp && upp.length >= 3) {
+        data.str = parseInt(upp.substring(0, 1), 16);
+        data.dex = parseInt(upp.substring(1, 2), 16);
+        data.end = parseInt(upp.substring(2, 3), 16);
+    }
+    if (upp && upp.length >= 6) {
+        data.int = parseInt(upp.substring(3, 4), 16);
+        data.edu = parseInt(upp.substring(4, 5), 16);
+        data.soc = parseInt(upp.substring(5, 6), 16);
+    }
+
+    return data;
+}
+
+Tools.getSkillLabel = function(skills, skillFqn) {
+    let label = "";
+    let skillId = skillFqn, specId = null;
+    if (skillFqn.indexOf(".") > -1) {
+        skillId = skillFqn.replace(/\..*/, "");
+        specId = skillFqn.replace(/.*\./, "");
+    }
+    let skillLabel = game.i18n.localize("MGT2.Skills." + skillId);
+    let specLabel = specId?game.i18n.localize("MGT2.Skills." + specId):"";
+    if (skills[skillId]) {
+        if (skills[skillId].label) {
+            skillLabel = skills[skillId.label];
+        }
+        if (specId && skills[skillId].specialities) {
+            if (skills[skillId].specialities[specId]?.label) {
+                specLabel = skills[skillId].specialities[specId].label;
+            }
+        }
+    }
+    label = skillLabel;
+    if (specId && specLabel) {
+        label = `${skillLabel} (${specLabel})`;
+    }
+
+    return label;
+};
+
+Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
+    console.log("uppInlineDisplay:");
+    console.log(name);
+    console.log(argsString);
+
+    const args = await Tools.blockInline(argsString);
+    console.log(args);
+    const a = document.createElement("div");
+
+    let html = `<div class="inline-upp">`;
+    html += `<span class="name">${name}`;
+    if (args.species) {
+        html += `<span class="extra-data">${args.species}</span>`;
+    }
+    html += `</span>`;
+    if (args.profession) {
+        html += `<span class="profession">${args.profession}`;
+        if (args.gender || args.age) {
+            html += `<span class="extra-data">`;
+            if (args.gender) html += `${args.gender}`;
+            if (args.age) html += ` ${args.age}`;
+            html += `</span>`;
+        }
+        html += `</span>`;
+    } else if (args.gender || args.age) {
+        html += `<span class="profession">`;
+        if (args.gender) html += `${args.gender}`;
+        if (args.age) html += ` ${args.age}`;
+        html += `</span>`;
+    }
+
+    if (args.upp) {
+        html += `<div class="inline-upp grid grid-8col">`;
+        let upp = Tools.getHexFromUpp(args.upp, 0);
+        for (let c of [ "str", "dex", "end", "int", "edu", "soc" ]) {
+            html += `<div><div>${c.toUpperCase()}</div><div>${upp[c]}</div></div>`;
+        }
+        html += `</div>`;
+    }
+
+    if (args.skills) {
+        let skillHtml = "";
+        let skills = args.skills.split(",");
+        let SKILLS = MGT2.getDefaultSkills();
+
+        for (let key of skills) {
+            let skillFqn = key.trim().split(" ")[0];
+            let skillVal = key.trim().split(" ")[1];
+            if (!skillVal) skillVal = 0;
+            let skillLabel = Tools.getSkillLabel(SKILLS, skillFqn);
+
+            skillHtml += `<li>${skillLabel.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
+        }
+        html += `<ul class="skill-list">${skillHtml}</ul>`;
+
+        html += `</div>`;
+    }
+
+    html += `</div>`;
+
+    a.innerHTML = html;
+    return a;
 }
 
 Tools.itemInlineDisplay = async function(itemId) {

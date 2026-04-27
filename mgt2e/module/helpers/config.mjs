@@ -1144,7 +1144,7 @@ MGT2.getDefaultSkills = function() {
     }
 
     return skills;
-}
+};
 
 MGT2.EFFECT_TYPES = {
   "CHA_AUG": "chaAug",
