@@ -146,7 +146,7 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
         let augmentType = context.document.system?.augmentType;
-        if (augmentType === null) {
+        if ((augmentType === null) || (augmentType === undefined)) {
             // This is a pre-v13 augment, so need to try and fix it.
             console.log("Migrating effect to v13");
             if (context.document.flags.augmentType && typeof context.document.flags.augmentType === "string") {
