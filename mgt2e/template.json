@@ -180,8 +180,15 @@
         "traits": "",
         "features": "",
         "tl": 7,
-        "primaryPower": "unpowered",
-        "secondaryPower": "unpowered",
+        "customisation": {
+          "primaryPower": "unpowered",
+          "secondaryPower": "unpowered",
+          "rangeModifications": 0,
+          "speedModifications": 0,
+          "fuelModifications": 0,
+          "fuelSpaces": 0,
+          "auxiliaryDrives": ""
+        },
         "armour": {
           "base": 0,
           "front" : 0,
