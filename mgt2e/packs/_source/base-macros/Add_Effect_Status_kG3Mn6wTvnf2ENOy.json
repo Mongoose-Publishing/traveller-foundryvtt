@@ -1,0 +1,28 @@
+{
+  "name": "Add Effect Status",
+  "type": "script",
+  "command": "const fields = foundry.applications.fields;\n\n\nlet unsorted = [];\nfor (let status in CONFIG.MGT2.STATUS_EFFECTS) {\n    if (CONFIG.MGT2.STATUS_EFFECTS[status].locked) {\n        continue;\n    }\n    const statusEffect = CONFIG.statusEffects.find(e => e.id === status);\n    if (statusEffect) {\n        unsorted.push({\n            status: status,\n            effect: statusEffect,\n            label: game.i18n.localize(statusEffect.name)\n        });\n    }\n}\nlet sorted = unsorted.sort((a, b) => {\n    if (a.label < b.label) {\n        return -1;\n    } else if (a.label > b.label) {\n        return 1;\n    }\n    return 0;\n});\n\nlet statusOptions = [\n  { label:\"-\", value: \"\" }\n];\nfor (let status of sorted) {\n    statusOptions.push({\n      label: status.label,\n      value: status.status\n    });\n}\n\n\n\nconst statusInput = fields.createSelectInput({\n  name: \"status\",\n  options: statusOptions,\n  value: \"surprised\"\n});\n\nconst content = `\n  <p>Select a status to apply to all selected actors</p>\n  ${statusInput.outerHTML}\n`;\n\n\nconst data = await foundry.applications.api.DialogV2.input({\n  window: { title: \"Set Status\" },\n  content: content,\n  ok: {\n    label: \"Set Status\"\n  }\n});\n\n    const status = data.status;\n    console.log(status);\n    const selected = canvas.tokens.controlled;\n\n    for (let token of selected) {\n      let actor = token.document.actor;\n      let type = token.document.actor.type;\n      console.log(actor.name);\n      if ([\"traveller\", \"npc\"].includes(type)) {\n        switch (status) {\n          case \"surprised\":\n            actor.setSurprisedEffect(true);\n            break;\n          case \"aware\":\n            actor.setAwareEffect(true);\n            break;\n          case \"frightened\":\n            actor.setFrightenedEffect(true);\n            break;\n          case \"fatigued\":\n            actor.setFatiguedEffect(true);\n            break;\n          case \"physical\":\n            actor.setPhysicalEffect(2);\n            break;\n          case \"armour\":\n            actor.setArmourEffect(4);\n            break;\n          case \"inCover\":\n            actor.setInCoverEffect(true);\n            break;\n          case \"prone\":\n            actor.setProneEffect(true);\n            break;\n          case \"dead\":\n            actor.setDeadEffect(true);\n            break;\n          case \"unconscious\":\n            actor.setUnconsciousEffect(true);\n            break;\n          case \"needsFirstAid\":\n            actor.setFirstAidEffect(true);\n            break;\n        }\n      }\n    }",
+  "img": "systems/mgt2e/icons/macros/add-effect.svg",
+  "author": "mhUjqDVicnwIUaiq",
+  "scope": "global",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.19.2.0-DEV",
+    "createdTime": 1777829197074,
+    "modifiedTime": 1777829197074,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_id": "kG3Mn6wTvnf2ENOy",
+  "sort": 0,
+  "_key": "!macros!kG3Mn6wTvnf2ENOy"
+}
