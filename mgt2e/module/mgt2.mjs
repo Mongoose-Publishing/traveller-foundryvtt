@@ -287,7 +287,7 @@ Hooks.once('init', async function() {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "2d6 - 8 + @initiative.value",
+    formula: "2D6 - 8 + @initiative.value",
     decimals: 0
   };
 
@@ -392,7 +392,7 @@ Hooks.on("init", function() {
 
     CONFIG.statusEffects.push({
         id: "destroyed",
-        name: "MGT2.EFFECT.Destroyed",
+        name: "EFFECT.Destroyed",
         img: "systems/mgt2e/icons/effects/destroyed.svg"
     });
     CONFIG.statusEffects.push({
@@ -419,6 +419,51 @@ Hooks.on("init", function() {
         id: "vaccSuit",
         name: "EFFECT.VaccSuit",
         img: "systems/mgt2e/icons/effects/vaccsuit.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "surprised",
+        name: "EFFECT.Surprised",
+        img: "systems/mgt2e/icons/effects/surprised.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "aware",
+        name: "EFFECT.Aware",
+        img: "systems/mgt2e/icons/effects/aware.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "reaction",
+        name: "EFFECT.Reaction",
+        img: "systems/mgt2e/icons/effects/reaction.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "fatigued",
+        name: "EFFECT.Fatigued",
+        img: "systems/mgt2e/icons/effects/fatigued.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "physical",
+        name: "EFFECT.Physical",
+        img: "systems/mgt2e/icons/effects/physical.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "armour",
+        name: "EFFECT.Armour",
+        img: "systems/mgt2e/icons/effects/armour.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "inCover",
+        name: "EFFECT.InCover",
+        img: "systems/mgt2e/icons/effects/inCover.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "stunned",
+        name: "EFFECT.Stunned",
+        img: "icons/svg/daze.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "tactics",
+        name: "EFFECT.Tactics",
+        img: "systems/mgt2e/icons/effects/tactics.svg"
     });
 })
 
@@ -543,8 +588,6 @@ Hooks.on('ready', () => {
 
 });
 
-
-
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
     if (message.indexOf("/upp") === 0) {
         let args = message.split(" ");
@@ -564,12 +607,7 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     } else if (message.indexOf("/time") === 0) {
         let args = message.split(" ");
         args.shift();
-        Tools.currentTime(chatData, args);html
-        return false;
-    } else if (message.indexOf("/status") === 0) {
-        let args = message.split(" ");
-        args.shift();
-        Tools.setStatus(chatData, args);
+        Tools.currentTime(chatData, args);
         return false;
     } else if (message.indexOf("/debug") === 0) {
         Tools.debugSelected(chatData);
@@ -877,37 +915,67 @@ Hooks.once("ready", async function() {
     }
 });
 
+
+Hooks.on("createCombatant", (combatant, combat, id) => {
+   console.log("createCombatant:");
+   const actor = combatant.actor;
+
+   let bonus = 0;
+   if (actor.getEffect("surprised")) {
+       bonus = -6;
+   } else if (actor.getEffect("aware")) {
+       bonus = +6;
+   }
+   actor.getRollData();
+   const roll = new Roll(`2D6 - 8 + @initiative.value + ${bonus}`, actor.getRollData());
+   roll.evaluate().then(rolledInstance => {
+       combatant.initiative = rolledInstance.total;
+       combatant.update({"initiative": combatant.initiative});
+   });
+
+});
+
 Hooks.on("combatTurn", (combat, data, options) => {
     // This is the actor which just finished their turn.
-    let combatant = combat.combatant.actor;
+    let actor = combat.combatant.actor;
     // Reset any reaction penalties back to zero.
-    combatant.unsetFlag("mgt2e", "reaction");
+    actor.setReactionEffect(0);
 
     // If stunned, reduce rounds left to be stunned
-    let stunned = combatant.getFlag("mgt2e", "stunned");
+    const stunned = actor.getEffect("stunned");
     if (stunned) {
-        let rounds = combatant.getFlag("mgt2e", "stunnedRounds");
-        rounds = rounds?parseInt(rounds):0;
-
-        if (--rounds < 1) {
-            combatant.unsetFlag("mgt2e", "stunned");
-            combatant.unsetFlag("mgt2e", "stunnedRounds");
+        let rounds = stunned.getFlag("mgt2e", "value");
+        if (--rounds > 0) {
+            stunned.setFlag("mgt2e", "value", rounds);
         } else {
-            combatant.setFlag("mgt2e", "stunnedRounds", rounds);
+            actor.setStunnedEffect(0);
         }
     }
 });
 
 Hooks.on("combatRound", (combat, data, options) => {
-    // This is the actor which just finished their turn.
+    // This is when the round changes.
+    console.log("combatRound:");
+    console.log(combat);
+    console.log(data);
+
+    for (let combatant of combat.combatants) {
+        const actor = combatant.actor;
+        if (actor.getEffect("surprised")) {
+            actor.setSurprisedEffect(false);
+            combatant.update({"initiative": combatant.initiative + 6 });
+        } else if (actor.getEffect("aware")) {
+            actor.setAwareEffect(false);
+            combatant.update({"initiative": combatant.initiative - 6 });
+        }
+    }
+
     let combatant = combat.combatant.actor;
-    // Reset any reaction penalties back to zero.
-    combatant.unsetFlag("mgt2e", "reaction");
 
     // If stunned, reduce rounds left to be stunned
     let stunnedEffect = combatant.effects.find(e => e.statuses?.values()?.next()?.value === "stun");
     if (stunnedEffect) {
-        if (parseInt(stunnedEffect.flags?.mgt2e?.value) !== NaN) {
+        if (!isNaN(parseInt(stunnedEffect.flags?.mgt2e?.value))) {
             let rounds = parseInt(stunnedEffect.flags.mgt2e.value);
             if (rounds > 1) {
                 rounds -= 1;
@@ -1839,15 +1907,22 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
         if (statusEffect) {
             label = game.i18n.localize(statusEffect.name);
             type = effect.flags.mgt2e.css;
+            let value = null;
 
             if (!isNaN(parseInt(effect.flags.mgt2e.value))) {
+                value = parseInt(effect.flags.mgt2e.value);
                 label += ` (${parseInt(effect.flags.mgt2e.value)})`;
             }
             if (!effect.flags.mgt2e.locked) {
                 const statusName = "status" + status.charAt(0).toUpperCase() + status.slice(1);
-                label += ` <i class="fas fa-xmark ${statusName}"> </i>`;
+                label += ` <i class="fas fa-xmark effect-remove ${statusName}"> </i>`;
+                if (value !== null) {
+                    label = `<i class="fas fa-minus effect-minus"> </i> ` +
+                            `<i class="fas fa-plus effect-plus"> </i> ` +
+                            label;
+                }
             }
-            return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
+            return `<div class="resource flex-group-center ${type}"><label class="mgt2e-effect" data-status-id="${status}">${label}</label></div>`;
         } else {
             return "";
         }
@@ -2470,10 +2545,16 @@ Handlebars.registerHelper('showSpacecraftAttacks', function(shipActor, roles) {
 Handlebars.registerHelper("showEffectPill", function(actor, effect) {
     let html = "";
 
-    let title = `${effect.sourceName}: ${effect.name}`;
-
+    let title = `${effect.name}`;
+    if (effect.origin) {
+        title = `${effect.sourceName}: ${effect.name}`;
+    }
+    console.log(effect);
     for (let change of effect.changes) {
         let text = "";
+        if (!effect.origin) {
+            text = effect.name;
+        }
         let key = change.key;
         let value = change.value;
         if (key.startsWith("system.skills.")) {

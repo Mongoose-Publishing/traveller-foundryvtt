@@ -1,5 +1,23 @@
 # Release Notes
 
+# 0.19.3 (Beta)
+
+* Added French translations, updates to Spanish translations.
+* Adding actor to a combat encounter automatically rolls their initiative. This now takes into
+  account whether they are "surprised" or "aware". After the first round of combat, DMS for surprise
+  are removed, which may result in re-ordering of combat.
+* Updates to status effects. Replacing the old flag based system with active effects. Some status
+  effects now provide active effect modifiers (such as cover adding to armour, or tactics adding
+  to initiative.
+* Added status effects for aware (have surprise), surprise (are surprised), reaction dodge, fatigued,
+  physical/combat/melee DMs, armour, inCover, stunned and tactics.
+* Status effects can now be added directly from the actor sheet (from settings tab). A better location
+  needs to be chosen.
+* Status effects with values can be modified from the status bar.
+* Fixed the 'In Cover' macro to use the new cover status effects.
+* Added 'Add Effect Status' macro for adding status to multiple actor tokens in one go.
+* Removed the /status chat command to set status on actors.
+
 # 0.19.2 (Beta)
 
 * Change to how characteristic augments work. Cha Augment split into Cha Bonus, and Cha Base.

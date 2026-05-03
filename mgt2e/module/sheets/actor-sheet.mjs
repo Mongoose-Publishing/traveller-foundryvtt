@@ -163,6 +163,36 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 }
             }
             guncombat.dm = guncombat.custom + guncombat.auto + guncombat.effect;
+
+            context.selectEffects = {};
+            context.selectEffects[""] = "-";
+
+            let unsorted = [];
+            for (let status in CONFIG.MGT2.STATUS_EFFECTS) {
+                if (CONFIG.MGT2.STATUS_EFFECTS[status].locked) {
+                    continue;
+                }
+                const statusEffect = CONFIG.statusEffects.find(e => e.id === status);
+                if (statusEffect) {
+                    unsorted.push({
+                        status: status,
+                        effect: statusEffect,
+                        label: game.i18n.localize(statusEffect.name)
+                    });
+                }
+            }
+            let sorted = unsorted.sort((a, b) => {
+                if (a.label < b.label) {
+                    return -1;
+                } else if (a.label > b.label) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            for (let status of sorted) {
+                context.selectEffects[status.status] = status.label;
+            }
         }
 
         context.selectColumns = {
@@ -1116,11 +1146,41 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             html.find('.roll-upp').click(ev => {
                this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });
             });
+
+            html.find('.effect-remove').click(ev => {
+                let e = $(ev.currentTarget).parents("label.mgt2e-effect");
+                if (e && e.data("statusId")) {
+                    const statusId = e.data("statusId");
+                    console.log(statusId);
+                    this._clearStatus(this.actor, statusId);
+                } else {
+                    const t = $(ev.currentTarget).parents(".effectPill");
+                    void this._removeEffect(t.data("effectId"));
+                }
+            });
+            html.find('.effect-plus').click(ev => {
+                let e = $(ev.currentTarget).parents();
+                const statusId = e.data("statusId");
+                this._modifyStatus(this.actor, statusId, +1);
+            });
+            html.find('.effect-minus').click(ev => {
+                let e = $(ev.currentTarget).parents();
+                const statusId = e.data("statusId");
+                this._modifyStatus(this.actor, statusId, -1);
+            });
+            html.find('.addEffectSelect').click(ev => {
+                const status = $(ev.currentTarget).val();
+                if (CONFIG.MGT2.STATUS_EFFECTS[status]) {
+                    let value = true;
+                    if (CONFIG.MGT2.STATUS_EFFECTS[status].value !== undefined) {
+                        value = CONFIG.MGT2.STATUS_EFFECTS[status].value;
+                    }
+                    this.actor.addStatusEffect(status, value);
+
+                }
+            });
+
         }
-        html.find('.effect-remove').click(ev => {
-            const t = $(ev.currentTarget).parents(".effectPill");
-            void this._removeEffect(t.data("effectId"));
-        });
         html.find('.addItemSelect').click(ev => {
             const value = $(ev.currentTarget).val();
             this._createEquipmentItem(value);
@@ -1134,6 +1194,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         html.find('.dodgeRoll').click(ev => {
             this._rollDodge(ev, this.actor);
         });
+        /*
         html.find('.statusReaction').click(ev => {
             this._clearDodge(this.actor);
         });
@@ -1185,6 +1246,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         html.find('.statusInCover').click(ev => {
             this._clearStatus(this.actor, 'inCover');
         });
+        */
         html.find('initRoll').click(ev => {
             this._rollInit(this.actor);
         });
@@ -1510,10 +1572,18 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             dodge += skill;
         }
         if (dodge > 0) {
-            let current = actor.getFlag("mgt2e", "reaction");
-            if (!current) current = 0;
-
-            actor.setFlag("mgt2e", "reaction", parseInt(current) - 1);
+            let effect = actor.getEffect("reaction");
+            if (!effect) {
+                actor.setReactionEffect(-1);
+            } else {
+                if (effect?.flags?.mgt2e?.effect) {
+                    let value = parseInt(effect.flags.mgt2e.value);
+                    value -= 1;
+                    effect.setFlag("mgt2e", "value", value);
+                } else {
+                    effect.setFlag("mgt2e", "value", -1);
+                }
+            }
         }
     }
 
@@ -1537,6 +1607,33 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         let e = actor.effects.find(e => e?.flags?.mgt2e?.effect === status);
         if (e) {
             e.delete();
+        }
+    }
+
+    _modifyStatus(actor, status, modifier) {
+        let e = actor.effects.find(e => e?.flags?.mgt2e?.effect === status);
+        if (e) {
+            const config = CONFIG.MGT2.STATUS_EFFECTS[status];
+            let value = parseInt(e.getFlag("mgt2e", "value"));
+            value += modifier;
+            if (config.min !== undefined) {
+                value = Math.max(config.min, value);
+            }
+            if (config.max !== undefined) {
+                value = Math.min(config.max, value);
+            }
+            e.setFlag("mgt2e", "value", value);
+            if (!config.mono) {
+                if (value < 0) {
+                    e.setFlag("mgt2e", "css", "statusWarn");
+                } else if (value > 0) {
+                    e.setFlag("mgt2e", "css", "statusGood");
+                }
+            }
+            if (e.changes && e.changes.length > 0) {
+                e.changes[0].value = value;
+                e.update({"changes": e.changes});
+            }
         }
     }
 

@@ -9,6 +9,59 @@ MGT2.STATUS = {
   DESTROYED: 5
 };
 
+// List of status effects that can be applied to an actor.
+// locked: Can't be manually added or removed.
+// mono: Monochromatic. Don't change CSS style when modifying.
+MGT2.STATUS_EFFECTS = {
+    "destroyed": { overlay: true },
+    "injured": {},
+    "needsFirstAid": {},
+    "needsSurgery": {},
+    "encumbered": { locked: true },
+    "vaccSuit": { locked: true },
+    "surprised": {},
+    "aware": {},
+    "reaction": {},
+    "fatigued": { value: 2, mono: true, min: 1 },
+    "physical": { value: -1 },
+    "melee": { value: 0 },
+    "combat": { value: 0 },
+    "armour": { value: 1, min: 1 },
+    "inCover": { value: 2, min: 1, replace: true },
+    "prone": {},
+    "dead": {},
+    "unconscious": { overlay: true },
+    "stunned": { value: 1, min: 1, mono: true },
+    "tactics": { value: 0 }
+}
+
+
+CONFIG.statusEffects.push({
+    id: "reaction",
+    name: "EFFECT.Reaction",
+    img: "systems/mgt2e/icons/effects/reaction.svg"
+});
+CONFIG.statusEffects.push({
+    id: "fatigued",
+    name: "EFFECT.Fatigued",
+    img: "systems/mgt2e/icons/effects/fatigued.svg"
+});
+CONFIG.statusEffects.push({
+    id: "physical",
+    name: "EFFECT.Physical",
+    img: "systems/mgt2e/icons/effects/physical.svg"
+});
+CONFIG.statusEffects.push({
+    id: "armour",
+    name: "EFFECT.Armour",
+    img: "systems/mgt2e/icons/effects/armour.svg"
+});
+CONFIG.statusEffects.push({
+    id: "inCover",
+    name: "EFFECT.InCover",
+    img: "systems/mgt2e/icons/effects/inCover.svg"
+});
+
 MGT2.HARDWARE_GENERAL = "general";
 MGT2.HARDWARE_ARMOUR = "armour";
 MGT2.HARDWARE_JUMP = "jump";

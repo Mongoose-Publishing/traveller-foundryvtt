@@ -128,48 +128,6 @@ Tools.getSelected = function() {
     }
 }
 
-Tools.setStatusFor = function(actor, args, status) {
-    if (args.includes(status)) {
-        actor.setFlag("mgt2e", status, true);
-    }
-    if (args.includes("-" + status)) {
-        actor.unsetFlag("mgt2e", status);
-    }
-}
-
-Tools.setStatus = function(chatData, args) {
-    const selected = Tools.getSelected();
-
-    if (selected.length === 0) {
-        ui.notifications("No tokens selected");
-        return;
-    }
-    for (let token of selected) {
-        if (!token.owner) {
-            continue;
-        }
-        let actor = token.actor;
-        if (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature") {
-            Tools.setStatusFor(actor, args, "stunned");
-            Tools.setStatusFor(actor, args, "fatigued");
-            Tools.setStatusFor(actor, args, "highGravity");
-            Tools.setStatusFor(actor, args, "lowGravity");
-            Tools.setStatusFor(actor, args, "zeroGravity");
-            Tools.setStatusFor(actor, args, "poisoned");
-            Tools.setStatusFor(actor, args, "diseased");
-            Tools.setStatusFor(actor, args, "unconscious");
-            Tools.setStatusFor(actor, args, "disabled");
-            Tools.setStatusFor(actor, args, "dead");
-            Tools.setStatusFor(actor, args, "destroyed");
-            Tools.setStatusFor(actor, args, "needsFirstAid");
-            Tools.setStatusFor(actor, args, "needsSurgery");
-            Tools.setStatusFor(actor, args, "inCover");
-            Tools.setStatusFor(actor, args, "prone");
-            actor.update({ "system.status": actor.system.status });
-        }
-    }
-}
-
 Tools.debugSelected = function(chatData) {
     const selected = Tools.getSelected();
 
