@@ -446,6 +446,16 @@ Hooks.on("init", function() {
         img: "systems/mgt2e/icons/effects/physical.svg"
     });
     CONFIG.statusEffects.push({
+        id: "melee",
+        name: "EFFECT.Melee",
+        img: "systems/mgt2e/icons/effects/melee.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "gunCombat",
+        name: "EFFECT.GunCombat",
+        img: "systems/mgt2e/icons/effects/guncombat.svg"
+    });
+    CONFIG.statusEffects.push({
         id: "armour",
         name: "EFFECT.Armour",
         img: "systems/mgt2e/icons/effects/armour.svg"
@@ -454,6 +464,11 @@ Hooks.on("init", function() {
         id: "inCover",
         name: "EFFECT.InCover",
         img: "systems/mgt2e/icons/effects/inCover.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "hiding",
+        name: "EFFECT.Hiding",
+        img: "systems/mgt2e/icons/effects/hiding.svg"
     });
     CONFIG.statusEffects.push({
         id: "stunned",
@@ -2549,7 +2564,6 @@ Handlebars.registerHelper("showEffectPill", function(actor, effect) {
     if (effect.origin) {
         title = `${effect.sourceName}: ${effect.name}`;
     }
-    console.log(effect);
     for (let change of effect.changes) {
         let text = "";
         if (!effect.origin) {

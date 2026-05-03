@@ -25,8 +25,8 @@
      inkscape:cx="54.062112"
      inkscape:cy="231.35404"
      inkscape:window-width="2560"
-     inkscape:window-height="1403"
-     inkscape:window-x="3760"
+     inkscape:window-height="1343"
+     inkscape:window-x="1200"
      inkscape:window-y="114"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg8"
@@ -41,7 +41,7 @@
   </sodipodi:namedview>
   <path
      style="fill:#ffffff;fill-opacity:0.999231;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke;stop-color:#000000"
-     d="m 96,96 h 64 C 159.80419,178.92043 145.76174,359.99594 128,448 110.34972,360.44313 96.163578,179.29203 96,96 Z"
+     d="m 96,192 h 64 C 159.80419,274.92043 145.76174,359.99594 128,448 110.34972,360.44313 96.163578,275.29203 96,192 Z"
      id="path2809"
      sodipodi:nodetypes="cccc" />
   <path

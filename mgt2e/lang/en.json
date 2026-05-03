@@ -1642,6 +1642,28 @@
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "World Data",
 
+  "EFFECT.TITLE.Injured": "Injured",
+  "EFFECT.TITLE.Destroyed": "Destroyed",
+  "EFFECT.TITLE.FirstAid": "First Aid",
+  "EFFECT.TITLE.Surgery": "Surgery",
+  "EFFECT.TITLE.Encumbered": "Encumbered",
+  "EFFECT.TITLE.VaccSuit": "Penalty from bulky armour",
+  "EFFECT.TITLE.Aware": "Aware of combat, +6 initiative",
+  "EFFECT.TITLE.Surprised": "Surprised, -6 initiative",
+  "EFFECT.TITLE.Reaction": "Reaction",
+  "EFFECT.TITLE.Fatigued": "Fatigued",
+  "EFFECT.TITLE.Physical": "Modifier to physical skill rolls",
+  "EFFECT.TITLE.Melee": "Melee DM",
+  "EFFECT.TITLE.GunCombat": "Gun Combat DM",
+  "EFFECT.TITLE.Initiative": "Initiative modifier",
+  "EFFECT.TITLE.Armour": "Extra armour bonus",
+  "EFFECT.TITLE.InCover": "-2 to be hit by ranged attacks",
+  "EFFECT.TITLE.Prone": "-1 to be hit by ranged attacks",
+  "EFFECT.TITLE.Stunned": "Stunned, cannot act for X turns",
+  "EFFECT.TITLE.Tactics": "Tactics bonus to initiative",
+  "EFFECT.TITLE.Hiding": "Armour bonus from cover",
+
+
   "EFFECT.Injured": "Injured",
   "EFFECT.Destroyed": "Destroyed",
   "EFFECT.FirstAid": "First Aid",
@@ -1660,6 +1682,8 @@
   "EFFECT.Prone": "Prone",
   "EFFECT.Stunned": "Stunned",
   "EFFECT.Tactics": "Tactics",
+  "EFFECT.Hiding": "Hiding",
+  "EFFECT.Initiative": "Initiative",
 
   "Save": "Save",
 

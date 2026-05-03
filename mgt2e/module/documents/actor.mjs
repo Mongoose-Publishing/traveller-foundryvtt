@@ -1639,6 +1639,17 @@ export class MgT2Actor extends Actor {
     }
 
     addStatusEffect(status, value) {
+        if (value === undefined) {
+            if (CONFIG.MGT2.STATUS_EFFECTS[status]) {
+                console.log(status);
+                if (CONFIG.MGT2.STATUS_EFFECTS[status].value !== undefined) {
+                    value = CONFIG.MGT2.STATUS_EFFECTS[status].value;
+                } else {
+                    value = true;
+                }
+            }
+        }
+
         switch (status) {
             case "dead":
                 this.setDeadEffect(true);
@@ -1675,6 +1686,9 @@ export class MgT2Actor extends Actor {
                 break;
             case "inCover":
                 this.setInCoverEffect(value);
+                break;
+            case "hiding":
+                this.setHidingEffect(value);
                 break;
             case "prone":
                 this.setProneEffect(true);
@@ -1765,6 +1779,26 @@ export class MgT2Actor extends Actor {
                 { key: "system.modifiers.physical.effect", mode: 2, priority: 0, value: parseInt(value) }
             ]);
     }
+    setMeleeEffect(value) {
+        let css= "Warn";
+        if (parseInt(value) > 0) {
+            css = "Good";
+        }
+        this.setEffect("melee", value, false, false, css,
+            [
+                { key: "system.modifiers.melee.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
+    setGunCombatEffect(value) {
+        let css= "Warn";
+        if (parseInt(value) > 0) {
+            css = "Good";
+        }
+        this.setEffect("gunCombat", value, false, false, css,
+            [
+                { key: "system.modifiers.guncombat.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
     setArmourEffect(value) {
         this.setEffect("armour", value, false, false, "Good",
             [
@@ -1772,13 +1806,22 @@ export class MgT2Actor extends Actor {
             ]);
     }
     setInCoverEffect(value) {
-        this.setEffect("inCover", value, false, false, "Good",
+        this.setEffect("inCover", value, false, false, "Good");
+    }
+    setHidingEffect(value) {
+        this.setEffect("hiding", value, false, false, "Good",
             [
                 { key: "system.modifiers.armour.effect", mode: 2, priority: 0, value: parseInt(value) }
             ]);
     }
     setProneEffect(value) {
         this.setEffect("prone", value, false, false, "Good");
+    }
+    setInCoverEffect(value) {
+        this.setEffect("inCover", value, false, false, "Good",
+            [
+                { key: "system.modifiers.armour.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
     }
     setTacticsEffect(value) {
         this.setEffect("tactics", value, false, false, "Good",
