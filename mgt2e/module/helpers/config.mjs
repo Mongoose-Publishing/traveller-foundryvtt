@@ -12,6 +12,7 @@ MGT2.STATUS = {
 // List of status effects that can be applied to an actor.
 // locked: Can't be manually added or removed.
 // mono: Monochromatic. Don't change CSS style when modifying.
+// replace: Setting a new value will replace the old one, rather than adding to it.
 MGT2.STATUS_EFFECTS = {
     "destroyed": { overlay: true },
     "injured": {},
@@ -33,7 +34,8 @@ MGT2.STATUS_EFFECTS = {
     "dead": {},
     "unconscious": { overlay: true },
     "stunned": { value: 1, min: 1, mono: true },
-    "tactics": { value: 0 }
+    "tactics": { value: 0 },
+    "initiative": { value: 0 }
 }
 
 

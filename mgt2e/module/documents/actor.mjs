@@ -1829,5 +1829,11 @@ export class MgT2Actor extends Actor {
                 { key: "system.modifiers.initiative.effect", mode: 2, priority: 0, value: parseInt(value) }
             ]);
     }
+    setInitiativeEffect(value) {
+        this.setEffect("initiative", value, false, false, "Good",
+            [
+                { key: "system.modifiers.initiative.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
 
 }

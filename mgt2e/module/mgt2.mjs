@@ -480,6 +480,11 @@ Hooks.on("init", function() {
         name: "EFFECT.Tactics",
         img: "systems/mgt2e/icons/effects/tactics.svg"
     });
+    CONFIG.statusEffects.push({
+        id: "initiative",
+        name: "EFFECT.Initiative",
+        img: "systems/mgt2e/icons/effects/initiative.svg"
+    });
 })
 
 async function openActorSheet(actorId) {
