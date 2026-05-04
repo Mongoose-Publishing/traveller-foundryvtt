@@ -106,6 +106,16 @@
   "MGT2.TaskDifficulty.15": "Formidable",
   "MGT2.TaskDifficulty.16": "Impossible",
 
+  "MGT2.TaskTime.1": "1D Seconds",
+  "MGT2.TaskTime.2": "1D Rounds",
+  "MGT2.TaskTime.3": "1D x 10 Seconds",
+  "MGT2.TaskTime.4": "1D Minutes",
+  "MGT2.TaskTime.5": "1D x 10 Minutes",
+  "MGT2.TaskTime.6": "1D Hours",
+  "MGT2.TaskTime.7": "1D x 4 Hours",
+  "MGT2.TaskTime.8": "1D x 10 Hours",
+  "MGT2.TaskTime.9": "1D Days",
+
   "MGT2.TaskEffect.ExceptionalFailure": "Exceptional Failure",
   "MGT2.TaskEffect.AverageFailure": "Average Failure",
   "MGT2.TaskEffect.MarginalFailure": "Marginal Failure",
@@ -260,6 +270,7 @@
   "MGT2.TravellerSheet.Hits": "HITS",
   "MGT2.TravellerSheet.Rads": "RADS",
   "MGT2.TravellerSheet.Dodge": "DODGE",
+  "MGT2.TravellerSheet.Powers": "Powers",
 
   "MGT2.TravellerSheet.Skills": "Skills",
   "MGT2.TravellerSheet.Equipment": "Equipment",
@@ -1295,6 +1306,18 @@
   "MGT2.Item.SpaceMount.Spinal": "Spinal Mount",
   "MGT2.Item.Power": "Power",
 
+  "MGT2.Item.Psionic.Range": "Range",
+  "MGT2.Item.PsionicRange.1": "Personal (<1m)",
+  "MGT2.Item.PsionicRange.2": "Close (1m+)",
+  "MGT2.Item.PsionicRange.3": "Short (6m+)",
+  "MGT2.Item.PsionicRange.4": "Medium (11m+)",
+  "MGT2.Item.PsionicRange.5": "Long (51m+)",
+  "MGT2.Item.PsionicRange.6": "Very Long (251m+)",
+  "MGT2.Item.PsionicRange.7": "Distant (501m+)",
+  "MGT2.Item.PsionicRange.8": "Very Distant (6km+)",
+  "MGT2.Item.PsionicRange.9": "Continental (501km+)",
+  "MGT2.Item.PsionicRange.10": "Planetary (5,001-50,000km)",
+
   "MGT2.Item.Hardware.Rating.j-drive": "Jump-{rating}",
   "MGT2.Item.Hardware.Rating.m-drive": "{rating} G",
   "MGT2.Item.Hardware.Rating.r-drive": "{rating} G",
@@ -1358,6 +1381,12 @@
   "MGT2.Armour.Psi": "Psi",
   "MGT2.Armour.VaccSuit": "Vacc Suit {skill}",
 
+  "MGT2.Psi.Talent": "Talent",
+  "MGT2.Psi.Cost": "Psi-point Cost",
+  "MGT2.Psi.Reach": "Reach",
+  "MGT2.Psi.Check": "Check",
+  "MGT2.Psi.Time": "Timeframe",
+  
   "MGT2.Effects.Disabled": "Disabled",
   "MGT2.Effects.Origin": "Origin",
   "MGT2.Effects.Transfer": "Transfer",
@@ -1500,6 +1529,8 @@
   "MGT2.Warn.NoActorsToBuy": "No actors available who can buy this item",
   "MGT2.Warn.ThisActorCannotBuy": "{actor} doesn't have enough cash to buy {item}",
 
+  "MGT2.Warn.NoPsi": "{actor} has no Psi points",
+
   "MGT2.Error.NoStatus": "Unable to find status '{status}'",
 
   "MGT2.Role.isDepartment": "Role is a department",
@@ -1640,6 +1671,7 @@
   "TYPES.Item.associate": "Background Associate",
   "TYPES.Item.role": "Crew Role",
   "TYPES.Item.software": "Software",
+  "TYPES.Item.power": "Power",
   "TYPES.Item.worlddata": "World Data",
 
   "EFFECT.TITLE.Injured": "Injured",

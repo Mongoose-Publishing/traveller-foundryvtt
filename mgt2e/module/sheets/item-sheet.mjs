@@ -450,7 +450,67 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                 return 1;
             });
             context.combatSkills = Object.fromEntries(sorted);
-        } else if (item.type === "cargo") {
+        } 
+        else if (item.type === "power"){
+            let reach = {};
+            for (let t=1; t <= 10; t += 1) {
+                reach[t] = game.i18n.localize("MGT2.Item.PsionicRange." + t);
+            }
+            context.psionicRange = reach;
+            // context.psionicReach = {
+            //     "personal": game.i18n.localize("MGT2.Item.Psionic.personal"),
+            //     "close": game.i18n.localize("MGT2.Item.Psionic.close"),
+            //     "short": game.i18n.localize("MGT2.Item.Psionic.short"),
+            //     "medium": game.i18n.localize("MGT2.Item.Psionic.medium"),
+            //     "long": game.i18n.localize("MGT2.Item.Psionic.long"),
+            //     "verylong": game.i18n.localize("MGT2.Item.Psionic.verylong"),
+            //     "distant": game.i18n.localize("MGT2.Item.Psionic.distant"),
+            //     "verydistant": game.i18n.localize("MGT2.Item.Psionic.verydistant"),
+            //     "continental": game.i18n.localize("MGT2.Item.Psionic.continental"),
+            //     "planetary": game.i18n.localize("MGT2.Item.Psionic.planetary")
+            // };
+            let difficultySelect = {};
+            for (let t=2; t <= 16; t += 2) {
+                difficultySelect[t] = game.i18n.localize("MGT2.TaskDifficulty." + t) + ` (${t}+)`;
+            }
+            context.difficulty = difficultySelect;
+
+            let timeSelect = {};
+            for (let t=1; t <= 9; t += 1) {
+                timeSelect[t] = game.i18n.localize("MGT2.TaskTime." + t);
+            }
+            context.timeFrame = timeSelect;
+
+            let allSkills = MGT2.getDefaultSkills();
+            context.psiSkills = {
+                "": "None"
+            };
+            for (let skillId in allSkills) {
+                let skill = allSkills[skillId];
+                if (skill.specialities) {
+                    for (let specId in skill.specialities) {
+                        let spec = skill.specialities[specId];
+                        if (skill.trait === "psionic") {
+                            let label = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
+                            let specLabel = spec.label?spec.label:game.i18n.localize("MGT2.Skills."+specId);
+                            context.psiSkills[skillId+"."+specId] = label + " (" + specLabel + ")";
+                        }
+                    }
+                } else if (skill.trait === "psionic") {
+                    context.psiSkills[skillId] = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
+                }
+            }
+            let sorted = Object.entries(context.psiSkills).sort((a,b) => {
+                if (a[0] === "") return -1;
+                if (b[0] === "") return 1;
+                if (a[1] < b[1]) {
+                    return -1;
+                }
+                return 1;
+            });
+            context.psiSkills = Object.fromEntries(sorted);
+        }
+            else if (item.type === "cargo") {
             context.availability = {};
             context.haveAvailability = {};
             context.purchaseTraits = {};
