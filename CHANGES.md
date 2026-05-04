@@ -2,6 +2,10 @@
 
 # 0.20.0 (Beta)
 
+NB: There are changes to how status effects are displayed/managed on an actor sheet.
+This may cause differences in behaviour. Any old-style status effects may no longer
+apply. This includes stunned effects.
+
 * Added French translations, updates to Spanish translations.
 * Adding actor to a combat encounter automatically rolls their initiative. This now takes into
   account whether they are "surprised" or "aware". After the first round of combat, DMS for surprise
