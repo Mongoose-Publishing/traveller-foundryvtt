@@ -1,6 +1,6 @@
 # Release Notes
 
-# 0.19.3 (Beta)
+# 0.20.0 (Beta)
 
 * Added French translations, updates to Spanish translations.
 * Adding actor to a combat encounter automatically rolls their initiative. This now takes into
