@@ -1756,7 +1756,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                 let showSpec = false;
                 if (!trainedOnly && skill.trained) {
                     showSpec = true;
-                } else if (Number(spec.value) > 0) {
+                } else if (Number(spec.value) > 0 && (!skill.individual || spec.trained)) {
                     showSpec = true;
                 } else if (spec.expert && Number(spec.expert) > 0) {
                     showSpec = true;
