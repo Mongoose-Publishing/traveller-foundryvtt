@@ -116,13 +116,19 @@ export class MgT2SkillDialog extends Application {
                 this.boonBane = "bane";
             }
             if (this.skillData.trained) {
-                this.value = this.skillData.value;
+                if (this.skillData.individual && this.specData) {
+                    // Treat as untrained so far.
+                } else {
+                    this.value = this.skillData.value;
+                }
 
                 if (this.skillData.augment && parseInt(this.skillData.augment) > 0) {
                     this.skillData.augment = parseInt(this.skillData.augment);
                 }
                 if (this.specData) {
-                    this.value = this.specData.value;
+                    if (!this.skillData.individual || this.specData.trained) {
+                        this.value = this.specData.value;
+                    }
                     if (this.specData.default && !this.cha) {
                         this.cha = this.specData.default;
                     }

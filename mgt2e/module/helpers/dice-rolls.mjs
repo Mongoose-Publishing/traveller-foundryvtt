@@ -85,7 +85,11 @@ export function getSkillValue(actor, skill, speciality) {
         if (data.skills[skill] && data.skills[skill].trained) {
             value = data.skills[skill].value;
             if (speciality) {
-                value = data.skills[skill].specialities[speciality].value;
+                if (skill.individual && !data.skills[skill].specialities[speciality].trained) {
+                    // Treat as untrained.
+                } else {
+                    value = data.skills[skill].specialities[speciality].value;
+                }
             }
         }
         return parseInt(value);
@@ -1059,7 +1063,9 @@ export async function rollSkill(actor, skill, options) {
         }
         skillText += skillLabel(skill);
         if (skill.trained) {
-            value = parseInt(skill.value);
+            if (!skill.individual && speciality) {
+                value = parseInt(skill.value);
+            }
             // For expert, it could be set by an active effect (skill.expert) or by
             // externally run software (options.expert).
             if (!speciality && (options.expert || skill.expert) && (cha === "INT" || cha === "EDU")) {
@@ -1078,7 +1084,14 @@ export async function rollSkill(actor, skill, options) {
                 skillNotes += `Aug&nbsp;${skill.augment}`;
             }
             if (speciality) {
-                value = parseInt(speciality.value) || 0;
+                if (skill.individual) {
+                    // Profession skill is wierd.
+                    if (speciality.trained) {
+                        value = parseInt(speciality.value) || 0;
+                    }
+                } else {
+                    value = parseInt(speciality.value) || 0;
+                }
                 title += " (" + skillLabel(speciality) + ")";
                 skillText += " (" + skillLabel(speciality) + ")";
                 specialityCheck = true;
