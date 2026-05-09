@@ -813,7 +813,7 @@ function getDifficultyLabel(difficulty) {
     return "";
 }
 
-function getEffectLabel(effect) {
+export function getEffectLabel(effect) {
     let effectType, effectClass;
     let chain = "+0";
     if (effect <= -6) {

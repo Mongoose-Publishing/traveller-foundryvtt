@@ -786,3 +786,7 @@ div.inline-package h2 span.actor-link {
   background-color: var(--mongoose-orange);
   margin-left: 40%;
 }
+
+.upp-inline-roll:hover {
+  color: var(--mongoose-orange);
+}

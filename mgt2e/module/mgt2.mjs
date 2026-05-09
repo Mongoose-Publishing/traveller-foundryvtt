@@ -389,6 +389,13 @@ Hooks.on("init", function() {
        const actorId = $(ev.currentTarget).data("actorId");
        openActorSheet(actorId);
     });
+    body.on("click", ".upp-inline-roll", ev => {
+        console.log("INLINE ROLL");
+        let name = $(ev.currentTarget).data("actorName");
+        console.log($(ev.currentTarget).data("skillData"));
+        let data = $(ev.currentTarget).data("skillData");
+        Tools.inlineUppRollSkill(name, data);
+    })
 
     CONFIG.statusEffects.push({
         id: "destroyed",

@@ -1596,6 +1596,10 @@
   "MGT2.Dialog.ApplyDamage.What": "<span class='player-name'>{playerName}</span> wants to cause <span class='damage-value'>{damage} HITS</span> to {actorName}.",
   "MGT2.Dialog.ApplyDamage.ClickYes": "Click YES to allow this.",
 
+  "MGT2.Dialog.AblateOption": "Ablate armour '{armour}'?",
+  "MGT2.Dialog.AblateConfirm.Title": "Attack on '{actor}'",
+  "MGT2.Dialog.AblateConfirm.Text": "Do you want to ablate armour '{armour}'?",
+
   "MGT2.ExceptionalFailure": "Exceptional Failure",
   "MGT2.AverageFailure": "Average Failure",
   "MGT2.MarginalFailure": "Marginal Failure",

@@ -457,6 +457,47 @@ export class MgT2Actor extends Actor {
       return game.users.activeGM;
   }
 
+  findAblatTarget(options) {
+      if (options.damageType) {
+          for (let i of this.items) {
+              if (i.type === "armour" && i.system.armour.ablat === "1" && i.system.status === MgT2Item.EQUIPPED) {
+                  if (i.system.armour.otherTypes.indexOf(options.damageType) > -1) {
+                      return i;
+                  }
+              }
+          }
+      }
+      return null;
+  }
+
+  async applyAnyAblatDamage(options, ablatItem) {
+      // How do we handle ablat?
+      if (ablatItem && ablatItem.type === "armour") {
+          let otherProt = parseInt(ablatItem.system?.armour?.otherProtection);
+          if (!isNaN(otherProt)) {
+              ablatItem.update({"system.armour.otherProtection": otherProt - 1});
+          }
+      } else {
+          for (let i of this.items) {
+              if (i.type === "armour" && i.system.armour.ablat === "1" && i.system.status === MgT2Item.EQUIPPED) {
+                  if (i.system.armour.otherTypes.indexOf(options.damageType) > -1) {
+                      let otherProt = parseInt(i.system.armour.otherProtection);
+                      if (otherProt > 0) {
+                          const yes = await foundry.applications.api.DialogV2.confirm({
+                              window: { title: game.i18n.format("MGT2.Dialog.AblateConfirm.Title", { actor: this.name }) },
+                              content: `<p>${game.i18n.format("MGT2.Dialog.AblateConfirm.Text", { armour: i.name })}</p>`
+                          });
+                          if (yes) {
+                              i.update({"system.armour.otherProtection": otherProt - 1});
+                          }
+                      }
+                      return;
+                  }
+              }
+          }
+      }
+  }
+
   async applyDamageToPerson(damage, options) {
       let armour = 0;
       let armourText = ""
@@ -558,14 +599,6 @@ export class MgT2Actor extends Actor {
               }
           }
 
-          // Finally, any cover options?
-          if (this.getFlag("mgt2e", "inCover")) {
-              const coverBonus = parseInt(this.getFlag("mgt2e", "inCover"));
-              if (coverBonus > 0) {
-                  armourText += `Cover +${coverBonus} `;
-                  armour += coverBonus;
-              }
-          }
           // Check for radiation damage.
           if (radiationDamage > 0 && this.system.armour && isNonZero(this.system.armour.rad)) {
               options.armourRads = Number(this.system.armour.rad);
@@ -598,6 +631,7 @@ export class MgT2Actor extends Actor {
                       {"target": this.name}
                   )
               );
+              this.applyAnyAblatDamage(options);
               return;
           }
       }
@@ -663,6 +697,14 @@ export class MgT2Actor extends Actor {
       let stuns = 0;
       if (hasTrait(options.traits, "stun")) {
           stun = true;
+      }
+      console.log("applyActualDamageToTraveller:");
+      console.log(options);
+      if (options.ablatItemId) {
+          console.log("Ablating armour ");
+          let i = this.items.get(options.ablatItemId);
+          this.applyAnyAblatDamage(options, i);
+
       }
       if (options.directChaDamage) {
           // Damage it to be applied to specific characteristics, not

@@ -1,4 +1,4 @@
-import {hasTrait, getTraitValue, skillLabel} from "../dice-rolls.mjs";
+import {hasTrait, getTraitValue, skillLabel, getEffectLabel} from "../dice-rolls.mjs";
 import {Physics} from "./physics.mjs";
 import {MgT2DamageDialog} from "../damage-dialog.mjs";
 import {MgT2eMacros} from "./macros.mjs";
@@ -600,9 +600,10 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
         html += `</span>`;
     }
 
+    let upp = null;
     if (args.upp) {
         html += `<div class="inline-upp grid grid-8col">`;
-        let upp = Tools.getHexFromUpp(args.upp, 0);
+        upp = Tools.getHexFromUpp(args.upp, 0);
         for (let c of [ "str", "dex", "end", "int", "edu", "soc" ]) {
             html += `<div><div>${c.toUpperCase()}</div><div>${upp[c]}</div></div>`;
         }
@@ -620,7 +621,50 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
             if (!skillVal) skillVal = 0;
             let skillLabel = Tools.getSkillLabel(SKILLS, skillFqn);
 
-            skillHtml += `<li>${skillLabel.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
+            // Try and find link to skill data.
+            let skillId = skillFqn, specId = null;
+            let skill = null, spec = null;
+            if (skillFqn.indexOf(".") > -1) {
+                skillId = skillFqn.split(".")[0];
+                specId = skillFqn.split(".")[1];
+
+                skill = SKILLS[skillId];
+                spec = skill?skill.specialities[specId]:null;
+            } else {
+                skill = SKILLS[skillId];
+            }
+            if (!skill) {
+                skillHtml += `<li>${skillLabel.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
+                continue;
+            }
+
+            let rollData = {
+                title: skillLabel,
+                cha: skill.default?skill.default:"INT",
+                chaDM: 0
+            };
+            if (spec && spec.default) {
+                rollData.cha = spec.default;
+            }
+            if (upp[rollData.cha.toLowerCase()]) {
+                let cv = upp[rollData.cha.toLowerCase()];
+                if (cv < 1) {
+                    rollData.chaDM = -3;
+                } else if (cv < 3) {
+                    rollData.chaDM = -2;
+                } else {
+                    rollData.chaDM = parseInt(cv / 3) - 2;
+                }
+            }
+
+            if (SKILLS[skillId]) {
+                rollData.label = skillLabel;
+                rollData.value = skillVal;
+                rollData.checkText = `${rollData.cha} (${rollData.chaDM}) + ${skillLabel} (${skillVal})`
+            }
+            let json = JSON.stringify(rollData);
+
+            skillHtml += `<li class="upp-inline-roll" data-actor-name="${name}" data-skill-data='${json}'>${skillLabel.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
         }
         html += `<ul class="skill-list">${skillHtml}</ul>`;
 
@@ -631,6 +675,33 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
 
     a.innerHTML = html;
     return a;
+}
+
+Tools.inlineUppRollSkill = async function(actorName, skillData) {
+    console.log(actorName);
+    console.log(skillData);
+
+    let roll = await new Roll(`2D6 + ${skillData.chaDM} + ${skillData.value}`, null).evaluate();
+    let contentData = {
+        agent: actorName,
+        skillTitle: skillData.label,
+        useChatIcons: false,
+        difficulty: 8,
+        total: roll.total,
+        effect: roll.total - 8,
+        checkText: skillData.checkText,
+        skillText: "<b>Average</b> skill check",
+        effectLabel: getEffectLabel(roll.total - 8)
+    }
+    const html = await foundry.applications.handlebars.renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
+
+    roll.toMessage({
+            flavor: html},
+        {
+            rollMode: game.settings.get("core", "rollMode")
+        }
+    );
+
 }
 
 Tools.itemInlineDisplay = async function(itemId) {
