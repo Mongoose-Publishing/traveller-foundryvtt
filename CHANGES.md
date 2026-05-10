@@ -1,6 +1,6 @@
 # Release Notes
 
-# Develop
+# 0.20.1 (Beta)
 
 * Ablative armour will now be reduced if an attack of the matching energy type is received.
   Option is provided in the damage dialog to disable this on a per case basis. If damage
