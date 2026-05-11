@@ -658,6 +658,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         const armour = [];
         const terms = [];
         const associates = [];
+        const powers = [];
         const augments = [];
         const software = [];
 
@@ -699,6 +700,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 armour.push(i);
             } else if (i.type === 'term') {
                 terms.push(i);
+            } else if (i.type === 'power') {
+                powers.push(i);
             } else if (i.type === "associate") {
                 associates.push(i);
             } else if (i.type === "software") {
@@ -755,6 +758,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         context.activeWeapons = activeWeapons;
         context.armour = armour;
         context.terms = terms;
+        context.powers = powers;
         context.associates = associates;
         context.software = software;
         context.augments = augments;
@@ -2781,7 +2785,6 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const element = event.currentTarget;
         const dataset = element.dataset;
-
         // Handle item rolls.
         if (dataset.rollType) {
             if (dataset.rollType === 'item') {
