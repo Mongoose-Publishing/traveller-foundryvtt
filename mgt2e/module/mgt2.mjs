@@ -1613,7 +1613,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     let showSpecs = false;
     let trainedOnly = data.settings.hideUntrained;
     let backgroundOnly = data.settings.onlyBackground;
-    let untrainedLevel = data.skills["jackofalltrades"].value - 3;
+    let untrainedLevel = (data.skills["jackofalltrades"]?.trained)?data.skills["jackofalltrades"].value - 3:-3;
     let isCreature = data.characteristics?false:true;
     let isDeleted = false;
 

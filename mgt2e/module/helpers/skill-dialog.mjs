@@ -62,7 +62,14 @@ export class MgT2SkillDialog extends Application {
         this.actor = actor;
         const data = actor?actor.system:null;
 
-        this.value = data?data.skills["jackofalltrades"].value - 3:-3;
+        let untrainedValue = -3;
+        if (data?.skills["jackofalltrades"]?.trained) {
+            untrainedValue = parseInt(data.skills["jackofalltrades"].value) - 3;
+            if (isNaN(untrainedValue)) {
+                untrainedValue = -3;
+            }
+        }
+        this.value = untrainedValue;
         this.cha = skillOptions.cha;
         this.expert = skillOptions.expert?skillOptions.expert:0;
         this.augment = 0;
@@ -137,7 +144,7 @@ export class MgT2SkillDialog extends Application {
                     }
                 }
             } else {
-                this.value = data.skills["jackofalltrades"].value - 3;
+                this.value = untrainedValue;
                 if (this.specData && this.specData.expert) {
                     this.expert = parseInt(this.specData.expert);
                 }
