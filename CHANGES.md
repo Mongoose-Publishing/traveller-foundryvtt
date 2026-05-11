@@ -1,5 +1,9 @@
 # Release Notes
 
+# 0.20.2 (Beta)
+
+* Previous fix introduced bug where some skills were rolling at -3.
+
 # 0.20.1 (Beta)
 
 * Ablative armour will now be reduced if an attack of the matching energy type is received.
