@@ -81,11 +81,15 @@ export function getSkillValue(actor, skill, speciality) {
             speciality = skill.split(".")[1];
             skill = skill.split(".")[0];
         }
-        let value = parseInt(data.skills["jackofalltrades"].value) - 3;
+        let value = (data.skills["jackofalltrades"]?.trained)?parseInt(data.skills["jackofalltrades"].value) - 3:-3;
         if (data.skills[skill] && data.skills[skill].trained) {
             value = data.skills[skill].value;
             if (speciality) {
-                value = data.skills[skill].specialities[speciality].value;
+                if (skill.individual && !data.skills[skill].specialities[speciality].trained) {
+                    // Treat as untrained.
+                } else {
+                    value = data.skills[skill].specialities[speciality].value;
+                }
             }
         }
         return parseInt(value);
@@ -813,7 +817,7 @@ function getDifficultyLabel(difficulty) {
     return "";
 }
 
-function getEffectLabel(effect) {
+export function getEffectLabel(effect) {
     let effectType, effectClass;
     let chain = "+0";
     if (effect <= -6) {
@@ -1049,7 +1053,7 @@ export async function rollSkill(actor, skill, options) {
 
         title += ((title === "")?"":" + ") + skillLabel(skill);
         skillCheck = true;
-        let value = data.skills["jackofalltrades"].value - 3;
+        let value = (data.skills["jackofalltrades"]?.trained)?data.skills["jackofalltrades"].value - 3:-3;
         // Athletics can always be rolled using basic characteristic.
         if (skill.id === "athletics" && value < 0) {
             value = 0;
@@ -1059,7 +1063,9 @@ export async function rollSkill(actor, skill, options) {
         }
         skillText += skillLabel(skill);
         if (skill.trained) {
-            value = parseInt(skill.value);
+            if (!skill.individual || !speciality) {
+                value = parseInt(skill.value);
+            }
             // For expert, it could be set by an active effect (skill.expert) or by
             // externally run software (options.expert).
             if (!speciality && (options.expert || skill.expert) && (cha === "INT" || cha === "EDU")) {
@@ -1078,7 +1084,14 @@ export async function rollSkill(actor, skill, options) {
                 skillNotes += `Aug&nbsp;${skill.augment}`;
             }
             if (speciality) {
-                value = parseInt(speciality.value) || 0;
+                if (skill.individual) {
+                    // Profession skill is wierd.
+                    if (speciality.trained) {
+                        value = parseInt(speciality.value) || 0;
+                    }
+                } else {
+                    value = parseInt(speciality.value) || 0;
+                }
                 title += " (" + skillLabel(speciality) + ")";
                 skillText += " (" + skillLabel(speciality) + ")";
                 specialityCheck = true;
@@ -1230,10 +1243,20 @@ export async function rollSkill(actor, skill, options) {
             for (let sp in skill.specialities) {
                 let spec = skill.specialities[sp];
                 let speciality = {};
+                let untrainedValue = (data.skills["jackofalltrades"]?.trained)?data.skills["jackofalltrades"].value - 3:-3;
 
-                if (spec.value > 0 || spec.augment || spec.augdm || spec.bonus || spec.expert) {
+                if (skill.individual && !spec.trained && !(spec.augdm || spec.bonus || spec.expert)) {
+                    continue;
+                }
+
+                if (spec.trained || spec.value > 0 || spec.augment || spec.augdm || spec.bonus || spec.expert) {
                     let stotal = parseInt(total) + parseInt(spec.value);
                     let slabel = `${skillLabel(spec)} (${spec.value})`;
+
+                    if (skill.individual && !spec.trained) {
+                        stotal = parseInt(total) + parseInt(untrainedValue);
+                        slabel = `${skillLabel(spec)} (${untrainedValue})`;
+                    }
 
                     specDM = 0;
                     specAug = 0;
@@ -1340,7 +1363,7 @@ export async function rollSkill(actor, skill, options) {
             options: JSON.stringify(options)
         }
 
-        const html = await renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
+        const html = await foundry.applications.handlebars.renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({actor: actor}),
             flavor: html},

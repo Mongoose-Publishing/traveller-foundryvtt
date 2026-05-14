@@ -1,5 +1,43 @@
 # Release Notes
 
+# 0.20.1 (Beta)
+
+* Ablative armour will now be reduced if an attack of the matching energy type is received.
+  Option is provided in the damage dialog to disable this on a per case basis. If damage
+  doesn't penetrate, a confirm dialog asks whether to reduce or not.
+* Fixed some bugs with profession skill. If the speciality was untrained, but skill had an
+  outstanding value, the value was used rather than -3. It was also using 0 rather than -3
+  if the parent was trained.
+* Added `[[/upp ...]]{Name}` macro for the journal. This allows an inline NPC to be rendered
+  in the journal, without the need for an actual actor object. Designed for use where a simple
+  NPC stat block is wanted, without the hassle of a complete character. If skills are defined,
+  then they can be rolled from the journal. e.g.:
+  `[[/upp upp=777A59 profession="Admin" gender="Male" species="Vilani" age=24 skills="admin 1, electronics.sensors 2"]]{Bob Smith}`
+  All the arguments are optional, except for the Name at the end. Skills must match the internal
+  skill ids to be properly linked.
+
+# 0.20.0 (Beta)
+
+NB: There are changes to how status effects are displayed/managed on an actor sheet.
+This may cause differences in behaviour. Any old-style status effects may no longer
+apply. This includes stunned effects.
+
+* Added French translations, updates to Spanish translations.
+* Adding actor to a combat encounter automatically rolls their initiative. This now takes into
+  account whether they are "surprised" or "aware". After the first round of combat, DMS for surprise
+  are removed, which may result in re-ordering of combat.
+* Updates to status effects. Replacing the old flag based system with active effects. Some status
+  effects now provide active effect modifiers (such as cover adding to armour, or tactics adding
+  to initiative.
+* Added status effects for aware (have surprise), surprise (are surprised), reaction dodge, fatigued,
+  physical/combat/melee DMs, armour, inCover, stunned and tactics.
+* Status effects can now be added directly from the actor sheet (from settings tab). A better location
+  needs to be chosen.
+* Status effects with values can be modified from the status bar.
+* Fixed the 'In Cover' macro to use the new cover status effects.
+* Added 'Add Effect Status' macro for adding status to multiple actor tokens in one go.
+* Removed the /status chat command to set status on actors.
+
 # 0.19.2 (Beta)
 
 * Change to how characteristic augments work. Cha Augment split into Cha Bonus, and Cha Base.

@@ -111,7 +111,7 @@ sed -i "s#\"maximum\": .*#\"maximum\": $FOUNDRY_VERSION#" mgt2e/system.json
 # Zip up system archive, minus the source json.
 if [ $LOCAL = "yes" ]
 then
-  if [[ $release =~ v[0-9].* ]]
+  if [[ $release =~ v[0-9]+\.[0-9]+.* ]]
   then
     echo "Running LOCAL build on RELEASE branch $release"
     exit 1

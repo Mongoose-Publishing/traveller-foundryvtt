@@ -62,9 +62,16 @@ export class MgT2SkillDialog extends Application {
         this.actor = actor;
         const data = actor?actor.system:null;
 
-        this.value = data?data.skills["jackofalltrades"].value - 3:-3;
+        let untrainedValue = -3;
+        if (data?.skills["jackofalltrades"]?.trained) {
+            untrainedValue = parseInt(data.skills["jackofalltrades"].value) - 3;
+            if (isNaN(untrainedValue)) {
+                untrainedValue = -3;
+            }
+        }
+        this.value = untrainedValue;
         this.cha = skillOptions.cha;
-        this.expert = 0;
+        this.expert = skillOptions.expert?skillOptions.expert:0;
         this.augment = 0;
         this.augdm = 0;
         this.penalty = 0;
@@ -116,13 +123,19 @@ export class MgT2SkillDialog extends Application {
                 this.boonBane = "bane";
             }
             if (this.skillData.trained) {
-                this.value = this.skillData.value;
+                if (this.skillData.individual && this.specData) {
+                    // Treat as untrained so far.
+                } else {
+                    this.value = this.skillData.value;
+                }
 
                 if (this.skillData.augment && parseInt(this.skillData.augment) > 0) {
                     this.skillData.augment = parseInt(this.skillData.augment);
                 }
                 if (this.specData) {
-                    this.value = this.specData.value;
+                    if (!this.skillData.individual || this.specData.trained) {
+                        this.value = this.specData.value;
+                    }
                     if (this.specData.default && !this.cha) {
                         this.cha = this.specData.default;
                     }
@@ -131,7 +144,7 @@ export class MgT2SkillDialog extends Application {
                     }
                 }
             } else {
-                this.value = data.skills["jackofalltrades"].value - 3;
+                this.value = untrainedValue;
                 if (this.specData && this.specData.expert) {
                     this.expert = parseInt(this.specData.expert);
                 }
@@ -185,6 +198,7 @@ export class MgT2SkillDialog extends Application {
             "skill": this.skillData,
             "description": this.description,
             "spec": this.specData,
+            "expert": this.expert,
             "skillText": this.skillText,
             "value": this.value,
             "showCha": (this.actor && this.skillData && this.actor.type !== "creature"),

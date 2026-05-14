@@ -1,4 +1,4 @@
-import {hasTrait, getTraitValue, skillLabel} from "../dice-rolls.mjs";
+import {hasTrait, getTraitValue, skillLabel, getEffectLabel} from "../dice-rolls.mjs";
 import {Physics} from "./physics.mjs";
 import {MgT2DamageDialog} from "../damage-dialog.mjs";
 import {MgT2eMacros} from "./macros.mjs";
@@ -6,6 +6,7 @@ import {calculateCost} from "../utils/character-utils.mjs";
 import {getShipData} from "../spacecraft/spacecraft-utils.mjs";
 import {MGT2} from "../config.mjs";
 import {setSpacecraftCriticalLevel} from "../spacecraft/criticals.mjs";
+import {getHighestModifier} from "../utils/trade-utils.mjs";
 
 export const Tools = {};
 
@@ -124,48 +125,6 @@ Tools.getSelected = function() {
         return selected;
     } else {
         return targets.values();
-    }
-}
-
-Tools.setStatusFor = function(actor, args, status) {
-    if (args.includes(status)) {
-        actor.setFlag("mgt2e", status, true);
-    }
-    if (args.includes("-" + status)) {
-        actor.unsetFlag("mgt2e", status);
-    }
-}
-
-Tools.setStatus = function(chatData, args) {
-    const selected = Tools.getSelected();
-
-    if (selected.length === 0) {
-        ui.notifications("No tokens selected");
-        return;
-    }
-    for (let token of selected) {
-        if (!token.owner) {
-            continue;
-        }
-        let actor = token.actor;
-        if (actor.type === "traveller" || actor.type === "npc" || actor.type === "creature") {
-            Tools.setStatusFor(actor, args, "stunned");
-            Tools.setStatusFor(actor, args, "fatigued");
-            Tools.setStatusFor(actor, args, "highGravity");
-            Tools.setStatusFor(actor, args, "lowGravity");
-            Tools.setStatusFor(actor, args, "zeroGravity");
-            Tools.setStatusFor(actor, args, "poisoned");
-            Tools.setStatusFor(actor, args, "diseased");
-            Tools.setStatusFor(actor, args, "unconscious");
-            Tools.setStatusFor(actor, args, "disabled");
-            Tools.setStatusFor(actor, args, "dead");
-            Tools.setStatusFor(actor, args, "destroyed");
-            Tools.setStatusFor(actor, args, "needsFirstAid");
-            Tools.setStatusFor(actor, args, "needsSurgery");
-            Tools.setStatusFor(actor, args, "inCover");
-            Tools.setStatusFor(actor, args, "prone");
-            actor.update({ "system.status": actor.system.status });
-        }
     }
 }
 
@@ -541,6 +500,8 @@ Tools.macroExecutionEnricher = function(match, options) {
             return Tools.actorInlineDisplay(macroName);
         } else if (type === "/item") {
             return Tools.itemInlineDisplay(macroName, argsString, title, flavor);
+        } else if (type === "/upp") {
+            return Tools.uppInlineDisplay(macroName, macroName + " " + argsString, title, flavor);
         } else {
             console.log(type);
         }
@@ -561,6 +522,186 @@ Tools.blockInline = async function(argsString) {
         const value = match[2] ?? match[3];
         args[key] = value;
     }
+    return args;
+}
+
+Tools.getHexFromUpp = function(upp) {
+    let data = { str: 7, dex: 7, end: 7, int: 7, edu: 7, soc: 7 }
+
+    if (upp && upp.length >= 3) {
+        data.str = parseInt(upp.substring(0, 1), 16);
+        data.dex = parseInt(upp.substring(1, 2), 16);
+        data.end = parseInt(upp.substring(2, 3), 16);
+    }
+    if (upp && upp.length >= 6) {
+        data.int = parseInt(upp.substring(3, 4), 16);
+        data.edu = parseInt(upp.substring(4, 5), 16);
+        data.soc = parseInt(upp.substring(5, 6), 16);
+    }
+
+    return data;
+}
+
+Tools.getSkillLabel = function(skills, skillFqn) {
+    let label = "";
+    let skillId = skillFqn, specId = null;
+    if (skillFqn.indexOf(".") > -1) {
+        skillId = skillFqn.replace(/\..*/, "");
+        specId = skillFqn.replace(/.*\./, "");
+    }
+    let skillLabel = game.i18n.localize("MGT2.Skills." + skillId);
+    let specLabel = specId?game.i18n.localize("MGT2.Skills." + specId):"";
+    if (skills[skillId]) {
+        if (skills[skillId].label) {
+            skillLabel = skills[skillId.label];
+        }
+        if (specId && skills[skillId].specialities) {
+            if (skills[skillId].specialities[specId]?.label) {
+                specLabel = skills[skillId].specialities[specId].label;
+            }
+        }
+    }
+    label = skillLabel;
+    if (specId && specLabel) {
+        label = `${skillLabel} (${specLabel})`;
+    }
+
+    return label;
+};
+
+Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
+    console.log("uppInlineDisplay:");
+    console.log(name);
+    console.log(argsString);
+
+    const args = await Tools.blockInline(argsString);
+    console.log(args);
+    const a = document.createElement("div");
+
+    let html = `<div class="inline-upp">`;
+    html += `<span class="name">${name}`;
+    if (args.species) {
+        html += `<span class="extra-data">${args.species}</span>`;
+    }
+    html += `</span>`;
+    if (args.profession) {
+        html += `<span class="profession">${args.profession}`;
+        if (args.gender || args.age) {
+            html += `<span class="extra-data">`;
+            if (args.gender) html += `${args.gender}`;
+            if (args.age) html += ` ${args.age}`;
+            html += `</span>`;
+        }
+        html += `</span>`;
+    } else if (args.gender || args.age) {
+        html += `<span class="profession">`;
+        if (args.gender) html += `${args.gender}`;
+        if (args.age) html += ` ${args.age}`;
+        html += `</span>`;
+    }
+
+    let upp = null;
+    if (args.upp) {
+        html += `<div class="inline-upp grid grid-8col">`;
+        upp = Tools.getHexFromUpp(args.upp, 0);
+        for (let c of [ "str", "dex", "end", "int", "edu", "soc" ]) {
+            html += `<div><div>${c.toUpperCase()}</div><div>${upp[c]}</div></div>`;
+        }
+        html += `</div>`;
+    }
+
+    if (args.skills) {
+        let skillHtml = "";
+        let skills = args.skills.split(",");
+        let SKILLS = MGT2.getDefaultSkills();
+
+        for (let key of skills) {
+            let skillFqn = key.trim().split(" ")[0];
+            let skillVal = key.trim().split(" ")[1];
+            if (!skillVal) skillVal = 0;
+            let skillLabel = Tools.getSkillLabel(SKILLS, skillFqn);
+
+            // Try and find link to skill data.
+            let skillId = skillFqn, specId = null;
+            let skill = null, spec = null;
+            if (skillFqn.indexOf(".") > -1) {
+                skillId = skillFqn.split(".")[0];
+                specId = skillFqn.split(".")[1];
+
+                skill = SKILLS[skillId];
+                spec = skill?skill.specialities[specId]:null;
+            } else {
+                skill = SKILLS[skillId];
+            }
+            if (!skill) {
+                skillHtml += `<li>${skillLabel.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
+                continue;
+            }
+
+            let rollData = {
+                title: skillLabel,
+                cha: skill.default?skill.default:"INT",
+                chaDM: 0
+            };
+            if (spec && spec.default) {
+                rollData.cha = spec.default;
+            }
+            if (upp[rollData.cha.toLowerCase()]) {
+                let cv = upp[rollData.cha.toLowerCase()];
+                if (cv < 1) {
+                    rollData.chaDM = -3;
+                } else if (cv < 3) {
+                    rollData.chaDM = -2;
+                } else {
+                    rollData.chaDM = parseInt(cv / 3) - 2;
+                }
+            }
+
+            if (SKILLS[skillId]) {
+                rollData.label = skillLabel;
+                rollData.value = skillVal;
+                rollData.checkText = `${rollData.cha} (${rollData.chaDM}) + ${skillLabel} (${skillVal})`
+            }
+            let json = JSON.stringify(rollData);
+
+            skillHtml += `<li class="upp-inline-roll" data-actor-name="${name}" data-skill-data='${json}'>${skillLabel.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
+        }
+        html += `<ul class="skill-list">${skillHtml}</ul>`;
+
+        html += `</div>`;
+    }
+
+    html += `</div>`;
+
+    a.innerHTML = html;
+    return a;
+}
+
+Tools.inlineUppRollSkill = async function(actorName, skillData) {
+    console.log(actorName);
+    console.log(skillData);
+
+    let roll = await new Roll(`2D6 + ${skillData.chaDM} + ${skillData.value}`, null).evaluate();
+    let contentData = {
+        agent: actorName,
+        skillTitle: skillData.label,
+        useChatIcons: false,
+        difficulty: 8,
+        total: roll.total,
+        effect: roll.total - 8,
+        checkText: skillData.checkText,
+        skillText: "<b>Average</b> skill check",
+        effectLabel: getEffectLabel(roll.total - 8)
+    }
+    const html = await foundry.applications.handlebars.renderTemplate("systems/mgt2e/templates/chat/skill-roll.html", contentData);
+
+    roll.toMessage({
+            flavor: html},
+        {
+            rollMode: game.settings.get("core", "rollMode")
+        }
+    );
+
 }
 
 Tools.itemInlineDisplay = async function(itemId) {

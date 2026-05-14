@@ -1,6 +1,13 @@
 <div class="mgt2e-chat-message item-box">
-    <img class="chat-sticker-item item-uuid-link" data-item-id="{{item.uuid}}"
-         title="{{item.name}}" src="{{item.img}}" />
+    {{#if item.system.world}}
+        {{#if item.parent}}
+            <img class="chat-sticker-item actor-uuid-link" data-actor-id="{{item.parent.uuid}}"
+                 title="{{item.parent.name}}" src="{{item.parent.img}}" />
+        {{/if}}
+    {{else}}
+        <img class="chat-sticker-item item-uuid-link" data-item-id="{{item.uuid}}"
+             title="{{item.name}}" src="{{item.img}}" />
+    {{/if}}
     <h2>
         {{item.name}}
     </h2>
@@ -10,6 +17,54 @@
             {{#if item.system.cargo}}
                 <div><b>{{localize 'MGT2.Item.BasePrice'}}:</b> Cr{{prettyNumber item.system.cargo.price 0 false}}</div>
                 <div><b>{{localize 'MGT2.Item.Tons'}}:</b> {{prettyNumber item.system.cargo.tons 0 false}}</div>
+            {{else if item.system.world}}
+                {{#if item.parent.system.world}}
+                    <div class="grid-span-3 world-data-chat-header">
+                        <h5>{{item.parent.name}}</h5>
+                        <span>{{localize (concat 'MGT2.WorldData.Type.' item.system.world.datatype) }}</span>
+                    </div>
+                {{/if}}
+                {{#if (ifEquals item.system.world.datatype "faction")}}
+                    <div class="grid-span-3">
+                        <b>{{localize (concat 'MGT2.WorldSheet.Government.Type.' item.system.world.government)}}</b>
+                        <br/>
+                        <i>{{localize (concat 'MGT2.WorldSheet.Faction.Strength.' item.system.world.strength)}}</i>
+                    </div>
+                {{/if}}
+                {{#if (ifEquals item.system.world.datatype "patron")}}
+                    <div class="grid-span-3">
+                        <b>{{item.system.world.species}}</b> / <b>{{item.system.world.profession}}</b>
+                    </div>
+                {{/if}}
+                {{#if (ifEquals item.system.world.datatype "planet")}}
+                    <div class="grid-span-1">
+                        {{localize (concat "MGT2.WorldData.Planet.Type." item.system.world.planetType)}}
+                    </div>
+                    <div class="grid-span-2">
+                        {{#if (ifEquals item.system.world.planetType "terrestrial")}}
+                            <span>
+                                {{item.system.world.uwp.port}}
+                                {{toHex item.system.world.uwp.size}}
+                                {{toHex item.system.world.uwp.atmosphere}}
+                                {{toHex item.system.world.uwp.hydrographicst}}
+                                {{toHex item.system.world.uwp.population}}
+                                {{toHex item.system.world.uwp.government}}
+                                {{toHex item.system.world.uwp.lawLevel}} -
+                                {{toHex item.system.world.uwp.techLevel}}
+                            </span>
+                        {{else}}
+                            -
+                        {{/if}}
+                    </div>
+                {{/if}}
+                {{#if (ifEquals item.system.world.datatype "star")}}
+                    <div class="grid-span-3">
+                        {{item.system.world.spectralType}}
+                        {{item.system.world.luminosityClass}}
+                    </div>
+                {{/if}}
+                {{#if (ifEquals item.system.world.datatype "passenger")}}
+                {{/if}}
             {{else}}
                 {{#if item.system.tl includeZero=false}}
                     <div>

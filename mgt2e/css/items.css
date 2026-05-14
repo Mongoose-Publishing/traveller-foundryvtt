@@ -349,27 +349,25 @@ div.span.item-status-RUNNING {
 .world-data-sheet {
   display: flex;
   align-items: flex-start;
+  height: 48px;
 }
 
 .world-data-sheet h1 {
   width: 100%;
   white-space: nowrap;
+  height: 48px;
 }
 
-.world-data-sheet h1 select.world-data-type {
-  float: left;
+.world-data-sheet select.world-data-type {
   display: inline-block;
-  width: 150px;
   height: 48px;
-  font-size: smaller;
+  font-size: x-large;
+  background-color: #f1511b;
 }
 
 .world-data-sheet h1 input.world-data-name {
-  display: inline;
-  width: auto;
+  display: inline-block;
   height: 48px;
-  overflow: hidden;
-  margin-left: 16px;
 }
 
 textarea.culture {
@@ -418,4 +416,23 @@ textarea.culture {
   right: 10px;
   top: 2px;
   cursor: pointer;
+}
+
+.world-data-sheet .item-to-chat {
+  position: relative;
+  right: 35px;
+}
+
+.world-data-chat-header img {
+  float: right;
+  width: 128px;
+}
+
+.world-data-chat-header h5 {
+  margin-bottom: 0;
+}
+
+.world-data-chat-header span {
+  font-style: italic;
+  font-size: larger;
 }
