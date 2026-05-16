@@ -2187,6 +2187,9 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                     }
                     continue;
                 }
+                if (itemData.type === "term" && itemData.system.term.hideFromPackage) {
+                    continue;
+                }
                 if (itemData.type === "term" && itemData.system.term.randomTerm) {
                     let dice = "3D6";
                     if (itemData.system.term.randomLength) {
@@ -2198,7 +2201,16 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 }
                 ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackageItem",
                     { item: item.name, actor: this.actor.name }));
-                await Item.create(itemData, {parent: this.actor});
+                if (item.type === "associate" && item.system.quantity && parseInt(item.system.quantity) > 1) {
+                    const num = parseInt(item.system.quantity);
+                    delete itemData.system.quantity;
+                    for (let i=0; i < parseInt(num); i++) {
+                        await Item.create(itemData, {parent: this.actor});
+                    }
+                } else {
+                    delete itemData.system.quantity;
+                    await Item.create(itemData, {parent: this.actor});
+                }
 
                 if (itemData.type !== "term") {
                     if (itemData.type === "associate") {

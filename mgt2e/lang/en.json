@@ -1176,6 +1176,7 @@
   "MGT2.Item.Term.RandomLength": "Roll",
   "MGT2.Item.Term.Assignment": "Assignment",
   "MGT2.Item.Term.RandomTerm": "Random term length",
+  "MGT2.Item.Term.HideFromPackage": "Do not transfer to Traveller",
 
   "MGT2.Item.EnergyType.standard": "Standard",
   "MGT2.Item.EnergyType.laser": "Laser",

@@ -434,7 +434,6 @@ div.inline-upp .inline-upp {
   width: 80%;
 }
 
-
 div.inline-actor {
     margin: 1em;
     background-color: #303030;
@@ -777,16 +776,27 @@ table.mongoose-equipment td {
   border: 1px solid black;
 }
 
-div.inline-package h2 span.actor-link {
+div.inline-package h3 span.actor-link {
+  text-transform: uppercase;
   color: var(--mongoose-orange);
 }
 
-.inline-package h3 {
+.inline-package h4 {
   color: black;
   background-color: var(--mongoose-orange);
   margin-left: 40%;
+  text-transform: uppercase;
 }
 
 .upp-inline-roll:hover {
   color: var(--mongoose-orange);
+}
+
+p.post-package-description {
+  margin-left: 1em;
+}
+
+p.post-package-description img.package-icon {
+  width: 128px;
+  float: left;
 }

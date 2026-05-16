@@ -1,5 +1,5 @@
 <div class="inline-actor inline-package">
-    <h2><span class="rollable actor-link" data-actor-id="{{actor.uuid}}">{{actor.name}}</span></h2>
+    <h3><span class="rollable actor-link" data-actor-id="{{actor.uuid}}">{{actor.name}}</span></h3>
 
     <div>
         <div class="grid grid-4col actor-cha-list grid-span-1" style="float:left">
@@ -12,16 +12,32 @@
             <div class="species-title grid-span-4">Skills</div>
         </div>
         <div>
-            <h3>Benefits</h3>
+            <h4>Benefits</h4>
             {{#if actor.system.cash includeZero=false}}
-                <p>Cr{{prettyNumber actor.system.cash 0 false}}</p>
+                Cr{{prettyNumber actor.system.cash 0 false}}<br/>
             {{/if}}
-            {{#each actor.items as |item|}}
-                {{item.name}},
-            {{/each}}
-            <p>
-                List of benefits goes here.
-            </p>
+            <ul class="comma-list">
+                {{#each actor.items as |item|}}
+                    {{#if (ifEquals item.type "term")}}
+                        {{#unless item.system.term.hideFromPackage}}
+                            <li>{{item.name}}</li>
+                        {{/unless}}
+                    {{/if}}
+                {{/each}}
+                {{#each actor.items as |item|}}
+                    {{#if (ifEquals item.type "associate")}}
+                        <li>{{localize (concat "MGT2.History.Relation." item.system.associate.relationship)}}
+                            ({{item.name}}){{#unless (ifEquals item.system.quantity "1")}}&nbsp;x{{item.system.quantity}}{{/unless}}</li>
+                    {{/if}}
+                {{/each}}
+                {{#each actor.items as |item|}}
+                    {{#if (ifEquals item.type "term")}}
+                    {{else if (ifEquals item.type "associate")}}
+                    {{else}}
+                        <li>{{item.name}}</li>
+                    {{/if}}
+                {{/each}}
+            </ul>
         </div>
         <div style="clear: both">
             <span>{{{showSimpleSkills actor}}}</span>
@@ -29,4 +45,9 @@
     </div>
 </div>
 
-{{{actor.system.description}}}
+<p class="post-package-description">
+    <img class="package-icon" src="{{actor.img}}"/>
+    {{{actor.system.description}}}
+</p>
+
+<p style="clear: both"> </p>
