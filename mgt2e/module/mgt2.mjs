@@ -1801,6 +1801,9 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                     }
                     let hasXp = (spec.xp && spec.xp > 0);
                     let label = skillLabel(spec);
+                    if (spec.optional) {
+                        label += " ?";
+                    }
                     html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} ${isDeleted?"deleted":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
                     html += `data-spec="${sid}" title="${title}">${label}${hasXp?"<sup>+</sup>":""}</label>`;
                     if (skill.trained && (!skill.individual || spec.trained)) {
@@ -2104,12 +2107,44 @@ Handlebars.registerHelper('showSimpleSkills', function(actor) {
             if (skill.trained) {
                 let showParent = true;
                 if (skill.specialities) {
-                    for (let specKey in skill.specialities) {
-                        let spec = skill.specialities[specKey];
-                        if (spec.value > 0) {
-                            const dataSkillFqn=`data-skill-fqn="${key}.${specKey}"`;
-                            showParent = false;
-                            html += `<li class="rollable" ${dataRoll} ${dataSkillFqn} data-spec="${specKey}">${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})&nbsp;${spec.value}</li>`;
+                    // Look for optional stuff.
+                    let optionalList = null;
+                    let optionalValue = 0;
+                    if (actor.type === "package") {
+                        optionalList = [];
+                        for (let specKey in skill.specialities) {
+                            if (skill.specialities[specKey].optional) {
+                                optionalList.push(specKey);
+                                // Assume optional specialisations all have the same value.
+                                optionalValue = skill.specialities[specKey].value;
+                            }
+                        }
+                        if (Object.keys(skill.specialities).length === optionalList.length) {
+                            optionalList = [ "any" ];
+                        }
+                    }
+
+                    if (optionalList && optionalList[0] === "any") {
+                        showParent = false;
+                        html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${game.i18n.localize("MGT2.any")})&nbsp;${optionalValue}</li>`;
+                    } else if (optionalList && optionalList.length > 0) {
+                        showParent = false;
+                        html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(`;
+                        let list = "";
+                        for (let specKey of optionalList) {
+                            let spec = skill.specialities[specKey];
+                            if (list !== "") list += ` ${game.i18n.localize("MGT2.or")} `;
+                            list += skillLabel(spec, specKey);
+                        }
+                        html += `${list})&nbsp;${optionalValue}</li>`;
+                    } else {
+                        for (let specKey in skill.specialities) {
+                            let spec = skill.specialities[specKey];
+                            if (spec.trained || spec.value > 0) {
+                                const dataSkillFqn = `data-skill-fqn="${key}.${specKey}"`;
+                                showParent = false;
+                                html += `<li class="rollable" ${dataRoll} ${dataSkillFqn} data-spec="${specKey}">${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})&nbsp;${spec.value}</li>`;
+                            }
                         }
                     }
                 }

@@ -1974,7 +1974,45 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                     target.trained = true;
                     target.value = Math.min(4, parseInt(target.value) + parseInt(skill.value));
                     if (skill.specialities) {
+                        // Look for optional skills.
+                        let optionalSkills = [];
+                        let selectedOptional = null;
                         for (let sp in skill.specialities) {
+                            if (skill.specialities[sp].optional) {
+                                optionalSkills.push({
+                                    label: skillLabel(skill.specialities[sp]),
+                                    action: sp,
+                                    value: sp
+                                })
+                            }
+                        }
+                        if (optionalSkills.length > 5) {
+                            let content = `<p>${game.i18n.format("MGT2.Dialog.SelectSkill.Text", { name: skillLabel(skill)})}</p>`;
+
+                            const fields = foundry.applications.fields;
+                            const selectInput = fields.createSelectInput({
+                                options: optionalSkills,
+                                name: "skill"
+                            });
+                            content += selectInput.outerHTML;
+
+                            const data = await foundry.applications.api.DialogV2.input({
+                                window: { title: game.i18n.format("MGT2.Dialog.SelectSkill.Title", { name: actor.name})},
+                                content: content
+                            });
+                            console.log(data);
+                            selectedOptional = data.skill;
+                        } else if (optionalSkills.length > 1) {
+                            selectedOptional = await foundry.applications.api.DialogV2.wait({
+                                window: { title: game.i18n.format("MGT2.Dialog.SelectSkill.Title", { name: actor.name})},
+                                content: `<p>${game.i18n.format("MGT2.Dialog.SelectSkill.Text", { name: skillLabel(skill)})}</p>`,
+                                buttons: optionalSkills
+                            });
+                        }
+                        for (let sp in skill.specialities) {
+                            if (selectedOptional && selectedOptional !== sp) {
+                                continue;
+                            }
                             let spec = skill.specialities[sp];
                             if (spec.deleted) {
                                 if (target.specialities[sp]) {
@@ -2097,9 +2135,33 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 await this.actor.update({"system.sophont": this.actor.system.sophont});
             }
 
+            // Look for optional items
+            let optionalItems = [];
+            let selectedOptional = null;
+            for (let item of actor.items) {
+                if (item.system.packageOptional) {
+                    optionalItems.push({
+                        label: item.name,
+                        action: item.uuid
+                    });
+                }
+            }
+            if (optionalItems.length > 1) {
+                selectedOptional = await foundry.applications.api.DialogV2.wait({
+                    window: { title: game.i18n.format("MGT2.Dialog.SelectItem.Title", { name: actor.name})},
+                    content: `<p>${game.i18n.localize("MGT2.Dialog.SelectItem.Text")}</p>`,
+                    buttons: optionalItems
+                });
+            }
+
             // Now copy any items across
             let term = null;
             for (let item of actor.items) {
+                if (item.system.packageOptional) {
+                    if (item.uuid !== selectedOptional) {
+                        continue;
+                    }
+                }
                 const itemData = {
                     name: item.name,
                     img: item.img,

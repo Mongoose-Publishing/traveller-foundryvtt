@@ -13,6 +13,12 @@
         </div>
         <div>
             <h3>Benefits</h3>
+            {{#if actor.system.cash includeZero=false}}
+                <p>Cr{{prettyNumber actor.system.cash 0 false}}</p>
+            {{/if}}
+            {{#each actor.items as |item|}}
+                {{item.name}},
+            {{/each}}
             <p>
                 List of benefits goes here.
             </p>

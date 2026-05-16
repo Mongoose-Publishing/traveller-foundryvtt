@@ -42,13 +42,15 @@
             <br/>
             <span name="addNewSkill" class="addNewSkill item">+ {{localize 'MGT2.TravellerSheet.AddNewSkill'}}</span>
         </div>
-        <div class="resource flex-group-center">
-            <br/>
-            <label><b>{{localize 'MGT2.TravellerSheet.AddStatusEffect'}}</b></label>
-            <select class="addEffectSelect">
-                {{selectOptions selectEffects}}
-            </select>
-        </div>
+        {{#if selectEffects}}
+            <div class="resource flex-group-center">
+                <br/>
+                <label><b>{{localize 'MGT2.TravellerSheet.AddStatusEffect'}}</b></label>
+                <select class="addEffectSelect">
+                    {{selectOptions selectEffects}}
+                </select>
+            </div>
+        {{/if}}
     </div>
 
     {{#if effects}}
