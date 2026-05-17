@@ -20,6 +20,8 @@ import {
 } from "../helpers/spacecraft/spacecraft-utils.mjs";
 import {MgT2CharacteristicDamageApp} from "../helpers/dialogs/characteristic-damage.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -2497,7 +2499,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         // Get the type of item to create.
         const type = header.dataset.type;
         // Grab any data associated with this control.
-        const data = duplicate(header.dataset);
+        const data = foundry.utils.duplicate(header.dataset);
         // Initialize a default name.
         let name = `New ${type.capitalize()}`;
         if (header.dataset.name) {

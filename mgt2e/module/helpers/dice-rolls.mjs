@@ -8,6 +8,9 @@
 
 import {MGT2} from "./config.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+const TextEditor = foundry.applications.ux.TextEditor;
+
 export function isNonZero(value) {
     if (!value) {
         return false;

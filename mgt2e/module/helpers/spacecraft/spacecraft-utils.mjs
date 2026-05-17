@@ -5,6 +5,8 @@ import {MgT2SellCargoApp} from "../dialogs/sell-cargo-app.mjs";
 import {tradeBuyFreightHandler, tradeSellFreightHandler} from "../utils/trade-utils.mjs";
 import {MgT2EmbarkPassengerApp} from "../dialogs/embark-passenger-app.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+
 
 export async function calculateSpacecraftCost(actor) {
     let data = actor.system;

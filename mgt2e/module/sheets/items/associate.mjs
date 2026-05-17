@@ -1,6 +1,8 @@
 import {MgT2ItemSheet} from "../item-sheet.mjs";
 import {randomiseAssociate} from "../../helpers/utils/character-utils.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor;
+
 export class MgT2AssociateItemSheet extends MgT2ItemSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
