@@ -20,9 +20,6 @@ export class MgT2SkillDialog extends Application {
         if (!skillOptions) {
             skillOptions = {};
         }
-        console.log(skillFqn);
-        console.log(skillOptions);
-
         this.skillFqn = skillFqn;
         if (skillFqn === "undefined") {
             this.skillFqn = null;
@@ -81,6 +78,7 @@ export class MgT2SkillDialog extends Application {
         this.target = skillOptions.difficulty?skillOptions.difficulty:8;
         this.skillText = "";
         this.description = skillOptions.description;
+        this.mode = skillOptions.rollMode?skillOptions.rollMode:game.settings.get("core", "rollMode");
 
         if (skillOptions.agent) {
             // This is a direct skill roll without a character.
@@ -90,7 +88,6 @@ export class MgT2SkillDialog extends Application {
             this.value = skillOptions.level;
 
             this.options.title = skillOptions.agent;
-            console.log("THIS IS AN AGENT");
             this.skillText = skillLabel(this.skillData, this.skillId);
             if (this.specId) {
                 this.skillText += " (" + skillLabel(this.specData, this.specId) + ")";
@@ -182,8 +179,6 @@ export class MgT2SkillDialog extends Application {
         MODE_SELECT["blindroll"] = game.i18n.localize("MGT2.Dialog.Blind");
         MODE_SELECT["selfroll"] = game.i18n.localize("MGT2.Dialog.Self");
 
-        let mode = game.settings.get("core", "rollMode")
-
         let TARGET_SELECT = {};
         for (let t=2; t <= 16; t += 2) {
             TARGET_SELECT[t] = game.i18n.localize("MGT2.TaskDifficulty." + t) + ` (${t}+)`;
@@ -214,7 +209,7 @@ export class MgT2SkillDialog extends Application {
             "BOON_SELECT": BOON_SELECT,
             "TARGET_SELECT": TARGET_SELECT,
             "MODE_SELECT": MODE_SELECT,
-            "mode": mode
+            "mode": this.mode
         }
     }
 
@@ -249,7 +244,6 @@ export class MgT2SkillDialog extends Application {
                 }
                 this.actor.update({"system.skills": this.actor.system.skills});
             } else if (this.skillId) {
-                console.log(this.skillId);
                 this.cha = this.actor.system.skills[this.skillId].default;
             }
         }

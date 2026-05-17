@@ -325,7 +325,8 @@ Tools.requestedSkillCheck = async function(skillFqn, skillOptions) {
         "failure": skillOptions.failure,
         "cost": skillOptions.cost,
         "quick": skillOptions.quick?skillOptions.quick:false,
-        "rollType": skillOptions.rollType?skillOptions.rollType:"standard"
+        "rollType": skillOptions.rollType?skillOptions.rollType:"standard",
+        "rollMode": skillOptions.rollMode?skillOptions.rollMode:game.settings.get("core", "rollMode")
     });
 
 };
