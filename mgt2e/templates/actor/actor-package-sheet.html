@@ -96,7 +96,7 @@
             <div class="shadow">
                 <ol class="items-list actor-items grid grid-3col">
                     {{#each items as |item id|}}
-                    {{#if (isItemOwned item)}}
+                    {{#if (isItemPhysical item)}}
                     <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
                         <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                         <img title="{{nameQuantity item}}" src="{{item.img}}"/>

@@ -2204,7 +2204,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 if (item.type === "associate" && item.system.quantity && parseInt(item.system.quantity) > 1) {
                     const num = parseInt(item.system.quantity);
                     delete itemData.system.quantity;
-                    for (let i=0; i < parseInt(num); i++) {
+                    for (let i=0; i < Math.min(9, parseInt(num)); i++) {
                         await Item.create(itemData, {parent: this.actor});
                     }
                 } else {

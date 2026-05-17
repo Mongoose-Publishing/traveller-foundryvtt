@@ -19,22 +19,35 @@
             <ul class="comma-list">
                 {{#each actor.items as |item|}}
                     {{#if (ifEquals item.type "term")}}
-                        {{#unless item.system.term.hideFromPackage}}
+                        {{#if item.system.term.hideFromPackage}}
                             <li>{{item.name}}</li>
-                        {{/unless}}
+                        {{/if}}
                     {{/if}}
                 {{/each}}
                 {{#each actor.items as |item|}}
                     {{#if (ifEquals item.type "associate")}}
-                        <li>{{localize (concat "MGT2.History.Relation." item.system.associate.relationship)}}
-                            ({{item.name}}){{#unless (ifEquals item.system.quantity "1")}}&nbsp;x{{item.system.quantity}}{{/unless}}</li>
+                        {{#if item.system.quantity includeZero=false}}
+                            <li>{{localize (concat "MGT2.History.Relation." item.system.associate.relationship)}}
+                                ({{item.name}}){{#unless (ifEquals item.system.quantity "1")}}&nbsp;x{{item.system.quantity}}{{/unless}}</li>
+                        {{else}}
+                            <li>{{localize (concat "MGT2.History.Relation." item.system.associate.relationship)}} ({{item.name}})</li>
+                        {{/if}}
                     {{/if}}
                 {{/each}}
                 {{#each actor.items as |item|}}
                     {{#if (ifEquals item.type "term")}}
                     {{else if (ifEquals item.type "associate")}}
                     {{else}}
-                        <li>{{item.name}}</li>
+                        {{#unless item.system.packageOptional}}
+                            <li>{{item.name}}</li>
+                        {{/unless}}
+                    {{/if}}
+                {{/each}}
+            </ul>
+            <ul class="comma-list">
+                {{#each actor.items as |item|}}
+                    {{#if item.system.packageOptional}}
+                        <li class="or-list">{{item.name}}</li>
                     {{/if}}
                 {{/each}}
             </ul>

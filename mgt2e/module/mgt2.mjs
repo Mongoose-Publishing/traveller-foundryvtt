@@ -1342,6 +1342,13 @@ Handlebars.registerHelper('isItemOwned', function(item) {
     return true;
 });
 
+Handlebars.registerHelper('isItemPhysical', function(item) {
+    if (item.type === "term" || item.type === "associate") {
+        return false;
+    }
+    return true;
+});
+
 
 Handlebars.registerHelper('equipItem', function(item) {
     if (item.system.status === MgT2Item.EQUIPPED || item.system.weight === undefined) {
