@@ -126,8 +126,8 @@ then
   rm -f release/mongoose-traveller.zip
   zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
   cp mgt2e/system.json release/system.json
-
   cp -p release/* $LOCAL_PUBLISH_DIR
+  echo "Published release ${version} to ${LOCAL_MANIFEST_URL}"
 
 else
   echo "Creating release files"

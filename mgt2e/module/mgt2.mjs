@@ -289,7 +289,7 @@ Hooks.once('init', async function() {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "2d6 - 8 + @initiative.value",
+    formula: "2D6 - 8 + @initiative.value",
     decimals: 0
   };
 
@@ -392,10 +392,17 @@ Hooks.on("init", function() {
        const actorId = $(ev.currentTarget).data("actorId");
        openActorSheet(actorId);
     });
+    body.on("click", ".upp-inline-roll", ev => {
+        console.log("INLINE ROLL");
+        let name = $(ev.currentTarget).data("actorName");
+        console.log($(ev.currentTarget).data("skillData"));
+        let data = $(ev.currentTarget).data("skillData");
+        Tools.inlineUppRollSkill(name, data);
+    })
 
     CONFIG.statusEffects.push({
         id: "destroyed",
-        name: "MGT2.EFFECT.Destroyed",
+        name: "EFFECT.Destroyed",
         img: "systems/mgt2e/icons/effects/destroyed.svg"
     });
     CONFIG.statusEffects.push({
@@ -422,6 +429,71 @@ Hooks.on("init", function() {
         id: "vaccSuit",
         name: "EFFECT.VaccSuit",
         img: "systems/mgt2e/icons/effects/vaccsuit.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "surprised",
+        name: "EFFECT.Surprised",
+        img: "systems/mgt2e/icons/effects/surprised.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "aware",
+        name: "EFFECT.Aware",
+        img: "systems/mgt2e/icons/effects/aware.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "reaction",
+        name: "EFFECT.Reaction",
+        img: "systems/mgt2e/icons/effects/reaction.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "fatigued",
+        name: "EFFECT.Fatigued",
+        img: "systems/mgt2e/icons/effects/fatigued.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "physical",
+        name: "EFFECT.Physical",
+        img: "systems/mgt2e/icons/effects/physical.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "melee",
+        name: "EFFECT.Melee",
+        img: "systems/mgt2e/icons/effects/melee.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "gunCombat",
+        name: "EFFECT.GunCombat",
+        img: "systems/mgt2e/icons/effects/guncombat.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "armour",
+        name: "EFFECT.Armour",
+        img: "systems/mgt2e/icons/effects/armour.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "inCover",
+        name: "EFFECT.InCover",
+        img: "systems/mgt2e/icons/effects/inCover.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "hiding",
+        name: "EFFECT.Hiding",
+        img: "systems/mgt2e/icons/effects/hiding.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "stunned",
+        name: "EFFECT.Stunned",
+        img: "icons/svg/daze.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "tactics",
+        name: "EFFECT.Tactics",
+        img: "systems/mgt2e/icons/effects/tactics.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "initiative",
+        name: "EFFECT.Initiative",
+        img: "systems/mgt2e/icons/effects/initiative.svg"
     });
 })
 
@@ -546,8 +618,6 @@ Hooks.on('ready', () => {
 
 });
 
-
-
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
     if (message.indexOf("/upp") === 0) {
         let args = message.split(" ");
@@ -567,12 +637,7 @@ Hooks.on("chatMessage", function(chatlog, message, chatData) {
     } else if (message.indexOf("/time") === 0) {
         let args = message.split(" ");
         args.shift();
-        Tools.currentTime(chatData, args);html
-        return false;
-    } else if (message.indexOf("/status") === 0) {
-        let args = message.split(" ");
-        args.shift();
-        Tools.setStatus(chatData, args);
+        Tools.currentTime(chatData, args);
         return false;
     } else if (message.indexOf("/debug") === 0) {
         Tools.debugSelected(chatData);
@@ -880,37 +945,67 @@ Hooks.once("ready", async function() {
     }
 });
 
+
+Hooks.on("createCombatant", (combatant, combat, id) => {
+   console.log("createCombatant:");
+   const actor = combatant.actor;
+
+   let bonus = 0;
+   if (actor.getEffect("surprised")) {
+       bonus = -6;
+   } else if (actor.getEffect("aware")) {
+       bonus = +6;
+   }
+   actor.getRollData();
+   const roll = new Roll(`2D6 - 8 + @initiative.value + ${bonus}`, actor.getRollData());
+   roll.evaluate().then(rolledInstance => {
+       combatant.initiative = rolledInstance.total;
+       combatant.update({"initiative": combatant.initiative});
+   });
+
+});
+
 Hooks.on("combatTurn", (combat, data, options) => {
     // This is the actor which just finished their turn.
-    let combatant = combat.combatant.actor;
+    let actor = combat.combatant.actor;
     // Reset any reaction penalties back to zero.
-    combatant.unsetFlag("mgt2e", "reaction");
+    actor.setReactionEffect(0);
 
     // If stunned, reduce rounds left to be stunned
-    let stunned = combatant.getFlag("mgt2e", "stunned");
+    const stunned = actor.getEffect("stunned");
     if (stunned) {
-        let rounds = combatant.getFlag("mgt2e", "stunnedRounds");
-        rounds = rounds?parseInt(rounds):0;
-
-        if (--rounds < 1) {
-            combatant.unsetFlag("mgt2e", "stunned");
-            combatant.unsetFlag("mgt2e", "stunnedRounds");
+        let rounds = stunned.getFlag("mgt2e", "value");
+        if (--rounds > 0) {
+            stunned.setFlag("mgt2e", "value", rounds);
         } else {
-            combatant.setFlag("mgt2e", "stunnedRounds", rounds);
+            actor.setStunnedEffect(0);
         }
     }
 });
 
 Hooks.on("combatRound", (combat, data, options) => {
-    // This is the actor which just finished their turn.
+    // This is when the round changes.
+    console.log("combatRound:");
+    console.log(combat);
+    console.log(data);
+
+    for (let combatant of combat.combatants) {
+        const actor = combatant.actor;
+        if (actor.getEffect("surprised")) {
+            actor.setSurprisedEffect(false);
+            combatant.update({"initiative": combatant.initiative + 6 });
+        } else if (actor.getEffect("aware")) {
+            actor.setAwareEffect(false);
+            combatant.update({"initiative": combatant.initiative - 6 });
+        }
+    }
+
     let combatant = combat.combatant.actor;
-    // Reset any reaction penalties back to zero.
-    combatant.unsetFlag("mgt2e", "reaction");
 
     // If stunned, reduce rounds left to be stunned
     let stunnedEffect = combatant.effects.find(e => e.statuses?.values()?.next()?.value === "stun");
     if (stunnedEffect) {
-        if (parseInt(stunnedEffect.flags?.mgt2e?.value) !== NaN) {
+        if (!isNaN(parseInt(stunnedEffect.flags?.mgt2e?.value))) {
             let rounds = parseInt(stunnedEffect.flags.mgt2e.value);
             if (rounds > 1) {
                 rounds -= 1;
@@ -1250,6 +1345,13 @@ Handlebars.registerHelper('isItemOwned', function(item) {
     return true;
 });
 
+Handlebars.registerHelper('isItemPhysical', function(item) {
+    if (item.type === "term" || item.type === "associate") {
+        return false;
+    }
+    return true;
+});
+
 
 Handlebars.registerHelper('equipItem', function(item) {
     if (item.system.status === MgT2Item.EQUIPPED || item.system.weight === undefined) {
@@ -1521,7 +1623,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
     let showSpecs = false;
     let trainedOnly = data.settings.hideUntrained;
     let backgroundOnly = data.settings.onlyBackground;
-    let untrainedLevel = data.skills["jackofalltrades"].value - 3;
+    let untrainedLevel = (data.skills["jackofalltrades"]?.trained)?data.skills["jackofalltrades"].value - 3:-3;
     let isCreature = data.characteristics?false:true;
     let isDeleted = false;
 
@@ -1664,7 +1766,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                 let showSpec = false;
                 if (!trainedOnly && skill.trained) {
                     showSpec = true;
-                } else if (Number(spec.value) > 0) {
+                } else if (Number(spec.value) > 0 && (!skill.individual || spec.trained)) {
                     showSpec = true;
                 } else if (spec.expert && Number(spec.expert) > 0) {
                     showSpec = true;
@@ -1709,6 +1811,9 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                     }
                     let hasXp = (spec.xp && spec.xp > 0);
                     let label = skillLabel(spec);
+                    if (spec.optional) {
+                        label += " ?";
+                    }
                     html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} ${isDeleted?"deleted":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
                     html += `data-spec="${sid}" title="${title}">${label}${hasXp?"<sup>+</sup>":""}</label>`;
                     if (skill.trained && (!skill.individual || spec.trained)) {
@@ -1842,15 +1947,22 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
         if (statusEffect) {
             label = game.i18n.localize(statusEffect.name);
             type = effect.flags.mgt2e.css;
+            let value = null;
 
             if (!isNaN(parseInt(effect.flags.mgt2e.value))) {
+                value = parseInt(effect.flags.mgt2e.value);
                 label += ` (${parseInt(effect.flags.mgt2e.value)})`;
             }
             if (!effect.flags.mgt2e.locked) {
                 const statusName = "status" + status.charAt(0).toUpperCase() + status.slice(1);
-                label += ` <i class="fas fa-xmark ${statusName}"> </i>`;
+                label += ` <i class="fas fa-xmark effect-remove ${statusName}"> </i>`;
+                if (value !== null) {
+                    label = `<i class="fas fa-minus effect-minus"> </i> ` +
+                            `<i class="fas fa-plus effect-plus"> </i> ` +
+                            label;
+                }
             }
-            return `<div class="resource flex-group-center ${type}"><label>${label}</label></div>`;
+            return `<div class="resource flex-group-center ${type}"><label class="mgt2e-effect" data-status-id="${status}">${label}</label></div>`;
         } else {
             return "";
         }
@@ -2005,12 +2117,44 @@ Handlebars.registerHelper('showSimpleSkills', function(actor) {
             if (skill.trained) {
                 let showParent = true;
                 if (skill.specialities) {
-                    for (let specKey in skill.specialities) {
-                        let spec = skill.specialities[specKey];
-                        if (spec.value > 0) {
-                            const dataSkillFqn=`data-skill-fqn="${key}.${specKey}"`;
-                            showParent = false;
-                            html += `<li class="rollable" ${dataRoll} ${dataSkillFqn} data-spec="${specKey}">${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})&nbsp;${spec.value}</li>`;
+                    // Look for optional stuff.
+                    let optionalList = null;
+                    let optionalValue = 0;
+                    if (actor.type === "package") {
+                        optionalList = [];
+                        for (let specKey in skill.specialities) {
+                            if (skill.specialities[specKey].optional) {
+                                optionalList.push(specKey);
+                                // Assume optional specialisations all have the same value.
+                                optionalValue = skill.specialities[specKey].value;
+                            }
+                        }
+                        if (Object.keys(skill.specialities).length === optionalList.length) {
+                            optionalList = [ "any" ];
+                        }
+                    }
+
+                    if (optionalList && optionalList[0] === "any") {
+                        showParent = false;
+                        html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${game.i18n.localize("MGT2.any")})&nbsp;${optionalValue}</li>`;
+                    } else if (optionalList && optionalList.length > 0) {
+                        showParent = false;
+                        html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(`;
+                        let list = "";
+                        for (let specKey of optionalList) {
+                            let spec = skill.specialities[specKey];
+                            if (list !== "") list += ` ${game.i18n.localize("MGT2.or")} `;
+                            list += skillLabel(spec, specKey);
+                        }
+                        html += `${list})&nbsp;${optionalValue}</li>`;
+                    } else {
+                        for (let specKey in skill.specialities) {
+                            let spec = skill.specialities[specKey];
+                            if (spec.trained || spec.value > 0) {
+                                const dataSkillFqn = `data-skill-fqn="${key}.${specKey}"`;
+                                showParent = false;
+                                html += `<li class="rollable" ${dataRoll} ${dataSkillFqn} data-spec="${specKey}">${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})&nbsp;${spec.value}</li>`;
+                            }
                         }
                     }
                 }
@@ -2534,10 +2678,15 @@ Handlebars.registerHelper('showSpacecraftAttacks', function(shipActor, roles) {
 Handlebars.registerHelper("showEffectPill", function(actor, effect) {
     let html = "";
 
-    let title = `${effect.sourceName}: ${effect.name}`;
-
+    let title = `${effect.name}`;
+    if (effect.origin) {
+        title = `${effect.sourceName}: ${effect.name}`;
+    }
     for (let change of effect.changes) {
         let text = "";
+        if (!effect.origin) {
+            text = effect.name;
+        }
         let key = change.key;
         let value = change.value;
         if (key.startsWith("system.skills.")) {

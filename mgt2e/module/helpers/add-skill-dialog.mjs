@@ -49,6 +49,7 @@ export class MgT2AddSkillDialog extends Application {
             this.isIndividual = this.formData.individual;
             this.isBackground = this.formData.background;
             this.isDeleted = !!this.formData.deleted;
+            this.isOptional = !!this.formData.optional;
             console.log(this.isCombat);
 
             // Always comes from the parent.
@@ -105,6 +106,7 @@ export class MgT2AddSkillDialog extends Application {
             "isIndividual": this.isIndividual,
             "icon": this.icon,
             "isDeleted": this.isDeleted,
+            "isOptional": this.isOptional,
             "parentId": this.parentId,
             "parentLabel": this.parentLabel
         }
@@ -145,17 +147,17 @@ export class MgT2AddSkillDialog extends Application {
         let combat = html.find(".skillCombatToggle")[0].checked;
         let background = html.find(".skillBackgroundToggle")[0].checked;
         let individual = html.find(".skillIndividualToggle")[0].checked;
+        let optional = html.find(".skillOptionalToggle")[0]?.checked;
 
         if (parent) {
-            console.log("Has a parent [" + parent + "]");
-            if (this.actorData.skills[parent]) {
-                if (!this.actorData.skills[parent].specialities) {
-                    this.actorData.skills[parent].specialities = {};
+            if (this.actorData.skills[this.skillId]) {
+                if (!this.actorData.skills[this.skillId].specialities) {
+                    this.actorData.skills[this.skillId].specialities = {};
                 }
                 // Find a unique id for this speciality.
-                if (!this.isEdit && this.actorData.skills[parent].specialities[shortname]) {
+                if (!this.isEdit && this.actorData.skills[this.skillId].specialities[shortname]) {
                     let idx = 1;
-                    while (this.actorData.skills[parent].specialities[shortname+"_"+idx]) {
+                    while (this.actorData.skills[this.skillId].specialities[shortname+"_"+idx]) {
                         idx++;
                     }
                     shortname = shortname + "_" + idx;
@@ -169,10 +171,19 @@ export class MgT2AddSkillDialog extends Application {
                     'trained': false,
                     'value': 0
                 }
-                this.actorData.skills[parent].specialities[shortname] = skill;
+                if (this.actorData.skills[this.skillId].specialities[shortname]) {
+                    skill.value = this.actorData.skills[this.skillId].specialities[shortname].value;
+                    if (this.actorData.skills[this.skillId].individual) {
+                        skill.trained = this.actorData.skills[this.skillId].specialities[shortname].trained;
+                    }
+                }
+                if (this.actor.type === "package") {
+                    skill.optional = optional;
+                }
+                this.actorData.skills[this.skillId].specialities[shortname] = skill;
 
             } else {
-                console.log("Parent skill [" + parent + "] does not exist");
+                console.log("Parent skill [" + this.skillId + "] does not exist");
             }
         } else {
             console.log("Top level skill");
@@ -214,21 +225,18 @@ export class MgT2AddSkillDialog extends Application {
         if (this.actor.type === "package") {
             // Packages need to mark a skill as deleted, rather than deleting it.
             if (this.specId) {
-                console.log("Parent is " + this.skillId);
                 if (this.actor.system.skills[this.skillId].specialities[this.specId].deleted) {
                     this.actor.system.skills[this.skillId].specialities[this.specId].deleted = false;
                 } else {
                     this.actor.system.skills[this.skillId].specialities[this.specId].deleted = true;
                 }
             } else {
-                console.log("Mark " + this.shortName + " as deleted");
                 if (this.actor.system.skills[this.skillId].deleted) {
                     this.actor.system.skills[this.skillId].deleted = false;
                 } else {
                     this.actor.system.skills[this.skillId].deleted = true;
                 }
             }
-            console.log(this.actor.system.skills);
             this.actor.update({ "system.skills": this.actor.system.skills });
         } else if (this.specId) {
             // Delete a specialisation.

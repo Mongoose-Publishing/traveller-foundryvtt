@@ -514,6 +514,47 @@ export class MgT2Actor extends Actor {
       return game.users.activeGM;
   }
 
+  findAblatTarget(options) {
+      if (options.damageType) {
+          for (let i of this.items) {
+              if (i.type === "armour" && i.system.armour.ablat === "1" && i.system.status === MgT2Item.EQUIPPED) {
+                  if (i.system.armour.otherTypes.indexOf(options.damageType) > -1) {
+                      return i;
+                  }
+              }
+          }
+      }
+      return null;
+  }
+
+  async applyAnyAblatDamage(options, ablatItem) {
+      // How do we handle ablat?
+      if (ablatItem && ablatItem.type === "armour") {
+          let otherProt = parseInt(ablatItem.system?.armour?.otherProtection);
+          if (!isNaN(otherProt)) {
+              ablatItem.update({"system.armour.otherProtection": otherProt - 1});
+          }
+      } else {
+          for (let i of this.items) {
+              if (i.type === "armour" && i.system.armour.ablat === "1" && i.system.status === MgT2Item.EQUIPPED) {
+                  if (i.system.armour.otherTypes.indexOf(options.damageType) > -1) {
+                      let otherProt = parseInt(i.system.armour.otherProtection);
+                      if (otherProt > 0) {
+                          const yes = await foundry.applications.api.DialogV2.confirm({
+                              window: { title: game.i18n.format("MGT2.Dialog.AblateConfirm.Title", { actor: this.name }) },
+                              content: `<p>${game.i18n.format("MGT2.Dialog.AblateConfirm.Text", { armour: i.name })}</p>`
+                          });
+                          if (yes) {
+                              i.update({"system.armour.otherProtection": otherProt - 1});
+                          }
+                      }
+                      return;
+                  }
+              }
+          }
+      }
+  }
+
   async applyDamageToPerson(damage, options) {
       let armour = 0;
       let armourText = ""
@@ -615,14 +656,6 @@ export class MgT2Actor extends Actor {
               }
           }
 
-          // Finally, any cover options?
-          if (this.getFlag("mgt2e", "inCover")) {
-              const coverBonus = parseInt(this.getFlag("mgt2e", "inCover"));
-              if (coverBonus > 0) {
-                  armourText += `Cover +${coverBonus} `;
-                  armour += coverBonus;
-              }
-          }
           // Check for radiation damage.
           if (radiationDamage > 0 && this.system.armour && isNonZero(this.system.armour.rad)) {
               options.armourRads = Number(this.system.armour.rad);
@@ -655,6 +688,7 @@ export class MgT2Actor extends Actor {
                       {"target": this.name}
                   )
               );
+              this.applyAnyAblatDamage(options);
               return;
           }
       }
@@ -720,6 +754,14 @@ export class MgT2Actor extends Actor {
       let stuns = 0;
       if (hasTrait(options.traits, "stun")) {
           stun = true;
+      }
+      console.log("applyActualDamageToTraveller:");
+      console.log(options);
+      if (options.ablatItemId) {
+          console.log("Ablating armour ");
+          let i = this.items.get(options.ablatItemId);
+          this.applyAnyAblatDamage(options, i);
+
       }
       if (options.directChaDamage) {
           // Damage it to be applied to specific characteristics, not
@@ -1618,8 +1660,11 @@ export class MgT2Actor extends Actor {
         return this.effects.find(e => e.name === name);
     }
 
-    async setEffect(status, value, overlay, locked, css) {
+    async setEffect(status, value, overlay, locked, css, changes) {
         const statusEffect = CONFIG.statusEffects.find(e => e.id === status);
+        if (!changes) {
+            changes = [];
+        }
 
         if (!statusEffect) {
             ui.notifications.error(
@@ -1632,6 +1677,33 @@ export class MgT2Actor extends Actor {
         const effect = this.effects.find(e => e.name === name);
 
         if (value && effect) {
+            if (isNaN(parseInt(value))) {
+                return false;
+            } else if (effect.flags?.mgt2e?.value) {
+                // Passed in a numerical value. Need to +/- it.
+                let current = parseInt(effect.flags?.mgt2e?.value);
+                if (!isNaN(current) && current !== 0) {
+                    if (CONFIG.MGT2.STATUS_EFFECTS[status]?.replace) {
+                        current = parseInt(value);
+                    } else {
+                        current += parseInt(value);
+                    }
+                    effect.setFlag("mgt2e", "value", current);
+                    if (!CONFIG.MGT2.STATUS_EFFECTS[status]?.mono) {
+                        if (current < 0) {
+                            effect.setFlag("mgt2e", "css", "statusWarn");
+                        } else if (current > 0) {
+                            effect.setFlag("mgt2e", "css", "statusGood");
+                        }
+                    }
+                    if (effect.changes && effect.changes.length > 0) {
+                        effect.changes[0].value = current;
+                        effect.update({"changes": effect.changes});
+                    }
+                } if (current === 0) {
+                    effect.delete();
+                }
+            }
             return false;
         } else if (!value && !effect) {
             return false;
@@ -1639,7 +1711,7 @@ export class MgT2Actor extends Actor {
             await this.createEmbeddedDocuments("ActiveEffect", [{
                 name: name,
                 icon: statusEffect.img,
-                changes: [],
+                changes: changes,
                 statuses: [ status ],
                 flags: {
                     "core": {
@@ -1665,6 +1737,79 @@ export class MgT2Actor extends Actor {
         return true;
     }
 
+    addStatusEffect(status, value) {
+        if (value === undefined) {
+            if (CONFIG.MGT2.STATUS_EFFECTS[status]) {
+                console.log(status);
+                if (CONFIG.MGT2.STATUS_EFFECTS[status].value !== undefined) {
+                    value = CONFIG.MGT2.STATUS_EFFECTS[status].value;
+                } else {
+                    value = true;
+                }
+            }
+        }
+
+        switch (status) {
+            case "dead":
+                this.setDeadEffect(true);
+                break;
+            case "unconscious":
+                this.setUnconsciousEffect(true);
+                break;
+            case "injured":
+                this.setInjuredEffect(true);
+                break;
+            case "fear":
+                this.setFearEffect(true);
+                break;
+            case "stunned":
+                this.setStunnedEffect(value);
+                break;
+            case "needsFirstAid":
+                this.setFirstAidEffect(true);
+                true;
+            case "needsSurgery":
+                this.setSurgeryEffect(true)
+                break;
+            case "destroyed":
+                this.setDestroyedEffect(true);
+                break;
+            case "aware":
+                this.setAwareEffect(true);
+                break;
+            case "surprised":
+                this.setSurprisedEffect(true);
+                break;
+            case "fatigued":
+                this.setFatiguedEffect(true);
+                break;
+            case "inCover":
+                this.setInCoverEffect(value);
+                break;
+            case "hiding":
+                this.setHidingEffect(value);
+                break;
+            case "prone":
+                this.setProneEffect(true);
+                break;
+            case "armour":
+                this.setArmourEffect(1);
+                break;
+            case "physical":
+                this.setPhysicalEffect(value);
+                break;
+            case "melee":
+                this.setMeleeEffect(value);
+                break;
+            case "gunCombat":
+                this.setGunCombatEffect(value);
+                break;
+            case "tactics":
+                this.setTacticsEffect(1);
+                break;
+        }
+    }
+
     setDeadEffect(value) {
         this.setEffect("dead", value, true, false,"Bad");
     }
@@ -1677,12 +1822,12 @@ export class MgT2Actor extends Actor {
         this.setEffect("injured", value,  false, false, "Warn");
     }
 
-    setFrightenedEffect(value) {
+    setFearEffect(value) {
         this.setEffect("fear", value,  false, false, "Warn");
     }
 
     setStunnedEffect(value) {
-        return this.setEffect("stun", value,  false, false, "Bad");
+        return this.setEffect("stunned", value,  false, false, "Bad");
     }
 
     setFirstAidEffect(value) {
@@ -1703,6 +1848,91 @@ export class MgT2Actor extends Actor {
 
     setVaccSuitEffect(value) {
         this.setEffect("vaccSuit", value,  false, true, "Warn");
+    }
+
+    setAwareEffect(value) {
+        this.setEffect("aware", value,  false, false, "Good");
+    }
+
+    setSurprisedEffect(value) {
+        this.setEffect("surprised", value,  false, false, "Warn");
+    }
+
+    setReactionEffect(value) {
+        this.setEffect("reaction", value,  false, false, "Warn");
+    }
+
+    setFatiguedEffect(value) {
+      this.setEffect("fatigued", value, false, false, "Warn",
+          [
+              { key: "system.modifiers.physical.effect", mode: 2, priority: 0, value: -2 }
+          ]);
+    }
+    setPhysicalEffect(value) {
+        let css= "Warn";
+        if (parseInt(value) > 0) {
+            css = "Good";
+        }
+        this.setEffect("physical", value, false, false, css,
+            [
+                { key: "system.modifiers.physical.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
+    setMeleeEffect(value) {
+        let css= "Warn";
+        if (parseInt(value) > 0) {
+            css = "Good";
+        }
+        this.setEffect("melee", value, false, false, css,
+            [
+                { key: "system.modifiers.melee.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
+    setGunCombatEffect(value) {
+        let css= "Warn";
+        if (parseInt(value) > 0) {
+            css = "Good";
+        }
+        this.setEffect("gunCombat", value, false, false, css,
+            [
+                { key: "system.modifiers.guncombat.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
+    setArmourEffect(value) {
+        this.setEffect("armour", value, false, false, "Good",
+            [
+                { key: "system.modifiers.armour.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
+    setInCoverEffect(value) {
+        this.setEffect("inCover", value, false, false, "Good");
+    }
+    setHidingEffect(value) {
+        this.setEffect("hiding", value, false, false, "Good",
+            [
+                { key: "system.modifiers.armour.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
+    setProneEffect(value) {
+        this.setEffect("prone", value, false, false, "Good");
+    }
+    setInCoverEffect(value) {
+        this.setEffect("inCover", value, false, false, "Good",
+            [
+                { key: "system.modifiers.armour.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
+    setTacticsEffect(value) {
+        this.setEffect("tactics", value, false, false, "Good",
+            [
+                { key: "system.modifiers.initiative.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
+    }
+    setInitiativeEffect(value) {
+        this.setEffect("initiative", value, false, false, "Good",
+            [
+                { key: "system.modifiers.initiative.effect", mode: 2, priority: 0, value: parseInt(value) }
+            ]);
     }
 
 }

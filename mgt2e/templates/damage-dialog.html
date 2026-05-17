@@ -43,6 +43,14 @@
             </div>
         {{/if}}
 
+        {{#if ablatItem}}
+            <span class="grid-span-4">
+                <input type="checkbox" class="useAblat" name="useAblat" {{checked useAblat}}>
+                    {{localize 'MGT2.Dialog.AblateOption' armour=ablatItem.name}}
+                </input>
+            </span>
+        {{/if}}
+
         {{#if radiation}}
             <div class="resource flex-group-center">
                 <label for="radiation" class="resource-label">{{localize "MGT2.DamageDialog.Radiation"}}</label>
