@@ -1,5 +1,25 @@
 # Release Notes
 
+# 0.20.3 (Beta)
+* Update to Spanish translations.
+* Fixed issue where a Package actor wasn't displaying equipped items in an
+  unexpected state. This could happen if an item was dragged from a different
+  actor.
+* Improvements to display of packages when displayed inline within a journal.
+  Tidied up some things, and added support for the new options for items and
+  skills. Icon is now displayed, headings have been downgraded to not pollute
+  the index pane.
+* If they belong to an actor package, skills and items can be marked as optional.
+  When the package is added to an actor, the player will be presented with a
+  dialog to select the one that they want to apply. Support is minimal, to
+  handle types of items and skills that are used in the Companion.
+* Associate item types have a quantity if they are part of a package. This allows
+  them to be displayed as (Contacts x3) in the journal, and they are expanded
+  out to individual items when added to an actor.
+* Career terms can now be marked so they are only displayed in the package. When
+  the package is added to an actor, they will not be transferred. This feature
+  may be changed in future releases.
+
 # 0.20.2 (Beta)
 
 * Previous fix introduced bug where some skills were rolling at -3.
