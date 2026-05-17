@@ -1,5 +1,8 @@
 # Release Notes
 
+# 0.20.4 (Beta)
+* Actually update the configuration so that it picks up the French localisation file.
+
 # 0.20.3 (Beta)
 * Update to Spanish translations.
 * Fixed issue where a Package actor wasn't displaying equipped items in an
