@@ -111,7 +111,7 @@ sed -i "s#\"maximum\": .*#\"maximum\": $FOUNDRY_VERSION#" mgt2e/system.json
 # Zip up system archive, minus the source json.
 if [ $LOCAL = "yes" ]
 then
-  if [[ $release =~ v[0-9].* ]]
+  if [[ $release =~ v[0-9]+\.[0-9]+.* ]]
   then
     echo "Running LOCAL build on RELEASE branch $release"
     exit 1
@@ -126,8 +126,8 @@ then
   rm -f release/mongoose-traveller.zip
   zip -x ./mgt2e/packs/_source/\*  -r release/mongoose-traveller.zip ./mgt2e
   cp mgt2e/system.json release/system.json
-
   cp -p release/* $LOCAL_PUBLISH_DIR
+  echo "Published release ${version} to ${LOCAL_MANIFEST_URL}"
 
 else
   echo "Creating release files"

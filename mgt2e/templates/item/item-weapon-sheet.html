@@ -3,6 +3,14 @@
         <div class="sidebar">
             <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
 
+            {{#if (ifEquals item.parent.type "package")}}
+                <div class="shadow item-side-panel">
+                    <input class="trained" type="checkbox" name="system.packageOptional"
+                           {{checked system.packageOptional}} data-type="Boolean"/>
+                    <span>Select if item is optional when added from a package</span>
+                </div>
+            {{/if}}
+
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
                     <label for="system.quantity" class="resource-label">{{localize "MGT2.Item.Quantity"}}</label>

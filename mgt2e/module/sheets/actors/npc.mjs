@@ -47,8 +47,6 @@ export class MgT2NpcActorSheet extends MgT2ActorSheet {
 
     async getData() {
         const context = await super.getData();
-        console.log("MgT2NpcActorSheet.getData:");
-        console.log(this.actor);
         context.system = this.actor.system;
 
         const traits = this.actor.system.characteristics;

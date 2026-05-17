@@ -48,7 +48,7 @@ export class MgT2DamageDialog extends Application {
             this.radiationDamage = damageOptions.radiation;
             this.actualRadiation = this.radiationDamage - this.armourRads;
         }
-        console.log(data.damage);
+        this.ablatItem = actor.findAblatTarget(damageOptions);
 
         this.DMG_STR = parseInt(data.damage.STR.value);
         this.DMG_DEX = parseInt(data.damage.DEX.value);
@@ -136,6 +136,8 @@ export class MgT2DamageDialog extends Application {
             "radiation": this.radiationDamage,
             "actualRadiation": this.actualRadiation,
             "armourRads": this.armourRads,
+            "ablatItem": this.ablatItem,
+            "useAblat": true,
             "playerRequestName": this.damageOptions.playerRequestName
         }
     }
@@ -217,8 +219,6 @@ export class MgT2DamageDialog extends Application {
             this.damageOptions.characteristics[this.laser] = xxx;
             this.damageOptions.directChaDamage = true;
         } else {
-            let remaining = this.getIntValue(html, ".remaining")
-            let total = str + dex + end;
             damage = this.actualDamage;
 
             this.damageOptions.characteristics = {
@@ -227,6 +227,9 @@ export class MgT2DamageDialog extends Application {
                 "END": end
             }
             this.damageOptions.actualRadiation = this.actualRadiation;
+        }
+        if (this.ablatItem && html.find(".useAblat")[0]?.checked) {
+            this.damageOptions.ablatItemId = this.ablatItem._id;
         }
         this.actor.applyActualDamageToTraveller(damage, this.damageOptions);
         this.close();
