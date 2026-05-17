@@ -25,6 +25,17 @@ export class MgT2Actor extends Actor {
 
     /** @override */
     prepareBaseData() {
+        // Must call super to clear overrides, statuses, and _completedActiveEffectPhases
+        // before each prepare cycle (required for Foundry v14 ActiveEffect application).
+        super.prepareBaseData();
+
+        // Foundry v14: for template.json-based systems (non-TypeDataModel), system data is not
+        // automatically reset from source between prepareData() calls. We must reset it manually
+        // so that ActiveEffects (applied after this method) always start from source values.
+        if (this._source?.system) {
+            foundry.utils.mergeObject(this.system, this._source.system, { overwrite: true, insertKeys: false });
+        }
+
         // Data modifications in this step occur before processing embedded
         // documents or derived data.
         if (this.system.hits && this.type !== "traveller") {
