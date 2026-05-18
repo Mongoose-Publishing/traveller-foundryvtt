@@ -65,7 +65,7 @@
                     <div class="resource flex-group-center characteristic-draggable"
                          data-rolltype="characteristic" data-cha="{{key}}">
                         <label class="characteristic-title"
-                               title="{{char.label}}">{{key}}</label>
+                               title="{{char.label}}">{{localize (concat 'MGT2.' key)}}</label>
                         <br/>
                         {{#if ../system.settings.useCustomDice}}
                             <input class="characteristic-dice writable" type="text" name="system.characteristics.{{key}}.dice" value="{{char.dice}}" data-dtype="Text" placeholder="2D6"/>

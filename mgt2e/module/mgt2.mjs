@@ -350,9 +350,7 @@ Hooks.once('init', async function() {
   return preloadHandlebarsTemplates();
 });
 
-Hooks.on("init", function() {
-    // Inline Macro Execution.
-    // Based on code written by Mesayah:
+Hooks.once("init", function() {
     // https://github.com/fpiechowski/inline-macro-execution
     const rgx = /\[\[(\/mgMacro)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
     CONFIG.TextEditor.enrichers.push({

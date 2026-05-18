@@ -9,13 +9,13 @@
         </p>
         <ol class="grid grid-3col">
 
-            <li class="always"><input type="checkbox" checked readonly><label>STR</label></li>
-            <li class="always"><input type="checkbox" checked readonly><label>DEX</label></li>
-            <li class="always"><input type="checkbox" checked readonly><label>END</label></li>
+            <li class="always"><input type="checkbox" checked readonly><label>{{localize "MGT2.STR"}}</label></li>
+            <li class="always"><input type="checkbox" checked readonly><label>{{localize "MGT2.DEX"}}</label></li>
+            <li class="always"><input type="checkbox" checked readonly><label>{{localize "MGT2.END"}}</label></li>
 
             {{#each LIST as |cha name|}}
             <li class="chaItem cha-{{name}}" data-id="{{name}}">
-                <input type="checkbox" name="{{name}}" {{checked cha}}><label>{{name}}</label>
+                <input type="checkbox" name="{{name}}" {{checked cha}}><label>{{localize (concat 'MGT2.' name)}}</label>
             </li>
             {{/each}}
         </ol>

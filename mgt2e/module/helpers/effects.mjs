@@ -18,10 +18,7 @@
                 origin: owner.uuid,
                 disabled: false,
                 transfer: true,
-                system: {
-                    augmentType: action
-                },
-                flags: { "augmentType": action }
+                flags: { "mgt2e": { "augmentType": action } }
             }]);
         }
     }

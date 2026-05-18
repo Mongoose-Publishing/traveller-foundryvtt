@@ -983,6 +983,12 @@ export async function rollSkill(actor, skill, options) {
         cha = null;
     }
     if (cha) {
+        // Apply characteristic boon/bane from augmentation effects if not already set
+        if ((!options.rollType || options.rollType === "normal") && data.characteristics[cha]?.boon) {
+            const chaBoon = data.characteristics[cha].boon;
+            dice = chaBoon === "boon" ? "3D6k2" : "3D6kl2";
+            options.rollType = chaBoon;
+        }
         chaDm = data.characteristics[cha].dm;
         // Bonus is a manually added bonus throught he XPDialog.
         if (data.characteristics[cha].bonus && parseInt(data.characteristics[cha].bonus) !== 0) {

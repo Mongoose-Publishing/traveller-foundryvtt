@@ -29,11 +29,21 @@ export class MgT2Actor extends Actor {
         // before each prepare cycle (required for Foundry v14 ActiveEffect application).
         super.prepareBaseData();
 
-        // Foundry v14: for template.json-based systems (non-TypeDataModel), system data is not
-        // automatically reset from source between prepareData() calls. We must reset it manually
-        // so that ActiveEffects (applied after this method) always start from source values.
-        if (this._source?.system) {
-            foundry.utils.mergeObject(this.system, this._source.system, { overwrite: true, insertKeys: false });
+        // Foundry v14: for template.json-based systems (non-TypeDataModel), characteristic values
+        // are not reset from source between prepareData() calls. Reset them individually to prevent
+        // ActiveEffect modifications from accumulating across repeated prepareData() cycles.
+        // NOTE: avoid mergeObject on this.system (Proxy) — it causes duplicate ownKeys trap entries.
+        const srcChars = this._source?.system?.characteristics;
+        if (srcChars && this.system.characteristics) {
+            for (const char of Object.keys(srcChars)) {
+                if (this.system.characteristics[char] !== undefined) {
+                    this.system.characteristics[char].value = srcChars[char].value;
+                    // Reset AE-modified fields so they don't accumulate across prepareData cycles
+                    this.system.characteristics[char].augment = srcChars[char].augment ?? 0;
+                    this.system.characteristics[char].augdm = 0;
+                    this.system.characteristics[char].min = srcChars[char].min ?? 0;
+                }
+            }
         }
 
         // Data modifications in this step occur before processing embedded
@@ -252,6 +262,25 @@ export class MgT2Actor extends Actor {
             return;
         }
 
+        // Collect augdm bonuses and boon/bane from AEs directly (these fields are not in schema,
+        // so Foundry's proxy won't persist field writes from AE application)
+        const chaDmBonuses = {};
+        const chaBoonMap = {};   // char → "boon" or "bane"
+        for (const effect of this.allApplicableEffects()) {
+            if (effect.disabled) continue;
+            for (const change of effect.changes) {
+                const mDm = change.key.match(/^system\.characteristics\.(\w+)\.augdm$/);
+                if (mDm) {
+                    chaDmBonuses[mDm[1]] = (chaDmBonuses[mDm[1]] ?? 0) + Number(change.value);
+                    continue;
+                }
+                const mBoon = change.key.match(/^system\.characteristics\.(\w+)\.(boon|bane)$/);
+                if (mBoon) {
+                    chaBoonMap[mBoon[1]] = mBoon[2];
+                }
+            }
+        }
+
         for (const char in sys.characteristics) {
             let value = sys.characteristics[char].value;
             if (sys.characteristics[char].augment) {
@@ -274,7 +303,12 @@ export class MgT2Actor extends Actor {
                 value -= dmg;
             }
             sys.characteristics[char].current = value;
-            sys.characteristics[char].dm = this.getModifier(value);
+            let dm = this.getModifier(value);
+            if (chaDmBonuses[char]) {
+                dm += chaDmBonuses[char];
+            }
+            sys.characteristics[char].dm = dm;
+            sys.characteristics[char].boon = chaBoonMap[char] ?? null;
         }
 
         if (sys.damage && sys.hits) {
