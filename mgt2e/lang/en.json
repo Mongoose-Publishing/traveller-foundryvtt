@@ -1,9 +1,7 @@
 {
   "MGT2.Title": "Mongoose Traveller 2e",
-
   "MGT2.Base.Yes": "Yes",
   "MGT2.Base.No": "No",
-
   "MGT2.Settings.Verbose.Name": "Verbose Skill Rolls",
   "MGT2.Settings.Verbose.Hint": "Displays effect and chain results of skill rolls.",
   "MGT2.Settings.ChatIcons.Name": "Use Chat Icons",
@@ -53,7 +51,6 @@
   "MGT2.Settings.NPCChaDamage.Hint": "By default, NPCs use characteristics for damage like Travellers. Disable this to use a simplified hits system instead",
   "MGT2.Settings.HexInWorldMenus.Name": "Use Hex when displaying world data",
   "MGT2.Settings.HexInWorldMenus.Hint": "Though the UWP will always show hexadecimals, other places show world data as decimal numbers unless this is set to true",
-
   "MGT2.STR": "STR",
   "MGT2.DEX": "DEX",
   "MGT2.END": "END",
@@ -70,7 +67,6 @@
   "MGT2.RES": "RES",
   "MGT2.FOL": "FOL",
   "MGT2.REP": "REP",
-
   "MGT2.Characteristics.STR": "Strength",
   "MGT2.Characteristics.DEX": "Dexterity",
   "MGT2.Characteristics.END": "Endurance",
@@ -87,7 +83,6 @@
   "MGT2.Characteristics.RES": "Resolve",
   "MGT2.Characteristics.FOL": "Following",
   "MGT2.Characteristics.REP": "Reputation",
-
   "MGT2.TaskDifficulty.0": "Trivial",
   "MGT2.TaskDifficulty.1": "Trivial",
   "MGT2.TaskDifficulty.2": "Simple",
@@ -105,14 +100,12 @@
   "MGT2.TaskDifficulty.14": "Formidable",
   "MGT2.TaskDifficulty.15": "Formidable",
   "MGT2.TaskDifficulty.16": "Impossible",
-
   "MGT2.TaskEffect.ExceptionalFailure": "Exceptional Failure",
   "MGT2.TaskEffect.AverageFailure": "Average Failure",
   "MGT2.TaskEffect.MarginalFailure": "Marginal Failure",
   "MGT2.TaskEffect.MarginalSuccess": "Marginal Success",
   "MGT2.TaskEffect.AverageSuccess": "Average Success",
   "MGT2.TaskEffect.ExceptionalSuccess": "Exception Success",
-
   "MGT2.Skills.admin": "Admin",
   "MGT2.Skills.advocate": "Advocate",
   "MGT2.Skills.animals": "Animals",
@@ -242,12 +235,9 @@
   "MGT2.Skills.awareness": "Awareness",
   "MGT2.Skills.teleportation": "Teleportation",
   "MGT2.Skills.untrained": "Untrained",
-
-
   "MGT2.Edit": "Edit",
   "MGT2.EditItem": "Edit Item",
   "MGT2.DeleteItem": "Delete Item",
-
   "MGT2.TravellerSheet.Player": "Player",
   "MGT2.TravellerSheet.Species": "Species",
   "MGT2.TravellerSheet.Gender": "Gender",
@@ -260,7 +250,6 @@
   "MGT2.TravellerSheet.Hits": "HITS",
   "MGT2.TravellerSheet.Rads": "RADS",
   "MGT2.TravellerSheet.Dodge": "DODGE",
-
   "MGT2.TravellerSheet.Skills": "Skills",
   "MGT2.TravellerSheet.Equipment": "Equipment",
   "MGT2.TravellerSheet.GeneralItems": "General Items",
@@ -271,12 +260,10 @@
   "MGT2.TravellerSheet.History": "History",
   "MGT2.TravellerSheet.Settings": "Settings",
   "MGT2.TravellerSheet.HomeWorld": "Homeworld",
-
   "MGT2.TravellerSheet.Terms": "Terms",
   "MGT2.TravellerSheet.Height": "Height (cm)",
   "MGT2.TravellerSheet.Weight": "Weight (kg)",
   "MGT2.TravellerSheet.Homeworld": "Homeworld",
-
   "MGT2.TravellerSheet.Damage": "Damage",
   "MGT2.TravellerSheet.Armour": "Armour",
   "MGT2.TravellerSheet.Prot": "Prot",
@@ -296,14 +283,12 @@
   "MGT2.TravellerSheet.Morale": "Morale",
   "MGT2.TravellerSheet.Attack": "Attack",
   "MGT2.TravellerSheet.Reload": "Reload",
-
   "MGT2.TravellerSheet.InitThrust": "Thrust",
   "MGT2.TravellerSheet.InitPilot": "Pilot",
   "MGT2.TravellerSheet.InitTactics": "Tactics",
   "MGT2.TravellerSheet.InitLeader": "Leadership",
   "MGT2.TravellerSheet.SizeDM": "Size DM",
   "MGT2.TravellerSheet.BridgeTypeLabel": "Bridge Type",
-
   "MGT2.TravellerSheet.StatusLabel.fatigued": "Fatigued",
   "MGT2.TravellerSheet.StatusLabel.encumbered": "Encumbered",
   "MGT2.TravellerSheet.StatusLabel.overLoaded": "Over Loaded",
@@ -324,11 +309,9 @@
   "MGT2.TravellerSheet.StatusLabel.needsSurgery": "Surgery",
   "MGT2.TravellerSheet.StatusLabel.inCover": "In Cover",
   "MGT2.TravellerSheet.StatusLabel.prone": "Prone",
-
   "MGT2.TravellerSheet.AugmentType.augment": "Aug",
   "MGT2.TravellerSheet.AugmentType.expert": "Ex",
   "MGT2.TravellerSheet.AugmentType.augdm": "DM",
-
   "MGT2.TravellerSheet.DTons": "Tonnage",
   "MGT2.TravellerSheet.Power": "Power",
   "MGT2.TravellerSheet.MDrive": "M-Drive",
@@ -393,7 +376,6 @@
   "MGT2.TravellerSheet.CategorySort": "Sort by category",
   "MGT2.TravellerSheet.AddNewSkill": "Add New Skill",
   "MGT2.TravellerSheet.AddStatusEffect": "Add Status Effect",
-
   "MGT2.TravellerSheet.CargoText": "Total cargo capacity.",
   "MGT2.TravellerSheet.JDriveText": "Jump distance.",
   "MGT2.TravellerSheet.MDriveText": "Manouevre Drive thrust.",
@@ -402,15 +384,12 @@
   "MGT2.TravellerSheet.AddHardwareToSet": "\nSet from Hardware tab.",
   "MGT2.TravellerSheet.Jump1": "Jump-1",
   "MGT2.TravellerSheet.Weekly": "Weekly",
-
   "MGT2.TravellerSheet.HeavyLoad": "Heavy Load",
   "MGT2.TravellerSheet.MaxLoad": "Max Load",
   "MGT2.TravellerSheet.WeightCarried": "Weight Carried",
-
   "MGT2.TravellerSheet.ItemsInUse": "Items in Use",
   "MGT2.TravellerSheet.ItemsCarried": "Items Carried",
   "MGT2.TravellerSheet.ItemsOwned": "Items Owned",
-
   "MGT2.TravellerSheet.CurrentYear.Label": "Current Year",
   "MGT2.TravellerSheet.CurrentYear.Title": "Current year in the campaign",
   "MGT2.TravellerSheet.StartAge.Label": "Start Age",
@@ -421,11 +400,9 @@
   "MGT2.TravellerSheet.EntryAge.Title": "Age when you enter the campaign",
   "MGT2.TravellerSheet.YearBorn.Label": "Year Born",
   "MGT2.TravellerSheet.YearBorn.Title": "Age when you were born",
-
   "MGT2.TravellerSheet.CareerTerms": "Career Terms",
   "MGT2.TravellerSheet.NewTerm": "New Term {number}",
   "MGT2.TravellerSheet.EventsMishapsPromotions": "Events, mishaps and promotions.",
-
   "MGT2.WorldSheet.Sector": "Sector",
   "MGT2.WorldSheet.Planet": "Planet",
   "MGT2.WorldSheet.SectorName": "Sector Name",
@@ -452,12 +429,10 @@
   "MGT2.WorldSheet.TradeZone": "Trade Zone",
   "MGT2.WorldSheet.TradeCodes": "Trade Codes",
   "MGT2.WorldSheet.BasesTitle": "Bases",
-
   "MGT2.WorldSheet.AddStar": "Add Star",
   "MGT2.WorldSheet.AddPlanet": "Add Planet",
   "MGT2.WorldSheet.AddFaction": "Add Faction",
   "MGT2.WorldSheet.AddPatron": "Add Patron",
-
   "MGT2.WorldSheet.LocalBroker": "World's Broker Skill",
   "MGT2.WorldSheet.Broker": "Broker:",
   "MGT2.WorldSheet.Streetwise": "Streetwise:",
@@ -466,7 +441,6 @@
   "MGT2.WorldSheet.TradeFolder": "Trade Folder",
   "MGT2.WorldSheet.TradeFolderHint": "Name of folder of cargo items to use as speculative trade goods on this world",
   "MGT2.WorldSheet.LocalGoods": "Local Goods",
-
   "MGT2.WorldSheet.Atmosphere.Composition.0": "None",
   "MGT2.WorldSheet.Atmosphere.Composition.1": "Trace",
   "MGT2.WorldSheet.Atmosphere.Composition.2": "Very Thin, Tainted",
@@ -485,7 +459,6 @@
   "MGT2.WorldSheet.Atmosphere.Composition.15": "Unusual",
   "MGT2.WorldSheet.Atmosphere.Composition.16": "Gas, Helium",
   "MGT2.WorldSheet.Atmosphere.Composition.17": "Gas, Hydrogen",
-
   "MGT2.WorldSheet.Hydrographics.Description.0": "Desert world",
   "MGT2.WorldSheet.Hydrographics.Description.1": "Dry world",
   "MGT2.WorldSheet.Hydrographics.Description.2": "A few small seas",
@@ -497,7 +470,6 @@
   "MGT2.WorldSheet.Hydrographics.Description.8": "Only a few islands and archipelagos",
   "MGT2.WorldSheet.Hydrographics.Description.9": "Almost entirely water",
   "MGT2.WorldSheet.Hydrographics.Description.10": "Waterworld",
-
   "MGT2.WorldSheet.Government.Type.0": "None",
   "MGT2.WorldSheet.Government.Type.1": "Company/Corporation",
   "MGT2.WorldSheet.Government.Type.2": "Participating Democracy",
@@ -514,7 +486,6 @@
   "MGT2.WorldSheet.Government.Type.13": "Religious Dictatorship",
   "MGT2.WorldSheet.Government.Type.14": "Reigious Autocracy",
   "MGT2.WorldSheet.Government.Type.15": "Totalitarian Oligarchy",
-
   "MGT2.WorldSheet.Law.Weapons.0": "No restrictions",
   "MGT2.WorldSheet.Law.Weapons.1": "Poison gas, explosives, undetectable weapons, WMD",
   "MGT2.WorldSheet.Law.Weapons.2": "Portable energy and laser weapons",
@@ -534,32 +505,27 @@
   "MGT2.WorldSheet.Law.Weapons.16": "All weapons",
   "MGT2.WorldSheet.Law.Weapons.17": "All weapons",
   "MGT2.WorldSheet.Law.Weapons.18": "All weapons",
-
   "MGT2.WorldSheet.Starport.Quality.A": "Excellent",
   "MGT2.WorldSheet.Starport.Quality.B": "Good",
   "MGT2.WorldSheet.Starport.Quality.C": "Routine",
   "MGT2.WorldSheet.Starport.Quality.D": "Poor",
   "MGT2.WorldSheet.Starport.Quality.E": "Frontier",
   "MGT2.WorldSheet.Starport.Quality.X": "No Starport",
-
   "MGT2.WorldSheet.Faction.Strength.obscure": "Obscure group",
   "MGT2.WorldSheet.Faction.Strength.fringe": "Fringe group",
   "MGT2.WorldSheet.Faction.Strength.minor": "Minor group",
   "MGT2.WorldSheet.Faction.Strength.notable": "Notable group",
   "MGT2.WorldSheet.Faction.Strength.significant": "Significant",
   "MGT2.WorldSheet.Faction.Strength.overwhelming": "Overwhelming support",
-
   "MGT2.WorldSheet.Passage.basic": "Basic Passage",
   "MGT2.WorldSheet.Passage.middle": "Middle Passage",
   "MGT2.WorldSheet.Passage.high": "High Passage",
-
   "MGT2.WorldSheet.Bases.S": "Scout",
   "MGT2.WorldSheet.Bases.N": "Navy",
   "MGT2.WorldSheet.Bases.M": "Military",
   "MGT2.WorldSheet.Bases.C": "Corsair",
   "MGT2.WorldSheet.Bases.D": "Naval Depot",
   "MGT2.WorldSheet.Bases.W": "Way Station",
-
   "MGT2.WorldSheet.Facility.berthingCost": "Berth Cost (Cr/Wk)",
   "MGT2.WorldSheet.Facility.shipyard": "Shipyard",
   "MGT2.WorldSheet.Facility.repair": "Repair",
@@ -579,19 +545,16 @@
   "MGT2.WorldSheet.Facility.BerthCost": "Berth Cost (Cr/Wk)",
   "MGT2.WorldSheet.Facility.Highport": "Highport",
   "MGT2.WorldSheet.Facility.BuyFuelTitle": "Drag to spacecraft to purchase/refuel",
-
   "MGT2.WorldData.Type.faction": "Faction",
   "MGT2.WorldData.Type.patron": "Patron",
   "MGT2.WorldData.Type.passenger": "Passenger",
   "MGT2.WorldData.Type.star": "Star",
   "MGT2.WorldData.Type.planet": "Planet",
-
   "MGT2.WorldData.Planet.Type.terrestrial": "Terrestrial",
   "MGT2.WorldData.Planet.Type.planetoidBelt": "Planetoid Belt",
   "MGT2.WorldData.Planet.Type.smallGas": "Small Gas Giant",
   "MGT2.WorldData.Planet.Type.largeGas": "Large Gas Giant",
   "MGT2.WorldData.Planet.Type.main": "Main World",
-
   "MGT2.Vehicle.Spaces": "Spaces",
   "MGT2.Vehicle.Chassis": "Chassis",
   "MGT2.Vehicle.SubType": "SubType",
@@ -602,7 +565,6 @@
   "MGT2.Vehicle.Cruise": "Cruise",
   "MGT2.Vehicle.Hull": "Hull",
   "MGT2.Vehicle.Cost": "Cost",
-
   "MGT2.Vehicle.ChassisLabel.lightGround": "Light Ground Vehicle",
   "MGT2.Vehicle.ChassisLabel.heavyGround": "Heavy Ground Vehicle",
   "MGT2.Vehicle.ChassisLabel.lightGrav": "Light Grav Vehicle",
@@ -625,7 +587,6 @@
   "MGT2.Vehicle.ChassisLabel.heavyWalker": "Heavy Walker",
   "MGT2.Vehicle.ChassisLabel.lightHovercraft": "Light Hovercraft",
   "MGT2.Vehicle.ChassisLabel.heavyHovercraft": "Heavy Hovercraft",
-
   "MGT2.Vehicle.SubTypeLabel.openFrame": "Open Frame",
   "MGT2.Vehicle.SubTypeLabel.monowheel": "Monowheel",
   "MGT2.Vehicle.SubTypeLabel.railRider": "Rail Rider",
@@ -640,7 +601,6 @@
   "MGT2.Vehicle.SubTypeLabel.hydrofoil": "Hydrofoil",
   "MGT2.Vehicle.SubTypeLabel.liftingBody": "Lifting Body",
   "MGT2.Vehicle.SubTypeLabel.standard": "Standard",
-
   "MGT2.Vehicle.SpeedBand.stopped": "Stopped",
   "MGT2.Vehicle.SpeedBand.idle": "Idle",
   "MGT2.Vehicle.SpeedBand.verySlow": "Very Slow",
@@ -652,27 +612,22 @@
   "MGT2.Vehicle.SpeedBand.subsonic": "Subsonic",
   "MGT2.Vehicle.SpeedBand.supersonic": "Supersonic",
   "MGT2.Vehicle.SpeedBand.hypersonic": "Hypersonic",
-
   "MGT2.Vehicle.Sheet.Crew": "Crew",
   "MGT2.Vehicle.Sheet.Passengers": "Passengers",
   "MGT2.Vehicle.Sheet.Cargo": "Cargo",
   "MGT2.Vehicle.Sheet.Shipping": "Shipping",
-
   "MGT2.Vehicle.Face.front": "Front",
   "MGT2.Vehicle.Face.rear": "Rear",
   "MGT2.Vehicle.Face.sides": "Side",
   "MGT2.Vehicle.Face.top": "Top",
   "MGT2.Vehicle.Face.bottom": "Bottom",
-
   "MGT2.TravellerSheet.SizeClass.small": "Small",
   "MGT2.TravellerSheet.SizeClass.medium": "Medium",
   "MGT2.TravellerSheet.SizeClass.large": "Large",
   "MGT2.TravellerSheet.SizeRecommendedHits": "Typically {min} to {max}",
-
   "MGT2.TravellerSheet.DragCargo": "Cargo hold is empty. Drag cargo here to fill it.",
   "MGT2.TravellerSheet.DragShip": "Drag spacecraft here to add them.",
   "MGT2.TravellerSheet.DragVehicle": "Drag vehicles here to add them.",
-
   "MGT2.Creature.Behaviour.herbivore": "Herbivore",
   "MGT2.Creature.Behaviour.omnivore": "Omnivore",
   "MGT2.Creature.Behaviour.carnivore": "Carnivore",
@@ -696,7 +651,6 @@
   "MGT2.Creature.Behaviour.trapper": "Trapper",
   "MGT2.Creature.Behaviour.sophont": "Sophont",
   "MGT2.Creature.Behaviour.inexplicable": "Inexplicable",
-
   "MGT2.Creature.BehaviourText.herbivore": "Plant eater",
   "MGT2.Creature.BehaviourText.omnivore": "Eats anything",
   "MGT2.Creature.BehaviourText.carnivore": "Meat eater",
@@ -720,7 +674,6 @@
   "MGT2.Creature.BehaviourText.sophont": "Intelligent",
   "MGT2.Creature.BehaviourText.trapper": "Creates traps to catch prey",
   "MGT2.Creature.BehaviourText.inexplicable": "Nobody knows",
-
   "MGT2.Creature.Trait.alarm": "Alarm",
   "MGT2.Creature.Trait.amphibious": "Amphibious",
   "MGT2.Creature.Trait.camouflaged": "Camouflaged",
@@ -747,7 +700,6 @@
   "MGT2.Creature.Trait.tough": "Tough",
   "MGT2.Creature.Trait.toxic": "Toxic",
   "MGT2.Creature.Trait.clever": "Clever",
-
   "MGT2.Creature.TraitChoice.flyer.idle": "Idle",
   "MGT2.Creature.TraitChoice.flyer.verySlow": "Very Slow",
   "MGT2.Creature.TraitChoice.flyer.slow": "Slow",
@@ -758,7 +710,6 @@
   "MGT2.Creature.TraitChoice.flyer.subsonic": "Subsonic",
   "MGT2.Creature.TraitChoice.flyer.supersonic": "Supersonic",
   "MGT2.Creature.TraitChoice.flyer.hypersonic": "Hypersonic",
-
   "MGT2.Spacecraft.Configuration.standard": "Standard",
   "MGT2.Spacecraft.Configuration.streamlined": "Streamlined",
   "MGT2.Spacecraft.Configuration.sphere": "Sphere",
@@ -766,11 +717,9 @@
   "MGT2.Spacecraft.Configuration.dispersed": "Dispersed Structure",
   "MGT2.Spacecraft.Configuration.planetoid": "Planetoid",
   "MGT2.Spacecraft.Configuration.buffered": "Buffered Planetoid",
-
   "MGT2.Spacecraft.Computer.Primary": "Primary",
   "MGT2.Spacecraft.Computer.Backup": "Backup",
   "MGT2.Spacecraft.Computer.Nodes": "Nodes",
-
   "MGT2.Spacecraft.System.general": "General",
   "MGT2.Spacecraft.System.j-drive": "J-Drive",
   "MGT2.Spacecraft.System.m-drive": "M-Drive",
@@ -787,7 +736,6 @@
   "MGT2.Spacecraft.System.stateroom": "Stateroom",
   "MGT2.Spacecraft.System.common": "Common Area",
   "MGT2.Spacecraft.System.sensor": "Sensor",
-
   "MGT2.Spacecraft.SensorSuite.visual": "Visual",
   "MGT2.Spacecraft.SensorSuite.thermal": "Thermal",
   "MGT2.Spacecraft.SensorSuite.em": "EM",
@@ -798,22 +746,18 @@
   "MGT2.Spacecraft.SensorSuite.nas": "NAS",
   "MGT2.Spacecraft.SensorSuite.densitometer": "Densitometer",
   "MGT2.Spacecraft.SensorSuite.jammers": "Jammers",
-
-  "MGT2.Spacecraft.DefenceType.meson":  "Meson Screen",
-  "MGT2.Spacecraft.DefenceType.nuclear":  "Nuclear Damper",
+  "MGT2.Spacecraft.DefenceType.meson": "Meson Screen",
+  "MGT2.Spacecraft.DefenceType.nuclear": "Nuclear Damper",
   "MGT2.Spacecraft.DefenceType.blackGlobe": "Black Globe",
   "MGT2.Spacecraft.DefenceType.laserPD": "Laser Point Defence",
   "MGT2.Spacecraft.DefenceType.gaussPD": "Gauss Point Defence",
   "MGT2.Spacecraft.DefenceType.repulsor": "Repulsor",
-
   "MGT2.Spacecraft.DefenceTypeLabel": "Defence Type",
   "MGT2.Spacecraft.DefenceEffectLabel": "Effect",
   "MGT2.Spacecraft.DefenceModeLabel": "Mode",
-
   "MGT2.Spacecraft.DefenceMode.nuclear": "Nuclear",
   "MGT2.Spacecraft.DefenceMode.meson": "Meson",
   "MGT2.Spacecraft.DefenceMode.missile": "Missiles",
-
   "MGT2.Spacecraft.ArmouredBulkhead": "Armoured Bulkhead",
   "MGT2.Spacecraft.Battery": "Battery",
   "MGT2.Spacecraft.BatteryCharge": "Charge",
@@ -828,12 +772,10 @@
   "MGT2.Spacecraft.ExtendedDrive": "Extend Drive Size",
   "MGT2.Spacecraft.ExtendedDriveTitle": "Select this if the drive needs to move\nmore than just the ship.\nDrop tanks, external cargo or craft",
   "MGT2.Spacecraft.ExtendedDriveTons": "Extended by (Tons)",
-
   "MGT2.DamageEffect.Injured": "They are injured.",
   "MGT2.DamageEffect.Unconscious": "They are knocked unconscious.",
   "MGT2.DamageEffect.Dead": "They are killed.",
   "MGT2.DamageEffect.Destroyed": "They are destroyed.",
-
   "MGT2.DamageTaken.Value": "Takes {dmg} hits.",
   "MGT2.DamageTaken.Minor": "Takes a minor wound.",
   "MGT2.DamageTaken.Major": "Takes a major wound (½ END).",
@@ -842,14 +784,11 @@
   "MGT2.DamageTaken.Critical": "Takes a critical wound (END x3).",
   "MGT2.DamageTaken.Stun": "Takes stun damage.",
   "MGT2.DamageTaken.Radiation": "Takes radiation damage.",
-
   "MGT2.DamageTaken.Creature.Light": "Takes a light wound.",
   "MGT2.DamageTaken.Creature.Heavy": "Takes a heavy wound.",
-
   "MGT2.DamageTaken.MinimumDamage": "Takes <b>minimum damage</b>.",
   "MGT2.DamageTaken.ReducedDamage": "Takes <b>reduced damage</b>.",
   "MGT2.DamageTaken.Tough": "<i>Roll [[/r 2D6 # Get better on 8+]] to recover</i>.",
-
   "MGT2.DamageDialog.Title": "Apply Damage",
   "MGT2.DamageDialog.Damage": "DAMAGE",
   "MGT2.DamageDialog.AP": "AP",
@@ -861,7 +800,6 @@
   "MGT2.DamageDialog.Current": "Current",
   "MGT2.DamageDialog.Radiation": "RADIATION",
   "MGT2.DamageDialog.ArmourRads": "Rads",
-
   "MGT2.DamageWound.Minor": "Minor Wound",
   "MGT2.DamageWound.Major": "Major Wound",
   "MGT2.DamageWound.Severe": "Severe Wound",
@@ -870,7 +808,6 @@
   "MGT2.DamageWound.Mortal": "Mortal Wound",
   "MGT2.DamageWound.Devastating": "Devastating Wound",
   "MGT2.DamageWound.Stun": "Stun",
-
   "MGT2.DamageWound.MinorEffect": "-",
   "MGT2.DamageWound.MajorEffect": "Body part injured",
   "MGT2.DamageWound.SevereEffect": "Lose consciousness",
@@ -879,7 +816,6 @@
   "MGT2.DamageWound.MortalEffect": "Location is destroyed",
   "MGT2.DamageWound.DevastatingEffect": "Location completely destroyed",
   "MGT2.DamageWound.StunEffect": "Temporary stun damage",
-
   "MGT2.Spacecraft.Criticals.sensors": "Sensors",
   "MGT2.Spacecraft.Criticals.powerPlant": "Power Plant",
   "MGT2.Spacecraft.Criticals.fuel": "Fuel",
@@ -891,12 +827,9 @@
   "MGT2.Spacecraft.Criticals.jDrive": "J-Drive",
   "MGT2.Spacecraft.Criticals.crew": "Crew",
   "MGT2.Spacecraft.Criticals.bridge": "Bridge",
-
   "MGT2.Spacecraft.CriticalEffects.Damage": "{name} takes an extra {hits} hits from critical",
   "MGT2.Spacecraft.CriticalEffects.Hull": "{name} takes an extra hull critical",
-
   "MGT2.Spacecraft.CriticalEffects.Power": "Critical on {name} reduces power by {power}%",
-
   "MGT2.Spacecraft.CriticalEffects.FuelLeakRound": "{name} is leaking fuel every round",
   "MGT2.Spacecraft.CriticalEffects.FuelLeakHour": "{name} is leaking fuel every hour",
   "MGT2.Spacecraft.CriticalEffects.FuelLoss": "{name} loses {percentage}% of its fuel",
@@ -908,7 +841,6 @@
   "MGT2.Spacecraft.CriticalEffects.WeaponDamaged": "Weapon {name} is damaged, -1 to attack rolls",
   "MGT2.Spacecraft.CriticalEffects.WeaponDisabled": "Weapon {name} is damaged, out of use",
   "MGT2.Spacecraft.CriticalEffects.WeaponDestroyed": "Weapon {name} is destroyed",
-
   "MGT2.Spacecraft.CriticalLabel.fuelHour": "Slow Fuel Leak",
   "MGT2.Spacecraft.CriticalLabel.fuelRound": "Fast Fuel Leak",
   "MGT2.Spacecraft.CriticalLabel.powerPlant": "Power Reduced",
@@ -918,7 +850,6 @@
   "MGT2.Spacecraft.CriticalLabel.thrust": "Thrust",
   "MGT2.Spacecraft.CriticalLabel.jumpDM": "Jump",
   "MGT2.Spacecraft.CriticalLabel.armour": "Armour",
-
   "MGT2.Spacecraft.Critical.hull.Title": "Hull Critical ({severity})",
   "MGT2.Spacecraft.Critical.hull.Text": "Starship takes {damage} hits to the hull",
   "MGT2.Spacecraft.Critical.hull.0": "Location already destroyed, instead suffer <b>6D6</b> damage",
@@ -928,7 +859,6 @@
   "MGT2.Spacecraft.Critical.hull.4": "Spacecraft suffers <b>4D</b> damage",
   "MGT2.Spacecraft.Critical.hull.5": "Spacecraft suffers <b>5D</b> damage",
   "MGT2.Spacecraft.Critical.hull.6": "Spacecraft suffers <b>6D</b> damage",
-
   "MGT2.Spacecraft.Critical.armour.Title": "Armour Critical ({severity})",
   "MGT2.Spacecraft.Critical.armour.Text": "Starship armour reduced by <b>{damage}</b>",
   "MGT2.Spacecraft.Critical.armour.1": "Armour reduced by <b>1</b>",
@@ -937,14 +867,12 @@
   "MGT2.Spacecraft.Critical.armour.4": "Armour reduced by <b>1D</b>",
   "MGT2.Spacecraft.Critical.armour.5": "Armour reduced by <b>2D</b>, <b>Hull Severity</b> increased by <b>+1</b>",
   "MGT2.Spacecraft.Critical.armour.6": "Armour reduced by <b>2D</b>, <b>Hull Severity</b> increased by <b>+1</b>",
-
   "MGT2.Spacecraft.Critical.sensors.Title": "Sensor Critical ({severity})",
   "MGT2.Spacecraft.Critical.sensors.penalty": "All checks to use sensors suffer <b>DM-{penalty}</b>",
   "MGT2.Spacecraft.Critical.sensors.reduced": "Sensors inoperative beyond <b>{range}</b> range",
   "MGT2.Spacecraft.Critical.sensors.disabled": "Sensors disabled",
   "MGT2.Spacecraft.Critical.sensors.NoSensors": "There are no sensors left to disable.",
   "MGT2.Spacecraft.Critical.sensors.ListOfDisabled": "The following sensors were disabled:",
-
   "MGT2.Spacecraft.Critical.power.Title": "Power Critical ({severity})",
   "MGT2.Spacecraft.Critical.power.Text": "Starship power is now at <b>{level}%</b>",
   "MGT2.Spacecraft.Critical.power.1": "Power reduced by <b>10%</b>",
@@ -953,7 +881,6 @@
   "MGT2.Spacecraft.Critical.power.4": "Power reduced to <b>0</b>",
   "MGT2.Spacecraft.Critical.power.5": "Power reduced to <b>0</b>, <b>Hull Severity</b> increased by <b>+1</b>",
   "MGT2.Spacecraft.Critical.power.6": "Power reduced to <b>0</b>, <b>Hull Severity</b> increased by <b>1D</b>",
-
   "MGT2.Spacecraft.Critical.weapon.Title": "Weapon Critical ({severity})",
   "MGT2.Spacecraft.Critical.weapon.NoWeapons": "There are no weapons left to be affected",
   "MGT2.Spacecraft.Critical.weapon.ListOfWeaponsDamaged": "Weapons damaged:",
@@ -965,7 +892,6 @@
   "MGT2.Spacecraft.Critical.weapon.4": "Random weapon explodes. <b>Hull Severity</b> increased by <b>+1</b>",
   "MGT2.Spacecraft.Critical.weapon.5": "<b>D3</b> random weapons explode, <b>Hull Severity</b> increased by <b>+1</b>",
   "MGT2.Spacecraft.Critical.weapon.6": "<b>1D</b> random weapons explode, <b>Hull Severity</b> increased by <b>+1</b>",
-
   "MGT2.Spacecraft.Critical.cargo.Title": "Cargo Critical ({severity})",
   "MGT2.Spacecraft.Critical.cargo.1": "<b>10%</b> of cargo destroyed",
   "MGT2.Spacecraft.Critical.cargo.2": "<b>1D x 10%</b> of cargo destroyed",
@@ -975,7 +901,6 @@
   "MGT2.Spacecraft.Critical.cargo.6": "All cargo destroyed, <b>Hull Severity</b> increased by <b>+1</b>",
   "MGT2.Spacecraft.Critical.cargo.NoCargo": "No cargo was destroyed",
   "MGT2.Spacecraft.Critical.cargo.CargoDestroyed": "The following cargo was destroyed:",
-
   "MGT2.Spacecraft.Critical.fuel.Title": "Fuel Critical ({severity})",
   "MGT2.Spacecraft.Critical.fuel.1": "Leak - lose <b>1D</b> tons of fuel per hour",
   "MGT2.Spacecraft.Critical.fuel.2": "Leak - lose <b>1D</b> tons of fuel per round",
@@ -986,7 +911,6 @@
   "MGT2.Spacecraft.Critical.fuel.Lost": "Lost <b>{lost}t</b> of fuel, {remaining}t left",
   "MGT2.Spacecraft.Critical.fuel.Destroyed": "<b>{name}</b> destroyed",
   "MGT2.Spacecraft.Critical.fuel.NotDestroyed": "No fuel tanks to destroy",
-
   "MGT2.Spacecraft.Critical.mDrive.Title": "M-Drive Critical ({severity})",
   "MGT2.Spacecraft.Critical.mDrive.1": "All checks to control spacecraft suffer DM-1",
   "MGT2.Spacecraft.Critical.mDrive.2": "All checks to control spacecraft suffer DM-1 and Thrust reduced by -1",
@@ -994,7 +918,6 @@
   "MGT2.Spacecraft.Critical.mDrive.4": "All checks to control spacecraft suffer DM-1 and Thrust reduced by -1",
   "MGT2.Spacecraft.Critical.mDrive.5": "Thrust reduced to zero",
   "MGT2.Spacecraft.Critical.mDrive.6": "Thrust reduced to zero, <b>Hull Severity</b> increased by <b>+1</b>",
-
   "MGT2.Spacecraft.Critical.jDrive.Title": "M-Drive Critical ({severity})",
   "MGT2.Spacecraft.Critical.jDrive.1": "All checks to use jump drive sufer DM-2",
   "MGT2.Spacecraft.Critical.jDrive.2": "Jump drive disabled",
@@ -1002,7 +925,6 @@
   "MGT2.Spacecraft.Critical.jDrive.4": "Jump drive destroyed, <b>Hull Severity</b> increased by <b>+1</b>",
   "MGT2.Spacecraft.Critical.jDrive.5": "Jump drive destroyed, <b>Hull Severity</b> increased by <b>+1</b>",
   "MGT2.Spacecraft.Critical.jDrive.6": "Jump drive destroyed, <b>Hull Severity</b> increased by <b>+1</b>",
-
   "MGT2.Spacecraft.Critical.crew.Title": "Crew Critical ({severity})",
   "MGT2.Spacecraft.Critical.crew.0": "Random occupant takes 1D x 1D damage",
   "MGT2.Spacecraft.Critical.crew.1": "Random occupant takes 1D damage",
@@ -1011,7 +933,6 @@
   "MGT2.Spacecraft.Critical.crew.4": "Random occupant takes {damage} damage",
   "MGT2.Spacecraft.Critical.crew.5": "Random occupant takes {damage} damage",
   "MGT2.Spacecraft.Critical.crew.6": "Random occupant takes {damage} damage",
-
   "MGT2.Spacecraft.Critical.bridge.Title": "Bridge Critical ({severity})",
   "MGT2.Spacecraft.Critical.bridge.1": "Random bridge station destroyed",
   "MGT2.Spacecraft.Critical.bridge.2": "Computer reboots, all software unavailable this round and next",
@@ -1019,9 +940,6 @@
   "MGT2.Spacecraft.Critical.bridge.4": "Random bridge station destroyed. Occupant takes 1D x 1D damage.",
   "MGT2.Spacecraft.Critical.bridge.5": "Computer destroyed",
   "MGT2.Spacecraft.Critical.bridge.6": "Random bridge station destroyed. Occupant takes 1D x 1D damage. Hull Severity increased by +1",
-
-
-
   "MGT2.Spacecraft.Advances.earlyPrototype": "Early Prototype",
   "MGT2.Spacecraft.Advances.prototype": "Prototype",
   "MGT2.Spacecraft.Advances.budget": "Budget",
@@ -1044,7 +962,6 @@
   "MGT2.Spacecraft.Advantages.fuelEfficient": "Fuel Efficient",
   "MGT2.Spacecraft.Advantages.fuelInefficient": "Fuel Inefficient",
   "MGT2.Spacecraft.Advantages.increasedPower": "Increased Power",
-
   "MGT2.Spacecraft.Hull.reinforced": "Reinforced",
   "MGT2.Spacecraft.Hull.light": "Light Hull",
   "MGT2.Spacecraft.Hull.military": "Military",
@@ -1061,7 +978,6 @@
   "MGT2.Spacecraft.Hull.hamsterCage": "Hamster Cage",
   "MGT2.Spacecraft.Hull.breakawayHulls": "Breakaway Hulls",
   "MGT2.Spacecraft.Hull.solarCoating": "Solar Coating",
-
   "MGT2.Spacecraft.Range.adjacent": "Adjacent",
   "MGT2.Spacecraft.Range.close": "Close",
   "MGT2.Spacecraft.Range.short": "Short",
@@ -1072,15 +988,12 @@
   "MGT2.Spacecraft.Range.verydistant": "Very Distant",
   "MGT2.Spacecraft.Range.far": "Far",
   "MGT2.Spacecraft.Range.null": "Out of range",
-
   "MGT2.TravellerSheet.SkillsLearned.Label": "Skills Learned",
   "MGT2.TravellerSheet.MaxSkills.Label": "Max Skills",
   "MGT2.TravellerSheet.Characteristics.Label": "Characteristics",
   "MGT2.TravellerSheet.SkillsLearned.Title": "Total points of skills learned",
   "MGT2.TravellerSheet.MaxSkills.Title": "Maximum skill points that can be learned (INT + EDU)",
   "MGT2.TravellerSheet.Characteristics.Title": "How many columns to display characteristics in",
-  "MGT2.TravellerSheet.AddNewSkill": "Add New Skill",
-
   "MGT2.TravellerSheet.EncumbranceDM": "Encumbrance DM",
   "MGT2.TravellerSheet.PhysicalDM": "Physical DM",
   "MGT2.TravellerSheet.MeleeDM": "Melee DM",
@@ -1091,7 +1004,6 @@
   "MGT2.TravellerSheet.FromItems": "From Items",
   "MGT2.TravellerSheet.TotalDM": "Total DM",
   "MGT2.TravellerSheet.DisplayCharacteristics": "Display Characteristics",
-
   "MGT2.Trade.Ag": "Agricultural",
   "MGT2.Trade.As": "Asteroid",
   "MGT2.Trade.Ba": "Barren",
@@ -1110,11 +1022,9 @@
   "MGT2.Trade.Ri": "Rich",
   "MGT2.Trade.Va": "Vacuum",
   "MGT2.Trade.Wa": "Water World",
-
   "MGT2.Trade.All": "All",
   "MGT2.Trade.Amber": "Amber Zone",
   "MGT2.Trade.Red": "Red Zone",
-
   "MGT2.Item.BasePrice": "Base Price",
   "MGT2.Item.Tons": "Tons",
   "MGT2.Item.Illegal": "Illegal",
@@ -1166,18 +1076,15 @@
   "MGT2.Item.Tech.23": "Ancient",
   "MGT2.Item.Tech.24": "Ancient",
   "MGT2.Item.Tech.25": "Ancient",
-
   "MGT2.Item.Scale.traveller": "Traveller",
   "MGT2.Item.Scale.vehicle": "Vehicle",
   "MGT2.Item.Scale.spacecraft": "Spacecraft",
-
   "MGT2.Item.Term.Number": "Term",
   "MGT2.Item.Term.Length": "Years",
   "MGT2.Item.Term.RandomLength": "Roll",
   "MGT2.Item.Term.Assignment": "Assignment",
   "MGT2.Item.Term.RandomTerm": "Random term length",
   "MGT2.Item.Term.HideFromPackage": "Do not transfer to Traveller",
-
   "MGT2.Item.EnergyType.standard": "Standard",
   "MGT2.Item.EnergyType.laser": "Laser",
   "MGT2.Item.EnergyType.plasma": "Plasma",
@@ -1186,7 +1093,6 @@
   "MGT2.Item.EnergyType.cutting": "Cutting",
   "MGT2.Item.EnergyType.meson": "Meson",
   "MGT2.Item.EnergyType.nuclear": "Nuclear",
-
   "MGT2.Item.WeaponTraits": "Traits",
   "MGT2.Item.WeaponTrait.Label.ap": "AP",
   "MGT2.Item.WeaponTrait.Label.auto": "Auto",
@@ -1224,7 +1130,6 @@
   "MGT2.Item.WeaponTrait.Label.longRange": "Long Range",
   "MGT2.Item.WeaponTrait.Label.multiWarhead": "Multiple Warheads",
   "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",
-
   "MGT2.Item.WeaponTrait.Text.ap": "Armour Piercing",
   "MGT2.Item.WeaponTrait.Text.auto": "Automatic Fire",
   "MGT2.Item.WeaponTrait.Text.bulky": "STR 9+ required",
@@ -1258,7 +1163,6 @@
   "MGT2.Item.WeaponTrait.Text.longRange": "Long Range Missile",
   "MGT2.Item.WeaponTrait.Text.multiWarhead": "Multiple Warheads",
   "MGT2.Item.WeaponTrait.Text.torpedo": "Missile is Torpedo",
-
   "MGT2.Attack.Dangerous": "Weapon has exploded!",
   "MGT2.Attack.DragMe": "Drag to character sheet, or click to apply to selected tokens.",
   "MGT2.Attack.DragMeBlast": "Drag to canvas to show blast radius",
@@ -1266,9 +1170,7 @@
   "MGT2.Attack.PsionicDamage": "+{pp} to damage for each point spent, base +{dmg}",
   "MGT2.Attack.PsionicAP": "+{pp} to AP for each point spent, base {ap}",
   "MGT2.Attack.DamageBounce": "Damage does not penetrate armour of {target}",
-
   "MGT2.SpacecraftDamageDialog.Title": "Damage Spacecraft",
-
   "MGT2.Item.RangeM": "Range (m)",
   "MGT2.Item.RangeKM": "Range (km)",
   "MGT2.Item.RangeSpace": "Range",
@@ -1295,11 +1197,9 @@
   "MGT2.Item.SpaceMount.BayLarge": "Large Bay",
   "MGT2.Item.SpaceMount.Spinal": "Spinal Mount",
   "MGT2.Item.Power": "Power",
-
   "MGT2.Item.Hardware.Rating.j-drive": "Jump-{rating}",
   "MGT2.Item.Hardware.Rating.m-drive": "{rating} G",
   "MGT2.Item.Hardware.Rating.r-drive": "{rating} G",
-
   "MGT2.Item.Hardware.Tonnage.Option.pcByRating": "%/Rating",
   "MGT2.Item.Hardware.Tonnage.Option.pcByHull": "% Hull",
   "MGT2.Item.Hardware.Tonnage.Option.tonByRating": "Tons/Rating",
@@ -1312,7 +1212,6 @@
   "MGT2.Item.Hardware.Tonnage.Title.pcByHull": "TONs is fixed % of Hull",
   "MGT2.Item.Hardware.Tonnage.Title.tonByRating": "TONS is multiplied by Item Rating",
   "MGT2.Item.Hardware.Tonnage.Title.fixedTons": "TONS is fixed value",
-
   "MGT2.Item.Hardware.Tonnage.Option.costByItem": "Item TON",
   "MGT2.Item.Hardware.Tonnage.Option.costByHull": "Hull TON",
   "MGT2.Item.Hardware.Tonnage.Option.costByRating": "Rating TON",
@@ -1325,7 +1224,6 @@
   "MGT2.Item.Hardware.Tonnage.Title.costByHull": "Cost is based on size of ship",
   "MGT2.Item.Hardware.Tonnage.Title.costByRating": "Cost is based on rating of the item",
   "MGT2.Item.Hardware.Tonnage.Title.fixedCost": "Cost is a fixed value",
-
   "MGT2.Item.Hardware.Tonnage.Option.powerByItem": "Item TONs",
   "MGT2.Item.Hardware.Tonnage.Option.powerByHull": "Hull TONs",
   "MGT2.Item.Hardware.Tonnage.Option.powerByRating": "Rating",
@@ -1338,12 +1236,9 @@
   "MGT2.Item.Hardware.Tonnage.Title.powerByHull": "Power is based on size of ship",
   "MGT2.Item.Hardware.Tonnage.Title.powerByRating": "Power is based on rating of item",
   "MGT2.Item.Hardware.Tonnage.Title.fixedPower": "Power is a fixed value",
-
   "MGT2.Item.ClickToChat": "Send item info to chat",
-
   "MGT2.Item.OptionalItem.Label": "Item is a package choice",
   "MGT2.Item.OptionalItem.Hover": "If player needs to choose between one or more items from a package actor, tick this",
-
   "MGT2.Armour.FormType": "Armour Type",
   "MGT2.Armour.Form.Standard": "Standard",
   "MGT2.Armour.Form.Layered": "Anti-Energy",
@@ -1361,7 +1256,6 @@
   "MGT2.Armour.Ablative": "Ablative",
   "MGT2.Armour.Psi": "Psi",
   "MGT2.Armour.VaccSuit": "Vacc Suit {skill}",
-
   "MGT2.Effects.Disabled": "Disabled",
   "MGT2.Effects.Origin": "Origin",
   "MGT2.Effects.Transfer": "Transfer",
@@ -1378,26 +1272,21 @@
   "MGT2.Effects.Type.skillDM": "Skill DM",
   "MGT2.Effects.Type.skillExpert": "Expert Program",
   "MGT2.Effects.Type.miscDM": "Other",
-
   "MGT2.Effects.EffectLocked": "Locked by augment",
-
   "MGT2.Effects.SoftwareEffects": "Software Features",
   "MGT2.Effects.Software.Class.personal": "Personal Software",
   "MGT2.Effects.Software.Class.spacecraft": "Spacecraft Software",
-
   "MGT2.Effects.Software.Type.generic": "Generic",
   "MGT2.Effects.Software.Type.interface": "Interface",
   "MGT2.Effects.Software.Type.agent": "Agent",
   "MGT2.Effects.Software.Type.augment": "Skill Augment",
   "MGT2.Effects.Software.Type.expert": "Expert Package",
   "MGT2.Effects.Software.Type.task": "Task Skill",
-
   "MGT2.Effects.Software.InterfaceType.none": "None",
   "MGT2.Effects.Software.InterfaceType.interface": "Interface",
   "MGT2.Effects.Software.InterfaceType.agent": "Agent",
   "MGT2.Effects.Software.InterfaceType.intelligent": "Intelligent",
   "MGT2.Effects.Software.InterfaceType.intellect": "Intellect",
-
   "MGT2.History.CareerTerms": "Career Terms",
   "MGT2.History.Year": "Year",
   "MGT2.History.Career": "Career",
@@ -1445,7 +1334,6 @@
   "MGT2.History.RelationHeader": "Relation",
   "MGT2.History.Name": "Name",
   "MGT2.History.AssociatesText": "Contacts, allies and rivals encountered during character generation.",
-
   "MGT2.Finance.Cash": "Cash (Cr)",
   "MGT2.Finance.Pension": "Pension (Cr/Year)",
   "MGT2.Finance.OtherIncome": "Other Income (Cr/Year)",
@@ -1453,7 +1341,6 @@
   "MGT2.Finance.Mortgage": "Mortgage (Cr/Month)",
   "MGT2.Finance.LivingCosts": "Living Costs (Cr/Month)",
   "MGT2.Finance.Notes": "Financial Notes",
-
   "MGT2.XPSkill.Title": "Training and Bonuses for {name}",
   "MGT2.EditSkill.Edit": "Edit skill",
   "MGT2.EditSkill.Add": "Add new skill",
@@ -1466,56 +1353,43 @@
   "MGT2.EditSkill.Individual": "Individual skill, each specialisation must be individually trained",
   "MGT2.EditSkill.Deleted": "Deleted, will be removed from target actor when package is applied",
   "MGT2.EditSkill.Optional": "Package Optional, player selects which one when package is applied",
-
   "MGT2.Info.Damage": "{actor} takes {damage} hits",
   "MGT2.Info.CreateItem": "Added {item} to {actor}",
   "MGT2.Error.CreateItem.NoItem": "Unable to locate linked item",
   "MGT2.Error.CreateItem.NoToken": "You need to select a token for an item to be added to a character",
-
   "MGT2.Error.NoWeaponMount": "Vehicle has no weapon mounted for this action",
   "MGT2.Error.RoleInUse": "Cannot delete role {roleName} because it is assigned to crew member {actorName}",
   "MGT2.Error.WeaponInUse": "Cannot delete weapon {wpnName} because it is assigned to {mountName}",
-
   "MGT2.Error.NoSuitableOwner": "No current player can be found who has permission to alter '{actor}'",
   "MGT2.Info.ActorOwnerFound": "Player '{player}' has been asked to apply damage to '{actor}'",
-
   "MGT2.Warn.HotBar.NewActor": "Cannot assign hot bar skills for a new actor",
   "MGT2.Info.HotBar.AssignedSkill": "Assigned skill '{skill}' to the hot bar",
   "MGT2.Warn.HotBar.SelectActorSkill": "Please select an actor token before using a hot bar skill",
   "MGT2.Warn.HotBar.SelectActorItem": "No actor is selected to use {item} with",
   "MGT2.Warn.HotBar.ActorNotHaveItem": "Actor '{actor}' does not have item '{item}'",
-
   "MGT2.Error.CombatNoSelection": "You must target or select a token",
-
   "MGT2.Warn.Crew.NoCrewActor": "Cannot find crew actor with id '{crewId}'",
   "MGT2.Warn.Crew.NoRoleItem": "Cannot find role with id '{roleId}'",
-
   "MGT2.Warn.Drop.OnlyOnCharacter": "Items of type '{type}' can only be added to characters",
   "MGT2.Warn.Drop.NotOnCharacter": "Cannot drop items of type '{type}' on a character",
   "MGT2.Warn.Drop.NotOnVehicle": "Cannot drop items of type '{type}' on a vehicle",
   "MGT2.Warn.Drop.CareerOnNPC": "NPCs and Creatures cannot be given career terms or associates",
   "MGT2.Info.Drop.DropPackage": "Adding package '{package}' to '{actor}'",
   "MGT2.Info.Drop.DropPackageItem": "Adding item '{item}' to '{actor}'",
-
   "MGT2.Info.DamageMsg.VehicleNoStun": "Vehicles can't be affected by stun damage",
   "MGT2.Info.DamageMsg.SpacecraftNoStun": "Spacecraft can't be affected by stun damage",
-
   "MGT2.Error.NotEnoughCash": "{actor} does not have enough Credits to spend Cr{cost}",
   "MGT2.Info.BuyItem": "{actor} spends Cr{cost} on buying {item}",
   "MGT2.Warn.NoActorsToBuy": "No actors available who can buy this item",
   "MGT2.Warn.ThisActorCannotBuy": "{actor} doesn't have enough cash to buy {item}",
-
   "MGT2.Error.NoStatus": "Unable to find status '{status}'",
-
   "MGT2.Role.isDepartment": "Role is a department",
   "MGT2.Role.RoleAssignment": "Role Assignment",
   "MGT2.Role.RoleActions": "Actions",
   "MGT2.Role.NoRoleAssigned": "No roles assigned",
   "MGT2.Role.NoCrewAssigned": "No passengers are assigned as crew members",
   "MGT2.Role.NoCrewOrPassengers": "Drag Travellers or NPCs to this sheet to add crew or passengers",
-
   "MGT2.Role.ChatAlias": "{actorName} aboard the {shipName}:",
-
   "MGT2.Role.ActionTitle": "Action",
   "MGT2.Role.ChatType": "Chat",
   "MGT2.Role.SkillType": "Skill",
@@ -1526,25 +1400,22 @@
   "MGT2.Role.Special.ImproveInitiative": "Improve Initiative",
   "MGT2.Role.Special.Evade": "Evade",
   "MGT2.Role.Special.Repair": "Repair System",
-
-  "MGT2.Role.BuiltIn.Name.Gunner":  "Gunner",
-  "MGT2.Role.BuiltIn.Name.Pilot":  "Pilot",
-  "MGT2.Role.BuiltIn.Name.Engineer":  "Engineer",
-  "MGT2.Role.BuiltIn.Name.Broker":  "Broker",
-  "MGT2.Role.BuiltIn.Name.Sensors":  "Sensor Op",
-  "MGT2.Role.BuiltIn.Name.Navigator":  "Astrogator",
-  "MGT2.Role.BuiltIn.Name.Captain":  "Captain",
-  "MGT2.Role.BuiltIn.Name.Officer":  "Officer",
-  "MGT2.Role.BuiltIn.Name.Mechanic":  "Mechanic",
-  "MGT2.Role.BuiltIn.Name.Steward":  "Steward",
-  "MGT2.Role.BuiltIn.Name.Medic":  "Medic",
-
+  "MGT2.Role.BuiltIn.Name.Gunner": "Gunner",
+  "MGT2.Role.BuiltIn.Name.Pilot": "Pilot",
+  "MGT2.Role.BuiltIn.Name.Engineer": "Engineer",
+  "MGT2.Role.BuiltIn.Name.Broker": "Broker",
+  "MGT2.Role.BuiltIn.Name.Sensors": "Sensor Op",
+  "MGT2.Role.BuiltIn.Name.Navigator": "Astrogator",
+  "MGT2.Role.BuiltIn.Name.Captain": "Captain",
+  "MGT2.Role.BuiltIn.Name.Officer": "Officer",
+  "MGT2.Role.BuiltIn.Name.Mechanic": "Mechanic",
+  "MGT2.Role.BuiltIn.Name.Steward": "Steward",
+  "MGT2.Role.BuiltIn.Name.Medic": "Medic",
   "MGT2.Role.BuiltIn.Action.Pilot": "Piloting",
   "MGT2.Role.BuiltIn.Action.PortLanding": "Port Landing",
   "MGT2.Role.BuiltIn.Action.WildLanding": "Wild Landing",
   "MGT2.Role.BuiltIn.Action.Evade": "Evade",
   "MGT2.Role.BuiltIn.Action.MakePilot": "Make Pilot",
-
   "MGT2.Swarm.MissileSource": "Missile Source",
   "MGT2.Swarm.MissileTarget": "Missile Target",
   "MGT2.Swarm.SelectTarget": "SELECT TARGET",
@@ -1563,15 +1434,12 @@
   "MGT2.Swarm.Armour": "Armour",
   "MGT2.Swarm.SquadronTL": "TL",
   "MGT2.Swarm.SalvoSize": "TL",
-
   "MGT2.Swarm.DeleteConfirm.Title": "Delete Swarm?",
   "MGT2.Swarm.DeleteConfirm.Text": "The Salvo/Squadrom and all its tokens will be deleted.",
-
-
   "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
   "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",
   "MGT2.Dialog.EmbarkPassengers": "Embark Passengers",
-  "MGT2.Dialog.TotalAvailable":  "Total Available",
+  "MGT2.Dialog.TotalAvailable": "Total Available",
   "MGT2.Dialog.UnitPrice": "Unit Price",
   "MGT2.Dialog.AvailableCash": "Available Cash",
   "MGT2.Dialog.FreeSpace": "Free Space",
@@ -1581,36 +1449,29 @@
   "MGT2.Dialog.PassengersAvailable": "Passengers Available",
   "MGT2.Dialog.AvailableStaterooms": "Available Staterooms",
   "MGT2.Dialog.TicketPrice": "Ticket Price",
-
   "MGT2.Dialog.EnableDamage.Title": "Enable damage for this NPC?",
   "MGT2.Dialog.EnableDamage.Text": "If enabled, then damage will be applied to STR, DEX and END rather than to a single HITS value.",
-
   "MGT2.Dialog.CharacteristicDamage.Title": "Show Damaged Characteristics",
   "MGT2.Dialog.CharacteristicDamage.Text": "Select which characteristics to show damage for",
   "MGT2.Dialog.CharacteristicDamage.Discard": "Revert to using HITS",
-
   "MGT2.Dialog.RememberCharacteristic": "Remember Characteristic",
   "MGT2.Dialog.RollType": "Roll Type",
   "MGT2.Dialog.RollMode": "Roll Mode",
+  "MGT2.Dialog.ActiveEffects": "Active Effects",
   "MGT2.Dialog.Public": "Public Roll",
   "MGT2.Dialog.Private": "Private Roll",
   "MGT2.Dialog.Blind": "Blind GM Roll",
   "MGT2.Dialog.Self": "Self Roll",
-
   "MGT2.Dialog.ApplyDamage.Title": "Apply Damage to {name}?",
   "MGT2.Dialog.ApplyDamage.What": "<span class='player-name'>{playerName}</span> wants to cause <span class='damage-value'>{damage} HITS</span> to {actorName}.",
   "MGT2.Dialog.ApplyDamage.ClickYes": "Click YES to allow this.",
-
   "MGT2.Dialog.AblateOption": "Ablate armour '{armour}'?",
   "MGT2.Dialog.AblateConfirm.Title": "Attack on '{actor}'",
   "MGT2.Dialog.AblateConfirm.Text": "Do you want to ablate armour '{armour}'?",
-
   "MGT2.Dialog.SelectItem.Title": "Add package {name}",
   "MGT2.Dialog.SelectItem.Text": "Choose one of the following items from the package:",
-
   "MGT2.Dialog.SelectSkill.Title": "Add package {name}",
   "MGT2.Dialog.SelectSkill.Text": "Choose one of the {name} specialities:",
-
   "MGT2.ExceptionalFailure": "Exceptional Failure",
   "MGT2.AverageFailure": "Average Failure",
   "MGT2.MarginalFailure": "Marginal Failure",
@@ -1623,7 +1484,6 @@
   "MGT2.SkillCheck.Skill": "skill check",
   "MGT2.SkillCheck.Characteristic": "characteristic check",
   "MGT2.SkillCheck.Untrained": "untrained",
-
   "MGT2.Source": "Source",
   "MGT2.Target": "Target",
   "MGT2.DM": "DM",
@@ -1635,9 +1495,7 @@
   "MGT2.Skill": "Skill",
   "MGT2.any": "any",
   "MGT2.or": "or",
-
   "MGT2.SpacecraftRepairDialog.Title": "Repair System",
-
   "TYPES.Actor.traveller": "Traveller",
   "TYPES.Actor.npc": "NPC",
   "TYPES.Actor.creature": "Creature",
@@ -1646,7 +1504,6 @@
   "TYPES.Actor.swarm": "Swarm",
   "TYPES.Actor.vehicle": "Vehicle",
   "TYPES.Actor.world": "World",
-
   "TYPES.Item.item": "General Item",
   "TYPES.Item.weapon": "Weapon",
   "TYPES.Item.armour": "Armour",
@@ -1658,7 +1515,6 @@
   "TYPES.Item.role": "Crew Role",
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "World Data",
-
   "EFFECT.TITLE.Injured": "Injured",
   "EFFECT.TITLE.Destroyed": "Destroyed",
   "EFFECT.TITLE.FirstAid": "First Aid",
@@ -1679,8 +1535,6 @@
   "EFFECT.TITLE.Stunned": "Stunned, cannot act for X turns",
   "EFFECT.TITLE.Tactics": "Tactics bonus to initiative",
   "EFFECT.TITLE.Hiding": "Armour bonus from cover",
-
-
   "EFFECT.Injured": "Injured",
   "EFFECT.Destroyed": "Destroyed",
   "EFFECT.FirstAid": "First Aid",
@@ -1701,8 +1555,23 @@
   "EFFECT.Tactics": "Tactics",
   "EFFECT.Hiding": "Hiding",
   "EFFECT.Initiative": "Initiative",
-
   "Save": "Save",
-
-  "TRAVELLER.Add": "Add"
+  "TRAVELLER.Add": "Add",
+  "EFFECT.ChangeKey": "Attribute Key",
+  "EFFECT.ChangeMode": "Change Mode",
+  "EFFECT.ChangePriority": "Priority",
+  "EFFECT.ChangeValue": "Change Value",
+  "EFFECT.MODE.Add": "Add",
+  "EFFECT.MODE.Multiply": "Multiply",
+  "EFFECT.MODE.Override": "Override",
+  "EFFECT.MODE.Upgrade": "Upgrade",
+  "EFFECT.MODE.Downgrade": "Downgrade",
+  "EFFECT.MODE.Custom": "Custom",
+  "MGT2.Modifiers.CarryMultiplier": "Carry Multiplier",
+  "MGT2.Modifiers.Encumbrance": "Encumbrance DM",
+  "MGT2.Modifiers.Physical": "Physical DM",
+  "MGT2.Modifiers.Melee": "Melee DM",
+  "MGT2.Modifiers.GunCombat": "Gun Combat DM",
+  "MGT2.Modifiers.Armour": "Armour",
+  "MGT2.Modifiers.Initiative": "Initiative"
 }

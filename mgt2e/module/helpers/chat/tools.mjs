@@ -8,6 +8,9 @@ import {MGT2} from "../config.mjs";
 import {setSpacecraftCriticalLevel} from "../spacecraft/criticals.mjs";
 import {getHighestModifier} from "../utils/trade-utils.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+const TextEditor = foundry.applications.ux.TextEditor;
+
 export const Tools = {};
 
 

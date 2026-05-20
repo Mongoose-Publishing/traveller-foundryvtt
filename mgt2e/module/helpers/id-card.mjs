@@ -4,7 +4,7 @@ export class NpcIdCard extends Application {
     static get defaultOptions() {
         const options = super.defaultOptions;
 
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             editable: false,
             resizable: false,
             template: "systems/mgt2e/templates/actor/actor-id-card.html",

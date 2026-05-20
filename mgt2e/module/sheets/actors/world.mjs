@@ -12,6 +12,9 @@ import {getFromNamedTable, getRollTableFolder} from "../../helpers/utils/table-u
 import {roll} from "../../helpers/dice-rolls.mjs";
 import {Tools} from "../../helpers/chat/tools.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+const TextEditor = foundry.applications.ux.TextEditor;
+
 export class MgT2WorldActorSheet extends MgT2ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {

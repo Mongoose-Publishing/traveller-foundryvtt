@@ -4,6 +4,8 @@ import {MgT2Item} from "../../documents/item.mjs";
 import {MGT2} from "../../helpers/config.mjs";
 import {skillLabel} from "../../helpers/dice-rolls.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor;
+
 export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {

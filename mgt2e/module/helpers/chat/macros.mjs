@@ -6,6 +6,8 @@ import {randomiseAssociate} from "../utils/character-utils.mjs";
 import {Tools} from "./tools.mjs";
 import {MgT2BuyDialog} from "../buy-dialog.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+
 export const MgT2eMacros = {};
 
 // Add a skill to a character sheet.

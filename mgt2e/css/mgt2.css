@@ -767,6 +767,53 @@ input.skillDialogDM {
   width: 5em;
 }
 
+.roll-effects-summary {
+  margin: 4px 0 6px 0;
+  border-top: 1px solid #c0a060;
+  padding-top: 4px;
+}
+
+.roll-effects-title {
+  font-weight: bold;
+  font-size: 8.5pt;
+  color: #806020;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.roll-effects-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.roll-effect-entry {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8pt;
+  padding: 1px 2px;
+  border-radius: 3px;
+  background: rgba(192, 160, 96, 0.08);
+  margin-bottom: 1px;
+}
+
+.roll-effect-name {
+  font-style: italic;
+  color: #504020;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 55%;
+}
+
+.roll-effect-detail {
+  font-weight: bold;
+  color: #304020;
+  white-space: nowrap;
+  padding-left: 6px;
+}
+
 span.skillroll {
   font-weight: bold;
 }
