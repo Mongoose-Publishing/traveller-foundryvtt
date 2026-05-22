@@ -1,5 +1,9 @@
 # Release Notes
 
+# 0.20.5 (Beta)
+* Allow skill request macros to set whether a roll is public, private, blind or GM.
+* Fix bug that prevented the adding of a new skill specialisation.
+
 # 0.20.4 (Beta)
 * Actually update the configuration so that it picks up the French localisation file.
 

@@ -1611,7 +1611,7 @@ Handlebars.registerHelper('skillListClasses', function() {
 });
 
 // Decide whether to show a skill or not.
-Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
+Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
     let showSkill = false;
     let showSpecs = false;
     let trainedOnly = data.settings.hideUntrained;
@@ -1626,6 +1626,15 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
         if (!data.characteristics[skill.requires] || !data.characteristics[skill.requires].show) {
             return "";
         }
+    }
+    if (!skillId && key) {
+        // Some old actors might not have an id set on the skill object.
+        skillId = Object.keys(data.skills)[key];
+        skill.id = skillId;
+        skill.icon = skill.icon?skill.icon:`systems/mgt2e/icons/skills/${skillId}.svg`;
+    }
+    if (!skillId) {
+        return "";
     }
 
     // If backgroundOnly is set, then shortcut to not showing anything.
