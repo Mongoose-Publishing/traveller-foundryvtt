@@ -4,8 +4,8 @@
   "description": "A system for Mongoose Traveller 2e. This includes rules specific to this version of Traveller.",
   "version": "0.20.4.0",
   "compatibility": {
-    "minimum": 14,
-    "verified": 14,
+    "minimum": 13,
+    "verified": 13,
     "maximum": 14
   },
   "authors": [
