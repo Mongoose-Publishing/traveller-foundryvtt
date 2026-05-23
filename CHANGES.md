@@ -1,5 +1,12 @@
 # Release Notes
 
+
+# Develop (Beta)
+* Added support for Foundry V14. This fixes some problems which augments had in v14.
+  These changes should work in both v13 and v14. It is recommended that you make
+  backups before moving to v14 in case of any undiscovered problems.
+* Better display of augment bonuses in the skill dialog.
+
 # 0.20.5 (Beta)
 * Allow skill request macros to set whether a roll is public, private, blind or GM.
 * Fix bug that prevented the adding of a new skill specialisation.
