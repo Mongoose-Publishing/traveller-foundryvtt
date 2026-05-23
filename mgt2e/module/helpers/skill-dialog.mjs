@@ -213,7 +213,7 @@ export class MgT2SkillDialog extends Application {
             "BOON_SELECT": BOON_SELECT,
             "TARGET_SELECT": TARGET_SELECT,
             "MODE_SELECT": MODE_SELECT,
-            "mode": mode,
+            "mode": this.mode,
             "rollEffects": this._collectRollEffects()
         }
     }

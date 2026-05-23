@@ -146,12 +146,13 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
 
-        // Resolve augmentType: stored in flags.mgt2e.augmentType (v14+),
-        // with fallback to old flag path and heuristic detection for legacy effects.
-        let augmentType = context.document.flags?.mgt2e?.augmentType
-            ?? context.document.flags?.augmentType
-            ?? context.document.system?.augmentType
-            ?? null;
+        console.log("_prepareContext: " + context.document.name);
+        console.log(context.document);
+
+        // system.augment is what we use now. Also check what we used to use.
+        let augmentType = context.document.system?.augmentType ??
+            context.document.flags?.mgt2e?.augmentType ??
+            null;
 
         if (!augmentType) {
             // Legacy effect: try to detect from change keys.
@@ -169,7 +170,7 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
                 }
             }
             // Persist the resolved type for next time
-            context.document.update({ "flags.mgt2e.augmentType": augmentType });
+            context.document.update({ "system.augmentType": augmentType });
         }
 
         context.effectType = MGT2.EFFECTS[augmentType] ?? null;
