@@ -2,7 +2,7 @@
     <div class="form-group">
         <label>Type</label>
         <div class="form-fields">
-            {{localize (concat 'MGT2.Effects.Type.' document.system.augmentType)}}
+            {{effectTypeLabel}}
         </div>
     </div>
     <header class="effect-change effects-header flexrow">
@@ -24,8 +24,8 @@
                 </div>
 
                 <div class="active-effecode">
-                    <select name="changes.{{i}}.mode" data-dtype="Number">
-                        {{selectOptions ../modes selected=change.mode}}
+                    <select name="changes.{{i}}.type" data-dtype="String">
+                        {{selectOptions ../modes selected=change.type}}
                     </select>
                 </div>
 
@@ -34,7 +34,9 @@
                 </div>
 
                 <div class="value">
+                    {{#if ../showValue}}
                     <input type="text" name="changes.{{i}}.value" value="{{change.value}}"/>
+                    {{/if}}
                 </div>
                 <div class="effect-controls">
                     <a class="effect-control" data-action="deleteChange"><i class="fas fa-trash"></i></a>

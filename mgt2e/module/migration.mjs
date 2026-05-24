@@ -177,7 +177,7 @@ export async function migrateWorld(fromVersion) {
             const t = token.toJSON();
             if (!t.actorLink) {
                 console.log(`Migrating Actor token ${token.name}`);
-                const actor = duplicate(t.delta);
+                const actor = foundry.utils.duplicate(t.delta);
                 actor.type = t.actor?.type;
                 migrateActorData(actor, fromVersion);
             }

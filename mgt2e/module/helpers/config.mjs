@@ -38,32 +38,7 @@ MGT2.STATUS_EFFECTS = {
     "initiative": { value: 0 }
 }
 
-
-CONFIG.statusEffects.push({
-    id: "reaction",
-    name: "EFFECT.Reaction",
-    img: "systems/mgt2e/icons/effects/reaction.svg"
-});
-CONFIG.statusEffects.push({
-    id: "fatigued",
-    name: "EFFECT.Fatigued",
-    img: "systems/mgt2e/icons/effects/fatigued.svg"
-});
-CONFIG.statusEffects.push({
-    id: "physical",
-    name: "EFFECT.Physical",
-    img: "systems/mgt2e/icons/effects/physical.svg"
-});
-CONFIG.statusEffects.push({
-    id: "armour",
-    name: "EFFECT.Armour",
-    img: "systems/mgt2e/icons/effects/armour.svg"
-});
-CONFIG.statusEffects.push({
-    id: "inCover",
-    name: "EFFECT.InCover",
-    img: "systems/mgt2e/icons/effects/inCover.svg"
-});
+// Note: STATUS_EFFECTS are registered in CONFIG.statusEffects via the 'init' hook in mgt2.mjs
 
 MGT2.HARDWARE_GENERAL = "general";
 MGT2.HARDWARE_ARMOUR = "armour";
@@ -1218,8 +1193,8 @@ MGT2.EFFECTS = {
   "chaAug": { "targets": "char", "value": true, "property": "augment", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "chaBase": { "targets": "char", "value": true, "property": "value", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "chaDM": { "targets": "char", "value": true, "property": "augdm", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
-  "chaBoon": { "targets": "char", "value": false, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE },
-  "chaBane":  { "targets": "char", "value": false, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE },
+  "chaBoon": { "targets": "char", "value": false, "property": "boon", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE },
+  "chaBane":  { "targets": "char", "value": false, "property": "bane", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE },
   "chaMin": { "targets": "char", "value": true, "property": "min", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE },
   "skillAug":  { "targets": "skills", "value": true, "property": "augment", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "skillDM": { "targets": "skills", "value": true, "property": "augdm", mode: CONST.ACTIVE_EFFECT_MODES.ADD },

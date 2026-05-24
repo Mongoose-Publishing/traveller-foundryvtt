@@ -279,8 +279,6 @@ Hooks.once('init', async function() {
         default: false
     });
 
-    CONFIG.ActiveEffect.legacyTransferral = false;
-
     // Add custom constants for configuration.
     CONFIG.MGT2 = MGT2;
 
@@ -317,8 +315,8 @@ Hooks.once('init', async function() {
   Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
   Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "worlddata"], makeDefault: true });
   Items.registerSheet("mgt2e", MgT2SoftwareItemSheet, { label: "Software", types: [ "software"], makeDefault: true });
-  DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
-  DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
+  foundry.applications.apps.DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
 //  ActiveEffects.registerSheet("mgt2e", MgT2EffectSheet, { makeDefault: true });
 
@@ -355,9 +353,7 @@ Hooks.once('init', async function() {
   return preloadHandlebarsTemplates();
 });
 
-Hooks.on("init", function() {
-    // Inline Macro Execution.
-    // Based on code written by Mesayah:
+Hooks.once("init", function() {
     // https://github.com/fpiechowski/inline-macro-execution
     const rgx = /\[\[(\/mgMacro)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
     CONFIG.TextEditor.enrichers.push({
@@ -1641,6 +1637,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
         skill.icon = skill.icon?skill.icon:`systems/mgt2e/icons/skills/${skillId}.svg`;
     }
     if (!skillId) {
+        console.log("Skill has no ID set");
         return "";
     }
 
@@ -2287,7 +2284,6 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
     // 'behaviours' is a string of space separated behaviour values. Some will have values
     // Want to return <span> elements with localised names.
     let html = "";
-    console.log(traits);
     let list = traits.split(",");
     for (let i in list) {
         if (list[i].length > 0) {

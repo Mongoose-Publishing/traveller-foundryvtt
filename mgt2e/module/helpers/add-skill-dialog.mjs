@@ -150,14 +150,17 @@ export class MgT2AddSkillDialog extends Application {
         let optional = html.find(".skillOptionalToggle")[0]?.checked;
 
         if (parent) {
-            if (this.actorData.skills[this.skillId]) {
-                if (!this.actorData.skills[this.skillId].specialities) {
-                    this.actorData.skills[this.skillId].specialities = {};
+            console.log("parent: " + parent);
+            console.log("skillId: " + this.skillId);
+            console.log("parentId: " + this.parentId);
+            if (this.actorData.skills[parent]) {
+                if (!this.actorData.skills[parent].specialities) {
+                    this.actorData.skills[parent].specialities = {};
                 }
                 // Find a unique id for this speciality.
-                if (!this.isEdit && this.actorData.skills[this.skillId].specialities[shortname]) {
+                if (!this.isEdit && this.actorData.skills[parent].specialities[shortname]) {
                     let idx = 1;
-                    while (this.actorData.skills[this.skillId].specialities[shortname+"_"+idx]) {
+                    while (this.actorData.skills[parent].specialities[shortname+"_"+idx]) {
                         idx++;
                     }
                     shortname = shortname + "_" + idx;
@@ -171,19 +174,19 @@ export class MgT2AddSkillDialog extends Application {
                     'trained': false,
                     'value': 0
                 }
-                if (this.actorData.skills[this.skillId].specialities[shortname]) {
-                    skill.value = this.actorData.skills[this.skillId].specialities[shortname].value;
-                    if (this.actorData.skills[this.skillId].individual) {
-                        skill.trained = this.actorData.skills[this.skillId].specialities[shortname].trained;
+                if (this.actorData.skills[parent].specialities[shortname]) {
+                    skill.value = this.actorData.skills[parent].specialities[shortname].value;
+                    if (this.actorData.skills[parent].individual) {
+                        skill.trained = this.actorData.skills[parent].specialities[shortname].trained;
                     }
                 }
                 if (this.actor.type === "package") {
                     skill.optional = optional;
                 }
-                this.actorData.skills[this.skillId].specialities[shortname] = skill;
+                this.actorData.skills[parent].specialities[shortname] = skill;
 
             } else {
-                console.log("Parent skill [" + this.skillId + "] does not exist");
+                console.log("Parent skill [" + parent + "] does not exist");
             }
         } else {
             console.log("Top level skill");
