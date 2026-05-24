@@ -1634,6 +1634,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
         skill.icon = skill.icon?skill.icon:`systems/mgt2e/icons/skills/${skillId}.svg`;
     }
     if (!skillId) {
+        console.log("Skill has no ID set");
         return "";
     }
 
@@ -2280,7 +2281,6 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
     // 'behaviours' is a string of space separated behaviour values. Some will have values
     // Want to return <span> elements with localised names.
     let html = "";
-    console.log(traits);
     let list = traits.split(",");
     for (let i in list) {
         if (list[i].length > 0) {
