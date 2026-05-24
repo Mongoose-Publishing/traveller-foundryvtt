@@ -565,12 +565,8 @@
   "MGT2.Vehicle.Cruise": "Cruise",
   "MGT2.Vehicle.Hull": "Hull",
   "MGT2.Vehicle.Cost": "Cost",
-<<<<<<< HEAD
   "MGT2.Vehicle.FeaturesTitle": "Features",
   "MGT2.Vehicle.TraitsTitle": "Traits",
-
-=======
->>>>>>> main
   "MGT2.Vehicle.ChassisLabel.lightGround": "Light Ground Vehicle",
   "MGT2.Vehicle.ChassisLabel.heavyGround": "Heavy Ground Vehicle",
   "MGT2.Vehicle.ChassisLabel.lightGrav": "Light Grav Vehicle",
@@ -1151,12 +1147,8 @@
   "MGT2.Item.WeaponTrait.Label.longRange": "Long Range",
   "MGT2.Item.WeaponTrait.Label.multiWarhead": "Multiple Warheads",
   "MGT2.Item.WeaponTrait.Label.torpedo": "Torpedo",
-<<<<<<< HEAD
   "MGT2.Item.WeaponTrait.Label.accurate": "Accurate",
   "MGT2.Item.WeaponTrait.Label.inaccurate": "Inaccurate",
-
-=======
->>>>>>> main
   "MGT2.Item.WeaponTrait.Text.ap": "Armour Piercing",
   "MGT2.Item.WeaponTrait.Text.auto": "Automatic Fire",
   "MGT2.Item.WeaponTrait.Text.bulky": "STR 9+ required",
