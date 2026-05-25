@@ -1,3 +1,9 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="equipment">
     <h2>Equipment</h2>
+
+    <ul>
+        {{#each items as |item id|}}
+            <li>{{item.name}}</li>
+        {{/each}}
+    </ul>
 </section>

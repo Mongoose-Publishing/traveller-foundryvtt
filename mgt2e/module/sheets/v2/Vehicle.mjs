@@ -2,6 +2,7 @@
 import { MgT2eActorV2 } from "./MgT2eActorV2.mjs";
 
 export class MgT2eVehicleSheet extends MgT2eActorV2 {
+
     static DEFAULT_OPTIONS = {
         classes: ["mgt2e", "sheet", "actor"],
         position: {width: 720, height: 600},
@@ -130,11 +131,12 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         };
 
         await this._calculateTypes();
+        console.log(this.document.items);
 
         context.structure = Math.ceil(this.document.system.hits.max / 10);
 
         context.TYPE_SELECT = {};
-        for (let t in CONFIG.MGT2.VEHICLE.TYPE) {
+        for (let t in CONFIG.MGT2.VEHICLES.TYPE) {
             context.TYPE_SELECT[t] = game.i18n.localize(`MGT2.Vehicle.Type.${t}`);
         }
 
@@ -143,13 +145,10 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         if (CONFIG.MGT2.VEHICLES.TYPE[this.document.system.vehicle.type]) {
             let allowedFeatures = CONFIG.MGT2.VEHICLES.TYPE[this.document.system.vehicle.type].allowedFeatures;
             if (allowedFeatures) {
-                console.log("FEATURES: " + this.document.system.vehicle?.features);
                 for (let f of allowedFeatures) {
-                    console.log(f);
                     let conflict = false;
                     if (CONFIG.MGT2.VEHICLES.FEATURES[f]?.conflicts) {
                         for (let c of CONFIG.MGT2.VEHICLES.FEATURES[f].conflicts) {
-                            console.log("  - " + c);
                             if (this.document.system.vehicle?.features?.indexOf(c) > -1) {
                                 conflict = true;
                                 continue;
@@ -205,7 +204,6 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
     }
 
     _preparePartContext(partId, context) {
-        console.log(partId);
         context.tab = context.tabs[partId];
 
         if (!this.document.system.vehicle.primaryPower) {
@@ -235,7 +233,37 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         await this.document.update(formData.object);
     }
 
-    _getTabs2(options) {
-        return "";
+    async _onDrop(event) {
+        let data;
+        try {
+            data = JSON.parse(event.dataTransfer.getData('text/plain'));
+        } catch (err) {
+            console.log("Could not parse data");
+            return false;
+        }
+        switch (data.type) {
+            case "Item":
+                await this._onDropItem(event, data);
+                break;
+        }
     }
+
+    async _onDropItem(event, data) {
+        const item = await Item.fromDropData(data);
+
+        if (!item || this.document.uuid === item.parent?.uuid) {
+            console.log("Not allowed");
+            return;
+        }
+        const itemData = item.toObject();
+        try {
+            const r = await this.document.createEmbeddedDocuments("Item", [ itemData ]);
+            return r;
+        } catch (err) {
+            console.error("Failed to create", err);
+            return false;
+        }
+
+    }
+
 }
