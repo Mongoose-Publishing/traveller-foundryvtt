@@ -134,7 +134,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         context.structure = Math.ceil(this.document.system.hits.max / 10);
 
         context.TYPE_SELECT = {};
-        for (let t in CONFIG.MGT2.VEHICLES.TYPE) {
+        for (let t in CONFIG.MGT2.VEHICLE.TYPE) {
             context.TYPE_SELECT[t] = game.i18n.localize(`MGT2.Vehicle.Type.${t}`);
         }
 

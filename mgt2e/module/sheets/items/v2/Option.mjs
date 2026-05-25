@@ -106,6 +106,10 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             tabs: this._prepareTabs("primary")
         };
 
+        context.SELECT_TYPE = {};
+        for (let t in CONFIG.MGT2.VEHICLES.OPTIONS) {
+            context.SELECT_TYPE[t] = game.i18n.localize(`MGT2.Option.Type.${t}`);
+        }
 
         context.SELECT_TECHLEVEL = {};
         for (let tl=0; tl < 20; tl++) {
@@ -115,10 +119,17 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         return context;
     }
 
-    _preparePartContext(partId, context) {
+    async _preparePartContext(partId, context) {
         console.log(partId);
         context.tab = context.tabs[partId];
 
+        if (partId === "description") {
+            console.log("DESCRIPTION");
+            context.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(
+                this.document.system.description,
+                { secrets: ((this.document.permission > 2)?true:false) }
+            );
+        }
 
 
         return context;

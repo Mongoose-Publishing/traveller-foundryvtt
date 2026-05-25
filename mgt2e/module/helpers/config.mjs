@@ -620,6 +620,12 @@ MGT2.VEHICLES = {
         "antimatter": {},
         "fusionPlus": {},
         "solar": {}
+    },
+    OPTIONS: {
+      "general": {},
+        "comms": {},
+        "sensors": {},
+        "armour": {}
     }
 };
 

@@ -1471,6 +1471,11 @@
   "MGT2.ItemTab.description": "Description",
   "MGT2.ItemTab.effects": "Effects",
 
+  "MGT2.Option.Type.general": "General",
+  "MGT2.Option.Type.comms": "Communications",
+  "MGT2.Option.Type.sensors": "Sensors",
+  "MGT2.Option.Type.armour": "Armour",
+
   "MGT2.Vehicle.Type.aeroplane": "Aeroplane",
   "MGT2.Vehicle.Type.airship": "Airship",
   "MGT2.Vehicle.Type.gravVehicle": "Grav Vehicle",

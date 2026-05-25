@@ -1,6 +1,28 @@
 <section class="sheet-body">
-    <h1 class="actor-name shadow">
-        <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
-    </h1>
-    <div class="vehicle-type">{{localize (concat "MGT2.Option.Type." system.option.type)}}</div>
+    <div class="grid grid-5col">
+        <h1 class="actor-name shadow grid-span-5">
+            <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+        </h1>
+
+        <div>
+            <label>Option Type</label>
+            <select name="system.option.type">
+                {{selectOptions SELECT_TYPE selected=system.option.type}}
+            </select>
+        </div>
+        <div>
+            <label>TL</label>
+            <select name="system.tl">
+                {{selectOptions SELECT_TECHLEVEL selected=system.tl}}
+            </select>
+        </div>
+        <div>
+            <label>Spaces</label>
+            <input name="system.option.spaces" value="{{system.option.spaces}}">
+        </div>
+        <div>
+            <label>Cost (Cr)</label>
+            <input name="system.cost" value="{{system.cost}}">
+        </div>
+    </div>
 </section>
