@@ -580,6 +580,9 @@ MGT2.VEHICLES = {
         "VTOL": {}
     },
     POWER: {
+        "standard": {
+          tl: 3
+        },
         "unpowered": {
             tl: 0, spaces: +50, speedBand: "stopped", cost: -80,
             conflicts: [ "gravVehicle", "hovercraft", "rotorcraft", "submersible", "walker" ]

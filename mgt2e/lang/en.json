@@ -1468,6 +1468,9 @@
   "MGT2.Vehicle.PrimaryPower": "Primary Power",
   "MGT2.Vehicle.SecondaryPower": "Secondary Power",
 
+  "MGT2.ItemTab.description": "Description",
+  "MGT2.ItemTab.effects": "Effects",
+
   "MGT2.Vehicle.Type.aeroplane": "Aeroplane",
   "MGT2.Vehicle.Type.airship": "Airship",
   "MGT2.Vehicle.Type.gravVehicle": "Grav Vehicle",
@@ -1521,6 +1524,7 @@
   "MGT2.Vehicle.Trait.unresponsive": "Unresponsive",
   "MGT2.Vehicle.Trait.VTOL": "VTOL",
 
+  "MGT2.Vehicle.Power.standard": "Standard",
   "MGT2.Vehicle.Power.unpowered": "Unpowered",
   "MGT2.Vehicle.Power.muscle": "Muscle",
   "MGT2.Vehicle.Power.wind": "Wind",
@@ -1616,6 +1620,7 @@
   "TYPES.Item.role": "Crew Role",
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "World Data",
+  "TYPES.Item.option": "Vehicle Option",
   "EFFECT.TITLE.Injured": "Injured",
   "EFFECT.TITLE.Destroyed": "Destroyed",
   "EFFECT.TITLE.FirstAid": "First Aid",

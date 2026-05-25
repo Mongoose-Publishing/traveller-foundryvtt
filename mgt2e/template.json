@@ -326,7 +326,7 @@
     }
   },
   "Item": {
-    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software", "worlddata" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "option","role", "software", "worlddata" ],
     "templates": {
       "base": {
         "tl": 0,
@@ -438,6 +438,15 @@
               "weapons": {}
           }
       },
+      "option": {
+        "option": {
+          "type": "general",
+          "spaceType": "fixed",
+          "spaces": 0,
+          "costType": "fixed"
+
+        }
+      },
       "role": {
           "role": {
               "actions": {},
@@ -477,6 +486,9 @@
     },
     "hardware": {
       "templates": [ "base", "hardware" ]
+    },
+    "option": {
+      "templates": [ "base", "option" ]
     },
     "role": {
         "templates": [ "role" ]

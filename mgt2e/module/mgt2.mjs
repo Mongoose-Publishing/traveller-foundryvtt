@@ -17,6 +17,7 @@ import { MgT2WorldDataItemSheet } from "./sheets/items/world-data.mjs";
 import { MgT2SoftwareItemSheet } from "./sheets/items/software.mjs";
 
 import { MgT2eVehicleSheet } from "./sheets/v2/Vehicle.mjs";
+import { MgT2eOptionSheet } from "./sheets/items/v2/Option.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
@@ -315,6 +316,7 @@ Hooks.once('init', async function() {
   Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
   Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "worlddata"], makeDefault: true });
   Items.registerSheet("mgt2e", MgT2SoftwareItemSheet, { label: "Software", types: [ "software"], makeDefault: true });
+  Items.registerSheet("mgt2e", MgT2eOptionSheet, { label: "Option", types: [ "option"], makeDefault: true });
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
