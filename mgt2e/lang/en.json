@@ -1570,6 +1570,9 @@
   "MGT2.Dialog.SelectItem.Text": "Choose one of the following items from the package:",
   "MGT2.Dialog.SelectSkill.Title": "Add package {name}",
   "MGT2.Dialog.SelectSkill.Text": "Choose one of the {name} specialities:",
+
+  "MGT2.Dialog.MissileAttack": "Missile Attack Roll",
+
   "MGT2.ExceptionalFailure": "Exceptional Failure",
   "MGT2.AverageFailure": "Average Failure",
   "MGT2.MarginalFailure": "Marginal Failure",
