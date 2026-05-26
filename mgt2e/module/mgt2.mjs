@@ -2758,6 +2758,34 @@ Handlebars.registerHelper("showEffectPill", function(actor, effect) {
     return html;
 });
 
+// Item block for new V2 actor sheets.
+Handlebars.registerHelper("itemBlock", function(actor, item, types) {
+    let html = `<li class="item-block">`;
+    html += `<h4>${item.name}</h4>`;
+    html += `<img class="portrait" src="${item.img}"/>`;
+
+    const system = item.system;
+    switch (item.type) {
+        case "weapon":
+            if (system.weapon) {
+                html += `${system.weapon.damage} ${system.weapon.range}m `;
+            }
+            break;
+        default:
+            break;
+    }
+    html += `<br/>`;
+    if (parseInt(system.weight) > 0) {
+        html += `${system.weight}kg `;
+    }
+    if (parseInt(system.weight) > 0) {
+        html += `Cr${system.cost} `;
+    }
+
+    html += `</li>`;
+    return html;
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

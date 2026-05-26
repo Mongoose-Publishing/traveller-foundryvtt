@@ -436,3 +436,23 @@ textarea.culture {
   font-style: italic;
   font-size: larger;
 }
+
+.item-block {
+  border: 1px solid var(--mongoose-blue);
+  color: white;
+}
+
+.item-block h4 {
+  color: black;
+  width: 100%;
+  background-color: var(--mongoose-blue);
+  border-bottom: white;
+  margin: 0;
+  padding: 1px;
+}
+
+.item-block img.portrait {
+  width: 32px;
+  height: 32px;
+  float: left;
+}

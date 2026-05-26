@@ -1,9 +1,9 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="equipment">
     <h2>Equipment</h2>
 
-    <ul>
+    <ol class="items-list grid grid-3col">
         {{#each items as |item id|}}
-            <li>{{item.name}}</li>
+            {{{itemBlock actor item}}}
         {{/each}}
-    </ul>
+    </ol>
 </section>
