@@ -440,6 +440,7 @@ textarea.culture {
 .item-block {
   border: 1px solid var(--mongoose-blue);
   color: white;
+  background-color: var(--mongoose-dark);
 }
 
 .item-block h4 {
@@ -455,4 +456,5 @@ textarea.culture {
   width: 32px;
   height: 32px;
   float: left;
+  margin: 2px;
 }

@@ -2768,8 +2768,10 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
     switch (item.type) {
         case "weapon":
             if (system.weapon) {
-                html += `${system.weapon.damage} ${system.weapon.range}m `;
+                html += `<b>D:</b> ${system.weapon.damage} <b>R:</b> ${system.weapon.range}m `;
             }
+            break;
+        case "armour":
             break;
         default:
             break;
@@ -2781,6 +2783,10 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
     if (parseInt(system.weight) > 0) {
         html += `Cr${system.cost} `;
     }
+    html += `<div class="item-controls">
+        <a className="item-control item-edit" title="{{localize 'MGT2.EditItem'}}"><i className="fas fa-edit"></i></a>
+        <a className="item-control item-delete" title="{{localize 'MGT2.DeleteItem'}}"><i className="fas fa-trash"></i></a>
+    </div>`;
 
     html += `</li>`;
     return html;
@@ -2790,7 +2796,7 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
 
-Hooks.once("ready", async function() {
+Hooks.once("ready", async function () {
     if (game.user.isGM) {
         let currentVersion = game.system.version;
         let lastVersion = game.settings.get("mgt2e", "lastVersionReported");
