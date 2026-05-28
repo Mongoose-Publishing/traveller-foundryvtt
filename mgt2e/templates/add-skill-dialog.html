@@ -56,6 +56,16 @@
         />
         <label for="isIndividual" class="skillDialogLabel">{{localize 'MGT2.EditSkill.Individual'}}</label>
     </div>
+    {{#if (ifEquals actor.type "package")}}
+        {{#if parentId}}
+            <div>
+                <input type="checkbox" name="isOptional" class="skillOptionalToggle"
+                       {{checked isOptional}} data-type="Boolean"
+                />
+                <label for="isOptional" class="skillDialogLabel">{{localize 'MGT2.EditSkill.Optional'}}</label>
+            </div>
+        {{/if}}
+    {{/if}}
 
     <footer class="sheet-footer flexrow">
         <button type="submit" name="submit" class="addNewSkill">Save</button>

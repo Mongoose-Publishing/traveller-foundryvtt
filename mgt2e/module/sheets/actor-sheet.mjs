@@ -20,6 +20,8 @@ import {
 } from "../helpers/spacecraft/spacecraft-utils.mjs";
 import {MgT2CharacteristicDamageApp} from "../helpers/dialogs/characteristic-damage.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -1974,7 +1976,45 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                     target.trained = true;
                     target.value = Math.min(4, parseInt(target.value) + parseInt(skill.value));
                     if (skill.specialities) {
+                        // Look for optional skills.
+                        let optionalSkills = [];
+                        let selectedOptional = null;
                         for (let sp in skill.specialities) {
+                            if (skill.specialities[sp].optional) {
+                                optionalSkills.push({
+                                    label: skillLabel(skill.specialities[sp]),
+                                    action: sp,
+                                    value: sp
+                                })
+                            }
+                        }
+                        if (optionalSkills.length > 5) {
+                            let content = `<p>${game.i18n.format("MGT2.Dialog.SelectSkill.Text", { name: skillLabel(skill)})}</p>`;
+
+                            const fields = foundry.applications.fields;
+                            const selectInput = fields.createSelectInput({
+                                options: optionalSkills,
+                                name: "skill"
+                            });
+                            content += selectInput.outerHTML;
+
+                            const data = await foundry.applications.api.DialogV2.input({
+                                window: { title: game.i18n.format("MGT2.Dialog.SelectSkill.Title", { name: actor.name})},
+                                content: content
+                            });
+                            console.log(data);
+                            selectedOptional = data.skill;
+                        } else if (optionalSkills.length > 1) {
+                            selectedOptional = await foundry.applications.api.DialogV2.wait({
+                                window: { title: game.i18n.format("MGT2.Dialog.SelectSkill.Title", { name: actor.name})},
+                                content: `<p>${game.i18n.format("MGT2.Dialog.SelectSkill.Text", { name: skillLabel(skill)})}</p>`,
+                                buttons: optionalSkills
+                            });
+                        }
+                        for (let sp in skill.specialities) {
+                            if (selectedOptional && selectedOptional !== sp) {
+                                continue;
+                            }
                             let spec = skill.specialities[sp];
                             if (spec.deleted) {
                                 if (target.specialities[sp]) {
@@ -2097,9 +2137,33 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 await this.actor.update({"system.sophont": this.actor.system.sophont});
             }
 
+            // Look for optional items
+            let optionalItems = [];
+            let selectedOptional = null;
+            for (let item of actor.items) {
+                if (item.system.packageOptional) {
+                    optionalItems.push({
+                        label: item.name,
+                        action: item.uuid
+                    });
+                }
+            }
+            if (optionalItems.length > 1) {
+                selectedOptional = await foundry.applications.api.DialogV2.wait({
+                    window: { title: game.i18n.format("MGT2.Dialog.SelectItem.Title", { name: actor.name})},
+                    content: `<p>${game.i18n.localize("MGT2.Dialog.SelectItem.Text")}</p>`,
+                    buttons: optionalItems
+                });
+            }
+
             // Now copy any items across
             let term = null;
             for (let item of actor.items) {
+                if (item.system.packageOptional) {
+                    if (item.uuid !== selectedOptional) {
+                        continue;
+                    }
+                }
                 const itemData = {
                     name: item.name,
                     img: item.img,
@@ -2125,6 +2189,9 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                     }
                     continue;
                 }
+                if (itemData.type === "term" && itemData.system.term.hideFromPackage) {
+                    continue;
+                }
                 if (itemData.type === "term" && itemData.system.term.randomTerm) {
                     let dice = "3D6";
                     if (itemData.system.term.randomLength) {
@@ -2136,7 +2203,16 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 }
                 ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackageItem",
                     { item: item.name, actor: this.actor.name }));
-                await Item.create(itemData, {parent: this.actor});
+                if (item.type === "associate" && item.system.quantity && parseInt(item.system.quantity) > 1) {
+                    const num = parseInt(item.system.quantity);
+                    delete itemData.system.quantity;
+                    for (let i=0; i < Math.min(9, parseInt(num)); i++) {
+                        await Item.create(itemData, {parent: this.actor});
+                    }
+                } else {
+                    delete itemData.system.quantity;
+                    await Item.create(itemData, {parent: this.actor});
+                }
 
                 if (itemData.type !== "term") {
                     if (itemData.type === "associate") {
@@ -2423,7 +2499,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         // Get the type of item to create.
         const type = header.dataset.type;
         // Grab any data associated with this control.
-        const data = duplicate(header.dataset);
+        const data = foundry.utils.duplicate(header.dataset);
         // Initialize a default name.
         let name = `New ${type.capitalize()}`;
         if (header.dataset.name) {

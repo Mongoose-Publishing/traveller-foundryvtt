@@ -38,12 +38,22 @@
                     {{selectOptions INFLUENCE_SELECT selected=system.associate.influence}}
                 </select>
             </div>
-        </div>
-        <div>
-            <span class="rollable randomiseRelationship" title="Randomise relationship">
-                <i class="fa fa-dice"> </i>
-                Randomise relationship
-            </span>
+            <div>
+                <span class="rollable randomiseRelationship" title="Randomise relationship">
+                    <i class="fa fa-dice"> </i>
+                    Randomise relationship
+                </span>
+            </div>
+            {{#if (ifEquals item.parent.type "package")}}
+                <div>
+                    <span class="" title="">
+                        Quantity
+                        <input class="quantity" name="system.quantity"
+                               type="text" value="{{#if item.system.quantity includeZero=false}}{{item.system.quantity}}{{else}}1{{/if}}"
+                               placeholder="1"/>
+                    </span>
+                </div>
+            {{/if}}
         </div>
 
     </section>

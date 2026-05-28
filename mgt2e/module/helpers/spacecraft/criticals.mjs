@@ -5,6 +5,8 @@
 import {MGT2} from "../config.mjs";
 import {MgT2Item} from "../../documents/item.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+
 export async function setSpacecraftCriticalLevel(actor, critical, level) {
     if (actor.type === "spacecraft") {
         level = Math.min(parseInt(level), 6);

@@ -20,9 +20,6 @@ export class MgT2SkillDialog extends Application {
         if (!skillOptions) {
             skillOptions = {};
         }
-        console.log(skillFqn);
-        console.log(skillOptions);
-
         this.skillFqn = skillFqn;
         if (skillFqn === "undefined") {
             this.skillFqn = null;
@@ -81,6 +78,7 @@ export class MgT2SkillDialog extends Application {
         this.target = skillOptions.difficulty?skillOptions.difficulty:8;
         this.skillText = "";
         this.description = skillOptions.description;
+        this.mode = skillOptions.rollMode?skillOptions.rollMode:game.settings.get("core", "rollMode");
 
         if (skillOptions.agent) {
             // This is a direct skill roll without a character.
@@ -90,7 +88,6 @@ export class MgT2SkillDialog extends Application {
             this.value = skillOptions.level;
 
             this.options.title = skillOptions.agent;
-            console.log("THIS IS AN AGENT");
             this.skillText = skillLabel(this.skillData, this.skillId);
             if (this.specId) {
                 this.skillText += " (" + skillLabel(this.specData, this.specId) + ")";
@@ -155,6 +152,10 @@ export class MgT2SkillDialog extends Application {
             this.options.title = `${actor.name} (${this.characteristic.label})`;
             this.value = this.characteristic.dm;
         }
+        // Apply characteristic boon/bane from augmentation effects
+        if (this.cha && data.characteristics?.[this.cha]?.boon) {
+            this.boonBane = data.characteristics[this.cha].boon;
+        }
         this.skillText = actor.getSkillLabel(skillFqn, false);
         this.options.title = `${actor.name} (${this.skillText})`;
         this.penalty = data.physicalDM;
@@ -181,8 +182,6 @@ export class MgT2SkillDialog extends Application {
         MODE_SELECT["gmroll"] = game.i18n.localize("MGT2.Dialog.Private");
         MODE_SELECT["blindroll"] = game.i18n.localize("MGT2.Dialog.Blind");
         MODE_SELECT["selfroll"] = game.i18n.localize("MGT2.Dialog.Self");
-
-        let mode = game.settings.get("core", "rollMode")
 
         let TARGET_SELECT = {};
         for (let t=2; t <= 16; t += 2) {
@@ -214,8 +213,124 @@ export class MgT2SkillDialog extends Application {
             "BOON_SELECT": BOON_SELECT,
             "TARGET_SELECT": TARGET_SELECT,
             "MODE_SELECT": MODE_SELECT,
-            "mode": mode
+            "mode": this.mode,
+            "rollEffects": this._collectRollEffects()
         }
+    }
+
+    /**
+     * Collect active effects that are relevant to the current roll, for display in the dialog.
+     * Returns an array of { name, typeLabel, summary } objects.
+     */
+    _collectRollEffects() {
+        if (!this.actor) return [];
+        const effects = [];
+        const cha = this.cha;
+        const skillPath = this.skillId ? `system.skills.${this.skillId}` : null;
+        const specPath = (this.skillId && this.specId)
+            ? `system.skills.${this.skillId}.specialities.${this.specId}`
+            : null;
+
+        for (const effect of this.actor.allApplicableEffects()) {
+            if (effect.disabled) continue;
+            const augmentType = effect.flags?.mgt2e?.augmentType ?? null;
+            const typeLabel = augmentType
+                ? game.i18n.localize("MGT2.Effects.Type." + augmentType)
+                : effect.name;
+
+            const relevantChanges = [];
+            for (const change of effect.changes) {
+                const key = change.key;
+                // Characteristic-based effects for the current cha
+                if (cha) {
+                    if (key === `system.characteristics.${cha}.augdm`) {
+                        const val = Number(change.value);
+                        relevantChanges.push({
+                            label: `MD ${val >= 0 ? "+" : ""}${val}`,
+                            target: game.i18n.localize("MGT2." + cha)
+                        });
+                        continue;
+                    }
+                    if (key === `system.characteristics.${cha}.augment`) {
+                        const val = Number(change.value);
+                        relevantChanges.push({
+                            label: `${game.i18n.localize("MGT2." + cha)} ${val >= 0 ? "+" : ""}${val}`,
+                            target: ""
+                        });
+                        continue;
+                    }
+                    if (key === `system.characteristics.${cha}.boon`
+                        || key === `system.characteristics.${cha}.bane`) {
+                        const isBoon = key.endsWith(".boon");
+                        relevantChanges.push({
+                            label: isBoon
+                                ? game.i18n.localize("MGT2.TravellerSheet.Boon")
+                                : game.i18n.localize("MGT2.TravellerSheet.Bane"),
+                            target: game.i18n.localize("MGT2." + cha)
+                        });
+                        continue;
+                    }
+                    if (key === `system.characteristics.${cha}.min`) {
+                        relevantChanges.push({
+                            label: `min ${change.value}`,
+                            target: game.i18n.localize("MGT2." + cha)
+                        });
+                        continue;
+                    }
+                }
+                // Skill-based effects for the current skill / spec
+                if (skillPath && key === `${skillPath}.augdm`) {
+                    const val = Number(change.value);
+                    relevantChanges.push({
+                        label: `MD ${val >= 0 ? "+" : ""}${val}`,
+                        target: skillLabel(this.skillData, this.skillId)
+                    });
+                    continue;
+                }
+                if (skillPath && key === `${skillPath}.augment`) {
+                    const val = Number(change.value);
+                    relevantChanges.push({
+                        label: `${val >= 0 ? "+" : ""}${val}`,
+                        target: skillLabel(this.skillData, this.skillId)
+                    });
+                    continue;
+                }
+                if (specPath && key === `${specPath}.augdm`) {
+                    const val = Number(change.value);
+                    const specLabel = skillLabel(this.skillData, this.skillId)
+                        + " (" + skillLabel(this.specData, this.specId) + ")";
+                    relevantChanges.push({ label: `MD ${val >= 0 ? "+" : ""}${val}`, target: specLabel });
+                    continue;
+                }
+                if (specPath && key === `${specPath}.augment`) {
+                    const val = Number(change.value);
+                    const specLabel = skillLabel(this.skillData, this.skillId)
+                        + " (" + skillLabel(this.specData, this.specId) + ")";
+                    relevantChanges.push({ label: `${val >= 0 ? "+" : ""}${val}`, target: specLabel });
+                    continue;
+                }
+                // Misc DM (global bonus to all rolls)
+                if (key.startsWith("system.modifiers.") && key.endsWith(".effect")) {
+                    const val = Number(change.value);
+                    if (val !== 0) {
+                        relevantChanges.push({ label: `DM ${val >= 0 ? "+" : ""}${val}`, target: "" });
+                    }
+                    continue;
+                }
+            }
+
+            if (relevantChanges.length > 0) {
+                for (const c of relevantChanges) {
+                    effects.push({
+                        name: effect.name,
+                        typeLabel,
+                        label: c.label,
+                        target: c.target
+                    });
+                }
+            }
+        }
+        return effects;
     }
 
     activateListeners(html) {
@@ -249,7 +364,6 @@ export class MgT2SkillDialog extends Application {
                 }
                 this.actor.update({"system.skills": this.actor.system.skills});
             } else if (this.skillId) {
-                console.log(this.skillId);
                 this.cha = this.actor.system.skills[this.skillId].default;
             }
         }

@@ -6,6 +6,8 @@ import {randomiseAssociate} from "../utils/character-utils.mjs";
 import {Tools} from "./tools.mjs";
 import {MgT2BuyDialog} from "../buy-dialog.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+
 export const MgT2eMacros = {};
 
 // Add a skill to a character sheet.
@@ -422,6 +424,9 @@ MgT2eMacros.skillCheck = async function(args, ask) {
             "failure": args.failure,
             "cost": args.cost?args.cost:0
         }
+        if (args.mode) {
+            jsonData["rollMode"] = args.mode;
+        }
         if (skillFqn) {
             jsonData["skill"] = skillFqn;
         }
@@ -457,6 +462,9 @@ MgT2eMacros.skillCheck = async function(args, ask) {
             "success": args.success,
             "failure": args.failure,
             "cost": args.cost?args.cost:0
+        }
+        if (args.mode) {
+            jsonData["rollMode"] = args.mode;
         }
         if (args.agent) {
             // This is a direct skill roll with a specified skill level.

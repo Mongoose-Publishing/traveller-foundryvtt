@@ -1,21 +1,56 @@
 <div class="inline-actor inline-package">
-    <h2><span class="rollable actor-link" data-actor-id="{{actor.uuid}}">{{actor.name}}</span></h2>
+    <h3><span class="rollable actor-link" data-actor-id="{{actor.uuid}}">{{actor.name}}</span></h3>
 
     <div>
         <div class="grid grid-4col actor-cha-list grid-span-1" style="float:left">
-            <div class="species-title">STR</div><div>{{actor.system.characteristics.STR.value}}</div>
-            <div class="species-title">INT</div><div>{{actor.system.characteristics.INT.value}}</div>
-            <div class="species-title">DEX</div><div>{{actor.system.characteristics.DEX.value}}</div>
-            <div class="species-title">EDU</div><div>{{actor.system.characteristics.EDU.value}}</div>
-            <div class="species-title">END</div><div>{{actor.system.characteristics.END.value}}</div>
-            <div class="species-title">SOC</div><div>{{actor.system.characteristics.SOC.value}}</div>
+            <div class="species-title">{{localize "MGT2.STR"}}</div><div>{{prettyNumber actor.system.characteristics.STR.value 0 true}}</div>
+            <div class="species-title">{{localize "MGT2.INT"}}</div><div>{{prettyNumber actor.system.characteristics.INT.value 0 true}}</div>
+            <div class="species-title">{{localize "MGT2.DEX"}}</div><div>{{prettyNumber actor.system.characteristics.DEX.value 0 true}}</div>
+            <div class="species-title">{{localize "MGT2.EDU"}}</div><div>{{prettyNumber actor.system.characteristics.EDU.value 0 true}}</div>
+            <div class="species-title">{{localize "MGT2.END"}}</div><div>{{prettyNumber actor.system.characteristics.END.value 0 true}}</div>
+            <div class="species-title">{{localize "MGT2.SOC"}}</div><div>{{prettyNumber actor.system.characteristics.SOC.value 0 true}}</div>
             <div class="species-title grid-span-4">Skills</div>
         </div>
         <div>
-            <h3>Benefits</h3>
-            <p>
-                List of benefits goes here.
-            </p>
+            <h4>Benefits</h4>
+            {{#if actor.system.cash includeZero=false}}
+                Cr{{prettyNumber actor.system.cash 0 false}}<br/>
+            {{/if}}
+            <ul class="comma-list">
+                {{#each actor.items as |item|}}
+                    {{#if (ifEquals item.type "term")}}
+                        {{#if item.system.term.hideFromPackage}}
+                            <li>{{item.name}}</li>
+                        {{/if}}
+                    {{/if}}
+                {{/each}}
+                {{#each actor.items as |item|}}
+                    {{#if (ifEquals item.type "associate")}}
+                        {{#if item.system.quantity includeZero=false}}
+                            <li>{{localize (concat "MGT2.History.Relation." item.system.associate.relationship)}}
+                                ({{item.name}}){{#unless (ifEquals item.system.quantity "1")}}&nbsp;x{{item.system.quantity}}{{/unless}}</li>
+                        {{else}}
+                            <li>{{localize (concat "MGT2.History.Relation." item.system.associate.relationship)}} ({{item.name}})</li>
+                        {{/if}}
+                    {{/if}}
+                {{/each}}
+                {{#each actor.items as |item|}}
+                    {{#if (ifEquals item.type "term")}}
+                    {{else if (ifEquals item.type "associate")}}
+                    {{else}}
+                        {{#unless item.system.packageOptional}}
+                            <li>{{item.name}}</li>
+                        {{/unless}}
+                    {{/if}}
+                {{/each}}
+            </ul>
+            <ul class="comma-list">
+                {{#each actor.items as |item|}}
+                    {{#if item.system.packageOptional}}
+                        <li class="or-list">{{item.name}}</li>
+                    {{/if}}
+                {{/each}}
+            </ul>
         </div>
         <div style="clear: both">
             <span>{{{showSimpleSkills actor}}}</span>
@@ -23,4 +58,9 @@
     </div>
 </div>
 
-{{{actor.system.description}}}
+<p class="post-package-description">
+    <img class="package-icon" src="{{actor.img}}"/>
+    {{{actor.system.description}}}
+</p>
+
+<p style="clear: both"> </p>

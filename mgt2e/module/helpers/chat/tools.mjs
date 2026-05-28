@@ -8,6 +8,9 @@ import {MGT2} from "../config.mjs";
 import {setSpacecraftCriticalLevel} from "../spacecraft/criticals.mjs";
 import {getHighestModifier} from "../utils/trade-utils.mjs";
 
+const { renderTemplate } = foundry.applications.handlebars;
+const TextEditor = foundry.applications.ux.TextEditor;
+
 export const Tools = {};
 
 
@@ -325,7 +328,8 @@ Tools.requestedSkillCheck = async function(skillFqn, skillOptions) {
         "failure": skillOptions.failure,
         "cost": skillOptions.cost,
         "quick": skillOptions.quick?skillOptions.quick:false,
-        "rollType": skillOptions.rollType?skillOptions.rollType:"standard"
+        "rollType": skillOptions.rollType?skillOptions.rollType:"standard",
+        "rollMode": skillOptions.rollMode?skillOptions.rollMode:game.settings.get("core", "rollMode")
     });
 
 };

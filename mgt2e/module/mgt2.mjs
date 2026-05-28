@@ -277,8 +277,6 @@ Hooks.once('init', async function() {
         default: false
     });
 
-    CONFIG.ActiveEffect.legacyTransferral = false;
-
     // Add custom constants for configuration.
     CONFIG.MGT2 = MGT2;
 
@@ -314,8 +312,8 @@ Hooks.once('init', async function() {
   Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
   Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "worlddata"], makeDefault: true });
   Items.registerSheet("mgt2e", MgT2SoftwareItemSheet, { label: "Software", types: [ "software"], makeDefault: true });
-  DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
-  DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
+  foundry.applications.apps.DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
 //  ActiveEffects.registerSheet("mgt2e", MgT2EffectSheet, { makeDefault: true });
 
@@ -352,9 +350,7 @@ Hooks.once('init', async function() {
   return preloadHandlebarsTemplates();
 });
 
-Hooks.on("init", function() {
-    // Inline Macro Execution.
-    // Based on code written by Mesayah:
+Hooks.once("init", function() {
     // https://github.com/fpiechowski/inline-macro-execution
     const rgx = /\[\[(\/mgMacro)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
     CONFIG.TextEditor.enrichers.push({
@@ -1342,6 +1338,13 @@ Handlebars.registerHelper('isItemOwned', function(item) {
     return true;
 });
 
+Handlebars.registerHelper('isItemPhysical', function(item) {
+    if (item.type === "term" || item.type === "associate") {
+        return false;
+    }
+    return true;
+});
+
 
 Handlebars.registerHelper('equipItem', function(item) {
     if (item.system.status === MgT2Item.EQUIPPED || item.system.weight === undefined) {
@@ -1608,7 +1611,7 @@ Handlebars.registerHelper('skillListClasses', function() {
 });
 
 // Decide whether to show a skill or not.
-Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
+Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
     let showSkill = false;
     let showSpecs = false;
     let trainedOnly = data.settings.hideUntrained;
@@ -1623,6 +1626,16 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
         if (!data.characteristics[skill.requires] || !data.characteristics[skill.requires].show) {
             return "";
         }
+    }
+    if (!skillId && key) {
+        // Some old actors might not have an id set on the skill object.
+        skillId = Object.keys(data.skills)[key];
+        skill.id = skillId;
+        skill.icon = skill.icon?skill.icon:`systems/mgt2e/icons/skills/${skillId}.svg`;
+    }
+    if (!skillId) {
+        console.log("Skill has no ID set");
+        return "";
     }
 
     // If backgroundOnly is set, then shortcut to not showing anything.
@@ -1801,6 +1814,9 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill) {
                     }
                     let hasXp = (spec.xp && spec.xp > 0);
                     let label = skillLabel(spec);
+                    if (spec.optional) {
+                        label += " ?";
+                    }
                     html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} ${isDeleted?"deleted":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
                     html += `data-spec="${sid}" title="${title}">${label}${hasXp?"<sup>+</sup>":""}</label>`;
                     if (skill.trained && (!skill.individual || spec.trained)) {
@@ -2104,12 +2120,44 @@ Handlebars.registerHelper('showSimpleSkills', function(actor) {
             if (skill.trained) {
                 let showParent = true;
                 if (skill.specialities) {
-                    for (let specKey in skill.specialities) {
-                        let spec = skill.specialities[specKey];
-                        if (spec.value > 0) {
-                            const dataSkillFqn=`data-skill-fqn="${key}.${specKey}"`;
-                            showParent = false;
-                            html += `<li class="rollable" ${dataRoll} ${dataSkillFqn} data-spec="${specKey}">${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})&nbsp;${spec.value}</li>`;
+                    // Look for optional stuff.
+                    let optionalList = null;
+                    let optionalValue = 0;
+                    if (actor.type === "package") {
+                        optionalList = [];
+                        for (let specKey in skill.specialities) {
+                            if (skill.specialities[specKey].optional) {
+                                optionalList.push(specKey);
+                                // Assume optional specialisations all have the same value.
+                                optionalValue = skill.specialities[specKey].value;
+                            }
+                        }
+                        if (Object.keys(skill.specialities).length === optionalList.length) {
+                            optionalList = [ "any" ];
+                        }
+                    }
+
+                    if (optionalList && optionalList[0] === "any") {
+                        showParent = false;
+                        html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${game.i18n.localize("MGT2.any")})&nbsp;${optionalValue}</li>`;
+                    } else if (optionalList && optionalList.length > 0) {
+                        showParent = false;
+                        html += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(`;
+                        let list = "";
+                        for (let specKey of optionalList) {
+                            let spec = skill.specialities[specKey];
+                            if (list !== "") list += ` ${game.i18n.localize("MGT2.or")} `;
+                            list += skillLabel(spec, specKey);
+                        }
+                        html += `${list})&nbsp;${optionalValue}</li>`;
+                    } else {
+                        for (let specKey in skill.specialities) {
+                            let spec = skill.specialities[specKey];
+                            if (spec.trained || spec.value > 0) {
+                                const dataSkillFqn = `data-skill-fqn="${key}.${specKey}"`;
+                                showParent = false;
+                                html += `<li class="rollable" ${dataRoll} ${dataSkillFqn} data-spec="${specKey}">${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})&nbsp;${spec.value}</li>`;
+                            }
                         }
                     }
                 }
@@ -2233,7 +2281,6 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
     // 'behaviours' is a string of space separated behaviour values. Some will have values
     // Want to return <span> elements with localised names.
     let html = "";
-    console.log(traits);
     let list = traits.split(",");
     for (let i in list) {
         if (list[i].length > 0) {

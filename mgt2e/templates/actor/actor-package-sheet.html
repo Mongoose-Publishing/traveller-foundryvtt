@@ -65,7 +65,7 @@
                     <div class="resource flex-group-center characteristic-draggable"
                          data-rolltype="characteristic" data-cha="{{key}}">
                         <label class="characteristic-title"
-                               title="{{char.label}}">{{key}}</label>
+                               title="{{char.label}}">{{localize (concat 'MGT2.' key)}}</label>
                         <br/>
                         {{#if ../system.settings.useCustomDice}}
                             <input class="characteristic-dice writable" type="text" name="system.characteristics.{{key}}.dice" value="{{char.dice}}" data-dtype="Text" placeholder="2D6"/>
@@ -96,7 +96,7 @@
             <div class="shadow">
                 <ol class="items-list actor-items grid grid-3col">
                     {{#each items as |item id|}}
-                    {{#if (isItemOwned item)}}
+                    {{#if (isItemPhysical item)}}
                     <li class="item item-{{item.type}}" data-item-id="{{item._id}}">
                         <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                         <img title="{{nameQuantity item}}" src="{{item.img}}"/>

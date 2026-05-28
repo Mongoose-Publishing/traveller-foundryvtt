@@ -55,6 +55,22 @@
             </p>
         {{/if}}
 
+        {{#if rollEffects}}
+            <div class="roll-effects-summary">
+                <span class="roll-effects-title">{{localize "MGT2.Dialog.ActiveEffects"}}</span>
+                <ul class="roll-effects-list">
+                    {{#each rollEffects}}
+                        <li class="roll-effect-entry">
+                            <span class="roll-effect-name">{{name}}</span>
+                            <span class="roll-effect-detail">
+                                {{#if target}}{{target}} — {{/if}}{{label}}
+                            </span>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        {{/if}}
+
         <div class="grid grid-3col">
             <div class="skill-boon">
                 <label for="rollmode" class="skillDialogLabel">{{localize "MGT2.Dialog.RollMode"}}</label>

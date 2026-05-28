@@ -74,7 +74,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.16.1.2-DEV",
         "createdTime": 1765549531841,
-        "modifiedTime": 1770238651479,
+        "modifiedTime": 1779469670242,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
@@ -158,6 +158,45 @@
       },
       "category": null,
       "_key": "!journal.pages!V8trIYLYHch6WjEo.IJKVIeSo7sA7HpXJ"
+    },
+    {
+      "sort": 500000,
+      "name": "Combat",
+      "type": "text",
+      "_id": "T0EQQCyYrwxZ2txR",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p></p><h3>Applying Damage</h3><p>A video showing how to select tokens and apply damage to them - either by drag and drop or by selecting or targeting tokens.</p><iframe width=\"854\" height=\"480\" src=\"https://www.youtube.com/embed/Ja4t-cgAAYg?si=Iejc1kD7-El5C98b\" title=\"Applying Damage\"></iframe><p></p><p></p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.20.4.0",
+        "createdTime": 1779469570744,
+        "modifiedTime": 1779470381035,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!V8trIYLYHch6WjEo.T0EQQCyYrwxZ2txR"
     }
   ],
   "sort": 200000,
