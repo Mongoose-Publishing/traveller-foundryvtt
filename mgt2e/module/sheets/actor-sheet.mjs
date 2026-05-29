@@ -227,6 +227,16 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                     }
                 }
             }
+            if (isNaN(parseInt(actorData.size))) {
+                // Earlier bug was storing size as label rather than integer.
+                // If it isn't a number, strip out all the non-number bits.
+                actorData.size = `${actorData.size}`.replaceAll(/[^-0-9]/g, "");
+                if (isNaN(parseInt(actorData.size))) {
+                    actorData.size = 0;
+                } else {
+                    actorData.size = parseInt(actorData.size);
+                }
+            }
             if (CONFIG.MGT2.CREATURES.sizes[actorData.size]) {
                 context.suggestedHits = game.i18n.format("MGT2.TravellerSheet.SizeRecommendedHits",
                     {
@@ -241,8 +251,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 let num = `${sz}`;
                 let label = CONFIG.MGT2.CREATURES.sizes[num].label;
                 context.SIZE_SELECT.push({
-                    "id": sz,
-                    "value": `${game.i18n.localize("MGT2.TravellerSheet.SizeClass." + label)} (${num})`
+                    "value": sz,
+                    "label": `${game.i18n.localize("MGT2.TravellerSheet.SizeClass." + label)} (${num})`
                 });
             }
         } else if (type === "spacecraft") {
