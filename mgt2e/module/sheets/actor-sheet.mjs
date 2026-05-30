@@ -227,6 +227,16 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                     }
                 }
             }
+            if (isNaN(parseInt(actorData.size))) {
+                // Earlier bug was storing size as label rather than integer.
+                // If it isn't a number, strip out all the non-number bits.
+                actorData.size = `${actorData.size}`.replaceAll(/[^-0-9]/g, "");
+                if (isNaN(parseInt(actorData.size))) {
+                    actorData.size = 0;
+                } else {
+                    actorData.size = parseInt(actorData.size);
+                }
+            }
             if (CONFIG.MGT2.CREATURES.sizes[actorData.size]) {
                 context.suggestedHits = game.i18n.format("MGT2.TravellerSheet.SizeRecommendedHits",
                     {
@@ -241,8 +251,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 let num = `${sz}`;
                 let label = CONFIG.MGT2.CREATURES.sizes[num].label;
                 context.SIZE_SELECT.push({
-                    "id": sz,
-                    "value": `${game.i18n.localize("MGT2.TravellerSheet.SizeClass." + label)} (${num})`
+                    "value": sz,
+                    "label": `${game.i18n.localize("MGT2.TravellerSheet.SizeClass." + label)} (${num})`
                 });
             }
         } else if (type === "spacecraft") {
@@ -635,7 +645,10 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         for (let actorId in actorData.docks) {
             let actor = game.actors.get(actorId);
             if (actor && actor.type === "spacecraft") {
-                ships.push(actor);
+                ships.push({
+                    ship: actor,
+                    quantity: actorData.docks[actorId].quantity
+                });
             } else if (actor && actor.type === "vehicle") {
                 vehicles.push(actor);
             }
@@ -1100,6 +1113,20 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 const li = $(ev.currentTarget).parents(".actor-crew");
                 const actorId = li.data("actorId");
                 this.actor.update({[`system.docks.-=${actorId}`]: null});
+            });
+            html.find('.docked-plus').click(ev => {
+                const li = $(ev.currentTarget).parents(".actor-crew");
+                const actorId = li.data("actorId");
+                let q = parseInt(this.actor.system.docks[actorId].quantity);
+                this.actor.update({[`system.docks.${actorId}.quantity`]: q + 1});
+            });
+            html.find('.docked-minus').click(ev => {
+                const li = $(ev.currentTarget).parents(".actor-crew");
+                const actorId = li.data("actorId");
+                let q = parseInt(this.actor.system.docks[actorId].quantity);
+                if (q > 1) {
+                    this.actor.update({[`system.docks.${actorId}.quantity`]: q - 1});
+                }
             });
             html.find('.critDel').click(ev => {
                 const div = $(ev.currentTarget).parents(".critical");

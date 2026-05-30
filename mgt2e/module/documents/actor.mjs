@@ -1274,7 +1274,7 @@ export class MgT2Actor extends Actor {
               "chadm": 0,
               "base": null,
               "expert": 0,
-              "augmentation": 0,
+              "augment": 0,
               "augdm": 0,
               "bonus": 0,
               "label": this.getSkillLabel(skillId),
@@ -1319,8 +1319,8 @@ export class MgT2Actor extends Actor {
                       options.results.expert = spec.expert;
                   }
                   // Only adds if skill is trained.
-                  if (isNonZero(spec.augmentation)) {
-                      score += parseInt(spec.augmentation);
+                  if (isNonZero(spec.augment)) {
+                      score += parseInt(spec.augment);
                   }
               } else {
                   score = isNonZero(skill.value)?parseInt(skill.value):0;
@@ -1330,8 +1330,8 @@ export class MgT2Actor extends Actor {
                       options.results.expert = skill.expert;
                   }
                   // Only adds if skill is trained.
-                  if (isNonZero(skill.augmentation) === "number") {
-                      score += parseInt(skill.augmentation);
+                  if (isNonZero(skill.augment)) {
+                      score += parseInt(skill.augment);
                   }
               }
           } else {
