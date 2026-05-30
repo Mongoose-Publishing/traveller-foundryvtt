@@ -1,5 +1,4 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="design">
-
     <div class="grid grid-3col">
         <div>
             <h4>Core Design</h4>
@@ -79,6 +78,12 @@
 
         <div>
             <h4>Options</h4>
+
+            <ol>
+                {{#each ITEMS_OPTIONS as |item|}}
+                    {{{itemName item}}}
+                {{/each}}
+            </ol>
         </div>
 
     </div>

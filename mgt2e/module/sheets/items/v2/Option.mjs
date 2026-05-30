@@ -12,12 +12,9 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         // Map your HTML [data-action] attributes to JS functions
         actions: {
             rollCheck: MgT2eItemV2.onRollCheck,
-            addFeature: {
-                handler: MgT2eOptionSheet.#addFeature,
-                buttons: [0, 1, 2],
-                event: "change"
-            },
-            removeFeature: MgT2eOptionSheet.#removeFeature
+            addEffect: MgT2eOptionSheet.#addEffect,
+            editEffect: MgT2eOptionSheet.#editEffect,
+            deleteEffect: MgT2eOptionSheet.#deleteEffect
         },
         form: {
             handler: MgT2eOptionSheet.#onFormSubmit,
@@ -58,15 +55,39 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         }
     }
 
-    static async #addFeature(event, target) {
-        console.log("addFeature:");
+    static async #addEffect(event, target) {
+        console.log("addEffect:");
 
-        let feature = event.target.value;
+        this.document.createEmbeddedDocuments("ActiveEffect",[
+            {
+                label: "Effect",
+                name: "Vehicle Effect",
+                icon: "systems/mgt2e/icons/items/option.svg",
+                disabled: false,
+                transfer: true,
+                system: {
+                    augmentType: "vehicle"
+                }
+            }
+        ]);
     }
 
-    static async #removeFeature(event, target) {
-        let featureId = event.target.dataset["featureId"];
+    static async #editEffect(event) {
+        let effectId = event.target.dataset["effectId"];
 
+        let effect = this.document.effects.get(effectId);
+        if (effect) {
+            effect.sheet.render(true);
+        } else {
+            console.log("No effect");
+        }
+    }
+
+    static async #deleteEffect(event) {
+        let effectId = event.target.dataset["effectId"];
+
+        let effect = this.document.effects.get(effectId);
+        effect.delete();
     }
 
     static async #test(event, target) {
@@ -103,6 +124,7 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             system: this.document.system,
             parent: this.document.parent,
             config: CONFIG.MGT2,
+            EFFECTS: this.document.effects,
             tabs: this._prepareTabs("primary")
         };
 
@@ -131,7 +153,6 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             );
         }
 
-
         return context;
     }
 
@@ -143,10 +164,6 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         if (traitSelect) {
             console.log("found");
             //traitSelect.removeEventListener("change", this.#addTrait.bind(this));
-            traitSelect.addEventListener("change", (ev) => {
-                // Manually trigger your private static method
-                MgT2eVehicleSheet.#addFeature.call(this, ev, ev.currentTarget);
-            });
         }
     }
 

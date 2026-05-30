@@ -1,3 +1,17 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="effects">
-    Active Effects
+    <span data-action="addEffect">+ Add New Effect</span>
+
+    <ol class="items-list effects-list effects-list-simple grid grid-4col">
+        {{#each EFFECTS as |e id|}}
+            <li class="items effect" data-effect-id="{{e.id}}">
+                <label>{{e.name}}</label>
+                <a data-action="editEffect">
+                    <i data-effect-id="{{e.id}}" class="fas fa-edit"></i>
+                </a>
+                <a data-action="deleteEffect">
+                    <i data-effect-id="{{e.id}}" class="fas fa-trash"></i>
+                </a>
+            </li>
+        {{/each}}
+    </ol>
 </section>

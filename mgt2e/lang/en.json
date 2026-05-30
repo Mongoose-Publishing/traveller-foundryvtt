@@ -1475,6 +1475,7 @@
   "MGT2.Option.Type.comms": "Communications",
   "MGT2.Option.Type.sensors": "Sensors",
   "MGT2.Option.Type.armour": "Armour",
+  "MGT2.Option.Type.mount": "Mount",
 
   "MGT2.Vehicle.Type.aeroplane": "Aeroplane",
   "MGT2.Vehicle.Type.airship": "Airship",

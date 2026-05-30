@@ -625,7 +625,8 @@ MGT2.VEHICLES = {
       "general": {},
         "comms": {},
         "sensors": {},
-        "armour": {}
+        "armour": {},
+        "mount": {}
     }
 };
 
@@ -1195,7 +1196,8 @@ MGT2.EFFECT_TYPES = {
   "SKILL_AUG": "skillAug",
   "SKILL_DM": "skillDM",
   "SKILL_EXPERT": "skillExpert",
-  "DM": "miscDM"
+  "DM": "miscDM",
+  "VEHICLE": "vehicle"
 };
 
 MGT2.EFFECTS = {
@@ -1208,7 +1210,8 @@ MGT2.EFFECTS = {
   "skillAug":  { "targets": "skills", "value": true, "property": "augment", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "skillDM": { "targets": "skills", "value": true, "property": "augdm", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "skillExpert": { "targets": "skills", "value": true, "property": "expert", mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE },
-  "miscDM": { "targets": "misc", "value": true, "property": "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD }
+  "miscDM": { "targets": "misc", "value": true, "property": "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
+  "vehicle": { "targets": "vehicle", "value": true, property: "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD }
 };
 
 MGT2.SOFTWARE_EFFECTS = {

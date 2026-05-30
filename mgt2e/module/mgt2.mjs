@@ -2784,12 +2784,23 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
         html += `Cr${system.cost} `;
     }
     html += `<div class="item-controls">
-        <a className="item-control item-edit" title="{{localize 'MGT2.EditItem'}}"><i className="fas fa-edit"></i></a>
-        <a className="item-control item-delete" title="{{localize 'MGT2.DeleteItem'}}"><i className="fas fa-trash"></i></a>
+        <a class="item-control" data-action="editItem"title="${game.i18n.localize('MGT2.EditItem')}">
+            <i data-item-id="${item._id}" class="fas fa-edit"></i>
+        </a>
+        <a class="item-control" data-action="deleteItem" title="${game.i18n.localize('MGT2.EditItem')}">
+            <i data-item-id="${item._id}" class="fas fa-trash"></i>
+        </a>
     </div>`;
 
     html += `</li>`;
     return html;
+});
+
+Handlebars.registerHelper("itemName", function(item) {
+   let html = `<li class="item-name">`;
+   html += item.name;
+   html += `</li>`;
+   return html;
 });
 
 /* -------------------------------------------- */

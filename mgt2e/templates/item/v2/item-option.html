@@ -1,6 +1,6 @@
 <section class="sheet-body">
-    <div class="grid grid-5col">
-        <h1 class="actor-name shadow grid-span-5">
+    <div class="grid grid-4col">
+        <h1 class="actor-name shadow grid-span-4">
             <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
         </h1>
 
@@ -24,5 +24,15 @@
             <label>Cost (Cr)</label>
             <input name="system.cost" value="{{system.cost}}">
         </div>
+
+        {{#if (ifEquals system.option.type "mount")}}
+            <div>
+                <label>Mount</label>
+            </div>
+
+            <div>
+                <label>Facing</label>
+            </div>
+        {{/if}}
     </div>
 </section>

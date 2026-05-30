@@ -19,7 +19,9 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
                 buttons: [0, 1, 2],
                 event: "change"
             },
-            removeFeature: MgT2eVehicleSheet.#removeFeature
+            removeFeature: MgT2eVehicleSheet.#removeFeature,
+            editItem: MgT2eVehicleSheet.#editItem,
+            deleteItem: MgT2eVehicleSheet.#deleteItem,
         },
         form: {
             handler: MgT2eVehicleSheet.#onFormSubmit,
@@ -93,6 +95,24 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         this.actor.update({"system.vehicle.features": b});
     }
 
+    static async #editItem(event, target) {
+        let itemId = event.target.dataset["itemId"];
+
+        const item = this.document.items.get(itemId);
+        if (item) {
+            item.sheet.render(true);
+        }
+    }
+
+    static async #deleteItem(event, target) {
+        let itemId = event.target.dataset["itemId"];
+
+        const item = this.document.items.get(itemId);
+        if (item) {
+            item.delete();
+        }
+    }
+
     static async #test(event, target) {
         console.log("TEST");
     }
@@ -134,6 +154,21 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         console.log(this.document.items);
 
         context.structure = Math.ceil(this.document.system.hits.max / 10);
+
+
+        // List Items
+        context.ITEMS_OPTIONS = [];
+        context.ITEMS_ROLES = [];
+        context.ITEMS_GEAR = [];
+        for (let item of this.document.items) {
+            if (["option"].includes(item.type)) {
+                context.ITEMS_OPTIONS.push(item);
+            } else if (["role"].includes(item.type)) {
+                contetxt.ITEMS_ROLES.push(item);
+            } else {
+                context.ITEMS_GEAR.push(item);
+            }
+        }
 
         context.TYPE_SELECT = {};
         for (let t in CONFIG.MGT2.VEHICLES.TYPE) {
@@ -219,7 +254,6 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         const traitSelect = this.element.querySelector('select[data-action="addFeature"]');
         if (traitSelect) {
-            console.log("found");
             //traitSelect.removeEventListener("change", this.#addTrait.bind(this));
             traitSelect.addEventListener("change", (ev) => {
                 // Manually trigger your private static method
@@ -238,7 +272,6 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         try {
             data = JSON.parse(event.dataTransfer.getData('text/plain'));
         } catch (err) {
-            console.log("Could not parse data");
             return false;
         }
         switch (data.type) {
