@@ -42,8 +42,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             template: "systems/mgt2e/templates/actor/v2/vehicle-design.html",
             scrollable: ['']
         },
-        power: {
-            template: "systems/mgt2e/templates/actor/v2/vehicle-power.html",
+        combat: {
+            template: "systems/mgt2e/templates/actor/v2/vehicle-combat.html",
             scrollable: ['']
         },
         crew: {
@@ -63,7 +63,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         primary: {
             tabs: [
                 { id: "design" },
-                { id: "power", icon: "systems/mgt2e/icons/tabs/power.svg" },
+                { id: "combat" },
                 { id: "crew" },
                 { id: "equipment" },
             ],
@@ -134,6 +134,28 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         if (traits !== this.document.system.vehicle.traits) {
             await this.document.update({"system.vehicle.traits": traits});
         }
+    }
+
+    getVehicleHitDM() {
+        const spaces = parseInt(this.document.system.vehicle.spaces);
+
+        if (isNaN(spaces)) {
+            return 0;
+        }
+        if (spaces < 4) {
+            return 0;
+        } else if (spaces < 20) {
+            return 1;
+        } else if (spaces < 100) {
+            return 2;
+        } else if (spaces < 200) {
+            return 3;
+        } else if (spaces < 1000) {
+            return 4;
+        } else if (spaces < 2000) {
+            return 5;
+        }
+        return 6;
     }
 
     prepareData() {
@@ -234,6 +256,11 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
 
         let spaceRemaining = spaces;
+
+        // Combat
+        context.VEHICLE_SIZE_DM = this.getVehicleHitDM();
+
+        context.VEHICLE_DAMAGE = 0;
 
         return context;
     }
