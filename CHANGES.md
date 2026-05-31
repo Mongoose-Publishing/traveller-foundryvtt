@@ -1,5 +1,14 @@
 # Release Notes
 
+# 0.21.1 (Beta)
+* Allow a quantity to be set on ships docked in a starship, so multiple fighters
+  can be docked without needing different actors for each one.
+* Fix to how sizes are stored on creatures. Sizes were incorrectly held as a string,
+  this has been changed to an integer. Existing creatures should automatically run
+  a conversion.
+* Dropping an actor on Broker/Streetwise world drop points should now include any
+  augments on those skills when applying the skill level.
+* Updates to Spanish translations.
 
 # 0.21.0 (Beta)
 * Added support for Foundry V14. This fixes some problems which augments had in v14.

@@ -1,10 +1,11 @@
 
 import { MgT2eActorV2 } from "./MgT2eActorV2.mjs";
+import {MgT2VehicleDamageApp} from "../../helpers/dialogs/vehicle-damage-app.mjs";
 
 export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
     static DEFAULT_OPTIONS = {
-        classes: ["mgt2e", "sheet", "actor"],
+        classes: ["mgt2e", "sheet", "actor" ],
         position: {width: 720, height: 600},
         window: {
             resizable: true,
@@ -38,6 +39,10 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         tabs: {
             template: "templates/generic/tab-navigation.hbs"
         },
+        description: {
+            template: "systems/mgt2e/templates/actor/v2/vehicle-description.html",
+            scrollable: ['']
+        },
         design: {
             template: "systems/mgt2e/templates/actor/v2/vehicle-design.html",
             scrollable: ['']
@@ -62,6 +67,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
     static TABS = {
         primary: {
             tabs: [
+                { id: "description" },
                 { id: "design" },
                 { id: "combat" },
                 { id: "crew" },
@@ -134,6 +140,20 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         if (traits !== this.document.system.vehicle.traits) {
             await this.document.update({"system.vehicle.traits": traits});
         }
+
+        const hull = Math.max(1, parseInt(typeConfig.hull * this.document.system.vehicle.spaces));
+        if (hull !== this.document.system.hits.hull) {
+            const HITS = this.document.system.hits;
+            HITS.hull = hull;
+            HITS.structure = Math.ceil(HITS.max / 10);
+            HITS.max = 10;
+            HITS.value = HITS.max - HITS.damage;
+            this.document.update({"system.hits": HITS});
+        }
+    }
+
+    async _calculateHits() {
+
     }
 
     getVehicleHitDM() {
@@ -175,8 +195,15 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         await this._calculateTypes();
         console.log(this.document.items);
 
-        context.structure = Math.ceil(this.document.system.hits.max / 10);
-
+        const HITS = this.document.system.hits;
+        context.structure = Math.ceil(HITS.max / 10);
+        context.MAX_DAMAGE = context.structure * 10;
+        context.VEHICLE_DAMAGE = HITS.damage;
+        if (context.MAX_DAMAGE !== HITS.max || (context.MAX_DAMAGE - context.VEHICLE_DAMAGE) !== HITS.value) {
+            HITS.max = context.MAX_DAMAGE;
+            HITS.value = context.MAX_DAMAGE - context.VEHICLE_DAMAGE;
+            this.document.update({"system.hits": this.document.system.hits});
+        }
 
         // List Items
         context.ITEMS_OPTIONS = [];
@@ -265,12 +292,19 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         return context;
     }
 
-    _preparePartContext(partId, context) {
+    async _preparePartContext(partId, context) {
         context.tab = context.tabs[partId];
 
         if (!this.document.system.vehicle.primaryPower) {
             this.document.system.vehicle.primaryPower = "unpowered";
         }
+        if (partId === "description") {
+            context.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(
+                this.document.system.description,
+                { secrets: ((this.document.permission > 2)) }
+            );
+        }
+
 
         return context;
     }
@@ -301,9 +335,13 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         } catch (err) {
             return false;
         }
+        console.log(data);
         switch (data.type) {
             case "Item":
                 await this._onDropItem(event, data);
+                break;
+            case "Damage":
+                await this._onDropDamage(event, data);
                 break;
         }
     }
@@ -323,6 +361,45 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             console.error("Failed to create", err);
             return false;
         }
+    }
+
+    async _onDropDamage(event, data) {
+        console.log("DAMAGE:");
+
+        const damageOptions = JSON.parse(data.options);
+        console.log(damageOptions);
+        this.applyDamageToVehicle(damageOptions);
+
+
+    }
+
+    // Apply damage to a vehicle. This uses the damage rules from the Vehicle Update book.
+    async applyDamageToVehicle(options) {
+        if (!options) {
+            return;
+        }
+        if (!options.traits) {
+            options.traits = "";
+        }
+        if (options.traits.indexOf("stun") > -1) {
+            console.log("Ignore stun damage");
+            return;
+        }
+        let techLevelArmour = false;
+        if (!options.scale || options.scale === "traveller") {
+            // Traveller scale damage.
+            if (options.effect > 5) {
+                techLevelArmour = true;
+            } else if (options.traits) {
+                if (options.traits.indexOf("blast") > -1) {
+                    techLevelArmour = true;
+                } else if (options.traits.indexOf("destructive")) {
+                    techLevelArmour = true;
+                }
+            }
+        }
+        new MgT2VehicleDamageApp(this.document, options).render(true);
+
 
     }
 

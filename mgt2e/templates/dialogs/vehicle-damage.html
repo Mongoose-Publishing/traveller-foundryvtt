@@ -1,0 +1,39 @@
+<div>
+    <div>
+        <h2>Vehicle Damage</h2>
+
+        Target: {{TARGET.name}}<br/>
+        Attack side:
+        <select name="facing">
+            {{selectOptions ARMOUR_SELECT}}
+        </select>
+    </div>
+
+    <div class="grid grid-4col">
+        <div class="resource flex-group-center">
+            <label class="field-label">Scale</label>
+            <span>{{OPTIONS.scale}}</span>
+        </div>
+
+        <div class="resource flex-group-center">
+            <label class="field-label">Damage</label>
+            <span>{{OPTIONS.damage}}</span>
+        </div>
+
+        <div class="resource flex-group-center">
+            <label class="field-label">Effect</label>
+            <span>{{OPTIONS.effect}}</span>
+        </div>
+
+        <div class="resource flex-group-center">
+            <label class="field-label">Armour</label>
+            <span>0</span>
+        </div>
+
+        <div>
+            <label>Actual Damage</label>
+        </div>
+    </div>
+
+
+</div>

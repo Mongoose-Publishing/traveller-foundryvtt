@@ -146,7 +146,6 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         context.tab = context.tabs[partId];
 
         if (partId === "description") {
-            console.log("DESCRIPTION");
             context.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(
                 this.document.system.description,
                 { secrets: ((this.document.permission > 2)?true:false) }
