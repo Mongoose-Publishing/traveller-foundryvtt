@@ -945,10 +945,13 @@ Hooks.once("ready", async function() {
 
 
 Hooks.on("createCombatant", (combatant, combat, id) => {
-   console.log("createCombatant:");
-   const actor = combatant.actor;
+   if (!game.user.isGM) {
+       return;
+   }
+    console.log("createCombatant:");
+    const actor = combatant.actor;
 
-   let bonus = 0;
+    let bonus = 0;
    if (actor.getEffect("surprised")) {
        bonus = -6;
    } else if (actor.getEffect("aware")) {
@@ -983,10 +986,6 @@ Hooks.on("combatTurn", (combat, data, options) => {
 
 Hooks.on("combatRound", (combat, data, options) => {
     // This is when the round changes.
-    console.log("combatRound:");
-    console.log(combat);
-    console.log(data);
-
     for (let combatant of combat.combatants) {
         const actor = combatant.actor;
         if (actor.getEffect("surprised")) {

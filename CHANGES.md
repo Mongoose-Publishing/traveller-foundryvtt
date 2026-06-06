@@ -1,5 +1,10 @@
 # Release Notes
 
+# Develop (Beta)
+* Update verified Foundry version to 14.
+* Fix issue where players would get a permission error when the GM adds a token to
+  the combat tracker if the players don't have permission to the token.
+
 # 0.21.1 (Beta)
 * Allow a quantity to be set on ships docked in a starship, so multiple fighters
   can be docked without needing different actors for each one.
