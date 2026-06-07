@@ -163,7 +163,7 @@ async function applySensorCritical(actor, effects, level) {
 
         let title = game.i18n.format("MGT2.Spacecraft.Critical.sensors.Title", { "severity": level });
         let text = game.i18n.format("MGT2.Spacecraft.Critical.sensors.reduced", { "range": maxRange });
-        criticalToChat(actor, level, title, text, null);
+        await criticalToChat(actor, level, title, text, null);
     }
     if (effects["sensorsDisabled"] || true) {
         const sensors = actor.getHardwareList("sensor");
@@ -177,11 +177,11 @@ async function applySensorCritical(actor, effects, level) {
         let title = game.i18n.format("MGT2.Spacecraft.Critical.sensors.Title", { "severity": level });
         let text = game.i18n.format("MGT2.Spacecraft.Critical.sensors.disabled");
         if (list.length === 0) {
-            criticalToChat(actor, level, title, text, {
+            await criticalToChat(actor, level, title, text, {
                 content: game.i18n.format("MGT2.Spacecraft.Critical.sensors.NoSensors")
             });
         } else {
-            criticalToChat(actor, level, title, text, {
+            await criticalToChat(actor, level, title, text, {
                 content: game.i18n.format("MGT2.Spacecraft.Critical.sensors.ListOfDisabled"),
                 items: list
             });
@@ -201,7 +201,7 @@ async function applyPowerPlantCritical(actor, effects, level) {
 
     let title = game.i18n.format("MGT2.Spacecraft.Critical.power.Title", { "severity": level });
     let text = game.i18n.format("MGT2.Spacecraft.Critical.power." + level);
-    criticalToChat(actor, level, title, text, {
+    await criticalToChat(actor, level, title, text, {
         content: game.i18n.format("MGT2.Spacecraft.Critical.power.Text", {
             "level": 100 - powerAt
         })
@@ -262,7 +262,7 @@ async function applyWeaponCritical(actor, effects, level) {
             content = game.i18n.format("MGT2.Spacecraft.Critical.weapon.ListOfWeaponsDamaged");
         }
 
-        criticalToChat(actor, level, title, text, {
+        await criticalToChat(actor, level, title, text, {
             content: content,
             items: list
         });
@@ -272,7 +272,7 @@ async function applyWeaponCritical(actor, effects, level) {
         let list = [];
         if (listMounts) {
             let item = listMounts[0];
-            if (item.system.status != MgT2Item.DESTROYED) {
+            if (item.system.status !== MgT2Item.DESTROYED) {
                 await item.update({"system.status": MgT2Item.DAMAGED});
             }
             list.push(item);
@@ -301,7 +301,7 @@ async function applyWeaponCritical(actor, effects, level) {
         if (listMounts) {
             for (let i=0; i < listMounts.length; i++) {
                 let item = listMounts[i];
-                if (item.system.status != MgT2Item.DESTROYED) {
+                if (item.system.status !== MgT2Item.DESTROYED) {
                     await item.update({"system.status": MgT2Item.DESTROYED});
                     list.push(item);
                 }
@@ -557,13 +557,13 @@ async function applyJDriveCritical(actor, effects, level) {
                 if (item.system.status !== MgT2Item.DESTROYED) {
                     item.system.status = MgT2Item.DESTROYED;
                     await item.update({"system.status": MgT2Item.DESTROYED});
-                    ui.notifications.info("M-Drive on ship is destroyed````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````");
+                    ui.notifications.info("J-Drive on ship is destroyed````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````");
                     break;
                 }
             }
         }
     }
-    criticalToChat(actor, level, title, text, { 'content': content });
+    await criticalToChat(actor, level, title, text, { 'content': content });
 
     await applyHullCritical(actor, effects, level);
 }
