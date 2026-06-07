@@ -937,7 +937,7 @@
   "MGT2.Spacecraft.Critical.mDrive.4": "All checks to control spacecraft suffer DM-1 and Thrust reduced by -1",
   "MGT2.Spacecraft.Critical.mDrive.5": "Thrust reduced to zero",
   "MGT2.Spacecraft.Critical.mDrive.6": "Thrust reduced to zero, <b>Hull Severity</b> increased by <b>+1</b>",
-  "MGT2.Spacecraft.Critical.jDrive.Title": "M-Drive Critical ({severity})",
+  "MGT2.Spacecraft.Critical.jDrive.Title": "J-Drive Critical ({severity})",
   "MGT2.Spacecraft.Critical.jDrive.1": "All checks to use jump drive sufer DM-2",
   "MGT2.Spacecraft.Critical.jDrive.2": "Jump drive disabled",
   "MGT2.Spacecraft.Critical.jDrive.3": "Jump drive destroyed",
