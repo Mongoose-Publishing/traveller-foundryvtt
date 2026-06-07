@@ -1,6 +1,6 @@
 # Release Notes
 
-# Develop (Beta)
+# 0.21.2 (Beta)
 * Update verified Foundry version to 14.
 * Fix issue where players would get a permission error when the GM adds a token to
   the combat tracker if the players don't have permission to the token.
