@@ -1383,6 +1383,8 @@
   "MGT2.Warn.NoActorsToBuy": "No actors available who can buy this item",
   "MGT2.Warn.ThisActorCannotBuy": "{actor} doesn't have enough cash to buy {item}",
   "MGT2.Error.NoStatus": "Unable to find status '{status}'",
+  "MGT2.Attack.OutOfRange": "Selected target is out of range",
+
   "MGT2.Role.isDepartment": "Role is a department",
   "MGT2.Role.RoleAssignment": "Role Assignment",
   "MGT2.Role.RoleActions": "Actions",

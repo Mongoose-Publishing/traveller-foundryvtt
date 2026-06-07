@@ -4,6 +4,9 @@
 * Update verified Foundry version to 14.
 * Fix issue where players would get a permission error when the GM adds a token to
   the combat tracker if the players don't have permission to the token.
+* Fix some labelling issues with starship criticals
+* Selecting a target when making spacecraft attack now automatically changes the
+  range when a new target is selected.
 
 # 0.21.1 (Beta)
 * Allow a quantity to be set on ships docked in a starship, so multiple fighters
