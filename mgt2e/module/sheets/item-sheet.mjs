@@ -674,7 +674,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             switch (item.system.hardware.system) {
                 case "power": case "j-drive": case "m-drive":
                 case "r-drive":case "computer": case "weapon":
-                case "bridge": case "sensor":
+                case "bridge": case "sensor": case "general":
                     item.system.status = MgT2Item.ACTIVE;
                     item.update({"system.status": item.system.status });
                     break;
