@@ -278,16 +278,13 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
 
     let traits = weapon?weapon.system.weapon.traits:"";
-    console.log("FROM WEAPON: " + traits);
     if (attackOptions.traits) {
-        console.log("FROM ATTACK: " + attackOptions.traits);
         if (traits.length > 0) {
             traits = ", " + attackOptions.traits;
         } else {
             traits = attackOptions.traits;
         }
     }
-    console.log(traits);
     let destructive = false;
     let bonusPsiAP = 0;
     if (weapon || traits) {
@@ -395,6 +392,15 @@ export async function rollAttack(actor, weapon, attackOptions) {
     } else if (attackOptions.autoOption && attackOptions.autoOption === "noammo") {
         attacks = 0;
         content += "<p>No ammo</p>";
+    }
+
+    // Fire linked weapons which get a damage bonus.
+    if (weapon && parseInt(weapon.system.quantity) > 1 && hasTrait(traits, "linked")) {
+        let found = dmg.match(/[0-9][0-9]*[dD]/);
+        if (found) {
+            let quantityBonus = parseInt(found[0]);
+            dmg = `${dmg} + ${quantityBonus * (parseInt(weapon.system.quantity) -1)}`;
+        }
     }
 
     // Creatures sometimes take reduced (D6 -> D3) or minimum (D6 -> D1) damage.
