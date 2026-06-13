@@ -84,7 +84,7 @@ export class MgT2XPDialog extends Application {
                 this.cost = 0;
             }
         } else if (this.formData.specialities) {
-            this.cost = 0;
+            this.cost = this.formData.trained?0:1;
         } else {
             this.cost = 1;
             if (this.formData.value > 0) {
@@ -171,6 +171,9 @@ export class MgT2XPDialog extends Application {
                 if (!this.formData.trained) {
                     this.formData.trained = true;
                     this.formData.xp = Number(this.formData.xp) - this.cost;
+                    if (this.formData.specialities) {
+                        this.formData.xp = 0;
+                    }
                 } else {
                     this.formData.value = Number(this.formData.value) + 1;
                     this.formData.xp -= this.cost;

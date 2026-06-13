@@ -2,7 +2,7 @@
 
     <div class="shadow">
         {{#if showEdit}}
-            <span class="edit-skill">Edit</span>
+            <span class="edit-skill">{{localize 'MGT2.EditSkill.Edit'}}</span>
         {{/if}}
         <h3 class="skill-dialog-title">
             {{skillTitle}} [{{value}}]
@@ -11,25 +11,23 @@
         {{#unless (ifEquals cost 0)}}
         <div class="grid grid-4col">
             <div class="xpgrid resource">
-                <label for="dicetype" class="skillDialogLabel">Level</label>
+                <label class="skillDialogLabel">{{localize 'MGT2.XPSkill.Level'}}</label>
                 <br/>
                 <span>{{formData.value}}</span>
             </div>
-
             <div class="xpgrid resource">
-                <label for="difficulty" class="skillDialogLabel">Cost</label>
+                <label class="skillDialogLabel">{{localize 'MGT2.XPSkill.Cost'}}</label>
                 <br/>
                 <span>{{cost}}</span>
             </div>
-
             <div class="xpgrid resource">
-                <label for="xp" class="skillDialogLabel">XP</label>
+                <label for="xp" class="skillDialogLabel">{{localize 'MGT2.XPSkill.XP'}}</label>
                 <br/>
                 <input class="skillXPxp writable" name="xp" type="text" data-dtype="Number" value="{{formData.xp}}"/>
             </div>
             <div class="resource"></div>
             <div class="resource grid-4col">
-                <label for="study" class="skillDialogLabel">Study Notes</label>
+                <label for="study" class="skillDialogLabel">{{localize 'MGT2.XPSkill.StudyNotes'}}</label>
                 <br/>
                 <input class="skillXPstudy writable" name="study" type="text" data-dtype="String" value="{{formData.study}}"/>
             </div>
@@ -38,13 +36,13 @@
 
         <div class="grid grid-4col">
             <div class="resource">
-                <label for="bonus" class="skillDialogLabel">Bonus DM</label>
+                <label for="bonus" class="skillDialogLabel">{{localize 'MGT2.XPSkill.BonusDM'}}</label>
                 <br/>
                 <input class="skillXPbonus writable" name="bonus" type="text" data-dtype="Number" value="{{formData.bonus}}"/>
             </div>
 
             <div class="resource">
-                <label for="boon" class="skillDialogLabel">Boon</label>
+                <label for="boon" class="skillDialogLabel">{{localize 'MGT2.TravellerSheet.Boon'}}</label>
                 <br/>
                 <select class="skillXPboon" name="boon">
                     {{selectOptions BOON_SELECT selected=formData.boon}}
@@ -55,35 +53,35 @@
         <div class="grid grid-4col">
 
             <div class="skill-bonus grid-span-4 resource">
-                <label for="notes" class="skillDialogLabel">Skill notes</label>
+                <label for="notes" class="skillDialogLabel">{{localize 'MGT2.XPSkill.SkillNotes'}}</label>
                 <br/>
                 <input class="skillXPnotes writable" name="notes" type="text" data-dtype="String" value="{{formData.notes}}"/>
             </div>
         </div>
-        <h3>Effects</h3>
+        <h3>{{localize 'MGT2.Dialog.ActiveEffects'}}</h3>
         <div class="grid grid-4col">
             <div class="xpgrid">
-                <label class="skillDialogLabel">DM</label>
+                <label class="skillDialogLabel">{{localize 'MGT2.DM'}}</label>
                 <br/>
                 <input class="augdm" readonly name="formData.dm" type="text" data-dtype="Number" value="{{formData.augdm}}"/>
             </div>
             <div class="xpgrid">
-                <label class="skillDialogLabel">Aug</label>
+                <label class="skillDialogLabel">{{localize 'MGT2.TravellerSheet.AugmentType.augment'}}</label>
                 <br/>
                 <input class="augment" readonly name="formData.augment" type="text" data-dtype="Number" value="{{formData.augment}}"/>
             </div>
             <div class="xpgrid">
-                <label class="skillDialogLabel">Expert</label>
+                <label class="skillDialogLabel">{{localize 'MGT2.TravellerSheet.AugmentType.expert'}}</label>
                 <br/>
                 <input class="expert" readonly name="formData.expert" type="text" data-dtype="Number" value="{{formData.expert}}"/>
             </div>
             <div>
-                <br/><span class="clearEffects rollable">Clear</span>
+                <br/><span class="clearEffects rollable">{{localize 'MGT2.XPSkill.Clear'}}</span>
             </div>
         </div>
     </div>
     <footer class="sheet-footer flexrow">
-        <button type="submit" name="submit" class="save">Save <i class="fas fa-dice"></i></button>
+        <button type="submit" name="submit" class="save">{{localize 'Save'}} <i class="fas fa-dice"></i></button>
     </footer>
 
 </form>

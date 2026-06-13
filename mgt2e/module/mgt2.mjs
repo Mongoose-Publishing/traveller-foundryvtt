@@ -1729,6 +1729,12 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
             augmented = true;
             title += " + " + Number(skill.augdm);
         }
+        if (game.settings.get("mgt2e", "quickRolls")) {
+            title += "&#10;" + game.i18n.localize("MGT2.TravellerSheet.SkillTitle.Dialog");
+        } else {
+            title += "&#10;" + game.i18n.localize("MGT2.TravellerSheet.SkillTitle.Quick");
+        }
+        title += "&#10;"+game.i18n.localize("MGT2.TravellerSheet.SkillTitle.XP");
 
         let hasXp = (skill.xp && skill.xp > 0);
         let label = skillLabel(skill);
@@ -1755,7 +1761,6 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
                 } else {
                     return 1;
                 }
-                return 0;
             });
 
             for (let i in SPECS) {
@@ -1804,6 +1809,12 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
                     if (spec.bonus && Number(spec.bonus) > 0) {
                         augmented = true;
                     }
+                    if (game.settings.get("mgt2e", "quickRolls")) {
+                        title += "&#10;" + game.i18n.localize("MGT2.TravellerSheet.SkillTitle.Dialog");
+                    } else {
+                        title += "&#10;" + game.i18n.localize("MGT2.TravellerSheet.SkillTitle.Quick");
+                    }
+                    title += "&#10;"+game.i18n.localize("MGT2.TravellerSheet.SkillTitle.XP");
 
                     html += "<div class='specialisationBlock'>";
                     if (skill.individual) {
