@@ -469,7 +469,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 // Calculate power if active.
                 if (i.system.status === MgT2Item.ACTIVE) {
                     if (h.system === "power") {
-                        powerTotal += parseFloat(h.powerPerTon) * t;
+                        powerTotal += parseFloat(h.rating);
                     } else {
                         if (parseFloat(h.power) > 0) {
                             powerUsed += parseFloat(h.power);
@@ -709,6 +709,10 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 weapons.push(i);
                 if (i.system.status === MgT2Item.EQUIPPED) {
                     activeWeapons.push(i);
+                } else if (i.system.component?.linkedTo) {
+                    if (this.actor.items.get(i.system.component.linkedTo)?.system.status === MgT2Item.EQUIPPED) {
+                        activeWeapons.push(i);
+                    }
                 }
             } else if (i.type === 'armour') {
                 armour.push(i);
