@@ -91,9 +91,11 @@ export class MgT2XPDialog extends Application {
                 this.cost = Math.pow(2, Number(this.formData.value));
             }
         }
+        console.log("End");
     }
 
     getData() {
+        console.log("getData:");
         return {
             "actor": this.actor,
             "data": this.actorData,
@@ -104,7 +106,12 @@ export class MgT2XPDialog extends Application {
             "value": this.formData.value,
             "cost": this.cost,
             "xp": this.xp,
-            "showEdit": !(this.actor.parent)
+            "showEdit": !(this.actor.parent),
+            BOON_SELECT: {
+                "": game.i18n.localize("MGT2.TravellerSheet.Normal"),
+                "boon": game.i18n.localize("MGT2.TravellerSheet.Boon"),
+                "bane": game.i18n.localize("MGT2.TravellerSheet.Bane")
+            }
         }
     }
 

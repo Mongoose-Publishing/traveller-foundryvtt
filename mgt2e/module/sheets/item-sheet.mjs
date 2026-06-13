@@ -509,6 +509,15 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             context.SKILL_SELECT = {
                 "": "None"
             };
+            context.COLOUR_SELECT = {
+                "": game.i18n.localize("MGT2.Colour.none"),
+                "gold": game.i18n.localize("MGT2.Colour.gold"),
+                "blue": game.i18n.localize("MGT2.Colour.blue"),
+                "red": game.i18n.localize("MGT2.Colour.red"),
+                "green": game.i18n.localize("MGT2.Colour.green"),
+                "grey": game.i18n.localize("MGT2.Colour.grey"),
+                "black": game.i18n.localize("MGT2.Colour.black")
+            };
             let allSkills = MGT2.getDefaultSkills();
             for (let skillId in allSkills) {
                 let skill = allSkills[skillId];

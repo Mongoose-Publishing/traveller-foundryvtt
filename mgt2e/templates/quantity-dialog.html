@@ -8,14 +8,7 @@
         <div>
             <label for="quantity" class="skillDialogLabel">How many? </label>
             <select class="quantity" name="quantity">
-                {{#select "one"}}
-                    <option value="one">One item</option>
-                    {{#if half}}
-                        <option value="half">Half ({{half}})</option>
-                    {{/if}}
-                    <option value="all">All items ({{max}})</option>
-                    <option value="custom">Custom</option>
-                {{/select}}
+                {{selectOptions QUANTITY_SELECT}}
             </select>
             <br/>
 
