@@ -26,9 +26,8 @@
 
     <div class="inset">
       <ol class="items-list">
-        {{#each items as |item id|}}
+        {{#each activeWeapons as |item id|}}
           {{#if item.system.weapon}}
-            {{#if (isItemEquipped item)}}
               {{#if item.system.quantity}}
                 <li class="item active-weapon" data-item-id="{{item._id}}" title="{{item.name}} ({{item.system.weapon.damage}})">
                   <label class="weapon-name">{{nameQuantity item "sidebar"}}</label>
@@ -54,7 +53,6 @@
                   <br/>
                 </li>
               {{/if}}
-            {{/if}}
           {{/if}}
         {{/each}}
       </ol>

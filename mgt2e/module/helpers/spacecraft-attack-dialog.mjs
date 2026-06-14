@@ -234,6 +234,13 @@ export class MgT2SpacecraftAttackDialog extends Application {
         html.find(".attackDialogRange").click(event => {
             this.range = html.find(".attackDialogRange")[0].value;
         });
+        html.find(".attackDialogTargets").click(event => {
+           this.target = html.find(".attackDialogTargets")[0].value;
+           const t = this.TARGETS.filter(i => i.id === this.target);
+           if (t.length > 0) {
+               html.find(".attackDialogRange")[0].value = t[0].range;
+           }
+        });
 
         this.setRanges(html);
     }
@@ -255,6 +262,10 @@ export class MgT2SpacecraftAttackDialog extends Application {
         let rangeDM = null;
         if (html.find(".attackDialogRange")[0]) {
             range = html.find(".attackDialogRange")[0].value;
+            if (!range) {
+                ui.notifications.error(game.i18n.localize("MGT2.Attack.OutOfRange"));
+                return;
+            }
             rangeDM = parseInt(CONFIG.MGT2.SPACE_RANGES[range].dm);
         }
         if (html.find(".attackDialogTargets")[0]) {

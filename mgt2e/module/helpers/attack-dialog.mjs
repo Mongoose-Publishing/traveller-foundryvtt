@@ -41,6 +41,13 @@ export class MgT2AttackDialog extends Application {
         } else if (weapon.system.quantity < 1) {
             this.outOfAmmo = true;
         }
+        this.linked = null;
+        if (parseInt(weapon.system.quantity) > 1) {
+            if (hasTrait(weapon.system.weapon.traits, "linked")) {
+                this.linked = game.i18n.format("MGT2.Attack.FireLinked", { number: parseInt(weapon.system.quantity)});
+            }
+        }
+
         this.AUTO = {};
         this.AUTO["single"] = `Single Shot`;
         this.AUTO["burst"] = `Burst (+${this.auto})`;
@@ -205,7 +212,8 @@ export class MgT2AttackDialog extends Application {
             "RANGES": this.RANGES,
             "ROLLTYPES": this.ROLLTYPES,
             "attackerName": this.attackerName,
-            "TARGETS": this.TARGETS
+            "TARGETS": this.TARGETS,
+            "linked": this.linked
         }
     }
 

@@ -213,6 +213,7 @@ MgT2eMacros.cash = function(args) {
     let cash = args.cash;
     let pension = args.pension;
     let medical = args.medical;
+    let other = args.other;
     let context = args.text;
 
     for (let actor of Tools.getSelectedOwned()) {
@@ -230,11 +231,19 @@ MgT2eMacros.cash = function(args) {
                 finance.pension = Number(finance.pension) + Number(pension);
                 finance.pension = Math.max(0, finance.pension);
                 text += `Pension increases by Cr${pension} to a total of Cr${finance.pension}/year.`;
+                finance.description += `<p>Pension: Cr${pension} (${context})</p>`;
             }
             if (medical) {
                 finance.medicalDebt = Number(finance.medicalDebt) + Number(medical);
                 finance.medicalDebt = Math.max(0, finance.medicalDebt);
                 text += `Medical debt increases by Cr${medical} to a total of Cr${finance.medicalDebt}.`;
+                finance.description += `<p>Medical Debt: Cr${medical} (${context})</p>`;
+            }
+            if (other) {
+                finance.otherIncome = Number(finance.otherIncome) + Number(other);
+                finance.otherIncome = Math.max(0, finance.otherIncome);
+                text += `Truther Patronage grants you an extra Cr${other} per year, to a total of Cr${finance.otherIncome}.`;
+                finance.description += `<p>Other Income: Cr${other} (${context})</p>`;
             }
 
             actor.update({"system.finance": finance});
@@ -278,6 +287,7 @@ MgT2eMacros.chaGain = async function(args) {
         let text = "";
 
         if (actor && actor.system.characteristics[cha]) {
+            actor.system.characteristics[cha].show = true;
             let current = Number(actor.system.characteristics[cha].value);
             if (min && min > (current + level)) {
                 actor.system.characteristics[cha].value = min;
