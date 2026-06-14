@@ -276,6 +276,14 @@ Hooks.once('init', async function() {
         type: Boolean,
         default: false
     });
+    game.settings.register('mgt2e', "damageManager", {
+        name: game.i18n.localize("MGT2.Settings.DamageManager.Name"),
+        hint: game.i18n.localize("MGT2.Settings.DamageManager.Hint"),
+        scope: "world",
+        config: true,
+        type: String,
+        default: ""
+    });
 
     // Add custom constants for configuration.
     CONFIG.MGT2 = MGT2;

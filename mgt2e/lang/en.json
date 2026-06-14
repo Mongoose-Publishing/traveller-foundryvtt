@@ -51,6 +51,8 @@
   "MGT2.Settings.NPCChaDamage.Hint": "By default, NPCs use characteristics for damage like Travellers. Disable this to use a simplified hits system instead",
   "MGT2.Settings.HexInWorldMenus.Name": "Use Hex when displaying world data",
   "MGT2.Settings.HexInWorldMenus.Hint": "Though the UWP will always show hexadecimals, other places show world data as decimal numbers unless this is set to true",
+  "MGT2.Settings.DamageManager.Name": "Player to use to manage NPC damage",
+  "MGT2.Settings.DamageManager.Hint": "If using multiple GMs, sets the name of the Player who is responsible for applying damage to characters. This must be a GM.",
   "MGT2.STR": "STR",
   "MGT2.DEX": "DEX",
   "MGT2.END": "END",

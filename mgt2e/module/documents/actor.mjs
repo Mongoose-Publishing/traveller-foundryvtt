@@ -472,11 +472,18 @@ export class MgT2Actor extends Actor {
       return score;
   }
 
+    /**
+     * Try and find active owner of this actor. Normally used for handing over damage management to.
+     * A user must be active, and have ownership of the actor. Users are searched for in this order:\
+     * - Traveller character with a 'player' set to the name of the user
+     * - Non-GM user who has permissions specifically set to 3
+     * - Non-GM user who has permissions of 3 due to default permissions
+     * - The player set by 'Damage Manager' setting
+     * - The active GM
+     */
   findActorOwner() {
-      // Find the active player who owns this actor. If there are none, select the Gamemaster.
-      console.log("findActorOwner:");
-      // First, look for the player mentioned on the character sheet. They must be active,
-      // and also have ownership permission of this actor.
+      // First, look for the player mentioned on the character sheet.
+      let defaultPlayer = null;
       for (let u of game.users) {
           if (u.active && u.name === this.system.player) {
               if (this.ownership[u._id] !== undefined) {
@@ -486,20 +493,36 @@ export class MgT2Actor extends Actor {
               } else if (this.ownership["default"] === 3) {
                   return u;
               }
-          }
-      }
-      // No matches, now look for a non-GM with ownership permissions.
-      console.log("Looking just at permissions");
-      for (let u in this.ownership) {
-          if (this.ownership[u] === 3 && game.users.get(u)?.active) {
-              if (!game.users.get(u).isGM) {
-                  return u;
+          } else if (!defaultPlayer && u.active && !u.isGM) {
+              if (this.ownership["default"] === 3) {
+                defaultPlayer = u;
               }
           }
       }
-      console.log("Just use the GM");
-      // Finally, just find an active GM.
-      return game.users.activeGM;
+      // Now look for a non-GM with specifically named owner permissions.
+      for (let u in this.ownership) {
+          if (this.ownership[u] === 3 && game.users.get(u)?.active) {
+              if (!game.users.get(u).isGM) {
+                  return game.users.get(u);
+              }
+          }
+      }
+      // If there is a non-GM with default owner permissions, use them.
+      if (defaultPlayer) {
+          return defaultPlayer;
+      }
+      // Finally, just use the GM. If a backup GM has been set to handle damage, then
+      // use that user, otherwise use whichever GM is marked as active.
+      let gm = game.users.activeGM;
+      let damageManager = game.settings.get("mgt2e", "damageManager");
+      if (damageManager) {
+          let user = game.users.getName(damageManager);
+          if (user && user.active && user.isGM) {
+              gm = game.users.getName(damageManager);
+          }
+      }
+
+      return gm;
   }
 
   findAblatTarget(options) {
@@ -550,8 +573,10 @@ export class MgT2Actor extends Actor {
       options.armour = 0;
 
       if (this.permission < 3) {
+          console.log("I don't have permission, looking for alternative player");
           let alternativePlayer = this.findActorOwner();
           if (alternativePlayer) {
+              console.log(alternativePlayer);
               game.socket.emit("system.mgt2e", {
                   type: "applyDamageToPerson",
                   userId: alternativePlayer.uuid,
@@ -568,9 +593,11 @@ export class MgT2Actor extends Actor {
               ui.notifications.error(game.i18n.format("MGT2.Error.NoSuitableOwner", { "actor": this.name }));
           }
           return;
-      } else if (this.type === "traveller" && game.users.current.isGM) {
+      } else if (game.users.current.isGM) {
+          console.log("I am the GM, looking for alternative player");
           let alternativePlayer = this.findActorOwner();
           if (alternativePlayer && alternativePlayer.uuid !== game.users.current.uuid) {
+              console.log(alternativePlayer);
               game.socket.emit("system.mgt2e", {
                   type: "applyDamageToPerson",
                   userId: alternativePlayer.uuid,

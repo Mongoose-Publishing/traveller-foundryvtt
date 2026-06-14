@@ -1,6 +1,27 @@
 # Release Notes
 
+
+# Develop (Beta)
+
+* Added some tokens for the most common Third Imperium species.
+* Allow general ship hardware to have a status flag. Without this, power requirements
+  weren't being calculated.
+* Total power now read directly from the power value set on power plants, rather than
+  being calculated from the tonnage. The old way sometimes produced unwanted fractions.
+* Removed some old image files which are no longer wanted. This includes some PNG files
+  for which there are now SVG replacements (and have been for a while).
+* Removed last remaining uses of handlebar templates that are no longer supported on v14.
+  This fixes problems with skill XP dialog, Crew Role items and quantity dialog.
+* Allow weapons to be attached as components of other items, such as battledress.
+* Added 'Linked' trait to weapons, which adds a damage bonus if weapon quantity > 1.
+* Expanded the hover text on skills to list the shift/ctrl options.
+* Allow parent skills to have training notes attached if they're not yet trained.
+* Added i18n keywords to the XP dialog.
+* Added new setting to control which GM player manages damage dialogs. Designed for use
+  where there are multiple GMs in a game.
+
 # 0.21.2 (Beta)
+
 * Update verified Foundry version to 14.
 * Fix issue where players would get a permission error when the GM adds a token to
   the combat tracker if the players don't have permission to the token.
@@ -9,6 +30,7 @@
   range when a new target is selected.
 
 # 0.21.1 (Beta)
+
 * Allow a quantity to be set on ships docked in a starship, so multiple fighters
   can be docked without needing different actors for each one.
 * Fix to how sizes are stored on creatures. Sizes were incorrectly held as a string,
@@ -19,6 +41,7 @@
 * Updates to Spanish translations.
 
 # 0.21.0 (Beta)
+
 * Added support for Foundry V14. This fixes some problems which augments had in v14.
   These changes should work in both v13 and v14. It is recommended that you make
   backups before moving to v14 in case of any undiscovered problems.
@@ -26,13 +49,16 @@
 * Added missing skill icons for Psionic skills.
 
 # 0.20.5 (Beta)
+
 * Allow skill request macros to set whether a roll is public, private, blind or GM.
 * Fix bug that prevented the adding of a new skill specialisation.
 
 # 0.20.4 (Beta)
+
 * Actually update the configuration so that it picks up the French localisation file.
 
 # 0.20.3 (Beta)
+
 * Update to Spanish translations.
 * Fixed issue where a Package actor wasn't displaying equipped items in an
   unexpected state. This could happen if an item was dragged from a different

@@ -193,6 +193,7 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
     for (let token of tokens) {
         if (!token.isOwner) {
             // Don't have permission to update token.
+            console.log("Token: Not the owner, look for someone else");
             let alternativePlayer = token.actor.findActorOwner();
 
             if (!alternativePlayer) {
@@ -216,9 +217,11 @@ Tools.applyDamageToTokens = async function(damage, damageOptions) {
             }
             game.socket.emit("system.mgt2e", data);
             continue;
-        } else if (["traveller", "spacecraft"].includes(token.actor.type)) {
+        } else {
             // Do have permission, but are we the right person?
+            console.log("Token: Have permission, but is there someone better?");
             let alternativePlayer = token.actor.findActorOwner();
+            console.log(alternativePlayer);
             if (!alternativePlayer) {
                 ui.notifications.error(game.i18n.format("MGT2.Error.NoSuitableOwner", {
                     "actor": token.document.name
