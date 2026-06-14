@@ -1,4 +1,4 @@
-<section class="tab {{tab.cssClass}}" data-group="primary" data-tab="design">
+<section class="tab {{tab.cssClass}} scrollable" data-group="primary" data-tab="design">
     <div class="grid grid-3col">
         <div>
             <h4>Core Design</h4>
@@ -6,6 +6,23 @@
             <select class="field-value" name="system.vehicle.type">
                 {{selectOptions TYPE_SELECT selected=system.vehicle.type}}
             </select>
+
+            <div class="shadow grid grid-2col">
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.tl" class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+
+                    <select name="system.vehicle.tl">
+                        {{selectOptions SELECT_TECHLEVEL selected=system.vehicle.tl }}
+                    </select>
+                </div>
+
+                <div class="resource flex-group-left">
+                    <label for="system.vehicle.spaces" class="field-label">{{localize 'MGT2.Vehicle.Spaces'}}</label>
+                    <input class="field-value writable" style="height: 32px;"
+                           name="system.vehicle.spaces" type="number"
+                           value="{{system.vehicle.spaces}}"/>
+                </div>
+            </div>
 
             <label>{{localize 'MGT2.Vehicle.FeaturesTitle'}}</label>
             <select class="field-value" data-action="addFeature" data-label="Add Feature">
@@ -17,48 +34,35 @@
 
             <div class="shadow grid grid-3col">
                 <div class="resource flex-group-left">
-                    <label for="system.vehicle.tl" class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
-
-                    <select name="system.vehicle.tl">
-                        {{selectOptions SELECT_TECHLEVEL selected=system.vehicle.tl }}
-                    </select>
-                </div>
-
-                <div class="resource flex-group-left">
-                    <label for="system.vehicle.spaces" class="field-label">{{localize 'MGT2.Vehicle.Spaces'}}</label>
-                    <input class="field-value writable" name="system.vehicle.spaces" type="text" value="{{system.vehicle.spaces}}"/>
-                </div>
-                <div class="resource flex-group-left">
                     <label for="system.hits.hull" class="field-label">{{localize 'MGT2.TravellerSheet.Hits'}}</label>
-                    <input class="field-value writable" name="system.hits.hull" type="text" value="{{system.hits.hull}}" readonly/>
+                    <input class="field-value writable" name="system.hits.hull" type="number" value="{{system.hits.hull}}" readonly/>
                 </div>
                 <div class="resource flex-group-left">
                     <label for="system.vehicle.agility" class="field-label">{{localize 'MGT2.Vehicle.Agility'}}</label>
-                    <input class="field-value writable" name="system.vehicle.agility" type="text" value="{{system.vehicle.agility}}"/>
+                    <input class="field-value writable" name="system.vehicle.agility" type="number" value="{{system.vehicle.agility}}"/>
                 </div>
                 <div class="resource flex-group-left">
                     <label for="system.vehicle.cost" class="field-label">{{localize 'MGT2.Vehicle.Cost'}}</label>
-                    <input class="field-value writable" name="system.vehicle.cost" type="text" value="{{system.vehicle.cost}}"/>
+                    <input class="field-value writable" name="system.vehicle.cost" type="number" value="{{system.vehicle.cost}}"/>
                 </div>
 
                 <div class="resource flex-group-left">
                     <label for="system.vehicle.crew" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Crew'}}</label>
-                    <input class="field-value writable" name="system.vehicle.crew" type="text" value="{{system.vehicle.crew}}"/>
+                    <input class="field-value writable" name="system.vehicle.crew" type="number" value="{{system.vehicle.crew}}"/>
                 </div>
                 <div class="resource flex-group-left">
                     <label for="system.vehicle.passengers" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Passengers'}}</label>
-                    <input class="field-value writable" name="system.vehicle.passengers" type="text" value="{{system.vehicle.passengers}}"/>
+                    <input class="field-value writable" name="system.vehicle.passengers" type="number" value="{{system.vehicle.passengers}}"/>
                 </div>
                 <div class="resource flex-group-left">
                     <label for="system.vehicle.cargo" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Cargo'}}</label>
-                    <input class="field-value writable" name="system.vehicle.cargo" type="text" value="{{system.vehicle.cargo}}"/>
+                    <input class="field-value writable" name="system.vehicle.cargo" type="number" value="{{system.vehicle.cargo}}"/>
                 </div>
                 <div class="resource flex-group-left">
                     <label for="system.vehicle.shipping" class="field-label">{{localize 'MGT2.Vehicle.Sheet.Shipping'}}</label>
-                    <input class="field-value writable" name="system.vehicle.shipping" type="text" value="{{system.vehicle.shipping}}"/>
+                    <input class="field-value writable" name="system.vehicle.shipping" type="number" value="{{system.vehicle.shipping}}"/>
                 </div>
             </div>
-
         </div>
 
         <div>
@@ -71,10 +75,61 @@
 
             <label>{{localize 'MGT2.Vehicle.SecondaryPower'}}</label>
             <select class="field-value" name="system.vehicle.secondaryPower">
-                {{selectOptions SELECT_POWER selected=system.vehicle.secondaryPower}}
+                {{selectOptions SELECT_SECOND_POWER selected=system.vehicle.secondaryPower}}
             </select>
-
         </div>
+
+
+        <div>
+            <h4>Armour</h4>
+
+            <div class="grid grid-2col">
+                <div class="resource flex-group-center">
+                    <label class="field-label">Front</label>
+                    <input class="field-value writable" type="number"
+                           name="system.vehicle.armour.front"
+                           value="{{system.vehicle.armour.front}}"
+                    />
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">Aft</label>
+                    <input class="field-value writable" type="number"
+                           name="system.vehicle.armour.rear"
+                           value="{{system.vehicle.armour.rear}}"
+                    />
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">Port</label>
+                    <input class="field-value writable" type="number"
+                           name="system.vehicle.armour.port"
+                           value="{{system.vehicle.armour.port}}"
+                    />
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">Starboard</label>
+                    <input class="field-value writable" type="number"
+                           name="system.vehicle.armour.starboard"
+                           value="{{system.vehicle.armour.starboard}}"
+                    />
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">Dorsal</label>
+                    <input class="field-value writable" type="number"
+                           name="system.vehicle.armour.top"
+                           value="{{system.vehicle.armour.top}}"
+                    />
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">Ventral</label>
+                    <input class="field-value writable" type="number"
+                           name="system.vehicle.armour.bottom"
+                           value="{{system.vehicle.armour.bottom}}"
+                    />
+                </div>
+            </div>
+        </div>
+
+
 
         <div>
             <h4>Options</h4>

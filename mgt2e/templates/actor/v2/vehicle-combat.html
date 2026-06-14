@@ -1,15 +1,45 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="combat">
-    <h2>Combat</h2>
+    <h4>Armour</h4>
+
+    <div class="grid grid-6col">
+        <div class="resource flex-group-center">
+            <label class="field-label">Front</label>
+            <span>{{system.vehicle.armour.front}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Aft</label>
+            <span>{{system.vehicle.armour.rear}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Port</label>
+            <span>{{system.vehicle.armour.port}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Starboard</label>
+            <span>{{system.vehicle.armour.starboard}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Dorsal</label>
+            <span>{{system.vehicle.armour.top}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Ventral</label>
+            <span>{{system.vehicle.armour.bottom}}</span>
+        </div>
+    </div>
 
     <div class="grid grid-4col">
-        <div>
-            <label>Size</label>
-            <span>{{VEHICLE_SIZE_DM}}</span>
-        </div>
 
-        <div>
-            <label>Damage</label>
-            <span>x{{VEHICLE_DAMAGE}}</span>
+        <div class="grid-span-2">
+            <div >
+                <label>Size</label>
+                <span>{{VEHICLE_SIZE_DM}}</span>
+            </div>
+
+            <div>
+                <label>Damage</label>
+                <span>x{{VEHICLE_DAMAGE}}</span>
+            </div>
         </div>
     </div>
 

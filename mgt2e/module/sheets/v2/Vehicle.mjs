@@ -6,7 +6,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
     static DEFAULT_OPTIONS = {
         classes: ["mgt2e", "sheet", "actor" ],
-        position: {width: 720, height: 600},
+        position: {width: 720, height: 640},
         window: {
             resizable: true,
             controls: [] // Header buttons go here
@@ -37,7 +37,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             scrollable: ['']
         },
         tabs: {
-            template: "templates/generic/tab-navigation.hbs"
+            template: "templates/generic/tab-navigation.hbs",
+            scrollable: [""]
         },
         description: {
             template: "systems/mgt2e/templates/actor/v2/vehicle-description.html",
@@ -45,7 +46,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         },
         design: {
             template: "systems/mgt2e/templates/actor/v2/vehicle-design.html",
-            scrollable: ['']
+            scrollable: [""],
+            classes: ["vehicle-design-tab"],
         },
         combat: {
             template: "systems/mgt2e/templates/actor/v2/vehicle-combat.html",
@@ -142,13 +144,14 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
 
         const hull = Math.max(1, parseInt(typeConfig.hull * this.document.system.vehicle.spaces));
-        if (hull !== this.document.system.hits.hull) {
+        if (hull !== parseInt(this.document.system.hits.hull)) {
+            console.log("UPDATING HITS FOR VEHICLE");
             const HITS = this.document.system.hits;
             HITS.hull = hull;
-            HITS.structure = Math.ceil(HITS.max / 10);
+            HITS.structure = Math.ceil(HITS.hull / 10);
             HITS.max = 10;
             HITS.value = HITS.max - HITS.damage;
-            this.document.update({"system.hits": HITS});
+            await this.document.update({"system.hits": HITS});
         }
     }
 
@@ -178,6 +181,21 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         return 6;
     }
 
+    getVehicleSize() {
+        const spaces = parseInt(this.document.system.vehicle.spaces);
+
+        if (spaces < 4) {
+            return "small";
+        } else if (spaces < 20) {
+            return "light";
+        } else if (spaces < 200) {
+            return "heavy";
+        } else if (spaces < 2000) {
+            return "huge";
+        }
+        return "massive";
+    }
+
     prepareData() {
         console.log("prepareDerivedData:");
     }
@@ -192,17 +210,18 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             tabs: this._prepareTabs("primary")
         };
 
+        // BASIC TYPE AND SIZE OF VEHICLE
         await this._calculateTypes();
-        console.log(this.document.items);
+        context.VEHICLE_SIZE = this.getVehicleSize();
 
+        // STRUCTURE AND HITS
         const HITS = this.document.system.hits;
-        context.structure = Math.ceil(HITS.max / 10);
         context.MAX_DAMAGE = context.structure * 10;
         context.VEHICLE_DAMAGE = HITS.damage;
         if (context.MAX_DAMAGE !== HITS.max || (context.MAX_DAMAGE - context.VEHICLE_DAMAGE) !== HITS.value) {
             HITS.max = context.MAX_DAMAGE;
             HITS.value = context.MAX_DAMAGE - context.VEHICLE_DAMAGE;
-            this.document.update({"system.hits": this.document.system.hits});
+            //this.document.update({"system.hits": this.document.system.hits});
         }
 
         // List Items
@@ -251,11 +270,20 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
 
         context.SELECT_POWER = {};
+        context.SELECT_SECOND_POWER = {}
         for (let p in CONFIG.MGT2.VEHICLES.POWER) {
             if (CONFIG.MGT2.VEHICLES.POWER[p].conflicts?.includes(this.document.system.vehicle.type)) {
                 continue;
             }
-            context.SELECT_POWER[p] = game.i18n.localize(`MGT2.Vehicle.Power.${p}`);
+            if (CONFIG.MGT2.VEHICLES.POWER[p].tl > this.document.system.vehicle.tl) {
+                continue;
+            }
+            if (CONFIG.MGT2.VEHICLES.POWER[p].tl) {
+                context.SELECT_POWER[p] = game.i18n.localize(`MGT2.Vehicle.Power.${p}`);
+            }
+            if (CONFIG.MGT2.VEHICLES.POWER[p].secondary) {
+                context.SELECT_SECOND_POWER[p] = game.i18n.localize(`MGT2.Vehicle.Power.${p}`);
+            }
         }
 
         const spaces = parseInt(this.document.system.vehicle.spaces);

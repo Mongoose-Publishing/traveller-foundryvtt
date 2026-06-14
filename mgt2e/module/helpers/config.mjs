@@ -580,6 +580,9 @@ MGT2.VEHICLES = {
         "VTOL": {}
     },
     POWER: {
+        "none": {
+            secondary: {}
+        },
         "standard": {
           tl: 3
         },
@@ -614,12 +617,76 @@ MGT2.VEHICLES = {
             ],
             secondary: { spaces: -10, cost: 100 }
         },
-        "beamed": {},
-        "fission": {},
-        "fusion": {},
-        "antimatter": {},
-        "fusionPlus": {},
-        "solar": {}
+        "beamed": {
+            tl: 8, spaces: +30, cost: 10000,
+            conflicts: [ "submersible" ],
+            secondary: { spaces: -20, cost: 10000, minSpaces: 2 }
+        },
+        "fissionBasic": {
+            tl: 6, spaces: -50, costPerSpace: 100000, powerPerSpace: 2, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -35 }
+        },
+        "fissionImproved": {
+            tl: 7, spaces: -40, costPerSpace: 150000, powerPerSpace: 2, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -28 }
+        },
+        "fissionAdvanced": {
+            tl: 8, spaces: -30, costPerSpace: 200000, powerPerSpace: 2, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -21 }
+        },
+        "fusionBasic": {
+            tl: 8, spaces: -25, costPerSpace: 125000, powerPerSpace: 2.5, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -21 }
+        },
+        "fusionImproved": {
+            tl: 12, spaces: -20, costPerSpace: 125000, powerPerSpace: 3.5, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -15 }
+        },
+        "fusionAdvanced": {
+            tl: 15, spaces: -10, costPerSpace: 125000, powerPerSpace: 5, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -12 }
+        },
+        "antimatter": {
+            tl: 20, spaces: -10, costPerSpace: 2500000, powerPerSpace: 25,
+            conflicts: [],
+            secondary: { spaces: -6 }
+        },
+        "fusionPlusBasic": {
+            tl: 10, spaces: -10, costPerSpace: 15000, powerPerSpace: 1,
+            conflicts: [],
+            secondary: { spaces: -5 }
+        },
+        "fusionPlusImproved": {
+            tl: 13, spaces: -10, costPerSpace: 25000, powerPerSpace: 2,
+            conflicts: [],
+            secondary: { spaces: -5 }
+        },
+        "fusionPlusAdvanced": {
+            tl: 16, spaces: -10, costPerSpace: 50000, powerPerSpace: 3,
+            conflicts: [],
+            secondary: { spaces: -5 }
+        },
+        "solarBasic": {
+            tl: 8, spaces: -20, costPerSpace: 50000,
+            conflicts: [],
+            secondary: { spaces: -10 }
+        },
+        "solarImproved": {
+            tl: 8, spaces: -20, costPerSpace: 50000,
+            conflicts: [],
+            secondary: { spaces: -10 }
+        },
+        "solarAdvanced": {
+            tl: 8, spaces: -20, costPerSpace: 50000,
+            conflicts: [],
+            secondary: { spaces: -10 }
+        }
     },
     OPTIONS: {
       "general": {},
