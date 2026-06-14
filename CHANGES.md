@@ -1,7 +1,6 @@
 # Release Notes
 
-
-# Develop (Beta)
+# 0.21.3 (Beta)
 
 * Added some tokens for the most common Third Imperium species.
 * Allow general ship hardware to have a status flag. Without this, power requirements
