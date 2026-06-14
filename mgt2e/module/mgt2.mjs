@@ -1792,8 +1792,8 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
                     let augmented = false;
                     let isDeleted = spec.deleted?true:false;
                     let title = spec.default?spec.default:skill.default;
-                    if (skill.trained) {
-                        title += " + " + skill.value;
+                    if (skill.trained && !(skill.individual && !spec.trained)) {
+                        title += " + " + spec.value;
                     } else {
                         title += " - " + Math.abs(untrainedLevel);
                     }
