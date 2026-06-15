@@ -267,13 +267,14 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             context.SELECT_TECHLEVEL[tl] = tl;
         }
 
+        const TL = parseInt(this.document.system.vehicle.tl);
         context.SELECT_POWER = {};
         context.SELECT_SECOND_POWER = {}
         for (let p in CONFIG.MGT2.VEHICLES.POWER) {
             if (CONFIG.MGT2.VEHICLES.POWER[p].conflicts?.includes(this.document.system.vehicle.type)) {
                 continue;
             }
-            if (CONFIG.MGT2.VEHICLES.POWER[p].tl > this.document.system.vehicle.tl) {
+            if (CONFIG.MGT2.VEHICLES.POWER[p].tl > TL) {
                 continue;
             }
             if (CONFIG.MGT2.VEHICLES.POWER[p].tl) {
@@ -282,6 +283,41 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             if (CONFIG.MGT2.VEHICLES.POWER[p].secondary) {
                 context.SELECT_SECOND_POWER[p] = game.i18n.localize(`MGT2.Vehicle.Power.${p}`);
             }
+        }
+
+
+        context.SELECT_SPEED = null;
+        if (TL >= 4) {
+            context.SELECT_SPEED = { };
+            let max = Math.min(3,TL - 3);
+            for (let i=-max; i <= max; i++) {
+                let v = (i<0)?i:"+"+i;
+                context.SELECT_SPEED[v] = game.i18n.localize("MGT2.Vehicle.SpeedModification"+v);
+            }
+        } else {
+            this.document.system.vehicle.speedModification = 0;
+        }
+        context.SELECT_EFFICIENCY = null;
+        if (TL >= 3) {
+            context.SELECT_EFFICIENCY = { };
+            let max = Math.min(3,TL - 2);
+            for (let i=-max; i <= max; i++) {
+                let v = (i<0)?i:"+"+i;
+                context.SELECT_EFFICIENCY[v] = game.i18n.localize("MGT2.Vehicle.FuelEfficiency"+v);
+            }
+        } else {
+            this.document.system.vehicle.fuelEfficiency = 0;
+        }
+        context.SELECT_FUEL_CAPACITY = null;
+        if (TL >= 3) {
+            context.SELECT_FUEL_CAPACITY = { };
+            for (let i=-2; i <= 10; i++) {
+                let v = (i<0)?(i*25):"+"+(i*25);
+                context.SELECT_FUEL_CAPACITY[v] = game.i18n.format("MGT2.Vehicle.FuelCapacity.Label",
+                    { capacity: v });
+            }
+        } else {
+            this.document.system.vehicle.fuelCapacity = 0;
         }
 
         const spaces = parseInt(this.document.system.vehicle.spaces);

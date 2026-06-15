@@ -77,6 +77,25 @@
             <select class="field-value" name="system.vehicle.secondaryPower">
                 {{selectOptions SELECT_SECOND_POWER selected=system.vehicle.secondaryPower}}
             </select>
+
+            {{#if SELECT_SPEED}}
+                <label>{{localize 'MGT2.Vehicle.SpeedModification.Title'}}</label>
+                <select class="field-value" name="system.vehicle.speedModification">
+                    {{selectOptions SELECT_SPEED selected=system.vehicle.speedModification}}
+                </select>
+            {{/if}}
+            {{#if SELECT_EFFICIENCY}}
+                <label>{{localize 'MGT2.Vehicle.FuelEfficiency.Title'}}</label>
+                <select class="field-value" name="system.vehicle.fuelEfficiency">
+                    {{selectOptions SELECT_EFFICIENCY selected=system.vehicle.fuelEfficiency}}
+                </select>
+            {{/if}}
+            {{#if SELECT_FUEL_CAPACITY}}
+                <label>{{localize 'MGT2.Vehicle.FuelCapacity.Title'}}</label>
+                <select class="field-value" name="system.vehicle.fuelCapacity">
+                    {{selectOptions SELECT_FUEL_CAPACITY selected=system.vehicle.fuelCapacity}}
+                </select>
+            {{/if}}
         </div>
 
 

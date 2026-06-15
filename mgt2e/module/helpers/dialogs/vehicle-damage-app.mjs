@@ -101,7 +101,6 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
                 damageEffect += " x" + this.structureDamage;
             }
         }
-
         const context = {
             buttons: [
                 { type: "submit", icon: "fa-solid fa-save", label: "Apply Damage" }

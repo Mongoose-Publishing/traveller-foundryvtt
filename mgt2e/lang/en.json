@@ -1579,6 +1579,27 @@
   "MGT2.Vehicle.Power.solarImproved": "Solar (Improved)",
   "MGT2.Vehicle.Power.solarAdvanced": "Solar (Advanced)",
 
+  "MGT2.Vehicle.SpeedModification.Title": "Speed Modifications",
+  "MGT2.Vehicle.SpeedModification-3": "Slower (-3 bands)",
+  "MGT2.Vehicle.SpeedModification-2": "Slower (-2 bands)",
+  "MGT2.Vehicle.SpeedModification-1": "Slower (-1 band)",
+  "MGT2.Vehicle.SpeedModification+0": "Normal",
+  "MGT2.Vehicle.SpeedModification+1": "Faster (+1 band)",
+  "MGT2.Vehicle.SpeedModification+2": "Faster (+2 bands)",
+  "MGT2.Vehicle.SpeedModification+3": "Faster (+3 bands)",
+
+  "MGT2.Vehicle.FuelEfficiency.Title": "Fuel Efficiency",
+  "MGT2.Vehicle.FuelEfficiency-3": "Decreased (-75%)",
+  "MGT2.Vehicle.FuelEfficiency-2": "Decreased (-50%)",
+  "MGT2.Vehicle.FuelEfficiency-1": "Decreased (-25%)",
+  "MGT2.Vehicle.FuelEfficiency+0": "Normal",
+  "MGT2.Vehicle.FuelEfficiency+1": "Increased (+50%)",
+  "MGT2.Vehicle.FuelEfficiency+2": "Increased (+100%)",
+  "MGT2.Vehicle.FuelEfficiency+3": "Increased (+150%)",
+
+  "MGT2.Vehicle.FuelCapacity.Title": "Fuel Capacity",
+  "MGT2.Vehicle.FuelCapacity.Label": "Fuel Capacity ({capacity}%)",
+
   "MGT2.Dialog.TransferCargoToShip": "Transfer Cargo to Ship",
   "MGT2.Dialog.SellCargoToWorld": "Sell Cargo to World",
   "MGT2.Dialog.EmbarkPassengers": "Embark Passengers",
