@@ -1,7 +1,7 @@
 import {MgT2Item} from "../../documents/item.mjs";
 import {outputTradeChat, tradeBuyFreightHandler, tradeBuyGoodsHandler} from "../utils/trade-utils.mjs";
 import {Tools} from "../chat/tools.mjs";
-import {rollSpaceAttack} from "../dice-rolls.mjs";
+import {hasTrait, rollSpaceAttack} from "../dice-rolls.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 // see: https://foundryvtt.wiki/en/development/api/applicationv2
@@ -20,6 +20,8 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
             "top": game.i18n.localize("MGT2.Vehicle.Face.top"),
             "bottom": game.i18n.localize("MGT2.Vehicle.Face.bottom")
         }
+        this.armourFace = "front";
+        this.armourFaceValue = this.targetActor.system.vehicle.armour[this.armourFace];
     }
 
     static DEFAULT_OPTIONS = {
@@ -30,7 +32,8 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
             closeOnSubmit: false,
         },
         actions: {
-            selectTarget: MgT2VehicleDamageApp.selectTargetAction
+            selectTarget: MgT2VehicleDamageApp.selectTargetAction,
+            changeFace: MgT2VehicleDamageApp.changeFaceAction
         },
         position: {
             width: 400,
@@ -50,14 +53,67 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
         }
     }
 
+    isCriticalHit() {
+        if (this.damageOptions.effect > 5) {
+            return true;
+        }
+        // TODO: Need to check size of vehicle.
+        return false;
+    }
+
+    isLightDamage() {
+        console.log(this.damageOptions);
+        const traits = this.damageOptions.traits;
+
+        if (hasTrait(traits, "blast") && !hasTrait(traits, "stun")) {
+            return false;
+        }
+        if (hasTrait(traits, "destructive")) {
+            return false;
+        }
+        if (this.isCriticalHit()) {
+            return false;
+        }
+
+        return true;
+    }
+
     async _prepareContext(options) {
+        console.log("prepareContext:");
+
+        let totalArmourValue = this.armourFaceValue;
+        if (this.isLightDamage()) {
+            totalArmourValue += parseInt(this.targetActor.system.vehicle.tl);
+        }
+        let actualDamage = parseInt(this.damageOptions.damage);
+        if (actualDamage > totalArmourValue) {
+            actualDamage -= totalArmourValue;
+        } else {
+            actualDamage = 0;
+        }
+        this.structureDamage = parseInt(actualDamage / parseInt(this.targetActor.system.hits.structure));
+        let damageEffect = "None";
+        if (actualDamage > 0 && actualDamage < this.targetActor.system.hits.structure) {
+            damageEffect = "Minor";
+        } else if (actualDamage >= this.targetActor.system.hits.structure) {
+            damageEffect = "Significant";
+            if (this.structureDamage > 1) {
+                damageEffect += " x" + this.structureDamage;
+            }
+        }
+
         const context = {
             buttons: [
-                { type: "submit", icon: "fa-solid fa-save", label: "Impact" }
+                { type: "submit", icon: "fa-solid fa-save", label: "Apply Damage" }
             ],
             TARGET: this.targetActor,
             OPTIONS: this.damageOptions,
-            ARMOUR_SELECT: this.ARMOUR_SELECT
+            ARMOUR_SELECT: this.ARMOUR_SELECT,
+            armourFace: this.armourFace,
+            armourFaceValue: this.armourFaceValue,
+            totalArmourValue: totalArmourValue,
+            actualDamage: actualDamage,
+            damageEffect: damageEffect
         }
 
         return context;
@@ -79,21 +135,44 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
         return context;
     }
 
+    static async #changeArmourFace(face) {
+        console.log("changeArmourFace: " + face);
+        this.armourFace = face;
+        this.armourFaceValue = this.targetActor.system.vehicle.armour[face];
+
+        this.render();
+
+    }
+
+    _onRender(context, options) {
+        super._onRender(context, options);
+
+        const armourSelect = this.element.querySelector('select[data-action="changeFace"]');
+        if (armourSelect) {
+            //traitSelect.removeEventListener("change", this.#addTrait.bind(this));
+            armourSelect.addEventListener("change", (ev) => {
+                ev.preventDefault();
+                ev.stopImmediatePropagation();
+                // Manually trigger your private static method
+                //MgT2eVehicleSheet.#addFeature.call(this, ev, ev.currentTarget);
+                console.log("CHANGE");
+                this.armourFace = ev.target.value;
+                MgT2VehicleDamageApp.#changeArmourFace.call(this, ev.target.value);
+            });
+        }
+    }
+
     // Despite being static, formHandler has access to `this`
     static async formHandler(event, form, formData) {
-
-        console.log(formData.object.DM);
-        let customDM = parseInt(formData.object.DM);
-        if (isNaN(customDM)) {
-            customDM = 0;
-        }
+        console.log("formHandler:");
 
         if (event.type === "submit") {
-            this.rollImpact(customDM);
+            this.applyDamage();
         }
 
         return null;
     }
+
 
     // Despite being static, action methods have access to `this`
     static selectTargetAction(event, target) {
@@ -101,23 +180,12 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
         // Do nothing. We should already have a target by this point.
     }
 
-    rollImpact(customDM) {
-        let attackDice = "2D6";
-        let smartDm = 1;
-        let targetTL = parseInt(this.targetActor.system.spacecraft.tl);
-        let missileTL = parseInt(this.salvoActor.system.salvo.tl);
-        if (targetTL < missileTL) {
-            smartDm = Math.min(6, missileTL - targetTL);
+    applyDamage() {
+        if (this.structureDamage > 0) {
+            this.targetActor.system.hits.damage += this.structureDamage;
+            this.targetActor.update({"system.hits.damage": this.targetActor.system.hits.damage });
         }
-        console.log(this.salvoActor);
-        let attackDm = smartDm + parseInt(this.salvoActor.system.size.value);
 
-        let attackOptions = {
-            "attackDM": attackDm,
-            "salvoSize": parseInt(this.salvoActor.system.size.value),
-            "dm": customDM
-        };
-        rollSpaceAttack(this.salvoActor, null, this.weaponItem, attackOptions);
         this.close();
     }
 }

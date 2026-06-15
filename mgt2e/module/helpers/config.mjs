@@ -309,7 +309,8 @@ MGT2.VEHICLES = {
       "veryFast": { band: 7, max: 800 },
       "subsonic": { band: 8, max: 1200 },
       "supersonic": { band: 9, max: 6000 },
-      "hypersonic": { band: 10 }
+      "hypersonic": { band: 10, max: 10000 },
+      "orbital": { band: 11 }
   },
     "SIZE": {
         "small": { min: 1, max: 3, speed: 0, agility: 0, armour: 4, traits: [], features: [ "openFrame"] },
@@ -687,6 +688,14 @@ MGT2.VEHICLES = {
             conflicts: [],
             secondary: { spaces: -10 }
         }
+    },
+    SPEED_MODIFICATIONS: {
+        "faster1": { tl: 4, speed: +1, spaces: -20, limit: "orbital", cost: +100 },
+        "faster2": { tl: 5, speed: +1, spaces: -20, limit: "orbital", cost: +100 },
+        "faster3": { tl: 6, speed: +1, spaces: -20, limit: "orbital", cost: +100 },
+        "slower1": { tl: 4, speed: -1, spaces: -10, limit: "idle", cost: -10 },
+        "slower2": { tl: 5, speed: -1, spaces: -10, limit: "idle", cost: -10 },
+        "slower3": { tl: 6, speed: -1, spaces: -10, limit: "idle", cost: -10 }
     },
     OPTIONS: {
       "general": {},

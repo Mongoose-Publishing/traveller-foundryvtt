@@ -4,8 +4,8 @@
 
         Target: {{TARGET.name}}<br/>
         Attack side:
-        <select name="facing">
-            {{selectOptions ARMOUR_SELECT}}
+        <select data-action="changeFace" name="armourFace">
+            {{selectOptions ARMOUR_SELECT selected=armourFace}}
         </select>
     </div>
 
@@ -27,11 +27,16 @@
 
         <div class="resource flex-group-center">
             <label class="field-label">Armour</label>
-            <span>0</span>
+            <span class="armourValue">{{totalArmourValue}}</span>
         </div>
 
-        <div>
-            <label>Actual Damage</label>
+        <div class="resource flex-group-center grid-span-2">
+            <label class="field-label">Actual Damage</label>
+            <span>{{actualDamage}}</span>
+        </div>
+        <div class="resource flex-group-center grid-span-2">
+            <label class="field-label">Damage Result</label>
+            <span>{{damageEffect}}</span>
         </div>
     </div>
 

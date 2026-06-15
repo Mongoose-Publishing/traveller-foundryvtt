@@ -144,6 +144,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
 
         const hull = Math.max(1, parseInt(typeConfig.hull * this.document.system.vehicle.spaces));
+        console.log("HULL: " + hull);
         if (hull !== parseInt(this.document.system.hits.hull)) {
             console.log("UPDATING HITS FOR VEHICLE");
             const HITS = this.document.system.hits;
@@ -153,6 +154,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             HITS.value = HITS.max - HITS.damage;
             await this.document.update({"system.hits": HITS});
         }
+        console.log("VEHICLE HITS");
+        console.log(this.document.system.hits);
     }
 
     async _calculateHits() {
@@ -218,11 +221,6 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         const HITS = this.document.system.hits;
         context.MAX_DAMAGE = context.structure * 10;
         context.VEHICLE_DAMAGE = HITS.damage;
-        if (context.MAX_DAMAGE !== HITS.max || (context.MAX_DAMAGE - context.VEHICLE_DAMAGE) !== HITS.value) {
-            HITS.max = context.MAX_DAMAGE;
-            HITS.value = context.MAX_DAMAGE - context.VEHICLE_DAMAGE;
-            //this.document.update({"system.hits": this.document.system.hits});
-        }
 
         // List Items
         context.ITEMS_OPTIONS = [];
