@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle", "world", "swarm" ],
+    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle", "world", "swarm", "robot" ],
     "templates": {
       "base": {
         "speed": {
@@ -155,6 +155,18 @@
         "templates": [ "base", "characteristics", "skills", "sophont" ],
         "cash": 0
     },
+    "robot": {
+      "templates": [ "base" ],
+      "skills": { },
+      "robot": {
+        "slots": 0,
+        "tl": 8,
+        "cost": 0,
+        "locomotion": "",
+        "endurance": 24,
+        "traits": ""
+      }
+    },
     "vehicle": {
       "templates": [ "crewed" ],
       "hits": {
@@ -172,7 +184,6 @@
         "value": 0
       },
       "vehicle": {
-        "templates": [ "crewed" ],
         "spaces": 4,
         "chassis": "lightGround",
         "subtype": "openFrame",
