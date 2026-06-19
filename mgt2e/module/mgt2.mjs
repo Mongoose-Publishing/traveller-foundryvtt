@@ -620,36 +620,42 @@ Hooks.on('ready', () => {
 });
 
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
-    if (message.indexOf("/upp") === 0) {
-        let args = message.split(" ");
+    let msg = message;
+    if (parseInt(game.version) > 13) {
+        // Chat message is HTML in 14+
+        const doc = new DOMParser().parseFromString(message, "text/html");
+        msg = doc.body.textContent.trim() || "";
+    }
+    if (msg.indexOf("/upp") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.upp(chatData, args);
         return false;
-    } else if (message.indexOf("/damage") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/damage") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.damage(chatData, args);
         return false;
-    } else if (message.indexOf("/skills") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/skills") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.showSkills(chatData, args);
         return false;
-    } else if (message.indexOf("/time") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/time") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.currentTime(chatData, args);
         return false;
-    } else if (message.indexOf("/debug") === 0) {
+    } else if (msg.indexOf("/debug") === 0) {
         Tools.debugSelected(chatData);
         return false;
-    } else if (message.indexOf("/skill") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/skill") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.rollChatSkill(chatData, args);
         return false;
-    } else if (message.indexOf("/mgt2e-test") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/mgt2e-test") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.test(chatData,args);
         return false;
