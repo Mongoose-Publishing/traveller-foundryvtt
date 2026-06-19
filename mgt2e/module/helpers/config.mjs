@@ -110,6 +110,17 @@ MGT2.SHIP_HARDWARE = {
 }
 
 MGT2.ROBOTS = {
+    SIZE: {
+        0: {slots: 0, hits: 1, attack: -4, vehicleSpaces: 0, cost: 100},
+        1: {slots: 1, hits: 1, attack: -4, vehicleSpaces: 0, cost: 100},
+        2: {slots: 2, hits: 4, attack: -3, vehicleSpaces: 0.02, cost: 200},
+        3: {slots: 4, hits: 8, attack: -2, vehicleSpaces: 0.1, cost: 400},
+        4: {slots: 8, hits: 12, attack: -1, vehicleSpaces: 0.25, cost: 800},
+        5: {slots: 16, hits: 20, attack: +0, vehicleSpaces: 0.5, cost: 1000},
+        6: {slots: 32, hits: 32, attack: +1, vehicleSpaces: 1, cost: 2000},
+        7: {slots: 64, hits: 50, attack: +2, vehicleSpaces: 2, cost: 4000},
+        8: {slots: 128, hits: 72, attack: +3, vehicleSpaces: 4, cost: 8000}
+    },
     LOCOMOTION: {
         "none": { tl: 5, endurance: 216, cost: 1 },
         "wheels": { tl: 5, agility: 0, endurance: 72, cost: 2 },

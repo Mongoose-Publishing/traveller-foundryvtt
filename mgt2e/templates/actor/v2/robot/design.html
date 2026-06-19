@@ -1,5 +1,30 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="design">
-    <select class="field-value" name="system.robot.locomotion">
+    <div class="grid grid-4col">
+        <div class="resource">
+            <label>Slots</label>
+            <span>{{ROBOT.slots}}</span>
+        </div>
+        <div class="resource">
+            <label>Max Hits</label>
+            <span>{{system.hits.max}}</span>
+        </div>
+        <div class="resource">
+            <label>Endurance</label>
+            <span>{{ROBOT.endurance}}</span>
+        </div>
+        <div class="resource">
+            <label>Cost</label>
+            <span>{{ROBOT.cost}}</span>
+        </div>
+    </div>
+
+    <h4>Size</h4>
+    <select class="field-value" name="system.robot.size" data-action="calculate">
+        {{selectOptions SELECT_SIZE selected=system.robot.size}}
+    </select>
+
+    <h4>Locomotion</h4>
+    <select class="field-value" name="system.robot.locomotion" data-action="calculate">
         {{selectOptions SELECT_LOCOMOTION selected=system.robot.locomotion}}
     </select>
 </section>

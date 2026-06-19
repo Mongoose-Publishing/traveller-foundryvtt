@@ -11,15 +11,29 @@
                 <h1 class="actor-name shadow">
                     <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
                 </h1>
-                <div class="vehicle-type">
-                </div>
-                <!-- Traits -->
-                <div class="vehicle-traits">
-                </div>
-
                 <hr style="clear: right"/>
 
                 <div class="grid grid-5col">
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.Hits'}}</label>
+                        <span>{{system.hits.max}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.Robot.Locomotion'}}</label>
+                        <span>{{localize (concat "MGT2.Robot.LocomotionType." system.robot.locomotion)}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
+                        <span>{{system.speed.value}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+                        <span>{{system.robot.tl}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.Vehicle.Cost'}}</label>
+                        <span>{{system.robot.cost}}</span>
+                    </div>
                 </div>
             </div>
 

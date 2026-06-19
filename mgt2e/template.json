@@ -159,6 +159,7 @@
       "templates": [ "base" ],
       "skills": { },
       "robot": {
+        "size": 5,
         "slots": 0,
         "tl": 8,
         "cost": 0,
@@ -451,11 +452,20 @@
       },
       "option": {
         "option": {
-          "type": "general",
+          "type": "vehicle",
           "spaceType": "fixed",
           "spaces": 0,
-          "costType": "fixed"
-
+          "costType": "fixed",
+          "vehicle": {
+            "type": "general",
+            "spaceType": "fixed",
+            "spaces": 0,
+            "costType": "fixed"
+          },
+          "robot": {
+            "type": "general",
+            "slots": 0
+          }
         }
       },
       "role": {

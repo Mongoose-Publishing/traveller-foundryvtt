@@ -53,6 +53,10 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             template: "systems/mgt2e/templates/actor/v2/robot/combat.html",
             scrollable: ['']
         },
+        skills: {
+            template: "systems/mgt2e/templates/actor/v2/robot/skills.html",
+            scrollable: ['']
+        },
         /*
         equipment: {
             template: "systems/mgt2e/templates/actor/v2/robot/equipment.html",
@@ -68,6 +72,7 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         primary: {
             tabs: [
                 { id: "description" },
+                { id: "skills" },
                 { id: "design" },
                 { id: "combat" },
                 // { id: "equipment" },
@@ -107,18 +112,25 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         console.log("TEST");
     }
 
-    async _calculateTypes() {
-
-    }
-
-    async _calculateHits() {
-
-    }
-
-
 
     prepareData() {
         console.log("prepareDerivedData:");
+    }
+
+    async calculateStats() {
+        console.log("Calculate stats");
+        const system = this.document.system;
+        const robot = this.document.system.robot;
+        const ROBOTS = CONFIG.MGT2.ROBOTS;
+        let sz = robot.size;
+        if (!ROBOTS.SIZE[sz]) {
+            sz = 4;
+        }
+        robot.slots = ROBOTS.SIZE[sz].slots;
+        system.hits.max = ROBOTS.SIZE[sz].hits;
+
+        this.document.update({"system": system });
+
     }
 
     async _prepareContext(options) {
@@ -126,10 +138,19 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             actor: this.document,
             owner: this.document.permission > 2,
             system: this.document.system,
+            ROBOT: this.document.system.robot,
             items: this.document.items,
             config: CONFIG.MGT2,
             tabs: this._prepareTabs("primary")
         };
+
+        context.SELECT_SIZE = {};
+
+        for (let s=1; s <= 8; s++) {
+            console.log(CONFIG.MGT2.ROBOTS.SIZE[s]);
+            context.SELECT_SIZE[s] = s;
+        }
+
 
         context.SELECT_LOCOMOTION = {};
         for (let l in CONFIG.MGT2.ROBOTS.LOCOMOTION) {
@@ -157,11 +178,12 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
     _onRender(context, options) {
         super._onRender(context, options);
 
-        const traitSelect = this.element.querySelector('select[data-action="addFeature"]');
-        if (traitSelect) {
+        const calc = this.element.querySelector('select[data-action="calculate"]');
+        if (calc) {
             //traitSelect.removeEventListener("change", this.#addTrait.bind(this));
-            traitSelect.addEventListener("change", (ev) => {
+            calc.addEventListener("change", (ev) => {
                 // Manually trigger your private static method
+//                this.calculateStats();
             });
         }
     }
@@ -169,6 +191,7 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
     static async #onFormSubmit(event, form, formData) {
         console.log("onFormSubmit:");
         await this.document.update(formData.object);
+        this.calculateStats();
     }
 
     async _onDrop(event) {
