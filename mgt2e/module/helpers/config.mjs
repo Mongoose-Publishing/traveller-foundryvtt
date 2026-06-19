@@ -109,6 +109,22 @@ MGT2.SHIP_HARDWARE = {
     }
 }
 
+MGT2.ROBOTS = {
+    LOCOMOTION: {
+        "none": { tl: 5, endurance: 216, cost: 1 },
+        "wheels": { tl: 5, agility: 0, endurance: 72, cost: 2 },
+        "ATV": { tl: 5, agility: 0, traits: "ATV", endurance: 72, cost: 3 },
+        "tracks": { tl: 5, agility: -1, traits: "ATV", endurance: 72, cost: 2 },
+        "grav": { tl: 9, agility: 1, traits: "flyer", endurance: 24, cost: 20 },
+        "aeroplane": { tl: 5, agility: 1, traits: "flyer", endurance: 12, cost: 12 },
+        "aquatic": { tl: 6, agility: -2, traits: "seafarer", endurance: 72, cost: 4 },
+        "VTOL": { tl: 7, agility: 0, traits: "flyer", endurance: 72, cost: 10 },
+        "walker": { tl: 8, agility: 0, traits: "ATV", endurance: 72, cost: 10 },
+        "hovercraft": { tl: 7, agility: 1, traits: "ACV", endurance: 24, cost: 10 },
+        "thruster": { tl: 7, agility: 1, endurance: 2, cost: 20 }
+    }
+}
+
 MGT2.VEHICLES = {
   // Chassis is deprecated in 2026 vehicle design rules.
   "CHASSIS": {

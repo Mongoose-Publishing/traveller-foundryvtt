@@ -44,7 +44,6 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             template: "systems/mgt2e/templates/actor/v2/robot/description.html",
             scrollable: ['']
         },
-        /*
         design: {
             template: "systems/mgt2e/templates/actor/v2/robot/design.html",
             scrollable: [""],
@@ -54,6 +53,7 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             template: "systems/mgt2e/templates/actor/v2/robot/combat.html",
             scrollable: ['']
         },
+        /*
         equipment: {
             template: "systems/mgt2e/templates/actor/v2/robot/equipment.html",
             scrollable: ['']
@@ -68,8 +68,8 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         primary: {
             tabs: [
                 { id: "description" },
-                // { id: "design" },
-                // { id: "combat" },
+                { id: "design" },
+                { id: "combat" },
                 // { id: "equipment" },
             ],
             labelPrefix: "MGT2.RobotTab",
@@ -131,7 +131,10 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             tabs: this._prepareTabs("primary")
         };
 
-
+        context.SELECT_LOCOMOTION = {};
+        for (let l in CONFIG.MGT2.ROBOTS.LOCOMOTION) {
+            context.SELECT_LOCOMOTION[l] = game.i18n.localize(`MGT2.Robot.LocomotionType.${l}`);
+        }
 
         return context;
     }

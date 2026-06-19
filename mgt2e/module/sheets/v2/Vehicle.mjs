@@ -33,7 +33,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
     static PARTS = {
         main: {
-            template: "systems/mgt2e/templates/actor/v2/vehicle.html",
+            template: "systems/mgt2e/templates/actor/v2/vehicle/vehicle.html",
             scrollable: ['']
         },
         tabs: {
@@ -41,24 +41,24 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             scrollable: [""]
         },
         description: {
-            template: "systems/mgt2e/templates/actor/v2/vehicle-description.html",
+            template: "systems/mgt2e/templates/actor/v2/vehicle/description.html",
             scrollable: ['']
         },
         design: {
-            template: "systems/mgt2e/templates/actor/v2/vehicle-design.html",
+            template: "systems/mgt2e/templates/actor/v2/vehicle/design.html",
             scrollable: [""],
             classes: ["vehicle-design-tab"],
         },
         combat: {
-            template: "systems/mgt2e/templates/actor/v2/vehicle-combat.html",
+            template: "systems/mgt2e/templates/actor/v2/vehicle/combat.html",
             scrollable: ['']
         },
         crew: {
-            template: "systems/mgt2e/templates/actor/v2/vehicle-crew.html",
+            template: "systems/mgt2e/templates/actor/v2/vehicle/crew.html",
             scrollable: ['']
         },
         equipment: {
-            template: "systems/mgt2e/templates/actor/v2/vehicle-equipment.html",
+            template: "systems/mgt2e/templates/actor/v2/vehicle/equipment.html",
             scrollable: ['']
         },
         footer: {
