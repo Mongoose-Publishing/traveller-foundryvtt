@@ -452,12 +452,12 @@
       },
       "option": {
         "option": {
-          "type": "vehicle",
+          "model": "vehicle",
+          "type": "general",
           "spaceType": "fixed",
           "spaces": 0,
           "costType": "fixed",
           "vehicle": {
-            "type": "general",
             "spaceType": "fixed",
             "spaces": 0,
             "costType": "fixed"

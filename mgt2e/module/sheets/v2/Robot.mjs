@@ -1,6 +1,7 @@
 
 import { MgT2eActorV2 } from "./MgT2eActorV2.mjs";
 import {MgT2VehicleDamageApp} from "../../helpers/dialogs/vehicle-damage-app.mjs";
+import {skillLabel} from "../../helpers/dice-rolls.mjs";
 
 export class MgT2eRobotSheet extends MgT2eActorV2 {
 
@@ -151,11 +152,18 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             context.SELECT_SIZE[s] = s;
         }
 
-
         context.SELECT_LOCOMOTION = {};
         for (let l in CONFIG.MGT2.ROBOTS.LOCOMOTION) {
             context.SELECT_LOCOMOTION[l] = game.i18n.localize(`MGT2.Robot.LocomotionType.${l}`);
         }
+
+        context.SELECT_SKILLS = {};
+        context.SELECT_SKILLS[""] = "Add skill";
+        const BASE_SKILLS = CONFIG.MGT2.getDefaultSkills();
+        for (let s in BASE_SKILLS) {
+            context.SELECT_SKILLS[s] = skillLabel(BASE_SKILLS[s], s);
+        }
+
 
         return context;
     }

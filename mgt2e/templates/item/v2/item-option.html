@@ -4,25 +4,31 @@
             <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
         </h1>
 
-        <div>
+        <div class="resource">
+            <label>Model</label>
+            <select name="system.option.model">
+                {{selectOptions SELECT_MODEL selected=system.option.model}}
+            </select>
+        </div>
+        <div class="resource">
             <label>Option Type</label>
             <select name="system.option.type">
                 {{selectOptions SELECT_TYPE selected=system.option.type}}
             </select>
         </div>
-        <div>
+        <div class="resource">
             <label>TL</label>
             <select name="system.tl">
                 {{selectOptions SELECT_TECHLEVEL selected=system.tl}}
             </select>
         </div>
+        <div class="resource">
+            <label>Cost (Cr)</label>
+            <input name="system.cost" value="{{system.cost}}">
+        </div>
         <div>
             <label>Spaces</label>
             <input name="system.option.spaces" value="{{system.option.spaces}}">
-        </div>
-        <div>
-            <label>Cost (Cr)</label>
-            <input name="system.cost" value="{{system.cost}}">
         </div>
 
         {{#if (ifEquals system.option.type "mount")}}

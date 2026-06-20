@@ -1603,6 +1603,7 @@
   "MGT2.RobotTab.description": "Description",
   "MGT2.RobotTab.design": "Design",
   "MGT2.RobotTab.combat": "Combat",
+  "MGT2.RobotTab.skills": "Skills",
   "MGT2.Robot.Locomotion": "Locomotion",
   "MGT2.Robot.LocomotionType.none": "None",
   "MGT2.Robot.LocomotionType.wheels": "Wheels",

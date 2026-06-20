@@ -1,6 +1,7 @@
 
 import { MgT2eItemV2 } from "./MgT2eItemV2.mjs";
 
+// Both Vehicle Options and Robot Options.
 export class MgT2eOptionSheet extends MgT2eItemV2 {
     static DEFAULT_OPTIONS = {
         classes: ["mgt2e", "sheet", "item"],
@@ -127,6 +128,12 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             EFFECTS: this.document.effects,
             tabs: this._prepareTabs("primary")
         };
+
+        // Is this for vehicles or robots?
+        context.SELECT_MODEL = {
+            "vehicle": "Vehicle",
+            "robot": "Robot"
+        }
 
         context.SELECT_TYPE = {};
         for (let t in CONFIG.MGT2.VEHICLES.OPTIONS) {
