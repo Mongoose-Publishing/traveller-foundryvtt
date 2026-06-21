@@ -85,12 +85,10 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             template: "systems/mgt2e/templates/actor/v2/robot/skills.html",
             scrollable: ['']
         },
-        /*
         equipment: {
             template: "systems/mgt2e/templates/actor/v2/robot/equipment.html",
             scrollable: ['']
         },
-        */
         footer: {
             template: "systems/mgt2e/templates/actor/v2/footer.html"
         }
@@ -103,7 +101,7 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
                 { id: "skills" },
                 { id: "design" },
                 { id: "combat" },
-                // { id: "equipment" },
+                { id: "equipment" },
             ],
             labelPrefix: "MGT2.RobotTab",
             initial: "design"
@@ -200,7 +198,15 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         context.SELECT_SKILLS[""] = "Add skill";
         const BASE_SKILLS = CONFIG.MGT2.getDefaultSkills();
         for (let s in BASE_SKILLS) {
-            context.SELECT_SKILLS[s] = skillLabel(BASE_SKILLS[s], s);
+            const skill = BASE_SKILLS[s];
+            const label = skillLabel(skill, s)
+            context.SELECT_SKILLS[s] = label;
+            if (skill.specialities) {
+                for (let sp in skill.specialities) {
+                    const spec = skill.specialities[sp];
+                    context.SELECT_SKILLS[`${s}.${sp}`] = `${label} (${skillLabel(spec, sp)})`;
+                }
+            }
         }
 
 
@@ -221,19 +227,37 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         return context;
     }
 
+    static async #addSkill(event, target) {
+        let skillFqn = event.target.value;
+        console.log(skillFqn);
 
+        const BASE_SKILLS = CONFIG.MGT2.getDefaultSkills();
+        const parts = skillFqn.split(".");
+        const skillId = parts[0];
+        const specId = (parts.length > 1)?parts[1]:null;
+
+        if (!this.document.system.skills) {
+            this.document.system.skills = {};
+        }
+
+        if (BASE_SKILLS[skillId]) {
+            BASE_SKILLS[skillId].id = skillId;
+
+            this.document.system.skills[skillId] = BASE_SKILLS[skillId];
+        }
+        this.document.update({"system.skills": this.document.system.skills });
+
+    }
 
 
     _onRender(context, options) {
         super._onRender(context, options);
 
-        const calc = this.element.querySelector('select[data-action="calculate"]');
-        if (calc) {
-            //traitSelect.removeEventListener("change", this.#addTrait.bind(this));
-            calc.addEventListener("change", (ev) => {
-                // Manually trigger your private static method
-//                this.calculateStats();
-            });
+        const addSkill = this.element.querySelector('select[data-action="addSkill"]');
+        if (addSkill) {
+            addSkill.addEventListener("change", (ev) => {
+                MgT2eRobotSheet.#addSkill.call(this, ev, ev.currentTarget);
+            })
         }
 
         this.#dragDrop.forEach((d) => d.bind(this.element));

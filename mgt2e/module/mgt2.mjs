@@ -735,7 +735,7 @@ Hooks.on("createActor", (actor, data, userId) => {
     }
 
     // Copy in characteristics where needed.
-    if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
+    if (["traveller", "npc", "package", "robot"].includes(actor.type)) {
         // Need to add characteristics. We want them in a specific order, otherwise
         // they get sorted alphabetically.
         for (let c of [
@@ -759,7 +759,7 @@ Hooks.on("createActor", (actor, data, userId) => {
 
     // Copy in skills where needed.
     const BASE_SKILLS = MGT2.getDefaultSkills();
-    if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package" || actor.type === "creature") {
+    if (["traveller", "npc", "package", "creature", "robot"].includes(actor.type)) {
         // Need to add skills.
         for (let s in BASE_SKILLS) {
             if (actor.system.skills[s]) {

@@ -1,8 +1,16 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="skills">
     <h4>Skills</h4>
 
-    <select name="newskill">
+    <select name="newskill" data-action="addSkill">
         {{selectOptions SELECT_SKILLS}}
     </select>
+
+    {{#if actor.system.skills}}
+        <h4>Skill List</h4>
+        {{#each actor.system.skills as |skill id|}}
+            <p>skill {{id}}</p>
+            {{{skillBlock ../system skill.id skill id}}}
+        {{/each}}
+    {{/if}}
 
 </section>
