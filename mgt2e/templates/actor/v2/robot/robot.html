@@ -38,28 +38,40 @@
                 </div>
                 <div class="grid grid-6col">
                     <div class="resource flex-group-center">
-                        <label class="field-label rollable">STR +0</label>
-                        <span title="characteristic-readonly">7</span>
+                        <label class="field-label rollable">
+                            STR {{prettyNumber system.characteristics.STR.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.STR.value}}</span>
                     </div>
                     <div class="resource flex-group-center">
-                        <label class="field-label rollable">DEX +0</label>
-                        <span title="characteristic-readonly">7</span>
+                        <label class="field-label rollable">
+                            DEX {{prettyNumber system.characteristics.DEX.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.DEX.value}}</span>
                     </div>
                     <div class="resource flex-group-center">
-                        <label class="field-label rollable">END -1</label>
-                        <span>7</span>
+                        <label class="field-label rollable">
+                            END {{prettyNumber system.characteristics.END.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.END.value}}</span>
                     </div>
                     <div class="resource flex-group-center">
-                        <label class="field-label rollable">INT -1</label>
-                        <span>5</span>
+                        <label class="field-label rollable">
+                            INT {{prettyNumber system.characteristics.INT.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.INT.value}}</span>
                     </div>
                     <div class="resource flex-group-center">
-                        <label class="field-label rollable">EDU -1</label>
-                        <span>5</span>
+                        <label class="field-label rollable">
+                            EDU {{prettyNumber system.characteristics.EDU.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.EDU.value}}</span>
                     </div>
                     <div class="resource flex-group-center">
-                        <label class="field-label rollable">SOC -3</label>
-                        <span>0</span>
+                        <label class="field-label rollable">
+                            SOC {{prettyNumber system.characteristics.SOC.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.SOC.value}}</span>
                     </div>
                 </div>
             </div>

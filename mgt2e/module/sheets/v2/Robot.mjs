@@ -167,6 +167,13 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         robot.slots = ROBOTS.SIZE[sz].slots;
         system.hits.max = ROBOTS.SIZE[sz].hits;
 
+        // Characteristics
+        system.characteristics["STR"].value = 0;
+        system.characteristics["DEX"].value = 0;
+        system.characteristics["END"].value = Math.max(6, sz);
+        system.characteristics["SOC"].value = 0;
+        this._prepareCharacteristics();
+
         this.document.update({"system": system });
 
     }

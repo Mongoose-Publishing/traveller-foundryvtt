@@ -133,6 +133,13 @@ MGT2.ROBOTS = {
         "walker": { tl: 8, agility: 0, traits: "ATV", endurance: 72, cost: 10 },
         "hovercraft": { tl: 7, agility: 1, traits: "ACV", endurance: 24, cost: 10 },
         "thruster": { tl: 7, agility: 1, endurance: 2, cost: 20 }
+    },
+    OPTIONS: {
+        "general": {},
+        "armour": {},
+        "endurance": {},
+        "resiliency": {},
+        "agility": {},
     }
 }
 
@@ -725,7 +732,7 @@ MGT2.VEHICLES = {
         "slower3": { tl: 6, speed: -1, spaces: -10, limit: "idle", cost: -10 }
     },
     OPTIONS: {
-      "general": {},
+        "general": {},
         "comms": {},
         "sensors": {},
         "armour": {},

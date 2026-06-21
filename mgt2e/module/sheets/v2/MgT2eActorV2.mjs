@@ -33,6 +33,21 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         }
     };
 
+    _prepareCharacteristics() {
+        if (this.document.system.characteristics) {
+            for (let c in this.document.system.characteristics) {
+                let char = this.document.system.characteristics[c];
+                if (char.value < 1) {
+                    char.dm = -3;
+                } else if (char.value < 3) {
+                    char.dm = -2;
+                } else {
+                    char.dm = parseInt(char.value / 3) - 2;
+                }
+            }
+        }
+    }
+
     onRollCheck() {
 
     }
