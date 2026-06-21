@@ -5,6 +5,31 @@ import {skillLabel} from "../../helpers/dice-rolls.mjs";
 
 export class MgT2eRobotSheet extends MgT2eActorV2 {
 
+    constructor(options = {}) {
+        super(options);
+        this.#dragDrop = this.#createDragDropHandlers();
+    }
+
+    #createDragDropHandlers() {
+        return this.options.dragDrop.map((d) => {
+            d.permissions = {
+                dragstart: this._canDragStart.bind(this),
+                drop: this._canDragDrop.bind(this),
+            };
+            d.callbacks = {
+                dragstart: this._onDragStart.bind(this),
+                drop: this._onDrop.bind(this)
+            };
+            return new DragDrop(d);
+        });
+    }
+
+    #dragDrop;
+
+    get dragDrop() {
+        return this.#dragDrop;
+    }
+
     static DEFAULT_OPTIONS = {
         classes: ["mgt2e", "sheet", "actor" ],
         position: {width: 720, height: 640},
@@ -24,7 +49,9 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             removeFeature: MgT2eRobotSheet.#removeFeature,
             editItem: MgT2eRobotSheet.#editItem,
             deleteItem: MgT2eRobotSheet.#deleteItem,
+            editImage: MgT2eRobotSheet.#onEditImage
         },
+        dragDrop: [ { dragSelector: '[data-drag]', dropSelector: null }],
         form: {
             handler: MgT2eRobotSheet.#onFormSubmit,
             submitOnChange: true,
@@ -81,6 +108,18 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             labelPrefix: "MGT2.RobotTab",
             initial: "design"
         }
+    }
+
+    static async #onEditImage(event, target) {
+        const field = target.dataset.field || "img";
+        const current = foundry.utils.getProperty(this.document, field) || "";
+        const fp = new foundry.applications.apps.FilePicker({
+            type: "image",
+            current: current,
+            callback: async (path) => {
+                await this.document.update({ [field]: path});
+            }
+        }).render(true);
     }
 
     static async #addFeature(event, target) {
@@ -197,19 +236,20 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             });
         }
 
-        const actors = this.element.querySelectorAll('img.actor-draggable');
-        actors.forEach(img => {
-            console.log("have an image");
-            img.setAttribute("draggable", true);
-            img.addEventListener("dragstart", handler, options);
-        });
-        html.find('img.actor-draggable').each((i, img) => {
-            let options = {};
-            options.actorId = img.getAttribute("data-actor-id");
-            handler = ev => this._onCrewDragStart(ev, options);
-            img.setAttribute("draggable", true);
-            img.addEventListener("dragstart", handler, options);
-        });
+        this.#dragDrop.forEach((d) => d.bind(this.element));
+    }
+
+    _onDragStart(event) {
+        const el = event.currentTarget;
+        // Dragging an actor. Set up actor drag data, so it can be dropped on other
+        // sheets or on the canvas.
+        if ('actorId' in event.target.dataset) {
+            let dragData = {
+                type: "Actor",
+                uuid: event.target.dataset.actorId
+            }
+            event.dataTransfer.setData('text/plain', JSON.stringify(dragData));
+        }
     }
 
     static async #onFormSubmit(event, form, formData) {

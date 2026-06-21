@@ -2,8 +2,9 @@
     <div class="actor-header">
         <div class="grid grid-5col">
             <div>
-                <img class="profile-img shadow actor-draggable" src="{{actor.img}}"
-                     data-edit="img" data-actor-id="{{actor._id}}"
+                <img class="profile-img shadow actor-draggable draggable" src="{{actor.img}}"
+                     data-action="editImage" data-field="img" data-actor-id="{{actor.uuid}}"
+                     data-drag="true"
                      title="{{actor.name}}" width="100%"/>
             </div>
 
