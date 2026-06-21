@@ -183,6 +183,8 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
     }
 
 
+
+
     _onRender(context, options) {
         super._onRender(context, options);
 
@@ -194,6 +196,20 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
 //                this.calculateStats();
             });
         }
+
+        const actors = this.element.querySelectorAll('img.actor-draggable');
+        actors.forEach(img => {
+            console.log("have an image");
+            img.setAttribute("draggable", true);
+            img.addEventListener("dragstart", handler, options);
+        });
+        html.find('img.actor-draggable').each((i, img) => {
+            let options = {};
+            options.actorId = img.getAttribute("data-actor-id");
+            handler = ev => this._onCrewDragStart(ev, options);
+            img.setAttribute("draggable", true);
+            img.addEventListener("dragstart", handler, options);
+        });
     }
 
     static async #onFormSubmit(event, form, formData) {
