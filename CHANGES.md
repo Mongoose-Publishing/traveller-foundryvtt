@@ -1,5 +1,8 @@
 # Release Notes
 
+# 0.21.4 (Beta)
+
+* Fix for V14 for chat commands
 
 # 0.21.3 (Beta)
 
