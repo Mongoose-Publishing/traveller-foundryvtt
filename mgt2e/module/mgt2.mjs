@@ -276,6 +276,14 @@ Hooks.once('init', async function() {
         type: Boolean,
         default: false
     });
+    game.settings.register('mgt2e', "damageManager", {
+        name: game.i18n.localize("MGT2.Settings.DamageManager.Name"),
+        hint: game.i18n.localize("MGT2.Settings.DamageManager.Hint"),
+        scope: "world",
+        config: true,
+        type: String,
+        default: ""
+    });
 
     // Add custom constants for configuration.
     CONFIG.MGT2 = MGT2;
@@ -612,36 +620,42 @@ Hooks.on('ready', () => {
 });
 
 Hooks.on("chatMessage", function(chatlog, message, chatData) {
-    if (message.indexOf("/upp") === 0) {
-        let args = message.split(" ");
+    let msg = message;
+    if (parseInt(game.version) > 13) {
+        // Chat message is HTML in 14+
+        const doc = new DOMParser().parseFromString(message, "text/html");
+        msg = doc.body.textContent.trim() || "";
+    }
+    if (msg.indexOf("/upp") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.upp(chatData, args);
         return false;
-    } else if (message.indexOf("/damage") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/damage") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.damage(chatData, args);
         return false;
-    } else if (message.indexOf("/skills") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/skills") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.showSkills(chatData, args);
         return false;
-    } else if (message.indexOf("/time") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/time") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.currentTime(chatData, args);
         return false;
-    } else if (message.indexOf("/debug") === 0) {
+    } else if (msg.indexOf("/debug") === 0) {
         Tools.debugSelected(chatData);
         return false;
-    } else if (message.indexOf("/skill") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/skill") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.rollChatSkill(chatData, args);
         return false;
-    } else if (message.indexOf("/mgt2e-test") === 0) {
-        let args = message.split(" ");
+    } else if (msg.indexOf("/mgt2e-test") === 0) {
+        let args = msg.split(" ");
         args.shift();
         Tools.test(chatData,args);
         return false;
@@ -940,10 +954,13 @@ Hooks.once("ready", async function() {
 
 
 Hooks.on("createCombatant", (combatant, combat, id) => {
-   console.log("createCombatant:");
-   const actor = combatant.actor;
+   if (!game.user.isGM) {
+       return;
+   }
+    console.log("createCombatant:");
+    const actor = combatant.actor;
 
-   let bonus = 0;
+    let bonus = 0;
    if (actor.getEffect("surprised")) {
        bonus = -6;
    } else if (actor.getEffect("aware")) {
@@ -978,10 +995,6 @@ Hooks.on("combatTurn", (combat, data, options) => {
 
 Hooks.on("combatRound", (combat, data, options) => {
     // This is when the round changes.
-    console.log("combatRound:");
-    console.log(combat);
-    console.log(data);
-
     for (let combatant of combat.combatants) {
         const actor = combatant.actor;
         if (actor.getEffect("surprised")) {
@@ -1730,6 +1743,12 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
             augmented = true;
             title += " + " + Number(skill.augdm);
         }
+        if (game.settings.get("mgt2e", "quickRolls")) {
+            title += "&#10;" + game.i18n.localize("MGT2.TravellerSheet.SkillTitle.Dialog");
+        } else {
+            title += "&#10;" + game.i18n.localize("MGT2.TravellerSheet.SkillTitle.Quick");
+        }
+        title += "&#10;"+game.i18n.localize("MGT2.TravellerSheet.SkillTitle.XP");
 
         let hasXp = (skill.xp && skill.xp > 0);
         let label = skillLabel(skill);
@@ -1756,7 +1775,6 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
                 } else {
                     return 1;
                 }
-                return 0;
             });
 
             for (let i in SPECS) {
@@ -1780,8 +1798,8 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
                     let augmented = false;
                     let isDeleted = spec.deleted?true:false;
                     let title = spec.default?spec.default:skill.default;
-                    if (skill.trained) {
-                        title += " + " + skill.value;
+                    if (skill.trained && !(skill.individual && !spec.trained)) {
+                        title += " + " + spec.value;
                     } else {
                         title += " - " + Math.abs(untrainedLevel);
                     }
@@ -1805,6 +1823,12 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
                     if (spec.bonus && Number(spec.bonus) > 0) {
                         augmented = true;
                     }
+                    if (game.settings.get("mgt2e", "quickRolls")) {
+                        title += "&#10;" + game.i18n.localize("MGT2.TravellerSheet.SkillTitle.Dialog");
+                    } else {
+                        title += "&#10;" + game.i18n.localize("MGT2.TravellerSheet.SkillTitle.Quick");
+                    }
+                    title += "&#10;"+game.i18n.localize("MGT2.TravellerSheet.SkillTitle.XP");
 
                     html += "<div class='specialisationBlock'>";
                     if (skill.individual) {

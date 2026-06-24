@@ -26,8 +26,14 @@ export class MgT2QuantityDialog extends Application {
         console.log("Number is " + this.transferNumber);
         return {
             "max": this.maxQuantity,
-            "half": (this.maxQuantity > 3)?parseInt(this.maxQuantity/2):0,
-            "transferNumber": this.transferNumber
+            "half": parseInt(this.maxQuantity/2),
+            "transferNumber": this.transferNumber,
+            QUANTITY_SELECT: {
+                "one": game.i18n.format("MGT2.Quantity.one"),
+                "half": game.i18n.format("MGT2.Quantity.half", { number: parseInt(this.maxQuantity/2) }),
+                "all": game.i18n.format("MGT2.Quantity.all", { number: this.maxQuantity }),
+                "custom": game.i18n.format("MGT2.Quantity.custom")
+            }
         }
     }
 
@@ -83,20 +89,16 @@ export class MgT2QuantityDialog extends Application {
 
         let option = html.find(".quantity")[0].value;
         let number = parseInt(html.find(".number")[0].value);
+        console.log("Option is " + option);
+        console.log("Saving " + number);
 
         // We need to create a new item at the destination.
         this.destItem = foundry.utils.duplicate(this.srcItem);
 
-        if (option === "one") {
-            number = 1;
-        } else if (option === "all") {
-            number = this.max;
-        } else {
-            // Number is the custom number.
-        }
-
         if (number >= this.srcItem.system.quantity) {
             this.srcActor.deleteEmbeddedDocuments("Item", [this.srcItem.id]);
+            this.destItem.system.status = MgT2Item.OWNED;
+            Item.create(this.destItem, { parent: this.destActor });
         } else {
             this.srcItem.system.quantity -= number;
             this.srcItem.update({ "system.quantity": this.srcItem.system.quantity });

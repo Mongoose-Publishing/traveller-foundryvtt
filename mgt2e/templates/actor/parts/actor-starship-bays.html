@@ -27,15 +27,19 @@
             {{#if dockedShips}}
                 <ol class="items-list actor-crew-list grid grid-3col">
                     {{#each dockedShips as |ship|}}
-                    <li class="actor-crew" data-actor-id="{{ship._id}}">
-                        <h4 title="{{ship.name}}">
-                            {{ship.name}}
+                    <li class="actor-crew" data-actor-id="{{ship.ship._id}}">
+                        <h4 title="{{ship.ship.name}}">
+                            {{ship.ship.name}} x{{ship.quantity}}
                         </h4>
-                        <img class="embedded-actor-portrait actor-draggable" data-actor-id="{{ship._id}}" title="{{ship.name}}" src="{{ship.img}}"/>
-                        {{ship.system.spacecraft.dtons}}dt
-                        {{#if ship.system.spacecraft.mdrive}} / {{ship.system.spacecraft.mdrive}}G {{/if}}
-                        {{#if ship.system.spacecraft.jdrive}} / J-{{ship.system.spacecraft.jdrive}} {{/if}}
+                        <img class="embedded-actor-portrait actor-draggable" data-actor-id="{{ship.ship._id}}" title="{{ship.ship.name}}" src="{{ship.ship.img}}"/>
+                        {{ship.ship.system.spacecraft.dtons}}dt
+                        {{#if ship.ship.system.spacecraft.mdrive}} / {{ship.ship.system.spacecraft.mdrive}}G {{/if}}
+                        {{#if ship.ship.system.spacecraft.jdrive}} / J-{{ship.ship.system.spacecraft.jdrive}} {{/if}}
                         <div class="item-controls">
+                            <a class="item-control docked-plus" title="Remove Ship">
+                                <i class="fas fa-plus"></i></a>
+                            <a class="item-control docked-minus" title="Remove Ship">
+                                <i class="fas fa-minus"></i></a>
                             <a class="item-control docked-delete" title="Remove Ship">
                                 <i class="fas fa-trash"></i></a>
                         </div>

@@ -1,7 +1,7 @@
 <form class="flexcol skilldialog">
 
     <div class="shadow">
-        <b>{{weapon.name}}</b> {{damage}}<br/>
+        <b>{{weapon.name}}</b> {{damage}} {{#if linked}}<b>[{{linked}}]</b>{{/if}}<br/>
         {{#if cha}}
             <i>{{cha}} + {{skill}}{{#if speciality}} ({{speciality}}){{/if}} at {{score}}</i>
         {{else}}

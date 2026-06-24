@@ -116,7 +116,7 @@ export class MgT2SkillDialog extends Application {
             }
             if (this.skillData.boon === "boon") {
                 this.boonBane = "boon";
-            } else if (this.skillData.bane === "bane") {
+            } else if (this.skillData.boon === "bane") {
                 this.boonBane = "bane";
             }
             if (this.skillData.trained) {

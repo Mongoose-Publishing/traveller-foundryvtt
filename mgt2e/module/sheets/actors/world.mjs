@@ -543,10 +543,10 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
             }
             if (event.target.closest(".brokerDropZone")) {
                 data.skill = "broker";
-                data.skillScore = parseInt(droppedActor.system.skills["broker"].value);
+                data.skillScore = droppedActor.getSkillValue("broker", {});
             } else if (event.target.closest(".streetwiseDropZone")) {
                 data.skill = "streetwise";
-                data.skillScore = parseInt(droppedActor.system.skills["streetwise"].value);
+                data.skillScore = droppedActor.getSkillValue("streetwise", {});
             }
             if (this.actor.permission > 2) {
                 await worldDropBrokerHandler(data);
