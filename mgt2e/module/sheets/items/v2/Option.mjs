@@ -36,6 +36,10 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             template: "systems/mgt2e/templates/item/v2/description.html",
             scrollable: ['']
         },
+        "manipulators": {
+            template: "systems/mgt2e/templates/item/v2/option/robot-manipulators.html",
+            scrollable: [''],
+        },
         effects: {
             template: "systems/mgt2e/templates/item/v2/effects.html",
             scrollable: ['']
@@ -45,15 +49,28 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         }
     };
 
-    static TABS = {
-        primary: {
-            tabs: [
-                { id: "description" },
-                { id: "effects" },
-            ],
-            labelPrefix: "MGT2.ItemTab",
-            initial: "description"
+
+    _addTab(group, name, active) {
+        return {
+            active: active,
+            cssClase: active?"active":null,
+            group: group,
+            id: name,
+            label: "MGT2.ItemTab." + name
         }
+    }
+
+    _prepareTabs(group) {
+        let tabs = {
+            description: this._addTab("primary", "description", true),
+            effects: this._addTab("primary", "effects", false)
+        }
+        switch (this.document.system.option.type) {
+            case "manipulator":
+                tabs.manipulators = this._addTab("primary", "manipulators", false);
+                break;
+        }
+        return tabs;
     }
 
     static async #addEffect(event, target) {
@@ -136,14 +153,26 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         }
 
         context.SELECT_TYPE = {};
-        for (let t in CONFIG.MGT2.VEHICLES.OPTIONS) {
-            context.SELECT_TYPE[t] = game.i18n.localize(`MGT2.Option.Type.${t}`);
+        if (this.document.system.option.model === "vehicle") {
+            for (let t in CONFIG.MGT2.VEHICLES.OPTIONS) {
+                context.SELECT_TYPE[t] = game.i18n.localize(`MGT2.Option.Type.${t}`);
+            }
+        } else {
+            for (let t in CONFIG.MGT2.ROBOTS.OPTIONS) {
+                context.SELECT_TYPE[t] = game.i18n.localize(`MGT2.Option.Type.${t}`);
+            }
         }
-
         context.SELECT_TECHLEVEL = {};
         for (let tl=0; tl < 20; tl++) {
             context.SELECT_TECHLEVEL[tl] = tl;
         }
+
+        // Dynamically add tabs
+        switch (this.document.system.option.type) {
+            case "manipulator":
+                break;
+        }
+
 
         return context;
     }

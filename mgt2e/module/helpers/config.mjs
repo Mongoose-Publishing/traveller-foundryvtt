@@ -140,6 +140,7 @@ MGT2.ROBOTS = {
         "endurance": {},
         "resiliency": {},
         "agility": {},
+        "manipulator" : {}
     }
 }
 

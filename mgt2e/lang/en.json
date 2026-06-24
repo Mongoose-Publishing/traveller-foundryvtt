@@ -1490,12 +1490,17 @@
 
   "MGT2.ItemTab.description": "Description",
   "MGT2.ItemTab.effects": "Effects",
+  "MGT2.ItemTab.manipulators": "Manipulators",
 
   "MGT2.Option.Type.general": "General",
   "MGT2.Option.Type.comms": "Communications",
   "MGT2.Option.Type.sensors": "Sensors",
   "MGT2.Option.Type.armour": "Armour",
   "MGT2.Option.Type.mount": "Mount",
+  "MGT2.Option.Type.resiliency": "Resiliency",
+  "MGT2.Option.Type.endurance": "Endurance",
+  "MGT2.Option.Type.agility": "Agility",
+  "MGT2.Option.Type.manipulator": "Manipulator",
 
   "MGT2.Vehicle.Size.small": "Small",
   "MGT2.Vehicle.Size.light": "Light",
@@ -1712,7 +1717,7 @@
   "TYPES.Item.role": "Crew Role",
   "TYPES.Item.software": "Software",
   "TYPES.Item.worlddata": "World Data",
-  "TYPES.Item.option": "Vehicle Option",
+  "TYPES.Item.option": "Option",
   "EFFECT.TITLE.Injured": "Injured",
   "EFFECT.TITLE.Destroyed": "Destroyed",
   "EFFECT.TITLE.FirstAid": "First Aid",
