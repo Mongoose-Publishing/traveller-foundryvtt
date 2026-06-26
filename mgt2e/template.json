@@ -159,7 +159,7 @@
       "templates": [ "base", "characteristics", "skills" ],
       "robot": {
         "size": 5,
-        "slots": 0,
+        "slots": 8,
         "tl": 8,
         "cost": 0,
         "locomotion": "",

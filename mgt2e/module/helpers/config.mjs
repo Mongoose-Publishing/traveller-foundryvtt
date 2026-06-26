@@ -134,6 +134,14 @@ MGT2.ROBOTS = {
         "hovercraft": { tl: 7, agility: 1, traits: "ACV", endurance: 24, cost: 10 },
         "thruster": { tl: 7, agility: 1, endurance: 2, cost: 20 }
     },
+    MANIPULATORS: {
+        "+2": { slots: 40, robotSize: [ 1, 1, 2, 4, 7, 13, 26, 52 ]},
+        "+1": { slots: 20, robotSize: [ 1, 1, 1, 2, 4, 7, 13, 26 ]},
+        "0":  { slots: 10, robotSize: [ 1, 1, 1, 1, 2, 4, 7, 13 ]},
+        "-1": { slots: 5,  robotSize: [ 1, 1, 1, 1, 1, 2, 4, 7 ]},
+        "-2": { slots: 2,  robotSize: [ 1, 1, 1, 1, 1, 1, 2, 3 ]},
+        "-3": { slots: 1,  robotSize: [ 1, 1, 1, 1, 1, 1, 1, 2 ]},
+    },
     OPTIONS: {
         "general": {},
         "armour": {},

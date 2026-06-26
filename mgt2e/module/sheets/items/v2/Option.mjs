@@ -40,6 +40,10 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             template: "systems/mgt2e/templates/item/v2/option/robot-manipulators.html",
             scrollable: [''],
         },
+        "armour": {
+            template: "systems/mgt2e/templates/item/v2/option/robot-armour.html",
+            scrollable: [''],
+        },
         effects: {
             template: "systems/mgt2e/templates/item/v2/effects.html",
             scrollable: ['']
@@ -48,29 +52,33 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             template: "systems/mgt2e/templates/actor/v2/footer.html"
         }
     };
+    
+    _addTab(group, name) {
+        // Compare directly against our tracked class instance variable
+        const activeTabId = this.tabGroups?this.tabGroups[group]:"description";
+        const isActive = activeTabId === name;
 
-
-    _addTab(group, name, active) {
         return {
-            active: active,
-            cssClase: active?"active":null,
+            active: isActive,
+            cssClass: isActive ? "active" : null,
             group: group,
             id: name,
             label: "MGT2.ItemTab." + name
-        }
+        };
     }
 
     _prepareTabs(group) {
         let tabs = {
-            description: this._addTab("primary", "description", true),
-            effects: this._addTab("primary", "effects", false)
+            description: this._addTab("primary", "description"),
+            effects: this._addTab("primary", "effects")
         }
         switch (this.document.system.option.type) {
             case "manipulator":
-                tabs.manipulators = this._addTab("primary", "manipulators", false);
+                tabs.manipulators = this._addTab("primary", "manipulators");
                 break;
         }
-        return tabs;
+        console.log(tabs);
+        return  tabs ;
     }
 
     static async #addEffect(event, target) {
@@ -177,8 +185,38 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         return context;
     }
 
+    _calculateManipulators(item) {
+        let robotSize = 5;
+        let robotSlots = 8;
+        if (item.parent && item.parent.type === "robot") {
+            robotSize = parseInt(item.parent.system.robot.size) || 8;
+            robotSlots = parseInt(item.parent.system.robot.slots) || 8;
+        }
+        let size = parseInt(item.system.option.manipulators.size) || 0;
+        let slotpc = parseInt(item.system.options.manipulators.slotpc);
+
+        const slots = Math.ceil((robotSlots * slotpc) / 100.0);
+
+        if (slots != item.system.options.slots) {
+            item.system.options.slots = slots;
+            item.update({"system.options": item.system.options });
+        }
+
+
+    }
+
+    _prepareManipulators(context) {
+        context.SELECT_SIZE = {};
+        context.SELECT_SIZE["-3"] = "Small -3";
+        context.SELECT_SIZE["-2"] = "Small -2";
+        context.SELECT_SIZE["-1"] = "Small -1";
+        context.SELECT_SIZE["+0"] = "Standard";
+        context.SELECT_SIZE["+1"] = "Large +1";
+        context.SELECT_SIZE["+2"] = "Large +2";
+
+    }
+
     async _preparePartContext(partId, context) {
-        console.log(partId);
         context.tab = context.tabs[partId];
 
         if (partId === "description") {
@@ -186,18 +224,22 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
                 this.document.system.description,
                 { secrets: ((this.document.permission > 2)?true:false) }
             );
+        } else if (partId === "manipulators") {
+            this._prepareManipulators(context);
         }
 
         return context;
     }
 
-
     _onRender(context, options) {
         super._onRender(context, options);
 
-        const traitSelect = this.element.querySelector('select[data-action="addFeature"]');
-        if (traitSelect) {
+        const e = this.element.querySelector('select[data-action="changeManipulators"]');
+        if (e) {
             console.log("found");
+            e.addEventListener("change", (ev) => {
+                this._calculateManipulators(this.document);
+            })
             //traitSelect.removeEventListener("change", this.#addTrait.bind(this));
         }
     }

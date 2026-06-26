@@ -26,10 +26,17 @@
             <label>Cost (Cr)</label>
             <input name="system.cost" value="{{system.cost}}">
         </div>
-        <div>
-            <label>Spaces</label>
-            <input name="system.option.spaces" value="{{system.option.spaces}}">
-        </div>
+        {{#if (ifEquals item.type "vehicle")}}
+            <div>
+                <label>Spaces</label>
+                <input name="system.option.spaces" value="{{system.option.spaces}}">
+            </div>
+        {{else}}
+            <div>
+                <label>Slots</label>
+                <input name="system.option.slots" value="{{system.option.slots}}">
+            </div>
+        {{/if}}
 
         {{#if (ifEquals system.option.type "mount")}}
             <div>

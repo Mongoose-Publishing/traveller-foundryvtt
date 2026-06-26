@@ -2,17 +2,28 @@
     <div class="grid grid-5col">
         <div class="resource">
             <label>Size</label>
-            <input type="number"/>
+            <select name="system.option.manipulators.size" data-action="changeManipulators">
+                {{selectOptions SELECT_SIZE selected=system.option.manipulators.size}}
+            </select>
+        </div>
+
+        <div class="resource">
+            <label>Slot %</label>
+            <input type="number" name="system.option.manipulators.slotpc"
+                   data-action="changeManipulators"
+                   value="{{system.option.manipulators.slotpc}}"/>
         </div>
 
         <div class="resource">
             <label>STR</label>
-            <input type="number"/>
+            <input type="number" name="system.option.manipulators.str"
+                   value="{{system.option.manipulators.str}}"/>
         </div>
 
         <div class="resource">
             <label>DEX</label>
-            <input type="number"/>
+            <input type="number" name="system.option.manipulators.dex"
+                   value="{{system.option.manipulators.dex}}"/>
         </div>
     </div>
 </section>

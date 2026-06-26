@@ -1491,6 +1491,7 @@
   "MGT2.ItemTab.description": "Description",
   "MGT2.ItemTab.effects": "Effects",
   "MGT2.ItemTab.manipulators": "Manipulators",
+  "MGT2.ItemTab.armour":  "Armour",
 
   "MGT2.Option.Type.general": "General",
   "MGT2.Option.Type.comms": "Communications",
