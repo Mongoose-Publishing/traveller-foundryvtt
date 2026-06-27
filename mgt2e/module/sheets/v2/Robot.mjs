@@ -40,7 +40,6 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         // Map your HTML [data-action] attributes to JS functions
         actions: {
             rollCheck: MgT2eActorV2.onRollCheck,
-            test: MgT2eRobotSheet.#test,
             addFeature: {
                 handler: MgT2eRobotSheet.#addFeature,
                 buttons: [0, 1, 2],
@@ -49,7 +48,8 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             removeFeature: MgT2eRobotSheet.#removeFeature,
             editItem: MgT2eRobotSheet.#editItem,
             deleteItem: MgT2eRobotSheet.#deleteItem,
-            editImage: MgT2eRobotSheet.#onEditImage
+            editImage: MgT2eRobotSheet.#onEditImage,
+            calculate: MgT2eRobotSheet.#calculate
         },
         dragDrop: [ { dragSelector: '[data-drag]', dropSelector: null }],
         form: {
@@ -146,8 +146,8 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         }
     }
 
-    static async #test(event, target) {
-        console.log("TEST");
+    static async #calculate(event, target) {
+        this.calculateStats();
     }
 
 
@@ -172,10 +172,53 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         system.characteristics["DEX"].value = 0;
         system.characteristics["END"].value = Math.max(6, sz);
         system.characteristics["SOC"].value = 0;
+
+        for (let item of this.document.items) {
+            if (item.type === "option" && item.system.option.model === "robot") {
+                console.log("item " + item.name);
+                console.log(item);
+                switch (item.system.option.type) {
+                    case "manipulator":
+                        let str = parseInt(item.system.option.manipulators.str);
+                        let dex = parseInt(item.system.option.manipulators.dex);
+                        console.log(str);
+                        console.log(dex);
+
+                        system.characteristics["STR"].value =
+                            Math.max(parseInt(item.system.option.manipulators.str),
+                                system.characteristics["STR"].value);
+                        system.characteristics["DEX"].value =
+                            Math.max(parseInt(item.system.option.manipulators.dex),
+                                system.characteristics["DEX"].value);
+                }
+            }
+        }
+
+
         this._prepareCharacteristics();
 
         this.document.update({"system": system });
 
+    }
+
+    async _prepareRobotOption(context, item) {
+        context.OPTIONS.push(item);
+        switch (item.system.option.type) {
+            case "manipulators":
+                break;
+        }
+    }
+
+    async _prepareItems(context) {
+        context.OPTIONS = [];
+        context.slotsUsed = 0;
+        for (let item of this.document.items) {
+            console.log(item.name);
+            if (item.type === "option" && item.system.option.model === "robot") {
+
+            }
+
+        }
     }
 
     async _prepareContext(options) {
@@ -188,11 +231,11 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             config: CONFIG.MGT2,
             tabs: this._prepareTabs("primary")
         };
+        this._prepareItems(context);
 
         context.SELECT_SIZE = {};
 
-        for (let s=1; s <= 8; s++) {
-            console.log(CONFIG.MGT2.ROBOTS.SIZE[s]);
+        for (let s= 1; s <= 8; s++) {
             context.SELECT_SIZE[s] = s;
         }
 

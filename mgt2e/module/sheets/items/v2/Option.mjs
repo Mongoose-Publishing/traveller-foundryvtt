@@ -52,7 +52,7 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             template: "systems/mgt2e/templates/actor/v2/footer.html"
         }
     };
-    
+
     _addTab(group, name) {
         // Compare directly against our tracked class instance variable
         const activeTabId = this.tabGroups?this.tabGroups[group]:"description";
@@ -185,21 +185,37 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         return context;
     }
 
-    _calculateManipulators(item) {
+    async _calculateManipulators(item, newSize) {
+        console.log("CALCULATE MANIPULATORS");
         let robotSize = 5;
         let robotSlots = 8;
         if (item.parent && item.parent.type === "robot") {
             robotSize = parseInt(item.parent.system.robot.size) || 8;
             robotSlots = parseInt(item.parent.system.robot.slots) || 8;
         }
-        let size = parseInt(item.system.option.manipulators.size) || 0;
-        let slotpc = parseInt(item.system.options.manipulators.slotpc);
+        let size = parseInt(newSize) || 0;
+        let slotpc = parseInt(item.system.option.manipulators.slotpc);
+
+        slotpc = parseInt(Math.max(1, 10 * Math.pow(2, size)));
+        console.log("Size: " + size);
+        console.log("Slot%: " + slotpc);
+
 
         const slots = Math.ceil((robotSlots * slotpc) / 100.0);
+        console.log("Robot slots: " + robotSlots);
+        console.log("Slots: " + slots);
 
-        if (slots != item.system.options.slots) {
-            item.system.options.slots = slots;
-            item.update({"system.options": item.system.options });
+        const actualSize = robotSize + size;
+        let str = (actualSize - 1) * 2;
+        let dex = parseInt(item.system.tl / 2) + 1;
+
+
+        if (slots != item.system.option.slots) {
+            item.system.option.slots = slots;
+            item.system.option.manipulators.str = str;
+            item.system.option.manipulators.dex = dex;
+            item.system.option.manipulators.slotpc = slotpc;
+            await item.update({"system.option": item.system.option });
         }
 
 
@@ -238,7 +254,7 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         if (e) {
             console.log("found");
             e.addEventListener("change", (ev) => {
-                this._calculateManipulators(this.document);
+                this._calculateManipulators(this.document, ev.target.value);
             })
             //traitSelect.removeEventListener("change", this.#addTrait.bind(this));
         }
