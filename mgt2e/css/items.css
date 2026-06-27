@@ -458,3 +458,32 @@ textarea.culture {
   float: left;
   margin: 2px;
 }
+
+.item-quantity {
+  font-size: larger;
+}
+
+.item-quantity span {
+  display: inline-block;
+}
+
+.item-quantity input {
+  display: inline-block;
+  text-align: center;
+  width: 3em;
+}
+
+.item-label {
+  background-color: #72bce8;
+  font-weight: bold;
+  color: black;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 3px 3px 0 0;
+}
+
+div.resource input[type=number] {
+  text-align: center;
+}

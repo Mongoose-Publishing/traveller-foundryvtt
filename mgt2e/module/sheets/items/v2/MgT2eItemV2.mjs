@@ -12,7 +12,9 @@ export class MgT2eItemV2 extends HandlebarsApplicationMixin(ItemSheetV2) {
         },
         // Map your HTML [data-action] attributes to JS functions
         actions: {
-            rollCheck: MgT2eItemV2.onRollCheck
+            rollCheck: MgT2eItemV2.onRollCheck,
+            quantityInc: MgT2eItemV2.#increment,
+            quantityDec: MgT2eItemV2.#decrement,
         },
         form: {
             handler: MgT2eItemV2.onFormSubmit,
@@ -39,6 +41,16 @@ export class MgT2eItemV2 extends HandlebarsApplicationMixin(ItemSheetV2) {
 
     onFormSubmit() {
 
+    }
+
+    static async #increment(event) {
+        this.document.system.quantity = Math.min(999, this.document.system.quantity + 1);
+        this.document.update({"system.quantity": parseInt(this.document.system.quantity)});
+    }
+
+    static async #decrement(event) {
+        this.document.system.quantity = Math.max(0, this.document.system.quantity - 1);
+            this.document.update({ "system.quantity": parseInt(this.document.system.quantity) });
     }
 
     async _prepareContext(options) {

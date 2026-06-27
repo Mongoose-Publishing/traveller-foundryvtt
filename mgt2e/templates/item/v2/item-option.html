@@ -1,51 +1,62 @@
 <section class="sheet-body">
-    <div class="grid grid-4col">
-        <h1 class="actor-name shadow grid-span-4">
+    <div>
+    <div class="grid grid-6col">
+        <div class="resource">
+            <div class="item-quantity flex-group-center">
+                <span data-action="quantityDec"><i class="fa-regular fa-square-minus"></i></span>
+                <input type="number" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+                <span data-action="quantityInc"><i class="fa-regular fa-square-plus"></i></span>
+                <label>Quantity</label>
+            </div>
+        </div>
+        <h1 class="actor-name shadow grid-span-5">
             <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
         </h1>
-
+    </div>
+    <div class="grid grid-4col">
         <div class="resource">
-            <label>Model</label>
+            <label class="item-label">Model</label>
             <select name="system.option.model">
                 {{selectOptions SELECT_MODEL selected=system.option.model}}
             </select>
         </div>
         <div class="resource">
-            <label>Option Type</label>
+            <label class="item-label">Option Type</label>
             <select name="system.option.type">
                 {{selectOptions SELECT_TYPE selected=system.option.type}}
             </select>
         </div>
-        <div class="resource">
-            <label>TL</label>
+        <div class="resource flex-group-center">
+            <label class="item-label">TL</label>
             <select name="system.tl">
                 {{selectOptions SELECT_TECHLEVEL selected=system.tl}}
             </select>
         </div>
         <div class="resource">
-            <label>Cost (Cr)</label>
-            <input name="system.cost" value="{{system.cost}}">
+            <label class="item-label">Cost (Cr)</label>
+            <input name="system.cost" type="number" value="{{system.cost}}"/>
         </div>
         {{#if (ifEquals item.type "vehicle")}}
-            <div>
-                <label>Spaces</label>
-                <input name="system.option.spaces" value="{{system.option.spaces}}">
+            <div class="resource flex-group-center">
+                <label class="item-label">Spaces</label>
+                <input type="number" name="system.option.spaces" value="{{system.option.spaces}}"/>
             </div>
         {{else}}
-            <div>
-                <label>Slots</label>
-                <input name="system.option.slots" value="{{system.option.slots}}">
+            <div class="resource flex-group-center">
+                <label class="item-label">Slots Used</label>
+                <input type="number" name="system.option.slots" value="{{system.option.slots}}"/>
             </div>
         {{/if}}
 
         {{#if (ifEquals system.option.type "mount")}}
             <div>
-                <label>Mount</label>
+                <label class="item-label">Mount</label>
             </div>
 
             <div>
-                <label>Facing</label>
+                <label class="item-label">Facing</label>
             </div>
         {{/if}}
+    </div>
     </div>
 </section>
