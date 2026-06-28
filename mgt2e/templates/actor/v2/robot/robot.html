@@ -17,7 +17,12 @@
                 <div class="grid grid-5col">
                     <div class="resource flex-group-center">
                         <label class="field-label">{{localize 'MGT2.TravellerSheet.Hits'}}</label>
-                        <span>{{system.hits.max}}</span>
+                        <span>
+                            {{#if system.hits.damage includeZero=false}}
+                                {{system.hits.value}} /
+                            {{/if}}
+                            {{system.hits.max}}
+                        </span>
                     </div>
                     <div class="resource flex-group-center">
                         <label class="field-label">{{localize 'MGT2.Robot.Locomotion'}}</label>

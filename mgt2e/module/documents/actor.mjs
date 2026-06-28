@@ -773,6 +773,7 @@ export class MgT2Actor extends Actor {
               new MgT2DamageDialog(this, damage, options).render(true);
           }
       } else {
+          console.log("Damage non Traveller");
           // In this situation, we don't need an apply damage dialog. However, we want to verify
           // that the GM is happy for the player to apply damage to this token. So we need a simple
           // yes/no confirmation.
@@ -1214,7 +1215,7 @@ export class MgT2Actor extends Actor {
               damage = options.reducedDamage;
           }
           this.applyDamageToPerson(damage, options);
-      } else if (this.type === "traveller" || this.type === "npc") {
+      } else if (this.type === "traveller" || this.type === "npc" || this.type === "robot") {
           if (options.scale === "spacecraft") {
               damage *= 10;
               // TODO: Possibly also add blast effects.

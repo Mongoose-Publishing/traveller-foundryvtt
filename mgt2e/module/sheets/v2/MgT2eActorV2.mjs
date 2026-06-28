@@ -1,3 +1,5 @@
+import {MgT2AttackDialog} from "../../helpers/attack-dialog.mjs";
+
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -12,6 +14,8 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         },
         // Map your HTML [data-action] attributes to JS functions
         actions: {
+            attack: MgT2eActorV2.#onAttack,
+            reload: MgT2eActorV2.#onReload,
             rollCheck: MgT2eActorV2.onRollCheck
         },
         form: {
@@ -52,8 +56,39 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
 
     }
 
+    static async #onAttack(event, target) {
+        const itemId = event.target.dataset["itemId"];
+        const item = this.document.items.get(itemId);
+
+        if (item) {
+            new MgT2AttackDialog(this.actor, item).render(true);
+        } else {
+            console.log("No item found");
+        }
+    }
+
+    static async #onReload(event, target) {
+
+    }
+
     onFormSubmit() {
 
+    }
+
+    async _prepareItems(context) {
+        context.ITEMS = this.document.items;
+        context.WEAPONS = [];
+        context.ARMOUR = [];
+        context.OPTIONS = [];
+
+        for (let item of this.document.items) {
+            if ([ "weapon" ].includes(item.type)) {
+                context.WEAPONS.push(item);
+            }
+            if ([ "armour" ].includes(item.type)) {
+                context.ARMOUR.push(item);
+            }
+        }
     }
 
     async _prepareContext(options) {

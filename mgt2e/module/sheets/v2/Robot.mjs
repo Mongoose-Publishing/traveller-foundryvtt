@@ -210,9 +210,9 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
     }
 
     async _prepareItems(context) {
-        context.OPTIONS = [];
+        super._prepareItems(context);
         context.slotsUsed = 0;
-        for (let item of this.document.items) {
+        for (let item of context.OPTIONS) {
             console.log(item.name);
             if (item.type === "option" && item.system.option.model === "robot") {
 

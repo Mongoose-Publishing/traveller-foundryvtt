@@ -119,3 +119,43 @@ div.pill-container {
   font-size: large;
   padding-top: 0.5em;
 }
+
+div.weapon-action-block {
+  width: 100%;
+  border: 2px solid #f1511b;
+  border-radius: 5px;
+  padding: 2px;
+  margin-bottom: 2px;
+}
+
+div.weapon-action-block h4 {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 3px;
+}
+div.weapon-action-block img {
+  float: right;
+  width: 48px;
+}
+
+div.weapon-action-block .action {
+  background-color: #ff311b;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid #404040;
+  box-shadow: 3px 3px 3px #404040;
+}
+
+div.weapon-range {
+  text-align: center;
+}
+
+div.weapon-range label {
+  font-weight: bold;
+  color: var(--mongoose-blue);
+  display: block;
+}
+
+div.weapon-range span {
+  display: block;
+}

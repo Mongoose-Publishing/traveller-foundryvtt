@@ -2375,6 +2375,27 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
     return html;
 });
 
+Handlebars.registerHelper('showWeaponRange', function(item) {
+    let html = `<div class="grid grid-4col weapon-range">`;
+
+    const range = parseInt(item.system.weapon.range);
+    const shortRange = range / 4;
+    const longRange = range * 2;
+    const extremeRange = range * 4;
+    let unit = "m";
+    if (item.system.weapon.scale === "vehicle") {
+        unit = "km";
+    }
+
+    html += `<div><label>Short (+1)</label><span>${shortRange}${unit}</span></div>`;
+    html += `<div><label>Medium</label><span>${range}${unit}</span></div>`;
+    html += `<div><label>Long (-2)</label><span>${longRange}${unit}</span></div>`;
+    html += `<div><label>Extreme (-4)</label><span>${extremeRange}${unit}</span></div>`;
+
+    html += `</div>`;
+
+    return html;
+});
 
 Handlebars.registerHelper('showWeaponTraits', function(key, traits) {
     // 'traits' are comma separated list of weapon traits. Some may have associated values.
