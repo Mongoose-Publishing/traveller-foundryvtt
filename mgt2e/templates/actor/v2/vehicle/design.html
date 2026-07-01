@@ -102,6 +102,26 @@
         <div>
             <h4>Armour</h4>
 
+            <div class="grid grid-3col">
+                <div>
+                    <label>Base</label>
+                    <span>{{system.vehicle.armour.base}}</span>
+                </div>
+                <div>
+                    <label>Max</label>
+                    <span>{{system.vehicle.armour.max}}</span>
+                </div>
+                <div>
+                    <label>Armour</label>
+                    <input type="number" name="system.vehicle.armour.total" value="{{system.vehicle.armour.total}}"/>
+                </div>
+            </div>
+
+            <p>
+                <b>Armour to assign: </b> {{unassignedArmour}}
+            </p>
+
+            <h4>Armour Assignment</h4>
             <div class="grid grid-2col">
                 <div class="resource flex-group-center">
                     <label class="field-label">Front</label>

@@ -623,6 +623,18 @@ MGT2.VEHICLES = {
         "unresponsive": {},
         "VTOL": {}
     },
+    ARMOUR: {
+        "0": { base: 0, max: 10, spaces: 2.5, costArmour: 1000, costVehicle: 25 },
+        "3": { base: 1, max: 15, spaces: 1.5, costArmour: 5000, costVehicle: 75 },
+        "5": { base: 2, max: 20, spaces: 1, costArmour: 7500, costVehicle: 75 },
+        "7": { base: 3, max: 30, spaces: 1, costArmour: 12500, costVehicle: 125 },
+        "10": { base: 5, max: 40, spaces: 0.5, costArmour: 50000, costVehicle: 250 },
+        "12": { base: 6, max: 50, spaces: 0.4, costArmour: 75000, costVehicle: 300 },
+        "14": { base: 8, max: 60, spaces: 0.32, costArmour: 125000, costVehicle: 400 },
+        "16": { base: 10, max: 80, spaces: 0.20, costArmour: 375000, costVehicle: 750 },
+        "17": { base: 15, max: 100, spaces: 0.16, costArmour: 500000, costVehicle: 800 },
+        "18": { base: 20, max: 160, spaces: 0.10, costArmour: 1000000, costVehicle: 1000 }
+    },
     POWER: {
         "none": {
             secondary: {}

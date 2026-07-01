@@ -77,16 +77,28 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
 
     async _prepareItems(context) {
         context.ITEMS = this.document.items;
-        context.WEAPONS = [];
-        context.ARMOUR = [];
-        context.OPTIONS = [];
+        context.ITEMS_WEAPONS = [];
+        context.ITEMS_ARMOUR = [];
+        context.ITEMS_OPTIONS = [];
+        context.ITEMS_GEAR = [];
 
         for (let item of this.document.items) {
             if ([ "weapon" ].includes(item.type)) {
-                context.WEAPONS.push(item);
-            }
-            if ([ "armour" ].includes(item.type)) {
-                context.ARMOUR.push(item);
+                context.ITEMS_WEAPONS.push(item);
+            } else if ([ "armour" ].includes(item.type)) {
+                context.ITEMS_ARMOUR.push(item);
+            } else if ([ "roles" ].includes(item.type)) {
+                context.ITEMS_ROLES.push(item);
+            } else if ([ "option" ].includes(item.type)) {
+                context.ITEMS_OPTIONS.push(item);
+                console.log(item);
+                switch (item.system.option.type) {
+                    case "armour":
+                        context.ITEMS_ARMOUR.push(item);
+                        break;
+                }
+            } else {
+                context.ITEMS_GEAR.push(item);
             }
         }
     }

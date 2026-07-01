@@ -215,6 +215,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         // BASIC TYPE AND SIZE OF VEHICLE
         await this._calculateTypes();
+        const VEHICLE = this.document.system.vehicle;
         context.VEHICLE_SIZE = this.getVehicleSize();
 
         // STRUCTURE AND HITS
@@ -223,18 +224,27 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         context.VEHICLE_DAMAGE = HITS.damage;
 
         // List Items
-        context.ITEMS_OPTIONS = [];
-        context.ITEMS_ROLES = [];
-        context.ITEMS_GEAR = [];
-        for (let item of this.document.items) {
-            if (["option"].includes(item.type)) {
-                context.ITEMS_OPTIONS.push(item);
-            } else if (["role"].includes(item.type)) {
-                contetxt.ITEMS_ROLES.push(item);
-            } else {
-                context.ITEMS_GEAR.push(item);
+        await this._prepareItems(context);
+        console.log("ARMOUR");
+        console.log(context.ITEMS_ARMOUR);
+
+        VEHICLE.armour.total = 0;
+        for (let armour of context.ITEMS_ARMOUR) {
+            console.log(armour);
+            const v = parseInt(armour.system.option.armour.value);
+            if (v && v > 0) {
+                VEHICLE.armour.total += v;
             }
         }
+
+        // Work out Armour
+        let assigned = 0;
+        for (let a of [ "front", "rear", "top", "bottom", "port", "starboard"]) {
+            if (VEHICLE.armour[a] > 0) {
+                assigned += VEHICLE.armour[a];
+            }
+        }
+        context.unassignedArmour = VEHICLE.armour.total - assigned;
 
         context.TYPE_SELECT = {};
         for (let t in CONFIG.MGT2.VEHICLES.TYPE) {

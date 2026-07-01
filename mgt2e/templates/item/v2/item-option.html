@@ -48,6 +48,13 @@
             </div>
         {{/if}}
 
+        {{#if (ifEquals system.option.type "armour")}}
+            <div>
+                <label class="item-label">Armour Value</label>
+                <input type="number" name="system.option.armour.value" value="{{system.option.armour.value}}"/>
+            </div>
+        {{/if}}
+
         {{#if (ifEquals system.option.type "mount")}}
             <div>
                 <label class="item-label">Mount</label>
