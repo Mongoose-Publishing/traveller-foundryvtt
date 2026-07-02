@@ -85,10 +85,10 @@ export class MgT2AttackDialog extends Application {
             }
 
             this.RANGES = {};
-            this.RANGES["+1"] = `Short (${this.shortRange}${this.rangeUnit}, +1)`;
-            this.RANGES["+0"] = `Medium (${this.range}${this.rangeUnit}, +0)`;
-            this.RANGES["-2"] = `Long (${this.longRange}${this.rangeUnit}, -2)`;
-            this.RANGES["-4"] = `Extreme (${this.extremeRange}${this.rangeUnit}, -4)`;
+            this.RANGES["+1"] = `${game.i18n.localize("MGT2.Attack.short")} (${this.shortRange}${this.rangeUnit}, +1)`;
+            this.RANGES["+0"] = `${game.i18n.localize("MGT2.Attack.medium")} (${this.range}${this.rangeUnit}, +0)`;
+            this.RANGES["-2"] = `${game.i18n.localize("MGT2.Attack.long")} (${this.longRange}${this.rangeUnit}, -2)`;
+            this.RANGES["-4"] = `${game.i18n.localize("MGT2.Attack.extreme")} (${this.extremeRange}${this.rangeUnit}, -4)`;
         } else {
             this.parryBonus = weapon.system.weapon.parryBonus;
             if (!this.parryBonus) {
