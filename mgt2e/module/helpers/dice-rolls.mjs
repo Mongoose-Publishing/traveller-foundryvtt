@@ -124,7 +124,6 @@ export function getTraitValue(traits, trait) {
 }
 
 export function printWeaponTraits(traits) {
-    console.log("printWeaponTraits: " + traits);
     let text = "";
     if (traits) {
         const list = traits.split(",");
@@ -252,7 +251,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
     if (weapon) {
         content += `<img class="skillcheck-thumb" alt="${weapon.name}" src="${weapon.img}"/>`;
-        content += `<b>Skill DM:</b> ${attackOptions.skillDM}`;
+        content += `<b>${game.i18n.localize("MGT2.SkillDM")}:</b> ${attackOptions.skillDM}`;
         if (attackOptions.dm && parseInt(attackOptions.dm) < 0) {
             content += " " + attackOptions.dm;
         } else if (attackOptions.dm && parseInt(attackOptions.dm) > 0) {
@@ -329,15 +328,15 @@ export async function rollAttack(actor, weapon, attackOptions) {
             if (weapon && weapon.system.weapon.scale === "spacecraft") {
                 scale = " [Spacecraft]";
             }
-            content += `<b>Damage:</b> ${dmg.toUpperCase()}${scale} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
+            content += `<b>${game.i18n.localize("MGT2.Damage")}:</b> ${dmg.toUpperCase()}${scale} ${(damageType === "standard") ? "" : (" (" + damageType + ")")}<br/>`;
             if (baseRange > 0) {
-                content += `<b>Range:</b> ${baseRange}${rangeUnit}<br/>`;
+                content += `<b>${game.i18n.localize("MGT2.Range")}:</b> ${baseRange}${rangeUnit}<br/>`;
             } else {
-                content += `<b>Melee</b><br/>`;
+                content += `<b>${game.i18n.localize("MGT2.Melee")}</b><br/>`;
             }
         }
         if (traits && traits !== "") {
-            content += `<b>Traits:</b> ${printWeaponTraits(traits)}<br/>`
+            content += `<b>${game.i18n.localize("MGT2.Item.WeaponTraits")}:</b> ${printWeaponTraits(traits)}<br/>`
         } else {
             traits = "";
         }
@@ -364,7 +363,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
             }
         }
         if (bulky > 0) {
-            content += `<b>Bulky Weapon:</b> -${bulky}`;
+            content += `<b>${game.i18n.localize("MGT2.Item.WeaponTrait.Label.bulky")}:</b> -${bulky}`;
             attackOptions.dm -= bulky;
         }
     }
@@ -556,7 +555,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
             let json = JSON.stringify(damageOptions);
 
             if (actor) {
-                content += `<b>Attack Roll:</b> ${dice}<br/>`
+                content += `<b>${game.i18n.localize("MGT2.AttackRoll")}:</b> ${dice}<br/>`
                 content += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${attackTotal}</span> <span class="${effectClass}">${effectText}</span><br/>`;
             } else {
                 content += "<br/>";
@@ -585,7 +584,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
         let longRange = parseInt(baseRange * 2);
         let extremeRange = parseInt(baseRange * 4);
 
-        content += "<table><tr><th>Short (+1)</th><th>Medium</th><th>Long (-2)</th><th>Extreme (-4)</th></tr>";
+        content += `<table><tr><th>${game.i18n.localize("MGT2.Attack.short")} (+1)</th><th>${game.i18n.localize("MGT2.Attack.medium")}</th><th>${game.i18n.localize("MGT2.Attack.long")} (-2)</th><th>${game.i18n.localize("MGT2.Attack.extreme")} (-4)</th></tr>`;
         content += `<tr><td>${shortRange}m</td><td>${baseRange}m</td><td>${longRange}m</td><td>${extremeRange}m</td></tr>`;
         content += "</table>";
     }
