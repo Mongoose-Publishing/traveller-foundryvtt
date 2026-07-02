@@ -6,7 +6,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
     static DEFAULT_OPTIONS = {
         tag: "form", // The outer element type
-        classes: ["mgt2e", "sheet", "actor"],
+        classes: ["mgt2e", "sheet", "actor" ],
         position: {width: 720, height: 600},
         window: {
             resizable: true,

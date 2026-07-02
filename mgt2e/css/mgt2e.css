@@ -159,3 +159,12 @@ div.weapon-range label {
 div.weapon-range span {
   display: block;
 }
+
+.mgt2e .window-content {
+  background-color: #202020;
+  background-image: url(traveller-hexes.png);
+}
+
+.item-option .window-content {
+  background-color: #446a87;
+}

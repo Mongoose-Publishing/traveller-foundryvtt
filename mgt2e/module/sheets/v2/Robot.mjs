@@ -31,7 +31,7 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
     }
 
     static DEFAULT_OPTIONS = {
-        classes: ["mgt2e", "sheet", "actor" ],
+        classes: ["mgt2e", "sheet", "actor", "actor-robot" ],
         position: {width: 720, height: 640},
         window: {
             resizable: true,
@@ -212,7 +212,7 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
     async _prepareItems(context) {
         super._prepareItems(context);
         context.slotsUsed = 0;
-        for (let item of context.OPTIONS) {
+        for (let item of context.ITEMS_OPTIONS) {
             console.log(item.name);
             if (item.type === "option" && item.system.option.model === "robot") {
 

@@ -6,7 +6,7 @@
                 <span data-action="quantityDec"><i class="fa-regular fa-square-minus"></i></span>
                 <input type="number" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
                 <span data-action="quantityInc"><i class="fa-regular fa-square-plus"></i></span>
-                <label>Quantity</label>
+                <label>{{localize "MGT2.Item.Quantity"}}</label>
             </div>
         </div>
         <h1 class="actor-name shadow grid-span-5">
@@ -15,42 +15,42 @@
     </div>
     <div class="grid grid-4col">
         <div class="resource">
-            <label class="item-label">Model</label>
+            <label class="item-label">{{localize "MGT2.Option.Model"}}</label>
             <select name="system.option.model">
                 {{selectOptions SELECT_MODEL selected=system.option.model}}
             </select>
         </div>
         <div class="resource">
-            <label class="item-label">Option Type</label>
+            <label class="item-label">{{localize "MGT2.Option.OptionType"}}</label>
             <select name="system.option.type">
                 {{selectOptions SELECT_TYPE selected=system.option.type}}
             </select>
         </div>
         <div class="resource flex-group-center">
-            <label class="item-label">TL</label>
+            <label class="item-label">{{localize "MGT2.TechLevel"}}</label>
             <select name="system.tl">
                 {{selectOptions SELECT_TECHLEVEL selected=system.tl}}
             </select>
         </div>
         <div class="resource">
-            <label class="item-label">Cost (Cr)</label>
+            <label class="item-label">{{localize "MGT2.CostCr"}}</label>
             <input name="system.cost" type="number" value="{{system.cost}}"/>
         </div>
         {{#if (ifEquals item.type "vehicle")}}
             <div class="resource flex-group-center">
-                <label class="item-label">Spaces</label>
+                <label class="item-label">{{localize "MGT2.Option.SpacesUsed"}}</label>
                 <input type="number" name="system.option.spaces" value="{{system.option.spaces}}"/>
             </div>
         {{else}}
             <div class="resource flex-group-center">
-                <label class="item-label">Slots Used</label>
+                <label class="item-label">{{localize "MGT2.Option.SlotsUsed"}}</label>
                 <input type="number" name="system.option.slots" value="{{system.option.slots}}"/>
             </div>
         {{/if}}
 
         {{#if (ifEquals system.option.type "armour")}}
-            <div>
-                <label class="item-label">Armour Value</label>
+            <div class="resource flex-group-center">
+                <label class="item-label">{{localize "MGT2.Item.armourValue"}}</label>
                 <input type="number" name="system.option.armour.value" value="{{system.option.armour.value}}"/>
             </div>
         {{/if}}

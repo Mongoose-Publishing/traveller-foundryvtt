@@ -53,6 +53,14 @@ export class MgT2eItemV2 extends HandlebarsApplicationMixin(ItemSheetV2) {
             this.document.update({ "system.quantity": parseInt(this.document.system.quantity) });
     }
 
+    static selectTechLevel() {
+        let ARRAY = {};
+        for (let tl=0; tl < 20; tl++) {
+            ARRAY[tl] = `${tl} (${game.i18n.localize("MGT2.Item.Tech."+tl)})`;
+        }
+        return ARRAY;
+    }
+
     async _prepareContext(options) {
         const context = {
             item: this.document,

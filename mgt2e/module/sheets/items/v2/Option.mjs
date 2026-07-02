@@ -4,7 +4,7 @@ import { MgT2eItemV2 } from "./MgT2eItemV2.mjs";
 // Both Vehicle Options and Robot Options.
 export class MgT2eOptionSheet extends MgT2eItemV2 {
     static DEFAULT_OPTIONS = {
-        classes: ["mgt2e", "sheet", "item"],
+        classes: ["mgt2e", "sheet", "item", "item-option"],
         position: {width: 720, height: 600},
         window: {
             resizable: true,
@@ -170,10 +170,7 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
                 context.SELECT_TYPE[t] = game.i18n.localize(`MGT2.Option.Type.${t}`);
             }
         }
-        context.SELECT_TECHLEVEL = {};
-        for (let tl=0; tl < 20; tl++) {
-            context.SELECT_TECHLEVEL[tl] = tl;
-        }
+        context.SELECT_TECHLEVEL = MgT2eItemV2.selectTechLevel();
 
         // Dynamically add tabs
         switch (this.document.system.option.type) {
