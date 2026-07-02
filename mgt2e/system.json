@@ -101,7 +101,12 @@
       "lang": "es",
       "name": "Español",
       "path": "lang/es.json"
-   }
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+     }
   ],
   "socket": true,
   "grid": {
