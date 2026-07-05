@@ -180,7 +180,7 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         system.characteristics["SOC"].value = 0;
 
         for (let item of this.document.items) {
-            if (item.type === "option" && item.system.option.model === "robot") {\
+            if (item.type === "option" && item.system.option.model === "robot") {
                 switch (item.system.option.type) {
                     case "manipulator":
                         const strBonus = parseInt(item.system.option.manipulators.strBonus) || 0;
