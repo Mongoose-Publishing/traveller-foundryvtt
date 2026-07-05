@@ -15,7 +15,9 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             rollCheck: MgT2eItemV2.onRollCheck,
             addEffect: MgT2eOptionSheet.#addEffect,
             editEffect: MgT2eOptionSheet.#editEffect,
-            deleteEffect: MgT2eOptionSheet.#deleteEffect
+            deleteEffect: MgT2eOptionSheet.#deleteEffect,
+            editImage: MgT2eOptionSheet.#onEditImage,
+
         },
         form: {
             handler: MgT2eOptionSheet.#onFormSubmit,
@@ -55,7 +57,7 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
 
     _addTab(group, name) {
         // Compare directly against our tracked class instance variable
-        const activeTabId = this.tabGroups?this.tabGroups[group]:"description";
+        const activeTabId = this.tabGroups[group]?this.tabGroups[group]:"description";
         const isActive = activeTabId === name;
 
         return {
@@ -77,8 +79,19 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
                 tabs.manipulators = this._addTab("primary", "manipulators");
                 break;
         }
-        console.log(tabs);
         return  tabs ;
+    }
+
+    static async #onEditImage(event, target) {
+        const field = target.dataset.field || "img";
+        const current = foundry.utils.getProperty(this.document, field) || "";
+        const fp = new foundry.applications.apps.FilePicker({
+            type: "image",
+            current: current,
+            callback: async (path) => {
+                await this.document.update({ [field]: path});
+            }
+        }).render(true);
     }
 
     static async #addEffect(event, target) {

@@ -1,43 +1,41 @@
 <section class="tab {{tab.cssClass}} scrollable" data-group="primary" data-tab="combat">
-    Combat!
-
     <div class="grid grid-3col">
         <div>
-            <h4>HITS & DAMAGE</h4>
+            <h4>{{localize "MGT2.TravellerSheet.CombatTab.HitsAndDamage"}}</h4>
 
             <div class="grid grid-3col">
-                <div class="resource">
-                    <label class="field-label">MAX HITS</label>
-                    <span>{{system.hits.max}}</span>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize "MGT2.TravellerSheet.MaxHits"}}</label>
+                    <input type="number" value="{{system.hits.max}}" readonly/>
                 </div>
-                <div class="resource">
-                    <label class="field-label">DAMAGE</label>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize "MGT2.TravellerSheet.Damage"}}</label>
                     <input type="number" name="system.hits.damage" value="{{system.hits.damage}}"/>
                 </div>
-                <div class="resource">
-                    <label class="field-label">CURRENT</label>
-                    <span>{{system.hits.value}}</span>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize "MGT2.TravellerSheet.Hits"}}</label>
+                    <input type="number" value="{{system.hits.value}}" readonly/>
                 </div>
             </div>
         </div>
 
         <div>
-            <h4>ARMOUR</h4>
+            <h4>{{localize "MGT2.TravellerSheet.CombatTab.Armour"}}</h4>
 
             <div class="grid grid-2col">
-                <div class="resource">
+                <div class="resource flex-group-center">
                     <label class="field-label">{{localize "MGT2.Item.ArmourValue"}}</label>
-                    <span>{{system.armour.protection}}</span>
+                    <input type="number" value="{{system.armour.protection}}" readonly/>
                 </div>
             </div>
         </div>
 
         <div>
-            <h4>BONUSES</h4>
+            <h4>{{localize "MGT2.TravellerSheet.CombatTab.Bonuses"}}</h4>
         </div>
 
         <div class="grid-span-2">
-            <h4>Attacks</h4>
+            <h4>{{localize "MGT2.TravellerSheet.CombatTab.Attacks"}}</h4>
 
             {{#each ITEMS_WEAPONS as |weapon| }}
                 <div class="weapon-action-block">

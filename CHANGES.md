@@ -1,5 +1,10 @@
 # Release Notes
 
+# 0.21.5 (Beta)
+
+* Updates to Spanish translations.
+* Addition of new Brazilian Portuguese translations.
+
 # 0.21.4 (Beta)
 
 * Fix for V14 for chat commands

@@ -1,6 +1,5 @@
 <section class="tab {{tab.cssClass}} scrollable" data-group="primary" data-tab="skills">
     {{#if actor.system.skills}}
-        <h4>Robot Skills</h4>
         <section class="skillList-Columns-Three traveller-skills">
             {{#each actor.system.skills as |skill id|}}
                 {{{skillBlock ../system skill.id skill id}}}

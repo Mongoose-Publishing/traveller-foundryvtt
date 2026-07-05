@@ -180,22 +180,19 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         system.characteristics["SOC"].value = 0;
 
         for (let item of this.document.items) {
-            if (item.type === "option" && item.system.option.model === "robot") {
-                console.log("item " + item.name);
-                console.log(item);
+            if (item.type === "option" && item.system.option.model === "robot") {\
                 switch (item.system.option.type) {
                     case "manipulator":
-                        let str = parseInt(item.system.option.manipulators.str);
-                        let dex = parseInt(item.system.option.manipulators.dex);
-                        console.log(str);
-                        console.log(dex);
+                        const strBonus = parseInt(item.system.option.manipulators.strBonus) || 0;
+                        const dexBonus = parseInt(item.system.option.manipulators.dexBonus) || 0;
+
+                        const str = (parseInt(item.system.option.manipulators.str) || 0) + strBonus;
+                        const dex = (parseInt(item.system.option.manipulators.dex) || 0) + dexBonus;
 
                         system.characteristics["STR"].value =
-                            Math.max(parseInt(item.system.option.manipulators.str),
-                                system.characteristics["STR"].value);
+                            Math.max(str, system.characteristics["STR"].value);
                         system.characteristics["DEX"].value =
-                            Math.max(parseInt(item.system.option.manipulators.dex),
-                                system.characteristics["DEX"].value);
+                            Math.max(dex, system.characteristics["DEX"].value);
                 }
             }
         }
