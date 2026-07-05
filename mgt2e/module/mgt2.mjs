@@ -1715,7 +1715,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
     if (isNaN(skill.value) || skill.value < 0) {
         skill.value = 0;
     }
-    const dataRoll='data-rolltype="skill" data-roll="2d6"';
+    const dataRoll='data-rolltype="skill" data-roll="2d6" data-action="rollCheck"';
     const dataSkill=`data-skill="${skillId}"`;
 
     const nameSkill=`system.skills.${skillId}`;
@@ -1766,7 +1766,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
 
         // Specialities?
         if (!backgroundOnly && skill.specialities && showSpecs) {
-            html += `<input type="text" value="${skill.trained?0:untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
+            html += `<input type="number" value="${skill.trained?0:untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
 
             let SPECS = [];
             // Sort specialities into alphabetical order according to l10n label.
@@ -1851,18 +1851,18 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
                     html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} ${isDeleted?"deleted":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
                     html += `data-spec="${sid}" title="${title}">${label}${hasXp?"<sup>+</sup>":""}</label>`;
                     if (skill.trained && (!skill.individual || spec.trained)) {
-                        html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
+                        html += `<input class="skill-level" type="number" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
                     } else {
-                        html += `<input type="text" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
+                        html += `<input type="number" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
                     }
                     html += "</div>";
                 }
             }
         } else {
             if (skill.trained) {
-                html += `<input class="skill-level" type="text" name="${nameSkill}.value" value="${skill.value}" ${dataRoll} ${dataSkill}"/>`;
+                html += `<input class="skill-level" type="number" min="0" max="9" name="${nameSkill}.value" value="${skill.value}" ${dataRoll} ${dataSkill}"/>`;
             } else {
-                html += `<input type="text" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
+                html += `<input type="number" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
             }
         }
 

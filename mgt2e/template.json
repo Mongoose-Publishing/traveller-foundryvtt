@@ -156,7 +156,7 @@
         "cash": 0
     },
     "robot": {
-      "templates": [ "base", "characteristics", "skills" ],
+      "templates": [ "base", "characteristics", "armour", "skills" ],
       "robot": {
         "size": 5,
         "slots": 8,

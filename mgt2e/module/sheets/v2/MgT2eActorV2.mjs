@@ -6,8 +6,8 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
     static DEFAULT_OPTIONS = {
         tag: "form", // The outer element type
-        classes: ["mgt2e", "sheet", "actor" ],
-        position: {width: 720, height: 600},
+        classes: [ "mgt2e", "sheet", "actor" ],
+        position: { width: 720, height: 600 },
         window: {
             resizable: true,
             controls: [] // Header buttons go here
@@ -15,8 +15,7 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         // Map your HTML [data-action] attributes to JS functions
         actions: {
             attack: MgT2eActorV2.#onAttack,
-            reload: MgT2eActorV2.#onReload,
-            rollCheck: MgT2eActorV2.onRollCheck
+            reload: MgT2eActorV2.#onReload
         },
         form: {
             handler: MgT2eActorV2.onFormSubmit,
@@ -52,8 +51,17 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         }
     }
 
-    onRollCheck() {
+    onRollCheck(event, target) {
+        const rollType = event.target.dataset["rolltype"];
 
+        if (rollType === "skill") {
+            const skillId = event.target.dataset["skill"];
+            const specId = event.target.dataset["spec"];
+            const skillFqn = skillId + (specId?("." + specId):"");
+            console.log("Skill: " + skillFqn);
+
+            game.mgt2e.rollSkillMacro(skillFqn);
+        }
     }
 
     static async #onAttack(event, target) {

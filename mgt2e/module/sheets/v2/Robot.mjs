@@ -39,7 +39,7 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         },
         // Map your HTML [data-action] attributes to JS functions
         actions: {
-            rollCheck: MgT2eActorV2.onRollCheck,
+            rollCheck: MgT2eRobotSheet.#onRollCheck,
             addFeature: {
                 handler: MgT2eRobotSheet.#addFeature,
                 buttons: [0, 1, 2],
@@ -58,6 +58,11 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
             closeOnSubmit: false
         }
     };
+
+    static async #onRollCheck(event, target) {
+        console.log("onRollCheck Robot:");
+        this.onRollCheck(event, target);
+    }
 
     static PARTS = {
         main: {
@@ -148,6 +153,7 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
 
     static async #calculate(event, target) {
         this.calculateStats();
+        this.calculateArmour();
     }
 
 
@@ -198,7 +204,31 @@ export class MgT2eRobotSheet extends MgT2eActorV2 {
         this._prepareCharacteristics();
 
         this.document.update({"system": system });
+    }
 
+    async calculateArmour() {
+        let totalArmour = 0;
+        console.log("calculateArmour:");
+        for (let item of this.document.items.filter(i => i.type === "option")) {
+            const option = item.system.option;
+            console.log(option);
+            if (option.model === "robot" && option.type === "armour") {
+                const value = parseInt(option.armour.value) || 0;
+                if (value > 0) {
+                    totalArmour += value;
+                }
+            }
+        }
+        if (!this.document.system.armour) {
+            this.document.system.armour = {
+                protection: 0,
+                otherProtection: 0,
+                otherTypes: "",
+                rad: 0,
+            }
+        }
+        this.document.system.armour.protection = totalArmour;
+        this.document.update({"system.armour": this.document.system.armour });
     }
 
     async _prepareRobotOption(context, item) {
