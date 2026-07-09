@@ -31,6 +31,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
     };
 
+
     static PARTS = {
         main: {
             template: "systems/mgt2e/templates/actor/v2/vehicle/vehicle.html",
@@ -76,7 +77,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
                 { id: "equipment" },
             ],
             labelPrefix: "MGT2.VehicleTab",
-            initial: "design"
+            initial: "description"
         }
     }
 
@@ -231,7 +232,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         VEHICLE.armour.total = 0;
         for (let armour of context.ITEMS_ARMOUR) {
             console.log(armour);
-            const v = parseInt(armour.system.option.armour.value);
+            const v = parseInt(armour.system?.option?.armour?.value);
             if (v && v > 0) {
                 VEHICLE.armour.total += v;
             }

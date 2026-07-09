@@ -103,16 +103,16 @@
             <h4>Armour</h4>
 
             <div class="grid grid-3col">
-                <div>
-                    <label>Base</label>
-                    <span>{{system.vehicle.armour.base}}</span>
+                <div class="resource flex-group-center">
+                    <label class="field-label">Base</label>
+                    <input type="number" value="{{system.vehicle.armour.base}}" readonly/>
                 </div>
-                <div>
-                    <label>Max</label>
-                    <span>{{system.vehicle.armour.max}}</span>
+                <div class="resource flex-group-center">
+                    <label class="field-label">Max</label>
+                    <input type="number" value="{{system.vehicle.armour.max}}" readonly/>
                 </div>
-                <div>
-                    <label>Armour</label>
+                <div class="resource flex-group-center">
+                    <label class="field-label">Armour</label>
                     <input type="number" name="system.vehicle.armour.total" value="{{system.vehicle.armour.total}}"/>
                 </div>
             </div>
@@ -125,42 +125,42 @@
             <div class="grid grid-2col">
                 <div class="resource flex-group-center">
                     <label class="field-label">Front</label>
-                    <input class="field-value writable" type="number"
+                    <input type="number"
                            name="system.vehicle.armour.front"
                            value="{{system.vehicle.armour.front}}"
                     />
                 </div>
                 <div class="resource flex-group-center">
                     <label class="field-label">Aft</label>
-                    <input class="field-value writable" type="number"
+                    <input type="number"
                            name="system.vehicle.armour.rear"
                            value="{{system.vehicle.armour.rear}}"
                     />
                 </div>
                 <div class="resource flex-group-center">
                     <label class="field-label">Port</label>
-                    <input class="field-value writable" type="number"
+                    <input type="number"
                            name="system.vehicle.armour.port"
                            value="{{system.vehicle.armour.port}}"
                     />
                 </div>
                 <div class="resource flex-group-center">
                     <label class="field-label">Starboard</label>
-                    <input class="field-value writable" type="number"
+                    <input type="number"
                            name="system.vehicle.armour.starboard"
                            value="{{system.vehicle.armour.starboard}}"
                     />
                 </div>
                 <div class="resource flex-group-center">
                     <label class="field-label">Dorsal</label>
-                    <input class="field-value writable" type="number"
+                    <input type="number"
                            name="system.vehicle.armour.top"
                            value="{{system.vehicle.armour.top}}"
                     />
                 </div>
                 <div class="resource flex-group-center">
                     <label class="field-label">Ventral</label>
-                    <input class="field-value writable" type="number"
+                    <input type="number"
                            name="system.vehicle.armour.bottom"
                            value="{{system.vehicle.armour.bottom}}"
                     />
