@@ -1,4 +1,38 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="description">
+
+    <div class="grid grid-4col">
+        <div class="resource">
+            <label class="field-label">{{localize "MGT2.Vehicle.Core.ControlSystems"}}</label>
+            <span>Basic (0)</span>
+        </div>
+
+        <div class="resource">
+            <label class="field-label">{{localize "MGT2.Vehicle.Core.Autopilot"}}</label>
+            <span>-</span>
+        </div>
+
+        <div class="resource grid-span-2">
+            <label class="field-label">{{localize "MGT2.Vehicle.Core.Communications"}}</label>
+            <span>-</span>
+        </div>
+
+        <div class="resource grid-span-2">
+            <label class="field-label">{{localize "MGT2.Vehicle.Core.Navigation"}}</label>
+            <span>-</span>
+        </div>
+
+        <div class="resource grid-span-1">
+            <label class="field-label">{{localize "MGT2.Vehicle.Core.Sensors"}}</label>
+            <span>-</span>
+        </div>
+
+        <div class="resource grid-span-1">
+            <label class="field-label">{{localize "MGT2.Vehicle.Core.Camouflage"}}</label>
+            <span>-</span>
+        </div>
+    </div>
+
+
     <img class="item-img actor-draggable draggable" src="{{actor.img}}"
          data-action="editImage" data-field="img"
          data-actor-id="{{actor._id}}"/>

@@ -2807,7 +2807,7 @@ Handlebars.registerHelper("showEffectPill", function(actor, effect) {
 
 // Item block for new V2 actor sheets.
 Handlebars.registerHelper("itemBlock", function(actor, item, types) {
-    let html = `<li class="item-block">`;
+    let html = `<li class="item-block draggable" data-item-id="${item._id}">`;
     html += `<h4>${item.name}</h4>`;
     html += `<img class="portrait" src="${item.img}"/>`;
 

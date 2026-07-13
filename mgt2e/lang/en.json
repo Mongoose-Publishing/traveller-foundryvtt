@@ -1514,6 +1514,12 @@
   "MGT2.Option.Type.agility": "Agility",
   "MGT2.Option.Type.manipulator": "Manipulator",
 
+  "MGT2.Option.Label.BaseProtection": "Base protection",
+  "MGT2.Option.Label.MaxProtection": "Max Protection",
+  "MGT2.Option.Label.VehicleSpacesPoint": "% Spaces/Point",
+  "MGT2.Option.Label.CostArmourSpace": "Cost/Armour Space",
+  "MGT2.Option.Label.CostPointVehicleSpace": "Cost/Point/Space",
+
   "MGT2.Vehicle.Size.small": "Small",
   "MGT2.Vehicle.Size.light": "Light",
   "MGT2.Vehicle.Size.heavy": "Heavy",
@@ -1616,6 +1622,13 @@
 
   "MGT2.Vehicle.FuelCapacity.Title": "Fuel Capacity",
   "MGT2.Vehicle.FuelCapacity.Label": "Fuel Capacity ({capacity}%)",
+
+  "MGT2.Vehicle.Core.ControlSystems": "Control Systems",
+  "MGT2.Vehicle.Core.Autopilot": "Autopilot",
+  "MGT2.Vehicle.Core.Communications": "Communications",
+  "MGT2.Vehicle.Core.Navigation": "Navigation",
+  "MGT2.Vehicle.Core.Sensors": "Sensors",
+  "MGT2.Vehicle.Core.Camouflage": "Camouflage",
 
   "MGT2.RobotTab.description": "Description",
   "MGT2.RobotTab.design": "Design",

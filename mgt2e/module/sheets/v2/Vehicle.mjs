@@ -1,6 +1,8 @@
 
 import { MgT2eActorV2 } from "./MgT2eActorV2.mjs";
 import {MgT2VehicleDamageApp} from "../../helpers/dialogs/vehicle-damage-app.mjs";
+import {skillLabel} from "../../helpers/dice-rolls.mjs";
+import {MGT2} from "../../helpers/config.mjs";
 
 export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
@@ -145,7 +147,6 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
 
         const hull = Math.max(1, parseInt(typeConfig.hull * this.document.system.vehicle.spaces));
-        console.log("HULL: " + hull);
         if (hull !== parseInt(this.document.system.hits.hull)) {
             console.log("UPDATING HITS FOR VEHICLE");
             const HITS = this.document.system.hits;
@@ -155,8 +156,6 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             HITS.value = HITS.max - HITS.damage;
             await this.document.update({"system.hits": HITS});
         }
-        console.log("VEHICLE HITS");
-        console.log(this.document.system.hits);
     }
 
     async _calculateHits() {
@@ -223,6 +222,9 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         const HITS = this.document.system.hits;
         context.MAX_DAMAGE = context.structure * 10;
         context.VEHICLE_DAMAGE = HITS.damage;
+
+        context.VEHICLE_SPEED = game.i18n.localize("MGT2.Vehicle.SpeedBand." + VEHICLE.speed);
+        context.VEHICLE_SKILL = MGT2.getFqnSkillLabel(VEHICLE.skill);
 
         // List Items
         await this._prepareItems(context);

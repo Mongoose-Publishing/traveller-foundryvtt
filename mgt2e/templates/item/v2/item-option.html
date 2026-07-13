@@ -44,7 +44,11 @@
         {{else}}
             <div class="resource flex-group-center">
                 <label class="item-label">{{localize "MGT2.Option.SlotsUsed"}}</label>
-                <input type="number" name="system.option.slots" value="{{system.option.slots}}"/>
+                {{#if item.parent}}
+                    <input type="number" name="system.option.slots" value="{{system.option.slots}}"/>
+                {{else}}
+                    <input type="number" value="-" readonly/>
+                {{/if}}
             </div>
         {{/if}}
 

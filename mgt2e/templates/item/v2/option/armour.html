@@ -1,0 +1,33 @@
+<section class="tab {{tab.cssClass}}" data-group="primary" data-tab="armour">
+    {{#if isRobot}}
+        <p>Robot Armour</p>
+    {{else}}
+        <div class="grid flex-group-center grid-4col">
+            <div class="resource">
+                <label class="item-label">{{localize "MGT2.Option.Label.BaseProtection"}}</label>
+                <input type="number" name="system.option.armour.baseProtection"
+                       value="{{system.option.armour.baseProtection}}"/>
+            </div>
+            <div class="resource">
+                <label class="item-label">{{localize "MGT2.Option.Label.MaxProtection"}}</label>
+                <input type="number" name="system.option.armour.maxProtection"
+                       value="{{system.option.armour.maxProtection}}"/>
+            </div>
+            <div class="resource">
+                <label class="item-label">{{localize "MGT2.Option.Label.VehicleSpacesPoint"}}</label>
+                <input type="number" name="system.option.armour.vehicleSpacesPerPoint"
+                       value="{{system.option.armour.vehicleSpacesPerPoint}}"/>
+            </div>
+            <div class="resource">
+                <label class="item-label">{{localize "MGT2.Option.Label.CostArmourSpace"}}</label>
+                <input type="number" name="system.option.armour.costPerArmourSpace"
+                       value="{{system.option.armour.costPerArmourSpace}}"/>
+            </div>
+            <div class="resource">
+                <label class="item-label">{{localize "MGT2.Option.Label.CostPointVehicleSpace"}}</label>
+                <input type="number" name="system.option.armour.costPerPointPerVehicleSpace"
+                       value="{{system.option.armour.costPerPointPerVehicleSpace}}"/>
+            </div>
+        </div>
+    {{/if}}
+</section>

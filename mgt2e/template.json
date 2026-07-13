@@ -191,6 +191,12 @@
         "traits": "",
         "features": "",
         "tl": 7,
+        "core": {
+          "agility": 0,
+          "autopilotDM": -3,
+          "autopilotMax": 7,
+          "navigationDM": 0
+        },
         "customisation": {
           "primaryPower": "unpowered",
           "secondaryPower": "unpowered",

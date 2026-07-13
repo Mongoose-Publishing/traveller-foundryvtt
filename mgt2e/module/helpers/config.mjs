@@ -1318,6 +1318,34 @@ MGT2.getDefaultSkills = function() {
     return skills;
 };
 
+MGT2.getFqnSkillLabel = function(skillFqn, skills) {
+    if (!skills) {
+        skills = MGT2.getDefaultSkills();
+    }
+    const skillId = skillFqn.split(".")[0];
+    const specId = skillFqn.split(".")[1];
+    let   label = "?";
+
+    const skill = skills[skillId];
+    if (skill) {
+        if (skill.label) {
+            label = skill.label;
+        } else {
+            label = game.i18n.localize("MGT2.Skills." + skillId);
+        }
+        if (specId && skill.specialities[specId]) {
+            const spec = skill.specialities[specId];
+            if (spec.label) {
+                label = `${label} (${spec.label})`;
+            } else {
+                label = `${label} (${game.i18n.localize("MGT2.Skills." + specId)})`;
+            }
+        }
+    }
+
+    return label;
+}
+
 MGT2.EFFECT_TYPES = {
   "CHA_AUG": "chaAug",
   "CHA_BASE": "chaBase",

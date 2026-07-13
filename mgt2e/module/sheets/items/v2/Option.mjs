@@ -43,7 +43,7 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             scrollable: [''],
         },
         "armour": {
-            template: "systems/mgt2e/templates/item/v2/option/robot-armour.html",
+            template: "systems/mgt2e/templates/item/v2/option/armour.html",
             scrollable: [''],
         },
         effects: {
@@ -77,6 +77,9 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         switch (this.document.system.option.type) {
             case "manipulator":
                 tabs.manipulators = this._addTab("primary", "manipulators");
+                break;
+            case "armour":
+                tabs.armour = this._addTab("primary", "armour");
                 break;
         }
         return  tabs ;
@@ -164,6 +167,8 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             parent: this.document.parent,
             config: CONFIG.MGT2,
             EFFECTS: this.document.effects,
+            isRobot: this.document.system.option.model === "robot",
+            isVehicle: this.document.system.option.model === "vehicle",
             tabs: this._prepareTabs("primary")
         };
 
@@ -220,15 +225,13 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         let dex = parseInt(item.system.tl / 2) + 1;
 
 
-        if (slots != item.system.option.slots) {
+        if (slots !== item.system.option.slots) {
             item.system.option.slots = slots;
             item.system.option.manipulators.str = str;
             item.system.option.manipulators.dex = dex;
             item.system.option.manipulators.slotpc = slotpc;
             await item.update({"system.option": item.system.option });
         }
-
-
     }
 
     _prepareManipulators(context) {
