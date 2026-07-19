@@ -493,3 +493,13 @@ img.weapon-scale {
   height: 64px;
   float: right;
 }
+
+span.damage-dice {
+  font-size: larger;
+  font-weight: bold;
+  padding-left: 3px;
+}
+
+span.destructive {
+  color: red;
+}

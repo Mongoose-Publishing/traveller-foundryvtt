@@ -247,13 +247,17 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
                 weapon: null,
                 quantity: 0
             }
+            console.log("MOUNT ITEM");
+            console.log(mountItem);
             if (mountItem.system.option.weapon.weaponId) {
-                const weaponItem = this.document.items.get(mountItem.system.option.weapon.weaponId);
+                const weaponItem = await this.document.items.get(mountItem.system.option.weapon.weaponId);
                 if (weaponItem) {
+                    console.log(weaponItem);
                     mount.weapon = weaponItem;
                     mount.quantity = mountItem.system.option.weapon.quantity;
                 }
             }
+            console.log(mount);
             context.MOUNTS.push(mount);
         }
 

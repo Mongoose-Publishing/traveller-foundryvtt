@@ -25,7 +25,7 @@ import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
 import { Tools } from "./helpers/chat/tools.mjs";
 import { MgT2eMacros } from "./helpers/chat/macros.mjs";
-import { rollSkill } from "./helpers/dice-rolls.mjs";
+import {printWeaponTraits, rollSkill} from "./helpers/dice-rolls.mjs";
 import { skillLabel } from "./helpers/dice-rolls.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
 import { migrateWorld } from "./migration.mjs";
@@ -2843,8 +2843,8 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
     return html;
 });
 
-Handlebars.registerHelper("weaponBlock", function(item) {
-    let html = `<li class="item-block draggable" data-item-id="${item._id}">`;
+Handlebars.registerHelper("weaponBlock", function(item, action) {
+    let html = `<li class="item-block draggable" data-item-id="${item._id}" data-action="${action}">`;
     const system = item.system;
 
     html += `<h4>
@@ -2852,27 +2852,59 @@ Handlebars.registerHelper("weaponBlock", function(item) {
         <img src="systems/mgt2e/icons/misc/scale-${system.weapon.scale}.svg" class="weapon-scale"/>
     </h4>`;
 
+    let damage = system.weapon.damage;
+    const destructive = hasTrait(system.weapon.traits, "destructive")?"destructive":"";
+    html += `<span class="damage-dice ${destructive}">${damage}</span>`;
+
     switch (system.weapon.scale) {
         case "vehicle":
-            html += `<b>D:</b> ${system.weapon.damage} `;
-            html += `<b>R:</b> ${system.weapon.range}km `;
+            html += ` / <b>Range:</b> ${system.weapon.range}km `;
             break;
         case "spacecraft":
+            html += ` / ${game.i18n.localize("MGT2.Spacecraft.Range." + system.weapon.spaceRange)}`;
             break;
         default:
-            html += `<b>D:</b> ${system.weapon.damage} `;
-            html += `<b>R:</b> ${system.weapon.range}m `;
+            html += ` / <b>Range:</b> ${system.weapon.range}m `;
             break;
     }
     html += `<br/>`;
+    if (system.weapon.traits) {
+        html += `<span class="weapon-traits">${printWeaponTraits(system.weapon.traits)}</span><br/>`;
+    }
     if (parseInt(system.weight) > 0) {
         html += `${system.weight}kg `;
     }
-    html += `<div class="item-controls">
-        <a class="item-control" data-action="editItem"title="${game.i18n.localize('MGT2.EditItem')}">
-            <i data-item-id="${item._id}" class="fas fa-edit"></i>
-        </a>
-    </div>`;
+
+    if (system.weapon.scale === "spacecraft") {
+        let mount = "Fixed";
+        switch (system.weapon.mount) {
+            case "fixed":
+                mount = "Fixed";
+                break;
+            case "turret1": case "turret2": case "turret3": case "turret4":
+                mount = "Turret1";
+                break;
+            case "barbette":
+                mount = "Barbette";
+                break;
+            case "bay.small":
+                mount = "BaySmall";
+                break;
+            case "bay.medium":
+                mount = "BayMedium";
+                break;
+            case "bay.large":
+                mount = "BayLarge";
+                break;
+            case "spinal":
+                mount = "Spinal";
+                break;
+            default:
+                mount = "Fixed";
+                break;
+        }
+        html += `${game.i18n.localize("MGT2.Item.SpaceMount." + mount)}`
+    }
 
     html += `</li>`;
     return html;

@@ -45,11 +45,12 @@
     <h4>Weapons</h4>
 
     <ol>
-        {{#each ITEMS_MOUNTS as |mount id|}}
+        {{#each MOUNTS as |mount|}}
             <li>
-                <h4>{{mount.name}}</h4>
-                Type: {{localize (concat "MGT2.Vehicle.MountType." mount.system.option.weapon.mountType)}}
-                Attached:
+                <h4>{{mount.item.name}}</h4>
+                Type: {{localize (concat "MGT2.Vehicle.MountType." mount.item.system.option.weapon.mountType)}}
+                <br/>
+                {{#if mount.weapon}}Attached: {{mount.weapon.name}} {{/if}}
             </li>
         {{/each}}
     </ol>

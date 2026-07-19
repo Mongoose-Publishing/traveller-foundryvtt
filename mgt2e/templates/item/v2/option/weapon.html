@@ -16,13 +16,15 @@
 
     <h4>Connected Weapons</h4>
 
+    {{{weaponBlock ATTACHED_WEAPON "removeWeapon"}}}
+
     <h4>Available Weapons</h4>
 
     <p>{{MOUNT_TEXT}}</p>
 
     <ol class="grid grid-3col">
         {{#each WEAPONS_LIST as | weapon id |}}
-            {{{weaponBlock weapon}}}
+            {{{weaponBlock weapon "addWeapon"}}}
         {{/each}}
     </ol>
 </section>

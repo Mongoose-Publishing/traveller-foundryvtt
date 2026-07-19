@@ -17,6 +17,7 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             editEffect: MgT2eOptionSheet.#editEffect,
             deleteEffect: MgT2eOptionSheet.#deleteEffect,
             editImage: MgT2eOptionSheet.#onEditImage,
+            addWeapon: MgT2eOptionSheet.#addWeapon
 
         },
         form: {
@@ -137,6 +138,37 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
 
         let effect = this.document.effects.get(effectId);
         effect.delete();
+    }
+
+    // Add a weapon to a vehicle weapon mount. Unlike with spacecraft mounts,
+    // if multiple weapons are added, they must all be identical. This makes the
+    // data structure a lot simpler.
+    static async #addWeapon(event, target) {
+        const element = target.closest("[data-item-id]");
+        if (!element) {
+            console.log("No element found");
+            return;
+        }
+        const itemId = element.dataset.itemId;
+
+        console.log("Adding weapon " + itemId);
+        if (this.document.parent) {
+            const weaponItem = this.document.parent.items.get(itemId);
+            if (!weaponItem) {
+                return;
+            }
+            console.log(weaponItem);
+            const option = this.document.system.option;
+            if (option.weapon.weaponId === itemId) {
+                option.weapon.quantity += 1;
+            } else {
+                option.weapon.weaponId = itemId;
+                option.weapon.quantity = 1;
+            }
+            await this.document.update({"system.option.weapon": option.weapon });
+        } else {
+            console.log("Not part of an actor");
+        }
     }
 
     static async #test(event, target) {
@@ -267,6 +299,16 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         context.SELECT_FIRECONTROL = {};
         for (let f of [ "none", "scope", "basic", "improved", "enhanced", "advanced"]) {
             context.SELECT_FIRECONTROL[f] = game.i18n.localize("MGT2.Vehicle.FireControl." + f);
+        }
+        context.ATTACHED_WEAPON = null;
+        if (this.document.system.option.weapon.weaponId) {
+            const weaponItem = this.document.parent.items.get(this.document.system.option.weapon.weaponId);
+            if (weaponItem) {
+                context.ATTACHED_WEAPON = weaponItem;
+            }
+        }
+        for (let w in this.document.system.option.weapon.weapons) {
+            console.log(w);
         }
 
         // Find all the weapons on this vehicle which could be attached to this mount.
