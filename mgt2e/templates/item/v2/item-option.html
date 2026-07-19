@@ -36,7 +36,7 @@
             <label class="item-label">{{localize "MGT2.CostCr"}}</label>
             <input name="system.cost" type="number" value="{{system.cost}}"/>
         </div>
-        {{#if (ifEquals item.type "vehicle")}}
+        {{#if (ifEquals system.option.model "vehicle")}}
             <div class="resource flex-group-center">
                 <label class="item-label">{{localize "MGT2.Option.SpacesUsed"}}</label>
                 <input type="number" name="system.option.spaces" value="{{system.option.spaces}}"/>
@@ -59,13 +59,16 @@
             </div>
         {{/if}}
 
-        {{#if (ifEquals system.option.type "mount")}}
+        {{#if (ifEquals system.option.type "weapon")}}
             <div>
-                <label class="item-label">Mount</label>
+                <label class="item-label">{{localize "MGT2.Option.Label.MountType"}}</label>
+                <select name="system.option.weapon.mountType">
+                    {{selectOptions SELECT_WEAPONMOUNT selected=system.option.weapon.mountType}}
+                </select>
             </div>
 
             <div>
-                <label class="item-label">Facing</label>
+                <label class="item-label">{{localize "MGT2.Option.Label.Facing"}}</label>
             </div>
         {{/if}}
     </div>

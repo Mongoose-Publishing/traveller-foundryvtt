@@ -2827,14 +2827,14 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
     if (parseInt(system.weight) > 0) {
         html += `${system.weight}kg `;
     }
-    if (parseInt(system.weight) > 0) {
+    if (parseInt(system.cost) > 0) {
         html += `Cr${system.cost} `;
     }
     html += `<div class="item-controls">
         <a class="item-control" data-action="editItem"title="${game.i18n.localize('MGT2.EditItem')}">
             <i data-item-id="${item._id}" class="fas fa-edit"></i>
         </a>
-        <a class="item-control" data-action="deleteItem" title="${game.i18n.localize('MGT2.EditItem')}">
+        <a class="item-control" data-action="deleteItem" title="${game.i18n.localize('MGT2.DeleteItem')}">
             <i data-item-id="${item._id}" class="fas fa-trash"></i>
         </a>
     </div>`;
@@ -2843,8 +2843,44 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
     return html;
 });
 
-Handlebars.registerHelper("itemName", function(item) {
-   let html = `<li class="item-name">`;
+Handlebars.registerHelper("weaponBlock", function(item) {
+    let html = `<li class="item-block draggable" data-item-id="${item._id}">`;
+    const system = item.system;
+
+    html += `<h4>
+        ${item.name}
+        <img src="systems/mgt2e/icons/misc/scale-${system.weapon.scale}.svg" class="weapon-scale"/>
+    </h4>`;
+
+    switch (system.weapon.scale) {
+        case "vehicle":
+            html += `<b>D:</b> ${system.weapon.damage} `;
+            html += `<b>R:</b> ${system.weapon.range}km `;
+            break;
+        case "spacecraft":
+            break;
+        default:
+            html += `<b>D:</b> ${system.weapon.damage} `;
+            html += `<b>R:</b> ${system.weapon.range}m `;
+            break;
+    }
+    html += `<br/>`;
+    if (parseInt(system.weight) > 0) {
+        html += `${system.weight}kg `;
+    }
+    html += `<div class="item-controls">
+        <a class="item-control" data-action="editItem"title="${game.i18n.localize('MGT2.EditItem')}">
+            <i data-item-id="${item._id}" class="fas fa-edit"></i>
+        </a>
+    </div>`;
+
+    html += `</li>`;
+    return html;
+
+});
+
+Handlebars.registerHelper("itemName", function (item) {
+    let html = `<li class="item-name">`;
    html += item.name;
    html += `</li>`;
    return html;

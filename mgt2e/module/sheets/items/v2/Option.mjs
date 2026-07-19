@@ -46,6 +46,10 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             template: "systems/mgt2e/templates/item/v2/option/armour.html",
             scrollable: [''],
         },
+        "weapon": {
+            template: "systems/mgt2e/templates/item/v2/option/weapon.html",
+            scrollable: [''],
+        },
         effects: {
             template: "systems/mgt2e/templates/item/v2/effects.html",
             scrollable: ['']
@@ -80,6 +84,9 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
                 break;
             case "armour":
                 tabs.armour = this._addTab("primary", "armour");
+                break;
+            case "weapon":
+                tabs.weapon = this._addTab("primary", "weapon");
                 break;
         }
         return  tabs ;
@@ -194,6 +201,9 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         switch (this.document.system.option.type) {
             case "manipulator":
                 break;
+            case "weapon":
+                this._prepareWeapon(context);
+                break;
         }
 
 
@@ -242,7 +252,61 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         context.SELECT_SIZE["+0"] = "Standard";
         context.SELECT_SIZE["+1"] = "Large +1";
         context.SELECT_SIZE["+2"] = "Large +2";
+    }
 
+    _prepareWeapon(context) {
+        context.SELECT_WEAPONMOUNT = {};
+        for (let m of [ "fixed", "hardpoint", "pintle", "ring", "gunport", "bay", "multibay", "turret"]) {
+            context.SELECT_WEAPONMOUNT[m] = game.i18n.localize("MGT2.Vehicle.MountType." + m);
+        }
+
+        context.SELECT_POPUP = {};
+        context.SELECT_POPUP[0] = "No";
+        context.SELECT_POPUP[1] = "Yes";
+
+        context.SELECT_FIRECONTROL = {};
+        for (let f of [ "none", "scope", "basic", "improved", "enhanced", "advanced"]) {
+            context.SELECT_FIRECONTROL[f] = game.i18n.localize("MGT2.Vehicle.FireControl." + f);
+        }
+
+        // Find all the weapons on this vehicle which could be attached to this mount.
+        // The rules are quite complicated, so there is a lot of logic here.
+        context.WEAPONS_LIST = [];
+        if (this.document.parent && this.document.parent.items) {
+            const mountSize = parseInt(this.document.system.option.spaces) || 0;
+            for (let w of this.document.parent.items) {
+                if (w.type === "weapon") {
+                    switch (this.document.system.option.weapon.mountType) {
+                        case "fixed":
+                            context.MOUNT_TEXT = "Weapons up to 250kg / space";
+                            if (w.system.weight <= mountSize * 250) {
+                                context.WEAPONS_LIST.push(w);
+                            }
+                            break;
+                        case "hardpoint":
+                            context.MOUNT_TEXT = "Any weapon size (normally oneshot or drones)";
+                            context.WEAPONS_LIST.push(w);
+                            break;
+                        case "pintle": case "ring":
+                            context.MOUNT_TEXT = "Weapons up to 500kg";
+                            if (w.system.weight <= 500) {
+                                context.WEAPONS_LIST.push(w);
+                            }
+                            break;
+                        case "bay":
+                            context.MOUNT_TEXT = "Weapons up to 250kg / space, normally one-shot or drones";
+                            if (w.system.weight <= mountSize * 250) {
+                                context.WEAPONS_LIST.push(w);
+                            }
+                            break;
+                        default:
+                            context.MOUNT_TEXT = "Whatever";
+                            context.WEAPONS_LIST.push(w);
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     async _preparePartContext(partId, context) {
@@ -255,6 +319,8 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             );
         } else if (partId === "manipulators") {
             this._prepareManipulators(context);
+        } else if (partId === "weapon") {
+            this._prepareWeapon(context);
         }
 
         return context;

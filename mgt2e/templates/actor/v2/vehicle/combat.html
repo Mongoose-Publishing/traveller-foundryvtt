@@ -29,7 +29,6 @@
     </div>
 
     <div class="grid grid-4col">
-
         <div class="grid-span-2">
             <div >
                 <label>Size</label>
@@ -42,5 +41,17 @@
             </div>
         </div>
     </div>
+
+    <h4>Weapons</h4>
+
+    <ol>
+        {{#each ITEMS_MOUNTS as |mount id|}}
+            <li>
+                <h4>{{mount.name}}</h4>
+                Type: {{localize (concat "MGT2.Vehicle.MountType." mount.system.option.weapon.mountType)}}
+                Attached:
+            </li>
+        {{/each}}
+    </ol>
 
 </section>

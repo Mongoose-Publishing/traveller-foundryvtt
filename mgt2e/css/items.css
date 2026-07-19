@@ -487,3 +487,9 @@ textarea.culture {
 div.resource input[type=number] {
   text-align: center;
 }
+
+img.weapon-scale {
+  width: 64px;
+  height: 64px;
+  float: right;
+}

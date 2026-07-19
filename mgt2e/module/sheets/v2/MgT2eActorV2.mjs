@@ -83,12 +83,39 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
 
     }
 
+    async _prepareCrew(context) {
+        if (!this.document.system.crewed) {
+            return;
+        }
+        context.CREW = [];
+        context.PASSENGERS = [];
+
+        for (let c in this.document.system.crewed.crew) {
+            let actor = game.actors.get(c);
+            if (actor) {
+                context.CREW.push({
+                    actor: actor,
+                    roles: []
+                });
+            }
+        }
+        for (let p in this.document.system.crewed.passengers) {
+            let actor = game.actors.get(p);
+            if (actor) {
+                context.PASSENGERS.push({
+                    actor: actor
+                });
+            }
+        }
+    }
+
     async _prepareItems(context) {
         context.ITEMS = this.document.items;
         context.ITEMS_WEAPONS = [];
         context.ITEMS_ARMOUR = [];
         context.ITEMS_OPTIONS = [];
         context.ITEMS_GEAR = [];
+        context.ITEMS_MOUNTS = [];
 
         for (let item of this.document.items) {
             if ([ "weapon" ].includes(item.type)) {
@@ -103,6 +130,10 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
                 switch (item.system.option.type) {
                     case "armour":
                         context.ITEMS_ARMOUR.push(item);
+                        break;
+                    case "weapon":
+                        context.ITEMS_MOUNTS.push(item);
+                        console.log(item);
                         break;
                 }
             } else {

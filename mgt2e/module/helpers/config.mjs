@@ -757,7 +757,7 @@ MGT2.VEHICLES = {
         "comms": {},
         "sensors": {},
         "armour": {},
-        "mount": {}
+        "weapon": {}
     }
 };
 

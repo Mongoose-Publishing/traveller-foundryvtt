@@ -1,3 +1,24 @@
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="crew">
     <h2>Crew</h2>
+
+    {{#if CREW}}
+        <ol class="items-list actor-crew-list grid grid-2col">
+            {{#each CREW as |member|}}
+                <li class="actor-crew" data-actor-id="{{member.actor._id}}">
+                    <h4>{{member.actor.name}}</h4>
+                    <img class="embedded-actor-portrait actor-draggable" d
+                         ata-actor-id="{{member.actor._id}}" title="{{member.actor.name}}"
+                         src="{{member.actor.img}}"/>
+                    {{{showCrewInfo ../actor member.actor}}}
+                </li>
+            {{/each}}
+        </ol>
+    {{/if}}
+
+    {{#if PASSENGERS}}
+        <ol class="items-list grid grid-3col">
+
+        </ol>
+    {{/if}}
+
 </section>

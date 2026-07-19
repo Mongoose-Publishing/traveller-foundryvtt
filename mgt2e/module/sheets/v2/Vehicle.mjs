@@ -203,6 +203,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         console.log("prepareDerivedData:");
     }
 
+
     async _prepareContext(options) {
         const context = {
             actor: this.document,
@@ -228,8 +229,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         // List Items
         await this._prepareItems(context);
-        console.log("ARMOUR");
-        console.log(context.ITEMS_ARMOUR);
+        await this._prepareCrew(context);
 
         VEHICLE.armour.total = 0;
         for (let armour of context.ITEMS_ARMOUR) {
@@ -239,6 +239,24 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
                 VEHICLE.armour.total += v;
             }
         }
+
+        context.MOUNTS = [];
+        for (let mountItem of context.ITEMS_MOUNTS) {
+            let mount = {
+                item: mountItem,
+                weapon: null,
+                quantity: 0
+            }
+            if (mountItem.system.option.weapon.weaponId) {
+                const weaponItem = this.document.items.get(mountItem.system.option.weapon.weaponId);
+                if (weaponItem) {
+                    mount.weapon = weaponItem;
+                    mount.quantity = mountItem.system.option.weapon.quantity;
+                }
+            }
+            context.MOUNTS.push(mount);
+        }
+
 
         // Work out Armour
         let assigned = 0;
@@ -297,7 +315,6 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
                 context.SELECT_SECOND_POWER[p] = game.i18n.localize(`MGT2.Vehicle.Power.${p}`);
             }
         }
-
 
         context.SELECT_SPEED = null;
         if (TL >= 4) {
