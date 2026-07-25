@@ -2467,6 +2467,14 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
     return html;
 });
 
+// Show where cargo/freight is from on the ship sheet.
+Handlebars.registerHelper('showCargoMeta', function(item) {
+    if (item.type === "cargo" && item.system.cargo) {
+
+    }
+    return "";
+});
+
 Handlebars.registerHelper('showSpacecraftHullTraits', function(key, traits) {
     let html = "";
     let list = traits.split(" ");

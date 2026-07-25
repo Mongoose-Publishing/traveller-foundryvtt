@@ -7,23 +7,35 @@
         <div class="shadow item-side-panel">
             <div class="cargo-data">
                 <div class="resource">
-                    <label>Quantity</label>
+                    <label>{{localize "MGT2.Item.Quantity"}}</label>
                     <span class="value-box">{{item.system.quantity}}dt</span>
                 </div>
                 {{#if item.system.cargo.parsecs}}
                     <div class="resource">
-                        <label>Parsecs</label>
+                        <label>{{localize "MGT2.Item.Parsecs"}}</label>
                         <span class="value-box">{{item.system.cargo.parsecs}}pc</span>
                     </div>
                 {{/if}}
                 <div class="resource">
-                    <label>Unit Value</label>
+                    <label>{{localize "MGT2.Item.UnitValue"}}</label>
                     <span class="value-box">Cr{{prettyNumber item.system.cargo.price 0 false}}</span>
                 </div>
                 <div class="resource">
-                    <label>Total Value</label>
+                    <label>{{localize "MGT2.Item.TotalValue"}}</label>
                     <span class="value-box">Cr{{prettyNumber totalCost 0 false}}</span>
                 </div>
+                {{#if item.system.cargo.sourceName}}
+                    <div class="resource">
+                        <label>{{localize "MGT2.Item.SourceWorld"}}</label>
+                        <span class="value-box">{{item.system.cargo.sourceName}}</span>
+                    </div>
+                {{/if}}
+                {{#if item.system.cargo.meta.purchasePrice includeZero=false}}
+                    <div class="resource">
+                        <label>{{localize "MGT2.Item.PurchasePrice"}}</label>
+                        <span class="value-box">Cr{{prettyNumber item.system.cargo.meta.purchasePrice 0 false}}/t</span>
+                    </div>
+                {{/if}}
             </div>
         </div>
       {{else}}

@@ -91,7 +91,7 @@
                     </div>
                     <div></div><div></div>
                 {{else}}
-                    <div><span class="add-finance-data">+Add Finance</span></div>
+                    <div><span class="add-finance-data">+{{localize 'MGT2.TravellerSheet.AddFinance'}}</span></div>
                     <div></div>
                     <div></div>
                 {{/if}}
@@ -117,16 +117,19 @@
                         <h4 title="{{nameQuantity item}}">{{nameQuantity item}}</h4>
                         <img title="{{nameQuantity item}}" src="{{item.img}}"/>
                         {{#if item.system.cargo.destinationName}}
+                            <b>{{localize 'MGT2.TravellerSheet.FreightDetails'}}</b><br/>
                             <span>{{item.system.cargo.destinationName}}</span>
                             <br/>
-                            <span>Cr{{niceNumber item.system.cargo.price}}</span>
+                            <span>Cr{{niceNumber item.system.cargo.price}}/t</span>
                         {{else}}
-                            {{#if item.system.quantity includeZero=false}}
-                                <span>{{item.system.quantity}}dt</span>
+                            <b>{{localize 'MGT2.TravellerSheet.SpeculativeDetails'}}</b><br/>
+                            {{#if item.system.cargo.sourceName}}
+                                <span>{{item.system.cargo.sourceName}}</span>
                                 <br/>
                             {{/if}}
                             {{#if item.system.cost includeZero=false}}
-                                <span>Cr{{niceNumber item.system.cost}}</span>
+                                <span>Cr{{niceNumber item.system.cost}}/t</span>
+                                <br/>
                             {{/if}}
                         {{/if}}
                         <div class="item-controls">
