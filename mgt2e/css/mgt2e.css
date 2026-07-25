@@ -213,3 +213,27 @@ div.weapon-range span {
   width: 120px;
   float: left;
 }
+
+.vehicle-weapons li.vehicle-weapon {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: var(--mongoose-dark);
+}
+
+.vehicle-weapons li.vehicle-weapon h4 {
+  padding-left: 10px;
+  background-color: var(--mongoose-orange);
+  border-radius: 10px 10px 0px 0px;
+  color: white;
+}
+
+.vehicle-weapons li.vehicle-weapon h5 {
+  margin-top: 0;
+  padding-top: 0;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+

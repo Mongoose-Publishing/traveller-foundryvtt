@@ -1,4 +1,4 @@
-<section class="tab {{tab.cssClass}}" data-group="primary" data-tab="combat">
+<section class="tab {{tab.cssClass}} scrollable" data-group="primary" data-tab="combat">
     <h4>Armour</h4>
 
     <div class="grid grid-6col">
@@ -44,13 +44,18 @@
 
     <h4>Weapons</h4>
 
-    <ol>
+    <ol class="vehicle-weapons grid grid-2col">
         {{#each MOUNTS as |mount|}}
-            <li>
-                <h4>{{mount.item.name}}</h4>
+            <li class="vehicle-weapon">
+                <h4>
+                    {{mount.item.name}}
+                    <img src="systems/mgt2e/icons/misc/scale-{{mount.weapon.system.weapon.scale}}.svg" class="weapon-scale"/>
+                </h4>
+                {{#if mount.weapon}}
+                    <h5>{{mount.weapon.name}}</h5>
+                {{/if}}
                 Type: {{localize (concat "MGT2.Vehicle.MountType." mount.item.system.option.weapon.mountType)}}
                 <br/>
-                {{#if mount.weapon}}Attached: {{mount.weapon.name}} {{/if}}
             </li>
         {{/each}}
     </ol>
