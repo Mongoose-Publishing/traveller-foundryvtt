@@ -1094,6 +1094,7 @@
   "MGT2.Item.EnergyType.standard": "Standard",
   "MGT2.Item.EnergyType.laser": "Laser",
   "MGT2.Item.EnergyType.plasma": "Plasma",
+  "MGT2.Item.EnergyType.psionic": "Psionic",
   "MGT2.Item.EnergyType.fire": "Fire",
   "MGT2.Item.EnergyType.energy": "Energy",
   "MGT2.Item.EnergyType.cutting": "Cutting",

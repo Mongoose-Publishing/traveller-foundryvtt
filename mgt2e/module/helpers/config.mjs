@@ -928,7 +928,7 @@ MGT2.COMPUTERS = {
 };
 
 MGT2.WEAPONS = {
-    "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting", "meson", "nuclear" ],
+    "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting", "meson", "nuclear", "psionic" ],
     "traits": {
         "artillery": { "scale": "traveller" },
         "ap": {  "value": 1, "min": 1, "max": 999, "conflict": [ "loPen", "spinal" ] },
