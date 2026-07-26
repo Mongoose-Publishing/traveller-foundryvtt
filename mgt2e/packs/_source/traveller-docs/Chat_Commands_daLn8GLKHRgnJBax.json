@@ -43,7 +43,7 @@
       "_key": "!journal.pages!daLn8GLKHRgnJBax.shQm9JqCDpnbYIo7"
     },
     {
-      "sort": 100000,
+      "sort": 300000,
       "name": "Damage",
       "type": "text",
       "_id": "mHFFq1B6Uu3nerxP",
@@ -70,11 +70,11 @@
       "_stats": {
         "compendiumSource": "JournalEntry.eZ2L0FoGcDGzjNht.JournalEntryPage.mHFFq1B6Uu3nerxP",
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.351",
         "systemId": "mgt2e",
         "systemVersion": "0.11.6.13-DEV",
         "createdTime": 1739898197031,
-        "modifiedTime": 1739898197031,
+        "modifiedTime": 1785071861356,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
@@ -82,7 +82,7 @@
       "_key": "!journal.pages!daLn8GLKHRgnJBax.mHFFq1B6Uu3nerxP"
     },
     {
-      "sort": 100000,
+      "sort": 400000,
       "name": "Set Status",
       "type": "text",
       "_id": "0w60QfzgYiHFsLnX",
@@ -109,11 +109,11 @@
       "_stats": {
         "compendiumSource": "JournalEntry.eZ2L0FoGcDGzjNht.JournalEntryPage.0w60QfzgYiHFsLnX",
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.351",
         "systemId": "mgt2e",
         "systemVersion": "0.11.6.13-DEV",
         "createdTime": 1739898199505,
-        "modifiedTime": 1742221108971,
+        "modifiedTime": 1785071861356,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
@@ -121,7 +121,7 @@
       "_key": "!journal.pages!daLn8GLKHRgnJBax.0w60QfzgYiHFsLnX"
     },
     {
-      "sort": 100000,
+      "sort": 500000,
       "name": "Macros",
       "type": "text",
       "_id": "eBUfwBRUB8sJVH8g",
@@ -152,7 +152,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.11.6.13-DEV",
         "createdTime": 1739898202402,
-        "modifiedTime": 1778365820235,
+        "modifiedTime": 1785071861356,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
@@ -160,7 +160,7 @@
       "_key": "!journal.pages!daLn8GLKHRgnJBax.eBUfwBRUB8sJVH8g"
     },
     {
-      "sort": 200000,
+      "sort": 600000,
       "name": "Skill",
       "type": "text",
       "_id": "9tkPjL06eDg382W2",
@@ -187,11 +187,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.351",
         "systemId": "mgt2e",
         "systemVersion": "0.15.1.17-DEV",
         "createdTime": 1760092318577,
-        "modifiedTime": 1760093344668,
+        "modifiedTime": 1785071861356,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
@@ -199,7 +199,7 @@
       "_key": "!journal.pages!daLn8GLKHRgnJBax.9tkPjL06eDg382W2"
     },
     {
-      "sort": 300000,
+      "sort": 700000,
       "name": "Skills",
       "type": "text",
       "_id": "2viOiQM3yzIlBY7b",
@@ -226,16 +226,55 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.351",
         "systemId": "mgt2e",
         "systemVersion": "0.15.1.17-DEV",
         "createdTime": 1760092540920,
-        "modifiedTime": 1760093463213,
+        "modifiedTime": 1785071861356,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
       "category": null,
       "_key": "!journal.pages!daLn8GLKHRgnJBax.2viOiQM3yzIlBY7b"
+    },
+    {
+      "sort": 350000,
+      "name": "Time",
+      "type": "text",
+      "_id": "5kEYFioP5VYAUqjD",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<pre><code>/time\n/time +days\n/time -days</code></pre><p>Displays the current in-game time. The time can be changed in the game settings, to set the current year and current day.</p><p>Or the GM can use the /time chat command to change the current time by a relative amount.</p><p>e.g.</p><pre><code>/time +7</code></pre><p>will shift the current time on by 7 days, after the ship makes a jump.</p><p>This is a very crude built-in way of tracking the current date within a campaign. It assumes the Third Imperium calendar, and uses ISO format (e.g. yyyy-ddd) for display.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.21.5.0",
+        "createdTime": 1785071689983,
+        "modifiedTime": 1785071863257,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!daLn8GLKHRgnJBax.5kEYFioP5VYAUqjD"
     }
   ],
   "sort": 300000,

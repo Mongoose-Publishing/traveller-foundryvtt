@@ -2,7 +2,7 @@
   "id": "mgt2e",
   "title": "Mongoose Traveller 2e",
   "description": "A system for Mongoose Traveller 2e. This includes rules specific to this version of Traveller.",
-  "version": "0.21.5.2-DEV",
+  "version": "0.21.6.0",
   "compatibility": {
     "minimum": 13,
     "verified": 14,
@@ -19,8 +19,7 @@
   "esmodules": ["module/mgt2.mjs" ],
   "styles": [
     "css/mgt2.css", "css/history.css", "css/items.css", "css/journals.css",
-    "css/software.css", "css/world.css", "css/npc.css", "css/chat.css",
-    "css/mgt2e.css"
+    "css/software.css", "css/world.css", "css/npc.css", "css/chat.css"
   ],
   "background": "systems/mgt2e/images/traveller.webp",
   "scripts": [ ],
@@ -116,8 +115,8 @@
   },
   "primaryTokenAttribute": "hits",
   "secondaryTokenAttribute": null,
-  "url": "https://filehost.notasnark.net/foundry/mgt2e/README.html",
-  "manifest": "https://filehost.notasnark.net/foundry/mgt2e/system.json",
-  "download": "https://filehost.notasnark.net/foundry/mgt2e/mongoose-traveller.zip",
+  "url": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/",
+  "manifest": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/release/system.json",
+  "download": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/v0.21.6/release/mongoose-traveller.zip",
   "license": "https://github.com/Mongoose-Publishing/traveller-foundryvtt/raw/latest/LICENSE.txt"
 }

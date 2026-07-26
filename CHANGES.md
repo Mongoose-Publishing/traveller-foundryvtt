@@ -1,5 +1,10 @@
 # Release Notes
 
+# 0.21.6 (Beta)
+
+* Added Psionic as a damage type for weapons and armour.
+* Record and show more meta data on trade goods on the spacecraft sheet.
+
 # 0.21.5 (Beta)
 
 * Updates to Spanish translations.

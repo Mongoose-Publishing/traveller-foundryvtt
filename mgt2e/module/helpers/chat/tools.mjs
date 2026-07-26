@@ -61,6 +61,17 @@ Tools.message = function(chatData, message) {
     chatData.content = message;
     ChatMessage.create(chatData);
 }
+Tools.formattedDate = function() {
+    const year = parseInt(game.settings.get("mgt2e", "currentYear")) || 0;
+    const day = Math.max(1, parseInt(game.settings.get("mgt2e", "currentDay")) || 1);
+
+    let dayStr = `${day}`;
+    while (dayStr.length < 3) {
+        dayStr = "0" + dayStr;
+    }
+
+    return `${year}-${dayStr}`;
+}
 
 // Not really hexadecimal, so can't use normal maths functions.
 // Skips some letters (I and O) to avoid confusion.

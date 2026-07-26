@@ -134,7 +134,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Updates for Spanish translations.</p></li><li><p>Addition of new Brazilian Portuguese translation.</p></li></ul>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Psionic has been added as a damage type for weapons and armour</p></li><li><p>More meta data is recorded and displayed for cargo. In the ship sheet, cargo shows the purchase price, source world and destination world (for speculative trade and freight respectively). Freight also records purchase date, and displays it on the item sheet. Makes use of the @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.daLn8GLKHRgnJBax.JournalEntryPage.5kEYFioP5VYAUqjD]{/time} chat command for the current date</p></li></ul>"
       },
       "video": {
         "controls": true,
@@ -153,7 +153,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1783254128380,
+        "modifiedTime": 1785073245434,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
