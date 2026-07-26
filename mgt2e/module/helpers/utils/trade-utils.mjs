@@ -858,7 +858,7 @@ export async function tradeBuyFreightHandler(queryData) {
         "system": foundry.utils.deepClone(freightItem.system)
     }
     itemData.system.cargo.meta = {
-        purchaseDate: `${game.settings.get("mgt2e", "currentYear")}-${game.settings.get("mgt2e", "currentDay")}`
+        purchaseDate: `${Tools.formattedDate()}`
     }
     Item.create(itemData, { parent: shipActor });
 

@@ -36,6 +36,12 @@
                         <span class="value-box">Cr{{prettyNumber item.system.cargo.meta.purchasePrice 0 false}}/t</span>
                     </div>
                 {{/if}}
+                {{#if item.system.cargo.meta.purchaseDate includeZero=false}}
+                    <div class="resource">
+                        <label>{{localize "MGT2.Item.PurchaseDate"}}</label>
+                        <span class="value-box">{{item.system.cargo.meta.purchaseDate}}</span>
+                    </div>
+                {{/if}}
             </div>
         </div>
       {{else}}

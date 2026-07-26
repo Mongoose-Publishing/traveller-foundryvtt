@@ -1262,6 +1262,7 @@
   "MGT2.Item.TotalValue": "Total Value",
   "MGT2.Item.SourceWorld": "Source World",
   "MGT2.Item.PurchasePrice": "Purchase Price",
+  "MGT2.Item.PurchaseDate": "Purchase Date",
   "MGT2.Armour.FormType": "Armour Type",
   "MGT2.Armour.Form.Standard": "Standard",
   "MGT2.Armour.Form.Layered": "Anti-Energy",
