@@ -470,35 +470,43 @@ Tools.currentTime = function(chatData, args) {
         let value = args.shift();
         let inc = false;
         let y = false;
+
+        if (!value.match("[+|-]?([0-9]+y)?[0-9]+")) {
+            ui.notifications.error(game.i18n.localize("MGT2.Macro.Time.InvalidTime"));
+            chatData.whisper = [ game.user.id ];
+            this.message(chatData, game.i18n.localize("MGT2.Macro.Time.FormatMsg"));
+            return true;
+        }
+
         if (value.startsWith("+")) {
             inc = true;
         }
         if (value.match("[0-9]+y.*")) {
-            year = parseInt(year) + parseInt(value);
+            year = parseInt(year) + parseInt(value) || 0;
+            day += parseInt(value.replace(/.*y/g, "")) || 0
         } else {
-            day = parseInt(day) + parseInt(value);
+            day = parseInt(day) + parseInt(value) || 0;
         }
 
         while (parseInt(day) > 365) {
             year++;
-            day-=365;
+            day -= 365;
         }
         while (parseInt(day) < 1) {
             year--;
-            day+=365;
+            day += 365;
         }
         game.settings.set("mgt2e", "currentYear", year);
         game.settings.set("mgt2e", "currentDay", day);
     } else if (args.length > 0) {
-        ui.notifications.error("Only the GM can set the date and time");
+        ui.notifications.error(game.i18n.localize("MGT2.Macro.Time.OnlyGM"));
     }
     if (parseInt(day) < 10) {
         day = "00" + day;
     } else if (parseInt(day) < 100) {
         day = "0" + day;
     }
-    let text = "It is currently " + year + "-" + day;
-    this.message(chatData, text);
+    this.message(chatData, game.i18n.format("MGT2.Macro.Time.Current", { time: `${year}-${day}`}));
 }
 
 Tools.macroExecutionEnricher = function(match, options) {
