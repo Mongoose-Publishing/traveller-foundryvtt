@@ -2242,7 +2242,7 @@ Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
                 } else if (action.action === "special") {
                     icon = "fa-wand-magic-sparkles";
                 }
-                html += `<span class="role-action-button" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}">`;
+                html += `<span class="role-action-button" data-action="roleAction" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}">`;
                 html += `<i class="fa-regular ${icon}"></i> ${action.title}`;
                 html += `</span>`;
             }
@@ -2848,7 +2848,11 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
     html += `</li>`;
     return html;
 });
+
 Handlebars.registerHelper("weaponBlock", function(item, action) {
+    if (!item) {
+        return "";
+    }
     let html = `<li class="item-block draggable" data-item-id="${item._id}" data-action="${action}">`;
     const system = item.system;
     html += `<h4>
@@ -2909,6 +2913,53 @@ Handlebars.registerHelper("weaponBlock", function(item, action) {
     html += `</li>`;
     return html;
 });
+
+Handlebars.registerHelper("weaponMountBlock", function(mount) {
+    const mountItem = mount.item;
+    const weaponItem = mount.weapon;
+    if (!mountItem || mountItem.type !== "option" || mountItem.system.option.type !== "weapon") {
+        return "";
+    }
+
+    let html = `<li class="item-block vehicle-weapon"><h4>${mountItem.name}</h4>`;
+    if (weaponItem) {
+        html += `<img src="systems/mgt2e/icons/misc/scale-${weaponItem.system.weapon.scale}.svg" class="weapon-scale"/>`;
+    }
+    html += `</h4>`;
+
+    const mountType = mountItem.system.option.weapon.mountType;
+    if (weaponItem) {
+        html += `<h5>${weaponItem.name} (${game.i18n.localize("MGT2.Vehicle.MountType." + mountType)})</h5>`;
+
+        const system = weaponItem.system;
+        let damage = system.weapon.damage;
+        const destructive = hasTrait(system.weapon.traits, "destructive")?"destructive":"";
+        html += `<span class="damage-dice ${destructive}">${damage}</span>`;
+        if (system.weapon.traits) {
+            html += `<br/><span class="weapon-traits">${printWeaponTraits(system.weapon.traits)}</span>`;
+        }
+        html += `<br/>`;
+        if (system.weapon.scale === "spacecraft") {
+            html += `${game.i18n.localize("MGT2.Spacecraft.Range." + system.weapon.spaceRange)}`;
+        } else {
+            const shortRange = parseInt(system.weapon.range / 4);
+            const longRange = parseInt(system.weapon.range * 2);
+            const extremeRange = parseInt(system.weapon.range * 4);
+            const unit = (system.weapon.scale === "vehicle")?"km":"m";
+            html += `<table><tr><th>${game.i18n.localize("MGT2.Attack.short")} (+1)</th><th>${game.i18n.localize("MGT2.Attack.medium")}</th><th>${game.i18n.localize("MGT2.Attack.long")} (-2)</th><th>${game.i18n.localize("MGT2.Attack.extreme")} (-4)</th></tr>`;
+            html += `<tr><td>${shortRange}${unit}</td><td>${system.weapon.range}${unit}</td><td>${longRange}${unit}</td><td>${extremeRange}${unit}</td></tr>`;
+            html += "</table>";
+        }
+
+    } else {
+        html += `<h5>${game.i18n.localize("MGT2.Vehicle.MountType." + mountType)}</h5>`;
+        html += `No weapon attached`;
+    }
+    html += `</li>`;
+    return html;
+});
+
+
 Handlebars.registerHelper("itemName", function (item) {
     let html = `<li class="item-name">`;
    html += item.name;

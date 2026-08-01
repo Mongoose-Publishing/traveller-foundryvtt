@@ -583,9 +583,13 @@ export async function rollAttack(actor, weapon, attackOptions) {
         let shortRange = parseInt(baseRange / 4);
         let longRange = parseInt(baseRange * 2);
         let extremeRange = parseInt(baseRange * 4);
+        let unit = "m";
+        if (weapon.system.weapon.scale === "vehicle") {
+            unit = "km";
+        }
 
         content += `<table><tr><th>${game.i18n.localize("MGT2.Attack.short")} (+1)</th><th>${game.i18n.localize("MGT2.Attack.medium")}</th><th>${game.i18n.localize("MGT2.Attack.long")} (-2)</th><th>${game.i18n.localize("MGT2.Attack.extreme")} (-4)</th></tr>`;
-        content += `<tr><td>${shortRange}m</td><td>${baseRange}m</td><td>${longRange}m</td><td>${extremeRange}m</td></tr>`;
+        content += `<tr><td>${shortRange}${unit}</td><td>${baseRange}${unit}</td><td>${longRange}${unit}</td><td>${extremeRange}${unit}</td></tr>`;
         content += "</table>";
     }
 

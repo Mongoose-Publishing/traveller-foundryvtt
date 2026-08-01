@@ -541,7 +541,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
 
             context.weapons = {};
             context.weapons[""] = "";
-            if (context.item.parent && context.item.parent.type === "spacecraft") {
+            if (context.item.parent && context.item.parent.type === "spacecraft" || context.item.parent.type === "vehicle") {
                 const spacecraft = context.item.parent;
                 for (let i of spacecraft.items) {
                     if (i.type === "hardware" && i.system.hardware.system === "weapon") {
@@ -565,6 +565,15 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                             wname = `${i.name} (${wname})`;
                         } else {
                             wname = i.name;
+                        }
+                        context.weapons[i._id] = wname;
+                    } else if (i.type === "option" && i.system.option.type === "weapon") {
+                        let wname = "";
+                        if (i.system.option.weapon?.weaponId) {
+                            let wpn = spacecraft.items.get(i.system.option.weapon?.weaponId);
+                            if (wpn) {
+                                wname = wpn.name;
+                            }
                         }
                         context.weapons[i._id] = wname;
                     }

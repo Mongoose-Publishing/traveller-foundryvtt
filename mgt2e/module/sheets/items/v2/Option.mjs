@@ -292,6 +292,10 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             context.SELECT_WEAPONMOUNT[m] = game.i18n.localize("MGT2.Vehicle.MountType." + m);
         }
 
+        if (!this.document.system.option.weapon) {
+            this.document.system.option.weapon = {};
+        }
+
         context.SELECT_POPUP = {};
         context.SELECT_POPUP[0] = "No";
         context.SELECT_POPUP[1] = "Yes";
@@ -301,13 +305,13 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             context.SELECT_FIRECONTROL[f] = game.i18n.localize("MGT2.Vehicle.FireControl." + f);
         }
         context.ATTACHED_WEAPON = null;
-        if (this.document.system.option.weapon.weaponId) {
+        if (this.document.system.option?.weapon?.weaponId) {
             const weaponItem = this.document.parent.items.get(this.document.system.option.weapon.weaponId);
             if (weaponItem) {
                 context.ATTACHED_WEAPON = weaponItem;
             }
         }
-        for (let w in this.document.system.option.weapon.weapons) {
+        for (let w in this.document.system.option?.weapon?.weapons) {
             console.log(w);
         }
 

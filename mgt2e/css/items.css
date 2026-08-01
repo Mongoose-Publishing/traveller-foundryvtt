@@ -438,6 +438,7 @@ textarea.culture {
 }
 
 .item-block {
+  list-style: none;
   border: 1px solid var(--mongoose-blue);
   color: white;
   background-color: var(--mongoose-dark);
@@ -489,8 +490,8 @@ div.resource input[type=number] {
 }
 
 img.weapon-scale {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   float: right;
 }
 

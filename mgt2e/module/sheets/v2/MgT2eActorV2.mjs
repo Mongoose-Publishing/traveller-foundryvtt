@@ -1,4 +1,6 @@
 import {MgT2AttackDialog} from "../../helpers/attack-dialog.mjs";
+import {MgT2CrewMemberDialog} from "../../helpers/crew-member-dialog.mjs";
+import {MgT2eAttackApp} from "../../helpers/dialogs/MgT2eAttackApp.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -15,7 +17,12 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         // Map your HTML [data-action] attributes to JS functions
         actions: {
             attack: MgT2eActorV2.#onAttack,
-            reload: MgT2eActorV2.#onReload
+            reload: MgT2eActorV2.#onReload,
+            promoteCrew: MgT2eActorV2.#promoteCrew,
+            removeCrew: MgT2eActorV2.#removeCrew,
+            demoteCrew: MgT2eActorV2.#demoteCrew,
+            editCrew: MgT2eActorV2.#editCrew,
+            roleAction: MgT2eActorV2.#roleAction
         },
         form: {
             handler: MgT2eActorV2.onFormSubmit,
@@ -79,6 +86,109 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
 
     }
 
+    static async #demoteCrew(event, target) {
+        const parent = target.closest("[data-actor-id]");
+        const actorId = parent?.dataset.actorId;
+        if (actorId) {
+            this.actor.update({[`system.crewed.crew.-=${actorId}`]: null});
+            this.actor.update({[`system.crewed.passenger.${actorId}`]: { } });
+        }
+    }
+
+    static async #promoteCrew(event, target) {
+        const parent = target.closest("[data-actor-id]");
+        const actorId = parent?.dataset.actorId;
+        if (actorId) {
+            this.actor.update({[`system.crewed.passengers.-=${actorId}`]: null});
+            this.actor.update({[`system.crewed.crew.${actorId}`]: { } });
+        }
+    }
+
+    static async #removeCrew(event, target) {
+        const parent = target.closest("[data-actor-id]");
+        const actorId = parent?.dataset.actorId;
+        if (actorId) {
+            this.actor.update({[`system.crewed.passengers.-=${actorId}`]: null});
+        }
+    }
+
+    static async #editCrew(event, target) {
+        const parent = target.closest("[data-actor-id]");
+        const actorId = parent?.dataset.actorId;
+        if (actorId) {
+            const crew = game.actors.get(actorId);
+            new MgT2CrewMemberDialog(crew, this.actor,this).render(true);
+        }
+    }
+
+    // Vehicle or Spacecraft using a role action.
+    static async #roleAction(event, target) {
+        console.log("roleAction:");
+        const actionId = event.target.dataset["actionId"];
+        const roleId = event.target.dataset["roleId"];
+        const crewId = event.target.dataset["crewId"];
+
+        const crewActor = game.actors.get(crewId);
+        const roleItem = this.document.items.get(roleId);
+
+        if (!crewActor || !roleItem) {
+            console.log("Crew or Role not found");
+            return;
+        }
+
+        const action = roleItem.system.role.actions[actionId];
+        if (!action) {
+            console.log("No action found");
+            return;
+        }
+
+        switch (action.action) {
+            case "chat":
+                let chatData = {
+                    user: game.user.id,
+                    speaker: {
+                        actor: crewActor._id,
+                        alias: game.i18n.format("MGT2.Role.ChatAlias", {
+                            "actorName": crewActor.name, "shipName": this.document.name
+                        }),
+                        scene: game.scenes.current.id
+                    },
+                    content: `${action.chat}`
+                }
+                ChatMessage.create(chatData, {});
+                break;
+            case "skill":
+                let skill = action.skill;
+                let cha = action.cha;
+                let target = isNaN(action.target)?null:parseInt(action.target);
+                let dm = action.dm?action.dm:0;
+                if (skill) {
+                    new MgT2SkillDialog(crewActor, skill, {
+                        "dm": dm,
+                        "cha": cha,
+                        "difficulty": target,
+                        "text": action.text
+                    }).render(true);
+                }
+                break;
+            case "weapon":
+                const weaponId = action.weapon;
+                const mountItem = this.document.items.get(weaponId);
+                const weaponItem = this.document.items.get(mountItem.system.option.weapon.weaponId);
+                const wdm = parseInt(action.dm) || 0;
+                new MgT2eAttackApp(crewActor, weaponItem, {
+                    vehicle: this.document,
+                    mount: mountItem,
+                    dm: wdm
+                }).render(true);
+                break;
+            default:
+                console.log("Unknown action " + action.action);
+        }
+
+
+    }
+
     onFormSubmit() {
 
     }
@@ -116,24 +226,23 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         context.ITEMS_OPTIONS = [];
         context.ITEMS_GEAR = [];
         context.ITEMS_MOUNTS = [];
+        context.ITEMS_ROLES = [];
 
         for (let item of this.document.items) {
             if ([ "weapon" ].includes(item.type)) {
                 context.ITEMS_WEAPONS.push(item);
             } else if ([ "armour" ].includes(item.type)) {
                 context.ITEMS_ARMOUR.push(item);
-            } else if ([ "roles" ].includes(item.type)) {
+            } else if ([ "role" ].includes(item.type)) {
                 context.ITEMS_ROLES.push(item);
             } else if ([ "option" ].includes(item.type)) {
                 context.ITEMS_OPTIONS.push(item);
-                console.log(item);
                 switch (item.system.option.type) {
                     case "armour":
                         context.ITEMS_ARMOUR.push(item);
                         break;
                     case "weapon":
                         context.ITEMS_MOUNTS.push(item);
-                        console.log(item);
                         break;
                 }
             } else {

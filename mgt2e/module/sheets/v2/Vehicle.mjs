@@ -24,7 +24,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             },
             removeFeature: MgT2eVehicleSheet.#removeFeature,
             editItem: MgT2eVehicleSheet.#editItem,
-            deleteItem: MgT2eVehicleSheet.#deleteItem,
+            deleteItem: MgT2eVehicleSheet.#deleteItem
         },
         form: {
             handler: MgT2eVehicleSheet.#onFormSubmit,
@@ -439,6 +439,9 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             case "Damage":
                 await this._onDropDamage(event, data);
                 break;
+            case "Actor":
+                await this._onDropActor(event, data);
+                break;
         }
     }
 
@@ -459,14 +462,29 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
     }
 
+    async _onDropActor(event, data) {
+        console.log("ADD ACTOR AS CREW:");
+        const actor = await Actor.fromDropData(data);
+        console.log(actor);
+
+        if (["traveller", "npc", "robot"].includes(actor.type)) {
+            console.log("Adding " + actor.type);
+            // Can be added as a passenger.
+            // TODO: What about creatures?
+            if (!this.document.system.crewed) {
+                this.document.system.crewed = { crew: {}, passengers: {}, roles: []};
+            }
+            console.log(this.document.system);
+            await this.document.update({[`system.crewed.passengers.${actor._id}`]: {roles: ["NONE"]}});
+        }
+        return false;
+    }
+
     async _onDropDamage(event, data) {
         console.log("DAMAGE:");
 
         const damageOptions = JSON.parse(data.options);
-        console.log(damageOptions);
         this.applyDamageToVehicle(damageOptions);
-
-
     }
 
     // Apply damage to a vehicle. This uses the damage rules from the Vehicle Update book.
