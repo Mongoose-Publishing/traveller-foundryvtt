@@ -242,6 +242,11 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         return context;
     }
 
+    async _calculateArmour(item) {
+        console.log("CALCULATE ARMOUR");
+
+    }
+
     async _calculateManipulators(item, newSize) {
         console.log("CALCULATE MANIPULATORS");
         let robotSize = 5;
@@ -284,6 +289,27 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         context.SELECT_SIZE["+0"] = "Standard";
         context.SELECT_SIZE["+1"] = "Large +1";
         context.SELECT_SIZE["+2"] = "Large +2";
+    }
+
+    _prepareArmour(context) {
+        if (this.document.system.option.model === "robot") {
+
+        } else if (this.document.system.option.model === "vehicle") {
+            let vehicleSpaces = 100;
+            let vehicleMultiplier = 1;
+            if (this.document.parent && this.document.parent.type === "vehicle") {
+                vehicleSpaces = parseInt(this.document.parent.system.vehicle.spaces) || 0;
+            }
+
+            const protection = this.document.system.option.armour.value;
+            const spaces = Math.ceil((protection * vehicleSpaces) * this.document.system.option.armour.vehicleSpacesPerPoint / 100.0);
+            console.log("Armour spaces: " + spaces);
+            if (spaces !== this.document.system.option.spaces) {
+                this.document.system.option.spaces = spaces;
+                this.document.update({"system.option.spaces": spaces});
+            }
+
+        }
     }
 
     _prepareWeapon(context) {
@@ -367,6 +393,10 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
             this._prepareManipulators(context);
         } else if (partId === "weapon") {
             this._prepareWeapon(context);
+        } else if (partId === "armour") {
+            if (this.document.system.option.type === "armour") {
+                this._prepareArmour(context);
+            }
         }
 
         return context;

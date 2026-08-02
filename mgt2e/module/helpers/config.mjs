@@ -754,6 +754,8 @@ MGT2.VEHICLES = {
     },
     OPTIONS: {
         "general": {},
+        "control": {},
+        "autopilot": {},
         "comms": {},
         "sensors": {},
         "armour": {},

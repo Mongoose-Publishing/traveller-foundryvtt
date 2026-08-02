@@ -1526,6 +1526,8 @@
   "MGT2.ItemTab.weapon":  "Weapon",
 
   "MGT2.Option.Type.general": "General",
+  "MGT2.Option.Type.control": "Control Systems",
+  "MGT2.Option.Type.autopilot": "Autopilot",
   "MGT2.Option.Type.comms": "Communications",
   "MGT2.Option.Type.sensors": "Sensors",
   "MGT2.Option.Type.armour": "Armour",

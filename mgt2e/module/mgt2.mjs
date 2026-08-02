@@ -687,6 +687,8 @@ Hooks.on("createItem", (item) => {
             item.img = "systems/mgt2e/icons/items/crew_role.svg";
         } else if (item.type === "software") {
             item.img = "systems/mgt2e/icons/items/software.svg";
+        } else if (item.type === "option") {
+            item.img = "systems/mgt2e/icons/items/option.svg";
         } else {
             item.img = "systems/mgt2e/icons/items/item.svg";
         }
@@ -791,6 +793,8 @@ Hooks.on("createActor", (actor, data, userId) => {
             actor.img = `systems/mgt2e/icons/actors/traveller-${colours[colours.length * Math.random() | 0]}.svg`;
         } else if (actor.type === "package") {
             actor.img = `systems/mgt2e/icons/actors/traveller-grey.svg`;
+        } else if (actor.type === "robot") {
+            actor.img = `systems/mgt2e/icons/actors/robot.svg`;
         } else if (actor.type === "spacecraft") {
             actor.img = `systems/mgt2e/images/tokens/spacecraft/white/far_trader.webp`;
         } else if (actor.type === "vehicle") {
