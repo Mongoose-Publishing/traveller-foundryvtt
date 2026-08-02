@@ -247,9 +247,6 @@ export class MgT2Actor extends Actor {
     _prepareVehicleData(actorData) {
       if (!["vehicle"].includes(actorData.type)) return;
 
-      console.log("_prepareVehicleData:");
-      console.log(actorData);
-
       const s = Math.ceil(Math.max(1, parseInt(actorData.system.hits.value) / 10));
       actorData.system.structure.value = s;
 
@@ -279,7 +276,6 @@ export class MgT2Actor extends Actor {
       actorData.system.vehicle.traits = "";
       if (typeData.traits && typeData.traits.length > 0) {
           for (let trait of typeData.traits) {
-              console.log("Type Trait: " + trait);
               actorData.system.vehicle.traits += ","+trait;
           }
       }

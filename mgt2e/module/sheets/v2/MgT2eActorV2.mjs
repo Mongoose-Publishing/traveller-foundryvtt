@@ -90,8 +90,9 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         const parent = target.closest("[data-actor-id]");
         const actorId = parent?.dataset.actorId;
         if (actorId) {
+            console.log("Demote");
             this.actor.update({[`system.crewed.crew.-=${actorId}`]: null});
-            this.actor.update({[`system.crewed.passenger.${actorId}`]: { } });
+            this.actor.update({[`system.crewed.passengers.${actorId}`]: { } });
         }
     }
 
@@ -99,8 +100,8 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         const parent = target.closest("[data-actor-id]");
         const actorId = parent?.dataset.actorId;
         if (actorId) {
-            this.actor.update({[`system.crewed.passengers.-=${actorId}`]: null});
-            this.actor.update({[`system.crewed.crew.${actorId}`]: { } });
+            await this.actor.update({[`system.crewed.passengers.-=${actorId}`]: null});
+            await this.actor.update({[`system.crewed.crew.${actorId}`]: { } });
         }
     }
 

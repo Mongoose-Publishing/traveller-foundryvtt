@@ -1,7 +1,7 @@
 import {MgT2Item} from "../../documents/item.mjs";
 import {outputTradeChat, tradeBuyFreightHandler, tradeBuyGoodsHandler} from "../utils/trade-utils.mjs";
 import {Tools} from "../chat/tools.mjs";
-import {rollSpaceAttack} from "../dice-rolls.mjs";
+import {rollAttack, rollSpaceAttack} from "../dice-rolls.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 // see: https://foundryvtt.wiki/en/development/api/applicationv2
@@ -112,6 +112,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     rollImpact(customDM) {
 
+        rollAttack(this.actor, this.weaponItem, this.attackOptions);
         this.close();
     }
 }

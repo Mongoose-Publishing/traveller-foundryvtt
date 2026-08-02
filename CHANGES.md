@@ -1,5 +1,27 @@
 # Release Notes
 
+# 0.22.0 (Beta)
+
+Some new actor and item types are introduced in this release. These have been on a develop
+branch for some time, but I want to get something in front of people. They are still not
+ready for heavy use, but I'm putting things out there to show progress and get a bit of
+feedback.
+
+The sheet style is changing as part of these new objects, to move to the Foundry v2 APIs.
+Eventually all sheets and dialogs will be updated to match the new style. Comments on styling
+are therefore appreciated.
+
+* Improvements to the /time chat command. Better error handling, better help.
+* Introduction of new Robot actor type. This is very much WIP. Feel free to try out, but
+  don't put too much effort into using it, since it may well change over the next few
+  releases.
+* New item type of Option, which is used by Robots and Vehicles. This is also WIP, and
+  may undergo big changes over the next few releases.
+* New Vehicle sheet. This begins to implement the rules in the updated Vehicle handbook,
+  and also uses API v2. This is also WIP, so be careful in how it is used. This is accessible
+  by selecting "Vehicle Sheet 2" as the sheet type for a vehicle.
+
+
 # 0.21.6 (Beta)
 
 * Added Psionic as a damage type for weapons and armour.
