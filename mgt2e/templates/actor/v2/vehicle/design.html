@@ -22,6 +22,11 @@
                            name="system.vehicle.spaces" type="number"
                            value="{{system.vehicle.spaces}}"/>
                 </div>
+
+                <div class="grid-span-2">
+                    <b>{{localize (concat "MGT2.Vehicle.Size." VEHICLE_SIZE)}}: </b>
+                    <i>{{localize (concat "MGT2.Vehicle.SizeExample." VEHICLE_SIZE)}}</i>
+                </div>
             </div>
 
             <label>{{localize 'MGT2.Vehicle.FeaturesTitle'}}</label>
@@ -102,24 +107,28 @@
         <div>
             <h4>Armour</h4>
 
-            <div class="grid grid-3col">
-                <div class="resource flex-group-center">
-                    <label class="field-label">Base</label>
-                    <input type="number" value="{{system.vehicle.armour.base}}" readonly/>
+            {{#if hasArmourItem}}
+                <div class="grid grid-3col">
+                    <div class="resource flex-group-center" title="{{localize 'MGT2.Vehicle.Sheet.BaseArmourText'}}">
+                        <label class="field-label">{{localize 'MGT2.Vehicle.Sheet.BaseArmour'}}</label>
+                        <input type="number" value="{{system.vehicle.armour.base}}" readonly/>
+                    </div>
+                    <div class="resource flex-group-center" title="{{localize 'MGT2.Vehicle.Sheet.MaxArmourText'}}">
+                        <label class="field-label">{{localize 'MGT2.Vehicle.Sheet.MaxArmour'}}</label>
+                        <input type="number" value="{{system.vehicle.armour.max}}" readonly/>
+                    </div>
+                    <div class="resource flex-group-center" title="{{localize 'MGT2.Vehicle.Sheet.ArmourValueText'}}">
+                        <label class="field-label">{{localize 'MGT2.Vehicle.Sheet.ArmourValue'}}</label>
+                        <input type="number" value="{{system.vehicle.armour.total}}" readonly/>
+                    </div>
                 </div>
-                <div class="resource flex-group-center">
-                    <label class="field-label">Max</label>
-                    <input type="number" value="{{system.vehicle.armour.max}}" readonly/>
-                </div>
-                <div class="resource flex-group-center">
-                    <label class="field-label">Armour</label>
-                    <input type="number" name="system.vehicle.armour.total" value="{{system.vehicle.armour.total}}"/>
-                </div>
-            </div>
+                <p>
+                    <b>{{localize 'MGT2.Vehicle.Sheet.ArmourToAssign'}}: </b> {{unassignedArmour}}
+                </p>
+            {{else}}
+                {{localize 'MGT2.Vehicle.Sheet.NoArmourItem'}}
+            {{/if}}
 
-            <p>
-                <b>Armour to assign: </b> {{unassignedArmour}}
-            </p>
 
             <h4>Armour Assignment</h4>
             <div class="grid grid-2col">

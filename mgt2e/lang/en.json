@@ -641,6 +641,16 @@
   "MGT2.Vehicle.Face.port": "Port",
   "MGT2.Vehicle.Face.starboard": "Starboard",
 
+  "MGT2.Vehicle.Sheet.NoArmourItem": "Add vehicle armour option to equipment to set armour",
+  "MGT2.Vehicle.Sheet.BaseArmour": "Base",
+  "MGT2.Vehicle.Sheet.BaseArmourText": "Free armour added from the armour type",
+  "MGT2.Vehicle.Sheet.MaxArmour": "Max",
+  "MGT2.Vehicle.Sheet.MaxArmourText": "Maximum armour allowed by armour type",
+  "MGT2.Vehicle.Sheet.ArmourValue": "Armour",
+  "MGT2.Vehicle.Sheet.ArmourValueText": "Total armour added by armour",
+  "MGT2.Vehicle.Sheet.ArmourToAssign": "Armour to assign",
+  "MGT2.Vehicle.Sheet.Size.": "Size",
+
   "MGT2.Vehicle.ComfortLevel.intolerable": "Intolerable",
   "MGT2.Vehicle.ComfortLevel.uncomfortable": "Uncomfortable Seating",
   "MGT2.Vehicle.ComfortLevel.basicSeating": "Basic Seating",
@@ -1557,6 +1567,12 @@
   "MGT2.Vehicle.Size.heavy": "Heavy",
   "MGT2.Vehicle.Size.huge": "Huge",
   "MGT2.Vehicle.Size.massive": "Massive",
+
+  "MGT2.Vehicle.SizeExample.small": "Motorcycle, G/Bike (1-3)",
+  "MGT2.Vehicle.SizeExample.light": "Automobile, Light Truck (4-19)",
+  "MGT2.Vehicle.SizeExample.heavy": "Freight Hauler, Airliner (20-199)",
+  "MGT2.Vehicle.SizeExample.huge": "Jumbo Jet, Destroyer (200-1,999)",
+  "MGT2.Vehicle.SizeExample.massive": "Battleship, Aircraft Carrier (2,000+)",
 
   "MGT2.Vehicle.Type.aeroplane": "Aeroplane",
   "MGT2.Vehicle.Type.airship": "Airship",

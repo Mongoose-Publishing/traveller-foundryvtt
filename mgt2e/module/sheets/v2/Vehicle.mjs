@@ -128,6 +128,15 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         console.log("TEST");
     }
 
+    _hasTrait(trait) {
+        if (this.document?.system?.vehicle?.traits) {
+            if (this.document.system.vehicle.traits.indexOf(trait) > -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     async _calculateTypes() {
         const vehicleType = this.document.system.vehicle.type;
         const typeConfig = CONFIG.MGT2.VEHICLES.TYPE[vehicleType];
@@ -232,13 +241,22 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         await this._prepareCrew(context);
 
         VEHICLE.armour.total = 0;
+        VEHICLE.armour.max = 0;
+        VEHICLE.armour.base = 0;
+        context.hasArmourItem = (context.ITEMS_ARMOUR.length > 0);
         for (let armour of context.ITEMS_ARMOUR) {
-            console.log(armour);
-            const v = parseInt(armour.system?.option?.armour?.value);
+            const v = parseInt(armour.system?.option?.armour?.value) || 0;
             if (v && v > 0) {
                 VEHICLE.armour.total += v;
             }
+            VEHICLE.armour.max = Math.max(VEHICLE.armour.max, parseInt(armour.system?.option?.armour?.maxProtection) || 0);
+            VEHICLE.armour.base = Math.max(VEHICLE.armour.base, parseInt(armour.system?.option?.armour?.baseProtection) || 0);
         }
+        if (this._hasTrait("AFV")) {
+            VEHICLE.armour.max = VEHICLE.armour.max * 3;
+        }
+        VEHICLE.armour.total += VEHICLE.armour.base;
+        VEHICLE.armour.total = Math.min(VEHICLE.armour.max, VEHICLE.armour.total);
 
         context.MOUNTS = [];
         for (let mountItem of context.ITEMS_MOUNTS) {
@@ -404,7 +422,6 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         return context;
     }
-
 
     _onRender(context, options) {
         super._onRender(context, options);

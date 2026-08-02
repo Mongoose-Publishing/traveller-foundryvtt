@@ -280,7 +280,6 @@ export class MgT2Actor extends Actor {
           }
       }
       for (let feature of actorData.system.vehicle.features.split(",")) {
-          console.log(feature);
           if (!feature || !CONFIG.MGT2.VEHICLES.FEATURES[feature]) {
               continue;
           }
