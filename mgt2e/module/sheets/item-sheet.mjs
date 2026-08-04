@@ -646,7 +646,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             context.LINKED_COMPONENTS = [];
             let found = [];
             for (let s of context.item.system.links.components) {
-                let c = context.item.parent.items.get(s);
+                let c = context.item?.parent?.items?.get(s);
                 if (c) {
                     context.LINKED_COMPONENTS.push(c);
                     found.push(s);
