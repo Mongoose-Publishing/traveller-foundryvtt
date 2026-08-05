@@ -1170,6 +1170,11 @@ img.item-img {
   border-radius: 10px;
   margin-bottom: 10px;
   padding: 0;
+  object-fit: scale-down;
+}
+
+li.item>img {
+  object-fit: scale-down;
 }
 
 div.item-side-panel {
