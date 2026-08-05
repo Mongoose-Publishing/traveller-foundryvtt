@@ -99,7 +99,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
         context.WEAPON_LEGALITY[9] = "(9) Harmless";
 
         context.SELECT_PROCESSING = {};
-        for (let i=0; i < 6; i++) {
+        for (let i=0; i < 8; i++) {
             context.SELECT_PROCESSING[i] = `Computer/${i}`;
         }
 
