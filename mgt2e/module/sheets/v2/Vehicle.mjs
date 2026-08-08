@@ -155,9 +155,9 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             await this.document.update({"system.vehicle.traits": traits});
         }
 
-        const hull = Math.max(1, parseInt(typeConfig.hull * this.document.system.vehicle.spaces));
+        const spaces = parseInt(this.document.system.vehicle.spaces) || 0;
+        const hull = Math.max(1, parseInt(typeConfig.hull * spaces));
         if (hull !== parseInt(this.document.system.hits.hull)) {
-            console.log("UPDATING HITS FOR VEHICLE");
             const HITS = this.document.system.hits;
             HITS.hull = hull;
             HITS.structure = Math.ceil(HITS.hull / 10);
@@ -165,6 +165,11 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             HITS.value = HITS.max - HITS.damage;
             await this.document.update({"system.hits": HITS});
         }
+        const shipping = parseInt(Math.ceil(typeConfig.shipping * spaces));
+        if (shipping !== parseInt(this.document.system.vehicle.shipping)) {
+            await this.document.update({"system.vehicle.shipping": shipping});
+        }
+
     }
 
     async _calculateHits() {
