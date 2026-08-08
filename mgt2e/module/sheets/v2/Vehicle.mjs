@@ -85,12 +85,16 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
     static async #addFeature(event, target) {
         let feature = event.target.value;
+
+        if (!feature || feature.length === 0) {
+            return;
+        }
         if (this.document.system.vehicle.features === "") {
             this.document.system.vehicle.features = feature;
-        } else {
+        } else if (this.document.system.vehicle.features.indexOf(feature) === -1) {
             this.document.system.vehicle.features += "," + feature;
         }
-        this.document.update({"system.vehicle.features": this.document.system.vehicle.features});
+        await this.document.update({"system.vehicle.features": this.document.system.vehicle.features});
     }
 
     static async #removeFeature(event, target) {
