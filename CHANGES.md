@@ -1,5 +1,14 @@
 # Release Notes
 
+# 0.22.1 (Beta)
+
+* Vehicle shipping value is now automatically calculated.
+* CSS fix for non-square item images
+* Allow embedded computers to go up to 7
+* Safety rails around possible null value if components are taken off an actor sheet.
+* General improvements to vehicles, adding hints and guides for players.
+* Better default icons for options and robots.
+
 # 0.22.0 (Beta)
 
 Some new actor and item types are introduced in this release. These have been on a develop
@@ -20,7 +29,6 @@ are therefore appreciated.
 * New Vehicle sheet. This begins to implement the rules in the updated Vehicle handbook,
   and also uses API v2. This is also WIP, so be careful in how it is used. This is accessible
   by selecting "Vehicle Sheet 2" as the sheet type for a vehicle.
-
 
 # 0.21.6 (Beta)
 
