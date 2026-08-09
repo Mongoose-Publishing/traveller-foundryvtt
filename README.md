@@ -1,6 +1,6 @@
 # Mongoose Traveller for FoundryVTT
 
-**Version:**  0.22.1
+**Version:**  0.22.2
 
 This is an implementation of Mongoose Traveller 2e for FoundryVTT. It currently supports Foundry v13.
 

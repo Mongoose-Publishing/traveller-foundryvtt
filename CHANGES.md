@@ -1,5 +1,9 @@
 # Release Notes
 
+# 0.22.2 (Beta)
+
+* Fix bug in vehicle sheet v2 where feature drop down was not rendering properly in Firefox.
+
 # 0.22.1 (Beta)
 
 * Vehicle shipping value is now automatically calculated.
