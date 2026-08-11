@@ -2942,6 +2942,7 @@ Handlebars.registerHelper("weaponMountBlock", function(mount) {
         if (system.weapon.traits) {
             html += `<br/><span class="weapon-traits">${printWeaponTraits(system.weapon.traits)}</span>`;
         }
+        html += `<br/><span class="action" data-action="attack" data-item-id="${weaponItem.id}" data-mount-id="${mountItem.id}">${game.i18n.localize("MGT2.TravellerSheet.Attack")}</span>`;
         html += `<br/>`;
         if (system.weapon.scale === "spacecraft") {
             html += `${game.i18n.localize("MGT2.Spacecraft.Range." + system.weapon.spaceRange)}`;
