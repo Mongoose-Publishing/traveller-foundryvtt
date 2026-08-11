@@ -1,3 +1,4 @@
+import {MgT2AttackDialog} from "../../helpers/attack-dialog.mjs";
 import {MgT2CrewMemberDialog} from "../../helpers/crew-member-dialog.mjs";
 import {MgT2eAttackApp} from "../../helpers/dialogs/MgT2eAttackApp.mjs";
 
@@ -76,24 +77,38 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         const weaponItem = this.document.items.get(itemId);
         const mountItem = this.document.items.get(mountId);
 
+        if (!mountId) {
+            if (weaponItem) {
+                new MgT2AttackDialog(this.actor, weaponItem).render(true);
+            } else {
+                ui.notifications.warn("Cannot find the weapon.");
+            }
+            return;
+        }
+
         if (!weaponItem || !mountItem) {
             ui.notifications.warn("Cannot find the vehicle weapon or its mount.");
             return;
         }
 
         let gunnerActor;
+        let fallbackGunnerActor;
         for (const [crewId, assignments] of Object.entries(this.document.system.crewed?.crew || {})) {
             for (const roleId of Object.keys(assignments)) {
                 const roleItem = this.document.items.get(roleId);
                 const weaponActions = Object.values(roleItem?.system.role.actions || {})
                     .filter(action => action.action === "weapon");
-                if (weaponActions.some(action => !action.weapon || action.weapon === mountId)) {
+                if (weaponActions.some(action => action.weapon === mountId)) {
                     gunnerActor = game.actors.get(crewId);
                     break;
+                }
+                if (!fallbackGunnerActor && weaponActions.some(action => !action.weapon)) {
+                    fallbackGunnerActor = game.actors.get(crewId);
                 }
             }
             if (gunnerActor) break;
         }
+        gunnerActor ||= fallbackGunnerActor;
 
         if (!gunnerActor) {
             ui.notifications.warn("Assign a crew member to a Gunner role before attacking.");
