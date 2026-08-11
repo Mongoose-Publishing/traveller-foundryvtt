@@ -20,9 +20,11 @@
 
         <div class="resource flex-group-center">
             <label class="field-label">{{localize 'MGT2.DM'}}</label>
-            <span></span>
+            <input type="number" name="DM" value="0"/>
         </div>
     </div>
+
+    <div>Skill DM: {{skillDM}}</div>
 
     {{#if weaponItem.system.weapon.traits}}
         <div>
