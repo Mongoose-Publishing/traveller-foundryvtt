@@ -1,0 +1,88 @@
+<section class="sheet-body robot">
+    <div class="actor-header">
+        <div class="grid grid-5col">
+            <div>
+                <img class="profile-img shadow actor-draggable draggable" src="{{actor.img}}"
+                     data-action="editImage" data-field="img" data-actor-id="{{actor.uuid}}"
+                     data-drag="true"
+                     title="{{actor.name}}" width="100%"/>
+            </div>
+
+            <div class="grid-span-4">
+                <h1 class="actor-name shadow">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+                </h1>
+                <hr style="clear: right"/>
+
+                <div class="grid grid-5col">
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.Hits'}}</label>
+                        <span>
+                            {{#if system.hits.damage includeZero=false}}
+                                {{system.hits.value}} /
+                            {{/if}}
+                            {{system.hits.max}}
+                        </span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.Robot.Locomotion'}}</label>
+                        <span>{{localize (concat "MGT2.Robot.LocomotionType." system.robot.locomotion)}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
+                        <span>{{system.speed.value}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+                        <span>{{system.robot.tl}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label">{{localize 'MGT2.Vehicle.Cost'}}</label>
+                        <span>{{system.robot.cost}}</span>
+                    </div>
+                </div>
+                <div class="grid grid-6col">
+                    <div class="resource flex-group-center">
+                        <label class="field-label rollable">
+                            STR {{prettyNumber system.characteristics.STR.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.STR.value}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label rollable">
+                            DEX {{prettyNumber system.characteristics.DEX.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.DEX.value}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label rollable">
+                            END {{prettyNumber system.characteristics.END.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.END.value}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label rollable">
+                            INT {{prettyNumber system.characteristics.INT.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.INT.value}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label rollable">
+                            EDU {{prettyNumber system.characteristics.EDU.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.EDU.value}}</span>
+                    </div>
+                    <div class="resource flex-group-center">
+                        <label class="field-label rollable">
+                            SOC {{prettyNumber system.characteristics.SOC.dm 0 true}}
+                        </label>
+                        <span class="">{{system.characteristics.SOC.value}}</span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>

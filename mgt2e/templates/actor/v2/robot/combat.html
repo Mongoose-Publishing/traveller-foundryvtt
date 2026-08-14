@@ -1,0 +1,73 @@
+<section class="tab {{tab.cssClass}} scrollable" data-group="primary" data-tab="combat">
+    <div class="grid grid-3col">
+        <div>
+            <h4>{{localize "MGT2.TravellerSheet.CombatTab.HitsAndDamage"}}</h4>
+
+            <div class="grid grid-3col">
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize "MGT2.TravellerSheet.MaxHits"}}</label>
+                    <input type="number" value="{{system.hits.max}}" readonly/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize "MGT2.TravellerSheet.Damage"}}</label>
+                    <input type="number" name="system.hits.damage" value="{{system.hits.damage}}"/>
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize "MGT2.TravellerSheet.Hits"}}</label>
+                    <input type="number" value="{{system.hits.value}}" readonly/>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h4>{{localize "MGT2.TravellerSheet.CombatTab.Armour"}}</h4>
+
+            <div class="grid grid-2col">
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize "MGT2.Item.ArmourValue"}}</label>
+                    <input type="number" value="{{system.armour.protection}}" readonly/>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h4>{{localize "MGT2.TravellerSheet.CombatTab.Bonuses"}}</h4>
+        </div>
+
+        <div class="grid-span-2">
+            <h4>{{localize "MGT2.TravellerSheet.CombatTab.Attacks"}}</h4>
+
+            {{#each ITEMS_WEAPONS as |weapon| }}
+                <div class="weapon-action-block">
+                    <img src="{{weapon.img}}" alt="{{weapon.name}}"/>
+                    <h4>
+                        {{weapon.name}}
+                        {{weapon.system.weapon.damage}}
+                        {{#if weapon.system.weapon.attackBonus includeZero=false}}
+                            {{prettyNumber weapon.system.weapon.attackBonus 0 true}}
+                        {{/if}}
+                    </h4>
+                    <span class="action" data-action="attack" data-item-id="{{weapon.id}}">Attack</span>
+                    <span class="action" data-action="reload" data-item-id="{{weapon.id}}">Reload</span>
+                    <br/>
+                    {{#if system.weapon.traits}}
+                        {{{showWeaponTraits . system.weapon.traits}}}
+                    {{/if}}
+                    {{#if system.weapon.range includeZero=false}}
+                        {{{ showWeaponRange weapon }}}
+                    {{/if}}
+                    <grid class="grid grid-4col">
+                        <div class="resource">
+                            <label>Type</label>
+                            <span>{{weapon.system.weapon.damageType}}</span>
+                        </div>
+                        <div class="resource">
+                            <label>Skill</label>
+                            <span>{{skillToLabel weapon.system.weapon.skill}}</span>
+                        </div>
+                    </grid>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</section>

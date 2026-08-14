@@ -1,0 +1,426 @@
+
+import { MgT2eItemV2 } from "./MgT2eItemV2.mjs";
+
+// Both Vehicle Options and Robot Options.
+export class MgT2eOptionSheet extends MgT2eItemV2 {
+    static DEFAULT_OPTIONS = {
+        classes: ["mgt2e", "sheet", "item", "item-option"],
+        position: {width: 720, height: 600},
+        window: {
+            resizable: true,
+            controls: [] // Header buttons go here
+        },
+        // Map your HTML [data-action] attributes to JS functions
+        actions: {
+            rollCheck: MgT2eItemV2.onRollCheck,
+            addEffect: MgT2eOptionSheet.#addEffect,
+            editEffect: MgT2eOptionSheet.#editEffect,
+            deleteEffect: MgT2eOptionSheet.#deleteEffect,
+            editImage: MgT2eOptionSheet.#onEditImage,
+            addWeapon: MgT2eOptionSheet.#addWeapon
+
+        },
+        form: {
+            handler: MgT2eOptionSheet.#onFormSubmit,
+            submitOnChange: true,
+            closeOnSubmit: false
+        }
+    };
+
+    static PARTS = {
+        main: {
+            template: "systems/mgt2e/templates/item/v2/item-option.html",
+            scrollable: ['']
+        },
+        tabs: {
+            template: "templates/generic/tab-navigation.hbs"
+        },
+        description: {
+            template: "systems/mgt2e/templates/item/v2/description.html",
+            scrollable: ['']
+        },
+        "manipulators": {
+            template: "systems/mgt2e/templates/item/v2/option/robot-manipulators.html",
+            scrollable: [''],
+        },
+        "armour": {
+            template: "systems/mgt2e/templates/item/v2/option/armour.html",
+            scrollable: [''],
+        },
+        "weapon": {
+            template: "systems/mgt2e/templates/item/v2/option/weapon.html",
+            scrollable: [''],
+        },
+        effects: {
+            template: "systems/mgt2e/templates/item/v2/effects.html",
+            scrollable: ['']
+        },
+        footer: {
+            template: "systems/mgt2e/templates/actor/v2/footer.html"
+        }
+    };
+
+    _addTab(group, name) {
+        // Compare directly against our tracked class instance variable
+        const activeTabId = this.tabGroups[group]?this.tabGroups[group]:"description";
+        const isActive = activeTabId === name;
+
+        return {
+            active: isActive,
+            cssClass: isActive ? "active" : null,
+            group: group,
+            id: name,
+            label: "MGT2.ItemTab." + name
+        };
+    }
+
+    _prepareTabs(group) {
+        let tabs = {
+            description: this._addTab("primary", "description"),
+            effects: this._addTab("primary", "effects")
+        }
+        switch (this.document.system.option.type) {
+            case "manipulator":
+                tabs.manipulators = this._addTab("primary", "manipulators");
+                break;
+            case "armour":
+                tabs.armour = this._addTab("primary", "armour");
+                break;
+            case "weapon":
+                tabs.weapon = this._addTab("primary", "weapon");
+                break;
+        }
+        return  tabs ;
+    }
+
+    static async #onEditImage(event, target) {
+        const field = target.dataset.field || "img";
+        const current = foundry.utils.getProperty(this.document, field) || "";
+        const fp = new foundry.applications.apps.FilePicker({
+            type: "image",
+            current: current,
+            callback: async (path) => {
+                await this.document.update({ [field]: path});
+            }
+        }).render(true);
+    }
+
+    static async #addEffect(event, target) {
+        console.log("addEffect:");
+
+        this.document.createEmbeddedDocuments("ActiveEffect",[
+            {
+                label: "Effect",
+                name: "Vehicle Effect",
+                icon: "systems/mgt2e/icons/items/option.svg",
+                disabled: false,
+                transfer: true,
+                system: {
+                    augmentType: "vehicle"
+                }
+            }
+        ]);
+    }
+
+    static async #editEffect(event) {
+        let effectId = event.target.dataset["effectId"];
+
+        let effect = this.document.effects.get(effectId);
+        if (effect) {
+            effect.sheet.render(true);
+        } else {
+            console.log("No effect");
+        }
+    }
+
+    static async #deleteEffect(event) {
+        let effectId = event.target.dataset["effectId"];
+
+        let effect = this.document.effects.get(effectId);
+        effect.delete();
+    }
+
+    // Add a weapon to a vehicle weapon mount. Unlike with spacecraft mounts,
+    // if multiple weapons are added, they must all be identical. This makes the
+    // data structure a lot simpler.
+    static async #addWeapon(event, target) {
+        const element = target.closest("[data-item-id]");
+        if (!element) {
+            console.log("No element found");
+            return;
+        }
+        const itemId = element.dataset.itemId;
+
+        console.log("Adding weapon " + itemId);
+        if (this.document.parent) {
+            const weaponItem = this.document.parent.items.get(itemId);
+            if (!weaponItem) {
+                return;
+            }
+            console.log(weaponItem);
+            const option = this.document.system.option;
+            if (option.weapon.weaponId === itemId) {
+                option.weapon.quantity += 1;
+            } else {
+                option.weapon.weaponId = itemId;
+                option.weapon.quantity = 1;
+            }
+            await this.document.update({"system.option.weapon": option.weapon });
+        } else {
+            console.log("Not part of an actor");
+        }
+    }
+
+    static async #test(event, target) {
+        console.log("TEST");
+    }
+
+    async _calculateTypes() {
+        const vehicleType = this.document.system.vehicle.type;
+        const typeConfig = CONFIG.MGT2.VEHICLES.TYPE[vehicleType];
+
+        if (!typeConfig) {
+            console.log(`Unknown vehicle type [${vehicleType}]`);
+            return;
+        }
+        let traits = this.document.system.vehicle.traits;
+        for (let t of typeConfig.traits) {
+            if (traits.indexOf(t) === -1) {
+                traits = traits + "," + t;
+            }
+        }
+        if (traits !== this.document.system.vehicle.traits) {
+            await this.document.update({"system.vehicle.traits": traits});
+        }
+    }
+
+    prepareData() {
+        console.log("prepareDerivedData:");
+    }
+
+    async _prepareContext(options) {
+        const context = {
+            item: this.document,
+            owner: this.document.permission > 2,
+            system: this.document.system,
+            parent: this.document.parent,
+            config: CONFIG.MGT2,
+            EFFECTS: this.document.effects,
+            isRobot: this.document.system.option.model === "robot",
+            isVehicle: this.document.system.option.model === "vehicle",
+            tabs: this._prepareTabs("primary")
+        };
+
+        // Is this for vehicles or robots?
+        context.SELECT_MODEL = {
+            "vehicle": "Vehicle",
+            "robot": "Robot"
+        }
+
+        context.SELECT_TYPE = {};
+        if (this.document.system.option.model === "vehicle") {
+            for (let t in CONFIG.MGT2.VEHICLES.OPTIONS) {
+                context.SELECT_TYPE[t] = game.i18n.localize(`MGT2.Option.Type.${t}`);
+            }
+        } else {
+            for (let t in CONFIG.MGT2.ROBOTS.OPTIONS) {
+                context.SELECT_TYPE[t] = game.i18n.localize(`MGT2.Option.Type.${t}`);
+            }
+        }
+        context.SELECT_TECHLEVEL = MgT2eItemV2.selectTechLevel();
+
+        // Dynamically add tabs
+        switch (this.document.system.option.type) {
+            case "manipulator":
+                break;
+            case "weapon":
+                this._prepareWeapon(context);
+                break;
+        }
+
+
+        return context;
+    }
+
+    async _calculateArmour(item) {
+        console.log("CALCULATE ARMOUR");
+
+    }
+
+    async _calculateManipulators(item, newSize) {
+        console.log("CALCULATE MANIPULATORS");
+        let robotSize = 5;
+        let robotSlots = 8;
+        if (item.parent && item.parent.type === "robot") {
+            robotSize = parseInt(item.parent.system.robot.size) || 8;
+            robotSlots = parseInt(item.parent.system.robot.slots) || 8;
+        }
+        let size = parseInt(newSize) || 0;
+        let slotpc = parseInt(item.system.option.manipulators.slotpc);
+
+        slotpc = parseInt(Math.max(1, 10 * Math.pow(2, size)));
+        console.log("Size: " + size);
+        console.log("Slot%: " + slotpc);
+
+
+        const slots = Math.ceil((robotSlots * slotpc) / 100.0);
+        console.log("Robot slots: " + robotSlots);
+        console.log("Slots: " + slots);
+
+        const actualSize = robotSize + size;
+        let str = (actualSize - 1) * 2;
+        let dex = parseInt(item.system.tl / 2) + 1;
+
+
+        if (slots !== item.system.option.slots) {
+            item.system.option.slots = slots;
+            item.system.option.manipulators.str = str;
+            item.system.option.manipulators.dex = dex;
+            item.system.option.manipulators.slotpc = slotpc;
+            await item.update({"system.option": item.system.option });
+        }
+    }
+
+    _prepareManipulators(context) {
+        context.SELECT_SIZE = {};
+        context.SELECT_SIZE["-3"] = "Small -3";
+        context.SELECT_SIZE["-2"] = "Small -2";
+        context.SELECT_SIZE["-1"] = "Small -1";
+        context.SELECT_SIZE["+0"] = "Standard";
+        context.SELECT_SIZE["+1"] = "Large +1";
+        context.SELECT_SIZE["+2"] = "Large +2";
+    }
+
+    _prepareArmour(context) {
+        if (this.document.system.option.model === "robot") {
+
+        } else if (this.document.system.option.model === "vehicle") {
+            let vehicleSpaces = 100;
+            let vehicleMultiplier = 1;
+            if (this.document.parent && this.document.parent.type === "vehicle") {
+                vehicleSpaces = parseInt(this.document.parent.system.vehicle.spaces) || 0;
+            }
+
+            const protection = this.document.system.option.armour.value;
+            const spaces = Math.ceil((protection * vehicleSpaces) * this.document.system.option.armour.vehicleSpacesPerPoint / 100.0);
+            console.log("Armour spaces: " + spaces);
+            if (spaces !== this.document.system.option.spaces) {
+                this.document.system.option.spaces = spaces;
+                this.document.update({"system.option.spaces": spaces});
+            }
+
+        }
+    }
+
+    _prepareWeapon(context) {
+        context.SELECT_WEAPONMOUNT = {};
+        for (let m of [ "fixed", "hardpoint", "pintle", "ring", "gunport", "bay", "multibay", "turret"]) {
+            context.SELECT_WEAPONMOUNT[m] = game.i18n.localize("MGT2.Vehicle.MountType." + m);
+        }
+
+        if (!this.document.system.option.weapon) {
+            this.document.system.option.weapon = {};
+        }
+
+        context.SELECT_POPUP = {};
+        context.SELECT_POPUP[0] = "No";
+        context.SELECT_POPUP[1] = "Yes";
+
+        context.SELECT_FIRECONTROL = {};
+        for (let f of [ "none", "scope", "basic", "improved", "enhanced", "advanced"]) {
+            context.SELECT_FIRECONTROL[f] = game.i18n.localize("MGT2.Vehicle.FireControl." + f);
+        }
+        context.ATTACHED_WEAPON = null;
+        if (this.document.system.option?.weapon?.weaponId) {
+            const weaponItem = this.document.parent.items.get(this.document.system.option.weapon.weaponId);
+            if (weaponItem) {
+                context.ATTACHED_WEAPON = weaponItem;
+            }
+        }
+        for (let w in this.document.system.option?.weapon?.weapons) {
+            console.log(w);
+        }
+
+        // Find all the weapons on this vehicle which could be attached to this mount.
+        // The rules are quite complicated, so there is a lot of logic here.
+        context.WEAPONS_LIST = [];
+        if (this.document.parent && this.document.parent.items) {
+            const mountSize = parseInt(this.document.system.option.spaces) || 0;
+            for (let w of this.document.parent.items) {
+                if (w.type === "weapon") {
+                    switch (this.document.system.option.weapon.mountType) {
+                        case "fixed":
+                            context.MOUNT_TEXT = "Weapons up to 250kg / space";
+                            if (w.system.weight <= mountSize * 250) {
+                                context.WEAPONS_LIST.push(w);
+                            }
+                            break;
+                        case "hardpoint":
+                            context.MOUNT_TEXT = "Any weapon size (normally oneshot or drones)";
+                            context.WEAPONS_LIST.push(w);
+                            break;
+                        case "pintle": case "ring":
+                            context.MOUNT_TEXT = "Weapons up to 500kg";
+                            if (w.system.weight <= 500) {
+                                context.WEAPONS_LIST.push(w);
+                            }
+                            break;
+                        case "bay":
+                            context.MOUNT_TEXT = "Weapons up to 250kg / space, normally one-shot or drones";
+                            if (w.system.weight <= mountSize * 250) {
+                                context.WEAPONS_LIST.push(w);
+                            }
+                            break;
+                        default:
+                            context.MOUNT_TEXT = "Whatever";
+                            context.WEAPONS_LIST.push(w);
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+    async _preparePartContext(partId, context) {
+        context.tab = context.tabs[partId];
+
+        if (partId === "description") {
+            context.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(
+                this.document.system.description,
+                { secrets: ((this.document.permission > 2)?true:false) }
+            );
+        } else if (partId === "manipulators") {
+            this._prepareManipulators(context);
+        } else if (partId === "weapon") {
+            this._prepareWeapon(context);
+        } else if (partId === "armour") {
+            if (this.document.system.option.type === "armour") {
+                this._prepareArmour(context);
+            }
+        }
+
+        return context;
+    }
+
+    _onRender(context, options) {
+        super._onRender(context, options);
+
+        const e = this.element.querySelector('select[data-action="changeManipulators"]');
+        if (e) {
+            console.log("found");
+            e.addEventListener("change", (ev) => {
+                this._calculateManipulators(this.document, ev.target.value);
+            })
+            //traitSelect.removeEventListener("change", this.#addTrait.bind(this));
+        }
+    }
+
+    static async #onFormSubmit(event, form, formData) {
+        console.log("onFormSubmit:");
+        await this.document.update(formData.object);
+    }
+
+    _getTabs2(options) {
+        return "";
+    }
+}

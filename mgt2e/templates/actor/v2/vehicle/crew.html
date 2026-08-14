@@ -1,0 +1,64 @@
+<section class="tab {{tab.cssClass}} scrollable" data-group="primary" data-tab="crew">
+    {{#if ITEMS_ROLES}}
+        <h3>Roles</h3>
+        <ol class="items-list grid grid-4col">
+            {{#each ITEMS_ROLES as |role|}}
+                <li class="item-block">
+                    <h4>{{role.name}}</h4>
+
+                </li>
+            {{/each}}
+        </ol>
+    {{/if}}
+
+    {{#if CREW}}
+        <h3>Crew</h3>
+        <ol class="items-list actor-crew-list grid grid-2col">
+            {{#each CREW as |member|}}
+                <li class="actor-crew" data-actor-id="{{member.actor._id}}">
+                    <h4>{{member.actor.name}}</h4>
+                    <img class="embedded-actor-portrait actor-draggable" d
+                         ata-actor-id="{{member.actor._id}}" title="{{member.actor.name}}"
+                         src="{{member.actor.img}}"/>
+                    {{{showCrewInfo ../actor member.actor}}}
+                    <br/>
+                    <div class="item-controls">
+                        <a class="item-control crew-passenger" title="Make passenger" data-action="demoteCrew">
+                            <i class="fas fa-suitcase"></i></a>
+                        <a class="item-control crew-edit" title="Edit Crew Role" data-action="editCrew">
+                            <i class="fas fa-edit"></i></a>
+                        <a class="item-control crew-delete" title="Remove Crew" data-action="removeCrew">
+                            <i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+            {{/each}}
+        </ol>
+    {{/if}}
+
+    {{#if PASSENGERS}}
+        <h3>Passengers</h3>
+        <ol class="items-list actor-crew-list grid grid-3col">
+            {{#each PASSENGERS as |member|}}
+                <li class="actor-crew" data-actor-id="{{member.actor._id}}">
+                    <h4>{{member.actor.name}}</h4>
+                    <img class="embedded-actor-portrait actor-draggable"
+                         data-actor-id="{{member.actor._id}}" title="{{member.actor.name}}"
+                         src="{{member.actor.img}}"/>
+                    {{#if member.actor.system.sophont.species}}
+                        <div>{{member.actor.system.sophont.species}}</div>
+                    {{/if}}
+                    {{#if member.actor.system.sophont.profession}}
+                        <div>{{member.actor.system.sophont.profession}}</div>
+                    {{/if}}
+                    <div class="item-controls">
+                        <a class="item-control passenger-crew" title="Make crew" data-action="promoteCrew">
+                            <i class="fas fa-person-military-pointing"></i></a>
+                        <a class="item-control passenger-delete" title="Remove Crew" data-action="removeCrew">
+                            <i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+            {{/each}}
+        </ol>
+    {{/if}}
+
+</section>

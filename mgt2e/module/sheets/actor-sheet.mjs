@@ -639,7 +639,6 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         context.crew = crew;
         context.passengers = passengers;
 
-
         const ships = [];
         const vehicles = [];
         for (let actorId in actorData.docks) {
@@ -1717,7 +1716,6 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         const action = itemRole.system.role.actions[actionId];
 
         if (action.action === "chat") {
-            console.log(ChatMessage.getSpeaker());
             let chatData = {
                 user: game.user.id,
                 speaker: {

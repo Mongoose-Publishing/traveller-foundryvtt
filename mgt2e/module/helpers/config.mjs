@@ -109,7 +109,51 @@ MGT2.SHIP_HARDWARE = {
     }
 }
 
+MGT2.ROBOTS = {
+    SIZE: {
+        0: {slots: 0, hits: 1, attack: -4, vehicleSpaces: 0, cost: 100},
+        1: {slots: 1, hits: 1, attack: -4, vehicleSpaces: 0, cost: 100},
+        2: {slots: 2, hits: 4, attack: -3, vehicleSpaces: 0.02, cost: 200},
+        3: {slots: 4, hits: 8, attack: -2, vehicleSpaces: 0.1, cost: 400},
+        4: {slots: 8, hits: 12, attack: -1, vehicleSpaces: 0.25, cost: 800},
+        5: {slots: 16, hits: 20, attack: +0, vehicleSpaces: 0.5, cost: 1000},
+        6: {slots: 32, hits: 32, attack: +1, vehicleSpaces: 1, cost: 2000},
+        7: {slots: 64, hits: 50, attack: +2, vehicleSpaces: 2, cost: 4000},
+        8: {slots: 128, hits: 72, attack: +3, vehicleSpaces: 4, cost: 8000}
+    },
+    LOCOMOTION: {
+        "none": { tl: 5, endurance: 216, cost: 1 },
+        "wheels": { tl: 5, agility: 0, endurance: 72, cost: 2 },
+        "ATV": { tl: 5, agility: 0, traits: "ATV", endurance: 72, cost: 3 },
+        "tracks": { tl: 5, agility: -1, traits: "ATV", endurance: 72, cost: 2 },
+        "grav": { tl: 9, agility: 1, traits: "flyer", endurance: 24, cost: 20 },
+        "aeroplane": { tl: 5, agility: 1, traits: "flyer", endurance: 12, cost: 12 },
+        "aquatic": { tl: 6, agility: -2, traits: "seafarer", endurance: 72, cost: 4 },
+        "VTOL": { tl: 7, agility: 0, traits: "flyer", endurance: 72, cost: 10 },
+        "walker": { tl: 8, agility: 0, traits: "ATV", endurance: 72, cost: 10 },
+        "hovercraft": { tl: 7, agility: 1, traits: "ACV", endurance: 24, cost: 10 },
+        "thruster": { tl: 7, agility: 1, endurance: 2, cost: 20 }
+    },
+    MANIPULATORS: {
+        "+2": { slots: 40, robotSize: [ 1, 1, 2, 4, 7, 13, 26, 52 ]},
+        "+1": { slots: 20, robotSize: [ 1, 1, 1, 2, 4, 7, 13, 26 ]},
+        "0":  { slots: 10, robotSize: [ 1, 1, 1, 1, 2, 4, 7, 13 ]},
+        "-1": { slots: 5,  robotSize: [ 1, 1, 1, 1, 1, 2, 4, 7 ]},
+        "-2": { slots: 2,  robotSize: [ 1, 1, 1, 1, 1, 1, 2, 3 ]},
+        "-3": { slots: 1,  robotSize: [ 1, 1, 1, 1, 1, 1, 1, 2 ]},
+    },
+    OPTIONS: {
+        "general": {},
+        "armour": {},
+        "endurance": {},
+        "resiliency": {},
+        "agility": {},
+        "manipulator" : {}
+    }
+}
+
 MGT2.VEHICLES = {
+  // Chassis is deprecated in 2026 vehicle design rules.
   "CHASSIS": {
       "lightGround": {
           "tl": 4, "skill": "drive.wheel", "agility": 0, "minSpaces": 1, "maxSpaces": 20,
@@ -308,8 +352,415 @@ MGT2.VEHICLES = {
       "veryFast": { band: 7, max: 800 },
       "subsonic": { band: 8, max: 1200 },
       "supersonic": { band: 9, max: 6000 },
-      "hypersonic": { band: 10 }
-  }
+      "hypersonic": { band: 10, max: 10000 },
+      "orbital": { band: 11 }
+  },
+    "SIZE": {
+        "small": { min: 1, max: 3, speed: 0, agility: 0, armour: 4, traits: [], features: [ "openFrame"] },
+        "light": { min: 4, max: 19, speed: 0, agility: 0, armour: 2, traits: [], features: [] },
+        "heavy": { min: 20, max: 199, speed: -1, agility: -1, armour: 1, traits: [],
+            features: [ "AFV", "locomotive", "tunneller" ]
+        },
+        "huge": { min: 200, max: 1999, speed: -1, agility: -2, armour: 0.5, traits: [ "unresponsive" ],
+            features: [ "AFV", "locomotive", "tunneller" ]
+        },
+        "massive": { min: 2000, speed: -1, agility: -4, armour: 0.5, traits: [ "unresponsive" ],
+            features: [ "AFV", "locomotive", "tunneller" ]
+        }
+    },
+    "TYPE": {
+        "aeroplane": {
+            tl: 4,
+            skill: [ "flyer.wing" ],
+            agility: 1,
+            hull: 0.5,
+            shipping: 1,
+            cost: 15000,
+            traits: [ ],
+            allowedFeatures: [
+                "agile", "fast", "floats", "foldingWings", "hypersonic", "jetEngines",
+                "openFrame", "openTopped", "responsive", "slow", "STOL", "supersonic", "tiltEngines",
+                "unresponsive"
+            ],
+            performance: [
+                { min: 4, max: 4, speed: "medium", range: 300 },
+                { min: 5, max: 6, speed: "high", range: 600 },
+                { min: 7, max: 8, speed: "fast", range: 1200 },
+                { min: 9, max: 10, speed: "veryFast", range: 2400 },
+                { min: 11, speed: "veryFast", range: 4800 }
+            ]
+        },
+        "airship": {
+            tl: 3,
+            skills: [ "flyer.airship" ],
+            agility: -3,
+            hull: 0.2,
+            shipping: 0.1,
+            traits: [ "VTOL" ],
+            cost: 300,
+            allowedFeatures: [
+                "agile", "fast", "openFrame", "responsive", "rigid", "slow", "streamlined", "unresponsive"
+            ],
+            performance: [
+                { min: 3, max: 3, speed: "idle", range: 100 },
+                { min: 4, max: 4, speed: "slow", range: 4000 },
+                { min: 5, max: 7, speed: "medium", range: 6000 },
+                { min: 8, max: 9, speed: "medium", range: 8000 },
+                { min: 10, max: 11, speed: "medium", range: 12000 },
+                { min: 12, speed: "medium", range: 18000 }
+            ]
+        },
+        "gravVehicle": {
+            tl: 8,
+            skills: [ "flyer.grav" ],
+            agility: 1,
+            hull: 2,
+            shipping: 0.5,
+            traits: [ "VTOL" ],
+            cost: 30000,
+            allowedFeatures: [
+                "AFV", "agile", "fast", "locomotive", "openFrame", "openTopped", "responsive", "slow",
+                "streamlined", "unresponsive"
+            ],
+            performance: [
+                { min: 8, max: 8, speed: "high", range: 1000 },
+                { min: 9, max: 10, speed: "fast", range: 2000 },
+                { min: 11, max: 12, speed: "fast", range: 3000 },
+                { min: 13, max: 14, speed: "veryFast", range: 4000 },
+                { min: 15, speed: "veryFast", range: 5000 }
+            ]
+        },
+        "groundVehicle": {
+            tl: 1,
+            skills: [ "drive.wheel", "drive.track", "drive.mole" ],
+            agiliy: 0,
+            hull: 2,
+            shipping: 1,
+            traits: [],
+            cost: 750,
+            allowedFeatures: [
+                "AFV", "agile", "ATV", "fast", "locomotive", "monowheel", "offRoader", "openFrame",
+                "openTopped", "railRider", "responsive", "slow", "smartWheels", "streamlined", "tracks",
+                "tunneller", "unresponsive"
+            ],
+            performance: [
+                { min: 1, max: 2, speed: "idle", range: 0 },
+                { min: 3, max: 3, speed: "idle", range: 50 },
+                { min: 4, max: 4, speed: "verySlow", range: 100 },
+                { min: 5, max: 6, speed: "slow", range: 300 },
+                { min: 7, max: 8, speed: "medium", range: 500 },
+                { min: 9, max: 10, speed: "high", range: 800 },
+                { min: 11, speed: "fast", range: 1000 }
+            ]
+        },
+        "hovercraft": {
+            tl: 5,
+            skills: [ "drive.hovercraft" ],
+            agility: 1,
+            hull: 0.5,
+            shipping: 0.5,
+            traits: [],
+            cost: 10000,
+            allowedFeatures: [
+                "agile", "fast", "openFrame", "openTopped", "responsive", "slow", "unresponsive"
+            ],
+            performance: [
+                { min: 5, max: 5, speed: "slow", range: 300 },
+                { min: 6, max: 7, speed: "medium", range: 400 },
+                { min: 8, max: 9, speed: "high", range: 500 },
+                { min: 10, max: 11, speed: "high", range: 600 },
+                { min: 12, speed: "fast", range: 800 }
+            ]
+        },
+        "rotorcraft": {
+            tl: 5,
+            skills: [ "flyer.rotor", "flyer.ornithopter" ],
+            agility: 0,
+            hull: 0.5,
+            shipping: 1,
+            traits: [ "VTOL" ],
+            cost: 25000,
+            allowedFeatures: [
+                "aerodyne", "agile", "fast", "floats", "foldingWings", "openFrame", "openTopped",
+                "ornithopter", "responsive", "slow", "streamlined", "unresponsive"
+            ],
+            performance: [
+                { min: 5, max: 6, speed: "medium", range: 500 },
+                { min: 7, max: 7, speed: "high", range: 1000 },
+                { min: 8, max: 10, speed: "high", range: 2000 },
+                { min: 11, speed: "fast", range: 4000 }
+            ]
+        },
+        "structure": {
+            tl: 0,
+            skills: [],
+            agility: -6,
+            hull: 1,
+            shipping: 0.5,
+            traits: [],
+            cost: 50,
+            allowedFeatures: [
+                "AFV", "openFrame", "openTopped", "streamlined"
+            ],
+            performance: [
+                { min: 0, speed: "stopped", range: 0 }
+            ]
+        },
+        "submersible": {
+            tl: 4,
+            skills: [ "seafarer.submarine" ],
+            agility: -2,
+            hull: 3,
+            shipping: 0.5,
+            traits: [],
+            cost: 50000,
+            allowedFeatures: [
+                "AFV", "agile", "fast", "locomotive", "openFrame", "openTopped", "responsive", "slow",
+                "tunneller", "unresponsive"
+            ],
+            performance: [
+                { min: 4, max: 4, speed: "idle", range: 50, safeDepth: 50, crushDepth: 150 },
+                { min: 5, max: 5, speed: "verySlow", range: 100, safeDepth: 200, crushDepth: 600 },
+                { min: 6, max: 8, speed: "slow", range: 150, safeDepth: 300, crushDepth: 900 },
+                { min: 9, max: 11, speed: "slow", range: 200, safeDepth: 600, crushDepth: 1800 },
+                { min: 12, max: 14, speed: "medium", range: 300, safeDepth: 2000, crushDepth: 6000 },
+                { min: 15, speed: "high", range: 500, safeDepth: 4000, crushDepth: 12000 }
+            ]
+        },
+        "walker": {
+            tl: 8,
+            skills: [ "drive.walker" ],
+            agility: 0,
+            hull: 2,
+            shipping: 0.5,
+            traits: [ "ATV" ],
+            cost: 10000,
+            allowedFeatures: [
+                "AFV", "agile", "fast", "locomotive", "multiLegged", "openFrame", "openTopped", "responsive",
+                "slow", "tunneller", "unresponsive"
+            ],
+            performance: [
+                { min: 8, max: 8, speed: "verySlow", range: 150 },
+                { min: 9, max: 10, speed: "slow", range: 300 },
+                { min: 11, max: 12, speed: "medium", range: 450 },
+                { min: 13, max: 14, speed: "high", range: 600 },
+                { min: 15, speed: "high", range: 750 }
+            ]
+        },
+        "watercraft": {
+            tl: 0,
+            skills: [ "seafarer.oceanShips", "seafarer.personal", "seafarer.sail"],
+            agility: -2,
+            hull: 2,
+            shipping: 0.5,
+            traits: [],
+            cost: 2000,
+            allowedFeatures: [
+                "AFV", "agile", "fast", "floats", "hydrofoil", "locomotive", "openFrame",
+                "openTopped", "responsive", "slow", "unresponsive"
+            ],
+            performance: [
+                { min: 0, max: 2, speed: "idle", range: 0 },
+                { min: 3, max: 3, speed: "idle", range: 100 },
+                { min: 4, max: 4, speed: "verySlow", range: 200 },
+                { min: 5, max: 5, speed: "verySlow", range: 400 },
+                { min: 6, max: 7, speed: "slow", range: 600 },
+                { min: 8, max: 11, speed: "slow", range: 800 },
+                { min: 12, speed: "medium", range: 1200 }
+            ]
+        }
+    },
+    FEATURES: {
+        "aerodyne": { tl: 7, conflicts: [ "foldingWings", "ornithopter" ], speed: +1, shipping: 0.5, cost: +30 },
+        "AFV": { tl: 5, conflict: [ "hydrofoil", "openTopped" ], traits: [ "AFV", "offRoader" ],
+            minSize: 20, speed: -1, cost: +100
+        },
+        "agile": { tl: 1, conflicts: [ "railRider" ], agility: +1, cost: +100 },
+        "ATV": { tl: 0, conflicts: [ "offRiader", "railRider", "tracks" ], traits: [ "ATV"], cost: +30 },
+        "biotech": { tl: 0 },
+        "fast": { tl: 0, conflicts: [ "slow", "supersonic" ], speed: +1, range: 0.5, cost: +100 },
+        "floats": { tl: 4, speed: -1, cost: +20 },
+        "foldingWings": { tl: 4, conflicts: [ "aerodyne" ], shipping: 0.75, cost: +20 },
+        "hydrofoil": { tl: 3, conflicts: [ "AFV"], speed: +1, cost: +200 },
+        "hypersonic": { tl: 8, conflicts: [ "openFrame", "openTopped", "supersonic"],
+            requires: [ "jet" ], speedBand: "hypersonic", range: 0.5, cost: +400
+        },
+        "jetEngines": { tl: 6, speed: +1, range: 1.5, cost: +200 },
+        "locomotive": { tl: 3, minSize: 20, agility: -1, cost: +50, traits: [ "unresponsive" ] },
+        "monowheel": { tl: 9, conflicts: [ "tracks" ], agility: +2, speed: +1, shipping: 0.5, cost: +200 },
+        "multiLegged": { tl: 8, agility: +1, cost: +100 },
+        "offRoader": { tl: 0, conflicts: [ "ATV", "railRider", "tracks"], traits: [ "offRoader" ], cost: +15 },
+        "openFrame": { tl: 0, conflicts: [ "hypersonic", "openTopped", "supersonic" ],
+            minSize: 1, maxSize: 3, agility: +1, speed: +1, range: 0.8, shipping: 0.5, cost: -30
+        },
+        "openTopped": { tl: 0, conflicts: [ "AFV", "hypersonic", "openFrame", "supersonic" ],
+            traits: [ "openTopped"], cost: -15
+        },
+        "ornithopter": { tl: 8, conflicts: [ "aerodyne" ], agility: +1, speed: -1, range: 0.75, shipping: 0.75, cost: +20 },
+        "railRider": { tl: 1, conflicts: [ "agile", "ATV", "offRoader", "tracked" ], agility: -2, speed: +1, cost: +50 },
+        "responsive": { tl: 0, conflicts: [ "unresponsive" ], traits: [ "responsive" ], range: 0.75, cost: +100 },
+        "rigid": { tl: 4, range: 1.5, shipping: 5, cost: +200 },
+        "slow": { tl: 0, conflicts: [ "fast" ], speed: -1, range: 1.5, cost: -25 },
+        "smartWheels": { tl: 9, agility: +1, range: 1.1, cost: +130 },
+        "STOL": { tl: 4, cost: +30 },
+        "streamlined": { tl: 1, conflicts: [ "tunneller" ], agility: +1, speed: +1, cost: +200 },
+        "supersonic": { tl: 6, conflicts: [ "fast", "hypersonic", "openFrame", "openTopped" ],
+            speedBand: "supersonic", range: 0.8, cost: +200
+        },
+        "tiltEngines": { tl: 8, speed: -1, cost: +100, traits: [ "VTOL" ] },
+        "tracks": { tl: 5, conflicts: [ "ATV", "monowheel", "offRoader" ], traits: [ "tracked"], speed: -1, cost: +100 },
+        "tunneller": { tl: 7, conflicts: [ "streamlined" ], minSize: 20, agility: -1, speed: -1, cost: +800 },
+        "unresponsive": { tl: 0, conflicts: [ "locomotive", "responsive" ], cost: -25, traits: [ "unresponsive "]}
+    },
+    TRAITS: {
+        "AFV": { armour: 3 },
+        "ATV": {},
+        "offRoader": {},
+        "openVehicle": {},
+        "openTopped": {},
+        "responsive": {},
+        "tracked": {},
+        "unresponsive": {},
+        "VTOL": {}
+    },
+    ARMOUR: {
+        "0": { base: 0, max: 10, spaces: 2.5, costArmour: 1000, costVehicle: 25 },
+        "3": { base: 1, max: 15, spaces: 1.5, costArmour: 5000, costVehicle: 75 },
+        "5": { base: 2, max: 20, spaces: 1, costArmour: 7500, costVehicle: 75 },
+        "7": { base: 3, max: 30, spaces: 1, costArmour: 12500, costVehicle: 125 },
+        "10": { base: 5, max: 40, spaces: 0.5, costArmour: 50000, costVehicle: 250 },
+        "12": { base: 6, max: 50, spaces: 0.4, costArmour: 75000, costVehicle: 300 },
+        "14": { base: 8, max: 60, spaces: 0.32, costArmour: 125000, costVehicle: 400 },
+        "16": { base: 10, max: 80, spaces: 0.20, costArmour: 375000, costVehicle: 750 },
+        "17": { base: 15, max: 100, spaces: 0.16, costArmour: 500000, costVehicle: 800 },
+        "18": { base: 20, max: 160, spaces: 0.10, costArmour: 1000000, costVehicle: 1000 }
+    },
+    POWER: {
+        "none": {
+            secondary: {}
+        },
+        "standard": {
+          tl: 3
+        },
+        "unpowered": {
+            tl: 0, spaces: +50, speedBand: "stopped", cost: -80,
+            conflicts: [ "gravVehicle", "hovercraft", "rotorcraft", "submersible", "walker" ]
+        },
+        "muscle": {
+            tl: 0, spaces: +40, speedBand: "idle", cost: -70,
+            conflicts: [ "airship", "gravVehicle", "hovercraft", "walker" ],
+            secondary: { spaces: -5, costPerSpace: 100 }
+        },
+        "wind": {
+            tl: 1, spaces: +20, speedBand: "idle", cost: -60, shipping: 2,
+            conflicts: [ "gravVehicle", "hovercraft", "submersible", "walker" ],
+            secondary: { spaces: -25, costPerSpace: 200 }
+        },
+        "wind5": {
+            tl: 5, spaces: +20, speedBand: "verySlow", cost: -60, shipping: 2,
+            conflicts: [ "gravVehicle", "hovercraft", "submersible", "walker" ],
+            secondary: { spaces: -25, costPerSpace: 200 }
+        },
+        "wind9": {
+            tl: 9, spaces: +20, speedBand: "slow", cost: -60, shipping: 2,
+            conflicts: [ "gravVehicle", "hovercraft", "submersible", "walker" ],
+            secondary: { spaces: -25, costPerSpace: 200 }
+        },
+        "grid": {
+            tl: 4, spaces: +40, cost: 100,
+            conflicts: [ "aeroplane", "airship", "gravVehicle", "hovercraft", "rotorcraft",
+                "submersible", "watercraft"
+            ],
+            secondary: { spaces: -10, cost: 100 }
+        },
+        "beamed": {
+            tl: 8, spaces: +30, cost: 10000,
+            conflicts: [ "submersible" ],
+            secondary: { spaces: -20, cost: 10000, minSpaces: 2 }
+        },
+        "fissionBasic": {
+            tl: 6, spaces: -50, costPerSpace: 100000, powerPerSpace: 2, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -35 }
+        },
+        "fissionImproved": {
+            tl: 7, spaces: -40, costPerSpace: 150000, powerPerSpace: 2, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -28 }
+        },
+        "fissionAdvanced": {
+            tl: 8, spaces: -30, costPerSpace: 200000, powerPerSpace: 2, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -21 }
+        },
+        "fusionBasic": {
+            tl: 8, spaces: -25, costPerSpace: 125000, powerPerSpace: 2.5, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -21 }
+        },
+        "fusionImproved": {
+            tl: 12, spaces: -20, costPerSpace: 125000, powerPerSpace: 3.5, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -15 }
+        },
+        "fusionAdvanced": {
+            tl: 15, spaces: -10, costPerSpace: 125000, powerPerSpace: 5, minSpaces: 10,
+            conflicts: [],
+            secondary: { spaces: -12 }
+        },
+        "antimatter": {
+            tl: 20, spaces: -10, costPerSpace: 2500000, powerPerSpace: 25,
+            conflicts: [],
+            secondary: { spaces: -6 }
+        },
+        "fusionPlusBasic": {
+            tl: 10, spaces: -10, costPerSpace: 15000, powerPerSpace: 1,
+            conflicts: [],
+            secondary: { spaces: -5 }
+        },
+        "fusionPlusImproved": {
+            tl: 13, spaces: -10, costPerSpace: 25000, powerPerSpace: 2,
+            conflicts: [],
+            secondary: { spaces: -5 }
+        },
+        "fusionPlusAdvanced": {
+            tl: 16, spaces: -10, costPerSpace: 50000, powerPerSpace: 3,
+            conflicts: [],
+            secondary: { spaces: -5 }
+        },
+        "solarBasic": {
+            tl: 8, spaces: -20, costPerSpace: 50000,
+            conflicts: [],
+            secondary: { spaces: -10 }
+        },
+        "solarImproved": {
+            tl: 8, spaces: -20, costPerSpace: 50000,
+            conflicts: [],
+            secondary: { spaces: -10 }
+        },
+        "solarAdvanced": {
+            tl: 8, spaces: -20, costPerSpace: 50000,
+            conflicts: [],
+            secondary: { spaces: -10 }
+        }
+    },
+    SPEED_MODIFICATIONS: {
+        "faster1": { tl: 4, speed: +1, spaces: -20, limit: "orbital", cost: +100 },
+        "faster2": { tl: 5, speed: +1, spaces: -20, limit: "orbital", cost: +100 },
+        "faster3": { tl: 6, speed: +1, spaces: -20, limit: "orbital", cost: +100 },
+        "slower1": { tl: 4, speed: -1, spaces: -10, limit: "idle", cost: -10 },
+        "slower2": { tl: 5, speed: -1, spaces: -10, limit: "idle", cost: -10 },
+        "slower3": { tl: 6, speed: -1, spaces: -10, limit: "idle", cost: -10 }
+    },
+    OPTIONS: {
+        "general": {},
+        "control": {},
+        "autopilot": {},
+        "comms": {},
+        "sensors": {},
+        "armour": {},
+        "weapon": {}
+    }
 };
 
 MGT2.SHIP_CONFIGURATION = {
@@ -869,6 +1320,34 @@ MGT2.getDefaultSkills = function() {
     return skills;
 };
 
+MGT2.getFqnSkillLabel = function(skillFqn, skills) {
+    if (!skills) {
+        skills = MGT2.getDefaultSkills();
+    }
+    const skillId = skillFqn.split(".")[0];
+    const specId = skillFqn.split(".")[1];
+    let   label = "?";
+
+    const skill = skills[skillId];
+    if (skill) {
+        if (skill.label) {
+            label = skill.label;
+        } else {
+            label = game.i18n.localize("MGT2.Skills." + skillId);
+        }
+        if (specId && skill.specialities[specId]) {
+            const spec = skill.specialities[specId];
+            if (spec.label) {
+                label = `${label} (${spec.label})`;
+            } else {
+                label = `${label} (${game.i18n.localize("MGT2.Skills." + specId)})`;
+            }
+        }
+    }
+
+    return label;
+}
+
 MGT2.EFFECT_TYPES = {
   "CHA_AUG": "chaAug",
   "CHA_BASE": "chaBase",
@@ -878,7 +1357,8 @@ MGT2.EFFECT_TYPES = {
   "SKILL_AUG": "skillAug",
   "SKILL_DM": "skillDM",
   "SKILL_EXPERT": "skillExpert",
-  "DM": "miscDM"
+  "DM": "miscDM",
+  "VEHICLE": "vehicle"
 };
 
 MGT2.EFFECTS = {
@@ -891,7 +1371,8 @@ MGT2.EFFECTS = {
   "skillAug":  { "targets": "skills", "value": true, "property": "augment", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "skillDM": { "targets": "skills", "value": true, "property": "augdm", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
   "skillExpert": { "targets": "skills", "value": true, "property": "expert", mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE },
-  "miscDM": { "targets": "misc", "value": true, "property": "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD }
+  "miscDM": { "targets": "misc", "value": true, "property": "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
+  "vehicle": { "targets": "vehicle", "value": true, property: "effect", mode: CONST.ACTIVE_EFFECT_MODES.ADD }
 };
 
 MGT2.SOFTWARE_EFFECTS = {
@@ -928,8 +1409,9 @@ MGT2.COMPUTERS = {
 };
 
 MGT2.WEAPONS = {
-    "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting", "meson", "nuclear" ],
+    "energyTypes": [ "laser", "plasma", "fire", "energy", "cutting", "meson", "nuclear", "psionic" ],
     "traits": {
+        "accurate": { "scale": "traveller", "conflict": [ "inaccurate" ]},
         "artillery": { "scale": "traveller" },
         "ap": {  "value": 1, "min": 1, "max": 999, "conflict": [ "loPen", "spinal" ] },
         "auto": {  "value": 2, "min": 2, "max": 99, "conflict": [ "oneUse" ] },
@@ -939,6 +1421,7 @@ MGT2.WEAPONS = {
         "dangerous": { "scale": "traveller", "conflict": [ "veryDangerous" ] },
         "destructive": { },
         "fire": { "scale": "traveller" },
+        "inaccurate": { "scale": "traveller", "conflict": [ "accurate"] },
         "ion": { "scale": "spacecraft" },
         "longRange": { "scale": "spacecraft" },
         "laserSight": { "scale": "traveller" },

@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle", "world", "swarm" ],
+    "types": ["traveller", "npc", "creature", "spacecraft", "package", "vehicle", "world", "swarm", "robot" ],
     "templates": {
       "base": {
         "speed": {
@@ -155,6 +155,18 @@
         "templates": [ "base", "characteristics", "skills", "sophont" ],
         "cash": 0
     },
+    "robot": {
+      "templates": [ "base", "characteristics", "armour", "skills" ],
+      "robot": {
+        "size": 5,
+        "slots": 8,
+        "tl": 8,
+        "cost": 0,
+        "locomotion": "",
+        "endurance": 24,
+        "traits": ""
+      }
+    },
     "vehicle": {
       "templates": [ "crewed" ],
       "hits": {
@@ -163,24 +175,46 @@
         "damage": 0,
         "criticals": {}
       },
+      "structure": {
+        "value": 1,
+        "damage": 0
+      },
       "initiative": {
         "base": 0,
         "value": 0
       },
       "vehicle": {
-        "templates": [ "crewed" ],
         "spaces": 4,
         "chassis": "lightGround",
         "subtype": "openFrame",
+        "type": "groundVehicle",
         "traits": "",
+        "features": "",
         "tl": 7,
+        "core": {
+          "agility": 0,
+          "autopilotDM": -3,
+          "autopilotMax": 7,
+          "navigationDM": 0
+        },
+        "customisation": {
+          "primaryPower": "unpowered",
+          "secondaryPower": "unpowered",
+          "rangeModifications": 0,
+          "speedModifications": 0,
+          "fuelModifications": 0,
+          "fuelSpaces": 0,
+          "auxiliaryDrives": ""
+        },
         "armour": {
           "base": 0,
           "front" : 0,
           "rear": 0,
           "sides": 0,
           "top": 0,
-          "bottom": 0
+          "bottom": 0,
+          "port": 0,
+          "starboard": 0
         },
         "cost": 10000,
         "skill": "drive.wheel",
@@ -189,6 +223,7 @@
         "range": 400,
         "crew": 1,
         "passengers": 0,
+        "comfort": 0,
         "cargo": 0,
         "shipping": 3
       }
@@ -308,7 +343,7 @@
     }
   },
   "Item": {
-    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "role", "software", "worlddata" ],
+    "types": ["item", "weapon", "armour", "augment", "term", "associate", "cargo", "hardware", "option","role", "software", "worlddata" ],
     "templates": {
       "base": {
         "tl": 0,
@@ -420,6 +455,24 @@
               "weapons": {}
           }
       },
+      "option": {
+        "option": {
+          "model": "vehicle",
+          "type": "general",
+          "spaceType": "fixed",
+          "spaces": 0,
+          "costType": "fixed",
+          "vehicle": {
+            "spaceType": "fixed",
+            "spaces": 0,
+            "costType": "fixed"
+          },
+          "robot": {
+            "type": "general",
+            "slots": 0
+          }
+        }
+      },
       "role": {
           "role": {
               "actions": {},
@@ -459,6 +512,9 @@
     },
     "hardware": {
       "templates": [ "base", "hardware" ]
+    },
+    "option": {
+      "templates": [ "base", "option" ]
     },
     "role": {
         "templates": [ "role" ]

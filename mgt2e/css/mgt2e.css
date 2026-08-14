@@ -1,0 +1,239 @@
+.mgt2e .sheet-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.mgt2e .shadow {
+  background-color: #414042;
+  color: white;
+  border: none;
+  padding: 0;
+}
+
+.mgt2e img.profile {
+  background: none;
+}
+
+.mgt2e .box-title {
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  background-color: #f1511b;
+  color: white;
+  width: 100%;
+  margin-top: 0;
+}
+
+.mgt2e div.actor-header {
+  width: 100%;
+}
+
+.mgt2e .profile-img {
+  width: 120px;
+  height: 120px;
+  float: left;
+}
+
+.mgt2e div.actor-left {
+  flex: 0 0 170px;
+  width: 170px;
+}
+
+.mgt2e div.actor-right {
+  width: 100%;
+  margin-left: 10px;
+}
+
+.mgt2e h1.actor-name {
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  padding: 2px;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: bold;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  margin-top: 0;
+  border-bottom: 0;
+}
+
+.mgt2e h1.actor-name input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.mgt2e .field-value {
+  color: white;
+  background: none;
+  text-align: center;
+}
+
+.mgt2e select.field-value {
+  background-color: #4b4a44;
+  color: white;
+  text-align: left;
+}
+
+div.pill-container {
+  width: 100%;
+  background-color: #808080;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.mgt2e .pill-container .trait-pill {
+  background-color: #f1511b;
+  color: white;
+}
+
+.mgt2e .pill-container .trait-pill i {
+  background-color: black;
+  color: white;
+  opacity: 0.5;
+  margin-top: 1px;
+}
+
+
+.mgt2e .pill-container .invalid-pill {
+  background-color: #909090;
+  color: #404040;
+}
+
+.mgt2e .vehicle-type {
+  display: inline-block;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.mgt2e .vehicle-traits {
+  display: inline-block;
+  float: right;
+  font-weight: bold;
+  font-size: large;
+  padding-top: 0.5em;
+}
+
+div.weapon-action-block {
+  width: 100%;
+  border: 2px solid #f1511b;
+  border-radius: 5px;
+  padding: 2px;
+  margin-bottom: 2px;
+}
+
+div.weapon-action-block h4 {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 3px;
+}
+div.weapon-action-block img {
+  float: right;
+  width: 48px;
+}
+
+div.weapon-action-block .action {
+  background-color: #ff311b;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid #404040;
+  box-shadow: 3px 3px 3px #404040;
+}
+
+div.weapon-range {
+  text-align: center;
+}
+
+div.weapon-range label {
+  font-weight: bold;
+  color: var(--mongoose-blue);
+  display: block;
+}
+
+div.weapon-range span {
+  display: block;
+}
+
+.mgt2e .window-content {
+  background-color: #303030;
+  background-image: url(traveller-hexes.png);
+}
+
+.mgt2e h1.actor-name input {
+  color: var(--mongoose-orange);
+  background-color: #202020;
+}
+
+.item-option .window-content {
+  background-color: #446a87;
+}
+
+.mgt2e .traveller-skills {
+  columns: 3;
+  column-rule: solid 1px #808080;
+  font-size: 10pt;
+}
+
+.mgt2e .traveller-skills .skillBlock {
+  width: 100%;
+  display: block;
+  margin-top: 1px;
+  break-inside: avoid;
+}
+
+.mgt2e .traveller-skills .skillBlock .rollable:hover {
+  color: var(--mongoose-orange);
+}
+
+.mgt2e .traveller-skills input.trained {
+  width: 12px;
+  height: 12px;
+  accent-color: var(--mongoose-orange);
+}
+
+.mgt2e .traveller-skills input.skill-level {
+  background-color: var(--mongoose-dark);
+  color: white;
+  width: 2em;
+  height: 1em;
+}
+.mgt2e .traveller-skills input.skill-fixed {
+  background-color: var(--mongoose-dark);
+  color: white;
+  width: 2em;
+}
+
+.mgt2e img.item-img {
+  width: 120px;
+  float: left;
+}
+
+.vehicle-weapons li.vehicle-weapon {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: var(--mongoose-dark);
+}
+
+.vehicle-weapons li.vehicle-weapon h4 {
+  padding-left: 10px;
+  background-color: var(--mongoose-orange);
+  border-radius: 10px 10px 0px 0px;
+  color: white;
+}
+
+.vehicle-weapons li.vehicle-weapon h5 {
+  margin-top: 0;
+  padding-top: 0;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+

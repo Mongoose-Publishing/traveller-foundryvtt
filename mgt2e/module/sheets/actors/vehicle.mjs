@@ -64,6 +64,7 @@ export class MgT2VehicleActorSheet extends MgT2ActorSheet {
 
     }
 
+
     async getData() {
         const context = await super.getData();
 

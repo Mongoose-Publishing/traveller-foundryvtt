@@ -99,7 +99,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
         context.WEAPON_LEGALITY[9] = "(9) Harmless";
 
         context.SELECT_PROCESSING = {};
-        for (let i=0; i < 6; i++) {
+        for (let i=0; i < 8; i++) {
             context.SELECT_PROCESSING[i] = `Computer/${i}`;
         }
 
@@ -541,7 +541,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
 
             context.weapons = {};
             context.weapons[""] = "";
-            if (context.item.parent && context.item.parent.type === "spacecraft") {
+            if (context.item.parent && context.item.parent.type === "spacecraft" || context.item.parent.type === "vehicle") {
                 const spacecraft = context.item.parent;
                 for (let i of spacecraft.items) {
                     if (i.type === "hardware" && i.system.hardware.system === "weapon") {
@@ -565,6 +565,15 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                             wname = `${i.name} (${wname})`;
                         } else {
                             wname = i.name;
+                        }
+                        context.weapons[i._id] = wname;
+                    } else if (i.type === "option" && i.system.option.type === "weapon") {
+                        let wname = "";
+                        if (i.system.option.weapon?.weaponId) {
+                            let wpn = spacecraft.items.get(i.system.option.weapon?.weaponId);
+                            if (wpn) {
+                                wname = wpn.name;
+                            }
                         }
                         context.weapons[i._id] = wname;
                     }
@@ -637,7 +646,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             context.LINKED_COMPONENTS = [];
             let found = [];
             for (let s of context.item.system.links.components) {
-                let c = context.item.parent.items.get(s);
+                let c = context.item?.parent?.items?.get(s);
                 if (c) {
                     context.LINKED_COMPONENTS.push(c);
                     found.push(s);

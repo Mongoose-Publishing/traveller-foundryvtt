@@ -1,0 +1,63 @@
+<section class="sheet-body">
+    <div class="actor-header">
+        <div class="grid-span-4">
+            <h1 class="actor-name shadow">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+            </h1>
+            <div class="vehicle-type">
+                {{localize (concat "MGT2.Vehicle.Size." VEHICLE_SIZE)}}
+                {{localize (concat "MGT2.Vehicle.Type." system.vehicle.type)}}
+            </div>
+            <!-- Traits -->
+            <div class="vehicle-traits">
+                {{{showVehicleTraits . system.vehicle.traits}}}
+            </div>
+
+            <hr style="clear: right"/>
+
+            <div class="grid grid-5col">
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize 'MGT2.TravellerSheet.TechLevel'}}</label>
+                    <span>{{system.vehicle.tl}}</span>
+                </div>
+                <div class="resource flex-group-left">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.Skill'}}</label>
+                    <span>{{VEHICLE_SKILL}}</span>
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.Agility'}}</label>
+                    <span>{{system.vehicle.agility}}</span>
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.Speed'}}</label>
+                    <span>{{VEHICLE_SPEED}}</span>
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.Range'}}</label>
+                    <span>{{system.vehicle.range}}</span>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.Sheet.Passengers'}}</label>
+                    <span>{{system.vehicle.passengers}}</span>
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.Sheet.Comfort'}}</label>
+                    <span>{{system.vehicle.comfort}}</span>
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.Sheet.Cargo'}}</label>
+                    <span>{{system.vehicle.cargo}}</span>
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.Structure'}}</label>
+                    <span>{{system.hits.structure}}</span>
+                </div>
+                <div class="resource flex-group-center">
+                    <label class="field-label">{{localize 'MGT2.Vehicle.Sheet.Shipping'}}</label>
+                    <span>{{system.vehicle.shipping}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

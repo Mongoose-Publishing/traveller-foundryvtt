@@ -188,7 +188,7 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
                 context.targets["system.characteristics." + k + "." + prop] = label + " – " + fullName;
             }
         } else if (context.effectType?.targets === "skills") {
-            context.targets = { "": "-" };
+            context.targets = {"": "-"};
             const skills = MGT2.getDefaultSkills();
             for (const id in skills) {
                 const baseKey = "system.skills." + id;
@@ -200,6 +200,11 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
                     }
                 }
             }
+        } else if (context.effectType?.targets === "vehicle") {
+            context.targets = {"": "-"};
+            context.targets["agility"] = "Agility";
+            context.targets["comfort"] = "Comfort";
+            context.targets["autopilot"] = "Auto Pilot";
         } else {
             context.targets = { "": "-" };
             context.targets["system.modifiers.encumbrance.multiplierBonus"] = game.i18n.localize("MGT2.Modifiers.CarryMultiplier") || "Carry Multiplier";

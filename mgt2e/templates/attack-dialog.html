@@ -41,21 +41,21 @@
 
     <div class="shadow grid grid-2col">
         <div class="boon-selection">
-            <label for="dicetype" class="skillDialogLabel">Roll Type</label>
+            <label for="dicetype" class="skillDialogLabel">{{localize "MGT2.Dialog.RollType"}}</label>
             <select class="skillDialogRollType" name="dicetype">
                 {{selectOptions ROLLTYPES selected="normal"}}
             </select>
         </div>
 
         <div class="bonus-selection">
-            <label for="dm" class="skillDialogLabel">DM</label>
+            <label for="dm" class="skillDialogLabel">{{localize "MGT2.DM"}}</label>
             <input class="skillDialogDM" name="dm" type="text" data-dtype="Number" value="{{dm}}"/>
         </div>
 
         {{#if melee}}
         {{else}}
             <div class="range">
-                <label for="range" class="skillDialogLabel">Range</label>
+                <label for="range" class="skillDialogLabel">{{localize "MGT2.Attack.Range"}}</label>
                 <select class="attackDialogRange" name="difficulty">
                     {{selectOptions RANGES selected="+0"}}
                 </select>
@@ -75,9 +75,9 @@
 
     <footer class="sheet-footer flexrow">
         {{#if parryBonus includeZero=true}}
-            <button type="submit" name="submit" class="parryRoll">Parry (+{{parryBonus}})</button>
+            <button type="submit" name="submit" class="parryRoll">{{localize "MGT2.TravellerSheet.Parry"}} (+{{parryBonus}})</button>
         {{/if}}
-        <button type="submit" name="submit" class="attackRoll">Attack</button>
+        <button type="submit" name="submit" class="attackRoll">{{localize "MGT2.TravellerSheet.Attack"}}</button>
     </footer>
 
 </form>

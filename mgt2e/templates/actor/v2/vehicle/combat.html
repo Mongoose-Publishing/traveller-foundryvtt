@@ -1,0 +1,53 @@
+<section class="tab {{tab.cssClass}} scrollable" data-group="primary" data-tab="combat">
+    <h4>Armour</h4>
+
+    <div class="grid grid-6col">
+        <div class="resource flex-group-center">
+            <label class="field-label">Front</label>
+            <span>{{system.vehicle.armour.front}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Aft</label>
+            <span>{{system.vehicle.armour.rear}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Port</label>
+            <span>{{system.vehicle.armour.port}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Starboard</label>
+            <span>{{system.vehicle.armour.starboard}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Dorsal</label>
+            <span>{{system.vehicle.armour.top}}</span>
+        </div>
+        <div class="resource flex-group-center">
+            <label class="field-label">Ventral</label>
+            <span>{{system.vehicle.armour.bottom}}</span>
+        </div>
+    </div>
+
+    <div class="grid grid-4col">
+        <div class="grid-span-2">
+            <div >
+                <label>Size</label>
+                <span>{{VEHICLE_SIZE_DM}}</span>
+            </div>
+
+            <div>
+                <label>Damage</label>
+                <input type="number" name="system.hits.damage" value="{{system.hits.damage}}"/>
+            </div>
+        </div>
+    </div>
+
+    <h4>Weapons</h4>
+
+    <ol class="vehicle-weapons grid grid-2col">
+        {{#each MOUNTS as |mount|}}
+            {{{weaponMountBlock mount}}}
+        {{/each}}
+    </ol>
+
+</section>

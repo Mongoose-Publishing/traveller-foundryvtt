@@ -1,0 +1,37 @@
+<div class="attack-dialog vehicle-attack-dialog">
+    <h1 class="actor-name">
+        {{actor.name}} ({{weaponItem.name}})
+    </h1>
+
+    <div>{{skillText}}</div>
+
+    <div class="grid grid-4col">
+        <div class="resource flex-group-center">
+            <label class="field-label">{{localize 'MGT2.Damage'}}</label>
+            <span>{{weaponItem.system.weapon.damage}}</span>
+        </div>
+
+        <div class="resource flex-group-center grid-span-2">
+            <label class="field-label">{{localize 'MGT2.Range'}}</label>
+            <select name="range">
+                {{selectOptions RANGE_SELECT }}
+            </select>
+        </div>
+
+        <div class="resource flex-group-center">
+            <label class="field-label">{{localize 'MGT2.DM'}}</label>
+            <span></span>
+        </div>
+    </div>
+
+    {{#if weaponItem.system.weapon.traits}}
+        <div>
+            {{{showWeaponTraits . weaponItem.system.weapon.traits}}}
+        </div>
+    {{/if}}
+
+    <div class="grid grid-4col">
+
+    </div>
+
+</div>

@@ -15,13 +15,16 @@ import { MgT2EffectSheet } from "./sheets/effect-sheet.mjs";
 import { MgT2AssociateItemSheet } from "./sheets/items/associate.mjs";
 import { MgT2WorldDataItemSheet } from "./sheets/items/world-data.mjs";
 import { MgT2SoftwareItemSheet } from "./sheets/items/software.mjs";
+import { MgT2eVehicleSheet } from "./sheets/v2/Vehicle.mjs";
+import { MgT2eRobotSheet } from "./sheets/v2/Robot.mjs";
+import { MgT2eOptionSheet } from "./sheets/items/v2/Option.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MGT2 } from "./helpers/config.mjs";
 import { Tools } from "./helpers/chat/tools.mjs";
 import { MgT2eMacros } from "./helpers/chat/macros.mjs";
-import { rollSkill } from "./helpers/dice-rolls.mjs";
+import { printWeaponTraits, rollSkill } from "./helpers/dice-rolls.mjs";
 import { skillLabel } from "./helpers/dice-rolls.mjs";
 import {MgT2Effect} from "./documents/effect.mjs";
 import { migrateWorld } from "./migration.mjs";
@@ -314,12 +317,16 @@ Hooks.once('init', async function() {
   Actors.registerSheet("mgt2e", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
   Actors.registerSheet("mgt2e", MgT2WorldActorSheet, { label: "World Sheet", types: [ "world"], makeDefault: true });
   Actors.registerSheet("mgt2e", MgT2VehicleActorSheet, { label: "Vehicle Sheet", types: [ "vehicle"], makeDefault: true });
+  Actors.registerSheet("mgt2e", MgT2eVehicleSheet, { label: "Vehicle Sheet 2", types: [ "vehicle"], makeDefault: false });
+  Actors.registerSheet("mgt2e", MgT2eRobotSheet, { label: "Robot Sheet", types: [ "robot"], makeDefault: true });
   Actors.registerSheet("mgt2e", MgT2SwarmActorSheet, { label: "Swarm Sheet", types: [ "swarm"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
   Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
   Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "worlddata"], makeDefault: true });
   Items.registerSheet("mgt2e", MgT2SoftwareItemSheet, { label: "Software", types: [ "software"], makeDefault: true });
+  Items.registerSheet("mgt2e", MgT2eOptionSheet, { label: "Option", types: [ "option"], makeDefault: true });
+
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
@@ -680,6 +687,8 @@ Hooks.on("createItem", (item) => {
             item.img = "systems/mgt2e/icons/items/crew_role.svg";
         } else if (item.type === "software") {
             item.img = "systems/mgt2e/icons/items/software.svg";
+        } else if (item.type === "option") {
+            item.img = "systems/mgt2e/icons/items/option.svg";
         } else {
             item.img = "systems/mgt2e/icons/items/item.svg";
         }
@@ -728,7 +737,7 @@ Hooks.on("createActor", (actor, data, userId) => {
     }
 
     // Copy in characteristics where needed.
-    if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package") {
+    if (["traveller", "npc", "package", "robot"].includes(actor.type)) {
         // Need to add characteristics. We want them in a specific order, otherwise
         // they get sorted alphabetically.
         for (let c of [
@@ -752,7 +761,7 @@ Hooks.on("createActor", (actor, data, userId) => {
 
     // Copy in skills where needed.
     const BASE_SKILLS = MGT2.getDefaultSkills();
-    if (actor.type === "traveller" || actor.type === "npc" || actor.type === "package" || actor.type === "creature") {
+    if (["traveller", "npc", "package", "creature", "robot"].includes(actor.type)) {
         // Need to add skills.
         for (let s in BASE_SKILLS) {
             if (actor.system.skills[s]) {
@@ -784,6 +793,8 @@ Hooks.on("createActor", (actor, data, userId) => {
             actor.img = `systems/mgt2e/icons/actors/traveller-${colours[colours.length * Math.random() | 0]}.svg`;
         } else if (actor.type === "package") {
             actor.img = `systems/mgt2e/icons/actors/traveller-grey.svg`;
+        } else if (actor.type === "robot") {
+            actor.img = `systems/mgt2e/icons/actors/robot.svg`;
         } else if (actor.type === "spacecraft") {
             actor.img = `systems/mgt2e/images/tokens/spacecraft/white/far_trader.webp`;
         } else if (actor.type === "vehicle") {
@@ -1708,7 +1719,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
     if (isNaN(skill.value) || skill.value < 0) {
         skill.value = 0;
     }
-    const dataRoll='data-rolltype="skill" data-roll="2d6"';
+    const dataRoll='data-rolltype="skill" data-roll="2d6" data-action="rollCheck"';
     const dataSkill=`data-skill="${skillId}"`;
 
     const nameSkill=`system.skills.${skillId}`;
@@ -1759,7 +1770,7 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
 
         // Specialities?
         if (!backgroundOnly && skill.specialities && showSpecs) {
-            html += `<input type="text" value="${skill.trained?0:untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
+            html += `<input type="number" value="${skill.trained?0:untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
 
             let SPECS = [];
             // Sort specialities into alphabetical order according to l10n label.
@@ -1844,18 +1855,18 @@ Handlebars.registerHelper('skillBlock', function(data, skillId, skill, key) {
                     html += `<label class="${augmented?"augmented":""} ${skill.individual?"individual":""} ${isDeleted?"deleted":""} specialisation rollable" ${dataRoll} ${dataSkill} `;
                     html += `data-spec="${sid}" title="${title}">${label}${hasXp?"<sup>+</sup>":""}</label>`;
                     if (skill.trained && (!skill.individual || spec.trained)) {
-                        html += `<input class="skill-level" type="text" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
+                        html += `<input class="skill-level" type="number" name="${nameSkill}.specialities.${sid}.value" value="${spec.value}"/>`;
                     } else {
-                        html += `<input type="text" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
+                        html += `<input type="number" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
                     }
                     html += "</div>";
                 }
             }
         } else {
             if (skill.trained) {
-                html += `<input class="skill-level" type="text" name="${nameSkill}.value" value="${skill.value}" ${dataRoll} ${dataSkill}"/>`;
+                html += `<input class="skill-level" type="number" min="0" max="9" name="${nameSkill}.value" value="${skill.value}" ${dataRoll} ${dataSkill}"/>`;
             } else {
-                html += `<input type="text" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
+                html += `<input type="number" value="${untrainedLevel}" data-dtype="Number" class="skill-fixed" readonly/>`;
             }
         }
 
@@ -2235,7 +2246,7 @@ Handlebars.registerHelper('showCrewInfo', function(actorShip, actorCrew) {
                 } else if (action.action === "special") {
                     icon = "fa-wand-magic-sparkles";
                 }
-                html += `<span class="role-action-button" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}">`;
+                html += `<span class="role-action-button" data-action="roleAction" data-action-id="${id}" data-role-id="${roleItem.id}" data-crew-id="${actorCrew.id}">`;
                 html += `<i class="fa-regular ${icon}"></i> ${action.title}`;
                 html += `</span>`;
             }
@@ -2368,6 +2379,27 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
     return html;
 });
 
+Handlebars.registerHelper('showWeaponRange', function(item) {
+    let html = `<div class="grid grid-4col weapon-range">`;
+
+    const range = parseInt(item.system.weapon.range);
+    const shortRange = range / 4;
+    const longRange = range * 2;
+    const extremeRange = range * 4;
+    let unit = "m";
+    if (item.system.weapon.scale === "vehicle") {
+        unit = "km";
+    }
+
+    html += `<div><label>Short (+1)</label><span>${shortRange}${unit}</span></div>`;
+    html += `<div><label>Medium</label><span>${range}${unit}</span></div>`;
+    html += `<div><label>Long (-2)</label><span>${longRange}${unit}</span></div>`;
+    html += `<div><label>Extreme (-4)</label><span>${extremeRange}${unit}</span></div>`;
+
+    html += `</div>`;
+
+    return html;
+});
 
 Handlebars.registerHelper('showWeaponTraits', function(key, traits) {
     // 'traits' are comma separated list of weapon traits. Some may have associated values.
@@ -2466,6 +2498,75 @@ Handlebars.registerHelper('showCargoTraits', function(key, traits) {
 
     return html;
 });
+
+// Show where cargo/freight is from on the ship sheet.
+Handlebars.registerHelper('showCargoMeta', function(item) {
+    if (item.type === "cargo" && item.system.cargo) {
+
+    }
+    return "";
+});
+
+Handlebars.registerHelper('showVehicleFeatures', function(key, traits) {
+    // 'traits' are comma separated list of vehicle traits.
+    console.log("showVehicleFeatures: " + traits);
+    if (!traits || traits==="") {
+        return "";
+    }
+    const vehicle = key?.actor?.system?.vehicle;
+    const type = vehicle.type;
+
+    let html = "";
+    let list = traits.split(",");
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let trait = list[i].trim();
+
+            let legal = false;
+            let required = false;
+            if (CONFIG.MGT2.VEHICLES.TYPE[type]?.allowedFeatures?.includes(trait)) {
+                legal = true;
+            }
+
+            html += `<span class='pill trait-pill ${legal?"":"invalid-pill"}' data-feature-id='${trait}' title='${game.i18n.localize("MGT2.Vehicle.Feature."+trait)}'>`;
+            html += `&nbsp;${game.i18n.localize("MGT2.Vehicle.Feature." + trait)} `;
+            if (key.owner) {
+                if (!required) {
+                    html += `&nbsp;<i class="fas fa-xmark" data-feature-id="${trait}" data-action="removeFeature"> </i>`;
+                } else {
+                    html + `&nbsp;`;
+                }
+            } else {
+                html += "&nbsp;";
+            }
+            html += "</span>";
+        }
+    }
+
+    return html;
+});
+
+Handlebars.registerHelper('showVehicleTraits', function(key, traits) {
+    // 'traits' are comma separated list of vehicle traits.
+    console.log("showVehicleTraits: " + traits);
+    if (!traits || traits==="") {
+        return "";
+    }
+    let html = "";
+    let list = traits.split(",");
+    for (let i in list) {
+        if (list[i].length > 0) {
+            let trait = list[i].trim();
+
+            html += `<span class='pill trait-pill' title='${game.i18n.localize("MGT2.Vehicle.Trait."+trait)}'>`;
+            html += `&nbsp;${game.i18n.localize("MGT2.Vehicle.Trait." + trait)} `;
+            html += "</span>";
+        }
+    }
+
+    return html;
+});
+
 
 Handlebars.registerHelper('showSpacecraftHullTraits', function(key, traits) {
     let html = "";
@@ -2714,6 +2815,160 @@ Handlebars.registerHelper("showEffectPill", function(actor, effect) {
     }
 
     return html;
+});
+
+// Item block for new V2 actor sheets.
+Handlebars.registerHelper("itemBlock", function(actor, item, types) {
+    let html = `<li class="item-block draggable" data-item-id="${item._id}">`;
+    html += `<h4>${item.name}</h4>`;
+    html += `<img class="portrait" src="${item.img}"/>`;
+    const system = item.system;
+    switch (item.type) {
+        case "weapon":
+            if (system.weapon) {
+                html += `<b>D:</b> ${system.weapon.damage} <b>R:</b> ${system.weapon.range}m `;
+            }
+            break;
+        case "armour":
+            break;
+        default:
+            break;
+    }
+    html += `<br/>`;
+    if (parseInt(system.weight) > 0) {
+        html += `${system.weight}kg `;
+    }
+    if (parseInt(system.cost) > 0) {
+        html += `Cr${system.cost} `;
+    }
+    html += `<div class="item-controls">
+        <a class="item-control" data-action="editItem"title="${game.i18n.localize('MGT2.EditItem')}">
+            <i data-item-id="${item._id}" class="fas fa-edit"></i>
+        </a>
+        <a class="item-control" data-action="deleteItem" title="${game.i18n.localize('MGT2.DeleteItem')}">
+            <i data-item-id="${item._id}" class="fas fa-trash"></i>
+        </a>
+    </div>`;
+    html += `</li>`;
+    return html;
+});
+
+Handlebars.registerHelper("weaponBlock", function(item, action) {
+    if (!item) {
+        return "";
+    }
+    let html = `<li class="item-block draggable" data-item-id="${item._id}" data-action="${action}">`;
+    const system = item.system;
+    html += `<h4>
+        ${item.name}
+        <img src="systems/mgt2e/icons/misc/scale-${system.weapon.scale}.svg" class="weapon-scale"/>
+    </h4>`;
+    let damage = system.weapon.damage;
+    const destructive = hasTrait(system.weapon.traits, "destructive")?"destructive":"";
+    html += `<span class="damage-dice ${destructive}">${damage}</span>`;
+    switch (system.weapon.scale) {
+        case "vehicle":
+            html += ` / <b>Range:</b> ${system.weapon.range}km `;
+            break;
+        case "spacecraft":
+            html += ` / ${game.i18n.localize("MGT2.Spacecraft.Range." + system.weapon.spaceRange)}`;
+            break;
+        default:
+            html += ` / <b>Range:</b> ${system.weapon.range}m `;
+            break;
+    }
+    html += `<br/>`;
+    if (system.weapon.traits) {
+        html += `<span class="weapon-traits">${printWeaponTraits(system.weapon.traits)}</span><br/>`;
+    }
+    if (parseInt(system.weight) > 0) {
+        html += `${system.weight}kg `;
+    }
+    if (system.weapon.scale === "spacecraft") {
+        let mount = "Fixed";
+        switch (system.weapon.mount) {
+            case "fixed":
+                mount = "Fixed";
+                break;
+            case "turret1": case "turret2": case "turret3": case "turret4":
+                mount = "Turret1";
+                break;
+            case "barbette":
+                mount = "Barbette";
+                break;
+            case "bay.small":
+                mount = "BaySmall";
+                break;
+            case "bay.medium":
+                mount = "BayMedium";
+                break;
+            case "bay.large":
+                mount = "BayLarge";
+                break;
+            case "spinal":
+                mount = "Spinal";
+                break;
+            default:
+                mount = "Fixed";
+                break;
+        }
+        html += `${game.i18n.localize("MGT2.Item.SpaceMount." + mount)}`
+    }
+    html += `</li>`;
+    return html;
+});
+
+Handlebars.registerHelper("weaponMountBlock", function(mount) {
+    const mountItem = mount.item;
+    const weaponItem = mount.weapon;
+    if (!mountItem || mountItem.type !== "option" || mountItem.system.option.type !== "weapon") {
+        return "";
+    }
+
+    let html = `<li class="item-block vehicle-weapon"><h4>${mountItem.name}</h4>`;
+    if (weaponItem) {
+        html += `<img src="systems/mgt2e/icons/misc/scale-${weaponItem.system.weapon.scale}.svg" class="weapon-scale"/>`;
+    }
+    html += `</h4>`;
+
+    const mountType = mountItem.system.option.weapon.mountType;
+    if (weaponItem) {
+        html += `<h5>${weaponItem.name} (${game.i18n.localize("MGT2.Vehicle.MountType." + mountType)})</h5>`;
+
+        const system = weaponItem.system;
+        let damage = system.weapon.damage;
+        const destructive = hasTrait(system.weapon.traits, "destructive")?"destructive":"";
+        html += `<span class="damage-dice ${destructive}">${damage}</span>`;
+        if (system.weapon.traits) {
+            html += `<br/><span class="weapon-traits">${printWeaponTraits(system.weapon.traits)}</span>`;
+        }
+        html += `<br/>`;
+        if (system.weapon.scale === "spacecraft") {
+            html += `${game.i18n.localize("MGT2.Spacecraft.Range." + system.weapon.spaceRange)}`;
+        } else {
+            const shortRange = parseInt(system.weapon.range / 4);
+            const longRange = parseInt(system.weapon.range * 2);
+            const extremeRange = parseInt(system.weapon.range * 4);
+            const unit = (system.weapon.scale === "vehicle")?"km":"m";
+            html += `<table><tr><th>${game.i18n.localize("MGT2.Attack.short")} (+1)</th><th>${game.i18n.localize("MGT2.Attack.medium")}</th><th>${game.i18n.localize("MGT2.Attack.long")} (-2)</th><th>${game.i18n.localize("MGT2.Attack.extreme")} (-4)</th></tr>`;
+            html += `<tr><td>${shortRange}${unit}</td><td>${system.weapon.range}${unit}</td><td>${longRange}${unit}</td><td>${extremeRange}${unit}</td></tr>`;
+            html += "</table>";
+        }
+
+    } else {
+        html += `<h5>${game.i18n.localize("MGT2.Vehicle.MountType." + mountType)}</h5>`;
+        html += `No weapon attached`;
+    }
+    html += `</li>`;
+    return html;
+});
+
+
+Handlebars.registerHelper("itemName", function (item) {
+    let html = `<li class="item-name">`;
+   html += item.name;
+   html += `</li>`;
+   return html;
 });
 
 /* -------------------------------------------- */

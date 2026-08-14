@@ -1,0 +1,30 @@
+<section class="tab {{tab.cssClass}}" data-group="primary" data-tab="weapon">
+    <div class="grid flex-group-center grid-4col">
+        <div class="resource">
+            <label class="item-label">{{localize "MGT2.Option.Label.PopUp"}}</label>
+            <select name="system.option.weapon.popUp">
+                {{selectOptions SELECT_POPUP selected=system.option.weapon.popUp}}
+            </select>
+        </div>
+        <div class="resource">
+            <label class="item-label">{{localize "MGT2.Option.Label.FireControl"}}</label>
+            <select name="system.option.weapon.fireControl">
+                {{selectOptions SELECT_FIRECONTROL selected=system.option.weapon.fireControl}}
+            </select>
+        </div>
+    </div>
+
+    <h4>Connected Weapons</h4>
+
+    {{{weaponBlock ATTACHED_WEAPON "removeWeapon"}}}
+
+    <h4>Available Weapons</h4>
+
+    <p>{{MOUNT_TEXT}}</p>
+
+    <ol class="grid grid-3col">
+        {{#each WEAPONS_LIST as | weapon id |}}
+            {{{weaponBlock weapon "addWeapon"}}}
+        {{/each}}
+    </ol>
+</section>

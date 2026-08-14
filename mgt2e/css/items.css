@@ -436,3 +436,71 @@ textarea.culture {
   font-style: italic;
   font-size: larger;
 }
+
+.item-block {
+  list-style: none;
+  border: 1px solid var(--mongoose-blue);
+  color: white;
+  background-color: var(--mongoose-dark);
+}
+
+.item-block h4 {
+  color: black;
+  width: 100%;
+  background-color: var(--mongoose-blue);
+  border-bottom: white;
+  margin: 0;
+  padding: 1px;
+}
+
+.item-block img.portrait {
+  width: 32px;
+  height: 32px;
+  float: left;
+  margin: 2px;
+}
+
+.item-quantity {
+  font-size: larger;
+}
+
+.item-quantity span {
+  display: inline-block;
+}
+
+.item-quantity input {
+  display: inline-block;
+  text-align: center;
+  width: 3em;
+}
+
+.item-label {
+  background-color: #72bce8;
+  font-weight: bold;
+  color: black;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 3px 3px 0 0;
+}
+
+div.resource input[type=number] {
+  text-align: center;
+}
+
+img.weapon-scale {
+  width: 48px;
+  height: 48px;
+  float: right;
+}
+
+span.damage-dice {
+  font-size: larger;
+  font-weight: bold;
+  padding-left: 3px;
+}
+
+span.destructive {
+  color: red;
+}

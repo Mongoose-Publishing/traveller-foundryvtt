@@ -380,6 +380,7 @@ export function createFreight(name, worldActor, destinationWorld, tonnage, price
                 "tons": "0",
                 "illegal": false,
                 "sourceId": worldActor.uuid,
+                "sourceName": worldActor.name,
                 "destinationId": destinationWorld.uuid,
                 "destinationName": destinationWorld.name,
                 "parsecs": parsecs,
@@ -598,6 +599,7 @@ async function createTradeItem(worldActor, item, available) {
                 "tons": tonnes,
                 "illegal": srcCargo.illegal,
                 "sourceId": worldActor.uuid,
+                "sourceName": worldActor.name,
                 "destinationId": null,
                 "speculative": true,
                 "salePrice": sell
@@ -855,6 +857,9 @@ export async function tradeBuyFreightHandler(queryData) {
         "type": "cargo",
         "system": foundry.utils.deepClone(freightItem.system)
     }
+    itemData.system.cargo.meta = {
+        purchaseDate: `${Tools.formattedDate()}`
+    }
     Item.create(itemData, { parent: shipActor });
 
     // Output purchase information to the chat.
@@ -880,7 +885,6 @@ export async function tradeSellFreightHandler(queryData) {
     console.log("Shipping to " + worldActor.uuid);
     for (let i of shipActor.items) {
         if (i.type === "cargo" && i.system?.cargo?.freight) {
-            console.log(`${i.name} - ${i.system.cargo.destinationId}`);
             if (i.system.cargo.destinationId === worldActor.uuid) {
                 let price = parseInt(i.system.cargo.price) * parseInt(i.system.quantity);
                 if (price === NaN) {
