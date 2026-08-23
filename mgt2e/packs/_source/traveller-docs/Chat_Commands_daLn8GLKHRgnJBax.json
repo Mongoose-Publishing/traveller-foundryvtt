@@ -15,7 +15,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<pre><code>/upp [&lt;extra-dice&gt;]</code></pre><p></p><p>Generate a set of six characteristics. If extra dice are specified, then extra pairs of dice are rolled, and the highest six pairs will be used to generate the UPP.</p><p></p><p>The results can be dragged to an actor's characteristics to set them.</p><p></p>"
+        "content": "<pre><code>/upp [&lt;dice-formula&gt;] [&lt;extra-dice&gt;]</code></pre><p>Generate a set of six characteristics. If extra dice are specified, then extra pairs of dice are rolled, and the highest six pairs will be used to generate the UPP.</p><p>If a dice formula is specified (e.g. 3D6K2) then this will be used instead of 2D6.</p><p>The results can be dragged to an actor's characteristics to set them.</p><p></p>"
       },
       "video": {
         "controls": true,
@@ -31,9 +31,9 @@
       "_stats": {
         "systemId": "mgt2e",
         "systemVersion": "0.4.9",
-        "coreVersion": "13.348",
+        "coreVersion": "13.351",
         "createdTime": 1717537853687,
-        "modifiedTime": 1739898210158,
+        "modifiedTime": 1787486053411,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
