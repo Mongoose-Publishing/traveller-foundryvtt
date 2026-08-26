@@ -48,11 +48,17 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     async _prepareContext(options) {
+        const characteristic = this.weaponItem.system.weapon.characteristic;
+        const skill = this.weaponItem.system.weapon.skill;
+        const characteristicDM = this.actor.system.characteristics?.[characteristic]?.dm || 0;
+        this.skillDM = this.actor.getSkillValue(skill, { cha: characteristic }) + characteristicDM;
+
         const context = {
             actor: this.actor,
             weaponItem: this.weaponItem,
-            rangeUnit: "m",
+            rangeUnit: this.weaponItem.system.weapon.scale === "vehicle" ? "km" : "m",
             skillText: this._getSkillText(),
+            skillDM: this.skillDM,
             buttons: [
                 { type: "submit", icon: "fa-solid fa-save", label: "Attack" }
             ]
@@ -91,14 +97,14 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
     // Despite being static, formHandler has access to `this`
     static async formHandler(event, form, formData) {
 
-        console.log(formData.object.DM);
         let customDM = parseInt(formData.object.DM);
         if (isNaN(customDM)) {
             customDM = 0;
         }
+        const rangeDM = parseInt(formData.object.range);
 
         if (event.type === "submit") {
-            this.rollImpact(customDM);
+            this.rollImpact(customDM, rangeDM);
         }
 
         return null;
@@ -110,7 +116,11 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         // Do nothing. We should already have a target by this point.
     }
 
-    rollImpact(customDM) {
+    rollImpact(customDM, rangeDM) {
+        this.attackOptions.skillDM = this.skillDM;
+        this.attackOptions.dm = customDM;
+        this.attackOptions.rangeDM = rangeDM;
+        this.attackOptions.showBreakdown = true;
 
         rollAttack(this.actor, this.weaponItem, this.attackOptions);
         this.close();

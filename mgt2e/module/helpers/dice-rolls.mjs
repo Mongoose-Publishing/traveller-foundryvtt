@@ -192,7 +192,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
     }
 
     if (attackOptions.skillDM !== 0) {
-        dice += ` + ${attackOptions.skillDM}`;
+        dice += ` + ${attackOptions.skillDM}[Skill]`;
     }
     if (system) {
         if (system.modifiers && system.modifiers.encumbrance.dm !== 0) {
@@ -370,9 +370,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
 
     if (attackOptions.dm && parseInt(attackOptions.dm) !== 0) {
         if (attackOptions.dm > 0) {
-            dice += ` + ${parseInt(attackOptions.dm)}`;
+            dice += ` + ${parseInt(attackOptions.dm)}[DM]`;
         } else {
-            dice += ` - ${Math.abs(parseInt(attackOptions.dm))}`;
+            dice += ` - ${Math.abs(parseInt(attackOptions.dm))}[DM]`;
         }
     }
     if (attackOptions.rangeDM) {
@@ -422,13 +422,14 @@ export async function rollAttack(actor, weapon, attackOptions) {
         let reducedTotal = (await new Roll(redDice, actor?actor.getRollData():null).evaluate()).total;
         let minimumTotal = (await new Roll(minDice, actor?actor.getRollData():null).evaluate()).total;
 
-        let effect = 0, attackTotal = 0;
+        let effect = 0, attackTotal = 0, attackDiceTotal = 0;
         if (actor) {
             const attackRoll = await new Roll(dice, actor ? actor.getRollData() : null).evaluate();
             if (!roll) {
                 roll = attackRoll;
             }
             attackTotal = attackRoll.total;
+            attackDiceTotal = attackRoll.dice.reduce((total, die) => total + die.total, 0);
             effect = attackTotal - 8;
         }
 
@@ -557,6 +558,11 @@ export async function rollAttack(actor, weapon, attackOptions) {
             if (actor) {
                 content += `<b>${game.i18n.localize("MGT2.AttackRoll")}:</b> ${dice}<br/>`
                 content += `<span class="skill-roll inline-roll inline-result"><i class="fas fa-dice"> </i> ${attackTotal}</span> <span class="${effectClass}">${effectText}</span><br/>`;
+                if (attackOptions.showBreakdown) {
+                    const modifierTotal = attackTotal - attackDiceTotal;
+                    const modifierSign = modifierTotal >= 0 ? "+" : "-";
+                    content += `Dice ${attackDiceTotal} ${modifierSign} Modifiers ${Math.abs(modifierTotal)} = Total ${attackTotal}<br/>`;
+                }
             } else {
                 content += "<br/>";
             }

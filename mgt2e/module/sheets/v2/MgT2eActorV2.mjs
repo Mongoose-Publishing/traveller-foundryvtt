@@ -73,13 +73,53 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
 
     static async #onAttack(event, target) {
         const itemId = event.target.dataset["itemId"];
-        const item = this.document.items.get(itemId);
+        const mountId = event.target.dataset["mountId"];
+        const weaponItem = this.document.items.get(itemId);
+        const mountItem = this.document.items.get(mountId);
 
-        if (item) {
-            new MgT2AttackDialog(this.actor, item).render(true);
-        } else {
-            console.log("No item found");
+        if (!mountId) {
+            if (weaponItem) {
+                new MgT2AttackDialog(this.actor, weaponItem).render(true);
+            } else {
+                ui.notifications.warn("Cannot find the weapon.");
+            }
+            return;
         }
+
+        if (!weaponItem || !mountItem) {
+            ui.notifications.warn("Cannot find the vehicle weapon or its mount.");
+            return;
+        }
+
+        let gunnerActor;
+        let fallbackGunnerActor;
+        for (const [crewId, assignments] of Object.entries(this.document.system.crewed?.crew || {})) {
+            for (const roleId of Object.keys(assignments)) {
+                const roleItem = this.document.items.get(roleId);
+                const weaponActions = Object.values(roleItem?.system.role.actions || {})
+                    .filter(action => action.action === "weapon");
+                if (weaponActions.some(action => action.weapon === mountId)) {
+                    gunnerActor = game.actors.get(crewId);
+                    break;
+                }
+                if (!fallbackGunnerActor && weaponActions.some(action => !action.weapon)) {
+                    fallbackGunnerActor = game.actors.get(crewId);
+                }
+            }
+            if (gunnerActor) break;
+        }
+        gunnerActor ||= fallbackGunnerActor;
+
+        if (!gunnerActor) {
+            ui.notifications.warn("Assign a crew member to a Gunner role before attacking.");
+            return;
+        }
+
+        new MgT2eAttackApp(gunnerActor, weaponItem, {
+            vehicle: this.document,
+            mount: mountItem,
+            dm: 0
+        }).render(true);
     }
 
     static async #onReload(event, target) {
@@ -218,6 +258,89 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
                 });
             }
         }
+    }
+
+    async _createCrewRole(roleType) {
+        const system = {
+            description: "",
+            role: {
+                actions: {},
+                department: false,
+                colour: null,
+                dei: 0
+            }
+        };
+        let itemName;
+        let img;
+        let timestamp = Date.now();
+        const addAction = (action) => {
+            system.role.actions[(timestamp++).toString(36)] = action;
+        };
+
+        switch (roleType) {
+            case "gunner":
+                itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner");
+                img = "systems/mgt2e/icons/items/roles/gunner.svg";
+                addAction({ title: itemName, action: "weapon", dm: 0, weapon: null });
+                break;
+            case "pilot": {
+                itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot");
+                img = "systems/mgt2e/icons/items/roles/pilot.svg";
+                let skill = this.document.system.vehicle?.skill || "pilot.spacecraft";
+                const dtons = this.document.system.spacecraft?.dtons;
+                if (dtons < 100) {
+                    skill = "pilot.smallCraft";
+                } else if (dtons > 5000) {
+                    skill = "pilot.capitalShips";
+                }
+                addAction({
+                    title: game.i18n.localize("MGT2.Role.BuiltIn.Action.Pilot"),
+                    action: "skill", cha: "DEX", skill, target: 8, dm: 0
+                });
+                break;
+            }
+            case "engineer":
+                itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer");
+                img = "systems/mgt2e/icons/items/roles/engineer.svg";
+                addAction({
+                    title: "Repair", action: "skill", cha: "INT",
+                    skill: "mechanic", target: 8, dm: 0
+                });
+                break;
+            case "sensors":
+                itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors");
+                img = "systems/mgt2e/icons/items/roles/sensors.svg";
+                addAction({
+                    title: itemName, action: "skill", cha: "INT",
+                    skill: "electronics.sensors", target: 8, dm: 0
+                });
+                break;
+            case "navigator":
+                itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Navigator");
+                img = "systems/mgt2e/icons/items/roles/navigator.svg";
+                addAction({
+                    title: itemName, action: "skill", cha: "EDU",
+                    skill: "navigation", target: 8, dm: 0
+                });
+                break;
+            case "broker":
+                itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Broker");
+                img = "systems/mgt2e/icons/items/roles/broker.svg";
+                addAction({
+                    title: itemName, action: "skill", cha: "INT",
+                    skill: "broker", target: 8, dm: 0
+                });
+                break;
+            default:
+                return;
+        }
+
+        return this.document.createEmbeddedDocuments("Item", [{
+            name: itemName,
+            img,
+            type: "role",
+            system
+        }]);
     }
 
     async _prepareItems(context) {
