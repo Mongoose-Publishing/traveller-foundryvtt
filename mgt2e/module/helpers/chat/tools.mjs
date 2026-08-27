@@ -608,16 +608,18 @@ Tools.getSkillLabel = function(skills, skillFqn) {
 };
 
 Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
-    console.log("uppInlineDisplay:");
-    console.log(name);
-    console.log(argsString);
-
     const args = await Tools.blockInline(argsString);
-    console.log(args);
     const a = document.createElement("div");
 
     let html = `<div class="inline-upp">`;
-    html += `<span class="name">${name}`;
+    let jsonData = {
+        name: name,
+        gender: args.gender,
+        profession: args.profession,
+        age: args.age
+    }
+    const json = JSON.stringify(jsonData);
+    html += `<span class="name"><i class="upp-to-chat fas fa-comment" data-upp-data='${json}'></i> ${name}`;
     if (args.species) {
         html += `<span class="extra-data">${args.species}</span>`;
     }

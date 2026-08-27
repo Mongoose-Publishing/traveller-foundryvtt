@@ -406,7 +406,19 @@ Hooks.once("init", function() {
         console.log($(ev.currentTarget).data("skillData"));
         let data = $(ev.currentTarget).data("skillData");
         Tools.inlineUppRollSkill(name, data);
-    })
+    });
+    body.on("click", ".upp-to-chat", ev => {
+       const data = $(ev.currentTarget).data("uppData");
+       if (data) {
+           let html = data.name;
+           if (data.profession) {
+               html += ` (${data.profession})`;
+           }
+           ChatMessage.create({
+               content: html
+           });
+       }
+    });
 
     CONFIG.statusEffects.push({
         id: "destroyed",
