@@ -294,6 +294,16 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             context.TYPE_SELECT[t] = game.i18n.localize(`MGT2.Vehicle.Type.${t}`);
         }
 
+        context.SELECT_CREW_TYPES = {
+            "": "",
+            "gunner": game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner"),
+            "mechanic": game.i18n.localize("MGT2.Role.BuiltIn.Name.Mechanic"),
+            "medic": game.i18n.localize("MGT2.Role.BuiltIn.Name.Medic"),
+            "driver": game.i18n.localize("MGT2.Role.BuiltIn.Name.Driver"),
+            "sensors": game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors"),
+            "steward": game.i18n.localize("MGT2.Role.BuiltIn.Name.Steward")
+        };
+
         context.SELECT_FEATURES = {};
         context.SELECT_FEATURES[""] = "";
         if (CONFIG.MGT2.VEHICLES.TYPE[this.document.system.vehicle.type]) {
@@ -433,6 +443,15 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
                 // Manually trigger your private static method
                 MgT2eVehicleSheet.#addFeature.call(this, ev, ev.currentTarget);
             });
+        }
+        const crewRoleSelect = this.element.querySelector('select[data-action="addRole"]');
+        if (crewRoleSelect) {
+            console.log("Add event listener for crewRole");
+            crewRoleSelect.addEventListener("change", (ev) => {
+                let role = ev.target.value;
+                console.log("Role is " + role);
+                this._createCrewRole(role);
+            })
         }
     }
 

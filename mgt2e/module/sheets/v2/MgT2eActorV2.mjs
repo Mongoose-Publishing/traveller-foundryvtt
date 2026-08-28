@@ -261,6 +261,7 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
     }
 
     async _createCrewRole(roleType) {
+        console.log("_createCrewRole: " + roleType);
         const system = {
             description: "",
             role: {
@@ -283,22 +284,27 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
                 img = "systems/mgt2e/icons/items/roles/gunner.svg";
                 addAction({ title: itemName, action: "weapon", dm: 0, weapon: null });
                 break;
-            case "pilot": {
-                itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot");
+            case "driver":
+            case "pilot":
+                let skill = "";
                 img = "systems/mgt2e/icons/items/roles/pilot.svg";
-                let skill = this.document.system.vehicle?.skill || "pilot.spacecraft";
-                const dtons = this.document.system.spacecraft?.dtons;
-                if (dtons < 100) {
-                    skill = "pilot.smallCraft";
-                } else if (dtons > 5000) {
-                    skill = "pilot.capitalShips";
+                if (this.document.type === "vehicle") {
+                    itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Driver");
+                    skill = this.document.system.vehicle?.skill || "pilot.spacecraft";
+                } else {
+                    itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Pilot");
+                    const dtons = this.document.system.spacecraft?.dtons;
+                    if (dtons < 100) {
+                        skill = "pilot.smallCraft";
+                    } else if (dtons > 5000) {
+                        skill = "pilot.capitalShips";
+                    }
                 }
                 addAction({
-                    title: game.i18n.localize("MGT2.Role.BuiltIn.Action.Pilot"),
-                    action: "skill", cha: "DEX", skill, target: 8, dm: 0
+                    title: itemName,
+                    action: "skill", cha: "DEX", skill: skill, target: 8, dm: 0
                 });
                 break;
-            }
             case "engineer":
                 itemName = game.i18n.localize("MGT2.Role.BuiltIn.Name.Engineer");
                 img = "systems/mgt2e/icons/items/roles/engineer.svg";

@@ -1473,6 +1473,7 @@
   "MGT2.Role.Special.Repair": "Repair System",
   "MGT2.Role.BuiltIn.Name.Gunner": "Gunner",
   "MGT2.Role.BuiltIn.Name.Pilot": "Pilot",
+  "MGT2.Role.BuiltIn.Name.Driver": "Driver",
   "MGT2.Role.BuiltIn.Name.Engineer": "Engineer",
   "MGT2.Role.BuiltIn.Name.Broker": "Broker",
   "MGT2.Role.BuiltIn.Name.Sensors": "Sensor Op",

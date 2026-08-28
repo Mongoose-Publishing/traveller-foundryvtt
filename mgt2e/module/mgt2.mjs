@@ -2854,7 +2854,7 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
         html += `Cr${system.cost} `;
     }
     html += `<div class="item-controls">
-        <a class="item-control" data-action="editItem"title="${game.i18n.localize('MGT2.EditItem')}">
+        <a class="item-control" data-action="editItem" title="${game.i18n.localize('MGT2.EditItem')}">
             <i data-item-id="${item._id}" class="fas fa-edit"></i>
         </a>
         <a class="item-control" data-action="deleteItem" title="${game.i18n.localize('MGT2.DeleteItem')}">
