@@ -18,6 +18,7 @@ import { MgT2SoftwareItemSheet } from "./sheets/items/software.mjs";
 import { MgT2eVehicleSheet } from "./sheets/v2/Vehicle.mjs";
 import { MgT2eRobotSheet } from "./sheets/v2/Robot.mjs";
 import { MgT2eOptionSheet } from "./sheets/items/v2/Option.mjs";
+import { MgT2eActorV2 } from "./sheets/v2/MgT2eActorV2.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
@@ -2954,6 +2955,8 @@ Handlebars.registerHelper("weaponMountBlock", function(mount) {
         if (system.weapon.traits) {
             html += `<br/><span class="weapon-traits">${printWeaponTraits(system.weapon.traits)}</span>`;
         }
+
+
         html += `<br/><span class="action" data-action="attack" data-item-id="${weaponItem.id}" data-mount-id="${mountItem.id}">${game.i18n.localize("MGT2.TravellerSheet.Attack")}</span>`;
         html += `<br/>`;
         if (system.weapon.scale === "spacecraft") {
@@ -2966,6 +2969,22 @@ Handlebars.registerHelper("weaponMountBlock", function(mount) {
             html += `<table><tr><th>${game.i18n.localize("MGT2.Attack.short")} (+1)</th><th>${game.i18n.localize("MGT2.Attack.medium")}</th><th>${game.i18n.localize("MGT2.Attack.long")} (-2)</th><th>${game.i18n.localize("MGT2.Attack.extreme")} (-4)</th></tr>`;
             html += `<tr><td>${shortRange}${unit}</td><td>${system.weapon.range}${unit}</td><td>${longRange}${unit}</td><td>${extremeRange}${unit}</td></tr>`;
             html += "</table>";
+        }
+
+        // Can anyone make an attack? Need to look at crew roles.
+        if (mountItem.parent) {
+            const vehicle = mountItem.parent;
+            const actors = MgT2eActorV2.getCrewForMount(vehicle, mountItem);
+            if (actors && actors.length > 0) {
+                for (const a of actors) {
+                    html += `<div data-action="attack" data-item-id="${weaponItem.id}"
+                                  data-dm="${a.action.dm}"
+                                  data-mount-id="${mountItem.id}" data-actor-id="${a.actor._id}"
+                                  class="weapon-attack-role"><img src="${a.actor.img}"/>${a.action.title}<br/>${a.actor.name}</div>`;
+                }
+            } else {
+                html += `<span>No-one to fire anything</span>`;
+            }
         }
 
     } else {

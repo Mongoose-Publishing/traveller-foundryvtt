@@ -71,11 +71,43 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         }
     }
 
+    static getCrewForMount(actor, mountItem) {
+        console.log("getCrewForMount:");
+        let actors = [];
+        for (const [crewId, assignments] of Object.entries(actor.system.crewed?.crew || {})) {
+            console.log(crewId);
+            for (const roleId of Object.keys(assignments)) {
+                const roleItem = actor.items.get(roleId);
+                const weaponActions = Object.values(roleItem?.system.role.actions || {})
+                    .filter(action => action.action === "weapon");
+                for (const action of weaponActions) {
+                    if (action.weapon === mountItem._id) {
+                        const a = game.actors.get(crewId)
+                        actors.push({
+                            actor: a,
+                            role: roleItem,
+                            action: action
+                        });
+                        console.log(action);
+                    }
+                }
+            }
+        }
+        return actors;
+    }
+
     static async #onAttack(event, target) {
         const itemId = event.target.dataset["itemId"];
         const mountId = event.target.dataset["mountId"];
+        const actorId = event.target.dataset["actorId"];
+        const actionDm = parseInt(event.target.dataset["dm"]) || 0;
+
         const weaponItem = this.document.items.get(itemId);
         const mountItem = this.document.items.get(mountId);
+        const crewActor = game.actors.get(actorId);
+
+        console.log("onAttack:");
+        console.log(actionDm);
 
         if (!mountId) {
             if (weaponItem) {
@@ -91,34 +123,10 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
             return;
         }
 
-        let gunnerActor;
-        let fallbackGunnerActor;
-        for (const [crewId, assignments] of Object.entries(this.document.system.crewed?.crew || {})) {
-            for (const roleId of Object.keys(assignments)) {
-                const roleItem = this.document.items.get(roleId);
-                const weaponActions = Object.values(roleItem?.system.role.actions || {})
-                    .filter(action => action.action === "weapon");
-                if (weaponActions.some(action => action.weapon === mountId)) {
-                    gunnerActor = game.actors.get(crewId);
-                    break;
-                }
-                if (!fallbackGunnerActor && weaponActions.some(action => !action.weapon)) {
-                    fallbackGunnerActor = game.actors.get(crewId);
-                }
-            }
-            if (gunnerActor) break;
-        }
-        gunnerActor ||= fallbackGunnerActor;
-
-        if (!gunnerActor) {
-            ui.notifications.warn("Assign a crew member to a Gunner role before attacking.");
-            return;
-        }
-
-        new MgT2eAttackApp(gunnerActor, weaponItem, {
+        new MgT2eAttackApp(crewActor, weaponItem, {
             vehicle: this.document,
             mount: mountItem,
-            dm: 0
+            dm: actionDm
         }).render(true);
     }
 

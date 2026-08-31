@@ -5,22 +5,22 @@
 
     <div>{{skillText}}</div>
 
-    <div class="grid grid-4col">
+    <div class="grid grid-3col">
         <div class="resource flex-group-center">
             <label class="field-label">{{localize 'MGT2.Damage'}}</label>
             <span>{{weaponItem.system.weapon.damage}}</span>
         </div>
 
-        <div class="resource flex-group-center grid-span-2">
+        <div class="resource flex-group-center grid-span-1">
             <label class="field-label">{{localize 'MGT2.Range'}}</label>
-            <select name="range">
+            <select name="range" data-action="changeRange">
                 {{selectOptions RANGE_SELECT }}
             </select>
         </div>
 
         <div class="resource flex-group-center">
             <label class="field-label">{{localize 'MGT2.DM'}}</label>
-            <input type="number" name="DM" value="0"/>
+            <input type="number" name="DM" value="{{customDM}}"/>
         </div>
     </div>
 
@@ -30,6 +30,13 @@
         <div>
             {{{showWeaponTraits . weaponItem.system.weapon.traits}}}
         </div>
+    {{/if}}
+
+    {{#if ATTACKER_TOKEN}}
+        <div>Attack from: {{ATTACKER_TOKEN.name}}</div>
+        <select name="targets" data-action="changeTarget">
+            {{selectOptions TARGET_SELECT}}
+        </select>
     {{/if}}
 
     <div class="grid grid-4col">
