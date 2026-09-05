@@ -384,25 +384,18 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         const spaces = parseInt(this.document.system.vehicle.spaces);
         if (spaces >= 2000) {
-            this.document.system.vehicle.size = 6;
             context.sizeLabel = "massive";
         } else if (spaces >= 1000) {
-            this.document.system.vehicle.size = 5;
             context.sizeLabel = "huge";
         } else if (spaces >= 200) {
-            this.document.system.vehicle.size = 4;
             context.sizeLabel = "huge";
         } else if (spaces >= 100) {
-            this.document.system.vehicle.size = 3;
             context.sizeLabel = "heavy";
         } else if (spaces >= 20) {
-            this.document.system.vehicle.size = 2;
             context.sizeLabel = "heavy";
         } else if (spaces >= 4) {
-            this.document.system.vehicle.size = 1;
             context.sizeLabel = "light";
         } else {
-            this.document.system.vehicle.size = 0;
             context.sizeLabel = "small";
         }
 
@@ -410,6 +403,9 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         // Combat
         context.VEHICLE_SIZE_DM = this.getVehicleHitDM();
+        if (context.VEHICLE_SIZE_DM !== this.document.system.vehicle.size) {
+            this.document.update({"system.vehicle.size": context.VEHICLE_SIZE_DM});
+        }
 
         context.VEHICLE_DAMAGE = 0;
 

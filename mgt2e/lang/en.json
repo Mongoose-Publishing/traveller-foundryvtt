@@ -1454,6 +1454,11 @@
   "MGT2.Error.NoStatus": "Unable to find status '{status}'",
   "MGT2.Attack.OutOfRange": "Selected target is out of range",
 
+  "MGT2.AttackDialog.Title": "Attack Roll by {name}",
+  "MGT2.AttackDialog.SelectTitle": "Select target",
+  "MGT2.AttackDialog.TargetRefresh": "Refresh list of targets",
+  "MGT2.AttackDialog.NoTargets": "Use 'T' to choose a target then refresh",
+
   "MGT2.Role.isDepartment": "Role is a department",
   "MGT2.Role.RoleAssignment": "Role Assignment",
   "MGT2.Role.RoleActions": "Actions",

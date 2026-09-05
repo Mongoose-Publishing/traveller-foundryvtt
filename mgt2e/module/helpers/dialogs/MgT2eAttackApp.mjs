@@ -22,7 +22,8 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             closeOnSubmit: false
         },
         actions: {
-            selectTarget: MgT2eAttackApp.selectTargetAction
+            selectTarget: MgT2eAttackApp.selectTargetAction,
+            addTargets: MgT2eAttackApp.#addTargets
         },
         window: {
             title: "MGT2.AttackRoll"
@@ -97,6 +98,9 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 context.TARGET_SELECT[t.token.document._id] = text;
             }
         }
+        if (this.attackerTokenName && options?.window) {
+            options.window.title = game.i18n.format("MGT2.AttackDialog.Title", { name: this.attackerTokenName });
+        }
 
         return context;
     }
@@ -127,6 +131,12 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
     }
 
+    static async #addTargets() {
+        console.log("Recalculate targets");
+        await this.calculateTargets();
+        this.render();
+    }
+
     // Calculate what targets are available.
     // 1 must be selected - this is the person firing
     // 1+ must be targeted - these are the potential targets.
@@ -144,12 +154,15 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             // We must also have some targets selected.
             return;
         }
-        this.ATTACKER_TOKEN = selected[0];
+        if (!this.ATTACKER_TOKEN) {
+            // We can't change the selected token.
+            this.ATTACKER_TOKEN = selected[0];
+            this.attackerTokenName = selected[0].name;
+        }
         this.TARGETS = [];
 
-        this.attackerTokenName = selected[0].name;
-        const X = parseInt(selected[0].center.x);
-        const Y = parseInt(selected[0].center.y);
+        const X = parseInt(this.ATTACKER_TOKEN.center.x);
+        const Y = parseInt(this.ATTACKER_TOKEN.center.y);
         // Assume everything is in metres.
         let unitMultiplier = 1;
         if (canvas.grid.units === "km") {
@@ -192,8 +205,15 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 // Work out facing?
                 target.type = game.i18n.localize("TYPES.Actor.vehicle");
                 target.facing = this._getTargetFacingHit(X, Y, x, y, token.document.rotation);
+                const spaces = parseInt(token.document.actor.system.vehicle.spaces) || 0;
+
             } else if (token.actor.type === "spacecraft") {
                 target.type = game.i18n.localize("TYPES.Actor.spacecraft");
+                target.sizeDm = 6;
+            } else {
+                if (token.document.actor.system.size) {
+                    target.sizeDm = parseInt(token.document.actor.system.size) || 0;
+                }
             }
             this.TARGETS.push(target);
 
@@ -234,6 +254,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 const target = this.TARGETS.filter(t => t.token.document._id === id)[0];
                 const rangeSelect = this.element.querySelector('select[data-action="changeRange"]');
                 rangeSelect.value = `${(target.rangeDm>=0)?"+":""}${target.rangeDm}`;
+                this.currentTarget = target;
             });
         }
     }

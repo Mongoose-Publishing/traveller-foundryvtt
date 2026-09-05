@@ -32,12 +32,24 @@
         </div>
     {{/if}}
 
+    <hr/>
     {{#if ATTACKER_TOKEN}}
-        <div>Attack from: {{ATTACKER_TOKEN.name}}</div>
-        <select name="targets" data-action="changeTarget">
-            {{selectOptions TARGET_SELECT}}
-        </select>
+        {{#if TARGETS}}
+            <h3>
+                {{localize "MGT2.AttackDialog.SelectTitle"}}
+                <i class="fa fa-refresh" data-action="addTargets" title="{{localize 'MGT2.AttackDialog.TargetRefresh'}}"> </i>
+            </h3>
+            <select name="targets" data-action="changeTarget">
+                {{selectOptions TARGET_SELECT}}
+            </select>
+        {{else}}
+            <p>
+                {{localize 'MGT2.AttackDialog.NoTargets'}}
+                <i class="fa fa-refresh" data-action="addTargets" title="{{localize 'MGT2.AttackDialog.TargetRefresh'}}"> </i>
+            </p>
+        {{/if}}
     {{/if}}
+    <hr/>
 
     <div class="grid grid-4col">
 
