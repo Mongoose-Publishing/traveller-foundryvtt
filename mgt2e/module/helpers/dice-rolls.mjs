@@ -195,7 +195,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
         dice += ` + ${attackOptions.skillDM}[Skill]`;
     }
     if (system) {
-        if (system.modifiers && system.modifiers.encumbrance.dm !== 0) {
+        if (system.modifiers && (parseInt(system.modifiers.encumbrance.dm)||0) !== 0) {
             dice += ` - ${Math.abs(parseInt(system.modifiers.encumbrance.dm))}[Enc]`;
         }
         if (baseRange === 0) {
@@ -215,10 +215,10 @@ export async function rollAttack(actor, weapon, attackOptions) {
                 }
             }
         }
-        if (system.modifiers && system.modifiers.physical.dm !== 0) {
+        if (system.modifiers && (parseInt(system.modifiers.physical.dm) || 0) !== 0) {
             if (system.modifiers.physical.dm > 0) {
                 dice += ` + ${parseInt(system.modifiers.physical.dm)}[Phy]`;
-            } else {
+            } else if (system.modifiers.physical.dm < 0) {
                 dice += ` - ${Math.abs(parseInt(system.modifiers.physical.dm))}[Phy]`;
             }
         }
@@ -378,7 +378,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
     if (attackOptions.rangeDM) {
         if (attackOptions.rangeDM > 0) {
             dice += ` + ${attackOptions.rangeDM}[Range]`;
-        } else {
+        } else if (attackOptions.rangeDM < 0) {
             dice += ` - ${Math.abs(attackOptions.rangeDM)}[Range]`;
         }
     }
@@ -542,6 +542,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
             }
             if (attackOptions.scale) {
                 damageOptions.scale = attackOptions.scale;
+            }
+            if (attackOptions.facing) {
+                damageOptions.facing = attackOptions.facing;
             }
             if (blastRadius) {
                 damageOptions.blastRadius = blastRadius;

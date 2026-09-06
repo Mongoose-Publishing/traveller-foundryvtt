@@ -20,7 +20,7 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
             "top": game.i18n.localize("MGT2.Vehicle.Face.top"),
             "bottom": game.i18n.localize("MGT2.Vehicle.Face.bottom")
         }
-        this.armourFace = "front";
+        this.armourFace = this.damageOptions.facing || "front";
         this.armourFaceValue = this.targetActor.system.vehicle.armour[this.armourFace];
     }
 

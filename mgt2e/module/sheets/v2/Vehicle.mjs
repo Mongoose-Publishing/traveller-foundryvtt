@@ -24,7 +24,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             },
             removeFeature: MgT2eVehicleSheet.#removeFeature,
             editItem: MgT2eVehicleSheet.#editItem,
-            deleteItem: MgT2eVehicleSheet.#deleteItem
+            deleteItem: MgT2eVehicleSheet.#deleteItem,
+            editImage: MgT2eVehicleSheet.#onEditImage
         },
         form: {
             handler: MgT2eVehicleSheet.#onFormSubmit,
@@ -514,6 +515,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
     // Apply damage to a vehicle. This uses the damage rules from the Vehicle Update book.
     async applyDamageToVehicle(options) {
+        console.log("applyDamageToVehicle:");
+        console.log(options);
         if (!options) {
             return;
         }
@@ -540,6 +543,18 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         new MgT2VehicleDamageApp(this.document, options).render(true);
 
 
+    }
+
+    static async #onEditImage(event, target) {
+        const field = target.dataset.field || "img";
+        const current = foundry.utils.getProperty(this.document, field) || "";
+        const fp = new foundry.applications.apps.FilePicker({
+            type: "image",
+            current: current,
+            callback: async (path) => {
+                await this.document.update({ [field]: path});
+            }
+        }).render(true);
     }
 
 }

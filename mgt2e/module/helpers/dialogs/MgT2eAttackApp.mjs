@@ -90,7 +90,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             for (let t of this.TARGETS) {
                 let text = `${t.distance}m ${t.name}`;
                 if (t.type) {
-                    text += ` [${t.type}]`;
+                    text += ` [${game.i18n.localize("TYPES.Actor." + t.type)}]`;
                 }
                 if (t.facing) {
                     text += ` - ${game.i18n.localize("MGT2.Vehicle.Face." + t.facing)}`;
@@ -121,11 +121,11 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
         console.log(relativeAngle);
         if (relativeAngle >= 315 || relativeAngle < 45) {
-            return "aft";
+            return "rear";
         } else if (relativeAngle >= 45 && relativeAngle < 135) {
             return "starboard";
         } else if (relativeAngle >= 135 && relativeAngle < 225) {
-            return "fore";
+            return "front";
         } else {
             return "port";
         }
@@ -203,12 +203,12 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
             if (token.actor.type === "vehicle") {
                 // Work out facing?
-                target.type = game.i18n.localize("TYPES.Actor.vehicle");
+                target.type = "vehicle";
                 target.facing = this._getTargetFacingHit(X, Y, x, y, token.document.rotation);
                 const spaces = parseInt(token.document.actor.system.vehicle.spaces) || 0;
 
             } else if (token.actor.type === "spacecraft") {
-                target.type = game.i18n.localize("TYPES.Actor.spacecraft");
+                target.type = "spacecraft";
                 target.sizeDm = 6;
             } else {
                 if (token.document.actor.system.size) {
@@ -288,6 +288,9 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.attackOptions.rangeDM = rangeDM;
         this.attackOptions.showBreakdown = true;
 
+        if (this.currentTarget?.type === "vehicle") {
+            this.attackOptions.facing = this.currentTarget.facing;
+        }
         rollAttack(this.actor, this.weaponItem, this.attackOptions);
         this.close();
     }
