@@ -11,8 +11,11 @@ export class MgT2Effect extends ActiveEffect {
     }
 
     get isSuppressed() {
+        // this.parent is the Item that the effect is attached to.
         if (this.parent instanceof Item) {
-            if (this.parent.system.status === MgT2Item.EQUIPPED) {
+            if (this.parent.type === "option") {
+                return false;
+            } else if (this.parent.system.status === MgT2Item.EQUIPPED) {
                 return false;
             } else if (this.parent.system?.component?.linkedTo) {
                 // If this is a component, and the item it is linked to is equipped,

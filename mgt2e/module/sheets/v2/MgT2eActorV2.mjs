@@ -65,17 +65,14 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
             const skillId = event.target.dataset["skill"];
             const specId = event.target.dataset["spec"];
             const skillFqn = skillId + (specId?("." + specId):"");
-            console.log("Skill: " + skillFqn);
 
             game.mgt2e.rollSkillMacro(skillFqn);
         }
     }
 
     static getCrewForMount(actor, mountItem) {
-        console.log("getCrewForMount:");
         let actors = [];
         for (const [crewId, assignments] of Object.entries(actor.system.crewed?.crew || {})) {
-            console.log(crewId);
             for (const roleId of Object.keys(assignments)) {
                 const roleItem = actor.items.get(roleId);
                 const weaponActions = Object.values(roleItem?.system.role.actions || {})
@@ -88,7 +85,6 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
                             role: roleItem,
                             action: action
                         });
-                        console.log(action);
                     }
                 }
             }
@@ -105,9 +101,6 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         const weaponItem = this.document.items.get(itemId);
         const mountItem = this.document.items.get(mountId);
         const crewActor = game.actors.get(actorId);
-
-        console.log("onAttack:");
-        console.log(actionDm);
 
         if (!mountId) {
             if (weaponItem) {

@@ -239,7 +239,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         context.MAX_DAMAGE = context.structure * 10;
         context.VEHICLE_DAMAGE = HITS.damage;
 
-        context.VEHICLE_SPEED = game.i18n.localize("MGT2.Vehicle.SpeedBand." + VEHICLE.speed);
+        const speedBand = Object.keys(CONFIG.MGT2.VEHICLES.SPEED).find(s => CONFIG.MGT2.VEHICLES.SPEED[s].band == VEHICLE.speedBand);
+        context.VEHICLE_SPEED = game.i18n.localize("MGT2.Vehicle.SpeedBand." + speedBand);
         context.VEHICLE_SKILL = MGT2.getFqnSkillLabel(VEHICLE.skill);
 
         // List Items

@@ -63,6 +63,11 @@ export class MgT2Actor extends Actor {
             }
             hits.tmpDamage = Math.min(hits.tmpDamage, hits.damage);
         }
+        switch (this.type) {
+            case "vehicle":
+                this._prepareVehicleBaseData(this);
+                break;
+        }
     }
 
     async _preUpdate(changes, options, user) {
@@ -243,54 +248,71 @@ export class MgT2Actor extends Actor {
       return total;
     }
 
+    // Pre-effects
+    _prepareVehicleBaseData(actorData) {
+        console.log("_prepareVehicleBaseData:");
+        console.log(actorData.system.vehicle.speedBand);
+
+        const s = Math.ceil(Math.max(1, parseInt(actorData.system.hits.value) / 10));
+        actorData.system.structure.value = s;
+
+        let vehicleType = actorData.system.vehicle.type;
+        if (!CONFIG.MGT2.VEHICLES.TYPE[vehicleType]) {
+            vehicleType = actorData.system.vehicle.type = "groundVehicle";
+        }
+        const typeData = CONFIG.MGT2.VEHICLES.TYPE[vehicleType];
+        if (actorData.system.vehicle.tl < typeData.tl) {
+            actorData.system.vehicle.tl = typeData.tl;
+        }
+        const techLevel = parseInt(actorData.system.vehicle.tl);
+
+        // Performance
+        let speedBand = 0;
+        let range = 0;
+
+        for (let i=0; i < typeData.performance.length; i++) {
+            if (typeData.performance[i].min <= techLevel) {
+                const speedName = typeData.performance[i].speed;
+                speedBand = CONFIG.MGT2.VEHICLES.SPEED[speedName].band;
+                range = typeData.performance[i].range;
+            }
+        }
+        if (actorData.system.vehicle?.customisation?.speedModifications) {
+            speedBand += parseInt(actorData.system.vehicle?.customisation?.speedModifications)||0;
+        }
+
+        actorData.system.vehicle.speedBand = speedBand;
+        actorData.system.vehicle.fuelRange.max = range;
+
+        actorData.system.vehicle.traits = "";
+        if (typeData.traits && typeData.traits.length > 0) {
+            for (let trait of typeData.traits) {
+                actorData.system.vehicle.traits += ","+trait;
+            }
+        }
+        for (let feature of actorData.system.vehicle.features.split(",")) {
+            if (!feature || !CONFIG.MGT2.VEHICLES.FEATURES[feature]) {
+                continue;
+            }
+            const fData = CONFIG.MGT2.VEHICLES.FEATURES[feature];
+            if (fData.traits && fData.traits.length > 0) {
+                for (let trait of fData.traits) {
+                    actorData.system.vehicle.traits += "," + trait;
+                }
+            }
+        }
+        actorData.system.vehicle.traits = actorData.system.vehicle.traits.replaceAll(/^,/g, "");
+    }
+
     // Prepare derived data for vehicles.
     _prepareVehicleData(actorData) {
       if (!["vehicle"].includes(actorData.type)) return;
 
-      const s = Math.ceil(Math.max(1, parseInt(actorData.system.hits.value) / 10));
-      actorData.system.structure.value = s;
+      console.log("_prepareVehicleData:");
+      console.log(actorData.system.vehicle.speedBand);
 
-      let vehicleType = actorData.system.vehicle.type;
-      if (!CONFIG.MGT2.VEHICLES.TYPE[vehicleType]) {
-          vehicleType = actorData.system.vehicle.type = "groundVehicle";
-      }
-      const typeData = CONFIG.MGT2.VEHICLES.TYPE[vehicleType];
-      if (actorData.system.vehicle.tl < typeData.tl) {
-          actorData.system.vehicle.tl = typeData.tl;
-      }
-      const techLevel = parseInt(actorData.system.vehicle.tl);
 
-      // Performance
-      let speedBand = "idle";
-      let range = 0;
 
-      for (let i=0; i < typeData.performance.length; i++) {
-          if (typeData.performance[i].min <= techLevel) {
-              speedBand = typeData.performance[i].speed;
-              range = typeData.performance[i].range;
-          }
-      }
-      actorData.system.vehicle.speed = speedBand;
-      actorData.system.vehicle.range = range;
-
-      actorData.system.vehicle.traits = "";
-      if (typeData.traits && typeData.traits.length > 0) {
-          for (let trait of typeData.traits) {
-              actorData.system.vehicle.traits += ","+trait;
-          }
-      }
-      for (let feature of actorData.system.vehicle.features.split(",")) {
-          if (!feature || !CONFIG.MGT2.VEHICLES.FEATURES[feature]) {
-              continue;
-          }
-          const fData = CONFIG.MGT2.VEHICLES.FEATURES[feature];
-          if (fData.traits && fData.traits.length > 0) {
-              for (let trait of fData.traits) {
-                  actorData.system.vehicle.traits += "," + trait;
-              }
-          }
-      }
-      actorData.system.vehicle.traits = actorData.system.vehicle.traits.replaceAll(/^,/g, "");
 
     }
 

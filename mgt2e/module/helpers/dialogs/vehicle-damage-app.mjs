@@ -187,5 +187,7 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
 
         this.close();
     }
+
+
 }
 

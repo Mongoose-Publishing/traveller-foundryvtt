@@ -34,7 +34,7 @@
                 </div>
                 <div class="resource flex-group-center">
                     <label class="field-label">{{localize 'MGT2.Vehicle.Range'}}</label>
-                    <span>{{system.vehicle.range}}</span>
+                    <span>{{system.vehicle.fuelRange.max}}</span>
                 </div>
 
                 <div class="resource flex-group-center">
@@ -58,6 +58,12 @@
                     <span>{{system.vehicle.shipping}}</span>
                 </div>
             </div>
+        </div>
+
+        <div>
+            {{#each actor.appliedEffects as |effect|}}
+                <span>({{effect.name}}) </span>
+            {{/each}}
         </div>
     </div>
 </section>

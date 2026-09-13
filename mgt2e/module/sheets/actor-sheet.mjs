@@ -898,11 +898,6 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         }
     }
 
-    applyActiveEffect() {
-        console.log("sheet.applyActiveEffect:");
-    }
-
-
   /* -------------------------------------------- */
 
     /** @override */

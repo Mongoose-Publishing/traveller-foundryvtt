@@ -1334,6 +1334,7 @@
   "MGT2.Effects.Type.skillDM": "Skill DM",
   "MGT2.Effects.Type.skillExpert": "Expert Program",
   "MGT2.Effects.Type.miscDM": "Other",
+  "MGT2.Effects.Type.vehicle": "Vehicle",
   "MGT2.Effects.EffectLocked": "Locked by augment",
   "MGT2.Effects.SoftwareEffects": "Software Features",
   "MGT2.Effects.Software.Class.personal": "Personal Software",
