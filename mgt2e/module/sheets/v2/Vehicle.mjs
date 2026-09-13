@@ -158,16 +158,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
 
         const spaces = parseInt(this.document.system.vehicle.spaces) || 0;
-        const hull = Math.max(1, parseInt(typeConfig.hull * spaces));
-        if (hull !== parseInt(this.document.system.hits.hull)) {
-            const HITS = this.document.system.hits;
-            HITS.hull = hull;
-            HITS.structure = Math.ceil(HITS.hull / 10);
-            HITS.max = 10;
-            HITS.value = HITS.max - HITS.damage;
-            await this.document.update({"system.hits": HITS});
-        }
-        const shipping = parseInt(Math.ceil(typeConfig.shipping * spaces));
+         const shipping = parseInt(Math.ceil(typeConfig.shipping * spaces));
         if (shipping !== parseInt(this.document.system.vehicle.shipping)) {
             await this.document.update({"system.vehicle.shipping": shipping});
         }

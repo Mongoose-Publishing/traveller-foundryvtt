@@ -266,6 +266,17 @@ export class MgT2Actor extends Actor {
         }
         const techLevel = parseInt(actorData.system.vehicle.tl);
 
+        // Hits
+        const spaces = parseInt(actorData.system.vehicle.spaces) || 0;
+        const hull = Math.max(1, parseInt(typeData.hull * spaces));
+        if (hull !== parseInt(actorData.system.hits.hull)) {
+            const HITS = actorData.system.hits;
+            HITS.hull = hull;
+            HITS.structure = Math.ceil(HITS.hull / 10);
+            HITS.max = 10;
+            HITS.value = HITS.max - HITS.damage;
+        }
+
         // Performance
         let speedBand = 0;
         let range = 0;
@@ -306,13 +317,12 @@ export class MgT2Actor extends Actor {
 
     // Prepare derived data for vehicles.
     _prepareVehicleData(actorData) {
-      if (!["vehicle"].includes(actorData.type)) return;
+        if (!["vehicle"].includes(actorData.type)) return;
 
-      console.log("_prepareVehicleData:");
-      console.log(actorData.system.vehicle.speedBand);
-
-
-
+        console.log("_prepareVehicleData:");
+        // Hull may have been modified by active effects, so re-calculate structure here.
+        const HITS = actorData.system.hits;
+        HITS.structure = Math.ceil(HITS.hull / 10);
 
     }
 

@@ -207,6 +207,7 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
             context.targets["system.vehihile.core.autopilotDM"] = "Auto Pilot";
             context.targets["system.vehicle.speedBand"] = "Speed";
             context.targets["system.vehicle.fuelRange.max"] = "Fuel Range"
+            context.targets["system.hits.hull"] = "Hull";
         } else {
             context.targets = { "": "-" };
             context.targets["system.modifiers.encumbrance.multiplierBonus"] = game.i18n.localize("MGT2.Modifiers.CarryMultiplier") || "Carry Multiplier";
@@ -222,12 +223,12 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
 
         // v14: modes are no longer provided by super._prepareContext; build them manually
         context.modes = {
-            "add": game.i18n.localize("EFFECT.MODE.Add") || "Add",
-            "multiply": game.i18n.localize("EFFECT.MODE.Multiply") || "Multiply",
-            "override": game.i18n.localize("EFFECT.MODE.Override") || "Override",
-            "upgrade": game.i18n.localize("EFFECT.MODE.Upgrade") || "Upgrade",
-            "downgrade": game.i18n.localize("EFFECT.MODE.Downgrade") || "Downgrade",
-            "custom": game.i18n.localize("EFFECT.MODE.Custom") || "Custom"
+            "2": game.i18n.localize("EFFECT.MODE.Add") || "Add",
+            "1": game.i18n.localize("EFFECT.MODE.Multiply") || "Multiply",
+            "5": game.i18n.localize("EFFECT.MODE.Override") || "Override",
+            "4": game.i18n.localize("EFFECT.MODE.Upgrade") || "Upgrade",
+            "3": game.i18n.localize("EFFECT.MODE.Downgrade") || "Downgrade",
+            "0": game.i18n.localize("EFFECT.MODE.Custom") || "Custom"
         };
 
         context.buttons = [
@@ -240,6 +241,7 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
     // v14: ensure custom keys (modes, targets, effectType) survive per-part context prep
     async _preparePartContext(partId, context, options) {
         const partContext = await super._preparePartContext(partId, context, options);
+
         if (partId === "changes") {
             partContext.modes = context.modes;
             partContext.targets = context.targets;
@@ -260,6 +262,7 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
         if (event.target.name === "document.name") {
             ae.name = event.target.value;
         } else if (event.target.name.startsWith("changes.")) {
+            console.log(event.target.name);
             const parts = event.target.name.split(".");
             const idx = parseInt(parts[1]);
             const param = parts[2];
