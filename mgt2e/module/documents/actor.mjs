@@ -1840,7 +1840,6 @@ export class MgT2Actor extends Actor {
     addStatusEffect(status, value) {
         if (value === undefined) {
             if (CONFIG.MGT2.STATUS_EFFECTS[status]) {
-                console.log(status);
                 if (CONFIG.MGT2.STATUS_EFFECTS[status].value !== undefined) {
                     value = CONFIG.MGT2.STATUS_EFFECTS[status].value;
                 } else {
@@ -1906,6 +1905,9 @@ export class MgT2Actor extends Actor {
                 break;
             case "tactics":
                 this.setTacticsEffect(1);
+                break;
+            case "reaction":
+                this.setReactionEffect(-1);
                 break;
         }
     }
