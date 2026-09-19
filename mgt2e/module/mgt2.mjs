@@ -516,6 +516,11 @@ Hooks.once("init", function() {
         name: "EFFECT.Initiative",
         img: "systems/mgt2e/icons/effects/initiative.svg"
     });
+    CONFIG.statusEffects.push({
+        id: "critical",
+        name: "EFFECT.Critical",
+        img: "systems/mgt2e/icons/effects/destroyed.svg"
+    });
 })
 
 async function openActorSheet(actorId) {

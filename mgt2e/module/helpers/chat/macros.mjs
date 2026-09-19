@@ -272,7 +272,7 @@ MgT2eMacros.chaGain = async function(args) {
 
     if (!level) {
         level = 1;
-    } else if (level.indexOf("D")) {
+    } else if ((""+level).indexOf("D") > -1) {
         // This is a dice roll.
         let roll = await new Roll(level, null).evaluate();
         level = Number(roll.total);
