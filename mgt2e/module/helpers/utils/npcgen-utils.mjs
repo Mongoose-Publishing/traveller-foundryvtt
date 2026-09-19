@@ -50,7 +50,6 @@ async function getFromTable(folder, tableName, variantName) {
         const doc = new DOMParser().parseFromString(text, "text/html");
         text = doc.body.textContent || "";
     }
-    console.log(text);
     return text;
 }
 
@@ -220,15 +219,20 @@ export async function generateNpc(npcData, folderName) {
     npcData.system.sophont.gender = gender;
     npcData.name = await getCompoundFromTable(npcData, folder, "Name " + species, gender);
 
+    let baseTable = "Profession"
     let profession = "";
-    let passage = npcData.system.meta?.passage;
+    let passage = npcData.system.meta?.passage || "";
     if (npcData.system.meta?.career) {
-        passage = npcData.system.meta?.career;
+        baseTable = "Profession " + npcData.system.meta?.career;
+        if (npcData.system.meta?.background) {
+            passage = npcData.system.meta.background;
+        }
     }
-    if (passage && await getTable(folder, `Profession ${species}`, passage)) {
-        profession = await getCompoundFromTable(npcData, folder, `Profession ${species}`, passage);
+    console.log("Passage: " + passage);
+    if (passage && await getTable(folder, `${baseTable} ${species}`, passage)) {
+        profession = await getCompoundFromTable(npcData, folder, `${baseTable} ${species}`, passage);
     } else {
-        profession = await getCompoundFromTable(npcData, folder, "Profession", passage);
+        profession = await getCompoundFromTable(npcData, folder, `${baseTable}`, passage);
     }
     npcData.system.sophont.profession = profession?profession:choose([ "Hitchhiker", "Tourist", "Slacker" ] );
     return true;
