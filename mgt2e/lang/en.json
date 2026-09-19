@@ -1858,6 +1858,7 @@
   "EFFECT.Tactics": "Tactics",
   "EFFECT.Hiding": "Hiding",
   "EFFECT.Initiative": "Initiative",
+  "EFFECT.Critical": "Critical",
   "Save": "Save",
   "TRAVELLER.Add": "Add",
   "EFFECT.ChangeKey": "Attribute Key",

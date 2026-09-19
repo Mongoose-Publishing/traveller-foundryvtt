@@ -62,7 +62,12 @@
 
         <div>
             {{#each actor.appliedEffects as |effect|}}
-                <span>({{effect.name}}) </span>
+                {{#if effect.flags.mgt2e.effect}}
+                    <span>{{{showStatus actor effect.flags.mgt2e.effect effect }}}</span>
+                {{else}}
+                    <span>({{effect.name}}) </span>
+                    <span>{{{showStatus actor null effect }}}</span>
+                {{/if}}
             {{/each}}
         </div>
     </div>

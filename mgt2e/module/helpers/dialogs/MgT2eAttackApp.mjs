@@ -295,13 +295,5 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.close();
     }
 
-    async vehicleCritical() {
-        const roll = await new Roll("2D6").evaluate();
-
-        switch (roll.total) {
-            case 2:
-
-        }
-    }
 }
 
