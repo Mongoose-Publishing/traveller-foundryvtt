@@ -1,0 +1,327 @@
+{
+  "folder": "80OLZYk2SeCAEBct",
+  "name": "Crew Skills",
+  "_id": "L5J9W2LfDinFQFBw",
+  "img": "systems/mgt2e/icons/misc/2D6.svg",
+  "description": "<p>List of skills likely to be had by someone with experience working as a crew of a starship.</p>",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "_id": "kZjlSwTEeoR9nRgT",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[vaccsuit] [engineer+2] [engineer+1] [electronics+1] [electronics+1]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825317545,
+        "modifiedTime": 1789825620966,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.kZjlSwTEeoR9nRgT"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "_id": "SS6Puhtd9jt28Esw",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[gambler+0] [carouse+0] [mechanic|steward|admin+1]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825325031,
+        "modifiedTime": 1789825586155,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.SS6Puhtd9jt28Esw"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "_id": "zhVCGSnpyHn95OA5",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[vaccsuit] [gunner]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825325634,
+        "modifiedTime": 1789825679509,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.zhVCGSnpyHn95OA5"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "_id": "RTKj3igJZk9hFSzN",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[vaccsuit+0] [pilot+0]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825326016,
+        "modifiedTime": 1789825741677,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.RTKj3igJZk9hFSzN"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "_id": "8cQ8EeeD8nZsak5y",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[steward+0]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825326269,
+        "modifiedTime": 1789825472400,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.8cQ8EeeD8nZsak5y"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "_id": "pNyxQA42MIH8Ycvq",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[vaccsuit+0]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825381879,
+        "modifiedTime": 1789825447976,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.pNyxQA42MIH8Ycvq"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "_id": "THRwr5gTV0FYcxSc",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[broker+0] [steward]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825382080,
+        "modifiedTime": 1789825486840,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.THRwr5gTV0FYcxSc"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "_id": "Ft3xoVJtKv078w6P",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[vaccsuit+0] [mechanic]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825382260,
+        "modifiedTime": 1789825499025,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.Ft3xoVJtKv078w6P"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "_id": "VpmlMDqjsOKniHkx",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[vaccsuit] [electronics|engineer+1]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825382457,
+        "modifiedTime": 1789825517847,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.VpmlMDqjsOKniHkx"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "_id": "cAFMzMyBtSwIanMR",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[broker] [steward] [persuade+0] [carouse+0]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825382645,
+        "modifiedTime": 1789825550133,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.cAFMzMyBtSwIanMR"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "_id": "GvEJSYXKJr1Wj6R8",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[vaccsuit] [steward] [steward] [broker] [streetwise] [deception]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825383098,
+        "modifiedTime": 1789825650252,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!L5J9W2LfDinFQFBw.GvEJSYXKJr1Wj6R8"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.22.2.1-DEV",
+    "createdTime": 1789825308176,
+    "modifiedTime": 1789829545905,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "",
+  "_key": "!tables!L5J9W2LfDinFQFBw"
+}

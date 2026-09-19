@@ -1,0 +1,219 @@
+{
+  "folder": "80OLZYk2SeCAEBct",
+  "name": "Citizen Skills",
+  "_id": "wWXQ00Kdmyvvnhwp",
+  "img": "systems/mgt2e/icons/misc/2D6.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "_id": "CLxhNIAUSNSEPY6r",
+      "name": "High Service Skills",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[drive|flyer|streetwise|melee|steward+2] [drive|flyer|streetwise|melee|steward] [art|advocate|diplomat] [electronics.computers]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825785851,
+        "modifiedTime": 1789853471412,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wWXQ00Kdmyvvnhwp.CLxhNIAUSNSEPY6r"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "_id": "td043aJ7lFk6osVX",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[drive|flyer|streetwise|melee|steward+2] [drive|flyer|streetwise|melee|steward]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825786076,
+        "modifiedTime": 1789853407081,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wWXQ00Kdmyvvnhwp.td043aJ7lFk6osVX"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "_id": "ROFv8cQTzNQ7elVr",
+      "name": "Service Skills EDU",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[drive|streetwise|melee|steward+0] [EDU+1]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825786459,
+        "modifiedTime": 1789853324603,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wWXQ00Kdmyvvnhwp.ROFv8cQTzNQ7elVr"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "_id": "XS5XVL40z0ntiBBj",
+      "name": "Service Skills",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[drive|streetwise|melee|steward+0] [drive|streetwise|melee|steward+0]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825786814,
+        "modifiedTime": 1789853303898,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wWXQ00Kdmyvvnhwp.XS5XVL40z0ntiBBj"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "_id": "iF4jDay1ztCdzgWB",
+      "name": "Service Skills INT",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[drive|streetwise|melee|steward+0] [INT+1] [gambler|carouse]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825787180,
+        "modifiedTime": 1789853501351,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wWXQ00Kdmyvvnhwp.iF4jDay1ztCdzgWB"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "_id": "BCvV0Yer8nCKS7Kl",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[drive|flyer|streetwise|melee|steward+1] [EDU+1] [INT+1]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825787962,
+        "modifiedTime": 1789853378286,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wWXQ00Kdmyvvnhwp.BCvV0Yer8nCKS7Kl"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "_id": "APcabklukomp7Pjg",
+      "name": "All Service Skills",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[drive+0] [flyer+0] [streetwise+0] [melee+0] [steward+0] [profession+0]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789825788375,
+        "modifiedTime": 1789828359536,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wWXQ00Kdmyvvnhwp.APcabklukomp7Pjg"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.22.2.1-DEV",
+    "createdTime": 1789825773319,
+    "modifiedTime": 1789855324265,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d7",
+  "_key": "!tables!wWXQ00Kdmyvvnhwp"
+}

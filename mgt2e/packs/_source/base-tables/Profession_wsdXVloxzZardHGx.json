@@ -9,8 +9,8 @@
       "type": "text",
       "weight": 1,
       "range": [
-        1,
-        1
+        11,
+        11
       ],
       "drawn": false,
       "_id": "Yc7WMUr9CX8TtYvr",
@@ -21,22 +21,23 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1789854265802,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "Entertainer [art+2] [DEX+2] # An entertainer looking for work.",
-      "name": "",
+      "description": "<p>Retail Worker !Worker_Skills [SOC-1] # Worker travelling to see friends and family. Nervous because this is their first time off-world.</p>",
+      "name": "Retail Worker",
+      "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.Yc7WMUr9CX8TtYvr"
     },
     {
       "type": "text",
-      "weight": 5,
+      "weight": 1,
       "range": [
-        2,
-        6
+        12,
+        12
       ],
       "drawn": false,
       "_id": "357wySeKSDS7kFtv",
@@ -47,22 +48,23 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1789854370897,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "Officer Worker [EDU+1] [profession+2] [admin+1] # Business person on a business trip.",
-      "name": "",
+      "description": "<p>Office Worker !Worker_Skills [admin] # Tourist travelling for the experience. Curious and careful with money.</p>",
+      "name": "Office Worker",
+      "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.357wySeKSDS7kFtv"
     },
     {
       "type": "text",
-      "weight": 3,
+      "weight": 1,
       "range": [
-        7,
-        9
+        13,
+        13
       ],
       "drawn": false,
       "_id": "DIh0A3ajS8RTn1s9",
@@ -73,22 +75,23 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1789854475616,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "Tourist [profession+0] [electronics.computers+1] # On holiday, looking to see some sights.",
-      "name": "",
+      "description": "<p>Salesman !Worker_Skills [admin+0] [persuade] [carouse] # Salesman for local company travelling to do some off-world networking. Talkative and a bore.</p>",
+      "name": "Salesman",
+      "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.DIh0A3ajS8RTn1s9"
     },
     {
       "type": "text",
-      "weight": 2,
+      "weight": 1,
       "range": [
-        10,
-        11
+        14,
+        14
       ],
       "drawn": false,
       "_id": "PSfVKx1J7cqrkex1",
@@ -99,22 +102,23 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1789854664316,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "Scientist [science+2] # Scientist going to a conference.",
-      "name": "",
+      "description": "<p>Officer Worker !Worker_Skills # Low ranking manager heading to a business conference.</p>",
+      "name": "Conference",
+      "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.PSfVKx1J7cqrkex1"
     },
     {
       "type": "text",
       "weight": 1,
       "range": [
-        12,
-        12
+        15,
+        15
       ],
       "drawn": false,
       "_id": "ZE9E87pCUEUbkXdK",
@@ -125,15 +129,232 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1789854653806,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "Officer Worker [EDU+1] [profession+2] # Business person on a business trip. {{Actually a secret agent}}",
-      "name": "",
+      "description": "<p>Office Worker !Worker_Skills # Salesman heading to make a deal with another company. Confident this will get them a promotion.</p>",
+      "name": "Salesman",
+      "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.ZE9E87pCUEUbkXdK"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        16,
+        16
+      ],
+      "_id": "97G8x0CtmuBOtj93",
+      "name": "Manager",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Manager !Worker_Skills [profession+2] [admin] [leadership] # Middle manager on a trip to a conference.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789830149654,
+        "modifiedTime": 1789854688660,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.97G8x0CtmuBOtj93"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        31,
+        31
+      ],
+      "_id": "gTmvEYu20bxDa9qO",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Bio Worker !Worker_Skills [profession.biologicals] [profession.biologicals] [science.biology] [medic+0] # Bio-hazard specialist looking for work, after losing their job from their previous employer.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789830301737,
+        "modifiedTime": 1789854504426,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.gTmvEYu20bxDa9qO"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        21,
+        21
+      ],
+      "_id": "2jj6fFWkevFFkvVd",
+      "name": "Office Worker",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Office Worker !Worker_Skills [admin] [streetwise] # Office administrator who has ties to small time criminals. Keeps quiet, watches and listens rather than talks.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853900816,
+        "modifiedTime": 1789854762080,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.2jj6fFWkevFFkvVd"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        22,
+        22
+      ],
+      "_id": "lyoBca8x420fg1mC",
+      "name": "Mechanic",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Mechanic !Worker_Skills [mechanic] [mechanic] [drive] # Mechanic on the way to a vehicle show. Will talk about the latest fast vehicles.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853974949,
+        "modifiedTime": 1789854959517,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.lyoBca8x420fg1mC"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        23,
+        23
+      ],
+      "_id": "UMhlP3gSw8VgGB8v",
+      "name": "Retail Manager",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Retail Manager !Worker_Skills [leadership+0] [admin] [electronics.computers+1] [INT+1] # Manager of retail chain, going to meeting at head office to talk about company performance.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853975876,
+        "modifiedTime": 1789855076044,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.UMhlP3gSw8VgGB8v"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        24,
+        24
+      ],
+      "_id": "8ek1mWLtHXeYNLsM",
+      "name": "IT Worker",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>IT Worker !Worker_Skills [admin] [electronics.computers+2] # Low level IT guy heading to fix customer problems.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853976280,
+        "modifiedTime": 1789855133538,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.8ek1mWLtHXeYNLsM"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        25,
+        25
+      ],
+      "_id": "DjCOwYpbnc1evxUm",
+      "name": "Tourist",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Office Worker !Worker_Skills [science] [profession] # Mid-level office worker just heading on holiday. They have a long list of things they want to do.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853976649,
+        "modifiedTime": 1789855212201,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.DjCOwYpbnc1evxUm"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        26,
+        26
+      ],
+      "_id": "HdvAPf8s9wqXDXum",
+      "name": "Unemployed",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Office Worker !Worker_Skills [admin] # Lost their job and now heading back home to family.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853976982,
+        "modifiedTime": 1789855268203,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.HdvAPf8s9wqXDXum"
     }
   ],
   "replacement": true,
@@ -151,10 +372,10 @@
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762550842758,
-    "modifiedTime": 1762627028951,
+    "modifiedTime": 1789854531960,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },
-  "formula": "1d12",
+  "formula": "1D2 * 10 + 1D6",
   "_key": "!tables!wsdXVloxzZardHGx"
 }

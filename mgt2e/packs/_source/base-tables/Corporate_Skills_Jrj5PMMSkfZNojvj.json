@@ -1,0 +1,213 @@
+{
+  "folder": "36NUGgjy33mFu5Pm",
+  "name": "Corporate Skills",
+  "_id": "Jrj5PMMSkfZNojvj",
+  "img": "icons/svg/d20-grey.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "_id": "OBgPvQ54CGIyCIkT",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853027809,
+        "modifiedTime": 1789853027809,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!tables.results!Jrj5PMMSkfZNojvj.OBgPvQ54CGIyCIkT"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "_id": "4zwCJ0rWVw2bNjTf",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853028102,
+        "modifiedTime": 1789853028102,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!tables.results!Jrj5PMMSkfZNojvj.4zwCJ0rWVw2bNjTf"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        5
+      ],
+      "_id": "pXTWHUNANkt1rYNU",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853028653,
+        "modifiedTime": 1789853028653,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!tables.results!Jrj5PMMSkfZNojvj.pXTWHUNANkt1rYNU"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        8
+      ],
+      "_id": "oSOd9pyxWdqBkyaK",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Worker !Worker_Skills</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853028828,
+        "modifiedTime": 1789853528205,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!Jrj5PMMSkfZNojvj.oSOd9pyxWdqBkyaK"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        10
+      ],
+      "_id": "WTVHOKPJ7CyAfmcw",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853029015,
+        "modifiedTime": 1789853029015,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!tables.results!Jrj5PMMSkfZNojvj.WTVHOKPJ7CyAfmcw"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "_id": "Am0Xuj7aWqtn2dcV",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853057729,
+        "modifiedTime": 1789853057729,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!tables.results!Jrj5PMMSkfZNojvj.Am0Xuj7aWqtn2dcV"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "_id": "uWL6qG9cjTMmdq3O",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789853058289,
+        "modifiedTime": 1789853058289,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!tables.results!Jrj5PMMSkfZNojvj.uWL6qG9cjTMmdq3O"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.22.2.1-DEV",
+    "createdTime": 1789853000165,
+    "modifiedTime": 1789853125039,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "",
+  "_key": "!tables!Jrj5PMMSkfZNojvj"
+}

@@ -1,0 +1,260 @@
+{
+  "folder": "81lpHPvcOeOkc8gf",
+  "name": "NPC Generators",
+  "_id": "dzoWvMqYL6UGTXO6",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Introduction",
+      "type": "text",
+      "_id": "rPD1bWq3iJiv164N",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>There is a basic NPC generator built into the system, which can be used to generate random NPCs tailored for specific needs.</p><p>It uses a combination of code and roll tables to generate NPC names, skills and backgrounds. It's a bit fiddly, but can allow a range of different character types.</p><p>To see what's provided out of the box, have a look at the <strong>NPC Generator</strong> folder in the <strong>MgT2e Base Tables</strong> compendium.</p><p>By default, it is used for generating random passengers at worlds. The easiest way to get an idea of what each table is doing is to look at the Profession roll table, and take a random entry from there:</p><p>Office Worker [EDU+1] [profession+2] [admin+1] # Business person on a business trip.</p><p>This is divided into three sections:</p><ul><li><p>Officer Worker - this is put into the actor's Profession field.</p></li><li><p>[EDU+1] [profession+2] [admin+1] - skills and characteristic modifiers.</p></li><li><p># … - Everything after the hash goes into the actor's description field.</p></li></ul><p>You can simply extend the table using the same format to create more types of passengers. Import the NPC Generator folder into your world, and this version will be used instead of the compendium version, allowing you to extend it.</p><p>The <strong>Profession high</strong> and <strong>Profession low</strong> tables are similar, but these are for high class and low class passengers respectively.</p><p></p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789811707161,
+        "modifiedTime": 1789815488926,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!dzoWvMqYL6UGTXO6.rPD1bWq3iJiv164N"
+    },
+    {
+      "sort": 200000,
+      "name": "Species and Gender",
+      "type": "text",
+      "_id": "mDxSZQJkAqDuveBY",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>There are also other tables other than profession. When an NPC is generated, there are a number of options which are selected for, in order:</p><ul><li><p>Species</p></li><li><p>Gender</p></li><li><p>Name</p></li><li><p>Profession</p></li></ul><h3>Species</h3><p>The Species table is used to select a species for the NPC. As well as selecting the species, this can also provide some background skills and characteristic modifiers.</p><p>e.g.:</p><p>Bwap [STR-4] [END-4] [admin+1] [broker|advocate|investigate+0]</p><p>Note that the use of | when setting a skill means one of those skills will be selected randomly. More on that later.</p><h3>Gender</h3><p>After the species is selected, the Gender table is used to select gender. Normally, this is 50% chance of Male or Female.</p><p>However, if there is a Gender &lt;Species&gt; table, then that table will be used instead for that specific species. This allows different types of Gender, or different distributions of Gender for that species.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789812464921,
+        "modifiedTime": 1789815489891,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!dzoWvMqYL6UGTXO6.mDxSZQJkAqDuveBY"
+    },
+    {
+      "sort": 300000,
+      "name": "Names",
+      "type": "text",
+      "_id": "hMjEZ9lyvq3ysn8F",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Once species and gender have been selected, it's time to choose a name.</p><p>The generator then looks for a table with the following structure:</p><p>Name &lt;Species&gt; &lt;Gender&gt;</p><p>If one isn't found, then it falls back to:</p><p>Name &lt;Species&gt;</p><p></p><p>Note that roll tables can be anywhere underneath the top level folder. In the provided examples, names are stored under a folder for each species. This is just for ease of organisation. You don't need to do this, and in fact the folder structure is ignored whilst looking for a table.</p><p>The only important structure is that they are named correctly, and that they are under the NPC Generator folder.</p><h3>Solomani Names</h3><p>Let's take a look at the Solomani name tables, in particular, Name Solomani Male</p><p>This has two entries:</p><p>!Name_Solomani_First_Male !Name_Solomani_Family</p><p>!Name_Solomani_First_Male !Name_Solomani_First_Male !Name_Solomani_Family</p><p>Basically, this is just allowing us to select between a first name and family name, or optionally including a middle name as well.</p><p>Each entry is split into words. Normally, the words would be written directly to the actor's name. A word beginning with ! though means go look for another table with that name, and choose something from there.</p><p>Underscores are turned into spaces when looking at table names.</p><p>So !Name_Solomani_First_Male would find a random entry from that table (James, Michael, John…) and use that.</p><p></p><h3>Vilani Names</h3><p>Vilani names are normally the same. Some common Vilani names are listed in the Name Vilani First Male and Name Vilani First Female tables, but there is a $^Vilani_Word entry at the end.</p><p>$ means the same as ! - go get a result from the name table. However, unlike !, it then strips any spaces out of the result. The ^ following it means capitalise the result.</p><p>So the result might be: <strong>k y k i i l l a</strong></p><p>That is then squashed into <strong>kykiilla</strong></p><p>Then it is capitalised to <strong>Kykiilla</strong></p><p>Each Vilani Word is made up of Patterns, which are made up of strings of consonants and vowels. </p><p>In theory, you could do something similar for name generators for Vargr, Aslan etc, by creating tables with the right frequencies of letters.</p><p></p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789812836947,
+        "modifiedTime": 1789813801658,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!dzoWvMqYL6UGTXO6.hMjEZ9lyvq3ysn8F"
+    },
+    {
+      "sort": 400000,
+      "name": "Professions",
+      "type": "text",
+      "_id": "Auu6PSNiqsX3tGiw",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Professions are the final step. A table is looked for in the following order:</p><p>Profession &lt;Species&gt; &lt;passage&gt;</p><p>Profession &lt;Species&gt;</p><p>Profession &lt;passage&gt;</p><p>Profession</p><p>If specific matches aren't found for species and passage, then it falls back to the default Profession table.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789813806673,
+        "modifiedTime": 1789813981518,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!dzoWvMqYL6UGTXO6.Auu6PSNiqsX3tGiw"
+    },
+    {
+      "sort": 500000,
+      "name": "Advanced Definitions",
+      "type": "text",
+      "_id": "eGvE4zahrteZGY3Y",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Defining skills for each entry can be done in different ways. One thing to consider is the order in which things are done. So modifiers from Species or Gender will be done before the Profession.</p><h3>Skills</h3><p>The following options</p><h4>[age+3D6]</h4><p>Increment the age of the actor by a random amount. This is normally set in professions. Whatever follows the + is considered to be a roll formula.</p><h4>[STR+1]</h4><p>Increment the named characteristic. Characteristics must be uppercase, and must be three letters. If they are not, then they are considered to be a skill. So, art would be treated as a skill. ART would look for a characteristic of that name (and fail).</p><h4>[STR-1]</h4><p>Decrement a characteristic</p><h4>[STR=3D6k2+1]</h4><p>Set a characteristic using a roll formula. Note that this will override modifiers made during previous steps.</p><h4>[admin]</h4><p>Set the skill to level 1, or increment by 1.</p><h4>[admin+1]</h4><p>Set a skill to a specific level. If the skill is at a higher level, leave it unchanged.</p><h4>[profession+2]</h4><p>Profession is a speciality skill, so can't be set above 0. However, if you try to set the parent of a speciality skill above 0, it will select a random speciality under that skill and increment that instead.</p><h4>[profession.belter+2]</h4><p>Set the Profession (Belter) skill specifically.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789813990773,
+        "modifiedTime": 1789820435261,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!dzoWvMqYL6UGTXO6.eGvE4zahrteZGY3Y"
+    },
+    {
+      "sort": 600000,
+      "name": "Other Careers",
+      "type": "text",
+      "_id": "w3jjbvseDMM32ZvQ",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>It's possible to use the generator to create specific careers of your own. A macro script like the following:</p><pre><code>let npcData = {\n  type\": \"npc\",\n  \"img\": `systems/mgt2e/icons/actors/pilot.svg`,\n  \"ownership\": {\n    default: 2\n  },\n  \"system\": {\n    \"settings\": {\n      hideUntrained: true,\n      lockCharacteristics: true\n    },\n    \"meta\": {\n      passage: \"Captain\",\n    },\n    \"sophont\": {\n        age: 24,\n        homeworld: \"Bork\"\n    },\n    \"description\": \"\"\n  }\n}\nawait game.mgt2e.generateNpc(npcData, \"Crew Generator\");\nActor.implementation.create(npcData);\n</code></pre><p>This will create a new NPC. Setting the passage to Captain will look for a profession named \"profession Captain\".</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789820463800,
+        "modifiedTime": 1789821449359,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!dzoWvMqYL6UGTXO6.w3jjbvseDMM32ZvQ"
+    }
+  ],
+  "categories": [],
+  "sort": 800000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.22.2.1-DEV",
+    "createdTime": 1789811696353,
+    "modifiedTime": 1789820466642,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!journal!dzoWvMqYL6UGTXO6"
+}

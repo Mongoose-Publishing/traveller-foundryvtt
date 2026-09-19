@@ -1,0 +1,218 @@
+{
+  "folder": "36NUGgjy33mFu5Pm",
+  "name": "Worker Skills",
+  "_id": "HlhavvnVpD3ViGzx",
+  "img": "systems/mgt2e/icons/misc/2D6.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "_id": "QIe3sZPWD62yid18",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>!Citizen_Skills [drive+0] [mechanic+0] [electronics+0] [engineer+0] [profession+0] [science+0] [drive|mechanic|electronics|engineer|profession+2] [EDU+1] [admin] [leadership]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789828044996,
+        "modifiedTime": 1789829972150,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!HlhavvnVpD3ViGzx.QIe3sZPWD62yid18"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "_id": "7dscj8Goblag4AJU",
+      "name": "Management",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>!Citizen_Skills [drive|mechanic|engineer|science] [engineer|science|electronics] [electronics.computers] [leadership] [EDU+1]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789828045185,
+        "modifiedTime": 1789853858630,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!HlhavvnVpD3ViGzx.7dscj8Goblag4AJU"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "_id": "4rtjIM88AO0QphFy",
+      "name": "Driver",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>!Citizen_Skills [drive+2] [mechanic]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789828045365,
+        "modifiedTime": 1789853762705,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!HlhavvnVpD3ViGzx.4rtjIM88AO0QphFy"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "_id": "HTiOzaj4YGYjmh8D",
+      "name": "Service Skills",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>!Citizen_Skills [drive+0] [electronics+0] [engineer|science|mechanic]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789828046003,
+        "modifiedTime": 1789853627993,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!HlhavvnVpD3ViGzx.HTiOzaj4YGYjmh8D"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "_id": "btxG90wygNLwMzHP",
+      "name": "All Service Skills",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>!Citizen_Skills [drive+0] [mechanic+0] [electronics+0] [engineer+0] [profession+0] [science+0]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789828046788,
+        "modifiedTime": 1789853684739,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!HlhavvnVpD3ViGzx.btxG90wygNLwMzHP"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "_id": "NtfyWwqDXFfV0h0h",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>!Citizen_Skills [drive+0] [mechanic+0] [electronics+0] [engineer+0] [profession+0] [science+0] [drive|mechanic|electronics|engineer|profession+1] [INT+1] [EDU+1] [SOC+1]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789828047675,
+        "modifiedTime": 1789830104216,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!HlhavvnVpD3ViGzx.NtfyWwqDXFfV0h0h"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "_id": "dYCozYaaXiiScTJR",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789828048298,
+        "modifiedTime": 1789828048298,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!tables.results!HlhavvnVpD3ViGzx.dYCozYaaXiiScTJR"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.22.2.1-DEV",
+    "createdTime": 1789826639244,
+    "modifiedTime": 1789855324174,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d7",
+  "_key": "!tables!HlhavvnVpD3ViGzx"
+}

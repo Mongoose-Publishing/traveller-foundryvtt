@@ -1,5 +1,5 @@
 {
-  "name": "DEFAULT TRAVELLER",
+  "name": "DEFAULT DARK CONSPIRACY",
   "type": "traveller",
   "img": "systems/mgt2e/icons/actors/traveller-red.svg",
   "system": {
@@ -71,7 +71,7 @@
       "damage": 0,
       "tmpDamage": 0
     },
-    "description": "<p>This is the <strong>DEFAULT TRAVELLER</strong>. Import it into your world, and it will define the list of skills given to new Actors when they are created.</p>\n<p>The list of skills on this actor also define which skills are displayed whenever a list of skills is needed on unattached items.</p>",
+    "description": "",
     "settings": {
       "hideUntrained": false,
       "onlyBackground": false,
@@ -89,124 +89,179 @@
         "current": 7,
         "show": true,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "DEX": {
         "value": 7,
         "current": 7,
         "show": true,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "END": {
         "value": 7,
         "current": 7,
         "show": true,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "INT": {
         "value": 7,
         "current": 7,
         "show": true,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "EDU": {
         "value": 7,
         "current": 7,
         "show": true,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "SOC": {
         "value": 7,
         "current": 7,
-        "show": true,
+        "show": false,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "CHA": {
         "value": 7,
         "current": 7,
-        "show": false,
+        "show": true,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "TER": {
         "value": 0,
         "current": 0,
         "show": false,
         "default": false,
-        "dm": -3
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": -3,
+        "boon": null
       },
       "PSI": {
         "value": 0,
         "current": 0,
         "show": false,
         "default": false,
-        "dm": -3
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": -3,
+        "boon": null
       },
       "WLT": {
         "value": 7,
         "current": 7,
         "show": false,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "LCK": {
         "value": 7,
         "current": 7,
         "show": false,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "MRL": {
         "value": 7,
         "current": 7,
         "show": false,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "STY": {
         "value": 7,
         "current": 7,
         "show": false,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "RES": {
         "value": 7,
         "current": 7,
         "show": false,
         "default": false,
-        "dm": 0
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": 0,
+        "boon": null
       },
       "FOL": {
         "value": 0,
         "current": 0,
         "show": false,
         "default": false,
-        "dm": -3
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": -3,
+        "boon": null
       },
       "REP": {
         "value": 0,
         "current": 0,
         "show": false,
         "default": false,
-        "dm": -3
+        "augment": 0,
+        "augdm": 0,
+        "min": 0,
+        "dm": -3,
+        "boon": null
       }
     },
     "skills": {
-      "admin": {
-        "default": "EDU",
-        "background": true,
-        "requires": "INT",
-        "id": "admin",
-        "value": 0,
-        "icon": "systems/mgt2e/icons/skills/admin.svg",
-        "trained": false
-      },
       "advocate": {
         "default": "EDU",
         "requires": "INT",
@@ -250,20 +305,28 @@
             "id": "performer",
             "value": 0
           },
-          "holography": {
-            "id": "holography",
-            "value": 0
-          },
           "instrument": {
             "id": "instrument",
             "value": 0
           },
-          "visualMedia": {
-            "id": "visualMedia",
-            "value": 0
-          },
           "write": {
             "id": "write",
+            "value": 0
+          },
+          "physical_media": {
+            "id": "physical_media",
+            "label": "Physical Media",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          },
+          "virtual_media": {
+            "id": "virtual_media",
+            "label": "Virtual Media",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
             "value": 0
           }
         },
@@ -352,16 +415,8 @@
             "id": "hovercraft",
             "value": 0
           },
-          "mole": {
-            "id": "mole",
-            "value": 0
-          },
           "track": {
             "id": "track",
-            "value": 0
-          },
-          "walker": {
-            "id": "walker",
             "value": 0
           },
           "wheel": {
@@ -383,10 +438,6 @@
             "id": "comms",
             "value": 0
           },
-          "computers": {
-            "id": "computers",
-            "value": 0
-          },
           "remoteOps": {
             "id": "remoteOps",
             "value": 0
@@ -405,20 +456,44 @@
         "default": "EDU",
         "requires": "INT",
         "specialities": {
-          "mDrive": {
-            "id": "mDrive",
+          "aerospace": {
+            "id": "aerospace",
+            "label": "Aerospace",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
             "value": 0
           },
-          "jDrive": {
-            "id": "jDrive",
+          "civil": {
+            "id": "civil",
+            "label": "Civil",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
             "value": 0
           },
-          "lifeSupport": {
-            "id": "lifeSupport",
+          "electrical": {
+            "id": "electrical",
+            "label": "Electrical",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
             "value": 0
           },
-          "power": {
-            "id": "power",
+          "industrial": {
+            "id": "industrial",
+            "label": "Industrial",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          },
+          "mechanical": {
+            "id": "mechanical",
+            "label": "Mechanical",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
             "value": 0
           }
         },
@@ -434,37 +509,6 @@
         "id": "explosives",
         "value": 0,
         "icon": "systems/mgt2e/icons/skills/explosives.svg",
-        "trained": false
-      },
-      "flyer": {
-        "default": "DEX",
-        "background": true,
-        "requires": "DEX",
-        "specialities": {
-          "airship": {
-            "id": "airship",
-            "value": 0
-          },
-          "grav": {
-            "id": "grav",
-            "value": 0
-          },
-          "ornithopter": {
-            "id": "ornithopter",
-            "value": 0
-          },
-          "rotor": {
-            "id": "rotor",
-            "value": 0
-          },
-          "wing": {
-            "id": "wing",
-            "value": 0
-          }
-        },
-        "id": "flyer",
-        "value": 0,
-        "icon": "systems/mgt2e/icons/skills/flyer.svg",
         "trained": false
       },
       "gambler": {
@@ -516,14 +560,20 @@
             "id": "archaic",
             "value": 0
           },
-          "energy": {
+          "pistol": {
+            "id": "pistol",
+            "label": "Pistol",
             "combat": true,
-            "id": "energy",
+            "default": "DEX",
+            "trained": false,
             "value": 0
           },
-          "slug": {
+          "rifle": {
+            "id": "rifle",
+            "label": "Rifle",
             "combat": true,
-            "id": "slug",
+            "default": "DEX",
+            "trained": false,
             "value": 0
           }
         },
@@ -585,28 +635,12 @@
         "background": true,
         "requires": "INT",
         "specialities": {
-          "galanglic": {
-            "id": "galanglic",
-            "value": 0
-          },
-          "vilani": {
-            "id": "vilani",
-            "value": 0
-          },
-          "zdetl": {
-            "id": "zdetl",
-            "value": 0
-          },
-          "oynprith": {
-            "id": "oynprith",
-            "value": 0
-          },
-          "trokh": {
-            "id": "trokh",
-            "value": 0
-          },
-          "gvegh": {
-            "id": "gvegh",
+          "english": {
+            "id": "english",
+            "label": "English",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
             "value": 0
           }
         },
@@ -693,16 +727,28 @@
         "default": "DEX",
         "requires": "INT",
         "specialities": {
-          "smallCraft": {
-            "id": "smallCraft",
+          "airship": {
+            "id": "airship",
+            "label": "Airship",
+            "combat": true,
+            "default": "DEX",
+            "trained": false,
             "value": 0
           },
-          "spacecraft": {
-            "id": "spacecraft",
+          "rotor": {
+            "id": "rotor",
+            "label": "Rotor",
+            "combat": true,
+            "default": "DEX",
+            "trained": false,
             "value": 0
           },
-          "capitalShips": {
-            "id": "capitalShips",
+          "wing": {
+            "id": "wing",
+            "label": "Wing",
+            "combat": true,
+            "default": "DEX",
+            "trained": false,
             "value": 0
           }
         },
@@ -717,33 +763,35 @@
         "requires": "INT",
         "individual": true,
         "specialities": {
-          "belter": {
-            "id": "belter",
-            "value": 0
-          },
           "biologicals": {
             "id": "biologicals",
-            "value": 0
+            "value": 0,
+            "trained": false
           },
           "civilEngineering": {
             "id": "civilEngineering",
-            "value": 0
+            "value": 0,
+            "trained": false
           },
           "construction": {
             "id": "construction",
-            "value": 0
+            "value": 0,
+            "trained": false
           },
           "hydroponics": {
             "id": "hydroponics",
-            "value": 0
+            "value": 0,
+            "trained": false
           },
           "polymers": {
             "id": "polymers",
-            "value": 0
+            "value": 0,
+            "trained": false
           },
           "robotics": {
             "id": "robotics",
-            "value": 0
+            "value": 0,
+            "trained": false
           }
         },
         "id": "profession",
@@ -821,8 +869,8 @@
             "id": "psionicology",
             "value": 0
           },
-          "psycology": {
-            "id": "psycology",
+          "psychology": {
+            "id": "psychology",
             "value": 0
           },
           "robotics": {
@@ -924,15 +972,6 @@
         "icon": "systems/mgt2e/icons/skills/tactics.svg",
         "trained": false
       },
-      "vaccsuit": {
-        "default": "DEX",
-        "background": true,
-        "requires": "INT",
-        "id": "vaccsuit",
-        "value": 0,
-        "icon": "systems/mgt2e/icons/skills/vaccsuit.svg",
-        "trained": false
-      },
       "telepathy": {
         "default": "PSI",
         "requires": "PSI",
@@ -979,6 +1018,167 @@
         "id": "untrained",
         "value": 0,
         "icon": "systems/mgt2e/icons/skills/untrained.svg"
+      },
+      "business": {
+        "id": "business",
+        "label": "Business",
+        "combat": false,
+        "default": "INT",
+        "trained": false,
+        "value": 0,
+        "background": true,
+        "individual": false,
+        "requires": "INT",
+        "icon": "systems/mgt2e/icons/skills/new.svg"
+      },
+      "computers": {
+        "id": "computers",
+        "label": "Computers",
+        "combat": false,
+        "default": "INT",
+        "trained": false,
+        "value": 0,
+        "background": false,
+        "individual": false,
+        "requires": "INT",
+        "icon": "systems/mgt2e/icons/skills/new.svg",
+        "specialities": {
+          "coding": {
+            "id": "coding",
+            "label": "Coding",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          },
+          "hardware": {
+            "id": "hardware",
+            "label": "Hardware",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          },
+          "operation": {
+            "id": "operation",
+            "label": "Operation",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          }
+        }
+      },
+      "empathy": {
+        "id": "empathy",
+        "label": "Empathy",
+        "combat": false,
+        "default": "INT",
+        "trained": false,
+        "value": 0,
+        "background": false,
+        "individual": false,
+        "requires": "INT",
+        "icon": "systems/mgt2e/icons/skills/new.svg",
+        "specialities": {
+          "computers": {
+            "id": "computers",
+            "label": "Computers",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          },
+          "drain": {
+            "id": "drain",
+            "label": "Drain",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          },
+          "foreboding": {
+            "id": "foreboding",
+            "label": "Foreboding",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          },
+          "healing": {
+            "id": "healing",
+            "label": "Healing",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          },
+          "project_mind": {
+            "id": "project_mind",
+            "label": "Project Mind",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          },
+          "sense_mind": {
+            "id": "sense_mind",
+            "label": "Sense Mind",
+            "combat": true,
+            "default": "INT",
+            "trained": false,
+            "value": 0
+          }
+        }
+      },
+      "admin": {
+        "default": "EDU",
+        "background": true,
+        "requires": "INT",
+        "id": "admin",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/admin.svg",
+        "trained": false
+      },
+      "flyer": {
+        "default": "DEX",
+        "background": true,
+        "requires": "DEX",
+        "specialities": {
+          "airship": {
+            "id": "airship",
+            "value": 0
+          },
+          "grav": {
+            "id": "grav",
+            "value": 0
+          },
+          "ornithopter": {
+            "id": "ornithopter",
+            "value": 0
+          },
+          "rotor": {
+            "id": "rotor",
+            "value": 0
+          },
+          "wing": {
+            "id": "wing",
+            "value": 0
+          }
+        },
+        "id": "flyer",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/flyer.svg",
+        "trained": false
+      },
+      "vaccsuit": {
+        "default": "DEX",
+        "background": true,
+        "requires": "INT",
+        "id": "vaccsuit",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/vaccsuit.svg",
+        "trained": false
       }
     },
     "damage": {
@@ -1003,7 +1203,7 @@
     "powered": 0,
     "sophont": {
       "age": "18",
-      "species": "Vilani",
+      "species": "Human",
       "speciesTraits": "",
       "gender": "",
       "weight": 80,
@@ -1020,11 +1220,11 @@
       "otherIncome": "0",
       "description": ""
     },
-    "player": "System",
+    "player": "",
     "terms": 0,
     "startAge": 18,
     "termLength": 4,
-    "entryYear": 1105,
+    "entryYear": 1113,
     "entryAge": 18,
     "armour": {
       "protection": 0,
@@ -1035,17 +1235,15 @@
       "name": null,
       "tl": 0
     },
-    "currentYear": 1105,
-    "birthYear": 1087,
+    "currentYear": 1113,
+    "birthYear": 1095,
     "totalSkills": 0,
     "maxSkills": 42
   },
   "prototypeToken": {
-    "name": "D",
-    "displayName": 50,
-    "actorLink": false,
-    "appendNumber": false,
-    "prependAdjective": false,
+    "name": "DEFAULT DARK CONSPIRACY",
+    "displayName": 0,
+    "actorLink": true,
     "width": 1,
     "height": 1,
     "texture": {
@@ -1064,8 +1262,8 @@
     "lockRotation": false,
     "rotation": 0,
     "alpha": 1,
-    "disposition": 0,
-    "displayBars": 50,
+    "disposition": -1,
+    "displayBars": 0,
     "bar1": {
       "attribute": "hits"
     },
@@ -1118,21 +1316,23 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
       }
     },
-    "flags": {},
-    "randomImg": false,
     "turnMarker": {
       "mode": 1,
       "animation": null,
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [],
   "effects": [],
@@ -1141,21 +1341,19 @@
     "default": 0,
     "mhUjqDVicnwIUaiq": 3
   },
-  "flags": {
-    "mgt2e": {}
-  },
+  "flags": {},
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
+    "exportSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.15.5.4-DEV",
-    "createdTime": 1763144944416,
-    "modifiedTime": 1789758986147,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq",
-    "exportSource": null
+    "systemVersion": "0.22.2.1-DEV",
+    "createdTime": 1789758986126,
+    "modifiedTime": 1789760934575,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
-  "_id": "fS6RRjXcB8jIUoK2",
-  "sort": 300000,
-  "_key": "!actors!fS6RRjXcB8jIUoK2"
+  "_id": "9Bjh4Mtg7RPD8bFL",
+  "sort": 200000,
+  "_key": "!actors!9Bjh4Mtg7RPD8bFL"
 }

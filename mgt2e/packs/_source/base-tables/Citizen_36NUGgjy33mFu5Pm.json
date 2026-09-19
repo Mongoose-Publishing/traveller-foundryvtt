@@ -1,0 +1,21 @@
+{
+  "type": "RollTable",
+  "folder": "80OLZYk2SeCAEBct",
+  "name": "Citizen",
+  "color": null,
+  "sorting": "a",
+  "_id": "36NUGgjy33mFu5Pm",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.22.2.1-DEV",
+    "lastModifiedBy": null
+  },
+  "_key": "!folders!36NUGgjy33mFu5Pm"
+}

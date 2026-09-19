@@ -1,0 +1,192 @@
+{
+  "folder": "NSK7MRUS079et3mw",
+  "name": "Profession Medic",
+  "_id": "4x3WOlnEyHPR84OB",
+  "img": "icons/svg/d20-grey.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "_id": "dG2L13vPIGAcL1jL",
+      "name": "Failed Medic",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Medic !Free_Trader_Skills [medic] [science.biology] [science.biology|science.genetics|science.cybernetics] # Never completed medical school, but left to seek a life of adventure. Now they pretend to be a doctor aboard ships. Often nervous and afraid of being found out for a fraud.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789840566477,
+        "modifiedTime": 1789850497975,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!4x3WOlnEyHPR84OB.dG2L13vPIGAcL1jL"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "_id": "zhfaWieKwApmk5Aq",
+      "name": "Restless Doctor",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Medic !Free_Trader_Skills [age+3D6] [INT+1] [EDU+2] [SOC+1] [medic-2] [science.biology-2] [science] # Medical doctor that grew tired of working in the same hospital. Currently working freelance, looking for a place to settle down. Never sure about what they want to be doing.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789840568757,
+        "modifiedTime": 1789850619932,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!4x3WOlnEyHPR84OB.zhfaWieKwApmk5Aq"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "_id": "9Lj1qbTgbcvjCff6",
+      "name": "Confident Medic",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Medic !Free_Trader_Skills [age+5D6] [INT+1] [EDU+2] [SOC+2] [medic+3] [science.biology] [science.genetics] [persuade] [admin] [diplomat] # Skilled doctor who knows what they are doing. Doesn't take kindly to being second guessed.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789840568990,
+        "modifiedTime": 1789850725289,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!4x3WOlnEyHPR84OB.9Lj1qbTgbcvjCff6"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "_id": "7AU3K27PRbQTHoi8",
+      "name": "Addicted Medic",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Medic !Free_Trader_Skills [age+5D6] [EDU+2] [SOC-2] [medic+2] [deception] [streetwise] [admin] # Medic who lost their license after they became addicted to drugs. Now has to take work where they can find it. Can be careless and depressed.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789840569413,
+        "modifiedTime": 1789852616635,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!4x3WOlnEyHPR84OB.7AU3K27PRbQTHoi8"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "_id": "xqKYwb7JjucTIjZX",
+      "name": "Good Medic",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Medic !Free_Trader_Skills [age+3D6] [medic] [medic] [admin] [diplomat] [persuade] # Competent medic who wants to help people. Friendly and confident in their abilities.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789840569694,
+        "modifiedTime": 1789852707593,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!4x3WOlnEyHPR84OB.xqKYwb7JjucTIjZX"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "_id": "x68bYQ2r2Vle7OLt",
+      "name": "Expert Medic",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Medic !Free_Trader_Skills [age+6D6] [INT+1] [EDU+2] [SOC+1] [medic-3] [admin] [steward] [science.biology] [science.cybernetics+2] [science.genetics] # A skilled medic with an interest in cybernetics.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789840570281,
+        "modifiedTime": 1789852831617,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!4x3WOlnEyHPR84OB.x68bYQ2r2Vle7OLt"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.22.2.1-DEV",
+    "createdTime": 1789840512024,
+    "modifiedTime": 1789850379666,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1D6",
+  "_key": "!tables!4x3WOlnEyHPR84OB"
+}

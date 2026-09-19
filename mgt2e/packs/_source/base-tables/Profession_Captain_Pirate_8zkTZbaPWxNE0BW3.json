@@ -1,0 +1,57 @@
+{
+  "folder": "NSK7MRUS079et3mw",
+  "name": "Profession Captain Pirate",
+  "_id": "8zkTZbaPWxNE0BW3",
+  "img": "icons/svg/d20-grey.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "_id": "apeGzPDFu11mOORK",
+      "name": "Pirate Captain",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Captain !Free_Trader_Skills [gunner.turret] # Pirate captain.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789849647525,
+        "modifiedTime": 1789849677909,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!8zkTZbaPWxNE0BW3.apeGzPDFu11mOORK"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.22.2.1-DEV",
+    "createdTime": 1789849645344,
+    "modifiedTime": 1789849695384,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d1",
+  "_key": "!tables!8zkTZbaPWxNE0BW3"
+}

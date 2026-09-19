@@ -1,0 +1,192 @@
+{
+  "folder": "NSK7MRUS079et3mw",
+  "name": "Profession Captain",
+  "_id": "CIxzkEjtFponA8O8",
+  "img": "systems/mgt2e/icons/misc/text.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "_id": "TP7BUN6kCpqakQAI",
+      "name": "Captain",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Captain !Free_Trader_Skills [pilot.spacecraft] [pilot.smallCraft] [flyer+0] [persuade] [guncombat+0] # Captain and pilot of a tramp freighter. A skilled 'seat of your pants' pilot who enjoys flying for the sake of it. Prefers not to get involved in the business side of things.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789836141377,
+        "modifiedTime": 1789849624643,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!CIxzkEjtFponA8O8.TP7BUN6kCpqakQAI"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "_id": "yoMyMA9D6o0TB6S0",
+      "name": "Captain",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Captain !Free_Trader_Skills [pilot.spacecraft] [broker] [admin+1] [astrogation+0] [persuade] [leadership] # Not just a pilot, but also a competent captain. Likes to do things carefully, after thinking them through.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789837456974,
+        "modifiedTime": 1789837734560,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!CIxzkEjtFponA8O8.yoMyMA9D6o0TB6S0"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "_id": "rIW30Wv15wUt1BFp",
+      "name": "Ex-Navy Pilot",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Captain !Free_Trader_Skills [leadership+2] [tactics+0] [guncombat.energy] [melee.blade] [pilot.spacecraft+2] [gunner+0] [athletics+0] [vaccsuit] # Served in the Navy, so has a lot of experience in managing a crew and keeping things orderly and precise. Keeps calm under pressure.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789837457146,
+        "modifiedTime": 1789837964399,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!CIxzkEjtFponA8O8.rIW30Wv15wUt1BFp"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "_id": "RO8YrxyWOjbEtFmO",
+      "name": "Smuggler",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Captain !Free_Trader_Skills [admin] [advocate+0] [streetwise] [broker] [deception+2] [stealth|recon] # Captain with a shady past. Has experience delivering cargo to places that people don't want it delivered to.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789837457359,
+        "modifiedTime": 1789838068578,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!CIxzkEjtFponA8O8.RO8YrxyWOjbEtFmO"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "_id": "Nd26w2c1TAGypWkP",
+      "name": "Drunk Captain",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Captain !Free_Trader_Skills [age+6D6] [carouse] [deception] # Things went wrong a long time ago, and now they try to sink their sorrows in drink. They used to be a good pilot and trader, now they're not so sure.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789837458577,
+        "modifiedTime": 1789838151607,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!CIxzkEjtFponA8O8.Nd26w2c1TAGypWkP"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "_id": "XpA0upF3KOBRYY0w",
+      "name": "Dangerous Captain",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Captain !Free_Trader_Skills [age+2D6] [deception+0] [melee.unarmed] [guncombat] [streetwise] [STR+2] [INT-1] [SOC-2] # A dangerously unpredicatable person, often resorting to physical violence if they don't get their way. Large and overbearing personality.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.1-DEV",
+        "createdTime": 1789837458862,
+        "modifiedTime": 1789838265169,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!CIxzkEjtFponA8O8.XpA0upF3KOBRYY0w"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.22.2.1-DEV",
+    "createdTime": 1789836138792,
+    "modifiedTime": 1789849463667,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1D6",
+  "_key": "!tables!CIxzkEjtFponA8O8"
+}
