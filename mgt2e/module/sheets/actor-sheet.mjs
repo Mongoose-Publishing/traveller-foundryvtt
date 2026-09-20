@@ -1067,8 +1067,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         // Events that only apply to creatures.
         if (this.actor.type === "creature") {
             html.find('.behaviour-selector').click(ev => {
-               const value = $(ev.currentTarget).val();
-               void this._creatureSelectBehaviour(value);
+                const value = $(ev.currentTarget).val();
+                void this._creatureSelectBehaviour(value);
             });
             html.find('.behaviour-remove').click(ev => {
                 const b = $(ev.currentTarget).parents(".behaviour-item");
@@ -1085,13 +1085,14 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             });
             html.find('.trait-minus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                void this._creatureTraitModify(t.data("traitId"), ev.shiftKey?-5:-1);
+                void this._creatureTraitModify(t.data("traitId"), ev.shiftKey ? -5 : -1);
             });
             html.find('.trait-plus').click(ev => {
                 const t = $(ev.currentTarget).parents(".trait-item");
-                void this._creatureTraitModify(t.data("traitId"), ev.shiftKey?5:1);
+                void this._creatureTraitModify(t.data("traitId"), ev.shiftKey ? 5 : 1);
             });
-        } else if (this.actor.type === "spacecraft") {
+        }
+        if (this.actor.type === "spacecraft") {
             // Select which bay to display.
             html.find('.bay-cargo').click(ev => {
                this.actor.system.spacecraft.baySelected = "cargo";
@@ -1169,7 +1170,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
 
             });
 
-        } else if (this.actor.type === "traveller" || this.actor.type === "npc") {
+        } else if (["traveller", "npc", "creature", "robot"].includes(this.actor.type)) {
             html.find('.roll-upp').click(ev => {
                this.actor.rollUPP({ "shift": ev.shiftKey, "ctrl": ev.ctrlKey });
             });
