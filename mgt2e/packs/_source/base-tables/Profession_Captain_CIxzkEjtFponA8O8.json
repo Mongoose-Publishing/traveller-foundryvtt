@@ -123,7 +123,7 @@
       "_id": "Nd26w2c1TAGypWkP",
       "name": "Drunk Captain",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>Captain !Free_Trader_Skills [age+6D6] [carouse] [deception] # Things went wrong a long time ago, and now they try to sink their sorrows in drink. They used to be a good pilot and trader, now they're not so sure.</p>",
+      "description": "<p>Captain !Free_Trader_Skills [Age+6D6] [carouse] [deception] # Things went wrong a long time ago, and now they try to sink their sorrows in drink. They used to be a good pilot and trader, now they're not so sure.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -134,7 +134,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789837458577,
-        "modifiedTime": 1789838151607,
+        "modifiedTime": 1789934153314,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -150,7 +150,7 @@
       "_id": "XpA0upF3KOBRYY0w",
       "name": "Dangerous Captain",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>Captain !Free_Trader_Skills [age+2D6] [deception+0] [melee.unarmed] [guncombat] [streetwise] [STR+2] [INT-1] [SOC-2] # A dangerously unpredicatable person, often resorting to physical violence if they don't get their way. Large and overbearing personality.</p>",
+      "description": "<p>Captain !Free_Trader_Skills [Age+2D6] [deception+0] [melee.unarmed] [guncombat] [streetwise] [STR+2] [INT-1] [SOC-2] # A dangerously unpredicatable person, often resorting to physical violence if they don't get their way. Large and overbearing personality.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -161,7 +161,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789837458862,
-        "modifiedTime": 1789838265169,
+        "modifiedTime": 1789934160990,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,

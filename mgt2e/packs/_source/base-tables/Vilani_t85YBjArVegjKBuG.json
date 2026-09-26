@@ -5,18 +5,19 @@
   "type": "RollTable",
   "_id": "t85YBjArVegjKBuG",
   "description": "",
-  "sort": 300000,
+  "sort": 400000,
   "color": null,
   "flags": {},
   "_stats": {
     "compendiumSource": null,
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.351",
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762622372575,
-    "modifiedTime": 1762622375618,
-    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+    "modifiedTime": 1789925598448,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
+    "exportSource": null
   },
   "_key": "!folders!t85YBjArVegjKBuG"
 }

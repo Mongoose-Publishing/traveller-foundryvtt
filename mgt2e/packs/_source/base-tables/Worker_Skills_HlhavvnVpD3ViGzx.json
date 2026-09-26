@@ -2,20 +2,20 @@
   "folder": "36NUGgjy33mFu5Pm",
   "name": "Worker Skills",
   "_id": "HlhavvnVpD3ViGzx",
-  "img": "systems/mgt2e/icons/misc/2D6.svg",
+  "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
     {
       "type": "text",
       "weight": 1,
       "range": [
-        1,
-        1
+        2,
+        2
       ],
       "_id": "QIe3sZPWD62yid18",
-      "name": "",
+      "name": "Skilled",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Citizen_Skills [drive+0] [mechanic+0] [electronics+0] [engineer+0] [profession+0] [science+0] [drive|mechanic|electronics|engineer|profession+2] [EDU+1] [admin] [leadership]</p>",
+      "description": "<p>!Citizen_Skills [drive+0] [mechanic+0] [electronics+0] [engineer+0] [science+0] [drive|mechanic|electronics|engineer+2] [EDU+1] [leadership]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -26,7 +26,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789828044996,
-        "modifiedTime": 1789829972150,
+        "modifiedTime": 1790110405059,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -36,8 +36,8 @@
       "type": "text",
       "weight": 1,
       "range": [
-        2,
-        2
+        3,
+        3
       ],
       "_id": "7dscj8Goblag4AJU",
       "name": "Management",
@@ -63,8 +63,8 @@
       "type": "text",
       "weight": 1,
       "range": [
-        3,
-        3
+        4,
+        5
       ],
       "_id": "4rtjIM88AO0QphFy",
       "name": "Driver",
@@ -90,13 +90,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        4,
-        4
+        6,
+        8
       ],
       "_id": "HTiOzaj4YGYjmh8D",
       "name": "Service Skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Citizen_Skills [drive+0] [electronics+0] [engineer|science|mechanic]</p>",
+      "description": "<p>!Citizen_Skills [drive+0] [engineer|science|mechanic|electronics]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -107,7 +107,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789828046003,
-        "modifiedTime": 1789853627993,
+        "modifiedTime": 1790110288583,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -117,8 +117,8 @@
       "type": "text",
       "weight": 1,
       "range": [
-        5,
-        5
+        9,
+        10
       ],
       "_id": "btxG90wygNLwMzHP",
       "name": "All Service Skills",
@@ -144,13 +144,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        6,
-        6
+        11,
+        11
       ],
       "_id": "NtfyWwqDXFfV0h0h",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Citizen_Skills [drive+0] [mechanic+0] [electronics+0] [engineer+0] [profession+0] [science+0] [drive|mechanic|electronics|engineer|profession+1] [INT+1] [EDU+1] [SOC+1]</p>",
+      "description": "<p>!Citizen_Skills [drive+0] [mechanic|electronics+0] [engineer+0] [science+0] [drive|mechanic|electronics|engineer+1] [INT+1] [EDU+1]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -161,7 +161,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789828047675,
-        "modifiedTime": 1789830104216,
+        "modifiedTime": 1790110365419,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -171,13 +171,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        7,
-        7
+        12,
+        12
       ],
       "_id": "dYCozYaaXiiScTJR",
-      "name": "",
+      "name": "Technician",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [mechanic+2] [engineer+2] [engineer+1] [electronics] [profession+0] [INT+1]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -188,9 +188,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789828048298,
-        "modifiedTime": 1789828048298,
+        "modifiedTime": 1790106951579,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!HlhavvnVpD3ViGzx.dYCozYaaXiiScTJR"
     }
   ],
@@ -210,9 +211,9 @@
     "systemId": "mgt2e",
     "systemVersion": "0.22.2.1-DEV",
     "createdTime": 1789826639244,
-    "modifiedTime": 1789855324174,
+    "modifiedTime": 1790109004291,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
-  "formula": "1d7",
+  "formula": "2D6",
   "_key": "!tables!HlhavvnVpD3ViGzx"
 }

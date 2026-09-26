@@ -86,6 +86,13 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
                 t = t.replaceAll(/ /g, "");
                 result += " " + t;
             }
+        } else if (npcData && t.startsWith("<")) {
+            t = t.replaceAll(/[\<\>]/g, "").replaceAll(/_/g, " ");
+            console.log("Item: " + t);
+            if (!npcData.system.meta.items) {
+                npcData.system.meta.items = [];
+            }
+            npcData.system.meta.items.push(t);
         } else if (npcData && t.startsWith("[")) {
             t = t.replaceAll(/[\[\]]/g, "");
             let skill = t;
@@ -96,8 +103,9 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
                 value = t.split("=")[1];
                 set = true;
             } else if (t.indexOf("+") > -1) {
-                skill = t.split("+")[0];
-                value = t.split("+")[1];
+                // There might be multiple +'s, e.g. age+3D6+10
+                skill = t.replace(/\+.*/, '');
+                value = t.replace(/^[^+]*\+/, '');
             } else if (t.indexOf("-") > -1 ) {
                 skill = t.split("-")[0];
                 value = t.split("-")[1];
@@ -105,14 +113,44 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
             } else {
                 value = undefined;
             }
-            if (skill === "age") {
+            if (skill === "Age") {
                 // For age, increment by a dice amount.
                 try {
                     let ageRoll = await new Roll(value).evaluate();
                     let inc = parseInt(ageRoll.total);
                     npcData.system.sophont.age += inc;
                 } catch (e) {
-                    console.log(`Invalid roll value [${value}] for age`);
+                    console.log(`Invalid roll value [${value}] for Age`);
+                }
+            } else if (skill === "Cash") {
+                try {
+                    let cashRoll = await new Roll(value).evaluate();
+                    let inc = parseInt(cashRoll.total);
+                    if (npcData.system.finance) {
+                        npcData.system.finance.cash += inc;
+                    } else {
+                        npcData.system.finance = {
+                            cash: inc,
+                            medicalDebt: 0
+                        };
+                    }
+                } catch (e) {
+                    console.log(`Invalid roll value [${value}] for Cash`);
+                }
+            } else if (skill === "MedicalDebt") {
+                try {
+                    let debtRoll = await new Roll(value).evaluate();
+                    let inc = parseInt(debtRoll.total);
+                    if (npcData.system.finance) {
+                        npcData.system.finance.medicalDebt += inc;
+                    } else {
+                        npcData.system.finance = {
+                            cash: 0,
+                            medicalDebt: inc
+                        }
+                    }
+                } catch (e) {
+                    console.log(`Invalid roll value [${value}] for MedicalDebt`);
                 }
             } else if (set && skill.toUpperCase() === skill && skill.length === 3) {
                 // Can set characteristics to specific values.

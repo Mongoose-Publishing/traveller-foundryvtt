@@ -1,5 +1,27 @@
 # Release Notes
 
+# 0.23.0 (Beta)
+
+* Dodge value on actor sheet now shows whether it is active or not. Dice icon is only
+  displayed if the dodge score is higher than zero.
+* Fixed ability to remove effects from the Creature sheet.
+* Parrying with a weapon adds a reaction penalty in the same way as dodging does.
+* Reaction effect wasn't being applied correctly from the 'Add status effect' menu.
+* Fixed some bugs in active effects exposed by work on vehicles. The effect mode
+  (add, subtract, override) wasn't being recorded properly.
+* Added some backend support for applying critical hits to vehicles using the active
+  effects mechanism.
+* Improvements to how weapons and crew actions are displayed on the new vehicle sheets.
+* Target facing is now automatically calculated and shown on the attack dialog, and passed
+  to the damage dialog for selecting armour facing. This is reliant on the facing of the
+  tokens on the map.
+* Update to Spanish translations.
+* Added option to /upp chat command to be able to specify the dice formula.
+* Inline UPP actors now have a button to output their name and profession to the chat.
+* Added more options for random NPC generation.
+* Added first draft of Dark Conspiracy character sheet (waiting for list of sciences
+  and professions).
+
 # 0.22.2 (Beta)
 
 * Fix bug in vehicle sheet v2 where feature drop down was not rendering properly in Firefox.

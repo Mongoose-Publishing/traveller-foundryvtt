@@ -17,6 +17,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         actions: {
             rollCheck: MgT2eActorV2.onRollCheck,
             test: MgT2eVehicleSheet.#test,
+            removeEffect: MgT2eVehicleSheet.#removeEffect,
             addFeature: {
                 handler: MgT2eVehicleSheet.#addFeature,
                 buttons: [0, 1, 2],
@@ -81,6 +82,16 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             ],
             labelPrefix: "MGT2.VehicleTab",
             initial: "description"
+        }
+    }
+
+    static async #removeEffect(event, target) {
+        console.log("removeEffect:");
+        const effectId = event.target.dataset["id"];
+
+        if (effectId) {
+            console.log(effectId);
+            this.document.deleteEmbeddedDocuments("ActiveEffect", [ effectId ]);
         }
     }
 

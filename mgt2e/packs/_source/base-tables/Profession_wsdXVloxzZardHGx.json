@@ -21,13 +21,13 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1789854265802,
+        "modifiedTime": 1790111805959,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "<p>Retail Worker !Worker_Skills [SOC-1] # Worker travelling to see friends and family. Nervous because this is their first time off-world.</p>",
+      "description": "<p>Retail Worker !Worker_Skills [SOC-1] [Age+1D6] [Cash+1D6*50] # Worker travelling to see friends and family. Nervous because this is their first time off-world.</p>",
       "name": "Retail Worker",
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.Yc7WMUr9CX8TtYvr"
@@ -48,13 +48,13 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1789854370897,
+        "modifiedTime": 1790111793634,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "<p>Office Worker !Worker_Skills [admin] # Tourist travelling for the experience. Curious and careful with money.</p>",
+      "description": "<p>Office Worker !Worker_Skills [admin] [Age+1D6] [Cash+2D6*50] # Tourist travelling for the experience. Curious and careful with money.</p>",
       "name": "Office Worker",
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.357wySeKSDS7kFtv"
@@ -75,13 +75,13 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1789854475616,
+        "modifiedTime": 1790111833496,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "<p>Salesman !Worker_Skills [admin+0] [persuade] [carouse] # Salesman for local company travelling to do some off-world networking. Talkative and a bore.</p>",
+      "description": "<p>Salesman !Worker_Skills [admin+0] [persuade] [carouse] [Age+1D6] [Cash+2D6*100] # Salesman for local company travelling to do some off-world networking. Talkative and a bore.</p>",
       "name": "Salesman",
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.DIh0A3ajS8RTn1s9"
@@ -102,13 +102,13 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1789854664316,
+        "modifiedTime": 1790111896484,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "<p>Officer Worker !Worker_Skills # Low ranking manager heading to a business conference.</p>",
+      "description": "<p>Office Manager !Worker_Skills [leadership] [profession] [Age+2D6] [Cash+2D6*100] # Low ranking manager heading to a business conference.</p>",
       "name": "Conference",
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.PSfVKx1J7cqrkex1"
@@ -129,13 +129,13 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1789854653806,
+        "modifiedTime": 1790111934953,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "<p>Office Worker !Worker_Skills # Salesman heading to make a deal with another company. Confident this will get them a promotion.</p>",
+      "description": "<p>Salesman !Worker_Skills [persuade] [broker] [Age+2D6] [Cash+2D6*150] # Salesman heading to make a deal with another company. Confident this will get them a promotion.</p>",
       "name": "Salesman",
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.ZE9E87pCUEUbkXdK"
@@ -150,7 +150,7 @@
       "_id": "97G8x0CtmuBOtj93",
       "name": "Manager",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>Manager !Worker_Skills [profession+2] [admin] [leadership] # Middle manager on a trip to a conference.</p>",
+      "description": "<p>Manager !Worker_Skills [profession+2] [art+2] [admin] [leadership] [Age+2D6] [Cash+3D6*1000] # Middle manager on a trip to a conference. Spends most of the time working.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -161,7 +161,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789830149654,
-        "modifiedTime": 1789854688660,
+        "modifiedTime": 1790113553948,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -175,9 +175,9 @@
         31
       ],
       "_id": "gTmvEYu20bxDa9qO",
-      "name": "",
+      "name": "Bio-Hazard Engineer",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>Bio Worker !Worker_Skills [profession.biologicals] [profession.biologicals] [science.biology] [medic+0] # Bio-hazard specialist looking for work, after losing their job from their previous employer.</p>",
+      "description": "<p>Bio Hazard Worker !Worker_Skills [profession.biologicals] [profession.biologicals] [science.biology] [medic+0] # Bio-hazard specialist looking for work, after losing their job from their previous employer. Their job is to clean up industrial accidents. They are calm and unfazed by most things, though very careful.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -188,7 +188,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789830301737,
-        "modifiedTime": 1789854504426,
+        "modifiedTime": 1789923867411,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -355,6 +355,141 @@
       },
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.HdvAPf8s9wqXDXum"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        32,
+        32
+      ],
+      "_id": "tber89ghpqLBhfxm",
+      "name": "Starport Engineer",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Starport Engineer !Worker_Skills [Age+2D6] [profession.robotics+2] [science.robotics] [profession.construction] [computers.remoteOps] [engineer] # Robotics engineer with experience working at a starport. Loves everything about robotics. Will talk about it to anyone who will listen.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.2-DEV",
+        "createdTime": 1789893594908,
+        "modifiedTime": 1789926919064,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.tber89ghpqLBhfxm"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        33,
+        33
+      ],
+      "_id": "7YBsJaHdQquazCMv",
+      "name": "Research Assistant",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.2-DEV",
+        "createdTime": 1789893595499,
+        "modifiedTime": 1789893647475,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.7YBsJaHdQquazCMv"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        34,
+        34
+      ],
+      "_id": "rj2dpL9XUhRNghlR",
+      "name": "Graduate",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.2-DEV",
+        "createdTime": 1789893595845,
+        "modifiedTime": 1789893654811,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.rj2dpL9XUhRNghlR"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        35,
+        35
+      ],
+      "_id": "pY0Y8B84gipun9Od",
+      "name": "Well off Student",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.2-DEV",
+        "createdTime": 1789893596103,
+        "modifiedTime": 1789893665354,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.pY0Y8B84gipun9Od"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        36,
+        36
+      ],
+      "_id": "GD4h6nKsfsTTTPDN",
+      "name": "Archaeologist",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.22.2.2-DEV",
+        "createdTime": 1789893596332,
+        "modifiedTime": 1789893690513,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wsdXVloxzZardHGx.GD4h6nKsfsTTTPDN"
     }
   ],
   "replacement": true,
@@ -372,7 +507,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.15.4.1-DEV",
     "createdTime": 1762550842758,
-    "modifiedTime": 1789854531960,
+    "modifiedTime": 1789893633418,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },

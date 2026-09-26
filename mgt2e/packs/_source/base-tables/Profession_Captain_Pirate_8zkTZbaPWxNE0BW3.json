@@ -2,7 +2,7 @@
   "folder": "NSK7MRUS079et3mw",
   "name": "Profession Captain Pirate",
   "_id": "8zkTZbaPWxNE0BW3",
-  "img": "icons/svg/d20-grey.svg",
+  "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
     {
@@ -15,7 +15,7 @@
       "_id": "apeGzPDFu11mOORK",
       "name": "Pirate Captain",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>Captain !Free_Trader_Skills [gunner.turret] # Pirate captain.</p>",
+      "description": "<p>Captain !Free_Trader_Skills [gunner.turret] [Age+3D6+30] [Cash+5000] [Cash+3D6] [MedicalDebt+1000] &lt;Laser_Pistol_TL11&gt; # Pirate captain.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -26,7 +26,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789849647525,
-        "modifiedTime": 1789849677909,
+        "modifiedTime": 1789932566395,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -49,7 +49,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.22.2.1-DEV",
     "createdTime": 1789849645344,
-    "modifiedTime": 1789849695384,
+    "modifiedTime": 1790456627360,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "formula": "1d1",

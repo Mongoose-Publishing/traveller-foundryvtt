@@ -2,7 +2,7 @@
   "folder": "NSK7MRUS079et3mw",
   "name": "Profession Engineer",
   "_id": "LKlVaHRnkz62ssfQ",
-  "img": "icons/svg/d20-grey.svg",
+  "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
     {
@@ -15,7 +15,7 @@
       "_id": "MeO2WJTXA0gI2bW2",
       "name": "Engineer",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>Engineer !Free_Trader_Skills [age+2D6] [engineer] [engineer] # An engineer with a lot of experience keeping a ship running.</p>",
+      "description": "<p>Engineer !Free_Trader_Skills [Age+2D6] [Cash=3D6*100] [engineer] [engineer] # An engineer with a lot of experience keeping a ship running.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -26,7 +26,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789849477954,
-        "modifiedTime": 1789849529158,
+        "modifiedTime": 1789926141472,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -49,7 +49,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.22.2.1-DEV",
     "createdTime": 1789840493610,
-    "modifiedTime": 1789849836264,
+    "modifiedTime": 1790456611852,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "formula": "1d1",

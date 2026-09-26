@@ -2,20 +2,20 @@
   "folder": "36NUGgjy33mFu5Pm",
   "name": "Corporate Skills",
   "_id": "Jrj5PMMSkfZNojvj",
-  "img": "icons/svg/d20-grey.svg",
-  "description": "",
+  "img": "systems/mgt2e/icons/misc/text.svg",
+  "description": "<p>Skills that Corporate NPCs might pick up.</p>",
   "results": [
     {
       "type": "text",
       "weight": 1,
       "range": [
-        2,
-        2
+        3,
+        3
       ],
       "_id": "OBgPvQ54CGIyCIkT",
-      "name": "",
+      "name": "Technical",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [admin+2] [electronics.computers+2] [Cash+2000]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -26,22 +26,23 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853027809,
-        "modifiedTime": 1789853027809,
+        "modifiedTime": 1790110200005,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!Jrj5PMMSkfZNojvj.OBgPvQ54CGIyCIkT"
     },
     {
       "type": "text",
       "weight": 1,
       "range": [
-        3,
-        3
+        2,
+        2
       ],
       "_id": "4zwCJ0rWVw2bNjTf",
-      "name": "",
+      "name": "Wealthy",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [Cash+100000] [Age+1D6] [diplomat] [broker]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -52,9 +53,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853028102,
-        "modifiedTime": 1789853028102,
+        "modifiedTime": 1790110097341,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!Jrj5PMMSkfZNojvj.4zwCJ0rWVw2bNjTf"
     },
     {
@@ -65,9 +67,9 @@
         5
       ],
       "_id": "pXTWHUNANkt1rYNU",
-      "name": "",
+      "name": "Lawyer",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [advocate] [admin] [electronics.computers+0] [cash+1000]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -78,9 +80,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853028653,
-        "modifiedTime": 1789853028653,
+        "modifiedTime": 1790109394025,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!Jrj5PMMSkfZNojvj.pXTWHUNANkt1rYNU"
     },
     {
@@ -91,9 +94,9 @@
         8
       ],
       "_id": "oSOd9pyxWdqBkyaK",
-      "name": "",
+      "name": "Corporate Service Skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>Worker !Worker_Skills</p>",
+      "description": "<p>!Citizen_Skills [advocate|broker|admin] [electronics.computers+0] [cash+2000]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -104,7 +107,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853028828,
-        "modifiedTime": 1789853528205,
+        "modifiedTime": 1790109377047,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -118,9 +121,9 @@
         10
       ],
       "_id": "WTVHOKPJ7CyAfmcw",
-      "name": "",
+      "name": "Broker",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [broker] [diplomat] [electronics.computers+0] [cash+5000]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -131,9 +134,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853029015,
-        "modifiedTime": 1789853029015,
+        "modifiedTime": 1790109363218,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!Jrj5PMMSkfZNojvj.WTVHOKPJ7CyAfmcw"
     },
     {
@@ -144,9 +148,9 @@
         11
       ],
       "_id": "Am0Xuj7aWqtn2dcV",
-      "name": "",
+      "name": "Diplomat",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [SOC+1] [INT+1] [diplomat+2] [leadership] [Cash+10000] [Age+1D6]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -157,9 +161,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853057729,
-        "modifiedTime": 1789853057729,
+        "modifiedTime": 1790109478497,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!Jrj5PMMSkfZNojvj.Am0Xuj7aWqtn2dcV"
     },
     {
@@ -170,9 +175,9 @@
         12
       ],
       "_id": "uWL6qG9cjTMmdq3O",
-      "name": "",
+      "name": "Management",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [SOC+1] [INT|+1] [leadership+2] [diplomat] [admin] [Cash+10000] [Age+2D6]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -183,9 +188,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853058289,
-        "modifiedTime": 1789853058289,
+        "modifiedTime": 1790109486478,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!Jrj5PMMSkfZNojvj.uWL6qG9cjTMmdq3O"
     }
   ],
@@ -205,9 +211,9 @@
     "systemId": "mgt2e",
     "systemVersion": "0.22.2.1-DEV",
     "createdTime": 1789853000165,
-    "modifiedTime": 1789853125039,
+    "modifiedTime": 1790110115523,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
-  "formula": "",
+  "formula": "2D6",
   "_key": "!tables!Jrj5PMMSkfZNojvj"
 }

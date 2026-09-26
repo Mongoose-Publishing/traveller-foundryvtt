@@ -3,19 +3,19 @@
   "name": "Citizen Skills",
   "_id": "wWXQ00Kdmyvvnhwp",
   "img": "systems/mgt2e/icons/misc/2D6.svg",
-  "description": "",
+  "description": "<p>Set of skills picked up by Citizens (Colonists, Corporate or Workers). This is a subset of skills from the Citizen career table.</p>",
   "results": [
     {
       "type": "text",
       "weight": 1,
       "range": [
-        1,
-        1
+        2,
+        2
       ],
       "_id": "CLxhNIAUSNSEPY6r",
-      "name": "High Service Skills",
+      "name": "Jack of all Trades",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[drive|flyer|streetwise|melee|steward+2] [drive|flyer|streetwise|melee|steward] [art|advocate|diplomat] [electronics.computers]</p>",
+      "description": "<p>[EDU+1] [INT+1] [jackOfAllTrades+1]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -26,7 +26,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825785851,
-        "modifiedTime": 1789853471412,
+        "modifiedTime": 1790108859951,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -36,13 +36,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        2,
-        2
+        3,
+        3
       ],
       "_id": "td043aJ7lFk6osVX",
-      "name": "",
+      "name": "Advanced Education",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[drive|flyer|streetwise|melee|steward+2] [drive|flyer|streetwise|melee|steward]</p>",
+      "description": "<p>[art|language] [advocate|diplomat] [electronics.computers]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -53,7 +53,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825786076,
-        "modifiedTime": 1789853407081,
+        "modifiedTime": 1790108753961,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -63,13 +63,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        3,
-        3
+        4,
+        5
       ],
       "_id": "ROFv8cQTzNQ7elVr",
-      "name": "Service Skills EDU",
+      "name": "Personal Skills EDU",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[drive|streetwise|melee|steward+0] [EDU+1]</p>",
+      "description": "<p>[carouse|gambler|drive] [EDU+1]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -80,7 +80,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825786459,
-        "modifiedTime": 1789853324603,
+        "modifiedTime": 1790108685032,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -90,13 +90,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        4,
-        4
+        6,
+        8
       ],
       "_id": "XS5XVL40z0ntiBBj",
-      "name": "Service Skills",
+      "name": "Personal Skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[drive|streetwise|melee|steward+0] [drive|streetwise|melee|steward+0]</p>",
+      "description": "<p>[carouse|gambler|drive]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -107,7 +107,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825786814,
-        "modifiedTime": 1789853303898,
+        "modifiedTime": 1790108623324,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -117,13 +117,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        5,
-        5
+        9,
+        10
       ],
       "_id": "iF4jDay1ztCdzgWB",
-      "name": "Service Skills INT",
+      "name": "Personal Skills INT",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[drive|streetwise|melee|steward+0] [INT+1] [gambler|carouse]</p>",
+      "description": "<p>[carouse|gambler|drive] [INT+1]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -134,7 +134,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825787180,
-        "modifiedTime": 1789853501351,
+        "modifiedTime": 1790108661122,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -144,13 +144,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        6,
-        6
+        11,
+        11
       ],
       "_id": "BCvV0Yer8nCKS7Kl",
-      "name": "",
+      "name": "Service Skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[drive|flyer|streetwise|melee|steward+1] [EDU+1] [INT+1]</p>",
+      "description": "<p>[drive|flyer] [streetwise|steward] [melee]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -161,7 +161,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825787962,
-        "modifiedTime": 1789853378286,
+        "modifiedTime": 1790108810488,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -171,8 +171,8 @@
       "type": "text",
       "weight": 1,
       "range": [
-        7,
-        7
+        12,
+        12
       ],
       "_id": "APcabklukomp7Pjg",
       "name": "All Service Skills",
@@ -211,9 +211,9 @@
     "systemId": "mgt2e",
     "systemVersion": "0.22.2.1-DEV",
     "createdTime": 1789825773319,
-    "modifiedTime": 1789855324265,
+    "modifiedTime": 1790109015314,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
-  "formula": "1d7",
+  "formula": "2D6",
   "_key": "!tables!wWXQ00Kdmyvvnhwp"
 }

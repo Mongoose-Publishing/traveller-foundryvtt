@@ -236,7 +236,10 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
         this.applySpeedCritical(actor, critical, level);
     }
 
-    async setCriticalEffect(actor, value, name, changes) {
+    /**
+     * Create an active effect to represent the critical.
+     */
+    async setCriticalEffect(actor, location, severity, value, name, changes) {
         await actor.createEmbeddedDocuments("ActiveEffect", [{
             name: name,
             changes: changes,
@@ -244,7 +247,10 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
             flags: {
                 "mgt2e": {
                     effect: "critical",
+                    critical: name,
+                    location: location,
                     severity: value,
+                    value: value,
                     css: "statusBad"
                 }
             }
@@ -255,7 +261,7 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
         const changes = [
             { key: "system.vehicle.speedBand", mode: 2, priority: 0, value: -1}
         ];
-        this.setCriticalEffect(actor, value, "Speed Critical", changes)
+        this.setCriticalEffect(actor, "speed", value, value, "Speed Band", changes)
     }
 
     async applySpeedCritical(actor, level) {

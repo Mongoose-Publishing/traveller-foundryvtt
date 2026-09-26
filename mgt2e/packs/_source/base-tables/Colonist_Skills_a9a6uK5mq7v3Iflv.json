@@ -2,20 +2,20 @@
   "folder": "36NUGgjy33mFu5Pm",
   "name": "Colonist Skills",
   "_id": "a9a6uK5mq7v3Iflv",
-  "img": "icons/svg/d20-grey.svg",
+  "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
     {
       "type": "text",
       "weight": 1,
       "range": [
-        2,
-        2
+        3,
+        3
       ],
       "_id": "MhODgjaJg3FY4vi6",
-      "name": "",
+      "name": "Good Skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [athletics] [athletics] [survival] [navigation] [drive]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -26,22 +26,23 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853079011,
-        "modifiedTime": 1789853079011,
+        "modifiedTime": 1790108331544,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!a9a6uK5mq7v3Iflv.MhODgjaJg3FY4vi6"
     },
     {
       "type": "text",
       "weight": 1,
       "range": [
-        3,
-        3
+        2,
+        2
       ],
       "_id": "JZxUDr5OfuJsEJU1",
-      "name": "",
+      "name": "Hunter",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [survival] [animals.riding] [athletics] [recon+2] [navigation] [guncombat]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -52,9 +53,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853079733,
-        "modifiedTime": 1789853079733,
+        "modifiedTime": 1790108264414,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!a9a6uK5mq7v3Iflv.JZxUDr5OfuJsEJU1"
     },
     {
@@ -65,9 +67,9 @@
         5
       ],
       "_id": "vs1gdxgiU9vdnvof",
-      "name": "",
+      "name": "Outdoors",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [survival+2] [recon+1] [athletics]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -78,9 +80,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853080076,
-        "modifiedTime": 1789853080076,
+        "modifiedTime": 1790106731337,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!a9a6uK5mq7v3Iflv.vs1gdxgiU9vdnvof"
     },
     {
@@ -91,9 +94,9 @@
         8
       ],
       "_id": "CC2hheT0WpOmM46O",
-      "name": "",
+      "name": "Service Skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [survival+0] [athletics+0] [drive|animals|recon]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -104,9 +107,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853080373,
-        "modifiedTime": 1789853080373,
+        "modifiedTime": 1790106645376,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!a9a6uK5mq7v3Iflv.CC2hheT0WpOmM46O"
     },
     {
@@ -117,9 +121,9 @@
         10
       ],
       "_id": "k9GgKdA9MCj1ctoE",
-      "name": "",
+      "name": "All Service Skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [animals+0] [athletics+0] [drive+0] [survival+0] [recon+0]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -130,9 +134,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853080573,
-        "modifiedTime": 1789853080573,
+        "modifiedTime": 1790106784974,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!a9a6uK5mq7v3Iflv.k9GgKdA9MCj1ctoE"
     },
     {
@@ -143,9 +148,9 @@
         11
       ],
       "_id": "DtNyvncWFjKF8Hjr",
-      "name": "",
+      "name": "Driver",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [drive] [drive] [drive] [drive.wheeled] [athletics.dexterity]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -156,9 +161,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853080781,
-        "modifiedTime": 1789853080781,
+        "modifiedTime": 1790108393284,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!a9a6uK5mq7v3Iflv.DtNyvncWFjKF8Hjr"
     },
     {
@@ -169,9 +175,9 @@
         12
       ],
       "_id": "hgUgWFYPO0glpoQf",
-      "name": "",
+      "name": "Jack of all Trades",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>!Citizen_Skills [jackOfAllTrades+1] [animals] [athletics] [drive] [survival] [recon]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -182,9 +188,10 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853081015,
-        "modifiedTime": 1789853081015,
+        "modifiedTime": 1790108511649,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
+      "documentUuid": null,
       "_key": "!tables.results!a9a6uK5mq7v3Iflv.hgUgWFYPO0glpoQf"
     }
   ],
@@ -204,9 +211,9 @@
     "systemId": "mgt2e",
     "systemVersion": "0.22.2.1-DEV",
     "createdTime": 1789853007384,
-    "modifiedTime": 1789853124079,
+    "modifiedTime": 1790109026003,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
-  "formula": "",
+  "formula": "2D6",
   "_key": "!tables!a9a6uK5mq7v3Iflv"
 }

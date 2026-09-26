@@ -6,7 +6,7 @@
   "sorting": "a",
   "_id": "80OLZYk2SeCAEBct",
   "description": "",
-  "sort": 0,
+  "sort": 100000,
   "flags": {},
   "_stats": {
     "compendiumSource": null,
@@ -16,7 +16,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.22.2.1-DEV",
     "createdTime": 1789825270062,
-    "modifiedTime": 1789832151270,
+    "modifiedTime": 1789925598448,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_key": "!folders!80OLZYk2SeCAEBct"

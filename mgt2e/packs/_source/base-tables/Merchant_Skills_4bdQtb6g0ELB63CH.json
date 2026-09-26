@@ -13,7 +13,7 @@
         2
       ],
       "_id": "5mkEbQm9btMStiIT",
-      "name": "Advanced Educatation",
+      "name": "Advanced Education",
       "img": "icons/svg/d20-black.svg",
       "description": "<p>[drive+0] [vaccsuit+0] [broker+0] [steward+0] [electronics+0] [persuade+0] [drive|vaccsuit|broker|steward|electronics|persuade+2] [pilot] [advocate] [EDU+2]</p>",
       "drawn": false,
@@ -26,7 +26,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789832194585,
-        "modifiedTime": 1789832763460,
+        "modifiedTime": 1789933936555,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,

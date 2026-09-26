@@ -1996,10 +1996,19 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
     let type = "statusWarn";
     let label = game.i18n.localize("MGT2.TravellerSheet.StatusLabel."+status);
 
+    console.log("showStatus: " + status);
+    console.log(effect);
+
     // If this is a proper status effect, then we can use a generic solution
     // and skip everything else.
     if (effect && effect?.flags?.mgt2e) {
+        console.log(effect);
         let statusEffect = CONFIG.statusEffects.find(e => e.id === status);
+        if (effect.flags.mgt2e.critical) {
+            statusEffect = {
+                name: effect.flags.mgt2e?.location + "/" + effect.flags.mgt2e?.severity
+            };
+        }
         if (statusEffect) {
             label = game.i18n.localize(statusEffect.name);
             type = effect.flags.mgt2e.css;
@@ -2009,13 +2018,15 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
                 value = parseInt(effect.flags.mgt2e.value);
                 label += ` (${parseInt(effect.flags.mgt2e.value)})`;
             }
+            console.log(label);
+            console.log(effect);
             if (!effect.flags.mgt2e.locked) {
                 const statusName = "status" + status.charAt(0).toUpperCase() + status.slice(1);
-                label += ` <i class="fas fa-xmark effect-remove ${statusName}"> </i>`;
+                label += ` <i data-action="removeEffect" data-id="${effect._id}" class="fas fa-xmark effect-remove ${statusName}"> </i>`;
                 if (value !== null) {
                     label = `<i class="fas fa-minus effect-minus"> </i> ` +
-                            `<i class="fas fa-plus effect-plus"> </i> ` +
-                            label;
+                        `<i class="fas fa-plus effect-plus"> </i> ` +
+                        label;
                 }
             }
             return `<div class="resource flex-group-center ${type}"><label class="mgt2e-effect" data-status-id="${status}">${label}</label></div>`;
