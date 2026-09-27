@@ -211,7 +211,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>It's possible to use the generator to create specific careers of your own. A macro script like the following:</p><pre><code>let npcData = {\n  type\": \"npc\",\n  \"img\": `systems/mgt2e/icons/actors/pilot.svg`,\n  \"ownership\": {\n    default: 2\n  },\n  \"system\": {\n    \"settings\": {\n      hideUntrained: true,\n      lockCharacteristics: true\n    },\n    \"meta\": {\n      passage: \"Captain\",\n    },\n    \"sophont\": {\n        age: 24,\n        homeworld: \"Bork\"\n    },\n    \"description\": \"\"\n  }\n}\nawait game.mgt2e.generateNpc(npcData, \"Crew Generator\");\nActor.implementation.create(npcData);\n</code></pre><p>This will create a new NPC. Setting the passage to Captain will look for a profession named \"profession Captain\".</p><p></p>"
+        "content": "<p>It's possible to use the generator to create specific careers of your own. A macro script like the following:</p><pre><code>let npcData = {\n  type\": \"npc\",\n  \"img\": `systems/mgt2e/icons/actors/pilot.svg`,\n  \"ownership\": {\n    default: 2\n  },\n  \"system\": {\n    \"settings\": {\n      hideUntrained: true,\n      lockCharacteristics: true\n    },\n    \"meta\": {\n      passage: \"Captain\",\n    },\n    \"sophont\": {\n        age: 24,\n        homeworld: \"Bork\"\n    },\n    \"description\": \"\"\n  }\n}\nawait game.mgt2e.generateNpc(npcData, \"Crew Generator\");\nActor.implementation.create(npcData);\n</code></pre><p>This will create a new NPC. Setting the passage to Captain will look for a profession named \"profession Captain\".</p><p>In the <strong>MgT2e Base Macros</strong> comepndium, there is a <em><strong>Create NPC Crew</strong></em> macro which makes use of this feature. Feel free to use it as an example.</p>"
       },
       "video": {
         "controls": true,
@@ -232,7 +232,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789820463800,
-        "modifiedTime": 1789821449359,
+        "modifiedTime": 1790507141179,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!dzoWvMqYL6UGTXO6.w3jjbvseDMM32ZvQ"

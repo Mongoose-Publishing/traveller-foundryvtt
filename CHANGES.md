@@ -21,6 +21,7 @@
 * Added more options for random NPC generation.
 * Added first draft of Dark Conspiracy character sheet (waiting for list of sciences
   and professions).
+* Fixed problems with vaccsuit active effect being applied/removed multiple times.
 
 # 0.22.2 (Beta)
 

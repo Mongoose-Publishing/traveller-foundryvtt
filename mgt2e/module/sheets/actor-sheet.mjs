@@ -751,22 +751,28 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             }
         }
 
-        let isVaccSuit = false;
-        if (skillNeeded >= 0) {
-            let vaccSkill = -3;
-            if (vs && vs.trained) {
-                vaccSkill = parseInt(vs.value);
-                if (vaccSkill < skillNeeded) {
-                    this.actor.system.modifiers.encumbrance.auto -= (skillNeeded - vaccSkill);
-                    isVaccSuit = true;
+        if (!this.actor.vaccLock) {
+            this.actor.vaccLock = true;
+            try {
+                let isVaccSuit = false;
+                if (skillNeeded >= 0) {
+                    let vaccSkill = -3;
+                    if (vs && vs.trained) {
+                        vaccSkill = parseInt(vs.value);
+                        if (vaccSkill < skillNeeded) {
+                            this.actor.system.modifiers.encumbrance.auto -= (skillNeeded - vaccSkill);
+                            isVaccSuit = true;
+                        }
+                    } else {
+                        this.actor.system.modifiers.encumbrance.auto += vaccSkill;
+                        isVaccSuit = true;
+                    }
                 }
-            } else {
-                this.actor.system.modifiers.encumbrance.auto += vaccSkill;
-                isVaccSuit = true;
+                await this.actor.setVaccSuitEffect(isVaccSuit);
+            } finally {
+                delete this.actor.vaccLock;
             }
         }
-        this.actor.setVaccSuitEffect(isVaccSuit);
-
         // Assign and return
         context.gear = gear;
         context.weapons = weapons;

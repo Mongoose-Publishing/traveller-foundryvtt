@@ -1765,6 +1765,7 @@ export class MgT2Actor extends Actor {
         if (!changes) {
             changes = [];
         }
+        console.log("setEffect: " + status + " " + value);
 
         if (!statusEffect) {
             ui.notifications.error(
@@ -1798,10 +1799,10 @@ export class MgT2Actor extends Actor {
                     }
                     if (effect.changes && effect.changes.length > 0) {
                         effect.changes[0].value = current;
-                        effect.update({"changes": effect.changes});
+                        await effect.update({"changes": effect.changes});
                     }
                 } if (current === 0) {
-                    effect.delete();
+                    await effect.delete();
                 }
             }
             return false;
@@ -1827,7 +1828,7 @@ export class MgT2Actor extends Actor {
             }]);
         } else if (effect) {
             try {
-                effect.delete();
+                await effect.delete();
                 return true;
             } catch (e) {
                 // Already deleted.
@@ -1948,8 +1949,8 @@ export class MgT2Actor extends Actor {
         await this.setEffect("encumbered", value,  false, true, "Warn");
     }
 
-    setVaccSuitEffect(value) {
-        this.setEffect("vaccSuit", value,  false, true, "Warn");
+    async setVaccSuitEffect(value) {
+        await this.setEffect("vaccSuit", value,  false, true, "Warn");
     }
 
     setAwareEffect(value) {
