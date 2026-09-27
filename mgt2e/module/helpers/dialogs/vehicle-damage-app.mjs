@@ -102,7 +102,8 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
             }
         }
         if (this.structureDamage >= 1) {
-            await this.rollVehicleCritical(this.structureDamage);
+            // Vehicle criticals disabled.
+            // await this.rollVehicleCritical(this.structureDamage);
         }
 
         const context = {
