@@ -63,6 +63,11 @@ export class MgT2Actor extends Actor {
             }
             hits.tmpDamage = Math.min(hits.tmpDamage, hits.damage);
         }
+        switch (this.type) {
+            case "vehicle":
+                this._prepareVehicleBaseData(this);
+                break;
+        }
     }
 
     async _preUpdate(changes, options, user) {
@@ -243,54 +248,81 @@ export class MgT2Actor extends Actor {
       return total;
     }
 
+    // Pre-effects
+    _prepareVehicleBaseData(actorData) {
+        console.log("_prepareVehicleBaseData:");
+        console.log(actorData.system.vehicle.speedBand);
+
+        const s = Math.ceil(Math.max(1, parseInt(actorData.system.hits.value) / 10));
+        actorData.system.structure.value = s;
+
+        let vehicleType = actorData.system.vehicle.type;
+        if (!CONFIG.MGT2.VEHICLES.TYPE[vehicleType]) {
+            vehicleType = actorData.system.vehicle.type = "groundVehicle";
+        }
+        const typeData = CONFIG.MGT2.VEHICLES.TYPE[vehicleType];
+        if (actorData.system.vehicle.tl < typeData.tl) {
+            actorData.system.vehicle.tl = typeData.tl;
+        }
+        const techLevel = parseInt(actorData.system.vehicle.tl);
+
+        // Hits
+        const spaces = parseInt(actorData.system.vehicle.spaces) || 0;
+        const hull = Math.max(1, parseInt(typeData.hull * spaces));
+        if (hull !== parseInt(actorData.system.hits.hull)) {
+            const HITS = actorData.system.hits;
+            HITS.hull = hull;
+            HITS.structure = Math.ceil(HITS.hull / 10);
+            HITS.max = 10;
+            HITS.value = HITS.max - HITS.damage;
+        }
+
+        // Performance
+        let speedBand = 0;
+        let range = 0;
+
+        for (let i=0; i < typeData.performance.length; i++) {
+            if (typeData.performance[i].min <= techLevel) {
+                const speedName = typeData.performance[i].speed;
+                speedBand = CONFIG.MGT2.VEHICLES.SPEED[speedName].band;
+                range = typeData.performance[i].range;
+            }
+        }
+        if (actorData.system.vehicle?.customisation?.speedModifications) {
+            speedBand += parseInt(actorData.system.vehicle?.customisation?.speedModifications)||0;
+        }
+
+        actorData.system.vehicle.speedBand = speedBand;
+        actorData.system.vehicle.fuelRange.max = range;
+
+        actorData.system.vehicle.traits = "";
+        if (typeData.traits && typeData.traits.length > 0) {
+            for (let trait of typeData.traits) {
+                actorData.system.vehicle.traits += ","+trait;
+            }
+        }
+        for (let feature of actorData.system.vehicle.features.split(",")) {
+            if (!feature || !CONFIG.MGT2.VEHICLES.FEATURES[feature]) {
+                continue;
+            }
+            const fData = CONFIG.MGT2.VEHICLES.FEATURES[feature];
+            if (fData.traits && fData.traits.length > 0) {
+                for (let trait of fData.traits) {
+                    actorData.system.vehicle.traits += "," + trait;
+                }
+            }
+        }
+        actorData.system.vehicle.traits = actorData.system.vehicle.traits.replaceAll(/^,/g, "");
+    }
+
     // Prepare derived data for vehicles.
     _prepareVehicleData(actorData) {
-      if (!["vehicle"].includes(actorData.type)) return;
+        if (!["vehicle"].includes(actorData.type)) return;
 
-      const s = Math.ceil(Math.max(1, parseInt(actorData.system.hits.value) / 10));
-      actorData.system.structure.value = s;
-
-      let vehicleType = actorData.system.vehicle.type;
-      if (!CONFIG.MGT2.VEHICLES.TYPE[vehicleType]) {
-          vehicleType = actorData.system.vehicle.type = "groundVehicle";
-      }
-      const typeData = CONFIG.MGT2.VEHICLES.TYPE[vehicleType];
-      if (actorData.system.vehicle.tl < typeData.tl) {
-          actorData.system.vehicle.tl = typeData.tl;
-      }
-      const techLevel = parseInt(actorData.system.vehicle.tl);
-
-      // Performance
-      let speedBand = "idle";
-      let range = 0;
-
-      for (let i=0; i < typeData.performance.length; i++) {
-          if (typeData.performance[i].min <= techLevel) {
-              speedBand = typeData.performance[i].speed;
-              range = typeData.performance[i].range;
-          }
-      }
-      actorData.system.vehicle.speed = speedBand;
-      actorData.system.vehicle.range = range;
-
-      actorData.system.vehicle.traits = "";
-      if (typeData.traits && typeData.traits.length > 0) {
-          for (let trait of typeData.traits) {
-              actorData.system.vehicle.traits += ","+trait;
-          }
-      }
-      for (let feature of actorData.system.vehicle.features.split(",")) {
-          if (!feature || !CONFIG.MGT2.VEHICLES.FEATURES[feature]) {
-              continue;
-          }
-          const fData = CONFIG.MGT2.VEHICLES.FEATURES[feature];
-          if (fData.traits && fData.traits.length > 0) {
-              for (let trait of fData.traits) {
-                  actorData.system.vehicle.traits += "," + trait;
-              }
-          }
-      }
-      actorData.system.vehicle.traits = actorData.system.vehicle.traits.replaceAll(/^,/g, "");
+        console.log("_prepareVehicleData:");
+        // Hull may have been modified by active effects, so re-calculate structure here.
+        const HITS = actorData.system.hits;
+        HITS.structure = Math.ceil(HITS.hull / 10);
 
     }
 
@@ -1733,6 +1765,7 @@ export class MgT2Actor extends Actor {
         if (!changes) {
             changes = [];
         }
+        console.log("setEffect: " + status + " " + value);
 
         if (!statusEffect) {
             ui.notifications.error(
@@ -1766,10 +1799,10 @@ export class MgT2Actor extends Actor {
                     }
                     if (effect.changes && effect.changes.length > 0) {
                         effect.changes[0].value = current;
-                        effect.update({"changes": effect.changes});
+                        await effect.update({"changes": effect.changes});
                     }
                 } if (current === 0) {
-                    effect.delete();
+                    await effect.delete();
                 }
             }
             return false;
@@ -1795,7 +1828,7 @@ export class MgT2Actor extends Actor {
             }]);
         } else if (effect) {
             try {
-                effect.delete();
+                await effect.delete();
                 return true;
             } catch (e) {
                 // Already deleted.
@@ -1808,7 +1841,6 @@ export class MgT2Actor extends Actor {
     addStatusEffect(status, value) {
         if (value === undefined) {
             if (CONFIG.MGT2.STATUS_EFFECTS[status]) {
-                console.log(status);
                 if (CONFIG.MGT2.STATUS_EFFECTS[status].value !== undefined) {
                     value = CONFIG.MGT2.STATUS_EFFECTS[status].value;
                 } else {
@@ -1875,6 +1907,9 @@ export class MgT2Actor extends Actor {
             case "tactics":
                 this.setTacticsEffect(1);
                 break;
+            case "reaction":
+                this.setReactionEffect(-1);
+                break;
         }
     }
 
@@ -1914,8 +1949,8 @@ export class MgT2Actor extends Actor {
         await this.setEffect("encumbered", value,  false, true, "Warn");
     }
 
-    setVaccSuitEffect(value) {
-        this.setEffect("vaccSuit", value,  false, true, "Warn");
+    async setVaccSuitEffect(value) {
+        await this.setEffect("vaccSuit", value,  false, true, "Warn");
     }
 
     setAwareEffect(value) {

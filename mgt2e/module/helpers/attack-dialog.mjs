@@ -316,6 +316,7 @@ export class MgT2AttackDialog extends Application {
             "isParry": true
         }
         rollAttack(this.actor, this.weapon, attackOptions);
+        this.actor.setReactionEffect(-1);
 
         this.close();
     }

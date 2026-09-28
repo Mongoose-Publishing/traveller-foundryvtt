@@ -18,6 +18,7 @@ import { MgT2SoftwareItemSheet } from "./sheets/items/software.mjs";
 import { MgT2eVehicleSheet } from "./sheets/v2/Vehicle.mjs";
 import { MgT2eRobotSheet } from "./sheets/v2/Robot.mjs";
 import { MgT2eOptionSheet } from "./sheets/items/v2/Option.mjs";
+import { MgT2eActorV2 } from "./sheets/v2/MgT2eActorV2.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
@@ -406,7 +407,19 @@ Hooks.once("init", function() {
         console.log($(ev.currentTarget).data("skillData"));
         let data = $(ev.currentTarget).data("skillData");
         Tools.inlineUppRollSkill(name, data);
-    })
+    });
+    body.on("click", ".upp-to-chat", ev => {
+       const data = $(ev.currentTarget).data("uppData");
+       if (data) {
+           let html = data.name;
+           if (data.profession) {
+               html += ` (${data.profession})`;
+           }
+           ChatMessage.create({
+               content: html
+           });
+       }
+    });
 
     CONFIG.statusEffects.push({
         id: "destroyed",
@@ -502,6 +515,11 @@ Hooks.once("init", function() {
         id: "initiative",
         name: "EFFECT.Initiative",
         img: "systems/mgt2e/icons/effects/initiative.svg"
+    });
+    CONFIG.statusEffects.push({
+        id: "critical",
+        name: "EFFECT.Critical",
+        img: "systems/mgt2e/icons/effects/destroyed.svg"
     });
 })
 
@@ -1982,6 +2000,11 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
     // and skip everything else.
     if (effect && effect?.flags?.mgt2e) {
         let statusEffect = CONFIG.statusEffects.find(e => e.id === status);
+        if (effect.flags.mgt2e.critical) {
+            statusEffect = {
+                name: effect.flags.mgt2e?.location + "/" + effect.flags.mgt2e?.severity
+            };
+        }
         if (statusEffect) {
             label = game.i18n.localize(statusEffect.name);
             type = effect.flags.mgt2e.css;
@@ -1993,11 +2016,11 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
             }
             if (!effect.flags.mgt2e.locked) {
                 const statusName = "status" + status.charAt(0).toUpperCase() + status.slice(1);
-                label += ` <i class="fas fa-xmark effect-remove ${statusName}"> </i>`;
+                label += ` <i data-action="removeEffect" data-id="${effect._id}" class="fas fa-xmark effect-remove ${statusName}"> </i>`;
                 if (value !== null) {
                     label = `<i class="fas fa-minus effect-minus"> </i> ` +
-                            `<i class="fas fa-plus effect-plus"> </i> ` +
-                            label;
+                        `<i class="fas fa-plus effect-plus"> </i> ` +
+                        label;
                 }
             }
             return `<div class="resource flex-group-center ${type}"><label class="mgt2e-effect" data-status-id="${status}">${label}</label></div>`;
@@ -2842,7 +2865,7 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
         html += `Cr${system.cost} `;
     }
     html += `<div class="item-controls">
-        <a class="item-control" data-action="editItem"title="${game.i18n.localize('MGT2.EditItem')}">
+        <a class="item-control" data-action="editItem" title="${game.i18n.localize('MGT2.EditItem')}">
             <i data-item-id="${item._id}" class="fas fa-edit"></i>
         </a>
         <a class="item-control" data-action="deleteItem" title="${game.i18n.localize('MGT2.DeleteItem')}">
@@ -2942,6 +2965,9 @@ Handlebars.registerHelper("weaponMountBlock", function(mount) {
         if (system.weapon.traits) {
             html += `<br/><span class="weapon-traits">${printWeaponTraits(system.weapon.traits)}</span>`;
         }
+
+
+        html += `<br/><span class="action" data-action="attack" data-item-id="${weaponItem.id}" data-mount-id="${mountItem.id}">${game.i18n.localize("MGT2.TravellerSheet.Attack")}</span>`;
         html += `<br/>`;
         if (system.weapon.scale === "spacecraft") {
             html += `${game.i18n.localize("MGT2.Spacecraft.Range." + system.weapon.spaceRange)}`;
@@ -2953,6 +2979,22 @@ Handlebars.registerHelper("weaponMountBlock", function(mount) {
             html += `<table><tr><th>${game.i18n.localize("MGT2.Attack.short")} (+1)</th><th>${game.i18n.localize("MGT2.Attack.medium")}</th><th>${game.i18n.localize("MGT2.Attack.long")} (-2)</th><th>${game.i18n.localize("MGT2.Attack.extreme")} (-4)</th></tr>`;
             html += `<tr><td>${shortRange}${unit}</td><td>${system.weapon.range}${unit}</td><td>${longRange}${unit}</td><td>${extremeRange}${unit}</td></tr>`;
             html += "</table>";
+        }
+
+        // Can anyone make an attack? Need to look at crew roles.
+        if (mountItem.parent) {
+            const vehicle = mountItem.parent;
+            const actors = MgT2eActorV2.getCrewForMount(vehicle, mountItem);
+            if (actors && actors.length > 0) {
+                for (const a of actors) {
+                    html += `<div data-action="attack" data-item-id="${weaponItem.id}"
+                                  data-dm="${a.action.dm}"
+                                  data-mount-id="${mountItem.id}" data-actor-id="${a.actor._id}"
+                                  class="weapon-attack-role"><img src="${a.actor.img}"/>${a.action.title}<br/>${a.actor.name}</div>`;
+                }
+            } else {
+                html += `<span>No-one to fire anything</span>`;
+            }
         }
 
     } else {

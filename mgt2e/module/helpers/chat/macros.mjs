@@ -65,6 +65,14 @@ MgT2eMacros.skillGain = function(args) {
             added = true;
         }
 
+        if (specId && !args.sname) {
+            // If a speciality doesn't exist, args.sname is used as the speciality label.
+            // If args.sname isn't defined, work out what it should be from the spec id.
+            // This is used for random NPC generation, where we don't have a way of specifying
+            // a new label.
+            args.sname = specId.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase());
+        }
+
         if (specId && args.sname && !skill.specialities) {
             ui.notifications.info(`Add speciality ${skillName} (${args.sname}) to character ${actor.name}`);
             skill.specialities = {};
@@ -272,7 +280,7 @@ MgT2eMacros.chaGain = async function(args) {
 
     if (!level) {
         level = 1;
-    } else if (level.indexOf("D")) {
+    } else if ((""+level).indexOf("D") > -1) {
         // This is a dice roll.
         let roll = await new Roll(level, null).evaluate();
         level = Number(roll.total);

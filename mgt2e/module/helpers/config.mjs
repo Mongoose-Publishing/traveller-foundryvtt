@@ -876,6 +876,97 @@ MGT2.SPACECRAFT_ADVANTAGES = {
    }
 };
 
+MGT2.VEHICLE_CRITICALS = {
+    "speed": [
+        { "speedBand": "1" },
+        { "speedBand": "1D3"},
+        { "speedBand": "1D6" },
+        { "speedBand": "1D6", "agility": "1" },
+        { "speedBand": "0", "severity": "1" },
+        { "speedBand": "0", "severity": "1D6" }
+    ],
+    "agility": [
+        { "agility": "1" },
+        { "agility": "1D3" },
+        { "agility": "1D6" },
+        { "steeringDisabled": true },
+        { "speedBand": "0", "severity": "1" },
+        { "speedBand": "0", "severity": "1D6" }
+    ],
+    "fuel": [
+        { "leak": "2D6" },
+        { "leak": "1D6 * 10" },
+        { "leak": "50", "leakPerMinute": "10" },
+        { "leakPerMinute": "50", "leakPerRound": "50" },
+        { "explodes": true, "severity": "1" },
+        { "explodes": true, "severity": "1D6" },
+    ],
+    "power": [
+        { "speedBand": "1", "power": "10" },
+        { "speedBand": "1D3", "power": "1D3 * 10" },
+        { "speedBand": "1D6", "power": "1D6 * 10" },
+        { "disabled": true, "speedBand": "0" },
+        { "destroyed": true },
+        { "destroyed": true, "severity": "1D6" }
+    ],
+    "armour": [
+        { "armour": "1" },
+        { "armour": "1D3" },
+        { "armour": "1D6" },
+        { "armour": "2D6" },
+        { "armour": "0", "severity": "1" },
+        { "armour": "0", "severity": "1D6" }
+    ],
+    "hull": [
+        { "breach": "exposed" },
+        { "breach": "exposed", "severity": 1 },
+        { "breach": "compromised", "severity": "1D3" },
+        { "breach": "compromised", "vehicleCompromised": "hours", "severity": "1D6" },
+        { "breach": "compromised", "vehicleCompromised": "minutes", "severity": "1D6", "structure": "50" },
+        { "breach": "compromised", "shattered": true, "severity": "1D6,1D6", "structure": "50" }
+    ],
+    "weapon": [
+        { "weapon": "-2" },
+        { "disabled": true },
+        { "destroyed": true },
+        { "destroyed": true, "severity": "1" },
+        { "destroyed": true, "severity": "1D3" },
+        { "destroyed": true, "severity": "1D6" }
+    ],
+    "cargo": [
+        { "damaged": "10" },
+        { "destroyed": "10" },
+        { "destroyed": "1D3 * 10" },
+        { "destroyed": "1D6 * 10", "severity": 1 },
+        { "destroyed": "1D6 * 10", "severity": "1D3" },
+        { "destroyed": "100", "severity": "1D6" }
+    ],
+    "occupants": [
+        { "damage": "1,1D6" },
+        { "damage": "1,2D6" },
+        { "damage": "1D3,2D6" },
+        { "damage": "1D6, 2D6" },
+        { "damage": "1D6, 3D6" },
+        { "damage": "1D6*1D6" }
+    ],
+    "equipment": [
+        { "disabled": "1" },
+        { "destroyed": "1" },
+        { "destroyed": "1D3" },
+        { "destroyed": "1D6", "severity": "1" },
+        { "destroyed": "1D6", "severity": "1D3" },
+        { "destroyed": "all", "severity": "1D6" }
+    ],
+    "operator": [
+        { "damage": "1D6" },
+        { "damage": "2D6" },
+        { "damage": "3D6" },
+        { "damage": "4D6", "severity": "1" },
+        { "damage": "5D6", "severity": "1D3" },
+        { "damage": "6D6", "severity": "1D6" }
+    ]
+}
+
 MGT2.SPACECRAFT_CRITICALS = {
     "sensors": [
         { "sensorDM": -2 },

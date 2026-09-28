@@ -20,7 +20,7 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
             "top": game.i18n.localize("MGT2.Vehicle.Face.top"),
             "bottom": game.i18n.localize("MGT2.Vehicle.Face.bottom")
         }
-        this.armourFace = "front";
+        this.armourFace = this.damageOptions.facing || "front";
         this.armourFaceValue = this.targetActor.system.vehicle.armour[this.armourFace];
     }
 
@@ -101,6 +101,11 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
                 damageEffect += " x" + this.structureDamage;
             }
         }
+        if (this.structureDamage >= 1) {
+            // Vehicle criticals disabled.
+            // await this.rollVehicleCritical(this.structureDamage);
+        }
+
         const context = {
             buttons: [
                 { type: "submit", icon: "fa-solid fa-save", label: "Apply Damage" }
@@ -187,5 +192,83 @@ export class MgT2VehicleDamageApp extends HandlebarsApplicationMixin(Application
 
         this.close();
     }
+
+    async rollVehicleCritical(level) {
+        const roll = await new Roll("2D6").evaluate();
+
+        switch (roll.total) {
+            case 2:
+                await this._setVehicleCritical(this.targetActor, "speed", level);
+                break;
+            case 3:
+                await this._setVehicleCritical(this.targetActor, "agility", level);
+                break;
+            case 4:
+                await this._setVehicleCritical(this.targetActor, "fuel", level);
+                break;
+            case 5:
+                await this._setVehicleCritical(this.targetActor, "power", level);
+                break;
+            case 6:
+                await this._setVehicleCritical(this.targetActor, "armour", level);
+                break;
+            case 7:
+                await this._setVehicleCritical(this.targetActor, "hull", level);
+                break;
+            case 8:
+                await this._setVehicleCritical(this.targetActor, "weapon", level);
+                break;
+            case 9:
+                await this._setVehicleCritical(this.targetActor, "cargo", level);
+                break;
+            case 10:
+                await this._setVehicleCritical(this.targetActor, "occupants", level);
+                break;
+            case 11:
+                await this._setVehicleCritical(this.targetActor, "equipment", level);
+                break;
+            case 12:
+                await this._setVehicleCritical(this.targetActor, "operator", level);
+                break;
+        }
+    }
+
+    async _setVehicleCritical(actor, critical, level) {
+        this.applySpeedCritical(actor, critical, level);
+    }
+
+    /**
+     * Create an active effect to represent the critical.
+     */
+    async setCriticalEffect(actor, location, severity, value, name, changes) {
+        await actor.createEmbeddedDocuments("ActiveEffect", [{
+            name: name,
+            changes: changes,
+            statuses: [],
+            flags: {
+                "mgt2e": {
+                    effect: "critical",
+                    critical: name,
+                    location: location,
+                    severity: value,
+                    value: value,
+                    css: "statusBad"
+                }
+            }
+        }]);
+    }
+
+    setSpeedEffect(actor, value) {
+        const changes = [
+            { key: "system.vehicle.speedBand", mode: 2, priority: 0, value: -1}
+        ];
+        this.setCriticalEffect(actor, "speed", value, value, "Speed Band", changes)
+    }
+
+    async applySpeedCritical(actor, level) {
+        const data = CONFIG.MGT2.VEHICLE_CRITICALS["speed"];
+        this.setSpeedEffect(actor, 1);
+    }
+
 }
 

@@ -192,7 +192,6 @@
         "features": "",
         "tl": 7,
         "core": {
-          "agility": 0,
           "autopilotDM": -3,
           "autopilotMax": 7,
           "navigationDM": 0
@@ -219,6 +218,11 @@
         "cost": 10000,
         "skill": "drive.wheel",
         "agility": 0,
+        "speedBand": 1,
+        "fuelRange": {
+          "max": 100,
+          "value": 0
+        },
         "speed": "medium",
         "range": 400,
         "crew": 1,

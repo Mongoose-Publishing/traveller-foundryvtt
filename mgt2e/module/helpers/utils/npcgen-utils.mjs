@@ -45,6 +45,10 @@ async function getFromTable(folder, tableName, variantName) {
     let text = result.results[0].description;
     if (!text) {
         text = result.results[0].name;
+    } else {
+        // Remove HTML. Needed if content is put in the result description.
+        const doc = new DOMParser().parseFromString(text, "text/html");
+        text = doc.body.textContent || "";
     }
     return text;
 }
@@ -82,27 +86,81 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
                 t = t.replaceAll(/ /g, "");
                 result += " " + t;
             }
+        } else if (npcData && t.startsWith("<")) {
+            t = t.replaceAll(/[\<\>]/g, "").replaceAll(/_/g, " ");
+            console.log("Item: " + t);
+            if (!npcData.system.meta.items) {
+                npcData.system.meta.items = [];
+            }
+            npcData.system.meta.items.push(t);
         } else if (npcData && t.startsWith("[")) {
             t = t.replaceAll(/[\[\]]/g, "");
             let skill = t;
             let value = 0;
-            if (t.indexOf("+") > -1) {
-                skill = t.split("+")[0];
-                value = t.split("+")[1];
+            let set = false;
+            if (t.indexOf("=") > -1) {
+                skill = t.split("=")[0];
+                value = t.split("=")[1];
+                set = true;
+            } else if (t.indexOf("+") > -1) {
+                // There might be multiple +'s, e.g. age+3D6+10
+                skill = t.replace(/\+.*/, '');
+                value = t.replace(/^[^+]*\+/, '');
             } else if (t.indexOf("-") > -1 ) {
                 skill = t.split("-")[0];
                 value = t.split("-")[1];
                 value = 0 - parseInt(value);
             } else {
-                value = 0;
+                value = undefined;
             }
-            if (skill === "age") {
+            if (skill === "Age") {
+                // For age, increment by a dice amount.
                 try {
                     let ageRoll = await new Roll(value).evaluate();
                     let inc = parseInt(ageRoll.total);
                     npcData.system.sophont.age += inc;
                 } catch (e) {
-                    console.log(`Invalid roll value [${value}] for age`);
+                    console.log(`Invalid roll value [${value}] for Age`);
+                }
+            } else if (skill === "Cash") {
+                try {
+                    let cashRoll = await new Roll(value).evaluate();
+                    let inc = parseInt(cashRoll.total);
+                    if (npcData.system.finance) {
+                        npcData.system.finance.cash += inc;
+                    } else {
+                        npcData.system.finance = {
+                            cash: inc,
+                            medicalDebt: 0
+                        };
+                    }
+                } catch (e) {
+                    console.log(`Invalid roll value [${value}] for Cash`);
+                }
+            } else if (skill === "MedicalDebt") {
+                try {
+                    let debtRoll = await new Roll(value).evaluate();
+                    let inc = parseInt(debtRoll.total);
+                    if (npcData.system.finance) {
+                        npcData.system.finance.medicalDebt += inc;
+                    } else {
+                        npcData.system.finance = {
+                            cash: 0,
+                            medicalDebt: inc
+                        }
+                    }
+                } catch (e) {
+                    console.log(`Invalid roll value [${value}] for MedicalDebt`);
+                }
+            } else if (set && skill.toUpperCase() === skill && skill.length === 3) {
+                // Can set characteristics to specific values.
+                try {
+                    let chaRoll = await new Roll(value).evaluate();
+                    if (npcData.system.characteristics[skill]) {
+                        npcData.system.characteristics[skill].value = parseInt(chaRoll.total);
+                    }
+                } catch (e) {
+                    console.log(`Invalid roll value [${value}] for ${skill}`);
                 }
             } else {
                 let args = {
@@ -115,7 +173,7 @@ async function getCompoundFromTable(npcData, folder, tableName, variant) {
                 } else {
                     args.skill = skill;
                 }
-                args.level = parseInt(value);
+                if (value !== undefined) args.level = parseInt(value) || 0;
                 MgT2eMacros.skillGain(args);
             }
         } else if (t === "#") {
@@ -199,12 +257,20 @@ export async function generateNpc(npcData, folderName) {
     npcData.system.sophont.gender = gender;
     npcData.name = await getCompoundFromTable(npcData, folder, "Name " + species, gender);
 
+    let baseTable = "Profession"
     let profession = "";
-    let passage = npcData.system.meta?.passage;
-    if (passage && await getTable(folder, `Profession ${species}`, passage)) {
-        profession = await getCompoundFromTable(npcData, folder, `Profession ${species}`, passage);
+    let passage = npcData.system.meta?.passage || "";
+    if (npcData.system.meta?.career) {
+        baseTable = "Profession " + npcData.system.meta?.career;
+        if (npcData.system.meta?.background) {
+            passage = npcData.system.meta.background;
+        }
+    }
+    console.log("Passage: " + passage);
+    if (passage && await getTable(folder, `${baseTable} ${species}`, passage)) {
+        profession = await getCompoundFromTable(npcData, folder, `${baseTable} ${species}`, passage);
     } else {
-        profession = await getCompoundFromTable(npcData, folder, "Profession", passage);
+        profession = await getCompoundFromTable(npcData, folder, `${baseTable}`, passage);
     }
     npcData.system.sophont.profession = profession?profession:choose([ "Hitchhiker", "Tourist", "Slacker" ] );
     return true;

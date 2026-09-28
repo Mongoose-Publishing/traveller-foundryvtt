@@ -235,5 +235,20 @@ div.weapon-range span {
   font-style: italic;
 }
 
+.weapon-attack-role {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 30%;
+  margin-right: 10px;
+  margin-bottom: 3px;
+}
+
+.weapon-attack-role img {
+  width: 24px;
+  height: 24px;
+  float: left;
+}
+
 
 

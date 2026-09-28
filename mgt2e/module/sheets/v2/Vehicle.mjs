@@ -17,6 +17,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         actions: {
             rollCheck: MgT2eActorV2.onRollCheck,
             test: MgT2eVehicleSheet.#test,
+            removeEffect: MgT2eVehicleSheet.#removeEffect,
             addFeature: {
                 handler: MgT2eVehicleSheet.#addFeature,
                 buttons: [0, 1, 2],
@@ -24,7 +25,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             },
             removeFeature: MgT2eVehicleSheet.#removeFeature,
             editItem: MgT2eVehicleSheet.#editItem,
-            deleteItem: MgT2eVehicleSheet.#deleteItem
+            deleteItem: MgT2eVehicleSheet.#deleteItem,
+            editImage: MgT2eVehicleSheet.#onEditImage
         },
         form: {
             handler: MgT2eVehicleSheet.#onFormSubmit,
@@ -80,6 +82,16 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
             ],
             labelPrefix: "MGT2.VehicleTab",
             initial: "description"
+        }
+    }
+
+    static async #removeEffect(event, target) {
+        console.log("removeEffect:");
+        const effectId = event.target.dataset["id"];
+
+        if (effectId) {
+            console.log(effectId);
+            this.document.deleteEmbeddedDocuments("ActiveEffect", [ effectId ]);
         }
     }
 
@@ -157,16 +169,7 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         }
 
         const spaces = parseInt(this.document.system.vehicle.spaces) || 0;
-        const hull = Math.max(1, parseInt(typeConfig.hull * spaces));
-        if (hull !== parseInt(this.document.system.hits.hull)) {
-            const HITS = this.document.system.hits;
-            HITS.hull = hull;
-            HITS.structure = Math.ceil(HITS.hull / 10);
-            HITS.max = 10;
-            HITS.value = HITS.max - HITS.damage;
-            await this.document.update({"system.hits": HITS});
-        }
-        const shipping = parseInt(Math.ceil(typeConfig.shipping * spaces));
+         const shipping = parseInt(Math.ceil(typeConfig.shipping * spaces));
         if (shipping !== parseInt(this.document.system.vehicle.shipping)) {
             await this.document.update({"system.vehicle.shipping": shipping});
         }
@@ -238,7 +241,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         context.MAX_DAMAGE = context.structure * 10;
         context.VEHICLE_DAMAGE = HITS.damage;
 
-        context.VEHICLE_SPEED = game.i18n.localize("MGT2.Vehicle.SpeedBand." + VEHICLE.speed);
+        const speedBand = Object.keys(CONFIG.MGT2.VEHICLES.SPEED).find(s => CONFIG.MGT2.VEHICLES.SPEED[s].band == VEHICLE.speedBand);
+        context.VEHICLE_SPEED = game.i18n.localize("MGT2.Vehicle.SpeedBand." + speedBand);
         context.VEHICLE_SKILL = MGT2.getFqnSkillLabel(VEHICLE.skill);
 
         // List Items
@@ -293,6 +297,16 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         for (let t in CONFIG.MGT2.VEHICLES.TYPE) {
             context.TYPE_SELECT[t] = game.i18n.localize(`MGT2.Vehicle.Type.${t}`);
         }
+
+        context.SELECT_CREW_TYPES = {
+            "": "",
+            "gunner": game.i18n.localize("MGT2.Role.BuiltIn.Name.Gunner"),
+            "mechanic": game.i18n.localize("MGT2.Role.BuiltIn.Name.Mechanic"),
+            "medic": game.i18n.localize("MGT2.Role.BuiltIn.Name.Medic"),
+            "driver": game.i18n.localize("MGT2.Role.BuiltIn.Name.Driver"),
+            "sensors": game.i18n.localize("MGT2.Role.BuiltIn.Name.Sensors"),
+            "steward": game.i18n.localize("MGT2.Role.BuiltIn.Name.Steward")
+        };
 
         context.SELECT_FEATURES = {};
         context.SELECT_FEATURES[""] = "";
@@ -374,25 +388,18 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         const spaces = parseInt(this.document.system.vehicle.spaces);
         if (spaces >= 2000) {
-            this.document.system.vehicle.size = 6;
             context.sizeLabel = "massive";
         } else if (spaces >= 1000) {
-            this.document.system.vehicle.size = 5;
             context.sizeLabel = "huge";
         } else if (spaces >= 200) {
-            this.document.system.vehicle.size = 4;
             context.sizeLabel = "huge";
         } else if (spaces >= 100) {
-            this.document.system.vehicle.size = 3;
             context.sizeLabel = "heavy";
         } else if (spaces >= 20) {
-            this.document.system.vehicle.size = 2;
             context.sizeLabel = "heavy";
         } else if (spaces >= 4) {
-            this.document.system.vehicle.size = 1;
             context.sizeLabel = "light";
         } else {
-            this.document.system.vehicle.size = 0;
             context.sizeLabel = "small";
         }
 
@@ -400,6 +407,9 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         // Combat
         context.VEHICLE_SIZE_DM = this.getVehicleHitDM();
+        if (context.VEHICLE_SIZE_DM !== this.document.system.vehicle.size) {
+            this.document.update({"system.vehicle.size": context.VEHICLE_SIZE_DM});
+        }
 
         context.VEHICLE_DAMAGE = 0;
 
@@ -433,6 +443,15 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
                 // Manually trigger your private static method
                 MgT2eVehicleSheet.#addFeature.call(this, ev, ev.currentTarget);
             });
+        }
+        const crewRoleSelect = this.element.querySelector('select[data-action="addRole"]');
+        if (crewRoleSelect) {
+            console.log("Add event listener for crewRole");
+            crewRoleSelect.addEventListener("change", (ev) => {
+                let role = ev.target.value;
+                console.log("Role is " + role);
+                this._createCrewRole(role);
+            })
         }
     }
 
@@ -499,6 +518,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
     // Apply damage to a vehicle. This uses the damage rules from the Vehicle Update book.
     async applyDamageToVehicle(options) {
+        console.log("applyDamageToVehicle:");
+        console.log(options);
         if (!options) {
             return;
         }
@@ -525,6 +546,18 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
         new MgT2VehicleDamageApp(this.document, options).render(true);
 
 
+    }
+
+    static async #onEditImage(event, target) {
+        const field = target.dataset.field || "img";
+        const current = foundry.utils.getProperty(this.document, field) || "";
+        const fp = new foundry.applications.apps.FilePicker({
+            type: "image",
+            current: current,
+            callback: async (path) => {
+                await this.document.update({ [field]: path});
+            }
+        }).render(true);
     }
 
 }

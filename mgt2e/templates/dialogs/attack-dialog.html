@@ -5,30 +5,51 @@
 
     <div>{{skillText}}</div>
 
-    <div class="grid grid-4col">
+    <div class="grid grid-3col">
         <div class="resource flex-group-center">
             <label class="field-label">{{localize 'MGT2.Damage'}}</label>
             <span>{{weaponItem.system.weapon.damage}}</span>
         </div>
 
-        <div class="resource flex-group-center grid-span-2">
+        <div class="resource flex-group-center grid-span-1">
             <label class="field-label">{{localize 'MGT2.Range'}}</label>
-            <select name="range">
+            <select name="range" data-action="changeRange">
                 {{selectOptions RANGE_SELECT }}
             </select>
         </div>
 
         <div class="resource flex-group-center">
             <label class="field-label">{{localize 'MGT2.DM'}}</label>
-            <span></span>
+            <input type="number" name="DM" value="{{customDM}}"/>
         </div>
     </div>
+
+    <div>Skill DM: {{skillDM}}</div>
 
     {{#if weaponItem.system.weapon.traits}}
         <div>
             {{{showWeaponTraits . weaponItem.system.weapon.traits}}}
         </div>
     {{/if}}
+
+    <hr/>
+    {{#if ATTACKER_TOKEN}}
+        {{#if TARGETS}}
+            <h3>
+                {{localize "MGT2.AttackDialog.SelectTitle"}}
+                <i class="fa fa-refresh" data-action="addTargets" title="{{localize 'MGT2.AttackDialog.TargetRefresh'}}"> </i>
+            </h3>
+            <select name="targets" data-action="changeTarget">
+                {{selectOptions TARGET_SELECT}}
+            </select>
+        {{else}}
+            <p>
+                {{localize 'MGT2.AttackDialog.NoTargets'}}
+                <i class="fa fa-refresh" data-action="addTargets" title="{{localize 'MGT2.AttackDialog.TargetRefresh'}}"> </i>
+            </p>
+        {{/if}}
+    {{/if}}
+    <hr/>
 
     <div class="grid grid-4col">
 

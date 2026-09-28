@@ -16,20 +16,32 @@ export const Tools = {};
 
 Tools.upp = async function(chatData, args) {
     let text = `<div class="tools">`;
+    let dice = "2D6";
 
     let extra = 0;
     while (args.length > 0) {
-        extra = Math.max(0, parseInt(args.shift()));
+        let arg = args.shift();
+        if (arg.toUpperCase().indexOf("D") > -1) {
+            dice = arg;
+        } else {
+            extra = Math.max(0, parseInt(arg) || 0);
+        }
     }
-    const title = `UPP ${(extra>0)?" (with "+extra+" extra rolls)":""}`;
+    let title = `<h4 style="margin-bottom: 0">UPP</h4>`;
+    if (extra > 0) {
+        title += `<p style="font-style: italic; margin-top: 0">With ${extra} extra rolls.</p>`;
+    }
+    if (dice !== "2D6") {
+        title += `<p style="font-style: italic; margin-top: 0">Using ${dice.toUpperCase()}.</p>`;
+    }
 
     let rolls = [];
     for (let i=0; i < 6; i++) {
-        const roll = await new Roll("2D6").evaluate();
+        const roll = await new Roll(dice).evaluate();
         rolls[i] = roll.total;
     }
     while (extra-- > 0) {
-        const roll = await new Roll("2d6").evaluate();
+        const roll = await new Roll(dice).evaluate();
         let value = roll.total;
         let lowest = 0;
         for (let i=0; i < 6; i++) {
@@ -46,7 +58,7 @@ Tools.upp = async function(chatData, args) {
         total += rolls[i];
     }
     text += `<div class="upp-data" data-STR="${rolls[0]}" data-DEX="${rolls[1]}" data-END="${rolls[2]}" data-INT="${rolls[3]}" data-EDU="${rolls[4]}" data-SOC="${rolls[5]}">`;
-    text += `<h3>${title}</h3>`;
+    text += `${title}`;
     for (let i=0; i < 6; i++) {
         text += `<span class="skill-roll">${rolls[i]}</span> `;
     }
@@ -596,16 +608,18 @@ Tools.getSkillLabel = function(skills, skillFqn) {
 };
 
 Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
-    console.log("uppInlineDisplay:");
-    console.log(name);
-    console.log(argsString);
-
     const args = await Tools.blockInline(argsString);
-    console.log(args);
     const a = document.createElement("div");
 
     let html = `<div class="inline-upp">`;
-    html += `<span class="name">${name}`;
+    let jsonData = {
+        name: name,
+        gender: args.gender,
+        profession: args.profession,
+        age: args.age
+    }
+    const json = JSON.stringify(jsonData);
+    html += `<span class="name"><i class="upp-to-chat fas fa-comment" data-upp-data='${json}'></i> ${name}`;
     if (args.species) {
         html += `<span class="extra-data">${args.species}</span>`;
     }

@@ -78,6 +78,7 @@
       "resetOnRoll": false,
       "columns": "3",
       "lockCharacteristics": false,
+      "sortByCategory": false,
       "lockSkills": false,
       "autoAge": true,
       "autoHits": true
@@ -1036,7 +1037,8 @@
       "medicalDebt": "0",
       "mortgage": "0",
       "livingCosts": "0",
-      "otherIncome": "0"
+      "otherIncome": "0",
+      "description": ""
     },
     "player": "System",
     "terms": 0,
@@ -1169,11 +1171,11 @@
     "systemId": "mgt2e",
     "systemVersion": "0.17.3.3-DEV",
     "createdTime": 1769376477760,
-    "modifiedTime": 1769376626904,
+    "modifiedTime": 1789758986147,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },
   "_id": "dyOcNBI7hQZwpH5u",
-  "sort": 0,
+  "sort": 100000,
   "_key": "!actors!dyOcNBI7hQZwpH5u"
 }
