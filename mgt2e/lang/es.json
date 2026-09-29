@@ -1333,6 +1333,7 @@
   "MGT2.Effects.Type.skillDM": "MD a Habilidad",
   "MGT2.Effects.Type.skillExpert": "Programa Experto",
   "MGT2.Effects.Type.miscDM": "Otro",
+  "MGT2.Effects.Type.vehicle": "Vehículo",  
   "MGT2.Effects.EffectLocked": "Bloqueado por Aumento",
   "MGT2.Effects.SoftwareEffects": "Características de Software",
   "MGT2.Effects.Software.Class.personal": "Software Personal",
@@ -1453,6 +1454,11 @@
   "MGT2.Error.NoStatus": "No se ha podido encontrar el estado '{status}'",
   "MGT2.Attack.OutOfRange": "El objetivo seleccionado está fuera de alcance",
   
+  "MGT2.AttackDialog.Title": "Tirada de Ataque de {name}",
+  "MGT2.AttackDialog.SelectTitle": "Seleccionar objetivo",
+  "MGT2.AttackDialog.TargetRefresh": "Actualizar la lista de objetivos",
+  "MGT2.AttackDialog.NoTargets": "Usa la tecla 'T' para elegir un objetivo y, a continuación, actualiza",
+  
   "MGT2.Role.isDepartment": "El rol es un cargo",
   "MGT2.Role.RoleAssignment": "Asignación de Rol",
   "MGT2.Role.RoleActions": "Acciones",
@@ -1472,6 +1478,7 @@
   "MGT2.Role.Special.Repair": "Reparar Sistema",
   "MGT2.Role.BuiltIn.Name.Gunner": "Artillero",
   "MGT2.Role.BuiltIn.Name.Pilot": "Piloto",
+  "MGT2.Role.BuiltIn.Name.Driver": "Conductor",  
   "MGT2.Role.BuiltIn.Name.Engineer": "Ingeniero",
   "MGT2.Role.BuiltIn.Name.Broker": "Bróker",
   "MGT2.Role.BuiltIn.Name.Sensors": "Operador de Sensores",
@@ -1740,6 +1747,7 @@
   "MGT2.Dialog.SelectSkill.Text": "Elige una de las especialidades de {name}:",
   
   "MGT2.Dialog.MissileAttack": "Tirada de ataque de misil",
+  "MGT2.Dialog.VehicleDamage": "Daños en el Vehículo",
   
   "MGT2.ExceptionalFailure": "Fracaso Excepcional",
   "MGT2.AverageFailure": "Fracaso Normal",
@@ -1849,6 +1857,7 @@
   "EFFECT.Tactics": "Táctica",
   "EFFECT.Hiding": "Cobertura",
   "EFFECT.Initiative": "Iniciativa",
+  "EFFECT.Critical": "Crítico",
   "Save": "Guardar",  
   "TRAVELLER.Add": "Añadir",
   "EFFECT.ChangeKey": "Clave de Atributo",
