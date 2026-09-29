@@ -72,6 +72,11 @@
                         <span>Buy Unrefined Fuel<br/>(Cr100)</span>
                     </div>
                 {{else if (ifEquals system.world.extra.fuel "refined")}}
+                    <div class="resource fuelPurchase" data-fuel-cost="100" data-fuel-type="unrefined"
+                         title="{{localize 'MGT2.WorldSheet.Facility.BuyFuelTitle'}}">
+                        <img src="systems/mgt2e/icons/cargo/unrefined_fuel.svg" draggable="false"/>
+                        <span>Buy Unrefined Fuel<br/>(Cr100)</span>
+                    </div>
                     <div class="fuelPurchase" data-fuel-cost="500" data-fuel-type="refined"
                          title="{{localize 'MGT2.WorldSheet.Facility.BuyFuelTitle'}}">
                         <img src="systems/mgt2e/icons/cargo/refined_fuel.svg" draggable="false"/>
