@@ -1812,7 +1812,7 @@ export class MgT2Actor extends Actor {
             await this.createEmbeddedDocuments("ActiveEffect", [{
                 name: name,
                 icon: statusEffect.img,
-                changes: changes,
+                changes: (changes && changes.length > 0)?changes:null,
                 statuses: [ status ],
                 flags: {
                     "core": {
