@@ -1,0 +1,57 @@
+{
+  "folder": "NSK7MRUS079et3mw",
+  "name": "Profession Broker",
+  "_id": "e79nxzFJUyG1Jkye",
+  "img": "systems/mgt2e/icons/misc/text.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "_id": "3ZyfD8VsaM8kCBjM",
+      "name": "Merchant Marine",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>Merchant !Merchant_Marine_Skills [broker] [streetwise] # A merchant marine aboard a ship.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790516797670,
+        "modifiedTime": 1790516832041,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!e79nxzFJUyG1Jkye.3ZyfD8VsaM8kCBjM"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.23.0.2",
+    "createdTime": 1790516795239,
+    "modifiedTime": 1790517377836,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "formula": "1d1",
+  "_key": "!tables!e79nxzFJUyG1Jkye"
+}

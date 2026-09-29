@@ -1,7 +1,7 @@
 {
   "folder": "MBpbms4sLlPbVPxu",
-  "name": "Free Trader Skills",
-  "_id": "MMOjyrBIF863S2Uv",
+  "name": "Merchant Marine Skills",
+  "_id": "FFd8ZXjTLoCdFbul",
   "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
@@ -9,13 +9,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        2,
-        2
+        1,
+        1
       ],
-      "_id": "eSbiKk7N4Hhblw2Y",
+      "_id": "wGEwaKt12edMvE2C",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>!Merchant_Skills [SOC+1] [pilot] [pilot] [astrogation] [vaccsuit] # High ranking</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -24,13 +24,40 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248059,
-        "modifiedTime": 1789834627224,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515649378,
+        "modifiedTime": 1790516725628,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.eSbiKk7N4Hhblw2Y"
+      "_key": "!tables.results!FFd8ZXjTLoCdFbul.wGEwaKt12edMvE2C"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "_id": "j9PqNeesdY32reTG",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>!Merchant_Skills [athletics.strength] [athletics.endurance] [mechanic+2] # Mechanic aboard big ship.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515649975,
+        "modifiedTime": 1790516643489,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!FFd8ZXjTLoCdFbul.j9PqNeesdY32reTG"
     },
     {
       "type": "text",
@@ -39,10 +66,10 @@
         3,
         3
       ],
-      "_id": "tKZt8VPmGGwSwhp3",
+      "_id": "97pmigWdSU8NCYAQ",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft] [astrogation] [DEX+1]</p>",
+      "description": "<p>!Merchant_Skills [astrogation+2] # Astrogator</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -51,25 +78,25 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248248,
-        "modifiedTime": 1789834544339,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515651733,
+        "modifiedTime": 1790516613237,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.tKZt8VPmGGwSwhp3"
+      "_key": "!tables.results!FFd8ZXjTLoCdFbul.97pmigWdSU8NCYAQ"
     },
     {
       "type": "text",
       "weight": 1,
       "range": [
         4,
-        5
+        4
       ],
-      "_id": "OvG4lPFLeJq0SGyr",
-      "name": "",
+      "_id": "aLkIP1sHINKJIyhy",
+      "name": "Merchant Marine",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>!Merchant_Skills [pilot|mechanic|engineer] [electronics|vaccsuit] [athletics+0] # In the merchant marines.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -78,25 +105,52 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248429,
-        "modifiedTime": 1789834378408,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515652424,
+        "modifiedTime": 1790516516478,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.OvG4lPFLeJq0SGyr"
+      "_key": "!tables.results!FFd8ZXjTLoCdFbul.aLkIP1sHINKJIyhy"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "_id": "Uh9jXQLBGs6sgWxr",
+      "name": "",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>!Merchant_Skills [mechanic|engineer] [electronics] [pilot|vaccsuit] [END+1] # Was a marine.</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515654187,
+        "modifiedTime": 1790516526783,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!FFd8ZXjTLoCdFbul.Uh9jXQLBGs6sgWxr"
     },
     {
       "type": "text",
       "weight": 1,
       "range": [
         6,
-        8
+        6
       ],
-      "_id": "F4jxPbH0VF0iG67q",
-      "name": "Free Trader",
+      "_id": "C7E8MgAWLNln9Tsl",
+      "name": "Freighter Captain",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>!Merchant_Skills [pilot.capitalShips] [vaccsuit] [electronics.comms] [astrogation] admin] # Worked aboard a freighter.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -105,25 +159,25 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248624,
-        "modifiedTime": 1789834352354,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515656656,
+        "modifiedTime": 1790516502894,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.F4jxPbH0VF0iG67q"
+      "_key": "!tables.results!FFd8ZXjTLoCdFbul.C7E8MgAWLNln9Tsl"
     },
     {
       "type": "text",
       "weight": 1,
       "range": [
-        9,
-        10
+        7,
+        7
       ],
-      "_id": "9R6jC00IwVPqCcjX",
+      "_id": "yJz88XWdRdGqgXHy",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [vaccsuit|mechanic+1] [pilot.spacecraft] [streetwise|deception+1]</p>",
+      "description": "<p>!Merchant_Skills [engineer+2] [engineer+2] [engineer] [mechanic] [electronics] # Engineer aboard a big ship.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -132,72 +186,18 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834265715,
-        "modifiedTime": 1789834502260,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515657056,
+        "modifiedTime": 1790516582567,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.9R6jC00IwVPqCcjX"
-    },
-    {
-      "type": "text",
-      "weight": 1,
-      "range": [
-        11,
-        11
-      ],
-      "_id": "WCsSNXDhIxJsJimK",
-      "name": "",
-      "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot] [streetwise] [deception] [gunner.turret]</p>",
-      "drawn": false,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.351",
-        "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834267401,
-        "modifiedTime": 1789836001711,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
-      },
-      "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.WCsSNXDhIxJsJimK"
-    },
-    {
-      "type": "text",
-      "weight": 1,
-      "range": [
-        12,
-        12
-      ],
-      "_id": "yXzi8Qz0AH7GLz5K",
-      "name": "",
-      "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [vaccsuit] [electronics] [steward] [pilot.spacecraft] [DEX+1]</p>",
-      "drawn": false,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.351",
-        "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834271502,
-        "modifiedTime": 1789836063291,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
-      },
-      "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.yXzi8Qz0AH7GLz5K"
+      "_key": "!tables.results!FFd8ZXjTLoCdFbul.yJz88XWdRdGqgXHy"
     }
   ],
   "replacement": true,
   "displayRoll": true,
-  "sort": 100000,
+  "sort": 0,
   "ownership": {
     "default": 0,
     "mhUjqDVicnwIUaiq": 3
@@ -209,11 +209,11 @@
     "exportSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.22.2.1-DEV",
-    "createdTime": 1789834245130,
-    "modifiedTime": 1790515596345,
+    "systemVersion": "0.23.0.2",
+    "createdTime": 1790515637089,
+    "modifiedTime": 1790516906554,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "formula": "1d7",
-  "_key": "!tables!MMOjyrBIF863S2Uv"
+  "_key": "!tables!FFd8ZXjTLoCdFbul"
 }

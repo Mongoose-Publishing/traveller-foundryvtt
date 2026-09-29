@@ -1,7 +1,7 @@
 {
   "folder": "MBpbms4sLlPbVPxu",
-  "name": "Free Trader Skills",
-  "_id": "MMOjyrBIF863S2Uv",
+  "name": "Broker Skills",
+  "_id": "8Dur8k1xiDktkzqU",
   "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
@@ -12,10 +12,10 @@
         2,
         2
       ],
-      "_id": "eSbiKk7N4Hhblw2Y",
+      "_id": "wo9Ixbw8WolhAxYZ",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>!Merchant_Skills [steward] [broker] [persuade] [pilot.spacecraft] [electronics]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -24,13 +24,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248059,
-        "modifiedTime": 1789834627224,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515044150,
+        "modifiedTime": 1790515517855,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.eSbiKk7N4Hhblw2Y"
+      "_key": "!tables.results!8Dur8k1xiDktkzqU.wo9Ixbw8WolhAxYZ"
     },
     {
       "type": "text",
@@ -39,10 +39,10 @@
         3,
         3
       ],
-      "_id": "tKZt8VPmGGwSwhp3",
+      "_id": "F19j5BY498c1DcCh",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft] [astrogation] [DEX+1]</p>",
+      "description": "<p>!Merchant_Skills [broker|admin] [streetwise|deception] [astrogation|admin]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -51,13 +51,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248248,
-        "modifiedTime": 1789834544339,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515044578,
+        "modifiedTime": 1790515473616,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.tKZt8VPmGGwSwhp3"
+      "_key": "!tables.results!8Dur8k1xiDktkzqU.F19j5BY498c1DcCh"
     },
     {
       "type": "text",
@@ -66,10 +66,10 @@
         4,
         5
       ],
-      "_id": "OvG4lPFLeJq0SGyr",
+      "_id": "8H3JR9X3ZqgsQP3f",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>!Merchant_Skills [INT+1] [streetwise] [deception] [admin|advocate|steward]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -78,13 +78,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248429,
-        "modifiedTime": 1789834378408,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515045144,
+        "modifiedTime": 1790515574094,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.OvG4lPFLeJq0SGyr"
+      "_key": "!tables.results!8Dur8k1xiDktkzqU.8H3JR9X3ZqgsQP3f"
     },
     {
       "type": "text",
@@ -93,10 +93,10 @@
         6,
         8
       ],
-      "_id": "F4jxPbH0VF0iG67q",
-      "name": "Free Trader",
+      "_id": "uMiT4ghERK2bEzgv",
+      "name": "Broker",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>!Merchant_Skills [admin|advocate|broker|streetwise|deception|persuade]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -105,13 +105,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248624,
-        "modifiedTime": 1789834352354,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515046118,
+        "modifiedTime": 1790515219244,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.F4jxPbH0VF0iG67q"
+      "_key": "!tables.results!8Dur8k1xiDktkzqU.uMiT4ghERK2bEzgv"
     },
     {
       "type": "text",
@@ -120,10 +120,10 @@
         9,
         10
       ],
-      "_id": "9R6jC00IwVPqCcjX",
+      "_id": "UGtv0heD4f5RBD1D",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [vaccsuit|mechanic+1] [pilot.spacecraft] [streetwise|deception+1]</p>",
+      "description": "<p>!Merchant_Skills [admin|advocate+1] [broker] [streetwise|deception|persuade+1]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -132,13 +132,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834265715,
-        "modifiedTime": 1789834502260,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515046441,
+        "modifiedTime": 1790515297440,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.9R6jC00IwVPqCcjX"
+      "_key": "!tables.results!8Dur8k1xiDktkzqU.UGtv0heD4f5RBD1D"
     },
     {
       "type": "text",
@@ -147,10 +147,10 @@
         11,
         11
       ],
-      "_id": "WCsSNXDhIxJsJimK",
+      "_id": "CoGTnYeOiuqSZYDo",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot] [streetwise] [deception] [gunner.turret]</p>",
+      "description": "<p>!Merchant_Skills [broker] [streetwise|deception] [persuade]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -159,13 +159,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834267401,
-        "modifiedTime": 1789836001711,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515046879,
+        "modifiedTime": 1790515345779,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.WCsSNXDhIxJsJimK"
+      "_key": "!tables.results!8Dur8k1xiDktkzqU.CoGTnYeOiuqSZYDo"
     },
     {
       "type": "text",
@@ -174,10 +174,10 @@
         12,
         12
       ],
-      "_id": "yXzi8Qz0AH7GLz5K",
+      "_id": "IsW2BxXnFBC7Mt1b",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [vaccsuit] [electronics] [steward] [pilot.spacecraft] [DEX+1]</p>",
+      "description": "<p>!Merchant_Skills [broker+2] [INT+1] [admin] [advocate] [steward]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -186,18 +186,18 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834271502,
-        "modifiedTime": 1789836063291,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790515051937,
+        "modifiedTime": 1790515385656,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.yXzi8Qz0AH7GLz5K"
+      "_key": "!tables.results!8Dur8k1xiDktkzqU.IsW2BxXnFBC7Mt1b"
     }
   ],
   "replacement": true,
   "displayRoll": true,
-  "sort": 100000,
+  "sort": 0,
   "ownership": {
     "default": 0,
     "mhUjqDVicnwIUaiq": 3
@@ -209,11 +209,11 @@
     "exportSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.22.2.1-DEV",
-    "createdTime": 1789834245130,
-    "modifiedTime": 1790515596345,
+    "systemVersion": "0.23.0.2",
+    "createdTime": 1790515032407,
+    "modifiedTime": 1790515612456,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
-  "formula": "1d7",
-  "_key": "!tables!MMOjyrBIF863S2Uv"
+  "formula": "",
+  "_key": "!tables!8Dur8k1xiDktkzqU"
 }

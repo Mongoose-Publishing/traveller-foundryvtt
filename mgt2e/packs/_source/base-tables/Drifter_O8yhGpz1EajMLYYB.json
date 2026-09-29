@@ -1,0 +1,21 @@
+{
+  "type": "RollTable",
+  "folder": "80OLZYk2SeCAEBct",
+  "name": "Drifter",
+  "color": null,
+  "sorting": "a",
+  "_id": "O8yhGpz1EajMLYYB",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.23.0.2",
+    "lastModifiedBy": null
+  },
+  "_key": "!folders!O8yhGpz1EajMLYYB"
+}

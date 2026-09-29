@@ -3,7 +3,7 @@
   "name": "Citizen Skills",
   "_id": "wWXQ00Kdmyvvnhwp",
   "img": "systems/mgt2e/icons/misc/2D6.svg",
-  "description": "<p>Set of skills picked up by Citizens (Colonists, Corporate or Workers). This is a subset of skills from the Citizen career table.</p>",
+  "description": "<p>Set of skills picked up by Citizens (Colonists, Corporate or Workers). This is a subset of skills from the Citizen career table. Provides some random flavour text backgrounds for the character. They need to be reasonably generic.</p>",
   "results": [
     {
       "type": "text",
@@ -15,7 +15,7 @@
       "_id": "CLxhNIAUSNSEPY6r",
       "name": "Jack of all Trades",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[EDU+1] [INT+1] [jackOfAllTrades+1]</p>",
+      "description": "<p>[EDU+1] [INT+1] [jackOfAllTrades+1] # Did a little bit of everything when young.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -26,7 +26,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825785851,
-        "modifiedTime": 1790108859951,
+        "modifiedTime": 1790517691822,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -42,7 +42,7 @@
       "_id": "td043aJ7lFk6osVX",
       "name": "Advanced Education",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[art|language] [advocate|diplomat] [electronics.computers]</p>",
+      "description": "<p>[art|language+2] [advocate|diplomat] [electronics.computers] [EDU+2] # Went to university to do an arts degree.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -53,7 +53,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825786076,
-        "modifiedTime": 1790108753961,
+        "modifiedTime": 1790525584076,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -117,40 +117,13 @@
       "type": "text",
       "weight": 1,
       "range": [
-        9,
-        10
-      ],
-      "_id": "iF4jDay1ztCdzgWB",
-      "name": "Personal Skills INT",
-      "img": "icons/svg/d20-black.svg",
-      "description": "<p>[carouse|gambler|drive] [INT+1]</p>",
-      "drawn": false,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.351",
-        "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789825787180,
-        "modifiedTime": 1790108661122,
-        "lastModifiedBy": "mhUjqDVicnwIUaiq"
-      },
-      "documentUuid": null,
-      "_key": "!tables.results!wWXQ00Kdmyvvnhwp.iF4jDay1ztCdzgWB"
-    },
-    {
-      "type": "text",
-      "weight": 1,
-      "range": [
         11,
         11
       ],
       "_id": "BCvV0Yer8nCKS7Kl",
       "name": "Service Skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[drive|flyer] [streetwise|steward] [melee]</p>",
+      "description": "<p>[carouse+2] [SOC+1] # Spent their youth going to parties.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -161,7 +134,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825787962,
-        "modifiedTime": 1790108810488,
+        "modifiedTime": 1790525691560,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -175,9 +148,9 @@
         12
       ],
       "_id": "APcabklukomp7Pjg",
-      "name": "All Service Skills",
+      "name": "Gambler",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[drive+0] [flyer+0] [streetwise+0] [melee+0] [steward+0] [profession+0]</p>",
+      "description": "<p>[carouse] [gambler] [gambler|carouse] [deception+0] [INT+1] [Cash+1D6*1D6*250] # Had some fun as a gambler and party animal.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -188,11 +161,38 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825788375,
-        "modifiedTime": 1789828359536,
+        "modifiedTime": 1790525703624,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
       "_key": "!tables.results!wWXQ00Kdmyvvnhwp.APcabklukomp7Pjg"
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        9,
+        10
+      ],
+      "_id": "dTxkuyPri59x08Xs",
+      "name": "Personal Skills INT",
+      "img": "icons/svg/d20-black.svg",
+      "description": "<p>[carouse|gambler|drive] [INT+1]</p>",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790525223131,
+        "modifiedTime": 1790525747195,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "documentUuid": null,
+      "_key": "!tables.results!wWXQ00Kdmyvvnhwp.dTxkuyPri59x08Xs"
     }
   ],
   "replacement": true,
@@ -211,7 +211,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.22.2.1-DEV",
     "createdTime": 1789825773319,
-    "modifiedTime": 1790109015314,
+    "modifiedTime": 1790525529885,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "formula": "2D6",

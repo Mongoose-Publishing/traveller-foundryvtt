@@ -1,8 +1,8 @@
 {
-  "folder": "MBpbms4sLlPbVPxu",
-  "name": "Free Trader Skills",
-  "_id": "MMOjyrBIF863S2Uv",
-  "img": "systems/mgt2e/icons/misc/text.svg",
+  "folder": "80OLZYk2SeCAEBct",
+  "name": "Drifter Skills",
+  "_id": "tP52DVfghIDJLXQX",
+  "img": "systems/mgt2e/icons/misc/2D6.svg",
   "description": "",
   "results": [
     {
@@ -12,10 +12,10 @@
         2,
         2
       ],
-      "_id": "eSbiKk7N4Hhblw2Y",
-      "name": "",
+      "_id": "Foq1A26VnkaJZgBy",
+      "name": "Mix of skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>[recon|streetwise|stealth] [survival|athletics|melee]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -24,13 +24,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248059,
-        "modifiedTime": 1789834627224,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790529605577,
+        "modifiedTime": 1790529834202,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.eSbiKk7N4Hhblw2Y"
+      "_key": "!tables.results!tP52DVfghIDJLXQX.Foq1A26VnkaJZgBy"
     },
     {
       "type": "text",
@@ -39,10 +39,10 @@
         3,
         3
       ],
-      "_id": "tKZt8VPmGGwSwhp3",
-      "name": "",
+      "_id": "xz26rxauVsTQqVhs",
+      "name": "Jack of All Trades",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft] [astrogation] [DEX+1]</p>",
+      "description": "<p>[jackOfAllTrades]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -51,13 +51,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248248,
-        "modifiedTime": 1789834544339,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790529605847,
+        "modifiedTime": 1790529797866,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.tKZt8VPmGGwSwhp3"
+      "_key": "!tables.results!tP52DVfghIDJLXQX.xz26rxauVsTQqVhs"
     },
     {
       "type": "text",
@@ -66,10 +66,10 @@
         4,
         5
       ],
-      "_id": "OvG4lPFLeJq0SGyr",
-      "name": "",
+      "_id": "ePj1t25QHdAoer1r",
+      "name": "Wilderness",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>[survival] [recon]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -78,13 +78,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248429,
-        "modifiedTime": 1789834378408,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790529606090,
+        "modifiedTime": 1790529775291,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.OvG4lPFLeJq0SGyr"
+      "_key": "!tables.results!tP52DVfghIDJLXQX.ePj1t25QHdAoer1r"
     },
     {
       "type": "text",
@@ -93,10 +93,10 @@
         6,
         8
       ],
-      "_id": "F4jxPbH0VF0iG67q",
-      "name": "Free Trader",
+      "_id": "BNxAkdQ7wvoPlRAT",
+      "name": "Personal Development",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>[STR|END|DEX+1]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -105,13 +105,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248624,
-        "modifiedTime": 1789834352354,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790529606347,
+        "modifiedTime": 1790529679142,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.F4jxPbH0VF0iG67q"
+      "_key": "!tables.results!tP52DVfghIDJLXQX.BNxAkdQ7wvoPlRAT"
     },
     {
       "type": "text",
@@ -120,10 +120,10 @@
         9,
         10
       ],
-      "_id": "9R6jC00IwVPqCcjX",
-      "name": "",
+      "_id": "Xn2THE4YqFyflacq",
+      "name": "Underworld",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [vaccsuit|mechanic+1] [pilot.spacecraft] [streetwise|deception+1]</p>",
+      "description": "<p>[streetwise] [stealth]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -132,13 +132,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834265715,
-        "modifiedTime": 1789834502260,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790529606667,
+        "modifiedTime": 1790529745414,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.9R6jC00IwVPqCcjX"
+      "_key": "!tables.results!tP52DVfghIDJLXQX.Xn2THE4YqFyflacq"
     },
     {
       "type": "text",
@@ -147,10 +147,10 @@
         11,
         11
       ],
-      "_id": "WCsSNXDhIxJsJimK",
-      "name": "",
+      "_id": "kprzXBwfQWBwF9Nc",
+      "name": "Polyglot",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot] [streetwise] [deception] [gunner.turret]</p>",
+      "description": "<p>[language] [language] [language]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -159,13 +159,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834267401,
-        "modifiedTime": 1789836001711,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790529606936,
+        "modifiedTime": 1790529864920,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.WCsSNXDhIxJsJimK"
+      "_key": "!tables.results!tP52DVfghIDJLXQX.kprzXBwfQWBwF9Nc"
     },
     {
       "type": "text",
@@ -174,10 +174,10 @@
         12,
         12
       ],
-      "_id": "yXzi8Qz0AH7GLz5K",
-      "name": "",
+      "_id": "sNsAXXy6m9yiC4Ax",
+      "name": "Skilled",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [vaccsuit] [electronics] [steward] [pilot.spacecraft] [DEX+1]</p>",
+      "description": "<p>[jackOfAllTrades] [profession]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -186,18 +186,18 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834271502,
-        "modifiedTime": 1789836063291,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790529607256,
+        "modifiedTime": 1790529891468,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.yXzi8Qz0AH7GLz5K"
+      "_key": "!tables.results!tP52DVfghIDJLXQX.sNsAXXy6m9yiC4Ax"
     }
   ],
   "replacement": true,
   "displayRoll": true,
-  "sort": 100000,
+  "sort": 0,
   "ownership": {
     "default": 0,
     "mhUjqDVicnwIUaiq": 3
@@ -209,11 +209,11 @@
     "exportSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.22.2.1-DEV",
-    "createdTime": 1789834245130,
-    "modifiedTime": 1790515596345,
+    "systemVersion": "0.23.0.2",
+    "createdTime": 1790529593743,
+    "modifiedTime": 1790529650323,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
-  "formula": "1d7",
-  "_key": "!tables!MMOjyrBIF863S2Uv"
+  "formula": "",
+  "_key": "!tables!tP52DVfghIDJLXQX"
 }

@@ -1,7 +1,7 @@
 {
-  "folder": "MBpbms4sLlPbVPxu",
-  "name": "Free Trader Skills",
-  "_id": "MMOjyrBIF863S2Uv",
+  "folder": "O8yhGpz1EajMLYYB",
+  "name": "Scavenger Skills",
+  "_id": "ZFcOkfv4l4XexsWL",
   "img": "systems/mgt2e/icons/misc/text.svg",
   "description": "",
   "results": [
@@ -12,10 +12,10 @@
         2,
         2
       ],
-      "_id": "eSbiKk7N4Hhblw2Y",
+      "_id": "hkq6RCAg2j4Y1S8g",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>!Drifter_Skills [jackOfAllTrades] [DEX+1] [vaccsuit] [guncombat.energy] [melee.unarmed] [profession.belter] [profession.civilEngineering|profession.construction] [guncombat.energy|vaccsuit] [Cash+2D6*50] # Worked as security around starports.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -24,13 +24,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248059,
-        "modifiedTime": 1789834627224,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790545162431,
+        "modifiedTime": 1790546164115,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.eSbiKk7N4Hhblw2Y"
+      "_key": "!tables.results!ZFcOkfv4l4XexsWL.hkq6RCAg2j4Y1S8g"
     },
     {
       "type": "text",
@@ -39,10 +39,10 @@
         3,
         3
       ],
-      "_id": "tKZt8VPmGGwSwhp3",
+      "_id": "O1wBQXhmcTHhmP42",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft] [astrogation] [DEX+1]</p>",
+      "description": "<p>!Drifter_Skills [profession.belter+2] [profession.construction] [mechanic+2] # Working on starport construction projects.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -51,13 +51,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248248,
-        "modifiedTime": 1789834544339,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790545162747,
+        "modifiedTime": 1790545991703,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.tKZt8VPmGGwSwhp3"
+      "_key": "!tables.results!ZFcOkfv4l4XexsWL.O1wBQXhmcTHhmP42"
     },
     {
       "type": "text",
@@ -66,10 +66,10 @@
         4,
         5
       ],
-      "_id": "OvG4lPFLeJq0SGyr",
+      "_id": "GJySRzhrtoQsY8TR",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner] [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>!Drifter_Skills [profession.scavenger] [profession.belter] [astrogation] [mechanic]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -78,13 +78,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248429,
-        "modifiedTime": 1789834378408,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790545163033,
+        "modifiedTime": 1790545924537,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.OvG4lPFLeJq0SGyr"
+      "_key": "!tables.results!ZFcOkfv4l4XexsWL.GJySRzhrtoQsY8TR"
     },
     {
       "type": "text",
@@ -93,10 +93,10 @@
         6,
         8
       ],
-      "_id": "F4jxPbH0VF0iG67q",
-      "name": "Free Trader",
+      "_id": "oEQrLNbxTlS6HRue",
+      "name": "Scavenger Skills",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot.spacecraft|vaccsuit|deception|mechanic|streetwise|gunner]</p>",
+      "description": "<p>!Drifter_Skills [mechanic|vaccsuit+0] [pilot.smallCraft|guncombat+0] [profession.scavenger+1]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -105,13 +105,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834248624,
-        "modifiedTime": 1789834352354,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790545163279,
+        "modifiedTime": 1790545318569,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.F4jxPbH0VF0iG67q"
+      "_key": "!tables.results!ZFcOkfv4l4XexsWL.oEQrLNbxTlS6HRue"
     },
     {
       "type": "text",
@@ -120,10 +120,10 @@
         9,
         10
       ],
-      "_id": "9R6jC00IwVPqCcjX",
+      "_id": "9TMytPXNnOjHLJ4I",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [vaccsuit|mechanic+1] [pilot.spacecraft] [streetwise|deception+1]</p>",
+      "description": "<p>!Drifter_Skills [mechanic] [pilot.smallCraft|vaccsuit] [profession.scavenger+2]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -132,13 +132,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834265715,
-        "modifiedTime": 1789834502260,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790545163510,
+        "modifiedTime": 1790545303311,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.9R6jC00IwVPqCcjX"
+      "_key": "!tables.results!ZFcOkfv4l4XexsWL.9TMytPXNnOjHLJ4I"
     },
     {
       "type": "text",
@@ -147,10 +147,10 @@
         11,
         11
       ],
-      "_id": "WCsSNXDhIxJsJimK",
-      "name": "",
+      "_id": "ea8bASD3PxKRq5ev",
+      "name": "Belters",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [pilot] [streetwise] [deception] [gunner.turret]</p>",
+      "description": "<p>!Drifter_Skills [profession.belter+2] [profession.scavenger] [Age+1D6] [mechanic] [vaccsuit+2] [pilot.smallCraft] # Grew up amongst belters, learning to fix spacecraft and work in a star dock.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -159,13 +159,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834267401,
-        "modifiedTime": 1789836001711,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790545163737,
+        "modifiedTime": 1790545416403,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.WCsSNXDhIxJsJimK"
+      "_key": "!tables.results!ZFcOkfv4l4XexsWL.ea8bASD3PxKRq5ev"
     },
     {
       "type": "text",
@@ -174,10 +174,10 @@
         12,
         12
       ],
-      "_id": "yXzi8Qz0AH7GLz5K",
+      "_id": "l2pKRCccHwFXWI0H",
       "name": "",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Merchant_Skills [vaccsuit] [electronics] [steward] [pilot.spacecraft] [DEX+1]</p>",
+      "description": "<p>!Drifter_Skills [guncombat] [profession.scavenger] [profession.smuggler] [vaccsuit] [pilot.smallCraft+2] [mechanic] [DEX+1] # Fell in with smugglers and pirates.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -186,18 +186,18 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mgt2e",
-        "systemVersion": "0.22.2.1-DEV",
-        "createdTime": 1789834271502,
-        "modifiedTime": 1789836063291,
+        "systemVersion": "0.23.0.2",
+        "createdTime": 1790545163988,
+        "modifiedTime": 1790545523734,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
-      "_key": "!tables.results!MMOjyrBIF863S2Uv.yXzi8Qz0AH7GLz5K"
+      "_key": "!tables.results!ZFcOkfv4l4XexsWL.l2pKRCccHwFXWI0H"
     }
   ],
   "replacement": true,
   "displayRoll": true,
-  "sort": 100000,
+  "sort": 0,
   "ownership": {
     "default": 0,
     "mhUjqDVicnwIUaiq": 3
@@ -209,11 +209,11 @@
     "exportSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.22.2.1-DEV",
-    "createdTime": 1789834245130,
-    "modifiedTime": 1790515596345,
+    "systemVersion": "0.23.0.2",
+    "createdTime": 1790545151484,
+    "modifiedTime": 1790545195539,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
-  "formula": "1d7",
-  "_key": "!tables!MMOjyrBIF863S2Uv"
+  "formula": "",
+  "_key": "!tables!ZFcOkfv4l4XexsWL"
 }

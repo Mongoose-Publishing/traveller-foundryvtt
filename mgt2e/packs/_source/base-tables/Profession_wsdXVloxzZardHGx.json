@@ -21,13 +21,13 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1790111805959,
+        "modifiedTime": 1790529323472,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "<p>Retail Worker !Worker_Skills [SOC-1] [Age+1D6] [Cash+1D6*50] # Worker travelling to see friends and family. Nervous because this is their first time off-world.</p>",
+      "description": "<p>Retail Worker !Worker_Skills [profession+0] [SOC=2D3] [Age+1D6] [Cash+1D6*50] # Worker travelling to see friends and family. Nervous because this is their first time off-world.</p>",
       "name": "Retail Worker",
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.Yc7WMUr9CX8TtYvr"
@@ -48,13 +48,13 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1790111793634,
+        "modifiedTime": 1790527486080,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "<p>Office Worker !Worker_Skills [admin] [Age+1D6] [Cash+2D6*50] # Tourist travelling for the experience. Curious and careful with money.</p>",
+      "description": "<p>Office Worker !Worker_Skills [admin] [profession.officeWorker] [Age+1D6] [Cash+2D6*50] # Tourist travelling for the experience. Curious and careful with money.</p>",
       "name": "Office Worker",
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.357wySeKSDS7kFtv"
@@ -102,13 +102,13 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1790111896484,
+        "modifiedTime": 1790527499330,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "<p>Office Manager !Worker_Skills [leadership] [profession] [Age+2D6] [Cash+2D6*100] # Low ranking manager heading to a business conference.</p>",
+      "description": "<p>Office Manager !Worker_Skills [leadership] [profession.officeWorker] [Age+2D6] [Cash+2D6*100] # Low ranking manager heading to a business conference.</p>",
       "name": "Conference",
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.PSfVKx1J7cqrkex1"
@@ -129,13 +129,13 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1790111934953,
+        "modifiedTime": 1790527544098,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "<p>Salesman !Worker_Skills [persuade] [broker] [Age+2D6] [Cash+2D6*150] # Salesman heading to make a deal with another company. Confident this will get them a promotion.</p>",
+      "description": "<p>Salesman !Worker_Skills [persuade] [broker] [profession.informationTechnology+2] [Age+2D6] [Cash+2D6*150] # Software salesman heading to make a deal with another company. Confident this will get them a promotion.</p>",
       "name": "Salesman",
       "documentUuid": null,
       "_key": "!tables.results!wsdXVloxzZardHGx.ZE9E87pCUEUbkXdK"
@@ -258,7 +258,7 @@
       "_id": "UMhlP3gSw8VgGB8v",
       "name": "Retail Manager",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>Retail Manager !Worker_Skills [leadership+0] [admin] [electronics.computers+1] [INT+1] # Manager of retail chain, going to meeting at head office to talk about company performance.</p>",
+      "description": "<p>Retail Manager !Worker_Skills [leadership+0] [admin] [electronics.computers+1] [INT+1] [profession.retail+2] # Manager of retail chain, going to meeting at head office to talk about company performance.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -269,7 +269,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853975876,
-        "modifiedTime": 1789855076044,
+        "modifiedTime": 1790527457522,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -285,7 +285,7 @@
       "_id": "8ek1mWLtHXeYNLsM",
       "name": "IT Worker",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>IT Worker !Worker_Skills [admin] [electronics.computers+2] # Low level IT guy heading to fix customer problems.</p>",
+      "description": "<p>IT Worker !Worker_Skills [admin] [electronics.computers+2] [profession.informationTechnology+2] # Low level IT guy heading to fix customer problems.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -296,7 +296,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853976280,
-        "modifiedTime": 1789855133538,
+        "modifiedTime": 1790527561919,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -393,7 +393,7 @@
       "_id": "7YBsJaHdQquazCMv",
       "name": "Research Assistant",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>Research Assistant [profession.academic] [EDU+2] [science.biology+2] [science.chemistry] [Age+1D6] # Research assistant working in biology lab.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -404,7 +404,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.2-DEV",
         "createdTime": 1789893595499,
-        "modifiedTime": 1789893647475,
+        "modifiedTime": 1790529072452,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -420,7 +420,7 @@
       "_id": "rj2dpL9XUhRNghlR",
       "name": "Graduate",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>Researcher [EDU+2] [INT+1] [profession.academic+1] [science.biology+1] [science.genetics+2] [Age+1D6] # Graduate in genetic engineering heading to their first job for a medical corporation.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -431,7 +431,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.2-DEV",
         "createdTime": 1789893595845,
-        "modifiedTime": 1789893654811,
+        "modifiedTime": 1790529060265,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -445,9 +445,9 @@
         35
       ],
       "_id": "pY0Y8B84gipun9Od",
-      "name": "Well off Student",
+      "name": "Scientist",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>Scientist [profession.academic+3] [science+3] [science+2] [science+1] [admin] [electronics+0] [Age+3D6+10] [Cash+2D6*250] [EDU=1D3+10] [INT=2D3+5] # Senior scientist working at a university as lecturer and researcher.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -458,7 +458,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.2-DEV",
         "createdTime": 1789893596103,
-        "modifiedTime": 1789893665354,
+        "modifiedTime": 1790529285885,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
@@ -474,7 +474,7 @@
       "_id": "GD4h6nKsfsTTTPDN",
       "name": "Archaeologist",
       "img": "icons/svg/d20-black.svg",
-      "description": "",
+      "description": "<p>Archaeologist [profession.academic+2] [science.archaeology+3] [science.history] [science.sophontology] [science] [investigate] [Age+2D6] # Archaeology returning from a dig.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -485,7 +485,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.2-DEV",
         "createdTime": 1789893596332,
-        "modifiedTime": 1789893690513,
+        "modifiedTime": 1790529430543,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
