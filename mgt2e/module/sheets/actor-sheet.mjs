@@ -1570,12 +1570,10 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 if (traitData.max) max = parseInt(traitData.max);
                 if (Math.abs(modifier) > 1 && Math.abs(value) > 100) {
                     let m = Math.abs(parseInt(Math.log10(value)));
-                    console.log(m);
                     modifier = Math.pow(10, m - 1) * Math.sign(modifier);
                     //modifier = Math.abs(parseInt(value / 100) * 10) * Math.sign(modifier);
                     value += modifier;
                     value = parseInt(value / modifier) * modifier;
-                    console.log(modifier);
                 } else {
                     value += parseInt(modifier);
                 }
@@ -1618,6 +1616,16 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                     effect.setFlag("mgt2e", "value", -1);
                 }
             }
+            let chatData = {
+                user: game.user.id,
+                speaker: {
+                    actor: actor._id,
+                    alias: actor.name,
+                    scene: game.scenes.current.id
+                },
+                content: game.i18n.format("MGT2.Chat.Dodge", { dodge: dodge})
+            }
+            ChatMessage.create(chatData, {});
         }
     }
 
@@ -1758,7 +1766,6 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             let weaponId = action.weapon;
             let weaponItem = shipActor.items.get(weaponId);
             let dm = parseInt(action.dm);
-            console.log(weaponItem);
             new MgT2SpacecraftAttackDialog(shipActor, actorCrew, weaponItem, dm).render(true);
         } else if (action.action === "special") {
             if (action.special === "pilot") {
@@ -1767,7 +1774,6 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 shipActor.setFlag("mgt2e", "initPilotName", actorCrew.name);
             } else if (action.special === "tacticsInit") {
                 let tacticsDM = actorCrew.getSkillValue("tactics.naval", { "addcha": true });
-                console.log(tacticsDM);
                 let roll = await new Roll("2D6 - 8 + " + tacticsDM).evaluate();
 
                 shipActor.setFlag("mgt2e", "initTacticsDM", roll.total);

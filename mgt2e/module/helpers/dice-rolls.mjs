@@ -1041,12 +1041,12 @@ export async function rollSkill(actor, skill, options) {
                 }
             }
         }
-        if (actor && actor.getEffect("reaction")) {
-            const react = Math.abs(parseInt(actor.getEffect("reaction").getFlag("mgt2e", "value")) ||0);
-            if (react !== 0) {
-                dice += ` - ${react}[Dodge]`;
-                skillNotes += ` (-${react}Dodge)`;
-            }
+    }
+    if (actor && actor.getEffect("reaction")) {
+        const react = Math.abs(parseInt(actor.getEffect("reaction").getFlag("mgt2e", "value")) ||0);
+        if (react !== 0) {
+            dice += ` - ${react}[Dodge]`;
+            skillNotes += ` (-${react}Dodge)`;
         }
     }
 
