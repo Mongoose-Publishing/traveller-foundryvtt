@@ -140,11 +140,11 @@
       {{else}}
           <div class="shadow">
             <div class="resources grid grid-3col flex-group-center">
-              <div class="resource">
+              <div class="resource" title="{{localize 'MGT2.Item.BasePriceTitle'}}">
                 <label for="system.cargo.price" class="resource-label">{{localize "MGT2.Item.BasePrice"}}</label>
                 <input type="text" name="system.cargo.price" value="{{system.cargo.price}}" data-dtype="Number"/>
               </div>
-              <div class="resource">
+              <div class="resource" title="{{localize 'MGT2.Item.TonsTitle'}}">
                 <label for="system.cargo.tons" class="resource-label">{{localize "MGT2.Item.Tons"}}</label><br/>
                 <input class="item-tons" type="text" name="system.cargo.tons" value="{{system.cargo.tons}}" data-dtype="String"/>
                 <span class="quantity-roll rollable"><i class="fas fa-dice"></i></span>
