@@ -223,12 +223,11 @@ export async function rollAttack(actor, weapon, attackOptions) {
             }
         }
     }
-    if (actor && actor.flags?.mgt2?.reaction) {
-        let react = Math.abs(parseInt(actor.flags.mgt2e.reaction));
+    if (actor && actor.getEffect("reaction")) {
+        const react = Math.abs(parseInt(actor.getEffect("reaction").getFlag("mgt2e", "value")) ||0);
         if (react !== 0) {
             dice += ` - ${react}[Dodge]`;
         }
-
     }
 
     if (weapon && weapon.system.weapon.attackBonus) {
@@ -1042,11 +1041,11 @@ export async function rollSkill(actor, skill, options) {
                 }
             }
         }
-        let reaction = actor.getFlag("mgt2e", "reaction");
-        if (reaction) {
-            reaction = parseInt(reaction);
-            if (reaction < 0) {
-                dice += ` ${reaction}[Dodge]`;
+        if (actor && actor.getEffect("reaction")) {
+            const react = Math.abs(parseInt(actor.getEffect("reaction").getFlag("mgt2e", "value")) ||0);
+            if (react !== 0) {
+                dice += ` - ${react}[Dodge]`;
+                skillNotes += ` (-${react}Dodge)`;
             }
         }
     }
