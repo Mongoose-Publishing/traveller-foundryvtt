@@ -341,10 +341,10 @@ async function applyCargoCritical(actor, effects, level) {
         for (let cargo of cargoList) {
             const roll = await new Roll(cargoLoss, null).evaluate();
             const percent = roll.total;
-            if (cargo.system.quantity < 1) {
+            if (cargo.system.quantity <= 0) {
                 // Do nothing. Shouldn't happen.
-            } else if (cargo.system.quantity === 1) {
-                // Only a single item.
+            } else if (cargo.system.quantity <= 1) {
+                // Only a single item, or fraction of an item.
                 if (Math.random() * 100 < percent) {
                     await actor.deleteEmbeddedDocuments("Item", [cargo._id]);
                     ui.notifications.info(
@@ -368,7 +368,8 @@ async function applyCargoCritical(actor, effects, level) {
                         await actor.deleteEmbeddedDocuments("Item", [cargo._id]);
                     } else {
                         list.push(`${lost}t ${cargo.name}`);
-                        await cargo.update({"system.quantity": (cargo.system.quantity - lost)});
+                        let left = Math.round((cargo.system.quantity * 10) - lost * 10) / 10;
+                        await cargo.update({"system.quantity": left });
                     }
                     ui.notifications.info(
                         game.i18n.format("MGT2.Spacecraft.CriticalEffects.CargoLost",

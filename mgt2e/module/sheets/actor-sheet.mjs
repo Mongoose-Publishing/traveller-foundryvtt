@@ -558,7 +558,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         context.bandwidthUsed = bandwidthUsed;
         context.dtonsUsed = Math.round(dtonsUsed * 100) / 100;
         context.cargoUsed = Math.round(cargoUsed * 100) / 100;
-        context.cargoRemaining = parseFloat(context.system.spacecraft.cargo) - cargoUsed;
+        context.cargoRemaining = (parseFloat(context.system.spacecraft.cargo) - cargoUsed).toFixed(1);
         context.dtonsRemaining = Math.floor(context.system.spacecraft.dtons * (config?config.volume:1)) - dtonsUsed;
         context.dtonsRemaining = Number(context.dtonsRemaining.toFixed(3));
 

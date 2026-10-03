@@ -543,6 +543,9 @@ export async function sellCargoDialog(shipActor, worldActor, item) {
     if (!item || !item.system?.cargo) {
         return false;
     }
+    if (item.system.quantity < 1) {
+        return false;
+    }
     if (item.system.cargo.freight) {
         console.log("Sell freight cargo");
         if (item.system.cargo.destinationId !== worldActor.uuid) {

@@ -720,7 +720,7 @@ export async function createSpeculativeGoods(worldActor, illegal) {
     let tonnes = spareRoll.total * parseInt(worldActor.system.world.uwp.population / 3);
     if (tonnes > 0) {
         const sparePartsData = {
-            "name": "Spare Parts",
+            "name": game.i18n.localize("MGT2.Item.SpareParts"),
             "img": "systems/mgt2e/icons/cargo/spare_parts.svg",
             "type": "cargo",
             "system": {

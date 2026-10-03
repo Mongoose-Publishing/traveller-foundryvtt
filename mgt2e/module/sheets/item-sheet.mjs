@@ -1066,8 +1066,8 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
 
         html.find(".damageDone").click(ev => this._rollDamage(this.item));
 
-        html.find(".quantity-inc").click(ev => this._incrementQuantity(this.item));
-        html.find(".quantity-dec").click(ev => this._decrementQuantity(this.item));
+        html.find(".quantity-inc").click(ev => this._incrementQuantity(this.item, ev));
+        html.find(".quantity-dec").click(ev => this._decrementQuantity(this.item, ev));
         html.find(".quantity-roll").click(ev => this._rollQuantity(this.item));
 
         // Role Items
@@ -1444,7 +1444,6 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
     }
 
     _rollDamage(item) {
-        console.log("_rollDamage:");
         if (item.system.weapon.scale === "spacecraft") {
             rollSpaceAttack(null, null, item, {
                 "skillDM": 0,
@@ -1456,24 +1455,36 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
         }
     }
 
-    _incrementQuantity(item) {
+    _incrementQuantity(item, ev) {
         if (item.type === "role") {
             item.system.role.positions++;
             item.update({"system.role.positions": item.system.role.positions });
         } else if (item.system.quantity !== undefined) {
-            item.system.quantity++;
+            if (ev.shiftKey) {
+                item.system.quantity += 10;
+            } else if (item.type === "cargo" && (ev.ctrlKey || ev.metaKey)) {
+                item.system.quantity = (Math.round(item.system.quantity * 10) + 1) / 10;
+            } else {
+                item.system.quantity = (Math.round(item.system.quantity * 10) + 10) / 10
+            }
             item.update({"system.quantity": item.system.quantity });
         }
     }
 
-    _decrementQuantity(item) {
+    _decrementQuantity(item, ev) {
         if (item.type === "role") {
             if (item.system.role.positions > 1) {
                 item.system.role.positions--;
                 item.update({"system.role.positions": item.system.role.positions});
             }
-        } else if (item.system.quantity && parseInt(item.system.quantity) > 0) {
-            item.system.quantity--;
+        } else if (item.system.quantity && parseFloat(item.system.quantity) > 0) {
+            if (ev.shiftKey) {
+                item.system.quantity = Math.max(0, item.system.quantity - 10);
+            } else if (item.type === "cargo" && (ev.ctrlKey || ev.metaKey)) {
+                item.system.quantity = (Math.round(item.system.quantity * 10) - 1) / 10;
+            } else {
+                item.system.quantity = (Math.round(item.system.quantity * 10) - 10) / 10
+            }
             item.update({"system.quantity": item.system.quantity });
         }
     }
