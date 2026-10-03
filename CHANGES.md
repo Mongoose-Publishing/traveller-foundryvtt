@@ -1,5 +1,26 @@
 # Release Notes
 
+# 0.23.1 (Beta)
+
+* Allow the NPC generator to create new skills for an actor. Adding a speciality that
+  doesn't exist, such as profession.telephoneSanitiser will create a new skill
+  "Profession (Telephone Sanitiser)".
+* Fixed issue with active effects in v14, which didn't like empty array of changes. Set
+  changes to null instead.
+* Allow both refined and unrefined fuel to be purchased at worlds which sell refined fuel.
+* Updated Spanish translations.
+* Locking characteristics on an actor sheet, now also prevents careers and associates
+  from being deleted by a player clicking a random button.
+* Fix issue where reaction penalty wasn't actually being applied to skills or attacks.
+* When a dodge is made, a message is now sent to the chat.
+* Support for fractional cargo amounts. This is mostly to allow space parts to be used in
+  increments of 0.1. Shift-Click on item quantity will modify by +/- 10, and Ctrl-Click
+  on cargo quantity modify by +/- 0.1
+* Allow the GM to modify the purchase and sale price of trade items on a world.
+* Added some hover text to some cargo fields, to try and explain their use. Some fields are
+  only used during the trade process, and that isn't obvious.
+
+
 # 0.23.0 (Beta)
 
 * Dodge value on actor sheet now shows whether it is active or not. Dice icon is only
