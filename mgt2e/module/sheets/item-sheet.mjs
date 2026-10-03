@@ -52,6 +52,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
         }
 
         context.isEditable = this.isEditable;
+        context.userIsGM = game.user.isGM;
 
         // Add the actor's data to context.data for easier access, as well as flags.
         context.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(
@@ -541,7 +542,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
 
             context.weapons = {};
             context.weapons[""] = "";
-            if (context.item.parent && context.item.parent.type === "spacecraft" || context.item.parent.type === "vehicle") {
+            if (context.item.parent && (context.item.parent.type === "spacecraft" || context.item.parent.type === "vehicle")) {
                 const spacecraft = context.item.parent;
                 for (let i of spacecraft.items) {
                     if (i.type === "hardware" && i.system.hardware.system === "weapon") {

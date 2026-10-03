@@ -57,6 +57,20 @@
             </div>
           </div>
       {{/if}}
+
+      {{#if userIsGM}}
+        <div class="shadow item-side-panel" title="{{localize 'MGT2.Item.TradeInternalsTitle'}}">
+            <h4>{{localize "MGT2.Item.TradeInternals"}}</h4>
+            <div class="resource">
+                <label class="resource-label">{{localize "MGT2.Item.PurchasePrice"}}</label>
+                <input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+            </div>
+            <div class="resource">
+                <label class="resource-label">{{localize "MGT2.Item.SalePrice"}}</label>
+                <input type="text" name="system.cargo.salePrice" value="{{system.cargo.salePrice}}" data-dtype="Number"/>
+            </div>
+        </div>
+      {{/if}}
     </div>
 
     <div class="flex-group-left">
