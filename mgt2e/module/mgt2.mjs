@@ -1005,6 +1005,7 @@ Hooks.on("createCombatant", (combatant, combat, id) => {
 });
 
 Hooks.on("combatTurn", (combat, data, options) => {
+    if (game.user !== game.users.activeGM) return;
     // This is the actor which just finished their turn.
     let actor = combat.combatant.actor;
     // Reset any reaction penalties back to zero.
@@ -1023,6 +1024,7 @@ Hooks.on("combatTurn", (combat, data, options) => {
 });
 
 Hooks.on("combatRound", (combat, data, options) => {
+    if (game.user !== game.users.activeGM) return;
     // This is when the round changes.
     for (let combatant of combat.combatants) {
         const actor = combatant.actor;
@@ -1035,7 +1037,9 @@ Hooks.on("combatRound", (combat, data, options) => {
         }
     }
 
+    // combatTurn hook doesn't seem to fire if actor is last in round.
     let combatant = combat.combatant.actor;
+    combatant.setReactionEffect(0);
 
     // If stunned, reduce rounds left to be stunned
     let stunnedEffect = combatant.effects.find(e => e.statuses?.values()?.next()?.value === "stun");

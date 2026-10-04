@@ -1765,7 +1765,6 @@ export class MgT2Actor extends Actor {
         if (!changes) {
             changes = [];
         }
-        console.log("setEffect: " + status + " " + value);
 
         if (!statusEffect) {
             ui.notifications.error(
@@ -1827,6 +1826,7 @@ export class MgT2Actor extends Actor {
                 }
             }]);
         } else if (effect) {
+            console.log("Deleting effect");
             try {
                 await effect.delete();
                 return true;

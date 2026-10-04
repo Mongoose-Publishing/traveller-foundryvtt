@@ -19,6 +19,7 @@
 * Allow the GM to modify the purchase and sale price of trade items on a world.
 * Added some hover text to some cargo fields, to try and explain their use. Some fields are
   only used during the trade process, and that isn't obvious.
+* Reaction status wasn't being removed if actor was last in initiative
 
 
 # 0.23.0 (Beta)
