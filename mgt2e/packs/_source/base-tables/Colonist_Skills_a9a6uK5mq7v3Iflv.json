@@ -177,7 +177,7 @@
       "_id": "hgUgWFYPO0glpoQf",
       "name": "Jack of all Trades",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>!Citizen_Skills [jackOfAllTrades+1] [animals] [athletics] [drive] [survival] [recon]</p>",
+      "description": "<p>!Citizen_Skills [jackofalltrades+1] [animals] [athletics] [drive] [survival] [recon]</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -188,7 +188,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789853081015,
-        "modifiedTime": 1790108511649,
+        "modifiedTime": 1791066181943,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,

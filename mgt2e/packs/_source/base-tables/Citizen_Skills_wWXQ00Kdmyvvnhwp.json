@@ -15,7 +15,7 @@
       "_id": "CLxhNIAUSNSEPY6r",
       "name": "Jack of all Trades",
       "img": "icons/svg/d20-black.svg",
-      "description": "<p>[EDU+1] [INT+1] [jackOfAllTrades+1] # Did a little bit of everything when young.</p>",
+      "description": "<p>[EDU+1] [INT+1] [jackofalltrades+1] # Did a little bit of everything when young.</p>",
       "drawn": false,
       "flags": {},
       "_stats": {
@@ -26,7 +26,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.22.2.1-DEV",
         "createdTime": 1789825785851,
-        "modifiedTime": 1790517691822,
+        "modifiedTime": 1791066221770,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "documentUuid": null,
