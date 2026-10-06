@@ -2021,7 +2021,7 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
             if (!effect.flags.mgt2e.locked) {
                 const statusName = "status" + status.charAt(0).toUpperCase() + status.slice(1);
                 label += ` <i data-action="removeEffect" data-id="${effect._id}" class="fas fa-xmark effect-remove ${statusName}"> </i>`;
-                if (value !== null) {
+                if (value !== null && !CONFIG.MGT2.STATUS_EFFECTS[status]?.fixed) {
                     label = `<i class="fas fa-minus effect-minus"> </i> ` +
                         `<i class="fas fa-plus effect-plus"> </i> ` +
                         label;

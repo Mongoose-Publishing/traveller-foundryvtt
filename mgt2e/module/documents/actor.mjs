@@ -1890,7 +1890,7 @@ export class MgT2Actor extends Actor {
                 this.setHidingEffect(value);
                 break;
             case "prone":
-                this.setProneEffect(true);
+                this.setProneEffect(value);
                 break;
             case "armour":
                 this.setArmourEffect(1);
@@ -2007,9 +2007,6 @@ export class MgT2Actor extends Actor {
                 { key: "system.modifiers.armour.effect", mode: 2, priority: 0, value: parseInt(value) }
             ]);
     }
-    setInCoverEffect(value) {
-        this.setEffect("inCover", value, false, false, "Good");
-    }
     setHidingEffect(value) {
         this.setEffect("hiding", value, false, false, "Good",
             [
@@ -2017,12 +2014,15 @@ export class MgT2Actor extends Actor {
             ]);
     }
     setProneEffect(value) {
-        this.setEffect("prone", value, false, false, "Good");
+        this.setEffect("prone", value, false, false, "Good",
+            [
+                { key: "system.modifiers.rangedToHit.effect", mode: 2, priority: 0, value: parseInt(value) || 0 }
+            ]);
     }
     setInCoverEffect(value) {
         this.setEffect("inCover", value, false, false, "Good",
             [
-                { key: "system.modifiers.armour.effect", mode: 2, priority: 0, value: parseInt(value) }
+                { key: "system.modifiers.rangedToHit.effect", mode: 2, priority: 0, value: parseInt(value) || 0 }
             ]);
     }
     setTacticsEffect(value) {
