@@ -164,8 +164,21 @@ export class MgT2AttackDialog extends Application {
             let d = Math.sqrt(dx * dx + dy * dy);
             let metres = (d / canvas.grid.size) * canvas.grid.distance;
             metres = parseFloat(metres.toFixed(1));
+            let dm = 0;
+            if (this.melee) {
+                if (token.actor?.system?.modifiers?.meleeToHit) {
+                    dm = parseInt(token.actor.system.modifiers.meleeToHit.dm) || 0;
+                }
+            } else {
+                if (token.actor?.system?.modifiers?.rangedToHit) {
+                    dm = parseInt(token.actor.system.modifiers.rangedToHit.dm) || 0;
+                }
+            }
 
-            this.TARGETS.push({ "name": token.name, "distance": metres});
+            if (dm >= 0) {
+                dm = "+" + dm;
+            }
+            this.TARGETS.push({ "name": token.name, "distance": metres, "dm": dm});
             this.TARGETS.sort((a, b) => {
                 if (a.distance !== b.distance) {
                     return a.distance - b.distance;

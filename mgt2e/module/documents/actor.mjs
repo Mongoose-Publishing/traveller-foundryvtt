@@ -415,6 +415,30 @@ export class MgT2Actor extends Actor {
         }
         this._prepareEncumbrance(actor);
         this._prepareInitiative(actor);
+        this._prepareModifiers(actor);
+    }
+
+    _prepareModifiers(actor) {
+        if (actor.system.modifiers) {
+            if (!actor.system.modifiers.rangedToHit) {
+                actor.system.modifiers.rangedToHit = {};
+            }
+            if (!actor.system.modifiers.meleeToHit) {
+                actor.system.modifiers.meleeToHit = {};
+            }
+            // Ranged to hit modifier
+            const ranged = actor.system.modifiers.rangedToHit;
+            ranged.custom = parseInt(ranged.custom) || 0;
+            ranged.effect = parseInt(ranged.effect) || 0;
+            ranged.auto = parseInt(actor.system.size) || 0;
+            ranged.dm = ranged.custom + ranged.effect + ranged.auto;
+            // Melee to hit modifier
+            const melee = actor.system.modifiers.meleeToHit;
+            melee.custom = parseInt(melee.custom) || 0;
+            melee.effect = parseInt(melee.effect) || 0;
+            melee.auto = parseInt(actor.system.size) || 0;
+            melee.dm = melee.custom + melee.effect + melee.auto;
+        }
     }
 
     _prepareNpcData(actor) {
@@ -434,6 +458,7 @@ export class MgT2Actor extends Actor {
             actorData.hits.max = maxHits;
             actorData.hits.value = maxHits - actorData.hits.damage;
         }
+        this._prepareModifiers(actor);
     }
 
     _prepareCreatureData(actor) {
@@ -460,6 +485,7 @@ export class MgT2Actor extends Actor {
             dodge += dodgeSkill;
         }
         actorData.dodge = dodge;
+        this._prepareModifiers(actor);
     }
 
     _prepareSpacecraftData(actor) {
