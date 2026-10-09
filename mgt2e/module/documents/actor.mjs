@@ -1839,6 +1839,7 @@ export class MgT2Actor extends Actor {
                 img: statusEffect.img,
                 changes: (changes && changes.length > 0)?changes:null,
                 statuses: [ status ],
+                showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.ALWAYS,
                 flags: {
                     "core": {
                         overlay: overlay
