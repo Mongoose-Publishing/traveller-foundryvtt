@@ -1836,7 +1836,7 @@ export class MgT2Actor extends Actor {
         } else if (value) {
             await this.createEmbeddedDocuments("ActiveEffect", [{
                 name: name,
-                icon: statusEffect.img,
+                img: statusEffect.img,
                 changes: (changes && changes.length > 0)?changes:null,
                 statuses: [ status ],
                 flags: {
