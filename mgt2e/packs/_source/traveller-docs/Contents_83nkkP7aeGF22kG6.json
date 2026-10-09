@@ -134,7 +134,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Updates to Spanish translations.</p></li><li><p>Fix for active effects issues in v14</p></li><li><p>Allow NPC generator to create new skills</p></li><li><p>Allow unrefined fuel to be purchased from worlds that also supply refined fuel</p></li><li><p>Locking UPP characteristics also protect careers and associates from accidential deletion.</p></li><li><p>Fix for reaction penalties so they now apply to attacks and skill rolls. Message sent to the chat when a dodge is made.</p></li><li><p>Support for fractional cargo amounts. This is specifically for spare parts which get used in 0.1 increments. Shift and Ctrl key modifiers now change item quantity by  10 or 0.1 respectively (latter for cargo only).</p></li><li><p>GM can now modify purchase and sale price of cargo for sale at a world through the Item sheet.</p></li></ul>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Added German translation.</p></li><li><p>More fixes for active effects issues in v14. Known issue still where effect icons aren't displayed on the token in v14.</p></li><li><p>In Cover and Prone effects now apply value which gives actors a penalty to be hit by ranged attacks.</p></li><li><p>Ranged attack DMs now displayed in attack dialog for targetted tokens, though are not automatically applied.</p></li></ul>"
       },
       "video": {
         "controls": true,
@@ -153,7 +153,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1791102239283,
+        "modifiedTime": 1791544295271,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },

@@ -1,5 +1,15 @@
 # Release Notes
 
+# 0.23.2 (Beta)
+
+* Added German Translations
+* Fixed issues with active effects in v14 (second attempt). Known issue where effect icons
+  don't appear on tokens in v14 if they've been added from the sheet.
+* InCover and Prone effects now apply a ranged to be hit DM to a character. This is
+  shown in a new settings option in the actor sheet.
+* Size and other DMs displayed in the Character attack dialog when tokens are targetted.
+  However, they are not yet automatically applied to the role.
+
 # 0.23.1 (Beta)
 
 * Allow the NPC generator to create new skills for an actor. Adding a speciality that
