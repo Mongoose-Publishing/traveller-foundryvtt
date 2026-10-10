@@ -1,9 +1,29 @@
 <div class="attack-dialog vehicle-attack-dialog">
-    <h1 class="actor-name">
+    <h1 class="attack-title">
         {{actor.name}} ({{weaponItem.name}})
     </h1>
 
-    <div>{{skillText}}</div>
+    <div grid class="grid grid-3col">
+        <div class="flex-group-left grid-span-2">
+            {{#if ATTACKER_TOKEN}}
+                <h4>
+                    Attacker Token: {{ATTACKER_TOKEN.name}}
+                </h4>
+            {{else if ATTACKER_TOKENS}}
+                <h4>
+                    Attacker Token:
+                    <select class="attacker-select" name="attackerSelect">
+                        {{selectOptions ATTACKER_SELECT}}
+                    </select>
+                </h4>
+            {{else}}
+                <h4>Attacker Token: <i>No token selected</i></h4>
+            {{/if}}
+        </div>
+        <div class="flex-group-left" style="font-weight: bold">
+            {{skillText}}
+        </div>
+    </div>
 
     <div class="grid grid-3col">
         <div class="resource flex-group-center">
@@ -35,13 +55,13 @@
     <hr/>
     {{#if ATTACKER_TOKEN}}
         {{#if TARGETS}}
-            <h3>
-                {{localize "MGT2.AttackDialog.SelectTitle"}}
+            <h4>
+                {{localize "MGT2.AttackDialog.SelectTitle"}}:
+                <select class="attacker-select" name="targets" data-action="changeTarget">
+                    {{selectOptions TARGET_SELECT selected=currentTarget.token.document._id}}
+                </select>
                 <i class="fa fa-refresh" data-action="addTargets" title="{{localize 'MGT2.AttackDialog.TargetRefresh'}}"> </i>
-            </h3>
-            <select name="targets" data-action="changeTarget">
-                {{selectOptions TARGET_SELECT}}
-            </select>
+            </h4>
         {{else}}
             <p>
                 {{localize 'MGT2.AttackDialog.NoTargets'}}
@@ -49,6 +69,23 @@
             </p>
         {{/if}}
     {{/if}}
+
+    {{#if currentTarget}}
+        <img src="{{currentTarget.token.document.texture.src}}" width="48px" style="float: left"/>
+        {{#if currentTarget.rangeDM}}
+            <b>Range DM: {{currentTarget.rangeDM}}</b>
+        {{/if}}
+        {{#if currentTarget.sizeDM}}
+            <b>Size DM: {{currentTarget.sizeDM}}</b>
+        {{/if}}
+        {{#if currentTarget.dodgeDM}}
+            <b>Dodge DM: {{currentTarget.dodgeDM}}</b>
+        {{/if}}
+        {{#if currentTarget.rangeHitDM}}
+            <b>To Hit DM: {{currentTarget.rangeHitDM}}</b>
+        {{/if}}
+    {{/if}}
+
     <hr/>
 
     <div class="grid grid-4col">

@@ -1,17 +1,34 @@
 import {MgT2Item} from "../../documents/item.mjs";
-import {outputTradeChat, tradeBuyFreightHandler, tradeBuyGoodsHandler} from "../utils/trade-utils.mjs";
 import {Tools} from "../chat/tools.mjs";
 import {rollAttack, rollSpaceAttack} from "../dice-rolls.mjs";
+import {getAttackerTokens, getTargetData} from "../utils/combat-utils.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 // see: https://foundryvtt.wiki/en/development/api/applicationv2
 export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
+    // this.actor : The character actually doing the firing.
+    // attackOptions:
+    //    vehicle: if attached to a vehicle, the vehicle actor.
     constructor(actor, weaponItem, attackOptions) {
         super();
         this.actor = actor;
         this.weaponItem = weaponItem;
         this.attackOptions = attackOptions;
+
+        if (this.attackOptions?.vehicle) {
+            this.ATTACKER_TOKENS = getAttackerTokens(this.attackOptions.vehicle);
+        } else {
+            this.ATTACKER_TOKENS = getAttackerTokens(this.actor);
+        }
+        if (this.ATTACKER_TOKENS?.length === 1) {
+            // Exactly one possible attacker token.
+            this.ATTACKER_TOKEN = this.ATTACKER_TOKENS[0];
+            this.TARGETS = getTargetData(this.ATTACKER_TOKEN);
+            this.ATTACKER_TOKEN.control({ releaseOthers: true });
+        } else {
+            ui.notifications.warn("No unique attacker token selected");
+        }
     }
 
     static DEFAULT_OPTIONS = {
@@ -48,7 +65,21 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return text;
     }
 
+    _getRangeDM(target) {
+        if (target.distance <= this.range.short) {
+            return +1;
+        } else if (target.distance <= this.range.medium) {
+            return +0;
+        } else if (target.distance <= this.range.long) {
+            return -2;
+        } else if (target.distance <= this.range.extreme) {
+            return -4;
+        }
+        return -99;
+    }
+
     async _prepareContext(options) {
+        console.log("_prepareContext:");
         const characteristic = this.weaponItem.system.weapon.characteristic;
         const skill = this.weaponItem.system.weapon.skill;
         const characteristicDM = this.actor.system.characteristics?.[characteristic]?.dm || 0;
@@ -81,150 +112,52 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.RANGE_SELECT["-4"] = `${game.i18n.localize("MGT2.Attack.extreme")} (${this.range.extreme}${context.rangeUnit}, -4)`;
 
         // Get possible targets
-        await this.calculateTargets();
+        this.TARGETS = getTargetData(this.ATTACKER_TOKEN)
         if (this.ATTACKER_TOKEN) {
             context.ATTACKER_TOKEN = this.ATTACKER_TOKEN;
             context.TARGETS = this.TARGETS;
             context.TARGET_SELECT = {};
-            context.TARGET_SELECT[""] = "-";
             for (let t of this.TARGETS) {
                 let text = `${t.distance}m ${t.name}`;
                 if (t.type) {
                     text += ` [${game.i18n.localize("TYPES.Actor." + t.type)}]`;
                 }
+                if (t.sizeDM) {
+                    text += ` [Size ${t.sizeDM>0?"+":""}${t.sizeDM}]`
+                }
                 if (t.facing) {
                     text += ` - ${game.i18n.localize("MGT2.Vehicle.Face." + t.facing)}`;
                 }
+                t.rangeDM = this._getRangeDM(t);
+                if (t.rangeDM) {
+                    text += ` [${t.rangeDM}]`;
+                }
                 context.TARGET_SELECT[t.token.document._id] = text;
+            }
+            if (!this.currentTarget) {
+                this.currentTarget = this.TARGETS[0];
+            }
+        } else {
+            context.ATTACKER_TOKENS = this.ATTACKER_TOKENS;
+            context.ATTACKER_SELECT = {};
+            for (let t of this.ATTACKER_TOKENS) {
+                console.log(t);
+                context.ATTACKER_SELECT[t.document.uuid] = t.name;
             }
         }
         if (this.attackerTokenName && options?.window) {
             options.window.title = game.i18n.format("MGT2.AttackDialog.Title", { name: this.attackerTokenName });
         }
+        context.currentTarget = this.currentTarget;
+        console.log(this.currentTarget);
 
         return context;
     }
 
-    // Rotation 0 assumes vehicle is pointing upwards (positive Y)
-    _getTargetFacingHit(shooterX, shooterY, targetX, targetY, targetRotation) {
-        const dx = shooterX - targetX;
-        const dy = shooterY - targetY;
-        let angleToShooter = Math.atan2(dx, dy) * (180 / Math.PI);
-        if (angleToShooter < 0) {
-            angleToShooter += 360;
-        }
-        console.log("Angle: " + angleToShooter);
-        console.log("Rotation: " + targetRotation);
-        let relativeAngle = (angleToShooter + targetRotation) % 360;
-        if (relativeAngle < 0) {
-            relativeAngle += 360;
-        }
-        console.log(relativeAngle);
-        if (relativeAngle >= 315 || relativeAngle < 45) {
-            return "rear";
-        } else if (relativeAngle >= 45 && relativeAngle < 135) {
-            return "starboard";
-        } else if (relativeAngle >= 135 && relativeAngle < 225) {
-            return "front";
-        } else {
-            return "port";
-        }
-    }
-
     static async #addTargets() {
         console.log("Recalculate targets");
-        await this.calculateTargets();
+        this.TARGETS = getTargetData(this.ATTACKER_TOKEN)
         this.render();
-    }
-
-    // Calculate what targets are available.
-    // 1 must be selected - this is the person firing
-    // 1+ must be targeted - these are the potential targets.
-    async calculateTargets() {
-        const user = game.users.current;
-        const selected = canvas.tokens.controlled;
-        const targets = user.targets;
-
-        if (selected.length !== 1) {
-            // We must have exactly one token selected. This is the current user.
-            return;
-        }
-
-        if (targets.length < 1) {
-            // We must also have some targets selected.
-            return;
-        }
-        if (!this.ATTACKER_TOKEN) {
-            // We can't change the selected token.
-            this.ATTACKER_TOKEN = selected[0];
-            this.attackerTokenName = selected[0].name;
-        }
-        this.TARGETS = [];
-
-        const X = parseInt(this.ATTACKER_TOKEN.center.x);
-        const Y = parseInt(this.ATTACKER_TOKEN.center.y);
-        // Assume everything is in metres.
-        let unitMultiplier = 1;
-        if (canvas.grid.units === "km") {
-            unitMultiplier = 1000;
-        }
-
-        for (let token of targets) {
-            let x = parseInt(token.center.x);
-            let y = parseInt(token.center.y);
-            const dx = Math.abs(X - x);
-            const dy = Math.abs(Y - y);
-
-            // True euclidean distance.
-            let d = Math.sqrt(dx * dx + dy * dy);
-            let metres = (d / canvas.grid.size) * canvas.grid.distance * unitMultiplier;
-            let rangeDm= 0;
-            if (metres <= this.range.short) {
-                rangeDm = 1;
-            } else if (metres <= this.range.medium) {
-                rangeDm = 0;
-            } else if (metres <= this.range.long) {
-                rangeDm = -2;
-            } else if (metres <= this.range.extreme) {
-                rangeDm = -4;
-            } else {
-                // Target is out of range.
-                continue;
-            }
-            metres = parseFloat(metres.toFixed(1));
-
-            console.log(token);
-            const target = {
-                token: token,
-                name: token.name,
-                rangeDm: rangeDm,
-                distance: metres
-            };
-
-            if (token.actor.type === "vehicle") {
-                // Work out facing?
-                target.type = "vehicle";
-                target.facing = this._getTargetFacingHit(X, Y, x, y, token.document.rotation);
-                const spaces = parseInt(token.document.actor.system.vehicle.spaces) || 0;
-
-            } else if (token.actor.type === "spacecraft") {
-                target.type = "spacecraft";
-                target.sizeDm = 6;
-            } else {
-                if (token.document.actor.system.size) {
-                    target.sizeDm = parseInt(token.document.actor.system.size) || 0;
-                }
-            }
-            this.TARGETS.push(target);
-
-            this.TARGETS.sort((a, b) => {
-                if (a.distance !== b.distance) {
-                    return a.distance - b.distance;
-                } else {
-                    return a.name.localeCompare(b.name);
-                }
-            });
-        }
     }
 
     /*
@@ -253,8 +186,9 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 const id = ev.target.value;
                 const target = this.TARGETS.filter(t => t.token.document._id === id)[0];
                 const rangeSelect = this.element.querySelector('select[data-action="changeRange"]');
-                rangeSelect.value = `${(target.rangeDm>=0)?"+":""}${target.rangeDm}`;
+                rangeSelect.value = `${(target.rangeDM>=0)?"+":""}${target.rangeDM}`;
                 this.currentTarget = target;
+                this.render();
             });
         }
     }
@@ -287,6 +221,10 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.attackOptions.dm = customDM;
         this.attackOptions.rangeDM = rangeDM;
         this.attackOptions.showBreakdown = true;
+        if (this.currentTarget.dodgeDM) {
+            this.attackOptions.dodgeDM = this.currentTarget.dodgeDM;
+        }
+        this.currentTarget.token.actor.setDodgeEffect(0);
 
         if (this.currentTarget?.type === "vehicle") {
             this.attackOptions.facing = this.currentTarget.facing;

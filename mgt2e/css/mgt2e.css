@@ -250,5 +250,28 @@ div.weapon-range span {
   float: left;
 }
 
+.attack-title {
+  background-color: var(--mongoose-orange);
+  color: white;
+  text-transform: capitalize;
+  width: auto;
+}
 
+select.attacker-select {
+  display: inline-block;
+  width: auto;
+  text-transform: initial;
+  font-size: smaller;
+}
 
+.target-select-short {
+  color: #00FF00;
+}
+
+.target-select-medium {
+
+}
+
+.target-select-long {
+  color: #606060;
+}

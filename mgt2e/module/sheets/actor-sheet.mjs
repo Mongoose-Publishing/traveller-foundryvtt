@@ -1616,6 +1616,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                     effect.setFlag("mgt2e", "value", -1);
                 }
             }
+            actor.setDodgeEffect(dodge);
             let chatData = {
                 user: game.user.id,
                 speaker: {

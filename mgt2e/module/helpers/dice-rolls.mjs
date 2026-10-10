@@ -226,7 +226,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
     if (actor && actor.getEffect("reaction")) {
         const react = Math.abs(parseInt(actor.getEffect("reaction").getFlag("mgt2e", "value")) ||0);
         if (react !== 0) {
-            dice += ` - ${react}[Dodge]`;
+            dice += ` - ${react}[Reaction]`;
         }
     }
 

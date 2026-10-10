@@ -1992,6 +1992,10 @@ export class MgT2Actor extends Actor {
         this.setEffect("reaction", value,  false, false, "Warn");
     }
 
+    setDodgeEffect(value) {
+        this.setEffect("dodge", value,  false, false, "Good");
+    }
+
     setFatiguedEffect(value) {
       this.setEffect("fatigued", value, false, false, "Warn",
           [

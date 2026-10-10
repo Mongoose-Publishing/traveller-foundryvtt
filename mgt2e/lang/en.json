@@ -1869,6 +1869,7 @@
   "EFFECT.Hiding": "Hiding",
   "EFFECT.Initiative": "Initiative",
   "EFFECT.Critical": "Critical",
+  "EFFECT.Dodge": "Dodge",
   "Save": "Save",
   "TRAVELLER.Add": "Add",
   "EFFECT.ChangeKey": "Attribute Key",

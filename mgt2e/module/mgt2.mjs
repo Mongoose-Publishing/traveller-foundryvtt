@@ -517,6 +517,11 @@ Hooks.once("init", function() {
         img: "systems/mgt2e/icons/effects/initiative.svg"
     });
     CONFIG.statusEffects.push({
+        id: "dodge",
+        name: "EFFECT.Dodge",
+        img: "systems/mgt2e/icons/effects/dodge.svg"
+    });
+    CONFIG.statusEffects.push({
         id: "critical",
         name: "EFFECT.Critical",
         img: "systems/mgt2e/icons/effects/destroyed.svg"

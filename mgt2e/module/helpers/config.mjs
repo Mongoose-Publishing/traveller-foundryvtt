@@ -28,14 +28,15 @@ MGT2.STATUS_EFFECTS = {
     "melee": { value: 1 },
     "gunCombat": { value: 1 },
     "armour": { value: 1, min: 1 },
-    "inCover": { value: -2, min: -2, max: -2, fixed: true },
+    "inCover": { value: -2, min: -2, max: -2, fixed: true, replace: true },
     "hiding": { value: 2, min: 1, replace: true },
     "prone": { value: -1, min: -1, max: -1, fixed: true },
     "dead": {},
     "unconscious": { overlay: true },
     "stunned": { value: 1, min: 1, mono: true },
     "tactics": { value: 0 },
-    "initiative": { value: 0 }
+    "initiative": { value: 0 },
+    "dodge": { value: 1, min: 1, fixed: true, replace: true }
 }
 
 // Note: STATUS_EFFECTS are registered in CONFIG.statusEffects via the 'init' hook in mgt2.mjs

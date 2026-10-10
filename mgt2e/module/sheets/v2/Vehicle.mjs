@@ -407,8 +407,8 @@ export class MgT2eVehicleSheet extends MgT2eActorV2 {
 
         // Combat
         context.VEHICLE_SIZE_DM = this.getVehicleHitDM();
-        if (context.VEHICLE_SIZE_DM !== this.document.system.vehicle.size) {
-            this.document.update({"system.vehicle.size": context.VEHICLE_SIZE_DM});
+        if (context.VEHICLE_SIZE_DM !== this.document.system.size) {
+            this.document.update({"system.size": context.VEHICLE_SIZE_DM});
         }
 
         context.VEHICLE_DAMAGE = 0;

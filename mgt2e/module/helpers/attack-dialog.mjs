@@ -1,5 +1,6 @@
 import {rollAttack, hasTrait, getTraitValue, skillLabel} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
+import {getAttackerTokens} from "./utils/combat-utils.mjs";
 
 export class MgT2AttackDialog extends Application {
     static get defaultOptions() {
