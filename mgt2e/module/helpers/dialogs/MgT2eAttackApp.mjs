@@ -15,6 +15,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.actor = actor;
         this.weaponItem = weaponItem;
         this.attackOptions = attackOptions;
+        this.shotType = "single";
 
         if (this.attackOptions?.vehicle) {
             this.ATTACKER_TOKENS = getAttackerTokens(this.attackOptions.vehicle);
@@ -26,6 +27,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             this.ATTACKER_TOKEN = this.ATTACKER_TOKENS[0];
             this.TARGETS = getTargetData(this.ATTACKER_TOKEN);
             this.ATTACKER_TOKEN.control({ releaseOthers: true });
+            this.ATTACKER_TOKENS = null;
         } else {
             ui.notifications.warn("No unique attacker token selected");
         }
@@ -66,6 +68,17 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     _getRangeDM(target) {
+        // Out of range.
+        if (target.distance > this.range.extreme) {
+            return -99;
+        }
+        // If not aiming with a scope, any range beyond 100m is extreme.
+        if (target.distance >= 100 && this.shotType !== "aimed") {
+            if (!hasTrait(this.weaponItem.system.weapon.traits, "scope")) {
+                return -4;
+            }
+        }
+
         if (target.distance <= this.range.short) {
             return +1;
         } else if (target.distance <= this.range.medium) {
@@ -90,8 +103,6 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.isOutOfAmmo = false;
         this.currentAmmo = this.weaponItem.useAmmo()?this.weaponItem.system.weapon.ammo:0;
         this.autoFire = getTraitValue(this.weaponItem.system.weapon.traits, "auto");
-        console.log(this.weaponItem);
-        console.log(this.currentAmmo);
 
         const context = {
             actor: this.actor,
@@ -113,6 +124,11 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         context.customDM = parseInt(this.attackOptions.dm) || 0;
 
+        context.ROLLTYPE_SELECT = {}
+        context.ROLLTYPE_SELECT["standard"] = game.i18n.localize("MGT2.TravellerSheet.Normal");
+        context.ROLLTYPE_SELECT["boon"] = game.i18n.localize("MGT2.TravellerSheet.Boon");
+        context.ROLLTYPE_SELECT["bane"] = game.i18n.localize("MGT2.TravellerSheet.Bane");
+
         context.RANGE_SELECT = {};
         if (this.isMelee) {
             context.RANGE_SELECT["+0"] = "Melee";
@@ -123,7 +139,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             context.RANGE_SELECT["-4"] = `${game.i18n.localize("MGT2.Attack.extreme")} (${this.range.extreme}${context.rangeUnit}, -4)`;
         }
 
-
+        context.shotType = this.shotType;
         context.SHOT_SELECT = {};
         context.SHOT_SELECT["single"] = game.i18n.format("MGT2.AttackDialog.ShotType.single");
         if (this.isAutoFire) {
@@ -156,16 +172,19 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (t.rangeDM) {
                     text += ` [${t.rangeDM}]`;
                 }
-                context.TARGET_SELECT[t.token.document._id] = text;
+                if (parseInt(t.rangeDM) > -99) {
+                    context.TARGET_SELECT[t.token.document._id] = text;
+                }
             }
             if (!this.currentTarget) {
                 this.currentTarget = this.TARGETS[0];
             }
-        } else {
+        }
+        if (this.ATTACKER_TOKENS && this.ATTACKER_TOKENS.length > 1) {
             context.ATTACKER_TOKENS = this.ATTACKER_TOKENS;
             context.ATTACKER_SELECT = {};
+            context.ATTACKER_SELECT["-"] = "-";
             for (let t of this.ATTACKER_TOKENS) {
-                console.log(t);
                 context.ATTACKER_SELECT[t.document.uuid] = t.name;
             }
         }
@@ -215,6 +234,32 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 this.render();
             });
         }
+
+        const attackerSelect = this.element.querySelector('select[data-action="changeAttacker"]');
+        if (attackerSelect) {
+            attackerSelect.addEventListener("change", (ev) => {
+                ev.preventDefault();
+                ev.stopImmediatePropagation();
+                const id = ev.target.value;
+                const attacker = this.ATTACKER_TOKENS.filter(t => t.document.uuid === id)[0];
+                this.ATTACKER_TOKEN = attacker;
+                this.ATTACKER_TOKEN.control({ releaseOthers: true });
+                this.TARGETS = getTargetData(this.ATTACKER_TOKEN);
+                this.render();
+            });
+        }
+
+        const shotSelect = this.element.querySelector('select[data-action="changeShotType"]');
+        if (shotSelect) {
+            shotSelect.addEventListener("change", (ev) => {
+                ev.preventDefault();
+                ev.stopImmediatePropagation();
+                this.shotType = ev.target.value;
+                console.log(this.shotType);
+                this.render();
+            });
+        }
+
     }
 
 
@@ -227,8 +272,11 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
         const rangeDM = parseInt(formData.object.range);
 
+        this.attackOptions.autoOption = formData.object.shotType;
+        this.attackOptions.rollType = formData.object.rollType;
+
         if (event.type === "submit") {
-            this.rollImpact(customDM, rangeDM);
+            this.rollAttack(customDM, rangeDM);
         }
 
         return null;
@@ -240,14 +288,16 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         // Do nothing. We should already have a target by this point.
     }
 
-    rollImpact(customDM, rangeDM) {
+    rollAttack(customDM, rangeDM) {
         this.attackOptions.skillDM = this.skillDM;
         this.attackOptions.dm = customDM;
         this.attackOptions.rangeDM = rangeDM;
         this.attackOptions.showBreakdown = true;
+
         if (this.currentTarget.dodgeDM) {
             this.attackOptions.dodgeDM = this.currentTarget.dodgeDM;
         }
+        // Remove dodge from the target being attacked.
         this.currentTarget.token.actor.setDodgeEffect(0);
 
         if (this.currentTarget?.type === "vehicle") {

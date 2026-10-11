@@ -3034,6 +3034,16 @@ Handlebars.registerHelper("itemName", function (item) {
    return html;
 });
 
+Handlebars.registerHelper("positive", function(value) {
+   const v = parseInt(value) || 0;
+
+   if (v < 0) {
+       return v;
+   } else {
+       return "+" + v;
+   }
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

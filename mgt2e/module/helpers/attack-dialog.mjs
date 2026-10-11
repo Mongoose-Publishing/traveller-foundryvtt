@@ -130,6 +130,7 @@ export class MgT2AttackDialog extends Application {
 
         this.options.title = this.weapon.name;
         if (this.skill) {
+
         }
 
         this.calculateTargets();

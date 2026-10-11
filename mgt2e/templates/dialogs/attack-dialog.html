@@ -5,16 +5,16 @@
 
     <div grid class="grid grid-3col">
         <div class="flex-group-left grid-span-2">
-            {{#if ATTACKER_TOKEN}}
-                <h4>
-                    Attacker Token: {{ATTACKER_TOKEN.name}}
-                </h4>
-            {{else if ATTACKER_TOKENS}}
+            {{#if ATTACKER_TOKENS}}
                 <h4>
                     Attacker Token:
-                    <select class="attacker-select" name="attackerSelect">
-                        {{selectOptions ATTACKER_SELECT}}
+                    <select class="attacker-select" name="attackerSelect" data-action="changeAttacker">
+                        {{selectOptions ATTACKER_SELECT selected=ATTACKER_TOKEN.document.uuid}}
                     </select>
+                </h4>
+            {{else if ATTACKER_TOKEN }}
+                <h4>
+                    Attacker Token: {{ATTACKER_TOKEN.name}}
                 </h4>
             {{else}}
                 <h4>Attacker Token: <i>No token selected</i></h4>
@@ -45,8 +45,15 @@
 
         <div class="resource flex-group-center">
             <label class="field-label">{{localize "MGT2.AttackDialog.ShotType.Title"}}</label>
-            <select name="shottype" data-action="changeShotType">
-                {{selectOptions SHOT_SELECT }}
+            <select name="shotType" data-action="changeShotType">
+                {{selectOptions SHOT_SELECT selected=shotType}}
+            </select>
+        </div>
+
+        <div class="resource flex-group-center">
+            <label class="field-label">{{localize "MGT2.Dialog.RollType"}}</label>
+            <select name="rollType">
+                {{selectOptions ROLLTYPE_SELECT }}
             </select>
         </div>
     </div>
@@ -79,24 +86,40 @@
 
     {{#if currentTarget}}
         <img src="{{currentTarget.token.document.texture.src}}" width="48px" style="float: left"/>
-        {{#if currentTarget.rangeDM}}
-            <b>Range DM: {{currentTarget.rangeDM}}</b>
-        {{/if}}
-        {{#if currentTarget.sizeDM}}
-            <b>Size DM: {{currentTarget.sizeDM}}</b>
-        {{/if}}
-        {{#if currentTarget.dodgeDM}}
-            <b>Dodge DM: {{currentTarget.dodgeDM}}</b>
-        {{/if}}
-        {{#if currentTarget.rangeHitDM}}
-            <b>To Hit DM: {{currentTarget.rangeHitDM}}</b>
-        {{/if}}
+        <div class="grid grid-4col">
+            {{#if currentTarget.type}}
+                <div class="resource flex-group-center">
+                    <label class="field-label">Type</label>
+                    <span>{{localize (concat "TYPES.Actor." currentTarget.type)}}</span>
+                </div>
+            {{/if}}
+            {{#if currentTarget.rangeDM}}
+                <div class="resource flex-group-center">
+                    <label class="field-label">Range DM</label>
+                    <span>{{positive currentTarget.rangeDM}}</span>
+                </div>
+            {{/if}}
+            {{#if currentTarget.sizeDM}}
+                <div class="resource flex-group-center">
+                    <label class="field-label">Size DM</label>
+                    <span>{{positive currentTarget.sizeDM}}</span>
+                </div>
+            {{/if}}
+            {{#if currentTarget.dodgeDM}}
+                <div class="resource flex-group-center">
+                    <label class="field-label">Dodge/Parry DM</label>
+                    <span>{{positive currentTarget.dodgeDM}}</span>
+                </div>
+            {{/if}}
+            {{#if currentTarget.rangeHitDM}}
+                <div class="resource flex-group-center">
+                    <label class="field-label">Cover DM</label>
+                    <span>{{positive currentTarget.rangeHitDM}}</span>
+                </div>
+            {{/if}}
+        </div>
     {{/if}}
-
+    <br/>
     <hr/>
-
-    <div class="grid grid-4col">
-
-    </div>
 
 </div>
