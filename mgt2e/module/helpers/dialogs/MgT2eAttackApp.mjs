@@ -148,16 +148,26 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         context.shotType = this.shotType;
         context.SHOT_SELECT = {};
-        context.SHOT_SELECT["single"] = game.i18n.format("MGT2.AttackDialog.ShotType.single");
-        if (this.isAutoFire) {
-            // Automatic Fire
-            this.fullAuto = Math.min(this.autoFire, parseInt(this.currentAmmo/3) || 0);
-            this.burstFire = Math.min(this.autoFire, this.currentAmmo);
+        if (this.isMelee) {
+            context.SHOT_SELECT["melee"] = game.i18n.format("MGT2.AttackDialog.ShotType.melee");
+        } else {
+            context.SHOT_SELECT["single"] = game.i18n.format("MGT2.AttackDialog.ShotType.single");
+            if (this.isAutoFire) {
+                // Automatic Fire
+                this.fullAuto = Math.min(this.autoFire, parseInt(this.currentAmmo / 3) || 0);
+                this.burstFire = Math.min(this.autoFire, this.currentAmmo);
 
-            context.SHOT_SELECT["burst"] = game.i18n.format("MGT2.AttackDialog.ShotType.burst", {shots: this.burstFire, ammo: this.burstFire });
-            context.SHOT_SELECT["full"] = game.i18n.format("MGT2.AttackDialog.ShotType.full", {shots: this.fullAuto, ammo: this.fullAuto * 3});
+                context.SHOT_SELECT["burst"] = game.i18n.format("MGT2.AttackDialog.ShotType.burst", {
+                    shots: this.burstFire,
+                    ammo: this.burstFire
+                });
+                context.SHOT_SELECT["full"] = game.i18n.format("MGT2.AttackDialog.ShotType.full", {
+                    shots: this.fullAuto,
+                    ammo: this.fullAuto * 3
+                });
+            }
+            context.SHOT_SELECT["aimed"] = game.i18n.format("MGT2.AttackDialog.ShotType.aimed", {bonus: this.aimingBonus});
         }
-        context.SHOT_SELECT["aimed"] = game.i18n.format("MGT2.AttackDialog.ShotType.aimed", {bonus: this.aimingBonus});
         // Get possible targets
         this.TARGETS = getTargetData(this.ATTACKER_TOKEN)
         if (this.ATTACKER_TOKEN) {
@@ -175,15 +185,21 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (t.facing) {
                     text += ` - ${game.i18n.localize("MGT2.Vehicle.Face." + t.facing)}`;
                 }
-                t.rangeDM = this._getRangeDM(t);
-                if (t.rangeDM) {
-                    text += ` [${t.rangeDM}]`;
-                }
-                if (parseInt(t.rangeDM) > -99) {
-                    context.TARGET_SELECT[t.token.document._id] = text;
+                if (this.isMelee) {
+                    if (t.distance < 6) {
+                        context.TARGET_SELECT[t.token.document._id] = text;
+                    }
+                } else {
+                    t.rangeDM = this._getRangeDM(t);
+                    if (t.rangeDM) {
+                        text += ` [${t.rangeDM}]`;
+                    }
+                    if (parseInt(t.rangeDM) > -99) {
+                        context.TARGET_SELECT[t.token.document._id] = text;
+                    }
                 }
             }
-            if (!this.currentTarget) {
+            if (!this.currentTarget && context.TARGET_SELECT.length > 0) {
                 this.currentTarget = this.TARGETS[0];
             }
         }
