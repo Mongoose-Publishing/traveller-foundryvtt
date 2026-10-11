@@ -70,24 +70,31 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
     _getRangeDM(target) {
         // Out of range.
         if (target.distance > this.range.extreme) {
+            target.rangeText = game.i18n.localize("MGT2.AttackDialog.OutOfRange");
             return -99;
         }
         // If not aiming with a scope, any range beyond 100m is extreme.
         if (target.distance >= 100 && this.shotType !== "aimed") {
             if (!hasTrait(this.weaponItem.system.weapon.traits, "scope")) {
+                target.rangeText = game.i18n.localize("MGT2.AttackDialog.NoScope");
                 return -4;
             }
         }
 
         if (target.distance <= this.range.short) {
+            target.rangeText = game.i18n.localize("MGT2.Attack.short")
             return +1;
         } else if (target.distance <= this.range.medium) {
+            target.rangeText = game.i18n.localize("MGT2.Attack.medium")
             return +0;
         } else if (target.distance <= this.range.long) {
+            target.rangeText = game.i18n.localize("MGT2.Attack.long")
             return -2;
         } else if (target.distance <= this.range.extreme) {
+            target.rangeText = game.i18n.localize("MGT2.Attack.extreme")
             return -4;
         }
+        target.rangeText = game.i18n.localize("MGT2.AttackDialog.OutOfRange");
         return -99;
     }
 

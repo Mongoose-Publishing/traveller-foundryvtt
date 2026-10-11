@@ -55,11 +55,37 @@ export function getTargetData(attackerToken) {
         // No targets selected, so just list everything in line of sight.
         const visionSource = attackerToken.vision;
         if (!visionSource?.active) {
-            targets = canvas.tokens.placeables;
-        } else {
+            //targets = canvas.tokens.placeables;
+            console.log("Using targets the player can see");
             targets = canvas.tokens.placeables.filter(t => {
                 if (t.id === attackerToken.id) return false;
                 return t.visible;
+            });
+        } else {
+            const detectionModes = attackerToken.document?.detectionModes
+                    ?? attackerToken.actor?.system?.detectionModes
+                    ?? [];
+
+            targets = canvas.tokens.placeables.filter(t => {
+                if (t.id === attackerToken.id) return false;
+
+                const tests = t.visibilityTests ?? [
+                    { point: t.center, los: new Map() }
+                ];
+                try {
+                    return detectionModes.some(mode => {
+                        if (!mode.enabled) return false;
+
+                        const detectionMode = CONFIG.Canvas.detectionModes[mode.id];
+                        if (!detectionMode) return false;
+
+                        // Safely execute testVisibility with guaranteed valid visionSource
+                        return detectionMode.testVisibility(visionSource, mode, { object: t, tests });
+                    });
+                } catch (e) {
+                    console.error(`[CombatUtils] Error checking visibility for token ${t.name}:`, e);
+                    return false;
+                }
             });
         }
     }
@@ -79,7 +105,6 @@ export function getTargetData(attackerToken) {
             // Can't shoot yourself.
             continue;
         }
-        console.log(token.name);
         if (["traveller", "npc", "robot", "vehicle", "spacecraft", "swarm"].includes(token?.actor?.type)) {
             let x = parseInt(token.center.x);
             let y = parseInt(token.center.y);

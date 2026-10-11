@@ -1473,6 +1473,8 @@
   "MGT2.AttackDialog.ShotType.single": "Single Shot",
   "MGT2.AttackDialog.ShotType.burst": "Burst +{shots} ({ammo} ammo)",
   "MGT2.AttackDialog.ShotType.full": "Full Auto x{shots} ({ammo} ammo)",
+  "MGT2.AttackDialog.NoScope": "No Scope",
+  "MGT2.AttackDialog.OutOfRange": "Out of Range",
 
   "MGT2.Role.isDepartment": "Role is a department",
   "MGT2.Role.RoleAssignment": "Role Assignment",

@@ -3034,7 +3034,7 @@ Handlebars.registerHelper("itemName", function (item) {
    return html;
 });
 
-Handlebars.registerHelper("positive", function(value) {
+Handlebars.registerHelper("dm", function(value) {
    const v = parseInt(value) || 0;
 
    if (v < 0) {

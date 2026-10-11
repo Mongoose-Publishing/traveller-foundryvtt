@@ -93,28 +93,26 @@
                     <span>{{localize (concat "TYPES.Actor." currentTarget.type)}}</span>
                 </div>
             {{/if}}
-            {{#if currentTarget.rangeDM}}
-                <div class="resource flex-group-center">
-                    <label class="field-label">Range DM</label>
-                    <span>{{positive currentTarget.rangeDM}}</span>
-                </div>
-            {{/if}}
+            <div class="resource flex-group-center">
+                <label class="field-label">Range DM</label>
+                <span>{{currentTarget.rangeText}} {{dm currentTarget.rangeDM}}</span>
+            </div>
             {{#if currentTarget.sizeDM}}
                 <div class="resource flex-group-center">
                     <label class="field-label">Size DM</label>
-                    <span>{{positive currentTarget.sizeDM}}</span>
+                    <span>{{dm currentTarget.sizeDM}}</span>
                 </div>
             {{/if}}
             {{#if currentTarget.dodgeDM}}
                 <div class="resource flex-group-center">
                     <label class="field-label">Dodge/Parry DM</label>
-                    <span>{{positive currentTarget.dodgeDM}}</span>
+                    <span>{{dm currentTarget.dodgeDM}}</span>
                 </div>
             {{/if}}
             {{#if currentTarget.rangeHitDM}}
                 <div class="resource flex-group-center">
                     <label class="field-label">Cover DM</label>
-                    <span>{{positive currentTarget.rangeHitDM}}</span>
+                    <span>{{dm currentTarget.rangeHitDM}}</span>
                 </div>
             {{/if}}
         </div>
