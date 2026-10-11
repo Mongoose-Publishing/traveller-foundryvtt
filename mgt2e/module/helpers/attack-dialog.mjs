@@ -50,9 +50,9 @@ export class MgT2AttackDialog extends Application {
         }
 
         this.AUTO = {};
-        this.AUTO["single"] = `Single Shot`;
-        this.AUTO["burst"] = `Burst (+${this.auto})`;
-        this.AUTO["full"] = `Full Auto (x${this.fullAuto})`;
+        this.AUTO["single"] = game.i18n.format("MGT2.AttackDialog.ShotType.single");
+        this.AUTO["burst"] = game.i18n.format("MGT2.AttackDialog.ShotType.burst", { shots: this.auto});
+        this.AUTO["full"] = game.i18n.format("MGT2.AttackDialog.ShotType.full", { shots: this.fullAuto});
 
         // Work out what the skill bonus is.
         this.score = parseInt(getSkillValue(this.actor, this.skill, this.speciality));

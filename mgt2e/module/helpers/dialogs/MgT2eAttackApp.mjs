@@ -1,6 +1,6 @@
 import {MgT2Item} from "../../documents/item.mjs";
 import {Tools} from "../chat/tools.mjs";
-import {rollAttack, rollSpaceAttack} from "../dice-rolls.mjs";
+import {getTraitValue, hasTrait, rollAttack, rollSpaceAttack} from "../dice-rolls.mjs";
 import {getAttackerTokens, getTargetData} from "../utils/combat-utils.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
@@ -84,6 +84,14 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const skill = this.weaponItem.system.weapon.skill;
         const characteristicDM = this.actor.system.characteristics?.[characteristic]?.dm || 0;
         this.skillDM = this.actor.getSkillValue(skill, { cha: characteristic }) + characteristicDM;
+        this.isMelee = (this.weaponItem.system.weapon.range > 0)?false:true;
+        this.isAutoFire = hasTrait(this.weaponItem.system.weapon.traits, "auto");
+        this.aimingBonus = 1;
+        this.isOutOfAmmo = false;
+        this.currentAmmo = this.weaponItem.useAmmo()?this.weaponItem.system.weapon.ammo:0;
+        this.autoFire = getTraitValue(this.weaponItem.system.weapon.traits, "auto");
+        console.log(this.weaponItem);
+        console.log(this.currentAmmo);
 
         const context = {
             actor: this.actor,
@@ -106,11 +114,27 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.customDM = parseInt(this.attackOptions.dm) || 0;
 
         context.RANGE_SELECT = {};
-        context.RANGE_SELECT["+1"] = `${game.i18n.localize("MGT2.Attack.short")} (${this.range.short}${context.rangeUnit}, +1)`;
-        context.RANGE_SELECT["+0"] = `${game.i18n.localize("MGT2.Attack.medium")} (${this.range.medium}${context.rangeUnit}, +0)`;
-        context.RANGE_SELECT["-2"] = `${game.i18n.localize("MGT2.Attack.long")} (${this.range.long}${context.rangeUnit}, -2)`;
-        context.RANGE_SELECT["-4"] = `${game.i18n.localize("MGT2.Attack.extreme")} (${this.range.extreme}${context.rangeUnit}, -4)`;
+        if (this.isMelee) {
+            context.RANGE_SELECT["+0"] = "Melee";
+        } else {
+            context.RANGE_SELECT["+1"] = `${game.i18n.localize("MGT2.Attack.short")} (${this.range.short}${context.rangeUnit}, +1)`;
+            context.RANGE_SELECT["+0"] = `${game.i18n.localize("MGT2.Attack.medium")} (${this.range.medium}${context.rangeUnit}, +0)`;
+            context.RANGE_SELECT["-2"] = `${game.i18n.localize("MGT2.Attack.long")} (${this.range.long}${context.rangeUnit}, -2)`;
+            context.RANGE_SELECT["-4"] = `${game.i18n.localize("MGT2.Attack.extreme")} (${this.range.extreme}${context.rangeUnit}, -4)`;
+        }
 
+
+        context.SHOT_SELECT = {};
+        context.SHOT_SELECT["single"] = game.i18n.format("MGT2.AttackDialog.ShotType.single");
+        if (this.isAutoFire) {
+            // Automatic Fire
+            this.fullAuto = Math.min(this.autoFire, parseInt(this.currentAmmo/3) || 0);
+            this.burstFire = Math.min(this.autoFire, this.currentAmmo);
+
+            context.SHOT_SELECT["burst"] = game.i18n.format("MGT2.AttackDialog.ShotType.burst", {shots: this.burstFire, ammo: this.burstFire });
+            context.SHOT_SELECT["full"] = game.i18n.format("MGT2.AttackDialog.ShotType.full", {shots: this.fullAuto, ammo: this.fullAuto * 3});
+        }
+        context.SHOT_SELECT["aimed"] = game.i18n.format("MGT2.AttackDialog.ShotType.aimed", {bonus: this.aimingBonus});
         // Get possible targets
         this.TARGETS = getTargetData(this.ATTACKER_TOKEN)
         if (this.ATTACKER_TOKEN) {

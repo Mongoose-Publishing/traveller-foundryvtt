@@ -1468,6 +1468,11 @@
   "MGT2.AttackDialog.SelectTitle": "Select target",
   "MGT2.AttackDialog.TargetRefresh": "Refresh list of targets",
   "MGT2.AttackDialog.NoTargets": "Use 'T' to choose a target then refresh",
+  "MGT2.AttackDialog.ShotType.Title": "Auto Fire",
+  "MGT2.AttackDialog.ShotType.aimed": "Aimed Shot +{bonus}",
+  "MGT2.AttackDialog.ShotType.single": "Single Shot",
+  "MGT2.AttackDialog.ShotType.burst": "Burst +{shots} ({ammo} ammo)",
+  "MGT2.AttackDialog.ShotType.full": "Full Auto x{shots} ({ammo} ammo)",
 
   "MGT2.Role.isDepartment": "Role is a department",
   "MGT2.Role.RoleAssignment": "Role Assignment",

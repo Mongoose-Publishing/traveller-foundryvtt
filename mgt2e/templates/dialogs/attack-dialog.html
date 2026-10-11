@@ -42,6 +42,13 @@
             <label class="field-label">{{localize 'MGT2.DM'}}</label>
             <input type="number" name="DM" value="{{customDM}}"/>
         </div>
+
+        <div class="resource flex-group-center">
+            <label class="field-label">{{localize "MGT2.AttackDialog.ShotType.Title"}}</label>
+            <select name="shottype" data-action="changeShotType">
+                {{selectOptions SHOT_SELECT }}
+            </select>
+        </div>
     </div>
 
     <div>Skill DM: {{skillDM}}</div>
