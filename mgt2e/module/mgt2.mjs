@@ -779,6 +779,18 @@ Hooks.on("createActor", (actor, data, userId) => {
                 actor.system.characteristics[c].current = 0;
             }
         }
+        let actorName = game.settings.get("mgt2e", "defaultTraveller");
+        if (actorName && game.actors.getName(actorName)?.type === "traveller") {
+            const defTrav = game.actors.getName(actorName);
+            // If Default Traveller has special characteristics options, make sure that
+            // we copy them across as well.
+            for (let c in defTrav.system.characteristics) {
+                actor.system.characteristics[c].show = defTrav.system.characteristics[c].show;
+                if (defTrav.system.characteristics[c].roll) {
+                    actor.system.characteristics[c].roll = defTrav.system.characteristics[c].roll;
+                }
+            }
+        }
         actor.update({ "system.characteristics": actor.system.characteristics });
     }
 
