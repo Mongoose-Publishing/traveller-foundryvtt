@@ -52,8 +52,16 @@ export function getTargetData(attackerToken) {
         // Player has specifically selected targets.
         targets = userTargets;
     } else {
-        // No targets selected, so just list everything possible.
-        targets = canvas.tokens.placeables;
+        // No targets selected, so just list everything in line of sight.
+        const visionSource = attackerToken.vision;
+        if (!visionSource?.active) {
+            targets = canvas.tokens.placeables;
+        } else {
+            targets = canvas.tokens.placeables.filter(t => {
+                if (t.id === attackerToken.id) return false;
+                return t.visible;
+            });
+        }
     }
 
     const X = parseInt(attackerToken.center.x);
@@ -71,7 +79,8 @@ export function getTargetData(attackerToken) {
             // Can't shoot yourself.
             continue;
         }
-        if (["traveller", "npc", "robot", "vehicle", "spacecraft", "swarm"].includes(token.actor.type)) {
+        console.log(token.name);
+        if (["traveller", "npc", "robot", "vehicle", "spacecraft", "swarm"].includes(token?.actor?.type)) {
             let x = parseInt(token.center.x);
             let y = parseInt(token.center.y);
             const dx = Math.abs(X - x);
