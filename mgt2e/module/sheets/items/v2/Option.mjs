@@ -332,7 +332,7 @@ export class MgT2eOptionSheet extends MgT2eItemV2 {
         }
         context.ATTACHED_WEAPON = null;
         if (this.document.system.option?.weapon?.weaponId) {
-            const weaponItem = this.document.parent.items.get(this.document.system.option.weapon.weaponId);
+            const weaponItem = this.document?.parent?.items?.get(this.document.system.option.weapon.weaponId);
             if (weaponItem) {
                 context.ATTACHED_WEAPON = weaponItem;
             }
