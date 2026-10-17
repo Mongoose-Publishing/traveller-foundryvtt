@@ -199,7 +199,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     }
                 }
             }
-            if (!this.currentTarget && context.TARGET_SELECT.length > 0) {
+            if (!this.currentTarget && this.TARGETS.length > 0) {
                 this.currentTarget = this.TARGETS[0];
             }
         }
