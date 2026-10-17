@@ -1,5 +1,23 @@
 # Release Notes
 
+# 0.23.3 (Beta)
+
+**Breaking change:** In order to match FoundryVTT suggestions for tokens, the included vehicle
+and spacecraft tokens have been rotated 180°. This means they now face down by rather than
+up. This will cause any tokens in scenes to flip. To help fix this, a new macro has been
+provided which will X+Y mirror selected tokens. This is "Mirror Tokens", and is in the
+MgT2e Base Macros compendium. This will resolve the problem of vehicles moving backwards if
+auto rotate is enabled (which it is by default).
+
+* If a Default Traveller actor is set, then copy not just the list of skills but also
+  the configured characteristics.
+* Improvements to how effect icons are displayed in v14.
+* Re-write of the vehicle attack dialog. Streamlined the process so it doesn't require as
+  much setup from the user. Attacker and target tokens are automatically calculated if it
+  is possible. Line of sight and range are used to determine which targets are added to the
+  list. Range, cover, dodge, size and other DMs automatically added to the attack roll.
+* Fixed typo in government type Religious Autocracy.
+
 # 0.23.2 (Beta)
 
 * Added German Translations
@@ -7,7 +25,7 @@
   don't appear on tokens in v14 if they've been added from the sheet.
 * InCover and Prone effects now apply a ranged to be hit DM to a character. This is
   shown in a new settings option in the actor sheet.
-* Size and other DMs displayed in the Character attack dialog when tokens are targetted.
+* Size and other DMs displayed in the Character attack dialog when tokens are targeted.
   However, they are not yet automatically applied to the role.
 
 # 0.23.1 (Beta)
