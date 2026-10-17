@@ -2,6 +2,7 @@ import {MgT2Item} from "../../documents/item.mjs";
 import {Tools} from "../chat/tools.mjs";
 import {getTraitValue, hasTrait, rollAttack, rollSpaceAttack} from "../dice-rolls.mjs";
 import {getAttackerTokens, getTargetData} from "../utils/combat-utils.mjs";
+import {MGT2} from "../config.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 // see: https://foundryvtt.wiki/en/development/api/applicationv2
@@ -62,6 +63,10 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const cha = this.weaponItem.system.weapon.characteristic;
         const skillFqdn = this.weaponItem.system.weapon.skill;
 
+        if (!this.actor) {
+            return Tools.getSkillLabel(MGT2.getDefaultSkills(), skillFqdn);
+        }
+
         let text = cha + " + " + this.actor.getSkillLabel(skillFqdn, false);
 
         return text;
@@ -102,8 +107,8 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         console.log("_prepareContext:");
         const characteristic = this.weaponItem.system.weapon.characteristic;
         const skill = this.weaponItem.system.weapon.skill;
-        const characteristicDM = this.actor.system.characteristics?.[characteristic]?.dm || 0;
-        this.skillDM = this.actor.getSkillValue(skill, { cha: characteristic }) + characteristicDM;
+        const characteristicDM = this.actor?.system.characteristics?.[characteristic]?.dm || 0;
+        this.skillDM = (this.actor?.getSkillValue(skill, { cha: characteristic }) + characteristicDM) || 0;
         this.isMelee = (this.weaponItem.system.weapon.range > 0)?false:true;
         this.isAutoFire = hasTrait(this.weaponItem.system.weapon.traits, "auto");
         this.aimingBonus = 1;

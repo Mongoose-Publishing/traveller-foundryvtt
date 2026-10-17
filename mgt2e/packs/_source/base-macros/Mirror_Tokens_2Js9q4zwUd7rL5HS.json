@@ -1,0 +1,28 @@
+{
+  "name": "Mirror Tokens",
+  "type": "script",
+  "command": "let tokens = canvas.tokens.controlled;\nlet number = canvas.tokens.controlled.length;\nlet title = `Mirror ${number} selected tokens?`;\nif (number === 0) {\n  ui.notifications.error(\"You must select at least one token\");\n  return;\n}\n\nconst yesno = await foundry.applications.api.DialogV2.confirm({\n  window: { title: title },\n  content: `<p>All selected Spacecraft and Vehicle tokens will be flipped. Other token types will be ignored.</p>`,\n  rejectClose: false,\n  modal: true\n});\n\nif (yesno) {\n  for (const token of tokens) {\n    if ([\"vehicle\", \"spacecraft\"].includes(token.document.actor.type)) {\n      const texture = token.document.texture;\n      texture.scaleX = texture.scaleX * -1;\n      texture.scaleY = texture.scaleY * -1;\n      token.document.update({ texture: texture });\n    }\n  }\n} else {\n  console.log(\"No\");\n}",
+  "img": "icons/svg/dice-target.svg",
+  "author": "mhUjqDVicnwIUaiq",
+  "scope": "global",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.23.2.3-DEV",
+    "createdTime": 1792015005051,
+    "modifiedTime": 1792183017715,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_id": "2Js9q4zwUd7rL5HS",
+  "sort": 200000,
+  "_key": "!macros!2Js9q4zwUd7rL5HS"
+}

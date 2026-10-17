@@ -2987,8 +2987,6 @@ Handlebars.registerHelper("weaponMountBlock", function(mount) {
             html += `<br/><span class="weapon-traits">${printWeaponTraits(system.weapon.traits)}</span>`;
         }
 
-
-        html += `<br/><span class="action" data-action="attack" data-item-id="${weaponItem.id}" data-mount-id="${mountItem.id}">${game.i18n.localize("MGT2.TravellerSheet.Attack")}</span>`;
         html += `<br/>`;
         if (system.weapon.scale === "spacecraft") {
             html += `${game.i18n.localize("MGT2.Spacecraft.Range." + system.weapon.spaceRange)}`;
@@ -3014,7 +3012,7 @@ Handlebars.registerHelper("weaponMountBlock", function(mount) {
                                   class="weapon-attack-role"><img src="${a.actor.img}"/>${a.action.title}<br/>${a.actor.name}</div>`;
                 }
             } else {
-                html += `<span>No-one to fire anything</span>`;
+                html += `<br/><span class="action" data-action="attack" data-item-id="${weaponItem.id}" data-mount-id="${mountItem.id}">${game.i18n.localize("MGT2.TravellerSheet.Attack")}</span>`;
             }
         }
 

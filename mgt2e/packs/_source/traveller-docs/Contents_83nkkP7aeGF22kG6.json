@@ -134,7 +134,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Added German translation.</p></li><li><p>More fixes for active effects issues in v14. Known issue still where effect icons aren't displayed on the token in v14.</p></li><li><p>In Cover and Prone effects now apply value which gives actors a penalty to be hit by ranged attacks.</p></li><li><p>Ranged attack DMs now displayed in attack dialog for targetted tokens, though are not automatically applied.</p></li></ul>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p><strong>A breaking change has been made to tokens.</strong> All the spacecraft and vehicle tokens for MgT2e were originally drawn pointing 'up'. In order to bring them inline with new Foundry assumptions, the graphics for this tokens have been rotated 180°. This means any tokens you have in play will now face the opposite direction. A macro has been provided that will automatically mirror your tokens. As GM, select the tokens, and run the provided macro: @UUID[Compendium.mgt2e.base-macros.Macro.2Js9q4zwUd7rL5HS]{Run Macro}</p></li><li><p>Improvements have been made to the <em><strong>Vehicle</strong></em> attack dialog. It now automatically tries to select which token is making the attack, and provides a drop down list of all viable targets (visible and in range). Modifiers, such as cover, range, target size and dodge DMs are now automatically applied. This dialog will replace the attack dialogs for other character types at a later point.</p></li><li><p>When a character performs a dodge or parry, an effect is added to the actor token to record the DM to hit the token. This is automatically used by the new attack dialog, and it is removed after an attack is made.</p></li><li><p>Characteristic information is now copied from the DEFAULT TRAVELLER when an actor is created, not just the list of skills.</p></li></ul>"
       },
       "video": {
         "controls": true,
@@ -153,7 +153,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1791544295271,
+        "modifiedTime": 1792272825198,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
