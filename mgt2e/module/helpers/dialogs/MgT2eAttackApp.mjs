@@ -322,14 +322,17 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.attackOptions.rangeDM = rangeDM;
         this.attackOptions.showBreakdown = true;
 
-        if (this.currentTarget.dodgeDM) {
-            this.attackOptions.dodgeDM = this.currentTarget.dodgeDM;
-        }
-        // Remove dodge from the target being attacked.
-        this.currentTarget.token.actor.setDodgeEffect(0);
+        // There won't always be a currentTarget. There might not even be a scene.
+        if (this.currentTarget) {
+            if (this.currentTarget?.dodgeDM) {
+                this.attackOptions.dodgeDM = this.currentTarget.dodgeDM;
+                // Remove dodge from the target being attacked.
+                this.currentTarget.token.actor.setDodgeEffect(0);
+            }
 
-        if (this.currentTarget?.type === "vehicle") {
-            this.attackOptions.facing = this.currentTarget.facing;
+            if (this.currentTarget?.type === "vehicle") {
+                this.attackOptions.facing = this.currentTarget.facing;
+            }
         }
         rollAttack(this.actor, this.weaponItem, this.attackOptions);
         this.close();
