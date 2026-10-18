@@ -1,8 +1,8 @@
 {
   "name": "Mirror Tokens",
   "type": "script",
-  "command": "let tokens = canvas.tokens.controlled;\nlet number = canvas.tokens.controlled.length;\nlet title = `Mirror ${number} selected tokens?`;\nif (number === 0) {\n  ui.notifications.error(\"You must select at least one token\");\n  return;\n}\n\nconst yesno = await foundry.applications.api.DialogV2.confirm({\n  window: { title: title },\n  content: `<p>All selected Spacecraft and Vehicle tokens will be flipped. Other token types will be ignored.</p>`,\n  rejectClose: false,\n  modal: true\n});\n\nif (yesno) {\n  for (const token of tokens) {\n    if ([\"vehicle\", \"spacecraft\"].includes(token.document.actor.type)) {\n      const texture = token.document.texture;\n      texture.scaleX = texture.scaleX * -1;\n      texture.scaleY = texture.scaleY * -1;\n      token.document.update({ texture: texture });\n    }\n  }\n} else {\n  console.log(\"No\");\n}",
-  "img": "icons/svg/dice-target.svg",
+  "command": "/**\n * Macro to flip Vehicle and Spacecraft tokens. In v0.23.3 the token\n * images for spacecraft and vehicles have been flipped from pointing\n *'up' to pointing 'down'. This is to match the Foundry guidelines.\n * This is mostly for the auto-rotate feature.\n *\n * This is only needed for the token images built into the MgT2e\n * system. Any images you've added yourself won't be affected.\n *\n * Select some tokens and run this macro. The mirror-X and mirror-Y\n * options will be toggled on them. This means you can re-run it to\n * put things back. It also works on tokens which are rotation locked.\n * It only affects tokens of type Spacecraft or Vehicle.\n */\nlet tokens = canvas.tokens.controlled;\nlet number = canvas.tokens.controlled.length;\nlet title = `Mirror ${number} selected tokens?`;\nif (number === 0) {\n  ui.notifications.error(\"You must select at least one token\");\n  return;\n}\n\nconst yesno = await foundry.applications.api.DialogV2.confirm({\n  window: { title: title },\n  content: `<p>All selected Spacecraft and Vehicle tokens will be flipped. Other token types will be ignored.</p>`,\n  rejectClose: false,\n  modal: true\n});\n\nif (yesno) {\n  for (const token of tokens) {\n    if ([\"vehicle\", \"spacecraft\"].includes(token.document.actor.type)) {\n      const texture = token.document.texture;\n      texture.scaleX = texture.scaleX * -1;\n      texture.scaleY = texture.scaleY * -1;\n      token.document.update({ texture: texture });\n    }\n  }\n} else {\n  console.log(\"No\");\n}",
+  "img": "systems/mgt2e/icons/hardware/workshop.svg",
   "author": "mhUjqDVicnwIUaiq",
   "scope": "global",
   "folder": null,
@@ -19,7 +19,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.23.2.3-DEV",
     "createdTime": 1792015005051,
-    "modifiedTime": 1792183017715,
+    "modifiedTime": 1792315876649,
     "lastModifiedBy": "mhUjqDVicnwIUaiq"
   },
   "_id": "2Js9q4zwUd7rL5HS",
