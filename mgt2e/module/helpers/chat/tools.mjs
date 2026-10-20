@@ -599,8 +599,14 @@ Tools.getSkillLabel = function(skills, skillFqn) {
             }
         }
     }
+    if (skillLabel.indexOf("MGT2.Skills") === 0) {
+        skillLabel = skillId.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase());
+    }
     label = skillLabel;
     if (specId && specLabel) {
+        if (specLabel.indexOf("MGT2.Skills") === 0) {
+            specLabel = specId.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase());
+        }
         label = `${skillLabel} (${specLabel})`;
     }
 
@@ -674,7 +680,15 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
                 skill = SKILLS[skillId];
             }
             if (!skill) {
-                skillHtml += `<li>${skillLabel.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
+                let rollData = {
+                    title: skillLabel,
+                    label: skillLabel,
+                    cha: "INT",
+                    chaDM: 0,
+                    value: skillVal
+                }
+                let json = JSON.stringify(rollData);
+                skillHtml += `<li class="upp-inline-roll" data-actor-name="${name}" data-skill-data='${json}'>${skillLabel.replace(/ /, "&nbsp")}&nbsp;${skillVal}</li>`;
                 continue;
             }
 
@@ -718,9 +732,6 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
 }
 
 Tools.inlineUppRollSkill = async function(actorName, skillData) {
-    console.log(actorName);
-    console.log(skillData);
-
     let roll = await new Roll(`2D6 + ${skillData.chaDM} + ${skillData.value}`, null).evaluate();
     let contentData = {
         agent: actorName,

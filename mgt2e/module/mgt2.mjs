@@ -402,9 +402,7 @@ Hooks.once("init", function() {
        openActorSheet(actorId);
     });
     body.on("click", ".upp-inline-roll", ev => {
-        console.log("INLINE ROLL");
         let name = $(ev.currentTarget).data("actorName");
-        console.log($(ev.currentTarget).data("skillData"));
         let data = $(ev.currentTarget).data("skillData");
         Tools.inlineUppRollSkill(name, data);
     });
@@ -1082,7 +1080,6 @@ Hooks.on("dropCanvasData", (canvas, data) =>{
         }
     }
 });
-
 
 // Dropping a skill on the macro bar. An entire skill tree is dragged,
 // not just a speciality.
