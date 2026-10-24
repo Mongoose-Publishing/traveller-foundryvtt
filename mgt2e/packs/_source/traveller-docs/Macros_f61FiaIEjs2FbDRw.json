@@ -1,0 +1,689 @@
+{
+  "folder": "81lpHPvcOeOkc8gf",
+  "name": "Macros",
+  "_id": "f61FiaIEjs2FbDRw",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Compendium",
+      "type": "text",
+      "_id": "D1rp90l2hL7gn5vY",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Included with the MgT2e system are a number of macros. These are provided as part of the <em><strong>MgT2e Base Macros</strong></em> compendium. They can be executed directly from the compendium, or dragged onto the world.</p><p>The more common ones can be placed on the hotbar.</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792846794721,
+        "modifiedTime": 1792847238426,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.D1rp90l2hL7gn5vY"
+    },
+    {
+      "sort": 200000,
+      "name": "1D6",
+      "type": "text",
+      "_id": "3KhhgPoBjVE0GZog",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Trivial macro for rolling 1D6 to the chat. It is mosty useful for putting on the hotbar, then you can roll 1D6 with a single click or button press.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.c0VzdYaCOk0lsx9W]{1D6}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792846942881,
+        "modifiedTime": 1792847223831,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.3KhhgPoBjVE0GZog"
+    },
+    {
+      "sort": 300000,
+      "name": "2D6",
+      "type": "text",
+      "_id": "LwLZBnQIgA5UP4uv",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Trivial macro for rolling 2D6 to the chat. It is mosty useful for putting on the hotbar, then you can roll 2D6 with a single click or button press.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.pjNaPg3jnqwq0ws7]{2D6}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792846977758,
+        "modifiedTime": 1792847235459,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.LwLZBnQIgA5UP4uv"
+    },
+    {
+      "sort": 400000,
+      "name": "D66",
+      "type": "text",
+      "_id": "LazeZpSLwLqoqaYP",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Roll D66 to the chat. This does /r 1D6 * 10 + 1D6, giving a result between 11 and 66. A number of tables in Traveller use D66, so this might be easier than typing it each time. As for the 1D6 and 2D6 macros, putting it on the hotbar provides a quick way of rolling it.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.pBJCMW5TZAb9pmuw]{D66}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792847050521,
+        "modifiedTime": 1792847250001,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.LazeZpSLwLqoqaYP"
+    },
+    {
+      "sort": 500000,
+      "name": "Add Effect Status",
+      "type": "text",
+      "_id": "qQCaa2kkDIPohHIO",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>This macro is designed to quickly add an effect status to a token. Select one or more tokens, and execute this. You will be given a drop down list of effects to select from.</p><p>Why would you want to use this rather than the normal token UI? This way adds some MgT2e specific meta data to the status, and can be applied to multiple tokens at once.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.kG3Mn6wTvnf2ENOy]{Add Effect Status}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792847150260,
+        "modifiedTime": 1792847473613,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.qQCaa2kkDIPohHIO"
+    },
+    {
+      "sort": 600000,
+      "name": "Cover",
+      "type": "text",
+      "_id": "jw2PzBpt6TMHYchL",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Adds a cover or hiding effect to an actor. Hiding gives an actor extra protection, cover makes them harder to hit. The drop down menu provides common values as per the Mongoose 2e rules.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.LBniQ3L4iJ0YfcMT]{Cover}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792847489817,
+        "modifiedTime": 1792847577034,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.jw2PzBpt6TMHYchL"
+    },
+    {
+      "sort": 700000,
+      "name": "Create NPC",
+      "type": "text",
+      "_id": "SeHCDutL0XSAQOdt",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Example macro to create a random NPC. See the @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.dzoWvMqYL6UGTXO6]{NPC Generator} documentation for how this works. Executing this macro as-is will create a random NPC.</p><p>NPCs are created with a random name, background and set of skills.</p><p>This macro is designed to be modified and extended in order to tailor it for the types of NPCs that you want to create.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.syDZckLCMGZ8qxIe]{Create NPC}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792847776747,
+        "modifiedTime": 1792849749233,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.SeHCDutL0XSAQOdt"
+    },
+    {
+      "sort": 800000,
+      "name": "Create NPC Crew",
+      "type": "text",
+      "_id": "mdeH7cW6LXFeEBzz",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Similar to the @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.f61FiaIEjs2FbDRw.JournalEntryPage.SeHCDutL0XSAQOdt]{Create NPC Macro}, this uses the built-in NPC generator to generate random NPCs.</p><p>This macro is designed to generate a complete crew for a spacecraft. It is still a work in progress, and should be seen as an example of what could be done for now.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.4lOra13wvvpnMKvl]{Create NPC Crew}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792849671877,
+        "modifiedTime": 1792849748265,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.mdeH7cW6LXFeEBzz"
+    },
+    {
+      "sort": 900000,
+      "name": "Create Item",
+      "type": "text",
+      "_id": "aYchHES4U58havLG",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Creates an item and gives it to the selected token. Raises a dialog to ask for the item name if one isn't provided. Can also be called from within a journal page.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.YW54FvIoaVZyMaHc]{CreateItem}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792849765172,
+        "modifiedTime": 1792851249749,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.aYchHES4U58havLG"
+    },
+    {
+      "sort": 1000000,
+      "name": "Generate Name",
+      "type": "text",
+      "_id": "LPGT7SktVHy5keiO",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Generate a random name. </p><p>@UUID[Compendium.mgt2e.base-macros.Macro.f8KzFH79S1B0jPsp]{Generate Name}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792851257662,
+        "modifiedTime": 1792853128819,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.LPGT7SktVHy5keiO"
+    },
+    {
+      "sort": 1100000,
+      "name": "Heal",
+      "type": "text",
+      "_id": "UoPiQHwZiRhjQQnY",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Heal a token of all damage.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.3l0bt2q0ePrPxYgE]{Heal}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792853141746,
+        "modifiedTime": 1792853365458,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.UoPiQHwZiRhjQQnY"
+    },
+    {
+      "sort": 1200000,
+      "name": "MgT2e Docs",
+      "type": "text",
+      "_id": "SHhRA1Gbl53fVaxW",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Open this document. Add to the hot bar for quick access to the docs.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.Kh7bGkL02BIg92ze]{MgT2e Docs}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792853375036,
+        "modifiedTime": 1792853597327,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.SHhRA1Gbl53fVaxW"
+    },
+    {
+      "sort": 1300000,
+      "name": "Mirror Tokens",
+      "type": "text",
+      "_id": "VSif3rZpPVmGTjYO",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Flips tokens to rotate them 180°. The orientation of spacecraft and vehicle tokens included with the system were rotated 180° in version 0.23.3. Previously tokens had been drawn facing 'up', to match the common style for spacecraft and vehicles in SF.</p><p>Foundry though assumes tokens face 'down', and the auto-rotate option has everything moving backwards if this orientation isn't used. So the token graphics for vehicles and spacecraft have been flipped to match the Foundry style.</p><p>This means any tokens on scenes would be rotated. In order to provide an easy fix, this macro allows you to select any number of tokens, and executing it will flip them around.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.2Js9q4zwUd7rL5HS]{Mirror Tokens}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792853601516,
+        "modifiedTime": 1792854024802,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.VSif3rZpPVmGTjYO"
+    },
+    {
+      "sort": 1400000,
+      "name": "Recover PSI",
+      "type": "text",
+      "_id": "28XK8E1bmGTscAWq",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Similar to the Heal macro, this just resets PSI points back to maximum. Can be used as an example of how to heal a specific characteristic.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.6gkHw0riniG3Nrf1]{Recover PSI}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792854031846,
+        "modifiedTime": 1792854081063,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.28XK8E1bmGTscAWq"
+    },
+    {
+      "sort": 1500000,
+      "name": "Scale Ships",
+      "type": "text",
+      "_id": "0ktyrDh0gNgr1qgw",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Automatically scales spacecraft tokens. Spaeccraft are big, and their sizes vary considerably from a 10t launch or fighter up to a 250,000t dreadnaught. Spacecraft are also small relative to the grid scale.</p><p>This macro will apply a logorithmic scaling to tokens based on their tonnage. This does not take the scene grid into account. It scales tokens to fit a number of grid squares, regardless of how large that grid is.</p><p>There are four options, based on how large the tokens you want to focus on are:</p><ul><li><p>Smallcraft - for when most ships are fighters or smallcraft. Spacecraft over 100t will appear as very large. A Far Trader token will be 4x4 grid units in size.</p></li></ul><ul><li><p>Spacecraft - for when most ships are in the 100t to 1,000t range. Small fighters will appear as sub-grid sized tokens. A Far Trader is 3x3 grid units in size.</p></li><li><p>Large Ships - for when ships are 1,000t or larger. A Far Trader is 1x1 grid units in size.</p></li><li><p>Capital Ships - for when the main ships are massive capital ships. A Far Trader token will appear as a quarter of a grid.</p></li></ul><p>@UUID[Compendium.mgt2e.base-macros.Macro.BAV1Tj8rE0i9eTsT]{Scale Ships}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792854088118,
+        "modifiedTime": 1792854649311,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.0ktyrDh0gNgr1qgw"
+    },
+    {
+      "sort": 1600000,
+      "name": "Scale Worlds",
+      "type": "text",
+      "_id": "Cz4OC0yQ0R3XY2ny",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>This scales world tokens. If a token represents a World, then it will be scaled according to the actual size of the world. This can be used in spacecraft combat scenes, where ships are in orbit and you want a world as 'terrain' that matches the grid size.</p><p>Note that this assumes a sensible grid size. If the grid unit is not \"km\", or the grid scale is less than 100km, then the macro will not run.</p><p>Assuming these requirements are met, then the world token will be scaled according to the world size defined in the UWP.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.qaDapPxzkNdklekX]{Scale Worlds}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792854881114,
+        "modifiedTime": 1792855351565,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.Cz4OC0yQ0R3XY2ny"
+    },
+    {
+      "sort": 1700000,
+      "name": "Skill Request",
+      "type": "text",
+      "_id": "5kgkga7Ep0ZTBrMS",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Allows the GM (or another player) to make a skill roll request and put it into the chat. They can specify the target difficulty, skill required, and some text for the purpose of the roll and also success and failure messages.</p><p>Useful for when the GM wants all players to make a skill check for their character. A chat message is generated, and each player can simply click the button to roll for their character.</p><p>@UUID[Compendium.mgt2e.base-macros.Macro.6biNYKza2rPgNzGF]{Skill Request}</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.23.3.4-DEV",
+        "createdTime": 1792855360105,
+        "modifiedTime": 1792855469974,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!journal.pages!f61FiaIEjs2FbDRw.5kgkga7Ep0ZTBrMS"
+    }
+  ],
+  "categories": [],
+  "sort": 900000,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.23.3.4-DEV",
+    "createdTime": 1792846715550,
+    "modifiedTime": 1792854708669,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!journal!f61FiaIEjs2FbDRw"
+}

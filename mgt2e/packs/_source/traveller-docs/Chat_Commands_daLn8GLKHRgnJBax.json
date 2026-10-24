@@ -122,7 +122,7 @@
     },
     {
       "sort": 500000,
-      "name": "Macros",
+      "name": "Journal Macros",
       "type": "text",
       "_id": "eBUfwBRUB8sJVH8g",
       "system": {},
@@ -152,7 +152,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.11.6.13-DEV",
         "createdTime": 1739898202402,
-        "modifiedTime": 1787834461637,
+        "modifiedTime": 1792846767401,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
