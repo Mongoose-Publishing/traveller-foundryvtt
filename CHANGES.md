@@ -1,5 +1,21 @@
 # Release Notes
 
+# Develop
+
+* Inline characters can now specify new skills, e.g. profession.officeWorker lists it as
+  Profession (Office Worker).
+* Skill macros weren't passing a DM to the actual skill roll. Fixed.
+* Characteristic DM active effects were being applied even if an item wasn't active. This
+  has now been fixed.
+* Rotation of tokens in previous release meant vehicle facing was now being calculated
+  incorrectly. It now assumes 0° rotation is facing down.
+* Robots can now be added to spacecraft as crew members.
+* Allow the cash macro to specify a dice formula as the amount. Needed by Believer career.
+* Added support for a module to automatically open a document in a compendium pack on first
+  login after installation. It also adds a hot bar link so that the document can be easily
+  accessed later.
+* Documented the macros available by default.
+
 # 0.23.3 (Beta)
 
 **Breaking change:** In order to match FoundryVTT suggestions for tokens, the included vehicle

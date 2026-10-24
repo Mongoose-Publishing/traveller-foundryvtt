@@ -1,5 +1,54 @@
 export const MGT2 = {};
 
+globalThis.mgt2eJournalHotbarQueue = globalThis.mgt2eJournalHotbarQueue || Promise.resolve();
+
+// Useful scripts
+MGT2.addHotbarJournalMacro = async function(journalId, title, image) {
+    const document = await fromUuid(journalId);
+    if (document) {
+        // Now add to hotbar. This is called by compendium modules, and if multiple are
+        // starting up they can clash. Ensure each request to add a macro is queued.
+        globalThis.mgt2eJournalHotbarQueue = globalThis.mgt2eJournalHotbarQueue.then(async () => {
+            const macroName = title;
+            const existingSlot = Object.entries(game.user.hotbar).find(
+                ([slot, macroId]) => {
+                    if (!macroId) return false;
+                    const macro = game.macros.get(macroId);
+                    return macro?.command.includes(journalId);
+                });
+
+            if (!existingSlot) {
+                let emptySlot = null;
+                for (let slot = 1; slot <= 50; slot++) {
+                    const macroId = game.user.hotbar[slot];
+                    if (!macroId || !game.macros.has(macroId)) {
+                        emptySlot = slot;
+                        break;
+                    }
+                }
+                if (emptySlot) {
+                    const command = `(await fromUuid("${journalId}"))?.sheet.render(true);`;
+                    let macro = game.macros.find(m => m.name === macroName && m.command === command);
+                    if (!macro) {
+                        macro = await Macro.create({
+                            name: macroName,
+                            type: "script",
+                            img: image,
+                            command: command,
+                            ownership: {
+                                default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER
+                            }
+                        });
+                    }
+                    await game.user.assignHotbarMacro(macro, emptySlot);
+                    document.sheet.render(true);
+                }
+            }
+        });
+    }
+};
+
+
 MGT2.STATUS = {
   OKAY: 0,
   HURT: 1,
