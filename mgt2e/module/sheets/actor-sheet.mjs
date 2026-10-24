@@ -1916,14 +1916,12 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         if (!actor) {
            return;
         }
-        if ((this.actor.type === "spacecraft") && (actor.type === "traveller" || actor.type === "npc")) {
-            console.log(`Adding new crew member ${actor._id}`);
+        if ((this.actor.type === "spacecraft") && (["traveller", "npc", "robot"].includes(actor.type))) {
             if (!this.actor.system.crewed) {
                 this.actor.system.crewed = {"crew": {}, "passengers": {}, "roles": []};
             }
             this.actor.update({[`system.crewed.passengers.${actor._id}`]: {roles: ["NONE"]}});
         } else if (this.actor.type === "spacecraft" && (actor.type === "spacecraft" || actor.type === "vehicle")) {
-            console.log(`Docking ${actor.name} with ship`);
             if (!this.actor.system.docks) {
                 this.actor.system.docks = {};
             }
@@ -1952,7 +1950,6 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 await this.actor.update({"system.speed": this.actor.system.speed });
             }
             if (actor.system.size && !Number.isNaN(actor.system.size)) {
-                console.log(`Size [${actor.system.size}]`);
                 if (actor.system.size !== this.actor.system.size) {
                     html += `<p><b>Size:</b> ${actor.system.size}</p>`;
                 }
