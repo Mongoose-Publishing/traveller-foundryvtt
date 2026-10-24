@@ -25,13 +25,13 @@ function getTargetFacingHit(shooterX, shooterY, targetX, targetY, targetRotation
         relativeAngle += 360;
     }
     if (relativeAngle >= 315 || relativeAngle < 45) {
-        return "rear";
-    } else if (relativeAngle >= 45 && relativeAngle < 135) {
-        return "starboard";
-    } else if (relativeAngle >= 135 && relativeAngle < 225) {
         return "front";
-    } else {
+    } else if (relativeAngle >= 45 && relativeAngle < 135) {
         return "port";
+    } else if (relativeAngle >= 135 && relativeAngle < 225) {
+        return "rear";
+    } else {
+        return "starboard";
     }
 }
 
