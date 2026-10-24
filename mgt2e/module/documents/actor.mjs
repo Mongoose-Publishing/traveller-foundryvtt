@@ -350,7 +350,8 @@ export class MgT2Actor extends Actor {
         // so Foundry's proxy won't persist field writes from AE application)
         const chaDmBonuses = {};
         const chaBoonMap = {};   // char → "boon" or "bane"
-        for (const effect of this.allApplicableEffects()) {
+        //for (const effect of this.allApplicableEffects()) {
+        for (const effect of this.appliedEffects) {
             if (effect.disabled) continue;
             for (const change of effect.changes) {
                 const mDm = change.key.match(/^system\.characteristics\.(\w+)\.augdm$/);
