@@ -2,7 +2,7 @@
   "name": "MgT2e Docs",
   "type": "script",
   "img": "systems/mgt2e/icons/macros/mgt2e-docs.svg",
-  "command": "await Hotbar.toggleDocumentSheet(\"Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6\");",
+  "command": "(await fromUuid(\"Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6\"))?.sheet.render(true);",
   "author": "Zj6ESAn9IiciiMCF",
   "scope": "global",
   "folder": null,
@@ -18,7 +18,7 @@
     "systemId": "mgt2e",
     "systemVersion": "0.16.1.2-DEV",
     "createdTime": 1765545706123,
-    "modifiedTime": 1792015005073,
+    "modifiedTime": 1792858244285,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },

@@ -5,7 +5,7 @@
   "pages": [
     {
       "sort": 100000,
-      "name": "Compendium",
+      "name": "Macro Compendium",
       "type": "text",
       "_id": "D1rp90l2hL7gn5vY",
       "system": {},
@@ -16,7 +16,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>Included with the MgT2e system are a number of macros. These are provided as part of the <em><strong>MgT2e Base Macros</strong></em> compendium. They can be executed directly from the compendium, or dragged onto the world.</p><p>The more common ones can be placed on the hotbar.</p><p></p>"
+        "content": "<p>Included with the MgT2e system are a number of macros. These are provided as part of the <em><strong>MgT2e Base Macros</strong></em> compendium. They can be executed directly from the compendium, or dragged onto the world.</p><p>Note that you can drag the macro links in this journal to the hot bar for quick access.</p><p></p>"
       },
       "video": {
         "controls": true,
@@ -37,7 +37,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.23.3.4-DEV",
         "createdTime": 1792846794721,
-        "modifiedTime": 1792847238426,
+        "modifiedTime": 1792858870997,
         "lastModifiedBy": "mhUjqDVicnwIUaiq"
       },
       "_key": "!journal.pages!f61FiaIEjs2FbDRw.D1rp90l2hL7gn5vY"
