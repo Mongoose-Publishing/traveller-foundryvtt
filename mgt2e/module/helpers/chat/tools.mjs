@@ -353,6 +353,7 @@ Tools.requestedSkillCheck = async function(skillFqn, skillOptions) {
         "success": skillOptions.success,
         "failure": skillOptions.failure,
         "cost": skillOptions.cost,
+        "dm": skillOptions.dm,
         "quick": skillOptions.quick?skillOptions.quick:false,
         "rollType": skillOptions.rollType?skillOptions.rollType:"standard",
         "rollMode": skillOptions.rollMode?skillOptions.rollMode:game.settings.get("core", "rollMode")

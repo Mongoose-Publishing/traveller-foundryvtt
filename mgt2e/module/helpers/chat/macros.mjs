@@ -461,10 +461,10 @@ MgT2eMacros.skillCheck = async function(args, ask) {
             skillTitle: title,
             skillFqn: skillFqn,
             json: json,
+            skillBonus: (dm>0)?(`+${dm}`):dm,
             difficulty: args.target,
             description: args.text,
         }
-
         const content = await renderTemplate("systems/mgt2e/templates/chat/skill-request.html", contentData);
         let chatData = {
             content: content,

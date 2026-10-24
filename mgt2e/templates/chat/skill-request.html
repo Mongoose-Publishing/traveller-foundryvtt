@@ -21,6 +21,7 @@
             <button data-skillcheck="{{skillFqn}}" data-options='{{json}}'
                     title="{{skillTitle}}" class="skillcheck-button">
                 {{{skillTitle}}}
+                {{#if skillBonus includeZero=false}}{{skillBonus}}{{/if}}
             </button>
         </div>
     </div>
