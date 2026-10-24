@@ -217,7 +217,7 @@ MgT2eMacros.skillGain = function(args) {
     }
 };
 
-MgT2eMacros.cash = function(args) {
+MgT2eMacros.cash = async function(args) {
     let cash = args.cash;
     let pension = args.pension;
     let medical = args.medical;
@@ -229,26 +229,41 @@ MgT2eMacros.cash = function(args) {
 
         if (actor.system.finance) {
             let finance = actor.system.finance;
-
             if (cash) {
-                finance.cash = Number(finance.cash) + Number(cash);
+                try {
+                    const roll = await new Roll(cash).evaluate();
+                    cash = roll.total;
+                } catch (e) {}
+                finance.cash = (Number(finance.cash)||0) + (Number(cash)||0);
                 finance.cash = Math.max(0, finance.cash);
                 text += `Gain Cr${cash} to a total of Cr${finance.cash}.`;
             }
             if (pension) {
-                finance.pension = Number(finance.pension) + Number(pension);
+                try {
+                    const roll = await new Roll(pension).evaluate();
+                    pension = roll.total;
+                } catch (e) {}
+                finance.pension = (Number(finance.pension)||0) + (Number(pension)||0);
                 finance.pension = Math.max(0, finance.pension);
                 text += `Pension increases by Cr${pension} to a total of Cr${finance.pension}/year.`;
                 finance.description += `<p>Pension: Cr${pension} (${context})</p>`;
             }
             if (medical) {
-                finance.medicalDebt = Number(finance.medicalDebt) + Number(medical);
+                try {
+                    const roll = await new Roll(medical).evaluate();
+                    medical = roll.total;
+                } catch (e) {}
+                finance.medicalDebt = (Number(finance.medicalDebt)||0) + (Number(medical)||0);
                 finance.medicalDebt = Math.max(0, finance.medicalDebt);
                 text += `Medical debt increases by Cr${medical} to a total of Cr${finance.medicalDebt}.`;
                 finance.description += `<p>Medical Debt: Cr${medical} (${context})</p>`;
             }
             if (other) {
-                finance.otherIncome = Number(finance.otherIncome) + Number(other);
+                try {
+                    const roll = await new Roll(other).evaluate();
+                    other = roll.total;
+                } catch (e) {}
+                finance.otherIncome = (Number(finance.otherIncome)||0) + (Number(other)||0);
                 finance.otherIncome = Math.max(0, finance.otherIncome);
                 text += `Truther Patronage grants you an extra Cr${other} per year, to a total of Cr${finance.otherIncome}.`;
                 finance.description += `<p>Other Income: Cr${other} (${context})</p>`;
