@@ -46,12 +46,14 @@
                             {{selectOptions SOFTWARE_CLASS selected=system.software.class}}
                         </select>
                     </div>
-                    <div class="resource flex-group-left">
-                        <label for="system.software.interface" class="resource-label">Interface Type</label>
-                        <select class="writable" name="system.software.interface">
-                            {{selectOptions SOFTWARE_INTERFACE selected=system.software.interface}}
-                        </select>
-                    </div>
+                    {{#if (ifEquals system.software.class "personal" "spacecraft")}}
+                        <div class="resource flex-group-left">
+                            <label for="system.software.interface" class="resource-label">Interface Type</label>
+                            <select class="writable" name="system.software.interface">
+                                {{selectOptions SOFTWARE_INTERFACE selected=system.software.interface}}
+                            </select>
+                        </div>
+                    {{/if}}
                     <div class="resource flex-group-left">
                         <label for="system.installedOn" class="resource-label">{{localize "MGT2.Item.InstalledOn"}}</label>
                         <select class="writable installedOn" name="system.installedOn">

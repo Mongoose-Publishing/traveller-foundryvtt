@@ -17,6 +17,19 @@
             {{#if item.system.cargo}}
                 <div><b>{{localize 'MGT2.Item.BasePrice'}}:</b> Cr{{prettyNumber item.system.cargo.price 0 false}}</div>
                 <div><b>{{localize 'MGT2.Item.Tons'}}:</b> {{prettyNumber item.system.cargo.tons 0 false}}</div>
+            {{else if item.system.software}}
+                {{#if (ifEquals item.system.software.class "data")}}
+                    {{#if item.system.software.messageFrom}}
+                        <div class="grid-span-3">
+                            <b>{{localize 'MGT2.Item.MessageFrom'}}:</b> {{item.system.software.messageFrom}}
+                        </div>
+                    {{/if}}
+                    {{#if item.system.software.messageTo}}
+                        <div class="grid-span-3">
+                            <b>{{localize 'MGT2.Item.MessageTo'}}:</b> {{item.system.software.messageTo}}
+                        </div>
+                    {{/if}}
+                {{/if}}
             {{else if item.system.world}}
                 {{#if item.parent.system.world}}
                     <div class="grid-span-3 world-data-chat-header">

@@ -42,7 +42,8 @@ export class MgT2SoftwareItemSheet extends MgT2ItemSheet {
 
         context.SOFTWARE_CLASS = {
             "personal": game.i18n.localize("MGT2.Effects.Software.Class.personal"),
-            "spacecraft": game.i18n.localize("MGT2.Effects.Software.Class.spacecraft")
+            "spacecraft": game.i18n.localize("MGT2.Effects.Software.Class.spacecraft"),
+            "data": game.i18n.localize("MGT2.Effects.Software.Class.data")
         }
         context.SOFTWARE_TYPE = {
             "generic": game.i18n.localize("MGT2.Effects.Software.Type.generic"),
