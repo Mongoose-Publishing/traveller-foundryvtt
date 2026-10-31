@@ -44,6 +44,7 @@ import {
     launchSwarmHandler, showSwarmHandler
 } from "./helpers/spacecraft/spacecraft-utils.mjs";
 import {onManageActiveEffect} from "./helpers/effects.mjs";
+import {initConfigSettings, initSocketEvents, initStatusEffects} from "./init-tasks.mjs";
 const  { renderTemplate } = foundry.applications.handlebars;
 
 const { Actors, Items } = foundry.documents.collections;
@@ -68,302 +69,56 @@ Hooks.once('init', async function() {
         generateText
     };
 
-    game.settings.register("mgt2e", "systemSchemaVersion", {
-        config: false,
-        scope: "world",
-        type: Number,
-        default: 0
-    });
-
-    game.settings.register("mgt2e", "lastVersionReported", {
-        config: false,
-        scope: "world",
-        type: String,
-        default: "0.0.0"
-    });
-
-    game.settings.register('mgt2e', 'verboseSkillRolls', {
-        name: game.i18n.localize("MGT2.Settings.Verbose.Name"),
-        hint: game.i18n.localize("MGT2.Settings.Verbose.Hint"),
-        scope: 'world',
-        config: true,
-        type: Boolean,
-        default: true,
-        onChange: value => {
-            console.log(`Setting verboseSkillRolls to ${value}`)
-        }
-    });
-    game.settings.register('mgt2e', 'useChatIcons', {
-        name: game.i18n.localize("MGT2.Settings.ChatIcons.Name"),
-        hint: game.i18n.localize("MGT2.Settings.ChatIcons.Hint"),
-        scope: 'world',
-        config: true,
-        type: Boolean,
-        default: true,
-        onChange: value => {
-            console.log(`Setting iconsInChat to ${value}`)
-        }
-    });
-    game.settings.register('mgt2e', 'useEncumbrance', {
-        name: game.i18n.localize("MGT2.Settings.UseEncumbrance.Name"),
-        hint: game.i18n.localize("MGT2.Settings.UseEncumbrance.Hint"),
-        scope: 'world',
-        config: true,
-        type: Boolean,
-        default: true
-    });
-    game.settings.register('mgt2e', 'quickRolls', {
-        name: game.i18n.localize("MGT2.Settings.QuickRolls.Name"),
-        hint: game.i18n.localize("MGT2.Settings.QuickRolls.Hint"),
-        scope: 'client',
-        config: true,
-        type: Boolean,
-        default: false,
-        onChange: value => {
-            console.log(`Setting quickRolls to ${value}`)
-        }
-    });
-    game.settings.register('mgt2e', 'npcChaDamage', {
-        name: game.i18n.localize("MGT2.Settings.NPCChaDamage.Name"),
-        hint: game.i18n.localize("MGT2.Settings.NPCChaDamage.Hint"),
-        scope: 'world',
-        config: true,
-        type: Boolean,
-        default: true
-    });
-    game.settings.register('mgt2e', 'skillColumns', {
-        name: game.i18n.localize("MGT2.Settings.SkillColumns.Name"),
-        hint: game.i18n.localize("MGT2.Settings.SkillColumns.Hint"),
-        scope: 'client',
-        config: true,
-        type: String,
-        choices: {
-            "2": game.i18n.localize("MGT2.Settings.SkillColumns.Values.Two"),
-            "3": game.i18n.localize("MGT2.Settings.SkillColumns.Values.Three")
-        },
-        default: "3"
-    });
-    game.settings.register('mgt2e', 'skillFormat', {
-        name: game.i18n.localize("MGT2.Settings.SkillFormat.Name"),
-        hint: game.i18n.localize("MGT2.Settings.SkillFormat.Hint"),
-        scope: 'client',
-        config: true,
-        type: String,
-        choices: {
-            "rows": game.i18n.localize("MGT2.Settings.SkillFormat.Values.Rows"),
-            "columns": game.i18n.localize("MGT2.Settings.SkillFormat.Values.Columns")
-        },
-        default: "columns"
-    });
-
-    game.settings.register('mgt2e', 'currentYear', {
-       name: game.i18n.localize("MGT2.Settings.CurrentYear.Name"),
-       hint: game.i18n.localize("MGT2.Settings.CurrentYear.Hint"),
-       scope: 'world',
-       config: true,
-       type: Number,
-       default: 1105
-    });
-    game.settings.register('mgt2e', 'currentDay', {
-        name: game.i18n.localize("MGT2.Settings.CurrentDay.Name"),
-        hint: game.i18n.localize("MGT2.Settings.CurrentDay.Hint"),
-        scope: 'world',
-        config: true,
-        type: Number,
-        default: 1
-    });
-    game.settings.register('mgt2e', 'autoResizeSpacecraft', {
-        name: game.i18n.localize("MGT2.Settings.AutoResizeSpacecraft.Name"),
-        hint: game.i18n.localize("MGT2.Settings.AutoResizeSpacecraft.Hint"),
-        scope: 'world',
-        config: false,
-        type: Boolean,
-        default: true
-    });
-    game.settings.register('mgt2e', 'playerSheetNotification', {
-        name: game.i18n.localize("MGT2.Settings.PlayerSheetNotification.Name"),
-        hint: game.i18n.localize("MGT2.Settings.PlayerSheetNotification.Hint"),
-        scope: 'world',
-        config: true,
-        choices: {
-            "private": game.i18n.localize("MGT2.Settings.SheetNotification.Values.Private"),
-            "public": game.i18n.localize("MGT2.Settings.SheetNotification.Values.Public"),
-            "gm": game.i18n.localize("MGT2.Settings.SheetNotification.Values.GM")
-        },
-        default: "gm"
-    });
-    game.settings.register('mgt2e', 'gmSheetNotification', {
-        name: game.i18n.localize("MGT2.Settings.GMSheetNotification.Name"),
-        hint: game.i18n.localize("MGT2.Settings.GMSheetNotification.Hint"),
-        scope: 'world',
-        config: true,
-        choices: {
-            "private": game.i18n.localize("MGT2.Settings.SheetNotification.Values.Private"),
-            "public": game.i18n.localize("MGT2.Settings.SheetNotification.Values.Public")
-        },
-        default: "private"
-    });
-    game.settings.register('mgt2e', 'visionDefaultTraveller', {
-        name: game.i18n.localize("MGT2.Settings.PlayerVision.Traveller.Name"),
-        hint: game.i18n.localize("MGT2.Settings.PlayerVision.Traveller.Hint"),
-        scope: 'world',
-        config: false,
-        type: Boolean,
-        default: false
-    });
-    game.settings.register('mgt2e', 'visionDefaultNPC', {
-        name: game.i18n.localize("MGT2.Settings.PlayerVision.NPC.Name"),
-        hint: game.i18n.localize("MGT2.Settings.PlayerVision.NPC.Hint"),
-        scope: 'world',
-        config: false,
-        type: Boolean,
-        default: false
-    });
-    game.settings.register('mgt2e', 'visionDefaultCreature', {
-        name: game.i18n.localize("MGT2.Settings.PlayerVision.Creature.Name"),
-        hint: game.i18n.localize("MGT2.Settings.PlayerVision.Creature.Hint"),
-        scope: 'world',
-        config: false,
-        type: Boolean,
-        default: false
-    });
-    game.settings.register('mgt2e', 'visionDefaultSpacecraft', {
-        name: game.i18n.localize("MGT2.Settings.PlayerVision.Spacecraft.Name"),
-        hint: game.i18n.localize("MGT2.Settings.PlayerVision.Spacecraft.Hint"),
-        scope: 'world',
-        config: false,
-        type: Boolean,
-        default: false
-    });
-    game.settings.register('mgt2e', 'autoPlayerCharacter', {
-        name: game.i18n.localize("MGT2.Settings.AutoPlayerCharacter.Name"),
-        hint: game.i18n.localize("MGT2.Settings.AutoPlayerCharacter.Hint"),
-        scope: 'world',
-        config: true,
-        type: Boolean,
-        default: true
-    });
-    game.settings.register('mgt2e', 'defaultTraveller', {
-        name: game.i18n.localize("MGT2.Settings.DefaultTraveller.Name"),
-        hint: game.i18n.localize("MGT2.Settings.DefaultTraveller.Hint"),
-        scope: 'world',
-        config: true,
-        type: String,
-        default: "DEFAULT TRAVELLER"
-    });
-    game.settings.register('mgt2e', 'blastEffectDivergence', {
-        name: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Name"),
-        hint: game.i18n.localize("MGT2.Settings.BlastEffectDivergence.Hint"),
-        scope: 'world',
-        config: true,
-        "choices": {
-            "0": "None",
-            "1": "Low",
-            "2": "Medium",
-            "3": "High"
-        },
-        default: "0"
-    });
-    game.settings.register('mgt2e', "splitAttackDamage", {
-       name: game.i18n.localize("MGT2.Settings.SplitAttackDamage.Name"),
-       hint: game.i18n.localize("MGT2.Settings.SplitAttackDamage.Hint"),
-       scope: "client",
-       config: true,
-       type: Boolean,
-       default: false
-    });
-    game.settings.register('mgt2e', "hexInWorldMenus", {
-        name: game.i18n.localize("MGT2.Settings.HexInWorldMenus.Name"),
-        hint: game.i18n.localize("MGT2.Settings.HexInWorldMenus.Hint"),
-        scope: "client",
-        config: true,
-        type: Boolean,
-        default: false
-    });
-    game.settings.register('mgt2e', "damageManager", {
-        name: game.i18n.localize("MGT2.Settings.DamageManager.Name"),
-        hint: game.i18n.localize("MGT2.Settings.DamageManager.Hint"),
-        scope: "world",
-        config: true,
-        type: String,
-        default: ""
-    });
+    initConfigSettings();
 
     // Add custom constants for configuration.
     CONFIG.MGT2 = MGT2;
 
-  /**
-   * Set an initiative formula for the system
-   * @type {String}
-   */
-  CONFIG.Combat.initiative = {
-    formula: "2D6 - 8 + @initiative.value",
-    decimals: 0
-  };
+    /**
+    * Set an initiative formula for the system
+    * @type {String}
+    */
+    CONFIG.Combat.initiative = {
+        formula: "2D6 - 8 + @initiative.value",
+        decimals: 0
+    };
 
-  // v13 only: https://foundryvtt.wiki/en/development/api/sockets
-  // CONFIG.queries["mgt2e.tradeBuyGoods"] = tradeBuyGoodsHandler;
+    // v13 only: https://foundryvtt.wiki/en/development/api/sockets
+    // CONFIG.queries["mgt2e.tradeBuyGoods"] = tradeBuyGoodsHandler;
 
-  // Define custom Document classes
-  CONFIG.Actor.documentClass = MgT2Actor;
-  CONFIG.Item.documentClass = MgT2Item;
-  CONFIG.ActiveEffect.documentClass = MgT2Effect;
+    // Define custom Document classes
+    CONFIG.Actor.documentClass = MgT2Actor;
+    CONFIG.Item.documentClass = MgT2Item;
+    CONFIG.ActiveEffect.documentClass = MgT2Effect;
 
-  //CONFIG.debug.hooks = true;
+    //CONFIG.debug.hooks = true;
 
-  // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("mgt2e", MgT2ActorSheet, { label: "Traveller Sheet", makeDefault: true });
-  Actors.registerSheet("mgt2e", MgT2NpcActorSheet, { label: "NPC Sheet", types: [ "npc"], makeDefault: false });
-  Actors.registerSheet("mgt2e", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
-  Actors.registerSheet("mgt2e", MgT2WorldActorSheet, { label: "World Sheet", types: [ "world"], makeDefault: true });
-  Actors.registerSheet("mgt2e", MgT2VehicleActorSheet, { label: "Vehicle Sheet", types: [ "vehicle"], makeDefault: true });
-  Actors.registerSheet("mgt2e", MgT2eVehicleSheet, { label: "Vehicle Sheet 2", types: [ "vehicle"], makeDefault: false });
-  Actors.registerSheet("mgt2e", MgT2eRobotSheet, { label: "Robot Sheet", types: [ "robot"], makeDefault: true });
-  Actors.registerSheet("mgt2e", MgT2SwarmActorSheet, { label: "Swarm Sheet", types: [ "swarm"], makeDefault: true });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
-  Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
-  Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "worlddata"], makeDefault: true });
-  Items.registerSheet("mgt2e", MgT2SoftwareItemSheet, { label: "Software", types: [ "software"], makeDefault: true });
-  Items.registerSheet("mgt2e", MgT2eOptionSheet, { label: "Option", types: [ "option"], makeDefault: true });
+    // Register sheet application classes
+    Actors.unregisterSheet("core", ActorSheet);
+    Actors.registerSheet("mgt2e", MgT2ActorSheet, { label: "Traveller Sheet", makeDefault: true });
+    Actors.registerSheet("mgt2e", MgT2NpcActorSheet, { label: "NPC Sheet", types: [ "npc"], makeDefault: false });
+    Actors.registerSheet("mgt2e", MgT2CreatureActorSheet, { label: "Creature Sheet", types: [ "creature"], makeDefault: false });
+    Actors.registerSheet("mgt2e", MgT2WorldActorSheet, { label: "World Sheet", types: [ "world"], makeDefault: true });
+    Actors.registerSheet("mgt2e", MgT2VehicleActorSheet, { label: "Vehicle Sheet", types: [ "vehicle"], makeDefault: true });
+    Actors.registerSheet("mgt2e", MgT2eVehicleSheet, { label: "Vehicle Sheet 2", types: [ "vehicle"], makeDefault: false });
+    Actors.registerSheet("mgt2e", MgT2eRobotSheet, { label: "Robot Sheet", types: [ "robot"], makeDefault: true });
+    Actors.registerSheet("mgt2e", MgT2SwarmActorSheet, { label: "Swarm Sheet", types: [ "swarm"], makeDefault: true });
+    Items.unregisterSheet("core", ItemSheet);
+    Items.registerSheet("mgt2e", MgT2ItemSheet, { label: "Item Sheet", makeDefault: true });
+    Items.registerSheet("mgt2e", MgT2AssociateItemSheet, { label: "Associate Sheet", types: [ "associate"], makeDefault: true });
+    Items.registerSheet("mgt2e", MgT2WorldDataItemSheet, { label: "World Data Sheet", types: [ "worlddata"], makeDefault: true });
+    Items.registerSheet("mgt2e", MgT2SoftwareItemSheet, { label: "Software", types: [ "software"], makeDefault: true });
+    Items.registerSheet("mgt2e", MgT2eOptionSheet, { label: "Option", types: [ "option"], makeDefault: true });
 
-  foundry.applications.apps.DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
-  foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
+    foundry.applications.apps.DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
+    foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "mgt2e", MgT2EffectSheet, { makeDefault: true});
 //  ActiveEffects.unregisterSheet("core", ActiveEffectSheet);
 //  ActiveEffects.registerSheet("mgt2e", MgT2EffectSheet, { makeDefault: true });
 
-    // Sockets
-    game.socket.on("system.mgt2e", (data) => {
-        if (game.user.uuid === data.userId) {
-            if (data.type === "showSwarm") {
-                showSwarmHandler(data);
-            } else if (data.type === "applyDamageToActor" || data.type === "applyDamageToPerson") {
-                Tools.applyDamageHandler(data);
-            }
-        } else if (game.user === game.users.activeGM) {
-            if (data.type === "tradeBuyGoods") {
-                tradeBuyGoodsHandler(data);
-            } else if (data.type === "tradeSellGoods") {
-                tradeSellGoodsHandler(data);
-            } else if (data.type === "tradeBuyFreight") {
-                tradeBuyFreightHandler(data);
-            } else if (data.type === "tradeSellFreight") {
-                tradeSellFreightHandler(data);
-            } else if (data.type === "tradeEmbarkPassenger") {
-                tradeEmbarkPassengerHandler(data);
-            } else if (data.type === "tradeDisembarkPassenger") {
-                tradeDisembarkPassengerHandler(data);
-            } else if (data.type === "worldDropBroker") {
-                worldDropBrokerHandler(data);
-            } else if (data.type === "launchSwarm") {
-                launchSwarmHandler(data);
-            }
-        }
-    });
+    await initSocketEvents();
 
-  // Preload Handlebars templates.
-  return preloadHandlebarsTemplates();
+    // Preload Handlebars templates.
+    return preloadHandlebarsTemplates();
 });
 
 Hooks.once("init", function() {
@@ -419,111 +174,9 @@ Hooks.once("init", function() {
        }
     });
 
-    CONFIG.statusEffects.push({
-        id: "destroyed",
-        name: "EFFECT.Destroyed",
-        img: "systems/mgt2e/icons/effects/destroyed.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "injured",
-        name: "EFFECT.Injured",
-        img: "systems/mgt2e/icons/effects/injured.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "needsFirstAid",
-        name: "EFFECT.FirstAid",
-        img: "systems/mgt2e/icons/effects/firstaid.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "needsSurgery",
-        name: "EFFECT.Surgery",
-        img: "systems/mgt2e/icons/effects/surgery.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "encumbered",
-        name: "EFFECT.Encumbered",
-        img: "systems/mgt2e/icons/effects/encumbered.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "vaccSuit",
-        name: "EFFECT.VaccSuit",
-        img: "systems/mgt2e/icons/effects/vaccsuit.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "surprised",
-        name: "EFFECT.Surprised",
-        img: "systems/mgt2e/icons/effects/surprised.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "aware",
-        name: "EFFECT.Aware",
-        img: "systems/mgt2e/icons/effects/aware.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "reaction",
-        name: "EFFECT.Reaction",
-        img: "systems/mgt2e/icons/effects/reaction.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "fatigued",
-        name: "EFFECT.Fatigued",
-        img: "systems/mgt2e/icons/effects/fatigued.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "physical",
-        name: "EFFECT.Physical",
-        img: "systems/mgt2e/icons/effects/physical.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "melee",
-        name: "EFFECT.Melee",
-        img: "systems/mgt2e/icons/effects/melee.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "gunCombat",
-        name: "EFFECT.GunCombat",
-        img: "systems/mgt2e/icons/effects/guncombat.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "armour",
-        name: "EFFECT.Armour",
-        img: "systems/mgt2e/icons/effects/armour.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "inCover",
-        name: "EFFECT.InCover",
-        img: "systems/mgt2e/icons/effects/inCover.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "hiding",
-        name: "EFFECT.Hiding",
-        img: "systems/mgt2e/icons/effects/hiding.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "stunned",
-        name: "EFFECT.Stunned",
-        img: "icons/svg/daze.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "tactics",
-        name: "EFFECT.Tactics",
-        img: "systems/mgt2e/icons/effects/tactics.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "initiative",
-        name: "EFFECT.Initiative",
-        img: "systems/mgt2e/icons/effects/initiative.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "dodge",
-        name: "EFFECT.Dodge",
-        img: "systems/mgt2e/icons/effects/dodge.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "critical",
-        name: "EFFECT.Critical",
-        img: "systems/mgt2e/icons/effects/destroyed.svg"
-    });
+    // Define status effects. Reset to empty before adding in what we need.
+    CONFIG.statusEffects = [];
+    initStatusEffects();
 })
 
 async function openActorSheet(actorId) {
