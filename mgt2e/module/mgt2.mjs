@@ -44,6 +44,7 @@ import {
     launchSwarmHandler, showSwarmHandler
 } from "./helpers/spacecraft/spacecraft-utils.mjs";
 import {onManageActiveEffect} from "./helpers/effects.mjs";
+import {getWeaponRangeBands, getWeaponRangeUnit, renderWeaponRangeTable} from "./helpers/utils/range-utils.mjs";
 const  { renderTemplate } = foundry.applications.handlebars;
 
 const { Actors, Items } = foundry.documents.collections;
@@ -2423,14 +2424,9 @@ Handlebars.registerHelper('showTraits', function(key, traits) {
 Handlebars.registerHelper('showWeaponRange', function(item) {
     let html = `<div class="grid grid-4col weapon-range">`;
 
-    const range = parseInt(item.system.weapon.range);
-    const shortRange = range / 4;
-    const longRange = range * 2;
-    const extremeRange = range * 4;
-    let unit = "m";
-    if (item.system.weapon.scale === "vehicle") {
-        unit = "km";
-    }
+    const bands = getWeaponRangeBands(item.system.weapon.range, item.system.weapon.scale);
+    const {short: shortRange, medium: range, long: longRange, extreme: extremeRange} = bands.display;
+    const unit = bands.unit;
 
     html += `<div><label>Short (+1)</label><span>${shortRange}${unit}</span></div>`;
     html += `<div><label>Medium</label><span>${range}${unit}</span></div>`;
@@ -2867,7 +2863,7 @@ Handlebars.registerHelper("itemBlock", function(actor, item, types) {
     switch (item.type) {
         case "weapon":
             if (system.weapon) {
-                html += `<b>D:</b> ${system.weapon.damage} <b>R:</b> ${system.weapon.range}m `;
+                html += `<b>D:</b> ${system.weapon.damage} <b>R:</b> ${system.weapon.range}${getWeaponRangeUnit(system.weapon.scale)} `;
             }
             break;
         case "armour":
@@ -2988,13 +2984,7 @@ Handlebars.registerHelper("weaponMountBlock", function(mount) {
         if (system.weapon.scale === "spacecraft") {
             html += `${game.i18n.localize("MGT2.Spacecraft.Range." + system.weapon.spaceRange)}`;
         } else {
-            const shortRange = parseInt(system.weapon.range / 4);
-            const longRange = parseInt(system.weapon.range * 2);
-            const extremeRange = parseInt(system.weapon.range * 4);
-            const unit = (system.weapon.scale === "vehicle")?"km":"m";
-            html += `<table><tr><th>${game.i18n.localize("MGT2.Attack.short")} (+1)</th><th>${game.i18n.localize("MGT2.Attack.medium")}</th><th>${game.i18n.localize("MGT2.Attack.long")} (-2)</th><th>${game.i18n.localize("MGT2.Attack.extreme")} (-4)</th></tr>`;
-            html += `<tr><td>${shortRange}${unit}</td><td>${system.weapon.range}${unit}</td><td>${longRange}${unit}</td><td>${extremeRange}${unit}</td></tr>`;
-            html += "</table>";
+            html += renderWeaponRangeTable(system.weapon, key => game.i18n.localize(key));
         }
 
         // Can anyone make an attack? Need to look at crew roles.
@@ -3064,4 +3054,3 @@ Hooks.once("ready", async function() {
         }
     }
 });
-

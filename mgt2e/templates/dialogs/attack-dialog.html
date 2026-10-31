@@ -31,10 +31,20 @@
             <span>{{weaponItem.system.weapon.damage}}</span>
         </div>
 
+        {{#if canAim}}
+            <div class="resource flex-group-center">
+                <label class="field-label">Aiming actions</label>
+                <select name="aimingActions" data-action="changeAimingActions">
+                    {{selectOptions AIMING_ACTIONS selected=aimingActions}}
+                </select>
+                <small>Track consecutive actions on the same target. Reset to 0 if the target changes. Do not add this bonus again in DM. Full Auto cannot use aiming actions.</small>
+            </div>
+        {{/if}}
+
         <div class="resource flex-group-center grid-span-1">
             <label class="field-label">{{localize 'MGT2.Range'}}</label>
             <select name="range" data-action="changeRange">
-                {{selectOptions RANGE_SELECT }}
+                {{selectOptions RANGE_SELECT selected=selectedRangeDM}}
             </select>
         </div>
 
@@ -59,6 +69,10 @@
     </div>
 
     <div>Skill DM: {{skillDM}}</div>
+
+    {{#if manualRangeRequired}}
+        <p class="manual-range-message">No eligible target. Select a range to make a manual targetless attack.</p>
+    {{/if}}
 
     {{#if weaponItem.system.weapon.traits}}
         <div>

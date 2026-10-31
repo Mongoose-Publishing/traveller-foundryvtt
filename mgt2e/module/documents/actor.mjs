@@ -6,6 +6,7 @@ import {getTraitValue, hasTrait, isNonZero, isNumber, skillLabel} from "../helpe
 import {MgT2SpacecraftDamageDialog} from "../helpers/spacecraft-damage-dialog.mjs";
 import {setSpacecraftCriticalLevel} from "../helpers/spacecraft/criticals.mjs";
 import {MgT2VehicleDamageDialog} from "../helpers/vehicle-damage-dialog.mjs";
+import {getArmourSkillPenalty} from "../helpers/utils/armour-penalty.mjs";
 const  { renderTemplate } = foundry.applications.handlebars;
 
 /**
@@ -13,6 +14,10 @@ const  { renderTemplate } = foundry.applications.handlebars;
  * @extends {Actor}
  */
 export class MgT2Actor extends Actor {
+
+    getArmourSkillPenalty() {
+        return getArmourSkillPenalty(this);
+    }
 
   /** @override */
   prepareData() {

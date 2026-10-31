@@ -1,6 +1,8 @@
 import {rollAttack, hasTrait, getTraitValue, skillLabel} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
 import {getAttackerTokens} from "./utils/combat-utils.mjs";
+import {getWeaponRangeBands} from "./utils/range-utils.mjs";
+import {AIMING_AUTO_WARNING, hasAimingAutoConflict, isCharacterAimingActor, parseAimingActions} from "./utils/attack-modifiers.mjs";
 
 export class MgT2AttackDialog extends Application {
     static get defaultOptions() {
@@ -27,6 +29,7 @@ export class MgT2AttackDialog extends Application {
         this.auto = 1;
         this.fullAuto = 1; // Full auto uses three times the ammo.
         this.rangeUnit = "m";
+        this.aimingActions = 0;
 
         if (hasTrait(this.weapon.system.weapon.traits, "auto")) {
             this.auto = getTraitValue(this.weapon.system.weapon.traits, "auto");
@@ -74,22 +77,25 @@ export class MgT2AttackDialog extends Application {
         this.damage = this.damage.toUpperCase().replace(/D6/, "D");
         this.damage = this.damage.replace(/ *\* *10/, "D");
 
-        this.range = parseInt(this.weapon.system.weapon.range);
+        const rangeBands = getWeaponRangeBands(this.weapon.system.weapon.range, weapon.system.weapon.scale);
+        this.range = rangeBands.display.medium;
         this.melee = true;
         if (this.range > 0) {
             this.melee = false;
-            this.shortRange = parseInt(this.range / 4);
-            this.longRange = parseInt(this.range * 2);
-            this.extremeRange = parseInt(this.range * 4);
-            if (weapon.system.weapon.scale === "vehicle") {
-                this.rangeUnit = "km";
-            }
+            this.shortRange = rangeBands.display.short;
+            this.longRange = rangeBands.display.long;
+            this.extremeRange = rangeBands.display.extreme;
+            this.rangeUnit = rangeBands.unit;
 
             this.RANGES = {};
             this.RANGES["+1"] = `${game.i18n.localize("MGT2.Attack.short")} (${this.shortRange}${this.rangeUnit}, +1)`;
             this.RANGES["+0"] = `${game.i18n.localize("MGT2.Attack.medium")} (${this.range}${this.rangeUnit}, +0)`;
             this.RANGES["-2"] = `${game.i18n.localize("MGT2.Attack.long")} (${this.longRange}${this.rangeUnit}, -2)`;
             this.RANGES["-4"] = `${game.i18n.localize("MGT2.Attack.extreme")} (${this.extremeRange}${this.rangeUnit}, -4)`;
+            if (isCharacterAimingActor(this.actor) && weapon.system.weapon.scale !== "spacecraft") {
+                this.AIMING_ACTIONS = {};
+                for (let i = 0; i <= 6; i++) this.AIMING_ACTIONS[i] = `${i}`;
+            }
         } else {
             this.parryBonus = weapon.system.weapon.parryBonus;
             if (!this.parryBonus) {
@@ -225,6 +231,8 @@ export class MgT2AttackDialog extends Application {
             "psiDmgBonus": this.psiDmgBonus,
             "psiApBonus": this.psiApBonus,
             "RANGES": this.RANGES,
+            "AIMING_ACTIONS": this.AIMING_ACTIONS,
+            "aimingActions": this.aimingActions,
             "ROLLTYPES": this.ROLLTYPES,
             "attackerName": this.attackerName,
             "TARGETS": this.TARGETS,
@@ -252,6 +260,18 @@ export class MgT2AttackDialog extends Application {
         let autoOption = "single";
         if (html.find(".attackDialogAuto")[0]) {
             autoOption = html.find(".attackDialogAuto")[0].value;
+        }
+        let aimingActions = 0;
+        if (html.find(".attackDialogAiming")[0]) {
+            aimingActions = parseAimingActions(html.find(".attackDialogAiming")[0].value);
+            if (aimingActions === null) {
+                ui.notifications.warn("Aiming actions must be a whole number from 0 to 6.");
+                return;
+            }
+        }
+        if (hasAimingAutoConflict(aimingActions, autoOption)) {
+            ui.notifications.warn(AIMING_AUTO_WARNING);
+            return;
         }
 
         let psiPoints = 0;
@@ -295,6 +315,7 @@ export class MgT2AttackDialog extends Application {
             "rollType": rollType,
             "rangeDM": rangeDM,
             "autoOption": autoOption,
+            "aimingActions": aimingActions,
             "isParry": false,
             "shotsFired": shotsFired,
             "psiDM": this.PSI_DM,

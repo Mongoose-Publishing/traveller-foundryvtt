@@ -13,6 +13,8 @@ import {MgT2Item} from "../documents/item.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {NpcIdCard} from "../helpers/id-card.mjs";
 import {randomiseAssociate} from "../helpers/utils/character-utils.mjs";
+import {dispatchSkillCheck} from "../helpers/utils/skill-roll-dispatch.mjs";
+import {buildTacticsInitiativeFormula} from "../helpers/utils/armour-penalty.mjs";
 import {
     buyCargoDialog, embarkPassengerDialog,
     fuelCost,
@@ -677,7 +679,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
 
         let weight = 0;
         let skillNeeded = -3;
-        let vs = this.actor.system.skills.vaccsuit;
+        const vs = this.actor.system.skills.vaccsuit;
 
         // Iterate through items, allocating to containers
         for (let i of context.items) {
@@ -754,20 +756,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         if (!this.actor.vaccLock) {
             this.actor.vaccLock = true;
             try {
-                let isVaccSuit = false;
-                if (skillNeeded >= 0) {
-                    let vaccSkill = -3;
-                    if (vs && vs.trained) {
-                        vaccSkill = parseInt(vs.value);
-                        if (vaccSkill < skillNeeded) {
-                            this.actor.system.modifiers.encumbrance.auto -= (skillNeeded - vaccSkill);
-                            isVaccSuit = true;
-                        }
-                    } else {
-                        this.actor.system.modifiers.encumbrance.auto += vaccSkill;
-                        isVaccSuit = true;
-                    }
-                }
+                const isVaccSuit = this.actor.getArmourSkillPenalty() < 0;
                 await this.actor.setVaccSuitEffect(isVaccSuit);
             } finally {
                 delete this.actor.vaccLock;
@@ -1775,7 +1764,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 shipActor.setFlag("mgt2e", "initPilotName", actorCrew.name);
             } else if (action.special === "tacticsInit") {
                 let tacticsDM = actorCrew.getSkillValue("tactics.naval", { "addcha": true });
-                let roll = await new Roll("2D6 - 8 + " + tacticsDM).evaluate();
+                const dice = buildTacticsInitiativeFormula(tacticsDM, actorCrew);
+                let roll = await new Roll(dice).evaluate();
 
                 shipActor.setFlag("mgt2e", "initTacticsDM", roll.total);
                 shipActor.setFlag("mgt2e", "initTacticsName", actorCrew.name);
@@ -2927,23 +2917,20 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 skillFqn = skillFqn + "." + specId;
             }
         }
-        let quickRoll = game.settings.get("mgt2e", "quickRolls");
-        if (event.shiftKey) {
-            quickRoll = !quickRoll;
-        }
         if (event.ctrlKey || event.metaKey) {
             new MgT2XPDialog(actor, skillId, specId, cha).render(true);
-        } else if (!quickRoll) {
-            new MgT2SkillDialog(actor, skillFqn, {
-                "cha": cha
-            }).render(true);
         } else {
-            // Roll directly with no options.
-            rollSkill(actor, skillFqn, {
-                "speciality": specId,
-                "cha": skillDefault,
-                "rollType": "normal",
-                "difficulty": 8
+            dispatchSkillCheck({
+                actor,
+                skillFqn,
+                speciality: specId,
+                dialogCharacteristic: cha,
+                quickCharacteristic: skillDefault,
+                quickRolls: game.settings.get("mgt2e", "quickRolls"),
+                shiftKey: event.shiftKey,
+                openDialog: (dialogActor, dialogSkill, options) =>
+                    new MgT2SkillDialog(dialogActor, dialogSkill, options).render(true),
+                rollSkill
             });
         }
     }

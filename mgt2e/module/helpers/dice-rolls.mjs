@@ -7,6 +7,9 @@
  */
 
 import {MGT2} from "./config.mjs";
+import {appendArmourPenalty, getArmourSkillPenalty} from "./utils/armour-penalty.mjs";
+import {AIMING_AUTO_WARNING, appendAimedModifier, hasAimingAutoConflict} from "./utils/attack-modifiers.mjs";
+import {getRangeBandDistance} from "./utils/range-utils.mjs";
 
 const { renderTemplate } = foundry.applications.handlebars;
 const TextEditor = foundry.applications.ux.TextEditor;
@@ -146,6 +149,10 @@ export function printWeaponTraits(traits) {
 }
 
 export async function rollAttack(actor, weapon, attackOptions) {
+    if (hasAimingAutoConflict(attackOptions?.aimingActions, attackOptions?.autoOption)) {
+        ui.notifications.warn(AIMING_AUTO_WARNING);
+        return null;
+    }
     const   system = actor?actor.system:null;
     let     content = "Attack";
 
@@ -161,23 +168,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
     let rangeDistance = baseRange;
     let rangeUnit = "m";
     if (attackOptions.rangeDM !== undefined && attackOptions.rangeDM !== null && !attackOptions.isParry) {
-        switch (attackOptions.rangeDM) {
-            case +1:
-                rangeBand = "Short";
-                rangeDistance = parseInt(rangeDistance / 4);
-                break;
-            case 0:
-                rangeBand = "Medium";
-                break;
-            case -2:
-                rangeBand = "Long";
-                rangeDistance = parseInt(rangeDistance * 2);
-                break;
-            case -4:
-                rangeBand = "Extreme";
-                rangeDistance = parseInt(rangeDistance * 4);
-                break;
-        }
+        ({band: rangeBand, distance: rangeDistance} = getRangeBandDistance(baseRange, attackOptions.rangeDM));
         if (weapon.system.weapon.scale === "vehicle") {
             rangeUnit = "km";
         }
@@ -194,6 +185,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
     if (attackOptions.skillDM !== 0) {
         dice += ` + ${attackOptions.skillDM}[Skill]`;
     }
+    dice = appendArmourPenalty(dice, actor);
     if (system) {
         if (system.modifiers && (parseInt(system.modifiers.encumbrance.dm)||0) !== 0) {
             dice += ` - ${Math.abs(parseInt(system.modifiers.encumbrance.dm))}[Enc]`;
@@ -374,6 +366,7 @@ export async function rollAttack(actor, weapon, attackOptions) {
             dice += ` - ${Math.abs(parseInt(attackOptions.dm))}[DM]`;
         }
     }
+    dice = appendAimedModifier(dice, attackOptions, weapon, actor);
     if (attackOptions.rangeDM) {
         if (attackOptions.rangeDM > 0) {
             dice += ` + ${attackOptions.rangeDM}[Range]`;
@@ -684,6 +677,7 @@ export async function rollSpaceAttack(starship, gunner, weaponItem, options) {
         score = options.attackDM;
     }
     let dice = `${options.results?options.results.dice:"2D6"} + ${score}`;
+    dice = appendArmourPenalty(dice, gunner);
 
     let damageDice = weaponItem.system.weapon.damage;
 
@@ -1041,6 +1035,13 @@ export async function rollSkill(actor, skill, options) {
                 }
             }
         }
+    }
+    const armourPenalty = typeof actor?.getArmourSkillPenalty === "function"
+        ? actor.getArmourSkillPenalty()
+        : getArmourSkillPenalty(actor);
+    if (armourPenalty !== 0) {
+        dice = appendArmourPenalty(dice, actor);
+        skillNotes += ` (${armourPenalty}Armour)`;
     }
     if (actor && actor.getEffect("reaction")) {
         const react = Math.abs(parseInt(actor.getEffect("reaction").getFlag("mgt2e", "value")) ||0);

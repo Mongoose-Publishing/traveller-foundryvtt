@@ -1,4 +1,5 @@
 import {MGT2} from "../config.mjs";
+import {distanceToMetres} from "./range-utils.mjs";
 
 // Returns all the valid tokens that could be the attacker.
 export function getAttackerTokens(actor) {
@@ -90,12 +91,15 @@ export function getTargetData(attackerToken) {
         }
     }
 
-    const X = parseInt(attackerToken.center.x);
-    const Y = parseInt(attackerToken.center.y);
-    // Assume everything is in metres.
-    let unitMultiplier = 1;
-    if (canvas.grid.units === "km") {
-        unitMultiplier = 1000;
+    const X = Number(attackerToken.center.x);
+    const Y = Number(attackerToken.center.y);
+    if (!Number.isFinite(X) || !Number.isFinite(Y)) {
+        ui.notifications.warn("Unable to calculate target ranges: attacker token position is invalid.");
+        return [];
+    }
+    if (distanceToMetres(0, canvas.grid.units) === null) {
+        ui.notifications.warn(`Unable to calculate target ranges: unsupported scene distance unit '${canvas.grid.units}'.`);
+        return [];
     }
 
     // Get data on every token.
@@ -106,14 +110,17 @@ export function getTargetData(attackerToken) {
             continue;
         }
         if (["traveller", "npc", "robot", "vehicle", "spacecraft", "swarm"].includes(token?.actor?.type)) {
-            let x = parseInt(token.center.x);
-            let y = parseInt(token.center.y);
+            const x = Number(token.center.x);
+            const y = Number(token.center.y);
+            if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
             const dx = Math.abs(X - x);
             const dy = Math.abs(Y - y);
 
             // True Euclidean distance.
             let d = Math.sqrt(dx * dx + dy * dy);
-            let metres = (d / canvas.grid.size) * canvas.grid.distance * unitMultiplier;
+            const preciseMetres = distanceToMetres((d / canvas.grid.size) * canvas.grid.distance, canvas.grid.units);
+            if (preciseMetres === null) continue;
+            let metres = preciseMetres;
             if (metres > 10) {
                 metres = Math.round(metres);
             } else {
@@ -122,7 +129,8 @@ export function getTargetData(attackerToken) {
             const target = {
                 token: token,
                 name: token.name,
-                distance: metres
+                distance: metres,
+                distanceMetres: preciseMetres
             }
             if (token.actor.type === "vehicle") {
                 // Work out facing?
@@ -160,8 +168,8 @@ export function getTargetData(attackerToken) {
 
             // Sort according to distance.
             targetData.sort((a, b) => {
-                if (a.distance !== b.distance) {
-                    return a.distance - b.distance;
+                if (a.distanceMetres !== b.distanceMetres) {
+                    return a.distanceMetres - b.distanceMetres;
                 } else {
                     return a.name.localeCompare(b.name);
                 }
