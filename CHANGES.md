@@ -15,6 +15,13 @@
   login after installation. It also adds a hot bar link so that the document can be easily
   accessed later.
 * Documented the macros available by default.
+* Added a new software type - Data. This represents emails, database entries and other purely
+  information items which can be help by Travellers or found on a computer.
+* Removed unused status effects. This removes a number of standard FoundryVTT status effects,
+  which are more suited to D&D and similar fantasy games. There is a world setting which can
+  be used to toggle them back on if you are using them in your own campaigns.
+* Added new fields to weapon sheets to support vehicle weapons from the new Vehicle Handbook.
+  This includes crew numbers, power usage and vehicle spaces (auto calculated from weight).
 
 # 0.23.3 (Beta)
 

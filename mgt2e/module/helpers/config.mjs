@@ -3,7 +3,10 @@ export const MGT2 = {};
 globalThis.mgt2eJournalHotbarQueue = globalThis.mgt2eJournalHotbarQueue || Promise.resolve();
 
 // Useful scripts
-MGT2.addHotbarJournalMacro = async function(journalId, title, image) {
+MGT2.addHotbarJournalMacro = async function(journalId, title, image, gmOnly) {
+    if (gmOnly && !game.user.isGM) {
+        return;
+    }
     const document = await fromUuid(journalId);
     if (document) {
         // Now add to hotbar. This is called by compendium modules, and if multiple are
