@@ -10,7 +10,7 @@ import {
 } from "./helpers/utils/trade-utils.mjs";
 import {worldDropBrokerHandler} from "./helpers/utils/world-utils.mjs";
 
-function ignoredStatusEffects() {
+function initCoreStatusEffects() {
     CONFIG.statusEffects.push({
         id: "sleep",
         name: "EFFECT.StatusAsleep",
@@ -150,6 +150,9 @@ function ignoredStatusEffects() {
 }
 
 export function initStatusEffects() {
+    if (game.settings.get("mgt2e", "coreEffects")) {
+        initCoreStatusEffects();
+    }
     // Standard effects
     CONFIG.statusEffects.push({
         id: "dead",
@@ -516,6 +519,14 @@ export function initConfigSettings() {
         config: true,
         type: String,
         default: ""
+    });
+    game.settings.register('mgt2e', "coreEffects", {
+        name: game.i18n.localize("MGT2.Settings.CoreEffects.Name"),
+        hint: game.i18n.localize("MGT2.Settings.CoreEffects.Hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false
     });
 }
 

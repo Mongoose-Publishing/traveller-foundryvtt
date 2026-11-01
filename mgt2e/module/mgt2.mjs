@@ -117,6 +117,10 @@ Hooks.once('init', async function() {
 
     await initSocketEvents();
 
+    // Define status effects. Reset to empty before adding in what we need.
+    CONFIG.statusEffects = [];
+    initStatusEffects();
+
     // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });
@@ -174,9 +178,6 @@ Hooks.once("init", function() {
        }
     });
 
-    // Define status effects. Reset to empty before adding in what we need.
-    CONFIG.statusEffects = [];
-    initStatusEffects();
 })
 
 async function openActorSheet(actorId) {
