@@ -29,12 +29,16 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
     async getDestination(worldActor, destinationWorlds, destId) {
         if (!destinationWorlds[destId]) {
             let world = await fromUuid(destId);
-            destinationWorlds[destId] = {
-                name: world.name,
-                parsecs: distanceBetweenWorlds(worldActor, world),
-                freight: [],
-                passengers: [],
-                mail: []
+            if (world) {
+                destinationWorlds[destId] = {
+                    name: world.name,
+                    parsecs: distanceBetweenWorlds(worldActor, world),
+                    freight: [],
+                    passengers: [],
+                    mail: []
+                }
+            } else {
+                return null;
             }
         }
         return destinationWorlds[destId];
@@ -70,7 +74,9 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                 } else if (i.system.cargo.freight) {
                     i.system.cargo.totalPrice = parseInt(i.system.cargo.price) * parseInt(i.system.quantity);
                     let dest = await this.getDestination(context.actor, destinationWorlds, i.system.cargo.destinationId);
-                    dest.freight.push(i);
+                    if (dest) {
+                        dest.freight.push(i);
+                    }
                 } else {
                     context.localGoods.push(i);
                 }
@@ -95,7 +101,9 @@ export class MgT2WorldActorSheet extends MgT2ActorSheet {
                     }
                 } else if (i.system?.world?.datatype === "passenger") {
                     let dest = await this.getDestination(context.actor, destinationWorlds, i.system.world.destinationId);
-                    dest.passengers.push(i);
+                    if (dest) {
+                        dest.passengers.push(i);
+                    }
                 } else if (i.system?.world?.datatype === "planet") {
                     context.planets.push(i);
                 } else if (i.system?.world?.datatype === "star") {
