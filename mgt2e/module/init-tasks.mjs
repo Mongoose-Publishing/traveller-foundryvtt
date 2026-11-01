@@ -523,6 +523,7 @@ export function initConfigSettings() {
     game.settings.register('mgt2e', "coreEffects", {
         name: game.i18n.localize("MGT2.Settings.CoreEffects.Name"),
         hint: game.i18n.localize("MGT2.Settings.CoreEffects.Hint"),
+        requiresReload: true,
         scope: "world",
         config: true,
         type: Boolean,
