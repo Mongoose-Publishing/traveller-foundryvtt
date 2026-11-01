@@ -16,7 +16,7 @@
                     <label for="system.quantity" class="resource-label">{{localize "MGT2.Item.Quantity"}}</label>
                     <div class="incdec">
                         <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
-                        <input class="writable" type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
+                        <input class="writable" type="number" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
                         <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
                     </div>
                 </div>
@@ -38,16 +38,22 @@
                 </div>
                 <div class="resource flex-group-center">
                     <label for="system.weapon.magazine" class="resource-label">{{localize "MGT2.Item.MagazineSize"}}</label>
-                    <input class="writable" type="text" name="system.weapon.magazine" value="{{system.weapon.magazine}}" data-dtype="Number"/>
+                    <input class="writable" type="number" name="system.weapon.magazine" value="{{system.weapon.magazine}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="system.weapon.magazineCost" class="resource-label">{{localize "MGT2.Item.MagazineCost"}}</label>
-                    <input class="writable" type="text" name="system.weapon.magazineCost" value="{{system.weapon.magazineCost}}" data-dtype="Number"/>
+                    <input class="writable" type="number" name="system.weapon.magazineCost" value="{{system.weapon.magazineCost}}" data-dtype="Number"/>
                 </div>
                 <div class="resource flex-group-center">
                     <label for="system.weapon.ammo" class="resource-label">{{localize "MGT2.Item.Ammo"}}</label>
-                    <input class="writable" type="text" name="system.weapon.ammo" value="{{system.weapon.ammo}}" data-dtype="Number"/>
+                    <input class="writable" type="number" name="system.weapon.ammo" value="{{system.weapon.ammo}}" data-dtype="Number"/>
                 </div>
+                {{#if (ifEquals system.weapon.scale "vehicle")}}
+                    <div class="resource flex-group-center">
+                        <label for="system.weapon.roundsPerSpace" class="resource-label">{{localize "MGT2.Item.RoundsPerSpace"}}</label>
+                        <input class="writable" type="number" name="system.weapon.roundsPerSpace" value="{{system.weapon.roundsPerSpace}}" data-dtype="Number"/>
+                    </div>
+                {{/if}}
             </div>
 
             <div class="shadow item-side-panel">
@@ -70,13 +76,15 @@
                     </div>
                     <div class="resource">
                         <label for="system.weight" class="resource-label">{{localize "MGT2.Item.Weight"}}</label>
-                        <input class="writable" type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
+                        <input class="writable" type="number" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
                     </div>
                     <div class="resource">
                         <label for="system.cost" class="resource-label">{{localize "MGT2.Item.Cost"}}</label>
-                        <input class="writable" type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+                        <input class="writable" type="number" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
                     </div>
+                </div>
 
+                <div class="resources grid grid-4col flex-group-center">
                     <div class="resource">
                         <label for="system.weapon.scale" class="resource-label">{{localize "MGT2.Item.WeaponScale"}}</label>
                         <br/>
@@ -99,21 +107,46 @@
                     {{else if (ifEquals system.weapon.scale "vehicle")}}
                         <label class="resource-label">{{localize "MGT2.Item.RangeKM"}}</label>
                         <br/>
-                        <input class="writable" type="text" name="system.weapon.range" value="{{system.weapon.range}}" data-dtype="Number"/>
+                        <input class="writable" type="number" name="system.weapon.range" value="{{system.weapon.range}}" data-dtype="Number"/>
                     {{else}}
                         <label class="resource-label">{{localize "MGT2.Item.RangeM"}}</label>
                         <br/>
-                        <input class="writable" type="text" name="system.weapon.range" value="{{system.weapon.range}}" data-dtype="Number"/>
+                        <input class="writable" type="number" name="system.weapon.range" value="{{system.weapon.range}}" data-dtype="Number"/>
                     {{/if}}
                     </div>
                     {{#if (ifEquals system.weapon.scale "vehicle")}}
                         <div class="resource">
                             <label for="system.weapon.minRange" class="resource-label">{{localize "MGT2.Item.MinRange"}}</label>
-                            <input class="writable" type="text" name="system.weapon.minRange" value="{{system.weapon.minRange}}" data-dtype="Number"/>
+                            <input class="writable" type="number" name="system.weapon.minRange" value="{{system.weapon.minRange}}" data-dtype="Number"/>
+                        </div>
+                        <div class="resource">
+                            <label for="vehicleWeaponSpaces" class="resource-label">{{localize "MGT2.Item.VehicleWeaponSpaces"}}</label>
+                            <input type="number" value="{{vehicleWeaponSpaces}}" readonly data-dtype="Number"/>
+                        </div>
+                        <div class="resource"  title="{{localize 'MGT2.Item.VehicleWeaponNuclearPower'}}">
+                            <label for="system.weapon.nuclearPower" class="resource-label">
+                                <input class="trained" type="checkbox" name="system.weapon.vehiclePowered"
+                                       {{checked system.weapon.vehiclePowered}} data-type="Boolean"/>
+                                {{localize "MGT2.Item.VehicleWeaponPowered"}}
+                            </label>
+                            {{#if system.weapon.vehiclePowered}}
+                                <input class="writable" type="number" name="system.weapon.nuclearPower"
+                                       value="{{system.weapon.nuclearPower}}" data-dtype="Number"/>
+                            {{else}}
+                                <input type="text" readonly value="-" data-dtype="Number"/>
+                            {{/if}}
+                        </div>
+                        <div class="resource">
+                            <label for="system.weapon.crew" class="resource-label">{{localize "MGT2.Item.WeaponCrew"}}</label>
+                            <input class="writable" type="number" name="system.weapon.crew" value="{{system.weapon.crew}}" data-dtype="Number"/>
+                        </div>
+                        <div class="resource">
+                            <label for="system.weapon.loaders" class="resource-label">{{localize "MGT2.Item.WeaponLoaders"}}</label>
+                            <input class="writable" type="number" name="system.weapon.loaders" value="{{system.weapon.loaders}}" data-dtype="Number"/>
                         </div>
                     {{/if}}
 
-                    <div class="resource grid-span-3 flex-group-left">
+                    <div class="resource grid-span-4 flex-group-left">
                         <label for="system.weapon.traits" class="resource-label">{{localize "MGT2.Item.WeaponTraits"}}</label>
                         {{#if (isOwner .)}}
                             <span style="display: inline-block; float: right">
@@ -158,7 +191,7 @@
                         {{#if (ifEquals system.component.type "armour")}}
                         <div title="Battledress Slots">
                             <label class="resource-label">Slots</label><br/>
-                            <input class="writable" type="text" name="system.component.slots" value="{{system.component.slots}}" dta-dtype="Number"/>
+                            <input class="writable" type="number" name="system.component.slots" value="{{system.component.slots}}" dta-dtype="Number"/>
                         </div>
                         {{/if}}
                         <div class="resource grid-span-3">

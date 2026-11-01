@@ -1245,6 +1245,8 @@
   "MGT2.Item.RoundsPerSpace": "Rounds/Space",
   "MGT2.Item.WeaponCrew": "Crew",
   "MGT2.Item.WeaponLoaders": "Loaders",
+  "MGT2.Item.VehicleWeaponPowered": "Powered",
+  "MGT2.Item.VehicleWeaponNuclearPower": "Tick if weapon requires powered vehicle.\nSet to 1+ if it requires Fission or Fusion power",
   "MGT2.Item.SpaceRange.adjacent": "Adjacent (<1km)",
   "MGT2.Item.SpaceRange.close": "Close (1km+)",
   "MGT2.Item.SpaceRange.short": "Short (11km+)",

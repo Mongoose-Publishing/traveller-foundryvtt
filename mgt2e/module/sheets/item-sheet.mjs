@@ -1,3 +1,5 @@
+// noinspection JSUnresolvedReference
+
 import {onManageActiveEffect} from "../helpers/effects.mjs";
 import {rollAttack, hasTrait, getTraitValue, toFloat, rollSpaceAttack, getFloat} from "../helpers/dice-rolls.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
@@ -388,6 +390,20 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             context.energyTypes["standard"] = game.i18n.localize("MGT2.Item.EnergyType.standard");
             for (let e of CONFIG.MGT2.WEAPONS.energyTypes) {
                 context.energyTypes[e] = game.i18n.localize("MGT2.Item.EnergyType." + e);
+            }
+            context.vehicleWeaponSpaces = 0;
+            if (Number(item.system.weight) > 0) {
+                context.vehicleWeaponSpaces = Math.ceil(Number(item.system.weight  / 250)) || 0;
+            }
+            if (item.system.weapon.scale === "vehicle") {
+                item.system.weapon.crew  = Number(item.system.weapon.crew) || 0;
+                item.system.weapon.loaders = Number(item.system.weapon.loaders) || 0;
+                item.system.weapon.roundsPerSpace = Number(item.system.weapon.roundsPerSpace) || 0;
+                if (item.system.weapon.vehiclePowered) {
+                    item.system.weapon.nuclearPower = Number(item.system.weapon.nuclearPower) || 0;
+                } else {
+                    item.system.weapon.nuclearPower = null;
+                }
             }
 
             context.weaponTraits = {};
