@@ -1464,6 +1464,7 @@
   "MGT2.Warn.Drop.NotOnCharacter": "Cannot drop items of type '{type}' on a character",
   "MGT2.Warn.Drop.NotOnVehicle": "Cannot drop items of type '{type}' on a vehicle",
   "MGT2.Warn.Drop.CareerOnNPC": "NPCs and Creatures cannot be given career terms or associates",
+  "MGT2.Info.Drop.DropPackageDupe": "Package '{package}' has already been added to '{actor}'",
   "MGT2.Info.Drop.DropPackage": "Adding package '{package}' to '{actor}'",
   "MGT2.Info.Drop.DropPackageItem": "Adding item '{item}' to '{actor}'",
   "MGT2.Info.DamageMsg.VehicleNoStun": "Vehicles can't be affected by stun damage",

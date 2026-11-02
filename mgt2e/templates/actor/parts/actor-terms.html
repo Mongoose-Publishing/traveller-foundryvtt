@@ -28,6 +28,16 @@
     </div>
 </div>
 
+{{#if system.packages}}
+    <div class="applied-packages grid grid-3col">
+        {{#each system.packages as |package|}}
+            <div class="package-pill">
+                <img src="{{package.img}}"/> <span>{{package.name}}</span>
+            </div>
+        {{/each}}
+    </div>
+{{/if}}
+
 <ol class="history-list">
     <li class="item flexrow history-header">
         <div class="history-number">{{localize 'MGT2.History.Year'}}</div>

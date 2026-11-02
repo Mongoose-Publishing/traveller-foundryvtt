@@ -2606,3 +2606,28 @@ ol.actor-items li.item-status- {
 .hits-box input.hits-state-zero {
   background-color: #ffd0d0;
 }
+
+.applied-packages {
+
+}
+
+.applied-packages div.package-pill {
+  vertical-align: middle;
+  background-color: var(--mongoose-orange);
+  border-radius: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.applied-packages div.package-pill img {
+  width: 28px;
+  height: 28px;
+  float: left;
+  padding: 2px;
+}
+
+.applied-packages div.package-pill span {
+  display: inline-block;
+  padding-top: 5px;
+  font-weight: bold;
+}

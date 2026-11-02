@@ -930,7 +930,17 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
 
         // -------------------------------------------------------------
         // Everything below here is only needed if the sheet is editable
-        if (!this.isEditable) return;
+        if (!this.isEditable) {
+            let handler = ev => this._onDragStart(ev);
+            html.find('img.actor-draggable').each((i, img) => {
+                let options = {};
+                options.actorId = img.getAttribute("data-actor-id");
+                handler = ev => this._onCrewDragStart(ev, options);
+                img.setAttribute("draggable", true);
+                img.addEventListener("dragstart", handler, options);
+            });
+            return;
+        }
 
         // Add Inventory Item
         html.find('.item-create').click(this._onItemCreate.bind(this));
@@ -1228,59 +1238,6 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         html.find('.dodgeRoll').click(ev => {
             this._rollDodge(ev, this.actor);
         });
-        /*
-        html.find('.statusReaction').click(ev => {
-            this._clearDodge(this.actor);
-        });
-        html.find('.statusStunned').click(ev => {
-            this._clearStunned(this.actor);
-        });
-        html.find('.statusStun').click(ev => {
-            this._clearStatus(this.actor, "stun");
-        });
-        html.find('.statusFatigued').click(ev => {
-            this._clearStatus(this.actor, "fatigued");
-        });
-        html.find('.statusInjured').click(ev => {
-            this._clearStatus(this.actor, "injured");
-        });
-        html.find('.statusHighGravity').click(ev => {
-           this._clearStatus(this.actor, 'highGravity');
-        });
-        html.find('.statusLowGravity').click(ev => {
-            this._clearStatus(this.actor, 'lowGravity');
-        });
-        html.find('.statusZeroGravity').click(ev => {
-            this._clearStatus(this.actor, 'zeroGravity');
-        });
-        html.find('.statusDiseased').click(ev => {
-            this._clearStatus(this.actor, 'diseased');
-        });
-        html.find('.statusPoisoned').click(ev => {
-            this._clearStatus(this.actor, 'poisoned');
-        });
-        html.find('.statusUnconscious').click(ev => {
-            this._clearStatus(this.actor, 'unconscious');
-        });
-        html.find('.statusDisabled').click(ev => {
-            this._clearStatus(this.actor, 'disabled');
-        });
-        html.find('.statusDead').click(ev => {
-            this._clearStatus(this.actor, 'dead');
-        });
-        html.find('.statusNeedsFirstAid').click(ev => {
-            this._clearStatus(this.actor, 'needsFirstAid');
-        });
-        html.find('.statusNeedsSurgery').click(ev => {
-            this._clearStatus(this.actor, 'needsSurgery');
-        });
-        html.find('.statusProne').click(ev => {
-            this._clearStatus(this.actor, 'prone');
-        });
-        html.find('.statusInCover').click(ev => {
-            this._clearStatus(this.actor, 'inCover');
-        });
-        */
         html.find('initRoll').click(ev => {
             this._rollInit(this.actor);
         });
@@ -1843,9 +1800,10 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
     }
 
     _onCrewDragStart(event, options) {
+        // If we don't have a full uuid, then we need to make one.
         let dragData = {
             type: "Actor",
-            uuid: "Actor." + options.actorId
+            uuid: ((options.actorId.indexOf("Actor")===-1)?"Actor.":"") + options.actorId
         }
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
     }
@@ -1914,6 +1872,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
     async _onDropActor(event, data) {
         let actor = await fromUuid(data.uuid);
         if (!actor) {
+            console.log("No actor " + data.uuid);
            return;
         }
         if ((this.actor.type === "spacecraft") && (["traveller", "npc", "robot"].includes(actor.type))) {
@@ -1927,6 +1886,22 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             }
             this.actor.update({[`system.docks.${actor._id}`]: { quantity: 1 }});
         } else if (actor.type === "package" && (this.actor.type === "traveller" || this.actor.type === "npc")) {
+            // Has it been added before? Don't add same package more than once.
+            if (this.actor.system.packages && this.actor.system.packages.find( p => p.uuid === actor.uuid)) {
+                ui.notifications.warn(game.i18n.format("MGT2.Info.Drop.DropPackageDupe",
+                    { package: actor.name, actor: this.actor.name }));
+                return;
+            }
+            if (!this.actor.system.packages) {
+                this.actor.system.packages = [];
+            }
+            this.actor.system.packages.push({
+                uuid: actor.uuid,
+                name: actor.name,
+                img: actor.img
+            });
+            await this.actor.update({ "system.packages": this.actor.system.packages});
+
             ui.notifications.info(game.i18n.format("MGT2.Info.Drop.DropPackage",
                 { package: actor.name, actor: this.actor.name }));
 
