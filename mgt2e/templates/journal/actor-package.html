@@ -1,5 +1,18 @@
+{{#if justLink}}
+    <div class="inline-package-link">
+        <span class="rollable actor-link" data-actor-id="{{actor.uuid}}">{{actor.name}}</span>
+        <span class="rollable package-add" data-actor-id="{{actor.uuid}}" title="{{localize 'MGT2.InlineActor.ClickToAdd'}}">
+            <i class="fas fa-arrow-up-from-bracket"></i>
+        </span>
+    </div>
+{{else}}
 <div class="inline-actor inline-package">
-    <h3><span class="rollable actor-link" data-actor-id="{{actor.uuid}}">{{actor.name}}</span></h3>
+    <div class="inline-package-header">
+        <span class="rollable package-add" data-actor-id="{{actor.uuid}}"><i class="fas fa-arrow-up-from-bracket"></i></span>
+        <h3>
+            <span class="rollable actor-link" data-actor-id="{{actor.uuid}}">{{actor.name}}</span>
+        </h3>
+    </div>
 
     <div>
         <div class="grid grid-4col actor-cha-list grid-span-1" style="float:left">
@@ -64,3 +77,4 @@
 </p>
 
 <p style="clear: both"> </p>
+{{/if}}

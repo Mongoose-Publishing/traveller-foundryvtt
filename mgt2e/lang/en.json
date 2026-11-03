@@ -1779,6 +1779,10 @@
   "MGT2.Dialog.MissileAttack": "Missile Attack Roll",
   "MGT2.Dialog.VehicleDamage": "Vehicle Damage",
 
+  "MGT2.InlineActor.ClickToAdd": "Click to add package to character",
+  "MGT2.Dialog.AddPackageConfirm.Title": "Add Package",
+  "MGT2.Dialog.AddPackageConfirm.Text": "Do you want to add package '{package}' to actor '{actor}'?",
+
   "MGT2.ExceptionalFailure": "Exceptional Failure",
   "MGT2.AverageFailure": "Average Failure",
   "MGT2.MarginalFailure": "Marginal Failure",

@@ -800,3 +800,30 @@ p.post-package-description img.package-icon {
   width: 128px;
   float: left;
 }
+
+.inline-package-header {
+}
+
+.inline-package-header h3 {
+  margin: 0;
+}
+
+.inline-package-header span.package-add {
+  float: right;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.inline-package-link {
+  background-color: var(--mongoose-orange);
+  padding: 5px;
+  border-radius: 5px;
+  width: auto;
+  display: inline-block;
+  font-size: larger;
+}
+
+.inline-package-link span.actor-link {
+  margin-right: 3em;
+}
+

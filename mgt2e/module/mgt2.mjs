@@ -45,6 +45,7 @@ import {
 } from "./helpers/spacecraft/spacecraft-utils.mjs";
 import {onManageActiveEffect} from "./helpers/effects.mjs";
 import {initConfigSettings, initSocketEvents, initStatusEffects} from "./init-tasks.mjs";
+import {addPackageToActor} from "./helpers/utils/package-utils.mjs";
 const  { renderTemplate } = foundry.applications.handlebars;
 
 const { Actors, Items } = foundry.documents.collections;
@@ -137,7 +138,7 @@ Hooks.once("init", function() {
         pattern: rgx2,
         enricher: Tools.macroExecutionEnricher,
     });
-    const rgx3 = /\[\[(\/actor)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
+    const rgx3 = /\[\[(\/x?actor)\s*(?:"([^"]*)"|(\S+))\s*(.*?)\s*(]{2,3})(?:{([^}]+)})?/gi;
     CONFIG.TextEditor.enrichers.push({
         pattern: rgx3,
         enricher: Tools.macroExecutionEnricher,
@@ -159,6 +160,10 @@ Hooks.once("init", function() {
     body.on("click", ".actor-link", ev =>  {
        const actorId = $(ev.currentTarget).data("actorId");
        openActorSheet(actorId);
+    });
+    body.on("click", ".package-add", ev =>  {
+        const actorId = $(ev.currentTarget).data("actorId");
+        addPackageFromJournal(actorId);
     });
     body.on("click", ".upp-inline-roll", ev => {
         let name = $(ev.currentTarget).data("actorName");
@@ -184,6 +189,23 @@ async function openActorSheet(actorId) {
     let actor = await fromUuid(actorId);
     if (actor) {
         actor.sheet.render(true);
+    } else {
+        ui.notifications.error(`Actor [${actorId}] cannot be found`);
+    }
+}
+
+async function addPackageFromJournal(actorId) {
+    const packageActor = await fromUuid(actorId);
+    if (packageActor) {
+        // Find my player character.
+        console.log("Adding package " + packageActor.name);
+        const actors = Tools.getSelectedOwned();
+
+        if (actors && actors.length === 1) {
+            console.log(actors[0].name);
+            const myActor = actors[0];
+            await addPackageToActor(myActor, packageActor);
+        }
     } else {
         ui.notifications.error(`Actor [${actorId}] cannot be found`);
     }

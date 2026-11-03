@@ -536,7 +536,9 @@ Tools.macroExecutionEnricher = function(match, options) {
         } else if (type === "/mgMacro") {
             return Tools.macroExecutionButton(macroName, argsString, title, flavor);
         } else if (type === "/actor") {
-            return Tools.actorInlineDisplay(macroName);
+            return Tools.actorInlineDisplay(macroName, false);
+        } else if (type === "/xactor") {
+            return Tools.actorInlineDisplay(macroName, true);
         } else if (type === "/item") {
             return Tools.itemInlineDisplay(macroName, argsString, title, flavor);
         } else if (type === "/upp") {
@@ -777,7 +779,7 @@ Tools.itemInlineDisplay = async function(itemId) {
     return a;
 }
 
-Tools.actorInlineDisplay = async function(actorId) {
+Tools.actorInlineDisplay = async function(actorId, justLink) {
     let actor = fromUuidSync(actorId);
     if (!actor) {
         actor = game.actors.get(actorId);
@@ -801,7 +803,7 @@ Tools.actorInlineDisplay = async function(actorId) {
     } else if (actor.type === "vehicle") {
         await Tools.vehicleInlineDisplay(a, actor);
     } else if (actor.type === "package") {
-        await Tools.packageInlineDisplay(a, actor);
+        await Tools.packageInlineDisplay(a, actor, justLink);
     } else {
         a.innerHTML = `Currently only supports Travellers, NPCs and Spacecraft`;
     }
@@ -837,9 +839,10 @@ Tools.creatureInlineDisplay = async function(a, actor) {
     return a;
 }
 
-Tools.packageInlineDisplay = async function(a, actor) {
+Tools.packageInlineDisplay = async function(a, actor, justLink) {
     let contentData = {
-        actor: actor
+        actor: actor,
+        justLink: justLink
     }
     let html = await renderTemplate("systems/mgt2e/templates/journal/actor-package.html", contentData);
 
