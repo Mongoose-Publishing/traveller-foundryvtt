@@ -20,6 +20,7 @@ import {
 } from "../helpers/spacecraft/spacecraft-utils.mjs";
 import {MgT2CharacteristicDamageApp} from "../helpers/dialogs/characteristic-damage.mjs";
 import {addPackageToActor} from "../helpers/utils/package-utils.mjs";
+import {chooseWeaponMount, getArmedWeaponMounts, resolveWeaponMount} from "../helpers/utils/weapon-mount-utils.mjs";
 
 const { renderTemplate } = foundry.applications.handlebars;
 
@@ -1723,7 +1724,12 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             }).render(true);
         } else if (action.action === "weapon") {
             let weaponId = action.weapon;
-            let weaponItem = shipActor.items.get(weaponId);
+            if (getArmedWeaponMounts(shipActor).length === 0) {
+                ui.notifications.warn(game.i18n.localize("MGT2.Error.NoWeaponMount"));
+                return;
+            }
+            let weaponItem = await resolveWeaponMount(shipActor, weaponId, chooseWeaponMount);
+            if (!weaponItem) return;
             let dm = parseInt(action.dm);
             new MgT2SpacecraftAttackDialog(shipActor, actorCrew, weaponItem, dm).render(true);
         } else if (action.action === "special") {
