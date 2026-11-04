@@ -68,13 +68,14 @@
         <div style="clear: both">
             <span>{{{showSimpleSkills actor}}}</span>
         </div>
+        <hr/>
+        <p class="post-package-description">
+            <img class="package-icon" src="{{actor.img}}"/>
+            {{{actor.system.description}}}
+        </p>
+        <p style="clear: both"> </p>
     </div>
 </div>
 
-<p class="post-package-description">
-    <img class="package-icon" src="{{actor.img}}"/>
-    {{{actor.system.description}}}
-</p>
 
-<p style="clear: both"> </p>
 {{/if}}

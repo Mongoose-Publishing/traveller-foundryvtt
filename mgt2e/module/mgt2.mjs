@@ -177,6 +177,9 @@ Hooks.once("init", function() {
            if (data.profession) {
                html += ` (${data.profession})`;
            }
+           if (data.description) {
+               html += `<p>${foundry.utils.escapeHTML(data.description)}</p>`;
+           }
            ChatMessage.create({
                content: html
            });

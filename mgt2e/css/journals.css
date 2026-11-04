@@ -434,6 +434,22 @@ div.inline-upp .inline-upp {
   width: 80%;
 }
 
+div.inline-upp .description-header {
+  font-size: larger;
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  display: inline-block;
+  color: var(--mongoose-orange);
+}
+
+div.inline-upp .description {
+  margin-top: 0;
+  padding-top: 0;
+  font-style: italic;
+}
+
 div.inline-actor {
     margin: 1em;
     background-color: #303030;

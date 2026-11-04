@@ -625,7 +625,8 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
         name: name,
         gender: args.gender,
         profession: args.profession,
-        age: args.age
+        age: args.age,
+        description: args.description
     }
     const json = JSON.stringify(jsonData);
     html += `<span class="name"><i class="upp-to-chat fas fa-comment" data-upp-data='${json}'></i> ${name}`;
@@ -725,8 +726,11 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
         }
         html += `<ul class="skill-list">${skillHtml}</ul>`;
 
-        html += `</div>`;
     }
+    if (args.description) {
+        html += `<div><span class="description-header">Description</span><p class="description">${foundry.utils.escapeHTML(args.description)}</p></div>`;
+    }
+    html += `</div>`;
 
     html += `</div>`;
 
