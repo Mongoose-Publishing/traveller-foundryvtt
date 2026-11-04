@@ -1,6 +1,13 @@
 import {MgT2AttackDialog} from "../../helpers/attack-dialog.mjs";
 import {MgT2CrewMemberDialog} from "../../helpers/crew-member-dialog.mjs";
 import {MgT2eAttackApp} from "../../helpers/dialogs/MgT2eAttackApp.mjs";
+import {
+    chooseWeaponMount,
+    getArmedWeaponMounts,
+    getMountedWeapon,
+    isWeaponMounted,
+    resolveWeaponMount
+} from "../../helpers/utils/weapon-mount-utils.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -98,8 +105,8 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         const actorId = event.target.dataset["actorId"];
         const actionDm = parseInt(event.target.dataset["dm"]) || 0;
 
-        const weaponItem = this.document.items.get(itemId);
-        const mountItem = this.document.items.get(mountId);
+        let weaponItem = this.document.items.get(itemId);
+        let mountItem = this.document.items.get(mountId);
         const crewActor = game.actors.get(actorId);
 
         if (!mountId) {
@@ -111,9 +118,15 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
             return;
         }
 
-        if (!weaponItem || !mountItem) {
-            ui.notifications.warn("Cannot find the vehicle weapon or its mount.");
-            return;
+        if (!mountItem || !weaponItem || !isWeaponMounted(this.document, mountItem, weaponItem)) {
+            if (getArmedWeaponMounts(this.document).length === 0) {
+                ui.notifications.warn(game.i18n.localize("MGT2.Error.NoWeaponMount"));
+                return;
+            }
+            mountItem = await resolveWeaponMount(this.document, mountId, chooseWeaponMount);
+            if (!mountItem) return;
+            weaponItem = getMountedWeapon(this.document, mountItem);
+            if (!weaponItem) return;
         }
 
         new MgT2eAttackApp(crewActor, weaponItem, {
@@ -214,9 +227,14 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
                 }
                 break;
             case "weapon":
-                const weaponId = action.weapon;
-                const mountItem = this.document.items.get(weaponId);
-                const weaponItem = this.document.items.get(mountItem.system.option.weapon.weaponId);
+                if (getArmedWeaponMounts(this.document).length === 0) {
+                    ui.notifications.warn(game.i18n.localize("MGT2.Error.NoWeaponMount"));
+                    return;
+                }
+                const mountItem = await resolveWeaponMount(this.document, action.weapon, chooseWeaponMount);
+                if (!mountItem) return;
+                const weaponItem = getMountedWeapon(this.document, mountItem);
+                if (!weaponItem) return;
                 const wdm = parseInt(action.dm) || 0;
                 new MgT2eAttackApp(crewActor, weaponItem, {
                     vehicle: this.document,
@@ -393,4 +411,3 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         return context;
     }
 }
-
