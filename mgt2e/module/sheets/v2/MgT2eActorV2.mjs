@@ -3,10 +3,9 @@ import {MgT2CrewMemberDialog} from "../../helpers/crew-member-dialog.mjs";
 import {MgT2eAttackApp} from "../../helpers/dialogs/MgT2eAttackApp.mjs";
 import {
     chooseWeaponMount,
-    getArmedWeaponMounts,
-    getMountedWeapon,
-    isWeaponMounted,
-    resolveWeaponMount
+    executeCrewWeaponAttack,
+    executeV2DirectWeaponAttack,
+    getMountedWeapon
 } from "../../helpers/utils/weapon-mount-utils.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -82,15 +81,16 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
         for (const [crewId, assignments] of Object.entries(actor.system.crewed?.crew || {})) {
             for (const roleId of Object.keys(assignments)) {
                 const roleItem = actor.items.get(roleId);
-                const weaponActions = Object.values(roleItem?.system.role.actions || {})
-                    .filter(action => action.action === "weapon");
-                for (const action of weaponActions) {
+                const weaponActions = Object.entries(roleItem?.system.role.actions || {})
+                    .filter(([, action]) => action.action === "weapon");
+                for (const [actionId, action] of weaponActions) {
                     if (action.weapon === mountItem._id) {
                         const a = game.actors.get(crewId)
                         actors.push({
                             actor: a,
                             role: roleItem,
-                            action: action
+                            action,
+                            actionId
                         });
                     }
                 }
@@ -100,10 +100,12 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
     }
 
     static async #onAttack(event, target) {
-        const itemId = event.target.dataset["itemId"];
-        const mountId = event.target.dataset["mountId"];
-        const actorId = event.target.dataset["actorId"];
-        const actionDm = parseInt(event.target.dataset["dm"]) || 0;
+        const itemId = target.dataset["itemId"];
+        const mountId = target.dataset["mountId"];
+        const actorId = target.dataset["actorId"];
+        const roleId = target.dataset["roleId"];
+        const actionId = target.dataset["actionId"];
+        const actionDm = parseInt(target.dataset["dm"]) || 0;
 
         let weaponItem = this.document.items.get(itemId);
         let mountItem = this.document.items.get(mountId);
@@ -118,22 +120,24 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
             return;
         }
 
-        if (!mountItem || !weaponItem || !isWeaponMounted(this.document, mountItem, weaponItem)) {
-            if (getArmedWeaponMounts(this.document).length === 0) {
-                ui.notifications.warn(game.i18n.localize("MGT2.Error.NoWeaponMount"));
-                return;
+        await executeV2DirectWeaponAttack({
+            actor: this.document,
+            weaponId: itemId,
+            mountId,
+            crewId: actorId,
+            roleId,
+            actionId,
+            actionDm,
+            chooseMount: chooseWeaponMount,
+            getCrewActor: id => game.actors.get(id),
+            onAttack: ({crewActor: currentCrew, mount, weapon, dm}) => {
+                new MgT2eAttackApp(currentCrew, weapon, {
+                    vehicle: this.document,
+                    mount,
+                    dm
+                }).render(true);
             }
-            mountItem = await resolveWeaponMount(this.document, mountId, chooseWeaponMount);
-            if (!mountItem) return;
-            weaponItem = getMountedWeapon(this.document, mountItem);
-            if (!weaponItem) return;
-        }
-
-        new MgT2eAttackApp(crewActor, weaponItem, {
-            vehicle: this.document,
-            mount: mountItem,
-            dm: actionDm
-        }).render(true);
+        });
     }
 
     static async #onReload(event, target) {
@@ -179,9 +183,9 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
     // Vehicle or Spacecraft using a role action.
     static async #roleAction(event, target) {
         console.log("roleAction:");
-        const actionId = event.target.dataset["actionId"];
-        const roleId = event.target.dataset["roleId"];
-        const crewId = event.target.dataset["crewId"];
+        const actionId = target.dataset["actionId"];
+        const roleId = target.dataset["roleId"];
+        const crewId = target.dataset["crewId"];
 
         const crewActor = game.actors.get(crewId);
         const roleItem = this.document.items.get(roleId);
@@ -227,20 +231,24 @@ export class MgT2eActorV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
                 }
                 break;
             case "weapon":
-                if (getArmedWeaponMounts(this.document).length === 0) {
-                    ui.notifications.warn(game.i18n.localize("MGT2.Error.NoWeaponMount"));
-                    return;
-                }
-                const mountItem = await resolveWeaponMount(this.document, action.weapon, chooseWeaponMount);
-                if (!mountItem) return;
-                const weaponItem = getMountedWeapon(this.document, mountItem);
-                if (!weaponItem) return;
-                const wdm = parseInt(action.dm) || 0;
-                new MgT2eAttackApp(crewActor, weaponItem, {
-                    vehicle: this.document,
-                    mount: mountItem,
-                    dm: wdm
-                }).render(true);
+                await executeCrewWeaponAttack({
+                    actor: this.document,
+                    crewId,
+                    roleId,
+                    actionId,
+                    chooseMount: chooseWeaponMount,
+                    getCrewActor: id => game.actors.get(id),
+                    onAttack: ({crewActor: currentCrew, mount, action: currentAction}) => {
+                        const weaponItem = getMountedWeapon(this.document, mount);
+                        if (!weaponItem) return;
+                        const wdm = parseInt(currentAction.dm) || 0;
+                        new MgT2eAttackApp(currentCrew, weaponItem, {
+                            vehicle: this.document,
+                            mount,
+                            dm: wdm
+                        }).render(true);
+                    }
+                });
                 break;
             default:
                 console.log("Unknown action " + action.action);

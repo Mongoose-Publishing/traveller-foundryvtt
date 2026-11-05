@@ -2682,6 +2682,7 @@ Handlebars.registerHelper("weaponMountBlock", function(mount) {
                     html += `<div data-action="attack" data-item-id="${weaponItem.id}"
                                   data-dm="${a.action.dm}"
                                   data-mount-id="${mountItem.id}" data-actor-id="${a.actor._id}"
+                                  data-role-id="${a.role.id}" data-action-id="${a.actionId}"
                                   class="weapon-attack-role"><img src="${a.actor.img}"/>${a.action.title}<br/>${a.actor.name}</div>`;
                 }
             } else {
@@ -2740,4 +2741,3 @@ Hooks.once("ready", async function() {
         }
     }
 });
-

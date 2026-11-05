@@ -68,14 +68,160 @@ export function isWeaponMounted(actor, mount, weapon) {
         ?.weapons.some(entry => entry.item.id === weapon?.id) ?? false;
 }
 
+function mountSignature(mount) {
+    const weapons = mount.weapons
+        .map(({item, quantity}) => ({id: item.id, name: item.name, quantity}));
+    return JSON.stringify({id: mount.id, name: mount.item.name, weapons});
+}
+
+function crewWeaponActionContext(actor, crewId, roleId, actionId) {
+    const assignments = actor.system?.crewed?.crew?.[crewId];
+    if (!assignments || !Object.hasOwn(assignments, roleId)) return null;
+    const role = actor.items.get(roleId);
+    const action = role?.system?.role?.actions?.[actionId];
+    if (action?.action !== "weapon") return null;
+    return {
+        action,
+        signature: JSON.stringify({
+            crewId,
+            roleId,
+            actionId,
+            type: action.action,
+            weapon: action.weapon ?? "",
+            dm: action.dm ?? ""
+        })
+    };
+}
+
+function warnWeaponActionChanged() {
+    ui.notifications.warn(game.i18n.localize("MGT2.Error.WeaponActionChanged"));
+}
+
+function normalizeActionDm(value) {
+    return Number.parseInt(value, 10) || 0;
+}
+
+export class WeaponMountSelectionChangedError extends Error {
+    constructor() {
+        super("Weapon mount selection changed while the chooser was open");
+        this.name = "WeaponMountSelectionChangedError";
+    }
+}
+
 export async function resolveWeaponMount(actor, requestedId, chooseMount) {
     const mounts = getArmedWeaponMounts(actor);
     const requested = mounts.find(mount => mount.id === requestedId);
     if (requested) return requested.item;
     if (mounts.length === 0) return null;
 
+    const displayedSignatures = new Map(mounts.map(mount => [mount.id, mountSignature(mount)]));
     const selectedId = await chooseMount(mounts);
-    return mounts.find(mount => mount.id === selectedId)?.item ?? null;
+    if (!selectedId) return null;
+
+    const displayedSignature = displayedSignatures.get(selectedId);
+    if (!displayedSignature) return null;
+    const current = getArmedWeaponMounts(actor).find(mount => mount.id === selectedId);
+    if (!current || displayedSignature !== mountSignature(current)) {
+        throw new WeaponMountSelectionChangedError();
+    }
+    return current.item;
+}
+
+export async function resolveWeaponMountForAttack(actor, requestedId, chooseMount) {
+    try {
+        return await resolveWeaponMount(actor, requestedId, chooseMount);
+    } catch (error) {
+        if (!(error instanceof WeaponMountSelectionChangedError)) throw error;
+        ui.notifications.warn(game.i18n.localize("MGT2.Error.WeaponMountChanged"));
+        return null;
+    }
+}
+
+export async function executeCrewWeaponAttack({
+    actor,
+    crewId,
+    roleId,
+    actionId,
+    chooseMount,
+    getCrewActor,
+    onAttack
+}) {
+    const initialCrew = getCrewActor(crewId);
+    const initialContext = crewWeaponActionContext(actor, crewId, roleId, actionId);
+    if (!initialCrew || !initialContext) {
+        warnWeaponActionChanged();
+        return false;
+    }
+    if (getArmedWeaponMounts(actor).length === 0) {
+        ui.notifications.warn(game.i18n.localize("MGT2.Error.NoWeaponMount"));
+        return false;
+    }
+
+    const mount = await resolveWeaponMountForAttack(actor, initialContext.action.weapon, chooseMount);
+    if (!mount) return false;
+
+    const currentCrew = getCrewActor(crewId);
+    const currentContext = crewWeaponActionContext(actor, crewId, roleId, actionId);
+    if (!currentCrew || !currentContext || currentContext.signature !== initialContext.signature) {
+        warnWeaponActionChanged();
+        return false;
+    }
+
+    onAttack({crewActor: currentCrew, mount, action: currentContext.action});
+    return true;
+}
+
+export async function executeV2DirectWeaponAttack({
+    actor,
+    weaponId,
+    mountId,
+    crewId,
+    roleId,
+    actionId,
+    actionDm,
+    chooseMount,
+    getCrewActor,
+    onAttack
+}) {
+    let weapon = actor.items.get(weaponId);
+    let mount = actor.items.get(mountId);
+    const initialCrew = crewId ? getCrewActor(crewId) : null;
+    const initialContext = roleId && actionId
+        ? crewWeaponActionContext(actor, crewId, roleId, actionId)
+        : null;
+    if ((crewId && !initialCrew) || ((roleId || actionId) && !initialContext)) {
+        warnWeaponActionChanged();
+        return false;
+    }
+    if (initialContext && (initialContext.action.weapon !== mountId
+        || normalizeActionDm(initialContext.action.dm) !== normalizeActionDm(actionDm))) {
+        warnWeaponActionChanged();
+        return false;
+    }
+
+    if (!mount || !weapon || !isWeaponMounted(actor, mount, weapon)) {
+        if (getArmedWeaponMounts(actor).length === 0) {
+            ui.notifications.warn(game.i18n.localize("MGT2.Error.NoWeaponMount"));
+            return false;
+        }
+        mount = await resolveWeaponMountForAttack(actor, null, chooseMount);
+        if (!mount) return false;
+        weapon = getMountedWeapon(actor, mount);
+        const currentCrew = crewId ? getCrewActor(crewId) : null;
+        const currentContext = initialContext
+            ? crewWeaponActionContext(actor, crewId, roleId, actionId)
+            : null;
+        if (!weapon || (crewId && !currentCrew)
+            || (initialContext && (!currentContext || currentContext.signature !== initialContext.signature))) {
+            warnWeaponActionChanged();
+            return false;
+        }
+        onAttack({crewActor: currentCrew, mount, weapon, dm: actionDm});
+        return true;
+    }
+
+    onAttack({crewActor: initialCrew, mount, weapon, dm: actionDm});
+    return true;
 }
 
 export async function chooseWeaponMount(mounts) {

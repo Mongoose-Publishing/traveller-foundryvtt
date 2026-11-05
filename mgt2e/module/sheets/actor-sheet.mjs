@@ -20,7 +20,7 @@ import {
 } from "../helpers/spacecraft/spacecraft-utils.mjs";
 import {MgT2CharacteristicDamageApp} from "../helpers/dialogs/characteristic-damage.mjs";
 import {addPackageToActor} from "../helpers/utils/package-utils.mjs";
-import {chooseWeaponMount, getArmedWeaponMounts, resolveWeaponMount} from "../helpers/utils/weapon-mount-utils.mjs";
+import {chooseWeaponMount, executeCrewWeaponAttack} from "../helpers/utils/weapon-mount-utils.mjs";
 
 const { renderTemplate } = foundry.applications.handlebars;
 
@@ -1723,15 +1723,18 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 "text": action.text
             }).render(true);
         } else if (action.action === "weapon") {
-            let weaponId = action.weapon;
-            if (getArmedWeaponMounts(shipActor).length === 0) {
-                ui.notifications.warn(game.i18n.localize("MGT2.Error.NoWeaponMount"));
-                return;
-            }
-            let weaponItem = await resolveWeaponMount(shipActor, weaponId, chooseWeaponMount);
-            if (!weaponItem) return;
-            let dm = parseInt(action.dm);
-            new MgT2SpacecraftAttackDialog(shipActor, actorCrew, weaponItem, dm).render(true);
+            await executeCrewWeaponAttack({
+                actor: shipActor,
+                crewId: actorCrewId,
+                roleId,
+                actionId,
+                chooseMount: chooseWeaponMount,
+                getCrewActor: id => game.actors.get(id),
+                onAttack: ({crewActor, mount, action: currentAction}) => {
+                    const dm = parseInt(currentAction.dm);
+                    new MgT2SpacecraftAttackDialog(shipActor, crewActor, mount, dm).render(true);
+                }
+            });
         } else if (action.action === "special") {
             if (action.special === "pilot") {
                 let pilotDM = actorCrew.getSkillValue("pilot.spacecraft");
