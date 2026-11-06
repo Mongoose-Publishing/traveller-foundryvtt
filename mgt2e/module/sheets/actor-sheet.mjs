@@ -1038,6 +1038,19 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
            game.actors.get(actorId).sheet.render(true);
         });
 
+        html.find('.package-show').click(ev => {
+            const actorId = $(ev.currentTarget).parents(".package-pill")?.data("packageUuid");
+            fromUuid(actorId).then((pkg) => {
+                pkg.sheet.render(true);
+            });
+        })
+
+        html.find('.package-delete').click(ev => {
+            const actorId = $(ev.currentTarget).parents(".package-pill")?.data("packageUuid");
+            const removed = this.actor.system.packages.filter(i => i.uuid !== actorId);
+            this.actor.update({"system.packages": removed});
+        })
+
         html.find('.crew-edit').click(ev => {
             const li = $(ev.currentTarget).parents(".actor-crew");
             const actorId = li.data("actorId");

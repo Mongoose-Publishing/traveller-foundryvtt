@@ -2631,3 +2631,9 @@ ol.actor-items li.item-status- {
   padding-top: 5px;
   font-weight: bold;
 }
+
+.package-delete {
+  padding-top: 5px;
+  padding-right: 3px;
+  float: right;
+}

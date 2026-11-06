@@ -1,6 +1,10 @@
 # Release Notes
 
-# Develop
+# 0.24.0 (Beta)
+
+**Note:** Number of status effects cut down, removing many of those in the Foundry default.
+This is a world option to re-enable them if they are being used, but most are applicable
+more to fantasy than SciFi.
 
 * Inline characters can now specify new skills, e.g. profession.officeWorker lists it as
   Profession (Office Worker).
@@ -22,6 +26,17 @@
   be used to toggle them back on if you are using them in your own campaigns.
 * Added new fields to weapon sheets to support vehicle weapons from the new Vehicle Handbook.
   This includes crew numbers, power usage and vehicle spaces (auto calculated from weight).
+* If a world is deleted, then don't crash when displaying passengers and freight for that world.
+* Document startup macro now supports GM only option.
+* Packages can now only be dragged to an actor once. They are recorded on an actor, and displayed
+  in a Traveller's history tab.
+* Packages can now be dragged directly from a journal to an actor sheet, or even added with a
+  single click. Confirmation dialog is now displayed to ensure it's doing to the correct actor.
+  This streamlines the Companion package based creation.
+* Inline package format changed to improve the look on digital, though it changes how they are
+  displayed in the Companion.
+* The [[/upp ]] macro now supports description field. If defined, this is output to the chat
+  when the send-to-chat option is used.
 
 # 0.23.3 (Beta)
 

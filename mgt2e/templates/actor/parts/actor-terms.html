@@ -31,8 +31,12 @@
 {{#if system.packages}}
     <div class="applied-packages grid grid-3col">
         {{#each system.packages as |package|}}
-            <div class="package-pill">
-                <img src="{{package.img}}"/> <span>{{package.name}}</span>
+            <div class="package-pill" data-package-uuid="{{package.uuid}}">
+                <img class="package-show" src="{{package.img}}"/>
+                <span class="package-show">{{package.name}}</span>
+                {{#unless ../system.settings.lockCharacteristics}}
+                    <a class="package-delete" title="{{localize 'MGT2.DeleteItem'}}"><i class="fas fa-trash"></i></a>
+                {{/unless}}
             </div>
         {{/each}}
     </div>
