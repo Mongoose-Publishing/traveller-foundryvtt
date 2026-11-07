@@ -529,6 +529,14 @@ export function initConfigSettings() {
         type: Boolean,
         default: false
     });
+    game.settings.register('mgt2e', "autoHotbarLinks", {
+        name: game.i18n.localize("MGT2.Settings.AutoHotbarLinks.Name"),
+        hint: game.i18n.localize("MGT2.Settings.AutoHotbarLinks.Hint"),
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true
+    });
 }
 
 export async function initSocketEvents() {

@@ -43,8 +43,10 @@ MGT2.addHotbarJournalMacro = async function(journalId, title, image, gmOnly) {
                             }
                         });
                     }
-                    await game.user.assignHotbarMacro(macro, emptySlot);
-                    document.sheet.render(true);
+                    if (game.settings.get("mgt2e", "autoHotbarLinks")) {
+                        await game.user.assignHotbarMacro(macro, emptySlot);
+                        document.sheet.render(true);
+                    }
                 }
             }
         });
