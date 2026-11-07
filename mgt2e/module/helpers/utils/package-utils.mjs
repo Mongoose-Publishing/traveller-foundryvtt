@@ -9,6 +9,12 @@ export async function addPackageToActor(targetActor, actorPackage) {
         return;
     }
 
+    if (!["traveller", "npc", "robot"].includes(targetActor.type)) {
+        ui.notifications.warn(game.i18n.format("MGT2.Info.Drop.DropPackageWrongType",
+            { package: actorPackage.name, actor: targetActor.name, type: targetActor.type }));
+        return;
+    }
+
     // Now confirm we want to add it.
     const yes = await foundry.applications.api.DialogV2.confirm({
         window: { title: game.i18n.format("MGT2.Dialog.AddPackageConfirm.Title") },
@@ -20,8 +26,6 @@ export async function addPackageToActor(targetActor, actorPackage) {
     if (!yes) {
         return;
     }
-
-
 
     if (!targetActor.system.packages) {
         targetActor.system.packages = [];

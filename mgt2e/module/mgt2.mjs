@@ -205,12 +205,19 @@ async function addPackageFromJournal(actorId) {
         const actors = Tools.getSelectedOwned();
 
         if (actors && actors.length === 1) {
-            console.log(actors[0].name);
             const myActor = actors[0];
             await addPackageToActor(myActor, packageActor);
+        } else if (!actors || actors.length === 0) {
+            ui.notifications.error(
+                game.i18n.format("MGT2.InlineActor.ClickToAddNoActor", { name: packageActor.name})
+            );
+        } else {
+            ui.notifications.error(game.i18n.localize("MGT2.InlineActor.ClickToAddTooMany"));
         }
     } else {
-        ui.notifications.error(`Actor [${actorId}] cannot be found`);
+        ui.notifications.error(
+            game.i18n.format("MGT2.InlineActor.ClickToAddNoPackage", { uuid: actorId})
+        );
     }
 }
 

@@ -1467,6 +1467,7 @@
   "MGT2.Info.Drop.DropPackageDupe": "Package '{package}' has already been added to '{actor}'",
   "MGT2.Info.Drop.DropPackage": "Adding package '{package}' to '{actor}'",
   "MGT2.Info.Drop.DropPackageItem": "Adding item '{item}' to '{actor}'",
+  "MGT2.Info.Drop.DropPackageWrongType": "Cannot add a package to '{actor}' because they are a '{type}'",
   "MGT2.Info.DamageMsg.VehicleNoStun": "Vehicles can't be affected by stun damage",
   "MGT2.Info.DamageMsg.SpacecraftNoStun": "Spacecraft can't be affected by stun damage",
   "MGT2.Error.NotEnoughCash": "{actor} does not have enough Credits to spend Cr{cost}",
@@ -1780,6 +1781,9 @@
   "MGT2.Dialog.VehicleDamage": "Vehicle Damage",
 
   "MGT2.InlineActor.ClickToAdd": "Click to add package to character",
+  "MGT2.InlineActor.ClickToAddNoActor": "To add the package '{name}' to a Traveller, define a default Player Character in your user configuration or select a token",
+  "MGT2.InlineActor.ClickToAddTooMany": "More than one token selected, can't decide which one to add package to.",
+  "MGT2.InlineActor.ClickToAddNoPackage": "The referenced Package {uuid} doesn't exist",
   "MGT2.Dialog.AddPackageConfirm.Title": "Add Package",
   "MGT2.Dialog.AddPackageConfirm.Text": "Do you want to add package '{package}' to actor '{actor}'?",
 
