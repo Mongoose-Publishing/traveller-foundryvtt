@@ -1,0 +1,79 @@
+name: Validate
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: JavaScript, JSON, and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - name: Check JavaScript syntax
+        shell: bash
+        run: |
+          mapfile -d '' files < <(git ls-files -z '*.js' '*.mjs')
+          if (( ${#files[@]} == 0 )); then
+            echo '::error::No tracked JavaScript files found.'
+            exit 1
+          fi
+          printf 'Syntax-checking %d JavaScript files.\n' "${#files[@]}"
+          for file in "${files[@]}"; do
+            node --check "$file"
+          done
+
+      - name: Validate JSON
+        shell: bash
+        run: |
+          mapfile -d '' files < <(git ls-files -z '*.json')
+          if (( ${#files[@]} == 0 )); then
+            echo '::error::No tracked JSON files found.'
+            exit 1
+          fi
+          node --input-type=module - "${files[@]}" <<'NODE'
+          import fs from 'node:fs';
+
+          const files = process.argv.slice(2);
+          for (const file of files) {
+            try {
+              JSON.parse(fs.readFileSync(file, 'utf8'));
+            } catch (error) {
+              throw new Error(`${file}: ${error.message}`);
+            }
+          }
+          console.log(`Parsed ${files.length} tracked JSON files.`);
+          NODE
+
+      - name: Run Node tests when present
+        shell: bash
+        run: |
+          mapfile -d '' tests < <(git ls-files -z 'tests/*.test.mjs')
+          if (( ${#tests[@]} == 0 )); then
+            echo 'No tracked node:test files yet; JavaScript and JSON validation remain required.'
+            exit 0
+          fi
+          printf 'Running %d Node test files.\n' "${#tests[@]}"
+          node --test "${tests[@]}"
