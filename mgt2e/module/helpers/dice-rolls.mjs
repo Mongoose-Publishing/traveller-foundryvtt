@@ -381,6 +381,12 @@ export async function rollAttack(actor, weapon, attackOptions) {
             dice += ` - ${Math.abs(attackOptions.rangeDM)}[Range]`;
         }
     }
+    // Target Dodge/Parry is a signed DM; do not fold it into the attacker's
+    // reaction penalty or custom DM (which may be reused for another attack).
+    const dodgeDM = Number(attackOptions.dodgeDM);
+    if (!attackOptions.isParry && Number.isFinite(dodgeDM) && dodgeDM < 0) {
+        dice += ` - ${Math.abs(dodgeDM)}[Dodge]`;
+    }
     let attacks = 1;
     if (attackOptions.autoOption && attackOptions.autoOption === "burst") {
         let autoBonus = attackOptions.shotsFired?attackOptions.shotsFired:getTraitValue(traits, "auto");
