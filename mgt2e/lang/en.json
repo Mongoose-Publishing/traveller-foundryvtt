@@ -55,6 +55,8 @@
   "MGT2.Settings.DamageManager.Hint": "If using multiple GMs, sets the name of the Player who is responsible for applying damage to characters. This must be a GM.",
   "MGT2.Settings.CoreEffects.Name": "Enable core Foundry status effects",
   "MGT2.Settings.CoreEffects.Hint": "The core set of status effects are now disabled by default. Enable this to bring them back",
+  "MGT2.Settings.AutoHotbarLinks.Name": "Automatically create hotbar links",
+  "MGT2.Settings.AutoHotbarLinks.Hint": "Automatically create links on the hotbar to compendium docs for official content",
   "MGT2.STR": "STR",
   "MGT2.DEX": "DEX",
   "MGT2.END": "END",
