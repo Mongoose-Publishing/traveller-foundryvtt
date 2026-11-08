@@ -126,7 +126,13 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 { type: "submit", icon: "fa-solid fa-save", label: "Attack" }
             ]
         }
-        const range = parseInt(this.weaponItem.system.weapon.range)||0;
+        let range = parseInt(this.weaponItem.system.weapon.range)||0;
+        if (this.weaponItem.system.weapon.scale === "vehicle") {
+            range *= 1000;
+        } else if (this.weaponItem.system.weapon.scale === "spacecraft") {
+            // TODO: This is just a quick hack. Assume weapon is fighter scale, so 1km.
+            range = 1000;
+        }
         this.range = {
             short: range / 4,
             medium: range,
@@ -145,10 +151,10 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (this.isMelee) {
             context.RANGE_SELECT["+0"] = "Melee";
         } else {
-            context.RANGE_SELECT["+1"] = `${game.i18n.localize("MGT2.Attack.short")} (${this.range.short}${context.rangeUnit}, +1)`;
-            context.RANGE_SELECT["+0"] = `${game.i18n.localize("MGT2.Attack.medium")} (${this.range.medium}${context.rangeUnit}, +0)`;
-            context.RANGE_SELECT["-2"] = `${game.i18n.localize("MGT2.Attack.long")} (${this.range.long}${context.rangeUnit}, -2)`;
-            context.RANGE_SELECT["-4"] = `${game.i18n.localize("MGT2.Attack.extreme")} (${this.range.extreme}${context.rangeUnit}, -4)`;
+            context.RANGE_SELECT["+1"] = `${game.i18n.localize("MGT2.Attack.short")} (${new Intl.NumberFormat().format(this.range.short)}${context.rangeUnit}, +1)`;
+            context.RANGE_SELECT["+0"] = `${game.i18n.localize("MGT2.Attack.medium")} (${new Intl.NumberFormat().format(this.range.medium)}${context.rangeUnit}, +0)`;
+            context.RANGE_SELECT["-2"] = `${game.i18n.localize("MGT2.Attack.long")} (${new Intl.NumberFormat().format(this.range.long)}${context.rangeUnit}, -2)`;
+            context.RANGE_SELECT["-4"] = `${game.i18n.localize("MGT2.Attack.extreme")} (${new Intl.NumberFormat().format(this.range.extreme)}${context.rangeUnit}, -4)`;
         }
 
         context.shotType = this.shotType;
