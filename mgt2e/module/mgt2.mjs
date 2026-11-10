@@ -654,6 +654,21 @@ Hooks.on("updateActor", async (actor, updateData, options, userId) => {
     }
 });
 
+Hooks.on("createActiveEffect", (effect, options, userId) => {
+   console.log(effect);
+   if (!effect.flags.mgt2e) {
+       let value = true;
+       let status = Array.from(effect.statuses)[0];
+
+       console.log("Need to populate active effect " + status);
+       if (CONFIG.MGT2.STATUS_EFFECTS[status]?.value) {
+           value = CONFIG.MGT2.STATUS_EFFECTS[status].value;
+       }
+       //effect.setFlag("mgt2e", "value", value);
+       effect.parent.addStatusEffect(status, value);
+   }
+});
+
 Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type === "Actor" || data.type === "Item" || data.data?.dragType === "skill") {
         createTravellerMacro(data, slot);
@@ -1727,7 +1742,8 @@ Handlebars.registerHelper('showStatus', function(actor, status, effect) {
                         label;
                 }
             }
-            return `<div class="resource flex-group-center ${type}"><label class="mgt2e-effect" data-status-id="${status}">${label}</label></div>`;
+            const title = game.i18n.localize("MGT2.EffectTitle." + statusEffect.name);
+            return `<div class="resource flex-group-center ${type}" title="${title}"><label class="mgt2e-effect" data-status-id="${status}">${label}</label></div>`;
         } else {
             return "";
         }

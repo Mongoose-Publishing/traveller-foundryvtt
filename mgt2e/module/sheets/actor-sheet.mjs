@@ -1566,15 +1566,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
     }
 
     _rollDodge(event, actor) {
-        let dodge = 0;
-        const dex = Math.max(0, parseInt(actor.system["DEX"]));
-        if (dex > 0) {
-            dodge = dex;
-        }
-        const skill = parseInt(actor.system.skills["athletics"].specialities["dexterity"].value);
-        if (skill > 0) {
-            dodge += skill;
-        }
+        let dodge = actor.getDodgeScore();
         if (dodge > 0) {
             let effect = actor.getEffect("reaction");
             if (!effect) {

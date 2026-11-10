@@ -1804,7 +1804,20 @@ export class MgT2Actor extends Actor {
         const effect = this.effects.find(e => e.name === name);
 
         if (value && effect) {
-            if (isNaN(parseInt(value))) {
+            if (!effect.flags?.mgt2e) {
+                // Flags not set, need to update.
+                await effect.update({
+                    "flags.mgt2e": {
+                        effect: status,
+                        locked: locked ? true : false,
+                        css: "status" + css,
+                        value: value
+                    }
+                });
+                if (changes) {
+                    await effect.update({"changes": changes});
+                }
+            } else if (isNaN(parseInt(value))) {
                 return false;
             } else if (effect.flags?.mgt2e?.value) {
                 // Passed in a numerical value. Need to +/- it.
@@ -1864,6 +1877,19 @@ export class MgT2Actor extends Actor {
             return false;
         }
         return true;
+    }
+
+    getDodgeScore() {
+        let dodge = 0;
+        const dex = Math.max(0, parseInt(this.system["DEX"]));
+        if (dex > 0) {
+            dodge = dex;
+        }
+        const skill = parseInt(this.system.skills["athletics"].specialities["dexterity"].value) || 0;
+        if (skill > 0) {
+            dodge += skill;
+        }
+        return dodge;
     }
 
     addStatusEffect(status, value) {
@@ -1937,6 +1963,9 @@ export class MgT2Actor extends Actor {
                 break;
             case "reaction":
                 this.setReactionEffect(-1);
+                break;
+            case "dodge":
+                this.setDodgeEffect(this.getDodgeScore());
                 break;
         }
     }

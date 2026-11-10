@@ -165,11 +165,6 @@ export function initStatusEffects() {
         img: "icons/svg/unconscious.svg",
     });
     CONFIG.statusEffects.push({
-        id: "stun",
-        name: "EFFECT.StatusStunned",
-        img: "icons/svg/daze.svg",
-    });
-    CONFIG.statusEffects.push({
         id: "prone",
         name: "EFFECT.StatusProne",
         img: "icons/svg/falling.svg",
