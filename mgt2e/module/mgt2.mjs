@@ -660,7 +660,6 @@ Hooks.on("createActiveEffect", (effect, options, userId) => {
        let value = true;
        let status = Array.from(effect.statuses)[0];
 
-       console.log("Need to populate active effect " + status);
        if (CONFIG.MGT2.STATUS_EFFECTS[status]?.value) {
            value = CONFIG.MGT2.STATUS_EFFECTS[status].value;
        }

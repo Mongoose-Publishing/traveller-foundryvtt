@@ -76,7 +76,7 @@ MGT2.STATUS_EFFECTS = {
     "vaccSuit": { locked: true },
     "surprised": {},
     "aware": {},
-    "reaction": {},
+    "reaction": { value: -1, max: -1 },
     "fatigued": { value: 2, mono: true, min: 1 },
     "physical": { value: -1 },
     "melee": { value: 1 },
@@ -89,8 +89,9 @@ MGT2.STATUS_EFFECTS = {
     "unconscious": { overlay: true },
     "stunned": { value: 1, min: 1, mono: true },
     "tactics": { value: 0 },
-    "initiative": { value: 0 },
-    "dodge": { value: 1, min: 1, fixed: true, replace: true }
+    "initiative": { value: 1 },
+    "dodge": { value: 1, min: 1, fixed: true, replace: true },
+    "aiming": { value: 1, min: 1, max: 6 }
 }
 
 // Note: STATUS_EFFECTS are registered in CONFIG.statusEffects via the 'init' hook in mgt2.mjs

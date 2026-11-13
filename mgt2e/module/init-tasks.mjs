@@ -146,6 +146,16 @@ function initCoreStatusEffects() {
         name: "EFFECT.StatusHolyShield",
         img: "icons/svg/holy-shield.svg",
     });
+    CONFIG.statusEffects.push({
+        id: "eye",
+        name: "EFFECT.StatusMarked",
+        img: "icons/svg/eye.svg",
+    });
+    CONFIG.statusEffects.push({
+        id: "fly",
+        name: "EFFECT.StatusFlying",
+        img: "icons/svg/wing.svg",
+    });
 
 }
 
@@ -170,19 +180,9 @@ export function initStatusEffects() {
         img: "icons/svg/falling.svg",
     });
     CONFIG.statusEffects.push({
-        id: "fly",
-        name: "EFFECT.StatusFlying",
-        img: "icons/svg/wing.svg",
-    });
-    CONFIG.statusEffects.push({
-        id: "target",
-        name: "EFFECT.StatusTarget",
+        id: "aiming",
+        name: "EFFECT.Aiming",
         img: "icons/svg/target.svg",
-    });
-    CONFIG.statusEffects.push({
-        id: "eye",
-        name: "EFFECT.StatusMarked",
-        img: "icons/svg/eye.svg",
     });
 
     // Traveller Effects
@@ -224,7 +224,7 @@ export function initStatusEffects() {
     CONFIG.statusEffects.push({
         id: "aware",
         name: "EFFECT.Aware",
-        img: "systems/mgt2e/icons/effects/aware.svg"
+        img: "icons/svg/eye.svg"
     });
     CONFIG.statusEffects.push({
         id: "reaction",
@@ -285,11 +285,6 @@ export function initStatusEffects() {
         id: "dodge",
         name: "EFFECT.Dodge",
         img: "systems/mgt2e/icons/effects/dodge.svg"
-    });
-    CONFIG.statusEffects.push({
-        id: "critical",
-        name: "EFFECT.Critical",
-        img: "systems/mgt2e/icons/effects/destroyed.svg"
     });
 }
 

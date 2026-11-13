@@ -1881,7 +1881,7 @@ export class MgT2Actor extends Actor {
 
     getDodgeScore() {
         let dodge = 0;
-        const dex = Math.max(0, parseInt(this.system["DEX"]));
+        const dex = Math.max(0, parseInt(this.system.characteristics["DEX"].dm)) || 0;
         if (dex > 0) {
             dodge = dex;
         }
@@ -1966,6 +1966,12 @@ export class MgT2Actor extends Actor {
                 break;
             case "dodge":
                 this.setDodgeEffect(this.getDodgeScore());
+                break;
+            case "initiative":
+                this.setInitiativeEffect(value);
+                break;
+            case "aiming":
+                this.setAimingEffect(value);
                 break;
         }
     }
@@ -2097,6 +2103,9 @@ export class MgT2Actor extends Actor {
             [
                 { key: "system.modifiers.initiative.effect", mode: 2, priority: 0, value: parseInt(value) }
             ]);
+    }
+    setAimingEffect(value) {
+        this.setEffect("aiming", value, false, false, "Good");
     }
 
 }

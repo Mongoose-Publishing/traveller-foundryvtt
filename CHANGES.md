@@ -1,5 +1,17 @@
 # Release Notes
 
+# 0.24.1 (Beta)
+
+* Target dodge DM is included in weapon attack rolls (passed by new vehicle attack dialog).
+* Improved how vehicle attacks are made. If roles and weapons aren't correctly configured,
+  still allows an attack to be made by offering choices of which weapon to use.
+* Added per-user settings configuration to control whether hot bar links are automatically
+  created for content documentation.
+* Vehicle weapons with ranges in kilometres are now handled correctly.
+* Adding effects from the TokenHUD will now correctly add system flags, allowing the
+  effects to be controlled from the actor sheet.
+* Allow world UWP fields to expand with the size of the sheet.
+
 # 0.24.0 (Beta)
 
 **Note:** Number of status effects cut down, removing many of those in the Foundry default.
