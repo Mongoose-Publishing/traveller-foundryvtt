@@ -1965,7 +1965,11 @@ export class MgT2Actor extends Actor {
                 this.setReactionEffect(-1);
                 break;
             case "dodge":
-                this.setDodgeEffect(this.getDodgeScore());
+                const dodge = this.getDodgeScore();
+                this.setDodgeEffect(dodge);
+                if (dodge) {
+                    this.setReactionEffect(-1);
+                }
                 break;
             case "initiative":
                 this.setInitiativeEffect(value);
