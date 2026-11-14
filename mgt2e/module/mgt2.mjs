@@ -655,17 +655,18 @@ Hooks.on("updateActor", async (actor, updateData, options, userId) => {
 });
 
 Hooks.on("createActiveEffect", (effect, options, userId) => {
-   console.log(effect);
-   if (!effect.flags.mgt2e) {
-       let value = true;
-       let status = Array.from(effect.statuses)[0];
+    // Only fire for the user that added the effect.
+    if (userId === game.users.current._id) {
+        if (!effect.flags.mgt2e) {
+            let value = true;
+            let status = Array.from(effect.statuses)[0];
 
-       if (CONFIG.MGT2.STATUS_EFFECTS[status]?.value) {
-           value = CONFIG.MGT2.STATUS_EFFECTS[status].value;
-       }
-       //effect.setFlag("mgt2e", "value", value);
-       effect.parent.addStatusEffect(status, value);
-   }
+            if (CONFIG.MGT2.STATUS_EFFECTS[status]?.value) {
+                value = CONFIG.MGT2.STATUS_EFFECTS[status].value;
+            }
+            effect.parent.addStatusEffect(status, value);
+        }
+    }
 });
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
