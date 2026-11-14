@@ -20,6 +20,7 @@ import {
 } from "../helpers/spacecraft/spacecraft-utils.mjs";
 import {MgT2CharacteristicDamageApp} from "../helpers/dialogs/characteristic-damage.mjs";
 import {addPackageToActor} from "../helpers/utils/package-utils.mjs";
+import {chooseWeaponMount, executeCrewWeaponAttack} from "../helpers/utils/weapon-mount-utils.mjs";
 
 const { renderTemplate } = foundry.applications.handlebars;
 
@@ -1565,15 +1566,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
     }
 
     _rollDodge(event, actor) {
-        let dodge = 0;
-        const dex = Math.max(0, parseInt(actor.system["DEX"]));
-        if (dex > 0) {
-            dodge = dex;
-        }
-        const skill = parseInt(actor.system.skills["athletics"].specialities["dexterity"].value);
-        if (skill > 0) {
-            dodge += skill;
-        }
+        let dodge = actor.getDodgeScore();
         if (dodge > 0) {
             let effect = actor.getEffect("reaction");
             if (!effect) {
@@ -1735,10 +1728,18 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                 "text": action.text
             }).render(true);
         } else if (action.action === "weapon") {
-            let weaponId = action.weapon;
-            let weaponItem = shipActor.items.get(weaponId);
-            let dm = parseInt(action.dm);
-            new MgT2SpacecraftAttackDialog(shipActor, actorCrew, weaponItem, dm).render(true);
+            await executeCrewWeaponAttack({
+                actor: shipActor,
+                crewId: actorCrewId,
+                roleId,
+                actionId,
+                chooseMount: chooseWeaponMount,
+                getCrewActor: id => game.actors.get(id),
+                onAttack: ({crewActor, mount, action: currentAction}) => {
+                    const dm = parseInt(currentAction.dm);
+                    new MgT2SpacecraftAttackDialog(shipActor, crewActor, mount, dm).render(true);
+                }
+            });
         } else if (action.action === "special") {
             if (action.special === "pilot") {
                 let pilotDM = actorCrew.getSkillValue("pilot.spacecraft");

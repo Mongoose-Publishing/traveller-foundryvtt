@@ -2338,7 +2338,7 @@ tr.targeted-cha-row td {
 }
 
 .uwp-data select {
-    width: 10em;
+    width: 100%;
 }
 
 .zone-Amber {
