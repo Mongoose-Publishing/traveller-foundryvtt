@@ -119,7 +119,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const context = {
             actor: this.actor,
             weaponItem: this.weaponItem,
-            rangeUnit: this.weaponItem.system.weapon.scale === "vehicle" ? "km" : "m",
+            rangeUnit: "m",
             skillText: this._getSkillText(),
             skillDM: this.skillDM,
             buttons: [
@@ -132,6 +132,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         } else if (this.weaponItem.system.weapon.scale === "spacecraft") {
             // TODO: This is just a quick hack. Assume weapon is fighter scale, so 1km.
             range = 1000;
+            context.rangeUnit = "km";
         }
         this.range = {
             short: range / 4,
