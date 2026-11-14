@@ -3,15 +3,30 @@ export const MGT2 = {};
 globalThis.mgt2eJournalHotbarQueue = globalThis.mgt2eJournalHotbarQueue || Promise.resolve();
 
 // Useful scripts
-MGT2.addHotbarJournalMacro = async function(journalId, title, image, gmOnly) {
-    if (gmOnly && !game.user.isGM) {
+MGT2.addHotbarJournalMacro = async function(journalId, title, image, options) {
+    if (!options) {
+        options = {};
+    }
+    if (options.gmOnly && !game.user.isGM) {
         return;
     }
+
     const document = await fromUuid(journalId);
     if (document) {
         // Now add to hotbar. This is called by compendium modules, and if multiple are
         // starting up they can clash. Ensure each request to add a macro is queued.
         globalThis.mgt2eJournalHotbarQueue = globalThis.mgt2eJournalHotbarQueue.then(async () => {
+            const folderName = options.folder?options.folder:game.i18n.localize("MGT2.Mongoose");
+            let folder = await game.macros.folders.getName(folderName);
+            console.log(folder);
+            if (!folder) {
+                folder = await Folder.create({
+                    "name": folderName,
+                    "type": "Macro",
+                    color: options.colour?options.colour:"#F1511B"
+                });
+            }
+
             const macroName = title;
             const existingSlot = Object.entries(game.user.hotbar).find(
                 ([slot, macroId]) => {
@@ -38,12 +53,13 @@ MGT2.addHotbarJournalMacro = async function(journalId, title, image, gmOnly) {
                             type: "script",
                             img: image,
                             command: command,
+                            folder: folder?folder._id:null,
                             ownership: {
                                 default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER
                             }
                         });
                     }
-                    if (game.settings.get("mgt2e", "autoHotbarLinks")) {
+                    if (!options.noHotbar && game.settings.get("mgt2e", "autoHotbarLinks")) {
                         await game.user.assignHotbarMacro(macro, emptySlot);
                         document.sheet.render(true);
                     }

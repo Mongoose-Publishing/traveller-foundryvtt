@@ -1,5 +1,10 @@
 {
   "MGT2.Title": "Mongoose Traveller 2e",
+  "MGT2.Mongoose": "Mongoose Publishing",
+  "MGT2.MongooseCore": "Mongoose Core Books",
+  "MGT2.MongooseChartedSpace": "Mongoose Charted Space",
+  "MGT2.MongooseSupplement": "Mongoose Supplements",
+  "MGT2.MongooseAdventures": "Mongoose Supplements",
   "MGT2.Base.Yes": "Yes",
   "MGT2.Base.No": "No",
   "MGT2.Settings.Verbose.Name": "Verbose Skill Rolls",
