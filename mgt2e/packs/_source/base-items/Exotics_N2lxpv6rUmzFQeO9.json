@@ -10,9 +10,10 @@
       "saleDM": "",
       "tons": "1",
       "illegal": false,
-      "cost": 100
+      "cost": 100,
+      "salePrice": null
     },
-    "description": "<p>Exotic goods are outside the normal trade rules, and covers such things as alien relics, prototype technology, unique plant or animal life, priceless treasures and so forth. Buying and seeling exotic goods is a matter for roleplaying and adventure.</p>",
+    "description": "<p>Exotic goods are outside the normal trade rules, and covers such things as alien relics, prototype technology, unique plant or animal life, priceless treasures and so forth. Buying and selling exotic goods is a matter for roleplaying and adventure.</p>",
     "quantity": 1,
     "cost": 1000
   },
@@ -30,9 +31,9 @@
     "duplicateSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.11.6.13-DEV",
+    "systemVersion": "0.24.0.2-DEV",
     "createdTime": 1739833676234,
-    "modifiedTime": 1739833676234,
+    "modifiedTime": 1794523515517,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },
