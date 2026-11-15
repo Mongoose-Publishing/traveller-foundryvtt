@@ -3,8 +3,11 @@ export const MGT2 = {};
 globalThis.mgt2eJournalHotbarQueue = globalThis.mgt2eJournalHotbarQueue || Promise.resolve();
 
 // Useful scripts
-MGT2.addHotbarJournalMacro = async function(journalId, title, image, gmOnly) {
-    if (gmOnly && !game.user.isGM) {
+MGT2.addHotbarJournalMacro = async function(journalId, title, image, options) {
+    if (!options) {
+        options = {};
+    }
+    if (options.gmOnly && !game.user.isGM) {
         return;
     }
 
@@ -15,7 +18,6 @@ MGT2.addHotbarJournalMacro = async function(journalId, title, image, gmOnly) {
         globalThis.mgt2eJournalHotbarQueue = globalThis.mgt2eJournalHotbarQueue.then(async () => {
             const folderName = options.folder?options.folder:game.i18n.localize("MGT2.Mongoose");
             let folder = await game.macros.folders.getName(folderName);
-            console.log(folder);
             if (!folder) {
                 folder = await Folder.create({
                     "name": folderName,
@@ -66,7 +68,6 @@ MGT2.addHotbarJournalMacro = async function(journalId, title, image, gmOnly) {
     }
 };
 
-
 MGT2.STATUS = {
   OKAY: 0,
   HURT: 1,
@@ -89,7 +90,7 @@ MGT2.STATUS_EFFECTS = {
     "vaccSuit": { locked: true },
     "surprised": {},
     "aware": {},
-    "reaction": {},
+    "reaction": { value: -1, max: -1 },
     "fatigued": { value: 2, mono: true, min: 1 },
     "physical": { value: -1 },
     "melee": { value: 1 },
@@ -102,8 +103,9 @@ MGT2.STATUS_EFFECTS = {
     "unconscious": { overlay: true },
     "stunned": { value: 1, min: 1, mono: true },
     "tactics": { value: 0 },
-    "initiative": { value: 0 },
-    "dodge": { value: 1, min: 1, fixed: true, replace: true }
+    "initiative": { value: 1 },
+    "dodge": { value: 1, min: 1, fixed: true, replace: true },
+    "aiming": { value: 1, min: 1, max: 6 }
 }
 
 // Note: STATUS_EFFECTS are registered in CONFIG.statusEffects via the 'init' hook in mgt2.mjs

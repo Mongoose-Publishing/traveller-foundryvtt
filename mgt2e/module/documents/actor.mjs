@@ -882,8 +882,7 @@ export class MgT2Actor extends Actor {
       if (hasTrait(options.traits, "stun")) {
           stun = true;
       }
-      console.log("applyActualDamageToTraveller:");
-      console.log(options);
+      console.log("applyActualDamageToTraveller:", options);
       if (options.ablatItemId) {
           console.log("Ablating armour ");
           let i = this.items.get(options.ablatItemId);
@@ -974,7 +973,6 @@ export class MgT2Actor extends Actor {
 
           }
           if (needsFirstAid) {
-              console.log("Actor needs first aid, setting effect");
               this.setFirstAidEffect(true);
           }
       }
@@ -1006,6 +1004,15 @@ export class MgT2Actor extends Actor {
               this.setUnconsciousEffect(false);
               this.setDeadEffect(true);
           }
+          const callContext = {
+              options: options,
+              actor: this,
+              promises: []
+          }
+          Hooks.call("mgt2e.woundHandling", callContext);
+          if (callContext.promises.length > 0) {
+              await Promise.all(callContext.promises);
+          }
 
           let text = "";
           if (stun) {
@@ -1026,7 +1033,11 @@ export class MgT2Actor extends Actor {
           }
 
           if (isDead && !wasDead) {
-              text += game.i18n.localize("MGT2.DamageEffect.Dead");
+              if (options.woundText) {
+                  text += options.woundText;
+              } else {
+                  text += game.i18n.localize("MGT2.DamageEffect.Dead");
+              }
           } else if (isUnconscious && !wasUnconscious) {
               text += game.i18n.localize("MGT2.DamageEffect.Unconscious");
           } else if (isInjured && !wasInjured) {
