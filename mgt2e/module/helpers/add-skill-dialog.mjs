@@ -142,7 +142,7 @@ export class MgT2AddSkillDialog extends Application {
 
         let label = html.find(".skillLabelField")[0].value;
         let shortname = html.find(".skillShortNameField")[0].value;
-        let parent = html.find(".skillParentSelect")[0].value;
+        let parent = this.parentId?this.parentId:html.find(".skillParentSelect")[0].value;
         let defaultCha = html.find(".skillDefaultSelect")[0].value;
         let combat = html.find(".skillCombatToggle")[0].checked;
         let background = html.find(".skillBackgroundToggle")[0].checked;
@@ -150,9 +150,6 @@ export class MgT2AddSkillDialog extends Application {
         let optional = html.find(".skillOptionalToggle")[0]?.checked;
 
         if (parent) {
-            console.log("parent: " + parent);
-            console.log("skillId: " + this.skillId);
-            console.log("parentId: " + this.parentId);
             if (this.actorData.skills[parent]) {
                 if (!this.actorData.skills[parent].specialities) {
                     this.actorData.skills[parent].specialities = {};
