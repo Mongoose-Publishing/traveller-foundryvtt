@@ -381,6 +381,9 @@ export async function rollAttack(actor, weapon, attackOptions) {
             dice += ` - ${Math.abs(attackOptions.rangeDM)}[Range]`;
         }
     }
+    if (attackOptions.aimDM) {
+        dice += ` + ${attackOptions.aimDM}[Aim]`;
+    }
     // Target Dodge/Parry is a signed DM; do not fold it into the attacker's
     // reaction penalty or custom DM (which may be reused for another attack).
     const dodgeDM = Number(attackOptions.dodgeDM);

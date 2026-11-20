@@ -1,3 +1,5 @@
+// noinspection JSUnresolvedReference
+
 import { MgT2Item } from "../documents/item.mjs";
 import { Tools } from "../helpers/chat/tools.mjs";
 import {MGT2} from "../helpers/config.mjs";
@@ -1079,7 +1081,6 @@ export class MgT2Actor extends Actor {
       let wasInjured = this.effects.find(e => e.name === "injured");
       let wasUnconscious = this.effects.find(e => e.name === "unconscious");
       let wasDead = this.effects.find(e => e.name === "dead");
-      let isInjured = false, isUnconscious = false, isDead = false;
 
       if (stun) {
           if (!hits.tmpDamage) {
@@ -1797,6 +1798,14 @@ export class MgT2Actor extends Actor {
 
         const name = game.i18n.localize(statusEffect.name);
         return this.effects.find(e => e.name === name);
+    }
+
+    getEffectValue(status) {
+      const effect = this.getEffect(status);
+      if (effect && effect.getFlag("mgt2e", "value")) {
+          return effect.getFlag("mgt2e", "value");
+      }
+      return 0;
     }
 
     async setEffect(status, value, overlay, locked, css, changes) {

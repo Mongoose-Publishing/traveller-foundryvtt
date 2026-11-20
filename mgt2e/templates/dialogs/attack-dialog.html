@@ -115,6 +115,12 @@
                     <span>{{dm currentTarget.rangeHitDM}}</span>
                 </div>
             {{/if}}
+            {{#if currentTarget.aimDM}}
+                <div class="resource flex-group-center">
+                    <label class="field-label">Aiming DM</label>
+                    <span>{{dm currentTarget.aimDM}}</span>
+                </div>
+            {{/if}}
         </div>
     {{/if}}
     <br/>

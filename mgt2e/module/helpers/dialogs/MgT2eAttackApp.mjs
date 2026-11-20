@@ -85,6 +85,11 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 return -4;
             }
         }
+        if (this.shotType === "aimed") {
+            target.aimDM = this.aimingBonus;
+        } else {
+            target.aimDM = null;
+        }
 
         if (target.distance <= this.range.short) {
             target.rangeText = game.i18n.localize("MGT2.Attack.short")
@@ -115,6 +120,10 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.isOutOfAmmo = false;
         this.currentAmmo = this.weaponItem.useAmmo()?this.weaponItem.system.weapon.ammo:0;
         this.autoFire = getTraitValue(this.weaponItem.system.weapon.traits, "auto");
+
+        if (this.actor) {
+            this.aimingBonus = this.actor.getEffectValue("aiming");
+        }
 
         const context = {
             actor: this.actor,
@@ -290,7 +299,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 ev.preventDefault();
                 ev.stopImmediatePropagation();
                 this.shotType = ev.target.value;
-                console.log(this.shotType);
+                this._getRangeDM(this.currentTarget);
                 this.render();
             });
         }
@@ -328,6 +337,15 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.attackOptions.dm = customDM;
         this.attackOptions.rangeDM = rangeDM;
         this.attackOptions.showBreakdown = true;
+        if (this.shotType === "aimed") {
+            this.attackOptions.aimDM = this.aimingBonus;
+        } else if (this.shotType === "burst") {
+            this.attackOptions.autoOption = "burst";
+        } else if (this.shotType === "full") {
+            this.attackOptions.autoOption = "full";
+        }
+        // Lose aiming bonus (if any) after shooting.
+        this.actor.setAimingEffect(0);
 
         // There won't always be a currentTarget. There might not even be a scene.
         if (this.currentTarget) {
