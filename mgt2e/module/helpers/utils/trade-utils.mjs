@@ -2,7 +2,6 @@ import {Tools} from "../chat/tools.mjs";
 import {roll} from "../dice-rolls.mjs";
 import {generateNpc} from "./npcgen-utils.mjs";
 
-
 export async function passengerTraffic(dm) {
     const roll = await new Roll(`2D6 + ${dm}`, null).evaluate();
     const total = roll.total;
@@ -149,6 +148,9 @@ function freightDm(worldActor) {
 function worldToHex(world) {
     let x = parseInt(world.system.world.location.x)-1;
     let y = parseInt(world.system.world.location.y)-1;
+
+    x += world.system.world.location.sectorX * 32;
+    y += world.system.world.location.sectorY * 40;
 
     let parity = x&1;
     let q = x;
