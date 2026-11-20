@@ -908,6 +908,7 @@ export class MgT2Actor extends Actor {
           this.update({ "system.rads": this.system.rads });
       }
       let totalDamage = damage;
+      options.totalDamage = totalDamage;
 
       if (stun) {
           if (options.characteristics) {
