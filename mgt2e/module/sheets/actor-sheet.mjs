@@ -1017,6 +1017,13 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
                item.sheet.render(true);
            }
         });
+        html.find('.trait-action').click(ev => {
+            const i = $(ev.currentTarget).parents(".body-item");
+            const item = this.actor.items.get(i.data("itemId"));
+            if (item) {
+                item.sheet.selectSkillAction(this.actor);
+            }
+        });
 
         html.find('.item-reload').click(ev => {
             const li = $(ev.currentTarget).parents(".item");

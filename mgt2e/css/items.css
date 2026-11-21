@@ -524,3 +524,10 @@ span.destructive {
   display: inline-block;
   float: right;
 }
+
+.actions-list .skill-action input {
+  width: 100%;
+}
+.actions-list .skill-action select {
+  width: 100%;
+}

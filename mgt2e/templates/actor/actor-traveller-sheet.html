@@ -97,21 +97,21 @@
                  </div>
             </div>
 
-            <div class="shadow grid grid-5col">
-                <div class="resource flex-group-center">
+            <div class="shadow grid grid-15col">
+                <div class="resource flex-group-center grid-span-3">
                     <label for="system.speed.base" class="field-label">{{localize 'MGT2.TravellerSheet.Speed'}}</label>
                     <input class="field-value writable" type="text" name="system.speed.base"
                            value="{{system.speed.base}}" data-dtype="Number"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center grid-span-3">
                     <label for="system.size" class="field-label">{{localize 'MGT2.TravellerSheet.Size'}}</label>
                     <input class="field-value writable" type="text" name="system.size" value="{{system.size}}" data-dtype="Number"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center grid-span-3">
                     <label for="system.rads" class="field-label">{{localize 'MGT2.TravellerSheet.Rads'}}</label>
                     <input class="field-value writable" type="text" name="system.rads" value="{{system.rads}}" data-dtype="Number"/>
                 </div>
-                <div class="resource flex-group-center">
+                <div class="resource flex-group-center grid-span-3">
                     <label for="system.initiative.value" class="field-label">
                         {{localize 'MGT2.TravellerSheet.Init'}}
                     </label>
@@ -119,7 +119,7 @@
                            value="{{system.initiative.value}}" data-dtype="Number" readonly/>
                 </div>
                 {{#if system.dodge includeZero=false}}
-                    <div class="resource flex-group-center dodgeRoll" title="Click to dodge">
+                    <div class="resource flex-group-center dodgeRoll grid-span-3" title="Click to dodge">
                         <label for="system.dodge" class="field-label">
                             <i class="fas fa-dice"></i>
                             {{localize 'MGT2.TravellerSheet.Dodge'}}
@@ -128,7 +128,7 @@
                                value="{{system.dodge}}" data-dtype="Number" readonly/>
                     </div>
                 {{else}}
-                    <div class="resource flex-group-center dodgeRoll">
+                    <div class="resource flex-group-center dodgeRoll grid-span-3">
                         <label for="system.dodge" class="field-label">
                             {{localize 'MGT2.TravellerSheet.Dodge'}}
                         </label>
