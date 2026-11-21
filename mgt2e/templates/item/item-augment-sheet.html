@@ -91,7 +91,10 @@
                                 <input type="number" name="system.skillActions.{{id}}.target"
                                        value="{{action.target}}"/>
                             </div>
-                            <div><a><i data-action-id="{{id}}" class="fas fa-dice roll-skill-action"> </i></a></div>
+                            <div>
+                                <a><i data-action-id="{{id}}" class="fas fa-dice roll-skill-action"> </i></a>
+                                <a><i data-action-id="{{id}}" class="fas fa-trash delete-skill-action"> </i></a>
+                            </div>
                         {{/each}}
                     </div>
                 {{/if}}

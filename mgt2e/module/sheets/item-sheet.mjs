@@ -1117,8 +1117,17 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
         });
         html.find(".roll-skill-action").click(ev => {
              const id = $(ev.currentTarget).data("actionId");
-             console.log(id);
              this.rollSkillAction(id);
+        });
+        html.find(".delete-skill-action").click(ev => {
+            const id = $(ev.currentTarget).data("actionId");
+            console.log(id);
+            const actions = this.item.system.skillActions;
+            if (Object.keys(actions).length === 1) {
+                this.item.update({"system.-=skillActions": null});
+            } else {
+                this.item.update({[`system.skillActions.-=${id}`]: null});
+            }
         });
         html.find(".show-effects").click(ev => {
             this.item.update({"system.showEffects": true });
@@ -1596,28 +1605,34 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                 // Multiple, so ask which to use.
                 const actionList = [];
                 for (let id of Object.keys(skillActions)) {
-                    console.log(id);
                     const action = skillActions[id];
                     actionList.push({
                         label: action.name,
-                        action: action,
+                        action: id,
                         value: id
                     });
                 }
-                let content = `<p>Select an action</p>`;
-                const fields = foundry.applications.fields;
-                const selectInput = fields.createSelectInput({
-                    options: actionList,
-                    name: "action"
-                });
-                content += selectInput.outerHTML;
-
-                const data = await foundry.applications.api.DialogV2.input({
-                    window: { title: "Select Action" },
-                    content: content
-                });
-                console.log(data);
-                let selected = data.action;
+                let content = `<p>Select an action:</p>`;
+                let selected = null;
+                if (Object.keys(actionList).length > 3) {
+                    const fields = foundry.applications.fields;
+                    const selectInput = fields.createSelectInput({
+                        options: actionList,
+                        name: "action"
+                    });
+                    content += selectInput.outerHTML;
+                    const data = await foundry.applications.api.DialogV2.input({
+                        window: { title: "Select Action" },
+                        content: content
+                    });
+                    selected = data?.action;
+                } else {
+                    selected = await foundry.applications.api.DialogV2.wait({
+                        window: { title: "Select Action"},
+                        content: content,
+                        buttons: actionList
+                    });
+                }
                 if (selected) {
                     this.rollSkillAction(selected);
                 }
