@@ -14,6 +14,11 @@
                 </div>
             </div>
             <div class="shadow item-side-panel">
+                <select class="trait-select writable" name="system.status">
+                    {{selectOptions STATUS_SELECT selected=system.status}}
+                </select>
+            </div>
+            <div class="shadow item-side-panel">
                 {{#if system.computer}}
                 <select class="" name="system.computer.processing" title="Computer Power">
                     {{selectOptions SELECT_PROCESSING selected=system.computer.processing}}

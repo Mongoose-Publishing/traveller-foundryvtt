@@ -72,6 +72,14 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             context.system.quantity = 0;
         }
 
+        context.STATUS_SELECT = {};
+        context.STATUS_SELECT["equipped"] = "Equipped";
+        context.STATUS_SELECT["carried"] = "Carried";
+        context.STATUS_SELECT["owned"] = "Owned";
+        context.STATUS_SELECT["equipped"] = "Equipped";
+        context.STATUS_SELECT["BODY"] = "Body";
+        context.STATUS_SELECT["APPLIED"] = "Applied";
+
         context.techLevels = {};
         for (let i=0; i <= 25; i++) {
             context.techLevels[i] = i + " (" + game.i18n.localize(`MGT2.Item.Tech.${i}`) + ")";

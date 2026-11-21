@@ -2637,3 +2637,7 @@ ol.actor-items li.item-status- {
   padding-right: 3px;
   float: right;
 }
+
+select.trait-select {
+  width: 100%;
+}

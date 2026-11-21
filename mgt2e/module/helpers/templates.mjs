@@ -10,6 +10,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/mgt2e/templates/actor/parts/actor-items-categorised.html",
         "systems/mgt2e/templates/actor/parts/actor-combat.html",
         "systems/mgt2e/templates/actor/parts/actor-status.html",
+        "systems/mgt2e/templates/actor/parts/actor-traits.html",
         "systems/mgt2e/templates/actor/parts/actor-effects.html",
         "systems/mgt2e/templates/actor/parts/actor-skills.html",
         "systems/mgt2e/templates/actor/parts/actor-weapons.html",

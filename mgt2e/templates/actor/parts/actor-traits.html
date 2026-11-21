@@ -1,0 +1,11 @@
+{{#if bodyItems}}
+    {{#each bodyItems as |item|}}
+      <div class="item body-item grid-span-2" data-item-id="{{item._id}}">
+          <span class="trait-name">{{item.name}}</span>
+
+          {{#if (isOwner ..)}}
+            <a class="item-control item-delete" title="{{localize 'MGT2.DeleteItem'}}"><i class="fas fa-trash"></i></a>
+          {{/if}}
+      </div>
+    {{/each}}
+{{/if}}
