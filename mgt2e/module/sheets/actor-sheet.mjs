@@ -693,6 +693,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             if ([MgT2Item.EFFECT, MgT2Item.BODY].includes(i.system.status)) {
                 if (i.type === "weapon") {
                     activeWeapons.push(i);
+                } else if (i.type === "armour") {
+
                 }
                 if (i.system.status === MgT2Item.EFFECT) {
                     effectItems.push(i);
@@ -855,7 +857,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             for (let i of context.items) {
                 if (i.system.armour) {
                     const armourData = i.system.armour;
-                    if (armourData.form === "natural" || i.system.status === MgT2Item.EQUIPPED) {
+                    if (armourData.form === "natural" || MgT2Item.isItemActive(i)) {
                         let armourData = i.system.armour;
                         let used = false;
 

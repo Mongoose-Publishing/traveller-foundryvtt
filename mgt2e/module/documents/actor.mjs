@@ -761,7 +761,7 @@ export class MgT2Actor extends Actor {
           }
           // Look for active weapons which provide protection.
           for (let i of this.items) {
-              if (i.type === "weapon" && i.system.status === MgT2Item.EQUIPPED) {
+              if (i.type === "weapon" && i.isActive()) {
                   if (hasTrait(i.system.weapon.traits, "protection")) {
                       let value = getTraitValue(i.system.weapon.traits, "protection");
                       if (value > 0) {
@@ -769,7 +769,7 @@ export class MgT2Actor extends Actor {
                           armourText += `${i.name} +${value} `;
                       }
                   }
-              } else if (i.type === "armour" && i.system.status === MgT2Item.EQUIPPED) {
+              } else if (i.type === "armour" && i.isActive()) {
                   if (i.system.armour.psi === "1") {
                       // Is Psi enhanced armour being worn?
                       let psi = this.system.characteristics["PSI"].current;

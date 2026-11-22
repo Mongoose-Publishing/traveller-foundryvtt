@@ -24,6 +24,13 @@ export class MgT2Item extends Item {
         return ["equipped", "ACTIVE", "BODY", "EFFECT", "RUNNING"].includes(this.system.status);
     }
 
+    static isItemActive(i) {
+        if (i && ["equipped", "ACTIVE", "BODY", "EFFECT", "RUNNING"].includes(i.system.status)) {
+            return true;
+        }
+        return false;
+    }
+
     static SOFTWARE_TYPE = {
         "generic": {},
         "interface": {},

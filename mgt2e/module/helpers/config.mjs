@@ -18,7 +18,6 @@ MGT2.addHotbarJournalMacro = async function(journalId, title, image, options) {
         globalThis.mgt2eJournalHotbarQueue = globalThis.mgt2eJournalHotbarQueue.then(async () => {
             const folderName = options.folder?options.folder:game.i18n.localize("MGT2.Mongoose");
             let folder = await game.macros.folders.getName(folderName);
-            console.log(folder);
             if (!folder) {
                 folder = await Folder.create({
                     "name": folderName,
