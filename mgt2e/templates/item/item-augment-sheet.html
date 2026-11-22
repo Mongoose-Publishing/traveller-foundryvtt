@@ -58,47 +58,7 @@
                 </div>
             </div>
 
-            <div class="shadow">
-                <div class="item-add-action">+ Add Action</div>
-                {{#if system.skillActions}}
-                    <div class="grid grid-9col actions-list">
-                        <div class="grid-span-2">Action</div>
-                        <div>Cha</div>
-                        <div class="grid-span-3">Skill</div>
-                        <div>Cost</div>
-                        <div>Target</div>
-                        <div></div>
-                        {{#each system.skillActions as |action id|}}
-                            <div class="skill-action grid-span-2">
-                                <input name="system.skillActions.{{id}}.name" class="writable"
-                                       value="{{action.name}}"/>
-                            </div>
-                            <div class="skill-action">
-                                <select class="writable" name="system.skillActions.{{id}}.cha">
-                                    {{selectOptions ../CHARACTERISTIC_SELECT selected=action.cha}}
-                                </select>
-                            </div>
-                            <div class="skill-action grid-span-3">
-                                <select class="writable" name="system.skillActions.{{id}}.skill">
-                                    {{selectOptions ../SKILL_SELECT selected=action.skill}}
-                                </select>
-                            </div>
-                            <div class="skill-action">
-                                <input type="number" name="system.skillActions.{{id}}.cost"
-                                       value="{{action.cost}}"/>
-                            </div>
-                            <div class="skill-action">
-                                <input type="number" name="system.skillActions.{{id}}.target"
-                                       value="{{action.target}}"/>
-                            </div>
-                            <div>
-                                <a><i data-action-id="{{id}}" class="fas fa-dice roll-skill-action"> </i></a>
-                                <a><i data-action-id="{{id}}" class="fas fa-trash delete-skill-action"> </i></a>
-                            </div>
-                        {{/each}}
-                    </div>
-                {{/if}}
-            </div>
+            {{> "systems/mgt2e/templates/item/parts/item-actions.html"}}
 
             <div class="shadow">
                 <h2>{{localize "MGT2.Effects.AugmentEffects"}}</h2>

@@ -1090,7 +1090,7 @@ Handlebars.registerHelper('isItemCarried', function(item) {
 });
 
 Handlebars.registerHelper('isItemOwned', function(item) {
-    if ([MgT2Item.EQUIPPED, MgT2Item.CARRIED, MgT2Item.CARRIED, MgT2Item.BODY, MgT2Item.APPLIED].includes(item.system.status)) {
+    if ([MgT2Item.EQUIPPED, MgT2Item.CARRIED, MgT2Item.CARRIED, MgT2Item.BODY, MgT2Item.EFFECT].includes(item.system.status)) {
         return false;
     }
     if (["term", "associate"].includes(item.type)) {

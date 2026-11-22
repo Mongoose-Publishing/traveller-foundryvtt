@@ -531,3 +531,7 @@ span.destructive {
 .actions-list .skill-action select {
   width: 100%;
 }
+
+.actions-list .action-header {
+  font-weight: bold;
+}

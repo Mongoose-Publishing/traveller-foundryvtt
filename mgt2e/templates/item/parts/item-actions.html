@@ -1,0 +1,65 @@
+<div class="shadow">
+    {{#if system.skillActions}}
+        <div class="grid grid-12col actions-list">
+            {{#each system.skillActions as |action id|}}
+                <div class="skill-action grid-span-4">
+                    <input name="system.skillActions.{{id}}.name" class="writable"
+                           value="{{action.name}}"/>
+                </div>
+                <div class="skill-action grid-span-2">
+                    <select class="writable" name="system.skillActions.{{id}}.cha">
+                        {{selectOptions ../CHARACTERISTIC_SELECT selected=action.cha}}
+                    </select>
+                </div>
+                <div class="skill-action grid-span-4">
+                    <select class="writable" name="system.skillActions.{{id}}.skill">
+                        {{selectOptions ../SKILL_SELECT selected=action.skill}}
+                    </select>
+                </div>
+                <div class="grid-span-2">
+                    <a><i data-action-id="{{id}}" class="fas fa-dice roll-skill-action"> </i></a>
+                    &nbsp;
+                    <a><i data-action-id="{{id}}" class="fas fa-trash delete-skill-action"> </i></a>
+                </div>
+                <div class="grid-span-2 skill-action">
+                    <b>{{localize "MGT2.Target"}}:</b>
+                    <input class="writable" type="number" name="system.skillActions.{{id}}.target"
+                           value="{{action.target}}"/>
+                </div>
+                {{#if action.cha}}
+                    <div class="grid-span-2 skill-action">
+                        <b>{{localize "MGT2.Cost" cha=action.cha}}:</b>
+                        <input class="writable" type="number" name="system.skillActions.{{id}}.cost"
+                               value="{{action.cost}}"/>
+                    </div>
+                    {{#if (ifEquals action.cha "PSI")}}
+                        <div class="grid-span-3 skill-action">
+                            <b>{{localize "MGT2.PsionicReach"}}:</b>
+                            <select class="writable" name="system.skillActions.{{id}}.reach">
+                                {{selectOptions ../PSI_REACH_SELECT selected=action.reach}}
+                            </select>
+                        </div>
+                        <div class="skill-action grid-span-12">
+                            <input name="system.skillActions.{{id}}.text" class="writable"
+                                   value="{{action.text}}"/>
+                        </div>
+                    {{else}}
+                        <div class="skill-action grid-span-8">
+                            <b>{{localize "MGT2.Item.ActionText"}}:</b>
+                            <input name="system.skillActions.{{id}}.text" class="writable"
+                                   value="{{action.text}}"/>
+                        </div>
+                    {{/if}}
+                {{else}}
+                    <div class="skill-action grid-span-10">
+                        <b>{{localize "MGT2.Item.ActionText"}}:</b>
+                        <input name="system.skillActions.{{id}}.text" class="writable"
+                               value="{{action.text}}"/>
+                    </div>
+                {{/if}}
+                <hr class="grid-span-12"/>
+            {{/each}}
+        </div>
+    {{/if}}
+    <div class="item-add-action">+ Add Action</div>
+</div>

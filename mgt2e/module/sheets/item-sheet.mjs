@@ -86,7 +86,6 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
         context.STATUS_SELECT["owned"] = "Owned";
         context.STATUS_SELECT["equipped"] = "Equipped";
         context.STATUS_SELECT["BODY"] = "Body";
-        context.STATUS_SELECT["APPLIED"] = "Applied";
 
         context.techLevels = {};
         for (let i=0; i <= 25; i++) {
@@ -137,10 +136,13 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             "": "None"
         };
 
+        // If this belongs to an actor, the actor might have custom skills, so
+        // we need to use the actor's skill list rather than the global one.
         let allSkills = MGT2.getDefaultSkills();
         if (context.item.parent && context.item.parent.system.skills) {
             allSkills = context.item.parent.system.skills;
         }
+        context.skills = allSkills;
         for (let skillId in allSkills) {
             let skill = allSkills[skillId];
             context.SKILL_SELECT[skillId] = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
@@ -154,12 +156,11 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             }
         }
 
-        // If this belongs to an actor, the actor might have custom skills, so
-        // we need to use the actor's skill list rather than the global one.
-        if (context.item.parent && context.item.parent.system.skills) {
-            context.skills = context.item.parent.system.skills;
-        } else {
-            context.skills = MGT2.getDefaultSkills();
+        context.PSI_REACH_SELECT = {
+            "": "-"
+        }
+        for (let r of [ "personal", "close", "short", "medium", "long", "veryLong", "distant", "veryDistant", "continental", "planetary"]) {
+            context.PSI_REACH_SELECT[r] = game.i18n.localize("MGT2.Psionic.Reach." + r);
         }
 
         if (context.item.type === "cargo") {
@@ -1220,6 +1221,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                 "skill": "",
                 "cost": 0,
                 "target": 8,
+                "reach": "",
                 "text": ""
             };
             this.item.update({"system.skillActions": this.item.system.skillActions });
@@ -1647,12 +1649,16 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             console.log(action);
 
             if (this.item.parent) {
+                let description = action.name;
+                if (action.text) {
+                    description = `<b>${action.name}: </b> ${action.text}`;
+                }
                 const options = {
                     actor: this.item.parent,
                     cha: action.cha,
                     difficulty: action.target,
                     cost: action.cost,
-                    description: action.name
+                    description: description
                 }
                 game.mgt2e.rollSkillMacro(action.skill, options);
             } else {

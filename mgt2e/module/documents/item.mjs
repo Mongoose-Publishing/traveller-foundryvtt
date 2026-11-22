@@ -18,10 +18,10 @@ export class MgT2Item extends Item {
     static DESTROYED = "DESTROYED";
     static RUNNING = "RUNNING";
     static BODY = "BODY";
-    static APPLIED = "APPLIED";
+    static EFFECT = "EFFECT";
 
     isActive() {
-        return ["equipped", "ACTIVE", "BODY", "APPLIED", "RUNNING"].includes(this.system.status);
+        return ["equipped", "ACTIVE", "BODY", "EFFECT", "RUNNING"].includes(this.system.status);
     }
 
     static SOFTWARE_TYPE = {

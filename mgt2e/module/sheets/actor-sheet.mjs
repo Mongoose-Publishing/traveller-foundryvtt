@@ -679,7 +679,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         const augments = [];
         const software = [];
         const bodyItems = [];  // Items that are part of the character (natural, abilities, cyberware)
-        const appliedItems = [];   // Effects rather than physical items (but not a natural part)
+        const effectItems = [];   // Effects rather than physical items (but not a natural part)
 
         let weight = 0;
         let skillNeeded = -3;
@@ -690,12 +690,12 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             i.img = i.img || MGT2.DEFAULT_ITEM_ICON;
             i.cssStyle = "";
 
-            if ([MgT2Item.APPLIED, MgT2Item.BODY].includes(i.system.status)) {
+            if ([MgT2Item.EFFECT, MgT2Item.BODY].includes(i.system.status)) {
                 if (i.type === "weapon") {
                     activeWeapons.push(i);
                 }
-                if (i.system.status === MgT2Item.APPLIED) {
-                    appliedItems.push(i);
+                if (i.system.status === MgT2Item.EFFECT) {
+                    effectItems.push(i);
                 }
                 if (i.system.status === MgT2Item.BODY) {
                     bodyItems.push(i);
@@ -802,7 +802,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         context.software = software;
         context.augments = augments;
         context.bodyItems = bodyItems;
-        context.appliedItems = appliedItems;
+        context.effectItems = effectItems;
 
         context.GEAR = context.gear;
         context.WEAPONS = context.weapons;
