@@ -1221,6 +1221,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                 "skill": "",
                 "cost": 0,
                 "target": 8,
+                "dm": 0,
                 "reach": "",
                 "text": ""
             };
@@ -1658,6 +1659,7 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                     cha: action.cha,
                     difficulty: action.target,
                     cost: action.cost,
+                    dm: parseInt(action.dm) || 0,
                     description: description
                 }
                 game.mgt2e.rollSkillMacro(action.skill, options);

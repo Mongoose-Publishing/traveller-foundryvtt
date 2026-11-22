@@ -21,20 +21,25 @@
                     &nbsp;
                     <a><i data-action-id="{{id}}" class="fas fa-trash delete-skill-action"> </i></a>
                 </div>
-                <div class="grid-span-2 skill-action">
-                    <b>{{localize "MGT2.Target"}}:</b>
+                <div class="grid-span-2 skill-action flex-group-center">
+                    <b>{{localize "MGT2.Target"}}</b>
                     <input class="writable" type="number" name="system.skillActions.{{id}}.target"
                            value="{{action.target}}"/>
                 </div>
+                <div class="grid-span-2 skill-action flex-group-center">
+                    <b>{{localize "MGT2.DM"}}</b>
+                    <input class="writable" type="number" name="system.skillActions.{{id}}.dm"
+                           value="{{action.dm}}"/>
+                </div>
                 {{#if action.cha}}
-                    <div class="grid-span-2 skill-action">
-                        <b>{{localize "MGT2.Cost" cha=action.cha}}:</b>
+                    <div class="grid-span-2 skill-action flex-group-center">
+                        <b>{{localize "MGT2.Cost" cha=action.cha}}</b>
                         <input class="writable" type="number" name="system.skillActions.{{id}}.cost"
                                value="{{action.cost}}"/>
                     </div>
                     {{#if (ifEquals action.cha "PSI")}}
                         <div class="grid-span-3 skill-action">
-                            <b>{{localize "MGT2.PsionicReach"}}:</b>
+                            <b>{{localize "MGT2.PsionicReach"}}</b>
                             <select class="writable" name="system.skillActions.{{id}}.reach">
                                 {{selectOptions ../PSI_REACH_SELECT selected=action.reach}}
                             </select>
@@ -44,14 +49,14 @@
                                    value="{{action.text}}"/>
                         </div>
                     {{else}}
-                        <div class="skill-action grid-span-8">
+                        <div class="skill-action grid-span-6">
                             <b>{{localize "MGT2.Item.ActionText"}}:</b>
                             <input name="system.skillActions.{{id}}.text" class="writable"
                                    value="{{action.text}}"/>
                         </div>
                     {{/if}}
                 {{else}}
-                    <div class="skill-action grid-span-10">
+                    <div class="skill-action grid-span-8">
                         <b>{{localize "MGT2.Item.ActionText"}}:</b>
                         <input name="system.skillActions.{{id}}.text" class="writable"
                                value="{{action.text}}"/>
