@@ -72,14 +72,15 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1794782580996,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "Veteran [age+3D6] [DEX+1] [STR+1] [END+1] [guncombat+2] [recon|stealth|leadership+1] # Old veteran.",
+      "description": "<p>Veteran [Age+3D6] [DEX+1] [STR+1] [END+1] [guncombat+2] [recon|stealth|leadership+1] # Old veteran.</p>",
       "name": "",
+      "documentUuid": null,
       "_key": "!tables.results!XfMny25sUIOhqIPE.PnplKCjc5bdhXhGI"
     },
     {
@@ -124,14 +125,15 @@
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1794782563165,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "Wanderer [SOC-1] [age+1D6] [streetwise+1] [language+1] [athletics+0]",
+      "description": "<p>Wanderer [SOC-1] [Age+1D6] [streetwise+1] [language+1] [athletics+0]</p>",
       "name": "",
+      "documentUuid": null,
       "_key": "!tables.results!XfMny25sUIOhqIPE.vamrspVI1YmTBN3E"
     },
     {
