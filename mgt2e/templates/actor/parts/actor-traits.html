@@ -1,0 +1,14 @@
+{{#if bodyItems}}
+    {{#each bodyItems as |item|}}
+      <div class="item body-item grid-span-5" data-item-id="{{item._id}}">
+          <span class="trait-name">{{item.name}}</span>
+
+          {{#if (isOwner ..)}}
+              <a class="item-control item-delete" title="{{localize 'MGT2.DeleteItem'}}"> <i class="fas fa-trash"></i></a>
+          {{/if}}
+          {{#if item.system.skillActions}}
+              <a class="item-control trait-action" title="{{localize 'MGT2.RollAction'}}"><i class="fas fa-dice"></i>&nbsp;&nbsp;</a>
+          {{/if}}
+      </div>
+    {{/each}}
+{{/if}}

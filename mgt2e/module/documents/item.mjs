@@ -2,6 +2,7 @@
 import {MgT2AttackDialog } from "../helpers/attack-dialog.mjs";
 import {rollAttack} from "../helpers/dice-rolls.mjs";
 import {getSkillValue} from "../helpers/dice-rolls.mjs";
+import {MgT2eAttackApp} from "../helpers/dialogs/MgT2eAttackApp.mjs";
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -16,6 +17,12 @@ export class MgT2Item extends Item {
     static DAMAGED = "DAMAGED";
     static DESTROYED = "DESTROYED";
     static RUNNING = "RUNNING";
+    static BODY = "BODY";
+    static EFFECT = "EFFECT";
+
+    isActive() {
+        return ["equipped", "ACTIVE", "BODY", "EFFECT", "RUNNING"].includes(this.system.status);
+    }
 
     static SOFTWARE_TYPE = {
         "generic": {},
@@ -141,6 +148,7 @@ export class MgT2Item extends Item {
         if (item.type === "weapon") {
             if (!quickRoll) {
                 new MgT2AttackDialog(this.actor, item).render(true);
+                //TODO: new MgT2eAttackApp(this.actor, item, {}).render(true);
             } else {
                 let skillDM = getSkillValue(this.actor, item.system.weapon.skill, null);
                 let actorData = this.actor.system;

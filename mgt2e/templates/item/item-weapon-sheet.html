@@ -22,6 +22,12 @@
                 </div>
             </div>
 
+            <div class="shadow item-side-panel">
+                <select class="trait-select writable" name="system.status">
+                    {{selectOptions STATUS_SELECT selected=system.status}}
+                </select>
+            </div>
+
             {{#unless system.component}}
                 <div class="shadow item-side-panel">
                     <span class="button link-component">Make component</span>

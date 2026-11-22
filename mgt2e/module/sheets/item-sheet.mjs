@@ -1,7 +1,15 @@
 // noinspection JSUnresolvedReference
 
 import {onManageActiveEffect} from "../helpers/effects.mjs";
-import {rollAttack, hasTrait, getTraitValue, toFloat, rollSpaceAttack, getFloat} from "../helpers/dice-rolls.mjs";
+import {
+    rollAttack,
+    hasTrait,
+    getTraitValue,
+    toFloat,
+    rollSpaceAttack,
+    getFloat,
+    skillLabel
+} from "../helpers/dice-rolls.mjs";
 import {getArmourMultiplier} from "../helpers/spacecraft.mjs";
 import { MGT2 } from "../helpers/config.mjs";
 import {MgT2Item} from "../documents/item.mjs";
@@ -72,6 +80,13 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             context.system.quantity = 0;
         }
 
+        context.STATUS_SELECT = {};
+        context.STATUS_SELECT["equipped"] = "Equipped";
+        context.STATUS_SELECT["carried"] = "Carried";
+        context.STATUS_SELECT["owned"] = "Owned";
+        context.STATUS_SELECT["equipped"] = "Equipped";
+        context.STATUS_SELECT["BODY"] = "Body";
+
         context.techLevels = {};
         for (let i=0; i <= 25; i++) {
             context.techLevels[i] = i + " (" + game.i18n.localize(`MGT2.Item.Tech.${i}`) + ")";
@@ -107,13 +122,45 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
         }
 
         context.characteristics = MGT2.CHARACTERISTICS;
+        context.CHARACTERISTIC_SELECT = {
+            "": "-",
+            "STR": "STR",
+            "DEX": "DEX",
+            "END": "END",
+            "INT": "INT",
+            "EDU": "EDU",
+            "SOC": "SOC",
+            "PSI": "PSI"
+        }
+        context.SKILL_SELECT = {
+            "": "None"
+        };
 
         // If this belongs to an actor, the actor might have custom skills, so
         // we need to use the actor's skill list rather than the global one.
+        let allSkills = MGT2.getDefaultSkills();
         if (context.item.parent && context.item.parent.system.skills) {
-            context.skills = context.item.parent.system.skills;
-        } else {
-            context.skills = MGT2.getDefaultSkills();
+            allSkills = context.item.parent.system.skills;
+        }
+        context.skills = allSkills;
+        for (let skillId in allSkills) {
+            let skill = allSkills[skillId];
+            context.SKILL_SELECT[skillId] = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
+            if (skill.specialities) {
+                for (let specId in skill.specialities) {
+                    let spec = skill.specialities[specId];
+                    let label = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
+                    let specLabel = spec.label?spec.label:game.i18n.localize("MGT2.Skills."+specId);
+                    context.SKILL_SELECT[skillId+"."+specId] = label + " (" + specLabel + ")";
+                }
+            }
+        }
+
+        context.PSI_REACH_SELECT = {
+            "": "-"
+        }
+        for (let r of [ "personal", "close", "short", "medium", "long", "veryLong", "distant", "veryDistant", "continental", "planetary"]) {
+            context.PSI_REACH_SELECT[r] = game.i18n.localize("MGT2.Psionic.Reach." + r);
         }
 
         if (context.item.type === "cargo") {
@@ -514,18 +561,6 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                 item.system.term.randomTerm = false;
             }
         } else if (item.type === "role") {
-            context.CHARACTERISTIC_SELECT = {
-                "": "-",
-                "STR": "STR",
-                "DEX": "DEX",
-                "END": "END",
-                "INT": "INT",
-                "EDU": "EDU",
-                "SOC": "SOC"
-            }
-            context.SKILL_SELECT = {
-                "": "None"
-            };
             context.COLOUR_SELECT = {
                 "": game.i18n.localize("MGT2.Colour.none"),
                 "gold": game.i18n.localize("MGT2.Colour.gold"),
@@ -535,20 +570,6 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
                 "grey": game.i18n.localize("MGT2.Colour.grey"),
                 "black": game.i18n.localize("MGT2.Colour.black")
             };
-            let allSkills = MGT2.getDefaultSkills();
-            for (let skillId in allSkills) {
-                let skill = allSkills[skillId];
-                context.SKILL_SELECT[skillId] = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
-                if (skill.specialities) {
-                    for (let specId in skill.specialities) {
-                        let spec = skill.specialities[specId];
-                        let label = skill.label?skill.label:game.i18n.localize("MGT2.Skills."+skillId);
-                        let specLabel = spec.label?spec.label:game.i18n.localize("MGT2.Skills."+specId);
-                        context.SKILL_SELECT[skillId+"."+specId] = label + " (" + specLabel + ")";
-                    }
-                }
-            }
-
             context.ACTION_TYPE = {
                 "chat": game.i18n.localize("MGT2.Role.ChatType"),
                 "skill": game.i18n.localize("MGT2.Role.SkillType"),
@@ -1095,7 +1116,20 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             const id = d.data("actionId");
             this._deleteRollAction(this.item, id)
         });
-
+        html.find(".roll-skill-action").click(ev => {
+             const id = $(ev.currentTarget).data("actionId");
+             this.rollSkillAction(id);
+        });
+        html.find(".delete-skill-action").click(ev => {
+            const id = $(ev.currentTarget).data("actionId");
+            console.log(id);
+            const actions = this.item.system.skillActions;
+            if (Object.keys(actions).length === 1) {
+                this.item.update({"system.-=skillActions": null});
+            } else {
+                this.item.update({[`system.skillActions.-=${id}`]: null});
+            }
+        });
         html.find(".show-effects").click(ev => {
             this.item.update({"system.showEffects": true });
         });
@@ -1173,7 +1207,26 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
             if (i) {
                 i.sheet.render(true);
             }
-        })
+        });
+
+        html.find(".item-add-action").click(ev => {
+            console.log("Add item");
+            if (!this.item.system.skillActions) {
+                this.item.system.skillActions = {};
+            }
+            let timestamp = Date.now();
+            this.item.system.skillActions[(timestamp).toString(36)] = {
+                "name": "Action",
+                "cha": "",
+                "skill": "",
+                "cost": 0,
+                "target": 8,
+                "reach": "",
+                "text": ""
+            };
+            this.item.update({"system.skillActions": this.item.system.skillActions });
+
+        });
 
         html.find(".item-add-wpn").click(ev => {
            const w = $(ev.currentTarget).parents(".ship-weapon");
@@ -1541,6 +1594,77 @@ export class MgT2ItemSheet extends foundry.appv1.sheets.ItemSheet {
     _deleteRollAction(item, id) {
         let actions = item.system.role.actions;
         item.update({[`system.role.actions.-=${id}`]: null});
+    }
+
+    async selectSkillAction(actor) {
+        if (this.item.system.skillActions) {
+            const skillActions = this.item.system.skillActions;
+            if (Object.keys(skillActions).length === 1) {
+                // Only one, so select it.
+                const actionId = Object.keys(skillActions)[0];
+                this.rollSkillAction(actionId);
+            } else {
+                // Multiple, so ask which to use.
+                const actionList = [];
+                for (let id of Object.keys(skillActions)) {
+                    const action = skillActions[id];
+                    actionList.push({
+                        label: action.name,
+                        action: id,
+                        value: id
+                    });
+                }
+                let content = `<p>Select an action:</p>`;
+                let selected = null;
+                if (Object.keys(actionList).length > 3) {
+                    const fields = foundry.applications.fields;
+                    const selectInput = fields.createSelectInput({
+                        options: actionList,
+                        name: "action"
+                    });
+                    content += selectInput.outerHTML;
+                    const data = await foundry.applications.api.DialogV2.input({
+                        window: { title: "Select Action" },
+                        content: content
+                    });
+                    selected = data?.action;
+                } else {
+                    selected = await foundry.applications.api.DialogV2.wait({
+                        window: { title: "Select Action"},
+                        content: content,
+                        buttons: actionList
+                    });
+                }
+                if (selected) {
+                    this.rollSkillAction(selected);
+                }
+            }
+        }
+    }
+
+    rollSkillAction(id) {
+        console.log("rollSkillAction: " + id);
+        if (this.item.system.skillActions[id]) {
+            const action = this.item.system.skillActions[id];
+            console.log(action);
+
+            if (this.item.parent) {
+                let description = action.name;
+                if (action.text) {
+                    description = `<b>${action.name}: </b> ${action.text}`;
+                }
+                const options = {
+                    actor: this.item.parent,
+                    cha: action.cha,
+                    difficulty: action.target,
+                    cost: action.cost,
+                    description: description
+                }
+                game.mgt2e.rollSkillMacro(action.skill, options);
+            } else {
+                console.log("No actor parent");
+            }
+        }
     }
 
 }

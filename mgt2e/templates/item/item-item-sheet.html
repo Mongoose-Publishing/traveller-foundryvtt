@@ -13,6 +13,11 @@
                     </div>
                 </div>
             </div>
+            <div class="shadow item-side-panel">
+                <select class="trait-select writable" name="system.status">
+                    {{selectOptions STATUS_SELECT selected=system.status}}
+                </select>
+            </div>
 
             {{#unless system.component}}
                 <div class="shadow item-side-panel">
@@ -90,6 +95,8 @@
                     <span class="button show-effects">Effects</span>
                 {{/unless}}
             </div>
+
+            {{> "systems/mgt2e/templates/item/parts/item-actions.html"}}
 
             {{> "systems/mgt2e/templates/item/parts/item-effects.html"}}
 
