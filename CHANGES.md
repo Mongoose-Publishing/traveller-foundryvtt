@@ -1,6 +1,6 @@
 # Release Notes
 
-# 0.24.2 (Beta)
+# 0.25.0 (Beta)
 
 * Some item types can now be placed on the 'Body'. They no longer appear on the equipment
   list, and instead are displayed in the stats block. Setting their status can be controlled
