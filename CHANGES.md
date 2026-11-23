@@ -1,5 +1,11 @@
 # Release Notes
 
+# 0.25.1 (Beta)
+
+* Fixed issued where items given a status of 'Body' weren't correctly applying armour or
+  active effects.
+* Skill actions added to items can now have a DM defined for them.
+
 # 0.25.0 (Beta)
 
 * Some item types can now be placed on the 'Body'. They no longer appear on the equipment

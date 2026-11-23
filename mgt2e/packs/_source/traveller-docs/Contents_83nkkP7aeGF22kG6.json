@@ -134,7 +134,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Equipment items could be 'Equipped' (active), 'Carried' (on the person) or 'Owned' (left elsewhere). A new status type of 'Body' has been added for some item types. Meant to represent natural abilities (claws, natural armour), cyberware or special powers. These are items are displayed in the main stat block rather than in the equipment list. Status can be changed in the item sheet sidebar.</p></li><li><p>General and augment items can have skill actions added to them. This allows skills to be rolled directly from the item. Meant for toolkits or psionic powers. If item is on the 'Body', can be rolled directly from the actor sheet. This feature may go through a few tweaks in the coming releases.</p></li><li><p>Packages added to an actor are now recorded and displayed on the character sheet.</p></li><li><p>Distance between worlds is now correctly calculated if the worlds are in different sectors.</p></li></ul>"
+        "content": "<img src=\"systems/mgt2e/images/traveller.webp\" /><p>Welcome to the latest update to Mongoose Traveller 2e. The full list of changes can be found in the release notes: <a href=\"https://github.com/Mongoose-Publishing/traveller-foundryvtt/blob/main/CHANGES.md\">Latest Changes</a></p><p>For general documentation, see the internal journal pages here: @UUID[Compendium.mgt2e.traveller-docs.JournalEntry.83nkkP7aeGF22kG6]{Documentation}</p><h3>Recent Changes</h3><ul><li><p>Fixed bug where items given a status of 'Body' didn't apply active effects.</p></li><li><p>Skill actions can now have a DM defined for them.</p></li></ul>"
       },
       "video": {
         "controls": true,
@@ -153,7 +153,7 @@
         "systemId": "mgt2e",
         "systemVersion": "0.14.0.7-DEV",
         "createdTime": 1756112217015,
-        "modifiedTime": 1795360580060,
+        "modifiedTime": 1795463141753,
         "lastModifiedBy": "mhUjqDVicnwIUaiq",
         "exportSource": null
       },
