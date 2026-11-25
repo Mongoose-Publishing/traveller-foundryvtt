@@ -28,7 +28,11 @@
     <div class="grid grid-3col">
         <div class="resource flex-group-center">
             <label class="field-label">{{localize 'MGT2.Damage'}}</label>
-            <span>{{weaponItem.system.weapon.damage}}</span>
+            {{#if linked}}
+                <span>{{linked}} {{linkedDamage}}</span>
+            {{else}}
+                <span>{{weaponItem.system.weapon.damage}}</span>
+            {{/if}}
         </div>
 
         <div class="resource flex-group-center grid-span-1">

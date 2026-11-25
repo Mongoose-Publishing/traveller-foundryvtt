@@ -41,12 +41,16 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             submitOnChange: false,
             closeOnSubmit: false
         },
+        position: {
+            width: 600
+        },
         actions: {
             selectTarget: MgT2eAttackApp.selectTargetAction,
             addTargets: MgT2eAttackApp.#addTargets
         },
         window: {
-            title: "MGT2.AttackRoll"
+            title: "MGT2.AttackRoll",
+            resizable: true
         }
     }
 
@@ -108,6 +112,19 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return -99;
     }
 
+    _getLinkedDamage(weapon) {
+        const dmg = weapon.system.weapon.damage;
+        const quantity = parseInt(weapon.system.quantity) || 0;
+        if (quantity > 1) {
+            let found = dmg.match(/[0-9][0-9]*[dD]/);
+            if (found) {
+                let quantityBonus = parseInt(found[0]);
+                return  `${dmg} + ${quantityBonus * (parseInt(weapon.system.quantity) -1)}`;
+            }
+        }
+        return dmg;
+    }
+
     async _prepareContext(options) {
         console.log("_prepareContext:");
         const characteristic = this.weaponItem.system.weapon.characteristic;
@@ -120,17 +137,28 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.isOutOfAmmo = false;
         this.currentAmmo = this.weaponItem.useAmmo()?this.weaponItem.system.weapon.ammo:0;
         this.autoFire = getTraitValue(this.weaponItem.system.weapon.traits, "auto");
+        this.linked = null;
+        if (parseInt(this.weaponItem.system.quantity) > 1) {
+            if (hasTrait(this.weaponItem.system.weapon.traits, "linked")) {
+                this.linked = game.i18n.format("MGT2.Attack.FireLinked", {
+                    number: parseInt(this.weaponItem.system.quantity)
+                });
+            }
+        }
 
         if (this.actor) {
             this.aimingBonus = this.actor.getEffectValue("aiming");
         }
 
+        console.log("LINKED: " + this.linked);
         const context = {
             actor: this.actor,
             weaponItem: this.weaponItem,
             rangeUnit: "m",
             skillText: this._getSkillText(),
             skillDM: this.skillDM,
+            linked: this.linked,
+            linkedDamage: this._getLinkedDamage(this.weaponItem),
             buttons: [
                 { type: "submit", icon: "fa-solid fa-save", label: "Attack" }
             ]
