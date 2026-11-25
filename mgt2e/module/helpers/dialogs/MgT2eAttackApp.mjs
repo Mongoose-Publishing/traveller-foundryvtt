@@ -89,6 +89,13 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 return -4;
             }
         }
+        let bonus = 0;
+        target.rangeText = "";
+        if (target.distance < 50 && hasTrait(this.weaponItem.system.weapon.traits, "laserSight")) {
+            target.rangeText = game.i18n.localize("MGT2.AttackDialog.LaserSight");
+            target.laserSightDM = 1;
+            bonus = 1;
+        }
         if (this.shotType === "aimed") {
             target.aimDM = this.aimingBonus;
         } else {
@@ -96,17 +103,17 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         if (target.distance <= this.range.short) {
-            target.rangeText = game.i18n.localize("MGT2.Attack.short")
-            return +1;
+            target.rangeText += game.i18n.localize("MGT2.Attack.short")
+            return bonus + 1;
         } else if (target.distance <= this.range.medium) {
-            target.rangeText = game.i18n.localize("MGT2.Attack.medium")
-            return +0;
+            target.rangeText += game.i18n.localize("MGT2.Attack.medium")
+            return bonus + 0;
         } else if (target.distance <= this.range.long) {
-            target.rangeText = game.i18n.localize("MGT2.Attack.long")
-            return -2;
+            target.rangeText += game.i18n.localize("MGT2.Attack.long")
+            return bonus - 2;
         } else if (target.distance <= this.range.extreme) {
-            target.rangeText = game.i18n.localize("MGT2.Attack.extreme")
-            return -4;
+            target.rangeText += game.i18n.localize("MGT2.Attack.extreme")
+            return bonus - 4;
         }
         target.rangeText = game.i18n.localize("MGT2.AttackDialog.OutOfRange");
         return -99;
@@ -375,8 +382,12 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         // Lose aiming bonus (if any) after shooting.
         this.actor.setAimingEffect(0);
 
+        console.log(this.currentTarget);
         // There won't always be a currentTarget. There might not even be a scene.
         if (this.currentTarget) {
+            if (this.currentTarget.laserSightDM) {
+                this.attackOptions.laserSightDM = this.currentTarget.laserSightDM;
+            }
             if (this.currentTarget?.dodgeDM) {
                 this.attackOptions.dodgeDM = this.currentTarget.dodgeDM;
                 // Remove dodge from the target being attacked.
@@ -387,6 +398,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 this.attackOptions.facing = this.currentTarget.facing;
             }
         }
+        console.log(this.attackOptions);
         rollAttack(this.actor, this.weaponItem, this.attackOptions);
         this.close();
     }

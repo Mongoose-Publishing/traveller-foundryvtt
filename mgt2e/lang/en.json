@@ -1502,6 +1502,13 @@
   "MGT2.AttackDialog.ShotType.full": "Full Auto x{shots} ({ammo} ammo)",
   "MGT2.AttackDialog.NoScope": "No Scope",
   "MGT2.AttackDialog.OutOfRange": "Out of Range",
+  "MGT2.AttackDialog.LaserSight": "Laser Sight<br/>",
+  "MGT2.AttackDialog.Type": "Type",
+  "MGT2.AttackDialog.RangeDM": "Range DM",
+  "MGT2.AttackDialog.SizeDM": "Size DM",
+  "MGT2.AttackDialog.DodgeDM": "Dodge/Parry DM",
+  "MGT2.AttackDialog.CoverDM": "Cover DM",
+  "MGT2.AttackDialog.AimDM": "Aiming DM",
 
   "MGT2.Role.isDepartment": "Role is a department",
   "MGT2.Role.RoleAssignment": "Role Assignment",
