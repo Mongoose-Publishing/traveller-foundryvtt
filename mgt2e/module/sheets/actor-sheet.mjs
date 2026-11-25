@@ -1,4 +1,6 @@
 
+// noinspection JSUnresolvedReference
+
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
 import {MgT2SkillDialog } from "../helpers/skill-dialog.mjs";
 import {MgT2XPDialog } from "../helpers/xp-dialog.mjs";
@@ -676,6 +678,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         const associates = [];
         const augments = [];
         const software = [];
+        const bodyItems = [];  // Items that are part of the character (natural, abilities, cyberware)
+        const effectItems = [];   // Effects rather than physical items (but not a natural part)
 
         let weight = 0;
         let skillNeeded = -3;
@@ -685,6 +689,21 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         for (let i of context.items) {
             i.img = i.img || MGT2.DEFAULT_ITEM_ICON;
             i.cssStyle = "";
+
+            if ([MgT2Item.EFFECT, MgT2Item.BODY].includes(i.system.status)) {
+                if (i.type === "weapon") {
+                    activeWeapons.push(i);
+                } else if (i.type === "armour") {
+
+                }
+                if (i.system.status === MgT2Item.EFFECT) {
+                    effectItems.push(i);
+                }
+                if (i.system.status === MgT2Item.BODY) {
+                    bodyItems.push(i);
+                }
+                continue;
+            }
 
             if (i.system.weight && !isNaN(parseFloat(i.system.weight))) {
                 if (i.system.status === MgT2Item.CARRIED) {
@@ -784,6 +803,8 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
         context.associates = associates;
         context.software = software;
         context.augments = augments;
+        context.bodyItems = bodyItems;
+        context.effectItems = effectItems;
 
         context.GEAR = context.gear;
         context.WEAPONS = context.weapons;
@@ -836,7 +857,7 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             for (let i of context.items) {
                 if (i.system.armour) {
                     const armourData = i.system.armour;
-                    if (armourData.form === "natural" || i.system.status === MgT2Item.EQUIPPED) {
+                    if (armourData.form === "natural" || MgT2Item.isItemActive(i)) {
                         let armourData = i.system.armour;
                         let used = false;
 
@@ -989,6 +1010,21 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             item.delete();
             li.slideUp(200, () => this.render(false));
             this._calculateArmour(this.actor);
+        });
+
+        html.find('.trait-name').click(ev => {
+           const i = $(ev.currentTarget).parents(".body-item");
+           const item = this.actor.items.get(i.data("itemId"));
+           if (item) {
+               item.sheet.render(true);
+           }
+        });
+        html.find('.trait-action').click(ev => {
+            const i = $(ev.currentTarget).parents(".body-item");
+            const item = this.actor.items.get(i.data("itemId"));
+            if (item) {
+                item.sheet.selectSkillAction(this.actor);
+            }
         });
 
         html.find('.item-reload').click(ev => {

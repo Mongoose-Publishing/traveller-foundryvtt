@@ -15,14 +15,14 @@ export class MgT2Effect extends ActiveEffect {
         if (this.parent instanceof Item) {
             if (this.parent.type === "option") {
                 return false;
-            } else if (this.parent.system.status === MgT2Item.EQUIPPED) {
+            } else if (this.parent.isActive()) {
                 return false;
             } else if (this.parent.system?.component?.linkedTo) {
                 // If this is a component, and the item it is linked to is equipped,
                 // then this component is also equipped.
                 let linkedId = this.parent.system.component.linkedTo;
                 let parent = this.parent?.parent?.items?.get(linkedId);
-                return parent?.system?.status !== MgT2Item.EQUIPPED;
+                return (!parent?.isActive());
             }
             return true;
         }
@@ -31,7 +31,7 @@ export class MgT2Effect extends ActiveEffect {
         if (this.origin) {
             let origin = fromUuidSync(this.origin);
             if (origin) {
-                if (origin.system.status !== MgT2Item.EQUIPPED) {
+                if (!origin.isActive()) {
                     return true;
                 }
             }

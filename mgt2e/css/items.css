@@ -504,3 +504,34 @@ span.damage-dice {
 span.destructive {
   color: red;
 }
+
+.body-item {
+  border: 1px solid black;
+  background-color: #606060;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 0;
+}
+
+.trait-name {
+  cursor: pointer;
+}
+
+.body-item .item-control {
+  display: inline-block;
+  float: right;
+}
+
+.actions-list .skill-action input {
+  width: 100%;
+}
+.actions-list .skill-action select {
+  width: 100%;
+}
+
+.actions-list .action-header {
+  font-weight: bold;
+}

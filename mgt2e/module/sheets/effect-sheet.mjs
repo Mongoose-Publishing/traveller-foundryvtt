@@ -107,7 +107,6 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
 
     // V13
     _onRender(context, options) {
-        console.log("onRender:");
     }
 
     // V13
@@ -145,9 +144,6 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
     // V13
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
-
-        console.log("_prepareContext: " + context.document.name);
-        console.log(context.document);
 
         // system.augment is what we use now. Also check what we used to use.
         let augmentType = context.document.system?.augmentType ??
@@ -262,7 +258,6 @@ export class MgT2EffectSheet extends foundry.applications.sheets.ActiveEffectCon
         if (event.target.name === "document.name") {
             ae.name = event.target.value;
         } else if (event.target.name.startsWith("changes.")) {
-            console.log(event.target.name);
             const parts = event.target.name.split(".");
             const idx = parseInt(parts[1]);
             const param = parts[2];

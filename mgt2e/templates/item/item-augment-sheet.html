@@ -5,13 +5,18 @@
             <img class="item-img shadow" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
             <div class="shadow item-side-panel">
                 <div class="resource flex-group-center">
-                    <label for="system.quantity" class="resource-label">Quantity</label>
+                    <label for="system.quantity" class="resource-label">{{localize "MGT2.Item.Quantity"}}</label>
                     <div class="incdec">
                         <span class="quantity-dec"><i class="fa-regular fa-square-minus"></i></span>
                         <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
                         <span class="quantity-inc"><i class="fa-regular fa-square-plus"></i></span>
                     </div>
                 </div>
+            </div>
+            <div class="shadow item-side-panel">
+                <select class="trait-select writable" name="system.status">
+                    {{selectOptions STATUS_SELECT selected=system.status}}
+                </select>
             </div>
             <div class="shadow item-side-panel">
                 {{#if system.computer}}
@@ -26,7 +31,6 @@
                 {{/if}}
             </div>
         </div>
-
 
         <div class="flex-group-left">
             <h1 class="charname shadow">
@@ -53,6 +57,8 @@
                     </div>
                 </div>
             </div>
+
+            {{> "systems/mgt2e/templates/item/parts/item-actions.html"}}
 
             <div class="shadow">
                 <h2>{{localize "MGT2.Effects.AugmentEffects"}}</h2>

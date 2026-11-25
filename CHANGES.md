@@ -1,5 +1,24 @@
 # Release Notes
 
+# 0.25.1 (Beta)
+
+* Fixed issued where items given a status of 'Body' weren't correctly applying armour or
+  active effects.
+* Skill actions added to items can now have a DM defined for them.
+
+# 0.25.0 (Beta)
+
+* Some item types can now be placed on the 'Body'. They no longer appear on the equipment
+  list, and instead are displayed in the stats block. Setting their status can be controlled
+  from the item sheet, where there is a new drop down on the sidebar to change status.
+  Designed for racial traits, psionic powers and cyberware.
+* Augments and general items can now have actions associated with them. For 'Body' items
+  these can be executed without opening the item sheet. This allows skill checks to be
+  made. Primary purpose is toolkits and Psionic powers. May be tweaked in upcoming releases.
+* Adding a package to an actor is now recorded, and displayed on the actor sheet. Adding
+  the same package multiple times is now prevented.
+* Cope with worlds being in different sectors when calculating distance for trade.
+
 # 0.24.1 (Beta)
 
 * Target dodge DM is included in weapon attack rolls (passed by new vehicle attack dialog).

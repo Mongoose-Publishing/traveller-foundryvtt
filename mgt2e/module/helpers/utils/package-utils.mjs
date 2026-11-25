@@ -212,11 +212,10 @@ export async function addPackageToActor(targetActor, actorPackage) {
                 targetActor.system.skills[s].specialities = {};
             }
             for (let sp in skill.specialities) {
-                if (targetActor.system.skills[skill.id].specialities[sp]) {
+                if (targetActor.system.skills[s].specialities[sp]) {
                     continue;
                 }
                 targetActor.system.skills[s].specialities[sp] = skill.specialities[sp];
-                console.log(`${sp} is a new speciality`);
             }
         }
         if (skill.bonus !== 0 && target) {
