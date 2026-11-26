@@ -154,7 +154,7 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         if (this.actor) {
-            this.aimingBonus = this.actor.getEffectValue("aiming");
+            this.aimingBonus = Math.max(1, this.actor.getEffectValue("aiming") || 0);
         }
 
         console.log("LINKED: " + this.linked);
