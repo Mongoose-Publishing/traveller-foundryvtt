@@ -323,7 +323,8 @@ export async function addPackageToActor(targetActor, actorPackage) {
             name: item.name,
             img: item.img,
             type: item.type,
-            system: foundry.utils.deepClone(item.system)
+            system: foundry.utils.deepClone(item.system),
+            effects: item.effects.map(e => e.toObject())
         };
         if (targetActor.type === "npc" && (itemData.type === "term" || itemData.type === "associate")) {
             // NPCs don't have career terms or associates.
