@@ -39,7 +39,7 @@ import {
     tradeEmbarkPassengerHandler, tradeDisembarkPassengerHandler
 } from "./helpers/utils/trade-utils.mjs";
 import { worldDropBrokerHandler } from "./helpers/utils/world-utils.mjs";
-import {generateNpc, generateText} from "./helpers/utils/npcgen-utils.mjs";
+import {generateNpc, generateText, createFromUpp} from "./helpers/utils/npcgen-utils.mjs";
 import {
     launchSwarmHandler, showSwarmHandler
 } from "./helpers/spacecraft/spacecraft-utils.mjs";
@@ -172,7 +172,9 @@ Hooks.once("init", function() {
     });
     body.on("click", ".upp-to-chat", ev => {
        const data = $(ev.currentTarget).data("uppData");
-       if (data) {
+       if (data && (ev.ctrlKey || ev.metaKey)) {
+           createFromUpp(data);
+       } else if (data) {
            let html = data.name;
            if (data.profession) {
                html += ` (${data.profession})`;

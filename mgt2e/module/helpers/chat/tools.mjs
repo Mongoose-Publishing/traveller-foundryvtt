@@ -626,6 +626,9 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
         gender: args.gender,
         profession: args.profession,
         age: args.age,
+        species: args.species,
+        skills: args.skills,
+        upp: args.upp,
         description: args.description
     }
     const json = JSON.stringify(jsonData);

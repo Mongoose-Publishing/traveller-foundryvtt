@@ -2,6 +2,7 @@ import {MgT2eMacros} from "../chat/macros.mjs";
 import {MGT2} from "../config.mjs";
 import {copySkills, rollUPP} from "./character-utils.mjs";
 import {choose} from "../dice-rolls.mjs";
+import {Tools} from "../chat/tools.mjs";
 
 
 async function getTable(folder, tableName, variantName) {
@@ -274,4 +275,97 @@ export async function generateNpc(npcData, folderName) {
     }
     npcData.system.sophont.profession = profession?profession:choose([ "Hitchhiker", "Tourist", "Slacker" ] );
     return true;
+}
+
+export async function createFromUpp(data) {
+    const npcData = {
+        name: data.name?data.name:"NPC",
+        type: "npc",
+        system: {
+            characteristics: {},
+            skills: MGT2.getDefaultSkills(),
+            settings: {
+                hideUntrained: true,
+                lockCharacteristics: true
+            },
+            sophont: {
+                species: data.species?data.species:"Human",
+                age: data.age?data.age:"30",
+                gender: data.gender?data.gender:"Male",
+                profession: data.profession
+            },
+            description: data.description?data.description:""
+        }
+    }
+    const upp = Tools.getHexFromUpp(data.upp, 0);
+    for (let c of [ "str", "dex", "end", "int", "edu", "soc" ]) {
+        npcData.system.characteristics[c.toUpperCase()] = {
+            value: upp[c],
+            current: upp[c],
+            show: true
+        }
+    }
+
+    if (data.skills) {
+        let skills = data.skills.split(",");
+
+        for (let key of skills) {
+            let skillFqn = key.trim().split(" ")[0];
+            let skillVal = key.trim().split(" ")[1];
+            if (!skillVal) skillVal = 0;
+
+            // Try and find link to skill data.
+            let skillId = skillFqn, specId = null;
+            if (skillFqn.indexOf(".") > -1) {
+                skillId = skillFqn.split(".")[0];
+                specId = skillFqn.split(".")[1];
+
+                if (!npcData.system.skills[skillId]) {
+                    let skillLabel = Tools.getSkillLabel(npcData.system.skills, skillId);
+                    npcData.system.skills[skillId] = {
+                        label: skillLabel,
+                        id: skillId,
+                        trained: true,
+                        value: 0,
+                        specialities: {}
+                    }
+                }
+                if (!npcData.system.skills[skillId].specialities) {
+                    npcData.system.skills[skillId].specialities = {};
+                }
+                npcData.system.skills[skillId].trained = true;
+                if (npcData.system.skills[skillId].specialities[specId]) {
+                    if (npcData.system.skills[skillId].individual) {
+                        npcData.system.skills[skillId].specialities[specId].trained = true;
+                    }
+                    npcData.system.skills[skillId].specialities[specId].value = skillVal;
+                } else {
+                    let skillLabel = Tools.getSkillLabel(npcData.system.skills, specId);
+                    npcData.system.skills[skillId].specialities[specId] = {
+                        label: skillLabel,
+                        id: specId,
+                        value: skillVal
+                    };
+
+                }
+            } else {
+                if (npcData.system.skills[skillId]) {
+                    npcData.system.skills[skillId].trained = true;
+                    npcData.system.skills[skillId].value = skillVal;
+                } else {
+                    let skillLabel = Tools.getSkillLabel(npcData.system.skills, skillId);
+                    npcData.system.skills[skillId] = {
+                        label: skillLabel,
+                        id: skillId,
+                        trained: true,
+                        value: skillVal
+                    }
+                }
+            }
+          }
+    }
+
+
+    const actor = await Actor.implementation.create(npcData);
+    actor.sheet.render(true);
 }

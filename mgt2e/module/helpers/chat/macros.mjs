@@ -514,12 +514,38 @@ MgT2eMacros.skillCheck = async function(args, ask) {
     }
 };
 
-MgT2eMacros.damage = function(args) {
+MgT2eMacros.damage = async function(args) {
     let dice = args.dice;
     let text = args.text;
     let damageType = args.type?args.type:"standard";
     let scale = args.scale?args.scale:null;
-    let traits = args.traits;
+
+    if (args.input) {
+        // Ask for a modifer. Can be:
+        //   dm: Straight bonus of X
+        //   per: Damage is per X (round down)
+        //   multiply: Damage is multiplied by X
+        let data = await foundry.applications.api.DialogV2.input({
+            window: { title: args.input },
+            content: `${args.text} (${dice})<br/><input type='text' value="${args.default||0}" name='value'>`,
+            ok: {
+                label: "Roll",
+                icon: "fa-solid fa-dice",
+            }
+        });
+        if (data && data.value) {
+            const value = parseFloat(data.value) || 0;
+            if (args.dm) {
+                dice = dice + " + " + Math.round(parseFloat(args.dm) * value);
+            } else if (args.per && parseFloat(args.per)) {
+                dice = `(${dice}) * ` + Math.floor(value / parseFloat(args.per));
+            } else if (args.multiply) {
+                dice = `(${dice}) * ${value}`;
+            }
+        } else {
+            return;
+        }
+    }
 
     rollAttack(null, null, {
         "damage": dice,
