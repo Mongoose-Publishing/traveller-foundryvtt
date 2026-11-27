@@ -300,8 +300,10 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 context.ATTACKER_SELECT[t.document.uuid] = t.name;
             }
         }
-        if (this.attackerTokenName && options?.window) {
-            options.window.title = game.i18n.format("MGT2.AttackDialog.Title", { name: this.attackerTokenName });
+        if (this.ATTACKER_TOKEN && options?.window) {
+            options.window.title = game.i18n.format("MGT2.AttackDialog.Title", { name: this.ATTACKER_TOKEN.name });
+        } else if (this.actor && options?.window) {
+            options.window.title = game.i18n.format("MGT2.AttackDialog.Title", { name: this.actor.name });
         }
         context.currentTarget = this.currentTarget;
 
