@@ -167,6 +167,13 @@
                         </tr>
                     </table>
                 </div>
+
+                {{#if system.notes}}
+                    <h2>{{localize "MGT2.TravellerSheet.RoleplayNotes"}}</h2>
+
+                    {{{enrichedNotes}}}
+                {{/if}}
+
             </div>
 
             {{> "systems/mgt2e/templates/actor/parts/actor-status.html"}}

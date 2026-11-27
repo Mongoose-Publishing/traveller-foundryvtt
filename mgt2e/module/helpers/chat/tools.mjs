@@ -602,7 +602,7 @@ Tools.getSkillLabel = function(skills, skillFqn) {
             }
         }
     }
-    if (skillLabel.indexOf("MGT2.Skills") === 0) {
+    if (skillLabel && skillLabel.indexOf("MGT2.Skills") === 0) {
         skillLabel = skillId.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase());
     }
     label = skillLabel;
@@ -676,6 +676,10 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
             let skillVal = key.trim().split(" ")[1];
             if (!skillVal) skillVal = 0;
             let skillLabel = Tools.getSkillLabel(SKILLS, skillFqn);
+            if (skillLabel === null) {
+                console.log("skillLabel IS NULL for " + skillFqn);
+                continue;
+            }
 
             // Try and find link to skill data.
             let skillId = skillFqn, specId = null;
@@ -922,9 +926,6 @@ Tools.npcInlineDisplay = async function(a, actor) {
     html += `</div>`; // Skills
     html += `</div>`; // Container
 
-    html += `<div class="grid grid-3col actor-equipment-list actor-link" data-actor-id="${actor.uuid}">`;
-    html += `<div class="species-title">Equipment</div>`;
-    html += `<div class="grid-span-2">`;
     let weapons = "";
     let armour = "";
     let equipment = "";
@@ -937,24 +938,37 @@ Tools.npcInlineDisplay = async function(a, actor) {
             equipment += `<li>${i.name}</li>`;
         }
     }
-    if (weapons !== "") {
-        html += `<b>Weapons:</b> <ul class="skill-list">${weapons}</ul><br/>`;
+    if (weapons !== "" || armour !== "" || equipment !== "") {
+        html += `<div class="grid grid-3col actor-equipment-list actor-link" data-actor-id="${actor.uuid}">`;
+        html += `<div class="species-title">Equipment</div>`;
+        html += `<div class="grid-span-2">`;
+        if (weapons !== "") {
+            html += `<b>Weapons:</b> <ul class="skill-list">${weapons}</ul><br/>`;
+        }
+        if (armour !== "") {
+            html += `<b>Armour:</b> <ul class="skill-list"> ${armour}</ul><br/>`;
+        }
+        if (equipment !== "") {
+            html += `<b>Equipment:</b> <ul class="skill-list">${equipment}</ul><br/>`;
+        }
+        html += `</div>`; // grid-span-2
+        html += `</div>`; // equipment-list
     }
-    if (armour !== "") {
-        html += `<b>Armour:</b> <ul class="skill-list"> ${armour}</ul><br/>`;
+    if (actor.permission > 2 && actor.system.notes) {
+        html += `<div class="species-title" style="width: 100%">${game.i18n.localize("MGT2.TravellerSheet.RoleplayNotes")}</div>`;
+        let d = await TextEditor.enrichHTML(
+            actor.system.notes,
+            {secrets: ((actor.permission > 2) ? true : false)}
+        );
+        html += d;
     }
-    if (equipment !== "") {
-        html += `<b>Equipment:</b> <ul class="skill-list">${equipment}</ul><br/>`;
-    }
-    html += `</div>`;
-    html += `</div>`;
     html += `</div>`;
     html += `</div>`;
 
     if (actor.system.description) {
         let d = await TextEditor.enrichHTML(
             actor.system.description,
-            { secrets: ((actor.permission > 2)?true:false) }
+            {secrets: ((actor.permission > 2) ? true : false)}
         );
         html += d;
     }
@@ -965,7 +979,7 @@ Tools.npcInlineDisplay = async function(a, actor) {
     return a;
 }
 
-Tools.prettyNumber = function(value, digits, sign) {
+Tools.prettyNumber = function (value, digits, sign) {
     let f = parseFloat(value);
     if (isNaN(f)) {
         f = 0;
