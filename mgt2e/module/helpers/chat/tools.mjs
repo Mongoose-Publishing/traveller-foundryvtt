@@ -676,7 +676,7 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
             let skillVal = key.trim().split(" ")[1];
             if (!skillVal) skillVal = 0;
             let skillLabel = Tools.getSkillLabel(SKILLS, skillFqn);
-            if (skillLabel === null) {
+            if (!skillLabel) {
                 console.log("skillLabel IS NULL for " + skillFqn);
                 continue;
             }
