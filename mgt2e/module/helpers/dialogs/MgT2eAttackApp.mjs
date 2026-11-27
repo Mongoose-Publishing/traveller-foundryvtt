@@ -76,6 +76,19 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return text;
     }
 
+    _getRawRangeDM(target) {
+        if (target.distance <= this.range.short) {
+            return 1;
+        } else if (target.distance <= this.range.medium) {
+            return 0;
+        } else if (target.distance <= this.range.long) {
+            return -2;
+        } else if (target.distance <= this.range.extreme) {
+            return -4;
+        }
+        return -99;
+    }
+
     _getRangeDM(target) {
         // Out of range.
         if (target.distance > this.range.extreme) {
@@ -133,7 +146,6 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     async _prepareContext(options) {
-        console.log("_prepareContext:");
         const characteristic = this.weaponItem.system.weapon.characteristic;
         const skill = this.weaponItem.system.weapon.skill;
         const characteristicDM = this.actor?.system.characteristics?.[characteristic]?.dm || 0;
@@ -157,7 +169,6 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             this.aimingBonus = Math.max(1, this.actor.getEffectValue("aiming") || 0);
         }
 
-        console.log("LINKED: " + this.linked);
         const context = {
             actor: this.actor,
             weaponItem: this.weaponItem,
@@ -201,6 +212,14 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             context.RANGE_SELECT["-2"] = `${game.i18n.localize("MGT2.Attack.long")} (${new Intl.NumberFormat().format(this.range.long)}${context.rangeUnit}, -2)`;
             context.RANGE_SELECT["-4"] = `${game.i18n.localize("MGT2.Attack.extreme")} (${new Intl.NumberFormat().format(this.range.extreme)}${context.rangeUnit}, -4)`;
         }
+        context.RANGE_SELECTED = "+1";
+        if (this.currentTarget) {
+            let r = this._getRawRangeDM(this.currentTarget);
+            if (r >= 0) {
+                r = "+" + r;
+            }
+            context.RANGE_SELECTED = r;
+        }
 
         context.shotType = this.shotType;
         context.SHOT_SELECT = {};
@@ -225,11 +244,15 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             context.SHOT_SELECT["aimed"] = game.i18n.format("MGT2.AttackDialog.ShotType.aimed", {bonus: this.aimingBonus});
         }
         // Get possible targets
-        this.TARGETS = getTargetData(this.ATTACKER_TOKEN)
+        this.TARGETS = getTargetData(this.ATTACKER_TOKEN);
+        console.log(this.TARGETS);
         if (this.ATTACKER_TOKEN) {
             context.ATTACKER_TOKEN = this.ATTACKER_TOKEN;
             context.TARGETS = this.TARGETS;
-            context.TARGET_SELECT = {};
+            context.TARGET_SELECT = { "": game.i18n.localize("MGT2.AttackDialog.NoTargetSelected") };
+            if (this.TARGETS.length > 0 && this.TARGETS[0].manual) {
+                context.TARGET_SELECT = {};
+            }
             for (let t of this.TARGETS) {
                 let text = `${t.distance}m ${t.name}`;
                 if (t.type) {
@@ -255,8 +278,18 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     }
                 }
             }
+            if (this.currentTarget) {
+                // If a refresh has just been done, it's possible what we
+                // previously had selected is no longer in the list.
+                if (!this.TARGETS.find(e => e.token.document.id === this.currentTarget.token.document.id )) {
+                    this.currentTarget = null;
+                }
+            }
             if (!this.currentTarget && this.TARGETS.length > 0) {
-                this.currentTarget = this.TARGETS[0];
+                // If player has manually selected targets, assume they want to shoot one of them.
+                if (this.TARGETS[0].manual) {
+                    this.currentTarget = this.TARGETS[0];
+                }
             }
         }
         if (this.ATTACKER_TOKENS && this.ATTACKER_TOKENS.length > 1) {
@@ -271,13 +304,11 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
             options.window.title = game.i18n.format("MGT2.AttackDialog.Title", { name: this.attackerTokenName });
         }
         context.currentTarget = this.currentTarget;
-        console.log(this.currentTarget);
 
         return context;
     }
 
     static async #addTargets() {
-        console.log("Recalculate targets");
         this.TARGETS = getTargetData(this.ATTACKER_TOKEN)
         this.render();
     }
@@ -290,7 +321,6 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
      * @private
      */
     async _preparePartContext(partId, context) {
-        console.log("_preparePartContext: " + partId);
         context.partId = `${this.id}-${partId}`;
 
         return context;
@@ -307,8 +337,6 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 ev.stopImmediatePropagation();
                 const id = ev.target.value;
                 const target = this.TARGETS.filter(t => t.token.document._id === id)[0];
-                const rangeSelect = this.element.querySelector('select[data-action="changeRange"]');
-                rangeSelect.value = `${(target.rangeDM>=0)?"+":""}${target.rangeDM}`;
                 this.currentTarget = target;
                 this.render();
             });
@@ -363,7 +391,6 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     // Despite being static, action methods have access to `this`
     static selectTargetAction(event, target) {
-        console.log("selectTargetAction:");
         // Do nothing. We should already have a target by this point.
     }
 
@@ -382,7 +409,6 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
         // Lose aiming bonus (if any) after shooting.
         this.actor.setAimingEffect(0);
 
-        console.log(this.currentTarget);
         // There won't always be a currentTarget. There might not even be a scene.
         if (this.currentTarget) {
             if (this.currentTarget.laserSightDM) {
@@ -398,7 +424,6 @@ export class MgT2eAttackApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 this.attackOptions.facing = this.currentTarget.facing;
             }
         }
-        console.log(this.attackOptions);
         rollAttack(this.actor, this.weaponItem, this.attackOptions);
         this.close();
     }

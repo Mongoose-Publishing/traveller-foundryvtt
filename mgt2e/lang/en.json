@@ -1499,6 +1499,7 @@
   "MGT2.AttackDialog.SelectTitle": "Select target",
   "MGT2.AttackDialog.TargetRefresh": "Refresh list of targets",
   "MGT2.AttackDialog.NoTargets": "Use 'T' to choose a target then refresh",
+  "MGT2.AttackDialog.NoTargetSelected": "No target selected",
   "MGT2.AttackDialog.ShotType.Title": "Attack Type",
   "MGT2.AttackDialog.ShotType.melee": "Melee",
   "MGT2.AttackDialog.ShotType.aimed": "Aimed Shot +{bonus}",

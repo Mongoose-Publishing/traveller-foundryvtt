@@ -1,5 +1,14 @@
 # Release Notes
 
+# 0.25.2 (Beta)
+
+* NPCs now have a roleplaying notes field.
+* Inline micro NPCs can now be used to create a full NPC actor from the journal.
+* Fixed issue where effects on package items weren't correctly copied across to an actor.
+* Laser Sight bonus now tracked in the attack dialog.
+* Fire linked weapons now displayed in the attack dialog.
+* Traits can't be deleted if the 'Lock Characteristics' option is enabled.
+
 # 0.25.1 (Beta)
 
 * Fixed issued where items given a status of 'Body' weren't correctly applying armour or

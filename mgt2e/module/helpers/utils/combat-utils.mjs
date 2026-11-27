@@ -47,16 +47,17 @@ export function getTargetData(attackerToken) {
     const user = game.users.current;
     const userTargets = user.targets;
 
+    let hasManualTargets = false;
     let targets = [];
     if (userTargets.size > 0) {
         // Player has specifically selected targets.
         targets = userTargets;
+        hasManualTargets = true;
     } else {
         // No targets selected, so just list everything in line of sight.
         const visionSource = attackerToken.vision;
         if (!visionSource?.active) {
             //targets = canvas.tokens.placeables;
-            console.log("Using targets the player can see");
             targets = canvas.tokens.placeables.filter(t => {
                 if (t.id === attackerToken.id) return false;
                 return t.visible;
@@ -123,6 +124,9 @@ export function getTargetData(attackerToken) {
                 token: token,
                 name: token.name,
                 distance: metres
+            }
+            if (hasManualTargets) {
+                target.manual = true;
             }
             if (token.actor.type === "vehicle") {
                 // Work out facing?
