@@ -815,7 +815,7 @@ Tools.actorInlineDisplay = async function(actorId, justLink) {
     }
 
     if (actor.type === "creature") {
-        await Tools.creatureInlineDisplay(a, actor);
+        await Tools.creatureInlineDisplay(a, actor, justLink);
     } else if (actor.type === "npc" || actor.type==="traveller") {
         await Tools.npcInlineDisplay(a, actor);
     } else if (actor.type === "spacecraft") {
@@ -830,33 +830,39 @@ Tools.actorInlineDisplay = async function(actorId, justLink) {
     return a;
 }
 
-Tools.creatureInlineDisplay = async function(a, actor) {
-    let html = `<div class="inline-creature actor-link" data-actor-id="${actor.uuid}">`;
-    html += `<h2>${actor.name}</h2>`;
-    html += `<img src="${actor.img}"/>`;
+Tools.creatureInlineDisplay = async function(a, actor, justLink) {
+    if (justLink) {
+        let html = `<div class='inline-package-link'><span class="rollable actor-link" data-actor-id='${actor.uuid}'>${actor.name}</span></div>`;
+        a.innerHTML = html;
+        return a;
+    } else {
+        let html = `<div class="inline-creature actor-link" data-actor-id="${actor.uuid}">`;
+        html += `<h2>${actor.name}</h2>`;
+        html += `<img src="${actor.img}"/>`;
 
-    if (actor.system.description) {
-        let d = await TextEditor.enrichHTML(
-            actor.system.description,
-            { secrets: ((actor.permission > 2)?true:false) }
-        );
-        html += d;
+        if (actor.system.description) {
+            let d = await TextEditor.enrichHTML(
+                actor.system.description,
+                {secrets: ((actor.permission > 2) ? true : false)}
+            );
+            html += d;
+        }
+
+        html += `<table class="creature-stats">`;
+        html += `<tr><th>Animal</th><th>Hits</th><th>Speed</th></tr>`;
+        html += `<tr class="noborder"><td>`;
+        html += `<a class="embedded-actor-link actor-draggable" data-actor-id="${actor.uuid}">${actor.name}</a></td>`;
+        html += `<td>${actor.system.hits.max}</td><td>${actor.system.speed.base}</td></tr>`;
+
+        html += `<tr><th>Skills</th><td colspan="2">${actor.printSkills()}</td></tr>`;
+        html += `<tr><th>Attacks</th><td colspan="2">${actor.printAttacks()}</td></tr>`;
+        html += `<tr><th>Traits</th><td colspan="2">${actor.printCreatureTraits(true)}</td></tr>`;
+        html += `<tr><th>Behaviour</th><td colspan="2">${actor.printCreatureBehaviours()}</td></tr>`;
+
+        html += `</table></div>`;
+        a.innerHTML = html;
+        return a;
     }
-
-    html += `<table class="creature-stats">`;
-    html += `<tr><th>Animal</th><th>Hits</th><th>Speed</th></tr>`;
-    html += `<tr class="noborder"><td>`;
-    html += `<a class="embedded-actor-link actor-draggable" data-actor-id="${actor.uuid}">${actor.name}</a></td>`;
-    html += `<td>${actor.system.hits.max}</td><td>${actor.system.speed.base}</td></tr>`;
-
-    html += `<tr><th>Skills</th><td colspan="2">${actor.printSkills()}</td></tr>`;
-    html += `<tr><th>Attacks</th><td colspan="2">${actor.printAttacks()}</td></tr>`;
-    html += `<tr><th>Traits</th><td colspan="2">${actor.printCreatureTraits(true)}</td></tr>`;
-    html += `<tr><th>Behaviour</th><td colspan="2">${actor.printCreatureBehaviours()}</td></tr>`;
-
-    html += `</table></div>`;
-    a.innerHTML = html;
-    return a;
 }
 
 Tools.packageInlineDisplay = async function(a, actor, justLink) {
