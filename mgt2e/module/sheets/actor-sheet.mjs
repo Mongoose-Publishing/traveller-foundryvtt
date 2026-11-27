@@ -69,6 +69,10 @@ export class MgT2ActorSheet extends foundry.appv1.sheets.ActorSheet {
             actorData.description,
             { secrets: ((context.actor.permission > 2)?true:false) }
         );
+        context.enrichedNotes = await foundry.applications.ux.TextEditor.enrichHTML(
+            actorData.notes,
+            { secrets: ((context.actor.permission > 2)?true:false) }
+        );
         if (actorData.finance) {
             context.enrichedFinanceDescription = await foundry.applications.ux.TextEditor.enrichHTML(
                 actorData.finance.description,

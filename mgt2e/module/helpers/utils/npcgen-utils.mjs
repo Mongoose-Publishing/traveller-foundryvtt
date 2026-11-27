@@ -294,7 +294,8 @@ export async function createFromUpp(data) {
                 gender: data.gender?data.gender:"Male",
                 profession: data.profession
             },
-            description: data.description?data.description:""
+            description: data.description?data.description:"",
+            notes: data.notes?data.notes:""
         }
     }
     const upp = Tools.getHexFromUpp(data.upp, 0);

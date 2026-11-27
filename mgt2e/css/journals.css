@@ -843,4 +843,17 @@ p.post-package-description img.package-icon {
   margin-right: 3em;
 }
 
+.upp-to-chat {
+  cursor: pointer;
+}
 
+.upp-to-actor {
+  display: inline-block;
+  padding-bottom: 1em;
+  float: right;
+  position: relative;
+  font-size: larger;
+  top: -1em;
+  color: var(--mongoose-orange);
+  cursor: pointer;
+}

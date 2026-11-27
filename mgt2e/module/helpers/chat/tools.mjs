@@ -629,10 +629,13 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
         species: args.species,
         skills: args.skills,
         upp: args.upp,
-        description: args.description
+        description: args.description,
+        notes: args.notes
     }
     const json = JSON.stringify(jsonData);
-    html += `<span class="name"><i class="upp-to-chat fas fa-comment" data-upp-data='${json}'></i> ${name}`;
+    html += `<span class="name"><i class="upp-to-chat fas fa-comment"
+            title="${game.i18n.localize('MGT2.UppToChat')}"
+            data-upp-data='${json}'></i> ${name}`;
     if (args.species) {
         html += `<span class="extra-data">${args.species}</span>`;
     }
@@ -731,7 +734,13 @@ Tools.uppInlineDisplay = async function(macro, argsString, title, name) {
 
     }
     if (args.description) {
-        html += `<div><span class="description-header">Description</span><p class="description">${foundry.utils.escapeHTML(args.description)}</p></div>`;
+        html += `<div><span class="description-header">${game.i18n.localize("MGT2.TravellerSheet.Description")}</span><p class="description">${foundry.utils.escapeHTML(args.description)}</p></div>`;
+    }
+    if (args.notes) {
+        html += `<div><span class="description-header">${game.i18n.localize("MGT2.TravellerSheet.RoleplayNotes")}</span><p class="description">${foundry.utils.escapeHTML(args.notes)}</p></div>`;
+    }
+    if (game.user.isGM) {
+        html += `<span class="upp-to-actor" title="${game.i18n.localize('MGT2.UppToActor')}"><i class="fas fa-arrow-up-from-bracket"></i></span>`;
     }
     html += `</div>`;
 

@@ -425,6 +425,8 @@
   "MGT2.TravellerSheet.SkillTitle.Quick": "+shift for quick roll",
   "MGT2.TravellerSheet.SkillTitle.Dialog": "+shift for dialog",
   "MGT2.TravellerSheet.SkillTitle.XP": "+ctrl for XP",
+  "MGT2.TravellerSheet.Description": "Description",
+  "MGT2.TravellerSheet.RoleplayNotes": "Roleplaying Notes",
   "MGT2.WorldSheet.Sector": "Sector",
   "MGT2.WorldSheet.Planet": "Planet",
   "MGT2.WorldSheet.SectorName": "Sector Name",
@@ -1489,6 +1491,9 @@
   "MGT2.Warn.ThisActorCannotBuy": "{actor} doesn't have enough cash to buy {item}",
   "MGT2.Error.NoStatus": "Unable to find status '{status}'",
   "MGT2.Attack.OutOfRange": "Selected target is out of range",
+
+  "MGT2.UppToChat": "Send name and description of this NPC\nto the chat for players to see",
+  "MGT2.UppToActor": "Create a full NPC actor from this NPC card",
 
   "MGT2.AttackDialog.Title": "Attack Roll by {name}",
   "MGT2.AttackDialog.SelectTitle": "Select target",

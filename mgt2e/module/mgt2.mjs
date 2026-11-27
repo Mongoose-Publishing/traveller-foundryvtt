@@ -170,11 +170,16 @@ Hooks.once("init", function() {
         let data = $(ev.currentTarget).data("skillData");
         Tools.inlineUppRollSkill(name, data);
     });
+    body.on("click", ".upp-to-actor", ev => {
+        const parent = $(ev.currentTarget).closest(".inline-upp");
+        const data = parent?.find(".upp-to-chat").data("uppData");
+        if (data) {
+            createFromUpp(data);
+        }
+    });
     body.on("click", ".upp-to-chat", ev => {
        const data = $(ev.currentTarget).data("uppData");
-       if (data && (ev.ctrlKey || ev.metaKey)) {
-           createFromUpp(data);
-       } else if (data) {
+       if (data) {
            let html = data.name;
            if (data.profession) {
                html += ` (${data.profession})`;

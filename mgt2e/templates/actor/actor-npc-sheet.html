@@ -175,11 +175,12 @@
             {{#if (isObserver .) }}
             <div class="shadow">
                 <nav class="sheet-tabs tabs" data-group="primary">
-                    <a class="item" data-tab="skills">Skills</a>
-                    <a class="item" data-tab="items">Equipment</a>
-                    <a class="item" data-tab="biography">Biography</a>
+                    <a class="item" data-tab="skills">{{localize "MGT2.TravellerSheet.Skills"}}</a>
+                    <a class="item" data-tab="items">{{localize "MGT2.TravellerSheet.Equipment"}}</a>
+                    <a class="item" data-tab="biography">{{localize "MGT2.TravellerSheet.Biography"}}</a>
                     {{#if (isOwner .)}}
-                        <a class="item" data-tab="settings">Settings</a>
+                        <a class="item" data-tab="notes">{{localize "MGT2.TravellerSheet.RoleplayNotes"}}</a>
+                        <a class="item" data-tab="settings">{{localize "MGT2.TravellerSheet.Settings"}}</a>
                     {{/if}}
                 </nav>
 
@@ -238,6 +239,17 @@
                                 button=true editable=editable}}
                         </section>
                     </div>
+
+                    {{#if (isOwner .)}}
+                        {{!-- Notes Tab --}}
+                        <div class="tab biography" data-group="primary" data-tab="notes">
+                            <section class="actor-description">
+                                {{editor
+                                enrichedNotes target="system.notes"
+                                button=true editable=editable}}
+                            </section>
+                        </div>
+                    {{/if}}
 
                     {{#if (isObserver .)}}
                         {{!-- Owned Items Tab --}}
