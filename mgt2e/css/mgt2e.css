@@ -253,7 +253,8 @@ div.weapon-range span {
 .attack-title {
   background-color: var(--mongoose-orange);
   color: white;
-  text-transform: capitalize;
+  padding-left: 0.15em;
+  font-family: var(--font-h1);
   width: auto;
 }
 
