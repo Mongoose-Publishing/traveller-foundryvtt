@@ -11,7 +11,7 @@
     "notes": "",
     "active": false,
     "quantity": 1,
-    "status": null,
+    "status": "equipped",
     "legality": "8",
     "weapon": {
       "scale": "traveller",
@@ -43,9 +43,9 @@
     "duplicateSource": null,
     "coreVersion": "13.351",
     "systemId": "mgt2e",
-    "systemVersion": "0.13.3.1-DEV",
+    "systemVersion": "0.25.1.3-DEV",
     "createdTime": 1753564696224,
-    "modifiedTime": 1753564742738,
+    "modifiedTime": 1795886983826,
     "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "exportSource": null
   },

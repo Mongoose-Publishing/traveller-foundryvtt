@@ -14,8 +14,8 @@
     "notes": "",
     "active": false,
     "quantity": 1,
-    "status": null,
-    "legality": 9,
+    "status": "BODY",
+    "legality": "9",
     "weapon": {
       "scale": "traveller",
       "range": 0,
@@ -46,11 +46,11 @@
   },
   "_stats": {
     "systemId": "mgt2e",
-    "systemVersion": "0.6.4",
+    "systemVersion": "0.25.1.3-DEV",
     "coreVersion": "13.351",
     "createdTime": null,
-    "modifiedTime": 1720367179236,
-    "lastModifiedBy": "Uzw5MJmM0BRE3sSL",
+    "modifiedTime": 1795886975557,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq",
     "compendiumSource": null,
     "duplicateSource": null,
     "exportSource": null

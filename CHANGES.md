@@ -8,6 +8,8 @@
 * Laser Sight bonus now tracked in the attack dialog.
 * Fire linked weapons now displayed in the attack dialog.
 * Traits can't be deleted if the 'Lock Characteristics' option is enabled.
+* Added new [[/xactor <uuid>]] macro for displaying a minimal NPC block in a journal.
+* Added per-user BETA settings option to enable new attack dialog.
 
 # 0.25.1 (Beta)
 

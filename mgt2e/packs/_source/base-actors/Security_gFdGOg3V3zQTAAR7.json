@@ -1,0 +1,1269 @@
+{
+  "folder": "gqXdlESYqHLEIR6X",
+  "name": "Security",
+  "type": "npc",
+  "_id": "gFdGOg3V3zQTAAR7",
+  "img": "systems/mgt2e/images/tokens/characters/npcs/security.svg",
+  "system": {
+    "speed": {
+      "base": 6,
+      "value": 6
+    },
+    "initiative": {
+      "base": 0,
+      "value": 0
+    },
+    "size": 0,
+    "rads": 0,
+    "weightCarried": 0,
+    "heavyLoad": 0,
+    "maxLoad": 0,
+    "modifiers": {
+      "encumbrance": {
+        "custom": 0,
+        "auto": 0,
+        "effect": 0,
+        "dm": [
+          "0",
+          0
+        ],
+        "multiplierBonus": 0
+      },
+      "physical": {
+        "custom": 0,
+        "auto": 0,
+        "effect": 0,
+        "dm": [
+          "0",
+          0
+        ]
+      },
+      "melee": {
+        "custom": 0,
+        "auto": 0,
+        "effect": 0,
+        "dm": 0
+      },
+      "guncombat": {
+        "custom": 0,
+        "auto": 0,
+        "effect": 0,
+        "dm": 0
+      },
+      "speed": {
+        "custom": 0,
+        "auto": 0,
+        "effect": 0,
+        "dm": 0
+      },
+      "initiative": {
+        "custom": 0,
+        "auto": 0,
+        "effect": 0,
+        "dm": 0
+      },
+      "armour": {
+        "custom": 0,
+        "effect": 0
+      },
+      "rangedToHit": {
+        "custom": 0,
+        "auto": 0,
+        "effect": 0,
+        "dm": 0
+      }
+    },
+    "hits": {
+      "value": 21,
+      "max": 22,
+      "damage": 0,
+      "tmpDamage": 0
+    },
+    "description": "<p>Security guard working in a typical light security role. Often found at star ports or patrolling warehouses. Trained in using basic security systems. Does not expect to encounter real threats.</p>",
+    "settings": {
+      "hideUntrained": true,
+      "onlyBackground": false,
+      "resetOnRoll": false,
+      "columns": "6",
+      "lockCharacteristics": true,
+      "sortByCategory": false,
+      "lockSkills": false,
+      "autoAge": true,
+      "autoHits": true
+    },
+    "characteristics": {
+      "STR": {
+        "value": 7,
+        "current": 7,
+        "show": true,
+        "default": false
+      },
+      "DEX": {
+        "value": 7,
+        "current": 7,
+        "show": true,
+        "default": false
+      },
+      "END": {
+        "value": 8,
+        "current": 8,
+        "show": true,
+        "default": false
+      },
+      "INT": {
+        "value": 7,
+        "current": 7,
+        "show": true,
+        "default": false
+      },
+      "EDU": {
+        "value": 6,
+        "current": 6,
+        "show": true,
+        "default": false
+      },
+      "SOC": {
+        "value": 6,
+        "current": 6,
+        "show": true,
+        "default": false
+      },
+      "CHA": {
+        "value": 7,
+        "current": 7,
+        "show": false,
+        "default": false
+      },
+      "TER": {
+        "value": 0,
+        "current": 0,
+        "show": false,
+        "default": false
+      },
+      "PSI": {
+        "value": 0,
+        "current": 0,
+        "show": false,
+        "default": false
+      },
+      "WLT": {
+        "value": 7,
+        "current": 7,
+        "show": false,
+        "default": false
+      },
+      "LCK": {
+        "value": 7,
+        "current": 7,
+        "show": false,
+        "default": false
+      },
+      "MRL": {
+        "value": 7,
+        "current": 7,
+        "show": false,
+        "default": false
+      },
+      "STY": {
+        "value": 7,
+        "current": 7,
+        "show": false,
+        "default": false
+      },
+      "RES": {
+        "value": 7,
+        "current": 7,
+        "show": false,
+        "default": false
+      },
+      "FOL": {
+        "value": 0,
+        "current": 0,
+        "show": false,
+        "default": false
+      },
+      "REP": {
+        "value": 0,
+        "current": 0,
+        "show": false,
+        "default": false
+      }
+    },
+    "skills": {
+      "admin": {
+        "default": "EDU",
+        "background": true,
+        "requires": "INT",
+        "id": "admin",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/admin.svg",
+        "trained": true
+      },
+      "advocate": {
+        "default": "EDU",
+        "requires": "INT",
+        "id": "advocate",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/advocate.svg",
+        "trained": false
+      },
+      "animals": {
+        "default": "INT",
+        "background": true,
+        "requires": "INT",
+        "specialities": {
+          "handling": {
+            "default": "DEX",
+            "id": "handling",
+            "value": 0
+          },
+          "vetinary": {
+            "default": "EDU",
+            "id": "vetinary",
+            "value": 0
+          },
+          "training": {
+            "default": "INT",
+            "id": "training",
+            "value": 0
+          }
+        },
+        "id": "animals",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/animals.svg",
+        "trained": false
+      },
+      "art": {
+        "default": "INT",
+        "background": true,
+        "requires": "INT",
+        "specialities": {
+          "performer": {
+            "id": "performer",
+            "value": 0
+          },
+          "holography": {
+            "id": "holography",
+            "value": 0
+          },
+          "instrument": {
+            "id": "instrument",
+            "value": 0
+          },
+          "visualMedia": {
+            "id": "visualMedia",
+            "value": 0
+          },
+          "write": {
+            "id": "write",
+            "value": 0
+          }
+        },
+        "id": "art",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/art.svg",
+        "trained": false
+      },
+      "astrogation": {
+        "default": "EDU",
+        "requires": "INT",
+        "id": "astrogation",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/astrogation.svg",
+        "trained": false
+      },
+      "athletics": {
+        "default": "DEX",
+        "background": true,
+        "creature": true,
+        "requires": "DEX",
+        "specialities": {
+          "dexterity": {
+            "default": "DEX",
+            "combat": true,
+            "id": "dexterity",
+            "value": 0
+          },
+          "endurance": {
+            "default": "END",
+            "id": "endurance",
+            "value": 0
+          },
+          "strength": {
+            "default": "STR",
+            "combat": true,
+            "id": "strength",
+            "value": 0
+          }
+        },
+        "id": "athletics",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/athletics.svg",
+        "trained": true
+      },
+      "broker": {
+        "default": "INT",
+        "requires": "INT",
+        "id": "broker",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/broker.svg",
+        "trained": false
+      },
+      "carouse": {
+        "default": "SOC",
+        "background": true,
+        "requires": "INT",
+        "id": "carouse",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/carouse.svg",
+        "trained": false
+      },
+      "deception": {
+        "default": "INT",
+        "requires": "INT",
+        "creature": true,
+        "id": "deception",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/deception.svg",
+        "trained": false
+      },
+      "diplomat": {
+        "default": "SOC",
+        "requires": "INT",
+        "id": "diplomat",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/diplomat.svg",
+        "trained": false
+      },
+      "drive": {
+        "default": "DEX",
+        "background": true,
+        "requires": "DEX",
+        "specialities": {
+          "hovercraft": {
+            "id": "hovercraft",
+            "value": 0
+          },
+          "mole": {
+            "id": "mole",
+            "value": 0
+          },
+          "track": {
+            "id": "track",
+            "value": 0
+          },
+          "walker": {
+            "id": "walker",
+            "value": 0
+          },
+          "wheel": {
+            "id": "wheel",
+            "value": 0
+          }
+        },
+        "id": "drive",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/drive.svg",
+        "trained": false
+      },
+      "electronics": {
+        "default": "EDU",
+        "background": true,
+        "requires": "INT",
+        "specialities": {
+          "comms": {
+            "id": "comms",
+            "value": 0
+          },
+          "computers": {
+            "id": "computers",
+            "value": 0
+          },
+          "remoteOps": {
+            "id": "remoteOps",
+            "value": 0
+          },
+          "sensors": {
+            "id": "sensors",
+            "value": 0
+          }
+        },
+        "id": "electronics",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/electronics.svg",
+        "trained": true
+      },
+      "engineer": {
+        "default": "EDU",
+        "requires": "INT",
+        "specialities": {
+          "mDrive": {
+            "id": "mDrive",
+            "value": 0
+          },
+          "jDrive": {
+            "id": "jDrive",
+            "value": 0
+          },
+          "lifeSupport": {
+            "id": "lifeSupport",
+            "value": 0
+          },
+          "power": {
+            "id": "power",
+            "value": 0
+          }
+        },
+        "id": "engineer",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/engineer.svg",
+        "trained": false
+      },
+      "explosives": {
+        "default": "EDU",
+        "requires": "INT",
+        "combat": true,
+        "id": "explosives",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/explosives.svg",
+        "trained": false
+      },
+      "flyer": {
+        "default": "DEX",
+        "background": true,
+        "requires": "DEX",
+        "specialities": {
+          "airship": {
+            "id": "airship",
+            "value": 0
+          },
+          "grav": {
+            "id": "grav",
+            "value": 0
+          },
+          "ornithopter": {
+            "id": "ornithopter",
+            "value": 0
+          },
+          "rotor": {
+            "id": "rotor",
+            "value": 0
+          },
+          "wing": {
+            "id": "wing",
+            "value": 0
+          }
+        },
+        "id": "flyer",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/flyer.svg",
+        "trained": false
+      },
+      "gambler": {
+        "default": "INT",
+        "requires": "INT",
+        "id": "gambler",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/gambler.svg",
+        "trained": false
+      },
+      "gunner": {
+        "default": "DEX",
+        "requires": "INT",
+        "specialities": {
+          "turret": {
+            "combat": true,
+            "id": "turret",
+            "value": 0
+          },
+          "ortillery": {
+            "combat": true,
+            "id": "ortillery",
+            "value": 0
+          },
+          "screen": {
+            "combat": true,
+            "id": "screen",
+            "value": 0
+          },
+          "capital": {
+            "default": "INT",
+            "combat": true,
+            "id": "capital",
+            "value": 0
+          }
+        },
+        "id": "gunner",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/gunner.svg",
+        "trained": false
+      },
+      "guncombat": {
+        "default": "DEX",
+        "requires": "DEX",
+        "creature": true,
+        "specialities": {
+          "archaic": {
+            "combat": true,
+            "id": "archaic",
+            "value": 0
+          },
+          "energy": {
+            "combat": true,
+            "id": "energy",
+            "value": 0
+          },
+          "slug": {
+            "combat": true,
+            "id": "slug",
+            "value": 0
+          }
+        },
+        "id": "guncombat",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/guncombat.svg",
+        "trained": true
+      },
+      "heavyweapons": {
+        "default": "DEX",
+        "requires": "INT",
+        "specialities": {
+          "artillery": {
+            "combat": true,
+            "id": "artillery",
+            "value": 0
+          },
+          "portable": {
+            "combat": true,
+            "id": "portable",
+            "value": 0
+          },
+          "vehicle": {
+            "combat": true,
+            "id": "vehicle",
+            "value": 0
+          }
+        },
+        "id": "heavyweapons",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/heavyweapons.svg",
+        "trained": false
+      },
+      "independence": {
+        "default": "INT",
+        "requires": "TER",
+        "id": "independence",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/independence.svg"
+      },
+      "investigate": {
+        "default": "INT",
+        "requires": "INT",
+        "id": "investigate",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/investigate.svg",
+        "trained": false
+      },
+      "jackofalltrades": {
+        "default": "INT",
+        "requires": "INT",
+        "id": "jackofalltrades",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/jackofalltrades.svg",
+        "trained": false
+      },
+      "language": {
+        "default": "EDU",
+        "background": true,
+        "requires": "INT",
+        "specialities": {
+          "galanglic": {
+            "id": "galanglic",
+            "value": 0
+          },
+          "vilani": {
+            "id": "vilani",
+            "value": 0
+          },
+          "zdetl": {
+            "id": "zdetl",
+            "value": 0
+          },
+          "oynprith": {
+            "id": "oynprith",
+            "value": 0
+          },
+          "trokh": {
+            "id": "trokh",
+            "value": 0
+          },
+          "gvegh": {
+            "id": "gvegh",
+            "value": 0
+          }
+        },
+        "id": "language",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/language.svg",
+        "trained": false
+      },
+      "leadership": {
+        "default": "SOC",
+        "requires": "INT",
+        "id": "leadership",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/leadership.svg",
+        "trained": false
+      },
+      "mechanic": {
+        "default": "EDU",
+        "background": true,
+        "requires": "INT",
+        "id": "mechanic",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/mechanic.svg",
+        "trained": false
+      },
+      "medic": {
+        "default": "EDU",
+        "background": true,
+        "requires": "INT",
+        "id": "medic",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/medic.svg",
+        "trained": false
+      },
+      "melee": {
+        "default": "DEX",
+        "requires": "DEX",
+        "creature": true,
+        "specialities": {
+          "unarmed": {
+            "combat": true,
+            "id": "unarmed",
+            "value": 1
+          },
+          "blade": {
+            "combat": true,
+            "id": "blade",
+            "value": 0
+          },
+          "bludgeon": {
+            "combat": true,
+            "id": "bludgeon",
+            "value": 2
+          },
+          "natural": {
+            "combat": true,
+            "id": "natural",
+            "value": 0
+          }
+        },
+        "id": "melee",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/melee.svg",
+        "trained": true
+      },
+      "navigation": {
+        "default": "INT",
+        "requires": "INT",
+        "id": "navigation",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/navigation.svg",
+        "trained": false
+      },
+      "persuade": {
+        "default": "SOC",
+        "requires": "INT",
+        "creature": true,
+        "id": "persuade",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/persuade.svg",
+        "trained": false
+      },
+      "pilot": {
+        "default": "DEX",
+        "requires": "INT",
+        "specialities": {
+          "smallCraft": {
+            "id": "smallCraft",
+            "value": 0
+          },
+          "spacecraft": {
+            "id": "spacecraft",
+            "value": 0
+          },
+          "capitalShips": {
+            "id": "capitalShips",
+            "value": 0
+          }
+        },
+        "id": "pilot",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/pilot.svg",
+        "trained": false
+      },
+      "profession": {
+        "default": "INT",
+        "background": true,
+        "requires": "INT",
+        "individual": true,
+        "specialities": {
+          "belter": {
+            "id": "belter",
+            "value": 0,
+            "trained": false
+          },
+          "biologicals": {
+            "id": "biologicals",
+            "value": 0,
+            "trained": false
+          },
+          "civilEngineering": {
+            "id": "civilEngineering",
+            "value": 0,
+            "trained": false
+          },
+          "construction": {
+            "id": "construction",
+            "value": 0,
+            "trained": false
+          },
+          "hydroponics": {
+            "id": "hydroponics",
+            "value": 0,
+            "trained": false
+          },
+          "polymers": {
+            "id": "polymers",
+            "value": 0,
+            "trained": false
+          },
+          "robotics": {
+            "id": "robotics",
+            "value": 0,
+            "trained": false
+          },
+          "security": {
+            "id": "security",
+            "label": "Security",
+            "combat": true,
+            "default": "INT",
+            "trained": true,
+            "value": 1
+          }
+        },
+        "id": "profession",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/profession.svg",
+        "trained": true
+      },
+      "recon": {
+        "default": "INT",
+        "requires": "INT",
+        "creature": true,
+        "id": "recon",
+        "value": 1,
+        "icon": "systems/mgt2e/icons/skills/recon.svg",
+        "trained": true
+      },
+      "science": {
+        "default": "EDU",
+        "background": true,
+        "requires": "INT",
+        "specialities": {
+          "archaeology": {
+            "id": "archaeology",
+            "value": 0
+          },
+          "astronomy": {
+            "id": "astronomy",
+            "value": 0
+          },
+          "biology": {
+            "id": "biology",
+            "value": 0
+          },
+          "chemistry": {
+            "id": "chemistry",
+            "value": 0
+          },
+          "cosmology": {
+            "id": "cosmology",
+            "value": 0
+          },
+          "cybernetics": {
+            "id": "cybernetics",
+            "value": 0
+          },
+          "economics": {
+            "id": "economics",
+            "value": 0
+          },
+          "genetics": {
+            "id": "genetics",
+            "value": 0
+          },
+          "history": {
+            "id": "history",
+            "value": 0
+          },
+          "linquistics": {
+            "id": "linquistics",
+            "value": 0
+          },
+          "philosophy": {
+            "id": "philosophy",
+            "value": 0
+          },
+          "physics": {
+            "id": "physics",
+            "value": 0
+          },
+          "planetology": {
+            "id": "planetology",
+            "value": 0
+          },
+          "psionicology": {
+            "id": "psionicology",
+            "value": 0
+          },
+          "psychology": {
+            "id": "psychology",
+            "value": 0
+          },
+          "robotics": {
+            "id": "robotics",
+            "value": 0
+          },
+          "sophontology": {
+            "id": "sophontology",
+            "value": 0
+          },
+          "xenology": {
+            "id": "xenology",
+            "value": 0
+          }
+        },
+        "id": "science",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/science.svg",
+        "trained": false
+      },
+      "seafarer": {
+        "default": "INT",
+        "background": true,
+        "requires": "INT",
+        "specialities": {
+          "oceanShips": {
+            "id": "oceanShips",
+            "value": 0
+          },
+          "personal": {
+            "id": "personal",
+            "value": 0
+          },
+          "sail": {
+            "id": "sail",
+            "value": 0
+          },
+          "submarine": {
+            "id": "submarine",
+            "value": 0
+          }
+        },
+        "id": "seafarer",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/seafarer.svg",
+        "trained": false
+      },
+      "stealth": {
+        "default": "DEX",
+        "requires": "INT",
+        "creature": true,
+        "id": "stealth",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/stealth.svg",
+        "trained": false
+      },
+      "steward": {
+        "default": "SOC",
+        "requires": "INT",
+        "id": "steward",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/steward.svg",
+        "trained": false
+      },
+      "streetwise": {
+        "default": "INT",
+        "background": true,
+        "requires": "INT",
+        "id": "streetwise",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/streetwise.svg",
+        "trained": false
+      },
+      "survival": {
+        "default": "EDU",
+        "background": true,
+        "requires": "INT",
+        "creature": true,
+        "id": "survival",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/survival.svg",
+        "trained": false
+      },
+      "tactics": {
+        "default": "EDU",
+        "requires": "INT",
+        "specialities": {
+          "military": {
+            "id": "military",
+            "value": 0
+          },
+          "naval": {
+            "id": "naval",
+            "value": 0
+          }
+        },
+        "id": "tactics",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/tactics.svg",
+        "trained": false
+      },
+      "vaccsuit": {
+        "default": "DEX",
+        "background": true,
+        "requires": "INT",
+        "id": "vaccsuit",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/vaccsuit.svg",
+        "trained": false
+      },
+      "telepathy": {
+        "default": "PSI",
+        "requires": "PSI",
+        "trait": "psionic",
+        "icon": "systems/mgt2e/icons/skills/psi.svg",
+        "id": "telepathy",
+        "value": 0
+      },
+      "clairvoyance": {
+        "default": "PSI",
+        "requires": "PSI",
+        "trait": "psionic",
+        "icon": "systems/mgt2e/icons/skills/psi.svg",
+        "id": "clairvoyance",
+        "value": 0
+      },
+      "telekinesis": {
+        "default": "PSI",
+        "requires": "PSI",
+        "trait": "psionic",
+        "icon": "systems/mgt2e/icons/skills/psi.svg",
+        "id": "telekinesis",
+        "value": 0
+      },
+      "awareness": {
+        "default": "PSI",
+        "requires": "PSI",
+        "trait": "psionic",
+        "icon": "systems/mgt2e/icons/skills/psi.svg",
+        "id": "awareness",
+        "value": 0
+      },
+      "teleportation": {
+        "default": "PSI",
+        "requires": "PSI",
+        "trait": "psionic",
+        "icon": "systems/mgt2e/icons/skills/psi.svg",
+        "id": "teleportation",
+        "value": 0
+      },
+      "untrained": {
+        "default": "INT",
+        "requires": "XXX",
+        "id": "untrained",
+        "value": 0,
+        "icon": "systems/mgt2e/icons/skills/untrained.svg"
+      }
+    },
+    "protection": 0,
+    "otherProtection": 0,
+    "otherTypes": "",
+    "rad": 0,
+    "tl": 0,
+    "archaic": 0,
+    "ablat": 0,
+    "powered": 0,
+    "sophont": {
+      "age": 28,
+      "species": "Human",
+      "speciesTraits": "",
+      "gender": "",
+      "weight": 80,
+      "height": 171,
+      "profession": "Security Guard",
+      "homeworld": ""
+    },
+    "finance": {
+      "cash": 0
+    },
+    "damage": {
+      "STR": {
+        "value": 0
+      },
+      "DEX": {
+        "value": 0
+      },
+      "END": {
+        "value": 0,
+        "tmp": 0
+      }
+    },
+    "armour": {
+      "protection": 0,
+      "otherProtection": 0,
+      "otherTypes": "",
+      "rad": 0,
+      "archaic": 0,
+      "name": null,
+      "tl": 0
+    },
+    "totalSkills": 5,
+    "maxSkills": 39,
+    "notes": "<p>They are working a job. They will make a best effort, but aren't being paid enough to risk their lives.</p>"
+  },
+  "prototypeToken": {
+    "name": "Security",
+    "displayName": 50,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/mgt2e/images/tokens/characters/npcs/security.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#88c8d8",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": true,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": 0,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "hits"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 0,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": true,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "_id": "wwxxoK4eY2lfrp2d",
+      "name": "Unarmed",
+      "type": "weapon",
+      "img": "systems/mgt2e/icons/items/melee-unarmed.svg",
+      "effects": [],
+      "folder": "bXGbV4AjDY6AJGxk",
+      "sort": 200000,
+      "flags": {},
+      "system": {
+        "tl": "0",
+        "weight": 0,
+        "cost": 0,
+        "notes": "",
+        "active": false,
+        "quantity": 1,
+        "status": "BODY",
+        "legality": "9",
+        "weapon": {
+          "scale": "traveller",
+          "range": 0,
+          "minRange": 0,
+          "damage": "1D6",
+          "magazine": 0,
+          "ammo": 0,
+          "magazineCost": 0,
+          "characteristic": "STR",
+          "skill": "melee.unarmed",
+          "parryBonus": 0,
+          "damageBonus": "",
+          "damageType": "standard",
+          "attackBonus": 0,
+          "traits": "",
+          "sfx": ""
+        },
+        "name": "",
+        "description": "<p>Unarmed strike from a human or someone without natural weapons.</p>",
+        "augments": [],
+        "templates": [
+          "base"
+        ],
+        "item": {
+          "tl": 0,
+          "weight": 0
+        }
+      },
+      "ownership": {
+        "default": 0,
+        "QlyRLFLquZkYH4lQ": 3,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.mgt2e.base-items.Item.uTtH5mXI2i0byiXO",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.25.1.3-DEV",
+        "createdTime": 1795890093667,
+        "modifiedTime": 1795890093667,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!actors.items!gFdGOg3V3zQTAAR7.wwxxoK4eY2lfrp2d"
+    },
+    {
+      "folder": "bXGbV4AjDY6AJGxk",
+      "name": "Baton",
+      "type": "weapon",
+      "_id": "alRs8KLYTdURZMwu",
+      "img": "systems/mgt2e/icons/items/melee-bludgeon.svg",
+      "system": {
+        "tl": "0",
+        "weight": 1,
+        "cost": 5,
+        "notes": "",
+        "active": false,
+        "quantity": 1,
+        "status": "equipped",
+        "legality": "8",
+        "weapon": {
+          "scale": "traveller",
+          "range": 0,
+          "minRange": 0,
+          "damage": "1D6",
+          "magazine": 0,
+          "ammo": 0,
+          "magazineCost": 0,
+          "characteristic": "DEX",
+          "skill": "melee.bludgeon",
+          "parryBonus": 0,
+          "damageBonus": "STR",
+          "damageType": "standard",
+          "attackBonus": 0,
+          "traits": ""
+        },
+        "description": "<p>A heavy stick.</p>"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "mhUjqDVicnwIUaiq": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.mgt2e.base-items.Item.k9jB0P60IGcEmeyw",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mgt2e",
+        "systemVersion": "0.25.1.3-DEV",
+        "createdTime": 1795890094998,
+        "modifiedTime": 1795890110224,
+        "lastModifiedBy": "mhUjqDVicnwIUaiq"
+      },
+      "_key": "!actors.items!gFdGOg3V3zQTAAR7.alRs8KLYTdURZMwu"
+    }
+  ],
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "mhUjqDVicnwIUaiq": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mgt2e",
+    "systemVersion": "0.25.1.3-DEV",
+    "createdTime": 1795889771138,
+    "modifiedTime": 1795890416900,
+    "lastModifiedBy": "mhUjqDVicnwIUaiq"
+  },
+  "_key": "!actors!gFdGOg3V3zQTAAR7"
+}
