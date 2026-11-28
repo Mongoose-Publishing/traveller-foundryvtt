@@ -82,13 +82,13 @@
                         <input class="field-value writable" type="text" name="system.size" value="{{system.size}}" data-dtype="Number"/>
                     </div>
                     <div class="resource flex-group-center">
-                        <label for="system.initiative.value" class="field-label">INIT</label>
+                        <label for="system.initiative.value" class="field-label">{{localize 'MGT2.TravellerSheet.Init'}}</label>
                         <input class="field-value" type="text" name="system.initiative.value"
                                value="{{system.initiative.value}}" data-dtype="Number" readonly/>
                     </div>
                     {{#unless system.damage}}
                         <div class="resource flex-group-center">
-                            <label for="system.hits.value" class="field-label">MAX HITS</label>
+                            <label for="system.hits.value" class="field-label">{{localize 'MGT2.TravellerSheet.MaxHits'}}</label>
                             <input class="field-value {{#unless system.settings.autoHits}}writable{{/unless}}"
                                    {{#if system.settings.autoHits}}readonly{{/if}}
                             type="text" name="system.hits.max"
@@ -120,7 +120,7 @@
             <div class="shadow">
                 <div class="no-space grid grid-3col">
                     <div class="npc-traits">
-                        <h2>Traits</h2>
+                        <h2>{{localize 'MGT2.TravellerSheet.Traits'}}</h2>
                         <table>
                             {{#each TRAITS as | row key | }}
                                 <tr>
@@ -136,17 +136,17 @@
                         </table>
                     </div>
                     <div class="grid-span-2">
-                        <h2>Skills</h2>
+                        <h2>{{localize 'MGT2.TravellerSheet.Skills'}}</h2>
 
                         <span>{{{showSimpleSkills actor}}}</span>
                     </div>
                 </div>
                 <div>
-                    <h2>Equipment</h2>
+                    <h2>{{localize "MGT2.TravellerSheet.Equipment"}}</h2>
 
                     <table class="equipment">
                         <tr>
-                            <th>Weapons</th>
+                            <th>{{localize "MGT2.TravellerSheet.Weapons"}}</th>
                             <td>
                                 <ul class="comma-list">
                                     {{#each WEAPONS as | item id |}}
@@ -156,7 +156,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>Other</th>
+                            <th>{{localize "MGT2.TravellerSheet.Gear"}}</th>
                             <td>
                                 <ul class="comma-list">
                                     {{#each GEAR as | item id |}}
