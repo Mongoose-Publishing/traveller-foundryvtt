@@ -154,8 +154,12 @@ export class MgT2Item extends Item {
 
         if (item.type === "weapon") {
             if (!quickRoll) {
-                new MgT2AttackDialog(this.actor, item).render(true);
-                //TODO: new MgT2eAttackApp(this.actor, item, {}).render(true);
+                // BETA: Switch to decide which attack dialog to use.
+                if (game.settings.get("mgt2e", "BETA_newAttackDialog")) {
+                    new MgT2eAttackApp(this.actor, item, {}).render(true);
+                } else {
+                    new MgT2AttackDialog(this.actor, item).render(true);
+                }
             } else {
                 let skillDM = getSkillValue(this.actor, item.system.weapon.skill, null);
                 let actorData = this.actor.system;

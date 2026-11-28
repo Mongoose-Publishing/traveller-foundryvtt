@@ -817,7 +817,7 @@ Tools.actorInlineDisplay = async function(actorId, justLink) {
     if (actor.type === "creature") {
         await Tools.creatureInlineDisplay(a, actor, justLink);
     } else if (actor.type === "npc" || actor.type==="traveller") {
-        await Tools.npcInlineDisplay(a, actor);
+        await Tools.npcInlineDisplay(a, actor, justLink);
     } else if (actor.type === "spacecraft") {
         await Tools.spacecraftInlineDisplay(a, actor);
     } else if (actor.type === "vehicle") {
@@ -876,38 +876,7 @@ Tools.packageInlineDisplay = async function(a, actor, justLink) {
     return a;
 }
 
-Tools.npcInlineDisplay = async function(a, actor) {
-    let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/>`;
-    html += `<span class="actor-link rollable name" data-actor-id="${actor.uuid}">${actor.name}</span>`;
-    html += `<span class="profession">${actor.system.sophont.profession}</span>`;
-
-    html += `<div style="clear: left"/>`;
-
-    html += `<div class="grid grid-3col actor-link" data-actor-id="${actor.uuid}">`;
-    html += `<div class="species-title">Species</div><div class="species-title">Gender</div><div class="species-title">Age</div>`;
-    html += `<div class="species-data">${actor.system.sophont.species}</div>`;
-    html += `<div class="species-data">${actor.system.sophont.gender}</div>`;
-    html += `<div class="species-data">${actor.system.sophont.age}</div>`;
-    html += `</div>`;
-
-    html += `<div class="actor-body-container actor-link" data-actor-id="${actor.uuid}">`;
-
-    // Characteristics
-    html += `<div class="grid grid-4col actor-cha-list">`;
-    html += `<div class="species-title grid-span-3">Traits</div><div>-</div>`;
-    html += `<div class="species-title">STR</div><div>${actor.system.characteristics.STR.value}</div>`;
-    html += `<div class="species-title">INT</div><div>${actor.system.characteristics.INT.value}</div>`;
-    html += `<div class="species-title">DEX</div><div>${actor.system.characteristics.DEX.value}</div>`;
-    html += `<div class="species-title">EDU</div><div>${actor.system.characteristics.EDU.value}</div>`;
-    html += `<div class="species-title">END</div><div>${actor.system.characteristics.END.value}</div>`;
-    html += `<div class="species-title">SOC</div><div>${actor.system.characteristics.SOC.value}</div>`;
-    html += `</div>`;
-
-    // Skills
-    html += `<div class="actor-skill-list">`;
-    html += `<div class="species-title" style="width: 100%">Skills</div>`;
-    const skills = actor.system.skills;
-
+Tools.getSkillsAsText = function(skills) {
     let skillHtml = "";
     for (let key in skills) {
         let skill = skills[key];
@@ -928,61 +897,140 @@ Tools.npcInlineDisplay = async function(a, actor) {
             }
         }
     }
-    html += `<ul class="skill-list">${skillHtml}</ul>`;
-    html += `</div>`; // Skills
-    html += `</div>`; // Container
+    return `<ul class="skill-list">${skillHtml}</ul>`;
+}
 
-    let weapons = "";
-    let armour = "";
-    let equipment = "";
-    for (let i of actor.items) {
-        if (i.type === "weapon") {
-            weapons += `<li>${i.name} (${i.system.weapon.damage})</li>`;
-        } else if (i.type === "armour") {
-            armour += `<li>${i.name} (+${i.system.armour.protection})</li>`;
-        } else {
-            equipment += `<li>${i.name}</li>`;
+Tools.npcInlineDisplay = async function(a, actor, justLink) {
+    if (justLink) {
+        let html = `<div class='inline-package-link'>`;
+        html += `<span class="rollable actor-link" data-actor-id='${actor.uuid}'>`;
+        html += `<b>${actor.name}</b> - `;
+        if (actor.system.sophont.species) {
+            html += `${actor.system.sophont.species} - `;
         }
-    }
-    if (weapons !== "" || armour !== "" || equipment !== "") {
-        html += `<div class="grid grid-3col actor-equipment-list actor-link" data-actor-id="${actor.uuid}">`;
-        html += `<div class="species-title">Equipment</div>`;
-        html += `<div class="grid-span-2">`;
-        if (weapons !== "") {
-            html += `<b>Weapons:</b> <ul class="skill-list">${weapons}</ul><br/>`;
-        }
-        if (armour !== "") {
-            html += `<b>Armour:</b> <ul class="skill-list"> ${armour}</ul><br/>`;
-        }
-        if (equipment !== "") {
-            html += `<b>Equipment:</b> <ul class="skill-list">${equipment}</ul><br/>`;
-        }
-        html += `</div>`; // grid-span-2
-        html += `</div>`; // equipment-list
-    }
-    if (actor.permission > 2 && actor.system.notes) {
-        html += `<div class="species-title" style="width: 100%">${game.i18n.localize("MGT2.TravellerSheet.RoleplayNotes")}</div>`;
-        let d = await TextEditor.enrichHTML(
-            actor.system.notes,
-            {secrets: ((actor.permission > 2) ? true : false)}
-        );
-        html += d;
-    }
-    html += `</div>`;
-    html += `</div>`;
+        html += `(${actor.system.sophont.profession}) - `;
 
-    if (actor.system.description) {
-        let d = await TextEditor.enrichHTML(
-            actor.system.description,
-            {secrets: ((actor.permission > 2) ? true : false)}
-        );
-        html += d;
+        let upp = "";
+        for (let c of [ "STR", "DEX", "END", "INT", "EDU", "SOC"]) {
+            upp += Tools.toHex(actor.system.characteristics[c].value);
+        }
+        html += ` ${upp}`;
+        html += `</span>`;
+        const skills = Tools.getSkillsAsText(actor.system.skills);
+        if (skills) {
+            html += `<div class="xactor-skills">${skills}</div>`;
+        }
+        html += `</div>`;
+        a.innerHTML = html;
+        return a;
+    } else {
+        let html = `<div class="inline-actor"><img class="portrait" src="${actor.img}"/>`;
+        html += `<span class="actor-link rollable name" data-actor-id="${actor.uuid}">${actor.name}</span>`;
+        html += `<span class="profession">${actor.system.sophont.profession}</span>`;
+
+        html += `<div style="clear: left"/>`;
+
+        html += `<div class="grid grid-3col actor-link" data-actor-id="${actor.uuid}">`;
+        html += `<div class="species-title">Species</div><div class="species-title">Gender</div><div class="species-title">Age</div>`;
+        html += `<div class="species-data">${actor.system.sophont.species}</div>`;
+        html += `<div class="species-data">${actor.system.sophont.gender}</div>`;
+        html += `<div class="species-data">${actor.system.sophont.age}</div>`;
+        html += `</div>`;
+
+        html += `<div class="actor-body-container actor-link" data-actor-id="${actor.uuid}">`;
+
+        // Characteristics
+        html += `<div class="grid grid-4col actor-cha-list">`;
+        html += `<div class="species-title grid-span-3">Traits</div><div>-</div>`;
+        html += `<div class="species-title">STR</div><div>${actor.system.characteristics.STR.value}</div>`;
+        html += `<div class="species-title">INT</div><div>${actor.system.characteristics.INT.value}</div>`;
+        html += `<div class="species-title">DEX</div><div>${actor.system.characteristics.DEX.value}</div>`;
+        html += `<div class="species-title">EDU</div><div>${actor.system.characteristics.EDU.value}</div>`;
+        html += `<div class="species-title">END</div><div>${actor.system.characteristics.END.value}</div>`;
+        html += `<div class="species-title">SOC</div><div>${actor.system.characteristics.SOC.value}</div>`;
+        html += `</div>`;
+
+        // Skills
+        html += `<div class="actor-skill-list">`;
+        html += `<div class="species-title" style="width: 100%">Skills</div>`;
+        const skills = actor.system.skills;
+
+        let skillHtml = "";
+        for (let key in skills) {
+            let skill = skills[key];
+
+            if (skill.trained) {
+                let showParent = true;
+                if (skill.specialities) {
+                    for (let specKey in skill.specialities) {
+                        let spec = skill.specialities[specKey];
+                        if (spec.value > 0) {
+                            showParent = false;
+                            skillHtml += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}&nbsp;(${skillLabel(spec, specKey).replace(/ /, "&nbsp;")})/${spec.value}</li>`;
+                        }
+                    }
+                }
+                if (showParent) {
+                    skillHtml += `<li>${skillLabel(skill, key).replace(/ /, "&nbsp;")}/${skill.value}</li>`;
+                }
+            }
+        }
+        html += `<ul class="skill-list">${skillHtml}</ul>`;
+        html += `</div>`; // Skills
+        html += `</div>`; // Container
+
+        let weapons = "";
+        let armour = "";
+        let equipment = "";
+        for (let i of actor.items) {
+            if (i.type === "weapon") {
+                weapons += `<li>${i.name} (${i.system.weapon.damage})</li>`;
+            } else if (i.type === "armour") {
+                armour += `<li>${i.name} (+${i.system.armour.protection})</li>`;
+            } else {
+                equipment += `<li>${i.name}</li>`;
+            }
+        }
+        if (weapons !== "" || armour !== "" || equipment !== "") {
+            html += `<div class="grid grid-3col actor-equipment-list actor-link" data-actor-id="${actor.uuid}">`;
+            html += `<div class="species-title">Equipment</div>`;
+            html += `<div class="grid-span-2">`;
+            if (weapons !== "") {
+                html += `<b>Weapons:</b> <ul class="skill-list">${weapons}</ul><br/>`;
+            }
+            if (armour !== "") {
+                html += `<b>Armour:</b> <ul class="skill-list"> ${armour}</ul><br/>`;
+            }
+            if (equipment !== "") {
+                html += `<b>Equipment:</b> <ul class="skill-list">${equipment}</ul><br/>`;
+            }
+            html += `</div>`; // grid-span-2
+            html += `</div>`; // equipment-list
+        }
+        if (actor.permission > 2 && actor.system.notes) {
+            html += `<div class="species-title" style="width: 100%">${game.i18n.localize("MGT2.TravellerSheet.RoleplayNotes")}</div>`;
+            let d = await TextEditor.enrichHTML(
+                actor.system.notes,
+                {secrets: ((actor.permission > 2) ? true : false)}
+            );
+            html += d;
+        }
+        html += `</div>`;
+        html += `</div>`;
+
+        if (actor.system.description) {
+            let d = await TextEditor.enrichHTML(
+                actor.system.description,
+                {secrets: ((actor.permission > 2) ? true : false)}
+            );
+            html += d;
+        }
+        html += `</div>`;
+
+        a.innerHTML = html;
+
+        return a;
     }
-    html += `</div>`;
-
-    a.innerHTML = html;
-
-    return a;
 }
 
 Tools.prettyNumber = function (value, digits, sign) {

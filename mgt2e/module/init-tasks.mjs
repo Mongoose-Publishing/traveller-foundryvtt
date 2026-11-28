@@ -527,6 +527,14 @@ export function initConfigSettings() {
         type: Boolean,
         default: true
     });
+    game.settings.register('mgt2e', "BETA_newAttackDialog", {
+        name: "BETA - Use new attack dialog",
+        hint: "Try out the new vehicle attack dialog on characters. Works better, but missing some features.",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: false
+    });
 }
 
 export async function initSocketEvents() {

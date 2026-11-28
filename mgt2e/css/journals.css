@@ -857,3 +857,10 @@ p.post-package-description img.package-icon {
   color: var(--mongoose-orange);
   cursor: pointer;
 }
+
+.xactor-skills {
+  background-color: var(--mongoose-dark);
+  color: white;
+  font-size: smaller;
+  padding: 3px;
+}
